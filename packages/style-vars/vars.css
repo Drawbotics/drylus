@@ -1,0 +1,123 @@
+/**
+ * VARS CSS
+ *
+ * Variables file
+ */
+
+
+:root {
+  /* COLORS */
+  --white: #fff;
+  --grey-50: #fafafa;
+  --grey-100: #f5f5f5;
+  --grey-200: #eeeeee;
+  --grey-300: #e0e0e0;
+  --grey-400: #bdbdbd;
+  --grey-500: #9e9e9e;
+  --grey-600: #757575;
+  --grey-700: #616161;
+  --grey-800: #424242;
+  --grey-900: #212121;
+
+  --brand-primary: #2cb7c6;
+  --brand-yellow: #ffaf3a;
+  --brand-red: #db4c60;
+  --brand-green: #48b762;
+  --brand-blue: #42a5f5;
+  --brand-orange: #ff6d2f;
+
+  --light-brand-primary: #e7f2f4;
+  --light-brand-yellow: #FCE2B8;
+  --light-brand-red: #EDB0BA;
+  --light-brand-green: #9DD9A8;
+  --light-brand-blue: #BADCFB;
+  --light-brand-orange: ##FAC2AB;
+
+
+  --background-alt: #fafafa;
+
+
+  --facebook-color: #275a9b;
+  --twitter-color: #00a2f5;
+  --mail-color: #3e8ee7;
+  --linkedin-color: #0077b5;
+
+
+  --lighter-overlay: rgba(33, 33, 33, 0.05);
+  --light-overlay: rgba(33, 33, 33, 0.1);
+
+
+  /* BORDERS */
+  --base-border-radius: 3px;
+  --base-border-radius-big: calc(var(--base-border-radius) * 1.5);
+
+
+  /* TYPOGRAPHY */
+  --base-font-size: 15px;
+  --base-font-family: @base-font-family;
+  --base-font-family-alt: @base-font-family-alt;
+  --base-line-height: @base-line-height;
+  --text-primary-dark: @text-primary-dark;
+  --text-secondary-dark: @text-secondary-dark;
+  --text-tertiary-dark: @text-tertiary-dark;
+  --text-disabled-dark: @text-disabled-dark;
+  --text-primary-white: @text-primary-white;
+  --text-secondary-dark: @text-secondary-dark;
+  --text-tertiary-dark: @text-tertiary-dark;
+  --text-disabled-dark: @text-disabled-dark;
+  --default-font-family: @default-font-family;
+  --alt-font-family: @base-font-family-alt;
+
+  /* SHADOWS */
+  --shadow-penumbra-color: @shadow-penumbra-color;
+  --shadow-umbra-color: @shadow-umbra-color;
+  --shadow-ambient-color: @shadow-ambient-color;
+
+  /* ELEVATIONS */
+  --elevation--2: @elevation--2;
+  --elevation--1: @elevation--1;
+  --elevation-0: @elevation-0;
+  --elevation-1: @elevation-1;
+  --elevation-2: @elevation-2;
+  --elevation-2: @elevation-2;
+  --elevation-3: @elevation-3;
+  --elevation-4: @elevation-4;
+  --elevation-5: @elevation-5;
+  --elevation-6: @elevation-6;
+  --elevation-7: @elevation-7;
+  --elevation-8: @elevation-8;
+
+  /* PADDINGS AND MARGINS */
+  --base-padding: @base-padding;
+  --base-padding-small: @base-padding-small;
+  --base-margin: @base-margin;
+
+
+  /* TRANSITIONS AND ANIMATIONS */
+  --base-transition-time: @base-transition-time;
+  --base-transition-time-short: @base-transition-time-short;
+
+
+  /* SIZES */
+  --max-width: @max-width;
+
+
+  /* MEDIA QUERIES */
+  --screen-xs: @screen-xs;
+  --screen-s: @screen-s;
+  --screen-m: @screen-m;
+  --screen-l: @screen-l;
+  --screen-xl: @screen-xl;
+  --phone-s: @phone-s;
+  --phone: @phone;
+  --phone-xl: @phone-xl;
+  --ipad: @ipad;
+  --desktop-s: @desktop-s;
+  --phone-s-landscape: @phone-s-landscape;
+  --phone-landscape: @phone-landscape;
+  --phone-xl-landscape: @phone-xl-landscape;
+  --ipad-landscape: @ipad-landscape;
+  --screen-s-or-m: @screen-s-or-m;
+  --greater-than-maximum-width: @greater-than-maximum-width;
+  --greater-than-minimum-width: @greater-than-minimum-width;
+ }
