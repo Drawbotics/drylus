@@ -2,14 +2,19 @@
   "name": "@drawbotics/style-vars",
   "version": "1.0.0",
   "description": "Style variables used by Drawbotics across different projects",
+  "license": "UNLICENSED",
   "main": "dist/vars.js",
   "scripts": {
-    "build": "node src/build.js"
+    "clean": "rimraf dist/",
+    "build": "npm run clean && node src/build.js",
+    "prepublishOnly": "npm run build"
   },
-  "license": "UNLICENSED",
   "dependencies": {
     "fs-extra": "^7.0.0",
     "lodash": "^4.17.10",
     "tinycolor2": "^1.4.1"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2"
   }
 }
