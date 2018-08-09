@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 ### For LESS
 
 ```less
-@import "~@drawbotics/style-vars/vars.less";
+@import "~@drawbotics/style-vars/dist/vars.less";
 
 :local(.myComponent) {
   padding: @default-padding * 0.5;
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 ### For CSS
 
 ```css
-@import "~@drawbotics/style-vars/vars.css";
+@import "~@drawbotics/style-vars/dist/vars.css";
 
 :local(.myComponent) {
   padding: calc(var(--default-padding) * 0.5);
