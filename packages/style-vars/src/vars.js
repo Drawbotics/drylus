@@ -82,10 +82,12 @@ module.exports = bindObject({
   basePadding: '30px',
   basePaddingSmall: (s) => d(s.basePadding, 2),
   baseMargin: (s) => s.basePadding,
+  baseMarginSmall: (s) => d(s.baseMargin, 2),
 
   // TRANSITIONS AND ANIMATIONS
   baseTransitionTime: '0.3s',
   baseTransitionTimeShort: (s) => d(s.baseTransitionTime, 2),
+  bouncyTransitionCurve: 'cubic-bezier(0.44, 0.11, 0.07, 1.29)',
 
   // SIZES
   maxWidth: '1200px',
