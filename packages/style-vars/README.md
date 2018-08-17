@@ -21,7 +21,7 @@ import { StyleSheet, css } from 'aphrodite-jss';
 
 const styles = StyleSheet.create({
   myComponent: {
-    padding: styleVars.defaultPadding * 0.5,
+    padding: `calc(${styleVars.defaultPadding} * 0.5)`,
   },
 });
 ```
