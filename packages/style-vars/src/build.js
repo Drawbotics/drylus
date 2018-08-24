@@ -10,7 +10,12 @@ async function createJs(vars, buildDir) {
   lines.push('module.exports = {');
   Object.keys(vars).forEach((key) => lines.push(`  ${key}: '${vars[key]}',`));
   lines.push('};');
-  const text = lines.join('\n');
+  let text = lines.join('\n');
+
+  // append functions from colors.js
+  const colorsJs = await fs.readFile(path.resolve(__dirname, 'colors.js'), 'utf-8');
+  text += `\n\n${colorsJs}`;
+
   await fs.writeFile(path.resolve(buildDir, './vars.js'), text, 'utf-8');
 }
 
