@@ -48,7 +48,7 @@ module.exports = bindObject({
   // TYPOGRAPHY
   baseFontSize: '15px',
   baseFontFamily: '"Open Sans", sans-serif',
-  baseFontFamilyAlt: '"brandon grotesque", sans-serif',
+  baseFontFamilyAlt: '"brandon-grotesque", sans-serif',
   baseLineHeight: '1.5',
   textPrimaryDark: (s) => s.grey700,
   textSecondaryDark: (s) => fade(s.textPrimaryDark, 60),
