@@ -6,6 +6,6 @@
   "homepage": "",
   "license": "ISC",
   "main": "index.js",
-  "scripts": {
-  }
+  "scripts": {},
+  "dependencies": {}
 }

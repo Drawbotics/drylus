@@ -14,5 +14,6 @@
   },
   "devDependencies": {
     "webpack-dev-server": "^3.2.1"
-  }
+  },
+  "dependencies": {}
 }
