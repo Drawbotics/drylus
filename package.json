@@ -1,0 +1,44 @@
+{
+  "name": "@drawbotics/drylus",
+  "version": "0.0.0",
+  "description": "Drawbotics' Design System Library",
+  "main": "index.js",
+  "scripts": {
+    "build": "lerna run build",
+    "watch:react": "cd packages/react-drylus && npm run build:watch",
+    "styleguide": "cd packages/styleguide && npm run start",
+    "add": "lerna add",
+    "remove": "lerna exec npm uninstall"
+  },
+  "author": "nicmosc <nick@drawbotics.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-do-expressions": "^7.2.0",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
+    "@drawbotics/check-env": "^1.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-emotion": "^10.0.9",
+    "better-webpack-progress": "^1.1.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "html-webpack-plugin": "^3.2.0",
+    "ip": "^1.1.5",
+    "lerna": "^3.13.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "rimraf": "^2.6.3",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
+  },
+  "dependencies": {
+    "@drawbotics/react-drylus": "file:packages/react-drylus",
+    "@drawbotics/styleguide": "file:packages/styleguide",
+    "@drawbotics/vanilla-drylus": "file:packages/vanilla-drylus"
+  }
+}
