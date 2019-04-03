@@ -2,6 +2,7 @@ node_modules
 *.log
 lib
 docs
+output
 
 .DS_Store
 **/.DS_Store

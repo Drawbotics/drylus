@@ -1,0 +1,29 @@
+{
+  "name": "@drawbotics/extract-emotion",
+  "version": "0.0.0",
+  "description": "Small utility to extract CSS styles from emotion components",
+  "author": "nicmosc <nmoscholios@gmail.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "jsdom": "^14.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "babel-jest": "^24.7.0",
+    "emotion": "^10.0.9",
+    "jest": "^24.7.0",
+    "jest-cli": "^24.7.0",
+    "memory-fs": "^0.4.1",
+    "react": "^16.8.6"
+  },
+  "peerDependencies": {
+    "webpack": "^4.2.0",
+    "react": "^16.8.0"
+  }
+}

@@ -7,6 +7,7 @@
     "build": "lerna run build",
     "watch:react": "cd packages/react-drylus && npm run build:watch",
     "styleguide": "cd packages/styleguide && npm run start",
+    "test:extract-emotion": "cd packages/extract-emotion && npm run test",
     "add": "lerna add",
     "remove": "lerna exec npm uninstall"
   },
