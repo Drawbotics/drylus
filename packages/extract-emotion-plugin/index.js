@@ -15,8 +15,8 @@ function runBrowser(code) {
       </body>
     </html>
   `, { runScripts: 'dangerously' });
-  const styles = dom.window.document.styleSheets.map((sheet) =>
-    sheet.cssRules.map((rules) => rules.cssText)
+  const styles = Object.values(dom.window.document.querySelectorAll('[data-emotion="css"]') || {}).map((element) =>
+    element.sheet.cssRules.map((rules) => rules.cssText)
   );
   const stylesList = styles.reduce((memo, list) => [ ...memo, ...list.reduce((memo, rule) => [ ...memo, rule ], [])], []);
   return stylesList.join('');
