@@ -3,7 +3,7 @@ const Self = require('../../');
 
 module.exports = {
   entry: {
-    app: './index.js',
+    // app: './index.js',
     emotion: './index.js',
   },
   plugins: [

@@ -47,11 +47,13 @@ class ExtractEmotionPlugin {
       const css = runBrowser(jsSource);
       const noHashCSS = removeHash(css, this.options.prefix);
 
-      compilation.assets = {
-        [filename]: {
-          source: () => noHashCSS,
-          size: () => asset.length,
-        },
+      // remove JS bundle from which we build the CSS
+      delete compilation.assets[`${entryName}.js`];
+
+      // assign new CSS bundle for the CSS
+      compilation.assets[filename] = {
+        source: () => noHashCSS,
+        size: () => asset.length,
       };
 
       callback();
