@@ -30,11 +30,11 @@ class ExtractEmotionPlugin {
       // Insert this list into the webpack build as a new file asset:
       const optionsFilename = this.options.filename;
       const filename = optionsFilename.includes('[name]') ? optionsFilename.replace('[name]', entryName) : optionsFilename || 'main.css';
-      console.log(entryName, optionsFilename);
+      console.log(entry);
       compilation.assets = {
         [filename]: {
-          source: () => filelist,
-          size: () => filelist.length,
+          source: () => entry,
+          size: () => entry.length,
         },
       };
 
