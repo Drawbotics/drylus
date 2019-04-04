@@ -1,4 +1,4 @@
-const Self = require('../../');
+const Self = require('../../../');
 
 
 module.exports = {

@@ -8,7 +8,7 @@ const assetsNames = (json) => json.assets.map((asset) => asset.name);
 
 describe('MemoryFS', () => {
   it('should preserve asset even if not emitted', (done) => {
-    const example = path.resolve(__dirname, 'example');
+    const example = path.resolve(__dirname, 'examples/transpiled');
     const webpackConfig = require(path.resolve(example, 'webpack.config.js'));
     const compiler = webpack({
       ...webpackConfig,

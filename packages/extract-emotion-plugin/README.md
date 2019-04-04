@@ -10,8 +10,8 @@ We did this because `emotion` generates classnames and applies styles at runtime
 
 Because of this, we can't truly generate a "JS-only" bundle + a "CSS-only" bundle when using `emotion`. The main entry using `emotion` will still come with the CSS generated at runtime. We use `ExtractEmotionPlugin` to create a _separate_ bundle for the CSS only, which will be used elsewhere.
 
-__Note__
-The plugin should be used with `babel-loader` since it assumes the code in the entry point is already babelified.
+__Prerequisite Notes__
+The plugin should be used with `babel-loader` since it assumes the code in the entry point is already babelified. It also requires `babel-emotion-plugin` to babelifiy the emotion output.
 
 ### Install:
 ```
@@ -85,4 +85,4 @@ This will generate a `my-css-bundle.css` file in your output directory, and no J
 ### Options
 - `filename`: Name of the generated CSS bundle. If `[name]` is passed, it will use the same name as the entry point/bundle name.
 - `bundleName`: Required if using multiple entries (object only) to match the entry to the bundle
-- `prefix`: `emotion` automatically adds a hash to its classnames, this library removes the hashes by default. You can then use a custom prefix to prepend to all the classes.
+- `prefix`: `emotion` automatically adds a hash to its classnames, this library removes the hashes by default to have more control over the vanilla CSS export. You can then use a custom prefix to prepend to all the classes.
