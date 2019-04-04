@@ -8,6 +8,7 @@ module.exports = {
   },
   plugins: [
     new Self({
+      prefix: 'drylus',
       bundleName: 'emotion',
       filename: '[name].css',
     }),

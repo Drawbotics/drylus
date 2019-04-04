@@ -1,4 +1,26 @@
+const { JSDOM } = require('jsdom');
 
+
+function removeHash(css, replacement) {
+  return css.replace(/(css-).*?(-)/gm, replacement ? `${replacement}-` : '');
+}
+
+
+function runBrowser(code) {
+  const dom = new JSDOM(`
+    <html>
+      <head></head>
+      <body>
+        <script>${code}</script>
+      </body>
+    </html>
+  `, { runScripts: 'dangerously' });
+  const styles = dom.window.document.styleSheets.map((sheet) =>
+    sheet.cssRules.map((rules) => rules.cssText)
+  );
+  const stylesList = styles.reduce((memo, list) => [ ...memo, ...list.reduce((memo, rule) => [ ...memo, rule ], [])], []);
+  return stylesList.join('');
+}
 
 
 class ExtractEmotionPlugin {
@@ -11,30 +33,24 @@ class ExtractEmotionPlugin {
     compiler.hooks.emit.tapAsync('ExtractEmotionPlugin', (compilation, callback) => {
       const assetsList = Object.keys(compilation.assets);
       const entryName = this.options.bundleName || 'main';
-      const entry = compilation.assets[`${entryName}.js`];
+      const asset = compilation.assets[`${entryName}.js`];
 
-      if (! entry) {
+      if (! asset) {
         callback(new Error('[extract-emotion-plugin] bundleName not specified'));
         return;
       }
 
-      // Create a header string for the generated file:
-      var filelist = 'In this build:\n\n';
-
-      // Loop through all compiled assets,
-      // adding a new line item for each filename.
-      for (var _filename in compilation.assets) {
-        filelist += '- ' + _filename + '\n';
-      }
-
-      // Insert this list into the webpack build as a new file asset:
       const optionsFilename = this.options.filename;
       const filename = optionsFilename.includes('[name]') ? optionsFilename.replace('[name]', entryName) : optionsFilename || 'main.css';
-      console.log(entry);
+      const jsSource = asset.source();
+
+      const css = runBrowser(jsSource);
+      const noHashCSS = removeHash(css, this.options.prefix);
+
       compilation.assets = {
         [filename]: {
-          source: () => entry,
-          size: () => entry.length,
+          source: () => noHashCSS,
+          size: () => asset.length,
         },
       };
 
