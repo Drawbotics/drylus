@@ -6,11 +6,6 @@ module.exports = {
       },
     }],
   ],
-  plugins: [
-    ["@babel/plugin-transform-runtime", {
-      "regenerator": true,
-    }],
-  ],
   env: {
     test: {
       presets: [
@@ -18,11 +13,6 @@ module.exports = {
           "targets": {
             "node": "current",
           },
-        }],
-      ],
-      plugins: [
-        ["@babel/plugin-transform-runtime", {
-          "regenerator": true,
         }],
       ],
     },

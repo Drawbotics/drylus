@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "extract-css": "extract-emotion ./src/react-components --output dist",
+    "extract-css": "extract-emotion ./src/react-components --output dist --prefix Drylus",
     "build": "npm run clean && npm run extract-css"
   },
   "devDependencies": {
