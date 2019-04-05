@@ -1,8 +1,8 @@
 node_modules
 *.log
 lib
-docs
 output
+dist
 
 .DS_Store
 **/.DS_Store

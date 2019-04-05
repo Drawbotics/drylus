@@ -9,7 +9,7 @@
   "scripts": {
     "clean:test": "rimraf **/output",
     "test": "npm run clean:test && jest",
-    "build": "NODE_ENV=production babel --root-mode upward ./index.js --out-dir lib/",
+    "build": "NODE_ENV=production babel ./index.js --out-dir lib/",
     "extract-emotion": "node ./bin/cli.js"
   },
   "bin": {
@@ -19,10 +19,12 @@
     "node": ">= 6.11.5"
   },
   "dependencies": {
+    "@babel/runtime": "^7.4.3",
     "jsdom": "^14.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
+    "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "babel-jest": "^24.7.1",
     "chalk": "^2.4.2",
