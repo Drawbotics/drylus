@@ -7,7 +7,9 @@
     "build": "lerna run build",
     "watch:react": "cd packages/react-drylus && npm run build:watch",
     "styleguide": "cd packages/styleguide && npm run start",
-    "test:extract-emotion": "cd packages/extract-emotion-plugin && npm run test",
+    "build:styleguide": "cd packages/styleguide && npm run build",
+    "test:extract-emotion": "cd packages/extract-emotion && npm run test",
+    "build:extract-emotion": "cd packages/extract-emotion && npm run build",
     "add": "lerna add",
     "remove": "lerna exec npm uninstall"
   },
@@ -41,6 +43,6 @@
     "@drawbotics/react-drylus": "file:packages/react-drylus",
     "@drawbotics/styleguide": "file:packages/styleguide",
     "@drawbotics/vanilla-drylus": "file:packages/vanilla-drylus",
-    "@drawbotics/extract-emotion-plugin": "file:packages/extract-emotion-plugin"
+    "@drawbotics/extract-emotion": "file:packages/extract-emotion"
   }
 }

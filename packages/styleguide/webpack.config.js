@@ -39,6 +39,9 @@ module.exports = {
   entry: './app/index.js',
   resolve: {
     extensions: [ '.js', '.jsx' ],
+    // alias: {
+    //   emotion: path.resolve(__dirname, 'temp.js'),
+    // },
   },
   output: {
     path: path.resolve(__dirname, './docs'),

@@ -15,5 +15,7 @@
   "devDependencies": {
     "webpack-dev-server": "^3.2.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "core-js": "2"
+  }
 }

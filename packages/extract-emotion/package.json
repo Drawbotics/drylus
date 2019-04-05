@@ -1,5 +1,5 @@
 {
-  "name": "@drawbotics/extract-emotion-plugin",
+  "name": "@drawbotics/extract-emotion",
   "version": "0.0.0",
   "description": "Small utility to extract CSS styles from emotion components",
   "author": "nicmosc <nmoscholios@gmail.com>",
@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "clean:test": "rimraf **/output",
-    "test": "npm run clean:test && jest"
+    "test": "npm run clean:test && jest",
+    "build": "NODE_ENV=production babel --root-mode upward ./index.js --out-dir lib/"
   },
   "dependencies": {
     "jsdom": "^14.0.0"
@@ -16,16 +17,17 @@
   "devDependencies": {
     "@babel/cli": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
-    "babel-jest": "^24.7.0",
+    "babel-jest": "^24.7.1",
+    "chalk": "^2.4.2",
     "emotion": "^10.0.9",
-    "jest": "^24.7.0",
-    "jest-cli": "^24.7.0",
+    "jest": "^24.7.1",
+    "jest-cli": "^24.7.1",
     "memory-fs": "^0.4.1",
     "react": "^16.8.6",
     "rimraf": "^2.6.3"
   },
   "peerDependencies": {
-    "react": "^16.8.0",
-    "webpack": "^4.2.0"
+    "emotion": "^10",
+    "react": "^16.8.0"
   }
 }
