@@ -4,12 +4,14 @@
   "description": "Drawbotics' Design System Library",
   "main": "index.js",
   "scripts": {
-    "build": "lerna run build",
     "watch:react": "cd packages/react-drylus && npm run build:watch",
-    "styleguide": "cd packages/styleguide && npm run start",
-    "build:styleguide": "cd packages/styleguide && npm run build",
+    "build:react": "cd packages/react-drylus && npm run build",
+    "build:vanilla": "cd packages/vanilla-drylus && npm run build",
     "test:extract-emotion": "cd packages/extract-emotion && npm run test",
     "build:extract-emotion": "cd packages/extract-emotion && npm run build",
+    "watch:styleguide": "cd packages/styleguide && npm run start",
+    "build:styleguide": "cd packages/styleguide && npm run build",
+    "build": "lerna run build",
     "add": "lerna add",
     "remove": "lerna exec npm uninstall"
   },

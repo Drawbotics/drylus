@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from '../temp';
+import { css } from 'emotion';
 
 import { Button, StyleProvider } from '@drawbotics/react-drylus';
 
