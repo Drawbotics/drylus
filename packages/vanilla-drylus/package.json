@@ -9,9 +9,13 @@
   "scripts": {
     "clean": "rimraf dist",
     "watch:lib": "NODE_ENV=development webpack --config webpack.config.js --watch",
-    "watch": "npm run watch:lib",
+    "watch:react": "node ./scripts/watch-react.js",
+    "watch": "npm run watch:react & npm run watch:lib",
     "build:lib": "NODE_ENV=production webpack --config webpack.config.js",
     "extract-css": "extract-emotion ./src/react-components --output dist --prefix Drylus --filename drylus.css",
     "build": "npm run clean && npm run extract-css && npm run build:lib"
+  },
+  "dependencies": {
+    "@drawbotics/react-drylus": "file:../react-drylus"
   }
 }

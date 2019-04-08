@@ -4,6 +4,7 @@ const checkEnv = require('@drawbotics/check-env');
 const betterWebpackProgress = require('better-webpack-progress');
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const ExtractEmotion = require('@drawbotics/extract-emotion');
 
 
 checkEnv([ 'NODE_ENV' ]);
@@ -47,6 +48,7 @@ module.exports = {
         ],
       },
     }),
+    // new ExtractEmotion.plugin(),
   ],
   module: {
     rules: [

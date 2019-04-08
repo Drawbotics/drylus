@@ -3,17 +3,10 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 
 
-const width = '700px';
-
-
 const styles = {
   base: css`
     background: blue;
     color: red;
-
-    @media (min-width: ${width}) {
-      color: red;
-    }
   `,
   hover: css`
     background: orange;
