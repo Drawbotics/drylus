@@ -13,10 +13,13 @@ drylus.default.all();
 
 const styles = {
   app: css`
-    background: pink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   `,
-  native: css`
-    background: yellow;
+  code: css`
+    flex: 1;
+    padding: 5px;
   `,
 };
 
@@ -25,16 +28,18 @@ const App = () => {
   return (
     <StyleProvider>
       <div className={styles.app}>
-        <h1>
-          React
-        </h1>
-        <Button>click me</Button>
-      </div>
-      <div className={styles.native}>
-        <h1>
-          Vanilla
-        </h1>
-        <button className="Drylus-Button__base Drylus-Button__hover">click me</button>
+        <div className={styles.code}>
+          <h1>
+            React
+          </h1>
+          <Button>click me</Button>
+        </div>
+        <div className={styles.code}>
+          <h1>
+            Vanilla
+          </h1>
+          <button className="Drylus-Button__base Drylus-Button__hover">click me</button>
+        </div>
       </div>
     </StyleProvider>
   );
