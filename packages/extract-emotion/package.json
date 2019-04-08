@@ -8,8 +8,9 @@
   "main": "lib/index.js",
   "scripts": {
     "clean:test": "rimraf **/output",
+    "clean:lib": "rimraf lib/",
     "test": "npm run clean:test && jest",
-    "build": "NODE_ENV=production babel ./index.js --out-dir lib/",
+    "build": "npm run clean:lib && NODE_ENV=production babel ./index.js --out-dir lib/",
     "extract-emotion": "node ./bin/cli.js"
   },
   "bin": {
