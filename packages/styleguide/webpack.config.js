@@ -38,17 +38,22 @@ module.exports = {
   stats: 'none',
   entry: './app/index.js',
   resolve: {
-    extensions: [ '.js', '.jsx' ],
+    modules: [
+      path.resolve(__dirname, './app'),
+      'node_modules',
+    ],
+    extensions: [ '.js', '.jsx', '.css' ],
   },
   output: {
     path: path.resolve(__dirname, './docs'),
     filename: 'bundle.js',
   },
+  optimization: {
+    namedModules: true,
+  },
   plugins: isProduction ? basePlugins : [
     ...basePlugins,
-    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
     new FriendlyErrorsWebpackPlugin({
       clearConsole: true,
       compilationSuccessInfo: {
@@ -71,13 +76,13 @@ module.exports = {
         }],
         exclude: /node_modules/,
       },
-      // {
-      //   test: /\.css$/,
-      //   use: [
-      //     'style-loader',
-      //     'css-loader',
-      //   ],
-      // },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ],
+      },
     ],
   },
   devServer: {

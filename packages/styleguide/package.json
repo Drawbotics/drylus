@@ -12,10 +12,8 @@
     "build:styleguide": "NODE_ENV=production webpack --config webpack.config.js",
     "build": "npm run clean && npm run build:styleguide"
   },
-  "devDependencies": {
-    "webpack-dev-server": "^3.2.1"
-  },
   "dependencies": {
+    "@drawbotics/vanilla-drylus": "file:../vanilla-drylus",
     "core-js": "2"
   }
 }

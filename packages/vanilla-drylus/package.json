@@ -5,17 +5,13 @@
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "index.js",
+  "main": "dist/drylus.js",
   "scripts": {
     "clean": "rimraf dist",
-    "watch:lib": "NODE_ENV=development webpack --config webpack.config.js -- --watch",
+    "watch:lib": "NODE_ENV=development webpack --config webpack.config.js --watch",
     "watch": "npm run watch:lib",
     "build:lib": "NODE_ENV=production webpack --config webpack.config.js",
     "extract-css": "extract-emotion ./src/react-components --output dist --prefix Drylus --filename drylus.css",
     "build": "npm run clean && npm run extract-css && npm run build:lib"
-  },
-  "devDependencies": {
-    "@drawbotics/extract-emotion": "^0.0.0",
-    "rimraf": "^2.6.3"
   }
 }

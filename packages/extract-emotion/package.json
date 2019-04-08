@@ -21,18 +21,6 @@
   "dependencies": {
     "jsdom": "^14.0.0"
   },
-  "devDependencies": {
-    "@babel/cli": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "babel-jest": "^24.7.1",
-    "chalk": "^2.4.2",
-    "emotion": "^10.0.9",
-    "jest": "^24.7.1",
-    "jest-cli": "^24.7.1",
-    "memory-fs": "^0.4.1",
-    "react": "^16.8.6",
-    "rimraf": "^2.6.3"
-  },
   "peerDependencies": {
     "emotion": "^10",
     "react": "^16.8.0"

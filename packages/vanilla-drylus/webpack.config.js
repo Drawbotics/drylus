@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const checkEnv = require('@drawbotics/check-env');
 const betterWebpackProgress = require('better-webpack-progress');
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 
 checkEnv([ 'NODE_ENV' ]);
@@ -32,10 +33,20 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'drylus.js',
+    library: 'drylus',
+    libraryTarget: 'umd',
   },
   plugins: isProduction ? basePlugins : [
     ...basePlugins,
     new webpack.NoEmitOnErrorsPlugin(),
+    new FriendlyErrorsWebpackPlugin({
+      clearConsole: true,
+      compilationSuccessInfo: {
+        messages: [
+          `Vanilla bundle compiled`,
+        ],
+      },
+    }),
   ],
   module: {
     rules: [

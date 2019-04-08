@@ -7,12 +7,12 @@ const width = '700px';
 
 
 const styles = {
-  button: css`
+  base: css`
     background: blue;
     color: red;
 
     @media (min-width: ${width}) {
-      color: green;
+      color: red;
     }
   `,
   hover: css`
@@ -23,7 +23,7 @@ const styles = {
 
 const Button = ({ children }) => {
   return (
-    <button className={cx(styles.button, styles.hover)}>{children}</button>
+    <button className={cx(styles.base, styles.hover)}>{children}</button>
   );
 }
 
