@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "rimraf lib/",
     "build:commonjs": "NODE_ENV=production babel --root-mode upward src/ --out-dir lib/",
-    "build:watch": "npm run clean && npm run build:commonjs -- --watch",
+    "watch": "npm run clean && npm run build:commonjs -- --watch",
     "build": "npm run clean && npm run build:commonjs"
   },
   "dependencies": {
