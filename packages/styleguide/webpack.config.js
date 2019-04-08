@@ -35,13 +35,10 @@ const basePlugins = [
 module.exports = {
   mode: process.env.NODE_ENV,
   devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
-  // stats: 'none',
+  stats: 'none',
   entry: './app/index.js',
   resolve: {
     extensions: [ '.js', '.jsx' ],
-    // alias: {
-    //   emotion: path.resolve(__dirname, 'temp.js'),
-    // },
   },
   output: {
     path: path.resolve(__dirname, './docs'),

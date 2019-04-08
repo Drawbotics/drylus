@@ -8,8 +8,11 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "extract-css": "extract-emotion ./src/react-components --output dist --prefix Drylus",
-    "build": "npm run clean && npm run extract-css"
+    "watch:lib": "NODE_ENV=development webpack --config webpack.config.js -- --watch",
+    "watch": "npm run watch:lib",
+    "build:lib": "NODE_ENV=production webpack --config webpack.config.js",
+    "extract-css": "extract-emotion ./src/react-components --output dist --prefix Drylus --filename drylus.css",
+    "build": "npm run clean && npm run extract-css && npm run build:lib"
   },
   "devDependencies": {
     "@drawbotics/extract-emotion": "^0.0.0",
