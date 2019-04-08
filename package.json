@@ -47,7 +47,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "rimraf": "^2.6.3",
+    "rimraf": "^2.6.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
@@ -56,6 +56,7 @@
   "dependencies": {
     "@drawbotics/extract-emotion": "file:packages/extract-emotion",
     "@drawbotics/react-drylus": "file:packages/react-drylus",
+    "@drawbotics/style-vars": "file:packages/style-vars",
     "@drawbotics/styleguide": "file:packages/styleguide",
     "@drawbotics/vanilla-drylus": "file:packages/vanilla-drylus"
   }
