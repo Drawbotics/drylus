@@ -15,7 +15,7 @@ function removeUnused(svgString) {
 }
 
 
-function transform(iconsFolder, cacheFolder) {
+async function transform(iconsFolder, cacheFolder) {
   // clean icons cache
   rimraf.sync(cacheFolder);
 
