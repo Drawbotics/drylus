@@ -5,14 +5,14 @@
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "https://github.com/Drawbotics/drylus#readme",
   "license": "ISC",
-  "main": "lib/icons.js",
+  "main": "dist/icons.css",
   "scripts": {
-    "build:webfont": "webfont ./icons/*.svg --dest ./dist --template css --template-class-name icon --font-name icon",
-    "build:font": "icon-font-generator ./icons/*.svg --out ./dist --mono",
-    "build": "npm run build:font"
+    "clean": "rimraf dist",
+    "generate-fonts": "webfont ./icons/*.svg --dest ./dist --template css --template-class-name drycon --font-name drycons --font-height 150",
+    "build:fonts": "node scripts/build.js",
+    "build": "npm run clean && mkdir dist && npm run build:fonts"
   },
   "devDependencies": {
-    "icon-font-generator": "^2.1.10",
     "webfont": "^8.2.1"
   }
 }
