@@ -1,0 +1,18 @@
+{
+  "name": "@drawbotics/icons",
+  "version": "0.0.0",
+  "description": "Drawbotics Icons Collection",
+  "author": "nicmosc <nmoscholios@gmail.com>",
+  "homepage": "https://github.com/Drawbotics/drylus#readme",
+  "license": "ISC",
+  "main": "lib/icons.js",
+  "scripts": {
+    "build:webfont": "webfont ./icons/*.svg --dest ./dist --template css --template-class-name icon --font-name icon",
+    "build:font": "icon-font-generator ./icons/*.svg --out ./dist --mono",
+    "build": "npm run build:font"
+  },
+  "devDependencies": {
+    "icon-font-generator": "^2.1.10",
+    "webfont": "^8.2.1"
+  }
+}
