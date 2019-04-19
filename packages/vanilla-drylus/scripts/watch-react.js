@@ -16,3 +16,7 @@ fs.watch(path.resolve(__dirname, '../../react-drylus/lib'), { recursive: true },
     extractEmotion(options);
   }
 });
+
+
+// NOTE initial call
+extractEmotion(options);

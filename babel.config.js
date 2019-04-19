@@ -16,6 +16,7 @@ module.exports = function(api) {
       autoLabel: true,
       labelFormat: '[filename]__[local]',
     }],
+    "babel-plugin-codegen",
     "@babel/plugin-proposal-export-default-from",
     ["@babel/plugin-proposal-optional-chaining", { "loose": false }],
     "@babel/plugin-proposal-do-expressions",

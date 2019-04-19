@@ -5,9 +5,11 @@ import sv from '@drawbotics/style-vars';
 import generateIconStyles from '@drawbotics/icons/dist/drycons.js';
 import packageJson from '@drawbotics/icons/package.json';
 
+import env from '../utils/get-static-env';
+
 
 injectGlobal`
-  ${generateIconStyles(process.env.NODE_ENV !== 'production' ? 'dev' : packageJson.version)}
+  ${generateIconStyles(env === 'development' ? 'dev' : packageJson.version)}
 `;
 
 

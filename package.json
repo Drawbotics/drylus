@@ -36,6 +36,7 @@
     "@drawbotics/extract-emotion": "file:../extract-emotion",
     "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.5",
+    "babel-plugin-codegen": "^3.0.0",
     "babel-plugin-emotion": "^10.0.9",
     "better-webpack-progress": "^1.1.0",
     "chalk": "^2.4.2",
