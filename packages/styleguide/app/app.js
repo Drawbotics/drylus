@@ -4,11 +4,11 @@ import { css } from 'emotion';
 import { Button, StyleProvider, Icon } from '@drawbotics/react-drylus';
 
 // vanilla import, will be in head for link and script
-import '@drawbotics/vanilla-drylus/dist/drylus.js';
+import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
 import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
 
-drylus.default.all();
+drylus.all();
 
 
 const styles = {
@@ -43,7 +43,7 @@ const App = () => {
           </h1>
           <button className="Drylus-Button__base Drylus-Button__hover">click me</button>
           <div>
-            <i className="Drycon Drycon-activity" />
+            <i className="Drylus-Icon__base Drycon Drycon-activity" />
           </div>
         </div>
       </div>

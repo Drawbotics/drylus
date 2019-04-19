@@ -2,7 +2,7 @@ const path = require('path');
 
 const generate = require('./webfont-generate');
 const transformIcons = require('./transform-icons');
-const { setFontSize, generateJSString } = require('./utils');
+const { setFontSize, generateJSFunction } = require('./utils');
 
 
 const ICONS_FOLDER = path.resolve(__dirname, '../icons');
@@ -27,7 +27,7 @@ async function build() {
 
   // Extra modifications
   setFontSize(18, path.resolve(DIST_FOLDER, 'drycons.css'));
-  generateJSString(path.resolve(DIST_FOLDER, 'drycons.css'));
+  generateJSFunction(path.resolve(DIST_FOLDER, 'drycons.css'));
   console.log('Finished applying transforms');
 }
 

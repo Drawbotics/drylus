@@ -10,7 +10,7 @@ injectGlobal`
 `;
 
 const styles = {
-  styleProvider: css`
+  base: css`
     font-family: Rubik;
     font-size: 14px;
   `,
@@ -19,7 +19,7 @@ const styles = {
 
 const StyleProvider = ({ children }) => {
   return (
-    <div className={styles.styleProvider}>
+    <div className={styles.base}>
       {children}
     </div>
   );

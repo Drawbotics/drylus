@@ -2,21 +2,27 @@ const fs = require('fs');
 const path = require('path');
 
 
+const ICONS_CDN_PATH = 'http://cdn.drawbotics.com/drycons';
+
+
 function setFontSize(size, file) {
   const contents = fs.readFileSync(file, 'utf8');
   fs.writeFileSync(file, contents.replace(/font-size: inherit;/gm, `font-size: ${size}px;`));
 }
 
 
-function generateJSString(file) {
+function generateJSFunction(file) {
   const contents = fs.readFileSync(file, 'utf8');
-  const withRequire = contents.replace(/url\((\S+)\)/gm, 'url(${require($1)})');
-  const jsString = `module.exports = \`${withRequire}\`;`;
-  fs.writeFileSync(file.replace('.css', '.js'), jsString);
+  const withPattern = contents.replace(/url\(".\/(\S+)"\)/gm, `url(${ICONS_CDN_PATH}/#{version}/$1)`);
+  const jsString = `export default function(version) {
+    return \`${withPattern}\`.replace(/#{version}/gm, version);
+  }`;
+  const escapedContent = jsString.replace(/(content: "\\)/gm, '$1\\');
+  fs.writeFileSync(file.replace('.css', '.js'), escapedContent);
 }
 
 
 module.exports = {
   setFontSize,
-  generateJSString,
+  generateJSFunction,
 }

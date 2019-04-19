@@ -12,10 +12,6 @@
     "build:fonts": "node scripts/build.js",
     "build": "npm run clean && mkdir dist && npm run build:fonts",
     "sync": "node scripts/sync.js",
-    "build:dev": "NODE_ENV=development npm run sync"
-  },
-  "devDependencies": {
-    "dotenv": "^7.0.0",
-    "webfont": "^8.2.1"
+    "build:dev": "npm run build && NODE_ENV=development npm run sync"
   }
 }
