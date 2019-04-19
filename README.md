@@ -34,6 +34,7 @@ npm run build:react
 
 __vanilla-drylus__
 ```
+npm run watch:vanilla
 npm run build:vanilla
 ```
 

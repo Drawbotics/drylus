@@ -39,6 +39,9 @@ const App = () => {
             Vanilla
           </h1>
           <button className="Drylus-Button__base Drylus-Button__hover">click me</button>
+          <div>
+            <i className="Drycon Drycon-activity" />
+          </div>
         </div>
       </div>
     </StyleProvider>

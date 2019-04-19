@@ -5,7 +5,7 @@
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "https://github.com/Drawbotics/drylus#readme",
   "license": "ISC",
-  "main": "dist/icons.css",
+  "main": "dist/drycons.css",
   "scripts": {
     "clean": "rimraf dist",
     "generate-fonts": "webfont ./icons/*.svg --dest ./dist --template css --template-class-name drycon --font-name drycons --font-height 150",

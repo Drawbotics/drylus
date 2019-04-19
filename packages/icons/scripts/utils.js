@@ -8,6 +8,15 @@ function setFontSize(size, file) {
 }
 
 
+function generateJSString(file) {
+  const contents = fs.readFileSync(file, 'utf8');
+  const withRequire = contents.replace(/url\((\S+)\)/gm, 'url(${require($1)})');
+  const jsString = `module.exports = \`${withRequire}\`;`;
+  fs.writeFileSync(file.replace('.css', '.js'), jsString);
+}
+
+
 module.exports = {
   setFontSize,
+  generateJSString,
 }
