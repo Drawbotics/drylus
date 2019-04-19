@@ -4,8 +4,6 @@ const { JSDOM } = require('jsdom');
 const webpack = require('webpack');
 const MemoryFS = require('memory-fs');
 
-const ExtractEmotionWatchPlugin = require('./plugin');
-
 
 async function build(input, output) {
   const fs = new MemoryFS();
@@ -76,6 +74,3 @@ async function extractEmotion(options) {
 
 
 module.exports = extractEmotion;
-
-
-module.exports.plugin = ExtractEmotionWatchPlugin;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 
-import { Button, StyleProvider } from '@drawbotics/react-drylus';
+import { Button, StyleProvider, Icon } from '@drawbotics/react-drylus';
 
 // vanilla import, will be in head for link and script
 import '@drawbotics/vanilla-drylus/dist/drylus.js';
@@ -33,6 +33,9 @@ const App = () => {
             React
           </h1>
           <Button>click me</Button>
+          <div>
+            <Icon name="activity" />
+          </div>
         </div>
         <div className={styles.code}>
           <h1>

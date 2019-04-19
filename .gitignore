@@ -3,6 +3,7 @@ node_modules
 lib
 output
 dist
+.env
 
 .DS_Store
 **/.DS_Store
