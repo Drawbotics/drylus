@@ -16,12 +16,6 @@ function generateJSString(file) {
 }
 
 
-function setCDNLink(file) {
-  const contents = fs.readFileSync(file, 'utf8');
-  // fs.writeFileSync(file, contents.replace(//g, ''));
-}
-
-
 module.exports = {
   setFontSize,
   generateJSString,

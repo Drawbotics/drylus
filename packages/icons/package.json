@@ -10,9 +10,12 @@
     "clean": "rimraf dist",
     "generate-fonts": "webfont ./icons/*.svg --dest ./dist --template css --template-class-name drycon --font-name drycons --font-height 150",
     "build:fonts": "node scripts/build.js",
-    "build": "npm run clean && mkdir dist && npm run build:fonts"
+    "build": "npm run clean && mkdir dist && npm run build:fonts",
+    "sync": "node scripts/sync.js",
+    "build:dev": "NODE_ENV=development npm run sync"
   },
   "devDependencies": {
+    "dotenv": "^7.0.0",
     "webfont": "^8.2.1"
   }
 }
