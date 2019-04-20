@@ -1,0 +1,12 @@
+graph TD
+    A(icons)
+    B(style-vars)
+    A --> C(react-drylus)
+    B --> C
+    D(extract-emotion)
+    E(styleguide)
+    C -- JS --> D
+    C -- JS --> E
+    F(vanilla-drylus) -- CSS, JS --> E
+    D -- CSS --> F
+    style C fill:#c9f7fc,stroke:#4697a0

@@ -18,8 +18,7 @@
     "build": "lerna run build",
     "watch": "lerna run watch",
     "test": "lerna run test",
-    "add": "lerna add",
-    "remove": "lerna exec npm uninstall"
+    "update:doc": "mmdc -i doc/graph.mmd -o doc/graph.svg"
   },
   "author": "nicmosc <nick@drawbotics.com>",
   "license": "ISC",
@@ -49,6 +48,7 @@
     "jest-cli": "^24.7.1",
     "lerna": "^3.13.1",
     "memory-fs": "^0.4.1",
+    "mermaid.cli": "^0.5.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
