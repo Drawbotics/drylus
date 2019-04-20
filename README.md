@@ -1,8 +1,6 @@
 # Drylus - Drawbotics Styles Library
 
-
-### Development
-Note: this is a monorepo, meaning all the code is divided into packages (`/packages`). All packages are dependencies of each other meaning the code can be shared between them. To manage the packages we use [Lerna](https://github.com/lerna/lerna).
+__NOTE__: this is a monorepo, meaning all the code is divided into packages (`/packages`). All packages are dependencies of each other meaning the code can be shared between them. To manage the packages we use [Lerna](https://github.com/lerna/lerna).
 ```
 npm install
 ```
@@ -29,8 +27,10 @@ The basic flow is the following:
 - `vanilla-drylus` gets the CSS from `extract-emotion`, it then also outputs its own JS bundle for vanilla JS interactions with components
 - `styleguide` simply uses the packages that output bundles/components to showcase them
 
-#### Commands
+## Development
 All commands should be run from the root of the project. If you want to have everything compiling and hot-reload while developing, then run all the `npm run watch:[package]` commands in separate terminal processes.
+
+__NOTE__ While each package's readme describes the commands to run the code (dev or production) it is better to use the root commands to avoid having to navigate between folders.
 
 __style-vars__
 ```
@@ -61,3 +61,8 @@ __styleguide__
 npm run watch:styleguide
 npm run build:styleguide
 ```
+
+### Requirements
+Some package require extra configuration to be used (this is also mentioned in each package's readme).
+
+- `icons` requires you to set some environment variables at the root of the monorepo to sync the code with the Drawbotics CDN
