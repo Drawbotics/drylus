@@ -15,9 +15,9 @@ There are 7 total packages:
 - [styleguide](/packages/styleguide): This is where we write all the documentation and code examples for the library; examples are written in React and the equivalent HTML and web-components version are auto generated
 
 ### How do these work together?
-<div style="text-align:center">
+<p align="center">
   <img src="./doc/graph.svg" width="200" style="margin: auto" />
-</div>
+</p>
 
 The basic flow is the following:
 - `icons` is an independent package that only deals with icons and generating the icon fonts
