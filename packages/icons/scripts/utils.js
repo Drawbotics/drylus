@@ -1,5 +1,4 @@
 const fs = require('fs');
-const path = require('path');
 
 
 const ICONS_CDN_PATH = 'http://cdn.drawbotics.com/drycons';

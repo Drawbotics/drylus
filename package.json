@@ -18,7 +18,8 @@
     "build": "lerna run build",
     "watch": "lerna run watch",
     "test": "lerna run test",
-    "update:doc": "mmdc -i doc/graph.mmd -o doc/graph.svg"
+    "update:doc": "mmdc -i doc/graph.mmd -o doc/graph.svg",
+    "lint": "eslint --ext js,jsx --format node_modules/eslint-formatter-pretty packages/"
   },
   "author": "nicmosc <nick@drawbotics.com>",
   "license": "ISC",
@@ -32,7 +33,7 @@
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "@drawbotics/check-env": "^1.0.0",
-    "@drawbotics/extract-emotion": "file:../extract-emotion",
+    "babel-eslint": "^10.0.1",
     "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.5",
     "babel-plugin-codegen": "^3.0.0",
@@ -42,6 +43,9 @@
     "copy-webpack-plugin": "^5.0.2",
     "css-loader": "^2.1.1",
     "emotion": "^10.0.9",
+    "eslint": "^5.16.0",
+    "eslint-formatter-pretty": "^2.1.1",
+    "eslint-plugin-react": "^7.12.4",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",
     "ip": "^1.1.5",
