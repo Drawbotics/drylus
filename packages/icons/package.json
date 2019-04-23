@@ -12,6 +12,7 @@
     "build:fonts": "node scripts/build.js",
     "build": "npm run clean && mkdir dist && npm run build:fonts",
     "sync": "node scripts/sync.js",
-    "build:dev": "npm run build && NODE_ENV=development npm run sync"
+    "build:dev": "npm run build && NODE_ENV=development npm run sync",
+    "prepublish": "npm run build && NODE_ENV=production npm run sync"
   }
 }

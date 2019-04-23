@@ -1,3 +1,3 @@
 export Button from './Button';
-export StyleProvider from './StyleProvider';
+export ThemeProvider from './ThemeProvider';
 export Icon from './Icon';

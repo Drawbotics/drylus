@@ -17,7 +17,7 @@ const styles = {
 };
 
 
-const StyleProvider = ({ children }) => {
+const ThemeProvider = ({ children }) => {
   return (
     <div className={styles.base}>
       {children}
@@ -26,4 +26,4 @@ const StyleProvider = ({ children }) => {
 };
 
 
-export default StyleProvider;
+export default ThemeProvider;
