@@ -90,7 +90,8 @@ module.exports = bindObject({
   elevation7: (s) => `0 16px 24px 2px ${s.shadowPenumbraColor}, 0  8px 10px -5px ${s.shadowUmbraColor}, 0  6px 30px 5px ${s.shadowAmbientColor}`,
   elevation8: (s) => `0  9px 46px  8px ${s.shadowPenumbraColor}, 0 24px 38px  3px ${s.shadowUmbraColor}, 0 11px 15px -7px ${s.shadowAmbientColor}`,
 
-  inset1: (s) => `0 1px 6px ${s.shadowColor} inset`,
+  insetActive: (s) => `0 1px 6px ${s.shadowColor} inset`,
+  insetActiveLight: (s) => `0 1px 6px ${s.neutral} inset`,
 
   // PADDINGS AND MARGINS
   basePadding: '20px',

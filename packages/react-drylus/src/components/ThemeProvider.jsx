@@ -19,6 +19,9 @@ const styles = {
       line-height: ${sv.baseLineHeight};
       letter-spacing: ${sv.baseLetterSpacing};
     }
+    html {
+      font-size: ${sv.baseFontSize};
+    }
   `,
 };
 

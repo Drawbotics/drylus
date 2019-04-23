@@ -42,7 +42,19 @@ const App = () => {
           <Button type="warning">Button Text</Button>
         </div>
         <div className={styles.component}>
+          <Button tier="secondary">Button Text</Button>
+        </div>
+        <div className={styles.component}>
+          <Button tier="tertiary">Button Text</Button>
+        </div>
+        <div className={styles.component}>
           <Button disabled>Button Text</Button>
+        </div>
+        <div className={styles.component}>
+          <Button size="small">Button Text</Button>
+        </div>
+        <div className={styles.component}>
+          <Button size="large">Button Text</Button>
         </div>
       </div>
     </ThemeProvider>

@@ -20,13 +20,14 @@ const styles = {
     }
 
     &:active {
-      box-shadow: ${sv.inset1};
+      box-shadow: ${sv.insetActive};
     }
 
     &:disabled {
       cursor: not-allowed;
       background: ${sv.neutralLight};
       color: ${sv.textDisabledDark};
+      box-shadow: none;
     }
   `,
   danger: css`
@@ -57,6 +58,39 @@ const styles = {
       background: ${sv.orangeDark};
     }
   `,
+  small: css`
+    padding: calc(${sv.basePaddingSmall} / 2) ${sv.basePaddingSmall};
+    font-size: 0.8rem;
+  `,
+  large: css`
+    padding: calc(${sv.basePaddingSmall} * 1.5) calc(${sv.basePadding} * 2.5);
+  `,
+  secondary: css`
+    background: transparent;
+    color: ${sv.textPrimaryDark};
+    box-shadow: 0 0 0 1px ${sv.neutral} inset;
+
+    &:hover {
+      background: ${sv.neutralLight};
+    }
+
+    &:active {
+      box-shadow: ${sv.insetActiveLight};
+    }
+  `,
+  tertiary: css`
+    background: transparent;
+    color: ${sv.blue};
+
+    &:hover {
+      background: ${sv.neutralLight};
+      color: ${sv.blueDark};
+    }
+
+    &:active {
+      box-shadow: ${sv.insetActiveLight};
+    }
+  `,
 };
 
 
@@ -65,12 +99,16 @@ const Button = ({
   disabled,
   onClick,
   type,
+  size,
+  tier,
 }) => {
   return (
     <button
       onClick={onClick}
       className={cx(styles.base, {
         [styles[type]]: type,
+        [styles[size]]: size,
+        [styles[tier]]: tier,
       })}
       disabled={disabled}>
       {children}
@@ -88,6 +126,10 @@ Button.propTypes = {
   onClick: PropTypes.func,
   /** Type of the button. Can be danger, success, info, warning */
   type: PropTypes.oneOf(['danger', 'success', 'info', 'warning']),
+  /** Size of the button. Can be small, large */
+  size: PropTypes.oneOf(['small', 'large']),
+  /** Tier of the button. Can be secondary, tertiary */
+  tier: PropTypes.oneOf(['secondary', 'tertiary']),
 }
 
 
