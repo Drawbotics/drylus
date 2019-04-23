@@ -21,6 +21,14 @@
     "update:doc": "mmdc -i doc/graph.mmd -o doc/graph.svg",
     "lint": "eslint --ext js,jsx --format node_modules/eslint-formatter-pretty packages/"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0"
+  },
   "author": "nicmosc <nick@drawbotics.com>",
   "license": "ISC",
   "devDependencies": {
@@ -48,10 +56,12 @@
     "eslint-plugin-react": "^7.12.4",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.3.1",
     "ip": "^1.1.5",
     "jest": "^24.7.1",
     "jest-cli": "^24.7.1",
     "lerna": "^3.13.1",
+    "lint-staged": "^8.1.5",
     "memory-fs": "^0.4.1",
     "mermaid.cli": "^0.5.1",
     "prop-types": "^15.7.2",
