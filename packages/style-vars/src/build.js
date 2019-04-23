@@ -24,7 +24,7 @@ async function createLess(vars, buildDir) {
   const lines = [];
   Object.keys(vars).forEach((key) => {
     const value = vars[key];
-    if (value.match(/\sonly\s|\sscreen\s|\sand\s|max\-width:/) != null) {  // is media query
+    if (value.match(/\sonly\s|\sscreen\s|\sand\s|max-width:/) != null) {  // is media query
       lines.push(`@${kebabCase(key)}: ~'${value}';`)
     }
     else {
