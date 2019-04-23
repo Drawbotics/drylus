@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
-import { Button, ThemeProvider } from '@drawbotics/react-drylus';
+import { Button, ThemeProvider, Icon } from '@drawbotics/react-drylus';
 
 // vanilla import, will be in head for link and script
 // import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
@@ -46,6 +46,12 @@ const App = () => {
         </div>
         <div className={styles.component}>
           <Button tier="tertiary">Button Text</Button>
+        </div>
+        <div className={styles.component}>
+          <Button>
+            <Icon name="activity" />
+            Button Text
+          </Button>
         </div>
         <div className={styles.component}>
           <Button disabled>Button Text</Button>

@@ -13,6 +13,9 @@ const styles = {
     outline: 0;
     border: 0;
     transition: ${sv.baseTransition};
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
       cursor: pointer;
@@ -91,6 +94,16 @@ const styles = {
       box-shadow: ${sv.insetActiveLight};
     }
   `,
+  rightIcon: css`
+    > i {
+      margin-left: 4px;
+    }
+  `,
+  leftIcon: css`
+    > i {
+      margin-right: 4px;
+    }
+  `,
 };
 
 
@@ -102,6 +115,7 @@ const Button = ({
   size,
   tier,
 }) => {
+  const iconSide = Array.isArray(children) && typeof children[0] === 'string' ? 'right' : 'left';
   return (
     <button
       onClick={onClick}
@@ -109,6 +123,8 @@ const Button = ({
         [styles[type]]: type,
         [styles[size]]: size,
         [styles[tier]]: tier,
+        [styles.rightIcon]: iconSide === 'right',
+        [styles.leftIcon]: iconSide === 'left',
       })}
       disabled={disabled}>
       {children}
@@ -118,8 +134,8 @@ const Button = ({
 
 
 Button.propTypes = {
-  /** Normally just text for the button */
-  children: PropTypes.string.isRequired,
+  /** Normally just text for the button, you can also pass an Icon component to use an icon in the button */
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   /** Disables the button click */
   disabled: PropTypes.bool,
   /** Triggered after the button is clicked */
