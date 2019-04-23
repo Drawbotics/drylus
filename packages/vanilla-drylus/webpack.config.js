@@ -4,6 +4,7 @@ const checkEnv = require('@drawbotics/check-env');
 const betterWebpackProgress = require('better-webpack-progress');
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 checkEnv([ 'NODE_ENV' ]);
@@ -19,6 +20,9 @@ const basePlugins = [
   new ProgressPlugin(betterWebpackProgress({
     mode: 'compact',
   })),
+  new CopyWebpackPlugin([
+    { from: 'src/styles/react-styles.css', to: 'drylus.css' },
+  ]),
 ];
 
 
@@ -28,7 +32,7 @@ module.exports = {
   stats: 'none',
   entry: './src/index.js',
   resolve: {
-    extensions: [ '.js', '.less' ],
+    extensions: [ '.js', '.css' ],
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -60,6 +64,10 @@ module.exports = {
         }],
         exclude: /node_modules/,
       },
+      // {
+      //   test: /\.css$/,
+      //   use: ['style-loader', 'css-loader'],
+      // },
     ],
   },
 };
