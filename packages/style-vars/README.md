@@ -16,14 +16,14 @@ $ npm i @drawbotics/style-vars
 ### For JavaScript (with CSS in JS for example):
 
 ```javascript
-import styleVars from '@drawbotics/style-vars';
-import { StyleSheet, css } from 'aphrodite-jss';
+import sv from '@drawbotics/style-vars';
+import { css } from 'emotion';
 
-const styles = StyleSheet.create({
-  myComponent: {
-    padding: `calc(${styleVars.defaultPadding} * 0.5)`,
-  },
-});
+const styles = {
+  myComponent: css`
+    padding: calc(${sv.defaultPadding} * 0.5);
+  `,
+};
 ```
 
 ### For LESS
