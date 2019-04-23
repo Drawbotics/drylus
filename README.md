@@ -66,3 +66,13 @@ npm run build:styleguide
 Some package require extra configuration to be used (this is also mentioned in each package's readme).
 
 - `icons` requires you to set some environment variables at the root of the monorepo to sync the code with the Drawbotics CDN
+
+
+## Publishing
+We use Lerna's `publish` command to automate the correct versioning and tagging of packages. All packages in this repo are published, with the exception of `styleguide` since it is only used to build the web app for the styleguide.
+
+Once you've finished with the changes and are ready to publish:
+```
+npx lerna publish
+```
+And follow the CLI prompts.
