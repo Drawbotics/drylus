@@ -10,7 +10,8 @@
     "clean": "rimraf lib/",
     "build:commonjs": "babel --root-mode upward src/ --out-dir lib/",
     "watch": "npm run clean && NODE_ENV=development npm run build:commonjs -- --watch",
-    "build": "npm run clean && NODE_ENV=production npm run build:commonjs"
+    "build": "npm run clean && NODE_ENV=production npm run build:commonjs",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@drawbotics/icons": "file:../icons",

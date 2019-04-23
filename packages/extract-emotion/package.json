@@ -11,7 +11,8 @@
     "clean:lib": "rimraf lib/",
     "test": "npm run clean:test && jest",
     "build": "npm run clean:lib && NODE_ENV=production babel ./index.js --out-dir lib/",
-    "extract-emotion": "node ./bin/cli.js"
+    "extract-emotion": "node ./bin/cli.js",
+    "prepublishOnly": "npm run build"
   },
   "bin": {
     "extract-emotion": "./bin/cli.js"
