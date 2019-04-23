@@ -1,5 +1,6 @@
 import React from 'react';
 import { css, injectGlobal } from 'emotion';
+import sv from '@drawbotics/style-vars';
 
 import '../utils/normalize';
 
@@ -9,10 +10,15 @@ injectGlobal`
   @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
 `;
 
+
 const styles = {
   base: css`
-    font-family: Rubik;
-    font-size: 14px;
+    * {
+      font-family: ${sv.baseFontFamily};
+      font-size: ${sv.baseFontSize};
+      line-height: ${sv.baseLineHeight};
+      letter-spacing: ${sv.baseLetterSpacing};
+    }
   `,
 };
 

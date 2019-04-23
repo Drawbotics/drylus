@@ -1,4 +1,4 @@
-const { lighten, fade } = require('./colors');
+const { fade } = require('./colors');
 const bindObject = require('./bind-object');
 const { m, d } = require('./operations');
 
@@ -17,49 +17,65 @@ module.exports = bindObject({
   grey800: '#424242',
   grey900: '#212121',
 
-  brandPrimary: '#2cb7c6',
-  brandYellow: '#ffaf3a',
-  brandRed: '#db4c60',
-  brandGreen: '#48b762',
-  brandBlue: '#42a5f5',
-  brandOrange: '#ff6d2f',
+  primaryDark: '#247488',
+  primary: '#3DB5D0',
+  primaryLight: '#bee6ef',
+  primaryLighter: '#f1fbfc',
 
-  lightBrandPrimary: '#e7f2f4',
-  lightBrandYellow: (s) => lighten(s.brandYellow, 27),
-  lightBrandRed: (s) => lighten(s.brandRed, 21),
-  lightBrandGreen: (s) => lighten(s.brandGreen, 27),
-  lightBrandBlue: (s) => lighten(s.brandBlue, 25),
-  lightBrandOrange: (s) => lighten(s.brandOrange, 21),
+  neutralDarkest: '#172b4e',
+  neutralDarker: '#425a70',
+  neutralDark: '#879ba6',
+  neutral: '#d3dce6',
+  neutralLight: '#eaeff4',
+  neutralLighter: '#f6f7fa',
 
-  backgroundAlt: '#fafafa',
+  redDark: '#BF0E08',
+  red: '#EC4C47',
+  redLight: '#fae2e2',
+  redLighter: '#fef6f6',
+
+  orangeDark: '#a16d22',
+  orange: '#f8a00f',
+  orangeLight: '#f9ebd6',
+  orangeLighter: '#fff7eb',
+
+  blueDark: '#2A41A2',
+  blue: '#4673D1',
+  blueLight: '#CFD8FF',
+  blueLighter: '#E7EBFC',
+
+  greenDark: '#288A70',
+  green: '#3FBC9B',
+  greenLight: '#C1E8DE',
+  greenLighter: '#E7F5F1',
 
   facebookColor: '#275a9b',
   twitterColor: '#00a2f5',
-  mailColor: '#3e8ee7',
   linkedinColor: '#0077b5',
 
   lighterOverlay: (s) => fade(s.grey900, 5),
   lightOverlay: (s) => fade(s.grey900, 10),
 
   // BORDERS
-  baseBorderRadius: '3px',
+  baseBorderRadius: '4px',
   baseBorderRadiusBig: (s) => m(s.baseBorderRadius, 1.5),
 
   // TYPOGRAPHY
-  baseFontSize: '15px',
-  baseFontFamily: '"Open Sans", sans-serif',
-  baseFontFamilyAlt: '"brandon-grotesque", sans-serif',
+  baseFontSize: '14px',
+  baseFontFamily: '"Rubik", sans-serif',
   baseLineHeight: '1.5',
-  textPrimaryDark: (s) => s.grey700,
+  baseLetterSpacing: '0.04rem',
+  textPrimaryDark: (s) => s.neutralDarkest,
   textPrimaryWhite: (s) => s.white,
-  textSecondaryDark: (s) => fade(s.textPrimaryDark, 70),
-  textTertiaryDark: (s) => fade(s.textPrimaryDark, 50),
-  textDisabledDark: (s) => fade(s.textPrimaryDark, 35),
+  textSecondaryDark: (s) => s.neutralDark,
+  textTertiaryDark: (s) => fade(s.neutralDark, 70),
+  textDisabledDark: (s) => fade(s.neutralDark, 50),
 
   // SHADOWS
   shadowPenumbraColor: 'rgba(0, 0, 0, 0.14)',
   shadowUmbraColor: 'rgba(0, 0, 0, 0.2)',
   shadowAmbientColor: 'rgba(0, 0, 0, 0.12)',
+  shadowColor: (s) => s.neutralDarkest,
 
   // ELEVATIONS
   elevationMinus2: (s) => `0 2px 2px 0 ${s.shadowPenumbraColor} inset, 0 3px 1px -2px ${s.shadowUmbraColor} inset, 0 1px 5px 0 ${s.shadowAmbientColor} inset`,
@@ -74,8 +90,10 @@ module.exports = bindObject({
   elevation7: (s) => `0 16px 24px 2px ${s.shadowPenumbraColor}, 0  8px 10px -5px ${s.shadowUmbraColor}, 0  6px 30px 5px ${s.shadowAmbientColor}`,
   elevation8: (s) => `0  9px 46px  8px ${s.shadowPenumbraColor}, 0 24px 38px  3px ${s.shadowUmbraColor}, 0 11px 15px -7px ${s.shadowAmbientColor}`,
 
+  inset1: (s) => `0 1px 6px ${s.shadowColor} inset`,
+
   // PADDINGS AND MARGINS
-  basePadding: '30px',
+  basePadding: '20px',
   basePaddingSmall: (s) => d(s.basePadding, 2),
   baseMargin: (s) => s.basePadding,
   baseMarginSmall: (s) => d(s.baseMargin, 2),
@@ -84,6 +102,7 @@ module.exports = bindObject({
   baseTransitionTime: '0.3s',
   baseTransitionTimeShort: (s) => d(s.baseTransitionTime, 2),
   bouncyTransitionCurve: 'cubic-bezier(0.44, 0.11, 0.07, 1.29)',
+  baseTransition: (s) => `all ${s.baseTransitionTimeShort} ease-in-out`,
 
   // SIZES
   maxWidth: '1200px',
