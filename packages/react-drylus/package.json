@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/react-drylus",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.1-alpha.0",
   "description": "React components for the Drawbotics' ecosystem",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "",
@@ -14,7 +14,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@drawbotics/icons": "^0.1.0-alpha.0",
+    "@drawbotics/icons": "^0.1.1-alpha.0",
     "core-js": "^2.6.5",
     "emotion": "^10.0.9"
   },
