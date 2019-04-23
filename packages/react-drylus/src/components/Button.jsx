@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
@@ -29,12 +29,52 @@ const styles = {
       color: ${sv.textDisabledDark};
     }
   `,
+  danger: css`
+    background: ${sv.red};
+
+    &:hover {
+      background: ${sv.redDark};
+    }
+  `,
+  info: css`
+    background: ${sv.blue};
+
+    &:hover {
+      background: ${sv.blueDark};
+    }
+  `,
+  success: css`
+    background: ${sv.green};
+
+    &:hover {
+      background: ${sv.greenDark};
+    }
+  `,
+  warning: css`
+    background: ${sv.orange};
+
+    &:hover {
+      background: ${sv.orangeDark};
+    }
+  `,
 };
 
 
-const Button = ({ children, disabled }) => {
+const Button = ({
+  children,
+  disabled,
+  onClick,
+  type,
+}) => {
   return (
-    <button className={styles.base} disabled={disabled}>{children}</button>
+    <button
+      onClick={onClick}
+      className={cx(styles.base, {
+        [styles[type]]: type,
+      })}
+      disabled={disabled}>
+      {children}
+    </button>
   );
 }
 
@@ -44,6 +84,10 @@ Button.propTypes = {
   children: PropTypes.string.isRequired,
   /** Disables the button click */
   disabled: PropTypes.bool,
+  /** Triggered after the button is clicked */
+  onClick: PropTypes.func,
+  /** Type of the button. Can be danger, success, info, warning */
+  type: PropTypes.oneOf(['danger', 'success', 'info', 'warning']),
 }
 
 
