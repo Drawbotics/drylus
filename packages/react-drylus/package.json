@@ -14,8 +14,12 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@drawbotics/icons": "file:../icons",
+    "@drawbotics/icons": "^0.1.0-alpha.0",
     "core-js": "^2.6.5",
     "emotion": "^10.0.9"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "57e9ffb75461ca23beaed3e245ad4f900be602a6"
 }

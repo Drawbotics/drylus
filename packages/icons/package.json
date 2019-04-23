@@ -14,5 +14,9 @@
     "sync": "node scripts/sync.js",
     "build:dev": "npm run build && NODE_ENV=development npm run sync",
     "prepublishOnly": "npm run build && NODE_ENV=production npm run sync"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "57e9ffb75461ca23beaed3e245ad4f900be602a6"
 }
