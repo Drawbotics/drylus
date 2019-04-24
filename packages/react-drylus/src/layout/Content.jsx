@@ -37,8 +37,10 @@ const Content = ({ children, fullHeight, fullWidth }) => {
 Content.propTypes = {
   children: PropTypes.node.isRequired,
 
+  /** If true, the content will take all the height available */
   fullHeight: PropTypes.bool,
 
+  /** If true, the content will not be limited to 1200px */
   fullWidth: PropTypes.bool,
 };
 
