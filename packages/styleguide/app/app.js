@@ -10,7 +10,7 @@ import { Navbar } from '@drawbotics/react-drylus/components';
 // import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
 import Sidebar from './components/Sidebar';
-import CustomFooter from './components/CustomFooter';
+// import CustomFooter from './components/CustomFooter';
 
 
 const styles = {
@@ -40,17 +40,17 @@ const App = () => {
     <ThemeProvider>
       <Page>
         <Layout
-          horizontalPreference
+          // horizontalPreference
           top={<Navbar />}
-          topFixed
+          // topFixed
           // topFloating
-          bottom={<CustomFooter />}
+          bottom={<Navbar />}
           // bottomFixed
           // bottomFloating
           right={<Sidebar />}
-          rightFixed
+          // rightFixed
           // left={<Sidebar />}
-          leftFixed>
+          >
           <Content fullHeight>
             <div className={styles.wrapper}>
               <div className={styles.fakeContent}>
@@ -59,6 +59,7 @@ const App = () => {
                 </div>
                 <div className={styles.table}>
                 </div>
+                more content
               </div>
             </div>
           </Content>

@@ -95,7 +95,9 @@ module.exports = bindObject({
   baseTransition: (s) => `all ${s.baseTransitionTimeShort} ease-in-out`,
 
   // SIZES
-  maxWidth: '1200px',
+  maxWidthLarge: '1200px',
+  maxWidthMedium: '400px',
+
 
   // MEDIA QUERIES
   screenXs: 'only screen and (max-width: 320px)',

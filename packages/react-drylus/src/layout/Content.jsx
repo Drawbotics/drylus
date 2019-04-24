@@ -10,15 +10,24 @@ const styles = {
   fullHeight: css`
     height: 100%;
   `,
+  fullWidth: css`
+    max-width: none;
+  `,
+  children: css`
+    max-width: ${sv.maxWidthLarge};
+    margin: auto;
+  `,
 };
 
 
-const Content = ({ children, fullHeight }) => {
+const Content = ({ children, fullHeight, fullWidth }) => {
   return (
     <div className={cx(styles.base, {
       [styles.fullHeight]: fullHeight,
     })}>
-      {children}
+      <div className={cx(styles.children, { [styles.fullWidth]: fullWidth })}>
+        {children}
+      </div>
     </div>
   );
 };

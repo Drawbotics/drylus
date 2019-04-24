@@ -23,7 +23,7 @@ const styles = {
 const Sidebar = () => {
   return (
     <div className={styles.sidebar}>
-      This is some content
+      This is some content sdfsdf 
       <div className={styles.longContent}>
 
       </div>

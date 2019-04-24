@@ -21,6 +21,22 @@ const styles = {
 };
 
 
+const RefWrappedComponent = ({ withRef, childRef, wrapperRef, content='' }) => {
+  if (withRef) {
+    return (
+      <div ref={wrapperRef}>
+        <div ref={childRef}>
+          {content}
+        </div>
+      </div>
+    );
+  }
+  else {
+    return content;
+  }
+};
+
+
 const Layout = ({
   children,
   top,
@@ -86,73 +102,29 @@ const Layout = ({
   if (horizontalPreference) {
     return (
       <div className={styles.horizontalContent}>
-        {do{
-          if (leftFixed) {
-            <div ref={leftWrapperRef}>
-              <div ref={leftRef}>
-                {left}
-              </div>
-            </div>
-          }
-          else {
-            left
-          }
-        }}
+        <RefWrappedComponent withRef={leftFixed} childRef={leftRef} wrapperRef={leftWrapperRef} content={left} />
         <div className={styles.verticalContent}>
-          {top}
+          <RefWrappedComponent withRef={topFixed} childRef={topRef} wrapperRef={topWrapperRef} content={top} />
           <div className={styles.content}>
             {children}
           </div>
-          {bottom}
+          <RefWrappedComponent withRef={bottomFixed} childRef={bottomRef} wrapperRef={bottomWrapperRef} content={bottom} />
         </div>
-        {do{
-          if (rightFixed) {
-            <div ref={rightWrapperRef}>
-              <div ref={rightRef}>
-                {right}
-              </div>
-            </div>
-          }
-          else {
-            right
-          }
-        }}
+        <RefWrappedComponent withRef={rightFixed} childRef={rightRef} wrapperRef={rightWrapperRef} content={right} />
       </div>
     );
   }
   return (
     <div className={styles.verticalContent}>
-      {do{
-        if (topFixed) {
-          <div ref={topWrapperRef}>
-            <div ref={topRef}>
-              {top}
-            </div>
-          </div>
-        }
-        else {
-          top
-        }
-      }}
+      <RefWrappedComponent withRef={topFixed} childRef={topRef} wrapperRef={topWrapperRef} content={top} />
       <div className={styles.horizontalContent}>
-        {left}
+        <RefWrappedComponent withRef={leftFixed} childRef={leftRef} wrapperRef={leftWrapperRef} content={left} />
         <div className={styles.content}>
           {children}
         </div>
-        {right}
+        <RefWrappedComponent withRef={rightFixed} childRef={rightRef} wrapperRef={rightWrapperRef} content={right} />
       </div>
-      {do{
-        if (bottomFixed) {
-          <div ref={bottomWrapperRef}>
-            <div ref={bottomRef}>
-              {bottom}
-            </div>
-          </div>
-        }
-        else {
-          bottom
-        }
-      }}
+      <RefWrappedComponent withRef={bottomFixed} childRef={bottomRef} wrapperRef={bottomWrapperRef} content={bottom} />
     </div>
   );
 };
