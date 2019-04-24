@@ -5,6 +5,9 @@ import { css } from 'emotion';
 const styles = {
   base: css`
     display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
   `,
   content: css`
     flex: 1;
@@ -13,12 +16,14 @@ const styles = {
 };
 
 
-const Layout = ({ children }) => {
+const Layout = ({ children, top, bottom, left, right }) => {
   return (
     <div className={styles.base}>
+      {top}
       <div className={styles.content}>
         {children}
       </div>
+      {bottom}
     </div>
   );
 };

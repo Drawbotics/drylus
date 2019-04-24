@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 
 
@@ -7,12 +7,17 @@ const styles = {
   base: css`
     background: ${sv.neutralLight};
   `,
+  fullHeight: css`
+    height: 100%;
+  `,
 };
 
 
-const Content = ({ children }) => {
+const Content = ({ children, fullHeight }) => {
   return (
-    <div className={styles.base}>
+    <div className={cx(styles.base, {
+      [styles.fullHeight]: fullHeight,
+    })}>
       {children}
     </div>
   );

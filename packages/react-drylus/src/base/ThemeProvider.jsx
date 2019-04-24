@@ -13,8 +13,6 @@ injectGlobal`
 
 const styles = {
   base: css`
-    min-height: 100vh;
-
     * {
       font-family: ${sv.baseFontFamily};
       font-size: ${sv.baseFontSize};
