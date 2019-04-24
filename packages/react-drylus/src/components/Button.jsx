@@ -104,6 +104,20 @@ const styles = {
       margin-right: 4px;
     }
   `,
+  iconOnly: css`
+    border-radius: 1000px;
+    padding: ${sv.basePaddingSmall};
+    background: ${sv.neutralLight};
+    color: ${sv.textPrimaryDark};
+
+    &:hover {
+      background: ${sv.neutral};
+    }
+
+    &:active {
+      box-shadow: ${sv.insetActiveMedium};
+    }
+  `,
 };
 
 
@@ -115,6 +129,7 @@ const Button = ({
   size,
   tier,
 }) => {
+  const iconOnly = ! Array.isArray(children) && typeof children !== 'string';
   const iconSide = Array.isArray(children) && typeof children[0] === 'string' ? 'right' : 'left';
   return (
     <button
@@ -123,8 +138,9 @@ const Button = ({
         [styles[type]]: type,
         [styles[size]]: size,
         [styles[tier]]: tier,
-        [styles.rightIcon]: iconSide === 'right',
-        [styles.leftIcon]: iconSide === 'left',
+        [styles.rightIcon]: iconSide === 'right' && ! iconOnly,
+        [styles.leftIcon]: iconSide === 'left' && ! iconOnly,
+        [styles.iconOnly]: iconOnly,
       })}
       disabled={disabled}>
       {children}
@@ -136,14 +152,19 @@ const Button = ({
 Button.propTypes = {
   /** Normally just text for the button, you can also pass an Icon component to use an icon in the button */
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+
   /** Disables the button click */
   disabled: PropTypes.bool,
+
   /** Triggered after the button is clicked */
   onClick: PropTypes.func,
+
   /** Type of the button. Can be danger, success, info, warning */
   type: PropTypes.oneOf(['danger', 'success', 'info', 'warning']),
+
   /** Size of the button. Can be small, large */
   size: PropTypes.oneOf(['small', 'large']),
+
   /** Tier of the button. Can be secondary, tertiary */
   tier: PropTypes.oneOf(['secondary', 'tertiary']),
 }

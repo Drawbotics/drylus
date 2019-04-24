@@ -48,16 +48,25 @@ const App = () => {
           <Button tier="tertiary">Button Text</Button>
         </div>
         <div className={styles.component}>
+          <Button><Icon name="activity" /></Button>
+        </div>
+        <div className={styles.component}>
           <Button>
             <Icon name="activity" />
             Button Text
           </Button>
         </div>
         <div className={styles.component}>
-          <Button disabled>Button Text</Button>
+          <Button disabled>
+            Button Text
+            <Icon name="activity" />
+          </Button>
         </div>
         <div className={styles.component}>
-          <Button size="small">Button Text</Button>
+          <Button size="small">
+            Button Text
+            <Icon name="activity" />
+          </Button>
         </div>
         <div className={styles.component}>
           <Button size="large">Button Text</Button>
