@@ -72,24 +72,9 @@ module.exports = bindObject({
   textDisabledDark: (s) => fade(s.neutralDark, 50),
 
   // SHADOWS
-  shadowPenumbraColor: 'rgba(0, 0, 0, 0.14)',
-  shadowUmbraColor: 'rgba(0, 0, 0, 0.2)',
-  shadowAmbientColor: 'rgba(0, 0, 0, 0.12)',
   shadowColor: (s) => s.neutralDarkest,
 
   // ELEVATIONS
-  elevationMinus2: (s) => `0 2px 2px 0 ${s.shadowPenumbraColor} inset, 0 3px 1px -2px ${s.shadowUmbraColor} inset, 0 1px 5px 0 ${s.shadowAmbientColor} inset`,
-  elevationMinus1: (s) => `0 1px 2px ${s.shadowPenumbraColor} inset, 0 2px 3px -2px ${s.shadowUmbraColor} inset, 0 0 5px 0 ${s.shadowAmbientColor} inset`,
-  elevation0: 'none',
-  elevation1: (s) => `0 1px 2px ${s.shadowPenumbraColor}, 0 2px 3px -2px ${s.shadowUmbraColor}, 0 0 5px 0 ${s.shadowAmbientColor}`,
-  elevation2: (s) => `0 2px 2px 0 ${s.shadowPenumbraColor}, 0 3px 1px -2px ${s.shadowUmbraColor}, 0 1px 5px 0 ${s.shadowAmbientColor}`,
-  elevation3: (s) => `0 3px 4px 0 ${s.shadowPenumbraColor}, 0 3px 3px -2px ${s.shadowUmbraColor}, 0 1px 8px 0 ${s.shadowAmbientColor}`,
-  elevation4: (s) => `0 4px 5px 0 ${s.shadowPenumbraColor}, 0 1px 10px 0 ${s.shadowUmbraColor}, 0 2px 4px -1px ${s.shadowAmbientColor}`,
-  elevation5: (s) => `0 6px 10px 0 ${s.shadowPenumbraColor}, 0 3px 5px -1px ${s.shadowUmbraColor}, 0 1px 18px 0 ${s.shadowAmbientColor}`,
-  elevation6: (s) => `0 8px 10px 1px ${s.shadowPenumbraColor}, 0 5px 5px -3px ${s.shadowUmbraColor}, 0 3px 14px 2px ${s.shadowAmbientColor}`,
-  elevation7: (s) => `0 16px 24px 2px ${s.shadowPenumbraColor}, 0  8px 10px -5px ${s.shadowUmbraColor}, 0  6px 30px 5px ${s.shadowAmbientColor}`,
-  elevation8: (s) => `0  9px 46px  8px ${s.shadowPenumbraColor}, 0 24px 38px  3px ${s.shadowUmbraColor}, 0 11px 15px -7px ${s.shadowAmbientColor}`,
-
   insetActive: (s) => `0 1px 6px ${s.shadowColor} inset`,
   insetActiveMedium: (s) => `0 1px 6px ${s.neutralDark} inset`,
   insetActiveLight: (s) => `0 1px 6px ${s.neutral} inset`,
@@ -97,8 +82,10 @@ module.exports = bindObject({
   // PADDINGS AND MARGINS
   basePadding: '20px',
   basePaddingSmall: (s) => d(s.basePadding, 2),
+  basePaddingLarge: (s) => m(s.basePadding, 1.5),
   baseMargin: (s) => s.basePadding,
   baseMarginSmall: (s) => d(s.baseMargin, 2),
+  baseMarginLarge: (s) => m(s.baseMargin, 1.5),
 
   // TRANSITIONS AND ANIMATIONS
   baseTransitionTime: '0.3s',
@@ -127,14 +114,4 @@ module.exports = bindObject({
   screenSOrM: '(max-width: 480px), (max-width: 768px)',
   greaterThanMaximumWidth: 'only screen and (min-width: 1200px)',
   greaterThanMinimumWidth: 'only screen and (min-width: 1024px)',
-
-  // LEGACY MEDIA QUERIES
-  screenXs_legacy: 'only screen and (max-width: 320px)',
-  screenS_legacy: 'only screen and (max-width: 480px)',
-  screenM_legacy: 'only screen and (max-width: 768px)',
-  screenL_legacy: 'only screen and (max-width: 992px)',
-  screenXl_legacy: 'only screen and (max-width: 1200px)',
-  screenSOrM_legacy: '(max-width: 480px), (max-width: 768px)',
-  greaterThanMaximumWidth_legacy: 'only screen and (min-width: 1200px)',
-  greaterThanMinimumWidth_legacy: 'only screen and (min-width: 1000px)',
 });
