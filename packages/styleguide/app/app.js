@@ -3,7 +3,7 @@ import { css } from 'emotion';
 // import sv from '@drawbotics/style-vars';
 import { ThemeProvider, Page } from '@drawbotics/react-drylus/base';
 import { Layout, Content } from '@drawbotics/react-drylus/layout';
-import { Footer, Navbar } from '@drawbotics/react-drylus/components';
+import { Footer, Navbar, Sidebar } from '@drawbotics/react-drylus/components';
 
 // vanilla import, will be in head for link and script
 // import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
@@ -27,7 +27,9 @@ const App = () => {
     <ThemeProvider>
       <Page>
         <Layout
+          // altPriority
           top={<Navbar />}
+          left={<Sidebar />}
           bottom={<Footer />}>
           <Content fullHeight>
             <div className={styles.fakeContent}>

@@ -54,6 +54,7 @@ module.exports = {
   plugins: isProduction ? basePlugins : [
     ...basePlugins,
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new FriendlyErrorsWebpackPlugin({
       clearConsole: true,
       compilationSuccessInfo: {
