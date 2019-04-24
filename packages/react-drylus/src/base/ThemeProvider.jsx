@@ -13,14 +13,13 @@ injectGlobal`
 
 const styles = {
   base: css`
+    min-height: 100vh;
+
     * {
       font-family: ${sv.baseFontFamily};
       font-size: ${sv.baseFontSize};
       line-height: ${sv.baseLineHeight};
       letter-spacing: ${sv.baseLetterSpacing};
-    }
-    html {
-      font-size: ${sv.baseFontSize};
     }
   `,
 };
