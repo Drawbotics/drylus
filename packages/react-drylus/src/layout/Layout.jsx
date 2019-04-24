@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { css } from 'emotion';
+import PropTypes from 'prop-types';
 
 
 const styles = {
@@ -127,6 +128,39 @@ const Layout = ({
       <RefWrappedComponent withRef={bottomFixed} childRef={bottomRef} wrapperRef={bottomWrapperRef} content={bottom} />
     </div>
   );
+};
+
+
+Layout.propTypes = {
+  /** Children can be of any type. You can pass another Layout if needed as well */
+  children: PropTypes.node.isRequired,
+
+  /** Changes the flow from top-bottom to left-right */
+  horizontalPreference: PropTypes.bool,
+
+  /** Component to be rendered at the top, bottom, left or right of the layout */
+  top: PropTypes.element,
+  bottom: PropTypes.element,
+  left: PropTypes.element,
+  right: PropTypes.element,
+
+  /** If true, the top component will stay fixed in position */
+  topFixed: PropTypes.bool,
+
+  /** Used with topFixed. If true the top component will overlap the content */
+  topFloating: PropTypes.bool,
+
+  /** If true, the bottom component will stay fixed in position */
+  bottomFixed: PropTypes.bool,
+
+  /** Used with bottomFixed. If true the bottom component will overlap the content */
+  bottomFloating: PropTypes.bool,
+
+  /** If true, the left component will stay fixed in position */
+  leftFixed: PropTypes.bool,
+
+  /** If true, the right component will stay fixed in position */
+  rightFixed: PropTypes.bool,
 };
 
 

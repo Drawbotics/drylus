@@ -1,5 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
+import PropTypes from 'prop-types';
 
 
 const styles = {
@@ -16,6 +17,11 @@ const Page = ({ children }) => {
       {children}
     </div>
   );
+};
+
+
+Page.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 

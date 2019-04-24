@@ -1,5 +1,6 @@
 import React from 'react';
 import { css, injectGlobal } from 'emotion';
+import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
 import '../utils/normalize';
@@ -29,6 +30,11 @@ const ThemeProvider = ({ children }) => {
       {children}
     </div>
   );
+};
+
+
+ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 

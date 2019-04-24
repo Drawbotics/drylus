@@ -167,7 +167,7 @@ Button.propTypes = {
 
   /** Tier of the button. Can be secondary, tertiary */
   tier: PropTypes.oneOf(['secondary', 'tertiary']),
-}
+};
 
 
 export default Button;

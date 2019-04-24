@@ -1,5 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
+// import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
 
