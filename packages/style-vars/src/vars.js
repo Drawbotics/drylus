@@ -72,10 +72,11 @@ module.exports = bindObject({
   textDisabledDark: (s) => fade(s.neutralDark, 50),
 
   // SHADOWS
-  shadowColor: (s) => s.neutralDarkest,
+  shadowColor: (s) => s.neutral,
 
   // ELEVATIONS
-  insetActive: (s) => `0 1px 6px ${s.shadowColor} inset`,
+  elevation1: (s) => `0 4px 8px ${s.shadowColor}`,
+  insetActive: (s) => `0 1px 6px ${s.neutralDarkest} inset`,
   insetActiveMedium: (s) => `0 1px 6px ${s.neutralDark} inset`,
   insetActiveLight: (s) => `0 1px 6px ${s.neutral} inset`,
 

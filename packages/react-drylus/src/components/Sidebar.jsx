@@ -4,8 +4,8 @@ import { css } from 'emotion';
 
 const styles = {
   base: css`
-    width: 300px;
-    height: 100%;
+    width: 200px;
+    min-height: 100vh;
     background: yellow;
   `,
 };
