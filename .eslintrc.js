@@ -27,7 +27,7 @@ module.exports = {
     'no-array-constructor': [ 'warn' ],
     'no-caller': [ 'warn' ],
     'no-cond-assign': [ 'warn', 'always' ],
-    'no-console': [ 'warn', { allow: [ 'warn', 'error', 'reportException' ] } ],
+    'no-console': [ 'warn', { allow: [ 'warn', 'error', 'reportException', 'info' ] } ],
     'no-eval': [ 'warn' ],
     'no-extend-native': [ 'warn' ],
     'no-extra-bind': [ 'warn' ],

@@ -40,14 +40,8 @@ const App = () => {
                 <h1>
                   The code will go below
                 </h1>
-                <h2>
-                  A bit lower
-                </h2>
                 <p>
-                  This is a paragraph sef sdfs dfs df s dsf
-                </p>
-                <p>
-                  This is a paragraph
+                  This paragraph is outside MDX
                 </p>
                 <Renderer>
                   <Button />

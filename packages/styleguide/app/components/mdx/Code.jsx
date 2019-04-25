@@ -12,7 +12,7 @@ const Code = ({ children, className }) => {
         <pre className={className} style={{...style, padding: '20px'}}>
           {tokens.map((line, i) => (
             <div key={i} {...getLineProps({line, key: i})}>
-              <span>{i + 1}</span>
+              {/* <span>{i + 1}</span> */}
               {line.map((token, key) => (
                 <span key={key} {...getTokenProps({token, key})} />
               ))}
