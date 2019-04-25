@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import ReactDOMServer from 'react-dom/server';
 import ReactElementToString from 'react-element-to-jsx-string';
+import omit from 'lodash/omit';
 import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
 
@@ -17,8 +18,10 @@ const styles = {
 };
 
 
-const Playground = ({ component: Component, defaultProps }) => {
-  const generatedComponent = <Component {...defaultProps} />;
+const Playground = ({ component: Component, initialProps }) => {
+  const [props, setProps] = useState({});
+
+  const generatedComponent = <Component {...initialProps} {...props} />;
   // const generatedHTMLString = ReactDOMServer.renderToStaticMarkup(generatedComponent);
   const generatedJSXString = ReactElementToString(generatedComponent);
   return (
@@ -28,7 +31,7 @@ const Playground = ({ component: Component, defaultProps }) => {
         {generatedComponent}
       </Preview>
       <CodeBox>{generatedJSXString}</CodeBox>
-      <PropsTable component={Component} defaultProps={defaultProps} onChange={(props) => console.info(props)} />
+      <PropsTable component={Component} activeProps={props} onChange={(v, n) => v === '_empty' ? setProps(omit(props, n)) : setProps({ ...props, [n]: v })} />
     </div>
   );
 };

@@ -2,6 +2,8 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 
+import Prop from './Prop';
+
 
 const styles = {
   propsTable: css`
@@ -50,7 +52,7 @@ function getProps(Component) {
 }
 
 
-const PropsTable = ({ component }) => {
+const PropsTable = ({ component, onChange, activeProps }) => {
   const props = getProps(component);
   return (
     <div className={styles.propsTable}>
@@ -69,6 +71,9 @@ const PropsTable = ({ component }) => {
         </div>
         <div className={cx(styles.cell, styles.headerCell, styles.bigCell)}>
           Description
+        </div>
+        <div className={cx(styles.cell, styles.headerCell, styles.bigCell)}>
+          Values
         </div>
       </div>
       {Object.keys(props).map((key) => (
@@ -95,6 +100,13 @@ const PropsTable = ({ component }) => {
                 `One of: ${values.join(', ')}`;
               }
             }}
+          </div>
+          <div className={cx(styles.cell, styles.bigCell)}>
+            <Prop
+              name={key}
+              prop={props[key]}
+              value={activeProps[key]}
+              onChange={onChange} />
           </div>
         </div>
       ))}

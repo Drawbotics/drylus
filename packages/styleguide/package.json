@@ -17,5 +17,8 @@
     "@drawbotics/react-drylus": "file:../react-drylus",
     "@drawbotics/vanilla-drylus": "file:../vanilla-drylus",
     "core-js": "2"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.11"
   }
 }

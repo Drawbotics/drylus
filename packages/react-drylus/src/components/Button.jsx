@@ -184,13 +184,8 @@ Button.propTypes = {
   /** Name of the icon to be displayed within the button. Shown on the left by default */
   withIcon: PropTypes.string,
 
-  /** Side on which the icon is displayed */
+  /** Side on which the icon is displayed, will default to "left" if none is given */
   iconSide: PropTypes.oneOf(['left', 'right']),
-};
-
-
-Button.defaultProps = {
-  iconSide: 'left',
 };
 
 
