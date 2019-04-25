@@ -3,7 +3,6 @@ import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import { ThemeProvider, Page } from '@drawbotics/react-drylus/base';
 import { Layout, Content } from '@drawbotics/react-drylus/layout';
-import { Button as MyButton } from '@drawbotics/react-drylus/components';
 
 // vanilla import, will be in head for link and script
 // import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
@@ -38,7 +37,6 @@ const App = () => {
           <Content fullHeight>
             <div className={styles.wrapper}>
               <div className={styles.fakeContent}>
-                <MyButton>Hey</MyButton>
                 <h1>
                   The code will go below
                 </h1>

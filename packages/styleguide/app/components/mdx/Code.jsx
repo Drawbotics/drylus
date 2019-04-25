@@ -4,7 +4,7 @@ import theme from 'prism-react-renderer/themes/nightOwl';
 
 
 const Code = ({ children, className }) => {
-  const language = className.replace(/language-/, '');
+  const language = className?.replace(/language-/, '');
 
   return (
     <Highlight {...defaultProps} theme={theme} code={children} language={language}>
