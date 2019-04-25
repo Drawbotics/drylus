@@ -20,6 +20,9 @@ const styles = {
 };
 
 
+const supportedModes = ['react', 'vanilla'];
+
+
 function getMarkupForMode(mode, component) {
   const generatedHTMLString = ReactDOMServer.renderToStaticMarkup(component);
   const generatedJSXString = ReactElementToString(component);
@@ -37,14 +40,14 @@ function getMarkupForMode(mode, component) {
 
 const Playground = ({ component: Component, initialProps }) => {
   const [props, setProps] = useState({});
-  const [activeMode, setMode] = useState('react');
+  const [activeMode, setMode] = useState(supportedModes[0]);
 
   const generatedComponent = <Component {...initialProps} {...props} />;
   const generatedMarkup = getMarkupForMode(activeMode, generatedComponent);
   return (
     <div className={styles.playground}>
       <h3>You are currently within the playground</h3>
-      <ModeSwitcher modes={['react', 'vanilla']} activeMode={activeMode} onChange={setMode} />
+      <ModeSwitcher modes={supportedModes} activeMode={activeMode} onChange={setMode} />
       <Preview component={Component}>
         {generatedComponent}
       </Preview>

@@ -33,7 +33,7 @@ const App = () => {
   return (
     <ThemeProvider>
       <Page>
-        <Layout left={<Sidebar />}>
+        <Layout left={<Sidebar />} leftFixed>
           <Content fullHeight>
             <div className={styles.wrapper}>
               <div className={styles.fakeContent}>
