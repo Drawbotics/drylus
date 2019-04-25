@@ -3,6 +3,8 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
+import Icon from './Icon';
+
 
 const styles = {
   base: css`
@@ -128,9 +130,10 @@ const Button = ({
   type,
   size,
   tier,
+  withIcon,
+  iconSide='left',
 }) => {
-  const iconOnly = ! Array.isArray(children) && typeof children !== 'string';
-  const iconSide = Array.isArray(children) && typeof children[0] === 'string' ? 'right' : 'left';
+  const iconOnly = ! children && withIcon;
   return (
     <button
       onClick={onClick}
@@ -138,20 +141,30 @@ const Button = ({
         [styles[type]]: type,
         [styles[size]]: size,
         [styles[tier]]: tier,
-        [styles.rightIcon]: iconSide === 'right' && ! iconOnly,
-        [styles.leftIcon]: iconSide === 'left' && ! iconOnly,
+        [styles.rightIcon]: iconSide === 'right' && withIcon,
+        [styles.leftIcon]: iconSide === 'left' && withIcon,
         [styles.iconOnly]: iconOnly,
       })}
       disabled={disabled}>
+      {do{
+        if (iconSide === 'left' && withIcon) {
+          <Icon name={withIcon} />
+        }
+      }}
       {children}
+      {do{
+        if (iconSide === 'right' && withIcon) {
+          <Icon name={withIcon} />
+        }
+      }}
     </button>
   );
 }
 
 
 Button.propTypes = {
-  /** Normally just text for the button, you can also pass an Icon component to use an icon in the button */
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  /** Normally just text for the button */
+  children: PropTypes.string,
 
   /** Disables the button click */
   disabled: PropTypes.bool,
@@ -167,6 +180,12 @@ Button.propTypes = {
 
   /** Tier of the button. Can be secondary, tertiary */
   tier: PropTypes.oneOf(['secondary', 'tertiary']),
+
+  /** Name of the icon to be displayed within the button. Shown on the left by default */
+  withIcon: PropTypes.string,
+
+  /** Side on which the icon is displayed, defaults to "left" */
+  iconSide: PropTypes.oneOf(['left', 'right']),
 };
 
 

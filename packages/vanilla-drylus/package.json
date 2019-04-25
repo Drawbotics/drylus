@@ -17,7 +17,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@drawbotics/react-drylus": "^0.1.1-alpha.0"
+    "@drawbotics/react-drylus": "file:../react-drylus"
   },
   "publishConfig": {
     "access": "public"

@@ -42,7 +42,7 @@ module.exports = {
       path.resolve(__dirname, './app'),
       'node_modules',
     ],
-    extensions: [ '.js', '.jsx', '.css' ],
+    extensions: [ '.js', '.jsx', '.css', '.mdx' ],
   },
   output: {
     path: path.resolve(__dirname, './docs'),
@@ -50,6 +50,7 @@ module.exports = {
   },
   optimization: {
     namedModules: true,
+    minimize: false,
   },
   plugins: isProduction ? basePlugins : [
     ...basePlugins,
@@ -82,6 +83,17 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
+        ],
+      },
+      {
+        test: /\.mdx$/,
+        use: [{
+            loader: 'babel-loader',
+            options: {
+              rootMode: 'upward',
+            },
+          },
+          '@mdx-js/loader',
         ],
       },
     ],

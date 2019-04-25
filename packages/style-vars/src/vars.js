@@ -63,7 +63,7 @@ module.exports = bindObject({
   // TYPOGRAPHY
   baseFontSize: '14px',
   baseFontFamily: '"Rubik", sans-serif',
-  baseLineHeight: '1.5',
+  baseLineHeight: '1.2',
   baseLetterSpacing: '0.04rem',
   textPrimaryDark: (s) => s.neutralDarkest,
   textPrimaryWhite: (s) => s.white,
