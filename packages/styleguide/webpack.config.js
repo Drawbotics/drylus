@@ -50,6 +50,7 @@ module.exports = {
   },
   optimization: {
     namedModules: true,
+    minimize: false,
   },
   plugins: isProduction ? basePlugins : [
     ...basePlugins,

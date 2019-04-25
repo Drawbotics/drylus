@@ -10,6 +10,11 @@ module.exports = function(api) {
     ["@babel/preset-react"],
   ];
 
+  const babelrcRoots = [
+    ".",
+    "packages/*",
+  ];
+
   const plugins = [
     ["babel-plugin-emotion", {
       sourceMap: true,
@@ -25,6 +30,7 @@ module.exports = function(api) {
   return {
     presets,
     plugins,
+    babelrcRoots,
     sourceType: 'unambiguous',
   };
 }

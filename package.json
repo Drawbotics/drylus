@@ -27,7 +27,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0"
+    "*.{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty"
   },
   "author": "nicmosc <nick@drawbotics.com>",
   "license": "ISC",
@@ -71,6 +71,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-live": "^2.0.1",
     "rimraf": "^2.6.2",
     "style-loader": "^0.23.1",
     "webfont": "^8.2.1",

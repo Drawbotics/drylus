@@ -2,13 +2,14 @@
 import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
 
-import Code from './Code';
+// import Code from './Code';
+import Preview from './Preview';
 
 
 const components = {
   h1: (props) => <h1 style={{color: 'tomato'}} {...props} />,
   pre: (props) => <div {...props} />,
-  code: Code,
+  code: Preview,
 }
 
 
