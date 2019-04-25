@@ -37,9 +37,15 @@ const App = () => {
           <Content fullHeight>
             <div className={styles.wrapper}>
               <div className={styles.fakeContent}>
-                <div>
+                <h1>
                   The code will go below
-                </div>
+                </h1>
+                <h2>
+                  A bit lower
+                </h2>
+                <p>
+                  This is a paragraph
+                </p>
                 <Renderer>
                   <Button />
                 </Renderer>
