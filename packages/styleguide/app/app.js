@@ -9,7 +9,9 @@ import { Layout, Content } from '@drawbotics/react-drylus/layout';
 // import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
 import Sidebar from './components/Sidebar';
-// import CustomFooter from './components/CustomFooter';
+import Renderer from './components/Renderer';
+
+import Button from './showcase/Button.mdx';
 
 
 const styles = {
@@ -24,13 +26,6 @@ const styles = {
   fakeContent: css`
     flex: 1;
   `,
-  table: css`
-    margin-top: ${sv.baseMargin};
-    box-shadow: ${sv.elevation1};
-    flex: 1;
-    background: pink;
-    height: 700px;
-  `,
 };
 
 
@@ -43,11 +38,11 @@ const App = () => {
             <div className={styles.wrapper}>
               <div className={styles.fakeContent}>
                 <div>
-                  Hello im the tabs
+                  The code will go below
                 </div>
-                <div className={styles.table}>
-                </div>
-                more content
+                <Renderer>
+                  <Button />
+                </Renderer>
               </div>
             </div>
           </Content>
