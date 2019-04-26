@@ -18,7 +18,7 @@ const styles = {
     display: flex;
     align-items: center;
 
-    &:nth-child(odd): {
+    &:nth-of-type(odd): {
       background: rgba(84, 110, 122, 0.03);
     }
   `,
@@ -76,7 +76,7 @@ const PropsTable = ({ component, onChange, activeProps }) => {
           Values
         </div>
       </div>
-      {Object.keys(props).map((key) => (
+      {Object.keys(props).sort().map((key) => (
         <div key={key} className={styles.row}>
           <div className={styles.cell}>
             {key}

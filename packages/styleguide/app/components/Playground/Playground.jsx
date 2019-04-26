@@ -25,7 +25,7 @@ const supportedModes = ['react', 'vanilla'];
 
 function getMarkupForMode(mode, component) {
   const generatedHTMLString = ReactDOMServer.renderToStaticMarkup(component);
-  const generatedJSXString = ReactElementToString(component);
+  const generatedJSXString = ReactElementToString(component, { showDefaultProps: false });
   switch (mode) {
     case 'vanilla':
       return generatedHTMLString;
@@ -51,7 +51,7 @@ const Playground = ({ component: Component, initialProps }) => {
       <Preview component={Component}>
         {generatedComponent}
       </Preview>
-      <CodeBox>{generatedMarkup}</CodeBox>
+      <CodeBox format={activeMode === 'vanilla'}>{generatedMarkup}</CodeBox>
       <PropsTable component={Component} activeProps={props} onChange={(v, n) => v === '_empty' ? setProps(omit(props, n)) : setProps({ ...props, [n]: v })} />
     </div>
   );

@@ -66,6 +66,7 @@
     "jest-cli": "^24.7.1",
     "lerna": "^3.13.1",
     "lint-staged": "^8.1.5",
+    "lodash": "^4.17.11",
     "memory-fs": "^0.4.1",
     "mermaid.cli": "^0.5.1",
     "prism-react-renderer": "^0.1.6",
