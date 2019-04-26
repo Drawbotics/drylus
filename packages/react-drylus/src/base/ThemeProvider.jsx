@@ -1,5 +1,7 @@
 import React from 'react';
 import { css, injectGlobal } from 'emotion';
+import PropTypes from 'prop-types';
+import sv from '@drawbotics/style-vars';
 
 import '../utils/normalize';
 
@@ -7,12 +9,20 @@ import '../utils/normalize';
 // NOTE: here we also include the custom fonts
 injectGlobal`
   @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
+
+  html {
+    font-size: ${sv.baseFontSize};
+    line-height: ${sv.baseLineHeight};
+    letter-spacing: ${sv.baseLetterSpacing};
+  }
 `;
+
 
 const styles = {
   base: css`
-    font-family: Rubik;
-    font-size: 14px;
+    * {
+      font-family: ${sv.baseFontFamily};
+    }
   `,
 };
 
@@ -23,6 +33,11 @@ const ThemeProvider = ({ children }) => {
       {children}
     </div>
   );
+};
+
+
+ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 

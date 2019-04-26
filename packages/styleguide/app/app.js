@@ -1,25 +1,30 @@
 import React from 'react';
 import { css } from 'emotion';
-
-import { Button, ThemeProvider, Icon } from '@drawbotics/react-drylus';
+import sv from '@drawbotics/style-vars';
+import { ThemeProvider, Page } from '@drawbotics/react-drylus/base';
+import { Layout, Content } from '@drawbotics/react-drylus/layout';
 
 // vanilla import, will be in head for link and script
-import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
+// import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
 import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
+import Sidebar from './components/Sidebar';
+import Renderer from './components/mdx/Renderer';
 
-drylus.all();
+import Button from './showcase/Button.mdx';
 
 
 const styles = {
   app: css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
   `,
-  code: css`
+  wrapper: css`
+    height: 100%;
+    padding: ${sv.basePadding};
+    display: flex;
+    flex-direction: column;
+  `,
+  fakeContent: css`
     flex: 1;
-    padding: 5px;
   `,
 };
 
@@ -27,26 +32,25 @@ const styles = {
 const App = () => {
   return (
     <ThemeProvider>
-      <div className={styles.app}>
-        <div className={styles.code}>
-          <h1>
-            React
-          </h1>
-          <Button>click me</Button>
-          <div>
-            <Icon name="activity" />
-          </div>
-        </div>
-        <div className={styles.code}>
-          <h1>
-            Vanilla
-          </h1>
-          <button className="Drylus-Button__base Drylus-Button__hover">click me</button>
-          <div>
-            <i className="Drylus-Icon__base Drycon Drycon-activity" />
-          </div>
-        </div>
-      </div>
+      <Page>
+        <Layout left={<Sidebar />} leftFixed>
+          <Content fullHeight>
+            <div className={styles.wrapper}>
+              <div className={styles.fakeContent}>
+                <h1>
+                  The code will go below
+                </h1>
+                <p>
+                  This paragraph is outside MDX
+                </p>
+                <Renderer>
+                  <Button />
+                </Renderer>
+              </div>
+            </div>
+          </Content>
+        </Layout>
+      </Page>
     </ThemeProvider>
   );
 };
