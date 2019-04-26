@@ -9,6 +9,7 @@ import CodeBox from './CodeBox';
 import Preview from './Preview';
 import PropsTable from './PropsTable';
 import ModeSwitcher from './ModeSwitcher';
+import { adaptForVanilla } from './utils';
 
 
 const styles = {
@@ -20,15 +21,12 @@ const styles = {
 };
 
 
-const supportedModes = ['react', 'vanilla'];
-
-
 function getMarkupForMode(mode, component) {
   const generatedHTMLString = ReactDOMServer.renderToStaticMarkup(component);
   const generatedJSXString = ReactElementToString(component, { showDefaultProps: false });
   switch (mode) {
     case 'vanilla':
-      return generatedHTMLString;
+      return adaptForVanilla(generatedHTMLString);
     case 'react':
       return generatedJSXString;
     default:
@@ -36,6 +34,9 @@ function getMarkupForMode(mode, component) {
       return '';
   }
 }
+
+
+const supportedModes = ['react', 'vanilla'];
 
 
 const Playground = ({ component: Component, initialProps }) => {
@@ -47,12 +48,18 @@ const Playground = ({ component: Component, initialProps }) => {
   return (
     <div className={styles.playground}>
       <h3>You are currently within the playground</h3>
-      <ModeSwitcher modes={supportedModes} activeMode={activeMode} onChange={setMode} />
-      <Preview component={Component} raw={activeMode === 'vanilla'}>
+      <ModeSwitcher
+        modes={supportedModes}
+        activeMode={activeMode}
+        onChange={setMode} />
+      <Preview raw={activeMode === 'vanilla'}>
         {activeMode === 'vanilla' ? generatedMarkup : generatedComponent}
       </Preview>
       <CodeBox format={activeMode === 'vanilla'}>{generatedMarkup}</CodeBox>
-      <PropsTable component={Component} activeProps={props} onChange={(v, n) => v === '_empty' ? setProps(omit(props, n)) : setProps({ ...props, [n]: v })} />
+      <PropsTable
+        component={Component}
+        activeProps={props}
+        onChange={(v, n) => v === '_empty' ? setProps(omit(props, n)) : setProps({ ...props, [n]: v })} />
     </div>
   );
 };
