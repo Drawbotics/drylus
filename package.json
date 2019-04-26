@@ -75,7 +75,6 @@
     "react-docgen": "^4.1.0",
     "react-dom": "^16.8.6",
     "react-element-to-jsx-string": "^14.0.2",
-    "react-live": "^2.0.1",
     "rimraf": "^2.6.2",
     "style-loader": "^0.23.1",
     "webfont": "^8.2.1",
