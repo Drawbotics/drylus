@@ -48,8 +48,8 @@ const Playground = ({ component: Component, initialProps }) => {
     <div className={styles.playground}>
       <h3>You are currently within the playground</h3>
       <ModeSwitcher modes={supportedModes} activeMode={activeMode} onChange={setMode} />
-      <Preview component={Component}>
-        {generatedComponent}
+      <Preview component={Component} raw={activeMode === 'vanilla'}>
+        {activeMode === 'vanilla' ? generatedMarkup : generatedComponent}
       </Preview>
       <CodeBox format={activeMode === 'vanilla'}>{generatedMarkup}</CodeBox>
       <PropsTable component={Component} activeProps={props} onChange={(v, n) => v === '_empty' ? setProps(omit(props, n)) : setProps({ ...props, [n]: v })} />

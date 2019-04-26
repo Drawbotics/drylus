@@ -30,10 +30,17 @@ const styles = {
 // };
 
 
-const Preview = ({ children }) => {
+const Preview = ({ children, raw }) => {
   return (
     <div className={styles.preview}>
-      {children}
+      {do{
+        if (raw) {
+          <div dangerouslySetInnerHTML={{ __html: children }} />
+        }
+        else {
+          children
+        }
+      }}
     </div>
   );
 };
