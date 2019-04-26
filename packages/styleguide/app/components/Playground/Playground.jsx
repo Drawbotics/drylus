@@ -47,7 +47,7 @@ const Playground = ({ component, children }) => {
   const [props, setProps] = useState({});
   const [activeMode, setMode] = useState(supportedModes[0]);
 
-  const generatedComponent = recursiveMdxTransform(children);
+  const generatedComponent = recursiveMdxTransform(children, { component, props });
   const generatedMarkup = getMarkupForMode(activeMode, generatedComponent);
   return (
     <div className={styles.playground}>

@@ -38,24 +38,36 @@ export function adaptForVanilla(markup) {
 }
 
 
-function transformMdxToReact(mdxElement) {
+function transformMdxToReact(mdxElement, target, props) {
   if (typeof mdxElement.type === 'string' && mdxElement.type.includes('react.fragment')) {
     return mdxElement;
   }
-  return React.createElement(mdxElement.props.originalType || mdxElement.type, omit(mdxElement.props, ['mdxType', 'originalType']))
+  if (target && target.type === mdxElement.props.originalType) {
+    return React.cloneElement(target, {
+      ...omit(mdxElement.props, ['mdxType', 'originalType']),
+      ...props,
+    });
+  }
+  return React.createElement(mdxElement.props.originalType || mdxElement.type, omit(mdxElement.props, ['mdxType', 'originalType']));
 }
 
 
-export function recursiveMdxTransform(tree) {
-  if (! tree.props.children.$$typeof && ! Array.isArray(tree.props.children)) {   // end of tree
-    return transformMdxToReact(tree);
+export function recursiveMdxTransform(tree, target) {
+  const { component, props } = target;
+  const targetComponent = component ? React.createElement(component) : null;
+
+  function mdxTransform(_tree) {
+    if (! _tree.props.children.$$typeof && ! Array.isArray(_tree.props.children)) {   // end of tree
+      return transformMdxToReact(_tree, targetComponent, props);
+    }
+    else if (Array.isArray(_tree.props.children)) {
+      const newTree = React.cloneElement(_tree, { children: React.Children.map(_tree.props.children, mdxTransform) });
+      return transformMdxToReact(newTree, targetComponent, props);
+    }
+    else {
+      const newTree = React.cloneElement(_tree, { children: React.Children.map(_tree.props.children, mdxTransform) });
+      return transformMdxToReact(newTree, targetComponent, props);
+    }
   }
-  else if (Array.isArray(tree.props.children)) {
-    const newTree = React.cloneElement(tree, { children: React.Children.map(tree.props.children, recursiveMdxTransform) });
-    return transformMdxToReact(newTree);
-  }
-  else {
-    const newTree = React.cloneElement(tree, { children: React.Children.map(tree.props.children, recursiveMdxTransform) });
-    return transformMdxToReact(newTree);
-  }
+  return mdxTransform(tree);
 }
