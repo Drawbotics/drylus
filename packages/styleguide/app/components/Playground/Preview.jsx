@@ -38,7 +38,9 @@ const Preview = ({ children, raw }) => {
           <div dangerouslySetInnerHTML={{ __html: children }} />
         }
         else {
-          children
+          <>
+            {children}
+          </>
         }
       }}
     </div>

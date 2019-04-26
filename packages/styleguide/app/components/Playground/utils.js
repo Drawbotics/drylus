@@ -57,6 +57,9 @@ export function recursiveMdxTransform(tree, target) {
   const targetComponent = component ? React.createElement(component) : null;
 
   function mdxTransform(_tree) {
+    if (Array.isArray(_tree)) {
+      return React.createElement(React.Fragment, {}, ...React.Children.map(_tree, mdxTransform));
+    }
     if (! _tree.props.children.$$typeof && ! Array.isArray(_tree.props.children)) {   // end of tree
       return transformMdxToReact(_tree, targetComponent, props);
     }
