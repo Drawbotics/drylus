@@ -1,4 +1,6 @@
+import React from 'react';
 import flow from 'lodash/flow';
+import omit from 'lodash/omit';
 
 
 function removeHash(string) {
@@ -33,4 +35,27 @@ export function transformClassname(string) {
 export function adaptForVanilla(markup) {
   const adapted = markup.replace(/(?<=")css-\S+(?=")/gm, transformClassname);
   return adapted;
+}
+
+
+function transformMdxToReact(mdxElement) {
+  if (typeof mdxElement.type === 'string' && mdxElement.type.includes('react.fragment')) {
+    return mdxElement;
+  }
+  return React.createElement(mdxElement.props.originalType || mdxElement.type, omit(mdxElement.props, ['mdxType', 'originalType']))
+}
+
+
+export function recursiveMdxTransform(tree) {
+  if (! tree.props.children.$$typeof && ! Array.isArray(tree.props.children)) {   // end of tree
+    return transformMdxToReact(tree);
+  }
+  else if (Array.isArray(tree.props.children)) {
+    const newTree = React.cloneElement(tree, { children: React.Children.map(tree.props.children, recursiveMdxTransform) });
+    return transformMdxToReact(newTree);
+  }
+  else {
+    const newTree = React.cloneElement(tree, { children: React.Children.map(tree.props.children, recursiveMdxTransform) });
+    return transformMdxToReact(newTree);
+  }
 }

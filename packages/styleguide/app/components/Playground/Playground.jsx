@@ -9,7 +9,7 @@ import CodeBox from './CodeBox';
 import Preview from './Preview';
 import PropsTable from './PropsTable';
 import ModeSwitcher from './ModeSwitcher';
-import { adaptForVanilla } from './utils';
+import { adaptForVanilla, recursiveMdxTransform } from './utils';
 
 
 const styles = {
@@ -22,6 +22,10 @@ const styles = {
 
 
 function getMarkupForMode(mode, component) {
+  if (component.length > 0) {
+    console.error('More than 1 element at root level. If you want to do that, use fragments: <>...</>');
+    return '';
+  }
   const generatedHTMLString = ReactDOMServer.renderToStaticMarkup(component);
   const generatedJSXString = ReactElementToString(component, { showDefaultProps: false });
   switch (mode) {
@@ -39,11 +43,11 @@ function getMarkupForMode(mode, component) {
 const supportedModes = ['react', 'vanilla'];
 
 
-const Playground = ({ component: Component, initialProps }) => {
+const Playground = ({ component, children }) => {
   const [props, setProps] = useState({});
   const [activeMode, setMode] = useState(supportedModes[0]);
 
-  const generatedComponent = <Component {...initialProps} {...props} />;
+  const generatedComponent = recursiveMdxTransform(children);
   const generatedMarkup = getMarkupForMode(activeMode, generatedComponent);
   return (
     <div className={styles.playground}>
@@ -57,7 +61,7 @@ const Playground = ({ component: Component, initialProps }) => {
       </Preview>
       <CodeBox format={activeMode === 'vanilla'}>{generatedMarkup}</CodeBox>
       <PropsTable
-        component={Component}
+        component={component}
         activeProps={props}
         onChange={(v, n) => v === '_empty' ? setProps(omit(props, n)) : setProps({ ...props, [n]: v })} />
     </div>
