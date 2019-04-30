@@ -1,6 +1,7 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
+import { Link } from 'react-router-dom';
 
 
 const styles = {
@@ -12,20 +13,58 @@ const styles = {
     display: flex;
     flex-direction: column;
   `,
-  longContent: css`
-    height: 700px;
-    width: 100%;
-    flex-shrink: 0;
+  links: css`
+    margin-top: ${sv.baseMargin};
+  `,
+  title: css`
+    color: ${sv.red};
+  `,
+  link: css`
+    color: ${sv.blue};
+  `,
+  sublinks: css`
+    padding-left: ${sv.baseMargin};
+  `,
+  root: css`
+    padding-left: 0;
   `,
 };
 
 
-const Sidebar = () => {
+export function generateLinks(route, routeName, parent='') {
+  const newPath = routeName ? `${parent}/${routeName}` : parent;
+  if (typeof route !== 'function') {
+    return (
+      <div key={newPath} className={styles.section}>
+        {do{
+          if (routeName) {
+            <div className={styles.title}>
+              {routeName}
+            </div>
+          }
+        }}
+        <div className={cx(styles.sublinks, { [styles.root]: ! routeName })}>
+          {Object.keys(route).map((routeName) => generateLinks(route[routeName], routeName, newPath))}
+        </div>
+      </div>
+    );
+  }
+  else {
+    return (
+      <div className={styles.link} key={newPath}>
+        <Link to={newPath}>{routeName}</Link>
+      </div>
+    );
+  }
+}
+
+
+const Sidebar = ({ routes }) => {
   return (
     <div className={styles.sidebar}>
-      This is some content sdfsdf 
-      <div className={styles.longContent}>
-
+      Styleguide sidebar
+      <div className={styles.links}>
+        {generateLinks(routes)}
       </div>
     </div>
   );

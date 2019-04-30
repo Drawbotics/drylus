@@ -42,11 +42,15 @@ module.exports = {
       path.resolve(__dirname, './app'),
       'node_modules',
     ],
+    alias: {
+      '~': path.resolve(__dirname, './app'),
+    },
     extensions: [ '.js', '.jsx', '.css', '.mdx' ],
   },
   output: {
     path: path.resolve(__dirname, './docs'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   optimization: {
     namedModules: true,

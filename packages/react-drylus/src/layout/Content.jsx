@@ -9,7 +9,7 @@ const styles = {
     background: ${sv.neutralLight};
   `,
   fullHeight: css`
-    height: 100%;
+    flex: 1;
   `,
   fullWidth: css`
     max-width: none;

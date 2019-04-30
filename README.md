@@ -62,6 +62,19 @@ npm run watch:styleguide
 npm run build:styleguide
 ```
 
+To add a new npm library/package to a package's dependencies:
+```
+npx lerna add [npm-package-name] --scope=@drawbotics/[package]
+```
+
+To add a new library as a dev dependency:
+```
+npx lerna add [npm-package-name] --scope=@drawbotics/[package] --dev
+npx lerna link convert
+(and sometimes)
+npm install
+```
+
 ### Requirements
 Some package require extra configuration to be used (this is also mentioned in each package's readme).
 
