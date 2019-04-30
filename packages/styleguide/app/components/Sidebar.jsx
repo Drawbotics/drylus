@@ -14,7 +14,7 @@ const styles = {
     flex-direction: column;
   `,
   links: css`
-    margin-top: ${sv.baseMargin};
+    margin-top: ${sv.margin};
   `,
   title: css`
     color: ${sv.red};

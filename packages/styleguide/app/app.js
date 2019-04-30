@@ -1,7 +1,11 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider, Page } from '@drawbotics/react-drylus/base';
-import { Layout, Content } from '@drawbotics/react-drylus/layout';
+import {
+  ThemeProvider,
+  Page,
+  Layout,
+  Content,
+} from '@drawbotics/react-drylus';
 
 // vanilla import, will be in head for link and script
 // import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
