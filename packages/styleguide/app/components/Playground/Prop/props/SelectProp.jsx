@@ -5,13 +5,13 @@ import sv from '@drawbotics/style-vars';
 
 const styles = {
   selectProp: css`
-    margin: ${sv.baseMarginSmall} 0;
+    margin: ${sv.marginSmall} 0;
   `,
   input: css`
     height: 35px;
     width: 100%;
     display: block;
-    border-radius: ${sv.baseBorderRadius};
+    border-radius: ${sv.defaultBorderRadius};
     border: 1px solid rgba(84, 110, 122, 0.23);
     color: rgba(0, 0, 0, 0.7);
     outline: none !important;

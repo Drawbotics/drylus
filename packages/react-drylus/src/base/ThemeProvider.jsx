@@ -11,9 +11,9 @@ injectGlobal`
   @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
 
   html {
-    font-size: ${sv.baseFontSize};
-    line-height: ${sv.baseLineHeight};
-    letter-spacing: ${sv.baseLetterSpacing};
+    font-size: ${sv.defaultFontSize};
+    line-height: ${sv.defaultLineHeight};
+    letter-spacing: ${sv.defaultLetterSpacing};
   }
 `;
 
@@ -21,7 +21,7 @@ injectGlobal`
 const styles = {
   base: css`
     * {
-      font-family: ${sv.baseFontFamily};
+      font-family: ${sv.defaultFontFamily};
     }
   `,
 };

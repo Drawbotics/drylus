@@ -5,8 +5,8 @@ import sv from '@drawbotics/style-vars';
 
 const styles = {
   preview: css`
-    padding: ${sv.padding};
-    border-radius: ${sv.baseBorderRadius};
+    padding: ${sv.defaultPadding};
+    border-radius: ${sv.defaultBorderRadius};
     background: ${sv.white};
     margin: ${sv.marginSmall};
   `,

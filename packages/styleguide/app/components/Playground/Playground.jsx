@@ -14,7 +14,7 @@ import { adaptForVanilla, recursiveMdxTransform } from './utils';
 
 const styles = {
   playground: css`
-    padding: ${sv.padding};
+    padding: ${sv.defaultPadding};
     border: 1px solid ${sv.neutralDark};
     position: relative;
   `,

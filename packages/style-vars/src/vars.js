@@ -17,10 +17,10 @@ module.exports = bindObject({
   grey800: '#424242',
   grey900: '#212121',
 
-  primaryDark: '#247488',
-  primary: '#3DB5D0',
-  primaryLight: '#bee6ef',
-  primaryLighter: '#f1fbfc',
+  brandDark: '#247488',
+  brand: '#3DB5D0',
+  brandLight: '#bee6ef',
+  brandLighter: '#f1fbfc',
 
   neutralDarkest: '#172b4e',
   neutralDarker: '#425a70',
@@ -63,18 +63,25 @@ module.exports = bindObject({
 
   // BORDERS
   baseBorderRadius: '4px',
-  baseBorderRadiusBig: (v) => m(v.baseBorderRadius, 1.5),
+  defaultBorderRadius: (v) => v.baseBorderRadius,
+  borderRadiusBig: (v) => m(v.baseBorderRadius, 1.5),
 
   // TYPOGRAPHY
   baseFontSize: '14px',
-  baseFontFamily: '"Rubik", sans-serif',
+  defaultFontSize: (v) => v.baseFontSize,
+  defaultFontFamily: '"Rubik", sans-serif',
   baseLineHeight: '1.2',
+  defaultLineHeight: (v) => v.baseLineHeight,
   baseLetterSpacing: '0.04rem',
-  textPrimaryDark: (v) => v.neutralDarkest,
-  textPrimaryWhite: (v) => v.white,
-  textSecondaryDark: (v) => v.neutralDark,
-  textTertiaryDark: (v) => fade(v.neutralDark, 70),
-  textDisabledDark: (v) => fade(v.neutralDark, 50),
+  defaultLetterSpacing: (v) => v.baseLetterSpacing,
+  colorPrimary: (v) => v.neutralDarkest,
+  colorPrimaryInverse: (v) => v.white,
+  colorSecondary: (v) => v.neutralDark,
+  colorSecondaryInverse: (v) => fade(v.white, 70),
+  colorTertiary: (v) => fade(v.neutralDark, 70),
+  colorTertiaryInverse: (v) => fade(v.white, 50),
+  colorDisabled: (v) => fade(v.neutralDark, 50),
+  colorDisabledInverse: (v) => fade(v.white, 30),
 
   // SHADOWS
   shadowColor: (v) => v.neutral,
@@ -86,24 +93,27 @@ module.exports = bindObject({
   insetActiveLight: (v) => `0 1px 6px ${v.neutral} inset`,
 
   // PADDINGS AND MARGINS
-  padding: '24px',
-  paddingSmall: (v) => s(v.padding, 8),
+  basePadding: '24px',
+  defaultPadding: (v) => v.basePadding,
+  paddingSmall: (v) => s(v.basePadding, 8),
   paddingExtraSmall: (v) => s(v.paddingSmall, 8),
-  paddingLarge: (v) => a(v.padding, 8),
+  paddingLarge: (v) => a(v.basePadding, 8),
   paddingExtraLarge: (v) => a(v.paddingLarge, 8),
   paddingHuge: (v) => m(v.paddingExtraSmall, 7),
-  margin: (v) => v.padding,
-  marginSmall: (v) => s(v.margin, 8),
+  baseMargin: '24px',
+  defaultMargin: (v) => v.basePadding,
+  marginSmall: (v) => s(v.baseMargin, 8),
   marginExtraSmall: (v) => s(v.marginSmall, 8),
-  marginLarge: (v) => a(v.margin, 8),
+  marginLarge: (v) => a(v.baseMargin, 8),
   marginExtraLarge: (v) => a(v.marginLarge, 8),
   marginHuge: (v) => m(v.marginExtraSmall, 7),
 
   // TRANSITIONS AND ANIMATIONS
   baseTransitionTime: '0.3s',
-  baseTransitionTimeShort: (v) => d(v.baseTransitionTime, 2),
+  defaultTransitionTime: (v) => v.baseTransitionTime,
+  transitionTimeShort: (v) => d(v.baseTransitionTime, 2),
   bouncyTransitionCurve: 'cubic-bezier(0.44, 0.11, 0.07, 1.29)',
-  baseTransition: (v) => `all ${v.baseTransitionTimeShort} ease-in-out`,
+  defaultTransition: (v) => `all ${v.transitionTimeShort} ease-in-out`,
 
   // SIZES
   maxWidthLarge: '1200px',

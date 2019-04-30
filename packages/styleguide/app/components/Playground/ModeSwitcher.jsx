@@ -13,7 +13,7 @@ const styles = {
   `,
   mode: css`
     padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
-    border-radius: ${sv.baseBorderRadius};
+    border-radius: ${sv.defaultBorderRadius};
 
     &:hover {
       cursor: pointer;
@@ -21,7 +21,7 @@ const styles = {
   `,
   active: css`
     background: ${sv.neutralDark};
-    color: ${sv.white};
+    color: ${sv.colorPrimaryInverse};
   `,
 }
 

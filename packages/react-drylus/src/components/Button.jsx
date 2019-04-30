@@ -8,20 +8,20 @@ import Icon from './Icon';
 
 const styles = {
   base: css`
-    background: ${sv.primary};
+    background: ${sv.brand};
     color: ${sv.white};
-    border-radius: ${sv.baseBorderRadius};
-    padding: calc(${sv.paddingExtraSmall} * 1.5) ${sv.padding};
+    border-radius: ${sv.defaultBorderRadius};
+    padding: calc(${sv.paddingExtraSmall} * 1.5) ${sv.defaultPadding};
     outline: 0;
     border: 0;
-    transition: ${sv.baseTransition};
+    transition: ${sv.defaultTransition};
     display: flex;
     align-items: center;
     justify-content: center;
 
     &:hover {
       cursor: pointer;
-      background: ${sv.primaryDark};
+      background: ${sv.brandDark};
     }
 
     &:active {
@@ -31,7 +31,7 @@ const styles = {
     &:disabled {
       cursor: not-allowed;
       background: ${sv.neutralLight};
-      color: ${sv.textDisabledDark};
+      color: ${sv.colorDisabled};
       box-shadow: none;
     }
   `,
@@ -72,7 +72,7 @@ const styles = {
   `,
   secondary: css`
     background: transparent;
-    color: ${sv.textPrimaryDark};
+    color: ${sv.colorPrimary};
     box-shadow: 0 0 0 1px ${sv.neutral} inset;
 
     &:hover {
@@ -110,7 +110,7 @@ const styles = {
     border-radius: 1000px;
     padding: ${sv.paddingSmall};
     background: ${sv.neutralLight};
-    color: ${sv.textPrimaryDark};
+    color: ${sv.colorPrimary};
 
     &:hover {
       background: ${sv.neutral};
