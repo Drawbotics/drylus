@@ -38,10 +38,14 @@ const SelectProp = ({
         name={key}
         value={value}
         defaultValue="_empty"
-        onChange={(e) => onChange(e.target.value, e.target.name)}>
+        onChange={(e) => onChange(e.target.value.includes("'") || e.target.value === '_empty' ?
+          e.target.value.replace(/'/g, '') :
+          parseFloat(e.target.value), e.target.name)}>
         <option value="_empty">none</option>
         {values.map((v) => (
-          <option key={v.value} value={v.value.split(/[.]/).pop().replace(/'/g, '')}>
+          <option
+            key={v.value}
+            value={v.value.split(/[.]/).pop()}>
             {v.value.split(/[.]/).pop().replace(/'/g, '')}
           </option>
         ))}

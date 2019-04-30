@@ -164,7 +164,7 @@ const Button = ({
 
 
 Button.propTypes = {
-  /** Normally just text for the button */
+  /** Just text for the button */
   children: PropTypes.string,
 
   /** Disables the button click */

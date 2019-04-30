@@ -1,6 +1,26 @@
 import React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import theme from 'prism-react-renderer/themes/nightOwl';
+import { css, cx, injectGlobal } from 'emotion';
+import sv from '@drawbotics/style-vars';
+
+import theme from './code-theme';
+
+
+injectGlobal`
+  @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+`;
+
+
+const styles = {
+  code: css`
+    padding: ${sv.paddingSmall};
+    margin: 0;
+
+    * {
+      font-family: 'Roboto Mono', monospace;
+    }
+  `,
+};
 
 
 const Code = ({ children, className }) => {
@@ -8,11 +28,10 @@ const Code = ({ children, className }) => {
 
   return (
     <Highlight {...defaultProps} theme={theme} code={children} language={language}>
-      {({className, style, tokens, getLineProps, getTokenProps}) => (
-        <pre className={className} style={{...style, padding: '20px'}}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre className={cx(className, styles.code)} style={style}>
           {tokens.map((line, i) => (
             <div key={i} {...getLineProps({line, key: i})}>
-              {/* <span>{i + 1}</span> */}
               {line.map((token, key) => (
                 <span key={key} {...getTokenProps({token, key})} />
               ))}

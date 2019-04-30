@@ -6,7 +6,6 @@ import sv from '@drawbotics/style-vars';
 import '../utils/normalize';
 
 
-// NOTE: here we also include the custom fonts
 injectGlobal`
   @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
 

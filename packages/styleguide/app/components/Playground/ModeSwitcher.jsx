@@ -5,15 +5,15 @@ import sv from '@drawbotics/style-vars';
 
 const styles = {
   switcher: css`
-    position: absolute;
-    top: ${sv.marginSmall};
-    right: ${sv.marginSmall};
     display: flex;
     align-items: center;
   `,
   mode: css`
     padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
     border-radius: ${sv.defaultBorderRadius};
+    background: ${sv.neutral};
+    color: ${sv.colorPrimary};
+    margin: 0 ${sv.marginExtraSmall};
 
     &:hover {
       cursor: pointer;
