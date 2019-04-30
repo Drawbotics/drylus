@@ -17,6 +17,7 @@
     "@drawbotics/react-drylus": "file:../react-drylus",
     "@drawbotics/vanilla-drylus": "file:../vanilla-drylus",
     "core-js": "2",
-    "fast-xml-parser": "^3.12.16"
+    "fast-xml-parser": "^3.12.16",
+    "react-router-dom": "^5.0.0"
   }
 }
