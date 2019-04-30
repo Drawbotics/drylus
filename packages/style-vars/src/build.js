@@ -2,7 +2,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const { kebabCase } = require('lodash');
 
-const vars = require('./vars');
+const vars = require('./vars-build');
 
 
 async function createJs(vars, buildDir) {
