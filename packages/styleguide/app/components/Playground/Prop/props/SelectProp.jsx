@@ -41,7 +41,9 @@ const SelectProp = ({
         onChange={(e) => onChange(e.target.value, e.target.name)}>
         <option value="_empty">none</option>
         {values.map((v) => (
-          <option key={v.value} value={v.value.replace(/'/g, '')}>{v.value.replace(/'/g, '')}</option>
+          <option key={v.value} value={v.value.split(/[.]/).pop().replace(/'/g, '')}>
+            {v.value.split(/[.]/).pop().replace(/'/g, '')}
+          </option>
         ))}
       </select>
     </div>

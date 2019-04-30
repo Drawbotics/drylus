@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
+import { Categories, Sizes } from '../base';
 import Icon from './Icon';
 
 
@@ -127,7 +128,7 @@ const Button = ({
   children,
   disabled,
   onClick,
-  type,
+  category,
   size,
   tier,
   withIcon,
@@ -138,8 +139,8 @@ const Button = ({
     <button
       onClick={onClick}
       className={cx(styles.base, {
-        [styles[type]]: type,
-        [styles[size]]: size,
+        [styles[category?.toLowerCase()]]: category,
+        [styles[size?.toLowerCase()]]: size,
         [styles[tier]]: tier,
         [styles.rightIcon]: iconSide === 'right' && withIcon,
         [styles.leftIcon]: iconSide === 'left' && withIcon,
@@ -172,11 +173,11 @@ Button.propTypes = {
   /** Triggered after the button is clicked */
   onClick: PropTypes.func,
 
-  /** Type of the button. Can be danger, success, info, warning */
-  type: PropTypes.oneOf(['danger', 'success', 'info', 'warning']),
+  /** Category of the button. Can be danger, success, info, warning */
+  category: PropTypes.oneOf([Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
 
   /** Size of the button. Can be small, large */
-  size: PropTypes.oneOf(['small', 'large']),
+  size: PropTypes.oneOf([Sizes.SMALL, Sizes.LARGE]),
 
   /** Tier of the button. Can be secondary, tertiary */
   tier: PropTypes.oneOf(['secondary', 'tertiary']),
