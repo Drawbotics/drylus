@@ -5,10 +5,10 @@ import sv from '@drawbotics/style-vars';
 
 const styles = {
   preview: css`
-    padding: ${sv.basePadding};
+    padding: ${sv.padding};
     border-radius: ${sv.baseBorderRadius};
     background: ${sv.white};
-    margin: ${sv.baseMarginSmall};
+    margin: ${sv.marginSmall};
   `,
 };
 

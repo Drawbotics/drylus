@@ -9,7 +9,7 @@ import Code from './Code';
 
 const styles = {
   content: css`
-    margin: ${sv.baseMarginLarge} ${sv.baseMargin};
+    margin: ${sv.marginLarge} ${sv.margin};
   `,
 };
 

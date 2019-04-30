@@ -11,7 +11,7 @@ const styles = {
     background: ${sv.primary};
     color: ${sv.white};
     border-radius: ${sv.baseBorderRadius};
-    padding: ${sv.basePaddingSmall} calc(${sv.basePadding} * 1.5);
+    padding: calc(${sv.paddingExtraSmall} * 1.5) ${sv.padding};
     outline: 0;
     border: 0;
     transition: ${sv.baseTransition};
@@ -64,11 +64,11 @@ const styles = {
     }
   `,
   small: css`
-    padding: calc(${sv.basePaddingSmall} / 2) ${sv.basePaddingSmall};
-    font-size: 0.8rem;
+    padding: ${sv.paddingExtraSmall} ${sv.paddingExtraSmall};
+    font-size: 0.9rem;
   `,
   large: css`
-    padding: calc(${sv.basePaddingSmall} * 1.5) calc(${sv.basePadding} * 2.5);
+    padding: ${sv.paddingSmall} ${sv.paddingHuge};
   `,
   secondary: css`
     background: transparent;
@@ -108,7 +108,7 @@ const styles = {
   `,
   iconOnly: css`
     border-radius: 1000px;
-    padding: ${sv.basePaddingSmall};
+    padding: ${sv.paddingSmall};
     background: ${sv.neutralLight};
     color: ${sv.textPrimaryDark};
 

@@ -8,7 +8,7 @@ import Prop from './Prop';
 const styles = {
   propsTable: css`
     width: 100%;
-    margin: ${sv.baseMargin} 0;
+    margin: ${sv.margin} 0;
     border: 1px solid rgba(84, 110, 122, 0.3);
     border-radius: 5;
     overflow: hidden;
@@ -24,7 +24,7 @@ const styles = {
   `,
   cell: css`
     flex: 1;
-    padding: ${sv.basePadding};
+    padding: ${sv.padding};
     color: ${sv.textPrimaryDark};
   `,
   bigCell: css`

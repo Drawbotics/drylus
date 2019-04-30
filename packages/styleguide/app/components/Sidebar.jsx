@@ -8,7 +8,7 @@ const styles = {
   sidebar: css`
     height: 100%;
     background: ${sv.neutral};
-    padding: ${sv.basePadding};
+    padding: ${sv.padding};
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -18,12 +18,14 @@ const styles = {
   `,
   title: css`
     color: ${sv.red};
+    margin-bottom: ${sv.marginSmall};
   `,
   link: css`
     color: ${sv.blue};
+    margin-bottom: ${sv.marginSmall};
   `,
   sublinks: css`
-    padding-left: ${sv.baseMargin};
+    padding-left: ${sv.padding};
   `,
   root: css`
     padding-left: 0;

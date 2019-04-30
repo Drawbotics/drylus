@@ -6,13 +6,13 @@ import sv from '@drawbotics/style-vars';
 const styles = {
   switcher: css`
     position: absolute;
-    top: ${sv.baseMarginSmall};
-    right: ${sv.baseMarginSmall};
+    top: ${sv.marginSmall};
+    right: ${sv.marginSmall};
     display: flex;
     align-items: center;
   `,
   mode: css`
-    padding: ${sv.basePaddingSmall};
+    padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
     border-radius: ${sv.baseBorderRadius};
 
     &:hover {

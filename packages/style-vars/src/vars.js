@@ -1,6 +1,6 @@
 const { fade } = require('./colors');
 const bindObject = require('./bind-object');
-const { m, d } = require('./operations');
+const { m, d, s, a } = require('./operations');
 
 
 module.exports = bindObject({
@@ -33,71 +33,81 @@ module.exports = bindObject({
   red: '#EC4C47',
   redLight: '#fae2e2',
   redLighter: '#fef6f6',
+  danger: (v) => v.red,
+  error: (v) => v.red,
 
   orangeDark: '#a16d22',
   orange: '#f8a00f',
   orangeLight: '#f9ebd6',
   orangeLighter: '#fff7eb',
+  warning: (v) => v.orange,
 
   blueDark: '#2A41A2',
   blue: '#4673D1',
   blueLight: '#CFD8FF',
   blueLighter: '#E7EBFC',
+  info: (v) => v.blue,
 
   greenDark: '#288A70',
   green: '#3FBC9B',
   greenLight: '#C1E8DE',
   greenLighter: '#E7F5F1',
+  success: (v) => v.green,
 
   facebookColor: '#275a9b',
   twitterColor: '#00a2f5',
   linkedinColor: '#0077b5',
 
-  lighterOverlay: (s) => fade(s.grey900, 5),
-  lightOverlay: (s) => fade(s.grey900, 10),
+  lighterOverlay: (v) => fade(v.grey900, 5),
+  lightOverlay: (v) => fade(v.grey900, 10),
 
   // BORDERS
   baseBorderRadius: '4px',
-  baseBorderRadiusBig: (s) => m(s.baseBorderRadius, 1.5),
+  baseBorderRadiusBig: (v) => m(v.baseBorderRadius, 1.5),
 
   // TYPOGRAPHY
   baseFontSize: '14px',
   baseFontFamily: '"Rubik", sans-serif',
   baseLineHeight: '1.2',
   baseLetterSpacing: '0.04rem',
-  textPrimaryDark: (s) => s.neutralDarkest,
-  textPrimaryWhite: (s) => s.white,
-  textSecondaryDark: (s) => s.neutralDark,
-  textTertiaryDark: (s) => fade(s.neutralDark, 70),
-  textDisabledDark: (s) => fade(s.neutralDark, 50),
+  textPrimaryDark: (v) => v.neutralDarkest,
+  textPrimaryWhite: (v) => v.white,
+  textSecondaryDark: (v) => v.neutralDark,
+  textTertiaryDark: (v) => fade(v.neutralDark, 70),
+  textDisabledDark: (v) => fade(v.neutralDark, 50),
 
   // SHADOWS
-  shadowColor: (s) => s.neutral,
+  shadowColor: (v) => v.neutral,
 
   // ELEVATIONS
-  elevation1: (s) => `0 4px 8px ${s.shadowColor}`,
-  insetActive: (s) => `0 1px 6px ${s.neutralDarkest} inset`,
-  insetActiveMedium: (s) => `0 1px 6px ${s.neutralDark} inset`,
-  insetActiveLight: (s) => `0 1px 6px ${s.neutral} inset`,
+  elevation1: (v) => `0 4px 8px ${v.shadowColor}`,
+  insetActive: (v) => `0 1px 6px ${v.neutralDarkest} inset`,
+  insetActiveMedium: (v) => `0 1px 6px ${v.neutralDark} inset`,
+  insetActiveLight: (v) => `0 1px 6px ${v.neutral} inset`,
 
   // PADDINGS AND MARGINS
-  basePadding: '20px',
-  basePaddingSmall: (s) => d(s.basePadding, 2),
-  basePaddingLarge: (s) => m(s.basePadding, 1.5),
-  baseMargin: (s) => s.basePadding,
-  baseMarginSmall: (s) => d(s.baseMargin, 2),
-  baseMarginLarge: (s) => m(s.baseMargin, 1.5),
+  padding: '24px',
+  paddingSmall: (v) => s(v.padding, 8),
+  paddingExtraSmall: (v) => s(v.paddingSmall, 8),
+  paddingLarge: (v) => a(v.padding, 8),
+  paddingExtraLarge: (v) => a(v.paddingLarge, 8),
+  paddingHuge: (v) => m(v.paddingExtraSmall, 7),
+  margin: (v) => v.padding,
+  marginSmall: (v) => s(v.margin, 8),
+  marginExtraSmall: (v) => s(v.marginSmall, 8),
+  marginLarge: (v) => a(v.margin, 8),
+  marginExtraLarge: (v) => a(v.marginLarge, 8),
+  marginHuge: (v) => m(v.marginExtraSmall, 7),
 
   // TRANSITIONS AND ANIMATIONS
   baseTransitionTime: '0.3s',
-  baseTransitionTimeShort: (s) => d(s.baseTransitionTime, 2),
+  baseTransitionTimeShort: (v) => d(v.baseTransitionTime, 2),
   bouncyTransitionCurve: 'cubic-bezier(0.44, 0.11, 0.07, 1.29)',
-  baseTransition: (s) => `all ${s.baseTransitionTimeShort} ease-in-out`,
+  baseTransition: (v) => `all ${v.baseTransitionTimeShort} ease-in-out`,
 
   // SIZES
   maxWidthLarge: '1200px',
   maxWidthMedium: '400px',
-
 
   // MEDIA QUERIES
   screenXs: 'only screen and (max-width: 320px)',
@@ -105,15 +115,15 @@ module.exports = bindObject({
   screenM: 'only screen and (max-width: 425px)',
   screenL: 'only screen and (max-width: 768px)',
   screenXl: 'only screen and (max-width: 1024px)',
-  phoneS: (s) => s.screenXs,
-  phone: (s) => s.screenS,
-  phoneXl: (s) => s.screenM,
-  ipad: (s) => s.screenL,
-  desktopS: (s) => s.screenXl,
-  phoneSLandscape: (s) => s.ipad,
-  phoneLandscape: (s) => s.ipad,
-  phoneXlLandscape: (s) => s.ipad,
-  ipadLandscape: (s) => s.desktopS,
+  phoneS: (v) => v.screenXs,
+  phone: (v) => v.screenS,
+  phoneXl: (v) => v.screenM,
+  ipad: (v) => v.screenL,
+  desktopS: (v) => v.screenXl,
+  phoneSLandscape: (v) => v.ipad,
+  phoneLandscape: (v) => v.ipad,
+  phoneXlLandscape: (v) => v.ipad,
+  ipadLandscape: (v) => v.desktopS,
   screenSOrM: '(max-width: 480px), (max-width: 768px)',
   greaterThanMaximumWidth: 'only screen and (min-width: 1200px)',
   greaterThanMinimumWidth: 'only screen and (min-width: 1024px)',
