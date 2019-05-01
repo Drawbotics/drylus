@@ -3,7 +3,7 @@ import Highlight, { defaultProps } from 'prism-react-renderer';
 import { css, cx, injectGlobal } from 'emotion';
 import sv from '@drawbotics/style-vars';
 
-import theme from './code-theme';
+import theme from '../utils/code-theme';
 
 
 injectGlobal`

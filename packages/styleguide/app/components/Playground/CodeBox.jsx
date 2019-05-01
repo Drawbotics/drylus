@@ -1,7 +1,7 @@
 import React from 'react';
 import parser from 'fast-xml-parser';
 
-import Code from '../mdx/Code';
+import Code from '../Code';
 
 
 function beautifyString(html) {
