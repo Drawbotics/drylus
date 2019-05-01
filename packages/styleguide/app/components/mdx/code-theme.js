@@ -40,7 +40,7 @@ export default {
     {
       types: ["string", "char", "tag", "selector"],
       style: {
-        color: sv.brand,
+        color: sv.green,
       }
     },
     {
