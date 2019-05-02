@@ -1,0 +1,52 @@
+import { Layout, LayoutPositions } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+export const Sidebar = ({ width }) => {
+  return (
+    <div style={{ width: width || 200, height: '100%', background: 'red', padding: 20 }}>Sidebar</div>
+  );
+}
+
+export const Navbar = () => {
+  return (
+    <div style={{ height: 60, width: '100%', background: 'blue', padding: 20 }}>Navbar</div>
+  );
+}
+
+
+# Layout component
+
+Example like Backoffice layout
+
+<Playground>
+  <div style={{ height: 400 }}>
+    <Layout bar={<Sidebar />} position={LayoutPositions.LEFT} fixed>
+      <Layout bar={<Navbar />} position={LayoutPositions.TOP}>
+        <div style={{ background: 'green', height: 500, padding: 20 }}>Content</div>
+      </Layout>
+    </Layout>
+  </div>
+</Playground>
+
+
+Example with sidebar and floating bottom bar
+
+export const FloatingBar = () => {
+  return (
+    <div style={{ height: 60, width: '100%', background: 'pink', padding: 20 }}>Floating bar</div>
+  );
+}
+
+<Playground>
+  <div style={{ height: 400 }}>
+    <Layout bar={<FloatingBar />} position={LayoutPositions.BOTTOM} fixed>
+      <Layout bar={<Navbar />} position={LayoutPositions.TOP}>
+        <Layout bar={<Sidebar width={400} />} position={LayoutPositions.RIGHT}>
+          <div style={{ background: 'green', height: 500, padding: 20 }}>Content</div>
+        </Layout>
+      </Layout>
+    </Layout>
+  </div>
+</Playground>

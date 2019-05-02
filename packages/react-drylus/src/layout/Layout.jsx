@@ -57,14 +57,16 @@ const styles = {
       grid-row: 1;
     }
   `,
-  autoHeight: css`
-    height: auto;
-  `,
   bar: css`
   `,
   content: css`
     display: flex;
     flex-direction: column;
+
+    > [data-element="layout"] {
+      flex: 1;
+      height: auto !important;
+    }
   `,
   scrollable: css`
     overflow: scroll;
@@ -87,9 +89,8 @@ const Layout = ({
   fixed,
 }) => {
   return (
-    <div className={cx(styles.layout, {
+    <div data-element="layout" className={cx(styles.layout, {
       [styles[position.toLowerCase()]]: position,
-      [styles.autoHeight]: ! fixed && position === LayoutPositions.BOTTOM,
     })}>
       <div className={styles.bar} data-element="bar">{bar}</div>
       <div className={cx(styles.content, { [styles.scrollable]: fixed })} data-element="content">{children}</div>

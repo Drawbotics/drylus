@@ -2,6 +2,7 @@ import brand from './brand';
 import components from './components';
 import introduction from './introduction';
 import guidelines from './guidelines';
+import layout from './layout';
 
 
 export default {
@@ -9,4 +10,5 @@ export default {
   guidelines,
   brand,
   components,
+  layout,
 }
