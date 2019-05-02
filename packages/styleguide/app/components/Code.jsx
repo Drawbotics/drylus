@@ -17,6 +17,7 @@ const styles = {
     display: flex;
   `,
   code: css`
+    flex: 1;
     padding: ${sv.paddingSmall};
     margin: 0;
     box-shadow: inset 0px 6px 8px -6px ${sv.grey900},

@@ -4,8 +4,9 @@ import {
   ThemeProvider,
   Page,
   Layout,
+  LayoutPositions,
   Content,
-  Navbar,
+  // Navbar,
 } from '@drawbotics/react-drylus';
 
 // vanilla import, will be in head for link and script
@@ -23,12 +24,10 @@ const App = () => {
       <ThemeProvider>
         <Page>
           <Layout
-            horizontalPreference
-            top={<Navbar />}
-            bottom={<Navbar />}
-            left={<Sidebar routes={routes} />}
-            right={<Sidebar routes={routes} />}
-            leftFixed>
+            // bar={<Navbar />}
+            bar={<Sidebar routes={routes} />}
+            position={LayoutPositions.LEFT}
+            fixed>
             <Content fullHeight>
               <RoutesRenderer routes={routes} />
             </Content>
