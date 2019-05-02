@@ -2,6 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import { Link } from 'react-router-dom';
+import omit from 'lodash/omit';
 
 
 const styles = {
@@ -15,11 +16,14 @@ const styles = {
     margin-top: ${sv.defaultMargin};
   `,
   title: css`
-    color: ${sv.red};
+    color: ${sv.colorSecondary};
+    text-transform: uppercase;
     margin-bottom: ${sv.marginSmall};
   `,
   link: css`
-    color: ${sv.blue};
+    a {
+      color: ${sv.colorPrimary};
+    }
     margin-bottom: ${sv.marginSmall};
   `,
   sublinks: css`
@@ -39,12 +43,21 @@ export function generateLinks(route, routeName, parent='') {
         {do{
           if (routeName) {
             <div className={styles.title}>
-              {routeName}
+              {do{
+                if (route.index) {
+                  <div className={styles.link}>
+                    <Link to={newPath}>{routeName}</Link>
+                  </div>
+                }
+                else {
+                  routeName
+                }
+              }}
             </div>
           }
         }}
         <div className={cx(styles.sublinks, { [styles.root]: ! routeName })}>
-          {Object.keys(route).map((routeName) => generateLinks(route[routeName], routeName, newPath))}
+          {Object.keys(omit(route, 'index')).map((routeName) => generateLinks(route[routeName], routeName, newPath))}
         </div>
       </div>
     );
