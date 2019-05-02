@@ -23,6 +23,17 @@ const styles = {
 };
 
 
+function normalizeValue(v) {
+  // console.log(v);
+  if (v.includes("'") || v === '_empty') {
+    return v.replace(/'/g, '');
+  }
+  else {
+    return parseFloat(v) || v;
+  }
+}
+
+
 const SelectProp = ({
   prop,
   value,
@@ -30,6 +41,7 @@ const SelectProp = ({
 }) => {
   const { key, type } = prop;
   const { value: values } = type;
+  // console.log(prop);
   return (
     <div className={styles.selectProp}>
       <select
@@ -38,9 +50,7 @@ const SelectProp = ({
         name={key}
         value={value}
         defaultValue="_empty"
-        onChange={(e) => onChange(e.target.value.includes("'") || e.target.value === '_empty' ?
-          e.target.value.replace(/'/g, '') :
-          parseFloat(e.target.value), e.target.name)}>
+        onChange={(e) => onChange(normalizeValue(e.target.value), e.target.name)}>
         <option value="_empty">none</option>
         {values.map((v) => (
           <option

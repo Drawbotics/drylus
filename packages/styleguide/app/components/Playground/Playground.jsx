@@ -25,12 +25,6 @@ const styles = {
   codeHidden: css`
     display: none;
   `,
-  codeBox: css`
-    > * {
-      box-shadow: inset 0px 6px 8px -6px ${sv.grey900},
-                  inset 0px -6px 8px -6px ${sv.grey900},
-    }
-  `,
   switcher: css`
     position: absolute;
     top: ${sv.defaultMargin};

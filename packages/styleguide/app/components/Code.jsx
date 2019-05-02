@@ -12,9 +12,15 @@ injectGlobal`
 
 
 const styles = {
+  codeWrapper: css`
+    overflow: scroll;
+    display: flex;
+  `,
   code: css`
     padding: ${sv.paddingSmall};
     margin: 0;
+    box-shadow: inset 0px 6px 8px -6px ${sv.grey900},
+                inset 0px -6px 8px -6px ${sv.grey900};
 
     * {
       font-family: 'Roboto Mono', monospace;
@@ -29,15 +35,17 @@ const Code = ({ children, className }) => {
   return (
     <Highlight {...defaultProps} theme={theme} code={children} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre className={cx(className, styles.code)} style={style}>
-          {tokens.map((line, i) => (
-            <div key={i} {...getLineProps({line, key: i})}>
-              {line.map((token, key) => (
-                <span key={key} {...getTokenProps({token, key})} />
-              ))}
-            </div>
-          ))}
-        </pre>
+        <div className={styles.codeWrapper}>
+          <pre className={cx(className, styles.code)} style={style}>
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({line, key: i})}>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({token, key})} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        </div>
       )}
     </Highlight>
   );

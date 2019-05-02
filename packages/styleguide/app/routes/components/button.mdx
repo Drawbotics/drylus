@@ -7,10 +7,12 @@ import Playground from '~/components/Playground';
 
 The following is an non-editable code example
 ```jsx
-<Button category="DANGER">Hello</Button>
+<button class="Drylus-Button__base Drylus-Button__danger Drylus-Button__small Drylus-Button__secondary">
+  <button class="Drylus-Button__base">Button Text</button>
+</button>
 ```
 
 The following is the rendered component
 <Playground component={Button}>
-  <Button>Button Text</Button>
+  <Button category="DANGER" size="SMALL" tier="secondary">Button Text</Button>
 </Playground>

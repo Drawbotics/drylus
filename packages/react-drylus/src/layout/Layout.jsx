@@ -71,6 +71,7 @@ const Layout = ({
       const widthDiff = leftRef.current.clientWidth;
       leftWrapperRef.current.style.width = `${widthDiff}px`;
       leftRef.current.style.position = 'fixed';
+      leftRef.current.style.zIndex = '9999';
       leftRef.current.style.height = '100%';
     }
 
@@ -79,6 +80,7 @@ const Layout = ({
       rightWrapperRef.current.style.width = `${widthDiff}px`;
       rightRef.current.style.position = 'fixed';
       rightRef.current.style.right = 0;
+      rightRef.current.style.zIndex = '9999';
       rightRef.current.style.height = '100%';
     }
 
@@ -88,6 +90,7 @@ const Layout = ({
         topWrapperRef.current.style.height = `${heightDiff}px`;
       }
       topRef.current.style.position = 'fixed';
+      topRef.current.style.zIndex = '9999';
       topRef.current.style.width = '100%';
     }
 
@@ -98,6 +101,7 @@ const Layout = ({
       }
       bottomRef.current.style.position = 'fixed';
       bottomRef.current.style.bottom = 0;
+      bottomRef.current.style.zIndex = '9999';
       bottomRef.current.style.width = '100%';
     }
   });
