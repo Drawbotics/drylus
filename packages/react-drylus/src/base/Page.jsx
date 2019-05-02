@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 
 const styles = {
   base: css`
-    min-height: 100vh;
-    display: flex;
+    height: 100vh;
+    width: 100vw;
   `,
 };
 

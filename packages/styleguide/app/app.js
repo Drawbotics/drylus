@@ -5,6 +5,7 @@ import {
   Page,
   Layout,
   Content,
+  Navbar,
 } from '@drawbotics/react-drylus';
 
 // vanilla import, will be in head for link and script
@@ -21,7 +22,12 @@ const App = () => {
     <BrowserRouter>
       <ThemeProvider>
         <Page>
-          <Layout left={<Sidebar routes={routes} />} leftFixed>
+          <Layout
+            top={<Navbar />}
+            bottom={<Navbar />}
+            left={<Sidebar routes={routes} />}
+            right={<Sidebar routes={routes} />}
+            leftFixed>
             <Content fullHeight>
               <RoutesRenderer routes={routes} />
             </Content>

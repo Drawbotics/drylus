@@ -10,8 +10,6 @@ const styles = {
     background: ${sv.neutral};
     padding: ${sv.defaultPadding};
     overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
   `,
   links: css`
     margin-top: ${sv.defaultMargin};
