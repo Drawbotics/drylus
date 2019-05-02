@@ -87,7 +87,7 @@ const Playground = ({ component, children, mode }) => {
             onChange={setMode} />
         </div>
         <div className={styles.codeBox}>
-          <CodeBox format={activeMode === 'vanilla'} mode={mode}>{generatedMarkup}</CodeBox>
+          <CodeBox format mode={mode}>{generatedMarkup}</CodeBox>
         </div>
       </div>
       {do{

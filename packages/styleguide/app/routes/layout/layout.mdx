@@ -15,8 +15,25 @@ export const Navbar = () => {
   );
 }
 
+export const BottomBar = () => {
+  return (
+    <div style={{ height: 60, width: '100%', background: 'pink', padding: 20 }}>Bottom bar</div>
+  );
+}
+
 
 # Layout component
+Example with fixed navbar and standard bottom bar
+
+<Playground>
+  <div style={{ height: 400 }}>
+    <Layout bar={<Navbar />} position={LayoutPositions.TOP} fixed>
+      <Layout bar={<BottomBar />} position={LayoutPositions.BOTTOM}>
+        <div style={{ background: 'green', height: 500, padding: 20 }}>Content</div>
+      </Layout>
+    </Layout>
+  </div>
+</Playground>
 
 Example like Backoffice layout
 
@@ -33,15 +50,9 @@ Example like Backoffice layout
 
 Example with sidebar and floating bottom bar
 
-export const FloatingBar = () => {
-  return (
-    <div style={{ height: 60, width: '100%', background: 'pink', padding: 20 }}>Floating bar</div>
-  );
-}
-
 <Playground>
   <div style={{ height: 400 }}>
-    <Layout bar={<FloatingBar />} position={LayoutPositions.BOTTOM} fixed>
+    <Layout bar={<BottomBar />} position={LayoutPositions.BOTTOM} fixed>
       <Layout bar={<Navbar />} position={LayoutPositions.TOP}>
         <Layout bar={<Sidebar width={400} />} position={LayoutPositions.RIGHT}>
           <div style={{ background: 'green', height: 500, padding: 20 }}>Content</div>

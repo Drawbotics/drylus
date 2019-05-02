@@ -1,26 +1,24 @@
 import React from 'react';
-import parser from 'fast-xml-parser';
+import prettier from 'prettier/standalone';
+import babelParser from 'prettier/parser-babylon';
 
 import Code from '../Code';
 
 
-function beautifyString(html) {
-  const jsonObject = parser.parse(html, {
-    allowBooleanAttributes : true,
-    ignoreAttributes : false,
-    trimValues: false,
-  });
-  const formattedXML = new parser.j2xParser({
-    supressEmptyNode: true,
-    format: true,
-    ignoreAttributes : false,
-  }).parse(jsonObject);
-  return formattedXML;
+function beautifyString(string, mode) {
+  return prettier.format(string, mode === 'jsx' ? {
+    semi: false,
+    parser: 'babel',
+    plugins: [babelParser],
+    singleQuote: true,
+    jsxBracketSameLine: true,
+    trailingComma: 'all',
+  } : {}).substring(1);
 }
 
 
 const CodeBox = ({ children, mode='jsx', format }) => {
-  const beautified = format ? beautifyString(children) : children;
+  const beautified = format ? beautifyString(children, mode) : children;
   return (
     <Code className={mode}>
       {beautified}

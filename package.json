@@ -69,6 +69,7 @@
     "lodash": "^4.17.11",
     "memory-fs": "^0.4.1",
     "mermaid.cli": "^0.5.1",
+    "prettier": "^1.17.0",
     "prism-react-renderer": "^0.1.6",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
