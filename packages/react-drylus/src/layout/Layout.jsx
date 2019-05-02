@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 
 
@@ -10,9 +10,21 @@ const styles = {
     grid-template-rows: max-content minmax(0, 1fr) max-content;
     width: 100%;
   `,
+  topDown: css`
+    > [data-element="left"], [data-element="right"] {
+      grid-row: 1 / span 3;
+    }
+
+    > [data-element="top"], [data-element="bottom"] {
+      grid-column: 2;
+    }
+   `,
   left: css`
     grid-column: 1;
     grid-row: 2;
+  `,
+  leftFixed: css`
+    
   `,
   right: css`
     grid-column: 3;
@@ -51,30 +63,15 @@ const Layout = ({
   rightFixed,
   horizontalPreference,
 }) => {
-  // if (horizontalPreference) {
-    return (
-      <div className={styles.layout}>
-        <div className={styles.left}>{left}</div>
-        <div className={styles.top}>{top}</div>
-        <div className={styles.content}>{children}</div>
-        <div className={styles.bottom}>{bottom}</div>
-        <div className={styles.right}>{right}</div>
-      </div>
-    );
-  // }
-  // return (
-  //   <div className={styles.verticalContent}>
-  //     <RefWrappedComponent withRef={topFixed} childRef={topRef} wrapperRef={topWrapperRef} content={top} />
-  //     <div className={styles.horizontalContent}>
-  //       <RefWrappedComponent withRef={leftFixed} childRef={leftRef} wrapperRef={leftWrapperRef} content={left} />
-  //       <div className={styles.content}>
-  //         {children}
-  //       </div>
-  //       <RefWrappedComponent withRef={rightFixed} childRef={rightRef} wrapperRef={rightWrapperRef} content={right} />
-  //     </div>
-  //     <RefWrappedComponent withRef={bottomFixed} childRef={bottomRef} wrapperRef={bottomWrapperRef} content={bottom} />
-  //   </div>
-  // );
+  return (
+    <div className={cx(styles.layout, { [styles.topDown]: horizontalPreference })}>
+      <div className={cx(styles.left, { [styles.leftFixed]: leftFixed })} data-element="left">{left}</div>
+      <div className={styles.top} data-element="top">{top}</div>
+      <div className={styles.content} data-element="content">{children}</div>
+      <div className={styles.bottom} data-element="bottom">{bottom}</div>
+      <div className={styles.right} data-element="right">{right}</div>
+    </div>
+  );
 };
 
 

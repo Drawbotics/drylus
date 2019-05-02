@@ -23,6 +23,7 @@ const App = () => {
       <ThemeProvider>
         <Page>
           <Layout
+            horizontalPreference
             top={<Navbar />}
             bottom={<Navbar />}
             left={<Sidebar routes={routes} />}
