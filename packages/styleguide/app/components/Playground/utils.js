@@ -33,8 +33,8 @@ export function transformClassname(string) {
 
 
 export function adaptForVanilla(markup) {
-  // const adapted = markup.replace(/(?<=")css-\S+(?=")/gm, transformClassname);
-  return markup;
+  const adapted = markup.replace(/css-\S+(?=")/gm, transformClassname);
+  return adapted;
 }
 
 
