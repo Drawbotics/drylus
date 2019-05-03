@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import RoundIcon from '../components/RoundIcon';
 import Sizes from '../base/Sizes';
 import Categories from '../base/Categories';
+import Hint from './Hint';
 
 
 const styles = {
@@ -19,8 +20,7 @@ const styles = {
       font-family: 'drycons';
       color: ${sv.colorPrimary};
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
+      top: calc(${sv.marginExtraSmall} * 1.5);
       font-size: 1.3rem;
       right: ${sv.marginSmall};
       pointer-events: none;
@@ -65,9 +65,13 @@ const styles = {
   icon: css`
     pointer-events: none;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: calc(${sv.marginExtraSmall} * 1.5);
     right: calc(${sv.marginSmall} * 2 + ${sv.marginExtraSmall});
+  `,
+  error: css`
+    > select {
+      box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
+    }
   `,
 };
 
@@ -80,6 +84,8 @@ const Select = ({
   labelKey='label',
   placeholder=' -- ',
   disabled,
+  hint,
+  error,
   ...rest,
 }) => {
   const handleOnChange = (e) => onChange(e.target.value, e.target.name);
@@ -87,9 +93,15 @@ const Select = ({
     <div className={cx(styles.base, {
       [styles.disabled]: disabled,
       [styles.withValue]: value,
+      [styles.error]: error,
     })}>
       {do{
-        if (value) {
+        if (error) {
+          <div className={styles.icon}>
+            <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
+          </div>
+        }
+        else if (value) {
           <div className={styles.icon}>
             <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
           </div>
@@ -117,6 +129,14 @@ const Select = ({
           </option>
         ))}
       </select>
+      {do{
+        if (error) {
+          <Hint error>{error}</Hint>
+        }
+        else if (hint) {
+          <Hint>{hint}</Hint>
+        }
+      }}
     </div>
   );
 };
@@ -147,6 +167,12 @@ Select.propTypes = {
 
   /** Triggered when a new value is chosen, returns a value, key (label, value) pair */
   onChange: PropTypes.func,
+
+  /** Small text shown below the box, replaced by error if present */
+  hint: PropTypes.string,
+
+  /** Error text to prompt the user to act */
+  error: PropTypes.string,
 };
 
 
