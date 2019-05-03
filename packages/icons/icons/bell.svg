@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icon/Feather/bell</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M18,13.9999999 L18,8.99999991 C18,5.68629145 15.3137085,3 12,3 C8.68629154,3 6.00000005,5.68629145 6,8.9999999 L6,13.9999999 C6,14.7285742 5.80521143,15.4116532 5.46487122,16 L18.5351288,15.9999999 C18.1947886,15.4116532 18,14.7285742 18,13.9999999 Z M22,18 L2,18 C0.666666667,17.9999999 0.666666667,15.9999999 2,16 C3.1045695,15.9999999 4,15.1045694 4,14 L4,9 C4.00000007,4.58172193 7.58172205,1 12,1 C16.418278,1 19.9999999,4.58172193 20,9 L20,14 C20,15.1045694 20.8954305,15.9999999 22,16 C23.3333333,15.9999999 23.3333333,17.9999999 22,18 Z M14.595,21.5017718 C14.0583034,22.4269783 13.0696029,22.9964562 12,22.9964562 C10.9303971,22.9964562 9.94169664,22.4269783 9.405,21.5017718 C9.01827917,20.8351072 9.49928951,19.9999999 10.27,19.9999999 L13.73,19.9999999 C14.5007105,19.9999999 14.9817208,20.8351072 14.595,21.5017718 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Feather/bell" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

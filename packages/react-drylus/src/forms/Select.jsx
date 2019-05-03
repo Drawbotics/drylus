@@ -3,14 +3,23 @@ import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 
-import Icon from '../components/Icon';
-
 
 const styles = {
   base: css`
     display: inline-block;
     position: relative;
     width: 100%;
+
+    &::after {
+      content: '\\ea29';
+      font-family: 'drycons';
+      color: ${sv.colorPrimary};
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      right: ${sv.marginSmall};
+    }
   `,
   select: css`
     background-color: ${sv.azureLight};
@@ -34,10 +43,6 @@ const styles = {
       border-color: ${sv.neutralLight};
       box-shadow: none;
     }
-
-    &::after {
-      content: " ";
-    }
   `,
   option: css`
     padding: 30px;
@@ -58,7 +63,6 @@ const Select = ({
   const handleOnChange = (e) => onChange(e.target.value, e.target.name);
   return (
     <div className={styles.base}>
-      <Icon name="chevron-down" />
       <select
         className={styles.select}
         value={value}

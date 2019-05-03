@@ -23,6 +23,7 @@ async function transform(iconsFolder, cacheFolder) {
   fs.mkdirSync(cacheFolder);
 
   const iconFiles = fs.readdirSync(iconsFolder);
+  console.log(iconFiles);
   for (let filename of iconFiles) {
     const contents = fs.readFileSync(path.resolve(iconsFolder, filename), 'utf8');
     const flat = removeWhitespace(contents)

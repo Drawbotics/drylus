@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icon/Feather/tablet</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M6,3 C5.44771525,3 5,3.44771525 5,4 L5,20 C5,20.5522847 5.44771525,21 6,21 L18,21 C18.5522847,21 19,20.5522847 19,20 L19,4 C19,3.44771525 18.5522847,3 18,3 L6,3 Z M6,1 L18,1 C19.6568542,1 21,2.34314575 21,4 L21,20 C21,21.6568542 19.6568542,23 18,23 L6,23 C4.34314575,23 3,21.6568542 3,20 L3,4 C3,2.34314575 4.34314575,1 6,1 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Feather/tablet" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Rectangle-path" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>
