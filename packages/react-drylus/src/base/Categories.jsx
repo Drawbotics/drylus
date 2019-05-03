@@ -1,5 +1,5 @@
 const Categories = {
-  PRIMARY: 'PRIMARY',
+  BRAND: 'BRAND',
   SUCCESS: 'SUCCESS',
   INFO: 'INFO',
   WARNING: 'WARNING',

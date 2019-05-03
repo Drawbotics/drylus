@@ -1,7 +1,11 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
+
+import RoundIcon from '../components/RoundIcon';
+import Sizes from '../base/Sizes';
+import Categories from '../base/Categories';
 
 
 const styles = {
@@ -17,8 +21,14 @@ const styles = {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       right: ${sv.marginSmall};
+      pointer-events: none;
+    }
+  `,
+  disabled: css`
+    &::after {
+      color: ${sv.colorDisabled};
     }
   `,
   select: css`
@@ -29,11 +39,11 @@ const styles = {
     appearance: button;
     width: 100%;
     outline: none !important;
-    border: 1px solid ${sv.azure};
+    box-shadow: inset 0px 0px 0px 1px ${sv.azure};
     transition: ${sv.defaultTransition};
 
     &:hover {
-      border-color: ${sv.azureDark};
+      box-shadow: inset 0px 0px 0px 1px ${sv.azureDark};
     }
 
     &:disabled {
@@ -44,8 +54,20 @@ const styles = {
       box-shadow: none;
     }
   `,
+  withValue: css`
+    > select {
+      box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
+    }
+  `,
   option: css`
     padding: 30px;
+  `,
+  icon: css`
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: calc(${sv.marginSmall} * 2 + ${sv.marginExtraSmall});
   `,
 };
 
@@ -56,22 +78,32 @@ const Select = ({
   onChange,
   valueKey='value',
   labelKey='label',
-  defaultValue,
   placeholder=' -- ',
+  disabled,
   ...rest,
 }) => {
   const handleOnChange = (e) => onChange(e.target.value, e.target.name);
   return (
-    <div className={styles.base}>
+    <div className={cx(styles.base, {
+      [styles.disabled]: disabled,
+      [styles.withValue]: value,
+    })}>
+      {do{
+        if (value) {
+          <div className={styles.icon}>
+            <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
+          </div>
+        }
+      }}
       <select
+        disabled={disabled}
         className={styles.select}
         value={value}
-        defaultValue={defaultValue}
         onChange={handleOnChange}
         {...rest}>
         {do {
           if (! value) {
-            <option key={values.length} value={defaultValue}>{placeholder}</option>
+            <option key={values.length}>{placeholder}</option>
           }
         }}
         {values.map((value) => (
@@ -96,13 +128,32 @@ Select.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
-  })).isRequired,
+  })),
 
   /** Determines which value is currently active */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /** Disables the select */
   disabled: PropTypes.bool,
+
+  /** Used to pick each value in the values array */
+  valueKey: PropTypes.string,
+
+  /** Used to pick each label in the values array */
+  labelKey: PropTypes.string,
+
+  /** Text shown when no value is selected */
+  placeholder: PropTypes.string,
+
+  /** Triggered when a new value is chosen, returns a value, key (label, value) pair */
+  onChange: PropTypes.func,
+};
+
+
+Select.defaultProps = {
+  valueKey: 'value',
+  labelKey: 'label',
+  placeholder: ' -- ',
 };
 
 

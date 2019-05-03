@@ -1,6 +1,7 @@
 import React from 'react';
 import flow from 'lodash/flow';
 import omit from 'lodash/omit';
+import merge from 'lodash/merge';
 
 
 function removeHash(string) {
@@ -42,11 +43,9 @@ function transformMdxToReact(mdxElement, target, props) {
   if (typeof mdxElement.type === 'string' && mdxElement.type.includes('react.fragment')) {
     return mdxElement;
   }
-  if (target && target.type === mdxElement.props.originalType) {
-    return React.cloneElement(target, {
-      ...omit(mdxElement.props, ['mdxType', 'originalType']),
-      ...props,
-    });
+  if (target && target === mdxElement.props.originalType) {
+    const newProps = merge(props, omit(mdxElement.props, ['mdxType', 'originalType']));
+    return React.createElement(target,  newProps);
   }
   return React.createElement(mdxElement.props.originalType || mdxElement.type, omit(mdxElement.props, ['mdxType', 'originalType']));
 }
@@ -54,7 +53,7 @@ function transformMdxToReact(mdxElement, target, props) {
 
 export function recursiveMdxTransform(tree, target) {
   const { component, props } = target;
-  const targetComponent = component ? React.createElement(component) : null;
+  const targetComponent = component || null;
 
   function mdxTransform(_tree) {
     if (Object.values(_tree.props || {}).some((c) => !! c.$$typeof)) {

@@ -1,10 +1,12 @@
 import button from './button';
 import title from './title';
+import roundIcon from './round-icon';
 
 
 const components = {
   button,
   title,
+  roundIcon,
 };
 
 

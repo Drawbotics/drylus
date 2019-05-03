@@ -17,12 +17,17 @@ const styles = {
   base: css`
     color: ${sv.brandRed};
   `,
+  bold: css`
+    font-weight: bold !important;
+  `,
 };
 
 
-const Icon = ({ name }) => {
+const Icon = ({ name, bold }) => {
   return (
-    <i className={cx(styles.base, `Drycon Drycon-${name}`)}></i>
+    <i className={cx(styles.base, `Drycon Drycon-${name}`, {
+      [styles.bold]: bold,
+    })} />
   );
 }
 
@@ -30,6 +35,9 @@ const Icon = ({ name }) => {
 Icon.propTypes = {
   /** Name of the icon */
   name: PropTypes.string.isRequired,
+
+  /** Makes icon T H I C C */
+  bold: PropTypes.bool,
 }
 
 
