@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { css, cx } from 'emotion';
-import sv from '@drawbotics/style-vars';
+import sv, { fade } from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 
 import RoundIcon from '../components/RoundIcon';
@@ -16,6 +16,11 @@ const styles = {
     position: relative;
     width: 100%;
   `,
+  inputWrapper: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
   input: css`
     background-color: ${sv.azureLight};
     color: ${sv.colorPrimary};
@@ -27,6 +32,7 @@ const styles = {
     outline: none !important;
     box-shadow: inset 0px 0px 0px 1px ${sv.azure};
     transition: ${sv.defaultTransition};
+    z-index: 1;
 
     &::placeholder {
       color: ${sv.colorSecondary};
@@ -40,8 +46,16 @@ const styles = {
       box-shadow: inset 0px 0px 0px 2px ${sv.brand} !important;
     }
   `,
+  straightLeft: css`
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  `,
+  straightRight: css`
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  `,
   withValue: css`
-    > input {
+    input {
       box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
     }
   `,
@@ -53,13 +67,33 @@ const styles = {
     transition: all ${sv.transitionTimeShort} ${sv.bouncyTransitionCurve};
   `,
   error: css`
-    > input {
+    input {
       box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
     }
   `,
   hidden: css`
     opacity: 0;
     transform: scale(0);
+  `,
+  fix: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${fade(sv.azure, 30)};
+    box-shadow: inset 0px 0px 0px 1px ${sv.azure};
+    border-radius: ${sv.defaultBorderRadius};
+    padding: calc(${sv.paddingExtraSmall} * 1.5);
+    color: ${sv.colorPrimary};
+  `,
+  prefix: css`
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: -1px;
+  `,
+  suffix: css`
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -1px;
   `,
 };
 
@@ -69,6 +103,8 @@ const Input = ({
   onChange=x=>x,
   error,
   hint,
+  prefix,
+  suffix,
   ...rest,
 }) => {
   const inputElement = useRef(null);
@@ -94,12 +130,31 @@ const Input = ({
           </div>
         }
       }}
-      <input
-        ref={inputElement}
-        onChange={handleOnChange}
-        className={styles.input}
-        value={value}
-        {...rest} />
+      <div className={styles.inputWrapper}>
+        {do{
+          if (prefix) {
+            <div className={cx(styles.fix, styles.prefix)}>
+              {prefix}
+            </div>
+          }
+        }}
+        <input
+          ref={inputElement}
+          onChange={handleOnChange}
+          className={cx(styles.input, {
+            [styles.straightLeft]: prefix,
+            [styles.straightRight]: suffix,
+          })}
+          value={value}
+          {...rest} />
+        {do{
+          if (suffix) {
+            <div className={cx(styles.fix, styles.suffix)}>
+              {suffix}
+            </div>
+          }
+        }}
+      </div>
       {do{
         if (error) {
           <Hint error>{error}</Hint>
