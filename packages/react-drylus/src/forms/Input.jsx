@@ -66,7 +66,7 @@ const styles = {
 
 const Input = ({
   value,
-  onChange,
+  onChange=x=>x,
   error,
   hint,
   ...rest,
@@ -98,7 +98,7 @@ const Input = ({
         ref={inputElement}
         onChange={handleOnChange}
         className={styles.input}
-        value={value || ''}
+        value={value}
         {...rest} />
       {do{
         if (error) {
@@ -131,6 +131,12 @@ Input.propTypes = {
 
   /** Error text to prompt the user to act */
   error: PropTypes.string,
+
+  /** Node to be rendered in front of the input field, for not limited to text, button and select */
+  prefix: PropTypes.node,
+
+  /** Node to be rendered at the end of the input field, for not limited to text, button and select */
+  suffix: PropTypes.node,
 };
 
 

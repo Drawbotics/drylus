@@ -1,13 +1,41 @@
 import { Input } from '@drawbotics/react-drylus';
+import { css } from 'emotion';
 
 import Playground from '~/components/Playground';
 import { ControlledField } from './utils';
 
 
-# Select
+# Input
+
+Here is how you use a normal input. Note that the check icon and green border is only present if the input field is __controlled__.
+
+If the field is not controlled, then it will go back to its default style even if text is present.
 
 <Playground component={Input}>
   <ControlledField component={
     <Input placeholder="Placeholder..." hint="bad stuff" />
   } />
+</Playground>
+
+
+You can also add a prefix and suffix. The following examples are __uncontrolled__ inputs.
+
+export const Example = ({ children }) => {
+  return (
+    <div className={css`
+      width: 300px;
+        > * {
+          margin-bottom: 20px;
+        }
+      `}>
+      {children}
+    </div>
+  );
+}
+
+<Playground>
+  <Example>
+    <Input placeholder="Something..." prefix="$" />
+    <Input placeholder="Something..." suffix=".com" />
+  </Example>
 </Playground>

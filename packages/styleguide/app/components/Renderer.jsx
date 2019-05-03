@@ -3,7 +3,7 @@ import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
-import { Title } from '@drawbotics/react-drylus';
+import { Title, Paragraph } from '@drawbotics/react-drylus';
 
 import Code from './Code';
 
@@ -21,6 +21,7 @@ const components = {
   h3: (props) => <Title {...props} size={3} />,
   h4: (props) => <Title {...props} size={4} />,
   pre: (props) => <div {...props} />,
+  p: (props) => <Paragraph {...props} />,
   code: Code,
 }
 

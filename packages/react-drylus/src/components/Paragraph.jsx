@@ -1,0 +1,26 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import sv from '@drawbotics/style-vars';
+import { css } from 'emotion';
+
+
+const styles = {
+  base: css`
+    color: ${sv.colorPrimary};
+    line-height: calc(${sv.defaultLineHeight} * 1.5);
+  `,
+};
+
+
+const Paragraph = ({ children }) => {
+  return <p className={styles.base}>{children}</p>;
+};
+
+
+Paragraph.propTypes = {
+  /** Text displayed by the paragraph */
+  children: PropTypes.node,
+};
+
+
+export default Paragraph;
