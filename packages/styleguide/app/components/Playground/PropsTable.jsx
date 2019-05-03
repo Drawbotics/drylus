@@ -8,9 +8,9 @@ import Prop from './Prop';
 const styles = {
   propsTable: css`
     width: 100%;
-    ${'' /* border: 1px solid rgba(84, 110, 122, 0.3); */}
     border-radius: 5;
     overflow: hidden;
+    background: ${sv.white};
   `,
   row: css`
     width: 100%;
@@ -18,7 +18,6 @@ const styles = {
     align-items: center;
 
     &:nth-of-type(odd): {
-      background: rgba(84, 110, 122, 0.03);
     }
   `,
   cell: css`
@@ -30,12 +29,12 @@ const styles = {
     flex: 2;
   `,
   header: css`
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid ${sv.neutralDark};
     font-size: 0.8rem;
     font-weight: bold;
     text-transform: uppercase;
     color: ${sv.colorSecondary};
-    background: rgba(84, 110, 122, 0.1) !important;
+    background: ${sv.neutral};
   `,
   headerCell: css`
     padding: 12px 16px;

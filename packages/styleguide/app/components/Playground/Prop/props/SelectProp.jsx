@@ -1,37 +1,16 @@
 import React from 'react';
 import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
+import { Select } from '@drawbotics/react-drylus';
+
+import { normalizeValue, displayValue } from '../utils';
 
 
 const styles = {
   selectProp: css`
     margin: ${sv.marginSmall} 0;
   `,
-  input: css`
-    height: 35px;
-    width: 100%;
-    display: block;
-    border-radius: ${sv.defaultBorderRadius};
-    border: 1px solid rgba(84, 110, 122, 0.23);
-    color: rgba(0, 0, 0, 0.7);
-    outline: none !important;
-
-    &:focus: {
-      border: 1px solid rgba(84, 110, 122, 0.4);
-    }
-  }`
 };
-
-
-function normalizeValue(v) {
-  // console.log(v);
-  if (v.includes("'") || v === '_empty') {
-    return v.replace(/'/g, '');
-  }
-  else {
-    return parseFloat(v) || v;
-  }
-}
 
 
 const SelectProp = ({
@@ -41,25 +20,19 @@ const SelectProp = ({
 }) => {
   const { key, type } = prop;
   const { value: values } = type;
-  // console.log(prop);
   return (
     <div className={styles.selectProp}>
-      <select
-        id={key}
-        className={styles.input}
+      <Select
         name={key}
-        value={value}
-        defaultValue="_empty"
-        onChange={(e) => onChange(normalizeValue(e.target.value), e.target.name)}>
-        <option value="_empty">none</option>
-        {values.map((v) => (
-          <option
-            key={v.value}
-            value={v.value.split(/[.]/).pop()}>
-            {v.value.split(/[.]/).pop().replace(/'/g, '')}
-          </option>
-        ))}
-      </select>
+        value={value || '_empty'}
+        values={[ {
+          label: 'none',
+          value: '_empty',
+        }, ...values.map((v) => ({
+          label: displayValue(v.value),
+          value: displayValue(v.value),
+        }))]}
+        onChange={(v, k) => onChange(normalizeValue(v), k)} />
     </div>
   );
 }

@@ -6,7 +6,7 @@ import sv from '@drawbotics/style-vars';
 
 const styles = {
   base: css`
-    background: ${sv.neutralLight};
+    background: ${sv.backgroundColor};
   `,
   fullHeight: css`
     flex: 1;

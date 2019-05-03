@@ -1,0 +1,34 @@
+import { useState } from 'react';
+import { Select } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+export const Example = ({ component: Component }) => {
+  const [value, setValue] = useState();
+  return (
+    <div style={{ maxWidth: 250 }}>
+      {React.cloneElement(Component, { value, onChange: (v) => setValue(v) })}
+    </div>
+  );
+};
+
+
+# Select
+
+<Playground component={Select}>
+  <Example component={
+    <Select
+      placeholder="Select an option..."
+      values={[{
+        label: 'Belgium',
+        value: 'BE',
+      }, {
+        label: 'France',
+        value: 'FR',
+      }, {
+        label: 'Italy',
+        value: 'IT',
+      }]} />
+  } />
+</Playground>

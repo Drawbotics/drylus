@@ -26,6 +26,11 @@ export const neutralDark = '#879ba6';
 export const neutral = '#d3dce6';
 export const neutralLight = '#eaeff4';
 export const neutralLighter = '#f6f7fa';
+export const backgroundColor = '#F1F5F9';
+
+export const azureDark = '#C2CDF4';
+export const azure = '#E0E7FF';
+export const azureLight = '#F9FAFF';
 
 export const redDark = '#BF0E08';
 export const red = '#EC4C47';

@@ -3,6 +3,7 @@ import components from './components';
 import introduction from './introduction';
 import guidelines from './guidelines';
 import layout from './layout';
+import forms from './forms';
 
 
 export default {
@@ -10,5 +11,6 @@ export default {
   guidelines,
   brand,
   components,
+  forms,
   layout,
 }

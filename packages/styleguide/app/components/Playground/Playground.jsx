@@ -14,10 +14,15 @@ import { adaptForVanilla, recursiveMdxTransform } from './utils';
 
 const styles = {
   playground: css`
+  `,
+  codeWrapper: css`
     border: 1px solid ${sv.neutralDark};
     border-radius: ${sv.defaultBorderRadius};
     position: relative;
     overflow: hidden;
+  `,
+  table: css`
+    margin-top: ${sv.defaultMargin};
   `,
   code: css`
     position: relative;
@@ -33,6 +38,7 @@ const styles = {
   toggle: css`
     padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
     color: ${sv.colorPrimary};
+    background: ${sv.neutralLight};
 
     &:hover {
       cursor: pointer;
@@ -73,29 +79,33 @@ const Playground = ({ component, children, mode }) => {
   const generatedMarkup = getMarkupForMode(activeMode, generatedComponent);
   return (
     <div className={styles.playground}>
-      <Preview raw={activeMode === 'vanilla'}>
-        {activeMode === 'vanilla' ? generatedMarkup : generatedComponent}
-      </Preview>
-      <div className={styles.toggle} onClick={() => setCodeOpen(! codeOpen)}>
-        Toggle code
-      </div>
-      <div className={cx(styles.code, { [styles.codeHidden]: ! codeOpen })}>
-        <div className={styles.switcher}>
-          <ModeSwitcher
-            modes={supportedModes}
-            activeMode={activeMode}
-            onChange={setMode} />
+      <div className={styles.codeWrapper}>
+        <Preview raw={activeMode === 'vanilla'}>
+          {activeMode === 'vanilla' ? generatedMarkup : generatedComponent}
+        </Preview>
+        <div className={styles.toggle} onClick={() => setCodeOpen(! codeOpen)}>
+          Toggle code
         </div>
-        <div className={styles.codeBox}>
-          <CodeBox format mode={mode}>{generatedMarkup}</CodeBox>
+        <div className={cx(styles.code, { [styles.codeHidden]: ! codeOpen })}>
+          <div className={styles.switcher}>
+            <ModeSwitcher
+              modes={supportedModes}
+              activeMode={activeMode}
+              onChange={setMode} />
+          </div>
+          <div className={styles.codeBox}>
+            <CodeBox format mode={mode}>{generatedMarkup}</CodeBox>
+          </div>
         </div>
       </div>
       {do{
         if (component) {
-          <PropsTable
-            component={component}
-            activeProps={props}
-            onChange={(v, n) => v === '_empty' ? setProps(omit(props, n)) : setProps({ ...props, [n]: v })} />
+          <div className={styles.table}>
+            <PropsTable
+              component={component}
+              activeProps={props}
+              onChange={(v, n) => v === '_empty' ? setProps(omit(props, n)) : setProps({ ...props, [n]: v })} />
+          </div>
         }
       }}
     </div>
