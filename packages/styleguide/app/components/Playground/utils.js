@@ -44,7 +44,7 @@ function transformMdxToReact(mdxElement, target, props) {
     return mdxElement;
   }
   if (target && target === mdxElement.props.originalType) {
-    const newProps = merge(props, omit(mdxElement.props, ['mdxType', 'originalType']));
+    const newProps = merge(omit(mdxElement.props, ['mdxType', 'originalType']), Object.assign({}, props));
     return React.createElement(target,  newProps);
   }
   return React.createElement(mdxElement.props.originalType || mdxElement.type, omit(mdxElement.props, ['mdxType', 'originalType']));

@@ -1,16 +1,7 @@
 import React from 'react';
-import { css } from 'emotion';
-import sv from '@drawbotics/style-vars';
 import { Select } from '@drawbotics/react-drylus';
 
 import { normalizeValue, displayValue } from '../utils';
-
-
-const styles = {
-  selectProp: css`
-    margin: ${sv.marginSmall} 0;
-  `,
-};
 
 
 const SelectProp = ({
@@ -21,7 +12,7 @@ const SelectProp = ({
   const { key, type } = prop;
   const { value: values } = type;
   return (
-    <div className={styles.selectProp}>
+    <div>
       <Select
         name={key}
         value={value || '_empty'}

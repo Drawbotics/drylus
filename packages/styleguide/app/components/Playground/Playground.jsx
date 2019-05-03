@@ -104,7 +104,7 @@ const Playground = ({ component, children, mode }) => {
             <PropsTable
               component={component}
               activeProps={props}
-              onChange={(v, n) => v === '_empty' ? setProps(omit(props, n)) : setProps({ ...props, [n]: v })} />
+              onChange={(v, n) => v === '_empty' || v === '' ? setProps(omit(props, n)) : setProps({ ...props, [n]: v })} />
           </div>
         }
       }}

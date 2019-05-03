@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SelectProp } from './props';
+import { SelectProp, InputProp } from './props';
 
 
 const Prop = ({
@@ -20,10 +20,10 @@ const Prop = ({
       return (
         <SelectProp prop={propWithKey} value={value} onChange={onChange} />
       );
-    // case 'string':
-    //   return (
-    //     <InputProp prop={propWithKey} value={value} onChange={onChange} />
-    //   );
+    case 'string':
+      return (
+        <InputProp prop={propWithKey} value={value} onChange={onChange} />
+      );
     default:
       // console.warn('Unknown prop', prop);
       return null;
