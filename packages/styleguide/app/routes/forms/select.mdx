@@ -2,22 +2,13 @@ import { useState } from 'react';
 import { Select } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
-
-
-export const Example = ({ component: Component }) => {
-  const [value, setValue] = useState();
-  return (
-    <div style={{ maxWidth: 250 }}>
-      {React.cloneElement(Component, { value, onChange: (v) => setValue(v) })}
-    </div>
-  );
-};
+import { ControlledField } from './utils';
 
 
 # Select
 
 <Playground component={Select}>
-  <Example component={
+  <ControlledField component={
     <Select
       placeholder="Select an option..."
       values={[{

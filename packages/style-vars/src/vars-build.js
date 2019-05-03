@@ -121,7 +121,7 @@ exports.lighterOverlay = lighterOverlay;
 const lightOverlay = fade(grey900, 10); // BORDERS
 
 exports.lightOverlay = lightOverlay;
-const baseBorderRadius = '4px';
+const baseBorderRadius = '5px';
 const defaultBorderRadius = baseBorderRadius;
 exports.defaultBorderRadius = defaultBorderRadius;
 const borderRadiusBig = m(baseBorderRadius, 1.5); // TYPOGRAPHY

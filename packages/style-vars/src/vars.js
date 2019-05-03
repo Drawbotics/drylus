@@ -65,7 +65,7 @@ export const lighterOverlay = fade(grey900, 5);
 export const lightOverlay = fade(grey900, 10);
 
 // BORDERS
-const baseBorderRadius = '4px';
+const baseBorderRadius = '5px';
 export const defaultBorderRadius = baseBorderRadius;
 export const borderRadiusBig = m(baseBorderRadius, 1.5);
 
