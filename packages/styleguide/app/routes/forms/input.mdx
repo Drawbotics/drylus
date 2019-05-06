@@ -20,14 +20,19 @@ If the field is not controlled, then it will go back to its default style even i
 
 You can also add a prefix and suffix. The following examples are __uncontrolled__ inputs.
 
+export const style = {
+  example: css`
+    label: noreplace;
+    width: 300px;
+    > * {
+      margin-bottom: 20px;
+    }
+  `,
+};
+
 export const Example = ({ children }) => {
   return (
-    <div className={css`
-      width: 300px;
-        > * {
-          margin-bottom: 20px;
-        }
-      `}>
+    <div className={style.example}>
       {children}
     </div>
   );

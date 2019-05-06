@@ -19,7 +19,10 @@ const styles = {
   inputWrapper: css`
     display: flex;
     align-items: center;
-    justify-content: center;
+  `,
+  withIcon: css`
+    position: relative;
+    flex: 1;
   `,
   input: css`
     background-color: ${sv.azureLight};
@@ -62,6 +65,7 @@ const styles = {
   icon: css`
     pointer-events: none;
     position: absolute;
+    z-index: 2;
     top: calc(${sv.marginExtraSmall} * 1.5);
     right: ${sv.marginSmall};
     transition: all ${sv.transitionTimeShort} ${sv.bouncyTransitionCurve};
@@ -118,18 +122,6 @@ const Input = ({
       [styles.withValue]: !! value,
       [styles.error]: error,
     })}>
-      {do{
-        if (error) {
-          <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
-            <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
-          </div>
-        }
-        else if (value) {
-          <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
-            <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
-          </div>
-        }
-      }}
       <div className={styles.inputWrapper}>
         {do{
           if (prefix) {
@@ -138,15 +130,29 @@ const Input = ({
             </div>
           }
         }}
-        <input
-          ref={inputElement}
-          onChange={handleOnChange}
-          className={cx(styles.input, {
-            [styles.straightLeft]: prefix,
-            [styles.straightRight]: suffix,
-          })}
-          value={value}
-          {...rest} />
+        <div className={styles.withIcon}>
+          {do{
+            if (error) {
+              <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
+                <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
+              </div>
+            }
+            else if (value) {
+              <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
+                <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
+              </div>
+            }
+          }}
+          <input
+            ref={inputElement}
+            onChange={handleOnChange}
+            className={cx(styles.input, {
+              [styles.straightLeft]: prefix,
+              [styles.straightRight]: suffix,
+            })}
+            value={value}
+            {...rest} />
+        </div>
         {do{
           if (suffix) {
             <div className={cx(styles.fix, styles.suffix)}>
@@ -188,10 +194,10 @@ Input.propTypes = {
   error: PropTypes.string,
 
   /** Node to be rendered in front of the input field, for not limited to text, button and select */
-  prefix: PropTypes.node,
+  prefix: PropTypes.string,
 
   /** Node to be rendered at the end of the input field, for not limited to text, button and select */
-  suffix: PropTypes.node,
+  suffix: PropTypes.string,
 };
 
 

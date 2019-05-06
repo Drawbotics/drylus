@@ -12,7 +12,7 @@ const SelectProp = ({
     <div>
       <Input
         name={key}
-        value={value}
+        value={value || ''}
         onChange={onChange} />
     </div>
   );

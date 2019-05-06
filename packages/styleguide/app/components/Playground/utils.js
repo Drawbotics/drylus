@@ -25,6 +25,9 @@ function prependString(string) {
 
 
 export function transformClassname(string) {
+  if (string.includes('noreplace')) {
+    return string;
+  }
   const classes = flow(removeHash, splitClasses)(string);
   // NOTE remove next line if they fix the emotion issue https://github.com/emotion-js/emotion/issues/1328
   const noDuplicate = removeDuplicate(classes);
