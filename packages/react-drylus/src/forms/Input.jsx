@@ -8,6 +8,7 @@ import Sizes from '../base/Sizes';
 import Categories from '../base/Categories';
 import Hint from './Hint';
 import { useEventListener } from '../utils/hooks';
+import Select from './Select';
 
 
 const styles = {
@@ -16,13 +17,14 @@ const styles = {
     position: relative;
     width: 100%;
   `,
-  inputWrapper: css`
+  outerWrapper: css`
     display: flex;
     align-items: center;
   `,
-  withIcon: css`
+  innerWrapper: css`
     position: relative;
     flex: 1;
+    z-index: 1;
   `,
   input: css`
     background-color: ${sv.azureLight};
@@ -57,7 +59,7 @@ const styles = {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   `,
-  withValue: css`
+  valid: css`
     input {
       box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
     }
@@ -94,10 +96,37 @@ const styles = {
     border-bottom-right-radius: 0;
     margin-right: -1px;
   `,
+  prefixComponent: css`
+    padding: 0;
+
+    select, button {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    select {
+      background-color: transparent;
+    }
+  `,
   suffix: css`
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     margin-left: -1px;
+  `,
+  suffixComponent: css`
+    padding: 0;
+
+    select, button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    select {
+      background-color: transparent;
+    }
+  `,
+  transparentButton: css`
+    button {
+      background-color: transparent;
+    }
   `,
 };
 
@@ -106,6 +135,7 @@ const Input = ({
   value,
   onChange=x=>x,
   error,
+  valid,
   hint,
   prefix,
   suffix,
@@ -119,25 +149,28 @@ const Input = ({
   useEventListener('keydown', handleOnEvent);
   return (
     <div className={cx(styles.base, {
-      [styles.withValue]: !! value,
+      [styles.valid]: !! value && valid,
       [styles.error]: error,
     })}>
-      <div className={styles.inputWrapper}>
+      <div className={styles.outerWrapper}>
         {do{
           if (prefix) {
-            <div className={cx(styles.fix, styles.prefix)}>
+            <div className={cx(styles.fix, styles.prefix, {
+              [styles.prefixComponent]: typeof prefix !== 'string',
+              [styles.transparentButton]: ! prefix?.props?.category,
+            })}>
               {prefix}
             </div>
           }
         }}
-        <div className={styles.withIcon}>
+        <div className={styles.innerWrapper}>
           {do{
             if (error) {
               <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
                 <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
               </div>
             }
-            else if (value) {
+            else if (value && valid) {
               <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
                 <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
               </div>
@@ -155,7 +188,10 @@ const Input = ({
         </div>
         {do{
           if (suffix) {
-            <div className={cx(styles.fix, styles.suffix)}>
+            <div className={cx(styles.fix, styles.suffix, {
+              [styles.suffixComponent]: typeof suffix !== 'string',
+              [styles.transparentButton]: ! suffix?.props?.category,
+            })}>
               {suffix}
             </div>
           }
@@ -190,14 +226,23 @@ Input.propTypes = {
   /** Small text shown below the box, replaced by error if present */
   hint: PropTypes.string,
 
-  /** Error text to prompt the user to act */
-  error: PropTypes.string,
+  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+
+  /** If true the element displays a check icon and a green outline, overridden by "error" */
+  valid: PropTypes.bool,
 
   /** Node to be rendered in front of the input field, for not limited to text, button and select */
-  prefix: PropTypes.string,
+  prefix: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Select),
+  ]),
 
   /** Node to be rendered at the end of the input field, for not limited to text, button and select */
-  suffix: PropTypes.string,
+  suffix: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Select),
+  ]),
 };
 
 

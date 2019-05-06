@@ -1,4 +1,4 @@
-import { Input } from '@drawbotics/react-drylus';
+import { Input, Select, Button } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 
 import Playground from '~/components/Playground';
@@ -42,5 +42,11 @@ export const Example = ({ children }) => {
   <Example>
     <Input placeholder="Something..." prefix="$" />
     <Input placeholder="Something..." suffix=".com" />
+    <Input placeholder="Something..." prefix={
+      <Select value="option" values={[{ label: 'Option', value: 'option' }]} placeholder="Select..." />
+    } />
+    <Input placeholder="Something else..." suffix={
+      <Button withIcon="activity">Click me</Button>
+    } />
   </Example>
 </Playground>

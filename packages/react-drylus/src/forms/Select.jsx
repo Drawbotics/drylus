@@ -35,6 +35,7 @@ const styles = {
     background-color: ${sv.azureLight};
     color: ${sv.colorPrimary};
     padding: calc(${sv.paddingExtraSmall} * 1.5) ${sv.paddingSmall};
+    padding-right: ${sv.paddingExtraLarge};
     border: none;
     border-radius: ${sv.defaultBorderRadius};
     appearance: button;
@@ -55,9 +56,10 @@ const styles = {
       box-shadow: none;
     }
   `,
-  withValue: css`
+  valid: css`
     > select {
       box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
+      padding-right: calc(${sv.paddingExtraLarge} + ${sv.defaultPadding});
     }
   `,
   icon: css`
@@ -84,13 +86,14 @@ const Select = ({
   disabled,
   hint,
   error,
+  valid,
   ...rest,
 }) => {
   const handleOnChange = (e) => onChange(e.target.value, e.target.name);
   return (
     <div className={cx(styles.base, {
       [styles.disabled]: disabled,
-      [styles.withValue]: !! value,
+      [styles.valid]: !! value && valid,
       [styles.error]: error,
     })}>
       {do{
@@ -99,7 +102,7 @@ const Select = ({
             <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
           </div>
         }
-        else if (value) {
+        else if (value && valid) {
           <div className={styles.icon}>
             <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
           </div>
@@ -169,8 +172,11 @@ Select.propTypes = {
   /** Small text shown below the box, replaced by error if present */
   hint: PropTypes.string,
 
-  /** Error text to prompt the user to act */
-  error: PropTypes.string,
+  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+
+  /** If true the element displays a check icon and a green outline, overridden by "error" */
+  valid: PropTypes.bool,
 };
 
 
