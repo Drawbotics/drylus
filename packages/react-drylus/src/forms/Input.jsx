@@ -8,7 +8,6 @@ import Sizes from '../base/Sizes';
 import Categories from '../base/Categories';
 import Hint from './Hint';
 import { useEventListener } from '../utils/hooks';
-import Select from './Select';
 
 
 const styles = {
@@ -232,17 +231,11 @@ Input.propTypes = {
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid: PropTypes.bool,
 
-  /** Node to be rendered in front of the input field, for not limited to text, button and select */
-  prefix: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.instanceOf(Select),
-  ]),
+  /** Node to be rendered in front of the input field, for now limited to text, Button and Select */
+  prefix: PropTypes.node,
 
-  /** Node to be rendered at the end of the input field, for not limited to text, button and select */
-  suffix: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.instanceOf(Select),
-  ]),
+  /** Node to be rendered at the end of the input field, for now limited to text, Button and Select */
+  suffix: PropTypes.node,
 };
 
 

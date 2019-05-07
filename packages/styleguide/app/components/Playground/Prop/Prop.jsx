@@ -11,6 +11,7 @@ const Prop = ({
 }) => {
   const { name: type } = prop.type;
   const propWithKey = { ...prop, key: name };
+  // console.log(name, type, prop.type.value);
   switch (type) {
     // case 'bool':
     //   return (
