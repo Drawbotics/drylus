@@ -1,0 +1,23 @@
+import { RadioGroup } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+import { ControlledField } from './utils';
+
+
+# Radio Group
+
+<Playground component={RadioGroup}>
+  <ControlledField component={
+    <RadioGroup
+      values={[{
+        label: 'Belgium',
+        value: 'BE',
+      }, {
+        label: 'France',
+        value: 'FR',
+      }, {
+        label: 'Italy',
+        value: 'IT',
+      }]} />
+  } />
+</Playground>

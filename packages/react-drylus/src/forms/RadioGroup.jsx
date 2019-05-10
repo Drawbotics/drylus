@@ -10,6 +10,9 @@ import { Sizes } from '../base';
 
 
 const styles = {
+  radioWrapper: css`
+    margin-bottom: ${sv.marginSmall};
+  `,
   base: css`
     position: relative;
     display: inline-block;
@@ -43,7 +46,7 @@ const styles = {
       background: ${sv.red};
     }
   `,
-  checkbox: css`
+  radio: css`
     height: ${sv.defaultMargin};
     width: ${sv.defaultMargin};
     position: relative;
@@ -82,7 +85,7 @@ const styles = {
     left: 0;
     height: 100%;
     width: 100%;
-    border-radius: ${sv.defaultBorderRadius};
+    border-radius: 1000px;
     background: ${sv.neutral};
     display: flex;
     align-items: center;
@@ -127,58 +130,96 @@ const styles = {
 };
 
 
-
-const Checkbox = ({
-  onChange,
+const Radio = ({
   value,
-  id,
-  children,
+  onChange,
+  valueKey='value',
+  labelKey='label',
   disabled,
   error,
   size,
+  checked,
+  children,
   ...rest,
 }) => {
-  const isChecked = !! value;
-
-  const handleOnChange = (e) => {
-    e.stopPropagation();
-    onChange ? onChange( ! isChecked, e.target.name) : null;
-  };
-
-  const uniqId = id ? id : v4();
+  const id = v4();
   return (
     <div className={styles.base}>
       <label className={cx(styles.wrapper, {
         [styles[size?.toLowerCase()]]: size,
         [styles.disabled]: disabled,
         [styles.error]: error,
-      })} htmlFor={uniqId}>
-        <div className={styles.checkbox}>
+      })} htmlFor={id}>
+        <div className={styles.radio}>
           <input
             disabled={disabled}
-            checked={isChecked}
-            id={uniqId}
-            type="checkbox"
+            checked={checked}
+            value={value}
+            id={id}
+            type="radio"
             className={styles.input}
-            onChange={handleOnChange}
+            onChange={onChange}
             {...rest} />
           <div data-element="sprite" className={styles.sprite}>
-            <label data-element="icon" className={styles.iconLabel} htmlFor={uniqId}>
+            <label data-element="icon" className={styles.iconLabel} htmlFor={id}>
               <Icon bold name="check" />
             </label>
           </div>
         </div>
         {do{
           if (children) {
-            <label data-element="label" className={styles.label} htmlFor={uniqId}>
+            <label data-element="label" className={styles.label} htmlFor={id}>
               {children}
             </label>
           }
         }}
       </label>
+    </div>
+  );
+};
+
+
+
+const RadioGroup = ({
+  value,
+  onChange,
+  values,
+  valueKey='value',
+  labelKey='label',
+  error,
+  size,
+  className,
+  hint,
+  ...rest,
+}) => {
+
+  const handleOnChange = (e) => {
+    e.stopPropagation();
+    onChange ? onChange(e.target.value, e.target.name) : null;
+  };
+
+  return (
+    <div className={cx(styles.radioGroup, className)}>
+      <div className={styles.radios}>
+        {values.map((_value) => (
+          <div key={_value[valueKey]} className={styles.radioWrapper}>
+            <Radio
+              size={size}
+              error={!! error}
+              onChange={handleOnChange}
+              checked={value === _value[valueKey]}
+              value={_value[valueKey]}
+              disabled={_value.disabled}
+              {...rest}>{_value[labelKey]}</Radio>
+          </div>
+        ))}
+      </div>
       {do{
         if (error && typeof error === 'string') {
           <Hint error>{error}</Hint>
+        }
+        else if (hint) {
+          <Hint>{hint}</Hint>
         }
       }}
     </div>
@@ -186,25 +227,41 @@ const Checkbox = ({
 };
 
 
-Checkbox.propTypes = {
-  /** If passed, the text will be the label of the checkbox */
-  children: PropTypes.string,
+RadioGroup.propTypes = {
+  /** Determine the radio components which will be rendered */
+  values: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    label: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
+  })),
 
-  /** Triggered when checkbox value is changed */
+  /** Used to pick each value in the values array */
+  valueKey: PropTypes.string,
+
+  /** Used to pick each label in the values array */
+  labelKey: PropTypes.string,
+
+  /** Triggered when radio value is changed */
   onChange: PropTypes.func,
 
-  /** If true, checkbox is not clickable */
+  /** If true, none of the checkboxes are clickable */
   disabled: PropTypes.bool,
 
-  /** Determines if checkbox is checked */
-  value: PropTypes.bool,
+  /** Determines which value is currently active */
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
-  /** Size of the checkbox. Can be small */
+  /** Size of the radio buttons. Can be small */
   size: PropTypes.oneOf([Sizes.SMALL]),
+
+  /** Passed to the wrapper component, to override any styles */
+  className: PropTypes.string,
+
+  /** Small text shown below the group, replaced by error if present */
+  hint: PropTypes.string,
 };
 
 
-export default Checkbox;
+export default RadioGroup;

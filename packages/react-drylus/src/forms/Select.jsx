@@ -89,7 +89,7 @@ const Select = ({
   valid,
   ...rest,
 }) => {
-  const handleOnChange = (e) => onChange(e.target.value, e.target.name);
+  const handleOnChange = (e) => onChange ? onChange(e.target.value, e.target.name) : null;
   return (
     <div className={cx(styles.base, {
       [styles.disabled]: disabled,

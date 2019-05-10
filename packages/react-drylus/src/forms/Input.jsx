@@ -152,7 +152,7 @@ const Input = ({
   const inputElement = useRef(null);
   const [isFocused, setFocused] = useState(false);
   const handleOnEvent = () => inputElement.current === document.activeElement ? setFocused(true) : setFocused(false);
-  const handleOnChange = (e) => onChange(e.target.value, e.target.name);
+  const handleOnChange = (e) => onChange ? onChange(e.target.value, e.target.name) : null;
   useEventListener('click', handleOnEvent);
   useEventListener('keydown', handleOnEvent);
   return (

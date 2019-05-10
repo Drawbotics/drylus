@@ -15,7 +15,7 @@ import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
 import Sidebar from './components/Sidebar';
 import RoutesRenderer from './components/RoutesRenderer';
-import routes from './routes';
+import pages from './pages';
 
 
 const App = () => {
@@ -25,11 +25,11 @@ const App = () => {
         <Page>
           <Layout
             // bar={<Navbar />}
-            bar={<Sidebar routes={routes} />}
+            bar={<Sidebar routes={pages} />}
             position={LayoutPositions.LEFT}
             fixed>
             <Content fullHeight>
-              <RoutesRenderer routes={routes} />
+              <RoutesRenderer routes={pages} />
             </Content>
           </Layout>
         </Page>
