@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 
-export const ControlledField = ({ component: Component }) => {
+export const ControlledField = ({ component: Component, style }) => {
   const [value, setValue] = useState('');
   return (
-    <div style={{ maxWidth: 250 }}>
+    <div style={style}>
       {React.cloneElement(Component, { value, onChange: (v) => setValue(v) })}
     </div>
   );

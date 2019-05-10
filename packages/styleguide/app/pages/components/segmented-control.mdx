@@ -1,0 +1,23 @@
+import { SegmentedControl } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+import { ControlledField } from '../utils';
+
+
+# Segmented Control
+
+<Playground component={SegmentedControl}>
+  <ControlledField component={
+    <SegmentedControl
+      values={[{
+        label: 'First choice',
+        value: 'first',
+      }, {
+        label: 'Second choice',
+        value: 'second',
+      }, {
+        label: 'Third',
+        value: 'third',
+      }]} />
+  } />
+</Playground>

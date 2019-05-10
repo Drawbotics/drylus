@@ -10,6 +10,9 @@ import { Sizes } from '../base';
 
 
 const styles = {
+  radioGroup: css`
+    display: inline-block;
+  `,
   radioWrapper: css`
     margin-bottom: ${sv.marginSmall};
   `,
@@ -183,7 +186,7 @@ const Radio = ({
 const RadioGroup = ({
   value,
   onChange,
-  values,
+  values=[],
   valueKey='value',
   labelKey='label',
   error,
@@ -228,7 +231,7 @@ const RadioGroup = ({
 
 
 RadioGroup.propTypes = {
-  /** Determine the radio components which will be rendered */
+  /** Determines the radio components which will be rendered */
   values: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     label: PropTypes.string.isRequired,
@@ -261,6 +264,12 @@ RadioGroup.propTypes = {
 
   /** Small text shown below the group, replaced by error if present */
   hint: PropTypes.string,
+};
+
+
+RadioGroup.defaultProps = {
+  valueKey: 'value',
+  labelKey: 'label',
 };
 
 

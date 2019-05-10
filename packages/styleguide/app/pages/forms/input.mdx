@@ -2,7 +2,7 @@ import { Input, Select, Button } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 
 import Playground from '~/components/Playground';
-import { ControlledField } from './utils';
+import { ControlledField } from '../utils';
 
 
 # Input
@@ -10,7 +10,7 @@ import { ControlledField } from './utils';
 Here is how you use a normal input.
 
 <Playground component={Input}>
-  <ControlledField component={
+  <ControlledField style={{ maxWidth: 250 }} component={
     <Input placeholder="Placeholder..." />
   } />
 </Playground>
