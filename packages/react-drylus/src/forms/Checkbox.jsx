@@ -12,6 +12,7 @@ const styles = {
     display: inline-flex;
     align-items: center;
     justify-content: flex-start;
+    cursor: pointer;
 
     &:hover {
       [data-element="sprite"] {
@@ -55,6 +56,10 @@ const styles = {
     &:disabled + [data-element="sprite"] {
       cursor: not-allowed;
       background: ${sv.neutralLight} !important;
+
+      [data-element="icon"] {
+        opacity: 0.7;
+      }
     }
   `,
   label: css`
@@ -82,7 +87,7 @@ const styles = {
     overflow: hidden;
   `,
   iconLabel: css`
-    cursor: pointer;
+    cursor: inherit;
     color: ${sv.white};
     height: 100%;
     width: 100%;
@@ -100,14 +105,13 @@ const styles = {
 const Checkbox = ({
   onChange,
   checked,
-  value,
   id,
   children,
   disabled,
   error,
   ...rest,
 }) => {
-  const isChecked = !! checked || !! value;
+  const isChecked = !! checked;
 
   const handleOnChange = (e) => {
     e.stopPropagation();

@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { SelectProp, InputProp } from './props';
+import {
+  SelectProp,
+  InputProp,
+  CheckboxProp,
+} from './props';
 
 
 const Prop = ({
@@ -11,12 +15,11 @@ const Prop = ({
 }) => {
   const { name: type } = prop.type;
   const propWithKey = { ...prop, key: name };
-  // console.log(name, type, prop.type.value);
   switch (type) {
-    // case 'bool':
-    //   return (
-    //     <CheckboxProp prop={propWithKey} value={value} onChange={onChange} />
-    //   );
+    case 'bool':
+      return (
+        <CheckboxProp prop={propWithKey} value={value} onChange={onChange} />
+      );
     case 'enum':
       return (
         <SelectProp prop={propWithKey} value={value} onChange={onChange} />
