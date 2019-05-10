@@ -131,7 +131,7 @@ const Select = ({
         ))}
       </select>
       {do{
-        if (error) {
+        if (error && typeof error === 'string') {
           <Hint error>{error}</Hint>
         }
         else if (hint) {

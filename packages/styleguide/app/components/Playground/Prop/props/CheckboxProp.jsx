@@ -12,8 +12,10 @@ const CheckboxProp = ({
     <div>
       <Checkbox
         name={key}
-        checked={value}
-        onChange={onChange} />
+        value={value}
+        onChange={onChange}>
+        True/false
+      </Checkbox>
     </div>
   );
 }

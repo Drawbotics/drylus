@@ -49,6 +49,14 @@ const styles = {
     &:focus {
       box-shadow: inset 0px 0px 0px 2px ${sv.brand} !important;
     }
+
+    &:disabled {
+      cursor: not-allowed;
+      background: ${sv.neutralLight};
+      color: ${sv.colorDisabled};
+      border-color: ${sv.neutralLight};
+      box-shadow: none;
+    }
   `,
   straightLeft: css`
     border-top-left-radius: 0;
@@ -138,6 +146,7 @@ const Input = ({
   hint,
   prefix,
   suffix,
+  disabled,
   ...rest,
 }) => {
   const inputElement = useRef(null);
@@ -176,6 +185,7 @@ const Input = ({
             }
           }}
           <input
+            disabled={disabled}
             ref={inputElement}
             onChange={handleOnChange}
             className={cx(styles.input, {
@@ -197,7 +207,7 @@ const Input = ({
         }}
       </div>
       {do{
-        if (error) {
+        if (error && typeof error === 'string') {
           <Hint error>{error}</Hint>
         }
         else if (hint) {

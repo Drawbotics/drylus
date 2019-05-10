@@ -31,8 +31,8 @@ const styles = {
 
     &:disabled {
       cursor: not-allowed;
-      background: ${sv.neutralLight};
-      color: ${sv.colorDisabled};
+      background: ${sv.neutralLight} !important;
+      color: ${sv.colorDisabled} !important;
       box-shadow: none;
     }
   `,

@@ -4,11 +4,16 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 
+import Hint from './Hint';
 import Icon from '../components/Icon';
 
 
 const styles = {
   base: css`
+    position: relative;
+    display: inline-block;
+  `,
+  wrapper: css`
     display: inline-flex;
     align-items: center;
     justify-content: flex-start;
@@ -104,14 +109,14 @@ const styles = {
 
 const Checkbox = ({
   onChange,
-  checked,
+  value,
   id,
   children,
   disabled,
   error,
   ...rest,
 }) => {
-  const isChecked = !! checked;
+  const isChecked = !! value;
 
   const handleOnChange = (e) => {
     e.stopPropagation();
@@ -120,33 +125,40 @@ const Checkbox = ({
 
   const uniqId = id ? id : v4();
   return (
-    <label className={cx(styles.base, {
-      [styles.disabled]: disabled,
-      [styles.error]: error,
-    })} htmlFor={uniqId}>
-      <div className={styles.checkbox}>
-        <input
-          disabled={disabled}
-          checked={isChecked}
-          id={uniqId}
-          type="checkbox"
-          className={styles.input}
-          onChange={handleOnChange}
-          {...rest} />
-        <div data-element="sprite" className={styles.sprite}>
-          <label data-element="icon" className={styles.iconLabel} htmlFor={uniqId}>
-            <Icon bold name="check" />
-          </label>
+    <div className={styles.base}>
+      <label className={cx(styles.wrapper, {
+        [styles.disabled]: disabled,
+        [styles.error]: error,
+      })} htmlFor={uniqId}>
+        <div className={styles.checkbox}>
+          <input
+            disabled={disabled}
+            checked={isChecked}
+            id={uniqId}
+            type="checkbox"
+            className={styles.input}
+            onChange={handleOnChange}
+            {...rest} />
+          <div data-element="sprite" className={styles.sprite}>
+            <label data-element="icon" className={styles.iconLabel} htmlFor={uniqId}>
+              <Icon bold name="check" />
+            </label>
+          </div>
         </div>
-      </div>
+        {do{
+          if (children) {
+            <label className={styles.label} htmlFor={uniqId}>
+              {children}
+            </label>
+          }
+        }}
+      </label>
       {do{
-        if (children) {
-          <label className={styles.label} htmlFor={uniqId}>
-            {children}
-          </label>
+        if (error && typeof error === 'string') {
+          <Hint error>{error}</Hint>
         }
       }}
-    </label>
+    </div>
   );
 };
 
@@ -162,7 +174,7 @@ Checkbox.propTypes = {
   disabled: PropTypes.bool,
 
   /** Determines if checkbox is checked */
-  checked: PropTypes.bool,
+  value: PropTypes.bool,
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
