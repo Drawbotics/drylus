@@ -16,6 +16,7 @@ const styles = {
     width: 100%;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid ${sv.neutral};
 
     &:nth-of-type(odd): {
     }

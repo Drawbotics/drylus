@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import Hint from './Hint';
 import Icon from '../components/Icon';
+import { Sizes } from '../base';
 
 
 const styles = {
@@ -101,7 +102,23 @@ const styles = {
     transform: scale(0);
     transition: all ${sv.transitionTimeShort} ${sv.bouncyTransitionCurve};
     border-radius: 100px;
-    font-size: 0.7rem;
+  `,
+  small: css`
+    > div {
+      height: ${sv.marginSmall};
+      width: ${sv.marginSmall};
+    }
+    [data-element="icon"] {
+      line-height: 15px;
+      
+       > i {
+         font-size: 0.7rem;
+       }
+    }
+
+    [data-element="label"] {
+      font-size: 0.9rem;
+    }
   `,
 };
 
@@ -114,6 +131,7 @@ const Checkbox = ({
   children,
   disabled,
   error,
+  size,
   ...rest,
 }) => {
   const isChecked = !! value;
@@ -127,6 +145,7 @@ const Checkbox = ({
   return (
     <div className={styles.base}>
       <label className={cx(styles.wrapper, {
+        [styles[size?.toLowerCase()]]: size,
         [styles.disabled]: disabled,
         [styles.error]: error,
       })} htmlFor={uniqId}>
@@ -147,7 +166,7 @@ const Checkbox = ({
         </div>
         {do{
           if (children) {
-            <label className={styles.label} htmlFor={uniqId}>
+            <label data-element="label" className={styles.label} htmlFor={uniqId}>
               {children}
             </label>
           }
@@ -178,6 +197,9 @@ Checkbox.propTypes = {
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+
+  /** Size of the checkbox. Can be small */
+  size: PropTypes.oneOf([Sizes.SMALL]),
 };
 
 
