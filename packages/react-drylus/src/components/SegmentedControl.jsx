@@ -24,6 +24,7 @@ const styles = {
     &:hover {
       cursor: pointer;
       background: ${sv.neutral};
+      color: ${sv.colorPrimary};
     }
   `,
   active: css`
