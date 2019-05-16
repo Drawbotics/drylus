@@ -219,8 +219,8 @@ Button.propTypes = {
   /** Category of the button. Can be danger, success, info, warning */
   category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
 
-  /** Size of the button. Can be small, large */
-  size: PropTypes.oneOf([Sizes.SMALL, Sizes.LARGE]),
+  /** Size of the button. Can be small, large, default */
+  size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE]),
 
   /** Tier of the button. Can be secondary, tertiary, overrides category */
   tier: PropTypes.oneOf(['secondary', 'tertiary']),
@@ -235,6 +235,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   iconSide: 'left',
+  size: Sizes.DEFAULT,
 };
 
 

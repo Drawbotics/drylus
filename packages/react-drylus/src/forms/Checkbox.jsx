@@ -202,8 +202,13 @@ Checkbox.propTypes = {
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
-  /** Size of the checkbox. Can be small */
-  size: PropTypes.oneOf([Sizes.SMALL]),
+  /** Size of the checkbox. Can be small or default */
+  size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT]),
+};
+
+
+Checkbox.defaultProps = {
+  size: Sizes.DEFAULT,
 };
 
 

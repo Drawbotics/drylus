@@ -257,7 +257,7 @@ RadioGroup.propTypes = {
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
   /** Size of the radio buttons. Can be small */
-  size: PropTypes.oneOf([Sizes.SMALL]),
+  size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT]),
 
   /** Passed to the wrapper component, to override any styles */
   className: PropTypes.string,
@@ -270,6 +270,7 @@ RadioGroup.propTypes = {
 RadioGroup.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
+  size: Sizes.DEFAULT,
 };
 
 

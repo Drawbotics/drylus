@@ -1,7 +1,6 @@
 import React from 'react';
 import { css, cx, injectGlobal } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/style-vars';
 import generateIconStyles from '@drawbotics/icons/dist/drycons.js';
 import packageJson from '@drawbotics/icons/package.json';
 
@@ -15,7 +14,7 @@ injectGlobal`
 
 const styles = {
   base: css`
-    color: ${sv.brandRed};
+    color: inherit;
   `,
   bold: css`
     font-weight: bold !important;
