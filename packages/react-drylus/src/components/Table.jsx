@@ -15,6 +15,9 @@ const styles = {
   `,
   cell: css`
     text-align: left;
+    padding: calc(${sv.defaultPadding} - 4px) ${sv.defaultPadding};
+  `,
+  headerPadding: css`
     padding: ${sv.paddingSmall} ${sv.defaultPadding};
   `,
   rightAlign: css`
@@ -29,7 +32,7 @@ const styles = {
   row: css`
     background: ${sv.white};
 
-    &:nth-child(odd) {
+    &:nth-of-type(odd) {
       background: ${sv.neutralLighter};
     }
   `,
@@ -43,6 +46,7 @@ export const TCell = ({ children, head, rightAlign }) => {
   const className = cx(styles.cell, {
     [styles.rightAlign]: rightAlign,
     [styles.white]: head,
+    [styles.headerPadding]: head,
   });
   if (head) {
     return (
