@@ -21,3 +21,22 @@ import { ControlledField } from '../utils';
       }]} />
   } />
 </Playground>
+
+
+You can also disable individual options by adding `disabled` to the values:
+<Playground>
+  <ControlledField component={
+    <RadioGroup
+      values={[{
+        label: 'Belgium',
+        value: 'BE',
+        disabled: true,
+      }, {
+        label: 'France',
+        value: 'FR',
+      }, {
+        label: 'Italy',
+        value: 'IT',
+      }]} />
+  } />
+</Playground>
