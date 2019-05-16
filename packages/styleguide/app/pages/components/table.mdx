@@ -1,0 +1,37 @@
+import {
+  Table,
+  THead,
+  TCell,
+  TRow,
+  TBody,
+} from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Table
+
+
+<Playground component={Table}>
+  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+    <Table>
+      <THead>
+        <TCell>Name</TCell>
+        <TCell>Surname</TCell>
+        <TCell>Age</TCell>
+      </THead>
+      <TBody>
+        <TRow>
+          <TCell>Nick</TCell>
+          <TCell>Jonas</TCell>
+          <TCell>20</TCell>
+        </TRow>
+        <TRow>
+          <TCell>Spongebob</TCell>
+          <TCell>Squarepants</TCell>
+          <TCell>35</TCell>
+        </TRow>
+      </TBody>
+    </Table>
+  </div>
+</Playground>
