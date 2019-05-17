@@ -148,7 +148,6 @@ const styles = {
 
       &:hover {
         cursor: pointer;
-
       }
     }
   `,

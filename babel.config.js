@@ -21,6 +21,7 @@ module.exports = function(api) {
       autoLabel: true,
       labelFormat: '[filename]__[local]',
     }],
+    "react-hot-loader/babel",
     "babel-plugin-codegen",
     "babel-plugin-react-docgen",
     "@babel/plugin-proposal-export-default-from",
