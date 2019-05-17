@@ -49,13 +49,25 @@ Here is a simple example of a table. By default it has no elevation. If the tabl
         <TCell>Items to approve</TCell>
       </THead>
       <TBody>
-        <TRow id="1">
+        <TRow>
+          <TCell>18430</TCell>
+          <TCell>BNP Paribas</TCell>
+          <TCell>Apr 13, 2019</TCell>
+          <TCell>5 items</TCell>
+        </TRow>
+        <TRow>
           <TCell>18430</TCell>
           <TCell>Covivio - Belaia</TCell>
           <TCell>Apr 13, 2019</TCell>
           <TCell>3 items</TCell>
         </TRow>
-        <TRow nested id="1">
+        <TRow parent="1">
+          <TCell>18430</TCell>
+          <TCell>BNP Paribas</TCell>
+          <TCell>Apr 13, 2019</TCell>
+          <TCell>5 items</TCell>
+        </TRow>
+        <TRow nested="1">
           <TCell>
             <Table>
               <TBody>
@@ -69,6 +81,11 @@ Here is a simple example of a table. By default it has no elevation. If the tabl
                   <TCell>Apartment 2.4</TCell>
                   <TCell>Exterior 3D</TCell>
                 </TRow>
+                <TRow>
+                  <TCell>18430-INT3</TCell>
+                  <TCell>Apartment 1.4</TCell>
+                  <TCell>Exterior 3D</TCell>
+                </TRow>
               </TBody>
             </Table>
           </TCell>
@@ -78,12 +95,6 @@ Here is a simple example of a table. By default it has no elevation. If the tabl
           <TCell>Covivio - CB21</TCell>
           <TCell>Apr 13, 2019</TCell>
           <TCell>2 items</TCell>
-        </TRow>
-        <TRow>
-          <TCell>18430</TCell>
-          <TCell>BNP Paribas</TCell>
-          <TCell>Apr 13, 2019</TCell>
-          <TCell>5 items</TCell>
         </TRow>
       </TBody>
     </Table>

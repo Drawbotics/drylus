@@ -10,28 +10,32 @@ const styles = {
   base: css`
     border-collapse: collapse;
 
-    [data-row]:nth-of-type(even) {
-      background: ${sv.white};
+    > tbody > tr[data-nested] {
+      box-shadow: 0 5px 12px -5px ${sv.neutral} inset;
+
+      & > td {
+        padding-left: ${sv.paddingExtraLarge};
+      }
     }
 
-    [data-row]:nth-of-type(odd) {
+    [data-nested] ~ tr:not([data-row]):nth-of-type(even) {
       background: ${sv.neutralLighter};
     }
 
-    tr:not([data-row]) ~ [data-row]:nth-of-type(even) {
-      background: ${sv.neutralLighter};
-    }
-
-    tr:not([data-row]) ~ [data-row]:nth-of-type(odd) {
+    [data-nested] ~ tr:not([data-row]):nth-of-type(odd) {
       background: ${sv.white};
     }
 
-    tr:not([data-row]) ~ tr:not([data-row]) ~ [data-row]:nth-of-type(even) {
+    [data-nested] ~ [data-nested] ~ tr:not([data-row]):nth-of-type(even) {
       background: ${sv.white};
     }
 
-    tr:not([data-row]) ~ tr:not([data-row]) ~ [data-row]:nth-of-type(odd) {
+    [data-nested] ~ [data-nested] ~ tr:not([data-row]):nth-of-type(odd) {
       background: ${sv.neutralLighter};
+    }
+
+    [data-nested] tr {
+      background: none !important;
     }
   `,
   fullWidth: css`
@@ -44,6 +48,7 @@ const styles = {
   asContainer: css`
     padding: 0;
     padding-left: ${sv.defaultPadding};
+    padding-right: ${sv.defaultPadding};
   `,
   header: css`
     border-bottom: 1px solid ${sv.neutral};
@@ -62,6 +67,21 @@ const styles = {
     }
   `,
   row: css`
+    &:nth-of-type(even) {
+      background: ${sv.white};
+
+      & + [data-nested] {
+        background: ${sv.white};
+      }
+    }
+
+    &:nth-of-type(odd) {
+      background: ${sv.neutralLighter};
+
+      & + [data-nested] {
+        background: ${sv.neutralLighter};
+      }
+    }
 
     & > td:last-of-type {
       text-align: right;
@@ -69,6 +89,29 @@ const styles = {
 
     & > th:last-of-type {
       text-align: right;
+    }
+
+    &[data-nested] > td > table {
+      tr {
+        border-bottom: 1px solid ${sv.neutralLight};
+
+        &:last-of-type {
+          border-bottom: none;
+        }
+      }
+
+      td {
+        padding-top: ${sv.paddingSmall};
+        padding-bottom: ${sv.paddingSmall};
+
+        &:first-of-type {
+          padding-left: 0;
+        }
+
+        &:last-of-type {
+          padding-right: 0;
+        }
+      }
     }
   `,
   body: css`
@@ -98,9 +141,9 @@ export const TCell = ({ children, head, asContainer }) => {
 };
 
 
-export const TRow = ({ children, nested }) => {
+export const TRow = ({ children, nested, parent }) => {
   return (
-    <tr className={styles.row} data-row={nested ? undefined : true}>
+    <tr className={styles.row} data-nested={nested || undefined} data-parent={parent || undefined}>
       {React.Children.map(children, (child, key) => React.cloneElement(child, {
         ...child.props,
         key,
