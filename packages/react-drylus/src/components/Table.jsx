@@ -1,7 +1,8 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, useContext, createContext, Fragment } from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
+import omit from 'lodash/omit';
 
 import Label from './Label';
 import Icon from './Icon';
@@ -243,8 +244,39 @@ export const TBody = ({ children }) => {
 };
 
 
-function generateTable(data) {
-  
+function generateTable(data, i=0) {
+  if (Array.isArray(data)) {
+    return (
+      <TBody>
+        {data.map(generateTable)}
+      </TBody>
+    );
+  }
+  else {
+    const hasData = !! data.data;
+    const row = hasData ? omit(data, 'data') : data;
+    const uniqId = Object.values(row).reduce((memo, v) => `${memo}-${v}`, `${i}`);
+    return (
+      <Fragment key={uniqId}>
+        <TRow parent={hasData ? uniqId : undefined}>
+          {Object.values(row).map((value, i) => (
+            <TCell key={`${i}-${value}`}>{value}</TCell>
+          ))}
+        </TRow>
+        {do{
+          if (hasData) {
+            <TRow nested={uniqId}>
+              <TCell>
+                <Table>
+                  {generateTable(data.data)}
+                </Table>
+              </TCell>
+            </TRow>
+          }
+        }}
+      </Fragment>
+    );
+  }
 }
 
 
@@ -259,10 +291,11 @@ const Table = ({
 }) => {
   const [rowsStates, setRowState] = useState({});
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
+  const hasNestedData = data && data.some((d) => d.data);
   return (
     <table className={cx(styles.base, {
       [styles.fullWidth]: fullWidth,
-      [styles.leftPadded]: withNesting,
+      [styles.leftPadded]: hasNestedData || withNesting,
     })}>
       <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
         {do{
@@ -300,7 +333,7 @@ Table.propTypes = {
   /** Returns the children given to each row (i.e. an array of values). To enable customization you will have to map the TCell(s) in the TRow */
   renderRow: PropTypes.func,
 
-  /** Array of strings to generate the header of the table (each string is a label) */
+  /** Array of strings to generate the header of the table (each string is a label). data prop keys will be filtered by these */
   header: PropTypes.arrayOf(PropTypes.string),
 };
 
