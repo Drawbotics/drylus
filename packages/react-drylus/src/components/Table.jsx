@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState, useContext, createContext } from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 
 import Label from './Label';
+import Icon from './Icon';
+
+
+const RowsContext = createContext([{}, () => {}]);
 
 
 const styles = {
@@ -40,6 +44,19 @@ const styles = {
   `,
   fullWidth: css`
     width: 100%;
+  `,
+  leftPadded: css`
+    > thead > tr > th:first-of-type {
+      padding-left: ${sv.paddingHuge};
+    }
+
+    > tbody > tr > td:first-of-type {
+      padding-left: ${sv.paddingHuge};
+    }
+
+    > tbody > tr[data-nested] > td {
+      padding-left: calc(${sv.paddingExtraLarge} + ${sv.paddingHuge});
+    }
   `,
   cell: css`
     text-align: left;
@@ -114,13 +131,38 @@ const styles = {
       }
     }
   `,
+  collapsed: css`
+    display: none;
+  `,
   body: css`
     color: ${sv.colorPrimary};
+  `,
+  withToggle: css`
+    position: relative;
+
+    > i {
+      position: absolute;
+      left: calc(${sv.defaultMargin} * -1);
+      top: 50%;
+      transform: translateY(-50%);
+
+      &:hover {
+        cursor: pointer;
+
+      }
+    }
   `,
 };
 
 
-export const TCell = ({ children, head, asContainer }) => {
+export const TCell = ({
+  children,
+  head,
+  asContainer,
+  withChildToggle,
+  onClickArrow,
+  active,
+}) => {
   const className = cx(styles.cell, {
     [styles.asContainer]: asContainer,
   });
@@ -135,19 +177,38 @@ export const TCell = ({ children, head, asContainer }) => {
   }
   return (
     <td className={className} colSpan={asContainer ? '100' : null}>
-      {children}
+      {do{
+        if (withChildToggle) {
+          <div onClick={onClickArrow} className={styles.withToggle}>
+            <Icon name={active ? 'chevron-up' : 'chevron-down'} />
+            {children}
+          </div>
+        }
+        else {
+          children
+        }
+      }}
     </td>
   );
 };
 
 
 export const TRow = ({ children, nested, parent }) => {
+  const [ rowsStates, handleSetRowState ] = useContext(RowsContext);
+  const collapsed = nested && ! rowsStates[nested];
   return (
-    <tr className={styles.row} data-nested={nested || undefined} data-parent={parent || undefined}>
+    <tr className={cx(styles.row, {
+        [styles.collapsed]: collapsed,
+      })}
+      data-nested={nested || undefined}
+      data-parent={parent || undefined}>
       {React.Children.map(children, (child, key) => React.cloneElement(child, {
         ...child.props,
         key,
-        asContainer: nested,
+        asContainer: !! nested,
+        withChildToggle: !! parent && key === 0,
+        active: !! parent && rowsStates[parent],
+        onClickArrow: parent ? () => handleSetRowState({ [parent]: ! rowsStates[parent] }) : null,
       }))}
     </tr>
   );
@@ -181,12 +242,18 @@ export const TBody = ({ children }) => {
 const Table = ({
   children,
   fullWidth,
+  withNesting,
 }) => {
+  const [rowsStates, setRowState] = useState({});
+  const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
   return (
     <table className={cx(styles.base, {
       [styles.fullWidth]: fullWidth,
+      [styles.leftPadded]: withNesting,
     })}>
-      {children}
+      <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
+        {children}
+      </RowsContext.Provider>
     </table>
   );
 };
@@ -198,6 +265,9 @@ Table.propTypes = {
 
   /** If true, the table takes the full width of the container, defaults to true */
   fullWidth: PropTypes.bool,
+
+  /** If true, the table is given some padding on the left to accomodate for nesting controls */
+  withNesting: PropTypes.bool,
 };
 
 
