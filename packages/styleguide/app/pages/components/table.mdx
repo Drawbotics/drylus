@@ -10,7 +10,7 @@ import Playground from '~/components/Playground';
 
 
 # Table
-Here is a simple example of a table. By default it has no elevation. If the table is the only content in the page it can be wrapped in a Panel to add elevation.s
+Here is a simple example of a table. By default it has no elevation. If the table is the only content in the page it can be wrapped in a Panel to add elevation.
 
 <Playground component={Table}>
   <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
@@ -130,5 +130,63 @@ The following example includes a "manually" built table with nested tables up to
         </TRow>
       </TBody>
     </Table>
+  </div>
+</Playground>
+
+
+#### Auto generated table
+The above example is very tedious to create by hand, and let's be honest, most tables with this sort of shape will be derived from a set of data. As such, you have access to a special `data` prop which will contain the data to generate the table.
+
+Take the following structure representing families and their trees:
+```js
+[{
+  name: 'Mike',
+  age: 35,
+  height: '180cm',
+  children: 2,
+  data: [{
+    name: 'Johnny',
+    association: 'Child',
+    age: 5,
+  }, {
+    name: 'Laura',
+    association: 'Child',
+    age: 10,
+  }],
+}, {
+  name: 'Jessica',
+  age: 20,
+  height: '170cm',
+  children: 0,
+  // etc
+}]
+```
+
+Here is the table it generates:
+
+export const family = [{
+  name: 'Mike',
+  age: 35,
+  height: '180cm',
+  children: 2,
+  data: [{
+    name: 'Johnny',
+    association: 'Child',
+    age: 5,
+  }, {
+    name: 'Laura',
+    association: 'Child',
+    age: 10,
+  }],
+}, {
+  name: 'Jessica',
+  age: 20,
+  height: '170cm',
+  children: 0,
+}]
+
+<Playground>
+  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+    <Table data={family} />
   </div>
 </Playground>

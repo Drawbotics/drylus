@@ -243,10 +243,19 @@ export const TBody = ({ children }) => {
 };
 
 
+function generateTable(data) {
+  
+}
+
+
 const Table = ({
   children,
   fullWidth,
   withNesting,
+  data,
+  renderHeader,
+  renderRow,
+  header,
 }) => {
   const [rowsStates, setRowState] = useState({});
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
@@ -256,7 +265,14 @@ const Table = ({
       [styles.leftPadded]: withNesting,
     })}>
       <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
-        {children}
+        {do{
+          if (data) {
+            generateTable(data)
+          }
+          else {
+            children
+          }
+        }}
       </RowsContext.Provider>
     </table>
   );
@@ -270,8 +286,22 @@ Table.propTypes = {
   /** If true, the table takes the full width of the container, defaults to true */
   fullWidth: PropTypes.bool,
 
-  /** If true, the table is given some padding on the left to accomodate for nesting controls */
+  /** If true, the table is given some padding on the left to accomodate for nesting controls. This prop is automatically added when using `data` with multiple levels */
   withNesting: PropTypes.bool,
+
+  /** If passed, the table will be generated from this, and children will be ignored */
+  data: PropTypes.arrayOf(PropTypes.shape({
+    data: PropTypes.arrayOf(PropTypes.object),
+  })),
+
+  /** Returns the raw children given to the header cells, the value can be wrapped for customization. The values are derived from the `header` prop */
+  renderHeader: PropTypes.func,
+
+  /** Returns the children given to each row (i.e. an array of values). To enable customization you will have to map the TCell(s) in the TRow */
+  renderRow: PropTypes.func,
+
+  /** Array of strings to generate the header of the table (each string is a label) */
+  header: PropTypes.arrayOf(PropTypes.string),
 };
 
 
