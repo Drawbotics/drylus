@@ -244,11 +244,11 @@ export const TBody = ({ children }) => {
 };
 
 
-function generateTable(data, i=0) {
+function generateTable(data, header, i=0) {
   if (Array.isArray(data)) {
     return (
       <TBody>
-        {data.map(generateTable)}
+        {data.map((rows, i) => generateTable(rows, header, i))}
       </TBody>
     );
   }
@@ -259,9 +259,18 @@ function generateTable(data, i=0) {
     return (
       <Fragment key={uniqId}>
         <TRow parent={hasData ? uniqId : undefined}>
-          {Object.values(row).map((value, i) => (
-            <TCell key={`${i}-${value}`}>{value}</TCell>
-          ))}
+          {do{
+            if (header) {
+              header.map((key, i) => (
+                <TCell key={`${i}-${row[key]}`}>{row[key]}</TCell>
+              ))
+            }
+            else {
+              Object.values(row).map((value, i) => (
+                <TCell key={`${i}-${value}`}>{value}</TCell>
+              ))
+            }
+          }}
         </TRow>
         {do{
           if (hasData) {
@@ -285,13 +294,16 @@ const Table = ({
   fullWidth,
   withNesting,
   data,
-  renderHeader,
-  renderRow,
+  renderHeader=x=>x,
+  renderRow=x=>x,
   header,
 }) => {
   const [rowsStates, setRowState] = useState({});
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
   const hasNestedData = data && data.some((d) => d.data);
+  if (data && (! header || header.length === 0)) {
+    console.warn('`data` was passed as prop but no/empty header, cannot render');
+  }
   return (
     <table className={cx(styles.base, {
       [styles.fullWidth]: fullWidth,
@@ -300,7 +312,14 @@ const Table = ({
       <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
         {do{
           if (data) {
-            generateTable(data)
+            <>
+              <THead>
+                {header.map((v) => (
+                  <TCell key={v}>{renderHeader(v)}</TCell>
+                ))}
+              </THead>
+              {generateTable(data, header)}
+            </>
           }
           else {
             children

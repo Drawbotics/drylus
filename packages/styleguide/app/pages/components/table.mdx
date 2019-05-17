@@ -162,7 +162,7 @@ Take the following structure representing families and their trees:
 }]
 ```
 
-Here is the table it generates:
+Below is the table that it generates. Note that you need to at least pass `header` to the table if you want to display something.
 
 export const family = [{
   name: 'Mike',
@@ -187,6 +187,8 @@ export const family = [{
 
 <Playground>
   <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
-    <Table data={family} />
+    <Table
+      data={family}
+      header={['name', 'height', 'age', 'children']} />
   </div>
 </Playground>
