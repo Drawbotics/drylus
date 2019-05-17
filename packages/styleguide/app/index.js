@@ -9,11 +9,4 @@ function render() {
 }
 
 
-// if (module.hot) {
-//   module.hot.accept(() => {
-//     render();
-//   });
-// }
-
-
 render();

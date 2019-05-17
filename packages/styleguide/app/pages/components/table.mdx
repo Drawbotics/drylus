@@ -38,7 +38,7 @@ Here is a simple example of a table. By default it has no elevation. If the tabl
 
 
 #### Complex example with nested data
-The following example includes a "manually" built table with nested tables up to 2 levels.
+The following example includes a "manually" built table with nested tables up to 4 levels.
 
 <Playground>
   <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
@@ -91,10 +91,23 @@ The following example includes a "manually" built table with nested tables up to
                   <TCell>
                     <Table>
                       <TBody>
-                        <TRow>
+                        <TRow parent="3">
                           <TCell>18430-BRD</TCell>
                           <TCell>Cam 1</TCell>
                           <TCell>Brand ID</TCell>
+                        </TRow>
+                        <TRow nested="3">
+                          <TCell>
+                            <Table>
+                              <TBody>
+                                <TRow>
+                                  <TCell>18430-BRD</TCell>
+                                  <TCell>Cam 1</TCell>
+                                  <TCell>Brand ID</TCell>
+                                </TRow>
+                              </TBody>
+                            </Table>
+                          </TCell>
                         </TRow>
                         <TRow>
                           <TCell>18430-WEB</TCell>

@@ -23,11 +23,11 @@ const styles = {
 };
 
 
-const Icon = ({ name, bold }) => {
+const Icon = ({ name, bold, onClick }) => {
   return (
     <i className={cx(styles.base, `Drycon Drycon-${name}`, {
       [styles.bold]: bold,
-    })} />
+    })} onClick={onClick} />
   );
 }
 
@@ -38,6 +38,9 @@ Icon.propTypes = {
 
   /** Makes icon T H I C C */
   bold: PropTypes.bool,
+
+  /** Triggered when the icon is clicked */
+  onClick: PropTypes.func,
 }
 
 

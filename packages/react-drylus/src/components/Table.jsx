@@ -18,8 +18,12 @@ const styles = {
       box-shadow: 0 5px 12px -5px ${sv.neutral} inset;
 
       & > td {
-        padding-left: ${sv.paddingExtraLarge};
+        padding-left: ${sv.paddingExtraLarge} !important;
       }
+    }
+
+    > tbody > tr[data-nested] > td > table > tbody > tr[data-nested] {
+      box-shadow: none;
     }
 
     [data-nested] ~ tr:not([data-row]):nth-of-type(even) {
@@ -55,7 +59,7 @@ const styles = {
     }
 
     > tbody > tr[data-nested] > td {
-      padding-left: calc(${sv.paddingExtraLarge} + ${sv.paddingHuge});
+      padding-left: calc(${sv.paddingExtraLarge} + ${sv.paddingHuge}) !important;
     }
   `,
   cell: css`
@@ -63,7 +67,8 @@ const styles = {
     padding: calc(${sv.defaultPadding} - 4px) ${sv.defaultPadding};
   `,
   asContainer: css`
-    padding: 0;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
     padding-left: ${sv.defaultPadding};
     padding-right: ${sv.defaultPadding};
   `,
@@ -115,18 +120,18 @@ const styles = {
         &:last-of-type {
           border-bottom: none;
         }
-      }
 
-      td {
-        padding-top: ${sv.paddingSmall};
-        padding-bottom: ${sv.paddingSmall};
+        > td {
+          padding-top: ${sv.paddingSmall};
+          padding-bottom: ${sv.paddingSmall};
 
-        &:first-of-type {
-          padding-left: 0;
-        }
+          &:first-of-type {
+            padding-left: 0;
+          }
 
-        &:last-of-type {
-          padding-right: 0;
+          &:last-of-type {
+            padding-right: 0;
+          }
         }
       }
     }
@@ -142,7 +147,7 @@ const styles = {
 
     > i {
       position: absolute;
-      left: calc(${sv.defaultMargin} * -1);
+      left: calc(${sv.marginLarge} * -1);
       top: 50%;
       transform: translateY(-50%);
 
@@ -178,8 +183,8 @@ export const TCell = ({
     <td className={className} colSpan={asContainer ? '100' : null}>
       {do{
         if (withChildToggle) {
-          <div onClick={onClickArrow} className={styles.withToggle}>
-            <Icon name={active ? 'chevron-up' : 'chevron-down'} />
+          <div className={styles.withToggle}>
+            <Icon onClick={onClickArrow} name={active ? 'chevron-up' : 'chevron-down'} />
             {children}
           </div>
         }
