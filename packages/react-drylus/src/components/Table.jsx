@@ -9,6 +9,30 @@ import Label from './Label';
 const styles = {
   base: css`
     border-collapse: collapse;
+
+    [data-row]:nth-of-type(even) {
+      background: ${sv.white};
+    }
+
+    [data-row]:nth-of-type(odd) {
+      background: ${sv.neutralLighter};
+    }
+
+    tr:not([data-row]) ~ [data-row]:nth-of-type(even) {
+      background: ${sv.neutralLighter};
+    }
+
+    tr:not([data-row]) ~ [data-row]:nth-of-type(odd) {
+      background: ${sv.white};
+    }
+
+    tr:not([data-row]) ~ tr:not([data-row]) ~ [data-row]:nth-of-type(even) {
+      background: ${sv.white};
+    }
+
+    tr:not([data-row]) ~ tr:not([data-row]) ~ [data-row]:nth-of-type(odd) {
+      background: ${sv.neutralLighter};
+    }
   `,
   fullWidth: css`
     width: 100%;
@@ -17,23 +41,34 @@ const styles = {
     text-align: left;
     padding: calc(${sv.defaultPadding} - 4px) ${sv.defaultPadding};
   `,
-  headerPadding: css`
-    padding: ${sv.paddingSmall} ${sv.defaultPadding};
-  `,
-  rightAlign: css`
-    text-align: right;
+  asContainer: css`
+    padding: 0;
+    padding-left: ${sv.defaultPadding};
   `,
   header: css`
     border-bottom: 1px solid ${sv.neutral};
-  `,
-  white: css`
-    background: ${sv.white};
+
+    & td:last-of-type {
+      text-align: right;
+    }
+
+    & th {
+      padding: ${sv.paddingSmall} ${sv.defaultPadding};
+      background: ${sv.white} !important;
+
+      &:last-of-type {
+        text-align: right;
+      }
+    }
   `,
   row: css`
-    background: ${sv.white};
 
-    &:nth-of-type(odd) {
-      background: ${sv.neutralLighter};
+    & > td:last-of-type {
+      text-align: right;
+    }
+
+    & > th:last-of-type {
+      text-align: right;
     }
   `,
   body: css`
@@ -42,11 +77,9 @@ const styles = {
 };
 
 
-export const TCell = ({ children, head, rightAlign }) => {
+export const TCell = ({ children, head, asContainer }) => {
   const className = cx(styles.cell, {
-    [styles.rightAlign]: rightAlign,
-    [styles.white]: head,
-    [styles.headerPadding]: head,
+    [styles.asContainer]: asContainer,
   });
   if (head) {
     return (
@@ -58,20 +91,20 @@ export const TCell = ({ children, head, rightAlign }) => {
     );
   }
   return (
-    <td className={className}>
+    <td className={className} colSpan={asContainer ? '100' : null}>
       {children}
     </td>
   );
 };
 
 
-export const TRow = ({ children }) => {
+export const TRow = ({ children, nested }) => {
   return (
-    <tr className={styles.row}>
+    <tr className={styles.row} data-row={nested ? undefined : true}>
       {React.Children.map(children, (child, key) => React.cloneElement(child, {
         ...child.props,
         key,
-        rightAlign: key === React.Children.count(children) - 1,
+        asContainer: nested,
       }))}
     </tr>
   );

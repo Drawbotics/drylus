@@ -10,7 +10,7 @@ import Playground from '~/components/Playground';
 
 
 # Table
-Here is a simple example of a table
+Here is a simple example of a table. By default it has no elevation. If the table is the only content in the page it can be wrapped in a Panel to add elevation.s
 
 <Playground component={Table}>
   <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
@@ -30,6 +30,60 @@ Here is a simple example of a table
           <TCell>Spongebob</TCell>
           <TCell>Squarepants</TCell>
           <TCell>35</TCell>
+        </TRow>
+      </TBody>
+    </Table>
+  </div>
+</Playground>
+
+
+#### Complex example with nested data
+
+<Playground>
+  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+    <Table>
+      <THead>
+        <TCell>Estate</TCell>
+        <TCell>Name</TCell>
+        <TCell>Date of creation</TCell>
+        <TCell>Items to approve</TCell>
+      </THead>
+      <TBody>
+        <TRow id="1">
+          <TCell>18430</TCell>
+          <TCell>Covivio - Belaia</TCell>
+          <TCell>Apr 13, 2019</TCell>
+          <TCell>3 items</TCell>
+        </TRow>
+        <TRow nested id="1">
+          <TCell>
+            <Table>
+              <TBody>
+                <TRow>
+                  <TCell>18430-INT1</TCell>
+                  <TCell>Apartment 3.4</TCell>
+                  <TCell>Interior 3D</TCell>
+                </TRow>
+                <TRow>
+                  <TCell>18430-INT2</TCell>
+                  <TCell>Apartment 2.4</TCell>
+                  <TCell>Exterior 3D</TCell>
+                </TRow>
+              </TBody>
+            </Table>
+          </TCell>
+        </TRow>
+        <TRow>
+          <TCell>18430</TCell>
+          <TCell>Covivio - CB21</TCell>
+          <TCell>Apr 13, 2019</TCell>
+          <TCell>2 items</TCell>
+        </TRow>
+        <TRow>
+          <TCell>18430</TCell>
+          <TCell>BNP Paribas</TCell>
+          <TCell>Apr 13, 2019</TCell>
+          <TCell>5 items</TCell>
         </TRow>
       </TBody>
     </Table>
