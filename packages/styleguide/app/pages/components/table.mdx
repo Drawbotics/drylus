@@ -5,6 +5,7 @@ import {
   TRow,
   TBody,
 } from '@drawbotics/react-drylus';
+import sv from '@drawbotics/style-vars';
 
 import Playground from '~/components/Playground';
 
@@ -171,12 +172,14 @@ export const family = [{
   children: 2,
   data: [{
     name: 'Johnny',
-    association: 'Child',
     age: 5,
+    height: '120cm',
+    children: 0,
   }, {
     name: 'Laura',
-    association: 'Child',
     age: 10,
+    height: '150cm',
+    children: 0,
   }],
 }, {
   name: 'Jessica',
@@ -188,6 +191,45 @@ export const family = [{
 <Playground>
   <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
     <Table
+      data={family}
+      header={['name', 'height', 'age', 'children']} />
+  </div>
+</Playground>
+
+
+You can customize the look of the cell contents through the `renderCell` prop. For example the following `renderCell` function:
+
+```js
+const customizeCells = (v, i, cols) => {
+  if (i === 0) {
+    return <div style={{ fontWeight: 'bold', color: sv.blue }}>{v}</div>;
+  }
+  else if (i === cols - 1) {
+    return <div style={{ fontStyle: 'italic' }}>{v}</div>;
+  }
+  else {
+    return v;
+  }
+}
+```
+export const customizeCells = (v, i, cols) => {
+  if (i === 0) {
+    return <div style={{ fontWeight: 'bold', color: sv.blue }}>{v}</div>;
+  }
+  else if (i === cols - 1) {
+    return <div style={{ fontStyle: 'italic' }}>{v}</div>;
+  }
+  else {
+    return v;
+  }
+}
+
+Gives the following
+
+<Playground>
+  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+    <Table
+      renderCell={customizeCells}
       data={family}
       header={['name', 'height', 'age', 'children']} />
   </div>

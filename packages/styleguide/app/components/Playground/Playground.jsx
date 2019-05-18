@@ -54,7 +54,11 @@ function getMarkupForMode(mode, component) {
     return '';
   }
   const generatedHTMLString = ReactDOMServer.renderToStaticMarkup(component);
-  const generatedJSXString = ReactElementToString(component, { showDefaultProps: false });
+  const generatedJSXString = ReactElementToString(component, {
+    showDefaultProps: false,
+    showFunctions: true,
+    functionValue: (v) => v.name,
+  });
   switch (mode) {
     case 'vanilla':
       return adaptForVanilla(generatedHTMLString);

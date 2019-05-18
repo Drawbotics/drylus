@@ -244,11 +244,11 @@ export const TBody = ({ children }) => {
 };
 
 
-function generateTable(data, header, i=0) {
+function generateTable(data, header, renderCell, i=0) {
   if (Array.isArray(data)) {
     return (
       <TBody>
-        {data.map((rows, i) => generateTable(rows, header, i))}
+        {data.map((rows, i) => generateTable(rows, header, renderCell, i))}
       </TBody>
     );
   }
@@ -262,12 +262,12 @@ function generateTable(data, header, i=0) {
           {do{
             if (header) {
               header.map((key, i) => (
-                <TCell key={`${i}-${row[key]}`}>{row[key]}</TCell>
+                <TCell key={`${i}-${row[key]}`}>{renderCell(row[key], i, header.length)}</TCell>
               ))
             }
             else {
-              Object.values(row).map((value, i) => (
-                <TCell key={`${i}-${value}`}>{value}</TCell>
+              Object.values(row).map((value, i, arr) => (
+                <TCell key={`${i}-${value}`}>{renderCell(value, i, arr.length)}</TCell>
               ))
             }
           }}
@@ -277,7 +277,7 @@ function generateTable(data, header, i=0) {
             <TRow nested={uniqId}>
               <TCell>
                 <Table>
-                  {generateTable(data.data)}
+                  {generateTable(data.data, undefined, renderCell)}
                 </Table>
               </TCell>
             </TRow>
@@ -294,8 +294,7 @@ const Table = ({
   fullWidth,
   withNesting,
   data,
-  renderHeader=x=>x,
-  renderRow=x=>x,
+  renderCell=x=>x,
   header,
 }) => {
   const [rowsStates, setRowState] = useState({});
@@ -315,10 +314,10 @@ const Table = ({
             <>
               <THead>
                 {header.map((v) => (
-                  <TCell key={v}>{renderHeader(v)}</TCell>
+                  <TCell key={v}>{v}</TCell>
                 ))}
               </THead>
-              {generateTable(data, header)}
+              {generateTable(data, header, renderCell)}
             </>
           }
           else {
@@ -346,11 +345,8 @@ Table.propTypes = {
     data: PropTypes.arrayOf(PropTypes.object),
   })),
 
-  /** Returns the raw children given to the header cells, the value can be wrapped for customization. The values are derived from the `header` prop */
-  renderHeader: PropTypes.func,
-
-  /** Returns the children given to each row (i.e. an array of values). To enable customization you will have to map the TCell(s) in the TRow */
-  renderRow: PropTypes.func,
+  /** Returns the child given to each row cell. Params (value, index, columns) */
+  renderCell: PropTypes.func,
 
   /** Array of strings to generate the header of the table (each string is a label). data prop keys will be filtered by these */
   header: PropTypes.arrayOf(PropTypes.string),
