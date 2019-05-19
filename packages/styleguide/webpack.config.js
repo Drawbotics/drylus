@@ -7,6 +7,8 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ip = require('ip');
 
+const rehypePlayground = require('./utils/rehype-playground');
+
 
 const WEBPACK_PORT = 4000;
 
@@ -96,8 +98,12 @@ module.exports = {
             options: {
               rootMode: 'upward',
             },
+          }, {
+            loader: '@mdx-js/loader',
+            options: {
+              rehypePlugins: [ rehypePlayground ],
+            },
           },
-          '@mdx-js/loader',
         ],
       },
     ],

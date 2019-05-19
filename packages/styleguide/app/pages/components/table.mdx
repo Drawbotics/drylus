@@ -255,12 +255,12 @@ export const SortedWrapper = ({ render }) => {
 
 
 <Playground>
-    <SortedWrapper render={({ sortedBy, sortedData, handleClickHeader }) => (
-      <Table
-        activeHeader={sortedBy}
-        onClickHeader={handleClickHeader}
-        data={sortedData}
-        sortableBy={['name']}
-        header={['name', 'height', 'age', 'children']} />
-    )} />
+  <SortedWrapper render={({ sortedBy, sortedData, handleClickHeader }) => (
+    <Table
+      activeHeader={sortedBy}
+      onClickHeader={handleClickHeader}
+      data={sortedData}
+      sortableBy={['name']}
+      header={['name', 'height', 'age', 'children']} />
+  )} />
 </Playground>

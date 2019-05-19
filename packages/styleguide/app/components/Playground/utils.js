@@ -83,8 +83,3 @@ export function recursiveMdxTransform(tree, target) {
   }
   return mdxTransform(tree);
 }
-
-
-export function stringToComponent() {
-  return '';
-}
