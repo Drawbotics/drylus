@@ -41,5 +41,8 @@ function addCodeProp(node, index) {
 
 
 module.exports = function rehypePlayground() {
-  return (tree) => tree.children.filter((node) => is('jsx', node)).map(addCodeProp);
+  return (tree) => {
+    // eslint-disable-next-line no-unused-vars
+    const reactNodes = tree.children.filter((node) => is('jsx', node)).map(addCodeProp);
+  }
 }
