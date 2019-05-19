@@ -156,7 +156,7 @@ Take the following structure representing families and their trees:
     age: 10,
   }],
 }, {
-  name: 'Jessica',
+  name: 'Claire',
   age: 20,
   height: '170cm',
   children: 0,
@@ -183,7 +183,7 @@ export const family = [{
     children: 0,
   }],
 }, {
-  name: 'Jessica',
+  name: 'Claire',
   age: 20,
   height: '170cm',
   children: 0,
@@ -244,8 +244,8 @@ For the event you should pass a function to the `onClickHeader` prop, which will
 
 export const SortedWrapper = ({ render }) => {
   const [sortedBy, setSortedBy] = useState(null);
-  const sortedData = sortedBy ? (sortedBy.direction === 'up' ?  family.sort((a, b) => a[sortedBy.key].localeCompare(b[sortedBy.key])) : family.sort((b, a) => a[sortedBy.key].localeCompare(b[sortedBy.key])) ) : family;
-  const handleClickHeader = (key) => setSortedBy({ key, direction: sortedBy && sortedBy.direction === 'down' ? 'up' : 'down' });
+  const sortedData = sortedBy ? (sortedBy.direction === 'asc' ?  family.sort((a, b) => a[sortedBy.key].localeCompare(b[sortedBy.key])) : family.sort((b, a) => a[sortedBy.key].localeCompare(b[sortedBy.key])) ) : family;
+  const handleClickHeader = (key) => setSortedBy({ key, direction: sortedBy && sortedBy.direction === 'desc' ? 'asc' : 'desc' });
   return (
     <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
       {render({ sortedBy, sortedData, handleClickHeader })}
@@ -260,7 +260,7 @@ export const SortedWrapper = ({ render }) => {
       activeHeader={sortedBy}
       onClickHeader={handleClickHeader}
       data={sortedData}
-      sortableBy={['name']}
+      sortableBy={['name', 'height']}
       header={['name', 'height', 'age', 'children']} />
   )} />
 </Playground>

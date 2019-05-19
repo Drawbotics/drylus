@@ -157,6 +157,15 @@ const styles = {
       }
     }
   `,
+  headerWithArrows: css`
+    position: relative;
+    transition: color ${sv.transitionTimeShort} ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      color: ${sv.neutralDark};
+    }
+  `,
   sortableIcons: css`
     position: absolute;
     left: calc(${sv.marginLarge} * -1);
@@ -282,7 +291,7 @@ function generateTable(data, header, renderCell, i=0) {
   else {
     const hasData = !! data.data;
     const row = hasData ? omit(data, 'data') : data;
-    const uniqId = Object.values(row).reduce((memo, v) => `${memo}-${v}`, `${i}`);
+    const uniqId = Object.values(row).reduce((memo, v) => `${memo}-${v}`, '');
     return (
       <Fragment key={uniqId}>
         <TRow parent={hasData ? uniqId : undefined}>
@@ -325,6 +334,7 @@ const Table = ({
   header,
   sortableBy,
   activeHeader,
+  onClickHeader,
 }) => {
   const [rowsStates, setRowState] = useState({});
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
@@ -346,10 +356,10 @@ const Table = ({
                   <TCell key={v}>
                     {do{
                       if (sortableBy?.includes(v)) {
-                        <span style={{ position: 'relative' }}>
+                        <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
                           <span className={cx(styles.sortableIcons, {
-                            [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'up',
-                            [styles.down]: activeHeader?.key === v && activeHeader?.direction === 'down',
+                            [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'asc',
+                            [styles.down]: activeHeader?.key === v && activeHeader?.direction === 'desc',
                           })}>
                             <Icon name="chevron-up" />
                             <Icon name="chevron-down" />
@@ -401,10 +411,10 @@ Table.propTypes = {
   /** Pass the keys of the attributes in the table which can be sorted. To be used with `data`. */
   sortableBy: PropTypes.arrayOf(PropTypes.string),
 
-  /** Sets the currently sorted column. Object with 1 key corresponding to the current header, and a value of "up" or "down" for the sorting */
+  /** Sets the currently sorted column. Object with 1 key corresponding to the current header, and a value of "asc" or "desc" for the sorting */
   activeHeader: PropTypes.shape({
     key: PropTypes.string,
-    direction: PropTypes.oneOf(['up', 'down']),
+    direction: PropTypes.oneOf(['asc', 'desc']),
   }),
 
   /** Called when a sortable column header is clicked, returns the key of the clicked header */
