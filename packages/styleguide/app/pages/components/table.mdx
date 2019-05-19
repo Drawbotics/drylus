@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Table,
   THead,
@@ -135,7 +136,7 @@ The following example includes a "manually" built table with nested tables up to
 </Playground>
 
 
-#### Auto generated table
+### Auto generated table
 The above example is very tedious to create by hand, and let's be honest, most tables with this sort of shape will be derived from a set of data. As such, you have access to a special `data` prop which will contain the data to generate the table.
 
 Take the following structure representing families and their trees:
@@ -233,4 +234,33 @@ Gives the following
       data={family}
       header={['name', 'height', 'age', 'children']} />
   </div>
+</Playground>
+
+### Sortable auto generated table
+You can pass an array of keys (`sortableBy`) to set which column is sortable in the table. This will enable the header of the column to be "clickable" and an onClick event will be triggered.
+
+For the event you should pass a function to the `onClickHeader` prop, which will return the active column. Note: the table holds no state in regards to the sorting, that's all up to you. Here is an example:
+
+
+export const SortedWrapper = ({ render }) => {
+  const [sortedBy, setSortedBy] = useState(null);
+  const sortedData = sortedBy ? (sortedBy.direction === 'up' ?  family.sort((a, b) => a[sortedBy.key].localeCompare(b[sortedBy.key])) : family.sort((b, a) => a[sortedBy.key].localeCompare(b[sortedBy.key])) ) : family;
+  const handleClickHeader = (key) => setSortedBy({ key, direction: sortedBy && sortedBy.direction === 'down' ? 'up' : 'down' });
+  return (
+    <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+      {render({ sortedBy, sortedData, handleClickHeader })}
+    </div>
+  );
+}
+
+
+<Playground>
+    <SortedWrapper render={({ sortedBy, sortedData, handleClickHeader }) => (
+      <Table
+        activeHeader={sortedBy}
+        onClickHeader={handleClickHeader}
+        data={sortedData}
+        sortableBy={['name']}
+        header={['name', 'height', 'age', 'children']} />
+    )} />
 </Playground>

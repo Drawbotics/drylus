@@ -25,7 +25,7 @@ const Label = ({ children }) => {
 
 Label.propTypes = {
   /** Just text for the label */
-  children: PropTypes.string,
+  children: PropTypes.oneOfType([ PropTypes.string, PropTypes.node ]),
 };
 
 

@@ -9,7 +9,7 @@ import CodeBox from './CodeBox';
 import Preview from './Preview';
 import PropsTable from './PropsTable';
 import ModeSwitcher from './ModeSwitcher';
-import { adaptForVanilla, recursiveMdxTransform } from './utils';
+import { adaptForVanilla, recursiveMdxTransform, stringToComponent } from './utils';
 
 
 const styles = {
@@ -74,10 +74,14 @@ function getMarkupForMode(mode, component) {
 const supportedModes = ['react', 'vanilla'];
 
 
-const Playground = ({ component, children, mode }) => {
+const Playground = ({ component, children: rawChildren, mode }) => {
   const [props, setProps] = useState({});
   const [codeOpen, setCodeOpen] = useState(false);
   const [activeMode, setMode] = useState(supportedModes[0]);
+
+  const childrenAsString = typeof rawChildren === 'string';
+
+  const children = childrenAsString ? stringToComponent(rawChildren) : rawChildren;
 
   const generatedComponent = recursiveMdxTransform(children, { component, props });
   const generatedMarkup = getMarkupForMode(activeMode, generatedComponent);
@@ -98,7 +102,7 @@ const Playground = ({ component, children, mode }) => {
               onChange={setMode} />
           </div>
           <div className={styles.codeBox}>
-            <CodeBox format mode={mode}>{generatedMarkup}</CodeBox>
+            <CodeBox format mode={mode}>{childrenAsString && activeMode === 'react' ? rawChildren : generatedMarkup}</CodeBox>
           </div>
         </div>
       </div>
