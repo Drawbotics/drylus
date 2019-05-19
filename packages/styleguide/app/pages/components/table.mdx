@@ -140,6 +140,7 @@ The following example includes a "manually" built table with nested tables up to
 The above example is very tedious to create by hand, and let's be honest, most tables with this sort of shape will be derived from a set of data. As such, you have access to a special `data` prop which will contain the data to generate the table.
 
 Take the following structure representing families and their trees:
+
 ```js
 [{
   name: 'Mike',
@@ -148,23 +149,29 @@ Take the following structure representing families and their trees:
   children: 2,
   data: [{
     name: 'Johnny',
-    association: 'Child',
     age: 5,
+    height: '120cm',
+    children: 0,
   }, {
     name: 'Laura',
-    association: 'Child',
     age: 10,
+    height: '150cm',
+    children: 0,
   }],
 }, {
   name: 'Claire',
   age: 20,
   height: '170cm',
-  children: 0,
+  children: 1,
+  data: [{
+    name: 'Timmy',
+    age: 3,
+    height: '70cm',
+    children: 0,
+  }],
   // etc
 }]
 ```
-
-Below is the table that it generates. Note that you need to at least pass `header` to the table if you want to display something.
 
 export const family = [{
   name: 'Mike',
@@ -186,8 +193,16 @@ export const family = [{
   name: 'Claire',
   age: 20,
   height: '170cm',
-  children: 0,
+  children: 1,
+  data: [{
+    name: 'Timmy',
+    age: 3,
+    height: '70cm',
+    children: 0,
+  }],
 }]
+
+Below is the table that it generates. Note that you need to at least pass `header` to the table if you want to display something.
 
 <Playground>
   <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
@@ -237,7 +252,7 @@ Gives the following
 </Playground>
 
 ### Sortable auto generated table
-You can pass an array of keys (`sortableBy`) to set which column is sortable in the table. This will enable the header of the column to be "clickable" and an onClick event will be triggered.
+You can pass an array of keys (`sortableBy`) to set which column is sortable in the table. This will enable the header of the column to be "clickable" and an onClick event will be triggered. Only the root data values can be sorted, since the headers correspond to the keys of such values, and not those of the children.
 
 For the event you should pass a function to the `onClickHeader` prop, which will return the active column. Note: the table holds no state in regards to the sorting, that's all up to you. Here is an example:
 
