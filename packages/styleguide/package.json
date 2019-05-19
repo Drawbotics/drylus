@@ -18,6 +18,9 @@
     "@drawbotics/vanilla-drylus": "file:../vanilla-drylus",
     "core-js": "2",
     "fast-xml-parser": "^3.12.16",
-    "react-router-dom": "^5.0.0"
+    "hast-util-to-string": "^1.0.1",
+    "react-router-dom": "^5.0.0",
+    "strip-indent": "^3.0.0",
+    "unist-util-is": "^2.1.2"
   }
 }

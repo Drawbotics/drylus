@@ -54,7 +54,11 @@ function getMarkupForMode(mode, component) {
     return '';
   }
   const generatedHTMLString = ReactDOMServer.renderToStaticMarkup(component);
-  const generatedJSXString = ReactElementToString(component, { showDefaultProps: false });
+  const generatedJSXString = ReactElementToString(component, {
+    showDefaultProps: false,
+    showFunctions: true,
+    functionValue: (v) => v.name,
+  });
   switch (mode) {
     case 'vanilla':
       return adaptForVanilla(generatedHTMLString);
@@ -70,7 +74,7 @@ function getMarkupForMode(mode, component) {
 const supportedModes = ['react', 'vanilla'];
 
 
-const Playground = ({ component, children, mode }) => {
+const Playground = ({ component, children, mode, __code }) => {
   const [props, setProps] = useState({});
   const [codeOpen, setCodeOpen] = useState(false);
   const [activeMode, setMode] = useState(supportedModes[0]);
@@ -94,7 +98,7 @@ const Playground = ({ component, children, mode }) => {
               onChange={setMode} />
           </div>
           <div className={styles.codeBox}>
-            <CodeBox format mode={mode}>{generatedMarkup}</CodeBox>
+            <CodeBox format mode={mode}>{activeMode === 'react' && ! component ? __code : generatedMarkup}</CodeBox>
           </div>
         </div>
       </div>

@@ -1,47 +1,7 @@
 import React from 'react';
-import { css, cx } from 'emotion';
-import sv from '@drawbotics/style-vars';
+import { Table, TBody, THead, TCell, TRow } from '@drawbotics/react-drylus';
 
 import Prop from './Prop';
-
-
-const styles = {
-  propsTable: css`
-    width: 100%;
-    border-radius: 5;
-    overflow: hidden;
-    background: ${sv.white};
-  `,
-  row: css`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid ${sv.neutral};
-
-    &:nth-of-type(odd): {
-    }
-  `,
-  cell: css`
-    flex: 1;
-    padding: ${sv.defaultPadding};
-    color: ${sv.colorPrimary};
-  `,
-  bigCell: css`
-    flex: 2;
-  `,
-  header: css`
-    border-bottom: 1px solid ${sv.neutralDark};
-    font-size: 0.8rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: ${sv.colorSecondary};
-    background: ${sv.neutral};
-  `,
-  headerCell: css`
-    padding: 12px 16px;
-    padding-top: 14;
-  `,
-};
 
 
 function getProps(Component) {
@@ -54,62 +14,44 @@ function getProps(Component) {
 const PropsTable = ({ component, onChange, activeProps }) => {
   const props = getProps(component);
   return (
-    <div className={styles.propsTable}>
-      <div className={cx(styles.row, styles.header)}>
-        <div className={cx(styles.cell, styles.headerCell)}>
-          Name
-        </div>
-        <div className={cx(styles.cell, styles.headerCell)}>
-          Type
-        </div>
-        <div className={cx(styles.cell, styles.headerCell)}>
-          Default
-        </div>
-        <div className={cx(styles.cell, styles.headerCell)}>
-          Required
-        </div>
-        <div className={cx(styles.cell, styles.headerCell, styles.bigCell)}>
-          Description
-        </div>
-        <div className={cx(styles.cell, styles.headerCell, styles.bigCell)}>
-          Values
-        </div>
-      </div>
-      {Object.keys(props).sort().map((key) => (
-        <div key={key} className={styles.row}>
-          <div className={styles.cell}>
-            {key}
-          </div>
-          <div className={styles.cell}>
-            {props[key].type.name}
-          </div>
-          <div className={styles.cell}>
-            {props[key].defaultValue?.value.replace(/'/g, '') || null}
-          </div>
-          <div className={styles.cell}>
-            {String(props[key].required)}
-          </div>
-          <div className={cx(styles.cell, styles.bigCell)}>
-            {do {
-              if (props[key].description) {
-                props[key].description;
-              }
-              else if (props[key].type.name === 'enum') {
-                const values = props[key].type.value.map((v) => v.value.replace(/'/g, ''));
-                `One of: ${values.join(', ')}`;
-              }
-            }}
-          </div>
-          <div className={cx(styles.cell, styles.bigCell)}>
-            <Prop
-              name={key}
-              prop={props[key]}
-              value={activeProps[key]}
-              onChange={onChange} />
-          </div>
-        </div>
-      ))}
-    </div>
+    <Table>
+      <THead>
+        <TCell>Name</TCell>
+        <TCell>Type</TCell>
+        <TCell>Default</TCell>
+        <TCell>Required</TCell>
+        <TCell>Description</TCell>
+        <TCell>Values</TCell>
+      </THead>
+      <TBody>
+        {Object.keys(props).sort().map((key) => (
+          <TRow key={key}>
+            <TCell>{key}</TCell>
+            <TCell>{props[key].type.name}</TCell>
+            <TCell>{props[key].defaultValue?.value.replace(/'/g, '') || null}</TCell>
+            <TCell>{String(props[key].required)}</TCell>
+            <TCell>
+              {do{
+                if (props[key].description) {
+                  props[key].description;
+                }
+                else if (props[key].type.name === 'enum') {
+                  const values = props[key].type.value.map((v) => v.value.replace(/'/g, ''));
+                  `One of: ${values.join(', ')}`;
+                }
+              }}
+            </TCell>
+            <TCell>
+              <Prop
+                name={key}
+                prop={props[key]}
+                value={activeProps[key]}
+                onChange={onChange} />
+            </TCell>
+          </TRow>
+        ))}
+      </TBody>
+    </Table>
   );
 };
 

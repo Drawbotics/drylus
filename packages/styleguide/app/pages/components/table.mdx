@@ -1,0 +1,266 @@
+import { useState } from 'react';
+import {
+  Table,
+  THead,
+  TCell,
+  TRow,
+  TBody,
+} from '@drawbotics/react-drylus';
+import sv from '@drawbotics/style-vars';
+
+import Playground from '~/components/Playground';
+
+
+# Table
+Here is a simple example of a table. By default it has no elevation. If the table is the only content in the page it can be wrapped in a Panel to add elevation.
+
+<Playground component={Table}>
+  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+    <Table>
+      <THead>
+        <TCell>Name</TCell>
+        <TCell>Surname</TCell>
+        <TCell>Age</TCell>
+      </THead>
+      <TBody>
+        <TRow>
+          <TCell>Nick</TCell>
+          <TCell>Jonas</TCell>
+          <TCell>20</TCell>
+        </TRow>
+        <TRow>
+          <TCell>Spongebob</TCell>
+          <TCell>Squarepants</TCell>
+          <TCell>35</TCell>
+        </TRow>
+      </TBody>
+    </Table>
+  </div>
+</Playground>
+
+
+#### Complex example with nested data
+The following example includes a "manually" built table with nested tables up to 4 levels.
+
+<Playground>
+  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+    <Table withNesting>
+      <THead>
+        <TCell>Estate</TCell>
+        <TCell>Name</TCell>
+        <TCell>Date of creation</TCell>
+        <TCell>Items to approve</TCell>
+      </THead>
+      <TBody>
+        <TRow>
+          <TCell>18430</TCell>
+          <TCell>BNP Paribas</TCell>
+          <TCell>Apr 13, 2019</TCell>
+          <TCell>5 items</TCell>
+        </TRow>
+        <TRow>
+          <TCell>18430</TCell>
+          <TCell>Covivio - Belaia</TCell>
+          <TCell>Apr 13, 2019</TCell>
+          <TCell>3 items</TCell>
+        </TRow>
+        <TRow parent="1">
+          <TCell>18430</TCell>
+          <TCell>BNP Paribas</TCell>
+          <TCell>Apr 13, 2019</TCell>
+          <TCell>5 items</TCell>
+        </TRow>
+        <TRow nested="1">
+          <TCell>
+            <Table>
+              <TBody>
+                <TRow>
+                  <TCell>18430-INT1</TCell>
+                  <TCell>Apartment 3.4</TCell>
+                  <TCell>Interior 3D</TCell>
+                </TRow>
+                <TRow>
+                  <TCell>18430-INT2</TCell>
+                  <TCell>Apartment 2.4</TCell>
+                  <TCell>Exterior 3D</TCell>
+                </TRow>
+                <TRow parent="2">
+                  <TCell>18430-INT3</TCell>
+                  <TCell>Apartment 1.4</TCell>
+                  <TCell>Exterior 3D</TCell>
+                </TRow>
+                <TRow nested="2">
+                  <TCell>
+                    <Table>
+                      <TBody>
+                        <TRow parent="3">
+                          <TCell>18430-BRD</TCell>
+                          <TCell>Cam 1</TCell>
+                          <TCell>Brand ID</TCell>
+                        </TRow>
+                        <TRow nested="3">
+                          <TCell>
+                            <Table>
+                              <TBody>
+                                <TRow>
+                                  <TCell>18430-BRD</TCell>
+                                  <TCell>Cam 1</TCell>
+                                  <TCell>Brand ID</TCell>
+                                </TRow>
+                              </TBody>
+                            </Table>
+                          </TCell>
+                        </TRow>
+                        <TRow>
+                          <TCell>18430-WEB</TCell>
+                          <TCell>Cam 2</TCell>
+                          <TCell>Website</TCell>
+                        </TRow>
+                      </TBody>
+                    </Table>
+                  </TCell>
+                </TRow>
+              </TBody>
+            </Table>
+          </TCell>
+        </TRow>
+        <TRow>
+          <TCell>18430</TCell>
+          <TCell>Covivio - CB21</TCell>
+          <TCell>Apr 13, 2019</TCell>
+          <TCell>2 items</TCell>
+        </TRow>
+      </TBody>
+    </Table>
+  </div>
+</Playground>
+
+
+### Auto generated table
+The above example is very tedious to create by hand, and let's be honest, most tables with this sort of shape will be derived from a set of data. As such, you have access to a special `data` prop which will contain the data to generate the table.
+
+Take the following structure representing families and their trees:
+```js
+[{
+  name: 'Mike',
+  age: 35,
+  height: '180cm',
+  children: 2,
+  data: [{
+    name: 'Johnny',
+    association: 'Child',
+    age: 5,
+  }, {
+    name: 'Laura',
+    association: 'Child',
+    age: 10,
+  }],
+}, {
+  name: 'Claire',
+  age: 20,
+  height: '170cm',
+  children: 0,
+  // etc
+}]
+```
+
+Below is the table that it generates. Note that you need to at least pass `header` to the table if you want to display something.
+
+export const family = [{
+  name: 'Mike',
+  age: 35,
+  height: '180cm',
+  children: 2,
+  data: [{
+    name: 'Johnny',
+    age: 5,
+    height: '120cm',
+    children: 0,
+  }, {
+    name: 'Laura',
+    age: 10,
+    height: '150cm',
+    children: 0,
+  }],
+}, {
+  name: 'Claire',
+  age: 20,
+  height: '170cm',
+  children: 0,
+}]
+
+<Playground>
+  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+    <Table
+      data={family}
+      header={['name', 'height', 'age', 'children']} />
+  </div>
+</Playground>
+
+
+You can customize the look of the cell contents through the `renderCell` prop. For example the following `renderCell` function:
+
+```js
+const customizeCells = (v, i, cols) => {
+  if (i === 0) {
+    return <div style={{ fontWeight: 'bold', color: sv.blue }}>{v}</div>;
+  }
+  else if (i === cols - 1) {
+    return <div style={{ fontStyle: 'italic' }}>{v}</div>;
+  }
+  else {
+    return v;
+  }
+}
+```
+export const customizeCells = (v, i, cols) => {
+  if (i === 0) {
+    return <div style={{ fontWeight: 'bold', color: sv.blue }}>{v}</div>;
+  }
+  else if (i === cols - 1) {
+    return <div style={{ fontStyle: 'italic' }}>{v}</div>;
+  }
+  else {
+    return v;
+  }
+}
+
+Gives the following
+
+<Playground>
+  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+    <Table
+      renderCell={customizeCells}
+      data={family}
+      header={['name', 'height', 'age', 'children']} />
+  </div>
+</Playground>
+
+### Sortable auto generated table
+You can pass an array of keys (`sortableBy`) to set which column is sortable in the table. This will enable the header of the column to be "clickable" and an onClick event will be triggered.
+
+For the event you should pass a function to the `onClickHeader` prop, which will return the active column. Note: the table holds no state in regards to the sorting, that's all up to you. Here is an example:
+
+
+export const SortedWrapper = ({ render }) => {
+  const [sortedBy, setSortedBy] = useState(null);
+  const sortedData = sortedBy ? (sortedBy.direction === 'asc' ?  family.sort((a, b) => a[sortedBy.key].localeCompare(b[sortedBy.key])) : family.sort((b, a) => a[sortedBy.key].localeCompare(b[sortedBy.key])) ) : family;
+  const handleClickHeader = (key) => setSortedBy({ key, direction: sortedBy && sortedBy.direction === 'desc' ? 'asc' : 'desc' });
+  return (
+    <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+      {render({ sortedBy, sortedData, handleClickHeader })}
+    </div>
+  );
+}
+
+
+<Playground>
+  <SortedWrapper render={({ sortedBy, sortedData, handleClickHeader }) => (
+    <Table
+      activeHeader={sortedBy}
+      onClickHeader={handleClickHeader}
+      data={sortedData}
+      sortableBy={['name', 'height']}
+      header={['name', 'height', 'age', 'children']} />
+  )} />
+</Playground>
