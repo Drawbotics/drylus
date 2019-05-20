@@ -6,6 +6,7 @@ const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ip = require('ip');
+const fs = require('fs-extra');
 
 const rehypePlayground = require('./utils/rehype-playground');
 
@@ -31,6 +32,17 @@ const basePlugins = [
   new ProgressPlugin(betterWebpackProgress({
     mode: 'compact',
   })),
+  {
+    apply: (compiler) => {
+      compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
+        fs.copy('./dist', '../../docs', (err) => {
+          if (err) {
+            console.error('An error occured while copying the docs folder');
+          }
+        });
+      });
+    },
+  },
 ];
 
 
@@ -50,7 +62,7 @@ module.exports = {
     extensions: [ '.js', '.jsx', '.css', '.mdx' ],
   },
   output: {
-    path: path.resolve(__dirname, './docs'),
+    path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
     publicPath: '/',
   },
