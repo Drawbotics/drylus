@@ -16,7 +16,7 @@ There are 7 total packages:
 
 ### How do these work together?
 <p align="center">
-  <img src="./doc/graph.svg" width="200" style="margin: auto" />
+  <img src="./assets/graph.svg" width="200" style="margin: auto" />
 </p>
 
 The basic flow is the following:

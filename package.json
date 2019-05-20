@@ -18,7 +18,7 @@
     "build": "lerna run build",
     "watch": "lerna run watch",
     "test": "lerna run test",
-    "update:doc": "mmdc -i doc/graph.mmd -o doc/graph.svg",
+    "update:assets": "mmdc -i assets/graph.mmd -o assets/graph.svg",
     "lint": "eslint --ext js,jsx --format node_modules/eslint-formatter-pretty packages/"
   },
   "husky": {
