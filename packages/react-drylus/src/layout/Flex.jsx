@@ -2,6 +2,9 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import camelCase from 'lodash/camelCase';
+import sv from '@drawbotics/style-vars';
+
+import Sizes from '../base/Sizes';
 
 
 const styles = {
@@ -52,6 +55,48 @@ const styles = {
   equalSpan: css`
     flex: 1;
   `,
+  hSpacingSmall: css`
+    margin-bottom: calc(${sv.marginSmall} * -1);
+
+    & > div {
+      margin-bottom: ${sv.marginSmall};
+    }
+  `,
+  hSpacingDefault: css`
+    margin-bottom: calc(${sv.defaultMargin} * -1);
+
+    & > div {
+      margin-bottom: ${sv.defaultMargin};
+    }
+  `,
+  hSpacingLarge: css`
+    margin-bottom: calc(${sv.marginLarge} * -1);
+
+    & > div {
+      margin-bottom: ${sv.marginLarge};
+    }
+  `,
+  vSpacingSmall: css`
+    margin-right: calc(${sv.marginSmall} * -1);
+
+    & > div {
+      margin-right: ${sv.marginSmall};
+    }
+  `,
+  vSpacingDefault: css`
+    margin-right: calc(${sv.defaultMargin} * -1);
+
+    & > div {
+      margin-right: ${sv.defaultMargin};
+    }
+  `,
+  vSpacingLarge: css`
+    margin-right: calc(${sv.marginLarge} * -1);
+
+    & > div {
+      margin-right: ${sv.marginLarge};
+    }
+  `,
 };
 
 
@@ -93,7 +138,9 @@ export const FlexItem = ({ children, flex }) => {
   const equalSpan = flex === true;
   const style = prefixFlex(flex);
   return (
-    <div className={cx(styles.item, { [styles.equalSpan]: equalSpan })} style={flex && typeof flex !== 'boolean' ? style : null}>
+    <div
+      className={cx(styles.item, { [styles.equalSpan]: equalSpan })}
+      style={flex && typeof flex !== 'boolean' ? style : null}>
       {children}
     </div>
   );
@@ -121,13 +168,17 @@ const Flex = ({
   wrap=false,
   className,
   styles: extraStyles,
+  vSpacing,
+  hSpacing,
 }) => {
   return (
     <div className={cx(styles.base, {
-      [styles[direction?.toLowerCase()]]: direction,
+      [styles[direction.toLowerCase()]]: direction,
       [styles[camelCase(`JUSTIFY_${justify}`)]]: justify,
       [styles[camelCase(`ALIGN_${align}`)]]: align,
       [styles.wrap]: wrap,
+      [styles[camelCase(`hSpacing${hSpacing}`)]]: hSpacing,
+      [styles[camelCase(`vSpacing${vSpacing}`)]]: vSpacing,
     }, className)} styles={extraStyles}>
       {children}
     </div>
@@ -168,6 +219,12 @@ Flex.propTypes = {
 
   /** If you need to customize the Flex container pass a custom className. E.g. if you want to use `display: inline-flex` */
   className: PropTypes.string,
+
+  /** Used to set the vertical space (gutters) between each FlexItem */
+  vSpacing: PropTypes.oneOf([ Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE ]),
+
+  /** Used to set the horizontal space (gutters) between each FlexItem */
+  hSpacing: PropTypes.oneOf([ Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE ]),
 };
 
 

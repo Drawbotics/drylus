@@ -28,6 +28,15 @@ export const Component = () => {
       <FlexItem>
         <Component />
       </FlexItem>
+      <FlexItem>
+        <Component />
+      </FlexItem>
+      <FlexItem>
+        <Component />
+      </FlexItem>
+      <FlexItem>
+        <Component />
+      </FlexItem>
     </Flex>
   </div>
 </Playground>
@@ -53,27 +62,17 @@ export const FullWidthItem = ({ background }) => {
 };
 
 <Playground>
-  <>
-    <Flex>
-      <FlexItem flex>
-        <FullWidthItem background="red" />
-      </FlexItem>
-      <FlexItem flex>
-        <FullWidthItem background="green" />
-      </FlexItem>
-      <FlexItem flex>
-        <FullWidthItem background="yellow" />
-      </FlexItem>
-    </Flex>
-    <Flex>
-      <FlexItem flex>
-        <FullWidthItem background="blue" />
-      </FlexItem>
-      <FlexItem flex>
-        <FullWidthItem background="pink" />
-      </FlexItem>
-    </Flex>
-  </>
+  <Flex>
+    <FlexItem flex>
+      <FullWidthItem background="red" />
+    </FlexItem>
+    <FlexItem flex>
+      <FullWidthItem background="green" />
+    </FlexItem>
+    <FlexItem flex>
+      <FullWidthItem background="yellow" />
+    </FlexItem>
+  </Flex>
 </Playground>
 
 

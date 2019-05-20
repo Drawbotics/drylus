@@ -1,4 +1,23 @@
-import { Panel, PanelHeader, PanelBody, PanelSection, PanelFooter } from '@drawbotics/react-drylus';
+import {
+  Panel,
+  PanelHeader,
+  PanelBody,
+  PanelSection,
+  PanelFooter,
+  SegmentedControl,
+  Flex,
+  FlexItem,
+  FlexJustify,
+  Select,
+  Title,
+  Sizes,
+  Button,
+  ButtonTiers,
+  Categories,
+  Table,
+  Pagination,
+} from '@drawbotics/react-drylus';
+import sv from '@drawbotics/style-vars';
 
 import Playground from '~/components/Playground';
 
@@ -11,22 +30,118 @@ import { Panel, PanelHeader, PanelBody, PanelSection, PanelFooter } from '@drawb
 ```
 Where `PanelBody` takes `PanelSection` as children. See example:
 
+export const Content = () => {
+  return (
+    <div style={{ width: '100%', height: '200px', background: 'orange', padding: sv.defaultPadding }}>
+      Some content goes here
+    </div>
+  );
+};
+
 <Playground component={Panel}>
   <Panel
     header={
       <PanelHeader>
+        <Flex justify={FlexJustify.SPACE_BETWEEN} vSpacing={Sizes.SMALL}>
+          <FlexItem flex>
+            <Title size={4} noMargin>Header of the panel</Title>
+          </FlexItem>
+          <FlexItem>
+            <Select
+              placeholder="Filter 1..."
+              values={[
+                { label: 'Option 1', value: '1' },
+                { label: 'Option 2', value: '2' },
+              ]}
+            />
+          </FlexItem>
+          <FlexItem>
+            <Select
+              placeholder="Another action..."
+              values={[
+                { label: 'Option 1', value: '1' },
+                { label: 'Option 2', value: '2' },
+              ]}
+            />
+          </FlexItem>
+        </Flex>
       </PanelHeader>
     }
     body={
       <PanelBody>
         <PanelSection title="Revenue">
+          <Content />
         </PanelSection>
         <PanelSection title="Growth">
+          <Content />
         </PanelSection>
       </PanelBody>
     }
     footer={
       <PanelFooter>
+        <Flex justify={FlexJustify.END} vSpacing={Sizes.SMALL}>
+          <FlexItem>
+            <Button tier={ButtonTiers.TERTIARY}>Tertiary action</Button>
+          </FlexItem>
+          <FlexItem>
+            <Button tier={ButtonTiers.SECONDARY}>Secondary action</Button>
+          </FlexItem>
+          <FlexItem>
+            <Button category={Categories.BRAND}>Primary action</Button>
+          </FlexItem>
+        </Flex>
       </PanelFooter>
     } />
+</Playground>
+
+Both `PanelHeader` and `PanelFooter` don't have any styles, they are simply containers. You should build your own content, and normally we use that space for actions (on either or both sides, or that take the full width).
+
+
+### Common examples
+
+Here is an example found in the Backoffice: the main content is a table, and we have some pagination at the bottom to navigate the different pages.
+
+<Playground>
+  <Panel
+    body={
+      <PanelBody noPadding>
+        <PanelSection>
+          <Table header={['name', 'height', 'age', 'children']} data={[{
+            name: 'Mike',
+            age: 35,
+            height: '180cm',
+            children: 2,
+          }, {
+            name: 'Claire',
+            age: 20,
+            height: '170cm',
+            children: 1,
+          }, {
+            name: 'Johnny',
+            age: 5,
+            height: '120cm',
+            children: 0,
+          }, {
+            name: 'Laura',
+            age: 10,
+            height: '150cm',
+            children: 0,
+          }, {
+            name: 'Timmy',
+            age: 3,
+            height: '70cm',
+            children: 0,
+          }]} />
+        </PanelSection>
+      </PanelBody>
+    }
+    footer={
+      <PanelFooter>
+        <Flex justify={FlexJustify.END}>
+          <FlexItem>
+            <Pagination />
+          </FlexItem>
+        </Flex>
+      </PanelFooter>
+  } />
 </Playground>

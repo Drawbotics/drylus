@@ -22,21 +22,25 @@ const styles = {
     font-size: 1.3rem;
     font-weight: 400;
   `,
+  noMargin: css`
+    margin-top: 0;
+    margin-bottom: 0;
+  `,
 };
 
 
-const Title = ({ children, size=1 }) => {
+const Title = ({ children, size=1, noMargin }) => {
   if (size === 1) {
-    return <h1 className={cx(styles.base, styles.h1)}>{children}</h1>;
+    return <h1 className={cx(styles.base, styles.h1, { [styles.noMargin]: noMargin })}>{children}</h1>;
   }
   else if (size === 2) {
-    return <h2 className={cx(styles.base, styles.h2)}>{children}</h2>;
+    return <h2 className={cx(styles.base, styles.h2, { [styles.noMargin]: noMargin })}>{children}</h2>;
   }
   else if (size === 3) {
-    return <h3 className={cx(styles.base, styles.h3)}>{children}</h3>;
+    return <h3 className={cx(styles.base, styles.h3, { [styles.noMargin]: noMargin })}>{children}</h3>;
   }
   else if (size === 4) {
-    return <h3 className={cx(styles.base, styles.h4)}>{children}</h3>;
+    return <h3 className={cx(styles.base, styles.h4, { [styles.noMargin]: noMargin })}>{children}</h3>;
   }
   else {
     console.warn('Unsupported title size');
@@ -51,6 +55,9 @@ Title.propTypes = {
 
   /** Each number is equivalent to the h[n] in html, smaller value equals larger title */
   size: PropTypes.oneOf([1, 2, 3, 4]),
+
+  /** Use this if you dont want the component to set margin. By default it has some top and bottom margin since it is a textual component */
+  noMargin: PropTypes.bool,
 };
 
 

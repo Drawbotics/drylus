@@ -15,7 +15,6 @@ const styles = {
   codeWrapper: css`
     overflow: scroll;
     display: flex;
-    min-height: 100px;
   `,
   code: css`
     flex: 1;
@@ -31,13 +30,13 @@ const styles = {
 };
 
 
-const Code = ({ children, className }) => {
+const Code = ({ children, className, style }) => {
   const language = className?.replace(/language-/, '');
 
   return (
     <Highlight {...defaultProps} theme={theme} code={children} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <div className={styles.codeWrapper}>
+        <div className={styles.codeWrapper} style={style}>
           <pre className={cx(className, styles.code)} style={style}>
             {tokens.map((line, i) => (
               <div key={i} {...getLineProps({line, key: i})}>

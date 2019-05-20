@@ -20,7 +20,7 @@ function beautifyString(string, mode) {
 const CodeBox = ({ children, mode='jsx', format }) => {
   const beautified = format ? beautifyString(children, mode) : children;
   return (
-    <Code className={mode}>
+    <Code className={mode} style={{ minHeight: '100px' }}>
       {beautified}
     </Code>
   );

@@ -1,16 +1,9 @@
-import { Button, Sizes, Categories } from '@drawbotics/react-drylus';
+import { Button, ButtonTiers, Sizes, Categories } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
 
 # Button
-
-The following is an non-editable code example
-```jsx
-<button class="Drylus-Button__base Drylus-Button__danger Drylus-Button__small Drylus-Button__secondary">
-  <button class="Drylus-Button__base">Button Text</button>
-</button>
-```
 
 The following is the rendered component
 <Playground component={Button}>
@@ -21,9 +14,9 @@ The following is the rendered component
 You can also have buttons with just the icon; for this don't pass any children. "Icon only" buttons only support default and small size. Icon only buttons have a lighter tone by default, illustrating they should be used for secondary actions.
 <Playground>
   <div style={{ display: 'flex', alignItems: 'center' }}>
-    <Button icon="command" tier="tertiary" />
+    <Button icon="command" tier={ButtonTiers.TERTIARY} />
     <div style={{ width: 16 }}></div>
-    <Button tier="tertiary">No icon</Button>
+    <Button tier={ButtonTiers.TERTIARY}>No icon</Button>
     <div style={{ width: 16 }}></div>
     <Button icon="command" size={Sizes.SMALL} />
     <div style={{ width: 16 }}></div>

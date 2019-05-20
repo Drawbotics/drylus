@@ -1,4 +1,4 @@
-export Button from './Button';
+export Button, { ButtonTiers } from './Button';
 export Icon from './Icon';
 export Footer from './Footer';
 export Navbar from './Navbar';
@@ -10,3 +10,4 @@ export SegmentedControl from './SegmentedControl';
 export Table, { TCell, TBody, TRow, THead } from './Table';
 export Label from './Label';
 export Panel, { PanelHeader, PanelBody, PanelFooter, PanelSection } from './Panel';
+export Pagination from './Pagination';

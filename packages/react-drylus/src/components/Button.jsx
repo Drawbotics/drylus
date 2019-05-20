@@ -166,13 +166,20 @@ const styles = {
 };
 
 
+export const ButtonTiers = {
+  PRIMARY: 'PRIMARY',
+  SECONDARY: 'SECONDARY',
+  TERTIARY: 'TERTIARY',
+};
+
+
 const Button = ({
   children,
   disabled,
   onClick,
   category,
   size,
-  tier,
+  tier=ButtonTiers.PRIMARY,
   icon,
   iconSide='left',
 }) => {
@@ -182,12 +189,12 @@ const Button = ({
       onClick={onClick}
       className={cx(styles.base, {
         [styles[size?.toLowerCase()]]: size,
-        [styles[tier]]: tier,
+        [styles[tier?.toLowerCase()]]: tier,
         [styles.rightIcon]: iconSide === 'right' && icon,
         [styles.leftIcon]: iconSide === 'left' && icon,
         [styles.iconOnly]: iconOnly,
         [styles.smallIcon]: iconOnly && size === 'SMALL',
-        [styles[category?.toLowerCase()]]: category && ! tier,
+        [styles[category?.toLowerCase()]]: category && tier === ButtonTiers.PRIMARY,
       })}
       disabled={disabled}>
       {do{
@@ -222,8 +229,8 @@ Button.propTypes = {
   /** Size of the button. Can be small, large, default */
   size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE]),
 
-  /** Tier of the button. Can be secondary, tertiary, overrides category */
-  tier: PropTypes.oneOf(['secondary', 'tertiary']),
+  /** Tier of the button */
+  tier: PropTypes.oneOf([ButtonTiers.PRIMARY, ButtonTiers.SECONDARY, ButtonTiers.TERTIARY]),
 
   /** Name of the icon to be displayed within the button. Shown on the left by default */
   icon: PropTypes.string,
@@ -236,6 +243,7 @@ Button.propTypes = {
 Button.defaultProps = {
   iconSide: 'left',
   size: Sizes.DEFAULT,
+  tier: ButtonTiers.PRIMARY,
 };
 
 
