@@ -68,6 +68,7 @@ export const lightOverlay = fade(grey900, 10);
 const baseBorderRadius = '5px';
 export const defaultBorderRadius = baseBorderRadius;
 export const borderRadiusBig = m(baseBorderRadius, 1.5);
+export const borderRadiusSmall = d(baseBorderRadius, 1.5);
 
 // TYPOGRAPHY
 const baseFontSize = '14px';
@@ -91,6 +92,8 @@ export const shadowColor = neutral;
 
 // ELEVATIONS
 export const elevation1 = `0 4px 8px ${shadowColor}`;
+export const elevation2 = `0 7px 14px ${shadowColor}`;
+export const elevation3 = `0 10px 17px ${shadowColor}`;
 export const insetActive =`0 1px 6px ${neutralDarkest} inset`;
 export const insetActiveMedium = `0 1px 6px ${neutralDark} inset`;
 export const insetActiveLight = `0 1px 6px ${neutral} inset`;

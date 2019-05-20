@@ -26,6 +26,13 @@ const styles = {
   `,
   code: css`
     position: relative;
+
+    &:hover {
+      & > [data-element="switcher"] {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   `,
   codeHidden: css`
     display: none;
@@ -34,6 +41,9 @@ const styles = {
     position: absolute;
     top: ${sv.defaultMargin};
     right: ${sv.defaultMargin};
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
   `,
   toggle: css`
     padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
@@ -91,7 +101,7 @@ const Playground = ({ component, children, mode, __code }) => {
           Toggle code
         </div>
         <div className={cx(styles.code, { [styles.codeHidden]: ! codeOpen })}>
-          <div className={styles.switcher}>
+          <div className={styles.switcher} data-element="switcher">
             <ModeSwitcher
               modes={supportedModes}
               activeMode={activeMode}

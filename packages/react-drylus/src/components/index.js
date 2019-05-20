@@ -9,3 +9,4 @@ export Paragraph from './Paragraph';
 export SegmentedControl from './SegmentedControl';
 export Table, { TCell, TBody, TRow, THead } from './Table';
 export Label from './Label';
+export Panel, { PanelHeader, PanelBody, PanelFooter, PanelSection } from './Panel';

@@ -15,6 +15,7 @@ const styles = {
   codeWrapper: css`
     overflow: scroll;
     display: flex;
+    min-height: 100px;
   `,
   code: css`
     flex: 1;

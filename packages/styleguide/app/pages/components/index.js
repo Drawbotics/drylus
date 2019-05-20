@@ -4,6 +4,7 @@ import roundIcon from './round-icon';
 import segmentedControl from './segmented-control';
 import table from './table';
 import label from './label';
+import panel from './panel';
 
 
 const components = {
@@ -13,6 +14,7 @@ const components = {
   segmentedControl,
   table,
   label,
+  panel,
 };
 
 

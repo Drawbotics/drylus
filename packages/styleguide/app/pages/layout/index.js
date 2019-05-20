@@ -1,10 +1,12 @@
-import layout from './layout';
 import index from './index.mdx';
+import layout from './layout';
+import flex from './flex';
 
 
 const components = {
   index,
   layout,
+  flex,
 };
 
 

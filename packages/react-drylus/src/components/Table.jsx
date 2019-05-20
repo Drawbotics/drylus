@@ -28,7 +28,7 @@ const styles = {
     }
 
     [data-nested] ~ tr:not([data-row]):nth-of-type(even) {
-      background: ${sv.neutralLighter};
+      background: ${sv.white};
     }
 
     [data-nested] ~ tr:not([data-row]):nth-of-type(odd) {
@@ -71,7 +71,7 @@ const styles = {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     padding-left: ${sv.defaultPadding};
-    padding-right: ${sv.defaultPadding};
+    padding-right: ${sv.paddingHuge};
   `,
   header: css`
     border-bottom: 1px solid ${sv.neutral};
@@ -243,7 +243,7 @@ export const TRow = ({ children, nested, parent }) => {
       })}
       data-nested={nested || undefined}
       data-parent={parent || undefined}>
-      {React.Children.map(children, (child, key) => React.cloneElement(child, {
+      {React.Children.toArray(children).filter((c) => Boolean(c)).map((child, key) => React.cloneElement(child, {
         ...child.props,
         key,
         asContainer: !! nested,
@@ -260,7 +260,7 @@ export const THead = ({ children }) => {
   return (
     <thead className={styles.header}>
       <TRow>
-        {React.Children.map(children, (child, key) => React.cloneElement(child, {
+        {React.Children.toArray(children).filter((c) => Boolean(c)).map((child, key) => React.cloneElement(child, {
           ...child.props,
           key,
           head: true,

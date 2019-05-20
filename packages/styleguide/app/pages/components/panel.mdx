@@ -1,0 +1,32 @@
+import { Panel, PanelHeader, PanelBody, PanelSection, PanelFooter } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Panel
+
+## Usage
+```js
+import { Panel, PanelHeader, PanelBody, PanelSection, PanelFooter } from '@drawbotics/react-drylus';
+```
+Where `PanelBody` takes `PanelSection` as children. See example:
+
+<Playground component={Panel}>
+  <Panel
+    header={
+      <PanelHeader>
+      </PanelHeader>
+    }
+    body={
+      <PanelBody>
+        <PanelSection title="Revenue">
+        </PanelSection>
+        <PanelSection title="Growth">
+        </PanelSection>
+      </PanelBody>
+    }
+    footer={
+      <PanelFooter>
+      </PanelFooter>
+    } />
+</Playground>

@@ -3,8 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.phoneSLandscape = exports.desktopS = exports.ipad = exports.phoneXl = exports.phone = exports.phoneS = exports.screenXl = exports.screenL = exports.screenM = exports.screenS = exports.screenXs = exports.maxWidthMedium = exports.maxWidthLarge = exports.defaultTransition = exports.bouncyTransitionCurve = exports.transitionTimeShort = exports.defaultTransitionTime = exports.marginHuge = exports.marginExtraLarge = exports.marginLarge = exports.marginExtraSmall = exports.marginSmall = exports.defaultMargin = exports.baseMargin = exports.paddingHuge = exports.paddingExtraLarge = exports.paddingLarge = exports.paddingExtraSmall = exports.paddingSmall = exports.defaultPadding = exports.insetActiveLight = exports.insetActiveMedium = exports.insetActive = exports.elevation1 = exports.shadowColor = exports.colorDisabledInverse = exports.colorDisabled = exports.colorTertiaryInverse = exports.colorTertiary = exports.colorSecondaryInverse = exports.colorSecondary = exports.colorPrimaryInverse = exports.colorPrimary = exports.defaultLetterSpacing = exports.defaultLineHeight = exports.defaultFontFamily = exports.defaultFontSize = exports.borderRadiusBig = exports.defaultBorderRadius = exports.lightOverlay = exports.lighterOverlay = exports.linkedinColor = exports.twitterColor = exports.facebookColor = exports.success = exports.greenLighter = exports.greenLight = exports.green = exports.greenDark = exports.info = exports.blueLighter = exports.blueLight = exports.blue = exports.blueDark = exports.warning = exports.orangeLighter = exports.orangeLight = exports.orange = exports.orangeDark = exports.error = exports.danger = exports.redLighter = exports.redLight = exports.red = exports.redDark = exports.azureLight = exports.azure = exports.azureDark = exports.backgroundColor = exports.neutralLighter = exports.neutralLight = exports.neutral = exports.neutralDark = exports.neutralDarker = exports.neutralDarkest = exports.brandLighter = exports.brandLight = exports.brand = exports.brandDark = exports.grey900 = exports.grey800 = exports.grey700 = exports.grey600 = exports.grey500 = exports.grey400 = exports.grey300 = exports.grey200 = exports.grey100 = exports.grey50 = exports.white = void 0;
-exports.greaterThanMinimumWidth = exports.greaterThanMaximumWidth = exports.screenSOrM = exports.ipadLandscape = exports.phoneXlLandscape = exports.phoneLandscape = void 0;
+exports.phoneXl = exports.phone = exports.phoneS = exports.screenXl = exports.screenL = exports.screenM = exports.screenS = exports.screenXs = exports.maxWidthMedium = exports.maxWidthLarge = exports.defaultTransition = exports.bouncyTransitionCurve = exports.transitionTimeShort = exports.defaultTransitionTime = exports.marginHuge = exports.marginExtraLarge = exports.marginLarge = exports.marginExtraSmall = exports.marginSmall = exports.defaultMargin = exports.baseMargin = exports.paddingHuge = exports.paddingExtraLarge = exports.paddingLarge = exports.paddingExtraSmall = exports.paddingSmall = exports.defaultPadding = exports.insetActiveLight = exports.insetActiveMedium = exports.insetActive = exports.elevation3 = exports.elevation2 = exports.elevation1 = exports.shadowColor = exports.colorDisabledInverse = exports.colorDisabled = exports.colorTertiaryInverse = exports.colorTertiary = exports.colorSecondaryInverse = exports.colorSecondary = exports.colorPrimaryInverse = exports.colorPrimary = exports.defaultLetterSpacing = exports.defaultLineHeight = exports.defaultFontFamily = exports.defaultFontSize = exports.borderRadiusSmall = exports.borderRadiusBig = exports.defaultBorderRadius = exports.lightOverlay = exports.lighterOverlay = exports.linkedinColor = exports.twitterColor = exports.facebookColor = exports.success = exports.greenLighter = exports.greenLight = exports.green = exports.greenDark = exports.info = exports.blueLighter = exports.blueLight = exports.blue = exports.blueDark = exports.warning = exports.orangeLighter = exports.orangeLight = exports.orange = exports.orangeDark = exports.error = exports.danger = exports.redLighter = exports.redLight = exports.red = exports.redDark = exports.azureLight = exports.azure = exports.azureDark = exports.backgroundColor = exports.neutralLighter = exports.neutralLight = exports.neutral = exports.neutralDark = exports.neutralDarker = exports.neutralDarkest = exports.brandLighter = exports.brandLight = exports.brand = exports.brandDark = exports.grey900 = exports.grey800 = exports.grey700 = exports.grey600 = exports.grey500 = exports.grey400 = exports.grey300 = exports.grey200 = exports.grey100 = exports.grey50 = exports.white = void 0;
+exports.greaterThanMinimumWidth = exports.greaterThanMaximumWidth = exports.screenSOrM = exports.ipadLandscape = exports.phoneXlLandscape = exports.phoneLandscape = exports.phoneSLandscape = exports.desktopS = exports.ipad = void 0;
 
 const {
   fade
@@ -124,9 +124,11 @@ exports.lightOverlay = lightOverlay;
 const baseBorderRadius = '5px';
 const defaultBorderRadius = baseBorderRadius;
 exports.defaultBorderRadius = defaultBorderRadius;
-const borderRadiusBig = m(baseBorderRadius, 1.5); // TYPOGRAPHY
-
+const borderRadiusBig = m(baseBorderRadius, 1.5);
 exports.borderRadiusBig = borderRadiusBig;
+const borderRadiusSmall = d(baseBorderRadius, 1.5); // TYPOGRAPHY
+
+exports.borderRadiusSmall = borderRadiusSmall;
 const baseFontSize = '14px';
 const defaultFontSize = baseFontSize;
 exports.defaultFontSize = defaultFontSize;
@@ -160,6 +162,10 @@ const shadowColor = neutral; // ELEVATIONS
 exports.shadowColor = shadowColor;
 const elevation1 = `0 4px 8px ${shadowColor}`;
 exports.elevation1 = elevation1;
+const elevation2 = `0 7px 14px ${shadowColor}`;
+exports.elevation2 = elevation2;
+const elevation3 = `0 10px 17px ${shadowColor}`;
+exports.elevation3 = elevation3;
 const insetActive = `0 1px 6px ${neutralDarkest} inset`;
 exports.insetActive = insetActive;
 const insetActiveMedium = `0 1px 6px ${neutralDark} inset`;

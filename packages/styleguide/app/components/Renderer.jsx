@@ -6,6 +6,7 @@ import sv from '@drawbotics/style-vars';
 import { Title, Paragraph } from '@drawbotics/react-drylus';
 
 import Code from './Code';
+import InlineCode from './InlineCode';
 
 
 const styles = {
@@ -23,6 +24,7 @@ const components = {
   pre: (props) => <div {...props} />,
   p: (props) => <Paragraph {...props} />,
   code: Code,
+  inlineCode: InlineCode,
 }
 
 

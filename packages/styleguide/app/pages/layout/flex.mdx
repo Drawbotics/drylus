@@ -1,0 +1,157 @@
+import { Flex, FlexItem, FlexAlign, FlexDirections, FlexJustify } from '@drawbotics/react-drylus';
+
+import Playground, { PropsTable } from '~/components/Playground';
+
+# Flex
+
+For more in depth examples about how flexbox works, please refer to https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+### The Flex container
+Here is an interactive example of the `Flex` container. It can only take `FlexItem` as children. Below you can see some fixed size content within each item.
+
+export const Component = () => {
+  return (
+    <div style={{ height: '50px', width: '100px', background: 'red', border: '1px solid orange' }} />
+  );
+};
+
+
+<Playground component={Flex}>
+  <div style={{ border: '2px solid black' }}>
+    <Flex>
+      <FlexItem>
+        <Component />
+      </FlexItem>
+      <FlexItem>
+        <Component />
+      </FlexItem>
+      <FlexItem>
+        <Component />
+      </FlexItem>
+    </Flex>
+  </div>
+</Playground>
+
+### The Flex Item
+
+The `FlexItem` takes the following props
+<PropsTable component={FlexItem} />
+
+The `flex` property can take values of many types. Here is the list and what they do:
+- `true`: passing `true` (or simply the `flex` prop without value) will set the `flex` property to 1. If this prop is passed to all the `FlexItem`s they will all take the same space.
+- Number < 1: for example `1/4` or `3/5`. When a value below 1 is passed, the component will interpret it as the `flex-basis` and will set `flex-grow` and `flex-shrink` to 0. So `flex={1/4}` equals `flex: 0 0 25%` This is useful for building grid layouts (See example below).
+- Number > 1: this will be interpreted as the `flex` value. E.g. `flex={3}` equals `flex: 3`.
+
+Here is an example with items that share the whole amount of the flex container. This is achieved by passing `span` as a boolean, translates to `flex: 1` for any item with that property.
+
+export const FullWidthItem = ({ background }) => {
+  return (
+    <div style={{ height: '50px', width: '100%', background, padding: '15px' }}>
+      {background}
+    </div>
+  );
+};
+
+<Playground>
+  <>
+    <Flex>
+      <FlexItem flex>
+        <FullWidthItem background="red" />
+      </FlexItem>
+      <FlexItem flex>
+        <FullWidthItem background="green" />
+      </FlexItem>
+      <FlexItem flex>
+        <FullWidthItem background="yellow" />
+      </FlexItem>
+    </Flex>
+    <Flex>
+      <FlexItem flex>
+        <FullWidthItem background="blue" />
+      </FlexItem>
+      <FlexItem flex>
+        <FullWidthItem background="pink" />
+      </FlexItem>
+    </Flex>
+  </>
+</Playground>
+
+
+And here is an example where the `FlexItem`s take only the space they determine (no `flex` attribute on the `FlexItem`). To wrap them pass `wrap` to the `Flex` container.
+
+export const Item = ({ background }) => {
+  return (
+    <div style={{ height: '50px', width: '100px', background, padding: '15px' }}>
+      {background}
+    </div>
+  );
+};
+
+<Playground>
+  <>
+    <div style={{ border: '2px solid black' }}>
+      <Flex justify={FlexJustify.START} wrap>
+        <FlexItem>
+          <Item background="red" />
+        </FlexItem>
+        <FlexItem>
+          <Item background="green" />
+        </FlexItem>
+        <FlexItem>
+          <Item background="yellow" />
+        </FlexItem>
+        <FlexItem>
+          <Item background="pink" />
+        </FlexItem>
+        <FlexItem>
+          <Item background="blue" />
+        </FlexItem>
+      </Flex>
+    </div>
+    <div style={{ border: '2px solid black', marginTop: '20px', width: '240px' }}>
+      <Flex justify={FlexJustify.START} wrap>
+        <FlexItem>
+          <Item background="red" />
+        </FlexItem>
+        <FlexItem>
+          <Item background="green" />
+        </FlexItem>
+        <FlexItem>
+          <Item background="yellow" />
+        </FlexItem>
+        <FlexItem>
+          <Item background="pink" />
+        </FlexItem>
+        <FlexItem>
+          <Item background="blue" />
+        </FlexItem>
+      </Flex>
+    </div>
+  </>
+</Playground>
+
+
+## Layout examples
+A responsive grid layout with 4 columns, aligned to the left. Becomes a 2 column layout when the screen is "medium".
+
+<Playground>
+  <div style={{ border: '2px solid black' }}>
+    <Flex justify={FlexJustify.START} wrap>
+      <FlexItem flex={1/4}>
+        <FullWidthItem background="red" />
+      </FlexItem>
+      <FlexItem flex={1/4}>
+        <FullWidthItem background="green" />
+      </FlexItem>
+      <FlexItem flex={1/4}>
+        <FullWidthItem background="yellow" />
+      </FlexItem>
+      <FlexItem flex={1/4}>
+        <FullWidthItem background="pink" />
+      </FlexItem>
+      <FlexItem flex={1/4}>
+        <FullWidthItem background="blue" />
+      </FlexItem>
+    </Flex>
+  </div>
+</Playground>
