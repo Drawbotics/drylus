@@ -20,7 +20,7 @@ import pages from './pages';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="drylus">
       <ThemeProvider>
         <Page>
           <Layout

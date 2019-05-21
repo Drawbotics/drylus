@@ -15,7 +15,7 @@ const RoutesHandler = ({ match, routes }) => {
     );
   }
   else {
-    return <Redirect to="/introduction"/>;
+    return <Redirect to="introduction" />;
   }
 };
 
@@ -25,7 +25,6 @@ const RoutesRenderer = ({ routes }) => {
   return (
     <Switch>
       <Route path="*" render={(props) => <RoutesHandler {...props} routes={generatedRoutes} />} />
-      <Redirect from="/" to="/introduction"/>
     </Switch>
   );
 };

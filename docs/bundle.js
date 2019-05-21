@@ -56535,7 +56535,7 @@ var RoutesRenderer_RoutesHandler = function RoutesHandler(_ref) {
     return react_default.a.createElement(components_Renderer, null, react_default.a.createElement(route));
   } else {
     return react_default.a.createElement(Redirect, {
-      to: "/introduction"
+      to: "introduction"
     });
   }
 };
@@ -56550,9 +56550,6 @@ var RoutesRenderer_RoutesRenderer = function RoutesRenderer(_ref2) {
         routes: generatedRoutes
       }));
     }
-  }), react_default.a.createElement(Redirect, {
-    from: "/",
-    to: "/introduction"
   }));
 };
 
@@ -57445,9 +57442,9 @@ function title_MDXContent(_ref) {
     parentName: "p"
   }, "Title"), " component."), index_es_p(components_Playground, {
     __position: 0,
-    __code: "<Title size={1}>Heading 1</Title>\n<Title size={2}>Heading 2</Title>\n<Title size={3}>Heading 3</Title>\n<Title size={4}>Heading 4</Title>",
+    __code: "<>\n  <Title size={1}>Heading 1</Title>\n  <Title size={2}>Heading 2</Title>\n  <Title size={3}>Heading 3</Title>\n  <Title size={4}>Heading 4</Title>\n</>",
     mdxType: "Playground"
-  }, index_es_p(components_Title, {
+  }, index_es_p(react_default.a.Fragment, null, index_es_p(components_Title, {
     size: 1,
     mdxType: "Title"
   }, "Heading 1"), index_es_p(components_Title, {
@@ -57459,7 +57456,7 @@ function title_MDXContent(_ref) {
   }, "Heading 3"), index_es_p(components_Title, {
     size: 4,
     mdxType: "Title"
-  }, "Heading 4")), index_es_p("h3", null, "Interactive Example"), index_es_p(components_Playground, {
+  }, "Heading 4"))), index_es_p("h3", null, "Interactive Example"), index_es_p(components_Playground, {
     __position: 1,
     __code: "<Playground component={Title}>\n  <Title>Heading text</Title>\n</Playground>",
     component: components_Title,
@@ -59475,7 +59472,9 @@ var forms_components = {
 
 
 var app_App = function App() {
-  return react_default.a.createElement(react_router_dom_BrowserRouter, null, react_default.a.createElement(base_ThemeProvider, null, react_default.a.createElement(base_Page, null, react_default.a.createElement(layout_Layout // bar={<Navbar />}
+  return react_default.a.createElement(react_router_dom_BrowserRouter, {
+    basename: "drylus"
+  }, react_default.a.createElement(base_ThemeProvider, null, react_default.a.createElement(base_Page, null, react_default.a.createElement(layout_Layout // bar={<Navbar />}
   , {
     bar: react_default.a.createElement(app_components_Sidebar, {
       routes: pages
