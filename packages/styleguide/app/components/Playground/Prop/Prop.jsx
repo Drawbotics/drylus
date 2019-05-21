@@ -52,6 +52,10 @@ const Prop = ({
       return (
         <InputProp prop={propWithKey} value={value} onChange={onChange} />
       );
+    case 'number':
+      return (
+        <InputProp prop={propWithKey} value={value} onChange={(v, n) => onChange(Number(v), n)} />
+      );
     case 'union':
       return (
         <div className={styles.union}>

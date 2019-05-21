@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import sv, { fade } from '@drawbotics/style-vars';
+import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 
 
@@ -37,7 +37,7 @@ const styles = {
   `,
   disabled: css`
     background: none !important;
-    color: ${fade(sv.colorTertiary, 20)} !important;
+    color: ${sv.colorDisabled} !important;
 
     &:hover {
       cursor: not-allowed;

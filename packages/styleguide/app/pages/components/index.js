@@ -5,6 +5,7 @@ import segmentedControl from './segmented-control';
 import table from './table';
 import label from './label';
 import panel from './panel';
+import pagination from './pagination';
 
 
 const components = {
@@ -15,6 +16,7 @@ const components = {
   table,
   label,
   panel,
+  pagination,
 };
 
 

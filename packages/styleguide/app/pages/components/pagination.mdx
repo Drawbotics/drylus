@@ -1,0 +1,26 @@
+import { useState } from 'react';
+import { Pagination } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Pagination
+
+
+export const PaginationControl = ({ component: Component }) => {
+  const [value, setValue] = useState(1);
+  return (
+    <div>
+      {React.cloneElement(Component, { value, onChange: (v) => setValue(v) })}
+    </div>
+  );
+}
+
+
+<Playground component={Pagination}>
+  <PaginationControl component={
+    <Pagination
+      pages={10}
+      value={1} />
+  } />
+</Playground>
