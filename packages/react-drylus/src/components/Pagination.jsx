@@ -48,7 +48,7 @@ const Pagination = ({
   prevLabel,
   nextLabel,
   pages,
-  onChange,
+  onChange=x=>x,
   value,
   maxVisiblePages,
 }) => {
