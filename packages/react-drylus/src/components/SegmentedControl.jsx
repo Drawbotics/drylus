@@ -35,6 +35,17 @@ const styles = {
       background: ${sv.white};
     }
   `,
+  bullet: css`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 5px 1px 5px;
+    background: ${sv.brand};
+    color: ${sv.white};
+    border-radius: 1000px;
+    font-size: 0.8rem;
+    margin-left: ${sv.marginExtraSmall};
+  `,
 };
 
 
@@ -55,6 +66,13 @@ const SegmentedControl = ({
           })}
           onClick={() => onChange(_value[valueKey])}>
           {_value[labelKey]}
+          {do{
+            if (_value.bullet) {
+              <div className={styles.bullet}>
+                {_value.bullet}
+              </div>
+            }
+          }}
         </div>
       ))}
     </div>
@@ -67,6 +85,7 @@ SegmentedControl.propTypes = {
   values: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     label: PropTypes.string.isRequired,
+    bullet: PropTypes.number,
   })),
 
   /** Used to pick each value in the values array */

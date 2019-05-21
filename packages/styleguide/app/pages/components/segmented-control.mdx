@@ -21,3 +21,25 @@ import { ControlledField } from '../utils';
       }]} />
   } />
 </Playground>
+
+
+You can also have a value displayed within each control:
+
+<Playground>
+  <ControlledField component={
+    <SegmentedControl
+      values={[{
+        label: 'First choice',
+        value: 'first',
+        bullet: 4,
+      }, {
+        label: 'Second choice',
+        value: 'second',
+        bullet: 23,
+      }, {
+        label: 'Third',
+        value: 'third',
+        bullet: 123,
+      }]} />
+  } />
+</Playground>
