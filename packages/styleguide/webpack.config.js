@@ -25,7 +25,7 @@ const basePlugins = [
     NODE_ENV: process.env.NODE_ENV,
   }),
   new HtmlWebpackPlugin({
-    filename: 'index.html',
+    filename: isProduction ? '404.html' : 'index.html',
     template: './templates/index.html',
     inject: true,
   }),
@@ -35,8 +35,6 @@ const basePlugins = [
   {
     apply: (compiler) => {
       compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
-        // fs.copySync('./templates/404.html', './dist/404.html');
-        fs.renameSync('./dist/index.html', './dist/404.html');
         fs.copySync('./dist', '../../docs');
       });
     },
