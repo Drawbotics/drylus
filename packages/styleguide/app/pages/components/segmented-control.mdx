@@ -23,7 +23,7 @@ import { ControlledField } from '../utils';
 </Playground>
 
 
-You can also have a value displayed within each control:
+You can also have a number value displayed within each control through `bullet`. Each option can also be `disabled`.
 
 <Playground>
   <ControlledField component={
@@ -36,6 +36,7 @@ You can also have a value displayed within each control:
         label: 'Second choice',
         value: 'second',
         bullet: 23,
+        disabled: true,
       }, {
         label: 'Third',
         value: 'third',

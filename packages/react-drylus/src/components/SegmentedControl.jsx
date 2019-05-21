@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import sv from '@drawbotics/style-vars';
+import sv, { fade } from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 
 
@@ -35,6 +35,19 @@ const styles = {
       background: ${sv.white};
     }
   `,
+  disabled: css`
+    background: none !important;
+    color: ${fade(sv.colorTertiary, 20)} !important;
+
+    &:hover {
+      cursor: not-allowed;
+      background: none !important;
+    }
+
+    & > [data-element="bullet"] {
+      opacity: 0.5;
+    }
+  `,
   bullet: css`
     display: inline-flex;
     align-items: center;
@@ -63,12 +76,13 @@ const SegmentedControl = ({
           key={_value[valueKey]}
           className={cx(styles.control, {
             [styles.active]: value === _value[valueKey],
+            [styles.disabled]: _value.disabled,
           })}
-          onClick={() => onChange(_value[valueKey])}>
+          onClick={! _value.disabled ? () => onChange(_value[valueKey]) : null}>
           {_value[labelKey]}
           {do{
             if (_value.bullet) {
-              <div className={styles.bullet}>
+              <div data-element="bullet" className={styles.bullet}>
                 {_value.bullet}
               </div>
             }
@@ -86,6 +100,7 @@ SegmentedControl.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     label: PropTypes.string.isRequired,
     bullet: PropTypes.number,
+    disabled: PropTypes.bool,
   })),
 
   /** Used to pick each value in the values array */
