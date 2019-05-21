@@ -26,7 +26,7 @@ const basePlugins = [
   }),
   new HtmlWebpackPlugin({
     filename: 'index.html',
-    template: './app/index.html',
+    template: './templates/index.html',
     inject: true,
   }),
   new ProgressPlugin(betterWebpackProgress({
@@ -35,7 +35,7 @@ const basePlugins = [
   {
     apply: (compiler) => {
       compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
-        fs.copySync('./dist/index.html', './dist/404.html');
+        fs.copySync('./templates/404.html', './dist/404.html');
         fs.copySync('./dist', '../../docs');
       });
     },
@@ -61,7 +61,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
-    publicPath: '/',
+    publicPath: isProduction ? '/drylus/' : '/',
   },
   optimization: {
     namedModules: true,
