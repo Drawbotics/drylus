@@ -35,11 +35,8 @@ const basePlugins = [
   {
     apply: (compiler) => {
       compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
-        fs.copy('./dist', '../../docs', (err) => {
-          if (err) {
-            console.error('An error occured while copying the docs folder');
-          }
-        });
+        fs.copySync('./dist/index.html', './dist/404.html');
+        fs.copySync('./dist', '../../docs');
       });
     },
   },
@@ -64,7 +61,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
-    publicPath: isProduction ? '' : '/',
+    publicPath: '/',
   },
   optimization: {
     namedModules: true,
