@@ -147,16 +147,9 @@ export const FlexItem = ({ children, flex }) => {
 };
 
 
-// NOTE: wip responsiveness
 FlexItem.propTypes = {
-  /** Determines how much space a flex item takes within the flex container. Can also be given an object for responsive values */
-  flex: PropTypes.oneOfType([ PropTypes.bool, PropTypes.number, PropTypes.shape({
-    xl: PropTypes.numner,
-    l: PropTypes.numner,
-    m: PropTypes.number,
-    s: PropTypes.number,
-    xs: PropTypes.numner,
-  })]),
+  /** Determines how much space a flex item takes within the flex container. */
+  flex: PropTypes.oneOfType([ PropTypes.bool, PropTypes.number ]),
 };
 
 

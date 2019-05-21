@@ -50,6 +50,13 @@ const styles = {
   fullWidth: css`
     width: 100%;
   `,
+  highlighted: css`
+    tr {
+      &:hover {
+        background: ${sv.neutralLight};
+      }
+    }
+  `,
   leftPadded: css`
     > thead > tr > th:first-of-type {
       padding-left: ${sv.paddingHuge};
@@ -136,6 +143,9 @@ const styles = {
         }
       }
     }
+  `,
+  highlightedRow: css`
+    background: ${sv.neutral} !important;
   `,
   collapsed: css`
     display: none;
@@ -234,12 +244,13 @@ export const TCell = ({
 };
 
 
-export const TRow = ({ children, nested, parent }) => {
+export const TRow = ({ children, nested, parent, highlighted }) => {
   const [ rowsStates, handleSetRowState ] = useContext(RowsContext);
   const collapsed = nested && ! rowsStates[nested];
   return (
     <tr className={cx(styles.row, {
         [styles.collapsed]: collapsed,
+        [styles.highlightedRow]: highlighted,
       })}
       data-nested={nested || undefined}
       data-parent={parent || undefined}>
@@ -335,6 +346,7 @@ const Table = ({
   sortableBy,
   activeHeader,
   onClickHeader,
+  highlighted,
 }) => {
   const [rowsStates, setRowState] = useState({});
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
@@ -346,6 +358,7 @@ const Table = ({
     <table className={cx(styles.base, {
       [styles.fullWidth]: fullWidth,
       [styles.leftPadded]: hasNestedData || withNesting,
+      [styles.highlighted]: highlighted && ! (hasNestedData || withNesting),
     })}>
       <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
         {do{
@@ -419,6 +432,9 @@ Table.propTypes = {
 
   /** Called when a sortable column header is clicked, returns the key of the clicked header */
   onClickHeader: PropTypes.func,
+
+  /** Highlights the rows when hovered. Does not work on tables with nested data */
+  highlighted: PropTypes.bool,
 };
 
 

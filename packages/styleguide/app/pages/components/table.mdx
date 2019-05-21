@@ -38,6 +38,31 @@ Here is a simple example of a table. By default it has no elevation. If the tabl
   </div>
 </Playground>
 
+Particular rows can also be set as `highlighted`. This is useful if a row can be "active" and opens a modal or a panel when selected.
+<Playground>
+  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+    <Table highlighted>
+      <THead>
+        <TCell>Name</TCell>
+        <TCell>Surname</TCell>
+        <TCell>Age</TCell>
+      </THead>
+      <TBody>
+        <TRow highlighted>
+          <TCell>Nick</TCell>
+          <TCell>Jonas</TCell>
+          <TCell>20</TCell>
+        </TRow>
+        <TRow>
+          <TCell>Spongebob</TCell>
+          <TCell>Squarepants</TCell>
+          <TCell>35</TCell>
+        </TRow>
+      </TBody>
+    </Table>
+  </div>
+</Playground>
+
 
 #### Complex example with nested data
 The following example includes a "manually" built table with nested tables up to 4 levels.
