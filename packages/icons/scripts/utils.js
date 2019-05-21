@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 
-const ICONS_CDN_PATH = 'http://cdn.drawbotics.com/drycons';
+const ICONS_CDN_PATH = 'https://cdn.drawbotics.com/drycons';
 
 
 function setFontSize(size, file) {

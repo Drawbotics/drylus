@@ -35,7 +35,8 @@ const basePlugins = [
   {
     apply: (compiler) => {
       compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
-        fs.copySync('./templates/404.html', './dist/404.html');
+        // fs.copySync('./templates/404.html', './dist/404.html');
+        fs.renameSync('./dist/index.html', './dist/404.html');
         fs.copySync('./dist', '../../docs');
       });
     },

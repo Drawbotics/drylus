@@ -2,21 +2,10 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="minimal-ui, width=device-width, height=device-height, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
     <title>Drawbotics Styleguide</title>
-    <script type="text/javascript">
-      var segmentCount = 0;
-
-      var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?p=/' +
-        l.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
-
-    </script>
   </head>
-  <body>
-  </body>
+  <body touch-action="none" unresolved>
+    <div id="styleguide"></div>
+  <script type="text/javascript" src="/drylus/bundle.js"></script></body>
 </html>
