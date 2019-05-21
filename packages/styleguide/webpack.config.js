@@ -62,7 +62,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js',
-    publicPath: isProduction ? '/drylus/' : '/',
+    publicPath: isProduction ? '' : '/',
   },
   optimization: {
     namedModules: true,
@@ -130,6 +130,5 @@ module.exports = {
     noInfo: false,
     clientLogLevel: 'none',
     overlay: true,
-    contentBase: [path.join(__dirname, '/dist'), path.join(__dirname, 'node_modules')],
   },
 };
