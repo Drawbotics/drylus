@@ -6,6 +6,7 @@ import table from './table';
 import label from './label';
 import panel from './panel';
 import pagination from './pagination';
+import badge from './badge';
 
 
 const components = {
@@ -17,6 +18,7 @@ const components = {
   label,
   panel,
   pagination,
+  badge,
 };
 
 

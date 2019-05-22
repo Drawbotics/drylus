@@ -30,13 +30,13 @@ const styles = {
 };
 
 
-const Code = ({ children, className, style }) => {
+const Code = ({ children, className, style: styleProp }) => {
   const language = className?.replace(/language-/, '');
 
   return (
     <Highlight {...defaultProps} theme={theme} code={children} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <div className={styles.codeWrapper} style={style}>
+        <div className={styles.codeWrapper} style={styleProp}>
           <pre className={cx(className, styles.code)} style={style}>
             {tokens.map((line, i) => (
               <div key={i} {...getLineProps({line, key: i})}>

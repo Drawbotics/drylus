@@ -3,6 +3,9 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 
+import Categories from '../base/Categories';
+import Badge from './Badge';
+
 
 const styles = {
   base: css`
@@ -49,14 +52,7 @@ const styles = {
     }
   `,
   bullet: css`
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2px 5px 1px 5px;
-    background: ${sv.brand};
-    color: ${sv.white};
-    border-radius: 1000px;
-    font-size: 0.8rem;
+    display: inline-block;
     margin-left: ${sv.marginExtraSmall};
   `,
 };
@@ -83,7 +79,7 @@ const SegmentedControl = ({
           {do{
             if (_value.bullet) {
               <div data-element="bullet" className={styles.bullet}>
-                {_value.bullet}
+                <Badge category={Categories.BRAND} value={_value.bullet} max={99} />
               </div>
             }
           }}
