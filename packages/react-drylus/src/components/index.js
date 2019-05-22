@@ -12,3 +12,4 @@ export Label from './Label';
 export Panel, { PanelHeader, PanelBody, PanelFooter, PanelSection } from './Panel';
 export Pagination from './Pagination';
 export Badge from './Badge';
+export Drawer from './Drawer';

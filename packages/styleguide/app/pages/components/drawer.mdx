@@ -1,0 +1,71 @@
+import { useState } from 'react';
+import { Drawer, Layout, LayoutPositions, Button } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Drawer
+Similarly to how a Modal works, the Drawer component is stateless, meaning you should control its visibility. It serves a similar purpose to the modal, but the content is served from the right side of the page, and can either overlay the whole page (like a modal) or be inline with the content.
+
+All the rendered drawers are automatically attached to the end of the DOM through a `drawers-outlet`.
+
+export const DrawerController = ({ component: Component }) => {
+  const [visible, setVisibility] = useState(false);
+  return (
+    <div style={{ border: '2px solid red', background: 'lightgrey' }}>
+      <Layout bar={
+        React.cloneElement(Component, {
+          visible,
+          onClickClose: () => setVisibility(false),
+          onClickOverlay: () => setVisibility(false),
+        })
+      } position={LayoutPositions.RIGHT}>
+        <div style={{ height: 500, padding: 20 }}>
+          <Button onClick={() => setVisibility(true)}>Show drawer</Button>
+          <div style={{
+            width: '100%',
+            height: 200,
+            background: 'orange',
+            marginTop: 20,
+            padding: 20,
+          }}>
+            Im the body content
+          </div>
+        </div>
+      </Layout>
+    </div>
+  );
+};
+
+
+Usage:
+```jsx
+const Example = () => {
+  const [drawerVisible, setDrawerVisibility] = useState(false);
+
+  return (
+    <div>
+      <Button onClick={() => setDrawerVisibility(true)}>Click to show drawer</Button>
+      <Drawer
+        visible={drawerVisible}
+        onClickClose={() => setDrawerVisibility(false)}>
+        <div>
+          Im some content
+        </div>
+      </Drawer>
+    </div>
+  );
+};
+```
+
+Interactive example:
+
+<Playground component={Drawer}>
+  <DrawerController component={
+    <Drawer visible={false}>
+      <div style={{ height: 1000 }}>
+        Im some content
+      </div>
+    </Drawer>
+  } />
+</Playground>

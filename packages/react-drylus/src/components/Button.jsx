@@ -143,24 +143,26 @@ const styles = {
   `,
   iconOnly: css`
     border-radius: 1000px;
-    padding: ${sv.paddingSmall};
+    height: ${sv.marginExtraLarge};
+    width: ${sv.marginExtraLarge};
+    padding: 0;
 
     > i {
-      height: 0.9rem;
-      width: 0.9rem;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-right: 0;
       margin-left: 0;
+      margin-bottom: -3px;
     }
   `,
   smallIcon: css`
-    padding: ${sv.paddingExtraSmall};
+    height: ${sv.marginLarge};
+    width: ${sv.marginLarge};
 
     > i {
-      height: initial;
-      width: initial;
+      font-size: 1rem;
+      margin-bottom: -3px;
     }
   `,
 };

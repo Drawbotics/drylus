@@ -63,6 +63,7 @@ export const linkedinColor = '#0077b5';
 
 export const lighterOverlay = fade(grey900, 5);
 export const lightOverlay = fade(grey900, 10);
+export const darkOverlay = fade(grey900, 90);
 
 // BORDERS
 const baseBorderRadius = '5px';
