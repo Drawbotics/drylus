@@ -24,6 +24,7 @@ const styles = {
     background: ${sv.darkOverlay};
     display: flex;
     justify-content: flex-end;
+    z-index: 99999;
 
     & [data-element="wrapper"] {
       box-shadow: -5px 0px 15px ${sv.grey900};
@@ -136,6 +137,7 @@ const Drawer = ({
   onClickClose=x=>x,
   onClickOverlay=x=>x,
   width: rawWidth,
+  raw,
 }) => {
   const [outletElement, setOutletElement] = useState(null);
   const overlayElement = useRef();
@@ -163,6 +165,8 @@ const Drawer = ({
 
   const width = typeof rawWidth === 'number' ? `${rawWidth}px` : rawWidth;
 
+  const content = raw ? children : <BaseDrawer onClickClose={onClickClose}>{children}</BaseDrawer>;
+
   if (asOverlay) {
     if (! outletElement) return '';
     const handleClickOverlay = (e) => e.target === overlayElement?.current ? onClickOverlay() : null;
@@ -181,9 +185,7 @@ const Drawer = ({
         }}>
         <div onClick={handleClickOverlay} className={styles.overlay} ref={overlayElement}>
           <div data-element="wrapper" style={{ width }}>
-            <BaseDrawer onClickClose={onClickClose}>
-              {children}
-            </BaseDrawer>
+            {content}
           </div>
         </div>
       </CSSTransition>,
@@ -206,9 +208,7 @@ const Drawer = ({
       }}>
       <div className={styles.outerWrapper}>
         <div className={styles.wrapper}>
-          <BaseDrawer onClickClose={onClickClose}>
-            {children}
-          </BaseDrawer>
+          {content}
         </div>
       </div>
     </CSSTransition>
@@ -234,12 +234,16 @@ Drawer.propTypes = {
 
   /** Width of the drawer */
   width: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
+
+  /** If true, the children are rendered without decoration, you have to style your own drawer */
+  raw: PropTypes.bool,
 };
 
 
 Drawer.defaultProps = {
   asOverlay: false,
   width: 400,
+  raw: false,
 };
 
 

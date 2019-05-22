@@ -69,3 +69,15 @@ Interactive example:
     </Drawer>
   } />
 </Playground>
+
+
+The `raw` property can be useful if you want to have some custom content in your drawer that does not follow the "classic" style. E.g.
+<Playground>
+  <DrawerController component={
+    <Drawer asOverlay raw visible={false}>
+      <div style={{ height: '100%', width: '100%' }}>
+        <img src="https://i.ytimg.com/vi/qfS84lQbkw8/maxresdefault.jpg" style={{ objectFit: 'cover', height: '100%', width: '100%' }} />
+      </div>
+    </Drawer>
+  } />
+</Playground>
