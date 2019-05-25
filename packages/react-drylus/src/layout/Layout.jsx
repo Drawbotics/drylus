@@ -58,6 +58,9 @@ const styles = {
     }
   `,
   bar: css`
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
   `,
   content: css`
     display: flex;

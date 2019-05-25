@@ -114,6 +114,17 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(png|jpe?g|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
   devServer: {

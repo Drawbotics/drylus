@@ -8,6 +8,8 @@ import panel from './panel';
 import pagination from './pagination';
 import badge from './badge';
 import drawer from './drawer';
+import combinationFilter from './combination-filter';
+import icon from './icon';
 
 
 const components = {
@@ -21,6 +23,8 @@ const components = {
   pagination,
   badge,
   drawer,
+  combinationFilter,
+  icon,
 };
 
 

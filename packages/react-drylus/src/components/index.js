@@ -13,3 +13,4 @@ export Panel, { PanelHeader, PanelBody, PanelFooter, PanelSection } from './Pane
 export Pagination from './Pagination';
 export Badge from './Badge';
 export Drawer from './Drawer';
+export CombinationFilter from './CombinationFilter';

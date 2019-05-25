@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import { Link } from 'react-router-dom';
 import omit from 'lodash/omit';
+import startCase from 'lodash/startCase';
 
 
 const styles = {
@@ -46,7 +47,7 @@ export function generateLinks(route, routeName, parent='') {
               {do{
                 if (route.index) {
                   <div className={styles.link}>
-                    <Link to={newPath}>{routeName}</Link>
+                    <Link to={newPath}>{startCase(routeName)}</Link>
                   </div>
                 }
                 else {
@@ -65,7 +66,7 @@ export function generateLinks(route, routeName, parent='') {
   else {
     return (
       <div className={styles.link} key={newPath}>
-        <Link to={newPath}>{routeName}</Link>
+        <Link to={newPath}>{startCase(routeName)}</Link>
       </div>
     );
   }

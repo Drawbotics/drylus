@@ -27,7 +27,7 @@ const styles = {
     z-index: 99999;
 
     & [data-element="wrapper"] {
-      box-shadow: -5px 0px 15px ${sv.grey900};
+      box-shadow: -5px 0px 15px ${sv.neutralDarker};
     }
   `,
   wrapper: css`

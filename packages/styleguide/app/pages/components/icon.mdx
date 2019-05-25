@@ -1,0 +1,58 @@
+import { Icon, Flex, FlexItem, FlexJustify, Sizes } from '@drawbotics/react-drylus';
+import { css } from 'emotion';
+import sv from '@drawbotics/style-vars';
+
+import Playground from '~/components/Playground';
+
+import icons from '../../../../icons/icons';
+
+
+# Icon
+By default the icon has no color, it inherits it from the parent component/element.
+
+<Playground component={Icon}>
+  <Icon name="globe" />
+</Playground>
+
+
+Here is the full set of available icons:
+
+export const styles = {
+  icon: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: ${sv.white};
+    padding: ${sv.defaultPadding};
+    color: ${sv.colorPrimary};
+    transition: ${sv.defaultTransition};
+    &:hover {
+      cursor: pointer;
+      box-shadow: ${sv.elevation1};
+    }
+  `,
+  iconBox: css`
+    margin-bottom: ${sv.marginSmall};
+  `,
+};
+
+export const Icons = () => {
+  const names = icons.map((name) => name.split('.')[0].replace('/', ''));
+  return (
+    <Flex wrap vSpacing={Sizes.SMALL} hSpacing={Sizes.SMALL}>
+      {names.map((name) => (
+        <FlexItem key={name} flex={1/4}>
+          <div className={styles.icon}>
+            <div className={styles.iconBox}>
+              <Icon name={name} />
+            </div>
+            <div>{name}</div>
+          </div>
+        </FlexItem>
+      ))}
+    </Flex>
+  );
+};
+
+<Icons />

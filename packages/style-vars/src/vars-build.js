@@ -120,7 +120,7 @@ const lighterOverlay = fade(grey900, 5);
 exports.lighterOverlay = lighterOverlay;
 const lightOverlay = fade(grey900, 10);
 exports.lightOverlay = lightOverlay;
-const darkOverlay = fade(grey900, 90); // BORDERS
+const darkOverlay = fade(neutralDarker, 90); // BORDERS
 
 exports.darkOverlay = darkOverlay;
 const baseBorderRadius = '5px';

@@ -10,6 +10,7 @@ import Sizes from '../base/Sizes';
 const styles = {
   base: css`
     display: flex;
+    margin: 0;
   `,
   horizontal: css`
     flex-direction: row;
@@ -56,45 +57,45 @@ const styles = {
     flex: 1;
   `,
   hSpacingSmall: css`
-    margin-bottom: calc(${sv.marginSmall} * -1);
+    margin-top: calc(${sv.marginSmall} * -1);
 
     & > div {
-      margin-bottom: ${sv.marginSmall};
+      padding-top: ${sv.paddingSmall};
     }
   `,
   hSpacingDefault: css`
-    margin-bottom: calc(${sv.defaultMargin} * -1);
+    margin-top: calc(${sv.defaultMargin} * -1);
 
     & > div {
-      margin-bottom: ${sv.defaultMargin};
+      padding-top: ${sv.defaultPadding};
     }
   `,
   hSpacingLarge: css`
-    margin-bottom: calc(${sv.marginLarge} * -1);
+    margin-top: calc(${sv.marginLarge} * -1);
 
     & > div {
-      margin-bottom: ${sv.marginLarge};
+      padding-top: ${sv.paddingLarge};
     }
   `,
   vSpacingSmall: css`
-    margin-right: calc(${sv.marginSmall} * -1);
+    margin-left: calc(${sv.marginSmall} * -1);
 
     & > div {
-      margin-right: ${sv.marginSmall};
+      padding-left: ${sv.paddingSmall};
     }
   `,
   vSpacingDefault: css`
-    margin-right: calc(${sv.defaultMargin} * -1);
+    margin-left: calc(${sv.defaultMargin} * -1);
 
     & > div {
-      margin-right: ${sv.defaultMargin};
+      padding-left: ${sv.defaultPadding};
     }
   `,
   vSpacingLarge: css`
-    margin-right: calc(${sv.marginLarge} * -1);
+    margin-left: calc(${sv.marginLarge} * -1);
 
     & > div {
-      margin-right: ${sv.marginLarge};
+      padding-left: ${sv.paddingLarge};
     }
   `,
 };
