@@ -42,6 +42,34 @@ const basePlugins = [
 ];
 
 
+const devPlugins = [
+  ...basePlugins,
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NoEmitOnErrorsPlugin(),
+  new FriendlyErrorsWebpackPlugin({
+    clearConsole: true,
+    compilationSuccessInfo: {
+      messages: [
+        `The styleguide is running at http://localhost:${WEBPACK_PORT}`,
+        `The styleguide is running at http://${ip.address()}:${WEBPACK_PORT}`
+      ],
+    },
+  }),
+];
+
+
+const prodPlugins = [
+  ...basePlugins,
+  {
+    apply: (compiler) => {
+      compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
+        fs.copySync('./dist', '../../docs');
+      });
+    },
+  },
+];
+
+
 module.exports = {
   mode: process.env.NODE_ENV,
   devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
@@ -66,20 +94,7 @@ module.exports = {
     namedModules: true,
     minimize: false,
   },
-  plugins: isProduction ? basePlugins : [
-    ...basePlugins,
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new FriendlyErrorsWebpackPlugin({
-      clearConsole: true,
-      compilationSuccessInfo: {
-        messages: [
-          `The styleguide is running at http://localhost:${WEBPACK_PORT}`,
-          `The styleguide is running at http://${ip.address()}:${WEBPACK_PORT}`
-        ],
-      },
-    }),
-  ],
+  plugins: isProduction ? prodPlugins : devPlugins,
   module: {
     rules: [
       {
