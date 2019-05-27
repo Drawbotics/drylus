@@ -1,7 +1,10 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/style-vars';
+import sv, { fade } from '@drawbotics/style-vars';
+
+import Categories from '../base/Categories';
+import Badge from './Badge';
 
 
 const styles = {
@@ -22,12 +25,34 @@ const styles = {
       z-index: 1;
     }
   `,
+  vertical: css`
+    flex-direction: column;
+    align-items: stretch;
+
+    &::after {
+      content: none;
+    }
+
+    & > div {
+      flex: 1;
+      justify-content: space-between;
+      color: ${sv.colorPrimary};
+      border-bottom: 1px solid ${sv.neutral};
+
+      &::after {
+        top: 0;
+        height: 100%;
+        width: 0px;
+      }
+    }
+  `,
   item: css`
+    display: flex;
+    align-items: center;
     padding: ${sv.defaultPadding} ${sv.paddingLarge};
     color: ${sv.colorSecondary};
     transition: ${sv.defaultTransition};
     position: relative;
-    font-weight: 400;
 
     &:hover {
       cursor: pointer;
@@ -53,6 +78,28 @@ const styles = {
       height: 3px;
     }
   `,
+  verticalActive: css`
+    background: ${fade(sv.brand, 15)};
+
+    &::after {
+      width: 4px !important;
+    }
+  `,
+  disabled: css`
+    color: ${sv.colorDisabled} !important;
+
+    &:hover {
+      cursor: not-allowed;
+    }
+
+    & > [data-element="bullet"] {
+      opacity: 0.5;
+    }
+  `,
+  bullet: css`
+    display: inline-block;
+    margin-left: ${sv.marginExtraSmall};
+  `,
 };
 
 
@@ -65,15 +112,33 @@ const TabNavigation = ({
   vertical,
 }) => {
   return (
-    <div className={styles.base}>
+    <div className={cx(styles.base, {
+      [styles.vertical]: vertical,
+    })}>
       {values.map((_value) => (
         <div
           key={_value[valueKey]}
           className={cx(styles.item, {
             [styles.active]: value === _value[valueKey],
+            [styles.verticalActive]: vertical && value === _value[valueKey],
+            [styles.disabled]: _value.disabled,
           })}
           onClick={! _value.disabled ? () => onChange(_value[valueKey]) : null}>
           {_value[labelKey]}
+          {do{
+            if (_value.bullet) {
+              <div data-element="bullet" className={styles.bullet}>
+                {do{
+                  if (vertical) {
+                    _value.bullet
+                  }
+                  else {
+                    <Badge category={Categories.BRAND} value={_value.bullet} max={99} />
+                  }
+                }}
+              </div>
+            }
+          }}
         </div>
       ))}
     </div>
