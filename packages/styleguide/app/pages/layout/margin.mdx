@@ -1,0 +1,28 @@
+import { Margin, Sizes } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+# Margin
+
+Low level component used to wrap other elements with margin.
+
+<Playground component={Margin}>
+  <div style={{ border: '1px solid red', display: 'inline-block' }}>
+    <Margin size={Sizes.LARGE}>
+      <div style={{ background: 'green', height: 100, width: 100 }} />
+    </Margin>
+  </div>
+</Playground>
+
+You can also pass an object to specify the margin on each side:
+
+<Playground>
+  <div style={{ border: '1px solid red', display: 'inline-block' }}>
+    <Margin size={{
+      top: Sizes.LARGE,
+      bottom: Sizes.EXTRA_SMALL,
+    }}>
+      <div style={{ background: 'green', height: 100, width: 100 }} />
+    </Margin>
+  </div>
+</Playground>

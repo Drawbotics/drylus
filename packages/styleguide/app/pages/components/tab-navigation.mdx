@@ -14,7 +14,7 @@ This is the most basic usage of a tab navigation:
 <Playground component={TabNavigation}>
   <ControlledField component={
     <TabNavigation
-      values={[{
+      options={[{
         label: 'First choice',
         value: 'first',
       }, {
@@ -36,7 +36,7 @@ However it can also be set vertically, and each value may have bullets (similarl
     <ControlledField component={
       <TabNavigation
         vertical
-        values={[{
+        options={[{
           label: 'First choice',
           value: 'first',
           bullet: 4,

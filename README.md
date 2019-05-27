@@ -37,6 +37,12 @@ __style-vars__
 npm run build:vars
 ```
 
+__icons__
+```
+npm run build:icons
+npm run dev:icons
+```
+
 __react-drylus__
 ```
 npm run watch:react

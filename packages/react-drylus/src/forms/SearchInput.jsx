@@ -13,7 +13,7 @@ const styles = {
   `,
   list: css`
     position: absolute;
-    z-index: 999
+    z-index: 999;
     top: 100%;
     margin-top: ${sv.marginExtraSmall};
     min-width: 100%;

@@ -32,13 +32,6 @@ const basePlugins = [
   new ProgressPlugin(betterWebpackProgress({
     mode: 'compact',
   })),
-  {
-    apply: (compiler) => {
-      compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
-        fs.copySync('./dist', '../../docs');
-      });
-    },
-  },
 ];
 
 
