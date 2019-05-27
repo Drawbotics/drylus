@@ -10,6 +10,7 @@ import badge from './badge';
 import drawer from './drawer';
 import combinationFilter from './combination-filter';
 import icon from './icon';
+import tabNavigation from './tab-navigation';
 
 
 const components = {
@@ -25,6 +26,7 @@ const components = {
   drawer,
   combinationFilter,
   icon,
+  tabNavigation,
 };
 
 

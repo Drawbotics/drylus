@@ -14,3 +14,4 @@ export Pagination from './Pagination';
 export Badge from './Badge';
 export Drawer from './Drawer';
 export CombinationFilter from './CombinationFilter';
+export TabNavigation from './TabNavigation';

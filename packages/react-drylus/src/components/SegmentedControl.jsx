@@ -62,8 +62,8 @@ const SegmentedControl = ({
   value,
   onChange=x=>x,
   values,
-  valueKey='value',
-  labelKey='label',
+  valueKey,
+  labelKey,
 }) => {
   return (
     <div className={styles.base}>

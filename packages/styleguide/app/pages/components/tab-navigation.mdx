@@ -1,0 +1,23 @@
+import { TabNavigation } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+import { ControlledField } from '../utils';
+
+
+# Tab Navigation
+
+<Playground component={TabNavigation}>
+  <ControlledField component={
+    <TabNavigation
+      values={[{
+        label: 'First choice',
+        value: 'first',
+      }, {
+        label: 'Second choice',
+        value: 'second',
+      }, {
+        label: 'Third',
+        value: 'third',
+      }]} />
+  } />
+</Playground>
