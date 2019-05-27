@@ -3,6 +3,7 @@ import index from './index.mdx';
 import input from './input';
 import checkbox from './checkbox';
 import radioGroup from './radio-group';
+import searchInput from './search-input';
 
 
 const components = {
@@ -11,6 +12,7 @@ const components = {
   input,
   checkbox,
   radioGroup,
+  searchInput,
 };
 
 

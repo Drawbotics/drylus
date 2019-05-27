@@ -1,13 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import { css, cx } from 'emotion';
 import sv, { fade } from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 
 import RoundIcon from '../components/RoundIcon';
+import Button from '../components/Button';
+import Select from './Select';
 import Sizes from '../base/Sizes';
 import Categories from '../base/Categories';
 import Hint from './Hint';
-import { useEventListener } from '../utils/hooks';
 
 
 const styles = {
@@ -109,6 +110,8 @@ const styles = {
     select, button {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
+      border-top-left-radius: ${sv.defaultBorderRadius};
+      border-bottom-left-radius: ${sv.defaultBorderRadius};
     }
     select {
       background-color: transparent;
@@ -138,9 +141,9 @@ const styles = {
 };
 
 
-const Input = ({
+const Input = forwardRef(({
   value,
-  onChange=x=>x,
+  onChange,
   error,
   valid,
   hint,
@@ -148,13 +151,11 @@ const Input = ({
   suffix,
   disabled,
   ...rest,
-}) => {
-  const inputElement = useRef(null);
+}, ref) => {
   const [isFocused, setFocused] = useState(false);
-  const handleOnEvent = () => inputElement.current === document.activeElement ? setFocused(true) : setFocused(false);
   const handleOnChange = (e) => onChange ? onChange(e.target.value, e.target.name) : null;
-  useEventListener('click', handleOnEvent);
-  useEventListener('keydown', handleOnEvent);
+  const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
+  const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
   return (
     <div className={cx(styles.base, {
       [styles.valid]: !! value && valid,
@@ -164,7 +165,7 @@ const Input = ({
         {do{
           if (prefix) {
             <div className={cx(styles.fix, styles.prefix, {
-              [styles.prefixComponent]: typeof prefix !== 'string',
+              [styles.prefixComponent]: isPrefixComponent,
               [styles.transparentButton]: ! prefix?.props?.category,
             })}>
               {prefix}
@@ -186,19 +187,21 @@ const Input = ({
           }}
           <input
             disabled={disabled}
-            ref={inputElement}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
             onChange={handleOnChange}
             className={cx(styles.input, {
               [styles.straightLeft]: prefix,
               [styles.straightRight]: suffix,
             })}
             value={value}
+            ref={ref}
             {...rest} />
         </div>
         {do{
           if (suffix) {
             <div className={cx(styles.fix, styles.suffix, {
-              [styles.suffixComponent]: typeof suffix !== 'string',
+              [styles.suffixComponent]: isSuffixComponent,
               [styles.transparentButton]: ! suffix?.props?.category,
             })}>
               {suffix}
@@ -216,7 +219,10 @@ const Input = ({
       }}
     </div>
   );
-};
+});
+
+
+Input.displayName = 'Input';
 
 
 Input.propTypes = {
@@ -230,7 +236,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
 
   /** Triggered when the value is changed (typing) */
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
 
   /** Small text shown below the box, replaced by error if present */
   hint: PropTypes.string,
