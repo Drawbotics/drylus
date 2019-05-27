@@ -20,7 +20,11 @@ const CombinationFilter = () => {
 
 
 CombinationFilter.propTypes = {
+};
 
+
+CombinationFilter.defaultProps = {
+  clearLabel: 'Clear',
 };
 
 

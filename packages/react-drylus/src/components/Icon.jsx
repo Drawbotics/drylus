@@ -3,6 +3,9 @@ import { css, cx, injectGlobal } from 'emotion';
 import PropTypes from 'prop-types';
 import generateIconStyles from '@drawbotics/icons/dist/drycons.js';
 import packageJson from '@drawbotics/icons/package.json';
+import sv from '@drawbotics/style-vars';
+
+import { Categories } from '../base';
 
 import env from '../utils/get-static-env';
 
@@ -19,13 +22,29 @@ const styles = {
   bold: css`
     font-weight: bold !important;
   `,
+  danger: css`
+    color: ${sv.red};
+  `,
+  info: css`
+    color: ${sv.blue};
+  `,
+  success: css`
+    color: ${sv.green};
+  `,
+  warning: css`
+    color: ${sv.orange};
+  `,
+  brand: css`
+    color: ${sv.brand};
+  `,
 };
 
 
-const Icon = ({ name, bold, onClick }) => {
+const Icon = ({ name, bold, onClick, category }) => {
   return (
     <i className={cx(styles.base, `Drycon Drycon-${name}`, {
       [styles.bold]: bold,
+      [styles[category?.toLowerCase()]]: category,
     })} onClick={onClick} />
   );
 }
@@ -40,6 +59,15 @@ Icon.propTypes = {
 
   /** Triggered when the icon is clicked */
   onClick: PropTypes.func,
+
+  /** Category of the icon */
+  category: PropTypes.oneOf([
+    Categories.DANGER,
+    Categories.INFO,
+    Categories.SUCCESS,
+    Categories.WARNING,
+    Categories.BRAND,
+  ]),
 }
 
 
