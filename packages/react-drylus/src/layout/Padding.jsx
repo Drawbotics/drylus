@@ -9,87 +9,87 @@ import Sizes from '../base/Sizes';
 
 const styles = {
   base: css`
-    margin: ${sv.defaultMargin};
+    padding: ${sv.defaultPadding};
   `,
-  resetMargin: css`
-    margin: 0;
+  resetPadding: css`
+    padding: 0;
   `,
   extraSmall: css`
-    margin: ${sv.marginExtraSmall};
+    padding: ${sv.paddingExtraSmall};
   `,
   small: css`
-    margin: ${sv.marginSmall};
+    padding: ${sv.paddingSmall};
   `,
   large: css`
-    margin: ${sv.marginLarge};
+    padding: ${sv.paddingLarge};
   `,
   extraLarge: css`
-    margin: ${sv.marginExtraLarge};
+    padding: ${sv.paddingExtraLarge};
   `,
   extraSmallLeft: css`
-    margin-left: ${sv.marginExtraSmall};
+    padding-left: ${sv.paddingExtraSmall};
   `,
   extraSmallRight: css`
-    margin-right: ${sv.marginExtraSmall};
+    padding-right: ${sv.paddingExtraSmall};
   `,
   extraSmallTop: css`
-    margin-top: ${sv.marginExtraSmall};
+    padding-top: ${sv.paddingExtraSmall};
   `,
   extraSmallBottom: css`
-    margin-bottom: ${sv.marginExtraSmall};
+    padding-bottom: ${sv.paddingExtraSmall};
   `,
   smallLeft: css`
-    margin-left: ${sv.marginSmall};
+    padding-left: ${sv.paddingSmall};
   `,
   smallRight: css`
-    margin-right: ${sv.marginSmall};
+    padding-right: ${sv.paddingSmall};
   `,
   smallTop: css`
-    margin-top: ${sv.marginSmall};
+    padding-top: ${sv.paddingSmall};
   `,
   smallBottom: css`
-    margin-bottom: ${sv.marginSmall};
+    padding-bottom: ${sv.paddingSmall};
   `,
   defaultLeft: css`
-    margin-left: ${sv.defaultMargin};
+    padding-left: ${sv.defaultPadding};
   `,
   defaultRight: css`
-    margin-right: ${sv.defaultMargin};
+    padding-right: ${sv.defaultPadding};
   `,
   defaultTop: css`
-    margin-top: ${sv.defaultMargin};
+    padding-top: ${sv.defaultPadding};
   `,
   defaultBottom: css`
-    margin-bottom: ${sv.defaultMargin};
+    padding-bottom: ${sv.defaultPadding};
   `,
   largeLeft: css`
-    margin-left: ${sv.marginLarge};
+    padding-left: ${sv.paddingLarge};
   `,
   largeRight: css`
-    margin-right: ${sv.marginLarge};
+    padding-right: ${sv.paddingLarge};
   `,
   largeTop: css`
-    margin-top: ${sv.marginLarge};
+    padding-top: ${sv.paddingLarge};
   `,
   largeBottom: css`
-    margin-bottom: ${sv.marginLarge};
+    padding-bottom: ${sv.paddingLarge};
   `,
   extraLargeLeft: css`
-    margin-left: ${sv.marginExtraLarge};
+    padding-left: ${sv.paddingExtraLarge};
   `,
   extraLargeRight: css`
-    margin-right: ${sv.marginExtraLarge};
+    padding-right: ${sv.paddingExtraLarge};
   `,
   extraLargeTop: css`
-    margin-top: ${sv.marginExtraLarge};
+    padding-top: ${sv.paddingExtraLarge};
   `,
   extraLargeBottom: css`
-    margin-bottom: ${sv.marginExtraLarge};
+    padding-bottom: ${sv.paddingExtraLarge};
   `,
 };
 
 
-const Margin = ({
+const Padding = ({
   children,
   size,
   style,
@@ -98,7 +98,7 @@ const Margin = ({
   return (
     <div className={cx(styles.base, {
       [styles[camelCase(size)]]: isUniform && size,
-      [styles.resetMargin]: ! isUniform,
+      [styles.resetPadding]: ! isUniform,
       [styles[camelCase(`${size.left}_LEFT`)]]: ! isUniform && size.left,
       [styles[camelCase(`${size.right}_RIGHT`)]]: ! isUniform && size.right,
       [styles[camelCase(`${size.top}_TOP`)]]: ! isUniform && size.top,
@@ -110,8 +110,8 @@ const Margin = ({
 };
 
 
-Margin.propTypes = {
-  /** Determines the amount of margin given to the component. If a single value, the margin is applied equally to each side */
+Padding.propTypes = {
+  /** Determines the amount of padding given to the component. If a single value, the padding is applied equally to each side */
   size: PropTypes.oneOfType([
     PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
     PropTypes.shape({
@@ -122,7 +122,7 @@ Margin.propTypes = {
     }),
   ]).isRequired,
 
-  /** The content of the margin wrapper */
+  /** The content of the padding wrapper */
   children: PropTypes.node,
 
   /** Prop to override any style if necessary, use sparingly */
@@ -130,4 +130,4 @@ Margin.propTypes = {
 };
 
 
-export default Margin;
+export default Padding;

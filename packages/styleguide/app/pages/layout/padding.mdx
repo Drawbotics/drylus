@@ -1,0 +1,36 @@
+import { Padding, Sizes } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+# Padding
+
+Low level component used to wrap other elements with padding.
+
+<Playground component={Padding}>
+  <div style={{ border: '1px solid red', display: 'inline-block' }}>
+    <Padding size={Sizes.LARGE}>
+      <div style={{ background: 'green', height: 100, width: 100 }} />
+    </Padding>
+  </div>
+</Playground>
+
+You can also pass an object to specify the padding on each side. As you can see, the paddings are not combined and each element keeps its padding as expected.
+
+<Playground>
+  <>
+    <Padding size={{
+      top: Sizes.LARGE,
+      bottom: Sizes.EXTRA_SMALL,
+      left: Sizes.DEFAULT,
+    }} style={{ border: '1px solid red' }}>
+      <div style={{ background: 'green', height: 100, width: 100 }} />
+    </Padding>
+    <Padding size={{
+      top: Sizes.LARGE,
+      bottom: Sizes.EXTRA_SMALL,
+      left: Sizes.DEFAULT,
+    }} style={{ border: '1px solid red' }}>
+      <div style={{ background: 'green', height: 100, width: 100 }} />
+    </Padding>
+  </>
+</Playground>
