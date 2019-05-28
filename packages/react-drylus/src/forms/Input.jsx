@@ -141,7 +141,7 @@ const styles = {
 };
 
 
-const Input = forwardRef(({
+const Input = ({
   value,
   onChange,
   error,
@@ -150,8 +150,9 @@ const Input = forwardRef(({
   prefix,
   suffix,
   disabled,
+  inputRef,
   ...rest,
-}, ref) => {
+}) => {
   const [isFocused, setFocused] = useState(false);
   const handleOnChange = (e) => onChange ? onChange(e.target.value, e.target.name) : null;
   const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
@@ -195,7 +196,7 @@ const Input = forwardRef(({
               [styles.straightRight]: suffix,
             })}
             value={value}
-            ref={ref}
+            ref={inputRef}
             {...rest} />
         </div>
         {do{
@@ -219,10 +220,15 @@ const Input = forwardRef(({
       }}
     </div>
   );
+};
+
+
+export const InputWithRef = forwardRef((props, ref) => {
+  return <Input {...props} inputRef={ref} />
 });
 
 
-Input.displayName = 'Input';
+InputWithRef.displayName = 'Input';
 
 
 Input.propTypes = {

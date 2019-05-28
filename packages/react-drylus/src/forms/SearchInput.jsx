@@ -3,7 +3,7 @@ import sv from '@drawbotics/style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 
-import Input from './Input';
+import { InputWithRef } from './Input';
 import Button from '../components/Button';
 
 
@@ -59,7 +59,7 @@ const SearchInput = ({
   const shouldDisplayResults = value !== '' && isFocused;
   return (
     <div className={styles.root}>
-      <Input
+      <InputWithRef
         prefix={<Button icon="search" onClick={() => inputRef.current.focus()} />}
         onChange={onChange}
         ref={inputRef}
