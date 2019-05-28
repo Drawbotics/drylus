@@ -45264,1596 +45264,1596 @@ webpackContext.id = "../icons/icons sync \\.svg$";
 /***/ "../icons/icons/activity.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "activity.svg";
+module.exports = __webpack_require__.p + "assets/activity.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/airplay.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "airplay.svg";
+module.exports = __webpack_require__.p + "assets/airplay.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/alert-circle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "alert-circle.svg";
+module.exports = __webpack_require__.p + "assets/alert-circle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/alert-octagon.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "alert-octagon.svg";
+module.exports = __webpack_require__.p + "assets/alert-octagon.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/alert-triangle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "alert-triangle.svg";
+module.exports = __webpack_require__.p + "assets/alert-triangle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/align-center.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "align-center.svg";
+module.exports = __webpack_require__.p + "assets/align-center.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/align-justify.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "align-justify.svg";
+module.exports = __webpack_require__.p + "assets/align-justify.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/align-left.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "align-left.svg";
+module.exports = __webpack_require__.p + "assets/align-left.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/align-right.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "align-right.svg";
+module.exports = __webpack_require__.p + "assets/align-right.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/anchor.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "anchor.svg";
+module.exports = __webpack_require__.p + "assets/anchor.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/aperture.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "aperture.svg";
+module.exports = __webpack_require__.p + "assets/aperture.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/arrow-down-left.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "arrow-down-left.svg";
+module.exports = __webpack_require__.p + "assets/arrow-down-left.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/arrow-down-right.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "arrow-down-right.svg";
+module.exports = __webpack_require__.p + "assets/arrow-down-right.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/arrow-down.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "arrow-down.svg";
+module.exports = __webpack_require__.p + "assets/arrow-down.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/arrow-left.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "arrow-left.svg";
+module.exports = __webpack_require__.p + "assets/arrow-left.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/arrow-right.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "arrow-right.svg";
+module.exports = __webpack_require__.p + "assets/arrow-right.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/arrow-up-left.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "arrow-up-left.svg";
+module.exports = __webpack_require__.p + "assets/arrow-up-left.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/arrow-up-right.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "arrow-up-right.svg";
+module.exports = __webpack_require__.p + "assets/arrow-up-right.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/arrow-up.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "arrow-up.svg";
+module.exports = __webpack_require__.p + "assets/arrow-up.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/at-sign.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "at-sign.svg";
+module.exports = __webpack_require__.p + "assets/at-sign.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/award.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "award.svg";
+module.exports = __webpack_require__.p + "assets/award.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/bar-chart-2.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "bar-chart-2.svg";
+module.exports = __webpack_require__.p + "assets/bar-chart-2.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/bar-chart.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "bar-chart.svg";
+module.exports = __webpack_require__.p + "assets/bar-chart.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/battery-charging.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "battery-charging.svg";
+module.exports = __webpack_require__.p + "assets/battery-charging.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/battery.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "battery.svg";
+module.exports = __webpack_require__.p + "assets/battery.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/bell-off.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "bell-off.svg";
+module.exports = __webpack_require__.p + "assets/bell-off.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/bell.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "bell.svg";
+module.exports = __webpack_require__.p + "assets/bell.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/bluetooth.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "bluetooth.svg";
+module.exports = __webpack_require__.p + "assets/bluetooth.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/book.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "book.svg";
+module.exports = __webpack_require__.p + "assets/book.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/bookmark.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "bookmark.svg";
+module.exports = __webpack_require__.p + "assets/bookmark.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/box.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "box.svg";
+module.exports = __webpack_require__.p + "assets/box.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/briefcase.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "briefcase.svg";
+module.exports = __webpack_require__.p + "assets/briefcase.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/burger.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "burger.svg";
+module.exports = __webpack_require__.p + "assets/burger.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/calendar.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "calendar.svg";
+module.exports = __webpack_require__.p + "assets/calendar.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/camera-off.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "camera-off.svg";
+module.exports = __webpack_require__.p + "assets/camera-off.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/camera.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "camera.svg";
+module.exports = __webpack_require__.p + "assets/camera.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/cast.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "cast.svg";
+module.exports = __webpack_require__.p + "assets/cast.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/check-circle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "check-circle.svg";
+module.exports = __webpack_require__.p + "assets/check-circle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/check-square.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "check-square.svg";
+module.exports = __webpack_require__.p + "assets/check-square.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/check.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "check.svg";
+module.exports = __webpack_require__.p + "assets/check.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/chevron-down.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "chevron-down.svg";
+module.exports = __webpack_require__.p + "assets/chevron-down.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/chevron-left.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "chevron-left.svg";
+module.exports = __webpack_require__.p + "assets/chevron-left.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/chevron-right.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "chevron-right.svg";
+module.exports = __webpack_require__.p + "assets/chevron-right.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/chevron-up.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "chevron-up.svg";
+module.exports = __webpack_require__.p + "assets/chevron-up.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/chevrons-down.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "chevrons-down.svg";
+module.exports = __webpack_require__.p + "assets/chevrons-down.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/chevrons-left.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "chevrons-left.svg";
+module.exports = __webpack_require__.p + "assets/chevrons-left.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/chevrons-right.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "chevrons-right.svg";
+module.exports = __webpack_require__.p + "assets/chevrons-right.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/chevrons-up.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "chevrons-up.svg";
+module.exports = __webpack_require__.p + "assets/chevrons-up.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/chrome.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "chrome.svg";
+module.exports = __webpack_require__.p + "assets/chrome.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/circle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "circle.svg";
+module.exports = __webpack_require__.p + "assets/circle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/clipboard.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "clipboard.svg";
+module.exports = __webpack_require__.p + "assets/clipboard.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/clock.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "clock.svg";
+module.exports = __webpack_require__.p + "assets/clock.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/cloud-drizzle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "cloud-drizzle.svg";
+module.exports = __webpack_require__.p + "assets/cloud-drizzle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/cloud-lightning.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "cloud-lightning.svg";
+module.exports = __webpack_require__.p + "assets/cloud-lightning.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/cloud-off.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "cloud-off.svg";
+module.exports = __webpack_require__.p + "assets/cloud-off.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/cloud-rain.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "cloud-rain.svg";
+module.exports = __webpack_require__.p + "assets/cloud-rain.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/cloud-snow.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "cloud-snow.svg";
+module.exports = __webpack_require__.p + "assets/cloud-snow.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/cloud.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "cloud.svg";
+module.exports = __webpack_require__.p + "assets/cloud.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/command.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "command.svg";
+module.exports = __webpack_require__.p + "assets/command.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/compass.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "compass.svg";
+module.exports = __webpack_require__.p + "assets/compass.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/copy.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "copy.svg";
+module.exports = __webpack_require__.p + "assets/copy.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/corner-down-left.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "corner-down-left.svg";
+module.exports = __webpack_require__.p + "assets/corner-down-left.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/corner-down-right.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "corner-down-right.svg";
+module.exports = __webpack_require__.p + "assets/corner-down-right.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/corner-left-down.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "corner-left-down.svg";
+module.exports = __webpack_require__.p + "assets/corner-left-down.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/corner-left-up.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "corner-left-up.svg";
+module.exports = __webpack_require__.p + "assets/corner-left-up.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/corner-right-down.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "corner-right-down.svg";
+module.exports = __webpack_require__.p + "assets/corner-right-down.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/corner-right-up.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "corner-right-up.svg";
+module.exports = __webpack_require__.p + "assets/corner-right-up.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/corner-up-left.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "corner-up-left.svg";
+module.exports = __webpack_require__.p + "assets/corner-up-left.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/corner-up-right.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "corner-up-right.svg";
+module.exports = __webpack_require__.p + "assets/corner-up-right.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/cpu.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "cpu.svg";
+module.exports = __webpack_require__.p + "assets/cpu.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/credit-card.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "credit-card.svg";
+module.exports = __webpack_require__.p + "assets/credit-card.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/crosshair.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "crosshair.svg";
+module.exports = __webpack_require__.p + "assets/crosshair.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/delete.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "delete.svg";
+module.exports = __webpack_require__.p + "assets/delete.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/disc.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "disc.svg";
+module.exports = __webpack_require__.p + "assets/disc.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/download-cloud.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "download-cloud.svg";
+module.exports = __webpack_require__.p + "assets/download-cloud.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/download.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "download.svg";
+module.exports = __webpack_require__.p + "assets/download.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/droplet.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "droplet.svg";
+module.exports = __webpack_require__.p + "assets/droplet.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/edit-2.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "edit-2.svg";
+module.exports = __webpack_require__.p + "assets/edit-2.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/edit-3.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "edit-3.svg";
+module.exports = __webpack_require__.p + "assets/edit-3.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/edit.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "edit.svg";
+module.exports = __webpack_require__.p + "assets/edit.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/external-link.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "external-link.svg";
+module.exports = __webpack_require__.p + "assets/external-link.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/eye-off.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "eye-off.svg";
+module.exports = __webpack_require__.p + "assets/eye-off.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/eye.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "eye.svg";
+module.exports = __webpack_require__.p + "assets/eye.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/facebook.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "facebook.svg";
+module.exports = __webpack_require__.p + "assets/facebook.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/fast-forward.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "fast-forward.svg";
+module.exports = __webpack_require__.p + "assets/fast-forward.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/feather.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "feather.svg";
+module.exports = __webpack_require__.p + "assets/feather.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/file-minus.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "file-minus.svg";
+module.exports = __webpack_require__.p + "assets/file-minus.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/file-plus.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "file-plus.svg";
+module.exports = __webpack_require__.p + "assets/file-plus.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/file-text.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "file-text.svg";
+module.exports = __webpack_require__.p + "assets/file-text.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/file.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "file.svg";
+module.exports = __webpack_require__.p + "assets/file.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/film.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "film.svg";
+module.exports = __webpack_require__.p + "assets/film.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/filter.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "filter.svg";
+module.exports = __webpack_require__.p + "assets/filter.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/flag.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "flag.svg";
+module.exports = __webpack_require__.p + "assets/flag.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/folder.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "folder.svg";
+module.exports = __webpack_require__.p + "assets/folder.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/github.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "github.svg";
+module.exports = __webpack_require__.p + "assets/github.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/globe.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "globe.svg";
+module.exports = __webpack_require__.p + "assets/globe.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/grid.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "grid.svg";
+module.exports = __webpack_require__.p + "assets/grid.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/hash.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "hash.svg";
+module.exports = __webpack_require__.p + "assets/hash.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/headphones.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "headphones.svg";
+module.exports = __webpack_require__.p + "assets/headphones.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/heart.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "heart.svg";
+module.exports = __webpack_require__.p + "assets/heart.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/home.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "home.svg";
+module.exports = __webpack_require__.p + "assets/home.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/image.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "image.svg";
+module.exports = __webpack_require__.p + "assets/image.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/inbox.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "inbox.svg";
+module.exports = __webpack_require__.p + "assets/inbox.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/info.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "info.svg";
+module.exports = __webpack_require__.p + "assets/info.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/instagram.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "instagram.svg";
+module.exports = __webpack_require__.p + "assets/instagram.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/layers.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "layers.svg";
+module.exports = __webpack_require__.p + "assets/layers.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/layout.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "layout.svg";
+module.exports = __webpack_require__.p + "assets/layout.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/life-buoy.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "life-buoy.svg";
+module.exports = __webpack_require__.p + "assets/life-buoy.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/link-2.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "link-2.svg";
+module.exports = __webpack_require__.p + "assets/link-2.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/link.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "link.svg";
+module.exports = __webpack_require__.p + "assets/link.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/loader.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "loader.svg";
+module.exports = __webpack_require__.p + "assets/loader.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/lock.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "lock.svg";
+module.exports = __webpack_require__.p + "assets/lock.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/log-in.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "log-in.svg";
+module.exports = __webpack_require__.p + "assets/log-in.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/log-out.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "log-out.svg";
+module.exports = __webpack_require__.p + "assets/log-out.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/mail.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "mail.svg";
+module.exports = __webpack_require__.p + "assets/mail.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/map-pin.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "map-pin.svg";
+module.exports = __webpack_require__.p + "assets/map-pin.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/map.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "map.svg";
+module.exports = __webpack_require__.p + "assets/map.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/maximize-2.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "maximize-2.svg";
+module.exports = __webpack_require__.p + "assets/maximize-2.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/maximize.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "maximize.svg";
+module.exports = __webpack_require__.p + "assets/maximize.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/menu.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "menu.svg";
+module.exports = __webpack_require__.p + "assets/menu.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/message-circle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "message-circle.svg";
+module.exports = __webpack_require__.p + "assets/message-circle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/message-square.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "message-square.svg";
+module.exports = __webpack_require__.p + "assets/message-square.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/mic-off.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "mic-off.svg";
+module.exports = __webpack_require__.p + "assets/mic-off.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/mic.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "mic.svg";
+module.exports = __webpack_require__.p + "assets/mic.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/minimize-2.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "minimize-2.svg";
+module.exports = __webpack_require__.p + "assets/minimize-2.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/minimize.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "minimize.svg";
+module.exports = __webpack_require__.p + "assets/minimize.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/minus-circle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "minus-circle.svg";
+module.exports = __webpack_require__.p + "assets/minus-circle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/minus-square.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "minus-square.svg";
+module.exports = __webpack_require__.p + "assets/minus-square.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/minus.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "minus.svg";
+module.exports = __webpack_require__.p + "assets/minus.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/monitor.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "monitor.svg";
+module.exports = __webpack_require__.p + "assets/monitor.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/moon.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "moon.svg";
+module.exports = __webpack_require__.p + "assets/moon.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/more-horizontal.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "more-horizontal.svg";
+module.exports = __webpack_require__.p + "assets/more-horizontal.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/more-vertical.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "more-vertical.svg";
+module.exports = __webpack_require__.p + "assets/more-vertical.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/move.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "move.svg";
+module.exports = __webpack_require__.p + "assets/move.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/music.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "music.svg";
+module.exports = __webpack_require__.p + "assets/music.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/navigation-2.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "navigation-2.svg";
+module.exports = __webpack_require__.p + "assets/navigation-2.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/navigation.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "navigation.svg";
+module.exports = __webpack_require__.p + "assets/navigation.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/octagon.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "octagon.svg";
+module.exports = __webpack_require__.p + "assets/octagon.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/package.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "package.svg";
+module.exports = __webpack_require__.p + "assets/package.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/pause-circle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "pause-circle.svg";
+module.exports = __webpack_require__.p + "assets/pause-circle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/pause.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "pause.svg";
+module.exports = __webpack_require__.p + "assets/pause.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/percent.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "percent.svg";
+module.exports = __webpack_require__.p + "assets/percent.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/phone-call.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "phone-call.svg";
+module.exports = __webpack_require__.p + "assets/phone-call.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/phone-forwarded.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "phone-forwarded.svg";
+module.exports = __webpack_require__.p + "assets/phone-forwarded.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/phone-incoming.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "phone-incoming.svg";
+module.exports = __webpack_require__.p + "assets/phone-incoming.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/phone-missed.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "phone-missed.svg";
+module.exports = __webpack_require__.p + "assets/phone-missed.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/phone-off.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "phone-off.svg";
+module.exports = __webpack_require__.p + "assets/phone-off.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/phone-outgoing.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "phone-outgoing.svg";
+module.exports = __webpack_require__.p + "assets/phone-outgoing.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/phone.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "phone.svg";
+module.exports = __webpack_require__.p + "assets/phone.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/pie-chart.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "pie-chart.svg";
+module.exports = __webpack_require__.p + "assets/pie-chart.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/play-circle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "play-circle.svg";
+module.exports = __webpack_require__.p + "assets/play-circle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/play.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "play.svg";
+module.exports = __webpack_require__.p + "assets/play.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/plus-circle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "plus-circle.svg";
+module.exports = __webpack_require__.p + "assets/plus-circle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/plus-square.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "plus-square.svg";
+module.exports = __webpack_require__.p + "assets/plus-square.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/plus.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "plus.svg";
+module.exports = __webpack_require__.p + "assets/plus.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/pocket.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "pocket.svg";
+module.exports = __webpack_require__.p + "assets/pocket.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/power.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "power.svg";
+module.exports = __webpack_require__.p + "assets/power.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/printer.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "printer.svg";
+module.exports = __webpack_require__.p + "assets/printer.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/radio.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "radio.svg";
+module.exports = __webpack_require__.p + "assets/radio.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/refresh-ccw.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "refresh-ccw.svg";
+module.exports = __webpack_require__.p + "assets/refresh-ccw.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/refresh-cw.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "refresh-cw.svg";
+module.exports = __webpack_require__.p + "assets/refresh-cw.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/repeat.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "repeat.svg";
+module.exports = __webpack_require__.p + "assets/repeat.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/rewind.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "rewind.svg";
+module.exports = __webpack_require__.p + "assets/rewind.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/rotate-ccw.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "rotate-ccw.svg";
+module.exports = __webpack_require__.p + "assets/rotate-ccw.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/rotate-cw.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "rotate-cw.svg";
+module.exports = __webpack_require__.p + "assets/rotate-cw.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/save.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "save.svg";
+module.exports = __webpack_require__.p + "assets/save.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/scissors.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "scissors.svg";
+module.exports = __webpack_require__.p + "assets/scissors.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/search.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "search.svg";
+module.exports = __webpack_require__.p + "assets/search.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/server.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "server.svg";
+module.exports = __webpack_require__.p + "assets/server.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/settings.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "settings.svg";
+module.exports = __webpack_require__.p + "assets/settings.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/share-2.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "share-2.svg";
+module.exports = __webpack_require__.p + "assets/share-2.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/share.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "share.svg";
+module.exports = __webpack_require__.p + "assets/share.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/shield.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "shield.svg";
+module.exports = __webpack_require__.p + "assets/shield.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/shuffle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "shuffle.svg";
+module.exports = __webpack_require__.p + "assets/shuffle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/sidebar.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "sidebar.svg";
+module.exports = __webpack_require__.p + "assets/sidebar.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/skip-back.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "skip-back.svg";
+module.exports = __webpack_require__.p + "assets/skip-back.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/skip-forward.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "skip-forward.svg";
+module.exports = __webpack_require__.p + "assets/skip-forward.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/slack.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "slack.svg";
+module.exports = __webpack_require__.p + "assets/slack.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/slash.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "slash.svg";
+module.exports = __webpack_require__.p + "assets/slash.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/smartphone.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "smartphone.svg";
+module.exports = __webpack_require__.p + "assets/smartphone.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/speaker.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "speaker.svg";
+module.exports = __webpack_require__.p + "assets/speaker.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/square.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "square.svg";
+module.exports = __webpack_require__.p + "assets/square.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/star.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "star.svg";
+module.exports = __webpack_require__.p + "assets/star.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/stop-circle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "stop-circle.svg";
+module.exports = __webpack_require__.p + "assets/stop-circle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/sun.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "sun.svg";
+module.exports = __webpack_require__.p + "assets/sun.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/sunrise.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "sunrise.svg";
+module.exports = __webpack_require__.p + "assets/sunrise.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/sunset.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "sunset.svg";
+module.exports = __webpack_require__.p + "assets/sunset.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/tablet.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "tablet.svg";
+module.exports = __webpack_require__.p + "assets/tablet.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/tag.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "tag.svg";
+module.exports = __webpack_require__.p + "assets/tag.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/target.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "target.svg";
+module.exports = __webpack_require__.p + "assets/target.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/thermometer.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "thermometer.svg";
+module.exports = __webpack_require__.p + "assets/thermometer.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/thumbs-down.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "thumbs-down.svg";
+module.exports = __webpack_require__.p + "assets/thumbs-down.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/thumbs-up.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "thumbs-up.svg";
+module.exports = __webpack_require__.p + "assets/thumbs-up.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/toggle-left.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "toggle-left.svg";
+module.exports = __webpack_require__.p + "assets/toggle-left.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/toggle-right.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "toggle-right.svg";
+module.exports = __webpack_require__.p + "assets/toggle-right.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/trash-2.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "trash-2.svg";
+module.exports = __webpack_require__.p + "assets/trash-2.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/trash.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "trash.svg";
+module.exports = __webpack_require__.p + "assets/trash.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/trending-down.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "trending-down.svg";
+module.exports = __webpack_require__.p + "assets/trending-down.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/trending-up.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "trending-up.svg";
+module.exports = __webpack_require__.p + "assets/trending-up.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/triangle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "triangle.svg";
+module.exports = __webpack_require__.p + "assets/triangle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/twitter.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "twitter.svg";
+module.exports = __webpack_require__.p + "assets/twitter.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/type.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "type.svg";
+module.exports = __webpack_require__.p + "assets/type.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/umbrella.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "umbrella.svg";
+module.exports = __webpack_require__.p + "assets/umbrella.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/unlock.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "unlock.svg";
+module.exports = __webpack_require__.p + "assets/unlock.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/upload-cloud.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "upload-cloud.svg";
+module.exports = __webpack_require__.p + "assets/upload-cloud.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/upload.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "upload.svg";
+module.exports = __webpack_require__.p + "assets/upload.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/user-check.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "user-check.svg";
+module.exports = __webpack_require__.p + "assets/user-check.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/user-minus.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "user-minus.svg";
+module.exports = __webpack_require__.p + "assets/user-minus.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/user-plus.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "user-plus.svg";
+module.exports = __webpack_require__.p + "assets/user-plus.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/user-x.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "user-x.svg";
+module.exports = __webpack_require__.p + "assets/user-x.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/user.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "user.svg";
+module.exports = __webpack_require__.p + "assets/user.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/users.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "users.svg";
+module.exports = __webpack_require__.p + "assets/users.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/video-off.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "video-off.svg";
+module.exports = __webpack_require__.p + "assets/video-off.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/video.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "video.svg";
+module.exports = __webpack_require__.p + "assets/video.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/voicemail.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "voicemail.svg";
+module.exports = __webpack_require__.p + "assets/voicemail.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/volume-1.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "volume-1.svg";
+module.exports = __webpack_require__.p + "assets/volume-1.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/volume-2.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "volume-2.svg";
+module.exports = __webpack_require__.p + "assets/volume-2.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/volume-x.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "volume-x.svg";
+module.exports = __webpack_require__.p + "assets/volume-x.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/volume.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "volume.svg";
+module.exports = __webpack_require__.p + "assets/volume.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/watch.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "watch.svg";
+module.exports = __webpack_require__.p + "assets/watch.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/wifi.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "wifi.svg";
+module.exports = __webpack_require__.p + "assets/wifi.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/wind.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "wind.svg";
+module.exports = __webpack_require__.p + "assets/wind.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/x-circle.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "x-circle.svg";
+module.exports = __webpack_require__.p + "assets/x-circle.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/x-square.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "x-square.svg";
+module.exports = __webpack_require__.p + "assets/x-square.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/x.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "x.svg";
+module.exports = __webpack_require__.p + "assets/x.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/zap.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "zap.svg";
+module.exports = __webpack_require__.p + "assets/zap.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/zoom-in.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "zoom-in.svg";
+module.exports = __webpack_require__.p + "assets/zoom-in.svg";
 
 /***/ }),
 
 /***/ "../icons/icons/zoom-out.svg":
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "zoom-out.svg";
+module.exports = __webpack_require__.p + "assets/zoom-out.svg";
 
 /***/ }),
 
@@ -46919,7 +46919,7 @@ module.exports = {
   linkedinColor: '#0077b5',
   lighterOverlay: 'rgba(33, 33, 33, 0.05)',
   lightOverlay: 'rgba(33, 33, 33, 0.1)',
-  darkOverlay: 'rgba(66, 90, 112, 0.9)',
+  darkOverlay: 'rgba(33, 33, 33, 0.9)',
   defaultBorderRadius: '5px',
   borderRadiusBig: '7.5px',
   borderRadiusSmall: '3.3333333333333335px',
@@ -63548,7 +63548,7 @@ var icon_styles = {
 };
 var icon_Icons = function Icons() {
   var names = icons.map(function (name) {
-    return name.split('.')[0].replace('/', '');
+    return name.split('.')[0].replace('/assets/', '');
   });
   return index_es_p(layout_Flex, {
     wrap: true,
@@ -64459,7 +64459,7 @@ function margin_MDXContent(_ref) {
   return index_es_p(margin_MDXLayout, margin_extends({}, margin_layoutProps, props, {
     components: components,
     mdxType: "MDXLayout"
-  }), index_es_p("h1", null, "Margin"), index_es_p("p", null, "Low level component used to wrap other elements with margin."), index_es_p(components_Playground, {
+  }), index_es_p("h1", null, "Margin lol"), index_es_p("p", null, "Low level component used to wrap other elements with margin."), index_es_p(components_Playground, {
     __position: 0,
     __code: "<Playground component={Margin}>\n  <div style={{ border: '1px solid red', display: 'inline-block' }}>\n    <Margin size={Sizes.LARGE}>\n      <div style={{ background: 'green', height: 100, width: 100 }} />\n    </Margin>\n  </div>\n</Playground>",
     component: layout_Margin,

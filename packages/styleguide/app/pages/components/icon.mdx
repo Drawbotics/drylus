@@ -38,7 +38,7 @@ export const styles = {
 };
 
 export const Icons = () => {
-  const names = icons.map((name) => name.split('.')[0].replace('/', ''));
+  const names = icons.map((name) => name.split('.')[0].replace('/assets/', ''));
   return (
     <Flex wrap vSpacing={Sizes.SMALL} hSpacing={Sizes.SMALL}>
       {names.map((name) => (
