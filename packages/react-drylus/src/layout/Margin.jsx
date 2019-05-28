@@ -11,6 +11,9 @@ const styles = {
   base: css`
     margin: ${sv.defaultMargin};
   `,
+  resetMargin: css`
+    margin: 0;
+  `,
   extraSmall: css`
     margin: ${sv.marginExtraSmall};
   `,
@@ -23,6 +26,66 @@ const styles = {
   extraLarge: css`
     margin: ${sv.marginExtraLarge};
   `,
+  extraSmallLeft: css`
+    margin-left: ${sv.marginExtraSmall};
+  `,
+  extraSmallRight: css`
+    margin-right: ${sv.marginExtraSmall};
+  `,
+  extraSmallTop: css`
+    margin-top: ${sv.marginExtraSmall};
+  `,
+  extraSmallBottom: css`
+    margin-bottom: ${sv.marginExtraSmall};
+  `,
+  smallLeft: css`
+    margin-left: ${sv.marginSmall};
+  `,
+  smallRight: css`
+    margin-right: ${sv.marginSmall};
+  `,
+  smallTop: css`
+    margin-top: ${sv.marginSmall};
+  `,
+  smallBottom: css`
+    margin-bottom: ${sv.marginSmall};
+  `,
+  defaultLeft: css`
+    margin-left: ${sv.defaultMargin};
+  `,
+  defaultRight: css`
+    margin-right: ${sv.defaultMargin};
+  `,
+  defaultTop: css`
+    margin-top: ${sv.defaultMargin};
+  `,
+  defaultBottom: css`
+    margin-bottom: ${sv.defaultMargin};
+  `,
+  largeLeft: css`
+    margin-left: ${sv.marginLarge};
+  `,
+  largeRight: css`
+    margin-right: ${sv.marginLarge};
+  `,
+  largeTop: css`
+    margin-top: ${sv.marginLarge};
+  `,
+  largeBottom: css`
+    margin-bottom: ${sv.marginLarge};
+  `,
+  extraLargeLeft: css`
+    margin-left: ${sv.marginExtraLarge};
+  `,
+  extraLargeRight: css`
+    margin-right: ${sv.marginExtraLarge};
+  `,
+  extraLargeTop: css`
+    margin-top: ${sv.marginExtraLarge};
+  `,
+  extraLargeBottom: css`
+    margin-bottom: ${sv.marginExtraLarge};
+  `,
 };
 
 
@@ -34,6 +97,11 @@ const Margin = ({
   return (
     <div className={cx(styles.base, {
       [styles[camelCase(size)]]: isUniform && size,
+      [styles.resetMargin]: ! isUniform,
+      [styles[camelCase(`${size.left}_LEFT`)]]: ! isUniform && size.left,
+      [styles[camelCase(`${size.right}_RIGHT`)]]: ! isUniform && size.right,
+      [styles[camelCase(`${size.top}_TOP`)]]: ! isUniform && size.top,
+      [styles[camelCase(`${size.bottom}_BOTTOM`)]]: ! isUniform && size.bottom,
     })}>
       {children}
     </div>
