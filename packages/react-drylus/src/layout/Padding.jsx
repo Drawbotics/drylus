@@ -99,10 +99,10 @@ const Padding = ({
     <div className={cx(styles.root, {
       [styles[camelCase(size)]]: isUniform && size,
       [styles.resetPadding]: ! isUniform,
-      [styles[camelCase(`${size.left}_LEFT`)]]: ! isUniform && size.left,
-      [styles[camelCase(`${size.right}_RIGHT`)]]: ! isUniform && size.right,
-      [styles[camelCase(`${size.top}_TOP`)]]: ! isUniform && size.top,
-      [styles[camelCase(`${size.bottom}_BOTTOM`)]]: ! isUniform && size.bottom,
+      [styles[camelCase(`${size?.left}_LEFT`)]]: ! isUniform && size?.left,
+      [styles[camelCase(`${size?.right}_RIGHT`)]]: ! isUniform && size?.right,
+      [styles[camelCase(`${size?.top}_TOP`)]]: ! isUniform && size?.top,
+      [styles[camelCase(`${size?.bottom}_BOTTOM`)]]: ! isUniform && size?.bottom,
     })} style={style}>
       {children}
     </div>

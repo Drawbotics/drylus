@@ -48,7 +48,7 @@ const styles = {
 
 
 const SearchInput = ({
-  values,
+  options,
   value,
   onChange,
   noResultLabel,
@@ -69,15 +69,15 @@ const SearchInput = ({
         [styles.visible]: shouldDisplayResults,
       })}>
         {do {
-          if (values == null || values.length === 0) {
+          if (options == null || options.length === 0) {
             <div className={cx(styles.item, styles.noResult)}>
               {noResultLabel}
             </div>
           }
           else {
-            values.map((value) => (
-              <div key={value} className={styles.item} onClick={() => onChange(value)}>
-                {value}
+            options.map((option) => (
+              <div key={option} className={styles.item} onClick={() => onChange(option)}>
+                {option}
               </div>
             ))
           }
@@ -90,7 +90,7 @@ const SearchInput = ({
 
 SearchInput.propTypes = {
   /** The list of items displayed under the input */
-  values: PropTypes.arrayOf(PropTypes.string),
+  options: PropTypes.arrayOf(PropTypes.string),
 
   /** The text passed to the input */
   value: PropTypes.string.isRequired,
