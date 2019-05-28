@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 
 const styles = {
-  base: css`
+  root: css`
   `,
 };
 
@@ -14,7 +14,7 @@ const BaseFilter = ({
   clearLabel,
 }) => {
   return (
-    <div className={styles.base}>
+    <div className={styles.root}>
 
     </div>
   );

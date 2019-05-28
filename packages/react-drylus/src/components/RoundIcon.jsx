@@ -8,7 +8,7 @@ import { Categories, Sizes } from '../base';
 
 
 const styles = {
-  base: css`
+  root: css`
     border-radius: 1000px;
     height: ${sv.defaultMargin};
     width: ${sv.defaultMargin};
@@ -72,7 +72,7 @@ const styles = {
 const RoundIcon = ({ name, size, category }) => {
   const customSize = typeof size === 'number';
   return (
-    <div className={cx(styles.base, {
+    <div className={cx(styles.root, {
       [styles[category?.toLowerCase()]]: category,
       [styles[! customSize && size?.toLowerCase()]]: size,
       [styles.iconInherit]: customSize,

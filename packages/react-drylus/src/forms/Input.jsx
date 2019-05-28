@@ -12,7 +12,7 @@ import Hint from './Hint';
 
 
 const styles = {
-  base: css`
+  root: css`
     display: inline-block;
     position: relative;
     width: 100%;
@@ -157,7 +157,7 @@ const Input = forwardRef(({
   const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
   const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
   return (
-    <div className={cx(styles.base, {
+    <div className={cx(styles.root, {
       [styles.valid]: !! value && valid,
       [styles.error]: error,
     })}>

@@ -5,7 +5,7 @@ import sv from '@drawbotics/style-vars';
 
 
 const styles = {
-  base: css`
+  root: css`
     background: ${sv.backgroundColor};
   `,
   fullHeight: css`
@@ -23,7 +23,7 @@ const styles = {
 
 const Content = ({ children, fullHeight, fullWidth }) => {
   return (
-    <div className={cx(styles.base, {
+    <div className={cx(styles.root, {
       [styles.fullHeight]: fullHeight,
     })}>
       <div className={cx(styles.children, { [styles.fullWidth]: fullWidth })}>

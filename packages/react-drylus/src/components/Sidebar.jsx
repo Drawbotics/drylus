@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 
 const styles = {
-  base: css`
+  root: css`
     width: 200px;
     min-height: 100vh;
     background: yellow;
@@ -13,7 +13,7 @@ const styles = {
 
 const Sidebar = () => {
   return (
-    <div className={styles.base}>
+    <div className={styles.root}>
 
     </div>
   );

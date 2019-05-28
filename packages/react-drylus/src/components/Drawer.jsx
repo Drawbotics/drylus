@@ -40,7 +40,7 @@ const styles = {
     width: 100%;
     z-index: 99;
   `,
-  base: css`
+  root: css`
     position: relative;
     padding: ${sv.defaultPadding};
     padding-top: calc(${sv.paddingExtraLarge} + ${sv.paddingExtraSmall});
@@ -118,7 +118,7 @@ const BaseDrawer = ({
   onClickClose,
 }) => {
   return (
-    <div className={styles.base}>
+    <div className={styles.root}>
       <div className={styles.close}>
         <Button size={Sizes.SMALL} onClick={onClickClose} tier={ButtonTiers.TERTIARY} icon="x" />
       </div>

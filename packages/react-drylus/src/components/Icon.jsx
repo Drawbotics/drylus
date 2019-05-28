@@ -16,7 +16,7 @@ injectGlobal`
 
 
 const styles = {
-  base: css`
+  root: css`
     color: inherit;
   `,
   bold: css`
@@ -42,7 +42,7 @@ const styles = {
 
 const Icon = ({ name, bold, onClick, category }) => {
   return (
-    <i className={cx(styles.base, `Drycon Drycon-${name}`, {
+    <i className={cx(styles.root, `Drycon Drycon-${name}`, {
       [styles.bold]: bold,
       [styles[category?.toLowerCase()]]: category,
     })} onClick={onClick} />

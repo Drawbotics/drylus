@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 
 const styles = {
-  base: css`
+  root: css`
     width: 100%;
     height: 100px;
     background: blue;
@@ -13,7 +13,7 @@ const styles = {
 
 const Footer = () => {
   return (
-    <div className={styles.base}>
+    <div className={styles.root}>
 
     </div>
   );

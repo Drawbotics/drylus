@@ -8,7 +8,7 @@ import Sizes from '../base/Sizes';
 
 
 const styles = {
-  base: css`
+  root: css`
     padding: ${sv.defaultPadding};
   `,
   resetPadding: css`
@@ -96,7 +96,7 @@ const Padding = ({
 }) => {
   const isUniform = typeof size !== 'object';
   return (
-    <div className={cx(styles.base, {
+    <div className={cx(styles.root, {
       [styles[camelCase(size)]]: isUniform && size,
       [styles.resetPadding]: ! isUniform,
       [styles[camelCase(`${size.left}_LEFT`)]]: ! isUniform && size.left,

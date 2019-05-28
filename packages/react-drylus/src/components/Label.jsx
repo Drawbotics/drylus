@@ -5,7 +5,7 @@ import sv from '@drawbotics/style-vars';
 
 
 const styles = {
-  base: css`
+  root: css`
     color: ${sv.colorTertiary};
     text-transform: uppercase;
     font-weight: 500;
@@ -16,7 +16,7 @@ const styles = {
 
 const Label = ({ children }) => {
   return (
-    <div className={styles.base}>
+    <div className={styles.root}>
       {children}
     </div>
   );

@@ -16,7 +16,7 @@ const styles = {
   radioWrapper: css`
     margin-bottom: ${sv.marginSmall};
   `,
-  base: css`
+  root: css`
     position: relative;
     display: inline-block;
   `,
@@ -147,7 +147,7 @@ const Radio = ({
 }) => {
   const id = v4();
   return (
-    <div className={styles.base}>
+    <div className={styles.root}>
       <label className={cx(styles.wrapper, {
         [styles[size?.toLowerCase()]]: size,
         [styles.disabled]: disabled,

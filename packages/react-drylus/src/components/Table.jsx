@@ -12,7 +12,7 @@ const RowsContext = createContext([{}, () => {}]);
 
 
 const styles = {
-  base: css`
+  root: css`
     border-collapse: collapse;
 
     > tbody > tr[data-nested] {
@@ -355,7 +355,7 @@ const Table = ({
     console.warn('`data` was passed as prop but no/empty header, cannot render');
   }
   return (
-    <table className={cx(styles.base, {
+    <table className={cx(styles.root, {
       [styles.fullWidth]: fullWidth,
       [styles.leftPadded]: hasNestedData || withNesting,
       [styles.highlighted]: highlighted && ! (hasNestedData || withNesting),

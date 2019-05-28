@@ -10,7 +10,7 @@ import Hint from './Hint';
 
 
 const styles = {
-  base: css`
+  root: css`
     display: inline-block;
     position: relative;
     width: 100%;
@@ -91,7 +91,7 @@ const Select = ({
 }) => {
   const handleOnChange = (e) => onChange ? onChange(e.target.value, e.target.name) : null;
   return (
-    <div className={cx(styles.base, {
+    <div className={cx(styles.root, {
       [styles.disabled]: disabled,
       [styles.valid]: !! value && valid,
       [styles.error]: error,

@@ -8,7 +8,7 @@ import Sizes from '../base/Sizes';
 
 
 const styles = {
-  base: css`
+  root: css`
     display: flex;
     margin: 0;
   `,
@@ -180,7 +180,7 @@ const Flex = ({
   hSpacing,
 }) => {
   return (
-    <div className={cx(styles.base, {
+    <div className={cx(styles.root, {
       [styles[direction.toLowerCase()]]: direction,
       [styles[camelCase(`JUSTIFY_${justify}`)]]: justify,
       [styles[camelCase(`ALIGN_${align}`)]]: align,

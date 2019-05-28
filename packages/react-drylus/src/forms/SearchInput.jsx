@@ -8,7 +8,7 @@ import Button from '../components/Button';
 
 
 const styles = {
-  base: css`
+  root: css`
     position: relative;
   `,
   list: css`
@@ -58,7 +58,7 @@ const SearchInput = ({
 
   const shouldDisplayResults = value !== '' && isFocused;
   return (
-    <div className={styles.base}>
+    <div className={styles.root}>
       <Input
         prefix={<Button icon="search" onClick={() => inputRef.current.focus()} />}
         onChange={onChange}

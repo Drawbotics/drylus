@@ -4,7 +4,7 @@ import sv from '@drawbotics/style-vars';
 
 
 const styles = {
-  base: css`
+  root: css`
     font-size: 0.8rem;
     color: ${sv.colorSecondary};
     margin-top: ${sv.marginExtraSmall};
@@ -17,7 +17,7 @@ const styles = {
 
 const Hint = ({ children, error }) => {
   return (
-    <div className={cx(styles.base, { [styles.error]: error })}>
+    <div className={cx(styles.root, { [styles.error]: error })}>
       {children}
     </div>
   );

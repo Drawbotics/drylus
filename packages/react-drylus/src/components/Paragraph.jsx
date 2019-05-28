@@ -5,7 +5,7 @@ import { css } from 'emotion';
 
 
 const styles = {
-  base: css`
+  root: css`
     color: ${sv.colorPrimary};
     line-height: calc(${sv.defaultLineHeight} * 1.5);
   `,
@@ -13,7 +13,7 @@ const styles = {
 
 
 const Paragraph = ({ children }) => {
-  return <p className={styles.base}>{children}</p>;
+  return <p className={styles.root}>{children}</p>;
 };
 
 

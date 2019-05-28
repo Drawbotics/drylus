@@ -8,7 +8,7 @@ import Sizes from '../base/Sizes';
 
 
 const styles = {
-  base: css`
+  root: css`
     display: inline-block;
   `,
   clickable: css`
@@ -40,7 +40,7 @@ const ListTile = ({
   onClick,
 }) => {
   return (
-    <div className={cx(styles.base, { [styles.clickable]: !! onClick })} onClick={onClick}>
+    <div className={cx(styles.root, { [styles.clickable]: !! onClick })} onClick={onClick}>
       <Flex vSpacing={Sizes.EXTRA_SMALL}>
         {do {
           if (leading) {

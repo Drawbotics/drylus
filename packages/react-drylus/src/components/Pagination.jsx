@@ -8,7 +8,7 @@ import Categories from '../base/Categories';
 
 
 const styles = {
-  base: css`
+  root: css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -55,7 +55,7 @@ const Pagination = ({
   if (maxVisiblePages < 4) console.warn("`maxVisiblePages` has to be at least 4");
   const labels = _getLabels(value, pages, Math.max(maxVisiblePages, 4));
   return (
-    <div className={styles.base}>
+    <div className={styles.root}>
       <Button
         onClick={value === 1 ? null : () => onChange(value - 1)}
         disabled={value === 1}

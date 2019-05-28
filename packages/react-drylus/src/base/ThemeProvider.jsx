@@ -18,7 +18,7 @@ injectGlobal`
 
 
 const styles = {
-  base: css`
+  root: css`
     * {
       font-family: ${sv.defaultFontFamily};
     }
@@ -28,7 +28,7 @@ const styles = {
 
 const ThemeProvider = ({ children }) => {
   return (
-    <div className={styles.base}>
+    <div className={styles.root}>
       {children}
     </div>
   );

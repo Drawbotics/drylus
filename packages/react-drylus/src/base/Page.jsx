@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 
 const styles = {
-  base: css`
+  root: css`
     height: 100vh;
     width: 100vw;
   `,
@@ -13,7 +13,7 @@ const styles = {
 
 const Page = ({ children }) => {
   return (
-    <div className={styles.base}>
+    <div className={styles.root}>
       {children}
     </div>
   );

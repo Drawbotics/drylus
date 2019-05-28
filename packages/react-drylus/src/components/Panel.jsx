@@ -5,7 +5,7 @@ import sv from '@drawbotics/style-vars';
 
 
 const styles = {
-  base: css`
+  root: css`
     background: ${sv.white};
     box-shadow: ${sv.elevation3};
     overflow: auto;
@@ -104,7 +104,7 @@ export const PanelFooter = ({ children, noPadding }) => {
 
 const Panel = ({ header, body, footer }) => {
   return (
-    <div className={styles.base}>
+    <div className={styles.root}>
       {header}
       {body}
       {footer}

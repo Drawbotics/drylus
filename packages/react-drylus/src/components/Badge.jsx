@@ -7,7 +7,7 @@ import Categories from '../base/Categories';
 
 
 const styles = {
-  base: css`
+  root: css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -42,7 +42,7 @@ const styles = {
 
 const Badge = ({ value, max, category }) => {
   return (
-    <div className={cx(styles.base, {
+    <div className={cx(styles.root, {
       [styles[category?.toLowerCase()]]: category,
     })}>
       {value > max ? `${max}+` : value}

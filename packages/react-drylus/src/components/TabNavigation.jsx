@@ -8,7 +8,7 @@ import Badge from './Badge';
 
 
 const styles = {
-  base: css`
+  root: css`
     display: flex;
     align-items: flex-end;
     width: 100%;
@@ -112,7 +112,7 @@ const TabNavigation = ({
   vertical,
 }) => {
   return (
-    <div className={cx(styles.base, {
+    <div className={cx(styles.root, {
       [styles.vertical]: vertical,
     })}>
       {options.map((option) => (

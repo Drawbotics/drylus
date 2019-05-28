@@ -8,7 +8,7 @@ import Badge from './Badge';
 
 
 const styles = {
-  base: css`
+  root: css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -66,7 +66,7 @@ const SegmentedControl = ({
   labelKey,
 }) => {
   return (
-    <div className={styles.base}>
+    <div className={styles.root}>
       {options.map((option) => (
         <div
           key={option[valueKey]}

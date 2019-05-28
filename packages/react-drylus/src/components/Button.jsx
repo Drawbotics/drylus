@@ -8,7 +8,7 @@ import Icon from './Icon';
 
 
 const styles = {
-  base: css`
+  root: css`
     background: ${sv.neutralLight};
     color: ${sv.colorPrimary};
     border-radius: ${sv.defaultBorderRadius};
@@ -189,7 +189,7 @@ const Button = ({
   return (
     <button
       onClick={onClick}
-      className={cx(styles.base, {
+      className={cx(styles.root, {
         [styles[size?.toLowerCase()]]: size,
         [styles[tier?.toLowerCase()]]: tier,
         [styles.rightIcon]: iconSide === 'right' && icon,
