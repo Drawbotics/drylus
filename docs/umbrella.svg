@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icon/Feather/umbrella</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M23.9955644,11.9049774 C24.0516112,12.492135 23.5899158,13 23.0000893,13 L1.00008927,13 C0.410262754,13 -0.0514327077,12.492135 0.00461415571,11.9049774 C0.594845647,5.72159985 5.78860548,1 12.0000893,1 C18.2115731,1 23.4053329,5.72159985 23.9955644,11.9049774 Z M12.0000893,3 C7.1929261,3 3.11662932,6.390761 2.16071025,11 L21.8394683,11 C20.8835492,6.390761 16.8072524,3 12.0000893,3 Z M13.0000893,14.7032574 L13.0000893,19 C13.0000893,20.1045695 13.8955198,21 15.0000893,21 C15.9898245,21 16.8116456,20.2810746 16.9718262,19.3369505 L13.0000893,14.7032574 Z M19.0000893,19 C19.0000893,21.209139 17.2092283,23 15.0000893,23 C12.7909503,23 11.0000893,21.209139 11.0000893,19 L11.0000893,12 C11.0000893,11.0715937 12.1551471,10.64431 12.7593459,11.3492086 L18.7593459,18.3492086 C18.9146971,18.5304517 19.0000893,18.7612887 19.0000893,19 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Feather/umbrella" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

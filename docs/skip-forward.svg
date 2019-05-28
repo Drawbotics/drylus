@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icon/Feather/skip-forward</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M6,6.08250215 L6,17.9212525 L13.3992189,12.0018773 L6,6.08250215 Z M5.62469505,3.22100849 L15.624695,11.2210085 C16.1251017,11.6213338 16.1251017,12.3824208 15.624695,12.7827461 L5.62469505,20.7827461 C4.9699317,21.3065568 4,20.8403835 4,20.0018773 L4,4.0018773 C4,3.16337109 4.9699317,2.69719782 5.62469505,3.22100849 Z M18,5.0018773 C18,4.44959255 18.4477153,4.0018773 19,4.0018773 C19.5522847,4.0018773 20,4.44959255 20,5.0018773 L20,19.0018773 C20,19.5541621 19.5522847,20.0018773 19,20.0018773 C18.4477153,20.0018773 18,19.5541621 18,19.0018773 L18,5.0018773 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Feather/skip-forward" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

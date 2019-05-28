@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icon/Feather/navigation</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M4.95354593,10.7113521 L10.2427326,12.0336488 C10.6010178,12.1232201 10.8807682,12.4029705 10.9703395,12.7612557 L12.2926362,18.0504424 L18.8978174,4.10617092 L4.95354593,10.7113521 Z M9.17557587,13.8284124 L1.75766137,11.9739338 C0.846722103,11.746199 0.72352368,10.5020157 1.57211065,10.1000535 L20.5721107,1.10005348 C21.4212859,0.697812594 22.3061757,1.58270246 21.9039348,2.43187766 L12.9039348,21.4318777 C12.5019726,22.2804646 11.2577893,22.1572662 11.0300545,21.2463269 L9.17557587,13.8284124 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Feather/navigation" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icon/Feather/pocket</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M4,2 L20,2 C21.6568542,2 23,3.34314575 23,5 L23,11 C23,17.0751322 18.0751322,22 12,22 C9.08261861,22 6.28472557,20.8410748 4.22182541,18.7781746 C2.15892524,16.7152744 1,13.9173814 1,11 L1,5 C1,3.34314575 2.34314575,2 4,2 Z M4,4 C3.44771525,4 3,4.44771525 3,5 L3,11 C3,13.3869484 3.94821156,15.6761336 5.63603897,17.363961 C7.32386638,19.0517884 9.61305159,20 12,20 C16.9705627,20 21,15.9705627 21,11 L21,5 C21,4.44771525 20.5522847,4 20,4 L4,4 Z M12,12.5857864 L15.2928932,9.29289322 C15.6834175,8.90236893 16.3165825,8.90236893 16.7071068,9.29289322 C17.0976311,9.68341751 17.0976311,10.3165825 16.7071068,10.7071068 L12.7071068,14.7071068 C12.3165825,15.0976311 11.6834175,15.0976311 11.2928932,14.7071068 L7.29289322,10.7071068 C6.90236893,10.3165825 6.90236893,9.68341751 7.29289322,9.29289322 C7.68341751,8.90236893 8.31658249,8.90236893 8.70710678,9.29289322 L12,12.5857864 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Feather/pocket" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

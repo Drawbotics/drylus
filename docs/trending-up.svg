@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icon/Feather/trending-up</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M20.5857864,7 L17,7 C16.4477153,7 16,6.55228475 16,6 C16,5.44771525 16.4477153,5 17,5 L23,5 C23.5522847,5 24,5.44771525 24,6 L24,12 C24,12.5522847 23.5522847,13 23,13 C22.4477153,13 22,12.5522847 22,12 L22,8.41421356 L14.2071068,16.2071068 C13.8165825,16.5976311 13.1834175,16.5976311 12.7928932,16.2071068 L8.5,11.9142136 L1.70710678,18.7071068 C1.31658249,19.0976311 0.683417511,19.0976311 0.292893219,18.7071068 C-0.0976310729,18.3165825 -0.0976310729,17.6834175 0.292893219,17.2928932 L7.79289322,9.79289322 C8.18341751,9.40236893 8.81658249,9.40236893 9.20710678,9.79289322 L13.5,14.0857864 L20.5857864,7 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Feather/trending-up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>
