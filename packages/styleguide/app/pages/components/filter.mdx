@@ -1,0 +1,18 @@
+import { BaseFilter, SelectFilter } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Filter
+
+A filter uses a number of other UI elements. For example, we may use a date picker to filter by date, or a list of checkboxes to filter by a particular criterium. The component exposes the `BaseFilter`, which is used to create custom filters, but also provides pre-built common components, see the examples below for more details.
+
+<Playground component={BaseFilter}>
+  <BaseFilter />
+</Playground>
+
+#### Examples
+
+<Playground component={SelectFilter}>
+  <SelectFilter />
+</Playground>

@@ -8,7 +8,7 @@ import panel from './panel';
 import pagination from './pagination';
 import badge from './badge';
 import drawer from './drawer';
-import combinationFilter from './combination-filter';
+import filter from './filter';
 import icon from './icon';
 import tabNavigation from './tab-navigation';
 import listTile from './list-tile';
@@ -26,7 +26,7 @@ const components = {
   pagination,
   badge,
   drawer,
-  combinationFilter,
+  filter,
   icon,
   tabNavigation,
   listTile,
