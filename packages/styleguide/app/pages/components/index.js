@@ -11,6 +11,7 @@ import drawer from './drawer';
 import combinationFilter from './combination-filter';
 import icon from './icon';
 import tabNavigation from './tab-navigation';
+import listTile from './list-tile';
 
 
 const components = {
@@ -27,6 +28,7 @@ const components = {
   combinationFilter,
   icon,
   tabNavigation,
+  listTile,
 };
 
 

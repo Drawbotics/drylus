@@ -56,6 +56,13 @@ const styles = {
   equalSpan: css`
     flex: 1;
   `,
+  hSpacingExtraSmall: css`
+    margin-top: calc(${sv.marginExtraSmall} * -1);
+
+    & > div {
+      padding-top: ${sv.paddingExtraSmall};
+    }
+  `,
   hSpacingSmall: css`
     margin-top: calc(${sv.marginSmall} * -1);
 
@@ -75,6 +82,13 @@ const styles = {
 
     & > div {
       padding-top: ${sv.paddingLarge};
+    }
+  `,
+  vSpacingExtraSmall: css`
+    margin-left: calc(${sv.marginExtraSmall} * -1);
+
+    & > div {
+      padding-left: ${sv.paddingExtraSmall};
     }
   `,
   vSpacingSmall: css`
@@ -215,10 +229,10 @@ Flex.propTypes = {
   className: PropTypes.string,
 
   /** Used to set the vertical space (gutters) between each FlexItem */
-  vSpacing: PropTypes.oneOf([ Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE ]),
+  vSpacing: PropTypes.oneOf([ Sizes.EXTRA_SMALL, Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE ]),
 
   /** Used to set the horizontal space (gutters) between each FlexItem */
-  hSpacing: PropTypes.oneOf([ Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE ]),
+  hSpacing: PropTypes.oneOf([ Sizes.EXTRA_SMALL, Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE ]),
 };
 
 

@@ -15,3 +15,4 @@ export Badge from './Badge';
 export Drawer from './Drawer';
 export CombinationFilter from './CombinationFilter';
 export TabNavigation from './TabNavigation';
+export ListTile from './ListTile';

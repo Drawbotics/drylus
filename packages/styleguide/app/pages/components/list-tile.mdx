@@ -1,0 +1,38 @@
+import {
+  ListTile,
+  RoundIcon,
+  Categories,
+  Icon,
+  Margin,
+  Sizes,
+} from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# List Tile
+Inspired by the Flutter [component](https://api.flutter.dev/flutter/material/ListTile-class.html) of the same name.
+
+
+<Playground component={ListTile}>
+  <ListTile
+    title="Hello"
+    subtitle="Im the subtitle"
+    leading={<RoundIcon name="check" size={50} />}
+    category={Categories.BRAND}
+    onClick={x=>x} />
+</Playground>
+
+
+The same component can be used for many things, such as combining an icon, or an avatar with text:
+
+<Playground>
+  <>
+    <Margin size={{ bottom: Sizes.EXTRA_SMALL }}>
+      <ListTile title="Destructive action" leading={<Icon name="x" category={Categories.DANGER} />} />
+    </Margin>
+    <Margin size={{ bottom: Sizes.EXTRA_LARGE }}>
+      <ListTile title="Success action" leading={<Icon name="check" category={Categories.SUCCESS} />} />
+    </Margin>
+  </>
+</Playground>
