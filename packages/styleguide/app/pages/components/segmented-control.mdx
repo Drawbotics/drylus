@@ -9,7 +9,7 @@ import { ControlledField } from '../utils';
 <Playground component={SegmentedControl}>
   <ControlledField component={
     <SegmentedControl
-      values={[{
+      options={[{
         label: 'First choice',
         value: 'first',
       }, {
@@ -28,7 +28,7 @@ You can also have a number value displayed within each control through `bullet`.
 <Playground>
   <ControlledField component={
     <SegmentedControl
-      values={[{
+      options={[{
         label: 'First choice',
         value: 'first',
         bullet: 4,

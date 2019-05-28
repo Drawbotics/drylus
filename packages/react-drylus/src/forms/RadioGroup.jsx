@@ -186,7 +186,7 @@ const Radio = ({
 const RadioGroup = ({
   value,
   onChange,
-  values=[],
+  options=[],
   valueKey='value',
   labelKey='label',
   error,
@@ -204,16 +204,16 @@ const RadioGroup = ({
   return (
     <div className={cx(styles.radioGroup, className)}>
       <div className={styles.radios}>
-        {values.map((_value) => (
-          <div key={_value[valueKey]} className={styles.radioWrapper}>
+        {options.map((option) => (
+          <div key={option[valueKey]} className={styles.radioWrapper}>
             <Radio
               size={size}
               error={!! error}
               onChange={handleOnChange}
-              checked={value === _value[valueKey]}
-              value={_value[valueKey]}
-              disabled={_value.disabled}
-              {...rest}>{_value[labelKey]}</Radio>
+              checked={value === option[valueKey]}
+              value={option[valueKey]}
+              disabled={option.disabled}
+              {...rest}>{option[labelKey]}</Radio>
           </div>
         ))}
       </div>
@@ -232,16 +232,16 @@ const RadioGroup = ({
 
 RadioGroup.propTypes = {
   /** Determines the radio components which will be rendered */
-  values: PropTypes.arrayOf(PropTypes.shape({
+  options: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
   })),
 
-  /** Used to pick each value in the values array */
+  /** Used to pick each value in the options array */
   valueKey: PropTypes.string,
 
-  /** Used to pick each label in the values array */
+  /** Used to pick each label in the options array */
   labelKey: PropTypes.string,
 
   /** Triggered when radio value is changed */

@@ -61,25 +61,25 @@ const styles = {
 const SegmentedControl = ({
   value,
   onChange=x=>x,
-  values,
+  options,
   valueKey,
   labelKey,
 }) => {
   return (
     <div className={styles.base}>
-      {values.map((_value) => (
+      {options.map((option) => (
         <div
-          key={_value[valueKey]}
+          key={option[valueKey]}
           className={cx(styles.control, {
-            [styles.active]: value === _value[valueKey],
-            [styles.disabled]: _value.disabled,
+            [styles.active]: value === option[valueKey],
+            [styles.disabled]: option.disabled,
           })}
-          onClick={! _value.disabled ? () => onChange(_value[valueKey]) : null}>
-          {_value[labelKey]}
+          onClick={! option.disabled ? () => onChange(option[valueKey]) : null}>
+          {option[labelKey]}
           {do{
-            if (_value.bullet) {
+            if (option.bullet) {
               <div data-element="bullet" className={styles.bullet}>
-                <Badge category={Categories.BRAND} value={_value.bullet} max={99} />
+                <Badge category={Categories.BRAND} value={option.bullet} max={99} />
               </div>
             }
           }}
@@ -92,17 +92,17 @@ const SegmentedControl = ({
 
 SegmentedControl.propTypes = {
   /** Determines the controls which will be rendered */
-  values: PropTypes.arrayOf(PropTypes.shape({
+  options: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     label: PropTypes.string.isRequired,
     bullet: PropTypes.number,
     disabled: PropTypes.bool,
   })),
 
-  /** Used to pick each value in the values array */
+  /** Used to pick each value in the options array */
   valueKey: PropTypes.string,
 
-  /** Used to pick each label in the values array */
+  /** Used to pick each label in the options array */
   labelKey: PropTypes.string,
 
   /** Determines which value is currently active */

@@ -7,7 +7,7 @@ const ModeSwitcher = ({ activeMode, modes, onChange }) => {
     <SegmentedControl
       value={activeMode}
       onChange={onChange}
-      values={modes.map((mode) => ({ value: mode, label: mode }))} />
+      options={modes.map((mode) => ({ value: mode, label: mode }))} />
   );
 };
 

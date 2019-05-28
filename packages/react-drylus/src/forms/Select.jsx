@@ -78,7 +78,7 @@ const styles = {
 
 const Select = ({
   value,
-  values=[],
+  options=[],
   onChange,
   valueKey='value',
   labelKey='label',
@@ -116,17 +116,17 @@ const Select = ({
         {...rest}>
         {do {
           if (! value) {
-            <option key={values.length}>{placeholder}</option>
+            <option key={options.length}>{placeholder}</option>
           }
         }}
-        {values.map((value) => (
+        {options.map((option) => (
           <option
             className={styles.option}
-            key={value[valueKey]}
-            name={value[labelKey]}
-            value={value[valueKey]}
-            disabled={value.disabled}>
-            {value[labelKey]}
+            key={option[valueKey]}
+            name={option[labelKey]}
+            value={option[valueKey]}
+            disabled={option.disabled}>
+            {option[labelKey]}
           </option>
         ))}
       </select>
@@ -144,8 +144,8 @@ const Select = ({
 
 
 Select.propTypes = {
-  /** The values to show in the list of options */
-  values: PropTypes.arrayOf(PropTypes.shape({
+  /** The options to show in the list of options */
+  options: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
@@ -157,10 +157,10 @@ Select.propTypes = {
   /** Disables the select */
   disabled: PropTypes.bool,
 
-  /** Used to pick each value in the values array */
+  /** Used to pick each value in the options array */
   valueKey: PropTypes.string,
 
-  /** Used to pick each label in the values array */
+  /** Used to pick each label in the options array */
   labelKey: PropTypes.string,
 
   /** Text shown when no value is selected */

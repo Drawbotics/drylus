@@ -16,7 +16,7 @@ const SelectProp = ({
       <Select
         name={key}
         value={value || '_empty'}
-        values={[ {
+        options={[ {
           label: 'none',
           value: '_empty',
         }, ...values.map((v) => ({
