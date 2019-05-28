@@ -95,3 +95,8 @@ Once you've finished with the changes and are ready to publish:
 npx lerna publish
 ```
 And follow the CLI prompts.
+**NOTE**: if you're working with pre-releases, lerna will not automatically publish _all_ packages (preferred behaviour), thus you have to run the command with:
+```
+npx lerna pulbish --force-publish
+```
+To release a new version for all the packages, even the unchanged ones.
