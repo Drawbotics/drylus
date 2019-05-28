@@ -120,7 +120,7 @@ Margin.propTypes = {
       bottom: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
       top: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
     }),
-  ]).isRequired,
+  ]),
 
   /** The content of the margin wrapper */
   children: PropTypes.node,
