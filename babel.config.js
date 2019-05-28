@@ -16,6 +16,7 @@ module.exports = function(api) {
   ];
 
   const plugins = [
+    "react-hot-loader/babel",
     ["babel-plugin-emotion", {
       sourceMap: true,
       autoLabel: true,
