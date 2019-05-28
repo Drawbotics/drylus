@@ -12,6 +12,7 @@ import combinationFilter from './combination-filter';
 import icon from './icon';
 import tabNavigation from './tab-navigation';
 import listTile from './list-tile';
+import avatar from './avatar';
 
 
 const components = {
@@ -29,6 +30,7 @@ const components = {
   icon,
   tabNavigation,
   listTile,
+  avatar,
 };
 
 

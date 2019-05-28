@@ -16,3 +16,4 @@ export Drawer from './Drawer';
 export CombinationFilter from './CombinationFilter';
 export TabNavigation from './TabNavigation';
 export ListTile from './ListTile';
+export Avatar from './Avatar';

@@ -14,7 +14,7 @@ const styles = {
     width: ${sv.defaultMargin};
     color: ${sv.colorPrimary};
     background: ${sv.neutralLight};
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 
@@ -69,7 +69,7 @@ const styles = {
 };
 
 
-const RoundIcon = ({ name, size=Sizes.DEFAULT, category }) => {
+const RoundIcon = ({ name, size, category }) => {
   const customSize = typeof size === 'number';
   return (
     <div className={cx(styles.base, {
