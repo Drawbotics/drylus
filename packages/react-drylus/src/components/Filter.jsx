@@ -5,6 +5,7 @@ import sv from '@drawbotics/style-vars';
 
 import Icon from './Icon';
 import ListTile from './ListTile';
+import Checkbox from '../forms/Checkbox';
 
 
 const styles = {
@@ -82,6 +83,11 @@ const styles = {
     &:hover {
       cursor: pointer;
       background: ${sv.neutralLight};
+    }
+  `,
+  defaultCursor: css`
+    &:hover {
+      cursor: default;
     }
   `,
   activeOption: css`
@@ -221,6 +227,72 @@ SelectFilter.propTypes = {
 
 
 SelectFilter.defaultProps = {
+  valueKey: 'value',
+  labelKey: 'label',
+};
+
+
+function getLabelForCheckboxFilter(label, options, values, valueKey, labelKey) {
+  if (values.length === 1) {
+    return options.find((option) => option[valueKey] === values[0])?.[labelKey];
+  }
+  else if (values.length > 1) {
+    return `${label} (${values.length})`;
+  }
+  else {
+    return label;
+  }
+}
+
+
+export const CheckboxFilter = ({
+  options,
+  values=[],
+  valueKey,
+  labelKey,
+  onChange,
+  label,
+  ...rest,
+}) => {
+  const currentLabel = getLabelForCheckboxFilter(label, options, values, valueKey, labelKey);
+  return (
+    <BaseFilter {...rest} label={currentLabel} active={values.length > 0}>
+      {options.map((option) => (
+        <div key={option[valueKey]} className={cx(styles.option, styles.defaultCursor)}>
+          <Checkbox
+            onChange={(checked) => onChange(option[valueKey], checked)}
+            value={values.includes(option[valueKey])}>
+            {option[labelKey]}
+          </Checkbox>
+        </div>
+      ))}
+    </BaseFilter>
+  );
+};
+
+
+CheckboxFilter.propTypes = {
+  /** The items to show in the filter panel */
+  options: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  })),
+
+  /** Determines which values are currently active */
+  values: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+
+  /** Used to pick each value in the options array */
+  valueKey: PropTypes.string,
+
+  /** Used to pick each label in the options array */
+  labelKey: PropTypes.string,
+
+  /** Triggered when an option is clicked. Returns (valueKey, boolean) where the second argument is true if checked, false if not */
+  onChange: PropTypes.func.isRequired,
+};
+
+
+CheckboxFilter.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
 };

@@ -1,7 +1,8 @@
 import {
   BaseFilter,
-  SelectFilter,
   FilterAlign,
+  SelectFilter,
+  CheckboxFilter,
   Avatar,
   Sizes,
   Categories,
@@ -12,7 +13,7 @@ import {
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
-import { ControlledField } from '../utils';
+import { ControlledField, ControlledMultiField } from '../utils';
 
 
 # Filter
@@ -79,5 +80,33 @@ A filter uses a number of other UI elements. For example, we may use a date pick
         } />
       </FlexItem>
     </Flex>
+  </div>
+</Playground>
+
+
+`CheckboxFilter` inherits all props from `BaseFilter` and adds the following
+
+<Playground component={CheckboxFilter}>
+  <div style={{ height: 200, marginLeft: 100 }}>
+    <ControlledMultiField component={
+      <CheckboxFilter
+        align={FilterAlign.LEFT}
+        label="Products"
+        onClear={x=>x}
+        onChange={x=>x}
+        options={[{
+          label: 'Exterior 3D',
+          value: 'exterior3d',
+        }, {
+          label: 'Interior 3D',
+          value: 'interior3d',
+        }, {
+          label: 'Shoebox',
+          value: 'shoebox',
+        }, {
+          label: 'Website',
+          value: 'website',
+        }]} />
+    } />
   </div>
 </Playground>

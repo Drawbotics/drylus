@@ -19,3 +19,16 @@ export const ControlledBoolField = ({ component: Component }) => {
     </div>
   );
 };
+
+
+export const ControlledMultiField = ({ component: Component, style }) => {
+  const [values, setValues] = useState([]);
+  return (
+    <div style={style}>
+      {React.cloneElement(Component, {
+        values,
+        onChange: (value, add) => add ? setValues([ ...values, value ]) : setValues(values.filter((v) => v !== value)),
+        onClear: () => setValues([]) })}
+    </div>
+  );
+};
