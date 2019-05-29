@@ -1,0 +1,13 @@
+import { Tooltip, Button, Categories } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Tooltip
+It can be used to wrap any component/element and display a hint when hovered. The component is uncontrolled and uses portals to be rendered on top of the content.
+
+<Playground component={Tooltip}>
+  <Tooltip message="I am a tooltip">
+    <Button category={Categories.BRAND}>Hover me</Button>
+  </Tooltip>
+</Playground>
