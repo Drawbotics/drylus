@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext, Fragment } from 'react';
+import React, { useState, useContext, createContext } from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
@@ -25,22 +25,6 @@ const styles = {
 
     > tbody > tr[data-nested] > td > table > tbody > tr[data-nested] {
       box-shadow: none;
-    }
-
-    [data-nested] ~ tr:not([data-row]):nth-of-type(even) {
-      background: ${sv.white};
-    }
-
-    [data-nested] ~ tr:not([data-row]):nth-of-type(odd) {
-      background: ${sv.white};
-    }
-
-    [data-nested] ~ [data-nested] ~ tr:not([data-row]):nth-of-type(even) {
-      background: ${sv.white};
-    }
-
-    [data-nested] ~ [data-nested] ~ tr:not([data-row]):nth-of-type(odd) {
-      background: ${sv.neutralLighter};
     }
 
     [data-nested] tr {
@@ -97,22 +81,6 @@ const styles = {
     }
   `,
   row: css`
-    &:nth-of-type(even) {
-      background: ${sv.white};
-
-      & + [data-nested] {
-        background: ${sv.white};
-      }
-    }
-
-    &:nth-of-type(odd) {
-      background: ${sv.neutralLighter};
-
-      & + [data-nested] {
-        background: ${sv.neutralLighter};
-      }
-    }
-
     & > td:last-of-type {
       text-align: right;
     }
@@ -123,7 +91,7 @@ const styles = {
 
     &[data-nested] > td > table {
       tr {
-        border-bottom: 1px solid ${sv.neutralLight};
+        border-bottom: 1px solid ${sv.neutral};
 
         &:last-of-type {
           border-bottom: none;
@@ -143,6 +111,31 @@ const styles = {
         }
       }
     }
+  `,
+  white: css`
+    background: ${sv.white};
+
+    [data-nested] {
+      background: ${sv.white} !important;
+
+      > tr {
+        background: ${sv.white} !important;
+      }
+    }
+  `,
+  light: css`
+    background: ${sv.neutralLightest};
+
+    [data-nested] {
+      background: ${sv.neutralLightest} !important;
+
+      > tr {
+        background: ${sv.neutralLightest} !important;
+      }
+    }
+  `,
+  noBorderBottom: css`
+    border-bottom: none !important;
   `,
   highlightedRow: css`
     background: ${sv.neutral} !important;
@@ -244,13 +237,16 @@ export const TCell = ({
 };
 
 
-export const TRow = ({ children, nested, parent, highlighted }) => {
+export const TRow = ({ children, nested, parent, highlighted, alt, lastParentRow }) => {
   const [ rowsStates, handleSetRowState ] = useContext(RowsContext);
   const collapsed = nested && ! rowsStates[nested];
   return (
     <tr className={cx(styles.row, {
         [styles.collapsed]: collapsed,
+        [styles.light]: ! alt,
+        [styles.white]: alt,
         [styles.highlightedRow]: highlighted,
+        [styles.noBorderBottom]: !! parent && ! rowsStates[parent] && lastParentRow,
       })}
       data-nested={nested || undefined}
       data-parent={parent || undefined}>
@@ -283,19 +279,26 @@ export const THead = ({ children }) => {
 
 
 export const TBody = ({ children }) => {
+  let light = true;
+  let i = 0;
+  const childrenCount = React.Children.count(children);
   return (
     <tbody className={styles.body}>
-      {children}
+      {React.Children.map(children, (child) => {
+        light = child.props.nested ? light : ! light;
+        i = i + 1;
+        return React.cloneElement(child, { alt: light, lastParentRow: i === childrenCount - 1 });
+      })}
     </tbody>
   );
 };
 
 
-function generateTable(data, header, renderCell, i=0) {
+function generateTable(data, header, renderCell, renderChildCell, i=0) {
   if (Array.isArray(data)) {
     return (
       <TBody>
-        {data.map((rows, i) => generateTable(rows, header, renderCell, i))}
+        {data.map((rows, i) => generateTable(rows, header, renderCell, renderChildCell, i))}
       </TBody>
     );
   }
@@ -303,35 +306,38 @@ function generateTable(data, header, renderCell, i=0) {
     const hasData = !! data.data;
     const row = hasData ? omit(data, 'data') : data;
     const uniqId = Object.values(row).reduce((memo, v) => `${memo}-${v}`, '');
-    return (
-      <Fragment key={uniqId}>
-        <TRow parent={hasData ? uniqId : undefined}>
-          {do{
-            if (header) {
-              header.map((key, i) => (
-                <TCell key={`${i}-${row[key]}`}>{renderCell(row[key], i, header.length)}</TCell>
-              ))
-            }
-            else {
-              Object.values(row).map((value, i, arr) => (
-                <TCell key={`${i}-${value}`}>{renderCell(value, i, arr.length)}</TCell>
-              ))
-            }
-          }}
-        </TRow>
+    const renderData = renderCell || renderChildCell;
+    const parentRow = (
+      <TRow key={uniqId} parent={hasData ? uniqId : undefined}>
         {do{
-          if (hasData) {
-            <TRow nested={uniqId}>
-              <TCell>
-                <Table>
-                  {generateTable(data.data, undefined, renderCell)}
-                </Table>
-              </TCell>
-            </TRow>
+          if (header) {
+            header.map((key, i) => (
+              <TCell key={`${i}-${row[key]}`}>{renderData(row[key], i, header.length)}</TCell>
+            ))
+          }
+          else {
+            Object.values(row).map((value, i, arr) => (
+              <TCell key={`${i}-${value}`}>{renderData(value, i, arr.length)}</TCell>
+            ))
           }
         }}
-      </Fragment>
+      </TRow>
     );
+
+    if (hasData) {
+      return [parentRow, (
+        <TRow key={`${uniqId}-1`} nested={uniqId}>
+          <TCell>
+            <Table>
+              {generateTable(data.data, undefined, null, renderChildCell)}
+            </Table>
+          </TCell>
+        </TRow>
+      )];
+    }
+    else {
+      return parentRow;
+    }
   }
 }
 
@@ -342,6 +348,7 @@ const Table = ({
   withNesting,
   data,
   renderCell=x=>x,
+  renderChildCell=x=>x,
   header,
   sortableBy,
   activeHeader,
@@ -357,7 +364,7 @@ const Table = ({
   return (
     <table className={cx(styles.root, {
       [styles.fullWidth]: fullWidth,
-      [styles.leftPadded]: hasNestedData || withNesting,
+      [styles.leftPadded]: hasNestedData || withNesting || sortableBy,
       [styles.highlighted]: highlighted && ! (hasNestedData || withNesting),
     })}>
       <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
@@ -387,7 +394,7 @@ const Table = ({
                   </TCell>
                 ))}
               </THead>
-              {generateTable(data, header, renderCell)}
+              {generateTable(data, header, renderCell, renderChildCell)}
             </>
           }
           else {
@@ -417,6 +424,9 @@ Table.propTypes = {
 
   /** Returns the child given to each row cell. Params (value, index, columns) */
   renderCell: PropTypes.func,
+
+  /** Same as renderCell but applies to the children cells (nested) */
+  renderChildCell: PropTypes.func,
 
   /** Array of strings to generate the header of the table (each string is a label). data prop keys will be filtered by these */
   header: PropTypes.arrayOf(PropTypes.string),

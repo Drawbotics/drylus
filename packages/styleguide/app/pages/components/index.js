@@ -14,6 +14,7 @@ import tabNavigation from './tab-navigation';
 import listTile from './list-tile';
 import avatar from './avatar';
 import text from './text';
+import dot from './dot';
 
 
 const components = {
@@ -33,6 +34,7 @@ const components = {
   listTile,
   avatar,
   text,
+  dot,
 };
 
 

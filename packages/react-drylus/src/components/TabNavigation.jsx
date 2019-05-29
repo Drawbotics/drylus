@@ -24,6 +24,11 @@ const styles = {
       background: ${sv.neutral};
       z-index: 1;
     }
+
+    & > a {
+      display: flex;
+      text-decoration: none;
+    }
   `,
   vertical: css`
     flex-direction: column;
@@ -33,7 +38,7 @@ const styles = {
       content: none;
     }
 
-    & > div {
+    & > div, > a > div {
       flex: 1;
       justify-content: space-between;
       color: ${sv.colorPrimary};
@@ -110,37 +115,42 @@ const TabNavigation = ({
   valueKey,
   labelKey,
   vertical,
+  linkComponent: Link,
 }) => {
+  const renderOption = (option) => (
+    <div
+      key={option[valueKey]}
+      className={cx(styles.item, {
+        [styles.active]: value === option[valueKey],
+        [styles.verticalActive]: vertical && value === option[valueKey],
+        [styles.disabled]: option.disabled,
+      })}
+      onClick={! option.disabled ? () => onChange(option[valueKey]) : null}>
+      {option[labelKey]}
+      {do{
+        if (option.bullet) {
+          <div data-element="bullet" className={styles.bullet}>
+            {do{
+              if (vertical) {
+                option.bullet
+              }
+              else {
+                <Badge category={Categories.BRAND} value={option.bullet} max={99} />
+              }
+            }}
+          </div>
+        }
+      }}
+    </div>
+  );
   return (
     <div className={cx(styles.root, {
       [styles.vertical]: vertical,
     })}>
-      {options.map((option) => (
-        <div
-          key={option[valueKey]}
-          className={cx(styles.item, {
-            [styles.active]: value === option[valueKey],
-            [styles.verticalActive]: vertical && value === option[valueKey],
-            [styles.disabled]: option.disabled,
-          })}
-          onClick={! option.disabled ? () => onChange(option[valueKey]) : null}>
-          {option[labelKey]}
-          {do{
-            if (option.bullet) {
-              <div data-element="bullet" className={styles.bullet}>
-                {do{
-                  if (vertical) {
-                    option.bullet
-                  }
-                  else {
-                    <Badge category={Categories.BRAND} value={option.bullet} max={99} />
-                  }
-                }}
-              </div>
-            }
-          }}
-        </div>
-      ))}
+      {options.map((option) => Link ? React.createElement(Link, {
+        href: option.disabled ? null : option[valueKey],
+        key: option[valueKey],
+      }, renderOption(option)) : renderOption(option))}
     </div>
   );
 };
@@ -169,6 +179,9 @@ TabNavigation.propTypes = {
 
   /** If true, the tabs are rendered in a vertical fashion, by default they take the full width of the container */
   vertical: PropTypes.bool,
+
+  /** If set, the rendered options will be wrapped in the component, which will be given the value as href */
+  linkComponent: PropTypes.node,
 };
 
 

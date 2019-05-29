@@ -18,3 +18,4 @@ export TabNavigation from './TabNavigation';
 export ListTile from './ListTile';
 export Avatar from './Avatar';
 export Text from './Text';
+export Dot from './Dot';

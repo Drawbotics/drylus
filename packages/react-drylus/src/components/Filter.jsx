@@ -64,7 +64,7 @@ const styles = {
     transform: translateY(0);
   `,
   clear: css`
-    padding: ${sv.paddingExtraSmall}; ${sv.paddingSmall};
+    padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
     margin: ${sv.marginExtraSmall} 0;
     color: ${sv.blue};
     transition: ${sv.defaultTransition};
