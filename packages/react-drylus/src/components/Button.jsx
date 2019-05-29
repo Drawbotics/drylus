@@ -16,7 +16,7 @@ const styles = {
     outline: 0;
     border: 0;
     transition: ${sv.defaultTransition};
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 

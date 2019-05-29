@@ -357,7 +357,7 @@ const Table = ({
   return (
     <table className={cx(styles.root, {
       [styles.fullWidth]: fullWidth,
-      [styles.leftPadded]: hasNestedData || withNesting,
+      [styles.leftPadded]: hasNestedData || withNesting || sortableBy,
       [styles.highlighted]: highlighted && ! (hasNestedData || withNesting),
     })}>
       <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
