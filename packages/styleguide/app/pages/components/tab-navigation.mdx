@@ -1,4 +1,4 @@
-import { TabNavigation } from '@drawbotics/react-drylus';
+import { TabNavigation, Flex, FlexItem, FlexJustify } from '@drawbotics/react-drylus';
 import sv from '@drawbotics/style-vars';
 
 import Playground from '~/components/Playground';
@@ -56,4 +56,56 @@ However it can also be set vertically, and each value may have bullets (similarl
         }]} />
       } />
   </div>
+</Playground>
+
+
+Examples with link component wrapping
+<Playground>
+  <Flex justify={FlexJustify.SPACE_AROUND}>
+    <FlexItem>
+      <div style={{ width: 250, background: sv.neutralLighter }}>
+        <ControlledField component={
+          <TabNavigation
+            linkComponent="a"
+            vertical
+            options={[{
+              label: 'First choice',
+              value: 'first',
+              bullet: 4,
+            }, {
+              label: 'Second choice',
+              value: 'second',
+              bullet: 10,
+              disabled: true,
+            }, {
+              label: 'Third',
+              value: 'third',
+              bullet: 123,
+            }, {
+              label: 'Fourth',
+              value: 'fourth',
+              bullet: 40,
+            }]} />
+          } />
+      </div>
+    </FlexItem>
+    <FlexItem>
+      <ControlledField component={
+        <TabNavigation
+          linkComponent="a"
+          options={[{
+            label: 'First choice',
+            value: 'first',
+          }, {
+            label: 'Second choice',
+            value: 'second',
+          }, {
+            label: 'Third',
+            value: 'third',
+            bullet: 4,
+            disabled: true,
+          }]} />
+      } />
+    </FlexItem>
+  </Flex>
 </Playground>
