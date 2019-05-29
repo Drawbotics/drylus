@@ -2,8 +2,8 @@ import React from 'react';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-import Button, { ButtonTiers } from './Button';
-import Sizes from '../base/Sizes';
+import Button from './Button';
+import { Sizes, Tiers } from '../base';
 import Categories from '../base/Categories';
 
 
@@ -59,7 +59,7 @@ const Pagination = ({
       <Button
         onClick={value === 1 ? null : () => onChange(value - 1)}
         disabled={value === 1}
-        tier={ButtonTiers.TERTIARY}
+        tier={Tiers.TERTIARY}
         size={Sizes.SMALL}
         icon="chevron-left">
         {prevLabel}
@@ -69,7 +69,7 @@ const Pagination = ({
           {do {
             if (label === '...') {
               <Button
-                tier={ButtonTiers.TERTIARY}
+                tier={Tiers.TERTIARY}
                 size={Sizes.SMALL}>
                 {label}
               </Button>
@@ -78,7 +78,7 @@ const Pagination = ({
               <Button
                 onClick={() => onChange(label)}
                 category={Categories.BRAND}
-                tier={value === label ? ButtonTiers.PRIMARY : ButtonTiers.TERTIARY}
+                tier={value === label ? Tiers.PRIMARY : Tiers.TERTIARY}
                 size={Sizes.SMALL}>
                 {`${label}`}
               </Button>
@@ -89,7 +89,7 @@ const Pagination = ({
       <Button
         onClick={value === pages ? null : () => onChange(value + 1)}
         disabled={value === pages}
-        tier={ButtonTiers.TERTIARY}
+        tier={Tiers.TERTIARY}
         size={Sizes.SMALL}
         icon="chevron-right"
         iconSide="right">

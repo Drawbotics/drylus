@@ -1,4 +1,4 @@
-export Button, { ButtonTiers } from './Button';
+export Button from './Button';
 export Icon from './Icon';
 export Footer from './Footer';
 export Navbar from './Navbar';

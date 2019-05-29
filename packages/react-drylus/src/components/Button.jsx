@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
-import { Categories, Sizes } from '../base';
+import { Categories, Sizes, Tiers } from '../base';
 import Icon from './Icon';
 
 
@@ -168,20 +168,13 @@ const styles = {
 };
 
 
-export const ButtonTiers = {
-  PRIMARY: 'PRIMARY',
-  SECONDARY: 'SECONDARY',
-  TERTIARY: 'TERTIARY',
-};
-
-
 const Button = ({
   children,
   disabled,
   onClick,
   category,
   size,
-  tier=ButtonTiers.PRIMARY,
+  tier=Tiers.PRIMARY,
   icon,
   iconSide='left',
 }) => {
@@ -196,7 +189,7 @@ const Button = ({
         [styles.leftIcon]: iconSide === 'left' && icon,
         [styles.iconOnly]: iconOnly,
         [styles.smallIcon]: iconOnly && size === 'SMALL',
-        [styles[category?.toLowerCase()]]: category && tier === ButtonTiers.PRIMARY,
+        [styles[category?.toLowerCase()]]: category && tier === Tiers.PRIMARY,
       })}
       disabled={disabled}>
       {do{
@@ -232,7 +225,7 @@ Button.propTypes = {
   size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE]),
 
   /** Tier of the button */
-  tier: PropTypes.oneOf([ButtonTiers.PRIMARY, ButtonTiers.SECONDARY, ButtonTiers.TERTIARY]),
+  tier: PropTypes.oneOf([Tiers.PRIMARY, Tiers.SECONDARY, Tiers.TERTIARY]),
 
   /** Name of the icon to be displayed within the button. Shown on the left by default */
   icon: PropTypes.string,
@@ -245,7 +238,7 @@ Button.propTypes = {
 Button.defaultProps = {
   iconSide: 'left',
   size: Sizes.DEFAULT,
-  tier: ButtonTiers.PRIMARY,
+  tier: Tiers.PRIMARY,
 };
 
 
