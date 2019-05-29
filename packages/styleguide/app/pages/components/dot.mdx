@@ -1,0 +1,19 @@
+import { Dot, ListTile, Categories } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Dot
+Used to display a status in a minimal way. Can be used on its own or combined with text when using `ListTile`.
+
+
+<Playground component={Dot}>
+  <Dot />
+</Playground>
+
+
+If you want to create a status
+
+<Playground>
+  <ListTile title="Finished" leading={<Dot category={Categories.SUCCESS} />} />
+</Playground>

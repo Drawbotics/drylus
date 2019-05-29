@@ -13,6 +13,7 @@ import icon from './icon';
 import tabNavigation from './tab-navigation';
 import listTile from './list-tile';
 import avatar from './avatar';
+import dot from './dot';
 
 
 const components = {
@@ -31,6 +32,7 @@ const components = {
   tabNavigation,
   listTile,
   avatar,
+  dot,
 };
 
 
