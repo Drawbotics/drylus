@@ -17,3 +17,4 @@ export BaseFilter, { FilterAlign, SelectFilter, CheckboxFilter } from './Filter'
 export TabNavigation from './TabNavigation';
 export ListTile from './ListTile';
 export Avatar from './Avatar';
+export Dot from './Dot';
