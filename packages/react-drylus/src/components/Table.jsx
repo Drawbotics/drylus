@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext, Fragment } from 'react';
+import React, { useState, useContext, createContext } from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
@@ -306,35 +306,37 @@ function generateTable(data, header, renderCell, i=0) {
     const hasData = !! data.data;
     const row = hasData ? omit(data, 'data') : data;
     const uniqId = Object.values(row).reduce((memo, v) => `${memo}-${v}`, '');
-    return (
-      <Fragment key={uniqId}>
-        <TRow parent={hasData ? uniqId : undefined}>
-          {do{
-            if (header) {
-              header.map((key, i) => (
-                <TCell key={`${i}-${row[key]}`}>{renderCell(row[key], i, header.length)}</TCell>
-              ))
-            }
-            else {
-              Object.values(row).map((value, i, arr) => (
-                <TCell key={`${i}-${value}`}>{renderCell(value, i, arr.length)}</TCell>
-              ))
-            }
-          }}
-        </TRow>
+    const parentRow = (
+      <TRow key={uniqId} parent={hasData ? uniqId : undefined}>
         {do{
-          if (hasData) {
-            <TRow nested={uniqId}>
-              <TCell>
-                <Table>
-                  {generateTable(data.data, undefined, renderCell)}
-                </Table>
-              </TCell>
-            </TRow>
+          if (header) {
+            header.map((key, i) => (
+              <TCell key={`${i}-${row[key]}`}>{renderCell(row[key], i, header.length)}</TCell>
+            ))
+          }
+          else {
+            Object.values(row).map((value, i, arr) => (
+              <TCell key={`${i}-${value}`}>{renderCell(value, i, arr.length)}</TCell>
+            ))
           }
         }}
-      </Fragment>
+      </TRow>
     );
+
+    if (hasData) {
+      return [parentRow, (
+        <TRow key={`${uniqId}-1`} nested={uniqId}>
+          <TCell>
+            <Table>
+              {generateTable(data.data, undefined, renderCell)}
+            </Table>
+          </TCell>
+        </TRow>
+      )];
+    }
+    else {
+      return parentRow;
+    }
   }
 }
 
