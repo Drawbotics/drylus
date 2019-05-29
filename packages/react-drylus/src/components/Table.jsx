@@ -294,11 +294,11 @@ export const TBody = ({ children }) => {
 };
 
 
-function generateTable(data, header, renderCell, i=0) {
+function generateTable(data, header, renderCell, renderChildCell, i=0) {
   if (Array.isArray(data)) {
     return (
       <TBody>
-        {data.map((rows, i) => generateTable(rows, header, renderCell, i))}
+        {data.map((rows, i) => generateTable(rows, header, renderCell, renderChildCell, i))}
       </TBody>
     );
   }
@@ -306,17 +306,18 @@ function generateTable(data, header, renderCell, i=0) {
     const hasData = !! data.data;
     const row = hasData ? omit(data, 'data') : data;
     const uniqId = Object.values(row).reduce((memo, v) => `${memo}-${v}`, '');
+    const renderData = renderCell || renderChildCell;
     const parentRow = (
       <TRow key={uniqId} parent={hasData ? uniqId : undefined}>
         {do{
           if (header) {
             header.map((key, i) => (
-              <TCell key={`${i}-${row[key]}`}>{renderCell(row[key], i, header.length)}</TCell>
+              <TCell key={`${i}-${row[key]}`}>{renderData(row[key], i, header.length)}</TCell>
             ))
           }
           else {
             Object.values(row).map((value, i, arr) => (
-              <TCell key={`${i}-${value}`}>{renderCell(value, i, arr.length)}</TCell>
+              <TCell key={`${i}-${value}`}>{renderData(value, i, arr.length)}</TCell>
             ))
           }
         }}
@@ -328,7 +329,7 @@ function generateTable(data, header, renderCell, i=0) {
         <TRow key={`${uniqId}-1`} nested={uniqId}>
           <TCell>
             <Table>
-              {generateTable(data.data, undefined, renderCell)}
+              {generateTable(data.data, undefined, null, renderChildCell)}
             </Table>
           </TCell>
         </TRow>
@@ -347,6 +348,7 @@ const Table = ({
   withNesting,
   data,
   renderCell=x=>x,
+  renderChildCell=x=>x,
   header,
   sortableBy,
   activeHeader,
@@ -392,7 +394,7 @@ const Table = ({
                   </TCell>
                 ))}
               </THead>
-              {generateTable(data, header, renderCell)}
+              {generateTable(data, header, renderCell, renderChildCell)}
             </>
           }
           else {
@@ -422,6 +424,9 @@ Table.propTypes = {
 
   /** Returns the child given to each row cell. Params (value, index, columns) */
   renderCell: PropTypes.func,
+
+  /** Same as renderCell but applies to the children cells (nested) */
+  renderChildCell: PropTypes.func,
 
   /** Array of strings to generate the header of the table (each string is a label). data prop keys will be filtered by these */
   header: PropTypes.arrayOf(PropTypes.string),

@@ -268,7 +268,7 @@ Below is the table that it generates. Note that you need to at least pass `heade
 You can customize the look of the cell contents through the `renderCell` prop. For example the following `renderCell` function:
 
 ```js
-const customizeCells = (v, i, cols) => {
+const customizeCell = (v, i, cols) => {
   if (i === 0) {
     return <div style={{ fontWeight: 'bold', color: sv.blue }}>{v}</div>;
   }
@@ -280,7 +280,7 @@ const customizeCells = (v, i, cols) => {
   }
 }
 ```
-export const customizeCells = (v, i, cols) => {
+export const customizeCell = (v, i, cols) => {
   if (i === 0) {
     return <div style={{ fontWeight: 'bold', color: sv.blue }}>{v}</div>;
   }
@@ -292,12 +292,13 @@ export const customizeCells = (v, i, cols) => {
   }
 }
 
-Gives the following
+We can do the same for the cells within nested rows. Combined this yields:
 
 <Playground>
   <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
     <Table
-      renderCell={customizeCells}
+      renderCell={customizeCell}
+      renderChildCell={customizeCell}
       data={family}
       header={['name', 'height', 'age', 'children']} />
   </div>
