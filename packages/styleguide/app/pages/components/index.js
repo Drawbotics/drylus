@@ -15,6 +15,7 @@ import listTile from './list-tile';
 import avatar from './avatar';
 import text from './text';
 import dot from './dot';
+import tooltip from './tooltip';
 
 
 const components = {
@@ -35,6 +36,7 @@ const components = {
   avatar,
   text,
   dot,
+  tooltip,
 };
 
 
