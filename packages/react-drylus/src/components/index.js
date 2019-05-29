@@ -13,7 +13,7 @@ export Panel, { PanelHeader, PanelBody, PanelFooter, PanelSection } from './Pane
 export Pagination from './Pagination';
 export Badge from './Badge';
 export Drawer from './Drawer';
-export BaseFilter, { SelectFilter } from './Filter';
+export BaseFilter, { FilterAlign, SelectFilter } from './Filter';
 export TabNavigation from './TabNavigation';
 export ListTile from './ListTile';
 export Avatar from './Avatar';

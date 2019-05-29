@@ -1,6 +1,18 @@
-import { BaseFilter, SelectFilter } from '@drawbotics/react-drylus';
+import {
+  BaseFilter,
+  SelectFilter,
+  FilterAlign,
+  Avatar,
+  Sizes,
+  Categories,
+  Flex,
+  FlexItem,
+  FlexJustify,
+  Icon,
+} from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
+import { ControlledField } from '../utils';
 
 
 # Filter
@@ -10,7 +22,7 @@ A filter uses a number of other UI elements. For example, we may use a date pick
 <Playground component={BaseFilter}>
   <div style={{ height: 200, marginLeft: 100 }}>
     <BaseFilter label="Base filter" onClear={x=>x}>
-      <div style={{ height: 70, width: 150, background: 'red', padding: 20 }}>
+      <div style={{ height: 70, background: 'red', padding: 20 }}>
         Some custom content
       </div>
     </BaseFilter>
@@ -19,6 +31,53 @@ A filter uses a number of other UI elements. For example, we may use a date pick
 
 #### Examples
 
+`SelectFilter` inherits all props from `BaseFilter` and adds the following
+
 <Playground component={SelectFilter}>
-  <SelectFilter />
+  <div style={{ height: 200 }}>
+    <Flex justify={FlexJustify.END} vSpacing={Sizes.SMALL}>
+      <FlexItem>
+        <ControlledField component={
+          <SelectFilter
+            label="Country"
+            onClear={x=>x}
+            onChange={x=>x}
+            options={[{
+              leading: <Avatar text="Belgium" backgroundColor="#E00D2B" size={Sizes.SMALL} />,
+              label: 'Belgium',
+              value: 'BE',
+            }, {
+              leading: <Avatar text="France" backgroundColor="#011082" size={Sizes.SMALL} />,
+              label: 'France',
+              value: 'FR',
+            }, {
+              leading: <Avatar text="Italy" backgroundColor="#128435" size={Sizes.SMALL} />,
+              label: 'Italy',
+              value: 'IT',
+            }]} />
+        } />
+      </FlexItem>
+      <FlexItem>
+        <ControlledField component={
+          <SelectFilter
+            label="Notifications"
+            onClear={x=>x}
+            onChange={x=>x}
+            options={[{
+              leading: <Icon name="x" category={Categories.DANGER} />,
+              label: 'Dismissed',
+              value: 'dismissed',
+            }, {
+              leading: <Icon name="bell" category={Categories.WARNING} />,
+              label: 'Snoozed',
+              value: 'snoozed',
+            }, {
+              leading: <Icon name="check" category={Categories.SUCCESS} />,
+              label: 'Seen',
+              value: 'seen',
+            }]} />
+        } />
+      </FlexItem>
+    </Flex>
+  </div>
 </Playground>

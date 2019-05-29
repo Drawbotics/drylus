@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
 import Icon from './Icon';
+import ListTile from './ListTile';
 
 
 const styles = {
@@ -41,7 +42,8 @@ const styles = {
     top: 100%;
     margin-top: ${sv.marginExtraSmall};
     background: ${sv.white};
-    min-width: 100%;
+    min-width: 180px;
+    width: 100%;
     border-radius: ${sv.defaultBorderRadius};
     border: 1px solid ${sv.azure};
     overflow: hidden;
@@ -50,6 +52,7 @@ const styles = {
     transform: translateY(-5px);
     pointer-events: none;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    padding-top: ${sv.paddingExtraSmall};
   `,
   rightAlign: css`
     right: 0;
@@ -70,6 +73,20 @@ const styles = {
       background: ${sv.neutralLight};
     }
   `,
+  option: css`
+    display: flex;
+    align-items: center;
+    padding: 5px ${sv.paddingExtraSmall};
+    transition: ${sv.defaultTransition};
+
+    &:hover {
+      cursor: pointer;
+      background: ${sv.neutralLight};
+    }
+  `,
+  activeOption: css`
+    font-weight: bold;
+  `,
 };
 
 
@@ -85,12 +102,13 @@ const BaseFilter = ({
   children,
   onClear,
   align,
+  active,
 }) => {
   const ref = useRef();
-  const [ active, setActive ] = useState(false);
-  const handleDocumentClick = (e) => ! ref.current.contains(e.target) ? setActive(false) : null;
+  const [ panelOpen, setPanelOpen ] = useState(false);
+  const handleDocumentClick = (e) => ! ref.current.contains(e.target) ? setPanelOpen(false) : null;
   const handleClickClear = () => {
-    setActive(false);
+    setPanelOpen(false);
     onClear();
   };
   useEffect(() => {
@@ -102,15 +120,22 @@ const BaseFilter = ({
   return (
     <div ref={ref} className={styles.root}>
       <div className={cx(styles.trigger, {
-        [styles.active]: active,
-      })} onClick={() => setActive(true)}>
+        [styles.active]: panelOpen || active,
+      })} onClick={() => setPanelOpen(true)}>
         {label}
-        <Icon name={active ? 'chevron-up' : 'chevron-down'} />
+        <Icon
+          onClick={(e) => {
+            if (active) {
+              e.stopPropagation();
+              onClear();
+            }
+          }}
+          name={active ? 'x' : (panelOpen ? 'chevron-up' : 'chevron-down')} />
       </div>
       <div className={cx(styles.panel, {
-        [styles.visible]: active,
+        [styles.visible]: panelOpen,
         [styles.rightAlign]: align === FilterAlign.RIGHT,
-      })}>
+      })} onClick={() => setPanelOpen(false)}>
         {children}
         <div className={styles.clear} onClick={handleClickClear}>
           {clearLabel}
@@ -136,6 +161,9 @@ BaseFilter.propTypes = {
 
   /** Determines on which side the panel is aligned */
   align: PropTypes.oneOf([ FilterAlign.LEFT, FilterAlign.RIGHT ]),
+
+  /** If true, the filter trigger is dark, and the close icon is shown to clear it when clicked */
+  active: PropTypes.bool,
 };
 
 
@@ -147,16 +175,54 @@ BaseFilter.defaultProps = {
 
 export const SelectFilter = ({
   options,
+  value,
+  valueKey,
+  labelKey,
+  onChange,
+  label,
+  ...rest,
 }) => {
+  const currentLabel = value ? options.find((option) => option[valueKey] === value)?.[labelKey] : label;
   return (
-    <BaseFilter>
+    <BaseFilter {...rest} label={currentLabel} active={!! value}>
+      {options.map((option) => (
+        <div
+          key={option[valueKey]}
+          className={cx(styles.option, { [styles.activeOption]: value === option[valueKey] })}
+          onClick={() => onChange(option[valueKey])}>
+          <ListTile title={option[labelKey]} leading={option.leading} />
+        </div>
+      ))}
     </BaseFilter>
   );
 };
 
 
 SelectFilter.propTypes = {
+  /** The items to show in the filter panel */
+  options: PropTypes.arrayOf(PropTypes.shape({
+    leading: PropTypes.node,
+    label: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  })),
 
+  /** Determines which value is currently active */
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /** Used to pick each value in the options array */
+  valueKey: PropTypes.string,
+
+  /** Used to pick each label in the options array */
+  labelKey: PropTypes.string,
+
+  /** Triggered when an option is clicked */
+  onChange: PropTypes.func.isRequired,
+};
+
+
+SelectFilter.defaultProps = {
+  valueKey: 'value',
+  labelKey: 'label',
 };
 
 
