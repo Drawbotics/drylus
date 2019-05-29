@@ -27,22 +27,6 @@ const styles = {
       box-shadow: none;
     }
 
-    [data-nested] ~ tr:not([data-row]):nth-of-type(even) {
-      background: ${sv.white};
-    }
-
-    [data-nested] ~ tr:not([data-row]):nth-of-type(odd) {
-      background: ${sv.white};
-    }
-
-    [data-nested] ~ [data-nested] ~ tr:not([data-row]):nth-of-type(even) {
-      background: ${sv.white};
-    }
-
-    [data-nested] ~ [data-nested] ~ tr:not([data-row]):nth-of-type(odd) {
-      background: ${sv.neutralLighter};
-    }
-
     [data-nested] tr {
       background: none !important;
     }
@@ -97,22 +81,6 @@ const styles = {
     }
   `,
   row: css`
-    &:nth-of-type(even) {
-      background: ${sv.white};
-
-      & + [data-nested] {
-        background: ${sv.white};
-      }
-    }
-
-    &:nth-of-type(odd) {
-      background: ${sv.neutralLighter};
-
-      & + [data-nested] {
-        background: ${sv.neutralLighter};
-      }
-    }
-
     & > td:last-of-type {
       text-align: right;
     }
@@ -123,7 +91,7 @@ const styles = {
 
     &[data-nested] > td > table {
       tr {
-        border-bottom: 1px solid ${sv.neutralLight};
+        border-bottom: 1px solid ${sv.neutral};
 
         &:last-of-type {
           border-bottom: none;
@@ -143,6 +111,31 @@ const styles = {
         }
       }
     }
+  `,
+  white: css`
+    background: ${sv.white};
+
+    [data-nested] {
+      background: ${sv.white} !important;
+
+      > tr {
+        background: ${sv.white} !important;
+      }
+    }
+  `,
+  light: css`
+    background: ${sv.neutralLightest};
+
+    [data-nested] {
+      background: ${sv.neutralLightest} !important;
+
+      > tr {
+        background: ${sv.neutralLightest} !important;
+      }
+    }
+  `,
+  noBorderBottom: css`
+    border-bottom: none !important;
   `,
   highlightedRow: css`
     background: ${sv.neutral} !important;
@@ -244,13 +237,16 @@ export const TCell = ({
 };
 
 
-export const TRow = ({ children, nested, parent, highlighted }) => {
+export const TRow = ({ children, nested, parent, highlighted, alt, lastParentRow }) => {
   const [ rowsStates, handleSetRowState ] = useContext(RowsContext);
   const collapsed = nested && ! rowsStates[nested];
   return (
     <tr className={cx(styles.row, {
         [styles.collapsed]: collapsed,
+        [styles.light]: ! alt,
+        [styles.white]: alt,
         [styles.highlightedRow]: highlighted,
+        [styles.noBorderBottom]: !! parent && ! rowsStates[parent] && lastParentRow,
       })}
       data-nested={nested || undefined}
       data-parent={parent || undefined}>
@@ -283,9 +279,16 @@ export const THead = ({ children }) => {
 
 
 export const TBody = ({ children }) => {
+  let light = true;
+  let i = 0;
+  const childrenCount = React.Children.count(children);
   return (
     <tbody className={styles.body}>
-      {children}
+      {React.Children.map(children, (child) => {
+        light = child.props.nested ? light : ! light;
+        i = i + 1;
+        return React.cloneElement(child, { alt: light, lastParentRow: i === childrenCount - 1 });
+      })}
     </tbody>
   );
 };
