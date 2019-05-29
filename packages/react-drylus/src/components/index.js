@@ -1,4 +1,4 @@
-export Button, { ButtonTiers } from './Button';
+export Button from './Button';
 export Icon from './Icon';
 export Footer from './Footer';
 export Navbar from './Navbar';
@@ -17,3 +17,4 @@ export BaseFilter, { FilterAlign, SelectFilter, CheckboxFilter } from './Filter'
 export TabNavigation from './TabNavigation';
 export ListTile from './ListTile';
 export Avatar from './Avatar';
+export Text from './Text';

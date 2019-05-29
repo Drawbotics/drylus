@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import sv from '@drawbotics/style-vars';
 
-import Button, { ButtonTiers } from './Button';
-import Sizes from '../base/Sizes';
+import Button from './Button';
+import { Sizes, Tiers } from '../base';
 
 
 const styles = {
@@ -120,7 +120,7 @@ const BaseDrawer = ({
   return (
     <div className={styles.root}>
       <div className={styles.close}>
-        <Button size={Sizes.SMALL} onClick={onClickClose} tier={ButtonTiers.TERTIARY} icon="x" />
+        <Button size={Sizes.SMALL} onClick={onClickClose} tier={Tiers.TERTIARY} icon="x" />
       </div>
       <div className={styles.content}>
         {children}

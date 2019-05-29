@@ -1,0 +1,5 @@
+export default {
+  PRIMARY: 'PRIMARY',
+  SECONDARY: 'SECONDARY',
+  TERTIARY: 'TERTIARY',
+};
