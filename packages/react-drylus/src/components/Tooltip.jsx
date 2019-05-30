@@ -107,6 +107,7 @@ function useRect() {
 
 
 function _getStyleForSide(side, rect, tooltipRect) {
+  if (! rect || ! tooltipRect) return null;
   if (side === TooltipSides.TOP) {
     const difference = rect?.height < tooltipRect?.height ? tooltipRect?.height : 0;
     return {

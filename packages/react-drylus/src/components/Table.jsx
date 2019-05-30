@@ -124,13 +124,13 @@ const styles = {
     }
   `,
   light: css`
-    background: ${sv.neutralLightest};
+    background: ${sv.neutralLighter};
 
     [data-nested] {
-      background: ${sv.neutralLightest} !important;
+      background: ${sv.neutralLighter} !important;
 
       > tr {
-        background: ${sv.neutralLightest} !important;
+        background: ${sv.neutralLighter} !important;
       }
     }
   `,
