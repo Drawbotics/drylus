@@ -1,9 +1,11 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
-import { Link } from 'react-router-dom';
 import omit from 'lodash/omit';
 import startCase from 'lodash/startCase';
+import kebabCase from 'lodash/kebabCase';
+
+import Link from './Link';
 
 
 const styles = {
@@ -37,17 +39,18 @@ const styles = {
 
 
 export function generateLinks(route, routeName, parent='') {
-  const newPath = routeName ? `${parent}/${routeName}` : parent;
+  const newPath = routeName ? `/${kebabCase(parent)}/${kebabCase(routeName)}` : `/${kebabCase(parent)}`;
+  const cleaned = newPath.replace(/\/+/g, '/');
   if (typeof route !== 'function') {
     return (
-      <div key={newPath} className={styles.section}>
+      <div key={cleaned} className={styles.section}>
         {do{
           if (routeName) {
             <div className={styles.title}>
               {do{
                 if (route.index) {
                   <div className={styles.link}>
-                    <Link to={newPath}>{startCase(routeName)}</Link>
+                    <Link href={cleaned}>{startCase(routeName)}</Link>
                   </div>
                 }
                 else {
@@ -65,8 +68,8 @@ export function generateLinks(route, routeName, parent='') {
   }
   else {
     return (
-      <div className={styles.link} key={newPath}>
-        <Link to={newPath}>{startCase(routeName)}</Link>
+      <div className={styles.link} key={cleaned}>
+        <Link href={cleaned}>{startCase(routeName)}</Link>
       </div>
     );
   }

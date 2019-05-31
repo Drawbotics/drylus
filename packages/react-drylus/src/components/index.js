@@ -21,3 +21,4 @@ export Text from './Text';
 export Dot from './Dot';
 export Tooltip, { TooltipSides } from './Tooltip';
 export Collapsible from './Collapsible';
+export Link, { TextLink, LinkUnderlined } from './Link';
