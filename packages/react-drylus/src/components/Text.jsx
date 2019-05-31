@@ -8,7 +8,7 @@ import { Tiers, Sizes, Categories } from '../base';
 
 const styles = {
   root: css`
-    display: inline-block;
+    display: inline;
   `,
   bold: css`
     font-weight: bold;
