@@ -99,7 +99,7 @@ Link.propTypes = {
   category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
 
   /** If you want to use a project-specific link component you can pass it here */
-  component: PropTypes.node,
+  component: PropTypes.func,
 
   underlined: PropTypes.oneOf([ LinkUnderlined.ALWAYS, LinkUnderlined.HOVER ]),
 };
@@ -124,7 +124,7 @@ TextLink.propTypes = {
   category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
 
   /** If you want to use a project-specific link component you can pass it here */
-  component: PropTypes.node,
+  component: PropTypes.func,
 
   underlined: PropTypes.oneOf([ LinkUnderlined.ALWAYS, LinkUnderlined.HOVER ]),
 };

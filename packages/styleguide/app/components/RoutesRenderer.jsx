@@ -15,7 +15,7 @@ const RoutesHandler = ({ match, routes }) => {
     );
   }
   else {
-    return <Redirect to="introduction" />;
+    return <Redirect to="/introduction" />;
   }
 };
 
