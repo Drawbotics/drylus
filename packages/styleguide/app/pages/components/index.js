@@ -16,6 +16,7 @@ import avatar from './avatar';
 import text from './text';
 import dot from './dot';
 import tooltip from './tooltip';
+import collapsible from './collapsible';
 
 
 const components = {
@@ -37,6 +38,7 @@ const components = {
   text,
   dot,
   tooltip,
+  collapsible,
 };
 
 

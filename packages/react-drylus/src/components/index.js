@@ -20,3 +20,4 @@ export Avatar from './Avatar';
 export Text from './Text';
 export Dot from './Dot';
 export Tooltip, { TooltipSides } from './Tooltip';
+export Collapsible from './Collapsible';
