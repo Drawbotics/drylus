@@ -4,6 +4,7 @@ import { MDXProvider } from '@mdx-js/react';
 import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import { Title, Paragraph } from '@drawbotics/react-drylus';
+import { Link } from 'react-router-dom';
 
 import Code from './Code';
 import InlineCode from './InlineCode';
@@ -23,6 +24,7 @@ const components = {
   h4: (props) => <Title {...props} size={4} />,
   pre: (props) => <div {...props} />,
   p: (props) => <Paragraph {...props} />,
+  a: (props) => <Link {...props} to={props.href} />,
   code: Code,
   inlineCode: InlineCode,
 }
