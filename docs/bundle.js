@@ -55856,7 +55856,32 @@ var styles = {
   Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* css */ "a"])( true ? {
     name: "g39dsa-Text__large",
     styles: "font-size:1.1rem;label:Text__large;"
-  } : undefined, "label:Text__large;" + ( true ? "" : undefined))
+  } : undefined, "label:Text__large;" + ( true ? "" : undefined)),
+  brand:
+  /*#__PURE__*/
+
+  /*#__PURE__*/
+  Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* css */ "a"])("color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.brand, ";label:Text__brand;" + ( true ? "" : undefined), "label:Text__brand;" + ( true ? "" : undefined)),
+  success:
+  /*#__PURE__*/
+
+  /*#__PURE__*/
+  Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* css */ "a"])("color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.success, ";label:Text__success;" + ( true ? "" : undefined), "label:Text__success;" + ( true ? "" : undefined)),
+  danger:
+  /*#__PURE__*/
+
+  /*#__PURE__*/
+  Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* css */ "a"])("color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.danger, ";label:Text__danger;" + ( true ? "" : undefined), "label:Text__danger;" + ( true ? "" : undefined)),
+  warning:
+  /*#__PURE__*/
+
+  /*#__PURE__*/
+  Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* css */ "a"])("color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.warning, ";label:Text__warning;" + ( true ? "" : undefined), "label:Text__warning;" + ( true ? "" : undefined)),
+  info:
+  /*#__PURE__*/
+
+  /*#__PURE__*/
+  Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* css */ "a"])("color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.info, ";label:Text__info;" + ( true ? "" : undefined), "label:Text__info;" + ( true ? "" : undefined))
 };
 
 var Text = function Text(_ref) {
@@ -55867,19 +55892,24 @@ var Text = function Text(_ref) {
       size = _ref.size,
       tier = _ref.tier,
       disabled = _ref.disabled,
-      children = _ref.children;
+      children = _ref.children,
+      category = _ref.category;
   return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("span", {
-    className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* cx */ "b"])(styles.root, (_cx2 = {}, _defineProperty(_cx2, styles.bold, bold), _defineProperty(_cx2, styles.primary, tier === _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].PRIMARY && !disabled && !inversed), _defineProperty(_cx2, styles.secondary, tier === _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].SECONDARY && !disabled && !inversed), _defineProperty(_cx2, styles.tertiary, tier === _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].TERTIARY && !disabled && !inversed), _defineProperty(_cx2, styles.disabled, disabled && !inversed), _defineProperty(_cx2, styles.primaryInversed, tier === _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].PRIMARY && !disabled && inversed), _defineProperty(_cx2, styles.secondaryInversed, tier === _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].SECONDARY && !disabled && inversed), _defineProperty(_cx2, styles.tertiaryInversed, tier === _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].TERTIARY && !disabled && inversed), _defineProperty(_cx2, styles.disabledInversed, disabled && inversed), _defineProperty(_cx2, styles.small, size === _base__WEBPACK_IMPORTED_MODULE_7__[/* Sizes */ "d"].SMALL), _defineProperty(_cx2, styles["default"], size === _base__WEBPACK_IMPORTED_MODULE_7__[/* Sizes */ "d"].DEFAULT), _defineProperty(_cx2, styles.large, size === _base__WEBPACK_IMPORTED_MODULE_7__[/* Sizes */ "d"].LARGE), _cx2))
+    className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* cx */ "b"])(styles.root, (_cx2 = {}, _defineProperty(_cx2, styles.bold, bold), _defineProperty(_cx2, styles.primary, tier === _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].PRIMARY && !disabled && !inversed), _defineProperty(_cx2, styles.secondary, tier === _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].SECONDARY && !disabled && !inversed), _defineProperty(_cx2, styles.tertiary, tier === _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].TERTIARY && !disabled && !inversed), _defineProperty(_cx2, styles.disabled, disabled && !inversed), _defineProperty(_cx2, styles.primaryInversed, tier === _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].PRIMARY && !disabled && inversed), _defineProperty(_cx2, styles.secondaryInversed, tier === _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].SECONDARY && !disabled && inversed), _defineProperty(_cx2, styles.tertiaryInversed, tier === _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].TERTIARY && !disabled && inversed), _defineProperty(_cx2, styles.disabledInversed, disabled && inversed), _defineProperty(_cx2, styles.small, size === _base__WEBPACK_IMPORTED_MODULE_7__[/* Sizes */ "d"].SMALL), _defineProperty(_cx2, styles["default"], size === _base__WEBPACK_IMPORTED_MODULE_7__[/* Sizes */ "d"].DEFAULT), _defineProperty(_cx2, styles.large, size === _base__WEBPACK_IMPORTED_MODULE_7__[/* Sizes */ "d"].LARGE), _defineProperty(_cx2, styles[category === null || category === void 0 ? void 0 : category.toLowerCase()], category && !disabled && !inversed), _cx2))
   }, children);
 };
 
 Text.propTypes = {
+  /** Makes the text visible on dark backgrounds */
   inversed: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool,
   bold: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool,
   size: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOf([_base__WEBPACK_IMPORTED_MODULE_7__[/* Sizes */ "d"].SMALL, _base__WEBPACK_IMPORTED_MODULE_7__[/* Sizes */ "d"].DEFAULT, _base__WEBPACK_IMPORTED_MODULE_7__[/* Sizes */ "d"].LARGE]),
   tier: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOf([_base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].PRIMARY, _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].SECONDARY, _base__WEBPACK_IMPORTED_MODULE_7__[/* Tiers */ "f"].TERTIARY]),
+
+  /** Makes the text appear disabled, but still selectable */
   disabled: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool,
-  children: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string.isRequired
+  children: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string.isRequired,
+  category: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOf([_base__WEBPACK_IMPORTED_MODULE_7__[/* Categories */ "a"].BRAND, _base__WEBPACK_IMPORTED_MODULE_7__[/* Categories */ "a"].DANGER, _base__WEBPACK_IMPORTED_MODULE_7__[/* Categories */ "a"].SUCCESS, _base__WEBPACK_IMPORTED_MODULE_7__[/* Categories */ "a"].INFO, _base__WEBPACK_IMPORTED_MODULE_7__[/* Categories */ "a"].WARNING])
 };
 Text.defaultProps = {
   inversed: false,
@@ -55926,7 +55956,7 @@ Text.__docgenInfo = {
         "name": "bool"
       },
       "required": false,
-      "description": ""
+      "description": "Makes the text visible on dark backgrounds"
     },
     "bold": {
       "defaultValue": {
@@ -55990,7 +56020,7 @@ Text.__docgenInfo = {
         "name": "bool"
       },
       "required": false,
-      "description": ""
+      "description": "Makes the text appear disabled, but still selectable"
     },
     "children": {
       "defaultValue": {
@@ -55999,6 +56029,29 @@ Text.__docgenInfo = {
       },
       "type": {
         "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "category": {
+      "type": {
+        "name": "enum",
+        "value": [{
+          "value": "Categories.BRAND",
+          "computed": true
+        }, {
+          "value": "Categories.DANGER",
+          "computed": true
+        }, {
+          "value": "Categories.SUCCESS",
+          "computed": true
+        }, {
+          "value": "Categories.INFO",
+          "computed": true
+        }, {
+          "value": "Categories.WARNING",
+          "computed": true
+        }]
       },
       "required": false,
       "description": ""
@@ -56019,7 +56072,7 @@ Text.__docgenInfo = {
         "name": "bool"
       },
       "required": false,
-      "description": ""
+      "description": "Makes the text visible on dark backgrounds"
     },
     "bold": {
       "defaultValue": {
@@ -56083,7 +56136,7 @@ Text.__docgenInfo = {
         "name": "bool"
       },
       "required": false,
-      "description": ""
+      "description": "Makes the text appear disabled, but still selectable"
     },
     "children": {
       "defaultValue": {
@@ -56092,6 +56145,29 @@ Text.__docgenInfo = {
       },
       "type": {
         "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "category": {
+      "type": {
+        "name": "enum",
+        "value": [{
+          "value": "Categories.BRAND",
+          "computed": true
+        }, {
+          "value": "Categories.DANGER",
+          "computed": true
+        }, {
+          "value": "Categories.SUCCESS",
+          "computed": true
+        }, {
+          "value": "Categories.INFO",
+          "computed": true
+        }, {
+          "value": "Categories.WARNING",
+          "computed": true
+        }]
       },
       "required": false,
       "description": ""
@@ -66416,6 +66492,7 @@ function Renderer_extends() { Renderer_extends = Object.assign || function (targ
 
 
 
+
 var Renderer_styles = {
   content:
   /*#__PURE__*/
@@ -66447,6 +66524,11 @@ var Renderer_components = {
   },
   p: function p(props) {
     return react_default.a.createElement(Paragraph["a" /* default */], props);
+  },
+  a: function a(props) {
+    return react_default.a.createElement(react_router_dom_Link, Renderer_extends({}, props, {
+      to: props.href
+    }));
   },
   code: components_Code,
   inlineCode: components_InlineCode
@@ -66559,15 +66641,189 @@ RoutesRenderer_RoutesRenderer.__docgenInfo = {
   "methods": [],
   "displayName": "RoutesRenderer"
 };
-// EXTERNAL MODULE: ./app/pages/brand/index.js
-var brand = __webpack_require__("./app/pages/brand/index.js");
-var brand_default = /*#__PURE__*/__webpack_require__.n(brand);
-
-// EXTERNAL MODULE: /Users/nick/Documents/Drawbotics/repos/stack/drylus/node_modules/core-js/modules/es6.array.sort.js
-var es6_array_sort = __webpack_require__("../../node_modules/core-js/modules/es6.array.sort.js");
-
 // EXTERNAL MODULE: /Users/nick/Documents/Drawbotics/repos/stack/drylus/node_modules/core-js/modules/es6.array.index-of.js
 var es6_array_index_of = __webpack_require__("../../node_modules/core-js/modules/es6.array.index-of.js");
+
+// CONCATENATED MODULE: ./app/pages/brand/style-variables.mdx
+
+
+
+
+
+
+
+
+
+function style_variables_extends() { style_variables_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return style_variables_extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = style_variables_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function style_variables_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+/* @jsx mdx */
+
+
+/* @jsx mdx */
+
+
+
+var style_variables_Constants = function Constants() {
+  var data = Object.keys(vars_default.a).map(function (key) {
+    return {
+      name: key,
+      value: String(vars_default.a[key])
+    };
+  });
+  return index_es_p(Panel["e" /* default */], {
+    body: index_es_p(Panel["a" /* PanelBody */], {
+      noPadding: true
+    }, index_es_p(Panel["d" /* PanelSection */], null, index_es_p(Table["e" /* default */], {
+      data: data,
+      header: ['name', 'value']
+    })))
+  });
+};
+
+var style_variables_makeShortcode = function makeShortcode(name) {
+  return function MDXDefaultShortcode(props) {
+    console.warn("Component " + name + " was not imported, exported, or provided by MDXProvider as global scope");
+    return index_es_p("div", props);
+  };
+};
+
+var layoutProps = {
+  Constants: style_variables_Constants
+};
+var MDXLayout = "wrapper";
+function MDXContent(_ref) {
+  var components = _ref.components,
+      props = _objectWithoutProperties(_ref, ["components"]);
+
+  return index_es_p(MDXLayout, style_variables_extends({}, layoutProps, props, {
+    components: components,
+    mdxType: "MDXLayout"
+  }), index_es_p("h1", null, "Style Variables"), index_es_p("p", null, "Here is a comprehensive list of all the constants exposed by the ", index_es_p("inlineCode", {
+    parentName: "p"
+  }, "style-vars"), " package. These are only for reference, if you're unsure what value to use for a particular style do ask our designers first."), index_es_p("p", null, "All of the following (except functions) are available as CSS and LESS variables."), index_es_p(style_variables_Constants, {
+    mdxType: "Constants"
+  }));
+}
+MDXContent.isMDXComponent = true;
+style_variables_Constants.__docgenInfo = {
+  "description": "",
+  "methods": [],
+  "displayName": "Constants"
+};
+MDXContent.__docgenInfo = {
+  "description": "",
+  "methods": [],
+  "displayName": "MDXContent"
+};
+// CONCATENATED MODULE: ./app/pages/brand/index.mdx
+
+
+
+
+
+
+
+
+function brand_extends() { brand_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return brand_extends.apply(this, arguments); }
+
+function brand_objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = brand_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function brand_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+/* @jsx mdx */
+
+
+/* @jsx mdx */
+
+var brand_makeShortcode = function makeShortcode(name) {
+  return function MDXDefaultShortcode(props) {
+    console.warn("Component " + name + " was not imported, exported, or provided by MDXProvider as global scope");
+    return index_es_p("div", props);
+  };
+};
+
+var brand_layoutProps = {};
+var brand_MDXLayout = "wrapper";
+function brand_MDXContent(_ref) {
+  var components = _ref.components,
+      props = brand_objectWithoutProperties(_ref, ["components"]);
+
+  return index_es_p(brand_MDXLayout, brand_extends({}, brand_layoutProps, props, {
+    components: components,
+    mdxType: "MDXLayout"
+  }), index_es_p("h1", null, "Brand"), index_es_p("p", null, "If you want to have a look at all the constants (", index_es_p("inlineCode", {
+    parentName: "p"
+  }, "style-vars"), ") available in this design system, you can see them ", index_es_p("a", brand_extends({
+    parentName: "p"
+  }, {
+    "href": "brand/style-variables"
+  }), "here"), "."));
+}
+brand_MDXContent.isMDXComponent = true;
+brand_MDXContent.__docgenInfo = {
+  "description": "",
+  "methods": [],
+  "displayName": "MDXContent"
+};
+// CONCATENATED MODULE: ./app/pages/brand/colors.mdx
+
+
+
+
+
+
+
+
+function colors_extends() { colors_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return colors_extends.apply(this, arguments); }
+
+function colors_objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = colors_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function colors_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+/* @jsx mdx */
+
+
+/* @jsx mdx */
+
+var colors_makeShortcode = function makeShortcode(name) {
+  return function MDXDefaultShortcode(props) {
+    console.warn("Component " + name + " was not imported, exported, or provided by MDXProvider as global scope");
+    return index_es_p("div", props);
+  };
+};
+
+var colors_layoutProps = {};
+var colors_MDXLayout = "wrapper";
+function colors_MDXContent(_ref) {
+  var components = _ref.components,
+      props = colors_objectWithoutProperties(_ref, ["components"]);
+
+  return index_es_p(colors_MDXLayout, colors_extends({}, colors_layoutProps, props, {
+    components: components,
+    mdxType: "MDXLayout"
+  }), index_es_p("h1", null, "Colors"));
+}
+colors_MDXContent.isMDXComponent = true;
+colors_MDXContent.__docgenInfo = {
+  "description": "",
+  "methods": [],
+  "displayName": "MDXContent"
+};
+// CONCATENATED MODULE: ./app/pages/brand/index.js
+
+
+
+/* harmony default export */ var brand = ({
+  index: brand_MDXContent,
+  colors: colors_MDXContent,
+  styleVariables: MDXContent
+});
+// EXTERNAL MODULE: /Users/nick/Documents/Drawbotics/repos/stack/drylus/node_modules/core-js/modules/es6.array.sort.js
+var es6_array_sort = __webpack_require__("../../node_modules/core-js/modules/es6.array.sort.js");
 
 // EXTERNAL MODULE: /Users/nick/Documents/Drawbotics/repos/stack/drylus/node_modules/core-js/modules/es7.symbol.async-iterator.js
 var es7_symbol_async_iterator = __webpack_require__("../../node_modules/core-js/modules/es7.symbol.async-iterator.js");
@@ -67335,7 +67591,7 @@ Playground_Playground.__docgenInfo = {
 
 function button_extends() { button_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return button_extends.apply(this, arguments); }
 
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = button_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+function button_objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = button_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function button_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
@@ -67354,13 +67610,13 @@ var button_makeShortcode = function makeShortcode(name) {
   };
 };
 
-var layoutProps = {};
-var MDXLayout = "wrapper";
-function MDXContent(_ref) {
+var button_layoutProps = {};
+var button_MDXLayout = "wrapper";
+function button_MDXContent(_ref) {
   var components = _ref.components,
-      props = _objectWithoutProperties(_ref, ["components"]);
+      props = button_objectWithoutProperties(_ref, ["components"]);
 
-  return index_es_p(MDXLayout, button_extends({}, layoutProps, props, {
+  return index_es_p(button_MDXLayout, button_extends({}, button_layoutProps, props, {
     components: components,
     mdxType: "MDXLayout"
   }), index_es_p("h1", null, "Button"), index_es_p("p", null, "The following is the rendered component"), index_es_p(components_Playground, {
@@ -67424,8 +67680,8 @@ function MDXContent(_ref) {
     mdxType: "Button"
   }, "Brand with text"))));
 }
-MDXContent.isMDXComponent = true;
-MDXContent.__docgenInfo = {
+button_MDXContent.isMDXComponent = true;
+button_MDXContent.__docgenInfo = {
   "description": "",
   "methods": [],
   "displayName": "MDXContent"
@@ -69694,7 +69950,7 @@ function components_defineProperty(obj, key, value) { if (key in obj) { Object.d
 
 
 var components_components = {
-  button: MDXContent,
+  button: button_MDXContent,
   title: title_MDXContent,
   roundIcon: round_icon_MDXContent,
   segmentedControl: segmented_control_MDXContent,
@@ -71117,7 +71373,7 @@ var forms_components = {
 /* harmony default export */ var pages = ({
   introduction: introduction_MDXContent,
   guidelines: guidelines_MDXContent,
-  brand: brand_default.a,
+  brand: brand,
   components: pages_components,
   forms: pages_forms,
   layout: layout
@@ -71162,13 +71418,6 @@ app_App.__docgenInfo = {
 
 
 react_dom_default.a.render(react_default.a.createElement(app, null), document.querySelector('#styleguide'));
-
-/***/ }),
-
-/***/ "./app/pages/brand/index.js":
-/***/ (function(module, exports) {
-
-
 
 /***/ })
 
