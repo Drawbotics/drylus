@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Drawer, Layout, LayoutPositions, Button } from '@drawbotics/react-drylus';
+import { Drawer, Layout, LayoutPositions, Button, Categories } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -63,6 +63,19 @@ Interactive example:
 <Playground component={Drawer}>
   <DrawerController component={
     <Drawer visible={false}>
+      <div style={{ height: 1000 }}>
+        Im some content
+      </div>
+    </Drawer>
+  } />
+</Playground>
+
+
+You may also have a footer:
+
+<Playground>
+  <DrawerController component={
+    <Drawer visible={false} footer={<Button category={Categories.BRAND} fullWidth>Footer action</Button>}>
       <div style={{ height: 1000 }}>
         Im some content
       </div>

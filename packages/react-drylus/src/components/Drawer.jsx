@@ -46,10 +46,16 @@ const styles = {
     padding-top: calc(${sv.paddingExtraLarge} + ${sv.paddingExtraSmall});
     background: ${sv.white};
     height: 100%;
+    display: flex;
+    flex-direction: column;
   `,
   content: css`
     overflow: scroll;
-    height: 100%;
+    flex: 1;
+  `,
+  footer: css`
+    padding-top: ${sv.defaultPadding};
+    border-top: 1px solid ${sv.neutralLight};
   `,
   close: css`
     position: absolute;
@@ -116,6 +122,7 @@ const styles = {
 const BaseDrawer = ({
   children,
   onClickClose,
+  footer,
 }) => {
   return (
     <div className={styles.root}>
@@ -125,6 +132,13 @@ const BaseDrawer = ({
       <div className={styles.content}>
         {children}
       </div>
+      {do {
+        if (footer) {
+          <div className={styles.footer}>
+            {footer}
+          </div>
+        }
+      }}
     </div>
   );
 };
@@ -132,6 +146,7 @@ const BaseDrawer = ({
 
 const Drawer = ({
   children,
+  footer,
   asOverlay,
   visible,
   onClickClose=x=>x,
@@ -165,7 +180,7 @@ const Drawer = ({
 
   const width = typeof rawWidth === 'number' ? `${rawWidth}px` : rawWidth;
 
-  const content = raw ? children : <BaseDrawer onClickClose={onClickClose}>{children}</BaseDrawer>;
+  const content = raw ? children : <BaseDrawer onClickClose={onClickClose} footer={footer}>{children}</BaseDrawer>;
 
   if (asOverlay) {
     if (! outletElement) return '';
@@ -219,6 +234,9 @@ const Drawer = ({
 Drawer.propTypes = {
   /** Content rendered within the drawer */
   children: PropTypes.node.isRequired,
+
+  /** Fixed content at the bottom of the drawer. Won't render if raw is true */
+  footer: PropTypes.node,
 
   /** Determines if the drawer is visible or not */
   visible: PropTypes.bool.isRequired,

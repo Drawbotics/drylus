@@ -165,6 +165,10 @@ const styles = {
       margin-bottom: -3px;
     }
   `,
+  fullWidth: css`
+    width: 100%;
+    flex: 1;
+  `,
 };
 
 
@@ -174,9 +178,10 @@ const Button = ({
   onClick,
   category,
   size,
-  tier=Tiers.PRIMARY,
+  tier,
   icon,
-  iconSide='left',
+  iconSide,
+  fullWidth,
 }) => {
   const iconOnly = ! children && icon;
   return (
@@ -188,8 +193,9 @@ const Button = ({
         [styles.rightIcon]: iconSide === 'right' && icon,
         [styles.leftIcon]: iconSide === 'left' && icon,
         [styles.iconOnly]: iconOnly,
-        [styles.smallIcon]: iconOnly && size === 'SMALL',
+        [styles.smallIcon]: iconOnly && size === Sizes.SMALL,
         [styles[category?.toLowerCase()]]: category && tier === Tiers.PRIMARY,
+        [styles.fullWidth]: fullWidth,
       })}
       disabled={disabled}>
       {do{
@@ -218,20 +224,19 @@ Button.propTypes = {
   /** Triggered after the button is clicked */
   onClick: PropTypes.func,
 
-  /** Category of the button. Can be danger, success, info, warning */
   category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
 
-  /** Size of the button. Can be small, large, default */
   size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE]),
 
-  /** Tier of the button */
   tier: PropTypes.oneOf([Tiers.PRIMARY, Tiers.SECONDARY, Tiers.TERTIARY]),
 
   /** Name of the icon to be displayed within the button. Shown on the left by default */
   icon: PropTypes.string,
 
-  /** Side on which the icon is displayed */
   iconSide: PropTypes.oneOf(['left', 'right']),
+
+  /** Makes button take the full width of the container */
+  fullWidth: PropTypes.bool,
 };
 
 
