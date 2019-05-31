@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 
-import { Tiers, Sizes } from '../base';
+import { Tiers, Sizes, Categories } from '../base';
 
 
 const styles = {
@@ -46,6 +46,21 @@ const styles = {
   large: css`
     font-size: 1.1rem;
   `,
+  brand: css`
+    color: ${sv.brand};
+  `,
+  success: css`
+    color: ${sv.success};
+  `,
+  danger: css`
+    color: ${sv.danger};
+  `,
+  warning: css`
+    color: ${sv.warning};
+  `,
+  info: css`
+    color: ${sv.info};
+  `,
 };
 
 
@@ -56,6 +71,7 @@ const Text = ({
   tier,
   disabled,
   children,
+  category,
 }) => {
   return (
     <span className={cx(styles.root, {
@@ -71,6 +87,7 @@ const Text = ({
       [styles.small]: size === Sizes.SMALL,
       [styles.default]: size === Sizes.DEFAULT,
       [styles.large]: size === Sizes.LARGE,
+      [styles[category?.toLowerCase()]]: category && ! disabled && ! inversed,
     })}>
       {children}
     </span>
@@ -79,12 +96,21 @@ const Text = ({
 
 
 Text.propTypes = {
+  /** Makes the text visible on dark backgrounds */
   inversed: PropTypes.bool,
+
   bold: PropTypes.bool,
+
   size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE]),
+
   tier: PropTypes.oneOf([Tiers.PRIMARY, Tiers.SECONDARY, Tiers.TERTIARY]),
+
+  /** Makes the text appear disabled, but still selectable */
   disabled: PropTypes.bool,
+
   children: PropTypes.string.isRequired,
+
+  category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
 };
 
 
