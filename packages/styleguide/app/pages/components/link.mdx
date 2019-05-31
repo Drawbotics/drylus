@@ -1,0 +1,19 @@
+import { Link, TextLink } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Link
+By default a `Link` sets no style except for the `cursor: pointer`. This is because we might have entire components wrapped in a `Link` to provide navigation.
+
+<Playground component={Link}>
+  <Link>Hello Im a link</Link>
+</Playground>
+
+### Text Link
+
+If you want to use links within text, the component also provides a `TextLink` component that only accepts `string` as children, and sets some default styling:
+
+<Playground component={TextLink}>
+  <TextLink>Hello Im a text link</TextLink>
+</Playground>
