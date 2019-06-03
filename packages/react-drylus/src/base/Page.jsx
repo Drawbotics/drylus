@@ -11,9 +11,9 @@ const styles = {
 };
 
 
-const Page = ({ children }) => {
+const Page = ({ children, style }) => {
   return (
-    <div className={styles.root}>
+    <div className={styles.root} style={style}>
       {children}
     </div>
   );
@@ -22,6 +22,7 @@ const Page = ({ children }) => {
 
 Page.propTypes = {
   children: PropTypes.node.isRequired,
+  style: PropTypes.object,
 };
 
 
