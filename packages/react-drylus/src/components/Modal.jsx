@@ -161,15 +161,16 @@ const Modal = ({
   children,
   footer,
   visible,
-  onClickClose=x=>x,
+  onClickClose,
   size,
   raw,
   title,
 }) => {
-  const [outletElement, setOutletElement] = useState(null);
-  const [overflowing, setOverflowing] = useState(false);
+  const [ outletElement, setOutletElement ] = useState(null);
+  const [ overflowing, setOverflowing ] = useState(false);
   const overlayElement = useRef();
   const modalElement = useRef();
+
   useEffect(() => {
     if ( ! document.getElementById('modals-outlet')) {
       const modalsOutlet = document.createElement('div');
@@ -192,29 +193,19 @@ const Modal = ({
     visible ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'initial';
   });
 
-  const handleWindowResize = () => {
-    if (modalElement.current) {
-      modalElement.current.getBoundingClientRect()?.height > window.innerHeight ? setOverflowing(true) : setOverflowing(false);
-    }
-  };
-
   useEffect(() => {
+    const handleWindowResize = () => {
+      if (modalElement.current) {
+        modalElement.current.getBoundingClientRect().height > window.innerHeight ? setOverflowing(true) : setOverflowing(false);
+      }
+    };
+
     window.addEventListener('resize', handleWindowResize);
 
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
   });
-
-  const content = raw ? children :
-    <BaseModal
-      size={size}
-      ref={modalElement}
-      onClickClose={onClickClose}
-      footer={footer}
-      title={title}>
-      {children}
-    </BaseModal>;
 
   if (! outletElement) return '';
 
@@ -233,10 +224,22 @@ const Modal = ({
         exitActive: styles.modalExitActive,
       }}>
       <div onClick={handleClickOverlay} className={styles.overlay} ref={overlayElement}>
-        <div className={cx(styles.container, {
-          [styles.alignTop]: overflowing,
-        })} data-element="container">
-          {content}
+        <div className={cx(styles.container, { [styles.alignTop]: overflowing })} data-element="container">
+          {do {
+            if (raw) {
+              children
+            }
+            else {
+              <BaseModal
+                size={size}
+                ref={modalElement}
+                onClickClose={onClickClose}
+                footer={footer}
+                title={title}>
+                {children}
+              </BaseModal>
+            }
+          }}
         </div>
       </div>
     </CSSTransition>,
