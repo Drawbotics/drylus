@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext } from 'react';
-import { css, cx } from 'emotion';
+import { css, cx, keyframes } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
@@ -10,6 +10,15 @@ import Icon from './Icon';
 
 const RowsContext = createContext([{}, () => {}]);
 
+
+const gradientAnimation = keyframes`
+  0%{
+      background-position: -500px 0;
+  }
+  100%{
+      background-position: 500px 0;
+  }
+`;
 
 const styles = {
   root: css`
@@ -196,6 +205,15 @@ const styles = {
       color: ${sv.colorPrimary};
     }
   `,
+  loadingBodyCell: css`
+    display: inline-block;
+    height: 30px;
+    width: 70%;
+    background: ${sv.neutralLight};
+    background: linear-gradient(to right, ${sv.neutralLight}, ${sv.neutral}, ${sv.neutralLight});
+    background-size: 1000px 600px;
+    animation: ${gradientAnimation} calc(${sv.defaultTransitionTime} * 4) linear forwards infinite;
+  `,
 };
 
 
@@ -294,6 +312,32 @@ export const TBody = ({ children }) => {
 };
 
 
+const FakeTable = ({ columns }) => {
+  return (
+    <>
+      <THead>
+        {columns.map((key, i) => (
+          <TCell key={i}>
+            {key}
+          </TCell>
+        ))}
+      </THead>
+      <TBody>
+        {Array(5).fill(null).map((...args) => (
+          <TRow key={args[1]}>
+            {columns.map((...args) => (
+              <TCell key={args[1]} align>
+                <div className={styles.loadingBodyCell} />
+              </TCell>
+            ))}
+          </TRow>
+        ))}
+      </TBody>
+    </>
+  );
+};
+
+
 function generateTable(data, header, renderCell, renderChildCell, i=0) {
   if (Array.isArray(data)) {
     return (
@@ -354,8 +398,9 @@ const Table = ({
   activeHeader,
   onClickHeader,
   highlighted,
+  isLoading,
 }) => {
-  const [rowsStates, setRowState] = useState({});
+  const [ rowsStates, setRowState ] = useState({});
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
   const hasNestedData = data && data.some((d) => d.data);
   if (data && (! header || header.length === 0)) {
@@ -369,7 +414,7 @@ const Table = ({
     })}>
       <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
         {do{
-          if (data) {
+          if (data && ! isLoading) {
             <>
               <THead>
                 {header.map((v) => (
@@ -396,6 +441,9 @@ const Table = ({
               </THead>
               {generateTable(data, header, renderCell, renderChildCell)}
             </>
+          }
+          else if (header && isLoading) {
+            <FakeTable columns={header} />
           }
           else {
             children
@@ -445,6 +493,9 @@ Table.propTypes = {
 
   /** Highlights the rows when hovered. Does not work on tables with nested data */
   highlighted: PropTypes.bool,
+
+  /** If true the content of the table will be overridden by a "fake" table with animated cells to show loading. You MUST pass header to render this */
+  isLoading: PropTypes.bool,
 };
 
 

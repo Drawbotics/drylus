@@ -332,3 +332,12 @@ export const SortedWrapper = ({ render }) => {
       header={['name', 'height', 'age', 'children']} />
   )} />
 </Playground>
+
+### Table with loading UI
+You can set `isLoading` to `true` and display a placeholder table (with the same number of columns as the one you are trying to load). If `header` is not given, `isLoading` has no effect.
+
+<Playground>
+  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+    <Table isLoading header={[ 'age', 'height', 'something', 'else' ]} />
+  </div>
+</Playground>
