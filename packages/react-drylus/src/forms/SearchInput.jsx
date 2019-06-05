@@ -76,12 +76,15 @@ const SearchInput = ({
               {noResultLabel}
             </div>
           }
-          else {
+          else if (options) {
             options.map((option) => (
               <div key={option} className={styles.item} onClick={() => onChange(option)}>
                 {option}
               </div>
             ))
+          }
+          else {
+            return ''
           }
         }}
       </div>
