@@ -37,6 +37,11 @@ const styles = {
   brand: css`
     color: ${sv.brand};
   `,
+  clickable: css`
+    &:hover {
+      cursor: pointer;
+    }
+  `,
 };
 
 
@@ -45,6 +50,7 @@ const Icon = ({ name, bold, onClick, category }) => {
     <i className={cx(styles.root, `Drycon Drycon-${name}`, {
       [styles.bold]: bold,
       [styles[category?.toLowerCase()]]: category,
+      [styles.clickable]: onClick,
     })} onClick={onClick} />
   );
 }

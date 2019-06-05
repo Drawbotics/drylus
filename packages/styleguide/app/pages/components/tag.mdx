@@ -1,0 +1,18 @@
+import { Tag } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Tag
+Used to display a status, or a category, but in a more compact way. Tag colors are also lighter, since more than one can be placed together, unlike `Status` which should be standalone.
+
+
+<Playground component={Tag}>
+  <Tag>Content</Tag>
+</Playground>
+
+
+If you pass a `onClickRemove` function, then a "x" is shown:
+<Playground>
+  <Tag onClickRemove={() => console.log('clicked')}>Removable</Tag>
+</Playground>
