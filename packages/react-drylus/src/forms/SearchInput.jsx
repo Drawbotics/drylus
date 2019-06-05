@@ -69,7 +69,7 @@ const SearchInput = ({
         [styles.visible]: shouldDisplayResults,
       })}>
         {do {
-          if (options == null || options.length === 0) {
+          if (options.length === 0) {
             <div className={cx(styles.item, styles.noResult)}>
               {noResultLabel}
             </div>
