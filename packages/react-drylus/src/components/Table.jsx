@@ -91,7 +91,7 @@ const styles = {
 
     &[data-nested] > td > table {
       tr {
-        border-bottom: 1px solid ${sv.neutral};
+        border-bottom: 1px solid ${sv.neutralLight};
 
         &:last-of-type {
           border-bottom: none;
