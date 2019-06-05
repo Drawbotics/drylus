@@ -1,0 +1,90 @@
+import { useState } from 'react';
+import {
+  Modal,
+  Button,
+  Title,
+  Paragraph,
+  Flex,
+  FlexItem,
+  FlexJustify,
+  Sizes,
+  Tiers,
+  Categories,
+  } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Modal
+
+This component is stateless, so you have to control its visibility state. The default behaviour is that modals are centered with the page, but if the content grows larger than the page height, then they are aligned with the top, and the whole modal scrolls.
+
+All the rendered modals are automatically attached to the end of the DOM through a `modals-outlet`.
+
+
+export const ModalController = ({ component: Component }) => {
+  const [visible, setVisibility] = useState(false);
+  return (
+    <div>
+      <Button onClick={() => setVisibility(true)}>Show modal</Button>
+      {React.cloneElement(Component, {
+        visible,
+        onClickClose: () => setVisibility(false),
+        onClickOverlay: () => setVisibility(false),
+      })}
+    </div>
+  );
+};
+
+
+Usage:
+```jsx
+const Example = () => {
+  const [modalVisible, setModalVisibility] = useState(false);
+
+  return (
+    <div>
+      <Button onClick={() => setModalVisibility(true)}>Click to show modal</Button>
+      <Modal
+        visible={modalVisible}
+        onClickClose={() => setModalVisibility(false)}>
+        <div>
+          Im some content
+        </div>
+      </Modal>
+    </div>
+  );
+};
+```
+
+Basic modal example:
+
+<Playground component={Modal}>
+  <ModalController component={
+    <Modal visible={false}>
+      <Title size={4}>Im some content</Title>
+      <div style={{ height: 500 }} />
+    </Modal>
+  } />
+</Playground>
+
+As you can see when the window height is smaller than the content, the modal is automatically aligned at the top and the overlay is scrollable.
+
+#### Complex example
+<Playground>
+  <ModalController component={
+    <Modal visible={false} title="Modal title" footer={
+      <Flex justify={FlexJustify.END} vSpacing={Sizes.SMALL}>
+        <FlexItem>
+          <Button tier={Tiers.TERTIARY}>Secondary action</Button>
+        </FlexItem>
+        <FlexItem>
+          <Button category={Categories.BRAND}>Main action</Button>
+        </FlexItem>
+      </Flex>
+    }>
+      <Paragraph>Im some content</Paragraph>
+      <div style={{ height: 300 }} />
+    </Modal>
+  } />
+</Playground>
