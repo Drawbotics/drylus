@@ -23,3 +23,4 @@ export Tooltip, { TooltipSides } from './Tooltip';
 export Collapsible from './Collapsible';
 export Link, { TextLink, LinkUnderlined } from './Link';
 export Modal from './Modal';
+export Tag from './Tag';

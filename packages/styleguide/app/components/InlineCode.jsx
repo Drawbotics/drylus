@@ -10,7 +10,6 @@ const styles = {
     padding-left: 5px;
     padding-right: 5px;
     color: ${sv.blue};
-    font-weight: 600;
     border-radius: ${sv.borderRadiusSmall};
   `,
 };

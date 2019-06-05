@@ -19,6 +19,7 @@ import tooltip from './tooltip';
 import collapsible from './collapsible';
 import link from './link';
 import modal from './modal';
+import tag from './tag';
 
 
 const components = {
@@ -43,6 +44,7 @@ const components = {
   collapsible,
   link,
   modal,
+  tag,
 };
 
 
