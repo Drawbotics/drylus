@@ -6,6 +6,7 @@ import { CSSTransition } from 'react-transition-group';
 import sv from '@drawbotics/style-vars';
 
 import Button from './Button';
+import Title from './Title';
 import { Sizes, Tiers } from '../base';
 
 
@@ -53,14 +54,18 @@ const styles = {
     overflow: scroll;
     flex: 1;
   `,
+  title: css`
+    margin-top: calc(${sv.defaultMargin} * -1);
+    margin-bottom: ${sv.marginSmall};
+  `,
   footer: css`
     padding-top: ${sv.defaultPadding};
     border-top: 1px solid ${sv.neutralLight};
   `,
   close: css`
     position: absolute;
-    top: ${sv.marginExtraSmall};
-    left: ${sv.marginExtraSmall};
+    top: ${sv.marginSmall};
+    right: ${sv.marginSmall};
   `,
   drawerEnter: css`
     opacity: 0;
@@ -123,12 +128,20 @@ const BaseDrawer = ({
   children,
   onClickClose,
   footer,
+  title,
 }) => {
   return (
     <div className={styles.root}>
       <div className={styles.close}>
         <Button size={Sizes.SMALL} onClick={onClickClose} tier={Tiers.TERTIARY} icon="x" />
       </div>
+      {do {
+        if (title) {
+          <div className={styles.title}>
+            <Title size={4} noMargin>{title}</Title>
+          </div>
+        }
+      }}
       <div className={styles.content}>
         {children}
       </div>
@@ -153,6 +166,7 @@ const Drawer = ({
   onClickOverlay=x=>x,
   width: rawWidth,
   raw,
+  title,
 }) => {
   const [outletElement, setOutletElement] = useState(null);
   const overlayElement = useRef();
@@ -180,7 +194,7 @@ const Drawer = ({
 
   const width = typeof rawWidth === 'number' ? `${rawWidth}px` : rawWidth;
 
-  const content = raw ? children : <BaseDrawer onClickClose={onClickClose} footer={footer}>{children}</BaseDrawer>;
+  const content = raw ? children : <BaseDrawer title={title} onClickClose={onClickClose} footer={footer}>{children}</BaseDrawer>;
 
   if (asOverlay) {
     if (! outletElement) return '';
@@ -255,6 +269,9 @@ Drawer.propTypes = {
 
   /** If true, the children are rendered without decoration, you have to style your own drawer */
   raw: PropTypes.bool,
+
+  /** Shown at the top left of the drawer, not rendered if raw is true */
+  title: PropTypes.string,
 };
 
 
