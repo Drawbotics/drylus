@@ -52,6 +52,7 @@ const SearchInput = ({
   value,
   onChange,
   noResultLabel,
+  placeholder,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
   const inputRef = useRef(null);
@@ -64,7 +65,8 @@ const SearchInput = ({
         onChange={onChange}
         ref={inputRef}
         onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)} />
+        onBlur={() => setFocused(false)}
+        placeholder={placeholder} />
       <div className={cx(styles.list, {
         [styles.visible]: shouldDisplayResults,
       })}>
@@ -100,6 +102,8 @@ SearchInput.propTypes = {
 
   /** Displayed when no results match the search */
   noResultLabel: PropTypes.string,
+
+  placeholder: PropTypes.string,
 };
 
 
