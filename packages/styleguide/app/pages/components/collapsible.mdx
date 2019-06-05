@@ -9,7 +9,11 @@ This component is used when there is a lot of information on the page, and we wa
 
 export const ControlledField = ({ component: Component }) => {
   const [isOpen, setIsOpen] = useState(false);
-  return React.cloneElement(Component, { isOpen, onClick: () => setIsOpen(! isOpen) });
+  return (
+    <div style={{ maxWidth: 400 }}>
+      {React.cloneElement(Component, { isOpen, onClick: () => setIsOpen(! isOpen) })}
+    </div>
+  );
 };
 
 

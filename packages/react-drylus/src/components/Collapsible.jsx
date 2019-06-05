@@ -14,16 +14,22 @@ const styles = {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    & [data-element="title"] {
+      transition: ${sv.defaultTransition};
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      & [data-element="title"] {
+        transform: translateX(5px);
+      }
+    }
   `,
   icon: css`
     margin-bottom: -2px;
     color: ${sv.colorSecondary};
-    transition: ${sv.defaultTransition};
-
-    &:hover {
-      cursor: pointer;
-      color: ${sv.colorPrimary};
-    }
   `,
   content: css`
     padding-top: ${sv.paddingExtraSmall};
@@ -38,11 +44,13 @@ const Collapsible = ({
   onClick,
 }) => {
   return (
-    <div className={styles.root}>
+    <div className={styles.root} onClick={onClick}>
       <div className={styles.header}>
-        <Label ellipsized>{title}</Label>
+        <div data-element="title">
+          <Label ellipsized>{title}</Label>
+        </div>
         <div className={styles.icon}>
-          <Icon onClick={onClick} name={isOpen ? 'chevron-up' : 'chevron-down'} />
+          <Icon name={isOpen ? 'chevron-up' : 'chevron-down'} />
         </div>
       </div>
       {do {
