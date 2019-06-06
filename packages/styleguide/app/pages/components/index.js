@@ -20,6 +20,7 @@ import collapsible from './collapsible';
 import link from './link';
 import modal from './modal';
 import tag from './tag';
+import spinner from './spinner';
 
 
 const components = {
@@ -45,6 +46,7 @@ const components = {
   link,
   modal,
   tag,
+  spinner,
 };
 
 
