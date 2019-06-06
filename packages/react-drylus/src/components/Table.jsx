@@ -207,7 +207,7 @@ const styles = {
   `,
   loadingBodyCell: css`
     display: inline-block;
-    height: 30px;
+    height: 20px;
     width: 70%;
     background: ${sv.neutralLight};
     background: linear-gradient(to right, ${sv.neutralLight}, ${sv.neutral}, ${sv.neutralLight});
