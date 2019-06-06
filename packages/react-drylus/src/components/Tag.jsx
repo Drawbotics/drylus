@@ -43,6 +43,10 @@ const styles = {
   info: css`
     background: ${sv.blueLight};
   `,
+  inversed: css`
+    color: ${sv.white};
+    background: ${sv.neutralDarker};
+  `,
 };
 
 
@@ -50,10 +54,12 @@ const Tag = ({
   children,
   category,
   onClickRemove,
+  inversed,
 }) => {
   return (
     <div className={cx(styles.root, {
       [styles[category?.toLowerCase()]]: category,
+      [styles.inversed]: inversed,
     })}>
       {children}
       {do {
@@ -79,6 +85,9 @@ Tag.propTypes = {
 
   /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */
   onClickRemove: PropTypes.func,
+
+  /** Takes precedence over category */
+  inversed: PropTypes.bool,
 };
 
 
