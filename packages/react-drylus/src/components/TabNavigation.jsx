@@ -3,8 +3,9 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv, { fade } from '@drawbotics/style-vars';
 
-import Categories from '../base/Categories';
+import { Categories, Sizes } from '../base';
 import Badge from './Badge';
+import Spinner from './Spinner';
 
 
 const styles = {
@@ -97,11 +98,11 @@ const styles = {
       cursor: not-allowed;
     }
 
-    & > [data-element="bullet"] {
+    & > [data-element="trailing"] {
       opacity: 0.5;
     }
   `,
-  bullet: css`
+  trailing: css`
     display: inline-block;
     margin-left: ${sv.marginExtraSmall};
   `,
@@ -127,9 +128,14 @@ const TabNavigation = ({
       })}
       onClick={! option.disabled ? () => onChange(option[valueKey]) : null}>
       {option[labelKey]}
-      {do{
-        if (option.bullet != null) {
-          <div data-element="bullet" className={styles.bullet}>
+      {do {
+        if (option.loading) {
+          <div className={styles.trailing} data-element="trailing">
+            <Spinner category={vertical ? null : Categories.BRAND} size={Sizes.SMALL} />
+          </div>
+        }
+        else if (option.bullet != null) {
+          <div data-element="trailing" className={styles.trailing}>
             {do{
               if (vertical) {
                 option.bullet
@@ -163,6 +169,7 @@ TabNavigation.propTypes = {
     label: PropTypes.string.isRequired,
     bullet: PropTypes.number,
     disabled: PropTypes.bool,
+    loading: PropTypes.bool,
   })),
 
   /** Used to pick each value in the options array */

@@ -58,6 +58,47 @@ However it can also be set vertically, and each value may have bullets (similarl
   </div>
 </Playground>
 
+Each option can also be given a `loading` value (useful when loading the data to determine the bullet number):
+<Playground>
+  <Flex justify={FlexJustify.SPACE_AROUND}>
+    <FlexItem>
+      <div style={{ maxWidth: 300, background: sv.neutralLighter }}>
+        <ControlledField component={
+          <TabNavigation
+            vertical
+            options={[{
+              label: 'First choice',
+              value: 'first',
+              bullet: 4,
+              loading: true,
+            }, {
+              label: 'Second choice',
+              value: 'second',
+              bullet: 10,
+              disabled: true,
+              loading: true,
+            }]} />
+          } />
+      </div>
+    </FlexItem>
+    <FlexItem>
+      <ControlledField component={
+        <TabNavigation
+          options={[{
+            label: 'First choice',
+            value: 'first',
+            loading: true,
+          }, {
+            label: 'Second choice',
+            value: 'second',
+            loading: true,
+            disabled: true,
+          }]} />
+      } />
+    </FlexItem>
+  </Flex>
+</Playground>
+
 
 Examples with link component wrapping
 <Playground>
