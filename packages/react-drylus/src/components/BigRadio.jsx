@@ -48,6 +48,18 @@ const styles = {
     justify-content: space-between;
     margin-bottom: ${sv.marginExtraSmall};
   `,
+  disabled: css`
+    opacity: 0.5;
+
+    &:hover {
+      cursor: not-allowed;
+      box-shadow: inset 0px 0px 0px 1px ${sv.neutral};
+
+      & [data-element="header"] > div {
+        color: ${sv.colorTertiary};
+      }
+    }
+  `,
 };
 
 
@@ -60,11 +72,11 @@ const BigRadio = ({
   name,
   label,
 }) => {
-  const handleOnChange = () => onChange ? onChange(value, name) : null;
+  const handleOnChange = () => onChange && ! disabled ? onChange(value, name) : null;
   return (
     <div className={cx(styles.root, {
-      [styles.disabled]: disabled,
       [styles.checked]: checked,
+      [styles.disabled]: disabled,
     })} onClick={handleOnChange}>
       <div data-element="header" className={styles.header}>
         <Label>{label}</Label>

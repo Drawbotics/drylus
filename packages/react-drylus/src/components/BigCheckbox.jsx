@@ -52,6 +52,18 @@ const styles = {
     justify-content: space-between;
     margin-bottom: ${sv.marginExtraSmall};
   `,
+  disabled: css`
+    opacity: 0.5;
+
+    &:hover {
+      cursor: not-allowed;
+      box-shadow: inset 0px 0px 0px 1px ${sv.neutral};
+
+      & [data-element="header"] > div {
+        color: ${sv.colorTertiary};
+      }
+    }
+  `,
 };
 
 
@@ -64,11 +76,11 @@ const BigCheckbox = ({
   label,
 }) => {
   const isChecked = !! value;
-  const handleOnChange = () => onChange ? onChange(! isChecked, name) : null;
+  const handleOnChange = () => onChange && ! disabled ? onChange(! isChecked, name) : null;
   return (
     <div className={cx(styles.root, {
-      [styles.disabled]: disabled,
       [styles.checked]: isChecked,
+      [styles.disabled]: disabled,
     })} onClick={handleOnChange}>
       <div data-element="header" className={styles.header}>
         <Label>{label}</Label>
