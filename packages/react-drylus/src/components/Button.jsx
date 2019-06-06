@@ -201,7 +201,7 @@ const Button = ({
       disabled={disabled}>
       {do{
         if (leading) {
-          <div className={round ? null : styles.leading}>
+          <div className={cx({ [styles.leading]: ! round })}>
             {leading}
           </div>
         }
@@ -209,7 +209,7 @@ const Button = ({
       {children}
       {do{
         if (trailing) {
-          <div className={round ? null : styles.trailing}>
+          <div className={cx({ [styles.trailing]: ! round })}>
             {trailing}
           </div>
         }
