@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { InputWithRef } from './Input';
 import Button from '../components/Button';
+import Icon from '../components/Icon';
 
 
 const styles = {
@@ -61,7 +62,7 @@ const SearchInput = ({
   return (
     <div className={styles.root}>
       <InputWithRef
-        prefix={<Button icon="search" onClick={() => inputRef.current.focus()} />}
+        prefix={<Button leading={<Icon name="search" />} onClick={() => inputRef.current.focus()} />}
         onChange={onChange}
         ref={inputRef}
         onFocus={() => setFocused(true)}

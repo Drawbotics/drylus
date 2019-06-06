@@ -7,6 +7,7 @@ import sv from '@drawbotics/style-vars';
 
 import Button from './Button';
 import Title from './Title';
+import Icon from './Icon';
 import { Sizes, Tiers } from '../base';
 
 
@@ -133,7 +134,7 @@ const BaseDrawer = ({
   return (
     <div className={styles.root}>
       <div className={styles.close}>
-        <Button size={Sizes.SMALL} onClick={onClickClose} tier={Tiers.TERTIARY} icon="x" />
+        <Button size={Sizes.SMALL} onClick={onClickClose} tier={Tiers.TERTIARY} leading={<Icon name="x" />} />
       </div>
       {do {
         if (title) {
