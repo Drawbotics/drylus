@@ -75,7 +75,6 @@ Tag.propTypes = {
     Categories.SUCCESS,
     Categories.INFO,
     Categories.WARNING,
-    Categories.DEFAULT,
   ]),
 
   /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */

@@ -128,7 +128,7 @@ const TabNavigation = ({
       onClick={! option.disabled ? () => onChange(option[valueKey]) : null}>
       {option[labelKey]}
       {do{
-        if (option.bullet) {
+        if (option.bullet != null) {
           <div data-element="bullet" className={styles.bullet}>
             {do{
               if (vertical) {
