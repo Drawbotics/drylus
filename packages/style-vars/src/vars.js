@@ -68,7 +68,7 @@ export const darkOverlay = fade(neutralDarker, 90);
 // BORDERS
 const baseBorderRadius = '5px';
 export const defaultBorderRadius = baseBorderRadius;
-export const borderRadiusBig = m(baseBorderRadius, 1.5);
+export const borderRadiusLarge = m(baseBorderRadius, 1.5);
 export const borderRadiusSmall = d(baseBorderRadius, 1.5);
 
 // TYPOGRAPHY
