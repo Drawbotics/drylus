@@ -184,8 +184,7 @@ const Button = ({
   fullWidth,
 }) => {
   if (! children && trailing && leading) {
-    console.warn('If no children are given, only pass trailing or leading, but not both');
-    return '';
+    throw new Error('If no children are given, only pass trailing or leading, but not both');
   }
   const round = ! children && (trailing || leading);
   return (
@@ -202,7 +201,7 @@ const Button = ({
       disabled={disabled}>
       {do{
         if (leading) {
-          <div className={! round && styles.leading}>
+          <div className={round ? null : styles.leading}>
             {leading}
           </div>
         }
@@ -210,7 +209,7 @@ const Button = ({
       {children}
       {do{
         if (trailing) {
-          <div className={! round && styles.trailing}>
+          <div className={round ? null : styles.trailing}>
             {trailing}
           </div>
         }
