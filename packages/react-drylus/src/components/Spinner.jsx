@@ -81,7 +81,7 @@ const styles = {
 const Spinner = ({
   size,
   category,
-  inverse,
+  inversed,
 }) => {
   return (
     <div className={cx(styles.root, {
@@ -91,7 +91,7 @@ const Spinner = ({
       <svg className={styles.circle} viewBox="25 25 50 50">
         <circle className={cx(styles.path, {
           [styles.brand]: category === Categories.BRAND,
-          [styles.white]: inverse,
+          [styles.white]: inversed,
         })} cx="50" cy="50" r="20" fill="none" />
       </svg>
     </div>
@@ -106,7 +106,7 @@ Spinner.propTypes = {
   category: PropTypes.oneOf([ Categories.BRAND ]),
 
   /** If true, sets the color of the spinner to white (to be used against colored backgrounds) */
-  inverse: PropTypes.bool,
+  inversed: PropTypes.bool,
 };
 
 
