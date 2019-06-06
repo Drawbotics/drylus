@@ -64,6 +64,9 @@ const styles = {
   brand: css`
     stroke: ${sv.brand};
   `,
+  info: css`
+    stroke: ${sv.blue};
+  `,
   white: css`
     stroke: ${sv.white};
   `,
@@ -91,6 +94,7 @@ const Spinner = ({
       <svg className={styles.circle} viewBox="25 25 50 50">
         <circle className={cx(styles.path, {
           [styles.brand]: category === Categories.BRAND,
+          [styles.info]: category === Categories.INFO,
           [styles.white]: inversed,
         })} cx="50" cy="50" r="20" fill="none" />
       </svg>
@@ -102,8 +106,8 @@ const Spinner = ({
 Spinner.propTypes = {
   size: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.LARGE ]),
 
-  /** For now limited to BRAND only, could have more in the future */
-  category: PropTypes.oneOf([ Categories.BRAND ]),
+  /** For now limited to BRAND and INFO only, could have more in the future */
+  category: PropTypes.oneOf([ Categories.BRAND, Categories.INFO ]),
 
   /** If true, sets the color of the spinner to white (to be used against colored backgrounds) */
   inversed: PropTypes.bool,

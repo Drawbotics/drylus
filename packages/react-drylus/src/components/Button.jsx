@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
 import { Categories, Sizes, Tiers } from '../base';
-import Icon from './Icon';
 
 
 const styles = {
@@ -129,45 +128,46 @@ const styles = {
       box-shadow: ${sv.insetActiveLight};
     }
   `,
-  rightIcon: css`
-    > i {
-      margin-top: -2px;
-      margin-left: 4px;
-    }
-  `,
-  leftIcon: css`
-    > i {
-      margin-top: -2px;
-      margin-right: 4px;
-    }
-  `,
-  iconOnly: css`
+  round: css`
     border-radius: 1000px;
     height: ${sv.marginExtraLarge};
     width: ${sv.marginExtraLarge};
     padding: 0;
 
-    > i {
+    i {
       display: flex;
       align-items: center;
       justify-content: center;
       margin-right: 0;
-      margin-left: 0;
-      margin-bottom: -3px;
+      margin-left: -1px;
+      margin-bottom: -1px;
     }
   `,
-  smallIcon: css`
+  roundSmall: css`
     height: ${sv.marginLarge};
     width: ${sv.marginLarge};
 
-    > i {
+    i {
       font-size: 1rem;
-      margin-bottom: -3px;
+      margin-bottom: -1px;
+      margin-left: -1px;
     }
   `,
   fullWidth: css`
     width: 100%;
     flex: 1;
+  `,
+  leading: css`
+    margin-right: ${sv.marginExtraSmall};
+    height: 0;
+    display: flex;
+    align-items: center;
+  `,
+  trailing: css`
+    margin-left: ${sv.marginExtraSmall};
+    height: 0;
+    display: flex;
+    align-items: center;
   `,
 };
 
@@ -179,34 +179,40 @@ const Button = ({
   category,
   size,
   tier,
-  icon,
-  iconSide,
+  leading,
+  trailing,
   fullWidth,
 }) => {
-  const iconOnly = ! children && icon;
+  if (! children && trailing && leading) {
+    console.warn('If no children are given, only pass trailing or leading, but not both');
+    return '';
+  }
+  const round = ! children && (trailing || leading);
   return (
     <button
       onClick={onClick}
       className={cx(styles.root, {
         [styles[size?.toLowerCase()]]: size,
         [styles[tier?.toLowerCase()]]: tier,
-        [styles.rightIcon]: iconSide === 'right' && icon,
-        [styles.leftIcon]: iconSide === 'left' && icon,
-        [styles.iconOnly]: iconOnly,
-        [styles.smallIcon]: iconOnly && size === Sizes.SMALL,
+        [styles.round]: round,
+        [styles.roundSmall]: round && size === Sizes.SMALL,
         [styles[category?.toLowerCase()]]: category && tier === Tiers.PRIMARY,
         [styles.fullWidth]: fullWidth,
       })}
       disabled={disabled}>
       {do{
-        if (iconSide === 'left' && icon) {
-          <Icon name={icon} />
+        if (leading) {
+          <div className={! round && styles.leading}>
+            {leading}
+          </div>
         }
       }}
       {children}
       {do{
-        if (iconSide === 'right' && icon) {
-          <Icon name={icon} />
+        if (trailing) {
+          <div className={! round && styles.trailing}>
+            {trailing}
+          </div>
         }
       }}
     </button>
@@ -224,16 +230,34 @@ Button.propTypes = {
   /** Triggered after the button is clicked */
   onClick: PropTypes.func,
 
-  category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
+  category: PropTypes.oneOf([
+    Categories.BRAND,
+    Categories.DANGER,
+    Categories.SUCCESS,
+    Categories.INFO,
+    Categories.WARNING,
+  ]),
 
-  size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE]),
+  size: PropTypes.oneOf([
+    Sizes.SMALL,
+    Sizes.DEFAULT,
+    Sizes.LARGE,
+  ]),
 
-  tier: PropTypes.oneOf([Tiers.PRIMARY, Tiers.SECONDARY, Tiers.TERTIARY]),
+  tier: PropTypes.oneOf([
+    Tiers.PRIMARY,
+    Tiers.SECONDARY,
+    Tiers.TERTIARY,
+  ]),
 
   /** Name of the icon to be displayed within the button. Shown on the left by default */
   icon: PropTypes.string,
 
-  iconSide: PropTypes.oneOf(['left', 'right']),
+  /** Shown in front of the button text, can be a Spinner or Icon */
+  leading: PropTypes.node,
+
+  /** Shown after the button text, can be a Spinner or Icon */
+  trailing: PropTypes.node,
 
   /** Makes button take the full width of the container */
   fullWidth: PropTypes.bool,
@@ -241,7 +265,6 @@ Button.propTypes = {
 
 
 Button.defaultProps = {
-  iconSide: 'left',
   size: Sizes.DEFAULT,
   tier: Tiers.PRIMARY,
 };

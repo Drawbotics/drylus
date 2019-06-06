@@ -1,4 +1,14 @@
-import { Button, Tiers, Sizes, Categories } from '@drawbotics/react-drylus';
+import {
+  Button,
+  Tiers,
+  Sizes,
+  Categories,
+  Icon,
+  Spinner,
+  Flex,
+  FlexItem,
+  FlexJustify,
+} from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -11,19 +21,29 @@ The following is the rendered component
 </Playground>
 
 
-You can also have buttons with just the icon; for this don't pass any children. "Icon only" buttons only support default and small size. Icon only buttons have a lighter tone by default, illustrating they should be used for secondary actions.
+You can also have buttons with just the icon, or just the spinner; for this don't pass any children. "No Children" buttons only support default and small size.
 <Playground>
-  <div style={{ display: 'flex', alignItems: 'center' }}>
-    <Button icon="command" tier={Tiers.TERTIARY} />
-    <div style={{ width: 16 }}></div>
-    <Button tier={Tiers.TERTIARY}>No icon</Button>
-    <div style={{ width: 16 }}></div>
-    <Button icon="command" size={Sizes.SMALL} />
-    <div style={{ width: 16 }}></div>
-    <Button icon="command" size={Sizes.SMALL}>Small with text</Button>
-    <div style={{ width: 16 }}></div>
-    <Button icon="command" category={Categories.WARNING} />
-    <div style={{ width: 16 }}></div>
-    <Button icon="command" category={Categories.BRAND}>Brand with text</Button>
-  </div>
+  <Flex justify={FlexJustify.START} vSpacing={Sizes.SMALL}>
+    <FlexItem>
+      <Button leading={<Icon name="command" />} tier={Tiers.TERTIARY} />
+    </FlexItem>
+    <FlexItem>
+      <Button tier={Tiers.TERTIARY} leading={<Spinner category={Categories.INFO} size={Sizes.SMALL} />} />
+    </FlexItem>
+    <FlexItem>
+      <Button leading={<Icon name="command" />} size={Sizes.SMALL} />
+    </FlexItem>
+    <FlexItem>
+      <Button leading={<Icon name="command" />} size={Sizes.SMALL}>Small with text</Button>
+    </FlexItem>
+    <FlexItem>
+      <Button leading={<Icon name="command" />} tier={Tiers.SECONDARY} />
+    </FlexItem>
+    <FlexItem>
+      <Button leading={<Icon name="command" />} category={Categories.BRAND}>Brand with text</Button>
+    </FlexItem>
+    <FlexItem>
+      <Button trailing={<Spinner size={Sizes.SMALL} inversed />} category={Categories.SUCCESS}>Text with spinner</Button>
+    </FlexItem>
+  </Flex>
 </Playground>

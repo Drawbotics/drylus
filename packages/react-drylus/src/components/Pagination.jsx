@@ -3,8 +3,8 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 import Button from './Button';
-import { Sizes, Tiers } from '../base';
-import Categories from '../base/Categories';
+import Icon from './Icon';
+import { Sizes, Tiers, Categories } from '../base';
 
 
 const styles = {
@@ -61,7 +61,7 @@ const Pagination = ({
         disabled={value === 1}
         tier={Tiers.TERTIARY}
         size={Sizes.SMALL}
-        icon="chevron-left">
+        leading={<Icon name="chevron-left" />}>
         {prevLabel}
       </Button>
       {labels.map((label, i) => (
@@ -91,8 +91,7 @@ const Pagination = ({
         disabled={value === pages}
         tier={Tiers.TERTIARY}
         size={Sizes.SMALL}
-        icon="chevron-right"
-        iconSide="right">
+        trailing={<Icon name="chevron-right" />}>
         {nextLabel}
       </Button>
     </div>

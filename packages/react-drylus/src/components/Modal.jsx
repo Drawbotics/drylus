@@ -7,6 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import Button from './Button';
 import Title from './Title';
+import Icon from './Icon';
 import { Sizes, Tiers } from '../base';
 
 
@@ -132,7 +133,7 @@ const BaseModal = React.forwardRef(({
     [styles.large]: size === Sizes.LARGE,
   })} ref={ref}>
     <div className={styles.close}>
-      <Button size={Sizes.SMALL} onClick={onClickClose} tier={Tiers.TERTIARY} icon="x" />
+      <Button size={Sizes.SMALL} onClick={onClickClose} tier={Tiers.TERTIARY} leading={<Icon name="x" />} />
     </div>
     {do {
       if (title) {
