@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import { InputWithRef } from './Input';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
+import Spinner from '../components/Spinner';
+import Sizes from '../base/Sizes';
 
 
 const styles = {
@@ -54,6 +56,7 @@ const SearchInput = ({
   onChange,
   noResultLabel,
   placeholder,
+  isLoading,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
   const inputRef = useRef(null);
@@ -62,7 +65,11 @@ const SearchInput = ({
   return (
     <div className={styles.root}>
       <InputWithRef
-        prefix={<Button leading={<Icon name="search" />} onClick={() => inputRef.current.focus()} />}
+        prefix={
+          <Button
+            leading={isLoading ? <Spinner size={Sizes.SMALL} /> : <Icon name="search" />}
+            onClick={() => inputRef.current.focus()} />
+        }
         onChange={onChange}
         ref={inputRef}
         onFocus={() => setFocused(true)}
@@ -108,6 +115,9 @@ SearchInput.propTypes = {
   noResultLabel: PropTypes.string,
 
   placeholder: PropTypes.string,
+
+  /** If true, the search button will display a spinner */
+  isLoading: PropTypes.bool,
 };
 
 
