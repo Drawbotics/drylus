@@ -260,7 +260,11 @@ export const CheckboxFilter = ({
       {options.map((option) => (
         <div key={option[valueKey]} className={cx(styles.option, styles.defaultCursor)}>
           <Checkbox
-            onChange={(checked) => onChange(option[valueKey], checked)}
+            onChange={(checked) => {
+              checked
+                ? onChange([...values, option[valueKey]])
+                : onChange(values.filter((v) => v !== option[valueKey]))
+            }}
             value={values.includes(option[valueKey])}>
             {option[labelKey]}
           </Checkbox>
