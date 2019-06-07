@@ -58,14 +58,6 @@ const styles = {
       &:focus {
         outline: none !important;
       }
-
-      ${'' /* &:disabled {
-        cursor: not-allowed;
-        background: ${sv.neutralLight};
-        color: ${sv.colorDisabled};
-        border-color: ${sv.neutralLight};
-        box-shadow: none;
-      } */}
     }
 
     & .selectr-placeholder {
@@ -168,29 +160,45 @@ const styles = {
     }
 
     & .selectr-tag-remove {
-      ${'' /* position: absolute;
-      top: 50%;
-      right: 22px;
+      position: absolute;
+      top: 0;
+      right: 0;
       width: 20px;
-      height: 20px;
+      height: 100%;
       padding: 0;
       cursor: pointer;
-      transform: translate3d(0,-50%,0);
       border: none;
       background-color: transparent;
-      z-index: 11; */}
-      display: none;
+      z-index: 2;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  `,
+  disabled: css`
+    & .selectr-container {
+      &::after {
+        color: ${sv.colorDisabled};
+      }
+    }
+
+    & .selectr-selected {
+      cursor: not-allowed;
+      background: ${sv.neutralLight};
+      border-color: ${sv.neutralLight};
+      box-shadow: none;
+    }
+
+    & .selectr-placeholder {
+      color: ${sv.colorDisabled};
     }
   `,
 };
 
 
 function myRenderFunction(option) {
-  return `
-    <div class=${styles.tag}>
-      ${renderToString(<Tag inversed onClickRemove>{option.textContent.trim()}</Tag>)}
-    </div>
-  `;
+  return renderToString(<Tag inversed onClickRemove={x=>x}>{option.textContent.trim()}</Tag>);
 }
 
 
@@ -219,20 +227,18 @@ const MultiSelect = ({
 
   const handleOnChange = (e) => onChange(e.target.value, e.target.name);
   return (
-    <div className={cx(styles.root, {})}>
+    <div className={cx(styles.root, {
+      [styles.disabled]: disabled,
+      [styles.valid]: Boolean(values) && valid,
+      [styles.error]: error,
+    })}>
       <select
         ref={selectRef}
         disabled={disabled}
         className={styles.select}
-        // value={value}
         onChange={handleOnChange}
         multiple
         {...rest}>
-        {/* {do {
-          if (! values) {
-            <option key={options.length}>{placeholder}</option>
-          }
-        }} */}
         {options.map((option) => (
           <option
             className={styles.option}
