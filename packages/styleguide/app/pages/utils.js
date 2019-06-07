@@ -27,7 +27,7 @@ export const ControlledMultiField = ({ component: Component, style }) => {
     <div style={style}>
       {React.cloneElement(Component, {
         values,
-        onChange: (value, add) => add ? setValues([ ...values, value ]) : setValues(values.filter((v) => v !== value)),
+        onChange: (values) => setValues(values),
         onClear: () => setValues([]) })}
     </div>
   );
