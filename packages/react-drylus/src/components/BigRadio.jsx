@@ -72,12 +72,14 @@ const BigRadio = ({
   name,
   label,
 }) => {
-  const handleOnChange = () => onChange && ! disabled ? onChange(value, name) : null;
+  const handleOnChange = () => ! disabled ? onChange(value, name) : null;
   return (
-    <div className={cx(styles.root, {
-      [styles.checked]: checked,
-      [styles.disabled]: disabled,
-    })} onClick={handleOnChange}>
+    <div
+      className={cx(styles.root, {
+        [styles.checked]: checked,
+        [styles.disabled]: disabled,
+      })}
+      onClick={handleOnChange}>
       <div data-element="header" className={styles.header}>
         <Label>{label}</Label>
         <div data-element="icon">
@@ -95,10 +97,10 @@ BigRadio.propTypes = {
   checked: PropTypes.bool,
 
   /** Triggered when big radio is clicked */
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
 
   /** Determines the value of the radio */
-  value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+  value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired,
 
   /** Content displayed in the BigRadio */
   children: PropTypes.node,

@@ -75,13 +75,15 @@ const BigCheckbox = ({
   name,
   label,
 }) => {
-  const isChecked = !! value;
-  const handleOnChange = () => onChange && ! disabled ? onChange(! isChecked, name) : null;
+  const isChecked = Boolean(value);
+  const handleOnChange = () => ! disabled ? onChange(! isChecked, name) : null;
   return (
-    <div className={cx(styles.root, {
-      [styles.checked]: isChecked,
-      [styles.disabled]: disabled,
-    })} onClick={handleOnChange}>
+    <div
+      className={cx(styles.root, {
+        [styles.checked]: isChecked,
+        [styles.disabled]: disabled,
+      })}
+      onClick={handleOnChange}>
       <div data-element="header" className={styles.header}>
         <Label>{label}</Label>
         <div data-element="icon">
@@ -96,10 +98,10 @@ const BigCheckbox = ({
 
 BigCheckbox.propTypes = {
   /** Triggered when big checkbox is clicked */
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
 
   /** Determines if checkbox is checked */
-  value: PropTypes.bool,
+  value: PropTypes.bool.isRequired,
 
   /** Content displayed in the BigRadio */
   children: PropTypes.node,
