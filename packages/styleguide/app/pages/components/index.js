@@ -21,6 +21,8 @@ import link from './link';
 import modal from './modal';
 import tag from './tag';
 import spinner from './spinner';
+import bigRadio from './big-radio';
+import bigCheckbox from './big-checkbox';
 
 
 const components = {
@@ -47,6 +49,8 @@ const components = {
   modal,
   tag,
   spinner,
+  bigRadio,
+  bigCheckbox,
 };
 
 

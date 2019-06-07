@@ -1,0 +1,48 @@
+import { useState } from 'react';
+import { BigRadio, Flex, FlexItem, Sizes } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Big Radio
+Is used for more complex UIs where one choice of many is necessary. Accepts similar props to a `radio` component but does not look the same. This kind of radio "button" is not to be used in regular forms, similarly to the `BigCheckbox` and `BigCountbox` components. Should also _never_ be used on its own, i.e. you should have more than 1 `BigRadio`.
+
+
+export const Wrapper = () => {
+  const [ value, setValue ] = useState(null);
+  return (
+    <Playground component={BigRadio}>
+      <Flex vSpacing={Sizes.DEFAULT}>
+        <FlexItem flex>
+          <BigRadio
+            label="Title"
+            value="first"
+            checked={value === 'first'}
+            onChange={(v) => setValue(v)}>
+            <div style={{ height: 100, background: 'blue' }} />
+          </BigRadio>
+        </FlexItem>
+        <FlexItem flex>
+          <BigRadio
+            label="Another title"
+            value="second"
+            checked={value === 'second'}
+            onChange={(v) => setValue(v)}>
+            <div style={{ height: 100, background: 'blue' }} />
+          </BigRadio>
+        </FlexItem>
+        <FlexItem flex>
+          <BigRadio
+            label="Yeah"
+            value="third"
+            checked={value === 'third'}
+            onChange={(v) => setValue(v)}>
+            <div style={{ height: 100, background: 'blue' }} />
+          </BigRadio>
+        </FlexItem>
+      </Flex>
+    </Playground>
+  );
+};
+
+<Wrapper />

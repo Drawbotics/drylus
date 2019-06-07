@@ -1,0 +1,45 @@
+import { useState } from 'react';
+import { BigCheckbox, Flex, FlexItem, Sizes } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Big Checkbox
+Is used for more complex UIs where multiple choices are available. Accepts similar props to a `Checkbox` component but does not look the same. This kind of checkbox "button" is not to be used in regular forms, similarly to the `BigRadio` component. Often used together with other `BigCheckbox`.
+
+
+export const Wrapper = () => {
+  const [ values, setValues ] = useState({ first: false, second: false, third: false });
+  return (
+    <Playground component={BigCheckbox}>
+      <Flex vSpacing={Sizes.DEFAULT}>
+        <FlexItem flex>
+          <BigCheckbox
+            label="Title"
+            value={values.first}
+            onChange={(v) => setValues({ ...values, first: v })}>
+            <div style={{ height: 100, background: 'blue' }} />
+          </BigCheckbox>
+        </FlexItem>
+        <FlexItem flex>
+          <BigCheckbox
+            label="Another title"
+            value={values.second}
+            onChange={(v) => setValues({ ...values, second: v })}>
+            <div style={{ height: 100, background: 'blue' }} />
+          </BigCheckbox>
+        </FlexItem>
+        <FlexItem flex>
+          <BigCheckbox
+            label="Yeah"
+            value={values.third}
+            onChange={(v) => setValues({ ...values, third: v })}>
+            <div style={{ height: 100, background: 'blue' }} />
+          </BigCheckbox>
+        </FlexItem>
+      </Flex>
+    </Playground>
+  );
+};
+
+<Wrapper />

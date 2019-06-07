@@ -25,3 +25,5 @@ export Link, { TextLink, LinkUnderlined } from './Link';
 export Modal from './Modal';
 export Tag from './Tag';
 export Spinner from './Spinner';
+export BigRadio from './BigRadio';
+export BigCheckbox from './BigCheckbox';

@@ -46,7 +46,7 @@ function transformMdxToReact(mdxElement, target, props) {
   if (typeof mdxElement.type === 'string' && mdxElement.type.includes('react.fragment')) {
     return mdxElement;
   }
-  if (target && target === mdxElement.props.originalType) {
+  if (target && target === mdxElement.props.originalType || target === mdxElement.type) {
     const newProps = merge(omit(mdxElement.props, ['mdxType', 'originalType']), Object.assign({}, props));
     return React.createElement(target,  newProps);
   }
