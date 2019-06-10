@@ -1,11 +1,10 @@
-import React, { useRef, useEffect } from 'react';
-import { renderToString } from 'react-dom/server'
+import React, { useRef, useState } from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
-import Selectr from 'mobius1-selectr';
 
 import Tag from '../components/Tag';
+import { useEventListener } from '../utils/hooks';
 
 
 const styles = {
@@ -14,192 +13,91 @@ const styles = {
     position: relative;
     width: 100%;
 
-    & .selectr-container {
-      position: relative;
-
-      &::after {
-        content: '\\ea99';
-        font-family: 'drycons';
-        color: ${sv.colorPrimary};
-        position: absolute;
-        top: calc(${sv.marginExtraSmall} * 1.3);
-        font-size: 1.3rem;
-        right: ${sv.marginSmall};
-        pointer-events: none;
-      }
-
-      &.open {
-        & .selectr-selected {
-          box-shadow: inset 0px 0px 0px 2px ${sv.brand} !important;
-        }
-
-        & .selectr-options-container {
-          opacity: 1;
-          pointer-events: auto;
-          transform: translateY(0);
-        }
-      }
-    }
-
-    & .selectr-selected {
-      background-color: ${sv.azureLight};
-      padding: calc(${sv.paddingExtraSmall} * 1.5) ${sv.paddingSmall};
-      padding-right: ${sv.paddingExtraLarge};
-      border: none;
-      border-radius: ${sv.defaultBorderRadius};
-      width: 100%;
-      box-shadow: inset 0px 0px 0px 1px ${sv.azure};
-      transition: ${sv.defaultTransition};
-
-      &:hover {
-        box-shadow: inset 0px 0px 0px 1px ${sv.azureDark};
-      }
-
-      &:focus {
-        outline: none !important;
-      }
-    }
-
-    & .selectr-placeholder {
+    &::after {
+      content: '\\ea29';
+      font-family: 'drycons';
       color: ${sv.colorPrimary};
-      letter-spacing: normal;
-    }
-
-    & .selectr-options {
-      position: relative;
-      overflow-x: auto;
-      overflow-y: scroll;
-      margin: 0;
-      padding: 0;
-    }
-
-    & .selectr-input-container {
-      display: none;
-    }
-
-    & .selectr-hidden {
       position: absolute;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      width: 1px;
-      height: 1px;
-      margin: -1px;
-      padding: 0;
-      border: 0;
-    }
-
-    & .selectr-options-container {
-      position: absolute;
-      z-index: 999;
-      top: 100%;
-      margin-top: ${sv.marginExtraSmall};
-      min-width: 100%;
-      background: ${sv.white};
-      border-radius: ${sv.defaultBorderRadius};
-      border: 1px solid ${sv.azure};
-      overflow: hidden;
-      box-shadow: ${sv.elevation2};
-      opacity: 0;
-      transform: translateY(-5px);
+      top: calc(${sv.marginExtraSmall} * 1.3);
+      font-size: 1.3rem;
+      right: ${sv.marginSmall};
       pointer-events: none;
-      transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
     }
 
-    & .selectr-option {
-      padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
-      color: ${sv.colorPrimary};
-
-      &:hover {
-        cursor: pointer;
-        background-color: ${sv.neutralLighter};
-      }
-
-      &.selected {
-        opacity: 0.5;
-        pointer-events: none;
-      }
-    }
-
-    & .selectr-tags {
-      display: none;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: -9px !important;
-    }
-
-    & .selectr-label {
-      display: none;
+    & select {
+      ${'' /* height: 1px;
+      width: 1px;
       overflow: hidden;
-      width: 100%;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    & .has-selected {
-      & .selectr-placeholder {
-        display: none;
-      }
-
-      & .selectr-label {
-        display: block;
-        margin: -4px;
-        padding: 0;
-      }
-
-      & .selectr-tags {
-        display: flex;
-      }
-    }
-
-    & .selectr-tag {
-      position: relative;
-      display: block;
-      list-style: none;
-      margin-right: 5px;
-      margin-bottom: 5px;
-    }
-
-    & .selectr-tag-remove {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 20px;
-      height: 100%;
-      padding: 0;
-      cursor: pointer;
-      border: none;
-      background-color: transparent;
-      z-index: 2;
-
-      &:focus {
-        outline: none;
-      }
+      opacity: 0;
+      position: absolute; */}
     }
   `,
-  disabled: css`
-    & .selectr-container {
-      &::after {
-        color: ${sv.colorDisabled};
-      }
-    }
+  select: css`
+    background-color: ${sv.azureLight};
+    color: ${sv.colorPrimary};
+    padding: calc(${sv.paddingExtraSmall} * 1.5) ${sv.paddingSmall};
+    padding-right: ${sv.paddingExtraLarge};
+    border: none;
+    border-radius: ${sv.defaultBorderRadius};
+    width: 100%;
+    outline: none !important;
+    box-shadow: inset 0px 0px 0px 1px ${sv.azure};
+    transition: ${sv.defaultTransition};
+    letter-spacing: normal;
 
-    & .selectr-selected {
-      cursor: not-allowed;
-      background: ${sv.neutralLight};
-      border-color: ${sv.neutralLight};
-      box-shadow: none;
+    &:hover {
+      box-shadow: inset 0px 0px 0px 1px ${sv.azureDark};
     }
+  `,
+  active: css`
+    box-shadow: inset 0px 0px 0px 2px ${sv.brand} !important;
+  `,
+  options: css`
+    position: absolute;
+    z-index: 999;
+    top: 100%;
+    margin-top: ${sv.marginExtraSmall};
+    min-width: 100%;
+    background: ${sv.white};
+    border-radius: ${sv.defaultBorderRadius};
+    border: 1px solid ${sv.azure};
+    overflow: hidden;
+    box-shadow: ${sv.elevation2};
+    opacity: 0;
+    transform: translateY(-5px);
+    pointer-events: none;
+    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+  `,
+  open: css`
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  `,
+  option: css`
+    padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
+    color: ${sv.colorPrimary};
 
-    & .selectr-placeholder {
-      color: ${sv.colorDisabled};
+    &:hover {
+      cursor: pointer;
+      background-color: ${sv.neutralLighter};
     }
+  `,
+  disabledOption: css`
+    pointer-events: none;
+    color: ${sv.colorDisabled};
+  `,
+  value: css`
+    margin-right: ${sv.marginExtraSmall};
+    margin-bottom: ${sv.marginExtraSmall};
+  `,
+  values: css`
+    display: flex;
+    flex-wrap: wrap;
+    margin: -4px;
+    margin-bottom: -12px;
+    margin-left: -8px;
   `,
 };
-
-
-function myRenderFunction(option) {
-  return renderToString(<Tag inversed onClickRemove={x=>x}>{option.textContent.trim()}</Tag>);
-}
 
 
 const MultiSelect = ({
@@ -216,32 +114,91 @@ const MultiSelect = ({
   ...rest,
 }) => {
   const selectRef = useRef();
+  const rootRef = useRef();
+  const [ isFocused, setFocused ] = useState(false);
+  const [ canBlur, setCanBlur ] = useState(true);
 
-  useEffect(() => {
-    new Selectr(selectRef.current, {multiple: true,
-      searchable: false,
-      placeholder,
-      renderSelection: myRenderFunction,
-    });
-  }, []);
+  useEventListener('mousedown', () => setCanBlur(false), rootRef.current);
+  useEventListener('mouseup', () => setCanBlur(true), rootRef.current);
 
-  const handleOnChange = (e) => onChange(e.target.value, e.target.name);
+  const handleOnChange = (value) => {
+    values.includes(value)
+      ? onChange(values.filter((v) => v !== value))
+      : onChange([ ...values, value ]);
+  };
+
+  const handleClickSelect = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    selectRef.current.focus();
+  };
+
+  const handleSelectOption = (value) => {
+    handleOnChange(value);
+    setFocused(false);
+  };
+
+  const handleClickRemove = (e, value) => {
+    e.stopPropagation();
+    onChange(values.filter((v) => v !== value));
+  };
+
+  // console.log(values);
+
   return (
-    <div className={cx(styles.root, {
-      [styles.disabled]: disabled,
-      [styles.valid]: Boolean(values) && valid,
-      [styles.error]: error,
-    })}>
+    <div className={styles.root} ref={rootRef}>
+      <div
+        className={cx(styles.select, {
+          [styles.active]: isFocused,
+          [styles.disabled]: disabled,
+          [styles.valid]: Boolean(values) && valid,
+          [styles.error]: error,
+        })}
+        onClick={handleClickSelect}>
+        {do {
+          if (placeholder && values?.length === 0) {
+            <div className={styles.placeholder}>
+              {placeholder}
+            </div>
+          }
+          else {
+            <div className={styles.values}>
+              {values.map((value) => (
+                <div key={value} className={styles.value}>
+                  <Tag inversed onClickRemove={(e) => handleClickRemove(e, value)}>
+                    {options.find((option) => option[valueKey] === value)[labelKey]}
+                  </Tag>
+                </div>
+              ))}
+            </div>
+          }
+        }}
+      </div>
+      <div className={cx(styles.options, {
+        [styles.open]: isFocused,
+      })}>
+        {options.map((option) => (
+          <div
+            className={cx(styles.option, {
+              [styles.disabledOption]: option.disabled || values.includes(option[valueKey]),
+            })}
+            key={option[valueKey]}
+            onClick={() => handleSelectOption(option[valueKey])}>
+            {option[labelKey]}
+          </div>
+        ))}
+      </div>
       <select
         ref={selectRef}
         disabled={disabled}
-        className={styles.select}
-        onChange={handleOnChange}
+        onChange={(e) => handleOnChange(e.target.value)}
+        onFocus={() => setFocused(true)}
+        onBlur={() => canBlur ? setFocused(false) : null}
+        values={values}
         multiple
         {...rest}>
         {options.map((option) => (
           <option
-            className={styles.option}
             key={option[valueKey]}
             name={option[labelKey]}
             value={option[valueKey]}

@@ -19,6 +19,6 @@ export const useEventListener = (eventName, handler, element = global) => {
         element.removeEventListener(eventName, eventListener);
       };
     },
-    [eventName, element]
+    () => [ eventName, element ],
   );
 };
