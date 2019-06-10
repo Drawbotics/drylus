@@ -1,10 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 
 import Tag from '../components/Tag';
-import { useEventListener } from '../utils/hooks';
 
 
 const styles = {
@@ -25,11 +24,11 @@ const styles = {
     }
 
     & select {
-      ${'' /* height: 1px;
+      height: 1px;
       width: 1px;
       overflow: hidden;
       opacity: 0;
-      position: absolute; */}
+      position: absolute;
     }
   `,
   select: css`
@@ -118,13 +117,26 @@ const MultiSelect = ({
   const [ isFocused, setFocused ] = useState(false);
   const [ canBlur, setCanBlur ] = useState(true);
 
-  useEventListener('mousedown', () => setCanBlur(false), rootRef.current);
-  useEventListener('mouseup', () => setCanBlur(true), rootRef.current);
+  useEffect(() => {
+    rootRef.current.addEventListener('mousedown', () => setCanBlur(false));
+    rootRef.current.addEventListener('mouseup', () => setCanBlur(true));
+
+    return () => {
+      rootRef.current.removeEventListener('mousedown', () => setCanBlur(false));
+      rootRef.current.removeEventListener('mouseup', () => setCanBlur(true));
+    };
+  });
 
   const handleOnChange = (value) => {
     values.includes(value)
       ? onChange(values.filter((v) => v !== value))
       : onChange([ ...values, value ]);
+  };
+
+  // used for mobile
+  const handleSelectChange = (options) => {
+    const selected = [].filter.call(options, (o) => o.selected).map((o) => o.value);
+    onChange(selected);
   };
 
   const handleClickSelect = (e) => {
@@ -142,8 +154,6 @@ const MultiSelect = ({
     e.stopPropagation();
     onChange(values.filter((v) => v !== value));
   };
-
-  // console.log(values);
 
   return (
     <div className={styles.root} ref={rootRef}>
@@ -191,7 +201,7 @@ const MultiSelect = ({
       <select
         ref={selectRef}
         disabled={disabled}
-        onChange={(e) => handleOnChange(e.target.value)}
+        onChange={(e) => handleSelectChange(e.target.options)}
         onFocus={() => setFocused(true)}
         onBlur={() => canBlur ? setFocused(false) : null}
         values={values}
