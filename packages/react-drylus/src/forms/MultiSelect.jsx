@@ -13,7 +13,7 @@ const styles = {
     width: 100%;
 
     &::after {
-      content: '\\ea29';
+      content: '\\ea99';
       font-family: 'drycons';
       color: ${sv.colorPrimary};
       position: absolute;
@@ -117,13 +117,17 @@ const MultiSelect = ({
   const [ isFocused, setFocused ] = useState(false);
   const [ canBlur, setCanBlur ] = useState(true);
 
+  const handleDocumentClick = (e) => ! rootRef.current.contains(e.target) ? setFocused(false) : null;
+
   useEffect(() => {
     rootRef.current.addEventListener('mousedown', () => setCanBlur(false));
     rootRef.current.addEventListener('mouseup', () => setCanBlur(true));
+    document.addEventListener('mousedown', handleDocumentClick);
 
     return () => {
       rootRef.current.removeEventListener('mousedown', () => setCanBlur(false));
       rootRef.current.removeEventListener('mouseup', () => setCanBlur(true));
+      document.removeEventListener('mousedown', handleDocumentClick);
     };
   });
 
@@ -143,11 +147,6 @@ const MultiSelect = ({
     e.preventDefault();
     e.stopPropagation();
     selectRef.current.focus();
-  };
-
-  const handleSelectOption = (value) => {
-    handleOnChange(value);
-    setFocused(false);
   };
 
   const handleClickRemove = (e, value) => {
@@ -193,7 +192,7 @@ const MultiSelect = ({
               [styles.disabledOption]: option.disabled || values.includes(option[valueKey]),
             })}
             key={option[valueKey]}
-            onClick={() => handleSelectOption(option[valueKey])}>
+            onClick={() => handleOnChange(option[valueKey])}>
             {option[labelKey]}
           </div>
         ))}
