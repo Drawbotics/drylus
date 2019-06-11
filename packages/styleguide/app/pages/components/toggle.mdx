@@ -1,0 +1,14 @@
+import { Toggle } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+import { ControlledBoolField } from '../utils';
+
+
+# Toggle
+Similar use to a checkbox, but not used with forms. Normally used to indicate that something has been __"activated"__ rather than __"selected"__.
+
+<Playground component={Toggle}>
+  <ControlledBoolField component={
+    <Toggle />
+  } />
+</Playground>

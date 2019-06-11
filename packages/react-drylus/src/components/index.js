@@ -27,3 +27,4 @@ export Tag from './Tag';
 export Spinner from './Spinner';
 export BigRadio from './BigRadio';
 export BigCheckbox from './BigCheckbox';
+export Toggle from './Toggle';
