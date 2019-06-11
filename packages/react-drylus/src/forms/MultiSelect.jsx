@@ -4,6 +4,9 @@ import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 
 import Tag from '../components/Tag';
+import RoundIcon from '../components/RoundIcon';
+import Hint from './Hint';
+import { Categories, Sizes } from '../base';
 
 
 const styles = {
@@ -51,10 +54,39 @@ const styles = {
   active: css`
     box-shadow: inset 0px 0px 0px 2px ${sv.brand} !important;
   `,
+  disabled: css`
+    & > [data-element="select"] {
+      cursor: not-allowed;
+      background: ${sv.neutralLight};
+      color: ${sv.colorDisabled};
+      border-color: ${sv.neutralLight};
+      box-shadow: none;
+
+      & > div {
+        pointer-events: none;
+        opacity: 0.6;
+      }
+    }
+
+    &::after {
+      color: ${sv.colorDisabled};
+    }
+  `,
+  valid: css`
+    > [data-element="select"] {
+      box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
+      padding-right: calc(${sv.paddingExtraLarge} + ${sv.defaultPadding});
+    }
+  `,
+  error: css`
+    > [data-element="select"] {
+      box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
+      padding-right: calc(${sv.paddingExtraLarge} + ${sv.defaultPadding});
+    }
+  `,
   options: css`
     position: absolute;
     z-index: 999;
-    top: 100%;
     margin-top: ${sv.marginExtraSmall};
     min-width: 100%;
     background: ${sv.white};
@@ -95,6 +127,12 @@ const styles = {
     margin: -4px;
     margin-bottom: -12px;
     margin-left: -8px;
+  `,
+  icon: css`
+    pointer-events: none;
+    position: absolute;
+    top: calc(${sv.marginExtraSmall} * 1.5);
+    right: calc(${sv.marginSmall} * 2 + ${sv.marginExtraSmall});
   `,
 };
 
@@ -155,13 +193,28 @@ const MultiSelect = ({
   };
 
   return (
-    <div className={styles.root} ref={rootRef}>
+    <div
+      className={cx(styles.root, {
+        [styles.disabled]: disabled,
+        [styles.error]: error,
+        [styles.valid]: values?.length > 0 && valid,
+      })} ref={rootRef}>
+      {do{
+        if (values?.length > 0 && valid) {
+          <div className={styles.icon}>
+            <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
+          </div>
+        }
+        else if (error) {
+          <div className={styles.icon}>
+            <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
+          </div>
+        }
+      }}
       <div
+        data-element="select"
         className={cx(styles.select, {
           [styles.active]: isFocused,
-          [styles.disabled]: disabled,
-          [styles.valid]: Boolean(values) && valid,
-          [styles.error]: error,
         })}
         onClick={handleClickSelect}>
         {do {
@@ -197,9 +250,17 @@ const MultiSelect = ({
           </div>
         ))}
       </div>
+      {do{
+        if (error && typeof error === 'string') {
+          <Hint error>{error}</Hint>
+        }
+        else if (hint) {
+          <Hint>{hint}</Hint>
+        }
+      }}
       <select
-        ref={selectRef}
         disabled={disabled}
+        ref={selectRef}
         onChange={(e) => handleSelectChange(e.target.options)}
         onFocus={() => setFocused(true)}
         onBlur={() => canBlur ? setFocused(false) : null}
