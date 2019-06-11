@@ -24,6 +24,7 @@ import spinner from './spinner';
 import bigRadio from './big-radio';
 import bigCheckbox from './big-checkbox';
 import toggle from './toggle';
+import separator from './separator';
 
 
 const components = {
@@ -53,6 +54,7 @@ const components = {
   bigRadio,
   bigCheckbox,
   toggle,
+  separator,
 };
 
 

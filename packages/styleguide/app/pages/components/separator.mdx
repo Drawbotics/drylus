@@ -1,0 +1,71 @@
+import {
+  Separator,
+  Panel,
+  PanelBody,
+  PanelSection,
+  Margin,
+  Sizes,
+  Flex,
+  FlexItem,
+  FlexJustify,
+  Label,
+  Toggle,
+} from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Separator
+Simply a decorative component used to add a thin grey bar between contents in a page or other container. If you want to add spacing you should use the `Margin` and `Padding` components.
+
+<Playground component={Separator}>
+  <div style={{ height: 100 }}>
+    <Separator />
+  </div>
+</Playground>
+
+### Example in panel
+
+<Playground>
+  <div style={{ maxWidth: 400 }}>
+    <Panel
+      body={
+        <PanelBody>
+          <PanelSection title="Actions">
+            <Margin size={{ bottom: Sizes.SMALL }}>
+              <Flex justify={FlexJustify.SPACE_BETWEEN}>
+                <FlexItem>
+                  <Label>First thing</Label>
+                </FlexItem>
+                <FlexItem>
+                  <Toggle value={true} onChange={x=>x} size={Sizes.SMALL} />
+                </FlexItem>
+              </Flex>
+            </Margin>
+            <Separator />
+            <Margin size={{ top: Sizes.SMALL, bottom: Sizes.SMALL }}>
+              <Flex justify={FlexJustify.SPACE_BETWEEN}>
+                <FlexItem>
+                  <Label>Second thing</Label>
+                </FlexItem>
+                <FlexItem>
+                  <Toggle value={false} onChange={x=>x} size={Sizes.SMALL} />
+                </FlexItem>
+              </Flex>
+            </Margin>
+            <Separator />
+            <Margin size={{ top: Sizes.SMALL }}>
+              <Flex justify={FlexJustify.SPACE_BETWEEN}>
+                <FlexItem>
+                  <Label>Third thing</Label>
+                </FlexItem>
+                <FlexItem>
+                  <Toggle value={true} onChange={x=>x} size={Sizes.SMALL} />
+                </FlexItem>
+              </Flex>
+            </Margin>
+          </PanelSection>
+        </PanelBody>
+      } />
+  </div>
+</Playground>
