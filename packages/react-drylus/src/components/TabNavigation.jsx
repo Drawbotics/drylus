@@ -63,6 +63,7 @@ const styles = {
     &:hover {
       cursor: pointer;
       color: ${sv.colorPrimary};
+      background: ${fade(sv.neutralLight, 30)};
     }
 
     &::after {
@@ -85,7 +86,7 @@ const styles = {
     }
   `,
   verticalActive: css`
-    background: ${fade(sv.brand, 15)};
+    background: ${fade(sv.brandLight, 20)} !important;
 
     &::after {
       width: 4px !important;
@@ -96,6 +97,7 @@ const styles = {
 
     &:hover {
       cursor: not-allowed;
+      background: none;
     }
 
     & > [data-element="trailing"] {
