@@ -154,13 +154,15 @@ const Input = ({
   ...rest,
 }) => {
   const [isFocused, setFocused] = useState(false);
+
   const handleOnChange = (e) => onChange ? onChange(e.target.value, e.target.name) : null;
+
   const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
   const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
   return (
     <div className={cx(styles.root, {
-      [styles.valid]: !! value && valid,
       [styles.error]: error,
+      [styles.valid]: Boolean(value) && valid,
     })}>
       <div className={styles.outerWrapper}>
         {do{
@@ -175,14 +177,14 @@ const Input = ({
         }}
         <div className={styles.innerWrapper}>
           {do{
-            if (error) {
-              <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
-                <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
-              </div>
-            }
-            else if (value && valid) {
+            if (Boolean(value) && valid) {
               <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
                 <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
+              </div>
+            }
+            else if (error) {
+              <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
+                <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
               </div>
             }
           }}

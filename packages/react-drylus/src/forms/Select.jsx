@@ -48,6 +48,10 @@ const styles = {
       box-shadow: inset 0px 0px 0px 1px ${sv.azureDark};
     }
 
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px ${sv.brand} !important;
+    }
+
     &:disabled {
       cursor: not-allowed;
       background: ${sv.neutralLight};
@@ -89,22 +93,22 @@ const Select = ({
   valid,
   ...rest,
 }) => {
-  const handleOnChange = (e) => onChange ? onChange(e.target.value, e.target.name) : null;
+  const handleOnChange = (e) => onChange(e.target.value, e.target.name);
   return (
     <div className={cx(styles.root, {
       [styles.disabled]: disabled,
-      [styles.valid]: !! value && valid,
       [styles.error]: error,
+      [styles.valid]: !! value && valid,
     })}>
       {do{
-        if (error) {
-          <div className={styles.icon}>
-            <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
-          </div>
-        }
-        else if (value && valid) {
+        if (value && valid) {
           <div className={styles.icon}>
             <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
+          </div>
+        }
+        else if (error) {
+          <div className={styles.icon}>
+            <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
           </div>
         }
       }}
@@ -167,7 +171,7 @@ Select.propTypes = {
   placeholder: PropTypes.string,
 
   /** Triggered when a new value is chosen, returns a value, key (label, value) pair */
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
 
   /** Small text shown below the box, replaced by error if present */
   hint: PropTypes.string,

@@ -1,0 +1,29 @@
+import { MultiSelect, Select } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+import { ControlledMultiField } from '../utils';
+
+
+# Multi Select
+
+<Playground component={MultiSelect}>
+  <>
+    <ControlledMultiField style={{ maxWidth: 280, height: 300 }} component={
+      <MultiSelect
+        placeholder="Select options..."
+        options={[{
+          label: 'Belgium',
+          value: 'BE',
+        }, {
+          label: 'France',
+          value: 'FR',
+        }, {
+          label: 'Italy',
+          value: 'IT',
+        }, {
+          label: 'Greece',
+          value: 'GR',
+        }]} />
+    } />
+  </>
+</Playground>
