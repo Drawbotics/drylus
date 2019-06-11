@@ -25,24 +25,12 @@ const styles = {
       cursor: pointer;
       background: ${sv.neutralDark};
     }
-
-    &:active {
-      & > [data-element="trigger"] {
-        transform: translateX(TOGGLE_PADDING);
-      }
-    }
   `,
   active: css`
     background: ${sv.green} !important;
 
     & > [data-element="trigger"] {
       transform: translateX(calc(100% + ${TRIGGER_OFFSET} - ${TOGGLE_PADDING} * 2)) !important;
-    }
-
-    &:active {
-      & > [data-element="trigger"] {
-        transform: translateX(calc(100% + ${TRIGGER_OFFSET} - ${TOGGLE_PADDING} * 3)) !important;
-      }
     }
   `,
   trigger: css`
@@ -78,6 +66,14 @@ const styles = {
       }
     }
   `,
+  disabled: css`
+    opacity: 0.5;
+
+    &:hover {
+      cursor: not-allowed;
+      background: ${sv.neutral};
+    }
+  `,
 };
 
 
@@ -92,8 +88,9 @@ const Toggle = ({
       className={cx(styles.root, {
         [styles.active]: value,
         [styles.small]: size === Sizes.SMALL,
+        [styles.disabled]: disabled,
       })}
-      onClick={() => onChange(! value)}>
+      onClick={() => disabled ? null : onChange(! value)}>
       <div className={styles.trigger} data-element="trigger" />
     </div>
   );
