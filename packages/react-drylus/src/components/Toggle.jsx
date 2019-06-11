@@ -99,13 +99,13 @@ const Toggle = ({
 
 Toggle.propTypes = {
   /** Triggered when toggle value is changed */
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
 
   /** If true, toggle is not clickable */
   disabled: PropTypes.bool,
 
   /** Determines if toggle is active */
-  active: PropTypes.bool,
+  value: PropTypes.bool.isRequired,
 
   size: PropTypes.oneOf([ Sizes.SMALL, Sizes.DEFAULT ]),
 };
