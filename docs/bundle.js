@@ -56386,6 +56386,140 @@ SegmentedControl.__docgenInfo = {
 
 /***/ }),
 
+/***/ "../react-drylus/lib/components/Separator.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("../../node_modules/core-js/modules/es6.object.define-property.js");
+/* harmony import */ var core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var emotion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("../../node_modules/emotion/dist/emotion.esm.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("../../node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("../style-vars/dist/vars.js");
+/* harmony import */ var _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__("../../node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+
+
+
+var styles = {
+  root:
+  /*#__PURE__*/
+
+  /*#__PURE__*/
+  Object(emotion__WEBPACK_IMPORTED_MODULE_1__[/* css */ "a"])("height:1px;width:100%;flex:1;background:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_4___default.a.neutralLight, ";label:Separator__root;" + ( true ? "" : undefined), "label:Separator__root;" + ( true ? "" : undefined)),
+  vertical:
+  /*#__PURE__*/
+
+  /*#__PURE__*/
+  Object(emotion__WEBPACK_IMPORTED_MODULE_1__[/* css */ "a"])( true ? {
+    name: "94qzfw-Separator__vertical",
+    styles: "width:1px;height:100%;label:Separator__vertical;"
+  } : undefined, "label:Separator__vertical;" + ( true ? "" : undefined))
+};
+
+var Separator = function Separator(_ref) {
+  var vertical = _ref.vertical;
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: Object(emotion__WEBPACK_IMPORTED_MODULE_1__[/* cx */ "b"])(styles.root, _defineProperty({}, styles.vertical, vertical))
+  });
+};
+
+Separator.propTypes = {
+  /** If true, the separator is rendered in a vertical fashion, by default it takes the full width of the container */
+  vertical: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool
+};
+Separator.defaultProps = {
+  vertical: false
+};
+var _default = Separator;
+/* harmony default export */ __webpack_exports__["a"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__("../../node_modules/react-hot-loader/index.js"))["default"];
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(styles, "styles", "/Users/nick/Documents/Drawbotics/repos/stack/drylus/packages/react-drylus/src/components/Separator.jsx");
+  reactHotLoader.register(Separator, "Separator", "/Users/nick/Documents/Drawbotics/repos/stack/drylus/packages/react-drylus/src/components/Separator.jsx");
+  reactHotLoader.register(_default, "default", "/Users/nick/Documents/Drawbotics/repos/stack/drylus/packages/react-drylus/src/components/Separator.jsx");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__("../../node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+
+Separator.__docgenInfo = {
+  "description": "",
+  "methods": [],
+  "displayName": "Separator",
+  "props": {
+    "vertical": {
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      },
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "If true, the separator is rendered in a vertical fashion, by default it takes the full width of the container"
+    }
+  }
+};
+Separator.__docgenInfo = {
+  "description": "",
+  "methods": [],
+  "displayName": "Separator",
+  "props": {
+    "vertical": {
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      },
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "If true, the separator is rendered in a vertical fashion, by default it takes the full width of the container"
+    }
+  }
+};
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("../../node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
 /***/ "../react-drylus/lib/components/Sidebar.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -60170,6 +60304,440 @@ Checkbox.__docgenInfo = {
 
 /***/ }),
 
+/***/ "../react-drylus/lib/forms/Countbox.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("../../node_modules/core-js/modules/es6.regexp.split.js");
+/* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("../../node_modules/core-js/modules/es6.number.constructor.js");
+/* harmony import */ var core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_number_constructor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("../../node_modules/core-js/modules/es6.object.define-property.js");
+/* harmony import */ var core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_define_property__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var emotion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("../../node_modules/emotion/dist/emotion.esm.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("../../node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("../style-vars/dist/vars.js");
+/* harmony import */ var _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _Input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("../react-drylus/lib/forms/Input.js");
+/* harmony import */ var _components_Icon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("../react-drylus/lib/components/Icon.js");
+
+
+
+
+
+
+
+
+
+(function () {
+  var enterModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__("../../node_modules/react-hot-loader/index.js")).enterModule;
+  enterModule && enterModule(module);
+})();
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+
+
+
+
+
+var styles = {
+  root:
+  /*#__PURE__*/
+
+  /*#__PURE__*/
+  Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* css */ "a"])( true ? {
+    name: "yfxf90-Countbox__root",
+    styles: "position:relative;display:inline-block;width:100%;& [data-element=\"suffix\"]{padding:0;align-items:stretch;overflow:hidden;}label:Countbox__root;"
+  } : undefined, "label:Countbox__root;" + ( true ? "" : undefined)),
+  buttons:
+  /*#__PURE__*/
+
+  /*#__PURE__*/
+  Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* css */ "a"])( true ? {
+    name: "124oayr-Countbox__buttons",
+    styles: "display:flex;flex-direction:column;flex:1;label:Countbox__buttons;"
+  } : undefined, "label:Countbox__buttons;" + ( true ? "" : undefined)),
+  button:
+  /*#__PURE__*/
+
+  /*#__PURE__*/
+  Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* css */ "a"])("flex:1;padding:0 ", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.paddingSmall, ";display:flex;align-items:center;transition:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.defaultTransition, ";border:none;&:hover{cursor:pointer;background:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.azure, ";}&:focus{outline:none;}&:active{box-shadow:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.insetActiveMedium, ";}& > i{font-size:1rem;}label:Countbox__button;" + ( true ? "" : undefined), "label:Countbox__button;" + ( true ? "" : undefined)),
+  disabled:
+  /*#__PURE__*/
+
+  /*#__PURE__*/
+  Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* css */ "a"])("> button{background:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.neutralLight, ";color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.colorDisabled, ";border-color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.neutralLight, ";color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.colorDisabled, ";&:hover{cursor:not-allowed;background:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.neutralLight, ";}&:active{box-shadow:none;}}label:Countbox__disabled;" + ( true ? "" : undefined), "label:Countbox__disabled;" + ( true ? "" : undefined)),
+  renderedValue:
+  /*#__PURE__*/
+
+  /*#__PURE__*/
+  Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* css */ "a"])("position:absolute;top:12px;left:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.marginSmall, ";z-index:9;color:red;letter-spacing:normal;white-space:nowrap;max-width:calc(100% - 65px);text-overflow:ellipsis;overflow:hidden;color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.colorSecondary, ";label:Countbox__renderedValue;" + ( true ? "" : undefined), "label:Countbox__renderedValue;" + ( true ? "" : undefined)),
+  value:
+  /*#__PURE__*/
+
+  /*#__PURE__*/
+  Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* css */ "a"])("color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_6___default.a.colorPrimary, ";label:Countbox__value;" + ( true ? "" : undefined), "label:Countbox__value;" + ( true ? "" : undefined))
+};
+
+var Countbox = function Countbox(_ref) {
+  var rawValue = _ref.value,
+      placeholder = _ref.placeholder,
+      disabled = _ref.disabled,
+      onChange = _ref.onChange,
+      hint = _ref.hint,
+      error = _ref.error,
+      valid = _ref.valid,
+      renderValue = _ref.renderValue,
+      max = _ref.max,
+      min = _ref.min;
+  var inputRef = Object(react__WEBPACK_IMPORTED_MODULE_4__["useRef"])(null);
+
+  var handleInputOnChange = function handleInputOnChange(v) {
+    var numericalValue = Number(v);
+
+    if (v === '-' || v === '') {
+      onChange(v);
+    } else if (numericalValue === 0 || numericalValue) {
+      var finalValue = numericalValue > max ? max : numericalValue < min ? min : numericalValue;
+      onChange(finalValue);
+    }
+  };
+
+  var value = rawValue === '-' || rawValue === '' ? rawValue : Number(rawValue);
+
+  if (value !== '-' && value !== '' && value !== 0 && !value) {
+    console.warn('Only numbers allowed as value for Countbox');
+  }
+
+  if (inputRef.current && renderValue) {
+    inputRef.current.style.color = 'transparent';
+  }
+
+  return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
+    className: styles.root
+  }, function () {
+    if (renderValue && (value === 0 || value)) {
+      var sections = renderValue(value).split(value);
+      return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("span", {
+        className: styles.renderedValue
+      }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("span", null, sections[0]), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("span", {
+        className: styles.value
+      }, value), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("span", null, sections[1]));
+    }
+  }(), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_Input__WEBPACK_IMPORTED_MODULE_7__[/* InputWithRef */ "a"], {
+    ref: inputRef,
+    error: error,
+    hint: hint,
+    valid: valid,
+    onChange: handleInputOnChange,
+    disabled: disabled,
+    placeholder: placeholder,
+    value: value,
+    suffix: react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
+      className: Object(emotion__WEBPACK_IMPORTED_MODULE_3__[/* cx */ "b"])(styles.buttons, _defineProperty({}, styles.disabled, disabled))
+    }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("button", {
+      className: styles.button,
+      onClick: function onClick() {
+        return !disabled && value < max ? onChange((value || 0) + 1) : null;
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_Icon__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"], {
+      name: "plus",
+      bold: true
+    })), react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("button", {
+      className: styles.button,
+      onClick: function onClick() {
+        return !disabled && value > min ? onChange((value || 0) - 1) : null;
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_components_Icon__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"], {
+      name: "minus",
+      bold: true
+    })))
+  }));
+};
+
+Countbox.propTypes = {
+  /** Value displayed in the field */
+  value: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOf(['-', ''])]).isRequired,
+
+  /** Disables the countbox */
+  disabled: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool,
+
+  /** Text shown when no value is active */
+  placeholder: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string,
+
+  /** Triggered when the value is changed (typing or clicking +/-) */
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func.isRequired,
+
+  /** Small text shown below the box, replaced by error if present */
+  hint: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string,
+
+  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
+  error: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool]),
+
+  /** If true the element displays a check icon and a green outline, overridden by "error" */
+  valid: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.bool,
+
+  /** Use if you want to modify the way you display the value (string operations only) */
+  renderValue: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.func,
+
+  /** Limits the max value */
+  max: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number,
+
+  /** Limits the min value */
+  min: prop_types__WEBPACK_IMPORTED_MODULE_5___default.a.number
+};
+Countbox.defaultProps = {
+  min: -Infinity,
+  max: Infinity
+};
+var _default = Countbox;
+/* harmony default export */ __webpack_exports__["a"] = (_default);
+;
+
+(function () {
+  var reactHotLoader = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__("../../node_modules/react-hot-loader/index.js"))["default"];
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(styles, "styles", "/Users/nick/Documents/Drawbotics/repos/stack/drylus/packages/react-drylus/src/forms/Countbox.jsx");
+  reactHotLoader.register(Countbox, "Countbox", "/Users/nick/Documents/Drawbotics/repos/stack/drylus/packages/react-drylus/src/forms/Countbox.jsx");
+  reactHotLoader.register(_default, "default", "/Users/nick/Documents/Drawbotics/repos/stack/drylus/packages/react-drylus/src/forms/Countbox.jsx");
+})();
+
+;
+
+(function () {
+  var leaveModule = (typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal : __webpack_require__("../../node_modules/react-hot-loader/index.js")).leaveModule;
+  leaveModule && leaveModule(module);
+})();
+
+Countbox.__docgenInfo = {
+  "description": "",
+  "methods": [],
+  "displayName": "Countbox",
+  "props": {
+    "min": {
+      "defaultValue": {
+        "value": "-Infinity",
+        "computed": false
+      },
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Limits the min value"
+    },
+    "max": {
+      "defaultValue": {
+        "value": "Infinity",
+        "computed": true
+      },
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Limits the max value"
+    },
+    "value": {
+      "type": {
+        "name": "union",
+        "value": [{
+          "name": "number"
+        }, {
+          "name": "enum",
+          "value": [{
+            "value": "'-'",
+            "computed": false
+          }, {
+            "value": "''",
+            "computed": false
+          }]
+        }]
+      },
+      "required": true,
+      "description": "Value displayed in the field"
+    },
+    "disabled": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Disables the countbox"
+    },
+    "placeholder": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "Text shown when no value is active"
+    },
+    "onChange": {
+      "type": {
+        "name": "func"
+      },
+      "required": true,
+      "description": "Triggered when the value is changed (typing or clicking +/-)"
+    },
+    "hint": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "Small text shown below the box, replaced by error if present"
+    },
+    "error": {
+      "type": {
+        "name": "union",
+        "value": [{
+          "name": "string"
+        }, {
+          "name": "bool"
+        }]
+      },
+      "required": false,
+      "description": "Error text to prompt the user to act, or a boolean if you don't want to show a message"
+    },
+    "valid": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "If true the element displays a check icon and a green outline, overridden by \"error\""
+    },
+    "renderValue": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Use if you want to modify the way you display the value (string operations only)"
+    }
+  }
+};
+Countbox.__docgenInfo = {
+  "description": "",
+  "methods": [],
+  "displayName": "Countbox",
+  "props": {
+    "min": {
+      "defaultValue": {
+        "value": "-Infinity",
+        "computed": false
+      },
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Limits the min value"
+    },
+    "max": {
+      "defaultValue": {
+        "value": "Infinity",
+        "computed": true
+      },
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Limits the max value"
+    },
+    "value": {
+      "type": {
+        "name": "union",
+        "value": [{
+          "name": "number"
+        }, {
+          "name": "enum",
+          "value": [{
+            "value": "'-'",
+            "computed": false
+          }, {
+            "value": "''",
+            "computed": false
+          }]
+        }]
+      },
+      "required": true,
+      "description": "Value displayed in the field"
+    },
+    "disabled": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Disables the countbox"
+    },
+    "placeholder": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "Text shown when no value is active"
+    },
+    "onChange": {
+      "type": {
+        "name": "func"
+      },
+      "required": true,
+      "description": "Triggered when the value is changed (typing or clicking +/-)"
+    },
+    "hint": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "Small text shown below the box, replaced by error if present"
+    },
+    "error": {
+      "type": {
+        "name": "union",
+        "value": [{
+          "name": "string"
+        }, {
+          "name": "bool"
+        }]
+      },
+      "required": false,
+      "description": "Error text to prompt the user to act, or a boolean if you don't want to show a message"
+    },
+    "valid": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "If true the element displays a check icon and a green outline, overridden by \"error\""
+    },
+    "renderValue": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Use if you want to modify the way you display the value (string operations only)"
+    }
+  }
+};
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("../../node_modules/webpack/buildin/harmony-module.js")(module)))
+
+/***/ }),
+
 /***/ "../react-drylus/lib/forms/Hint.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -60466,8 +61034,8 @@ var styles = {
 
   /*#__PURE__*/
   Object(emotion__WEBPACK_IMPORTED_MODULE_11__[/* css */ "a"])( true ? {
-    name: "1do2tet-Input__outerWrapper",
-    styles: "display:flex;align-items:center;label:Input__outerWrapper;"
+    name: "odgt8r-Input__outerWrapper",
+    styles: "display:flex;align-items:stretch;label:Input__outerWrapper;"
   } : undefined, "label:Input__outerWrapper;" + ( true ? "" : undefined)),
   innerWrapper:
   /*#__PURE__*/
@@ -60481,7 +61049,7 @@ var styles = {
   /*#__PURE__*/
 
   /*#__PURE__*/
-  Object(emotion__WEBPACK_IMPORTED_MODULE_11__[/* css */ "a"])("background-color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.azureLight, ";color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.colorPrimary, ";padding:calc(", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.paddingExtraSmall, " * 1.5) ", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.paddingSmall, ";border:none;border-radius:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.defaultBorderRadius, ";appearance:button;width:100%;outline:none !important;box-shadow:inset 0px 0px 0px 1px ", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.azure, ";transition:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.defaultTransition, ";z-index:1;&::placeholder{color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.colorSecondary, ";}&:hover{box-shadow:inset 0px 0px 0px 1px ", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.azureDark, ";}&:focus{box-shadow:inset 0px 0px 0px 2px ", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.brand, " !important;}&:disabled{cursor:not-allowed;background:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.neutralLight, ";color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.colorDisabled, ";border-color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.neutralLight, ";box-shadow:none;}label:Input__input;" + ( true ? "" : undefined), "label:Input__input;" + ( true ? "" : undefined)),
+  Object(emotion__WEBPACK_IMPORTED_MODULE_11__[/* css */ "a"])("background-color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.azureLight, ";color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.colorPrimary, ";padding:calc(", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.paddingExtraSmall, " * 1.5) ", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.paddingSmall, ";border:none;border-radius:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.defaultBorderRadius, ";appearance:button;outline:none !important;box-shadow:inset 0px 0px 0px 1px ", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.azure, ";transition:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.defaultTransition, ";z-index:1;width:100%;&::placeholder{color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.colorSecondary, ";}&:hover{box-shadow:inset 0px 0px 0px 1px ", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.azureDark, ";}&:focus{box-shadow:inset 0px 0px 0px 2px ", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.brand, " !important;}&:disabled{cursor:not-allowed;background:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.neutralLight, ";color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.colorDisabled, ";border-color:", _drawbotics_style_vars__WEBPACK_IMPORTED_MODULE_13___default.a.neutralLight, ";box-shadow:none;}label:Input__input;" + ( true ? "" : undefined), "label:Input__input;" + ( true ? "" : undefined)),
   straightLeft:
   /*#__PURE__*/
 
@@ -60591,27 +61159,28 @@ var Input = function Input(_ref) {
   var isPrefixComponent = (prefix === null || prefix === void 0 ? void 0 : prefix.type) === _components_Button__WEBPACK_IMPORTED_MODULE_16__[/* default */ "a"] || (prefix === null || prefix === void 0 ? void 0 : prefix.type) === _Select__WEBPACK_IMPORTED_MODULE_17__[/* default */ "a"];
   var isSuffixComponent = (suffix === null || suffix === void 0 ? void 0 : suffix.type) === _components_Button__WEBPACK_IMPORTED_MODULE_16__[/* default */ "a"] || (suffix === null || suffix === void 0 ? void 0 : suffix.type) === _Select__WEBPACK_IMPORTED_MODULE_17__[/* default */ "a"];
   return react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
-    className: Object(emotion__WEBPACK_IMPORTED_MODULE_11__[/* cx */ "b"])(styles.root, (_cx2 = {}, _defineProperty(_cx2, styles.error, error), _defineProperty(_cx2, styles.valid, Boolean(value) && valid), _cx2))
+    className: Object(emotion__WEBPACK_IMPORTED_MODULE_11__[/* cx */ "b"])(styles.root, (_cx2 = {}, _defineProperty(_cx2, styles.valid, Boolean(value) && valid), _defineProperty(_cx2, styles.error, error), _cx2))
   }, react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
     className: styles.outerWrapper
   }, prefix ? react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
+    "data-element": "prefix",
     className: Object(emotion__WEBPACK_IMPORTED_MODULE_11__[/* cx */ "b"])(styles.fix, styles.prefix, (_cx3 = {}, _defineProperty(_cx3, styles.prefixComponent, isPrefixComponent), _defineProperty(_cx3, styles.transparentButton, !(prefix === null || prefix === void 0 ? void 0 : (_prefix$props = prefix.props) === null || _prefix$props === void 0 ? void 0 : _prefix$props.category)), _cx3))
   }, prefix) : void 0, react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
     className: styles.innerWrapper
-  }, Boolean(value) && valid ? react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
-    className: Object(emotion__WEBPACK_IMPORTED_MODULE_11__[/* cx */ "b"])(styles.icon, _defineProperty({}, styles.hidden, isFocused)),
-    "data-element": "icon"
-  }, react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement(_components_RoundIcon__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"], {
-    name: "check",
-    size: _base_Sizes__WEBPACK_IMPORTED_MODULE_18__[/* default */ "a"].SMALL,
-    category: _base_Categories__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"].SUCCESS
-  })) : error ? react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
+  }, error ? react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
     className: Object(emotion__WEBPACK_IMPORTED_MODULE_11__[/* cx */ "b"])(styles.icon, _defineProperty({}, styles.hidden, isFocused)),
     "data-element": "icon"
   }, react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement(_components_RoundIcon__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"], {
     name: "x",
     size: _base_Sizes__WEBPACK_IMPORTED_MODULE_18__[/* default */ "a"].SMALL,
     category: _base_Categories__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"].DANGER
+  })) : Boolean(value) && valid ? react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
+    className: Object(emotion__WEBPACK_IMPORTED_MODULE_11__[/* cx */ "b"])(styles.icon, _defineProperty({}, styles.hidden, isFocused)),
+    "data-element": "icon"
+  }, react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement(_components_RoundIcon__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"], {
+    name: "check",
+    size: _base_Sizes__WEBPACK_IMPORTED_MODULE_18__[/* default */ "a"].SMALL,
+    category: _base_Categories__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"].SUCCESS
   })) : void 0, react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("input", _extends({
     disabled: disabled,
     onFocus: function onFocus() {
@@ -60625,6 +61194,7 @@ var Input = function Input(_ref) {
     value: value,
     ref: inputRef
   }, rest))), suffix ? react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
+    "data-element": "suffix",
     className: Object(emotion__WEBPACK_IMPORTED_MODULE_11__[/* cx */ "b"])(styles.fix, styles.suffix, (_cx7 = {}, _defineProperty(_cx7, styles.suffixComponent, isSuffixComponent), _defineProperty(_cx7, styles.transparentButton, !(suffix === null || suffix === void 0 ? void 0 : (_suffix$props = suffix.props) === null || _suffix$props === void 0 ? void 0 : _suffix$props.category)), _cx7))
   }, suffix) : void 0), error && typeof error === 'string' ? react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement(_Hint__WEBPACK_IMPORTED_MODULE_20__[/* default */ "a"], {
     error: true
@@ -60639,9 +61209,9 @@ var InputWithRef = Object(react__WEBPACK_IMPORTED_MODULE_12__["forwardRef"])(fun
 InputWithRef.displayName = 'Input';
 Input.propTypes = {
   /** Value displayed in the field */
-  value: prop_types__WEBPACK_IMPORTED_MODULE_14___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_14___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_14___default.a.number]),
+  value: prop_types__WEBPACK_IMPORTED_MODULE_14___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_14___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_14___default.a.number]).isRequired,
 
-  /** Disables the select */
+  /** Disables the input */
   disabled: prop_types__WEBPACK_IMPORTED_MODULE_14___default.a.bool,
 
   /** Text shown when no value is active */
@@ -60703,7 +61273,7 @@ Input.__docgenInfo = {
           "name": "number"
         }]
       },
-      "required": false,
+      "required": true,
       "description": "Value displayed in the field"
     },
     "disabled": {
@@ -60711,7 +61281,7 @@ Input.__docgenInfo = {
         "name": "bool"
       },
       "required": false,
-      "description": "Disables the select"
+      "description": "Disables the input"
     },
     "placeholder": {
       "type": {
@@ -60783,7 +61353,7 @@ Input.__docgenInfo = {
           "name": "number"
         }]
       },
-      "required": false,
+      "required": true,
       "description": "Value displayed in the field"
     },
     "disabled": {
@@ -60791,7 +61361,7 @@ Input.__docgenInfo = {
         "name": "bool"
       },
       "required": false,
-      "description": "Disables the select"
+      "description": "Disables the input"
     },
     "placeholder": {
       "type": {
@@ -61246,20 +61816,20 @@ var MultiSelect = function MultiSelect(_ref) {
   };
 
   return react__WEBPACK_IMPORTED_MODULE_20___default.a.createElement("div", {
-    className: Object(emotion__WEBPACK_IMPORTED_MODULE_19__[/* cx */ "b"])(styles.root, (_cx2 = {}, _defineProperty(_cx2, styles.disabled, disabled), _defineProperty(_cx2, styles.error, error), _defineProperty(_cx2, styles.valid, (values === null || values === void 0 ? void 0 : values.length) > 0 && valid), _cx2)),
+    className: Object(emotion__WEBPACK_IMPORTED_MODULE_19__[/* cx */ "b"])(styles.root, (_cx2 = {}, _defineProperty(_cx2, styles.disabled, disabled), _defineProperty(_cx2, styles.valid, (values === null || values === void 0 ? void 0 : values.length) > 0 && valid), _defineProperty(_cx2, styles.error, error), _cx2)),
     ref: rootRef
-  }, (values === null || values === void 0 ? void 0 : values.length) > 0 && valid ? react__WEBPACK_IMPORTED_MODULE_20___default.a.createElement("div", {
-    className: styles.icon
-  }, react__WEBPACK_IMPORTED_MODULE_20___default.a.createElement(_components_RoundIcon__WEBPACK_IMPORTED_MODULE_24__[/* default */ "a"], {
-    name: "check",
-    size: _base__WEBPACK_IMPORTED_MODULE_26__[/* Sizes */ "d"].SMALL,
-    category: _base__WEBPACK_IMPORTED_MODULE_26__[/* Categories */ "a"].SUCCESS
-  })) : error ? react__WEBPACK_IMPORTED_MODULE_20___default.a.createElement("div", {
+  }, error ? react__WEBPACK_IMPORTED_MODULE_20___default.a.createElement("div", {
     className: styles.icon
   }, react__WEBPACK_IMPORTED_MODULE_20___default.a.createElement(_components_RoundIcon__WEBPACK_IMPORTED_MODULE_24__[/* default */ "a"], {
     name: "x",
     size: _base__WEBPACK_IMPORTED_MODULE_26__[/* Sizes */ "d"].SMALL,
     category: _base__WEBPACK_IMPORTED_MODULE_26__[/* Categories */ "a"].DANGER
+  })) : (values === null || values === void 0 ? void 0 : values.length) > 0 && valid ? react__WEBPACK_IMPORTED_MODULE_20___default.a.createElement("div", {
+    className: styles.icon
+  }, react__WEBPACK_IMPORTED_MODULE_20___default.a.createElement(_components_RoundIcon__WEBPACK_IMPORTED_MODULE_24__[/* default */ "a"], {
+    name: "check",
+    size: _base__WEBPACK_IMPORTED_MODULE_26__[/* Sizes */ "d"].SMALL,
+    category: _base__WEBPACK_IMPORTED_MODULE_26__[/* Categories */ "a"].SUCCESS
   })) : void 0, react__WEBPACK_IMPORTED_MODULE_20___default.a.createElement("div", {
     "data-element": "select",
     className: Object(emotion__WEBPACK_IMPORTED_MODULE_19__[/* cx */ "b"])(styles.select, _defineProperty({}, styles.active, isFocused)),
@@ -62828,19 +63398,19 @@ var Select = function Select(_ref) {
   };
 
   return react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("div", {
-    className: Object(emotion__WEBPACK_IMPORTED_MODULE_10__[/* cx */ "b"])(styles.root, (_cx2 = {}, _defineProperty(_cx2, styles.disabled, disabled), _defineProperty(_cx2, styles.error, error), _defineProperty(_cx2, styles.valid, !!value && valid), _cx2))
-  }, value && valid ? react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("div", {
-    className: styles.icon
-  }, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(_components_RoundIcon__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"], {
-    name: "check",
-    size: _base_Sizes__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].SMALL,
-    category: _base_Categories__WEBPACK_IMPORTED_MODULE_16__[/* default */ "a"].SUCCESS
-  })) : error ? react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("div", {
+    className: Object(emotion__WEBPACK_IMPORTED_MODULE_10__[/* cx */ "b"])(styles.root, (_cx2 = {}, _defineProperty(_cx2, styles.disabled, disabled), _defineProperty(_cx2, styles.valid, Boolean(value) && valid), _defineProperty(_cx2, styles.error, error), _cx2))
+  }, error ? react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("div", {
     className: styles.icon
   }, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(_components_RoundIcon__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"], {
     name: "x",
     size: _base_Sizes__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].SMALL,
     category: _base_Categories__WEBPACK_IMPORTED_MODULE_16__[/* default */ "a"].DANGER
+  })) : value && valid ? react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("div", {
+    className: styles.icon
+  }, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement(_components_RoundIcon__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"], {
+    name: "check",
+    size: _base_Sizes__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].SMALL,
+    category: _base_Categories__WEBPACK_IMPORTED_MODULE_16__[/* default */ "a"].SUCCESS
   })) : void 0, react__WEBPACK_IMPORTED_MODULE_11___default.a.createElement("select", _extends({
     disabled: disabled,
     className: styles.select,
@@ -67419,7 +67989,12 @@ var BigCheckbox = __webpack_require__("../react-drylus/lib/components/BigCheckbo
 // EXTERNAL MODULE: ../react-drylus/lib/components/Toggle.js
 var Toggle = __webpack_require__("../react-drylus/lib/components/Toggle.js");
 
+// EXTERNAL MODULE: ../react-drylus/lib/components/Separator.js
+var Separator = __webpack_require__("../react-drylus/lib/components/Separator.js");
+
 // CONCATENATED MODULE: ../react-drylus/lib/components/index.js
+
+
 
 
 
@@ -67503,7 +68078,12 @@ var SearchInput = __webpack_require__("../react-drylus/lib/forms/SearchInput.js"
 // EXTERNAL MODULE: ../react-drylus/lib/forms/MultiSelect.js
 var MultiSelect = __webpack_require__("../react-drylus/lib/forms/MultiSelect.js");
 
+// EXTERNAL MODULE: ../react-drylus/lib/forms/Countbox.js
+var Countbox = __webpack_require__("../react-drylus/lib/forms/Countbox.js");
+
 // CONCATENATED MODULE: ../react-drylus/lib/forms/index.js
+
+
 
 
 
@@ -71541,9 +72121,11 @@ function utils_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var utils_ControlledField = function ControlledField(_ref) {
   var Component = _ref.component,
-      style = _ref.style;
+      style = _ref.style,
+      _ref$initialValue = _ref.initialValue,
+      initialValue = _ref$initialValue === void 0 ? '' : _ref$initialValue;
 
-  var _useState = Object(react["useState"])(''),
+  var _useState = Object(react["useState"])(initialValue),
       _useState2 = utils_slicedToArray(_useState, 2),
       value = _useState2[0],
       setValue = _useState2[1];
@@ -71556,7 +72138,7 @@ var utils_ControlledField = function ControlledField(_ref) {
       return setValue(v);
     },
     onClear: function onClear() {
-      return setValue('');
+      return setValue(initialValue);
     }
   }));
 };
@@ -71599,7 +72181,16 @@ var utils_ControlledMultiField = function ControlledMultiField(_ref3) {
 utils_ControlledField.__docgenInfo = {
   "description": "",
   "methods": [],
-  "displayName": "ControlledField"
+  "displayName": "ControlledField",
+  "props": {
+    "initialValue": {
+      "defaultValue": {
+        "value": "''",
+        "computed": false
+      },
+      "required": false
+    }
+  }
 };
 utils_ControlledBoolField.__docgenInfo = {
   "description": "",
@@ -74473,6 +75064,152 @@ toggle_MDXContent.__docgenInfo = {
   "methods": [],
   "displayName": "MDXContent"
 };
+// CONCATENATED MODULE: ./app/pages/components/separator.mdx
+
+
+
+
+
+
+
+
+function separator_extends() { separator_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return separator_extends.apply(this, arguments); }
+
+function separator_objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = separator_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function separator_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+/* @jsx mdx */
+
+
+/* @jsx mdx */
+
+
+
+
+var separator_makeShortcode = function makeShortcode(name) {
+  return function MDXDefaultShortcode(props) {
+    console.warn("Component " + name + " was not imported, exported, or provided by MDXProvider as global scope");
+    return index_es_p("div", props);
+  };
+};
+
+var separator_layoutProps = {};
+var separator_MDXLayout = "wrapper";
+function separator_MDXContent(_ref) {
+  var components = _ref.components,
+      props = separator_objectWithoutProperties(_ref, ["components"]);
+
+  return index_es_p(separator_MDXLayout, separator_extends({}, separator_layoutProps, props, {
+    components: components,
+    mdxType: "MDXLayout"
+  }), index_es_p("h1", null, "Separator"), index_es_p("p", null, "Simply a decorative component used to add a thin grey bar between contents in a page or other container. If you want to add spacing you should use the ", index_es_p("inlineCode", {
+    parentName: "p"
+  }, "Margin"), " and ", index_es_p("inlineCode", {
+    parentName: "p"
+  }, "Padding"), " components."), index_es_p(components_Playground, {
+    __position: 0,
+    __code: "<Playground component={Separator}>\n  <div style={{ height: 100 }}>\n    <Separator />\n  </div>\n</Playground>",
+    component: Separator["a" /* default */],
+    mdxType: "Playground"
+  }, index_es_p("div", {
+    style: {
+      height: 100
+    }
+  }, index_es_p(Separator["a" /* default */], {
+    mdxType: "Separator"
+  }))), index_es_p("h3", null, "Example in panel"), index_es_p(components_Playground, {
+    __position: 1,
+    __code: "<div style={{ maxWidth: 400 }}>\n  <Panel\n    body={\n      <PanelBody>\n        <PanelSection title=\"Actions\">\n          <Margin size={{ bottom: Sizes.SMALL }}>\n            <Flex justify={FlexJustify.SPACE_BETWEEN}>\n              <FlexItem>\n                <Label>First thing</Label>\n              </FlexItem>\n              <FlexItem>\n                <Toggle value={true} onChange={x=>x} size={Sizes.SMALL} />\n              </FlexItem>\n            </Flex>\n          </Margin>\n          <Separator />\n          <Margin size={{ top: Sizes.SMALL, bottom: Sizes.SMALL }}>\n            <Flex justify={FlexJustify.SPACE_BETWEEN}>\n              <FlexItem>\n                <Label>Second thing</Label>\n              </FlexItem>\n              <FlexItem>\n                <Toggle value={false} onChange={x=>x} size={Sizes.SMALL} />\n              </FlexItem>\n            </Flex>\n          </Margin>\n          <Separator />\n          <Margin size={{ top: Sizes.SMALL }}>\n            <Flex justify={FlexJustify.SPACE_BETWEEN}>\n              <FlexItem>\n                <Label>Third thing</Label>\n              </FlexItem>\n              <FlexItem>\n                <Toggle value={true} onChange={x=>x} size={Sizes.SMALL} />\n              </FlexItem>\n            </Flex>\n          </Margin>\n        </PanelSection>\n      </PanelBody>\n    } />\n</div>",
+    mdxType: "Playground"
+  }, index_es_p("div", {
+    style: {
+      maxWidth: 400
+    }
+  }, index_es_p(Panel["e" /* default */], {
+    body: index_es_p(Panel["a" /* PanelBody */], {
+      mdxType: "PanelBody"
+    }, index_es_p(Panel["d" /* PanelSection */], {
+      title: "Actions",
+      mdxType: "PanelSection"
+    }, index_es_p(Margin["a" /* default */], {
+      size: {
+        bottom: lib_base["d" /* Sizes */].SMALL
+      },
+      mdxType: "Margin"
+    }, index_es_p(Flex["c" /* default */], {
+      justify: Flex["b" /* FlexJustify */].SPACE_BETWEEN,
+      mdxType: "Flex"
+    }, index_es_p(Flex["a" /* FlexItem */], {
+      mdxType: "FlexItem"
+    }, index_es_p(Label["a" /* default */], {
+      mdxType: "Label"
+    }, "First thing")), index_es_p(Flex["a" /* FlexItem */], {
+      mdxType: "FlexItem"
+    }, index_es_p(Toggle["a" /* default */], {
+      value: true,
+      onChange: function onChange(x) {
+        return x;
+      },
+      size: lib_base["d" /* Sizes */].SMALL,
+      mdxType: "Toggle"
+    })))), index_es_p(Separator["a" /* default */], {
+      mdxType: "Separator"
+    }), index_es_p(Margin["a" /* default */], {
+      size: {
+        top: lib_base["d" /* Sizes */].SMALL,
+        bottom: lib_base["d" /* Sizes */].SMALL
+      },
+      mdxType: "Margin"
+    }, index_es_p(Flex["c" /* default */], {
+      justify: Flex["b" /* FlexJustify */].SPACE_BETWEEN,
+      mdxType: "Flex"
+    }, index_es_p(Flex["a" /* FlexItem */], {
+      mdxType: "FlexItem"
+    }, index_es_p(Label["a" /* default */], {
+      mdxType: "Label"
+    }, "Second thing")), index_es_p(Flex["a" /* FlexItem */], {
+      mdxType: "FlexItem"
+    }, index_es_p(Toggle["a" /* default */], {
+      value: false,
+      onChange: function onChange(x) {
+        return x;
+      },
+      size: lib_base["d" /* Sizes */].SMALL,
+      mdxType: "Toggle"
+    })))), index_es_p(Separator["a" /* default */], {
+      mdxType: "Separator"
+    }), index_es_p(Margin["a" /* default */], {
+      size: {
+        top: lib_base["d" /* Sizes */].SMALL
+      },
+      mdxType: "Margin"
+    }, index_es_p(Flex["c" /* default */], {
+      justify: Flex["b" /* FlexJustify */].SPACE_BETWEEN,
+      mdxType: "Flex"
+    }, index_es_p(Flex["a" /* FlexItem */], {
+      mdxType: "FlexItem"
+    }, index_es_p(Label["a" /* default */], {
+      mdxType: "Label"
+    }, "Third thing")), index_es_p(Flex["a" /* FlexItem */], {
+      mdxType: "FlexItem"
+    }, index_es_p(Toggle["a" /* default */], {
+      value: true,
+      onChange: function onChange(x) {
+        return x;
+      },
+      size: lib_base["d" /* Sizes */].SMALL,
+      mdxType: "Toggle"
+    })))))),
+    mdxType: "Panel"
+  }))));
+}
+separator_MDXContent.isMDXComponent = true;
+separator_MDXContent.__docgenInfo = {
+  "description": "",
+  "methods": [],
+  "displayName": "MDXContent"
+};
 // CONCATENATED MODULE: ./app/pages/components/index.js
 
 
@@ -74488,6 +75225,7 @@ toggle_MDXContent.__docgenInfo = {
 function components_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { components_defineProperty(target, key, source[key]); }); } return target; }
 
 function components_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -74541,7 +75279,8 @@ var components_components = {
   spinner: spinner_MDXContent,
   bigRadio: big_radio_MDXContent,
   bigCheckbox: big_checkbox_MDXContent,
-  toggle: toggle_MDXContent
+  toggle: toggle_MDXContent,
+  separator: separator_MDXContent
 };
 /* harmony default export */ var pages_components = (Object.keys(components_components).sort().reduce(function (memo, key) {
   return components_objectSpread({}, memo, components_defineProperty({}, key, components_components[key]));
@@ -75983,6 +76722,94 @@ multi_select_MDXContent.__docgenInfo = {
   "methods": [],
   "displayName": "MDXContent"
 };
+// CONCATENATED MODULE: ./app/pages/forms/countbox.mdx
+
+
+
+
+
+
+
+
+function countbox_extends() { countbox_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return countbox_extends.apply(this, arguments); }
+
+function countbox_objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = countbox_objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function countbox_objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+/* @jsx mdx */
+
+
+/* @jsx mdx */
+
+
+
+
+
+var countbox_makeShortcode = function makeShortcode(name) {
+  return function MDXDefaultShortcode(props) {
+    console.warn("Component " + name + " was not imported, exported, or provided by MDXProvider as global scope");
+    return index_es_p("div", props);
+  };
+};
+
+var countbox_layoutProps = {};
+var countbox_MDXLayout = "wrapper";
+function countbox_MDXContent(_ref) {
+  var components = _ref.components,
+      props = countbox_objectWithoutProperties(_ref, ["components"]);
+
+  return index_es_p(countbox_MDXLayout, countbox_extends({}, countbox_layoutProps, props, {
+    components: components,
+    mdxType: "MDXLayout"
+  }), index_es_p("h1", null, "Countbox"), index_es_p("p", null, "Used in forms to set a numerical value to a field. You can also type directly in the input but only positive and negative integers."), index_es_p(components_Playground, {
+    __position: 0,
+    __code: "<Playground component={Countbox}>\n  <ControlledField style={{ width: 300 }} component={\n    <Countbox placeholder=\"Number of things\" value=\"\" onChange={x=>x} />\n  } />\n</Playground>",
+    component: Countbox["a" /* default */],
+    mdxType: "Playground"
+  }, index_es_p(utils_ControlledField, {
+    style: {
+      width: 300
+    },
+    component: index_es_p(Countbox["a" /* default */], {
+      placeholder: "Number of things",
+      value: "",
+      onChange: function onChange(x) {
+        return x;
+      },
+      mdxType: "Countbox"
+    }),
+    mdxType: "ControlledField"
+  })), index_es_p("p", null, "You can also use a custom ", index_es_p("inlineCode", {
+    parentName: "p"
+  }, "renderValue"), " function to customize the way the value is displayed"), index_es_p(components_Playground, {
+    __position: 1,
+    __code: "<ControlledField style={{ width: 300 }} component={\n  <Countbox renderValue={(v) => v + ' \u20AC HTVA'} placeholder=\"Price HTVA\" value={0} onChange={x=>x} />\n} />",
+    mdxType: "Playground"
+  }, index_es_p(utils_ControlledField, {
+    style: {
+      width: 300
+    },
+    component: index_es_p(Countbox["a" /* default */], {
+      renderValue: function renderValue(v) {
+        return v + ' € HTVA';
+      },
+      placeholder: "Price HTVA",
+      value: 0,
+      onChange: function onChange(x) {
+        return x;
+      },
+      mdxType: "Countbox"
+    }),
+    mdxType: "ControlledField"
+  })));
+}
+countbox_MDXContent.isMDXComponent = true;
+countbox_MDXContent.__docgenInfo = {
+  "description": "",
+  "methods": [],
+  "displayName": "MDXContent"
+};
 // CONCATENATED MODULE: ./app/pages/forms/index.js
 
 
@@ -76006,6 +76833,7 @@ function forms_defineProperty(obj, key, value) { if (key in obj) { Object.define
 
 
 
+
 var forms_components = {
   select: select_MDXContent,
   index: forms_MDXContent,
@@ -76013,7 +76841,8 @@ var forms_components = {
   checkbox: checkbox_MDXContent,
   radioGroup: radio_group_MDXContent,
   searchInput: search_input_MDXContent,
-  multiSelect: multi_select_MDXContent
+  multiSelect: multi_select_MDXContent,
+  countbox: countbox_MDXContent
 };
 /* harmony default export */ var pages_forms = (Object.keys(forms_components).sort().reduce(function (memo, key) {
   return forms_objectSpread({}, memo, forms_defineProperty({}, key, forms_components[key]));
