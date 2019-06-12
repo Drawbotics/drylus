@@ -1,0 +1,13 @@
+import { Countbox } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+import { ControlledField } from '../utils';
+
+
+# Checkbox
+
+<Playground component={Countbox}>
+  <ControlledField style={{ width: 300 }} component={
+    <Countbox placeholder="Number of things" value="" onChange={x=>x} />
+  } />
+</Playground>
