@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
-import Input from './Input';
+import { InputWithRef } from './Input';
 import Icon from '../components/Icon';
 
 
 const styles = {
   root: css`
+    position: relative;
     display: inline-block;
     width: 100%;
 
@@ -65,6 +66,22 @@ const styles = {
       }
     }
   `,
+  renderedValue: css`
+    position: absolute;
+    top: 12px;
+    left: ${sv.marginSmall};
+    z-index: 9;
+    color: red;
+    letter-spacing: normal;
+    white-space: nowrap;
+    max-width: calc(100% - 65px);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: ${sv.colorSecondary};
+  `,
+  value: css`
+    color: ${sv.colorPrimary};
+  `,
 };
 
 
@@ -77,13 +94,20 @@ const Countbox = ({
   error,
   valid,
   renderValue,
+  max,
+  min,
 }) => {
+  const inputRef = useRef(null);
+
   const handleInputOnChange = (v) => {
+    const numericalValue = Number(v);
+
     if (v === '-' || v === '') {
       onChange(v);
     }
-    else if (Number(v) === 0 || Number(v)) {
-      onChange(Number(v));
+    else if (numericalValue === 0 || numericalValue) {
+      const finalValue = numericalValue > max ? max : (numericalValue < min ? min : numericalValue);
+      onChange(finalValue);
     }
   };
 
@@ -93,22 +117,39 @@ const Countbox = ({
     console.warn('Only numbers allowed as value for Countbox');
   }
 
+  if (inputRef.current && renderValue) {
+    inputRef.current.style.color = 'transparent';
+  }
+
   return (
     <div className={styles.root}>
-      <Input
+      {do {
+        if (renderValue && (value === 0 || value)) {
+          const sections = renderValue(value).split(value);
+          return (
+            <span className={styles.renderedValue}>
+              <span>{sections[0]}</span>
+              <span className={styles.value}>{value}</span>
+              <span>{sections[1]}</span>
+            </span>
+          );
+        }
+      }}
+      <InputWithRef
+        ref={inputRef}
         error={error}
         hint={hint}
         valid={valid}
         onChange={handleInputOnChange}
         disabled={disabled}
         placeholder={placeholder}
-        value={renderValue(value)}
+        value={value}
         suffix={
           <div className={cx(styles.buttons, { [styles.disabled]: disabled })}>
-            <button className={styles.button} onClick={() => disabled ? null : onChange((value || 0) + 1)}>
+            <button className={styles.button} onClick={() => ! disabled && value < max ? onChange((value || 0) + 1) : null}>
               <Icon name="plus" bold />
             </button>
-            <button className={styles.button} onClick={() => disabled ? null : onChange((value || 0) - 1)}>
+            <button className={styles.button} onClick={() => ! disabled && value > min ? onChange((value || 0) - 1) : null}>
               <Icon name="minus" bold />
             </button>
           </div>
@@ -145,11 +186,18 @@ Countbox.propTypes = {
 
   /** Use if you want to modify the way you display the value (string operations only) */
   renderValue: PropTypes.func,
+
+  /** Limits the max value */
+  max: PropTypes.number,
+
+  /** Limits the min value */
+  min: PropTypes.number,
 };
 
 
 Countbox.defaultProps = {
-  renderValue: x=>x,
+  min: -Infinity,
+  max: Infinity,
 };
 
 

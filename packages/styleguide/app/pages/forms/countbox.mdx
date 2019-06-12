@@ -4,10 +4,20 @@ import Playground from '~/components/Playground';
 import { ControlledField } from '../utils';
 
 
-# Checkbox
+# Countbox
+Used in forms to set a numerical value to a field. You can also type directly in the input but only positive and negative integers.
 
 <Playground component={Countbox}>
   <ControlledField style={{ width: 300 }} component={
     <Countbox placeholder="Number of things" value="" onChange={x=>x} />
+  } />
+</Playground>
+
+
+You can also use a custom `renderValue` function to customize the way the value is displayed
+
+<Playground>
+  <ControlledField style={{ width: 300 }} component={
+    <Countbox renderValue={(v) => v + ' € HTVA'} placeholder="Price HTVA" value={0} onChange={x=>x} />
   } />
 </Playground>
