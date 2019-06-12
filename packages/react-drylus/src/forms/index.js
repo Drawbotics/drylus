@@ -5,3 +5,4 @@ export RadioGroup from './RadioGroup';
 export SearchInput from './SearchInput';
 export MultiSelect from './MultiSelect';
 export Countbox from './Countbox';
+export DatePicker from './DatePicker';

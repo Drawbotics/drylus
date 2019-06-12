@@ -6,6 +6,7 @@ import radioGroup from './radio-group';
 import searchInput from './search-input';
 import multiSelect from './multi-select';
 import countbox from './countbox';
+import datePicker from './date-picker';
 
 
 const components = {
@@ -17,6 +18,7 @@ const components = {
   searchInput,
   multiSelect,
   countbox,
+  datePicker,
 };
 
 

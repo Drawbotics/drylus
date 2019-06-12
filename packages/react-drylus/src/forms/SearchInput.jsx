@@ -70,6 +70,7 @@ const SearchInput = ({
             leading={isLoading ? <Spinner size={Sizes.SMALL} /> : <Icon name="search" />}
             onClick={() => inputRef.current.focus()} />
         }
+        value={value}
         onChange={onChange}
         ref={inputRef}
         onFocus={() => setFocused(true)}

@@ -128,6 +128,8 @@ const styles = {
     select, button {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
+      border-top-right-radius: ${sv.defaultBorderRadius};
+      border-bottom-right-radius: ${sv.defaultBorderRadius};
     }
     select {
       background-color: transparent;
@@ -254,7 +256,7 @@ Input.propTypes = {
   hint: PropTypes.string,
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  error: PropTypes.oneOfType([ PropTypes.string, PropTypes.bool ]),
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid: PropTypes.bool,
