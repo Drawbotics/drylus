@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/icons",
-  "version": "0.1.3-alpha.11",
+  "version": "0.1.3-alpha.12",
   "description": "Drawbotics Icons Collection",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "https://github.com/Drawbotics/drylus#readme",
@@ -18,6 +18,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "57e9ffb75461ca23beaed3e245ad4f900be602a6",
-  "dependencies": {}
+  "gitHead": "57e9ffb75461ca23beaed3e245ad4f900be602a6"
 }
