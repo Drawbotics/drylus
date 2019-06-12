@@ -5,6 +5,7 @@ import checkbox from './checkbox';
 import radioGroup from './radio-group';
 import searchInput from './search-input';
 import multiSelect from './multi-select';
+import countbox from './countbox';
 
 
 const components = {
@@ -15,6 +16,7 @@ const components = {
   radioGroup,
   searchInput,
   multiSelect,
+  countbox,
 };
 
 

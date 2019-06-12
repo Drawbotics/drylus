@@ -19,7 +19,7 @@ const styles = {
   `,
   outerWrapper: css`
     display: flex;
-    align-items: center;
+    align-items: stretch;
   `,
   innerWrapper: css`
     position: relative;
@@ -33,11 +33,11 @@ const styles = {
     border: none;
     border-radius: ${sv.defaultBorderRadius};
     appearance: button;
-    width: 100%;
     outline: none !important;
     box-shadow: inset 0px 0px 0px 1px ${sv.azure};
     transition: ${sv.defaultTransition};
     z-index: 1;
+    width: 100%;
 
     &::placeholder {
       color: ${sv.colorSecondary};
@@ -153,7 +153,7 @@ const Input = ({
   inputRef,
   ...rest,
 }) => {
-  const [isFocused, setFocused] = useState(false);
+  const [ isFocused, setFocused ] = useState(false);
 
   const handleOnChange = (e) => onChange ? onChange(e.target.value, e.target.name) : null;
 
@@ -161,30 +161,32 @@ const Input = ({
   const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
   return (
     <div className={cx(styles.root, {
-      [styles.error]: error,
       [styles.valid]: Boolean(value) && valid,
+      [styles.error]: error,
     })}>
       <div className={styles.outerWrapper}>
         {do{
           if (prefix) {
-            <div className={cx(styles.fix, styles.prefix, {
-              [styles.prefixComponent]: isPrefixComponent,
-              [styles.transparentButton]: ! prefix?.props?.category,
-            })}>
+            <div
+              data-element="prefix"
+              className={cx(styles.fix, styles.prefix, {
+                [styles.prefixComponent]: isPrefixComponent,
+                [styles.transparentButton]: ! prefix?.props?.category,
+              })}>
               {prefix}
             </div>
           }
         }}
         <div className={styles.innerWrapper}>
           {do{
-            if (Boolean(value) && valid) {
-              <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
-                <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
-              </div>
-            }
-            else if (error) {
+            if (error) {
               <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
                 <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
+              </div>
+            }
+            else if (Boolean(value) && valid) {
+              <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
+                <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
               </div>
             }
           }}
@@ -203,10 +205,12 @@ const Input = ({
         </div>
         {do{
           if (suffix) {
-            <div className={cx(styles.fix, styles.suffix, {
-              [styles.suffixComponent]: isSuffixComponent,
-              [styles.transparentButton]: ! suffix?.props?.category,
-            })}>
+            <div
+              data-element="suffix"
+              className={cx(styles.fix, styles.suffix, {
+                [styles.suffixComponent]: isSuffixComponent,
+                [styles.transparentButton]: ! suffix?.props?.category,
+              })}>
               {suffix}
             </div>
           }
@@ -235,9 +239,9 @@ InputWithRef.displayName = 'Input';
 
 Input.propTypes = {
   /** Value displayed in the field */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired,
 
-  /** Disables the select */
+  /** Disables the input */
   disabled: PropTypes.bool,
 
   /** Text shown when no value is active */

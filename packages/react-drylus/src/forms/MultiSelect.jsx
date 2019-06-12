@@ -196,18 +196,18 @@ const MultiSelect = ({
     <div
       className={cx(styles.root, {
         [styles.disabled]: disabled,
-        [styles.error]: error,
         [styles.valid]: values?.length > 0 && valid,
+        [styles.error]: error,
       })} ref={rootRef}>
       {do{
-        if (values?.length > 0 && valid) {
-          <div className={styles.icon}>
-            <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
-          </div>
-        }
-        else if (error) {
+        if (error) {
           <div className={styles.icon}>
             <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
+          </div>
+        }
+        else if (values?.length > 0 && valid) {
+          <div className={styles.icon}>
+            <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
           </div>
         }
       }}

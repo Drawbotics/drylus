@@ -97,18 +97,18 @@ const Select = ({
   return (
     <div className={cx(styles.root, {
       [styles.disabled]: disabled,
+      [styles.valid]: Boolean(value) && valid,
       [styles.error]: error,
-      [styles.valid]: !! value && valid,
     })}>
       {do{
-        if (value && valid) {
-          <div className={styles.icon}>
-            <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
-          </div>
-        }
-        else if (error) {
+        if (error) {
           <div className={styles.icon}>
             <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
+          </div>
+        }
+        else if (value && valid) {
+          <div className={styles.icon}>
+            <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
           </div>
         }
       }}
