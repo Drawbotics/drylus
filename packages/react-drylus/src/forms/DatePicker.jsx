@@ -149,9 +149,9 @@ const DatePicker = ({
   const inputRef = useRef(null);
   const rootRef = useRef(null);
 
-  const handleDocumentClick = (e) => ! rootRef.current.contains(e.target) ? setFocused(false) : null;
-
   useEffect(() => {
+    const handleDocumentClick = (e) => ! rootRef.current.contains(e.target) ? setFocused(false) : null;
+
     rootRef.current.addEventListener('mousedown', () => setCanBlur(false));
     rootRef.current.addEventListener('mouseup', () => setCanBlur(true));
     document.addEventListener('mousedown', handleDocumentClick);
