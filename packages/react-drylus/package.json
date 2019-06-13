@@ -14,6 +14,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@drawbotics/enums": "^0.2.0",
     "@drawbotics/icons": "file:../icons",
     "core-js": "^2.6.5",
     "emotion": "^10.0.9",

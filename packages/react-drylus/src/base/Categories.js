@@ -1,10 +1,13 @@
-const Categories = {
-  BRAND: 'BRAND',
-  SUCCESS: 'SUCCESS',
-  INFO: 'INFO',
-  WARNING: 'WARNING',
-  DANGER: 'DANGER',
-};
+import Enum from '@drawbotics/enums';
+
+
+const Categories = new Enum(
+  'BRAND',
+  'SUCCESS',
+  'INFO',
+  'WARNING',
+  'DANGER',
+);
 
 
 export default Categories;

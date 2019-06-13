@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import Hint from './Hint';
 import Icon from '../components/Icon';
 import { Sizes } from '../base';
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -149,7 +150,7 @@ const Checkbox = ({
   return (
     <div className={styles.root}>
       <label className={cx(styles.wrapper, {
-        [styles[size?.toLowerCase()]]: size,
+        [styles[getEnumAsClass(size)]]: size,
         [styles.disabled]: disabled,
         [styles.error]: error,
       })} htmlFor={uniqId}>

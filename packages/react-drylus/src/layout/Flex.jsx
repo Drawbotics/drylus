@@ -3,8 +3,10 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import camelCase from 'lodash/camelCase';
 import sv from '@drawbotics/style-vars';
+import Enum from '@drawbotics/enums';
 
 import Sizes from '../base/Sizes';
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -115,28 +117,28 @@ const styles = {
 };
 
 
-export const FlexDirections = {
-  HORIZONTAL: 'HORIZONTAL',
-  VERTICAL: 'VERTICAL',
-};
+export const FlexDirections = new Enum(
+  'HORIZONTAL',
+  'VERTICAL',
+);
 
 
-export const FlexJustify = {
-  START: 'START',
-  END: 'END',
-  CENTER: 'CENTER',
-  SPACE_AROUND: 'SPACE_AROUND',
-  SPACE_BETWEEN: 'SPACE_BETWEEN',
-  SPACE_EVENLY: 'SPACE_EVENLY',
-};
+export const FlexJustify = new Enum(
+  'START',
+  'END',
+  'CENTER',
+  'SPACE_AROUND',
+  'SPACE_BETWEEN',
+  'SPACE_EVENLY',
+);
 
 
-export const FlexAlign = {
-  STRETCH: 'STRETCH',
-  START: 'START',
-  END: 'END',
-  CENTER: 'CENTER',
-};
+export const FlexAlign = new Enum(
+  'STRETCH',
+  'START',
+  'END',
+  'CENTER',
+);
 
 
 function prefixFlex(value) {
@@ -181,12 +183,12 @@ const Flex = ({
 }) => {
   return (
     <div className={cx(styles.root, {
-      [styles[direction.toLowerCase()]]: direction,
-      [styles[camelCase(`JUSTIFY_${justify}`)]]: justify,
-      [styles[camelCase(`ALIGN_${align}`)]]: align,
+      [styles[getEnumAsClass(direction)]]: direction,
+      [styles[camelCase(`JUSTIFY_${justify?.description}`)]]: justify,
+      [styles[camelCase(`ALIGN_${align?.description}`)]]: align,
       [styles.wrap]: wrap,
-      [styles[camelCase(`hSpacing${hSpacing}`)]]: hSpacing,
-      [styles[camelCase(`vSpacing${vSpacing}`)]]: vSpacing,
+      [styles[camelCase(`hSpacing${hSpacing?.description}`)]]: hSpacing,
+      [styles[camelCase(`vSpacing${vSpacing?.description}`)]]: vSpacing,
     }, className)} styles={extraStyles}>
       {children}
     </div>

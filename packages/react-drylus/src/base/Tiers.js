@@ -1,5 +1,11 @@
-export default {
-  PRIMARY: 'PRIMARY',
-  SECONDARY: 'SECONDARY',
-  TERTIARY: 'TERTIARY',
-};
+import Enum from '@drawbotics/enums';
+
+
+const Tiers = new Enum(
+  'PRIMARY',
+  'SECONDARY',
+  'TERTIARY',
+);
+
+
+export default Tiers;

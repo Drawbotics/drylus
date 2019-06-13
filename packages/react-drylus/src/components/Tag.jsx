@@ -5,6 +5,7 @@ import sv from '@drawbotics/style-vars';
 
 import Categories from '../base/Categories';
 import Icon from './Icon';
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -58,7 +59,7 @@ const Tag = ({
 }) => {
   return (
     <div className={cx(styles.root, {
-      [styles[category?.toLowerCase()]]: category,
+      [styles[getEnumAsClass(category)]]: category,
       [styles.inversed]: inversed,
     })}>
       {children}

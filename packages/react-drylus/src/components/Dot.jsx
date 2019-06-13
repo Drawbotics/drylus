@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
 import Categories from '../base/Categories';
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -35,7 +36,7 @@ const styles = {
 const Dot = ({ category }) => {
   return (
     <div className={cx(styles.root, {
-      [styles[category?.toLowerCase()]]: category,
+      [styles[getEnumAsClass(category)]]: category,
     })} />
   );
 };

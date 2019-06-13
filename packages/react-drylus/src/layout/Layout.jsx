@@ -1,6 +1,9 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
+import Enum from '@drawbotics/enums';
+
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -77,12 +80,12 @@ const styles = {
 };
 
 
-export const LayoutPositions = {
-  LEFT: 'LEFT',
-  RIGHT: 'RIGHT',
-  BOTTOM: 'BOTTOM',
-  TOP: 'TOP',
-};
+export const LayoutPositions = new Enum(
+  'LEFT',
+  'RIGHT',
+  'BOTTOM',
+  'TOP',
+);
 
 
 const Layout = ({
@@ -93,7 +96,7 @@ const Layout = ({
 }) => {
   return (
     <div data-element="layout" className={cx(styles.layout, {
-      [styles[position.toLowerCase()]]: position,
+      [styles[getEnumAsClass(position)]]: position,
     })}>
       <div className={styles.bar} data-element="layout-bar">{bar}</div>
       <div className={cx(styles.content, { [styles.scrollable]: fixed })} data-element="layout-content">{children}</div>
@@ -110,7 +113,12 @@ Layout.propTypes = {
   bar: PropTypes.node.isRequired,
 
   /** Determines on which side of the layout the bar component will be shown */
-  position: PropTypes.oneOf(Object.keys(LayoutPositions)).isRequired,
+  position: PropTypes.oneOf([
+    LayoutPositions.LEFT,
+    LayoutPositions.RIGHT,
+    LayoutPositions.TOP,
+    LayoutPositions.BOTTOM,
+  ]).isRequired,
 
   /** If true the component will be fixed in place, and the children will scroll independently */
   fixed: PropTypes.bool,

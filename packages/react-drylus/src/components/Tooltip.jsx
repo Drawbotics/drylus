@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
+import Enum from '@drawbotics/enums';
 
 
 const styles = {
@@ -79,12 +80,12 @@ const styles = {
 };
 
 
-export const TooltipSides = {
-  TOP: 'TOP',
-  LEFT: 'LEFT',
-  BOTTOM: 'BOTTOM',
-  RIGHT: 'RIGHT',
-};
+export const TooltipSides = new Enum(
+  'TOP',
+  'LEFT',
+  'BOTTOM',
+  'RIGHT',
+);
 
 
 function useRect() {

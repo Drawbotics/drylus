@@ -4,6 +4,7 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 
 import { Categories, Sizes } from '../base';
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -74,8 +75,8 @@ const Avatar = ({
   const customSize = typeof size === 'number';
   return (
     <div className={cx(styles.root, {
-      [styles[category?.toLowerCase()]]: category,
-      [styles[! customSize && size?.toLowerCase()]]: size,
+      [styles[getEnumAsClass(category)]]: category,
+      [styles[! customSize && getEnumAsClass(size)]]: size,
       [styles.customBackground]: backgroundColor,
     })} style={{
       backgroundColor,

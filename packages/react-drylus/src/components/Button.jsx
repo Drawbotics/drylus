@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
 import { Categories, Sizes, Tiers } from '../base';
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -191,11 +192,11 @@ const Button = ({
     <button
       onClick={onClick}
       className={cx(styles.root, {
-        [styles[size?.toLowerCase()]]: size,
-        [styles[tier?.toLowerCase()]]: tier,
+        [styles[getEnumAsClass(size)]]: size,
+        [styles[getEnumAsClass(tier)]]: tier,
         [styles.round]: round,
         [styles.roundSmall]: round && size === Sizes.SMALL,
-        [styles[category?.toLowerCase()]]: category && tier === Tiers.PRIMARY,
+        [styles[getEnumAsClass(category)]]: category && tier === Tiers.PRIMARY,
         [styles.fullWidth]: fullWidth,
       })}
       disabled={disabled}>

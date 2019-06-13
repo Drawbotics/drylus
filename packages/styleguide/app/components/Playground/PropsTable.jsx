@@ -8,6 +8,9 @@ import {
   Panel,
   PanelBody,
   PanelSection,
+  Sizes,
+  Tiers,
+  Categories,
 } from '@drawbotics/react-drylus';
 
 import Prop from './Prop';
@@ -20,7 +23,7 @@ function getProps(Component) {
 }
 
 
-const PropsTable = ({ component, onChange, activeProps }) => {
+const PropsTable = ({ component, onChange, activeProps, enums }) => {
   const props = getProps(component);
   return (
     <Panel
@@ -58,6 +61,7 @@ const PropsTable = ({ component, onChange, activeProps }) => {
                       {do{
                         if (activeProps) {
                           <Prop
+                            enums={{ ...enums, Categories, Sizes, Tiers }}
                             name={key}
                             prop={props[key]}
                             value={activeProps[key]}
