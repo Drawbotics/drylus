@@ -139,6 +139,9 @@ const DatePicker = ({
   disabled,
   placeholder,
   options,
+  valid,
+  hint,
+  error,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
   const [ canBlur, setCanBlur ] = useState(true);
@@ -170,9 +173,14 @@ const DatePicker = ({
       <InputWithRef
         suffix={
           <Button
+            disabled={disabled}
             leading={<Icon name="calendar" />}
             onClick={() => inputRef.current.focus()} />
         }
+        disabled={disabled}
+        valid={valid}
+        error={error}
+        hint={hint}
         value={inputValue}
         onChange={x=>x}
         ref={inputRef}
