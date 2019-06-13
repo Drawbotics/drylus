@@ -17,6 +17,7 @@
     "@drawbotics/icons": "file:../icons",
     "core-js": "^2.6.5",
     "emotion": "^10.0.9",
+    "react-calendar": "^2.19.0",
     "react-transition-group": "^4.0.1",
     "uuid": "^3.3.2"
   },

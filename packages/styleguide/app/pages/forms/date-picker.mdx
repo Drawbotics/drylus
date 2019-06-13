@@ -1,0 +1,15 @@
+import { DatePicker } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+import { ControlledField } from '../utils';
+
+
+# Date Picker
+
+<Playground component={DatePicker}>
+  <div style={{ maxWidth: 300, height: 300 }}>
+    <ControlledField initialValue={null} component={
+      <DatePicker placeholder="Pick a date..." onChange={x=>x} />
+    } />
+  </div>
+</Playground>
