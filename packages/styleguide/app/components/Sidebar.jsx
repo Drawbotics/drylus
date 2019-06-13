@@ -5,8 +5,6 @@ import omit from 'lodash/omit';
 import startCase from 'lodash/startCase';
 import kebabCase from 'lodash/kebabCase';
 
-import { Tooltip } from '@drawbotics/react-drylus';
-
 import Link from './Link';
 
 
@@ -70,9 +68,7 @@ export function generateLinks(route, routeName, parent='') {
   else {
     return (
       <div className={styles.link} key={cleaned}>
-        <Tooltip message={routeName}>
-          <Link href={cleaned}>{startCase(routeName)}</Link>
-        </Tooltip>
+        <Link href={cleaned}>{startCase(routeName)}</Link>
       </div>
     );
   }
