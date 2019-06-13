@@ -205,7 +205,10 @@ const DatePicker = ({
 
 DatePicker.propTypes = {
   /** Should be given in a UTC format */
-  value: PropTypes.instanceOf(Date),
+  value: PropTypes.oneOfType([
+    PropTypes.instanceOf(Date),
+    PropTypes.oneOf(['']),
+  ]),
 
   /** Triggered when the date is chosen from the calendar */
   onChange: PropTypes.func.isRequired,
