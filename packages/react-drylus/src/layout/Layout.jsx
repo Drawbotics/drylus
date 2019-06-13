@@ -16,7 +16,7 @@ const styles = {
       grid-column: 1;
       grid-row: 1;
     }
-    > [data-element="content"] {
+    > [data-element="layout-content"] {
       grid-column: 1;
       grid-row: 2;
     }
@@ -28,7 +28,7 @@ const styles = {
       grid-column: 1;
       grid-row: 2;
     }
-    > [data-element="content"] {
+    > [data-element="layout-content"] {
       grid-column: 1;
       grid-row: 1;
     }
@@ -40,7 +40,7 @@ const styles = {
       grid-column: 2;
       grid-row: 1;
     }
-    > [data-element="content"] {
+    > [data-element="layout-content"] {
       grid-column: 1;
       grid-row: 1;
     }
@@ -52,7 +52,7 @@ const styles = {
       grid-column: 1;
       grid-row: 1;
     }
-    > [data-element="content"] {
+    > [data-element="layout-content"] {
       grid-column: 2;
       grid-row: 1;
     }
@@ -96,7 +96,7 @@ const Layout = ({
       [styles[position.toLowerCase()]]: position,
     })}>
       <div className={styles.bar} data-element="bar">{bar}</div>
-      <div className={cx(styles.content, { [styles.scrollable]: fixed })} data-element="content">{children}</div>
+      <div className={cx(styles.content, { [styles.scrollable]: fixed })} data-element="layout-content">{children}</div>
     </div>
   );
 };

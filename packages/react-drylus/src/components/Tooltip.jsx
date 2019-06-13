@@ -19,7 +19,8 @@ const styles = {
     max-width: 300px;
     text-align: center;
     transform: translate(0, -5px);
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    transition: transform ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve},
+                opacity ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
 
     &::after {
       content: ' ';
@@ -168,19 +169,26 @@ const Tooltip = ({ children, message, side }) => {
     };
   }, []);
 
-  const handleMouseEnter = () => {
-    setVisible(true);
-  }
-
-  const handleMouseLeave = () => setVisible(false);
-
   useEffect(() => {
+    const handleMouseEnter = () => {
+      setVisible(true);
+    }
+
+    const handleMouseLeave = () => setVisible(false);
+
+    const layoutContent = document.querySelector('[data-element="layout-content"]');
+
+    window.addEventListener('scroll', handleMouseLeave);
+    layoutContent?.addEventListener('scroll', handleMouseLeave);
+
     if (childrenRef.current) {
       childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
       childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
     }
 
     return () => {
+      window.removeEventListener('scroll', handleMouseLeave);
+      layoutContent?.removeEventListener('scroll', handleMouseLeave);
       childrenRef.current.removeEventListener('mouseover', handleMouseEnter);
       childrenRef.current.removeEventListener('mouseleave', handleMouseLeave);
     };
