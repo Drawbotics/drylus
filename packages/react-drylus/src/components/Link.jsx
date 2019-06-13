@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
 import { Categories } from '../base';
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -77,7 +78,7 @@ const Link = ({
   ...rest,
 }) => {
   const className = cx(styles.root, {
-    [styles[category?.toLowerCase()]]: category,
+    [styles[getEnumAsClass(category)]]: category,
     [styles.underlinedHover]: underlined === LinkUnderlined.HOVER,
     [styles.underlinedAlways]: underlined === LinkUnderlined.ALWAYS,
   });

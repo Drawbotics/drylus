@@ -36,6 +36,7 @@ const Prop = ({
   prop,
   value,
   onChange,
+  enums,
 }) => {
   const { name: type } = prop.type;
   const propWithKey = { ...prop, key: name };
@@ -46,7 +47,7 @@ const Prop = ({
       );
     case 'enum':
       return (
-        <SelectProp prop={propWithKey} value={value} onChange={onChange} />
+        <SelectProp prop={propWithKey} value={value} onChange={onChange} enums={enums} />
       );
     case 'string':
       return (

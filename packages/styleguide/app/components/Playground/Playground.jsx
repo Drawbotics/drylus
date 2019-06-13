@@ -84,7 +84,7 @@ function getMarkupForMode(mode, component) {
 const supportedModes = ['react', 'vanilla'];
 
 
-const Playground = ({ component, children, mode, __code }) => {
+const Playground = ({ component, children, mode, __code, enums }) => {
   const [props, setProps] = useState({});
   const [codeOpen, setCodeOpen] = useState(false);
   const [activeMode, setMode] = useState(supportedModes[0]);
@@ -116,6 +116,7 @@ const Playground = ({ component, children, mode, __code }) => {
         if (component) {
           <div className={styles.table}>
             <PropsTable
+              enums={enums}
               component={component}
               activeProps={props}
               onChange={(v, n) => v === '_empty' || v === '' ? setProps(omit(props, n)) : setProps({ ...props, [n]: v })} />

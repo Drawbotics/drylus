@@ -1,4 +1,13 @@
-export function normalizeValue(v) {
+import get from 'lodash/get';
+
+
+export function normalizeValue(v, enums) {
+  const asSymbol = get(enums, v);
+
+  if (asSymbol) {
+    return asSymbol;
+  }
+
   if (v.includes("'") || v === '_empty') {
     return v.replace(/'/g, '');
   }
@@ -9,5 +18,5 @@ export function normalizeValue(v) {
 
 
 export function displayValue(v) {
-  return v.split(/[.]/).pop().replace(/'/g, '');
+  return v;
 }

@@ -97,12 +97,12 @@ const Margin = ({
   const isUniform = typeof size !== 'object';
   return (
     <div className={cx(styles.root, {
-      [styles[camelCase(size)]]: isUniform && size,
+      [styles[camelCase(size.description)]]: isUniform && size,
       [styles.resetMargin]: ! isUniform,
-      [styles[camelCase(`${size?.left}_LEFT`)]]: ! isUniform && size?.left,
-      [styles[camelCase(`${size?.right}_RIGHT`)]]: ! isUniform && size?.right,
-      [styles[camelCase(`${size?.top}_TOP`)]]: ! isUniform && size?.top,
-      [styles[camelCase(`${size?.bottom}_BOTTOM`)]]: ! isUniform && size?.bottom,
+      [styles[camelCase(`${size?.left?.description}_LEFT`)]]: ! isUniform && size?.left,
+      [styles[camelCase(`${size?.right?.description}_RIGHT`)]]: ! isUniform && size?.right,
+      [styles[camelCase(`${size?.top?.description}_TOP`)]]: ! isUniform && size?.top,
+      [styles[camelCase(`${size?.bottom?.description}_BOTTOM`)]]: ! isUniform && size?.bottom,
     })} style={style}>
       {children}
     </div>

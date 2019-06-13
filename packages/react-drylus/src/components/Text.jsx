@@ -4,6 +4,7 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 
 import { Tiers, Sizes, Categories } from '../base';
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -87,7 +88,7 @@ const Text = ({
       [styles.small]: size === Sizes.SMALL,
       [styles.default]: size === Sizes.DEFAULT,
       [styles.large]: size === Sizes.LARGE,
-      [styles[category?.toLowerCase()]]: category && ! disabled && ! inversed,
+      [styles[getEnumAsClass(category)]]: category && ! disabled && ! inversed,
     })}>
       {children}
     </span>

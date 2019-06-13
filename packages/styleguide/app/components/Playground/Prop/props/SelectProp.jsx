@@ -8,14 +8,16 @@ const SelectProp = ({
   prop,
   value,
   onChange,
+  enums,
 }) => {
   const { key, type } = prop;
   const { value: values } = type;
+  const finalValue = (values[0].value.split('.')[0] || '') + '.' + (value?.description || value);
   return (
     <div>
       <Select
         name={key}
-        value={value || '_empty'}
+        value={value ? finalValue : '_empty'}
         options={[ {
           label: 'none',
           value: '_empty',
@@ -23,7 +25,7 @@ const SelectProp = ({
           label: displayValue(v.value),
           value: displayValue(v.value),
         }))]}
-        onChange={(v, k) => onChange(normalizeValue(v), k)} />
+        onChange={(v, k) => onChange(normalizeValue(v, enums), k)} />
     </div>
   );
 }

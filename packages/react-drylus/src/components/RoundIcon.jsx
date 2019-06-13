@@ -5,6 +5,7 @@ import sv from '@drawbotics/style-vars';
 
 import Icon from './Icon';
 import { Categories, Sizes } from '../base';
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -73,8 +74,8 @@ const RoundIcon = ({ name, size, category }) => {
   const customSize = typeof size === 'number';
   return (
     <div className={cx(styles.root, {
-      [styles[category?.toLowerCase()]]: category,
-      [styles[! customSize && size?.toLowerCase()]]: size,
+      [styles[getEnumAsClass(category)]]: category,
+      [styles[! customSize && getEnumAsClass(size)]]: size,
       [styles.iconInherit]: customSize,
     })} style={customSize ? { height: size, width: size, fontSize: size * 0.5 } : null}>
       <Icon name={name} bold />

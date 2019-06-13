@@ -6,7 +6,7 @@ import packageJson from '@drawbotics/icons/package.json';
 import sv from '@drawbotics/style-vars';
 
 import { Categories } from '../base';
-
+import { getEnumAsClass } from '../utils';
 import env from '../utils/get-static-env';
 
 
@@ -49,7 +49,7 @@ const Icon = ({ name, bold, onClick, category }) => {
   return (
     <i className={cx(styles.root, `Drycon Drycon-${name}`, {
       [styles.bold]: bold,
-      [styles[category?.toLowerCase()]]: category,
+      [styles[getEnumAsClass(category)]]: category,
       [styles.clickable]: onClick,
     })} onClick={onClick} />
   );
