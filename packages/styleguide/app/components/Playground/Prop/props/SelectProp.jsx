@@ -14,7 +14,7 @@ const SelectProp = ({
   const { value: values } = type;
   const finalValue = (values[0].value.split('.')[0] || '') + '.' + (value?.description || value);
   return (
-    <div>
+    <div style={{ minWidth: 200 }}>
       <Select
         name={key}
         value={value ? finalValue : '_empty'}
