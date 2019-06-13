@@ -208,7 +208,7 @@ DatePicker.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.instanceOf(Date),
     PropTypes.oneOf(['']),
-  ]),
+  ]).isRequired,
 
   /** Triggered when the date is chosen from the calendar */
   onChange: PropTypes.func.isRequired,
