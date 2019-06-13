@@ -12,7 +12,7 @@ const styles = {
   top: css`
     grid-template-rows: max-content minmax(0, 1fr);
 
-    > [data-element="bar"] {
+    > [data-element="layout-bar"] {
       grid-column: 1;
       grid-row: 1;
     }
@@ -24,7 +24,7 @@ const styles = {
   bottom: css`
     grid-template-rows: minmax(0, 1fr) max-content;
 
-    > [data-element="bar"] {
+    > [data-element="layout-bar"] {
       grid-column: 1;
       grid-row: 2;
     }
@@ -36,7 +36,7 @@ const styles = {
   right: css`
     grid-template-columns: minmax(0, 1fr) max-content;
 
-    > [data-element="bar"] {
+    > [data-element="layout-bar"] {
       grid-column: 2;
       grid-row: 1;
     }
@@ -48,7 +48,7 @@ const styles = {
   left: css`
     grid-template-columns: max-content minmax(0, 1fr);
 
-    > [data-element="bar"] {
+    > [data-element="layout-bar"] {
       grid-column: 1;
       grid-row: 1;
     }
@@ -95,7 +95,7 @@ const Layout = ({
     <div data-element="layout" className={cx(styles.layout, {
       [styles[position.toLowerCase()]]: position,
     })}>
-      <div className={styles.bar} data-element="bar">{bar}</div>
+      <div className={styles.bar} data-element="layout-bar">{bar}</div>
       <div className={cx(styles.content, { [styles.scrollable]: fixed })} data-element="layout-content">{children}</div>
     </div>
   );

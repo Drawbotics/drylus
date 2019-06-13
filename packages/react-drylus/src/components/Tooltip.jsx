@@ -7,7 +7,7 @@ import sv from '@drawbotics/style-vars';
 
 const styles = {
   root: css`
-    position: absolute;
+    position: fixed;
     padding: ${sv.paddingExtraSmall} ${sv.defaultPadding};
     background: ${sv.neutralDarkest};
     color: ${sv.colorPrimaryInverse};
@@ -174,23 +174,29 @@ const Tooltip = ({ children, message, side }) => {
       setVisible(true);
     }
 
-    const handleMouseLeave = () => setVisible(false);
+    const handleMouseLeave = () => {
+      setVisible(false);
+    };
 
     const layoutContent = document.querySelector('[data-element="layout-content"]');
-
-    window.addEventListener('scroll', handleMouseLeave);
-    layoutContent?.addEventListener('scroll', handleMouseLeave);
+    const layoutBar = document.querySelector('[data-element="layout-bar"]');
 
     if (childrenRef.current) {
       childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
       childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
+
+      window.addEventListener('scroll', handleMouseLeave);
+      layoutContent?.addEventListener('scroll', handleMouseLeave);
+      layoutBar?.addEventListener('scroll', handleMouseLeave);
     }
 
     return () => {
+      childrenRef.current?.removeEventListener('mouseenter', handleMouseEnter);
+      childrenRef.current?.removeEventListener('mouseleave', handleMouseLeave);
+
       window.removeEventListener('scroll', handleMouseLeave);
       layoutContent?.removeEventListener('scroll', handleMouseLeave);
-      childrenRef.current.removeEventListener('mouseover', handleMouseEnter);
-      childrenRef.current.removeEventListener('mouseleave', handleMouseLeave);
+      layoutBar?.removeEventListener('scroll', handleMouseLeave);
     };
   });
 

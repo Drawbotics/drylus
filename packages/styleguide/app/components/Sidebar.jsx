@@ -5,15 +5,16 @@ import omit from 'lodash/omit';
 import startCase from 'lodash/startCase';
 import kebabCase from 'lodash/kebabCase';
 
+import { Tooltip } from '@drawbotics/react-drylus';
+
 import Link from './Link';
 
 
 const styles = {
   sidebar: css`
-    height: 100%;
     background: ${sv.neutral};
     padding: ${sv.defaultPadding};
-    overflow-y: scroll;
+    flex: 1;
   `,
   links: css`
     margin-top: ${sv.defaultMargin};
@@ -69,7 +70,9 @@ export function generateLinks(route, routeName, parent='') {
   else {
     return (
       <div className={styles.link} key={cleaned}>
-        <Link href={cleaned}>{startCase(routeName)}</Link>
+        <Tooltip message={routeName}>
+          <Link href={cleaned}>{startCase(routeName)}</Link>
+        </Tooltip>
       </div>
     );
   }
