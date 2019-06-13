@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
+import getDevice from '@drawbotics/use-is-device/lib/get-device';
+
 
 import Tag from '../components/Tag';
 import RoundIcon from '../components/RoundIcon';
@@ -154,6 +156,7 @@ const MultiSelect = ({
   const rootRef = useRef();
   const [ isFocused, setFocused ] = useState(false);
   const [ canBlur, setCanBlur ] = useState(true);
+  const { isDesktop } = getDevice();
 
   const handleDocumentClick = (e) => ! rootRef.current.contains(e.target) ? setFocused(false) : null;
 
@@ -236,20 +239,24 @@ const MultiSelect = ({
           }
         }}
       </div>
-      <div className={cx(styles.options, {
-        [styles.open]: isFocused,
-      })}>
-        {options.map((option) => (
-          <div
-            className={cx(styles.option, {
-              [styles.disabledOption]: option.disabled || values.includes(option[valueKey]),
-            })}
-            key={option[valueKey]}
-            onClick={() => handleOnChange(option[valueKey])}>
-            {option[labelKey]}
+      {do {
+        if (isDesktop) {
+          <div className={cx(styles.options, {
+            [styles.open]: isFocused,
+          })}>
+            {options.map((option) => (
+              <div
+                className={cx(styles.option, {
+                  [styles.disabledOption]: option.disabled || values.includes(option[valueKey]),
+                })}
+                key={option[valueKey]}
+                onClick={() => handleOnChange(option[valueKey])}>
+                {option[labelKey]}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        }
+      }}
       {do{
         if (error && typeof error === 'string') {
           <Hint error>{error}</Hint>
