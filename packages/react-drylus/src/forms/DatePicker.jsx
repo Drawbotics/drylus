@@ -163,10 +163,10 @@ const DatePicker = ({
     };
   }, []);
 
-  const inputValue = value?.toLocaleDateString(locale, {
+  const inputValue = value === '' ? value : value.toLocaleDateString(locale, {
     ...DEFAULT_OPTIONS,
     ...options,
-  }) || '';
+  });
 
   return (
     <div className={styles.root} ref={rootRef}>
@@ -196,7 +196,7 @@ const DatePicker = ({
           tileClassName={styles.tile}
           locale={locale}
           onChange={onChange}
-          value={value} />
+          value={value === '' ? null : value} />
       </div>
     </div>
   );
