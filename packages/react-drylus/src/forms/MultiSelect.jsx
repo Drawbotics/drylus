@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
-import getDevice from '@drawbotics/use-is-device/lib/get-device';
+import { getDevice } from '@drawbotics/use-is-device';
 
 
 import Tag from '../components/Tag';

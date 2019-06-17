@@ -16,7 +16,7 @@
   "dependencies": {
     "@drawbotics/enums": "0.2.0",
     "@drawbotics/icons": "file:../icons",
-    "@drawbotics/use-is-device": "^0.1.2",
+    "@drawbotics/use-is-device": "^0.1.4",
     "core-js": "^2.6.5",
     "emotion": "^10.0.9",
     "react-calendar": "^2.19.0",
