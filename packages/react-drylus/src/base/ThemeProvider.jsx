@@ -26,9 +26,9 @@ const styles = {
 };
 
 
-const ThemeProvider = ({ children }) => {
+const ThemeProvider = ({ children, style }) => {
   return (
-    <div className={styles.root}>
+    <div className={styles.root} style={style}>
       {children}
     </div>
   );
@@ -37,6 +37,7 @@ const ThemeProvider = ({ children }) => {
 
 ThemeProvider.propTypes = {
   children: PropTypes.node.isRequired,
+  style: PropTypes.object,
 };
 
 
