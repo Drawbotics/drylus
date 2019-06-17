@@ -79596,7 +79596,7 @@ var icon_styles = {
 };
 var icon_Icons = function Icons() {
   var names = icons.map(function (name) {
-    return name.split('.')[0].replace('/assets/', '');
+    return name.split('.')[0].replace('/assets/', '').replace('/drylus', '');
   });
   return index_es_p(Flex["e" /* default */], {
     wrap: true,
