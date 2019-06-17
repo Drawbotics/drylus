@@ -234,7 +234,10 @@ SelectFilter.defaultProps = {
 
 
 function getLabelForCheckboxFilter(label, options, values, valueKey, labelKey) {
-  if (values.length === 1) {
+  if (values == null) {
+    return label;
+  }
+  else if (values.length === 1) {
     return options.find((option) => option[valueKey] === values[0])?.[labelKey];
   }
   else if (values.length > 1) {
@@ -248,7 +251,7 @@ function getLabelForCheckboxFilter(label, options, values, valueKey, labelKey) {
 
 export const CheckboxFilter = ({
   options,
-  values=[],
+  values,
   valueKey,
   labelKey,
   onChange,
