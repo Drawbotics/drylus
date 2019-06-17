@@ -17,7 +17,8 @@
     "build:icons": "cd packages/icons && npm run build",
     "build": "lerna run build",
     "watch": "lerna run watch",
-    "test": "lerna run test",
+    "bootstrap": "lerna link convert && lerna exec npm install && npm install",
+    "publish": "lerna publish --force-publish",
     "update:assets": "mmdc -i assets/graph.mmd -o assets/graph.svg",
     "lint": "eslint --ext js,jsx --format node_modules/eslint-formatter-pretty packages/"
   },
