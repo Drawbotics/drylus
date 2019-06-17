@@ -110,35 +110,34 @@ function useRect() {
 
 function _getStyleForSide(side, rect, tooltipRect) {
   if (! rect || ! tooltipRect) return null;
+  const arrowHeight = 12;
+
   if (side === TooltipSides.TOP) {
-    const difference = rect?.height < tooltipRect?.height ? tooltipRect?.height : 0;
     return {
-      top: rect?.top - rect?.height - 8 - difference,
-      left: rect?.left - (Math.abs(rect?.width - tooltipRect?.width) / 2),
+      top: rect?.top - tooltipRect?.height - arrowHeight,
+      left: rect?.left + (rect?.width / 2) - (tooltipRect?.width / 2),
     };
   }
   else if (side === TooltipSides.LEFT) {
-    const difference = rect?.height < tooltipRect?.height ? tooltipRect?.height - rect?.height : 0;
     return {
-      top: rect?.top + (Math.abs(rect?.height - tooltipRect?.height) / 2) - difference,
-      left: rect?.left - tooltipRect?.width - 16,
+      top: rect?.top + (rect?.height / 2) - (tooltipRect?.height / 2),
+      left: rect?.left - tooltipRect?.width - arrowHeight,
     };
   }
   else if (side === TooltipSides.RIGHT) {
-    const difference = rect?.height < tooltipRect?.height ? tooltipRect?.height - rect?.height : 0;
     return {
-      top: rect?.top + (Math.abs(rect?.height - tooltipRect?.height) / 2) - difference,
-      left: rect?.left + rect?.width + 16,
+      top: rect?.top + (rect?.height / 2) - (tooltipRect?.height / 2),
+      left: rect?.left + rect?.width + arrowHeight,
     };
   }
   else if (side === TooltipSides.BOTTOM) {
     return {
-      top: rect?.top + rect?.height + 16,
-      left: rect?.left - (Math.abs(rect?.width - tooltipRect?.width) / 2),
+      top: rect?.top + rect?.height + arrowHeight,
+      left: rect?.left + (rect?.width / 2) - (tooltipRect?.width / 2),
     };
   }
   else {
-    console.warn(`${side} side value provided not supported`);
+    console.warn(`${String(side)} side value provided not supported`);
     return null;
   }
 }
