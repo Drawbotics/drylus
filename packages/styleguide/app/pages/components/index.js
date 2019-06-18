@@ -17,7 +17,7 @@ import text from './text';
 import dot from './dot';
 import tooltip from './tooltip';
 import collapsible from './collapsible';
-import link from './link';
+import textLink from './text-link';
 import modal from './modal';
 import tag from './tag';
 import spinner from './spinner';
@@ -47,7 +47,7 @@ const components = {
   dot,
   tooltip,
   collapsible,
-  link,
+  textLink,
   modal,
   tag,
   spinner,

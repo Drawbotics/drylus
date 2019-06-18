@@ -23,10 +23,12 @@ const styles = {
     margin-bottom: ${sv.marginSmall};
   `,
   link: css`
-    a {
-      color: ${sv.colorPrimary};
-    }
     margin-bottom: ${sv.marginSmall};
+
+    &:hover {
+      cursor: pointer;
+      color: ${sv.blue};
+    }
   `,
   sublinks: css`
     padding-left: ${sv.defaultPadding};
@@ -48,9 +50,11 @@ export function generateLinks(route, routeName, parent='') {
             <div className={styles.title}>
               {do{
                 if (route.index) {
-                  <div className={styles.link}>
-                    <Link href={cleaned}>{startCase(routeName)}</Link>
-                  </div>
+                  <Link href={cleaned}>
+                    <div className={styles.link}>
+                      {startCase(routeName)}
+                    </div>
+                  </Link>
                 }
                 else {
                   routeName
@@ -67,9 +71,11 @@ export function generateLinks(route, routeName, parent='') {
   }
   else {
     return (
-      <div className={styles.link} key={cleaned}>
-        <Link href={cleaned}>{startCase(routeName)}</Link>
-      </div>
+      <Link key={cleaned} href={cleaned}>
+        <div className={styles.link}>
+          {startCase(routeName)}
+        </div>
+      </Link>
     );
   }
 }

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link as DryLink } from '@drawbotics/react-drylus';
 import { Link as RouterLink } from 'react-router-dom';
 
 
-const Link = (props) => {
+const Link = ({ children, href, ...rest }) => {
   return (
-    <DryLink {...props} to={props.href} component={RouterLink} />
+    <RouterLink {...rest} to={href}>
+      {children}
+    </RouterLink>
   );
 };
 

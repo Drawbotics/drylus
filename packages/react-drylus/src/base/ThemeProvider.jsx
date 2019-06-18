@@ -14,6 +14,12 @@ injectGlobal`
     line-height: ${sv.defaultLineHeight};
     letter-spacing: ${sv.defaultLetterSpacing};
   }
+
+  a {
+    cursor: default;
+    text-decoration: none;
+    color: initial;
+  }
 `;
 
 

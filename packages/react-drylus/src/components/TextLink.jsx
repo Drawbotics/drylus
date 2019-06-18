@@ -2,6 +2,7 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
+import Enum from '@drawbotics/enums';
 
 import { Categories } from '../base';
 import { getEnumAsClass } from '../utils';
@@ -63,55 +64,28 @@ const styles = {
 };
 
 
-export const LinkUnderlined = {
-  ALWAYS: 'ALWAYS',
-  HOVER: 'HOVER',
-};
+export const LinkUnderlined = new Enum(
+  'ALWAYS',
+  'HOVER',
+);
 
 
-const Link = ({
-  category,
+const TextLink = ({
   children,
-  href,
-  component,
+  category,
   underlined,
   ...rest,
 }) => {
-  const className = cx(styles.root, {
-    [styles[getEnumAsClass(category)]]: category,
-    [styles.underlinedHover]: underlined === LinkUnderlined.HOVER,
-    [styles.underlinedAlways]: underlined === LinkUnderlined.ALWAYS,
-  });
-  if (component) {
-    return React.createElement(component, { ...rest, className }, children);
-  }
   return (
-    <a className={className} href={href} {...rest}>{children}</a>
-  );
-};
-
-
-Link.propTypes = {
-  /** This will be wrapped to serve as a link */
-  children: PropTypes.node,
-
-  href: PropTypes.string,
-
-  category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
-
-  /** If you want to use a project-specific link component you can pass it here */
-  component: PropTypes.func,
-
-  underlined: PropTypes.oneOf([ LinkUnderlined.ALWAYS, LinkUnderlined.HOVER ]),
-};
-
-
-export const TextLink = ({
-  children,
-  ...rest,
-}) => {
-  return (
-    <Link {...rest}>{children}</Link>
+    <span
+      className={cx(styles.root, {
+        [styles[getEnumAsClass(category)]]: category,
+        [styles.underlinedHover]: underlined === LinkUnderlined.HOVER,
+        [styles.underlinedAlways]: underlined === LinkUnderlined.ALWAYS,
+      })}
+      {...rest}>
+      {children}
+    </span>
   );
 };
 
@@ -120,14 +94,9 @@ TextLink.propTypes = {
   /** Text of the link */
   children: PropTypes.string,
 
-  href: PropTypes.string,
-
   category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
 
-  /** If you want to use a project-specific link component you can pass it here */
-  component: PropTypes.func,
-
-  underlined: PropTypes.oneOf([ LinkUnderlined.ALWAYS, LinkUnderlined.HOVER ]),
+  underlined: PropTypes.oneOf([LinkUnderlined.ALWAYS, LinkUnderlined.HOVER]),
 };
 
 
@@ -137,4 +106,4 @@ TextLink.defaultProps = {
 };
 
 
-export default Link;
+export default TextLink;
