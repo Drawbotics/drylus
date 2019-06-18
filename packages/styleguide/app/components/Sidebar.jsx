@@ -24,6 +24,7 @@ const styles = {
   `,
   link: css`
     margin-bottom: ${sv.marginSmall};
+    color: ${sv.colorPrimary};
 
     &:hover {
       cursor: pointer;
