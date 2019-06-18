@@ -342,7 +342,7 @@ function generateTable(data, header, renderCell, renderChildCell, i=0, childHead
   if (Array.isArray(data)) {
     return (
       <TBody>
-        {data.map((rows, i) => generateTable(rows, header, renderCell, renderChildCell, i))}
+        {data.map((rows, i) => generateTable(rows, header, renderCell, renderChildCell, i, childHeader))}
       </TBody>
     );
   }
@@ -440,7 +440,7 @@ const Table = ({
                   </TCell>
                 ))}
               </THead>
-              {generateTable(data, header, renderCell, renderChildCell, childHeader)}
+              {generateTable(data, header, renderCell, renderChildCell, 0, childHeader)}
             </>
           }
           else if (header && isLoading) {
