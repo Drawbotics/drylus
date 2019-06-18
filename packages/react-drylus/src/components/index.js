@@ -21,7 +21,7 @@ export Text from './Text';
 export Dot from './Dot';
 export Tooltip, { TooltipSides } from './Tooltip';
 export Collapsible from './Collapsible';
-export TextLink, { LinkUnderlined } from './Link';
+export TextLink, { LinkUnderlined } from './TextLink';
 export Modal from './Modal';
 export Tag from './Tag';
 export Spinner from './Spinner';
