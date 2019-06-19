@@ -11,6 +11,9 @@ export function normalizeValue(v, enums) {
   if (v.includes("'") || v === '_empty') {
     return v.replace(/'/g, '');
   }
+  else if (v.includes('.')) {
+    return v;
+  }
   else {
     return parseFloat(v) || v;
   }

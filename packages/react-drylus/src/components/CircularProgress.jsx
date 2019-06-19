@@ -9,11 +9,22 @@ import { Categories, Sizes } from '../base';
 
 const styles = {
   root: css`
+    height: 50px;
+    width: 50px;
+
+    > svg {
+      height: 100%;
+      width: 100%;
+    }
   `,
   circle: css`
-    stroke-width: 4px;
+    stroke-width: 10px;
     transform: rotate(-90deg);
+    transform-origin: 50% 50%;
     fill: none;
+    cx: 50;
+    cy: 50;
+    r: 40;
     transition: ${sv.defaultTransition};
   `,
   background: css`
@@ -25,40 +36,24 @@ const styles = {
 };
 
 
-function getSizeFromProp(size) {
-  switch (size) {
-    case Sizes.EXTRA_LARGE:
-      return 90;
-    case Sizes.LARGE:
-      return 70;
-    case Sizes.SMALL:
-      return 30;
-    default:
-      return 50;
-  }
-}
-
-
 const CircularProgress = ({
   percentage,
   category,
   size,
   text,
 }) => {
-  const circleSize = getSizeFromProp(size);
-  const style = { cx: circleSize / -2, cy: circleSize / 2, r: (circleSize / 2) - 2 };
-  const circumference = (circleSize - 4) * Math.PI;
-  const offset = percentage * circleSize;
+  const circumference = 80 * Math.PI;
+  const offset = percentage * circumference;
   return (
-    <div className={styles.root}>
-      <svg height={`${circleSize}px`} width={`${circleSize}px`}>
-        <circle data-element="circle" className={cx(styles.circle, styles.background)} style={style}>
-        </circle>
-        <circle data-element="circle" className={cx(styles.circle, styles.progress)} style={{
-          ...style,
-          strokeDasharray: `${offset}, ${circumference}`,
-        }}>
-        </circle>
+    <div className={cx(styles.root, { [styles.small]: size })}>
+      <svg viewBox="0 0 100 100">
+        <circle
+          data-element="circle"
+          className={cx(styles.circle, styles.background)} />
+        <circle
+          data-element="circle"
+          className={cx(styles.circle, styles.progress)}
+          style={{ strokeDasharray: `${offset}, ${circumference}` }} />
       </svg>
     </div>
   );

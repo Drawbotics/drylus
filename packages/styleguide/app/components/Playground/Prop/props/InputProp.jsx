@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from '@drawbotics/react-drylus';
 
 
-const SelectProp = ({
+const InputProp = ({
   prop,
   value,
   onChange,
@@ -12,11 +12,11 @@ const SelectProp = ({
     <div>
       <Input
         name={key}
-        value={value || ''}
+        value={value === 0 ? value : (value || '')}
         onChange={onChange} />
     </div>
   );
 }
 
 
-export default SelectProp;
+export default InputProp;
