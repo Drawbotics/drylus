@@ -17,7 +17,7 @@ export BaseFilter, { FilterAlign, SelectFilter, CheckboxFilter } from './Filter'
 export TabNavigation from './TabNavigation';
 export ListTile from './ListTile';
 export Avatar from './Avatar';
-export Text from './Text';
+export Text, { TextAlign } from './Text';
 export Dot from './Dot';
 export Tooltip, { TooltipSides } from './Tooltip';
 export Collapsible from './Collapsible';
@@ -30,3 +30,4 @@ export BigCheckbox from './BigCheckbox';
 export Toggle from './Toggle';
 export Separator from './Separator';
 export CircularProgress from './CircularProgress';
+export EmptyState from './EmptyState';
