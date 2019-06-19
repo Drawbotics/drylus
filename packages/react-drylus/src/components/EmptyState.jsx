@@ -94,22 +94,30 @@ const EmptyState = ({
         <FlexItem>
           <Title size={3}>{title}</Title>
         </FlexItem>
-        <FlexItem>
-          <div className={styles.description}>
-            <Paragraph>
-              <Text tier={Tiers.SECONDARY}>{description}</Text>
-            </Paragraph>
-          </div>
-        </FlexItem>
-        <FlexItem>
-          <Margin size={{ top: Sizes.DEFAULT }}>
-            <Flex vSpacing={Sizes.SMALL}>
-              {actions.map((action, i) => (
-                <FlexItem key={i}>{action}</FlexItem>
-              ))}
-            </Flex>
-          </Margin>
-        </FlexItem>
+        {do {
+          if (description) {
+            <FlexItem>
+              <div className={styles.description}>
+                <Paragraph>
+                  <Text tier={Tiers.SECONDARY}>{description}</Text>
+                </Paragraph>
+              </div>
+            </FlexItem>
+          }
+        }}
+        {do {
+          if (actions) {
+            <FlexItem>
+              <Margin size={{ top: Sizes.DEFAULT }}>
+                <Flex vSpacing={Sizes.SMALL}>
+                  {actions.map((action, i) => (
+                    <FlexItem key={i}>{action}</FlexItem>
+                  ))}
+                </Flex>
+              </Margin>
+            </FlexItem>
+          }
+        }}
       </Flex>
     </div>
   );
