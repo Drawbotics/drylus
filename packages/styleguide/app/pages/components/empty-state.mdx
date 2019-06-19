@@ -1,4 +1,9 @@
-import { EmptyState } from '@drawbotics/react-drylus';
+import {
+  EmptyState,
+  Button,
+  Categories,
+  Tiers,
+} from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -7,5 +12,11 @@ import Playground from '~/components/Playground';
 Used on a neutral background, can display some information about the page/page section and what is going on. It contains a row of actions at the bottom, these are usually `Button`s.
 
 <Playground component={EmptyState}>
-  <EmptyState />
+  <EmptyState
+    title="This place is empty"
+    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+    actions={[
+      <Button tier={Tiers.SECONDARY}>Cancel</Button>,
+      <Button category={Categories.BRAND}>Go to home</Button>
+    ]} />
 </Playground>

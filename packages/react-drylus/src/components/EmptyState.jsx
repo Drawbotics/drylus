@@ -2,10 +2,12 @@ import React from 'react';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-import Flex, { FlexItem, FlexDirections } from '../layout/flex';
+import Flex, { FlexItem, FlexDirections } from '../layout/Flex';
+import Margin from '../layout/Margin';
 import Title from './Title';
 import Text from './Text';
-// import Sizes from '../base/sizes';
+import Paragraph from './Paragraph';
+import { Sizes, Tiers } from '../base';
 
 
 const styles = {
@@ -13,6 +15,10 @@ const styles = {
   `,
   image: css`
     width: 300px;
+  `,
+  description: css`
+    max-width: 500px;
+    text-align: center;
   `,
 };
 
@@ -72,7 +78,11 @@ const Illustration = () => {
 };
 
 
-const EmptyState = () => {
+const EmptyState = ({
+  description,
+  title,
+  actions,
+}) => {
   return (
     <div className={styles.root}>
       <Flex direction={FlexDirections.VERTICAL}>
@@ -82,10 +92,23 @@ const EmptyState = () => {
           </div>
         </FlexItem>
         <FlexItem>
-          <Title size={3}></Title>
+          <Title size={3}>{title}</Title>
         </FlexItem>
         <FlexItem>
-          <Text></Text>
+          <div className={styles.description}>
+            <Paragraph>
+              <Text tier={Tiers.SECONDARY}>{description}</Text>
+            </Paragraph>
+          </div>
+        </FlexItem>
+        <FlexItem>
+          <Margin size={{ top: Sizes.DEFAULT }}>
+            <Flex vSpacing={Sizes.SMALL}>
+              {actions.map((action, i) => (
+                <FlexItem key={i}>{action}</FlexItem>
+              ))}
+            </Flex>
+          </Margin>
         </FlexItem>
       </Flex>
     </div>
@@ -94,7 +117,14 @@ const EmptyState = () => {
 
 
 EmptyState.propTypes = {
+  /** Main title to explain the situation */
+  title: PropTypes.string.isRequired,
+
+  /** Text shown to explain the situation */
   description: PropTypes.string,
+
+  /** Array of components, usually Buttons */
+  actions: PropTypes.arrayOf(PropTypes.node),
 };
 
 
