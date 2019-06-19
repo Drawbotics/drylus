@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
 import { Categories, Sizes } from '../base';
-// import { getEnumAsClass } from '../utils';
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -33,6 +33,43 @@ const styles = {
   progress: css`
     stroke: ${sv.neutralDark};
   `,
+  large: css`
+    height: 70px;
+    width: 70px;
+  `,
+  extraLarge: css`
+    height: 90px;
+    width: 90px;
+  `,
+  small: css`
+    height: 30px;
+    width: 30px;
+  `,
+  brand: css`
+    & [data-element="circle"] {
+      stroke: ${sv.brand};
+    }
+  `,
+  danger: css`
+    & [data-element="circle"] {
+      stroke: ${sv.red};
+    }
+  `,
+  info: css`
+    & [data-element="circle"] {
+      stroke: ${sv.blue};
+    }
+  `,
+  warning: css`
+    & [data-element="circle"] {
+      stroke: ${sv.orange};
+    }
+  `,
+  success: css`
+    & [data-element="circle"] {
+      stroke: ${sv.green};
+    }
+  `,
 };
 
 
@@ -45,10 +82,13 @@ const CircularProgress = ({
   const circumference = 80 * Math.PI;
   const offset = percentage * circumference;
   return (
-    <div className={cx(styles.root, { [styles.small]: size })}>
+    <div
+      className={cx(styles.root, {
+        [styles[getEnumAsClass(size)]]: size,
+        [styles[getEnumAsClass(category)]]: category,
+      })}>
       <svg viewBox="0 0 100 100">
         <circle
-          data-element="circle"
           className={cx(styles.circle, styles.background)} />
         <circle
           data-element="circle"
