@@ -24,7 +24,12 @@ const components = {
   h4: (props) => <Title {...props} size={4} />,
   pre: (props) => <div {...props} />,
   p: (props) => <Paragraph {...props} />,
-  a: (props) => <Link to={props.href}><TextLink {...props} /></Link>,
+  a: (props) => {
+    if (props.href.includes('http')) {
+      return <a href={props.href} target="_blank" rel="noopener noreferrer"><TextLink {...props} /></a>;
+    }
+    return <Link to={props.href}><TextLink {...props} /></Link>;
+  },
   code: Code,
   inlineCode: InlineCode,
 }
