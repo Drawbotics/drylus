@@ -250,9 +250,6 @@ Button.propTypes = {
     Tiers.TERTIARY,
   ]),
 
-  /** Name of the icon to be displayed within the button. Shown on the left by default */
-  icon: PropTypes.string,
-
   /** Shown in front of the button text, can be a Spinner or Icon */
   leading: PropTypes.node,
 

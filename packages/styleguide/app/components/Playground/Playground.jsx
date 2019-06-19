@@ -81,6 +81,11 @@ function getMarkupForMode(mode, component) {
 }
 
 
+function replaceSymbol(value) {
+  return value.replace(/Symbol\((.+)\)/gm, '$1');
+}
+
+
 const supportedModes = ['react', 'vanilla'];
 
 
@@ -108,7 +113,7 @@ const Playground = ({ component, children, mode, __code, enums }) => {
               onChange={setMode} />
           </div>
           <div className={styles.codeBox}>
-            <CodeBox format mode={mode}>{activeMode === 'react' && ! component ? __code : generatedMarkup}</CodeBox>
+            <CodeBox format mode={mode}>{activeMode === 'react' && ! component ? __code : replaceSymbol(generatedMarkup)}</CodeBox>
           </div>
         </div>
       </div>
