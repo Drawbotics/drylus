@@ -11,20 +11,30 @@ const styles = {
   root: css`
     height: 50px;
     width: 50px;
+    position: relative;
+    font-size: 0.8rem;
 
     > svg {
       height: 100%;
       width: 100%;
     }
   `,
+  text: css`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: ${sv.colorPrimary};
+    text-align: center;
+  `,
   circle: css`
-    stroke-width: 10px;
+    stroke-width: 8px;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
     fill: none;
     cx: 50;
     cy: 50;
-    r: 40;
+    r: 42;
     transition: ${sv.defaultTransition};
   `,
   background: css`
@@ -36,10 +46,12 @@ const styles = {
   large: css`
     height: 70px;
     width: 70px;
+    font-size: 1rem;
   `,
   extraLarge: css`
     height: 90px;
     width: 90px;
+    font-size: 1.2rem;
   `,
   small: css`
     height: 30px;
@@ -79,7 +91,7 @@ const CircularProgress = ({
   size,
   text,
 }) => {
-  const circumference = 80 * Math.PI;
+  const circumference = 84 * Math.PI;
   const offset = percentage * circumference;
   return (
     <div
@@ -87,6 +99,13 @@ const CircularProgress = ({
         [styles[getEnumAsClass(size)]]: size,
         [styles[getEnumAsClass(category)]]: category,
       })}>
+      {do{
+        if (text && size !== Sizes.SMALL) {
+          <div className={styles.text}>
+            {text}
+          </div>
+        }
+      }}
       <svg viewBox="0 0 100 100">
         <circle
           className={cx(styles.circle, styles.background)} />
@@ -104,7 +123,7 @@ CircularProgress.propTypes = {
   /** Determines the amount of the circle which is completed, between 0 and 1 */
   percentage: PropTypes.number.isRequired,
 
-  /** Text shown within the circular progress */
+  /** Text shown within the circular progress. Not shown when size is smaller than DEFAULT */
   text: PropTypes.string,
 
   category: PropTypes.oneOf([
