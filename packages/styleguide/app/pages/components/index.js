@@ -25,6 +25,7 @@ import bigRadio from './big-radio';
 import bigCheckbox from './big-checkbox';
 import toggle from './toggle';
 import separator from './separator';
+import circularProgress from './circular-progress';
 
 
 const components = {
@@ -55,6 +56,7 @@ const components = {
   bigCheckbox,
   toggle,
   separator,
+  circularProgress,
 };
 
 
