@@ -51,8 +51,21 @@ You can also mix different components:
   <div style={{ height: 400 }}>
     <InputGroup>
       <Input value="First value" onChange={x=>x} />
-      <Select options={[{ value: 'option', label: 'Option' }]} onChange={x=>x} />
-      <DatePicker value="" onChange={x=>x} />
+      <Select placeholder="Second value..." options={[{ value: 'option', label: 'Option' }]} onChange={x=>x} />
+      <DatePicker placeholder="Third value..." value="" onChange={x=>x} />
     </InputGroup>
   </div>
 </Playground>
+
+And with the `layout` option you can create more complex input groups like so:
+
+<Playground>
+  <InputGroup layout={[ 3/4, 1/4, 1/2, 1/2 ]}>
+    <Input placeholder="Street & Number" value="" onChange={x=>x} />
+    <Input placeholder="ZIP" onChange={x=>x} value="" />
+    <Input placeholder="City" onChange={x=>x} value="" />
+    <Select placeholder="Country" options={[{ value: 'IT', label: 'Italy' }, { value: 'FR', label: 'France' }]} onChange={x=>x} />
+  </InputGroup>
+</Playground>
+
+Using the `layout` option will set the flex direction to `HORIZONTAL` and wrap the children to generate the needed layout. By default all items are placed top to bottom and take the full width.

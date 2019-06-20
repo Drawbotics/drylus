@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
 
-import Flex, { FlexItem, FlexDirections, FlexAlign } from '../layout/Flex';
+import Flex, { FlexItem, FlexDirections, FlexAlign, FlexJustify } from '../layout/Flex';
 import { Sizes } from '../base';
 import Hint from './Hint';
 
@@ -17,16 +17,20 @@ const InputGroup = ({
   hint,
   error,
   valid,
-  children
+  children,
+  layout,
 }) => {
   return (
     <div className={styles.root}>
       <Flex
-        direction={FlexDirections.VERTICAL}
+        justify={FlexJustify.START}
+        direction={layout ? FlexDirections.HORIZONTAL : FlexDirections.VERTICAL}
         hSpacing={Sizes.EXTRA_SMALL}
-        align={FlexAlign.STRETCH}>
-        {React.Children.map(children, (child) => (
-          <FlexItem flex>
+        vSpacing={Sizes.EXTRA_SMALL}
+        align={FlexAlign.STRETCH}
+        wrap={Boolean(layout)}>
+        {React.Children.map(children, (child, i) => (
+          <FlexItem flex={layout ? layout[i] : true}>
             {React.cloneElement(child, {
               error: child.props.valid ? false : Boolean(error),
               valid: valid !== undefined ? valid : child.props.valid,
@@ -59,6 +63,9 @@ InputGroup.propTypes = {
 
   /** If true all elements display a check icon and a green outline, overridden by "error" */
   valid: PropTypes.bool,
+
+  /** An array of values for the flex property of each child, mimics the usage on FlexItem. Array length should match number of children */
+  layout: PropTypes.arrayOf(PropTypes.number),
 };
 
 
