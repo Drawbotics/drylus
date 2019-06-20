@@ -82,7 +82,7 @@ function getMarkupForMode(mode, component) {
 
 
 function replaceSymbol(value) {
-  return value.replace(/Symbol\((.+)\)/gm, '$1');
+  return value.replace(/Symbol\((.+?)\)/gm, '$1');
 }
 
 
