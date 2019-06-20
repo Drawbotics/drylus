@@ -2,6 +2,9 @@ import {
   FormGroup,
   Label,
   Input,
+  InputGroup,
+  Checkbox,
+  Select,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -21,3 +24,46 @@ Here is a simple example:
 
 ### InputGroup example
 As mentioned above you can set the `FormGroup` to take multiple components as inputs, in order to "group" inputs into a single label.
+
+<Playground>
+  <FormGroup
+    input={
+      <InputGroup hint="This is a global hint">
+        <Input value="First thing" onChange={x=>x} />
+        <Input value="Second thing" onChange={x=>x} />
+        <Input placeholder="Third thing..." onChange={x=>x} value="" />
+      </InputGroup>
+    }
+    label={<Label>My group of inputs</Label>} />
+</Playground>
+
+And can be horizontal too of course:
+<Playground>
+  <FormGroup
+    horizontal
+    input={
+      <InputGroup error="This is a global error">
+        <Input value="First thing" onChange={x=>x} />
+        <Input value="Second thing" onChange={x=>x} />
+        <Input placeholder="Third thing..." onChange={x=>x} value="" />
+      </InputGroup>
+    }
+    label={<Label>My group of inputs</Label>} />
+</Playground>
+
+
+### Address example
+With this method you can easily create complex form groups, for example for an address section:
+
+<Playground>
+  <FormGroup
+    input={
+      <InputGroup error="All fields are required">
+        <Input value="1 Street Avenue" onChange={x=>x} valid />
+        <Input placeholder="ZIP" onChange={x=>x} value="" />
+        <Input placeholder="City" onChange={x=>x} value="" />
+        <Select placeholder="Country" options={[{ value: 'IT', label: 'Italy' }, { value: 'FR', label: 'France' }]} onChange={x=>x} />
+      </InputGroup>
+    }
+    label={<Label>Address of residence</Label>} />
+</Playground>

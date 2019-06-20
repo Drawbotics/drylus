@@ -28,8 +28,8 @@ const InputGroup = ({
         {React.Children.map(children, (child) => (
           <FlexItem flex>
             {React.cloneElement(child, {
-              error: Boolean(error),
-              valid: valid,
+              error: child.props.valid ? false : Boolean(error),
+              valid: valid !== undefined ? valid : child.props.valid,
             })}
           </FlexItem>
         ))}

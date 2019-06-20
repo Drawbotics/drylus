@@ -77,6 +77,11 @@ const styles = {
       box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
     }
   `,
+  noValue: css`
+    > select {
+      color: ${sv.colorSecondary};
+    }
+  `,
 };
 
 
@@ -96,6 +101,7 @@ const Select = ({
   const handleOnChange = (e) => onChange(e.target.value, e.target.name);
   return (
     <div className={cx(styles.root, {
+      [styles.noValue]: ! value,
       [styles.disabled]: disabled,
       [styles.valid]: Boolean(value) && valid,
       [styles.error]: error,
@@ -125,7 +131,6 @@ const Select = ({
         }}
         {options.map((option) => (
           <option
-            className={styles.option}
             key={option[valueKey]}
             name={option[labelKey]}
             value={option[valueKey]}

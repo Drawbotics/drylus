@@ -136,6 +136,9 @@ const styles = {
     top: calc(${sv.marginExtraSmall} * 1.5);
     right: calc(${sv.marginSmall} * 2 + ${sv.marginExtraSmall});
   `,
+  placeholder: css`
+    color: ${sv.colorSecondary};
+  `,
 };
 
 
