@@ -14,9 +14,9 @@ This component is used to group together different types of form inputs (selects
 
 <Playground component={InputGroup}>
   <InputGroup>
-    <Input value="First thing" onChange={x=>x} />
-    <Input value="Second thing" onChange={x=>x} />
-    <Input placeholder="Third thing..." onChange={x=>x} value="" />
+    <Checkbox checked>First one</Checkbox>
+    <Checkbox>Second one</Checkbox>
+    <Checkbox>Third one</Checkbox>
   </InputGroup>
 </Playground>
 
@@ -25,47 +25,13 @@ This component is used to group together different types of form inputs (selects
 
 ### Examples
 
-You are not limited to only `Input` of course, you can group any type of form element, for example checkboxes here:
+You are not limited to only `Input` of course, you can group any type of form element, for example inputs here:
 
 Example with error
 <Playground>
-  <InputGroup error="This is an error message">
-    <Checkbox checked>First one</Checkbox>
-    <Checkbox>Second one</Checkbox>
-    <Checkbox>Third one</Checkbox>
+  <InputGroup valid>
+    <Input value="First thing" onChange={x=>x} />
+    <Input value="Second thing" onChange={x=>x} />
+    <Input placeholder="Third thing..." onChange={x=>x} value="" />
   </InputGroup>
 </Playground>
-
-Example without error
-<Playground>
-  <InputGroup>
-    <Checkbox checked>First one</Checkbox>
-    <Checkbox>Second one</Checkbox>
-    <Checkbox>Third one</Checkbox>
-  </InputGroup>
-</Playground>
-
-
-You can also mix different components:
-<Playground>
-  <div style={{ height: 400 }}>
-    <InputGroup>
-      <Input value="First value" onChange={x=>x} />
-      <Select placeholder="Second value..." options={[{ value: 'option', label: 'Option' }]} onChange={x=>x} />
-      <DatePicker placeholder="Third value..." value="" onChange={x=>x} />
-    </InputGroup>
-  </div>
-</Playground>
-
-And with the `layout` option you can create more complex input groups like so:
-
-<Playground>
-  <InputGroup layout={[ 3/4, 1/4, 1/2, 1/2 ]}>
-    <Input placeholder="Street & Number" value="" onChange={x=>x} />
-    <Input placeholder="ZIP" onChange={x=>x} value="" />
-    <Input placeholder="City" onChange={x=>x} value="" />
-    <Select placeholder="Country" options={[{ value: 'IT', label: 'Italy' }, { value: 'FR', label: 'France' }]} onChange={x=>x} />
-  </InputGroup>
-</Playground>
-
-Using the `layout` option will set the flex direction to `HORIZONTAL` and wrap the children to generate the needed layout. By default all items are placed top to bottom and take the full width.

@@ -5,6 +5,13 @@ import {
   InputGroup,
   Checkbox,
   Select,
+  Margin,
+  Sizes,
+  Hint,
+  Flex,
+  FlexItem,
+  FlexJustify,
+  Categories,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -29,41 +36,64 @@ As mentioned above you can set the `FormGroup` to take multiple components as in
   <FormGroup
     input={
       <InputGroup hint="This is a global hint">
-        <Input value="First thing" onChange={x=>x} />
-        <Input value="Second thing" onChange={x=>x} />
-        <Input placeholder="Third thing..." onChange={x=>x} value="" />
+        <Checkbox checked>First one</Checkbox>
+        <Checkbox>Second one</Checkbox>
+        <Checkbox>Third one</Checkbox>
       </InputGroup>
     }
     label={<Label>My group of inputs</Label>} />
 </Playground>
 
-And can be horizontal too of course and have a global error:
+And can be horizontal too of course and have a global error or validation:
 <Playground>
-  <FormGroup
-    horizontal
-    input={
-      <InputGroup error="This is a global error">
-        <Input value="First thing" onChange={x=>x} />
-        <Input value="Second thing" onChange={x=>x} />
-        <Input placeholder="Third thing..." onChange={x=>x} value="" />
-      </InputGroup>
-    }
-    label={<Label>My group of inputs</Label>} />
+  <>
+    <FormGroup
+      horizontal
+      input={
+        <InputGroup error="This is a global error">
+          <Checkbox checked>First one</Checkbox>
+          <Checkbox>Second one</Checkbox>
+          <Checkbox>Third one</Checkbox>
+        </InputGroup>
+      }
+      label={<Label>My group of checkboxes</Label>} />
+    <Margin size={{ bottom: Sizes.DEFAULT }} />
+    <FormGroup
+      horizontal
+      input={
+        <InputGroup valid>
+          <Input value="Something" onChange={x=>x} />
+          <Input value="Something else" onChange={x=>x} />
+        </InputGroup>
+      }
+      label={<Label>My group of inputs</Label>} />
+  </>
 </Playground>
 
 
 ### Address example
-With this method you can easily create complex form groups, for example for an address section:
+Sometimes you might need to create complex form groups, for example for an address section. **Note** you will have to set the layout and display of the hint/error yourself when making this kind of form groups, same goes for the error states of the components. See [`Hint`](/forms/hint) documentation for that.
 
 <Playground>
   <FormGroup
     input={
-      <InputGroup layout={[ 3/4, 1/4, 1/2, 1/2 ]} error="All fields are required">
-        <Input valid placeholder="Street & Number" value="1 Real Avenue" onChange={x=>x} />
-        <Input placeholder="ZIP" onChange={x=>x} value="" />
-        <Input valid placeholder="City" onChange={x=>x} value="Brussels" />
-        <Select placeholder="Country" options={[{ value: 'IT', label: 'Italy' }, { value: 'FR', label: 'France' }]} onChange={x=>x} />
-      </InputGroup>
+      <>
+        <Flex vSpacing={Sizes.EXTRA_SMALL} hSpacing={Sizes.EXTRA_SMALL} justify={FlexJustify.START} wrap>
+          <FlexItem flex={3/4}>
+            <Input valid placeholder="Street & Number" value="1 Real Avenue" onChange={x=>x} />
+          </FlexItem>
+          <FlexItem flex={1/4}>
+            <Input error placeholder="ZIP" onChange={x=>x} value="" />
+          </FlexItem>
+          <FlexItem flex={1/2}>
+            <Input valid placeholder="City" onChange={x=>x} value="Brussels" />
+          </FlexItem>
+          <FlexItem flex={1/2}>
+            <Select error placeholder="Country" options={[{ value: 'IT', label: 'Italy' }, { value: 'FR', label: 'France' }]} onChange={x=>x} />
+          </FlexItem>
+        </Flex>
+        <Hint category={Categories.DANGER}>All fields are required</Hint>
+      </>
     }
     label={<Label>Address of residence</Label>} />
 </Playground>

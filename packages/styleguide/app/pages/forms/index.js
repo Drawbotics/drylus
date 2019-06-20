@@ -9,6 +9,7 @@ import countbox from './countbox';
 import datePicker from './date-picker';
 import formGroup from './form-group';
 import inputGroup from './input-group';
+import hint from './hint';
 
 
 const components = {
@@ -23,6 +24,7 @@ const components = {
   datePicker,
   formGroup,
   inputGroup,
+  hint,
 };
 
 

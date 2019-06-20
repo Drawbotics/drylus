@@ -8,3 +8,4 @@ export Countbox from './Countbox';
 export DatePicker from './DatePicker';
 export FormGroup from './FormGroup';
 export InputGroup from './InputGroup';
+export Hint from './Hint';
