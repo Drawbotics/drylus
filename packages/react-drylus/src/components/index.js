@@ -30,3 +30,4 @@ export BigCheckbox from './BigCheckbox';
 export Toggle from './Toggle';
 export Separator from './Separator';
 export CircularProgress from './CircularProgress';
+export EmptyState from './EmptyState';
