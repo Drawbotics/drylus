@@ -1,0 +1,23 @@
+import {
+  FormGroup,
+  Label,
+  Input,
+} from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Form Group
+This component sets the layout when combining a `Label` with a form element or multiple form elements (see [`InputGroup`](/forms/input-group)).
+
+Here is a simple example:
+
+<Playground component={FormGroup}>
+  <FormGroup
+    input={<Input placeholder="Something..." value="" onChange={x=>x} />}
+    label={<Label>My input label</Label>} />
+</Playground>
+
+
+### InputGroup example
+As mentioned above you can set the `FormGroup` to take multiple components as inputs, in order to "group" inputs into a single label.

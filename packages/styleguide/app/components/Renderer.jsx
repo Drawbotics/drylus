@@ -3,7 +3,7 @@ import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
-import { Title, Paragraph, TextLink } from '@drawbotics/react-drylus';
+import { Title, Paragraph, TextLink, LinkUnderlined } from '@drawbotics/react-drylus';
 import { Link } from 'react-router-dom';
 
 import Code from './Code';
@@ -28,7 +28,7 @@ const components = {
     if (props.href.includes('http')) {
       return <a href={props.href} target="_blank" rel="noopener noreferrer"><TextLink {...props} /></a>;
     }
-    return <Link to={props.href}><TextLink {...props} /></Link>;
+    return <Link to={props.href}><TextLink {...props} underlined={LinkUnderlined.ALWAYS} /></Link>;
   },
   code: Code,
   inlineCode: InlineCode,

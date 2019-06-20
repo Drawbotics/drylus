@@ -7,6 +7,8 @@ import searchInput from './search-input';
 import multiSelect from './multi-select';
 import countbox from './countbox';
 import datePicker from './date-picker';
+import formGroup from './form-group';
+import inputGroup from './input-group';
 
 
 const components = {
@@ -19,6 +21,8 @@ const components = {
   multiSelect,
   countbox,
   datePicker,
+  formGroup,
+  inputGroup,
 };
 
 
