@@ -128,7 +128,7 @@ const BaseFilter = ({
     <div ref={ref} className={styles.root}>
       <div className={cx(styles.trigger, {
         [styles.active]: panelOpen || active,
-      })} onClick={() => setPanelOpen(true)}>
+      })} onClick={() => panelOpen ? setPanelOpen(false) : setPanelOpen(true)}>
         {label}
         <Icon
           onClick={(e) => {
