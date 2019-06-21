@@ -34,6 +34,7 @@ const styles = {
   vertical: css`
     flex-direction: column;
     align-items: stretch;
+    border-right: 1px solid ${sv.neutral};
 
     &::after {
       content: none;
@@ -51,6 +52,16 @@ const styles = {
         width: 0px;
       }
     }
+
+    & > div:last-of-type {
+      border-bottom: none;
+    }
+
+    & > a:last-of-type {
+      > div {
+        border-bottom: none;
+      }
+    }
   `,
   item: css`
     display: flex;
@@ -63,7 +74,7 @@ const styles = {
     &:hover {
       cursor: pointer;
       color: ${sv.colorPrimary};
-      background: ${fade(sv.neutralLight, 30)};
+      background: ${fade(sv.neutralLight, 50)};
     }
 
     &::after {
@@ -86,7 +97,7 @@ const styles = {
     }
   `,
   verticalActive: css`
-    background: ${fade(sv.brandLight, 20)} !important;
+    background: ${sv.neutralLight} !important;
 
     &::after {
       width: 4px !important;
