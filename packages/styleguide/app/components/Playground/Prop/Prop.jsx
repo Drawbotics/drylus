@@ -7,6 +7,7 @@ import {
   InputProp,
   CheckboxProp,
 } from './props';
+import { normalizeValue } from './utils';
 
 
 const styles = {
@@ -55,7 +56,7 @@ const Prop = ({
       );
     case 'number':
       return (
-        <InputProp prop={propWithKey} value={value} onChange={(v, n) => onChange(v, n)} />
+        <InputProp prop={propWithKey} value={value} onChange={(v, n) => onChange(normalizeValue(v), n)} />
       );
     case 'union':
       return (
