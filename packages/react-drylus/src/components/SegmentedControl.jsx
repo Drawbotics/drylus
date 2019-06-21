@@ -23,19 +23,41 @@ const styles = {
     color: ${sv.colorSecondary};
     margin: 0 2px;
     transition: ${sv.defaultTransition};
+    position: relative;
+    display: flex;
+
+    > * {
+      z-index: 1;
+    }
 
     &:hover {
       cursor: pointer;
       background: ${sv.neutral};
       color: ${sv.colorPrimary};
     }
+
+    &::before {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: ${sv.white};
+      border-radius: calc(${sv.defaultBorderRadius} - 1px);
+      opacity: 0;
+      transform: scale(0.2);
+      transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    }
   `,
   active: css`
-    background: ${sv.white};
-    color: ${sv.colorPrimary};
+    &::before {
+      opacity: 1;
+      transform: scale(1);
+    }
 
     &:hover {
-      background: ${sv.white};
+      background: transparent;
     }
   `,
   disabled: css`
@@ -75,7 +97,7 @@ const SegmentedControl = ({
             [styles.disabled]: option.disabled,
           })}
           onClick={! option.disabled ? () => onChange(option[valueKey]) : null}>
-          {option[labelKey]}
+          <span>{option[labelKey]}</span>
           {do{
             if (option.bullet) {
               <div data-element="bullet" className={styles.bullet}>
