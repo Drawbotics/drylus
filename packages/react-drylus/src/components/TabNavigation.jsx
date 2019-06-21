@@ -34,7 +34,6 @@ const styles = {
   vertical: css`
     flex-direction: column;
     align-items: stretch;
-    border-right: 1px solid ${sv.neutral};
 
     &::after {
       content: none;
