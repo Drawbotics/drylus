@@ -109,7 +109,7 @@ Text.propTypes = {
   /** Makes the text appear disabled, but still selectable */
   disabled: PropTypes.bool,
 
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 
   category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
 };
