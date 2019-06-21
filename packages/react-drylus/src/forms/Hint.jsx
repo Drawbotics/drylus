@@ -1,6 +1,10 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
+import PropTypes from 'prop-types';
+
+import Categories from '../base/Categories';
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -9,18 +13,29 @@ const styles = {
     color: ${sv.colorSecondary};
     margin-top: ${sv.marginExtraSmall};
   `,
-  error: css`
+  danger: css`
     color: ${sv.red};
   `,
 }
 
 
-const Hint = ({ children, error }) => {
+const Hint = ({ children, category }) => {
   return (
-    <div className={cx(styles.root, { [styles.error]: error })}>
+    <div
+      className={cx(styles.root, {
+        [styles[getEnumAsClass(category)]]: category,
+      })}>
       {children}
     </div>
   );
+};
+
+
+Hint.propTypes = {
+  /** Text displayed by the hint */
+  children: PropTypes.string.isRequired,
+
+  category: PropTypes.oneOf([ Categories.DANGER ]),
 };
 
 

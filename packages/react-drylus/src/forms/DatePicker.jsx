@@ -22,6 +22,7 @@ const styles = {
     transform: translateY(-5px);
     pointer-events: none;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    width: 350px;
   `,
   visible: css`
     opacity: 1;

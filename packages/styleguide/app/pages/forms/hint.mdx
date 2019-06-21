@@ -1,0 +1,11 @@
+import { Hint } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Hint
+Used to display hints or errors on form elements. You should __never__ have to use this in anything other than complex `FormGroups`, if you need to set a hint to a form element use the `hint` or `error` props already provided. It sets its own margin on top, so no need to set that yourself.
+
+<Playground component={Hint}>
+  <Hint>This is a hint</Hint>
+</Playground>

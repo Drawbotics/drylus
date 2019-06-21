@@ -1,0 +1,37 @@
+import {
+  InputGroup,
+  Input,
+  Select,
+  Checkbox,
+  DatePicker,
+} from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Input Group
+This component is used to group together different types of form inputs (selects, inputs, checkboxes etc.). Should not be used on its own, rather with [`FormGroup`](/forms/form-group)
+
+<Playground component={InputGroup}>
+  <InputGroup>
+    <Checkbox checked>First one</Checkbox>
+    <Checkbox>Second one</Checkbox>
+    <Checkbox>Third one</Checkbox>
+  </InputGroup>
+</Playground>
+
+**NOTE**: you can set `valid` and `error` like you would on the form elements themselves, but it is important to know that you can override the value by setting those props in each form element as well. See _Address_ example in [`FormGroup`](/forms/form-group).
+
+
+### Examples
+
+You are not limited to only `Input` of course, you can group any type of form element, for example inputs here:
+
+Example with error
+<Playground>
+  <InputGroup valid>
+    <Input value="First thing" onChange={x=>x} />
+    <Input value="Second thing" onChange={x=>x} />
+    <Input placeholder="Third thing..." onChange={x=>x} value="" />
+  </InputGroup>
+</Playground>

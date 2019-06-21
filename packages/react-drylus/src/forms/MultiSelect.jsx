@@ -136,6 +136,9 @@ const styles = {
     top: calc(${sv.marginExtraSmall} * 1.5);
     right: calc(${sv.marginSmall} * 2 + ${sv.marginExtraSmall});
   `,
+  placeholder: css`
+    color: ${sv.colorSecondary};
+  `,
 };
 
 
@@ -259,7 +262,7 @@ const MultiSelect = ({
       }}
       {do{
         if (error && typeof error === 'string') {
-          <Hint error>{error}</Hint>
+          <Hint category={Categories.DANGER}>{error}</Hint>
         }
         else if (hint) {
           <Hint>{hint}</Hint>
