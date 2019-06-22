@@ -3,7 +3,15 @@ import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
-import { Title, Paragraph, TextLink, LinkUnderlined } from '@drawbotics/react-drylus';
+import {
+  Title,
+  Paragraph,
+  TextLink,
+  LinkUnderlined,
+  Panel,
+  PanelSection,
+  PanelBody,
+} from '@drawbotics/react-drylus';
 import { Link } from 'react-router-dom';
 
 import Code from './Code';
@@ -32,14 +40,31 @@ const components = {
   },
   code: Code,
   inlineCode: InlineCode,
+  wrapper: ({ children, ...props }) => {
+    const [ title, ...rest ] = children;
+    // console.log(rest);
+    if (title?.props.mdxType === 'h1') {
+      return (
+        <>
+          {title}
+          <Panel body={
+            <PanelBody>
+              <PanelSection>
+                {rest}
+              </PanelSection>
+            </PanelBody>} />
+        </>
+      );
+    }
+    return children;
+  }
 }
 
 
 const Renderer = (props) => {
   return (
     <MDXProvider components={components}>
-      <div {...props} className={styles.content}>
-      </div>
+      <div {...props} className={styles.content} />
     </MDXProvider>
   );
 };

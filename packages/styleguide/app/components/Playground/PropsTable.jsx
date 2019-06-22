@@ -5,9 +5,6 @@ import {
   THead,
   TCell,
   TRow,
-  Panel,
-  PanelBody,
-  PanelSection,
   Sizes,
   Tiers,
   Categories,
@@ -26,56 +23,49 @@ function getProps(Component) {
 const PropsTable = ({ component, onChange, activeProps, enums }) => {
   const props = getProps(component);
   return (
-    <Panel
-      body={
-        <PanelBody noPadding>
-          <PanelSection>
-            <Table>
-              <THead>
-                <TCell>Name</TCell>
-                <TCell>Type</TCell>
-                <TCell>Default</TCell>
-                <TCell>Required</TCell>
-                <TCell>Description</TCell>
-                <TCell>{activeProps && 'Values'}</TCell>
-              </THead>
-              <TBody>
-                {Object.keys(props).sort().map((key) => (
-                  <TRow key={key}>
-                    <TCell>{key}</TCell>
-                    <TCell>{props[key].type.name}</TCell>
-                    <TCell>{props[key].defaultValue?.value.replace(/'/g, '') || null}</TCell>
-                    <TCell>{String(props[key].required)}</TCell>
-                    <TCell>
-                      {do{
-                        if (props[key].description) {
-                          props[key].description;
-                        }
-                        else if (props[key].type.name === 'enum') {
-                          const values = props[key].type.value.map((v) => v.value.replace(/'/g, ''));
-                          `One of: ${values.join(', ')}`;
-                        }
-                      }}
-                    </TCell>
-                    <TCell>
-                      {do{
-                        if (activeProps) {
-                          <Prop
-                            enums={{ ...enums, Categories, Sizes, Tiers }}
-                            name={key}
-                            prop={props[key]}
-                            value={activeProps[key]}
-                            onChange={onChange} />
-                        }
-                      }}
-                    </TCell>
-                  </TRow>
-                ))}
-              </TBody>
-            </Table>
-          </PanelSection>
-        </PanelBody>
-      } />
+    <Table>
+      <THead>
+        <TCell>Name</TCell>
+        <TCell>Type</TCell>
+        <TCell>Default</TCell>
+        <TCell>Required</TCell>
+        <TCell>Description</TCell>
+        <TCell>{activeProps && 'Values'}</TCell>
+      </THead>
+      <TBody>
+        {Object.keys(props).sort().map((key) => (
+          <TRow key={key}>
+            <TCell>{key}</TCell>
+            <TCell>{props[key].type.name}</TCell>
+            <TCell>{props[key].defaultValue?.value.replace(/'/g, '') || null}</TCell>
+            <TCell>{String(props[key].required)}</TCell>
+            <TCell>
+              {do{
+                if (props[key].description) {
+                  props[key].description;
+                }
+                else if (props[key].type.name === 'enum') {
+                  const values = props[key].type.value.map((v) => v.value.replace(/'/g, ''));
+                  `One of: ${values.join(', ')}`;
+                }
+              }}
+            </TCell>
+            <TCell>
+              {do{
+                if (activeProps) {
+                  <Prop
+                    enums={{ ...enums, Categories, Sizes, Tiers }}
+                    name={key}
+                    prop={props[key]}
+                    value={activeProps[key]}
+                    onChange={onChange} />
+                }
+              }}
+            </TCell>
+          </TRow>
+        ))}
+      </TBody>
+    </Table>
   );
 };
 

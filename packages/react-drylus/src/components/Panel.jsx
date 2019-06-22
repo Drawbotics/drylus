@@ -9,6 +9,7 @@ const styles = {
     background: ${sv.white};
     box-shadow: ${sv.elevation3};
     border-radius: ${sv.borderRadiusSmall};
+    overflow: auto;
   `,
   header: css`
     padding: ${sv.defaultPadding};
