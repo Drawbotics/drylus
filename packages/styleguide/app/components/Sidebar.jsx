@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import sv from '@drawbotics/style-vars';
+import sv, { fade } from '@drawbotics/style-vars';
 import omit from 'lodash/omit';
 import startCase from 'lodash/startCase';
 import kebabCase from 'lodash/kebabCase';
@@ -13,6 +13,9 @@ const styles = {
   sidebar: css`
     background: ${sv.neutralLightest};
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
   `,
   sidebarTitle: css`
     padding: ${sv.paddingExtraLarge} ${sv.defaultPadding};
@@ -21,28 +24,58 @@ const styles = {
     border-bottom: 1px solid ${sv.neutral};
   `,
   links: css`
-    margin-top: ${sv.defaultMargin};
+    flex: 1;
     overflow: scroll;
+    padding-top: ${sv.defaultPadding};
   `,
   title: css`
     color: ${sv.colorSecondary};
     text-transform: uppercase;
-    margin-bottom: ${sv.marginSmall};
+    padding: ${sv.paddingExtraSmall} ${sv.defaultPadding};
+
+    a {
+      cursor: pointer;
+      color: ${sv.colorSecondary};
+    }
   `,
   link: css`
-    margin-bottom: ${sv.marginSmall};
+    position: relative;
+    padding: ${sv.paddingExtraSmall} ${sv.defaultPadding};
     color: ${sv.colorPrimary};
 
     &:hover {
       cursor: pointer;
-      color: ${sv.blue};
+      background: ${fade(sv.neutralLight, 50)};
+    }
+
+    &::after {
+      content: ' ';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0px;
+      height: 100%;
+      background: ${sv.brand};
+      z-index: 2;
+      transition: ${sv.defaultTransition};
     }
   `,
   sublinks: css`
-    padding-left: ${sv.defaultPadding};
+    & > a > [data-element="link"] {
+      padding-left: ${sv.paddingExtraLarge};
+    }
   `,
   root: css`
-    padding-left: 0;
+    & > a > [data-element="link"] {
+      padding-left: ${sv.defaultPadding};
+    }
+  `,
+  active: css`
+    background: ${sv.neutralLight} !important;
+
+    &::after {
+      width: 4px !important;
+    }
   `,
 };
 
@@ -50,18 +83,20 @@ const styles = {
 export function generateLinks(route, routeName, parent='') {
   const newPath = routeName ? `/${kebabCase(parent)}/${kebabCase(routeName)}` : `/${kebabCase(parent)}`;
   const cleaned = newPath.replace(/\/+/g, '/');
+  const active = window.location.pathname.replace('/drylus', '') === cleaned;
   if (typeof route !== 'function') {
     return (
       <div key={cleaned} className={styles.section}>
         {do{
           if (routeName) {
-            <div className={styles.title}>
+            <div className={cx(styles.title, {
+              [styles.link]: route.index,
+              [styles.active]: active,
+            })}>
               {do{
                 if (route.index) {
                   <Link href={cleaned}>
-                    <div className={styles.link}>
-                      {startCase(routeName)}
-                    </div>
+                    {startCase(routeName)}
                   </Link>
                 }
                 else {
@@ -80,7 +115,11 @@ export function generateLinks(route, routeName, parent='') {
   else {
     return (
       <Link key={cleaned} href={cleaned}>
-        <div className={styles.link}>
+        <div
+          className={cx(styles.link, {
+            [styles.active]: active,
+          })}
+          data-element="link">
           {startCase(routeName)}
         </div>
       </Link>

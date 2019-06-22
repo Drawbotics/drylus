@@ -33,8 +33,6 @@ const styles = {
   `,
   table: css`
     margin-top: ${sv.defaultMargin};
-    border: 1px solid ${sv.neutralLight};
-    overflow: scroll;
   `,
   code: css`
     position: relative;
