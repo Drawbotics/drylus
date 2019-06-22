@@ -41,8 +41,10 @@ const components = {
   code: Code,
   inlineCode: InlineCode,
   wrapper: ({ children, ...props }) => {
+    if (React.Children.count(children) <= 1) {
+      return children;
+    }
     const [ title, ...rest ] = children;
-    // console.log(rest);
     if (title?.props.mdxType === 'h1') {
       return (
         <>

@@ -4,18 +4,25 @@ import sv from '@drawbotics/style-vars';
 import omit from 'lodash/omit';
 import startCase from 'lodash/startCase';
 import kebabCase from 'lodash/kebabCase';
+import { Title } from '@drawbotics/react-drylus';
 
 import Link from './Link';
 
 
 const styles = {
   sidebar: css`
-    background: ${sv.neutral};
-    padding: ${sv.defaultPadding};
+    background: ${sv.neutralLightest};
     flex: 1;
+  `,
+  sidebarTitle: css`
+    padding: ${sv.paddingExtraLarge} ${sv.defaultPadding};
+    padding-left: 0;
+    margin: 0 ${sv.marginSmall};
+    border-bottom: 1px solid ${sv.neutral};
   `,
   links: css`
     margin-top: ${sv.defaultMargin};
+    overflow: scroll;
   `,
   title: css`
     color: ${sv.colorSecondary};
@@ -85,7 +92,9 @@ export function generateLinks(route, routeName, parent='') {
 const Sidebar = ({ routes }) => {
   return (
     <div className={styles.sidebar}>
-      Styleguide sidebar
+      <div className={styles.sidebarTitle}>
+        <Title size={4} noMargin>Component kit</Title>
+      </div>
       <div className={styles.links}>
         {generateLinks(routes)}
       </div>
