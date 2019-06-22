@@ -5,9 +5,7 @@ import omit from 'lodash/omit';
 import startCase from 'lodash/startCase';
 import kebabCase from 'lodash/kebabCase';
 import { Title } from '@drawbotics/react-drylus';
-import { withRouter } from 'react-router-dom';
-
-import Link from './Link';
+import { withRouter, Link } from 'react-router-dom';
 
 
 const styles = {
@@ -30,14 +28,9 @@ const styles = {
     padding-top: ${sv.defaultPadding};
   `,
   title: css`
-    color: ${sv.colorSecondary};
+    color: ${sv.colorSecondary} !important;
     text-transform: uppercase;
     padding: ${sv.paddingExtraSmall} ${sv.defaultPadding};
-
-    a {
-      cursor: pointer;
-      color: ${sv.colorSecondary};
-    }
   `,
   link: css`
     position: relative;
@@ -90,21 +83,24 @@ export function generateLinks(route, routeName, parent='', pathname) {
       <div key={cleaned} className={styles.section}>
         {do{
           if (routeName) {
-            <div className={cx(styles.title, {
-              [styles.link]: route.index,
-              [styles.active]: active,
-            })}>
-              {do{
-                if (route.index) {
-                  <Link href={cleaned}>
-                    {startCase(routeName)}
-                  </Link>
-                }
-                else {
-                  routeName
-                }
-              }}
-            </div>
+            const link = (
+              <div className={cx(styles.title, {
+                [styles.link]: route.index,
+                [styles.active]: active,
+              })}>
+                {startCase(routeName)}
+              </div>
+            );
+            if (route.index) {
+              return (
+                <Link to={cleaned}>
+                  {link}
+                </Link>
+              );
+            }
+            else {
+              return link;
+            }
           }
         }}
         <div className={cx(styles.sublinks, { [styles.root]: ! routeName })}>
@@ -115,7 +111,7 @@ export function generateLinks(route, routeName, parent='', pathname) {
   }
   else {
     return (
-      <Link key={cleaned} href={cleaned}>
+      <Link key={cleaned} to={cleaned}>
         <div
           className={cx(styles.link, {
             [styles.active]: active,
