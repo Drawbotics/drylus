@@ -8,7 +8,6 @@ const styles = {
   root: css`
     background: ${sv.white};
     box-shadow: ${sv.elevation3};
-    overflow: auto;
     border-radius: ${sv.borderRadiusSmall};
   `,
   header: css`
