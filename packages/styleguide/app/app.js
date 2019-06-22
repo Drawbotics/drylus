@@ -25,9 +25,9 @@ const App = () => {
       <ThemeProvider>
         <Page>
           <Layout
-            // bar={<Navbar />}
             bar={<Sidebar routes={pages} />}
             position={LayoutPositions.LEFT}
+            barScrollable
             fixed>
             <Content fullHeight>
               <RoutesRenderer routes={pages} />

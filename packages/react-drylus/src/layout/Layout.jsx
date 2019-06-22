@@ -61,7 +61,6 @@ const styles = {
     }
   `,
   bar: css`
-    overflow: scroll;
     display: flex;
     flex-direction: column;
   `,
@@ -93,12 +92,13 @@ const Layout = ({
   position,
   bar,
   fixed,
+  barScrollable,
 }) => {
   return (
     <div data-element="layout" className={cx(styles.layout, {
       [styles[getEnumAsClass(position)]]: position,
     })}>
-      <div className={styles.bar} data-element="layout-bar">{bar}</div>
+      <div className={cx(styles.bar, { [styles.scrollable]: barScrollable })} data-element="layout-bar">{bar}</div>
       <div className={cx(styles.content, { [styles.scrollable]: fixed })} data-element="layout-content">{children}</div>
     </div>
   );
@@ -122,6 +122,9 @@ Layout.propTypes = {
 
   /** If true the component will be fixed in place, and the children will scroll independently */
   fixed: PropTypes.bool,
+
+  /** If true the sidebar container is made scrollable */
+  barScrollable: PropTypes.bool,
 };
 
 
