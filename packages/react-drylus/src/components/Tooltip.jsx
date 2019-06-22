@@ -170,11 +170,14 @@ const Tooltip = ({ children, message, side }) => {
   }, []);
 
   useEffect(() => {
+    let timeout = null;
+
     const handleMouseEnter = () => {
-      setVisible(true);
+      timeout = setTimeout(() => setVisible(true), 200);
     }
 
     const handleMouseLeave = () => {
+      clearTimeout(timeout);
       setVisible(false);
     };
 
