@@ -15,6 +15,7 @@ const styles = {
   codeWrapper: css`
     overflow: scroll;
     display: flex;
+    border-radius: ${sv.defaultBorderRadius};
   `,
   code: css`
     flex: 1;
