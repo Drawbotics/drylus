@@ -33,6 +33,7 @@ const styles = {
   `,
   table: css`
     margin-top: ${sv.defaultMargin};
+    border: 1px solid ${sv.neutralLight};
   `,
   code: css`
     position: relative;
