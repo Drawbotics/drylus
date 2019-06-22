@@ -5,6 +5,7 @@ import omit from 'lodash/omit';
 import startCase from 'lodash/startCase';
 import kebabCase from 'lodash/kebabCase';
 import { Title } from '@drawbotics/react-drylus';
+import { withRouter } from 'react-router-dom';
 
 import Link from './Link';
 
@@ -80,10 +81,10 @@ const styles = {
 };
 
 
-export function generateLinks(route, routeName, parent='') {
+export function generateLinks(route, routeName, parent='', pathname) {
   const newPath = routeName ? `/${kebabCase(parent)}/${kebabCase(routeName)}` : `/${kebabCase(parent)}`;
   const cleaned = newPath.replace(/\/+/g, '/');
-  const active = window.location.pathname.replace('/drylus', '') === cleaned;
+  const active = pathname === cleaned;
   if (typeof route !== 'function') {
     return (
       <div key={cleaned} className={styles.section}>
@@ -107,7 +108,7 @@ export function generateLinks(route, routeName, parent='') {
           }
         }}
         <div className={cx(styles.sublinks, { [styles.root]: ! routeName })}>
-          {Object.keys(omit(route, 'index')).map((routeName) => generateLinks(route[routeName], routeName, newPath))}
+          {Object.keys(omit(route, 'index')).map((routeName) => generateLinks(route[routeName], routeName, newPath, pathname))}
         </div>
       </div>
     );
@@ -128,18 +129,18 @@ export function generateLinks(route, routeName, parent='') {
 }
 
 
-const Sidebar = ({ routes }) => {
+const Sidebar = ({ routes, location }) => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebarTitle}>
         <Title size={4} noMargin>Component kit</Title>
       </div>
       <div className={styles.links}>
-        {generateLinks(routes)}
+        {generateLinks(routes, undefined, undefined, location.pathname)}
       </div>
     </div>
   );
 };
 
 
-export default Sidebar;
+export default withRouter(Sidebar);
