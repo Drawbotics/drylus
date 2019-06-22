@@ -49,7 +49,7 @@ const components = {
           {title}
           <Panel body={
             <PanelBody>
-              <PanelSection>
+              <PanelSection title="Description">
                 {rest}
               </PanelSection>
             </PanelBody>} />
