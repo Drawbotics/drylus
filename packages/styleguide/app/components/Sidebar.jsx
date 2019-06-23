@@ -12,7 +12,6 @@ import {
 } from '@drawbotics/react-drylus';
 
 import Search from './Search';
-// import pages from '../pages';
 
 
 const styles = {
@@ -93,7 +92,6 @@ const Logo = () => {
 
 const Sidebar = () => {
   const [ searchOpen, toggleSearch ] = useState(false);
-  // console.log(pages)
   return (
     <div className={styles.sidebar}>
       <Flex direction={FlexDirections.VERTICAL} justify={FlexJustify.START}>
@@ -119,7 +117,9 @@ const Sidebar = () => {
           </Margin>
         </FlexItem>
       </Flex>
-      <Search open={searchOpen} onClickClose={() => toggleSearch(false)} />
+      <Search
+        open={searchOpen}
+        onClickClose={() => toggleSearch(false)} />
     </div>
   );
 };

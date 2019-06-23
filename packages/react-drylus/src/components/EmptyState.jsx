@@ -126,7 +126,7 @@ const EmptyState = ({
 
 EmptyState.propTypes = {
   /** Main title to explain the situation */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
 
   /** Text shown to explain the situation */
   description: PropTypes.string,

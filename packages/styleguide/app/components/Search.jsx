@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { css } from 'emotion';
 import {
   Modal,
@@ -10,17 +10,24 @@ import {
   Sizes,
   ListTile,
   Separator,
+  EmptyState,
+  Margin,
 } from '@drawbotics/react-drylus';
 import sv from '@drawbotics/style-vars';
 import { Link } from 'react-router-dom';
 
-// import { generateRoutes } from '../utils';
+import { generateRouteObjects } from '../utils';
+import pages from '../pages';
+
+
+const routes = generateRouteObjects(pages);
 
 
 const styles = {
   results: css`
-    min-height: 300px;
+    height: 300px;
     margin-top: ${sv.marginSmall};
+    overflow: scroll;
   `,
   result: css`
     padding: ${sv.paddingSmall} ${sv.paddingExtraSmall};
@@ -33,13 +40,7 @@ const styles = {
 };
 
 
-// function groupRoutes() {
-//   const listed = generateRoutes(routes);
-//   return listed;
-// }
-
-
-function getIconForCategory(category) {
+function _getIconForCategory(category) {
   switch (category) {
     case 'brand':
       return 'tag';
@@ -56,7 +57,7 @@ function getIconForCategory(category) {
 
 
 const Result = ({ category, title, url, onClick }) => {
-  const icon = getIconForCategory(category);
+  const icon = _getIconForCategory(category);
   return (
     <Link to={url}>
       <div className={styles.result} onClick={onClick}>
@@ -73,13 +74,34 @@ const Result = ({ category, title, url, onClick }) => {
 const Search = ({ open, onClickClose }) => {
   const [ searchTerm, setTerm ] = useState('');
   const [ searching, setSearching ] = useState(false);
+
+  const handleOnChange = (v) => {
+    let timeout;
+    if (v === '') {
+      setSearching(false);
+      setTerm(v);
+      clearTimeout(timeout);
+    }
+    else {
+      clearTimeout(timeout);
+      setTerm(v);
+      setSearching(true);
+      timeout = setTimeout(async () => setSearching(false), 500);
+    }
+  };
+
+  const handleOnClose = () => {
+    onClickClose();
+    setTimeout(() => setTerm(''), 500);
+  };
+
   return (
     <Modal
       title="Search documentation"
       visible={open}
-      onClickClose={onClickClose}>
+      onClickClose={handleOnClose}>
       <Input
-        onChange={(v) => setTerm(v)}
+        onChange={handleOnChange}
         value={searchTerm}
         placeholder="Component name, page..."
         suffix={
@@ -89,9 +111,32 @@ const Search = ({ open, onClickClose }) => {
             trailing={searching ? <Spinner size={Sizes.SMALL} inversed /> : <Icon name="search" />} />
         } />
       <div className={styles.results}>
-        <Result onClick={onClickClose} category="brand" title="Colors" url="/brand/colors" />
-        <Separator />
-        <Result onClick={onClickClose} category="components" title="Modal" url="/components/modal" />
+        {do {
+          if (! searching && Boolean(searchTerm)) {
+            routes.filter((route) =>
+              route.url.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              route.name.toLowerCase().includes(searchTerm.toLowerCase()))
+              .map((route, i, array) => (
+                <Fragment key={i}>
+                  <Result
+                    onClick={handleOnClose}
+                    category={route.base}
+                    title={route.name}
+                    url={route.url} />
+                  {do {
+                    if (i < array.length - 1) {
+                      <Separator />
+                    }
+                  }}
+                </Fragment>
+              ));
+          }
+          else {
+            <Margin size={{ top: Sizes.DEFAULT }}>
+              <EmptyState description="No results. Type to find documentation." />
+            </Margin>
+          }
+        }}
       </div>
     </Modal>
   );
