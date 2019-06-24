@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React from 'react';
+import React, { Fragment } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
@@ -47,7 +47,7 @@ const components = {
     const [ title, ...rest ] = children;
     if (title?.props.mdxType === 'h1') {
       return (
-        <>
+        <Fragment>
           {title}
           <Panel body={
             <PanelBody>
@@ -55,7 +55,7 @@ const components = {
                 {rest}
               </PanelSection>
             </PanelBody>} />
-        </>
+        </Fragment>
       );
     }
     return children;

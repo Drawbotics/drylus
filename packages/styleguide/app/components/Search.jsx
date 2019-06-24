@@ -115,23 +115,23 @@ const Search = ({ open, onClickClose }) => {
       <div className={styles.results}>
         {do {
           if (searchTerm) {
-            routes.filter((route) =>
-              route.url.toLowerCase().includes(searchTerm.toLowerCase()) ||
-              route.name.toLowerCase().includes(searchTerm.toLowerCase()))
-              .map((route, i, array) => (
-                <Fragment key={i}>
-                  <Result
-                    onClick={handleOnClose}
-                    category={route.base}
-                    title={route.name}
-                    url={route.url} />
-                  {do {
-                    if (i < array.length - 1) {
-                      <Separator />
-                    }
-                  }}
-                </Fragment>
-              ));
+            routes.filter((route) => {
+              return route.url.toLowerCase().includes(searchTerm.toLowerCase()) || route.name.toLowerCase().includes(searchTerm.toLowerCase());
+            })
+            .map((route, i, array) => (
+              <Fragment key={i}>
+                <Result
+                  onClick={handleOnClose}
+                  category={route.base}
+                  title={route.name}
+                  url={route.url} />
+                {do {
+                  if (i < array.length - 1) {
+                    <Separator />
+                  }
+                }}
+              </Fragment>
+            ));
           }
           else {
             <Margin size={{ top: Sizes.DEFAULT }}>
