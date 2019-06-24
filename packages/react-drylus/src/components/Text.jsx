@@ -73,6 +73,7 @@ const Text = ({
   disabled,
   children,
   category,
+  style,
 }) => {
   return (
     <span className={cx(styles.root, {
@@ -89,7 +90,7 @@ const Text = ({
       [styles.default]: size === Sizes.DEFAULT,
       [styles.large]: size === Sizes.LARGE,
       [styles[getEnumAsClass(category)]]: category && ! disabled && ! inversed,
-    })}>
+    })} style={style}>
       {children}
     </span>
   );
@@ -112,6 +113,9 @@ Text.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 
   category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
+
+  /** Custom style object override */
+  style: PropTypes.object,
 };
 
 

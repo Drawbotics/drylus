@@ -9,7 +9,7 @@ const InputProp = ({
 }) => {
   const { key } = prop;
   return (
-    <div>
+    <div style={{ minWidth: 150 }}>
       <Input
         name={key}
         value={value === 0 ? value : (value || '')}
