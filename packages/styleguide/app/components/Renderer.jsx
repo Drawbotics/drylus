@@ -1,9 +1,17 @@
 /* eslint-disable react/display-name */
-import React from 'react';
+import React, { Fragment } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
-import { Title, Paragraph, TextLink, LinkUnderlined } from '@drawbotics/react-drylus';
+import {
+  Title,
+  Paragraph,
+  TextLink,
+  LinkUnderlined,
+  Panel,
+  PanelSection,
+  PanelBody,
+} from '@drawbotics/react-drylus';
 import { Link } from 'react-router-dom';
 
 import Code from './Code';
@@ -32,14 +40,33 @@ const components = {
   },
   code: Code,
   inlineCode: InlineCode,
+  wrapper: ({ children, ...props }) => {
+    if (React.Children.count(children) <= 1) {
+      return children;
+    }
+    const [ title, ...rest ] = children;
+    if (title?.props.mdxType === 'h1') {
+      return (
+        <Fragment>
+          {title}
+          <Panel body={
+            <PanelBody>
+              <PanelSection title="Description">
+                {rest}
+              </PanelSection>
+            </PanelBody>} />
+        </Fragment>
+      );
+    }
+    return children;
+  }
 }
 
 
 const Renderer = (props) => {
   return (
     <MDXProvider components={components}>
-      <div {...props} className={styles.content}>
-      </div>
+      <div {...props} className={styles.content} />
     </MDXProvider>
   );
 };

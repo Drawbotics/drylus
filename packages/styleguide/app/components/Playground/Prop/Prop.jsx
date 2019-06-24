@@ -5,7 +5,7 @@ import sv from '@drawbotics/style-vars';
 import {
   SelectProp,
   InputProp,
-  CheckboxProp,
+  ToggleProp,
 } from './props';
 import { normalizeValue } from './utils';
 
@@ -44,7 +44,7 @@ const Prop = ({
   switch (type) {
     case 'bool':
       return (
-        <CheckboxProp prop={propWithKey} value={value} onChange={onChange} />
+        <ToggleProp prop={propWithKey} value={value} onChange={onChange} />
       );
     case 'enum':
       return (
