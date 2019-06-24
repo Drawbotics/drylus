@@ -177,7 +177,7 @@ const Flex = ({
   align=FlexAlign.CENTER,
   wrap=false,
   className,
-  styles: extraStyles,
+  style,
   vSpacing,
   hSpacing,
 }) => {
@@ -189,7 +189,7 @@ const Flex = ({
       [styles.wrap]: wrap,
       [styles[camelCase(`hSpacing${hSpacing?.description}`)]]: hSpacing,
       [styles[camelCase(`vSpacing${vSpacing?.description}`)]]: vSpacing,
-    }, className)} styles={extraStyles}>
+    }, className)} style={style}>
       {children}
     </div>
   );
@@ -225,7 +225,7 @@ Flex.propTypes = {
   wrap: PropTypes.bool,
 
   /** To override simple styles on the flex element, use only for properties that do not require prefixing */
-  styles: PropTypes.object,
+  style: PropTypes.object,
 
   /** If you need to customize the Flex container pass a custom className. E.g. if you want to use `display: inline-flex` */
   className: PropTypes.string,
