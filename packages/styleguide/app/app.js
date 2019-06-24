@@ -33,7 +33,6 @@ const App = () => {
               </Layout>
             }
             position={LayoutPositions.LEFT}
-            barScrollable
             fixed>
             <Content fullHeight>
               <RoutesRenderer routes={pages} />

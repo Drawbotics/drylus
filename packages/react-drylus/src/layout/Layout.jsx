@@ -123,8 +123,13 @@ Layout.propTypes = {
   /** If true the component will be fixed in place, and the children will scroll independently */
   fixed: PropTypes.bool,
 
-  /** If true the sidebar container is made scrollable */
+  /** If false the sidebar container is not made scrollable */
   barScrollable: PropTypes.bool,
+};
+
+
+Layout.defaultProps = {
+  barScrollable: true,
 };
 
 
