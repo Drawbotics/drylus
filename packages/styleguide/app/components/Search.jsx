@@ -72,6 +72,7 @@ const Result = ({ category, title, url, onClick }) => {
 
 
 const Search = ({ open, onClickClose }) => {
+  const [ inputValue, setValue ] = useState('');
   const [ searchTerm, setTerm ] = useState('');
   const [ searching, setSearching ] = useState(false);
 
@@ -79,20 +80,21 @@ const Search = ({ open, onClickClose }) => {
     let timeout;
     if (v === '') {
       setSearching(false);
+      setValue(v);
       setTerm(v);
       clearTimeout(timeout);
     }
     else {
       clearTimeout(timeout);
-      setTerm(v);
+      setValue(v);
       setSearching(true);
-      timeout = setTimeout(async () => setSearching(false), 500);
+      timeout = setTimeout(async () => { setSearching(false); setTerm(v); }, 500);
     }
   };
 
   const handleOnClose = () => {
     onClickClose();
-    setTimeout(() => setTerm(''), 500);
+    setTimeout(() => { setValue(''); setTerm('') }, 500);
   };
 
   return (
@@ -102,7 +104,7 @@ const Search = ({ open, onClickClose }) => {
       onClickClose={handleOnClose}>
       <Input
         onChange={handleOnChange}
-        value={searchTerm}
+        value={inputValue}
         placeholder="Component name, page..."
         suffix={
           <Button
@@ -112,7 +114,7 @@ const Search = ({ open, onClickClose }) => {
         } />
       <div className={styles.results}>
         {do {
-          if (! searching && Boolean(searchTerm)) {
+          if (searchTerm) {
             routes.filter((route) =>
               route.url.toLowerCase().includes(searchTerm.toLowerCase()) ||
               route.name.toLowerCase().includes(searchTerm.toLowerCase()))
