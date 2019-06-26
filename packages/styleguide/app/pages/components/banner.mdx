@@ -1,0 +1,48 @@
+import {
+  Banner,
+  TextLink,
+  LinkUnderlined,
+  Categories,
+  Sizes,
+  Margin,
+} from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Banner
+Component used to display an important message that should take precedence over the rest of the content of the page. Similar to [`Callout`](/components/callout), but used to the inform the user of possible actions he needs to make, or as a result of an _uncontrolled_ effect. Cannot be dismissed.
+
+<Playground component={Banner}>
+  <Banner title="You don't have enough credits" category={Categories.DANGER}>
+    Your order will not go into production because your credit number is below 0. Click <TextLink underlined={LinkUnderlined.ALWAYS}>here</TextLink> to buy more credits.
+    <Margin size={{ top: Sizes.SMALL }}>
+      If you don't buy more in 10 days your order will be void.
+    </Margin>
+  </Banner>
+</Playground>
+
+For small information snippets you can leave it without title to be more concise and use less space.
+
+<Playground>
+  <>
+    <Margin size={{ bottom: Sizes.DEFAULT }}>
+      <Banner category={Categories.INFO}>
+        A new service is now available.
+      </Banner>
+    </Margin>
+    <Margin size={{ bottom: Sizes.DEFAULT }}>
+      <Banner category={Categories.WARNING}>
+        You used all your correction rounds.
+      </Banner>
+    </Margin>
+    <Margin size={{ bottom: Sizes.DEFAULT }}>
+      <Banner category={Categories.DANGER}>
+        Your floorplans will not go into production, we need them to get started.
+      </Banner>
+    </Margin>
+    <Banner category={Categories.SUCCESS}>
+      Congratulation, you can now send your items to production.
+    </Banner>
+  </>
+</Playground>

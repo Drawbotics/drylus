@@ -27,6 +27,7 @@ import toggle from './toggle';
 import separator from './separator';
 import circularProgress from './circular-progress';
 import emptyState from './empty-state';
+import banner from './banner';
 
 
 const components = {
@@ -59,6 +60,7 @@ const components = {
   separator,
   circularProgress,
   emptyState,
+  banner,
 };
 
 
