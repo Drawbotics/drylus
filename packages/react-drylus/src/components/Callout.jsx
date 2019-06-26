@@ -93,9 +93,6 @@ Callout.propTypes = {
   /** Message shown in the callout */
   children: PropTypes.node.isRequired,
 
-  /** Larger text shown beside the icon */
-  title: PropTypes.string,
-
   category: PropTypes.oneOf([
     Categories.DANGER,
     Categories.SUCCESS,
