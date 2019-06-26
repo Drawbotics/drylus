@@ -86,6 +86,9 @@ const styles = {
       background: ${sv.neutralLight};
     }
   `,
+  smallPadding: css`
+    padding: 5px ${sv.paddingSmall};
+  `,
   defaultCursor: css`
     &:hover {
       cursor: default;
@@ -195,7 +198,9 @@ export const SelectFilter = ({
       {options.map((option) => (
         <div
           key={option[valueKey]}
-          className={cx(styles.option, { [styles.activeOption]: value === option[valueKey] })}
+          className={cx(styles.option, styles.smallPadding, {
+            [styles.activeOption]: value === option[valueKey],
+          })}
           onClick={() => onChange(option[valueKey])}>
           <ListTile title={option[labelKey]} leading={option.leading} />
         </div>
