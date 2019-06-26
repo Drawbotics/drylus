@@ -67,7 +67,6 @@ function _getIconForCategory(category) {
 const Callout = ({
   children,
   category,
-  title,
 }) => {
   const icon = _getIconForCategory(category);
   return (
