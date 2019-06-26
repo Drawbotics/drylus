@@ -14,12 +14,6 @@ injectGlobal`
     line-height: ${sv.defaultLineHeight};
     letter-spacing: ${sv.defaultLetterSpacing};
   }
-
-  a {
-    cursor: default;
-    text-decoration: none;
-    color: initial;
-  }
 `;
 
 
@@ -27,6 +21,12 @@ const styles = {
   root: css`
     * {
       font-family: ${sv.defaultFontFamily};
+    }
+
+    a {
+      cursor: default;
+      text-decoration: none;
+      color: initial;
     }
   `,
 };
