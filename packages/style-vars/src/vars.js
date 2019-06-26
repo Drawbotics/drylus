@@ -33,26 +33,26 @@ export const azure = '#E0E7FF';
 export const azureLight = '#F9FAFF';
 
 export const redDark = '#BF0E08';
-export const red = '#FA1E30';
+export const red = '#EC4C47';
 export const redLight = '#fae2e2';
 export const redLighter = '#fef6f6';
 export const danger = red;
 export const error = red;
 
 export const orangeDark = '#a16d22';
-export const orange = '#FF8A00';
+export const orange = '#f8a00f';
 export const orangeLight = '#f9ebd6';
 export const orangeLighter = '#fff7eb';
 export const warning = orange;
 
 export const blueDark = '#2A41A2';
-export const blue = '#2E56C3';
+export const blue = '#4673D1';
 export const blueLight = '#CFD8FF';
 export const blueLighter = '#E7EBFC';
 export const info = blue;
 
 export const greenDark = '#288A70';
-export const green = '#00B687';
+export const green = '#3FBC9B';
 export const greenLight = '#C1E8DE';
 export const greenLighter = '#E7F5F1';
 export const success = green;
