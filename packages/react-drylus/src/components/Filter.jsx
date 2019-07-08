@@ -95,7 +95,7 @@ const styles = {
     }
   `,
   activeOption: css`
-    font-weight: bold;
+    font-weight: 500;
   `,
 };
 

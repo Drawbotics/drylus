@@ -65,7 +65,7 @@ const styles = {
   `,
   cell: css`
     text-align: left;
-    padding: calc(${sv.defaultPadding} - 4px) ${sv.defaultPadding};
+    padding: ${sv.paddingSmall} ${sv.defaultPadding};
   `,
   asContainer: css`
     padding-top: 0 !important;

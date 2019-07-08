@@ -12,7 +12,7 @@ const styles = {
     display: inline;
   `,
   bold: css`
-    font-weight: bold;
+    font-weight: 500;
   `,
   primary: css`
     color: ${sv.colorPrimary};
