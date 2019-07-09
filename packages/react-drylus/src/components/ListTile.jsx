@@ -58,14 +58,14 @@ const ListTile = ({
         }}
         <FlexItem flex>
           {do {
-            if (title) {
+            if (title != null) {
               <div className={cx(styles.title, { [styles.withMargin]: subtitle })}>
                 {title}
               </div>
             }
           }}
           {do {
-            if (subtitle) {
+            if (subtitle != null) {
               <div className={styles.subtitle}>
                 {subtitle}
               </div>
@@ -73,7 +73,7 @@ const ListTile = ({
           }}
         </FlexItem>
         {do {
-          if (trailing) {
+          if (trailing != null) {
             <FlexItem>
               <div className={styles.trailing}>
                 {trailing}

@@ -7,7 +7,7 @@ import { Categories, Sizes, Tiers } from '../base';
 import { getEnumAsClass } from '../utils';
 
 
-const styles = {
+export const styles = {
   root: css`
     background: ${sv.neutralLight};
     color: ${sv.colorPrimary};

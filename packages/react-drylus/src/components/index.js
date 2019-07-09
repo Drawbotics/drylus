@@ -33,3 +33,4 @@ export CircularProgress from './CircularProgress';
 export EmptyState from './EmptyState';
 export Banner from './Banner';
 export Callout from './Callout';
+export ButtonLink from './ButtonLink';

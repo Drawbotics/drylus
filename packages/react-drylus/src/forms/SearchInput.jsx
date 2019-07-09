@@ -57,6 +57,7 @@ const SearchInput = ({
   noResultLabel,
   placeholder,
   isLoading,
+  name,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
   const inputRef = useRef(null);
@@ -72,31 +73,36 @@ const SearchInput = ({
         }
         value={value}
         onChange={onChange}
+        name={name}
         ref={inputRef}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         placeholder={placeholder} />
-      <div className={cx(styles.list, {
-        [styles.visible]: shouldDisplayResults,
-      })}>
-        {do {
-          if (options?.length === 0) {
-            <div className={cx(styles.item, styles.noResult)}>
-              {noResultLabel}
-            </div>
-          }
-          else if (options) {
-            options.map((option) => (
-              <div key={option} className={styles.item} onClick={() => onChange(option)}>
-                {option}
-              </div>
-            ))
-          }
-          else {
-            return ''
-          }
-        }}
-      </div>
+      {do {
+        if (options == null) {
+          return null;
+        }
+        else {
+          <div className={cx(styles.list, {
+            [styles.visible]: shouldDisplayResults,
+          })}>
+            {do {
+              if (options.length === 0) {
+                <div className={cx(styles.item, styles.noResult)}>
+                  {noResultLabel}
+                </div>
+              }
+              else {
+                options.map((option) => (
+                  <div key={option} className={styles.item} onClick={() => onChange(option)}>
+                    {option}
+                  </div>
+                ))
+              }
+            }}
+          </div>
+        }
+      }}
     </div>
   );
 };
@@ -108,6 +114,9 @@ SearchInput.propTypes = {
 
   /** The text passed to the input */
   value: PropTypes.string.isRequired,
+
+  /** Name of the form element (target.name) */
+  name: PropTypes.string,
 
   /** Triggered when the text is changed, and when the search button is pressed */
   onChange: PropTypes.func.isRequired,

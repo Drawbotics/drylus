@@ -163,6 +163,9 @@ Select.propTypes = {
   /** Determines which value is currently active */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
+  /** Name of the form element (target.name) */
+  name: PropTypes.string,
+
   /** Disables the select */
   disabled: PropTypes.bool,
 

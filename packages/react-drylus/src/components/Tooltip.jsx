@@ -181,16 +181,11 @@ const Tooltip = ({ children, message, side }) => {
       setVisible(false);
     };
 
-    const layoutContent = document.querySelector('[data-element="layout-content"]');
-    const layoutBar = document.querySelector('[data-element="layout-bar"]');
-
     if (childrenRef.current) {
       childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
       childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
 
-      window.addEventListener('scroll', handleMouseLeave);
-      layoutContent?.addEventListener('scroll', handleMouseLeave);
-      layoutBar?.addEventListener('scroll', handleMouseLeave);
+      window.addEventListener('scroll', handleMouseLeave, true);
     }
 
     return () => {
@@ -198,8 +193,6 @@ const Tooltip = ({ children, message, side }) => {
       childrenRef.current?.removeEventListener('mouseleave', handleMouseLeave);
 
       window.removeEventListener('scroll', handleMouseLeave);
-      layoutContent?.removeEventListener('scroll', handleMouseLeave);
-      layoutBar?.removeEventListener('scroll', handleMouseLeave);
     };
   });
 

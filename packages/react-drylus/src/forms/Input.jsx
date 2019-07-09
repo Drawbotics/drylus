@@ -243,6 +243,9 @@ Input.propTypes = {
   /** Value displayed in the field */
   value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired,
 
+  /** Name of the form element (target.name) */
+  name: PropTypes.string,
+
   /** Disables the input */
   disabled: PropTypes.bool,
 

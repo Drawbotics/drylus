@@ -34,8 +34,8 @@ export const azureLight = '#F9FAFF';
 
 export const redDark = '#BF0E08';
 export const red = '#EC4C47';
-export const redLight = '#fae2e2';
-export const redLighter = '#fef6f6';
+export const redLight = '#F8C8C8';
+export const redLighter = '#fae2e2';
 export const danger = red;
 export const error = red;
 
