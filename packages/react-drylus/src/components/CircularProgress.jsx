@@ -32,9 +32,6 @@ const styles = {
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
     fill: none;
-    cx: 50;
-    cy: 50;
-    r: 42;
     transition: ${sv.defaultTransition};
   `,
   background: css`
@@ -108,8 +105,14 @@ const CircularProgress = ({
       }}
       <svg viewBox="0 0 100 100">
         <circle
+          cx="50"
+          cy="50"
+          r="42"
           className={cx(styles.circle, styles.background)} />
         <circle
+          cx="50"
+          cy="50"
+          r="42"
           data-element="circle"
           className={cx(styles.circle, styles.progress)}
           style={{ strokeDasharray: `${offset}, ${circumference}` }} />
