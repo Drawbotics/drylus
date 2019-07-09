@@ -29,6 +29,7 @@ import circularProgress from './circular-progress';
 import emptyState from './empty-state';
 import banner from './banner';
 import callout from './callout';
+import buttonLink from './button-link';
 
 
 const components = {
@@ -63,6 +64,7 @@ const components = {
   emptyState,
   banner,
   callout,
+  buttonLink,
 };
 
 
