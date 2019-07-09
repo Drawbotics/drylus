@@ -23,6 +23,7 @@ const styles = {
     pointer-events: none;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
     width: 350px;
+    background: ${sv.white};
   `,
   visible: css`
     opacity: 1;
@@ -39,6 +40,12 @@ const styles = {
 
       & button {
         color: ${sv.colorPrimary};
+
+        &:disabled {
+          cursor: not-allowed !important;
+          background: ${sv.neutralLighter} !important;
+          color: ${sv.colorDisabled} !important;
+        }
       }
 
       > button.react-calendar__navigation__arrow {
@@ -119,6 +126,12 @@ const styles = {
       }
     }
 
+    &:disabled > abbr {
+      cursor: not-allowed !important;
+      background: transparent !important;
+      color: ${sv.colorDisabled} !important;
+    }
+
     &.react-calendar__month-view__days__day--neighboringMonth {
       color: ${sv.colorSecondary};
     }
@@ -144,6 +157,7 @@ const DatePicker = ({
   hint,
   error,
   name,
+  calendarOptions,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
   const [ canBlur, setCanBlur ] = useState(true);
@@ -194,6 +208,7 @@ const DatePicker = ({
           [styles.visible]: isFocused,
         })}>
         <Calendar
+          {...calendarOptions}
           className={styles.calendar}
           tileClassName={styles.tile}
           locale={locale}
@@ -238,6 +253,9 @@ DatePicker.propTypes = {
 
   /** See toLocaleDateString documentation */
   options: PropTypes.object,
+
+  /** See react-calendar documentation for extra options */
+  calendarOptions: PropTypes.object,
 };
 
 
