@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 import { css, cx } from 'emotion';
@@ -14,10 +15,9 @@ const styles = {
     position: relative;
   `,
   calendarContainer: css`
-    position: absolute;
+    position: fixed;
     z-index: 999;
-    top: 100%;
-    margin-top: ${sv.marginExtraSmall};
+    margin-top: calc(${sv.marginLarge} + ${sv.marginSmall});
     opacity: 0;
     transform: translateY(-5px);
     pointer-events: none;
@@ -176,23 +176,41 @@ const DatePicker = ({
   calendarOptions,
   activeStartDate,
 }) => {
+  const [ outletElement, setOutletElement ] = useState(null);
   const [ isFocused, setFocused ] = useState(false);
-  const [ canBlur, setCanBlur ] = useState(true);
 
   const inputRef = useRef(null);
   const rootRef = useRef(null);
+  const pickerElement = useRef();
 
   useEffect(() => {
-    const handleDocumentClick = (e) => ! rootRef.current.contains(e.target) ? setFocused(false) : null;
+    const handleDocumentClick = (e) => ! pickerElement.current.contains(e.target) ? setFocused(false) : null;
+    const handleWindowScroll = () => { setFocused(false); inputRef.current.blur() };
 
-    rootRef.current.addEventListener('mousedown', () => setCanBlur(false));
-    rootRef.current.addEventListener('mouseup', () => setCanBlur(true));
     document.addEventListener('mousedown', handleDocumentClick);
+    window.addEventListener('scroll', handleWindowScroll, true);
 
     return () => {
-      rootRef.current.removeEventListener('mousedown', () => setCanBlur(false));
-      rootRef.current.removeEventListener('mouseup', () => setCanBlur(true));
       document.removeEventListener('mousedown', handleDocumentClick);
+      window.removeEventListener('scroll', handleWindowScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if ( ! document.getElementById('picker-outlet')) {
+      const pickerOutlet = document.createElement('div');
+      pickerOutlet.id = 'picker-outlet';
+      document.body.appendChild(pickerOutlet);
+      setOutletElement(pickerOutlet);
+    }
+    else {
+      setOutletElement(document.getElementById('picker-outlet'));
+    }
+
+    return () => {
+      if (outletElement) {
+        document.body.removeChild(outletElement);
+      }
     };
   }, []);
 
@@ -218,23 +236,30 @@ const DatePicker = ({
         onChange={x=>x}
         ref={inputRef}
         onFocus={() => setFocused(true)}
-        onBlur={() => canBlur ? setFocused(false) : null}
         placeholder={placeholder} />
-      <div
-        className={cx(styles.calendarContainer, {
-          [styles.visible]: isFocused,
-        })}>
-        <Calendar
-          {...calendarOptions}
-          maxDate={maxDate && _objectToDate(maxDate)}
-          minDate={minDate && _objectToDate(minDate)}
-          className={styles.calendar}
-          tileClassName={styles.tile}
-          locale={locale}
-          activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
-          onChange={(v) => onChange(_dateToObject(v), name)}
-          value={value === '' ? null : _objectToDate(value)} />
-      </div>
+      {outletElement && createPortal(
+        <div
+          style={{
+            top: rootRef.current?.getBoundingClientRect()?.top,
+            left: rootRef.current?.getBoundingClientRect()?.left,
+          }}
+          ref={pickerElement}
+          className={cx(styles.calendarContainer, {
+            [styles.visible]: isFocused,
+          })}>
+          <Calendar
+            {...calendarOptions}
+            maxDate={maxDate && _objectToDate(maxDate)}
+            minDate={minDate && _objectToDate(minDate)}
+            className={styles.calendar}
+            tileClassName={styles.tile}
+            locale={locale}
+            activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
+            onChange={(v) => onChange(_dateToObject(v), name)}
+            value={value === '' ? null : _objectToDate(value)} />
+        </div>,
+        document.getElementById('picker-outlet'),
+      )}
     </div>
   );
 };

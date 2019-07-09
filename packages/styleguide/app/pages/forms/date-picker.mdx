@@ -7,7 +7,7 @@ import { ControlledField } from '../utils';
 # Date Picker
 
 <Playground component={DatePicker}>
-  <div style={{ maxWidth: 300, height: 300 }}>
+  <div style={{ maxWidth: 300 }}>
     <ControlledField component={
       <DatePicker value="" placeholder="Pick a date..." onChange={x=>x} />
     } />
@@ -17,7 +17,7 @@ import { ControlledField } from '../utils';
 If you need to limit the range of dates you can use `maxDate` and/or `minDate` (see the [react-calendar](https://github.com/wojtekmaj/react-calendar#readme) documentation for the full list of options).
 
 <Playground>
-  <div style={{ maxWidth: 300, height: 300 }}>
+  <div style={{ maxWidth: 300 }}>
     <ControlledField component={
       <DatePicker
         value=""
