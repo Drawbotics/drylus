@@ -185,7 +185,7 @@ const DatePicker = ({
 
   useEffect(() => {
     const handleDocumentClick = (e) => ! pickerElement.current.contains(e.target) ? setFocused(false) : null;
-    const handleWindowScroll = () => { setFocused(false); inputRef.current.blur() };
+    const handleWindowScroll = () => { setFocused(false); inputRef?.current.blur() };
 
     document.addEventListener('mousedown', handleDocumentClick);
     window.addEventListener('scroll', handleWindowScroll, true);
