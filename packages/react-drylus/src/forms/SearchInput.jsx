@@ -57,6 +57,7 @@ const SearchInput = ({
   noResultLabel,
   placeholder,
   isLoading,
+  name,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
   const inputRef = useRef(null);
@@ -72,6 +73,7 @@ const SearchInput = ({
         }
         value={value}
         onChange={onChange}
+        name={name}
         ref={inputRef}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
@@ -112,6 +114,9 @@ SearchInput.propTypes = {
 
   /** The text passed to the input */
   value: PropTypes.string.isRequired,
+
+  /** Name of the form element (target.name) */
+  name: PropTypes.string,
 
   /** Triggered when the text is changed, and when the search button is pressed */
   onChange: PropTypes.func.isRequired,

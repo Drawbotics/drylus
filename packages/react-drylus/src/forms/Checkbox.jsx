@@ -200,6 +200,9 @@ Checkbox.propTypes = {
   /** Determines if checkbox is checked */
   value: PropTypes.bool,
 
+  /** Name of the form element (target.name) */
+  name: PropTypes.string,
+
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 

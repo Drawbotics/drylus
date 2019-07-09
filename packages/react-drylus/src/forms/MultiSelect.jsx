@@ -153,6 +153,7 @@ const MultiSelect = ({
   hint,
   error,
   valid,
+  name,
   ...rest,
 }) => {
   const selectRef = useRef();
@@ -177,8 +178,8 @@ const MultiSelect = ({
 
   const handleOnChange = (value) => {
     values.includes(value)
-      ? onChange(values.filter((v) => v !== value))
-      : onChange([ ...values, value ]);
+      ? onChange(values.filter((v) => v !== value), name)
+      : onChange([ ...values, value ], name);
   };
 
   // used for mobile
@@ -302,6 +303,9 @@ MultiSelect.propTypes = {
 
   /** Determines which values are currently active */
   values: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+
+  /** Name of the form element (target.name) */
+  name: PropTypes.string,
 
   /** Disables the multi select */
   disabled: PropTypes.bool,

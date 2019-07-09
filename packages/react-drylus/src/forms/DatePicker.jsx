@@ -143,6 +143,7 @@ const DatePicker = ({
   valid,
   hint,
   error,
+  name,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
   const [ canBlur, setCanBlur ] = useState(true);
@@ -196,7 +197,7 @@ const DatePicker = ({
           className={styles.calendar}
           tileClassName={styles.tile}
           locale={locale}
-          onChange={onChange}
+          onChange={(v) => onChange(v, name)}
           value={value === '' ? null : value} />
       </div>
     </div>
@@ -213,6 +214,9 @@ DatePicker.propTypes = {
 
   /** Triggered when the date is chosen from the calendar */
   onChange: PropTypes.func.isRequired,
+
+  /** Name of the form element (target.name) */
+  name: PropTypes.string,
 
   /** Used to render the name of months in the calendar */
   locale: PropTypes.string,

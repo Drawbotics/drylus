@@ -239,6 +239,9 @@ RadioGroup.propTypes = {
     disabled: PropTypes.bool,
   })),
 
+  /** Name of the form element (target.name) */
+  name: PropTypes.string,
+
   /** Used to pick each value in the options array */
   valueKey: PropTypes.string,
 
