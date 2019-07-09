@@ -16,23 +16,16 @@ import { ControlledField } from '../utils';
 
 If you need to limit the range of dates you can use `maxDate` and/or `minDate` (see the [react-calendar](https://github.com/wojtekmaj/react-calendar#readme) documentation for the full list of options).
 
-export const before = new Date();
-before.setDate(before.getDate() - 5)
-
-export const after = new Date();
-after.setDate(after.getDate() + 5)
-
 <Playground>
   <div style={{ maxWidth: 300, height: 300 }}>
     <ControlledField component={
       <DatePicker
         value=""
         placeholder="Pick a date..."
-        onChange={x=>x}
-        calendarOptions={{
-          minDate: before,
-          maxDate: after,
-        }} />
+        maxDate={{ year: 2010, month: 4, day: 10 }}
+        activeStartDate={{ year: 2010, month: 4, day: 10 }}
+        minDate={{ year: 2010, month: 4, day: 1 }}
+        onChange={x=>x} />
     } />
   </div>
 </Playground>

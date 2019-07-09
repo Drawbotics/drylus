@@ -146,18 +146,35 @@ const DEFAULT_OPTIONS = {
 };
 
 
+function _objectToDate(object) {
+  return new Date(object.year, object.month - 1, object.day);
+}
+
+
+function _dateToObject(date) {
+  return {
+    day: date.getDate(),
+    month: date.getMonth() + 1,
+    year: date.getFullYear(),
+  };
+}
+
+
 const DatePicker = ({
   value,
   onChange,
   locale,
   disabled,
   placeholder,
-  options,
+  displayOptions,
   valid,
   hint,
   error,
   name,
+  maxDate,
+  minDate,
   calendarOptions,
+  activeStartDate,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
   const [ canBlur, setCanBlur ] = useState(true);
@@ -179,9 +196,9 @@ const DatePicker = ({
     };
   }, []);
 
-  const inputValue = value === '' ? value : value.toLocaleDateString(locale, {
+  const inputValue = value === '' ? value : _objectToDate(value).toLocaleDateString(locale, {
     ...DEFAULT_OPTIONS,
-    ...options,
+    ...displayOptions,
   });
 
   return (
@@ -209,11 +226,14 @@ const DatePicker = ({
         })}>
         <Calendar
           {...calendarOptions}
+          maxDate={maxDate && _objectToDate(maxDate)}
+          minDate={minDate && _objectToDate(minDate)}
           className={styles.calendar}
           tileClassName={styles.tile}
           locale={locale}
-          onChange={(v) => onChange(v, name)}
-          value={value === '' ? null : value} />
+          activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
+          onChange={(v) => onChange(_dateToObject(v), name)}
+          value={value === '' ? null : _objectToDate(value)} />
       </div>
     </div>
   );
@@ -221,9 +241,13 @@ const DatePicker = ({
 
 
 DatePicker.propTypes = {
-  /** Should be given in a UTC format */
+  /** Can be empty string, or object containing day, month, year as numbers */
   value: PropTypes.oneOfType([
-    PropTypes.instanceOf(Date),
+    PropTypes.shape({
+      day: PropTypes.number.isRequired,
+      month: PropTypes.number.isRequired,
+      year: PropTypes.number.isRequired,
+    }),
     PropTypes.oneOf(['']),
   ]).isRequired,
 
@@ -252,10 +276,31 @@ DatePicker.propTypes = {
   valid: PropTypes.bool,
 
   /** See toLocaleDateString documentation */
-  options: PropTypes.object,
+  displayOptions: PropTypes.object,
 
   /** See react-calendar documentation for extra options */
   calendarOptions: PropTypes.object,
+
+  /** Follows format of value */
+  maxDate: PropTypes.shape({
+    day: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    year: PropTypes.number.isRequired,
+  }),
+
+  /** Follows format of value */
+  minDate: PropTypes.shape({
+    day: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    year: PropTypes.number.isRequired,
+  }),
+
+  /** Determines the date where the calendar should open by default. Follows format of value */
+  activeStartDate: PropTypes.shape({
+    day: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    year: PropTypes.number.isRequired,
+  }),
 };
 
 
