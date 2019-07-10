@@ -4,6 +4,10 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 import v4 from 'uuid/v4';
+import {
+  CSSTransition,
+  TransitionGroup,
+} from 'react-transition-group';
 
 import { Categories, Sizes, Tiers } from '../base';
 import {
@@ -24,6 +28,8 @@ const styles = {
     z-index: 9999;
     bottom: ${sv.defaultMargin};
     left: ${sv.defaultMargin};
+    display: inline-flex;
+    flex-direction: column-reverse;
   `,
   root: css`
     display: inline-block;
@@ -89,6 +95,27 @@ const styles = {
     &::after {
       background: ${sv.green};
     }
+  `,
+  alertEnter: css`
+    opacity: 0;
+    transform: translateY(-5px);
+  `,
+  alertEnterActive: css`
+    opacity: 1;
+    transform: translateY(0);
+    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+  `,
+  alertEnterDone: css`
+  `,
+  alertExit: css`
+    opacity: 1;
+    transform: translateY(0);
+    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+  `,
+  alertExitActive: css`
+    opacity: 0.01;
+    transform: translateY(5px);
+    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
   `,
 };
 
@@ -210,11 +237,26 @@ const AlertsProvider = ({ children }) => {
       {children}
       {ReactDOM.createPortal(
         <div className={styles.provider}>
-          {alerts.map((props) => (
-            <Margin key={props.id} size={{ top: Sizes.SMALL }}>
-              <Alert onClickDismiss={hide} {...props} />
-            </Margin>
-          ))}
+          <TransitionGroup>
+            {alerts.map((props) => (
+              <CSSTransition
+                key={props.id}
+                timeout={{
+                  enter: 500,
+                  exit: 300,
+                }}
+                classNames={{
+                  enter: styles.alertEnter,
+                  enterActive: styles.alertEnterActive,
+                  exit: styles.alertExit,
+                  exitActive: styles.alertExitActive,
+                }}>
+                <Margin size={{ top: Sizes.SMALL }}>
+                  <Alert onClickDismiss={hide} {...props} />
+                </Margin>
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
         </div>,
         document.getElementById('alerts-outlet'),
       )}

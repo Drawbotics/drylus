@@ -63,7 +63,7 @@ const ComponentWithAlerts = () => {
 The `show` function takes exactly the same arguments as the props of `Alert`, while `hide` only takes the `id` (if provided to `show`).
 
 <Playground component={Alert}>
-  <Alert category={Categories.DANGER} text="This is an information message" />
+  <Alert category={Categories.DANGER} text="This is an information message" onClickDismiss={x=>x} />
 </Playground>
 
 
