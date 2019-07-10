@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 import v4 from 'uuid/v4';
 
-import { Categories, Sizes } from '../base';
-import Margin from '../layout/Margin';
+import { Categories, Sizes, Tiers } from '../base';
+import {
+  Margin,
+  Flex,
+  FlexItem,
+  FlexAlign,
+  FlexJustify,
+} from '../layout';
+import Icon from './Icon';
+import Button from './Button';
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -17,25 +26,122 @@ const styles = {
     left: ${sv.defaultMargin};
   `,
   root: css`
-    padding: ${sv.defaultPadding};
+    display: inline-block;
+    position: relative;
+    padding: ${sv.paddingExtraSmall};
+    padding-left: ${sv.defaultPadding};
     background: ${sv.white};
     border-radius: ${sv.defaultBorderRadius};
-    box-shadow: ${sv.elevation2};
+    box-shadow: ${sv.elevation2}, inset 0px 0px 0px 1px ${sv.neutralLight};
+    max-width: 400px;
+    color: ${sv.colorPrimary};
+    overflow: hidden;
+
+    [data-element="text"] {
+      font-size: 0.95rem;
+    }
+
+    [data-element="icon"] {
+      margin-top: -1px;
+    }
+
+    &::after {
+      content: ' ';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 5px;
+      height: 100%;
+    }
+  `,
+  danger: css`
+    [data-element="icon"] {
+      color: ${sv.red};
+    }
+
+    &::after {
+      background: ${sv.red};
+    }
+  `,
+  info: css`
+    [data-element="icon"] {
+      color: ${sv.blue};
+    }
+
+    &::after {
+      background: ${sv.blue};
+    }
+  `,
+  warning: css`
+    [data-element="icon"] {
+      color: ${sv.orange};
+    }
+
+    &::after {
+      background: ${sv.orange};
+    }
+  `,
+  success: css`
+    [data-element="icon"] {
+      color: ${sv.green};
+    }
+
+    &::after {
+      background: ${sv.green};
+    }
   `,
 };
 
 
-const Context = React.createContext();
+function _getIconForCategory(category) {
+  switch (category) {
+    case Categories.DANGER:
+      return 'alert-circle';
+    case Categories.SUCCESS:
+      return 'check-circle';
+    case Categories.WARNING:
+      return 'alert-triangle';
+    default:
+      return 'info';
+  }
+}
 
 
 export const Alert = ({
+  id,
   text,
   category,
   onClickDismiss,
 }) => {
+  const icon = _getIconForCategory(category);
   return (
-    <div className={styles.root}>
-      {text}
+    <div
+      className={cx(styles.root, {
+        [styles[getEnumAsClass(category)]]: category,
+      })}>
+      <Flex justify={FlexJustify.START} align={FlexAlign.START}>
+        <FlexItem>
+          <Margin size={{ right: Sizes.SMALL, top: Sizes.EXTRA_SMALL }}>
+            <div data-element="icon">
+              <Icon name={icon} />
+            </div>
+          </Margin>
+        </FlexItem>
+        <FlexItem flex>
+          <Margin size={{ top: Sizes.EXTRA_SMALL, bottom: Sizes.EXTRA_SMALL }}>
+            <span data-element="text">{text}</span>
+          </Margin>
+        </FlexItem>
+        <FlexItem>
+          <Margin size={{ left: Sizes.DEFAULT }}>
+            <Button
+              size={Sizes.SMALL}
+              onClick={() => onClickDismiss(id)}
+              tier={Tiers.TERTIARY}
+              leading={<Icon name="x" />} />
+          </Margin>
+        </FlexItem>
+      </Flex>
     </div>
   );
 };
@@ -61,6 +167,9 @@ Alert.propTypes = {
     PropTypes.string,
   ]),
 };
+
+
+const Context = React.createContext();
 
 
 const AlertsProvider = ({ children }) => {
