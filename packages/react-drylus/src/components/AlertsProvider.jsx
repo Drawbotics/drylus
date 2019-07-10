@@ -5,19 +5,22 @@ import sv from '@drawbotics/style-vars';
 import PropTypes from 'prop-types';
 import v4 from 'uuid/v4';
 
-import { Categories } from '../base';
+import { Categories, Sizes } from '../base';
+import Margin from '../layout/Margin';
 
 
 const styles = {
   provider: css`
     position: fixed;
     z-index: 9999;
-    bottom: 0;
-    left: 0;
+    bottom: ${sv.defaultMargin};
+    left: ${sv.defaultMargin};
   `,
   root: css`
     padding: ${sv.defaultPadding};
-    background: red;
+    background: ${sv.white};
+    border-radius: ${sv.defaultBorderRadius};
+    box-shadow: ${sv.elevation2};
   `,
 };
 
@@ -99,7 +102,9 @@ const AlertsProvider = ({ children }) => {
       {ReactDOM.createPortal(
         <div className={styles.provider}>
           {alerts.map((props) => (
-            <Alert key={props.id} onClickDismiss={hide} {...props} />
+            <Margin key={props.id} size={{ top: Sizes.SMALL }}>
+              <Alert onClickDismiss={hide} {...props} />
+            </Margin>
           ))}
         </div>,
         document.getElementById('alerts-outlet'),

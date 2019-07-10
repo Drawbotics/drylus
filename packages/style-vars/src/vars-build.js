@@ -159,7 +159,7 @@ exports.colorDisabled = colorDisabled;
 const colorDisabledInverse = fade(white, 30); // SHADOWS
 
 exports.colorDisabledInverse = colorDisabledInverse;
-const shadowColor = neutral; // ELEVATIONS
+const shadowColor = fade(neutralDark, 30); // ELEVATIONS
 
 exports.shadowColor = shadowColor;
 const elevation1 = `0 4px 8px ${shadowColor}`;

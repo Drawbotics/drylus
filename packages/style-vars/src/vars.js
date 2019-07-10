@@ -89,7 +89,7 @@ export const colorDisabled = fade(neutralDark, 50);
 export const colorDisabledInverse = fade(white, 30);
 
 // SHADOWS
-export const shadowColor = neutral;
+export const shadowColor = fade(neutralDark, 30);
 
 // ELEVATIONS
 export const elevation1 = `0 4px 8px ${shadowColor}`;
