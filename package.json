@@ -12,6 +12,7 @@
     "build:extract-emotion": "cd packages/extract-emotion && npm run build",
     "watch:styleguide": "cd packages/styleguide && npm run start",
     "build:styleguide": "cd packages/styleguide && npm run build",
+    "publish:styleguide": "cd packages/styleguide && npm run build:publish",
     "build:vars": "cd packages/style-vars && npm run build",
     "dev:icons": "cd packages/icons && npm run build:dev",
     "build:icons": "cd packages/icons && npm run build",
@@ -21,7 +22,7 @@
     "publish": "lerna publish --force-publish",
     "update:assets": "mmdc -i assets/graph.mmd -o assets/graph.svg",
     "lint": "eslint --ext js,jsx --format node_modules/eslint-formatter-pretty packages/",
-    "prepublishOnly": "./packages/styleguide/build.sh"
+    "prepublishOnly": "npm run publish:styleguide"
   },
   "husky": {
     "hooks": {
