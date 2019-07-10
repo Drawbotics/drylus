@@ -3,6 +3,6 @@ npm run build
 
 git add --all
 
-git commit -m "new styleguide build"
+git commit -m "new styleguide build" --no-verify
 
 git push
