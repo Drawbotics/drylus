@@ -1,7 +1,7 @@
 #!/bin/sh
 npm run build
 
-git add .
+git add --all
 
 git commit -m "new styleguide build"
 
