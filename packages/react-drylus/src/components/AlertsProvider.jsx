@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
@@ -141,6 +141,11 @@ export const Alert = ({
   onClickDismiss,
 }) => {
   const icon = _getIconForCategory(category);
+
+  useEffect(() => {
+    setTimeout(() => onClickDismiss(id), 2000);
+  }, []);
+
   return (
     <div
       className={cx(styles.root, {
@@ -199,17 +204,29 @@ Alert.propTypes = {
 const Context = React.createContext();
 
 
+function reducer(alerts, action) {
+  const { type, payload } = action;
+  if (type === 'show') {
+    return [ ...alerts, payload.alert ];
+  }
+  else if (type === 'hide') {
+    return alerts.filter((a) => payload.id !== a.id);
+  }
+}
+
+
 const AlertsProvider = ({ children }) => {
   const [outletElement, setOutletElement] = useState(null);
-  const [alerts, setAlerts] = React.useState([]);
+  const [alerts, dispatch] = useReducer(reducer, []);
+
+  const hide = (id) => {
+    dispatch({ type: 'hide', payload: { id } });
+  };
 
   const show = (alertProps) => {
     const id = v4();
-    setAlerts([ ...alerts, { id, ...alertProps } ]);
-  };
-
-  const hide = (id) => {
-    setAlerts(alerts.filter((alert) => alert.id !== id));
+    const alert = { id, ...alertProps };
+    dispatch({ type: 'show', payload: { alert } });
   };
 
   useEffect(() => {
@@ -233,31 +250,29 @@ const AlertsProvider = ({ children }) => {
   if (! outletElement) return null;
 
   return (
-    <Context.Provider value={{ show, hide }}>
+    <Context.Provider value={{ show, hide: (id) => hide(id, alerts) }}>
       {children}
       {ReactDOM.createPortal(
-        <div className={styles.provider}>
-          <TransitionGroup>
-            {alerts.map((props) => (
-              <CSSTransition
-                key={props.id}
-                timeout={{
-                  enter: 500,
-                  exit: 300,
-                }}
-                classNames={{
-                  enter: styles.alertEnter,
-                  enterActive: styles.alertEnterActive,
-                  exit: styles.alertExit,
-                  exitActive: styles.alertExitActive,
-                }}>
-                <Margin size={{ top: Sizes.SMALL }}>
-                  <Alert onClickDismiss={hide} {...props} />
-                </Margin>
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
-        </div>,
+        <TransitionGroup className={styles.provider}>
+          {alerts.map((alert) => (
+            <CSSTransition
+              key={alert.id}
+              timeout={{
+                enter: 500,
+                exit: 300,
+              }}
+              classNames={{
+                enter: styles.alertEnter,
+                enterActive: styles.alertEnterActive,
+                exit: styles.alertExit,
+                exitActive: styles.alertExitActive,
+              }}>
+              <Margin size={{ top: Sizes.SMALL }}>
+                <Alert onClickDismiss={(id) => hide(id, alerts)} {...alert} />
+              </Margin>
+            </CSSTransition>
+          ))}
+        </TransitionGroup>,
         document.getElementById('alerts-outlet'),
       )}
     </Context.Provider>

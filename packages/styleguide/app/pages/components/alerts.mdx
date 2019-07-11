@@ -76,27 +76,27 @@ export const Demo = ({ component: Component }) => {
     <Flex justify={FlexJustify.START}>
       <FlexItem>
         <Margin size={{ right: Sizes.SMALL }}>
-          <Button category={Categories.SUCCESS} onClick={() => show({ category: Categories.SUCCESS, text: 'Congrats you did it!' })}>
+          <Button category={Categories.SUCCESS} onClick={() => show({ category: Categories.SUCCESS, text: 'Congrats you did it!', id: 'success' })}>
             Show success
           </Button>
         </Margin>
       </FlexItem>
       <FlexItem>
         <Margin size={{ right: Sizes.SMALL }}>
-          <Button category={Categories.DANGER} onClick={() => show({ category: Categories.DANGER, text: 'Oh oh! Something went bad.' })}>
+          <Button category={Categories.DANGER} onClick={() => show({ category: Categories.DANGER, text: 'Oh oh! Something went bad.', id: 'danger' })}>
             Show danger
           </Button>
         </Margin>
       </FlexItem>
       <FlexItem>
         <Margin size={{ right: Sizes.SMALL }}>
-          <Button category={Categories.WARNING} onClick={() => show({ category: Categories.WARNING, text: 'Oh oh! Careful there.' })}>
+          <Button category={Categories.WARNING} onClick={() => show({ category: Categories.WARNING, text: 'Oh oh! Careful there.', id: 'warning' })}>
             Show warning
           </Button>
         </Margin>
       </FlexItem>
       <FlexItem>
-        <Button category={Categories.INFO} onClick={() => show({ category: Categories.INFO, text: 'Here is some info. You are welcome.' })}>
+        <Button category={Categories.INFO} onClick={() => show({ category: Categories.INFO, text: 'Here is some info. You are welcome.', id: 'info' })}>
           Show info
         </Button>
       </FlexItem>
