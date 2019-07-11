@@ -223,6 +223,9 @@ function reducer(alerts, action) {
   else if (type === 'hide') {
     return alerts.filter((a) => payload.id !== a.id);
   }
+  else {
+    return alerts;
+  }
 }
 
 
