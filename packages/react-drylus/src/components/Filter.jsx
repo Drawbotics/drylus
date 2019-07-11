@@ -86,13 +86,16 @@ const styles = {
       background: ${sv.neutralLight};
     }
   `,
+  smallPadding: css`
+    padding: 5px ${sv.paddingSmall};
+  `,
   defaultCursor: css`
     &:hover {
       cursor: default;
     }
   `,
   activeOption: css`
-    font-weight: bold;
+    font-weight: 500;
   `,
 };
 
@@ -128,7 +131,7 @@ const BaseFilter = ({
     <div ref={ref} className={styles.root}>
       <div className={cx(styles.trigger, {
         [styles.active]: panelOpen || active,
-      })} onClick={() => setPanelOpen(true)}>
+      })} onClick={() => panelOpen ? setPanelOpen(false) : setPanelOpen(true)}>
         {label}
         <Icon
           onClick={(e) => {
@@ -191,11 +194,13 @@ export const SelectFilter = ({
 }) => {
   const currentLabel = value ? options.find((option) => option[valueKey] === value)?.[labelKey] : label;
   return (
-    <BaseFilter {...rest} label={currentLabel} active={!! value}>
+    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel && value}>
       {options.map((option) => (
         <div
           key={option[valueKey]}
-          className={cx(styles.option, { [styles.activeOption]: value === option[valueKey] })}
+          className={cx(styles.option, styles.smallPadding, {
+            [styles.activeOption]: value === option[valueKey],
+          })}
           onClick={() => onChange(option[valueKey])}>
           <ListTile title={option[labelKey]} leading={option.leading} />
         </div>
@@ -260,7 +265,7 @@ export const CheckboxFilter = ({
 }) => {
   const currentLabel = getLabelForCheckboxFilter(label, options, values, valueKey, labelKey);
   return (
-    <BaseFilter {...rest} label={currentLabel} active={values.length > 0}>
+    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel && values.length > 0}>
       {options.map((option) => (
         <div key={option[valueKey]} className={cx(styles.option, styles.defaultCursor)}>
           <Checkbox

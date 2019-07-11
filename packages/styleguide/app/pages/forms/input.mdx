@@ -11,7 +11,7 @@ Here is how you use a normal input.
 
 <Playground component={Input}>
   <ControlledField style={{ maxWidth: 250 }} component={
-    <Input placeholder="Placeholder..." onChange={x=>x} />
+    <Input placeholder="Placeholder..." onChange={x=>x} value="" />
   } />
 </Playground>
 
@@ -38,13 +38,13 @@ export const Example = ({ children }) => {
 
 <Playground>
   <Example>
-    <Input placeholder="Something..." prefix="$" />
-    <Input placeholder="Something..." suffix=".com" />
+    <Input placeholder="Something..." prefix="$" value="" onChange={x=>x} />
+    <Input placeholder="Something..." suffix=".com" value="" onChange={x=>x} />
     <Input placeholder="Something..." prefix={
-      <Select value="option" options={[{ label: 'Option', value: 'option' }]} placeholder="Select..." />
-    } />
+      <Select value="option" options={[{ label: 'Option', value: 'option' }]} placeholder="Select..." onChange={x=>x} />
+    } value="" onChange={x=>x} />
     <Input placeholder="Something else..." suffix={
       <Button leading={<Icon name="copy" />}>Click me</Button>
-    } />
+    } value="" onChange={x=>x} />
   </Example>
 </Playground>

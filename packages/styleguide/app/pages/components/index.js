@@ -17,7 +17,7 @@ import text from './text';
 import dot from './dot';
 import tooltip from './tooltip';
 import collapsible from './collapsible';
-import link from './link';
+import textLink from './text-link';
 import modal from './modal';
 import tag from './tag';
 import spinner from './spinner';
@@ -25,6 +25,12 @@ import bigRadio from './big-radio';
 import bigCheckbox from './big-checkbox';
 import toggle from './toggle';
 import separator from './separator';
+import circularProgress from './circular-progress';
+import emptyState from './empty-state';
+import banner from './banner';
+import callout from './callout';
+import buttonLink from './button-link';
+import alerts from './alerts';
 
 
 const components = {
@@ -47,7 +53,7 @@ const components = {
   dot,
   tooltip,
   collapsible,
-  link,
+  textLink,
   modal,
   tag,
   spinner,
@@ -55,6 +61,12 @@ const components = {
   bigCheckbox,
   toggle,
   separator,
+  circularProgress,
+  emptyState,
+  banner,
+  callout,
+  buttonLink,
+  alerts,
 };
 
 

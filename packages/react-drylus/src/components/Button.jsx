@@ -7,7 +7,7 @@ import { Categories, Sizes, Tiers } from '../base';
 import { getEnumAsClass } from '../utils';
 
 
-const styles = {
+export const styles = {
   root: css`
     background: ${sv.neutralLight};
     color: ${sv.colorPrimary};
@@ -249,9 +249,6 @@ Button.propTypes = {
     Tiers.SECONDARY,
     Tiers.TERTIARY,
   ]),
-
-  /** Name of the icon to be displayed within the button. Shown on the left by default */
-  icon: PropTypes.string,
 
   /** Shown in front of the button text, can be a Spinner or Icon */
   leading: PropTypes.node,

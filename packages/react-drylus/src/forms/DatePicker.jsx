@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 import { css, cx } from 'emotion';
@@ -14,14 +15,15 @@ const styles = {
     position: relative;
   `,
   calendarContainer: css`
-    position: absolute;
+    position: fixed;
     z-index: 999;
-    top: 100%;
-    margin-top: ${sv.marginExtraSmall};
+    margin-top: calc(${sv.marginLarge} + ${sv.marginSmall});
     opacity: 0;
     transform: translateY(-5px);
     pointer-events: none;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    width: 350px;
+    background: ${sv.white};
   `,
   visible: css`
     opacity: 1;
@@ -38,6 +40,12 @@ const styles = {
 
       & button {
         color: ${sv.colorPrimary};
+
+        &:disabled {
+          cursor: not-allowed !important;
+          background: ${sv.neutralLighter} !important;
+          color: ${sv.colorDisabled} !important;
+        }
       }
 
       > button.react-calendar__navigation__arrow {
@@ -118,6 +126,12 @@ const styles = {
       }
     }
 
+    &:disabled > abbr {
+      cursor: not-allowed !important;
+      background: transparent !important;
+      color: ${sv.colorDisabled} !important;
+    }
+
     &.react-calendar__month-view__days__day--neighboringMonth {
       color: ${sv.colorSecondary};
     }
@@ -132,40 +146,77 @@ const DEFAULT_OPTIONS = {
 };
 
 
+function _objectToDate(object) {
+  return new Date(object.year, object.month - 1, object.day);
+}
+
+
+function _dateToObject(date) {
+  return {
+    day: date.getDate(),
+    month: date.getMonth() + 1,
+    year: date.getFullYear(),
+  };
+}
+
+
 const DatePicker = ({
   value,
   onChange,
   locale,
   disabled,
   placeholder,
-  options,
+  displayOptions,
   valid,
   hint,
   error,
+  name,
+  maxDate,
+  minDate,
+  calendarOptions,
+  activeStartDate,
 }) => {
+  const [ outletElement, setOutletElement ] = useState(null);
   const [ isFocused, setFocused ] = useState(false);
-  const [ canBlur, setCanBlur ] = useState(true);
 
   const inputRef = useRef(null);
   const rootRef = useRef(null);
+  const pickerElement = useRef();
 
   useEffect(() => {
-    const handleDocumentClick = (e) => ! rootRef.current.contains(e.target) ? setFocused(false) : null;
+    const handleDocumentClick = (e) => ! pickerElement.current.contains(e.target) ? setFocused(false) : null;
+    const handleWindowScroll = () => { setFocused(false); inputRef?.current.blur() };
 
-    rootRef.current.addEventListener('mousedown', () => setCanBlur(false));
-    rootRef.current.addEventListener('mouseup', () => setCanBlur(true));
     document.addEventListener('mousedown', handleDocumentClick);
+    window.addEventListener('scroll', handleWindowScroll, true);
 
     return () => {
-      rootRef.current.removeEventListener('mousedown', () => setCanBlur(false));
-      rootRef.current.removeEventListener('mouseup', () => setCanBlur(true));
       document.removeEventListener('mousedown', handleDocumentClick);
+      window.removeEventListener('scroll', handleWindowScroll);
     };
   }, []);
 
-  const inputValue = value === '' ? value : value.toLocaleDateString(locale, {
+  useEffect(() => {
+    if ( ! document.getElementById('picker-outlet')) {
+      const pickerOutlet = document.createElement('div');
+      pickerOutlet.id = 'picker-outlet';
+      document.body.appendChild(pickerOutlet);
+      setOutletElement(pickerOutlet);
+    }
+    else {
+      setOutletElement(document.getElementById('picker-outlet'));
+    }
+
+    return () => {
+      if (outletElement) {
+        document.body.removeChild(outletElement);
+      }
+    };
+  }, []);
+
+  const inputValue = value === '' ? value : _objectToDate(value).toLocaleDateString(locale, {
     ...DEFAULT_OPTIONS,
-    ...options,
+    ...displayOptions,
   });
 
   return (
@@ -185,33 +236,51 @@ const DatePicker = ({
         onChange={x=>x}
         ref={inputRef}
         onFocus={() => setFocused(true)}
-        onBlur={() => canBlur ? setFocused(false) : null}
         placeholder={placeholder} />
-      <div
-        className={cx(styles.calendarContainer, {
-          [styles.visible]: isFocused,
-        })}>
-        <Calendar
-          className={styles.calendar}
-          tileClassName={styles.tile}
-          locale={locale}
-          onChange={onChange}
-          value={value === '' ? null : value} />
-      </div>
+      {outletElement && createPortal(
+        <div
+          style={{
+            top: rootRef.current?.getBoundingClientRect()?.top,
+            left: rootRef.current?.getBoundingClientRect()?.left,
+          }}
+          ref={pickerElement}
+          className={cx(styles.calendarContainer, {
+            [styles.visible]: isFocused,
+          })}>
+          <Calendar
+            {...calendarOptions}
+            maxDate={maxDate && _objectToDate(maxDate)}
+            minDate={minDate && _objectToDate(minDate)}
+            className={styles.calendar}
+            tileClassName={styles.tile}
+            locale={locale}
+            activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
+            onChange={(v) => onChange(_dateToObject(v), name)}
+            value={value === '' ? null : _objectToDate(value)} />
+        </div>,
+        document.getElementById('picker-outlet'),
+      )}
     </div>
   );
 };
 
 
 DatePicker.propTypes = {
-  /** Should be given in a UTC format */
+  /** Can be empty string, or object containing day, month, year as numbers */
   value: PropTypes.oneOfType([
-    PropTypes.instanceOf(Date),
+    PropTypes.shape({
+      day: PropTypes.number.isRequired,
+      month: PropTypes.number.isRequired,
+      year: PropTypes.number.isRequired,
+    }),
     PropTypes.oneOf(['']),
   ]).isRequired,
 
   /** Triggered when the date is chosen from the calendar */
   onChange: PropTypes.func.isRequired,
+
+  /** Name of the form element (target.name) */
+  name: PropTypes.string,
 
   /** Used to render the name of months in the calendar */
   locale: PropTypes.string,
@@ -232,7 +301,31 @@ DatePicker.propTypes = {
   valid: PropTypes.bool,
 
   /** See toLocaleDateString documentation */
-  options: PropTypes.object,
+  displayOptions: PropTypes.object,
+
+  /** See react-calendar documentation for extra options */
+  calendarOptions: PropTypes.object,
+
+  /** Follows format of value */
+  maxDate: PropTypes.shape({
+    day: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    year: PropTypes.number.isRequired,
+  }),
+
+  /** Follows format of value */
+  minDate: PropTypes.shape({
+    day: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    year: PropTypes.number.isRequired,
+  }),
+
+  /** Determines the date where the calendar should open by default. Follows format of value */
+  activeStartDate: PropTypes.shape({
+    day: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired,
+    year: PropTypes.number.isRequired,
+  }),
 };
 
 

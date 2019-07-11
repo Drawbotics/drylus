@@ -1,10 +1,18 @@
 /* eslint-disable react/display-name */
-import React from 'react';
+import React, { Fragment } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
-import { Title, Paragraph, TextLink } from '@drawbotics/react-drylus';
-import { Link as RouterLink } from 'react-router-dom';
+import {
+  Title,
+  Paragraph,
+  TextLink,
+  LinkUnderlined,
+  Panel,
+  PanelSection,
+  PanelBody,
+} from '@drawbotics/react-drylus';
+import { Link } from 'react-router-dom';
 
 import Code from './Code';
 import InlineCode from './InlineCode';
@@ -24,17 +32,41 @@ const components = {
   h4: (props) => <Title {...props} size={4} />,
   pre: (props) => <div {...props} />,
   p: (props) => <Paragraph {...props} />,
-  a: (props) => <TextLink {...props} to={props.href} component={RouterLink} />,
+  a: (props) => {
+    if (props.href.includes('http')) {
+      return <a href={props.href} target="_blank" rel="noopener noreferrer"><TextLink {...props} /></a>;
+    }
+    return <Link to={props.href}><TextLink {...props} underlined={LinkUnderlined.ALWAYS} /></Link>;
+  },
   code: Code,
   inlineCode: InlineCode,
+  wrapper: ({ children, ...props }) => {
+    if (React.Children.count(children) <= 1) {
+      return children;
+    }
+    const [ title, ...rest ] = children;
+    if (title?.props.mdxType === 'h1') {
+      return (
+        <Fragment>
+          {title}
+          <Panel body={
+            <PanelBody>
+              <PanelSection title="Description">
+                {rest}
+              </PanelSection>
+            </PanelBody>} />
+        </Fragment>
+      );
+    }
+    return children;
+  }
 }
 
 
 const Renderer = (props) => {
   return (
     <MDXProvider components={components}>
-      <div {...props} className={styles.content}>
-      </div>
+      <div {...props} className={styles.content} />
     </MDXProvider>
   );
 };

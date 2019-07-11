@@ -1,0 +1,29 @@
+import { TextLink, Text, LinkUnderlined } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Text Link
+
+This component is to be used if you need to style a link in a piece of text, it does not provide the actual "linking" functionality.
+
+<Playground component={TextLink} enums={{LinkUnderlined}}>
+  <>
+    <Text>This is some normal text and there is a </Text><TextLink>link</TextLink><Text> within it</Text>
+  </>
+</Playground>
+
+
+Normally the framework you use should provide a `Link` component for navigation, which you can use like this:
+```jsx
+import { Link } from 'my-framework';
+import { TextLink } from '@drawbotics/react-drylus';
+
+// ...
+  return (
+    <Link to="some url">
+      <TextLink>Click me to navigate</TextLink>
+    </Link>
+  );
+// ...
+```

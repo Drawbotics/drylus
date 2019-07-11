@@ -65,7 +65,7 @@ const styles = {
   `,
   cell: css`
     text-align: left;
-    padding: calc(${sv.defaultPadding} - 4px) ${sv.defaultPadding};
+    padding: ${sv.paddingSmall} ${sv.defaultPadding};
   `,
   asContainer: css`
     padding-top: 0 !important;
@@ -338,11 +338,11 @@ const FakeTable = ({ columns }) => {
 };
 
 
-function generateTable(data, header, renderCell, renderChildCell, i=0) {
+function generateTable(data, header, renderCell, renderChildCell, i=0, childHeader) {
   if (Array.isArray(data)) {
     return (
       <TBody>
-        {data.map((rows, i) => generateTable(rows, header, renderCell, renderChildCell, i))}
+        {data.map((rows, i) => generateTable(rows, header, renderCell, renderChildCell, i, childHeader))}
       </TBody>
     );
   }
@@ -373,7 +373,7 @@ function generateTable(data, header, renderCell, renderChildCell, i=0) {
         <TRow key={`${uniqId}-1`} nested={uniqId}>
           <TCell>
             <Table>
-              {generateTable(data.data, undefined, null, renderChildCell)}
+              {generateTable(data.data, childHeader, null, renderChildCell)}
             </Table>
           </TCell>
         </TRow>
@@ -394,6 +394,7 @@ const Table = ({
   renderCell=x=>x,
   renderChildCell=x=>x,
   header,
+  childHeader,
   sortableBy,
   activeHeader,
   onClickHeader,
@@ -439,7 +440,7 @@ const Table = ({
                   </TCell>
                 ))}
               </THead>
-              {generateTable(data, header, renderCell, renderChildCell)}
+              {generateTable(data, header, renderCell, renderChildCell, 0, childHeader)}
             </>
           }
           else if (header && isLoading) {
@@ -478,6 +479,9 @@ Table.propTypes = {
 
   /** Array of strings to generate the header of the table (each string is a label). data prop keys will be filtered by these */
   header: PropTypes.arrayOf(PropTypes.string),
+
+  /** Array of strings to generate the order of the children of the table (each string is a key). data prop keys will be filtered by these */
+  childHeader: PropTypes.arrayOf(PropTypes.string),
 
   /** Pass the keys of the attributes in the table which can be sorted. To be used with `data`. */
   sortableBy: PropTypes.arrayOf(PropTypes.string),

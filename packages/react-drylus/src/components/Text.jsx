@@ -12,7 +12,7 @@ const styles = {
     display: inline;
   `,
   bold: css`
-    font-weight: bold;
+    font-weight: 500;
   `,
   primary: css`
     color: ${sv.colorPrimary};
@@ -73,6 +73,7 @@ const Text = ({
   disabled,
   children,
   category,
+  style,
 }) => {
   return (
     <span className={cx(styles.root, {
@@ -89,7 +90,7 @@ const Text = ({
       [styles.default]: size === Sizes.DEFAULT,
       [styles.large]: size === Sizes.LARGE,
       [styles[getEnumAsClass(category)]]: category && ! disabled && ! inversed,
-    })}>
+    })} style={style}>
       {children}
     </span>
   );
@@ -109,9 +110,12 @@ Text.propTypes = {
   /** Makes the text appear disabled, but still selectable */
   disabled: PropTypes.bool,
 
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 
   category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
+
+  /** Custom style object override */
+  style: PropTypes.object,
 };
 
 

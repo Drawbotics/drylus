@@ -96,6 +96,7 @@ const Countbox = ({
   renderValue,
   max,
   min,
+  name,
 }) => {
   const inputRef = useRef(null);
 
@@ -103,11 +104,11 @@ const Countbox = ({
     const numericalValue = Number(v);
 
     if (v === '-' || v === '') {
-      onChange(v);
+      onChange(v, name);
     }
     else if (numericalValue === 0 || numericalValue) {
       const finalValue = numericalValue > max ? max : (numericalValue < min ? min : numericalValue);
-      onChange(finalValue);
+      onChange(finalValue, name);
     }
   };
 
@@ -144,12 +145,13 @@ const Countbox = ({
         disabled={disabled}
         placeholder={placeholder}
         value={value}
+        name={name}
         suffix={
           <div className={cx(styles.buttons, { [styles.disabled]: disabled })}>
-            <button className={styles.button} onClick={() => ! disabled && value < max ? onChange((value || 0) + 1) : null}>
+            <button className={styles.button} onClick={() => ! disabled && value < max ? onChange((value || 0) + 1, name) : null}>
               <Icon name="plus" bold />
             </button>
-            <button className={styles.button} onClick={() => ! disabled && value > min ? onChange((value || 0) - 1) : null}>
+            <button className={styles.button} onClick={() => ! disabled && value > min ? onChange((value || 0) - 1, name) : null}>
               <Icon name="minus" bold />
             </button>
           </div>
@@ -165,6 +167,9 @@ Countbox.propTypes = {
     PropTypes.number,
     PropTypes.oneOf(['-', '']),
   ]).isRequired,
+
+  /** Name of the form element (target.name) */
+  name: PropTypes.string,
 
   /** Disables the countbox */
   disabled: PropTypes.bool,

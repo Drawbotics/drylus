@@ -9,7 +9,7 @@ import '../utils/normalize';
 injectGlobal`
   @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
 
-  html {
+  html, body {
     font-size: ${sv.defaultFontSize};
     line-height: ${sv.defaultLineHeight};
     letter-spacing: ${sv.defaultLetterSpacing};
@@ -21,6 +21,12 @@ const styles = {
   root: css`
     * {
       font-family: ${sv.defaultFontFamily};
+    }
+
+    a {
+      cursor: default;
+      text-decoration: none;
+      color: initial;
     }
   `,
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import ReactElementToString from 'react-element-to-jsx-string';
 import omit from 'lodash/omit';
@@ -16,16 +16,27 @@ const styles = {
   playground: css`
   `,
   codeWrapper: css`
-    border: 1px solid ${sv.neutralDark};
+    padding: ${sv.paddingExtraSmall};
+    background: ${sv.neutralLight};
     border-radius: ${sv.defaultBorderRadius};
     position: relative;
     overflow: hidden;
+
+    &:hover {
+      cursor: pointer;
+      background: ${sv.neutral};
+
+      & > * {
+        cursor: auto;
+      }
+    }
   `,
   table: css`
     margin-top: ${sv.defaultMargin};
   `,
   code: css`
     position: relative;
+    margin-top: ${sv.marginExtraSmall};
 
     &:hover {
       & > [data-element="switcher"] {
@@ -46,13 +57,13 @@ const styles = {
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
   `,
   toggle: css`
-    padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
-    color: ${sv.colorPrimary};
-    background: ${sv.neutralLight};
+    padding: ${sv.paddingSmall};
+    padding-top: ${sv.paddingExtraSmall};
+    padding-bottom: 0;
+    color: ${sv.blue};
 
     &:hover {
       cursor: pointer;
-      background: ${sv.neutral};
     }
   `,
 };
@@ -81,6 +92,11 @@ function getMarkupForMode(mode, component) {
 }
 
 
+function replaceSymbol(value) {
+  return value.replace(/Symbol\((.+?)\)/gm, '$1');
+}
+
+
 const supportedModes = ['react', 'vanilla'];
 
 
@@ -88,28 +104,37 @@ const Playground = ({ component, children, mode, __code, enums }) => {
   const [props, setProps] = useState({});
   const [codeOpen, setCodeOpen] = useState(false);
   const [activeMode, setMode] = useState(supportedModes[0]);
+  const childrenRef = useRef();
+  const parentRef = useRef();
 
   const generatedComponent = recursiveMdxTransform(children, { component, props });
   const generatedMarkup = getMarkupForMode(activeMode, generatedComponent);
   return (
     <div className={styles.playground}>
-      <div className={styles.codeWrapper}>
-        <Preview raw={activeMode === 'vanilla'}>
-          {activeMode === 'vanilla' ? generatedMarkup : generatedComponent}
-        </Preview>
-        <div className={styles.toggle} onClick={() => setCodeOpen(! codeOpen)}>
-          Toggle code
+      <div
+        ref={parentRef}
+        className={styles.codeWrapper}
+        onClick={(e) =>
+          ! childrenRef.current.contains(e.target) && parentRef.current.contains(e.target) ?
+          setCodeOpen(! codeOpen) : null}>
+        <div ref={childrenRef}>
+          <Preview raw={activeMode === 'vanilla'}>
+            {activeMode === 'vanilla' ? generatedMarkup : generatedComponent}
+          </Preview>
+          <div className={cx(styles.code, { [styles.codeHidden]: ! codeOpen })}>
+            <div className={styles.switcher} data-element="switcher">
+              <ModeSwitcher
+                modes={supportedModes}
+                activeMode={activeMode}
+                onChange={setMode} />
+            </div>
+            <div className={styles.codeBox}>
+              <CodeBox format mode={mode}>{activeMode === 'react' && ! component ? __code : replaceSymbol(generatedMarkup)}</CodeBox>
+            </div>
+          </div>
         </div>
-        <div className={cx(styles.code, { [styles.codeHidden]: ! codeOpen })}>
-          <div className={styles.switcher} data-element="switcher">
-            <ModeSwitcher
-              modes={supportedModes}
-              activeMode={activeMode}
-              onChange={setMode} />
-          </div>
-          <div className={styles.codeBox}>
-            <CodeBox format mode={mode}>{activeMode === 'react' && ! component ? __code : generatedMarkup}</CodeBox>
-          </div>
+        <div className={styles.toggle}>
+          Toggle code
         </div>
       </div>
       {do{

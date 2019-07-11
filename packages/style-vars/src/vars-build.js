@@ -72,9 +72,9 @@ const redDark = '#BF0E08';
 exports.redDark = redDark;
 const red = '#EC4C47';
 exports.red = red;
-const redLight = '#fae2e2';
+const redLight = '#F8C8C8';
 exports.redLight = redLight;
-const redLighter = '#fef6f6';
+const redLighter = '#fae2e2';
 exports.redLighter = redLighter;
 const danger = red;
 exports.danger = danger;
@@ -159,7 +159,7 @@ exports.colorDisabled = colorDisabled;
 const colorDisabledInverse = fade(white, 30); // SHADOWS
 
 exports.colorDisabledInverse = colorDisabledInverse;
-const shadowColor = neutral; // ELEVATIONS
+const shadowColor = fade(neutralDark, 30); // ELEVATIONS
 
 exports.shadowColor = shadowColor;
 const elevation1 = `0 4px 8px ${shadowColor}`;

@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/style-vars",
-  "version": "0.1.3-alpha.13",
+  "version": "0.6.5",
   "description": "Style variables used by Drawbotics across different projects",
   "license": "UNLICENSED",
   "main": "dist/vars.js",
@@ -17,5 +17,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "57e9ffb75461ca23beaed3e245ad4f900be602a6"
+  "gitHead": "9cc8d47536307bcf38703623a716a0955b3b6446"
 }

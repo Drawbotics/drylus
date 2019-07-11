@@ -97,7 +97,7 @@ const Margin = ({
   const isUniform = typeof size !== 'object';
   return (
     <div className={cx(styles.root, {
-      [styles[camelCase(size.description)]]: isUniform && size,
+      [styles[camelCase(size?.description)]]: isUniform && size,
       [styles.resetMargin]: ! isUniform,
       [styles[camelCase(`${size?.left?.description}_LEFT`)]]: ! isUniform && size?.left,
       [styles[camelCase(`${size?.right?.description}_RIGHT`)]]: ! isUniform && size?.right,

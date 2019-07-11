@@ -26,8 +26,9 @@ const basePlugins = [
   }),
   new HtmlWebpackPlugin({
     filename: isProduction ? '404.html' : 'index.html',
-    template: './templates/index.html',
+    template: './public/index.html',
     inject: true,
+    favicon: './public/favicon.ico',
   }),
   new ProgressPlugin(betterWebpackProgress({
     mode: 'compact',

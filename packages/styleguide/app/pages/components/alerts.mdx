@@ -1,0 +1,109 @@
+import {
+  AlertsProvider,
+  Alert,
+  Categories,
+  useAlert,
+  Button,
+  Flex,
+  FlexItem,
+  FlexJustify,
+  Margin,
+  Sizes,
+} from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Alerts Provider
+Used to display temporary information regarding an action, or a status due to a user action. The `AlertsProvider` should be called at the root of the project to provide the container for the alerts to display. The `useAlert` function hook can then be imported wherever the alert needs to be shown/hidden. See below for an example usage:
+
+```jsx
+// App.js
+import { AlertsProvider } from '@drawbotics/react-drylus';
+
+// ...
+  return (
+    <AlertsProvider>
+      <ComponentWithAlerts />
+    </AlertsProvider>
+  );
+// ...
+
+// ComponentWithAlerts.js
+import { useAlert } from '@drawbotics/react-drylus';
+
+const ComponentWithAlerts = () => {
+  const { show } = useAlert();
+
+  return (
+    <button onClick={() => show({ text: 'I am an alert' })}>Show alert when clicked!</button>
+  );
+};
+```
+
+Alerts automatically disappear (except for `danger` alerts, which need to be manually discarded), though this can be overriden (see `Alert` docs below). A "discard" button is rendered on all alerts which when clicked, discards them. If you need to discard alerts manually for some other reason you can use `hide` from the hook to trigger it; though in this case you should provide your own ID for the alert:
+
+```jsx
+// ComponentWithAlerts.js
+import { useAlert } from '@drawbotics/react-drylus';
+
+const ComponentWithAlerts = () => {
+  const { show, hide } = useAlert();
+
+  return (
+    <div>
+      <button onClick={() => show({ text: 'I am an alert', id: 'my-alert' })}>Show alert when clicked!</button>
+      <button onClick={() => hide('my-alert')}>Hide alert!</button>
+    </div>
+  );
+};
+```
+
+### Alert
+The `show` function takes exactly the same arguments as the props of `Alert`, while `hide` only takes the `id` (if provided to `show`).
+
+<Playground component={Alert}>
+  <Alert category={Categories.DANGER} text="This is an information message" onClickDismiss={x=>x} />
+</Playground>
+
+
+## Demo
+Click on the buttons to trigger different alert types.
+
+export const Demo = ({ component: Component }) => {
+  const { show, hide } = useAlert();
+  return (
+    <Flex justify={FlexJustify.START}>
+      <FlexItem>
+        <Margin size={{ right: Sizes.SMALL }}>
+          <Button category={Categories.SUCCESS} onClick={() => show({ category: Categories.SUCCESS, text: 'Congrats you did it!' })}>
+            Show success
+          </Button>
+        </Margin>
+      </FlexItem>
+      <FlexItem>
+        <Margin size={{ right: Sizes.SMALL }}>
+          <Button category={Categories.DANGER} onClick={() => show({ category: Categories.DANGER, text: 'Oh oh! Something went bad.' })}>
+            Show danger
+          </Button>
+        </Margin>
+      </FlexItem>
+      <FlexItem>
+        <Margin size={{ right: Sizes.SMALL }}>
+          <Button category={Categories.WARNING} onClick={() => show({ category: Categories.WARNING, text: 'Oh oh! Careful there.' })}>
+            Show warning
+          </Button>
+        </Margin>
+      </FlexItem>
+      <FlexItem>
+        <Button category={Categories.INFO} onClick={() => show({ category: Categories.INFO, text: 'Here is some info. You are welcome.' })}>
+          Show info
+        </Button>
+      </FlexItem>
+    </Flex>
+  );
+};
+
+<AlertsProvider>
+  <Demo />
+</AlertsProvider>

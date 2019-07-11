@@ -34,8 +34,8 @@ export const azureLight = '#F9FAFF';
 
 export const redDark = '#BF0E08';
 export const red = '#EC4C47';
-export const redLight = '#fae2e2';
-export const redLighter = '#fef6f6';
+export const redLight = '#F8C8C8';
+export const redLighter = '#fae2e2';
 export const danger = red;
 export const error = red;
 
@@ -89,7 +89,7 @@ export const colorDisabled = fade(neutralDark, 50);
 export const colorDisabledInverse = fade(white, 30);
 
 // SHADOWS
-export const shadowColor = neutral;
+export const shadowColor = fade(neutralDark, 30);
 
 // ELEVATIONS
 export const elevation1 = `0 4px 8px ${shadowColor}`;

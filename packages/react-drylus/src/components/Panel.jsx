@@ -8,8 +8,8 @@ const styles = {
   root: css`
     background: ${sv.white};
     box-shadow: ${sv.elevation3};
-    overflow: auto;
     border-radius: ${sv.borderRadiusSmall};
+    overflow: auto;
   `,
   header: css`
     padding: ${sv.defaultPadding};
@@ -17,11 +17,8 @@ const styles = {
     margin-bottom: ${sv.defaultMargin};
   `,
   body: css`
-    padding: ${sv.defaultPadding};
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: ${sv.defaultMargin};
-    margin-bottom: ${sv.defaultMargin};
+    padding: 0 ${sv.defaultPadding};
+    margin: ${sv.defaultMargin} 0;
   `,
   footer: css`
     padding: ${sv.defaultPadding};

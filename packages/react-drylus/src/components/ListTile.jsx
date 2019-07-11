@@ -20,6 +20,10 @@ const styles = {
     display: flex;
     align-items: center;
   `,
+  trailing: css`
+    display: flex;
+    align-items: center;
+  `,
   title: css`
     color: ${sv.colorPrimary};
   `,
@@ -37,6 +41,7 @@ const ListTile = ({
   title,
   subtitle,
   leading,
+  trailing,
   onClick,
 }) => {
   return (
@@ -53,20 +58,29 @@ const ListTile = ({
         }}
         <FlexItem flex>
           {do {
-            if (title) {
+            if (title != null) {
               <div className={cx(styles.title, { [styles.withMargin]: subtitle })}>
                 {title}
               </div>
             }
           }}
           {do {
-            if (subtitle) {
+            if (subtitle != null) {
               <div className={styles.subtitle}>
                 {subtitle}
               </div>
             }
           }}
         </FlexItem>
+        {do {
+          if (trailing != null) {
+            <FlexItem>
+              <div className={styles.trailing}>
+                {trailing}
+              </div>
+            </FlexItem>
+          }
+        }}
       </Flex>
     </div>
   );
@@ -82,6 +96,9 @@ ListTile.propTypes = {
 
   /** Can be anything, will appear centered to the left of the title and/or subtitle */
   leading: PropTypes.node,
+
+  /** Can be anything, will appear centered to the right of the title and/or subtitle */
+  trailing: PropTypes.node,
 
   /** Triggered when the component is clicked */
   onClick: PropTypes.func,
