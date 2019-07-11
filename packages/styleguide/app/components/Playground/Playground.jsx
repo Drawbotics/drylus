@@ -105,14 +105,18 @@ const Playground = ({ component, children, mode, __code, enums }) => {
   const [codeOpen, setCodeOpen] = useState(false);
   const [activeMode, setMode] = useState(supportedModes[0]);
   const childrenRef = useRef();
+  const parentRef = useRef();
 
   const generatedComponent = recursiveMdxTransform(children, { component, props });
   const generatedMarkup = getMarkupForMode(activeMode, generatedComponent);
   return (
     <div className={styles.playground}>
       <div
+        ref={parentRef}
         className={styles.codeWrapper}
-        onClick={(e) => ! childrenRef.current.contains(e.target) && setCodeOpen(! codeOpen)}>
+        onClick={(e) =>
+          ! childrenRef.current.contains(e.target) && parentRef.current.contains(e.target) ?
+          setCodeOpen(! codeOpen) : null}>
         <div ref={childrenRef}>
           <Preview raw={activeMode === 'vanilla'}>
             {activeMode === 'vanilla' ? generatedMarkup : generatedComponent}

@@ -34,3 +34,4 @@ export EmptyState from './EmptyState';
 export Banner from './Banner';
 export Callout from './Callout';
 export ButtonLink from './ButtonLink';
+export AlertsProvider, { Alert, useAlert } from './AlertsProvider';

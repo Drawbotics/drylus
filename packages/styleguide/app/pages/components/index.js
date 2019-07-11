@@ -30,6 +30,7 @@ import emptyState from './empty-state';
 import banner from './banner';
 import callout from './callout';
 import buttonLink from './button-link';
+import alerts from './alerts';
 
 
 const components = {
@@ -65,6 +66,7 @@ const components = {
   banner,
   callout,
   buttonLink,
+  alerts,
 };
 
 
