@@ -139,11 +139,14 @@ export const Alert = ({
   text,
   category,
   onClickDismiss,
+  hideDelay,
 }) => {
   const icon = _getIconForCategory(category);
 
   useEffect(() => {
-    setTimeout(() => onClickDismiss(id), 2000);
+    if (category !== Categories.DANGER) {
+      setTimeout(() => onClickDismiss(id), hideDelay);
+    }
   }, []);
 
   return (
@@ -198,6 +201,14 @@ Alert.propTypes = {
     PropTypes.number,
     PropTypes.string,
   ]),
+
+  /** Amount of milliseconds before the alert is dismissed (except for danger) */
+  hideDelay: PropTypes.number,
+};
+
+
+Alert.defaultProps = {
+  hideDelay: 4000,
 };
 
 
