@@ -60,9 +60,9 @@ const Context = React.createContext();
 
 
 const SplashScreenProvider = ({ children }) => {
-  const [outletElement, setOutletElement] = useState(null);
-  const [visible, setVisibility] = useState(false);
-  const [state, setState] = useState({});
+  const [ outletElement, setOutletElement ] = useState(null);
+  const [ visible, setVisibility ] = useState(false);
+  const [ state, setState ] = useState({});
 
   const { text } = state;
 
@@ -174,4 +174,6 @@ const SplashScreenProvider = ({ children }) => {
 export default SplashScreenProvider;
 
 
-export const useSplashScreen = () => React.useContext(Context);
+export function useSplashScreen() {
+  return React.useContext(Context);
+}
