@@ -11,6 +11,11 @@ import {
   Panel,
   PanelSection,
   PanelBody,
+  Table,
+  TRow,
+  TBody,
+  THead,
+  TCell,
 } from '@drawbotics/react-drylus';
 import { Link } from 'react-router-dom';
 
@@ -40,6 +45,12 @@ const components = {
   },
   code: Code,
   inlineCode: InlineCode,
+  table: (props) => <Table {...props} />,
+  tr: (props) => <TRow {...props} />,
+  td: (props) => <TCell {...props} />,
+  th: (props) => <TCell {...props} />,
+  thead: (props) => <THead>{props.children.props.children}</THead>,
+  tbody: (props) => <TBody {...props} />,
   wrapper: ({ children, ...props }) => {
     if (React.Children.count(children) <= 1) {
       return children;

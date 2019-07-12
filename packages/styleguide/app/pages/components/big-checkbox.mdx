@@ -6,7 +6,10 @@ import Playground from '~/components/Playground';
 
 # Big Checkbox
 Is used for more complex UIs where multiple choices are available. Accepts similar props to a `Checkbox` component but does not look the same. This kind of checkbox "button" is not to be used in regular forms, similarly to the `BigRadio` component. Often used together with other `BigCheckbox`.
-
+```jsx
+import { BigCheckbox } from '@drawbotics/react-drylus';
+```
+__Example__
 
 export const Wrapper = () => {
   const [ values, setValues ] = useState({ first: false, second: false, third: false });

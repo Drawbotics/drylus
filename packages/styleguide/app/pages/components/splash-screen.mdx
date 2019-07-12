@@ -5,9 +5,17 @@ import { PropsTable } from '~/components/Playground';
 
 
 # Splash Screen Provider
-Set this provider at the root of the project if you want to show/hide a splash screen at will, similarly to `AlertsProvider`.
+Set this provider at the root of the project if you want to show/hide a splash screen at will. See [`Alerts`](/components/alerts) for usage, since it's essentially the same.
 
 Shown when a whole page should be loading and the user shouldn't perform any action. For example when the website is loading, or when an order is being placed.
+```jsx
+import { useSplashScreen } from '@drawbotics/react-drylus';
+```
+
+In your component, use the `useSplashScreen` hook like so:
+```jsx
+const { show, hide, update } = useSplashScreen();
+```
 
 The functions available for interacting with the splash screen are these:
 ```

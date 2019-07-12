@@ -13,6 +13,10 @@ import Playground from '~/components/Playground';
 # Banner
 Component used to display an important message that should take precedence over the rest of the content of the page. Similar to [`Callout`](/components/callout), but used to the inform the user of possible actions he needs to make, or as a result of an _uncontrolled_ effect. Cannot be dismissed.
 
+```jsx
+import { Banner } from '@drawbotics/react-drylus';
+```
+__Example__
 <Playground component={Banner}>
   <Banner title="You don't have enough credits" category={Categories.DANGER}>
     Your order will not go into production because your credit number is below 0. Click <TextLink underlined={LinkUnderlined.ALWAYS}>here</TextLink> to buy more credits.
