@@ -17,6 +17,7 @@
     "@drawbotics/enums": "0.2.0",
     "@drawbotics/icons": "^0.6.5",
     "@drawbotics/use-is-device": "^0.1.4",
+    "animejs": "^3.0.1",
     "core-js": "^2.6.5",
     "emotion": "^10.0.9",
     "react-calendar": "^2.19.0",

@@ -31,6 +31,7 @@ import banner from './banner';
 import callout from './callout';
 import buttonLink from './button-link';
 import alerts from './alerts';
+import splashScreen from './splash-screen';
 
 
 const components = {
@@ -67,6 +68,7 @@ const components = {
   callout,
   buttonLink,
   alerts,
+  splashScreen,
 };
 
 

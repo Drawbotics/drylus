@@ -230,8 +230,8 @@ function reducer(alerts, action) {
 
 
 const AlertsProvider = ({ children }) => {
-  const [outletElement, setOutletElement] = useState(null);
-  const [alerts, dispatch] = useReducer(reducer, []);
+  const [ outletElement, setOutletElement ] = useState(null);
+  const [ alerts, dispatch ] = useReducer(reducer, []);
 
   const hide = (id) => {
     dispatch({ type: 'hide', payload: { id } });
@@ -264,7 +264,7 @@ const AlertsProvider = ({ children }) => {
   if (! outletElement) return null;
 
   return (
-    <Context.Provider value={{ show, hide: (id) => hide(id, alerts) }}>
+    <Context.Provider value={{ show, hide }}>
       {children}
       {ReactDOM.createPortal(
         <TransitionGroup className={styles.provider}>
@@ -296,4 +296,7 @@ const AlertsProvider = ({ children }) => {
 
 export default AlertsProvider;
 
-export const useAlert = () => React.useContext(Context);
+
+export function useAlert() {
+  return React.useContext(Context);
+}
