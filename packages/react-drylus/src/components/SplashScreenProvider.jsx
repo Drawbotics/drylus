@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
 import anime from 'animejs';
 import { CSSTransition } from 'react-transition-group';
+import PropTypes from 'prop-types';
 
 
 const styles = {
@@ -168,6 +169,10 @@ const SplashScreenProvider = ({ children }) => {
       )}
     </Context.Provider>
   );
+};
+
+SplashScreenProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 

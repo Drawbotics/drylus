@@ -1,0 +1,32 @@
+import {
+  DrylusProvider,
+  ThemeProvider,
+  AlertsProvider,
+  SplashScreenProvider,
+} from '@drawbotics/react-drylus';
+
+import { PropsTable } from '~/components/Playground';
+
+
+# Providers
+Providers are components that _provide_ basic functionality throughout the whole application that uses the design system. You can find more information about each one individually in the `Components` section of this styleguide. The available providers are:
+
+### Drylus Provider
+Combines all the providers into one for easier usage and avoiding having to repeat the same code in multiple projects.
+
+<PropsTable component={DrylusProvider} />
+
+### Theme Provider
+Wraps the whole application with the required styles. Normalizes and applies default styles globally (note that each component styles itself).
+
+<PropsTable component={ThemeProvider} />
+
+### AlertsProvider
+See [`Alerts`](/components/alerts).
+
+<PropsTable component={AlertsProvider} />
+
+### SplashScreenProvider
+See [`SplashScreen`](/components/splash-screen).
+
+<PropsTable component={SplashScreenProvider} />

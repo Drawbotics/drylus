@@ -293,6 +293,10 @@ const AlertsProvider = ({ children }) => {
   );
 };
 
+AlertsProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 
 export default AlertsProvider;
 
