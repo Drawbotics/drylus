@@ -19,19 +19,6 @@ const styles = {
 };
 
 
-function setValueFromType(value, { name: type }) {
-  if (typeof value === type) {
-    return value;
-  }
-  else if (typeof value === 'boolean' && type === 'bool') {
-    return value;
-  }
-  else {
-    return null;
-  }
-}
-
-
 const Prop = ({
   name,
   prop,
@@ -66,7 +53,8 @@ const Prop = ({
               key={i}
               name={name}
               prop={{ type }}
-              value={setValueFromType(value, type)}
+              enums={enums}
+              value={value}
               onChange={onChange} />
           ))}
         </div>
