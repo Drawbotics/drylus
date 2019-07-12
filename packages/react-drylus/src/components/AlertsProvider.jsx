@@ -230,8 +230,8 @@ function reducer(alerts, action) {
 
 
 const AlertsProvider = ({ children }) => {
-  const [outletElement, setOutletElement] = useState(null);
-  const [alerts, dispatch] = useReducer(reducer, []);
+  const [ outletElement, setOutletElement ] = useState(null);
+  const [ alerts, dispatch ] = useReducer(reducer, []);
 
   const hide = (id) => {
     dispatch({ type: 'hide', payload: { id } });
@@ -300,4 +300,7 @@ AlertsProvider.propTypes = {
 
 export default AlertsProvider;
 
-export const useAlert = () => React.useContext(Context);
+
+export function useAlert() {
+  return React.useContext(Context);
+}

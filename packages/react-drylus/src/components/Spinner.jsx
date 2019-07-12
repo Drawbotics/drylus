@@ -30,6 +30,16 @@ const dash = keyframes`
 
 
 const styles = {
+  container: css`
+  `,
+  fullSizeContainer: css`
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  `,
   root: css`
     position: relative;
     width: ${sv.defaultMargin};
@@ -85,19 +95,25 @@ const Spinner = ({
   size,
   category,
   inversed,
+  fullSize,
 }) => {
   return (
-    <div className={cx(styles.root, {
-      [styles.small]: size === Sizes.SMALL,
-      [styles.large]: size === Sizes.LARGE,
-    })}>
-      <svg className={styles.circle} viewBox="25 25 50 50">
-        <circle className={cx(styles.path, {
-          [styles.brand]: category === Categories.BRAND,
-          [styles.info]: category === Categories.INFO,
-          [styles.white]: inversed,
-        })} cx="50" cy="50" r="20" fill="none" />
-      </svg>
+    <div
+      className={cx(styles.container, {
+        [styles.fullSizeContainer]: fullSize,
+      })}>
+      <div className={cx(styles.root, {
+        [styles.small]: size === Sizes.SMALL,
+        [styles.large]: size === Sizes.LARGE,
+      })}>
+        <svg className={styles.circle} viewBox="25 25 50 50">
+          <circle className={cx(styles.path, {
+            [styles.brand]: category === Categories.BRAND,
+            [styles.info]: category === Categories.INFO,
+            [styles.white]: inversed,
+          })} cx="50" cy="50" r="20" fill="none" />
+        </svg>
+      </div>
     </div>
   );
 };
@@ -111,6 +127,9 @@ Spinner.propTypes = {
 
   /** If true, sets the color of the spinner to white (to be used against colored backgrounds) */
   inversed: PropTypes.bool,
+
+  /** If true the spinner will be placed in the center of the parent container */
+  fullSize: PropTypes.bool,
 };
 
 
