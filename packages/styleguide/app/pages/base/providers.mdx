@@ -14,19 +14,35 @@ Providers are components that _provide_ basic functionality throughout the whole
 ### Drylus Provider
 Combines all the providers into one for easier usage and avoiding having to repeat the same code in multiple projects.
 
+```jsx
+import { DrylusProvider } from '@drawbotics/react-drylus';
+```
+
 <PropsTable component={DrylusProvider} />
 
 ### Theme Provider
 Wraps the whole application with the required styles. Normalizes and applies default styles globally (note that each component styles itself).
+
+```jsx
+import { ThemeProvider } from '@drawbotics/react-drylus';
+```
 
 <PropsTable component={ThemeProvider} />
 
 ### AlertsProvider
 See [`Alerts`](/components/alerts).
 
+```jsx
+import { AlertsProvider } from '@drawbotics/react-drylus';
+```
+
 <PropsTable component={AlertsProvider} />
 
 ### SplashScreenProvider
 See [`SplashScreen`](/components/splash-screen).
+
+```jsx
+import { SplashScreenProvider } from '@drawbotics/react-drylus';
+```
 
 <PropsTable component={SplashScreenProvider} />

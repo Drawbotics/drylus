@@ -1,0 +1,61 @@
+import { Page, Content } from '@drawbotics/react-drylus';
+
+import { PropsTable } from '~/components/Playground';
+
+# Page and Content
+
+These are the basic building blocks for any UI using the design system. You should always import them and use them at the root of the project (the same place where you'd be using the [providers](/base/providers)).
+
+Use the import like so
+```jsx
+import { Page, Content } from '@drawbotics/react-drylus';
+```
+
+Each component takes the following props:
+
+__Page__
+<PropsTable component={Page} />
+
+`Page` essentially defines the available space on the UI where your app will live, pretty much setting the height and width as a container.
+
+__Content__
+<PropsTable component={Content} />
+
+`Content` takes care of properly setting the space taken by the content, and adds the background color which is normally used to define where the "main" content of the page lives.
+
+And to construct a simple page you would do the following:
+```jsx
+const App = () => {
+  return (
+    <YourRouter>
+      <DrylusProvider>
+        <Page>
+          <Content fullHeight fullWidth>
+            // the rest of the app goes here
+          </Content>
+        </Page>
+      </DrylusProvider>
+    </YourRouter>
+  );
+};
+```
+
+Or if you require a more complex root layout (see [`Layout`](/layout/layout)) for more examples.
+
+```jsx
+const App = () => {
+  return (
+    <YourRouter>
+      <DrylusProvider>
+        <Page>
+          <Layout bar={<YourBarComponent />} position={LayoutPositions.LEFT}>
+            <Content fullHeight>
+              // the rest of the app goes here
+            </Content>
+          </Layout>
+        </Page>
+      </DrylusProvider>
+    </YourRouter>
+  );
+};
+```
