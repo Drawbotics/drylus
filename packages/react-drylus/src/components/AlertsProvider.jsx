@@ -264,7 +264,7 @@ const AlertsProvider = ({ children }) => {
   if (! outletElement) return null;
 
   return (
-    <Context.Provider value={{ show, hide: (id) => hide(id, alerts) }}>
+    <Context.Provider value={{ show, hide }}>
       {children}
       {ReactDOM.createPortal(
         <TransitionGroup className={styles.provider}>

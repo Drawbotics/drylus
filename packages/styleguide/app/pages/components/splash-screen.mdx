@@ -1,15 +1,24 @@
 import { useEffect, useState } from 'react';
-import { SplashScreen } from '@drawbotics/react-drylus';
+import { SplashScreenProvider, useSplashScreen } from '@drawbotics/react-drylus';
 
 import { PropsTable } from '~/components/Playground';
 
 
-# Splash Screen
-Used when a whole page should be loading and the user shouldn't perform any action. For example when the website is loading, or when an order is being placed.
+# Splash Screen Provider
+Set this provider at the root of the project if you want to show/hide a splash screen at will, similarly to `AlertsProvider`.
 
-The component is shown when rendered, no props are required for that.
+Shown when a whole page should be loading and the user shouldn't perform any action. For example when the website is loading, or when an order is being placed.
 
-<PropsTable component={SplashScreen} />
+The functions available for interacting with the splash screen are these:
+```
+show(options)   // to trigger the visibility of the splash screen
+hide()          // to hide the splash screen (resets options)
+update(options) // to update the options without changing the visibility
+```
+You may pass a `options` object to the `show` and `update` calls to display something during the loading step. `options` accepts the following fields:
+```
+text  // displayed below the loading animation
+```
 
 
 ### Demo
@@ -17,9 +26,11 @@ Press `s` on your keyboard to start the splash screen. Press it again to hide it
 
 export const Demo = () => {
   const [visible, toggle] = useState(false);
+  const { show, hide } = useSplashScreen();
   useEffect(() => {
     const handlePressKey = (e) => {
       if (e.code === 'KeyS') {
+        visible ? hide() : show({ text: 'Loading...' });
         toggle(! visible);
       }
     };
@@ -28,8 +39,9 @@ export const Demo = () => {
       window.removeEventListener('keydown', handlePressKey);
     };
   });
-  return <SplashScreen visible={visible} />
+  return '';
 };
 
-
-<Demo />
+<SplashScreenProvider>
+  <Demo />
+</SplashScreenProvider>
