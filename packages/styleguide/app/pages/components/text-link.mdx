@@ -4,9 +4,12 @@ import Playground from '~/components/Playground';
 
 
 # Text Link
-
 This component is to be used if you need to style a link in a piece of text, it does not provide the actual "linking" functionality.
+```jsx
+import { TextLink, LinkUnderlined } from '@drawbotics/react-drylus';
+```
 
+__Example__
 <Playground component={TextLink} enums={{LinkUnderlined}}>
   <>
     <Text>This is some normal text and there is a </Text><TextLink>link</TextLink><Text> within it</Text>

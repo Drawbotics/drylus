@@ -6,7 +6,11 @@ import { ControlledField } from '../utils';
 
 # Countbox
 Used in forms to set a numerical value to a field. You can also type directly in the input but only positive and negative integers.
+```jsx
+import { Countbox } from '@drawbotics/react-drylus';
+```
 
+__Example__
 <Playground component={Countbox}>
   <ControlledField style={{ width: 300 }} component={
     <Countbox placeholder="Number of things" value="" onChange={x=>x} />

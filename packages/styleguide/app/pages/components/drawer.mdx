@@ -7,6 +7,10 @@ import Playground from '~/components/Playground';
 # Drawer
 Similarly to how a Modal works, the Drawer component is stateless, meaning you should control its visibility. It serves a similar purpose to the modal, but the content is served from the right side of the page, and can either overlay the whole page (like a modal) or be inline with the content.
 
+```jsx
+import { Drawer } from '@drawbotics/react-drylus';
+```
+
 All the rendered drawers are automatically attached to the end of the DOM through a `drawers-outlet`.
 
 export const DrawerController = ({ component: Component }) => {
