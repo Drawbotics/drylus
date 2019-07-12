@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/style-vars",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Style variables used by Drawbotics across different projects",
   "license": "UNLICENSED",
   "main": "dist/vars.js",
