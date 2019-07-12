@@ -23,7 +23,6 @@ const styles = {
     pointer-events: none;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
     width: 350px;
-    background: ${sv.white};
   `,
   visible: css`
     opacity: 1;
@@ -34,6 +33,7 @@ const styles = {
     padding: ${sv.paddingSmall};
     border-radius: ${sv.defaultBorderRadius};
     box-shadow: ${sv.elevation2};
+    background: ${sv.white};
 
     & > .react-calendar__navigation {
       margin-bottom: ${sv.marginExtraSmall};
@@ -136,6 +136,9 @@ const styles = {
       color: ${sv.colorSecondary};
     }
   `,
+  topRender: css`
+    transform: translateY(calc(-100% - ${sv.marginLarge} - ${sv.defaultMargin}));
+  `,
 };
 
 
@@ -160,6 +163,14 @@ function _dateToObject(date) {
 }
 
 
+function _getShouldRenderTop(box) {
+  if (box?.bottom > window.innerHeight) {
+    return true;
+  }
+  return false;
+}
+
+
 const DatePicker = ({
   value,
   onChange,
@@ -181,7 +192,7 @@ const DatePicker = ({
 
   const inputRef = useRef(null);
   const rootRef = useRef(null);
-  const pickerElement = useRef();
+  const pickerElement = useRef(null);
 
   useEffect(() => {
     const handleDocumentClick = (e) => ! pickerElement.current.contains(e.target) ? setFocused(false) : null;
@@ -219,6 +230,10 @@ const DatePicker = ({
     ...displayOptions,
   });
 
+  const pickerBox = pickerElement.current?.getBoundingClientRect();
+  const rootBox = rootRef.current?.getBoundingClientRect();
+  const topRender =  pickerBox ? _getShouldRenderTop(pickerBox) : false;
+
   return (
     <div className={styles.root} ref={rootRef}>
       <InputWithRef
@@ -240,8 +255,8 @@ const DatePicker = ({
       {outletElement && createPortal(
         <div
           style={{
-            top: rootRef.current?.getBoundingClientRect()?.top,
-            left: rootRef.current?.getBoundingClientRect()?.left,
+            top: rootBox?.top,
+            left: rootBox?.left,
           }}
           ref={pickerElement}
           className={cx(styles.calendarContainer, {
@@ -251,7 +266,9 @@ const DatePicker = ({
             {...calendarOptions}
             maxDate={maxDate && _objectToDate(maxDate)}
             minDate={minDate && _objectToDate(minDate)}
-            className={styles.calendar}
+            className={cx(styles.calendar, {
+              [styles.topRender]: topRender,
+            })}
             tileClassName={styles.tile}
             locale={locale}
             activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
