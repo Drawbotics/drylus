@@ -1,0 +1,14 @@
+# Constants
+
+You will see that throughout the design system, sometimes you are required to use one of some possible values for a particular prop, for example when choosing a `category` for a `Button`. Here are the 3 basic constants we provide for those components (note that some components expose their own constants, like `FlexJustify` in `Flex`).
+
+You can import them like so:
+```jsx
+import { Tiers, Categories, Sizes } from '@drawbotics/react-drylus';
+```
+
+| Name | Usage | Values |
+| ---- | ----- | ------ |
+| Sizes | To define a size, margin or padding | `EXTRA_SMALL`, `SMALL`, `DEFAULT`, `LARGE`, `EXTRA_LARGE`, `HUGE` |
+| Categories | Used with any component where the color determines a particular kind of action, to differentiate its usage (e.g. buttons or banners) | `BRAND`, `SUCCESS`, `INFO`, `WARNING`, `DANGER` |
+| Tiers | Used whenever the hierarchy is needed to determine the usage of a component (e.g. buttons) | `PRIMARY`, `SECONDARY`, `TERTIARY` |

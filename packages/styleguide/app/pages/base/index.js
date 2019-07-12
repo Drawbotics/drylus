@@ -1,8 +1,10 @@
 import providers from './providers';
+import constants from './constants';
 
 
 const components = {
   providers,
+  constants,
 };
 
 
