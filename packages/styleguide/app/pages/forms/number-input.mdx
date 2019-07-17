@@ -1,19 +1,19 @@
-import { Countbox } from '@drawbotics/react-drylus';
+import { NumberInput } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 import { ControlledField } from '../utils';
 
 
-# Countbox
+# Number Input
 Used in forms to set a numerical value to a field. You can also type directly in the input but only positive and negative integers.
 ```jsx
-import { Countbox } from '@drawbotics/react-drylus';
+import { NumberInput } from '@drawbotics/react-drylus';
 ```
 
 __Example__
-<Playground component={Countbox}>
+<Playground component={NumberInput}>
   <ControlledField style={{ width: 300 }} component={
-    <Countbox placeholder="Number of things" value="" onChange={x=>x} />
+    <NumberInput placeholder="Number of things" value="" onChange={x=>x} />
   } />
 </Playground>
 
@@ -22,6 +22,6 @@ You can also use a custom `renderValue` function to customize the way the value 
 
 <Playground>
   <ControlledField style={{ width: 300 }} component={
-    <Countbox renderValue={(v) => v + ' € HTVA'} placeholder="Price HTVA" value={0} onChange={x=>x} />
+    <NumberInput renderValue={(v) => v + ' € HTVA'} placeholder="Price HTVA" value={0} onChange={x=>x} />
   } />
 </Playground>

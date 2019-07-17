@@ -143,7 +143,7 @@ const styles = {
 };
 
 
-const Input = ({
+const RawInput = ({
   value,
   onChange,
   error,
@@ -153,6 +153,7 @@ const Input = ({
   suffix,
   disabled,
   inputRef,
+  className,
   ...rest,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
@@ -165,6 +166,7 @@ const Input = ({
     <div className={cx(styles.root, {
       [styles.valid]: Boolean(value) && valid,
       [styles.error]: error,
+      [className]: Boolean(className),
     })}>
       <div className={styles.outerWrapper}>
         {do{
@@ -232,11 +234,15 @@ const Input = ({
 
 
 export const InputWithRef = forwardRef((props, ref) => {
-  return <Input {...props} inputRef={ref} />
+  return <RawInput {...props} inputRef={ref} />
 });
 
-
 InputWithRef.displayName = 'Input';
+
+
+const Input = (props) => {
+  return <RawInput {...props} />;
+};
 
 
 Input.propTypes = {
@@ -269,6 +275,22 @@ Input.propTypes = {
 
   /** Node to be rendered at the end of the input field, for now limited to text, Button and Select */
   suffix: PropTypes.node,
+
+  /** Additional class name to override styles */
+  className: PropTypes.string,
+
+  type: PropTypes.oneOf([
+    'text',
+    'password',
+    'email',
+    'tel',
+    'url',
+  ]),
+};
+
+
+Input.defaultProps = {
+  type: 'text',
 };
 
 

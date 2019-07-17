@@ -2,21 +2,27 @@ import get from 'lodash/get';
 
 
 export function normalizeValue(v, enums) {
+  if (! v) return '';
+  
   const asSymbol = get(enums, v);
 
   if (asSymbol) {
     return asSymbol;
   }
 
+  if (Number(v)) {
+    return Number(v);
+  }
+
   if (v.includes("'") || v === '_empty') {
     return v.replace(/'/g, '');
   }
-  else if (v.includes('.')) {
+
+  if (v.includes('.')) {
     return v;
   }
-  else {
-    return parseFloat(v) || v;
-  }
+
+  return v;
 }
 
 

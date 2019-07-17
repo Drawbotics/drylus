@@ -5,8 +5,8 @@ import checkbox from './checkbox';
 import radioGroup from './radio-group';
 import searchInput from './search-input';
 import multiSelect from './multi-select';
-import countbox from './countbox';
-import datePicker from './date-picker';
+import numberInput from './number-input';
+import dateInput from './date-input';
 import formGroup from './form-group';
 import inputGroup from './input-group';
 import hint from './hint';
@@ -20,8 +20,8 @@ const components = {
   radioGroup,
   searchInput,
   multiSelect,
-  countbox,
-  datePicker,
+  numberInput,
+  dateInput,
   formGroup,
   inputGroup,
   hint,
