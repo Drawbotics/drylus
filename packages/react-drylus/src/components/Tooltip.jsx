@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 import Enum from '@drawbotics/enums';
 
+import { styles as themeStyles } from '../base/ThemeProvider';
+
 
 const styles = {
   root: css`
@@ -217,16 +219,18 @@ const Tooltip = ({ children, message, side }) => {
     <Fragment>
       <Wrapper />
       {ReactDOM.createPortal(
-        <div
-          ref={tooltipRef}
-          className={cx(styles.root, {
-            [styles.bottom]: side === TooltipSides.BOTTOM,
-            [styles.left]: side === TooltipSides.LEFT,
-            [styles.right]: side === TooltipSides.RIGHT,
-            [styles.visible]: visible,
-          })}
-          style={tooltipStyle}>
-          {message}
+        <div className={themeStyles.root}>
+          <div
+            ref={tooltipRef}
+            className={cx(styles.root, {
+              [styles.bottom]: side === TooltipSides.BOTTOM,
+              [styles.left]: side === TooltipSides.LEFT,
+              [styles.right]: side === TooltipSides.RIGHT,
+              [styles.visible]: visible,
+            })}
+            style={tooltipStyle}>
+            {message}
+          </div>
         </div>,
         document.getElementById('tooltips-outlet'),
       )}

@@ -9,6 +9,7 @@ import Button from './Button';
 import Title from './Title';
 import Icon from './Icon';
 import { Sizes, Tiers } from '../base';
+import { styles as themeStyles } from '../base/ThemeProvider';
 
 
 const styles = {
@@ -202,23 +203,25 @@ const Drawer = ({
     const handleClickOverlay = (e) => e.target === overlayElement?.current ? onClickOverlay() : null;
 
     return ReactDOM.createPortal(
-      <CSSTransition
-        in={visible}
-        timeout={300}
-        mountOnEnter
-        unmountOnExit
-        classNames={{
-          enter: styles.drawerOverlayEnter,
-          enterActive: styles.drawerOverlayEnterActive,
-          exit: styles.drawerOverlayExit,
-          exitActive: styles.drawerOverlayExitActive,
-        }}>
-        <div onClick={handleClickOverlay} className={styles.overlay} ref={overlayElement}>
-          <div data-element="wrapper" style={{ width }}>
-            {content}
+      <div className={themeStyles.root}>
+        <CSSTransition
+          in={visible}
+          timeout={300}
+          mountOnEnter
+          unmountOnExit
+          classNames={{
+            enter: styles.drawerOverlayEnter,
+            enterActive: styles.drawerOverlayEnterActive,
+            exit: styles.drawerOverlayExit,
+            exitActive: styles.drawerOverlayExitActive,
+          }}>
+          <div onClick={handleClickOverlay} className={styles.overlay} ref={overlayElement}>
+            <div data-element="wrapper" style={{ width }}>
+              {content}
+            </div>
           </div>
-        </div>
-      </CSSTransition>,
+        </CSSTransition>
+      </div>,
       document.getElementById('drawers-outlet'),
     );
   }

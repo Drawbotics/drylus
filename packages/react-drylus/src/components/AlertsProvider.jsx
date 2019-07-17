@@ -20,6 +20,7 @@ import {
 import Icon from './Icon';
 import Button from './Button';
 import { getEnumAsClass } from '../utils';
+import { styles as themeStyles } from '../base/ThemeProvider';
 
 
 const styles = {
@@ -267,26 +268,28 @@ const AlertsProvider = ({ children }) => {
     <Context.Provider value={{ show, hide }}>
       {children}
       {ReactDOM.createPortal(
-        <TransitionGroup className={styles.provider}>
-          {alerts.map((alert) => (
-            <CSSTransition
-              key={alert.id}
-              timeout={{
-                enter: 500,
-                exit: 300,
-              }}
-              classNames={{
-                enter: styles.alertEnter,
-                enterActive: styles.alertEnterActive,
-                exit: styles.alertExit,
-                exitActive: styles.alertExitActive,
-              }}>
-              <Margin size={{ top: Sizes.SMALL }}>
-                <Alert onClickDismiss={(id) => hide(id, alerts)} {...alert} />
-              </Margin>
-            </CSSTransition>
-          ))}
-        </TransitionGroup>,
+        <div className={themeStyles.root}>
+          <TransitionGroup className={styles.provider}>
+            {alerts.map((alert) => (
+              <CSSTransition
+                key={alert.id}
+                timeout={{
+                  enter: 500,
+                  exit: 300,
+                }}
+                classNames={{
+                  enter: styles.alertEnter,
+                  enterActive: styles.alertEnterActive,
+                  exit: styles.alertExit,
+                  exitActive: styles.alertExitActive,
+                }}>
+                <Margin size={{ top: Sizes.SMALL }}>
+                  <Alert onClickDismiss={(id) => hide(id, alerts)} {...alert} />
+                </Margin>
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
+        </div>,
         document.getElementById('alerts-outlet'),
       )}
     </Context.Provider>

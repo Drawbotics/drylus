@@ -9,6 +9,7 @@ import Button from './Button';
 import Title from './Title';
 import Icon from './Icon';
 import { Sizes, Tiers } from '../base';
+import { styles as themeStyles } from '../base/ThemeProvider';
 
 
 const styles = {
@@ -213,37 +214,39 @@ const Modal = ({
   const handleClickOverlay = (e) => e.target === overlayElement?.current ? onClickClose() : null;
 
   return ReactDOM.createPortal(
-    <CSSTransition
-      in={visible}
-      timeout={300}
-      mountOnEnter
-      unmountOnExit
-      classNames={{
-        enter: styles.modalEnter,
-        enterActive: styles.modalEnterActive,
-        exit: styles.modalExit,
-        exitActive: styles.modalExitActive,
-      }}>
-      <div onClick={handleClickOverlay} className={styles.overlay} ref={overlayElement}>
-        <div className={cx(styles.container, { [styles.alignTop]: overflowing })} data-element="container">
-          {do {
-            if (raw) {
-              children
-            }
-            else {
-              <BaseModal
-                size={size}
-                ref={modalElement}
-                onClickClose={onClickClose}
-                footer={footer}
-                title={title}>
-                {children}
-              </BaseModal>
-            }
-          }}
+    <div className={themeStyles.root}>
+      <CSSTransition
+        in={visible}
+        timeout={300}
+        mountOnEnter
+        unmountOnExit
+        classNames={{
+          enter: styles.modalEnter,
+          enterActive: styles.modalEnterActive,
+          exit: styles.modalExit,
+          exitActive: styles.modalExitActive,
+        }}>
+        <div onClick={handleClickOverlay} className={styles.overlay} ref={overlayElement}>
+          <div className={cx(styles.container, { [styles.alignTop]: overflowing })} data-element="container">
+            {do {
+              if (raw) {
+                children
+              }
+              else {
+                <BaseModal
+                  size={size}
+                  ref={modalElement}
+                  onClickClose={onClickClose}
+                  footer={footer}
+                  title={title}>
+                  {children}
+                </BaseModal>
+              }
+            }}
+          </div>
         </div>
-      </div>
-    </CSSTransition>,
+      </CSSTransition>
+    </div>,
     document.getElementById('modals-outlet'),
   );
   // eslint-disable-next-line no-unreachable
