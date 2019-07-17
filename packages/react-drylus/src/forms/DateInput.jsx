@@ -9,6 +9,7 @@ import { getDevice } from '@drawbotics/use-is-device';
 import { InputWithRef } from './Input';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
+import { styles as themeStyles } from '../base/ThemeProvider';
 
 
 const styles = {
@@ -287,27 +288,29 @@ const DatePicker = ({
         max={! isDesktop && maxDate ? _objectToDateString(maxDate) : null}
         min={! isDesktop && minDate ? _objectToDateString(minDate) : null} />
       {isDesktop && outletElement && createPortal(
-        <div
-          style={{
-            top: rootBox?.top,
-            left: rootBox?.left,
-          }}
-          ref={pickerElement}
-          className={cx(styles.calendarContainer, {
-            [styles.visible]: isFocused,
-          })}>
-          <Calendar
-            {...calendarOptions}
-            maxDate={maxDate && _objectToDate(maxDate)}
-            minDate={minDate && _objectToDate(minDate)}
-            className={cx(styles.calendar, {
-              [styles.topRender]: topRender,
-            })}
-            tileClassName={styles.tile}
-            locale={locale}
-            activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
-            onChange={(v) => onChange(_dateToObject(v), name)}
-            value={value === '' ? null : _objectToDate(value)} />
+        <div className={themeStyles.root}>
+          <div
+            style={{
+              top: rootBox?.top,
+              left: rootBox?.left,
+            }}
+            ref={pickerElement}
+            className={cx(styles.calendarContainer, {
+              [styles.visible]: isFocused,
+            })}>
+            <Calendar
+              {...calendarOptions}
+              maxDate={maxDate && _objectToDate(maxDate)}
+              minDate={minDate && _objectToDate(minDate)}
+              className={cx(styles.calendar, {
+                [styles.topRender]: topRender,
+              })}
+              tileClassName={styles.tile}
+              locale={locale}
+              activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
+              onChange={(v) => onChange(_dateToObject(v), name)}
+              value={value === '' ? null : _objectToDate(value)} />
+          </div>
         </div>,
         document.getElementById('picker-outlet'),
       )}

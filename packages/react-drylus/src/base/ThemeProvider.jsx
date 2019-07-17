@@ -17,7 +17,7 @@ injectGlobal`
 `;
 
 
-const styles = {
+export const styles = {
   root: css`
     * {
       font-family: ${sv.defaultFontFamily};
@@ -27,6 +27,10 @@ const styles = {
       cursor: default;
       text-decoration: none;
       color: initial;
+    }
+
+    b, strong {
+      font-weight: 500;
     }
   `,
   wrapper: css`

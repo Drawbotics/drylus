@@ -6,6 +6,8 @@ import anime from 'animejs';
 import { CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 
+import { styles as themeStyles } from '../base/ThemeProvider';
+
 
 const styles = {
   root: css`
@@ -130,41 +132,43 @@ const SplashScreenProvider = ({ children }) => {
     <Context.Provider value={{ show, hide, update }}>
       {children}
       {ReactDOM.createPortal(
-        <CSSTransition
-          timeout={300}
-          in={visible}
-          mountOnEnter
-          unmountOnExit
-          onEnter={handleEnter}
-          classNames={{
-            enter: styles.splashEnter,
-            enterActive: styles.splashEnterActive,
-            exit: styles.splashExit,
-            exitActive: styles.splashExitActive,
-          }}>
-          <div className={styles.root}>
-            <div className={styles.animation}>
-              <svg height="100%" width="100%" viewBox="0 0 300 300">
-                <defs>
-                  <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" style={{ stopColor: sv.brand, stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: sv.brandDark, stopOpacity: 1 }} />
-                  </linearGradient>
-                </defs>
-                <polygon className="first" id="1" stroke="url('#gradient')" fill="none" points="5,228 195,5 295,280" />
-                <polyline className="second" id="2" stroke="url('#gradient')" fill="none" points="5,228 132,188 295,280" />
-                <polyline className="third" id="3" stroke="url('#gradient')" fill="none" points="132,188 195,5" />
-              </svg>
+        <div className={themeStyles.root}>
+          <CSSTransition
+            timeout={300}
+            in={visible}
+            mountOnEnter
+            unmountOnExit
+            onEnter={handleEnter}
+            classNames={{
+              enter: styles.splashEnter,
+              enterActive: styles.splashEnterActive,
+              exit: styles.splashExit,
+              exitActive: styles.splashExitActive,
+            }}>
+            <div className={styles.root}>
+              <div className={styles.animation}>
+                <svg height="100%" width="100%" viewBox="0 0 300 300">
+                  <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" style={{ stopColor: sv.brand, stopOpacity: 1 }} />
+                      <stop offset="100%" style={{ stopColor: sv.brandDark, stopOpacity: 1 }} />
+                    </linearGradient>
+                  </defs>
+                  <polygon className="first" id="1" stroke="url('#gradient')" fill="none" points="5,228 195,5 295,280" />
+                  <polyline className="second" id="2" stroke="url('#gradient')" fill="none" points="5,228 132,188 295,280" />
+                  <polyline className="third" id="3" stroke="url('#gradient')" fill="none" points="132,188 195,5" />
+                </svg>
+              </div>
+              {do {
+                if (text) {
+                  <div className={styles.text}>
+                    {text}
+                  </div>
+                }
+              }}
             </div>
-            {do {
-              if (text) {
-                <div className={styles.text}>
-                  {text}
-                </div>
-              }
-            }}
-          </div>
-        </CSSTransition>,
+          </CSSTransition>
+        </div>,
         document.getElementById('splash-outlet'),
       )}
     </Context.Provider>
