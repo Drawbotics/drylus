@@ -6,7 +6,7 @@ const ICONS_CDN_PATH = 'https://cdn.drawbotics.com/drycons';
 
 function setFontSize(size, file) {
   const contents = fs.readFileSync(file, 'utf8');
-  fs.writeFileSync(file, contents.replace(/font-size: inherit;/gm, `font-size: ${size}px;`));
+  fs.writeFileSync(file, contents.replace(/font-size: inherit;/gm, `font-size: ${size}px; font-family: drycons !important;`));
 }
 
 
