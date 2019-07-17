@@ -1,5 +1,5 @@
 import React from 'react';
-import { css, injectGlobal } from 'emotion';
+import { css, injectGlobal, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
@@ -29,12 +29,17 @@ const styles = {
       color: initial;
     }
   `,
+  wrapper: css`
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  `,
 };
 
 
 const ThemeProvider = ({ children, style }) => {
   return (
-    <div className={styles.root} style={style}>
+    <div className={cx(styles.root, styles.wrapper)} style={style}>
       {children}
     </div>
   );

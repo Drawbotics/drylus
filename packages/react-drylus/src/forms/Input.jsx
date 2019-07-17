@@ -153,6 +153,7 @@ const Input = ({
   suffix,
   disabled,
   inputRef,
+  className,
   ...rest,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
@@ -165,6 +166,7 @@ const Input = ({
     <div className={cx(styles.root, {
       [styles.valid]: Boolean(value) && valid,
       [styles.error]: error,
+      [className]: Boolean(className),
     })}>
       <div className={styles.outerWrapper}>
         {do{
@@ -269,6 +271,9 @@ Input.propTypes = {
 
   /** Node to be rendered at the end of the input field, for now limited to text, Button and Select */
   suffix: PropTypes.node,
+
+  /** Additional class name to override styles */
+  className: PropTypes.string,
 };
 
 
