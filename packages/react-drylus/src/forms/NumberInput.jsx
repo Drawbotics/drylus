@@ -109,6 +109,7 @@ const NumberInput = ({
   max,
   min,
   name,
+  withCounter,
 }) => {
   const inputRef = useRef(null);
 
@@ -163,7 +164,7 @@ const NumberInput = ({
         min={min}
         inputMode="numeric"
         className={styles.numberInput}
-        suffix={
+        suffix={withCounter ?
           <div className={cx(styles.buttons, { [styles.disabled]: disabled })}>
             <button className={styles.button} onClick={() => ! disabled && value < max ? onChange((value || 0) + 1, name) : null}>
               <Icon name="plus" bold />
@@ -172,7 +173,7 @@ const NumberInput = ({
               <Icon name="minus" bold />
             </button>
           </div>
-        } />
+        : null} />
     </div>
   );
 };
@@ -214,12 +215,16 @@ NumberInput.propTypes = {
 
   /** Limits the min value */
   min: PropTypes.number,
+
+  /** If true, the counter arrows to increase/decrease are shown */
+  withCounter: PropTypes.bool,
 };
 
 
 NumberInput.defaultProps = {
   min: -Infinity,
   max: Infinity,
+  withCounter: true,
 };
 
 
