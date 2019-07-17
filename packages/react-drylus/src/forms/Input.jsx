@@ -143,7 +143,7 @@ const styles = {
 };
 
 
-const Input = ({
+const RawInput = ({
   value,
   onChange,
   error,
@@ -234,11 +234,15 @@ const Input = ({
 
 
 export const InputWithRef = forwardRef((props, ref) => {
-  return <Input {...props} inputRef={ref} />
+  return <RawInput {...props} inputRef={ref} />
 });
 
-
 InputWithRef.displayName = 'Input';
+
+
+const Input = (props) => {
+  return <RawInput {...props} />;
+};
 
 
 Input.propTypes = {
