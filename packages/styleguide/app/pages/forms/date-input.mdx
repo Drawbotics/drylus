@@ -1,20 +1,20 @@
-import { DatePicker } from '@drawbotics/react-drylus';
+import { DateInput } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 import { ControlledField } from '../utils';
 
 
-# Date Picker
+# Date Input
 Usage
 ```jsx
-import { DatePicker } from '@drawbotics/react-drylus';
+import { DateInput } from '@drawbotics/react-drylus';
 ```
 
 __Example__
-<Playground component={DatePicker}>
+<Playground component={DateInput}>
   <div style={{ maxWidth: 300 }}>
     <ControlledField component={
-      <DatePicker value="" placeholder="Pick a date..." onChange={x=>x} />
+      <DateInput value="" placeholder="Pick a date..." onChange={x=>x} />
     } />
   </div>
 </Playground>
@@ -24,7 +24,7 @@ If you need to limit the range of dates you can use `maxDate` and/or `minDate` (
 <Playground>
   <div style={{ maxWidth: 300 }}>
     <ControlledField component={
-      <DatePicker
+      <DateInput
         value=""
         placeholder="Pick a date..."
         maxDate={{ year: 2010, month: 4, day: 10 }}

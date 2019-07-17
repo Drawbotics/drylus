@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 import { css, cx } from 'emotion';
 import Calendar from 'react-calendar/dist/entry.nostyle';
+import { getDevice } from '@drawbotics/use-is-device';
 
 import { InputWithRef } from './Input';
 import Button from '../components/Button';
@@ -13,6 +14,11 @@ import Icon from '../components/Icon';
 const styles = {
   root: css`
     position: relative;
+
+    input {
+      white-space: nowrap;
+      min-height: 40px;
+    }
   `,
   calendarContainer: css`
     position: fixed;
@@ -82,6 +88,7 @@ const styles = {
         pointer-events: none;
         appearance: none;
         border: none;
+        background: none;
       }
     }
 
@@ -117,6 +124,10 @@ const styles = {
         cursor: pointer;
         background: ${sv.neutralLight};
       }
+    }
+
+    &.react-calendar__tile {
+      background: none;
     }
 
     &.react-calendar__tile--active {
@@ -162,6 +173,20 @@ function _dateToObject(date) {
   };
 }
 
+function _stringToDateObject(string) {
+  const [ year, month, day ] = string.split('-');
+  return {
+    year: Number(year),
+    month: Number(month),
+    day: Number(day),
+  };
+}
+
+
+function _objectToDateString(object) {
+  return `${object.year}-${String(object.month).padStart(2, '0')}-${String(object.day).padStart(2, '0')}`;
+}
+
 
 function _getShouldRenderTop(box) {
   if (box?.bottom > window.innerHeight) {
@@ -189,14 +214,20 @@ const DatePicker = ({
 }) => {
   const [ outletElement, setOutletElement ] = useState(null);
   const [ isFocused, setFocused ] = useState(false);
+  const { isDesktop } = getDevice();
 
   const inputRef = useRef(null);
   const rootRef = useRef(null);
   const pickerElement = useRef(null);
 
   useEffect(() => {
-    const handleDocumentClick = (e) => ! pickerElement.current.contains(e.target) ? setFocused(false) : null;
-    const handleWindowScroll = () => { setFocused(false); inputRef?.current.blur() };
+    const handleDocumentClick = (e) => ! pickerElement.current?.contains(e.target) ? setFocused(false) : null;
+    const handleWindowScroll = () => {
+      if (isDesktop) {
+        setFocused(false);
+        inputRef?.current.blur();
+      }
+    };
 
     document.addEventListener('mousedown', handleDocumentClick);
     window.addEventListener('scroll', handleWindowScroll, true);
@@ -225,10 +256,10 @@ const DatePicker = ({
     };
   }, []);
 
-  const inputValue = value === '' ? value : _objectToDate(value).toLocaleDateString(locale, {
+  const inputValue = value === '' ? value : (isDesktop ?_objectToDate(value).toLocaleDateString(locale, {
     ...DEFAULT_OPTIONS,
     ...displayOptions,
-  });
+  }) : _objectToDateString(value));
 
   const pickerBox = pickerElement.current?.getBoundingClientRect();
   const rootBox = rootRef.current?.getBoundingClientRect();
@@ -248,11 +279,14 @@ const DatePicker = ({
         error={error}
         hint={hint}
         value={inputValue}
-        onChange={x=>x}
+        onChange={isDesktop ? x=>x : (v) => Boolean(v) && onChange(_stringToDateObject(v), name)}
         ref={inputRef}
         onFocus={() => setFocused(true)}
-        placeholder={placeholder} />
-      {outletElement && createPortal(
+        placeholder={placeholder}
+        type={isDesktop ? null : "date"}
+        max={! isDesktop && maxDate ? _objectToDateString(maxDate) : null}
+        min={! isDesktop && minDate ? _objectToDateString(minDate) : null} />
+      {isDesktop && outletElement && createPortal(
         <div
           style={{
             top: rootBox?.top,
