@@ -225,7 +225,7 @@ const DatePicker = ({
     const handleWindowScroll = () => {
       if (isDesktop) {
         setFocused(false);
-        inputRef?.current.blur();
+        inputRef?.current?.blur();
       }
     };
 

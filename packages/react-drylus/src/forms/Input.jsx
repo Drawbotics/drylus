@@ -274,6 +274,19 @@ Input.propTypes = {
 
   /** Additional class name to override styles */
   className: PropTypes.string,
+
+  type: PropTypes.oneOf([
+    'text',
+    'password',
+    'email',
+    'tel',
+    'url',
+  ]),
+};
+
+
+Input.defaultProps = {
+  type: 'text',
 };
 
 

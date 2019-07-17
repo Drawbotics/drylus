@@ -12,7 +12,8 @@ const SelectProp = ({
 }) => {
   const { key, type } = prop;
   const { value: values } = type;
-  const finalValue = (values[0].value.split('.')[0] || '') + '.' + (value?.description || value);
+  const isEnum = value?.description;
+  const finalValue = isEnum ? (values[0].value.split('.')[0] || '') + '.' + (value?.description || value) : normalizeValue(value);
   return (
     <div style={{ minWidth: 200 }}>
       <Select
@@ -22,8 +23,8 @@ const SelectProp = ({
           label: 'none',
           value: '_empty',
         }, ...values.map((v) => ({
-          label: displayValue(v.value),
-          value: displayValue(v.value),
+          label: isEnum ? displayValue(v.value) : normalizeValue(v.value),
+          value: isEnum ? displayValue(v.value) : normalizeValue(v.value),
         }))]}
         onChange={(v, k) => onChange(normalizeValue(v, enums), k)} />
     </div>
