@@ -31,6 +31,7 @@ const styles = {
   `,
   result: css`
     padding: ${sv.paddingSmall} ${sv.paddingExtraSmall};
+    color: ${sv.colorPrimary};
 
     &:hover {
       cursor: pointer;
