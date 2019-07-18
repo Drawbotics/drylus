@@ -5,7 +5,7 @@ import {
   SplashScreenProvider,
 } from '@drawbotics/react-drylus';
 
-import { PropsTable } from '~/components/Playground';
+import Playground, { PropsTable } from '~/components/Playground';
 
 
 # Providers
@@ -17,8 +17,11 @@ Combines all the providers into one for easier usage and avoiding having to repe
 ```jsx
 import { DrylusProvider } from '@drawbotics/react-drylus';
 ```
-
-<PropsTable component={DrylusProvider} />
+<Playground component={DrylusProvider}>
+  <DrylusProvider>
+    Content within provider
+  </DrylusProvider>
+</Playground>
 
 ### Theme Provider
 Wraps the whole application with the required styles. Normalizes and applies default styles globally (note that each component styles itself).

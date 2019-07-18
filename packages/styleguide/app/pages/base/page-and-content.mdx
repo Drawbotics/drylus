@@ -1,6 +1,6 @@
 import { Page, Content } from '@drawbotics/react-drylus';
 
-import { PropsTable } from '~/components/Playground';
+import Playground, { PropsTable } from '~/components/Playground';
 
 # Page and Content
 
@@ -59,3 +59,12 @@ const App = () => {
   );
 };
 ```
+
+### Example
+<Playground>
+  <Page style={{ display: 'flex' }}>
+    <Content fullHeight>
+      I am some content
+    </Content>
+  </Page>
+</Playground>
