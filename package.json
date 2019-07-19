@@ -16,6 +16,7 @@
     "build:vars": "cd packages/style-vars && npm run build",
     "dev:icons": "cd packages/icons && npm run build:dev",
     "dev:vanilla": "cd packages/vanilla-drylus && npm run build:dev",
+    "dev:vars": "cd packages/style-vars && npm run build:dev",
     "build:icons": "cd packages/icons && npm run build",
     "build": "lerna run build",
     "watch": "lerna run watch",
