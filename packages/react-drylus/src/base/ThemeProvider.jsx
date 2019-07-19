@@ -3,7 +3,7 @@ import { css, injectGlobal, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
-import '../utils/normalize';
+import normalize from '../utils/normalize';
 
 
 injectGlobal`
@@ -15,6 +15,9 @@ injectGlobal`
     letter-spacing: ${sv.defaultLetterSpacing};
   }
 `;
+
+
+normalize();
 
 
 export const styles = {
