@@ -1,4 +1,4 @@
-import { Tag, Flex, FlexItem, FlexJustify, Sizes } from '@drawbotics/react-drylus';
+import { Tag, Flex, FlexItem, FlexJustify, Sizes, Margin } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -17,9 +17,11 @@ __Example__
 
 If you pass a `onClickRemove` function, then a "x" is shown:
 <Playground>
-  <Flex justify={FlexJustify.START} vSpacing={Sizes.EXTRA_SMALL}>
+  <Flex justify={FlexJustify.START}>
     <FlexItem>
-      <Tag onClickRemove={x=>x}>Removable</Tag>
+      <Margin size={{ right: Sizes.EXTRA_SMALL }}>
+        <Tag onClickRemove={x=>x}>Removable</Tag>
+      </Margin>
     </FlexItem>
     <FlexItem>
       <Tag onClickRemove={() => console.log('clicked')} inversed>Another one</Tag>

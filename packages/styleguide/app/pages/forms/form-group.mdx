@@ -81,15 +81,21 @@ Sometimes you might need to create complex form groups, for example for an addre
   <FormGroup
     input={
       <>
-        <Flex vSpacing={Sizes.EXTRA_SMALL} hSpacing={Sizes.EXTRA_SMALL} justify={FlexJustify.START} wrap>
+        <Flex justify={FlexJustify.START} wrap>
           <FlexItem flex={3/4}>
-            <Input valid placeholder="Street & Number" value="1 Real Avenue" onChange={x=>x} />
+            <Margin size={{ right: Sizes.EXTRA_SMALL, bottom: Sizes.EXTRA_SMALL }}>
+              <Input valid placeholder="Street & Number" value="1 Real Avenue" onChange={x=>x} />
+            </Margin>
           </FlexItem>
           <FlexItem flex={1/4}>
-            <Input error placeholder="ZIP" onChange={x=>x} value="" />
+            <Margin size={{ bottom: Sizes.EXTRA_SMALL }}>
+              <Input error placeholder="ZIP" onChange={x=>x} value="" />
+            </Margin>
           </FlexItem>
           <FlexItem flex={1/2}>
-            <Input valid placeholder="City" onChange={x=>x} value="Brussels" />
+            <Margin size={{ right: Sizes.EXTRA_SMALL }}>
+              <Input valid placeholder="City" onChange={x=>x} value="Brussels" />
+            </Margin>
           </FlexItem>
           <FlexItem flex={1/2}>
             <Select error placeholder="Country" options={[{ value: 'IT', label: 'Italy' }, { value: 'FR', label: 'France' }]} onChange={x=>x} />

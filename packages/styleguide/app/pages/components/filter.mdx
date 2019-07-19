@@ -10,6 +10,7 @@ import {
   FlexItem,
   FlexJustify,
   Icon,
+  Margin,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -40,27 +41,29 @@ __Example__
 
 <Playground component={SelectFilter}>
   <div style={{ height: 200 }}>
-    <Flex justify={FlexJustify.END} vSpacing={Sizes.SMALL}>
+    <Flex justify={FlexJustify.END}>
       <FlexItem>
-        <ControlledField component={
-          <SelectFilter
-            label="Country"
-            onClear={x=>x}
-            onChange={x=>x}
-            options={[{
-              leading: <Avatar text="Belgium" backgroundColor="#E00D2B" size={Sizes.SMALL} />,
-              label: 'Belgium',
-              value: 'BE',
-            }, {
-              leading: <Avatar text="France" backgroundColor="#011082" size={Sizes.SMALL} />,
-              label: 'France',
-              value: 'FR',
-            }, {
-              leading: <Avatar text="Italy" backgroundColor="#128435" size={Sizes.SMALL} />,
-              label: 'Italy',
-              value: 'IT',
-            }]} />
-        } />
+        <Margin size={{ right: Sizes.SMALL }}>
+          <ControlledField component={
+            <SelectFilter
+              label="Country"
+              onClear={x=>x}
+              onChange={x=>x}
+              options={[{
+                leading: <Avatar text="Belgium" backgroundColor="#E00D2B" size={Sizes.SMALL} />,
+                label: 'Belgium',
+                value: 'BE',
+              }, {
+                leading: <Avatar text="France" backgroundColor="#011082" size={Sizes.SMALL} />,
+                label: 'France',
+                value: 'FR',
+              }, {
+                leading: <Avatar text="Italy" backgroundColor="#128435" size={Sizes.SMALL} />,
+                label: 'Italy',
+                value: 'IT',
+              }]} />
+          } />
+        </Margin>
       </FlexItem>
       <FlexItem>
         <ControlledField component={

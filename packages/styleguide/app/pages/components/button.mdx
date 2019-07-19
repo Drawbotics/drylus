@@ -8,6 +8,7 @@ import {
   Flex,
   FlexItem,
   FlexJustify,
+  Margin,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -27,24 +28,36 @@ __Example__
 
 You can also have buttons with just the icon, or just the spinner; for this don't pass any children. "No Children" buttons only support default and small size.
 <Playground>
-  <Flex justify={FlexJustify.START} vSpacing={Sizes.SMALL}>
+  <Flex justify={FlexJustify.START}>
     <FlexItem>
-      <Button leading={<Icon name="command" />} tier={Tiers.TERTIARY} />
+      <Margin size={{ right: Sizes.SMALL }}>
+        <Button leading={<Icon name="command" />} tier={Tiers.TERTIARY} />
+      </Margin>
     </FlexItem>
     <FlexItem>
-      <Button tier={Tiers.TERTIARY} leading={<Spinner category={Categories.INFO} size={Sizes.SMALL} />} />
+      <Margin size={{ right: Sizes.SMALL }}>
+        <Button tier={Tiers.TERTIARY} leading={<Spinner category={Categories.INFO} size={Sizes.SMALL} />} />
+      </Margin>
     </FlexItem>
     <FlexItem>
-      <Button leading={<Icon name="command" />} size={Sizes.SMALL} />
+      <Margin size={{ right: Sizes.SMALL }}>
+        <Button leading={<Icon name="command" />} size={Sizes.SMALL} />
+      </Margin>
     </FlexItem>
     <FlexItem>
-      <Button leading={<Icon name="command" />} size={Sizes.SMALL}>Small with text</Button>
+      <Margin size={{ right: Sizes.SMALL }}>
+        <Button leading={<Icon name="command" />} size={Sizes.SMALL}>Small with text</Button>
+      </Margin>
     </FlexItem>
     <FlexItem>
-      <Button leading={<Icon name="command" />} tier={Tiers.SECONDARY} />
+      <Margin size={{ right: Sizes.SMALL }}>
+        <Button leading={<Icon name="command" />} tier={Tiers.SECONDARY} />
+      </Margin>
     </FlexItem>
     <FlexItem>
-      <Button leading={<Icon name="command" />} category={Categories.BRAND}>Brand with text</Button>
+      <Margin size={{ right: Sizes.SMALL }}>
+        <Button leading={<Icon name="command" />} category={Categories.BRAND}>Brand with text</Button>
+      </Margin>
     </FlexItem>
     <FlexItem>
       <Button trailing={<Spinner size={Sizes.SMALL} inversed />} category={Categories.SUCCESS}>Text with spinner</Button>

@@ -7,6 +7,7 @@ import {
   Flex,
   FlexItem,
   Sizes,
+  Margin,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -20,11 +21,13 @@ import { Tooltip, TooltipSides } from '@drawbotics/react-drylus';
 
 __Example__
 <Playground component={Tooltip} enums={{ TooltipSides }}>
-<Flex vSpacing={Sizes.LARGE}>
+<Flex>
   <FlexItem>
-    <Tooltip message="I am a tooltip">
-      <Button category={Categories.BRAND}>Hover me</Button>
-    </Tooltip>
+    <Margin size={{ right: Sizes.LARGE }}>
+      <Tooltip message="I am a tooltip">
+        <Button category={Categories.BRAND}>Hover me</Button>
+      </Tooltip>
+    </Margin>
   </FlexItem>
   <FlexItem>
     <Tooltip message="I am another tooltip">

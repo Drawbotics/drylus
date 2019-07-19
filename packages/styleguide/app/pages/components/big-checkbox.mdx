@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BigCheckbox, Flex, FlexItem, Sizes } from '@drawbotics/react-drylus';
+import { BigCheckbox, Flex, FlexItem, Sizes, Margin } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -15,22 +15,26 @@ export const Wrapper = () => {
   const [ values, setValues ] = useState({ first: false, second: false, third: false });
   return (
     <Playground component={BigCheckbox}>
-      <Flex vSpacing={Sizes.DEFAULT}>
+      <Flex>
         <FlexItem flex>
-          <BigCheckbox
-            label="Title"
-            value={values.first}
-            onChange={(v) => setValues({ ...values, first: v })}>
-            <div style={{ height: 100, background: 'blue' }} />
-          </BigCheckbox>
+          <Margin size={{ right: Sizes.DEFAULT }}>
+            <BigCheckbox
+              label="Title"
+              value={values.first}
+              onChange={(v) => setValues({ ...values, first: v })}>
+              <div style={{ height: 100, background: 'blue' }} />
+            </BigCheckbox>
+          </Margin>
         </FlexItem>
         <FlexItem flex>
-          <BigCheckbox
-            label="Another title"
-            value={values.second}
-            onChange={(v) => setValues({ ...values, second: v })}>
-            <div style={{ height: 100, background: 'blue' }} />
-          </BigCheckbox>
+          <Margin size={{ right: Sizes.DEFAULT }}>
+            <BigCheckbox
+              label="Another title"
+              value={values.second}
+              onChange={(v) => setValues({ ...values, second: v })}>
+              <div style={{ height: 100, background: 'blue' }} />
+            </BigCheckbox>
+          </Margin>
         </FlexItem>
         <FlexItem flex>
           <BigCheckbox

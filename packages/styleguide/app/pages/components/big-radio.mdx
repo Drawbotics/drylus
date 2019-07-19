@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BigRadio, Flex, FlexItem, Sizes } from '@drawbotics/react-drylus';
+import { BigRadio, Flex, FlexItem, Sizes, Margin } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -16,24 +16,28 @@ export const Wrapper = () => {
   const [ value, setValue ] = useState(null);
   return (
     <Playground component={BigRadio}>
-      <Flex vSpacing={Sizes.DEFAULT}>
+      <Flex>
         <FlexItem flex>
-          <BigRadio
-            label="Title"
-            value="first"
-            checked={value === 'first'}
-            onChange={(v) => setValue(v)}>
-            <div style={{ height: 100, background: 'blue' }} />
-          </BigRadio>
+          <Margin size={{ right: Sizes.DEFAULT }}>
+            <BigRadio
+              label="Title"
+              value="first"
+              checked={value === 'first'}
+              onChange={(v) => setValue(v)}>
+              <div style={{ height: 100, background: 'blue' }} />
+            </BigRadio>
+          </Margin>
         </FlexItem>
         <FlexItem flex>
-          <BigRadio
-            label="Another title"
-            value="second"
-            checked={value === 'second'}
-            onChange={(v) => setValue(v)}>
-            <div style={{ height: 100, background: 'blue' }} />
-          </BigRadio>
+          <Margin size={{ right: Sizes.DEFAULT }}>
+            <BigRadio
+              label="Another title"
+              value="second"
+              checked={value === 'second'}
+              onChange={(v) => setValue(v)}>
+              <div style={{ height: 100, background: 'blue' }} />
+            </BigRadio>
+          </Margin>
         </FlexItem>
         <FlexItem flex>
           <BigRadio

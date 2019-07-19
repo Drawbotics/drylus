@@ -4,6 +4,7 @@ import { css } from 'emotion';
 
 import Flex, { FlexItem, FlexDirections, FlexAlign } from '../layout/Flex';
 import { Sizes } from '../base';
+import Margin from '../layout/Margin';
 
 
 const styles = {
@@ -21,12 +22,12 @@ const FormGroup = ({
   return (
     <div className={styles.root}>
       <Flex
-        hSpacing={horizontal ? null : Sizes.SMALL}
-        vSpacing={horizontal ? Sizes.SMALL : null}
         direction={horizontal ? FlexDirections.HORIZONTAL : FlexDirections.VERTICAL}
         align={horizontal ? FlexAlign.CENTER : FlexAlign.STRETCH}>
         <FlexItem>
-          {label}
+          <Margin size={horizontal ? { right: Sizes.SMALL } : { bottom: Sizes.SMALL }}>
+            {label}
+          </Margin>
         </FlexItem>
         <FlexItem flex>
           {input}

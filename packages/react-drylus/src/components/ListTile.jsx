@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
 import Flex, { FlexItem } from '../layout/Flex';
-import Sizes from '../base/Sizes';
 
 
 const styles = {
@@ -19,6 +18,7 @@ const styles = {
   leading: css`
     display: flex;
     align-items: center;
+    margin-right: ${sv.marginExtraSmall};
   `,
   trailing: css`
     display: flex;
@@ -46,7 +46,7 @@ const ListTile = ({
 }) => {
   return (
     <div className={cx(styles.root, { [styles.clickable]: !! onClick })} onClick={onClick}>
-      <Flex vSpacing={Sizes.EXTRA_SMALL}>
+      <Flex>
         {do {
           if (leading) {
             <FlexItem>

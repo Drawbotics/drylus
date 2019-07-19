@@ -10,6 +10,7 @@ import {
   Sizes,
   Tiers,
   Categories,
+  Margin,
   } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -76,9 +77,11 @@ As you can see when the window height is smaller than the content, the modal is 
 <Playground>
   <ModalController component={
     <Modal visible={false} title="Modal title" footer={
-      <Flex justify={FlexJustify.END} vSpacing={Sizes.SMALL}>
+      <Flex justify={FlexJustify.END}>
         <FlexItem>
-          <Button tier={Tiers.TERTIARY}>Secondary action</Button>
+          <Margin size={{ right: Sizes.EXTRA_SMALL }}>
+            <Button tier={Tiers.TERTIARY}>Secondary action</Button>
+          </Margin>
         </FlexItem>
         <FlexItem>
           <Button category={Categories.BRAND}>Main action</Button>

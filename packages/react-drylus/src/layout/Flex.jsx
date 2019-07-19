@@ -2,10 +2,8 @@ import React from 'react';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import camelCase from 'lodash/camelCase';
-import sv from '@drawbotics/style-vars';
 import Enum from '@drawbotics/enums';
 
-import Sizes from '../base/Sizes';
 import { getEnumAsClass } from '../utils';
 
 
@@ -57,62 +55,6 @@ const styles = {
   `,
   equalSpan: css`
     flex: 1;
-  `,
-  hSpacingExtraSmall: css`
-    margin-top: calc(${sv.marginExtraSmall} * -1);
-
-    & > div {
-      padding-top: ${sv.paddingExtraSmall};
-    }
-  `,
-  hSpacingSmall: css`
-    margin-top: calc(${sv.marginSmall} * -1);
-
-    & > div {
-      padding-top: ${sv.paddingSmall};
-    }
-  `,
-  hSpacingDefault: css`
-    margin-top: calc(${sv.defaultMargin} * -1);
-
-    & > div {
-      padding-top: ${sv.defaultPadding};
-    }
-  `,
-  hSpacingLarge: css`
-    margin-top: calc(${sv.marginLarge} * -1);
-
-    & > div {
-      padding-top: ${sv.paddingLarge};
-    }
-  `,
-  vSpacingExtraSmall: css`
-    margin-left: calc(${sv.marginExtraSmall} * -1);
-
-    & > div {
-      padding-left: ${sv.paddingExtraSmall};
-    }
-  `,
-  vSpacingSmall: css`
-    margin-left: calc(${sv.marginSmall} * -1);
-
-    & > div {
-      padding-left: ${sv.paddingSmall};
-    }
-  `,
-  vSpacingDefault: css`
-    margin-left: calc(${sv.defaultMargin} * -1);
-
-    & > div {
-      padding-left: ${sv.defaultPadding};
-    }
-  `,
-  vSpacingLarge: css`
-    margin-left: calc(${sv.marginLarge} * -1);
-
-    & > div {
-      padding-left: ${sv.paddingLarge};
-    }
   `,
 };
 
@@ -178,8 +120,6 @@ const Flex = ({
   wrap=false,
   className,
   style,
-  vSpacing,
-  hSpacing,
 }) => {
   return (
     <div className={cx(styles.root, {
@@ -187,8 +127,6 @@ const Flex = ({
       [styles[camelCase(`JUSTIFY_${justify?.description}`)]]: justify,
       [styles[camelCase(`ALIGN_${align?.description}`)]]: align,
       [styles.wrap]: wrap,
-      [styles[camelCase(`hSpacing${hSpacing?.description}`)]]: hSpacing,
-      [styles[camelCase(`vSpacing${vSpacing?.description}`)]]: vSpacing,
     }, className)} style={style}>
       {children}
     </div>
@@ -229,12 +167,6 @@ Flex.propTypes = {
 
   /** If you need to customize the Flex container pass a custom className. E.g. if you want to use `display: inline-flex` */
   className: PropTypes.string,
-
-  /** Used to set the vertical space (gutters) between each FlexItem */
-  vSpacing: PropTypes.oneOf([ Sizes.EXTRA_SMALL, Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE ]),
-
-  /** Used to set the horizontal space (gutters) between each FlexItem */
-  hSpacing: PropTypes.oneOf([ Sizes.EXTRA_SMALL, Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE ]),
 };
 
 
