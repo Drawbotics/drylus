@@ -25,7 +25,7 @@ const FormGroup = ({
         direction={horizontal ? FlexDirections.HORIZONTAL : FlexDirections.VERTICAL}
         align={horizontal ? FlexAlign.CENTER : FlexAlign.STRETCH}>
         <FlexItem>
-          <Margin size={horizontal ? { right: Sizes.SMALL } : { bottom: Sizes.SMALL }}>
+          <Margin size={horizontal ? { right: Sizes.SMALL } : { bottom: Sizes.EXTRA_SMALL }}>
             {label}
           </Margin>
         </FlexItem>
