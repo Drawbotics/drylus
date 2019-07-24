@@ -1,0 +1,23 @@
+import {
+  Dropdown,
+  Button,
+} from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Dropdown
+A little floating menu used to perform actions. Can also contain some information, but should be kept at a minimum. If you see that the content of the dropdown is becoming excessive, use a [`Modal`](/components/modal) instead.
+
+```jsx
+import { Dropdown, DropdownOption, DropdownTitle, DropdownSeparator, DropdownSides } from '@drawbotics/react-drylus';
+```
+__Example__
+
+<Playground component={Dropdown}>
+  <Dropdown menu={
+    <div>hello</div>
+  }>
+    <Button>I show the menu</Button>
+  </Dropdown>
+</Playground>

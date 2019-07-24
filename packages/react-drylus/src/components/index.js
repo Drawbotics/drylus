@@ -37,3 +37,4 @@ export ButtonLink from './ButtonLink';
 export AlertsProvider, { Alert, useAlert } from './AlertsProvider';
 export SplashScreenProvider, { useSplashScreen } from './SplashScreenProvider';
 export Breadcrumbs from './Breadcrumbs';
+export Dropdown from './Dropdown';

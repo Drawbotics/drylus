@@ -33,6 +33,7 @@ import buttonLink from './button-link';
 import alerts from './alerts';
 import splashScreen from './splash-screen';
 import breadcrumbs from './breadcrumbs';
+import dropdown from './dropdown';
 
 
 const components = {
@@ -71,6 +72,7 @@ const components = {
   alerts,
   splashScreen,
   breadcrumbs,
+  dropdown,
 };
 
 
