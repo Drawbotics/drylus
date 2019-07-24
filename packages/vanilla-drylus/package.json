@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/vanilla-drylus",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Vanilla JS/CSS export of component styles and logic",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "",
@@ -19,10 +19,10 @@
     "prepublishOnly": "npm run build && NODE_ENV=production npm run sync"
   },
   "dependencies": {
-    "@drawbotics/react-drylus": "^1.5.1"
+    "@drawbotics/react-drylus": "^1.5.2"
   },
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "43e2b8bd3860ef03e2b59a134a2932409a6b3d90"
+  "gitHead": "46851b04ad70c955e6a2550e1b3aefc5d13fadc9"
 }
