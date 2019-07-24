@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 import Enum from '@drawbotics/enums';
 
+import { Categories } from '../base';
+import { getEnumAsClass } from '../utils';
+
 
 const styles = {
   wrapper: css`
@@ -12,7 +15,7 @@ const styles = {
   `,
   root: css`
     position: absolute;
-    z-index: 999;
+    z-index: 9999;
     top: 100%;
     margin-top: ${sv.marginExtraSmall};
     background: ${sv.white};
@@ -24,11 +27,59 @@ const styles = {
     transform: translateY(-5px);
     pointer-events: none;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    padding: ${sv.paddingExtraSmall} 0;
   `,
   visible: css`
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
+  `,
+  top: css`
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: ${sv.marginExtraSmall};
+  `,
+  right: css`
+    top: 0;
+    margin-top: 0;
+    margin-left: ${sv.marginExtraSmall};
+    left: 100%;
+  `,
+  left: css`
+    top: 0;
+    margin-top: 0;
+    margin-right: ${sv.marginExtraSmall};
+    right: 100%;
+  `,
+  option: css`
+    color: ${sv.colorPrimary};
+    padding: 5px ${sv.paddingSmall};
+    white-space: nowrap;
+
+    &:hover {
+      cursor: pointer;
+      background: ${sv.neutralLight};
+    }
+  `,
+  disabled: css`
+    color: ${sv.colorDisabled};
+    cursor: not-allowed !important;
+    background: none !important;
+  `,
+  danger: css`
+    color: ${sv.red};
+
+    &:hover {
+      color: ${sv.redDark};
+      background: ${sv.redLight};
+    }
+  `,
+  separator: css`
+    height: 1px;
+    width: 100%;
+    background: ${sv.neutralLight};
+    margin: ${sv.marginExtraSmall} 0;
   `,
 };
 
@@ -42,12 +93,39 @@ export const DropdownSides = new Enum(
 );
 
 
-export const DropdownOption = () => {
+export const DropdownOption = ({
+  text,
+  category,
+  disabled,
+  onClick,
+}) => {
   return (
-    <div>
-
+    <div
+      className={cx(styles.option, {
+        [styles.disabled]: disabled,
+        [styles[getEnumAsClass(category)]]: category,
+      })}
+      onClick={disabled ? null : onClick}>
+      {text}
     </div>
   );
+};
+
+DropdownOption.propTypes = {
+  /** Text displayed in the option */
+  text: PropTypes.string.isRequired,
+
+  /** If true, the option is not clickable */
+  disabled: PropTypes.bool,
+
+  /** Triggered when the option is clicked */
+  onClick: PropTypes.func,
+
+  category: PropTypes.oneOf([
+    Categories.DANGER,
+    Categories.SUCCESS,
+    Categories.WARNING,
+  ]),
 };
 
 
@@ -62,15 +140,13 @@ export const DropdownTitle = () => {
 
 export const DropdownSeparator = () => {
   return (
-    <div>
-
-    </div>
+    <div className={styles.separator} />
   );
 };
 
 
-const Dropdown = ({ children, menu, side }) => {
-  if (! React.Children.only(children)) {
+const Dropdown = ({ children, trigger, side }) => {
+  if (! React.isValidElement(trigger)) {
     console.warn('Dropdown only accepts a single child as trigger');
     return null;
   }
@@ -88,14 +164,15 @@ const Dropdown = ({ children, menu, side }) => {
   return (
     <div className={styles.wrapper}>
       <div onClick={() => setDropdowOpen(true)}>
-        {children}
+        {trigger}
       </div>
       <div
         ref={ref}
         className={cx(styles.root, {
           [styles.visible]: isOpen,
+          [styles[getEnumAsClass(side)]]: side,
         })}>
-        {menu}
+        {children}
       </div>
     </div>
   );
@@ -103,10 +180,10 @@ const Dropdown = ({ children, menu, side }) => {
 
 Dropdown.propTypes = {
   /** This will be the trigger of the dropdown, and relative to which the menu will be positioned */
-  children: PropTypes.node,
+  trigger: PropTypes.node,
 
   /** This is the content of the dropdown menu */
-  menu: PropTypes.node,
+  children: PropTypes.node,
 
   side: PropTypes.oneOf([
     DropdownSides.LEFT,
@@ -114,6 +191,10 @@ Dropdown.propTypes = {
     DropdownSides.TOP,
     DropdownSides.BOTTOM,
   ]),
+};
+
+Dropdown.defaultProps = {
+  side: DropdownSides.BOTTOM,
 };
 
 

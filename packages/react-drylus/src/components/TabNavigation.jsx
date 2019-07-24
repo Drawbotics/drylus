@@ -43,7 +43,7 @@ const styles = {
       flex: 1;
       justify-content: space-between;
       color: ${sv.colorPrimary};
-      border-bottom: 1px solid ${sv.neutral};
+      border-bottom: 1px solid ${sv.neutralLight};
 
       &::after {
         top: 0;

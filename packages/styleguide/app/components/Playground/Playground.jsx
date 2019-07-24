@@ -20,7 +20,6 @@ const styles = {
     background: ${sv.neutralLight};
     border-radius: ${sv.defaultBorderRadius};
     position: relative;
-    overflow: hidden;
 
     &:hover {
       cursor: pointer;

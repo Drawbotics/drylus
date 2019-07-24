@@ -1,5 +1,9 @@
 import {
   Dropdown,
+  DropdownOption,
+  DropdownSides,
+  DropdownTitle,
+  DropdownSeparator,
   Button,
 } from '@drawbotics/react-drylus';
 
@@ -14,10 +18,14 @@ import { Dropdown, DropdownOption, DropdownTitle, DropdownSeparator, DropdownSid
 ```
 __Example__
 
-<Playground component={Dropdown}>
-  <Dropdown menu={
-    <div>hello</div>
-  }>
+<Playground component={Dropdown} enums={{ DropdownSides }}>
+  <Dropdown trigger={
     <Button>I show the menu</Button>
+  }>
+    <DropdownOption text="First option" />
+    <DropdownOption text="Second option" />
+    <DropdownOption text="Third option" disabled />
+    <DropdownSeparator />
+    <DropdownOption text="Fourth option" />
   </Dropdown>
 </Playground>
