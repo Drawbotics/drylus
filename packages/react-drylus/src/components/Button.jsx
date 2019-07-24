@@ -96,6 +96,41 @@ export const styles = {
       box-shadow: ${sv.insetActive};
     }
   `,
+  brandAlt: css`
+    color: ${sv.brand};
+
+    &:hover {
+      color: ${sv.brandDark};
+    }
+  `,
+  dangerAlt: css`
+    color: ${sv.red};
+
+    &:hover {
+      color: ${sv.redDark};
+    }
+  `,
+  warningAlt: css`
+    color: ${sv.orange};
+
+    &:hover {
+      color: ${sv.orangeDark};
+    }
+  `,
+  infoAlt: css`
+    color: ${sv.blue};
+
+    &:hover {
+      color: ${sv.blueDark};
+    }
+  `,
+  successAlt: css`
+    color: ${sv.green};
+
+    &:hover {
+      color: ${sv.greenDark};
+    }
+  `,
   small: css`
     padding: ${sv.paddingExtraSmall} ${sv.paddingExtraSmall};
     font-size: 0.9rem;
@@ -113,7 +148,7 @@ export const styles = {
     }
 
     &:active {
-      box-shadow: ${sv.insetActiveLight};
+      box-shadow: 0 0 0 1px ${sv.neutral} inset, ${sv.insetActiveLight};
     }
   `,
   tertiary: css`
@@ -193,10 +228,11 @@ const Button = ({
       onClick={onClick}
       className={cx(styles.root, {
         [styles[getEnumAsClass(size)]]: size,
-        [styles[getEnumAsClass(tier)]]: tier,
         [styles.round]: round,
         [styles.roundSmall]: round && size === Sizes.SMALL,
         [styles[getEnumAsClass(category)]]: category && tier === Tiers.PRIMARY,
+        [styles[getEnumAsClass(tier)]]: tier,
+        [styles[`${category?.description?.toLowerCase()}Alt`]]: category && tier !== Tiers.PRIMARY,
         [styles.fullWidth]: fullWidth,
       })}
       disabled={disabled}>
