@@ -25,12 +25,12 @@ const styles = {
     }
   `,
   clickable: css`
-    text-decoration: underline;
+    color: ${sv.blue};
 
     &:hover {
       cursor: pointer;
       background: ${sv.neutralLight};
-      color: ${sv.colorPrimary};
+      color: ${sv.blue};
     }
   `,
   active: css`
