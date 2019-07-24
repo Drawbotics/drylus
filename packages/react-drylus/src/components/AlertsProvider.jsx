@@ -31,6 +31,7 @@ const styles = {
     left: ${sv.defaultMargin};
     display: inline-flex;
     flex-direction: column-reverse;
+    align-items: flex-start;
   `,
   root: css`
     display: inline-block;
