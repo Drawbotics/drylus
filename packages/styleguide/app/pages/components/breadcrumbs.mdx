@@ -1,0 +1,26 @@
+import { Breadcrumbs } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Breadcrumbs
+Used to display links (and text) in a sequence to show the path to a page.
+
+```jsx
+import { Breadcrumbs } from '@drawbotics/react-drylus';
+```
+__Example__
+
+<Playground component={Breadcrumbs}>
+  <Breadcrumbs
+    linkComponent="a"
+    crumbs={[{
+      label: 'Pages',
+    }, {
+      label: 'Home',
+      url: 'home',
+    }, {
+      label: 'Project name - 123',
+      active: true,
+    }]} />
+</Playground>

@@ -32,6 +32,7 @@ import callout from './callout';
 import buttonLink from './button-link';
 import alerts from './alerts';
 import splashScreen from './splash-screen';
+import breadcrumbs from './breadcrumbs';
 
 
 const components = {
@@ -69,6 +70,7 @@ const components = {
   buttonLink,
   alerts,
   splashScreen,
+  breadcrumbs,
 };
 
 
