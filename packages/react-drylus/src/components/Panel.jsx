@@ -11,6 +11,12 @@ const styles = {
     border-radius: ${sv.borderRadiusSmall};
     padding: ${sv.defaultPadding};
   `,
+  doubleTopPadding: css`
+    padding-top: calc(${sv.defaultPadding} * 2);
+  `,
+  doubleBottomPadding: css`
+    padding-bottom: calc(${sv.defaultPadding} * 2);
+  `,
   header: css`
     padding-bottom: ${sv.defaultPadding};
     margin-bottom: ${sv.defaultMargin};
@@ -131,7 +137,10 @@ PanelFooter.propTypes = {
 
 const Panel = ({ header, body, footer }) => {
   return (
-    <div className={styles.root}>
+    <div className={cx(styles.root, {
+      [styles.doubleTopPadding]: ! header && ! body.props.noPadding,
+      [styles.doubleBottomPadding]: ! footer && ! body.props.noPadding,
+    })}>
       {header}
       {body}
       {footer}
@@ -145,7 +154,7 @@ Panel.propTypes = {
   header: PropTypes.node,
 
   /** Component: PanelBody, will render as the body of the panel. Takes PanelSection as children */
-  body: PropTypes.node,
+  body: PropTypes.node.isRequired,
 
   /** Component: PanelFooter, will render as the footer of the panel */
   footer: PropTypes.node,
