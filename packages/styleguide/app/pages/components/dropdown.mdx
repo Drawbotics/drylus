@@ -5,9 +5,11 @@ import {
   DropdownTitle,
   DropdownSeparator,
   Button,
+  Categories,
+  Avatar,
 } from '@drawbotics/react-drylus';
 
-import Playground from '~/components/Playground';
+import Playground, { PropsTable } from '~/components/Playground';
 
 
 # Dropdown
@@ -27,5 +29,36 @@ __Example__
     <DropdownOption text="Third option" disabled />
     <DropdownSeparator />
     <DropdownOption text="Fourth option" />
+  </Dropdown>
+</Playground>
+
+#### Dropdown option
+<Playground component={DropdownOption}>
+  <DropdownOption text="I'm an option" />
+</Playground>
+
+#### Dropdown title
+<PropsTable component={DropdownTitle} />
+
+### Example with categories
+<Playground>
+  <Dropdown trigger={<Avatar text="MK" />} side={DropdownSides.RIGHT}>
+    <DropdownOption text="Alright option" category={Categories.SUCCESS} />
+    <DropdownOption text="Not okay" category={Categories.DANGER} />
+    <DropdownOption text="Maybe okay" category={Categories.WARNING} />
+  </Dropdown>
+</Playground>
+
+### Example with titles
+<Playground>
+  <Dropdown trigger={<Avatar text="MK" />} side={DropdownSides.TOP}>
+    <DropdownTitle text="First section" />
+    <DropdownOption text="First option" />
+    <DropdownOption text="Second option" />
+    <DropdownOption text="Third option" />
+    <DropdownTitle text="Second section" />
+    <DropdownOption text="First option" />
+    <DropdownOption text="Second option" disabled />
+    <DropdownOption text="Third option" />
   </Dropdown>
 </Playground>

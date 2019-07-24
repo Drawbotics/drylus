@@ -5,13 +5,19 @@ import sv from '@drawbotics/style-vars';
 import Enum from '@drawbotics/enums';
 
 import { Categories } from '../base';
-import { getEnumAsClass } from '../utils';
+import Icon from './Icon';
+import { getEnumAsClass, getIconForCategory } from '../utils';
 
 
 const styles = {
   wrapper: css`
     position: relative;
     display: inline-block;
+  `,
+  trigger: css`
+    &:hover {
+      cursor: pointer;
+    }
   `,
   root: css`
     position: absolute;
@@ -56,23 +62,52 @@ const styles = {
     color: ${sv.colorPrimary};
     padding: 5px ${sv.paddingSmall};
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 
     &:hover {
       cursor: pointer;
       background: ${sv.neutralLight};
     }
+
+    > i {
+      margin-right: ${sv.marginExtraSmall};
+    }
   `,
   disabled: css`
     color: ${sv.colorDisabled};
-    cursor: not-allowed !important;
-    background: none !important;
+    cursor: not-allowed;
+    background: none;
+
+    &:hover {
+      cursor: not-allowed;
+      color: ${sv.colorDisabled};
+      background: none;
+    }
   `,
   danger: css`
     color: ${sv.red};
 
     &:hover {
       color: ${sv.redDark};
-      background: ${sv.redLight};
+      background: ${sv.redLighter};
+    }
+  `,
+  success: css`
+    color: ${sv.green};
+
+    &:hover {
+      color: ${sv.greenDark};
+      background: ${sv.greenLighter};
+    }
+  `,
+  warning: css`
+    color: ${sv.orange};
+
+    &:hover {
+      color: ${sv.orangeDark};
+      background: ${sv.orangeLighter};
     }
   `,
   separator: css`
@@ -80,6 +115,12 @@ const styles = {
     width: 100%;
     background: ${sv.neutralLight};
     margin: ${sv.marginExtraSmall} 0;
+  `,
+  title: css`
+    padding: ${sv.paddingExtraSmall};
+    font-size: 0.8rem;
+    color: ${sv.colorTertiary};
+    text-transform: uppercase;
   `,
 };
 
@@ -98,14 +139,21 @@ export const DropdownOption = ({
   category,
   disabled,
   onClick,
+  onClickClose,
 }) => {
+  const icon = getIconForCategory(category);
   return (
     <div
       className={cx(styles.option, {
-        [styles.disabled]: disabled,
         [styles[getEnumAsClass(category)]]: category,
+        [styles.disabled]: disabled,
       })}
-      onClick={disabled ? null : onClick}>
+      onClick={disabled ? null : () => { onClickClose(); onClick(); }}>
+      {do {
+        if (category) {
+          <Icon name={icon} />
+        }
+      }}
       {text}
     </div>
   );
@@ -128,13 +176,22 @@ DropdownOption.propTypes = {
   ]),
 };
 
+DropdownOption.defaultProps = {
+  onClick: x=>x,
+};
 
-export const DropdownTitle = () => {
+
+export const DropdownTitle = ({ text }) => {
   return (
-    <div>
-
+    <div className={styles.title}>
+      {text}
     </div>
   );
+};
+
+DropdownTitle.propTypes = {
+  /** Value of the title */
+  text: PropTypes.string.isRequired,
 };
 
 
@@ -163,7 +220,7 @@ const Dropdown = ({ children, trigger, side }) => {
   }, []);
   return (
     <div className={styles.wrapper}>
-      <div onClick={() => setDropdowOpen(true)}>
+      <div onClick={() => setDropdowOpen(true)} className={styles.trigger}>
         {trigger}
       </div>
       <div
@@ -172,7 +229,9 @@ const Dropdown = ({ children, trigger, side }) => {
           [styles.visible]: isOpen,
           [styles[getEnumAsClass(side)]]: side,
         })}>
-        {children}
+        {React.Children.map(children, (child) => React.cloneElement(child, {
+          onClickClose: () => setDropdowOpen(false),
+        }))}
       </div>
     </div>
   );
