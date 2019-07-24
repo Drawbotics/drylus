@@ -9,29 +9,27 @@ const styles = {
     background: ${sv.white};
     box-shadow: ${sv.elevation3};
     border-radius: ${sv.borderRadiusSmall};
-    overflow: auto;
+    padding: ${sv.defaultPadding};
   `,
   header: css`
-    padding: ${sv.defaultPadding};
-    padding-bottom: 0;
+    padding-bottom: ${sv.defaultPadding};
     margin-bottom: ${sv.defaultMargin};
   `,
   body: css`
-    padding: 0 ${sv.defaultPadding};
-    margin: ${sv.defaultMargin} 0;
+    margin-top: calc(${sv.defaultMargin} * -1);
+    margin-bottom: calc(${sv.defaultMargin} * -1);
   `,
   footer: css`
-    padding: ${sv.defaultPadding};
-    padding-top: 0;
     margin-top: ${sv.defaultMargin};
+    padding-top: ${sv.defaultPadding};
   `,
   noSpacing: css`
     padding: 0;
-    margin: 0;
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
     margin-top: 0;
     margin-bottom: 0;
+    margin: calc(${sv.defaultMargin} * -1);
   `,
   section: css`
     margin-bottom: ${sv.marginLarge};
@@ -83,7 +81,7 @@ PanelBody.propTypes = {
   /** Content of the body */
   children: PropTypes.node.isRequired,
 
-  /** If true there is no space between the content and the border of the panel */
+  /** If true there is no (minimal) space between the content and the border of the panel */
   noPadding: PropTypes.bool,
 };
 
