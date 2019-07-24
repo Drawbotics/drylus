@@ -55,11 +55,11 @@ const styles = {
   `,
   underlinedHover: css`
     &:hover {
-      text-decoration: underline;
+      text-decoration: underline !important;
     }
   `,
   underlinedAlways: css`
-    text-decoration: underline;
+    text-decoration: underline !important;
   `,
 };
 

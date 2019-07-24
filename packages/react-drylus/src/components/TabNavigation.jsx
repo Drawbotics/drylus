@@ -65,7 +65,7 @@ const styles = {
   item: css`
     display: flex;
     align-items: center;
-    padding: ${sv.defaultPadding} ${sv.paddingLarge};
+    padding: ${sv.defaultPadding} ${sv.paddingExtraLarge};
     color: ${sv.colorSecondary};
     transition: ${sv.defaultTransition};
     position: relative;

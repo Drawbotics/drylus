@@ -27,9 +27,8 @@ export const styles = {
     }
 
     a {
-      cursor: default;
       text-decoration: none;
-      color: initial;
+      color: inherit;
     }
 
     b, strong {
