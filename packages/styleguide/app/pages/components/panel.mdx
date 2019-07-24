@@ -20,7 +20,7 @@ import {
 } from '@drawbotics/react-drylus';
 import sv from '@drawbotics/style-vars';
 
-import Playground from '~/components/Playground';
+import Playground, { PropsTable } from '~/components/Playground';
 
 
 # Panel
@@ -102,6 +102,13 @@ export const Content = () => {
 </Playground>
 
 Both `PanelHeader` and `PanelFooter` don't have any styles, they are simply containers. You should build your own content, and normally we use that space for actions (on either or both sides, or that take the full width).
+
+#### PanelHeader
+`PanelBody` and `PanelFooter` take identical props.
+<PropsTable component={PanelHeader} />
+
+#### PanelSection
+<PropsTable component={PanelSection} />
 
 
 ### Common examples

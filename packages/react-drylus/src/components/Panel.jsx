@@ -60,6 +60,14 @@ export const PanelHeader = ({ children, noPadding }) => {
   );
 };
 
+PanelHeader.propTypes = {
+  /** Content of the header */
+  children: PropTypes.node.isRequired,
+
+  /** If true there is no space between the content and the border of the panel */
+  noPadding: PropTypes.bool,
+};
+
 
 export const PanelBody = ({ children, noPadding }) => {
   return (
@@ -69,6 +77,14 @@ export const PanelBody = ({ children, noPadding }) => {
       {children}
     </div>
   );
+};
+
+PanelBody.propTypes = {
+  /** Content of the body */
+  children: PropTypes.node.isRequired,
+
+  /** If true there is no space between the content and the border of the panel */
+  noPadding: PropTypes.bool,
 };
 
 
@@ -87,6 +103,14 @@ export const PanelSection = ({ children, title }) => {
   );
 };
 
+PanelSection.propTypes = {
+  /** Content of the section */
+  children: PropTypes.node.isRequired,
+
+  /** Displays a title on the top left of the section */
+  title: PropTypes.bool,
+};
+
 
 export const PanelFooter = ({ children, noPadding }) => {
   return (
@@ -96,6 +120,14 @@ export const PanelFooter = ({ children, noPadding }) => {
       {children}
     </div>
   );
+};
+
+PanelFooter.propTypes = {
+  /** Content of the footer */
+  children: PropTypes.node.isRequired,
+
+  /** If true there is no space between the content and the border of the panel */
+  noPadding: PropTypes.bool,
 };
 
 
