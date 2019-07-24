@@ -40,6 +40,8 @@ const styles = {
     pointer-events: auto;
     transform: translateY(0);
   `,
+  bottom: css`
+  `,
   top: css`
     top: auto;
     bottom: 100%;

@@ -112,7 +112,7 @@ PanelSection.propTypes = {
   children: PropTypes.node.isRequired,
 
   /** Displays a title on the top left of the section */
-  title: PropTypes.bool,
+  title: PropTypes.string,
 };
 
 
