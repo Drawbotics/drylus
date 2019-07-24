@@ -25,6 +25,8 @@ const styles = {
     }
   `,
   clickable: css`
+    text-decoration: underline;
+
     &:hover {
       cursor: pointer;
       background: ${sv.neutralLight};
