@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/react-drylus",
-  "version": "1.5.2",
+  "version": "2.0.0",
   "description": "React components for the Drawbotics' ecosystem",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "",
@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@drawbotics/enums": "0.2.0",
-    "@drawbotics/icons": "^1.5.2",
+    "@drawbotics/icons": "^2.0.0",
     "@drawbotics/use-is-device": "^0.1.4",
     "animejs": "^3.0.1",
     "core-js": "^2.6.5",
