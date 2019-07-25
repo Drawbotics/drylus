@@ -29,6 +29,7 @@ export const styles = {
     flex-direction: column;
     background: ${sv.white};
     padding: ${sv.defaultPadding};
+    margin: ${sv.marginSmall};
     color: ${sv.colorPrimary};
     transition: ${sv.defaultTransition};
     &:hover {
@@ -44,7 +45,7 @@ export const styles = {
 export const Icons = () => {
   const names = icons.map((name) => name.split('.')[0].replace('/assets/', '').replace('/drylus', ''));
   return (
-    <Flex wrap vSpacing={Sizes.SMALL} hSpacing={Sizes.SMALL}>
+    <Flex wrap>
       {names.map((name) => (
         <FlexItem key={name} flex={1/4}>
           <div className={styles.icon}>

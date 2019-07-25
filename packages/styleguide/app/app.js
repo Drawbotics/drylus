@@ -10,13 +10,16 @@ import {
 } from '@drawbotics/react-drylus';
 
 // vanilla import, will be in head for link and script
-// import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
+import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
 import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
 import Sidebar from './components/Sidebar';
 import LinksNavigation from './components/LinksNavigation';
 import RoutesRenderer from './components/RoutesRenderer';
 import pages from './pages';
+
+
+window._drylus = drylus;
 
 
 const App = () => {

@@ -8,13 +8,15 @@
   "main": "dist/drylus.js",
   "scripts": {
     "clean": "rimraf dist",
+    "sync": "node scripts/sync.js",
     "watch:lib": "NODE_ENV=development webpack --config webpack.config.js --watch",
     "watch:react": "node ./scripts/watch-react.js",
     "watch": "npm run watch:react & npm run watch:lib",
     "build:lib": "NODE_ENV=production webpack --config webpack.config.js",
     "extract-css": "extract-emotion ./src/styles/react-components --output ./src/styles/ --prefix Drylus --filename react-styles.css",
     "build": "npm run clean && npm run extract-css && npm run build:lib",
-    "prepublishOnly": "npm run build"
+    "build:dev": "npm run build && NODE_ENV=development npm run sync",
+    "prepublishOnly": "npm run build && NODE_ENV=production npm run sync"
   },
   "dependencies": {
     "@drawbotics/react-drylus": "^1.5.2"

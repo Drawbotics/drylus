@@ -43,7 +43,7 @@ const styles = {
       flex: 1;
       justify-content: space-between;
       color: ${sv.colorPrimary};
-      border-bottom: 1px solid ${sv.neutral};
+      border-bottom: 1px solid ${sv.neutralLight};
 
       &::after {
         top: 0;
@@ -65,7 +65,7 @@ const styles = {
   item: css`
     display: flex;
     align-items: center;
-    padding: ${sv.defaultPadding} ${sv.paddingLarge};
+    padding: ${sv.defaultPadding} ${sv.paddingExtraLarge};
     color: ${sv.colorSecondary};
     transition: ${sv.defaultTransition};
     position: relative;

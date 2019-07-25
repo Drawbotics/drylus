@@ -1,0 +1,84 @@
+import {
+  Dropdown,
+  DropdownOption,
+  DropdownSides,
+  DropdownTitle,
+  DropdownSeparator,
+  Button,
+  Categories,
+  Avatar,
+  Margin,
+  Sizes,
+  Text,
+  Tiers,
+} from '@drawbotics/react-drylus';
+
+import Playground, { PropsTable } from '~/components/Playground';
+
+
+# Dropdown
+A little floating menu used to perform actions. Can also contain some information, but should be kept at a minimum. If you see that the content of the dropdown is becoming excessive, use a [`Modal`](/components/modal) instead.
+
+```jsx
+import { Dropdown, DropdownOption, DropdownTitle, DropdownSeparator, DropdownSides } from '@drawbotics/react-drylus';
+```
+__Example__
+
+<Playground component={Dropdown} enums={{ DropdownSides }}>
+  <Dropdown trigger={
+    <Button>I show the menu</Button>
+  }>
+    <DropdownOption text="First option" />
+    <DropdownOption text="Second option" />
+    <DropdownOption text="Third option" disabled />
+    <DropdownSeparator />
+    <DropdownOption text="Fourth option" />
+  </Dropdown>
+</Playground>
+
+#### Dropdown option
+<Playground component={DropdownOption}>
+  <DropdownOption text="I'm an option" />
+</Playground>
+
+#### Dropdown title
+<PropsTable component={DropdownTitle} />
+
+### Example with categories
+<Playground>
+  <Dropdown trigger={<Avatar text="MK" />} side={DropdownSides.RIGHT}>
+    <DropdownOption text="Alright option" category={Categories.SUCCESS} />
+    <DropdownOption text="Not okay" category={Categories.DANGER} />
+    <DropdownOption text="Maybe okay" category={Categories.WARNING} />
+  </Dropdown>
+</Playground>
+
+### Example with titles
+<Playground>
+  <Dropdown trigger={<Avatar text="MK" />} side={DropdownSides.TOP}>
+    <DropdownTitle text="First section" />
+    <DropdownOption text="First option" />
+    <DropdownOption text="Second option" />
+    <DropdownOption text="Third option" />
+    <DropdownTitle text="Second section" />
+    <DropdownOption text="First option" />
+    <DropdownOption text="Second option" disabled />
+    <DropdownOption text="Third option" />
+  </Dropdown>
+</Playground>
+
+### Example with custom content
+You can also put whatever you want in a dropdown, as long as it respects the design system
+<Playground>
+  <Dropdown trigger={<Avatar text="JD" />} side={DropdownSides.RIGHT}>
+    <Margin size={{ top: Sizes.EXTRA_SMALL, right: Sizes.SMALL, left: Sizes.SMALL }}>
+      <Text style={{ whiteSpace: 'nowrap' }}>John Doe</Text>
+    </Margin>
+    <Margin size={{ right: Sizes.SMALL, left: Sizes.SMALL }}>
+      <Text tier={Tiers.SECONDARY} size={Sizes.SMALL}>Drawer</Text>
+    </Margin>
+    <DropdownSeparator />
+    <DropdownOption text="Settings" />
+    <DropdownOption text="Logout" />
+  </Dropdown>
+</Playground>

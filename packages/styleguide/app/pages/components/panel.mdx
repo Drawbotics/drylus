@@ -16,10 +16,11 @@ import {
   Categories,
   Table,
   Pagination,
+  Margin,
 } from '@drawbotics/react-drylus';
 import sv from '@drawbotics/style-vars';
 
-import Playground from '~/components/Playground';
+import Playground, { PropsTable } from '~/components/Playground';
 
 
 # Panel
@@ -42,18 +43,20 @@ export const Content = () => {
   <Panel
     header={
       <PanelHeader>
-        <Flex justify={FlexJustify.SPACE_BETWEEN} vSpacing={Sizes.SMALL}>
+        <Flex justify={FlexJustify.SPACE_BETWEEN}>
           <FlexItem flex>
             <Title size={4} noMargin>Header of the panel</Title>
           </FlexItem>
           <FlexItem>
-            <Select
-              placeholder="Filter 1..."
-              options={[
-                { label: 'Option 1', value: '1' },
-                { label: 'Option 2', value: '2' },
-              ]}
-            />
+            <Margin size={{ right: Sizes.SMALL }}>
+              <Select
+                placeholder="Filter 1..."
+                options={[
+                  { label: 'Option 1', value: '1' },
+                  { label: 'Option 2', value: '2' },
+                ]}
+              />
+            </Margin>
           </FlexItem>
           <FlexItem>
             <Select
@@ -79,12 +82,16 @@ export const Content = () => {
     }
     footer={
       <PanelFooter>
-        <Flex justify={FlexJustify.END} vSpacing={Sizes.SMALL}>
+        <Flex justify={FlexJustify.END}>
           <FlexItem>
-            <Button tier={Tiers.TERTIARY}>Tertiary action</Button>
+            <Margin size={{ right: Sizes.SMALL }}>
+              <Button tier={Tiers.TERTIARY}>Tertiary action</Button>
+            </Margin>
           </FlexItem>
           <FlexItem>
-            <Button tier={Tiers.SECONDARY}>Secondary action</Button>
+            <Margin size={{ right: Sizes.SMALL }}>
+              <Button tier={Tiers.SECONDARY}>Secondary action</Button>
+            </Margin>
           </FlexItem>
           <FlexItem>
             <Button category={Categories.BRAND}>Primary action</Button>
@@ -95,6 +102,13 @@ export const Content = () => {
 </Playground>
 
 Both `PanelHeader` and `PanelFooter` don't have any styles, they are simply containers. You should build your own content, and normally we use that space for actions (on either or both sides, or that take the full width).
+
+#### PanelHeader
+`PanelBody` and `PanelFooter` take identical props.
+<PropsTable component={PanelHeader} />
+
+#### PanelSection
+<PropsTable component={PanelSection} />
 
 
 ### Common examples

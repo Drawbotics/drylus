@@ -9,29 +9,33 @@ const styles = {
     background: ${sv.white};
     box-shadow: ${sv.elevation3};
     border-radius: ${sv.borderRadiusSmall};
-    overflow: auto;
+    padding: ${sv.defaultPadding};
+  `,
+  doubleTopPadding: css`
+    padding-top: calc(${sv.defaultPadding} * 2);
+  `,
+  doubleBottomPadding: css`
+    padding-bottom: calc(${sv.defaultPadding} * 2);
   `,
   header: css`
-    padding: ${sv.defaultPadding};
-    padding-bottom: 0;
+    padding-bottom: ${sv.defaultPadding};
     margin-bottom: ${sv.defaultMargin};
   `,
   body: css`
-    padding: 0 ${sv.defaultPadding};
-    margin: ${sv.defaultMargin} 0;
+    margin-top: calc(${sv.defaultMargin} * -1);
+    margin-bottom: calc(${sv.defaultMargin} * -1);
   `,
   footer: css`
-    padding: ${sv.defaultPadding};
-    padding-top: 0;
     margin-top: ${sv.defaultMargin};
+    padding-top: ${sv.defaultPadding};
   `,
   noSpacing: css`
     padding: 0;
-    margin: 0;
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 3px;
+    padding-bottom: 3px;
     margin-top: 0;
     margin-bottom: 0;
+    margin: calc(${sv.defaultMargin} * -1);
   `,
   section: css`
     margin-bottom: ${sv.marginLarge};
@@ -60,6 +64,14 @@ export const PanelHeader = ({ children, noPadding }) => {
   );
 };
 
+PanelHeader.propTypes = {
+  /** Content of the header */
+  children: PropTypes.node.isRequired,
+
+  /** If true there is no space between the content and the border of the panel */
+  noPadding: PropTypes.bool,
+};
+
 
 export const PanelBody = ({ children, noPadding }) => {
   return (
@@ -69,6 +81,14 @@ export const PanelBody = ({ children, noPadding }) => {
       {children}
     </div>
   );
+};
+
+PanelBody.propTypes = {
+  /** Content of the body */
+  children: PropTypes.node.isRequired,
+
+  /** If true there is no (minimal) space between the content and the border of the panel */
+  noPadding: PropTypes.bool,
 };
 
 
@@ -87,6 +107,14 @@ export const PanelSection = ({ children, title }) => {
   );
 };
 
+PanelSection.propTypes = {
+  /** Content of the section */
+  children: PropTypes.node.isRequired,
+
+  /** Displays a title on the top left of the section */
+  title: PropTypes.string,
+};
+
 
 export const PanelFooter = ({ children, noPadding }) => {
   return (
@@ -98,10 +126,21 @@ export const PanelFooter = ({ children, noPadding }) => {
   );
 };
 
+PanelFooter.propTypes = {
+  /** Content of the footer */
+  children: PropTypes.node.isRequired,
+
+  /** If true there is no space between the content and the border of the panel */
+  noPadding: PropTypes.bool,
+};
+
 
 const Panel = ({ header, body, footer }) => {
   return (
-    <div className={styles.root}>
+    <div className={cx(styles.root, {
+      [styles.doubleTopPadding]: ! header && ! body.props.noPadding,
+      [styles.doubleBottomPadding]: ! footer && ! body.props.noPadding,
+    })}>
       {header}
       {body}
       {footer}
@@ -115,7 +154,7 @@ Panel.propTypes = {
   header: PropTypes.node,
 
   /** Component: PanelBody, will render as the body of the panel. Takes PanelSection as children */
-  body: PropTypes.node,
+  body: PropTypes.node.isRequired,
 
   /** Component: PanelFooter, will render as the footer of the panel */
   footer: PropTypes.node,

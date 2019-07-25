@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { css } from 'emotion';
 import sv from '@drawbotics/style-vars';
 
@@ -19,9 +19,9 @@ const Preview = ({ children, raw }) => {
           <div dangerouslySetInnerHTML={{ __html: children }} />
         }
         else {
-          <>
+          <Fragment>
             {children}
-          </>
+          </Fragment>
         }
       }}
     </div>

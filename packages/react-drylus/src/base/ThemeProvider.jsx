@@ -3,7 +3,7 @@ import { css, injectGlobal, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/style-vars';
 
-import '../utils/normalize';
+import normalize from '../utils/normalize';
 
 
 injectGlobal`
@@ -17,6 +17,9 @@ injectGlobal`
 `;
 
 
+normalize();
+
+
 export const styles = {
   root: css`
     * {
@@ -24,9 +27,8 @@ export const styles = {
     }
 
     a {
-      cursor: default;
       text-decoration: none;
-      color: initial;
+      color: inherit;
     }
 
     b, strong {

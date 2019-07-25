@@ -77,7 +77,7 @@ const Pagination = ({
             else {
               <Button
                 onClick={() => onChange(label)}
-                category={Categories.BRAND}
+                category={value === label ? Categories.BRAND : null}
                 tier={value === label ? Tiers.PRIMARY : Tiers.TERTIARY}
                 size={Sizes.SMALL}>
                 {`${label}`}

@@ -1,7 +1,12 @@
 export function addDocumentReady() {
   document._ready = (callback) => {
-    document.addEventListener('DOMContentLoaded', (event) => {
+    if (document.readyState === 'complete') {
       callback();
-    });
+    }
+    else {
+      document.addEventListener('DOMContentLoaded', (event) => {
+        callback();
+      });
+    }
   };
 }

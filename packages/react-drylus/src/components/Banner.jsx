@@ -7,7 +7,7 @@ import { Categories, Sizes } from '../base';
 import Icon from './Icon';
 import Flex, { FlexItem, FlexAlign, FlexJustify } from '../layout/Flex';
 import Margin from '../layout/Margin';
-import { getEnumAsClass } from '../utils';
+import { getEnumAsClass, getIconForCategory } from '../utils';
 
 
 const styles = {
@@ -42,26 +42,12 @@ const styles = {
 };
 
 
-function _getIconForCategory(category) {
-  switch (category) {
-    case Categories.DANGER:
-      return 'alert-circle';
-    case Categories.SUCCESS:
-      return 'check-circle';
-    case Categories.WARNING:
-      return 'alert-triangle';
-    default:
-      return 'info';
-  }
-}
-
-
 const Banner = ({
   children,
   category,
   title,
 }) => {
-  const icon = _getIconForCategory(category);
+  const icon = getIconForCategory(category);
   return (
     <div className={cx(styles.root, { [styles[getEnumAsClass(category)]]: category })}>
       <Flex align={FlexAlign.START} justify={FlexJustify.START}>

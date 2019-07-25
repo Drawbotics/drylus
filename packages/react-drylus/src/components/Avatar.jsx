@@ -4,6 +4,7 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/style-vars';
 
 import { Categories, Sizes } from '../base';
+import Tooltip from '../components/Tooltip';
 import { getEnumAsClass } from '../utils';
 
 
@@ -71,9 +72,10 @@ const Avatar = ({
   size,
   category,
   backgroundColor,
+  hint,
 }) => {
   const customSize = typeof size === 'number';
-  return (
+  const avatar = (
     <div className={cx(styles.root, {
       [styles[getEnumAsClass(category)]]: category,
       [styles[! customSize && getEnumAsClass(size)]]: size,
@@ -94,6 +96,16 @@ const Avatar = ({
       }}
     </div>
   );
+  if (hint) {
+    return (
+      <Tooltip message={hint}>
+        {avatar}
+      </Tooltip>
+    );
+  }
+  else {
+    return avatar;
+  }
 };
 
 

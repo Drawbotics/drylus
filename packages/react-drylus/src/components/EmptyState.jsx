@@ -109,9 +109,13 @@ const EmptyState = ({
           if (actions) {
             <FlexItem>
               <Margin size={{ top: Sizes.DEFAULT }}>
-                <Flex vSpacing={Sizes.SMALL}>
+                <Flex>
                   {actions.map((action, i) => (
-                    <FlexItem key={i}>{action}</FlexItem>
+                    <FlexItem key={i}>
+                      <Margin size={{ left: i === 0 ? null : Sizes.SMALL }}>
+                        {action}
+                      </Margin>
+                    </FlexItem>
                   ))}
                 </Flex>
               </Margin>

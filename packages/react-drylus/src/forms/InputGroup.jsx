@@ -4,6 +4,7 @@ import { css } from 'emotion';
 
 import Flex, { FlexItem, FlexDirections, FlexAlign } from '../layout/Flex';
 import { Sizes, Categories } from '../base';
+import Margin from '../layout/Margin';
 import Hint from './Hint';
 
 
@@ -23,14 +24,15 @@ const InputGroup = ({
     <div className={styles.root}>
       <Flex
         direction={FlexDirections.VERTICAL}
-        hSpacing={Sizes.EXTRA_SMALL}
         align={FlexAlign.STRETCH}>
         {React.Children.map(children, (child, i) => (
           <FlexItem flex>
-            {React.cloneElement(child, {
-              error: child.props.valid ? false : Boolean(error),
-              valid: valid !== undefined ? valid : child.props.valid,
-            })}
+            <Margin size={{ top: i === 0 ? null : Sizes.EXTRA_SMALL }}>
+              {React.cloneElement(child, {
+                error: child.props.valid ? false : Boolean(error),
+                valid: valid !== undefined ? valid : child.props.valid,
+              })}
+            </Margin>
           </FlexItem>
         ))}
       </Flex>

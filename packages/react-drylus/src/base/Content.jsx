@@ -11,12 +11,12 @@ const styles = {
   fullHeight: css`
     flex: 1;
   `,
-  fullWidth: css`
-    max-width: none;
-  `,
   children: css`
     max-width: ${sv.maxWidthLarge};
     margin: auto;
+  `,
+  fullWidth: css`
+    max-width: none;
   `,
 };
 
