@@ -1,0 +1,29 @@
+import { List, ListItem } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# List
+Used to display items with bullet points or numbers. `ordered` lists take over most of the items style, and make it all the same color, overriding `category` and `icon`.
+
+```jsx
+import { List, ListItem } from '@drawbotics/react-drylus';
+```
+__Example__
+
+<Playground component={List}>
+  <List>
+    <ListItem>First item in the list</ListItem>
+    <ListItem>Second item in the list</ListItem>
+    <ListItem>Third item in the list</ListItem>
+    <ListItem>Fourth item in the list</ListItem>
+  </List>
+</Playground>
+
+
+#### List item
+<Playground component={ListItem}>
+  <List>
+    <ListItem>Im an item of the list</ListItem>
+  </List>
+</Playground>

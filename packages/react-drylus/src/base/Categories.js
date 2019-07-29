@@ -7,6 +7,7 @@ const Categories = new Enum(
   'INFO',
   'WARNING',
   'DANGER',
+  'PRIMARY',
 );
 
 

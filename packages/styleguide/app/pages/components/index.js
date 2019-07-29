@@ -34,6 +34,7 @@ import alerts from './alerts';
 import splashScreen from './splash-screen';
 import breadcrumbs from './breadcrumbs';
 import dropdown from './dropdown';
+import list from './list';
 
 
 const components = {
@@ -73,6 +74,7 @@ const components = {
   splashScreen,
   breadcrumbs,
   dropdown,
+  list,
 };
 
 

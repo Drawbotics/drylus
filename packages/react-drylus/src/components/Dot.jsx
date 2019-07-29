@@ -30,6 +30,9 @@ const styles = {
   info: css`
     background: ${sv.blue};
   `,
+  primary: css`
+    background: ${sv.colorPrimary};
+  `,
 };
 
 
@@ -50,6 +53,7 @@ Dot.propTypes = {
     Categories.INFO,
     Categories.WARNING,
     Categories.DANGER,
+    Categories.PRIMARY,
   ]),
 };
 

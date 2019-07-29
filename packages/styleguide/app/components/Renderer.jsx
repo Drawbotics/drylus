@@ -16,6 +16,8 @@ import {
   TBody,
   THead,
   TCell,
+  List,
+  ListItem,
 } from '@drawbotics/react-drylus';
 import { Link } from 'react-router-dom';
 
@@ -43,6 +45,9 @@ const components = {
     }
     return <Link to={props.href}><TextLink {...props} underlined={LinkUnderlined.ALWAYS} /></Link>;
   },
+  li: (props) => <ListItem {...props} />,
+  ol: (props) => <List {...props} ordered />,
+  ul: (props) => <List {...props} />,
   code: Code,
   inlineCode: InlineCode,
   table: (props) => <Table {...props} />,
