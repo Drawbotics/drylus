@@ -43,7 +43,7 @@ const styles = {
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
 
     &::after {
-      content: '\\ea26';
+      content: '\\ea29';
       font-family: 'drycons';
       color: ${sv.white};
       position: absolute;
