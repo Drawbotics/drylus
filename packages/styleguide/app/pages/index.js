@@ -1,7 +1,7 @@
 import brand from './brand';
 import components from './components';
 import introduction from './introduction';
-import guidelines from './guidelines';
+import installation from './installation';
 import layout from './layout';
 import forms from './forms';
 import base from './base';
@@ -9,7 +9,7 @@ import base from './base';
 
 export default {
   introduction,
-  guidelines,
+  installation,
   brand,
   base,
   components,
