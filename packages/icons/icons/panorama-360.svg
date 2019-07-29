@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
+    <title>Icon/Service/panorama-360</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M2.1,12 C2.5,15.7 5.2,18.8 8.8,19.7 C7.3,17.4 6.4,14.8 6.1,12 L2.1,12 Z M2.1,10 L6.1,10 C6.3,7.2 7.2,4.6 8.8,2.3 C5.2,3.2 2.5,6.3 2.1,10 Z M19.9,10 C19.5,6.3 16.8,3.2 13.2,2.3 C14.7,4.6 15.6,7.2 15.9,10 L19.9,10 Z M19.9,12 L15.9,12 C15.7,14.8 14.8,17.4 13.2,19.7 C16.8,18.8 19.5,15.7 19.9,12 Z M8.1,10 L14,10 C13.7,7.3 12.7,4.7 11.1,2.6 C9.3,4.7 8.3,7.3 8.1,10 Z M13.9,12 L8.1,12 C8.4,14.7 9.4,17.3 11,19.4 C12.7,17.3 13.7,14.7 13.9,12 Z M11,22 C4.9,22 0,17.1 0,11 C0,4.9 4.9,0 11,0 C17.1,0 22,4.9 22,11 C22,17.1 17.1,22 11,22 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Service/panorama-360" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>
