@@ -104,6 +104,7 @@ const Search = ({ open, onClickClose }) => {
       visible={open}
       onClickClose={handleOnClose}>
       <Input
+        autoFocus
         onChange={handleOnChange}
         value={inputValue}
         placeholder="Component name, page..."
