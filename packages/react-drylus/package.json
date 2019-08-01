@@ -14,6 +14,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@drawbotics/drylus-style-vars": "file:../drylus-style-vars",
     "@drawbotics/enums": "0.2.0",
     "@drawbotics/icons": "^2.1.1",
     "@drawbotics/use-is-device": "^0.1.4",

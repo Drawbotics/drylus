@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
-import sv, { fade } from '@drawbotics/style-vars';
+import sv, { fade } from '@drawbotics/drylus-style-vars';
 import {
   Icon,
   Margin,

@@ -1,4 +1,4 @@
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 
 
 export default {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 
 
 const styles = {

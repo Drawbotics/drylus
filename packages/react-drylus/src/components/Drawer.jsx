@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 
 import Button from './Button';
 import Title from './Title';

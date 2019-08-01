@@ -1,6 +1,6 @@
 # React Drylus
 
-The "root" package for all of the Drawbotics styles (excluding [icons]('../icons') and [variables]('../style-vars')).
+The "root" package for all of the Drawbotics styles (excluding [icons]('../icons') and [variables]('../drylus-style-vars')).
 
 The components are written in React and are styled using [emotion](https://github.com/emotion-js/emotion).
 

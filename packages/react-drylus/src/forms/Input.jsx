@@ -1,6 +1,6 @@
 import React, { useState, forwardRef } from 'react';
 import { css, cx } from 'emotion';
-import sv, { fade } from '@drawbotics/style-vars';
+import sv, { fade } from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
 import RoundIcon from '../components/RoundIcon';

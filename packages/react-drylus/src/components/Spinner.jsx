@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx, keyframes } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 
 import { Sizes, Categories } from '../base';
 

@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext } from 'react';
 import { css, cx, keyframes } from 'emotion';
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 
