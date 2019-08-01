@@ -10,7 +10,7 @@ import {
   Categories,
 } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 
 import Prop from './Prop';
 

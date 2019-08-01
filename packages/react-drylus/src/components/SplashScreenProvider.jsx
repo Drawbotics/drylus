@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { css } from 'emotion';
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 import anime from 'animejs';
 import { CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';

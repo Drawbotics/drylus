@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import Calendar from 'react-calendar/dist/entry.nostyle';
 import { getDevice } from '@drawbotics/use-is-device';

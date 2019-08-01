@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, cx } from 'emotion';
-import sv, { fade } from '@drawbotics/style-vars';
+import sv, { fade } from '@drawbotics/drylus-style-vars';
 import omit from 'lodash/omit';
 import startCase from 'lodash/startCase';
 import kebabCase from 'lodash/kebabCase';

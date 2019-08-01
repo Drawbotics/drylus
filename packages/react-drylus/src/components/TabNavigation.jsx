@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv, { fade } from '@drawbotics/style-vars';
+import sv, { fade } from '@drawbotics/drylus-style-vars';
 
 import { Categories, Sizes } from '../base';
 import Badge from './Badge';

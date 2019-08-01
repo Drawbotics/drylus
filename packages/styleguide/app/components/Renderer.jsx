@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { css } from 'emotion';
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 import {
   Title,
   Paragraph,

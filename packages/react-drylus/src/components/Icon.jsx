@@ -3,7 +3,7 @@ import { css, cx, injectGlobal } from 'emotion';
 import PropTypes from 'prop-types';
 import generateIconStyles from '@drawbotics/icons/dist/drycons.js';
 import packageJson from '@drawbotics/icons/package.json';
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 
 import { Categories } from '../base';
 import { getEnumAsClass } from '../utils';

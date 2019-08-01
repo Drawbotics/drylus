@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 
 import { InputWithRef } from './Input';
 import Icon from '../components/Icon';

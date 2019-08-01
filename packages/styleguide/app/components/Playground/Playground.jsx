@@ -3,7 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import ReactElementToString from 'react-element-to-jsx-string';
 import omit from 'lodash/omit';
 import { css, cx } from 'emotion';
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 
 import CodeBox from './CodeBox';
 import Preview from './Preview';

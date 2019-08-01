@@ -13,7 +13,7 @@ import {
   EmptyState,
   Margin,
 } from '@drawbotics/react-drylus';
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 import { Link } from 'react-router-dom';
 
 import { generateRouteObjects } from '../utils';

@@ -1,7 +1,7 @@
 import React from 'react';
 import v4 from 'uuid/v4';
 import { css, cx } from 'emotion';
-import sv from '@drawbotics/style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
 import Hint from './Hint';

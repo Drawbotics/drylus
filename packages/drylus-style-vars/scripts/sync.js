@@ -9,7 +9,7 @@ function sync() {
   const isDev = process.env.NODE_ENV !== 'production';
   s3sync({
     sourceDir: path.resolve(__dirname, '../dist'),
-    folder: 'style-vars',
+    folder: 'drylus-style-vars',
     version,
     dev: isDev,
   });

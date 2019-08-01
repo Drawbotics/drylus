@@ -6,7 +6,7 @@ npm install
 ```
 
 There are 7 total packages:
-- [style-vars](/packages/style-vars): This package holds all the variables used in the Drawbotics styles. Exports js, less and css vars.
+- [drylus-style-vars](/packages/drylus-style-vars): This package holds all the variables used in the Drawbotics styles. Exports js, less and css vars.
 - [icons](/packages/icons): This package holds all the icons used throughout the Drawbotics design system
 - [react-drylus](/packages/react-drylus): This is basically the source of all the components for the library; it uses React
 - [vanilla-drylus](/packages/vanilla-drylus): The vanilla JS version of the library. The styles (CSS) is extracted from `react-drylus` using `extract-emotion` (see next point) and bundled to be used in non-react apps. Since we can't extract JS logic from React, the component logic is re-written in non-react code and bundled separately as well
@@ -21,7 +21,7 @@ There are 7 total packages:
 
 The basic flow is the following:
 - `icons` is an independent package that only deals with icons and generating the icon fonts
-- `style-vars` is independent and generates the variables for colors, font sizes, margins etc
+- `drylus-style-vars` is independent and generates the variables for colors, font sizes, margins etc
 - `react-drylus` feeds from the two above and is the core of the design system. It's from here that nearly all of the styles and components are created
 - `extract-emotion` feeds from `react-drylus` to get the components and extracts the CSS
 - `vanilla-drylus` gets the CSS from `extract-emotion`, it then also outputs its own JS bundle for vanilla JS interactions with components

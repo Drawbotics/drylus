@@ -13,10 +13,10 @@
     "watch:styleguide": "cd packages/styleguide && npm run start",
     "build:styleguide": "cd packages/styleguide && npm run build",
     "publish:styleguide": "cd packages/styleguide && npm run build:publish",
-    "build:vars": "cd packages/style-vars && npm run build",
+    "build:vars": "cd packages/drylus-style-vars && npm run build",
     "dev:icons": "cd packages/icons && npm run build:dev",
     "dev:vanilla": "cd packages/vanilla-drylus && npm run build:dev",
-    "dev:vars": "cd packages/style-vars && npm run build:dev",
+    "dev:vars": "cd packages/drylus-style-vars && npm run build:dev",
     "build:icons": "cd packages/icons && npm run build",
     "build": "lerna run build",
     "watch": "lerna run watch",
@@ -92,10 +92,10 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
+    "@drawbotics/drylus-style-vars": "file:packages/drylus-style-vars",
     "@drawbotics/extract-emotion": "file:packages/extract-emotion",
     "@drawbotics/icons": "file:packages/icons",
     "@drawbotics/react-drylus": "file:packages/react-drylus",
-    "@drawbotics/style-vars": "file:packages/style-vars",
     "@drawbotics/styleguide": "file:packages/styleguide",
     "@drawbotics/vanilla-drylus": "file:packages/vanilla-drylus"
   }

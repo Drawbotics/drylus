@@ -151,7 +151,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = getDevice;
 
-var _styleVars = _interopRequireDefault(__webpack_require__("../style-vars/dist/vars.js"));
+var _styleVars = _interopRequireDefault(__webpack_require__("../drylus-style-vars/dist/vars.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -52839,7 +52839,7 @@ module.exports = {"name":"@drawbotics/icons","version":"2.1.1","description":"Dr
 
 /***/ }),
 
-/***/ "../style-vars/dist/vars.js":
+/***/ "../drylus-style-vars/dist/vars.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -57419,8 +57419,8 @@ var _createEmotion = create_emotion_browser_esm(),
 
 
 
-// EXTERNAL MODULE: ../style-vars/dist/vars.js
-var vars = __webpack_require__("../style-vars/dist/vars.js");
+// EXTERNAL MODULE: ../drylus-style-vars/dist/vars.js
+var vars = __webpack_require__("../drylus-style-vars/dist/vars.js");
 var vars_default = /*#__PURE__*/__webpack_require__.n(vars);
 
 // CONCATENATED MODULE: ../react-drylus/lib/utils/normalize.js
