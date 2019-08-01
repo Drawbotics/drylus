@@ -17,7 +17,7 @@
     "@drawbotics/drylus-style-vars": "^3.0.0",
     "@drawbotics/enums": "0.2.0",
     "@drawbotics/icons": "^3.0.0",
-    "@drawbotics/use-is-device": "^0.1.4",
+    "@drawbotics/use-is-device": "1.0.0",
     "animejs": "^3.0.1",
     "core-js": "^2.6.5",
     "emotion": "^10.0.9",
