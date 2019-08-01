@@ -6,7 +6,7 @@ import Enum from '@drawbotics/enums';
 
 import { Categories } from '../base';
 import Icon from './Icon';
-import { getEnumAsClass, getIconForCategory } from '../utils';
+import { getEnumAsClass } from '../utils';
 
 
 const styles = {
@@ -142,8 +142,8 @@ export const DropdownOption = ({
   disabled,
   onClick,
   onClickClose,
+  icon,
 }) => {
-  const icon = getIconForCategory(category);
   return (
     <div
       className={cx(styles.option, {
@@ -152,7 +152,7 @@ export const DropdownOption = ({
       })}
       onClick={disabled ? null : () => { onClickClose(); onClick(); }}>
       {do {
-        if (category) {
+        if (icon) {
           <Icon name={icon} />
         }
       }}
@@ -170,6 +170,9 @@ DropdownOption.propTypes = {
 
   /** Triggered when the option is clicked */
   onClick: PropTypes.func,
+
+  /** Name of the icon to be shown on the left side */
+  icon: PropTypes.string,
 
   category: PropTypes.oneOf([
     Categories.DANGER,
