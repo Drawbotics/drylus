@@ -5,9 +5,9 @@ import ThemeProvider from './ThemeProvider';
 import { AlertsProvider, SplashScreenProvider } from '../components';
 
 
-const DrylusProvider = ({ children }) => {
+const DrylusProvider = ({ children, style }) => {
   return (
-    <ThemeProvider>
+    <ThemeProvider style={style}>
       <AlertsProvider>
         <SplashScreenProvider>
           {children}
@@ -20,6 +20,9 @@ const DrylusProvider = ({ children }) => {
 
 DrylusProvider.propTypes = {
   children: PropTypes.node.isRequired,
+
+  /** This prop will be passed down to ThemeProvider */
+  style: PropTypes.object,
 };
 
 

@@ -52826,7 +52826,7 @@ module.exports = __webpack_require__.p + "assets/zoom-out.svg";
 /***/ "../icons/package.json":
 /***/ (function(module) {
 
-module.exports = {"name":"@drawbotics/icons","version":"3.1.0","description":"Drawbotics Icons Collection","author":"nicmosc <nmoscholios@gmail.com>","homepage":"https://github.com/Drawbotics/drylus#readme","license":"ISC","main":"dist/drycons.css","scripts":{"clean":"rimraf dist","generate-fonts":"webfont ./icons/*.svg --dest ./dist --template css --template-class-name drycon --font-name drycons --font-height 150","build:fonts":"node scripts/build.js","build":"npm run clean && mkdir dist && npm run build:fonts","sync":"node scripts/sync.js","build:dev":"npm run build && NODE_ENV=development npm run sync","prepublishOnly":"npm run build && NODE_ENV=production npm run sync"},"publishConfig":{"access":"public"},"gitHead":"1b8ab5fe3fc4417e34fd920b965f3826e6a82765","dependencies":{"core-js":"^2.6.9"}};
+module.exports = {"name":"@drawbotics/icons","version":"3.1.1","description":"Drawbotics Icons Collection","author":"nicmosc <nmoscholios@gmail.com>","homepage":"https://github.com/Drawbotics/drylus#readme","license":"ISC","main":"dist/drycons.css","scripts":{"clean":"rimraf dist","generate-fonts":"webfont ./icons/*.svg --dest ./dist --template css --template-class-name drycon --font-name drycons --font-height 150","build:fonts":"node scripts/build.js","build":"npm run clean && mkdir dist && npm run build:fonts","sync":"node scripts/sync.js","build:dev":"npm run build && NODE_ENV=development npm run sync","prepublishOnly":"npm run build && NODE_ENV=production npm run sync"},"publishConfig":{"access":"public"},"gitHead":"b476409038563be21b2ac2936e7c9fb914bfb77b","dependencies":{"core-js":"^2.6.9"}};
 
 /***/ }),
 
@@ -89963,7 +89963,7 @@ react_dom_default.a.render(react_default.a.createElement(app, null), document.qu
 /***/ "./package.json":
 /***/ (function(module) {
 
-module.exports = {"name":"@drawbotics/styleguide","version":"3.1.0","description":"Drawbotics Styleguide","author":"nicmosc <nmoscholios@gmail.com>","homepage":"","license":"ISC","main":"index.js","private":true,"scripts":{"clean":"rimraf dist/ ../../docs","start":"NODE_ENV=development webpack-dev-server --config webpack.config.js","build:styleguide":"NODE_ENV=production webpack --config webpack.config.js","build":"npm run clean && npm run build:styleguide","build:publish":"./build.sh"},"dependencies":{"@drawbotics/react-drylus":"file:../react-drylus","@drawbotics/vanilla-drylus":"file:../vanilla-drylus","core-js":"2","fast-xml-parser":"^3.12.16","hast-util-to-string":"^1.0.1","react-hot-loader":"^4.8.8","react-router-dom":"^5.0.0","strip-indent":"^3.0.0","unist-util-is":"^2.1.2"}};
+module.exports = {"name":"@drawbotics/styleguide","version":"3.1.1","description":"Drawbotics Styleguide","author":"nicmosc <nmoscholios@gmail.com>","homepage":"","license":"ISC","main":"index.js","private":true,"scripts":{"clean":"rimraf dist/ ../../docs","start":"NODE_ENV=development webpack-dev-server --config webpack.config.js","build:styleguide":"NODE_ENV=production webpack --config webpack.config.js","build":"npm run clean && npm run build:styleguide","build:publish":"./build.sh"},"dependencies":{"@drawbotics/react-drylus":"file:../react-drylus","@drawbotics/vanilla-drylus":"file:../vanilla-drylus","core-js":"2","fast-xml-parser":"^3.12.16","hast-util-to-string":"^1.0.1","react-hot-loader":"^4.8.8","react-router-dom":"^5.0.0","strip-indent":"^3.0.0","unist-util-is":"^2.1.2"}};
 
 /***/ })
 
