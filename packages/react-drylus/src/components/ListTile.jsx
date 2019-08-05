@@ -44,11 +44,11 @@ const ListTile = ({
   trailing,
   onClick,
 }) => {
-  if (typeof title !== 'string' && title.type?.name !== 'Text') {
+  if (typeof title !== 'string' && title?.type?.name !== 'Text') {
     console.warn('`title` should only be a string or a Text component');
     return null;
   }
-  if (typeof subtitle !== 'string' && subtitle.type?.name !== 'Text') {
+  if (typeof subtitle !== 'string' && subtitle?.type?.name !== 'Text') {
     console.warn('`subtitle` should only be a string or a Text component');
     return null;
   }
