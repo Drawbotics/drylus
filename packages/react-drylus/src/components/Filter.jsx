@@ -198,7 +198,7 @@ export const SelectFilter = ({
 
   const currentLabel = value ? options.find((option) => option[valueKey] === value)?.[labelKey] : label;
   return (
-    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={Boolean(currentLabel) && Boolean(value)}>
+    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel != null && value != null}>
       {options.map((option) => (
         <div
           key={option[valueKey]}
@@ -273,7 +273,7 @@ export const CheckboxFilter = ({
 
   const currentLabel = getLabelForCheckboxFilter(label, options, values, valueKey, labelKey);
   return (
-    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={Boolean(currentLabel) && values.length > 0}>
+    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel != null && values.length > 0}>
       {options.map((option) => (
         <div key={option[valueKey]} className={cx(styles.option, styles.defaultCursor)}>
           <Checkbox

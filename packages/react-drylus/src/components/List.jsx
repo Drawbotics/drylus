@@ -35,7 +35,6 @@ const styles = {
   `,
   item: css`
     position: relative;
-    ${'' /* color: ${sv.colorPrimary}; */}
     margin-bottom: ${sv.marginExtraSmall};
 
     &:last-of-type {
