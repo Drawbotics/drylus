@@ -50,7 +50,6 @@ const styles = {
     box-shadow: 0px 5px 15px ${sv.neutralDarker};
     min-width: 500px;
     border-radius: ${sv.defaultBorderRadius};
-    overflow: hidden;
 
     @media ${sv.screenL} {
       min-width: auto;

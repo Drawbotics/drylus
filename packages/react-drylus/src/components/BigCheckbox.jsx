@@ -12,7 +12,6 @@ const styles = {
   root: css`
     border-radius: ${sv.borderRadiusLarge};
     padding: ${sv.paddingSmall};
-    overflow: hidden;
     box-shadow: inset 0px 0px 0px 1px ${sv.neutral};
     transition: ${sv.defaultTransition};
 
