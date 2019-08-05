@@ -302,7 +302,7 @@ MultiSelect.propTypes = {
   })),
 
   /** Determines which values are currently active */
-  values: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  values: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
 
   /** Name of the form element (target.name) */
   name: PropTypes.string,
