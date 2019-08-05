@@ -14,6 +14,7 @@ const styles = {
     padding-left: ${sv.paddingExtraLarge};
     list-style: none;
     counter-reset: custom-counter;
+    text-align: left;
   `,
   ordered: css`
     > li {
@@ -34,7 +35,7 @@ const styles = {
   `,
   item: css`
     position: relative;
-    color: ${sv.colorPrimary};
+    ${'' /* color: ${sv.colorPrimary}; */}
     margin-bottom: ${sv.marginExtraSmall};
 
     &:last-of-type {

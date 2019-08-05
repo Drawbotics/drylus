@@ -240,8 +240,8 @@ const Tooltip = ({ children, message, side }) => {
 
 
 Tooltip.propTypes = {
-  /** Text shown when the tooltip is visible */
-  message: PropTypes.string.isRequired,
+  /** Content shown when the tooltip is visible */
+  message: PropTypes.node.isRequired,
 
   /** Component wrapped by the tooltip */
   children: PropTypes.node.isRequired,

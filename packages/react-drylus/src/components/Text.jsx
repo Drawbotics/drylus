@@ -13,6 +13,7 @@ const styles = {
   `,
   bold: css`
     font-weight: 500;
+    letter-spacing: 0.01rem;
   `,
   primary: css`
     color: ${sv.colorPrimary};

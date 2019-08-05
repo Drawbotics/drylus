@@ -44,6 +44,14 @@ const ListTile = ({
   trailing,
   onClick,
 }) => {
+  if (typeof title !== 'string' && title.type?.name !== 'Text') {
+    console.warn('`title` should only be a string or a Text component');
+    return null;
+  }
+  if (typeof subtitle !== 'string' && subtitle.type?.name !== 'Text') {
+    console.warn('`subtitle` should only be a string or a Text component');
+    return null;
+  }
   return (
     <div className={cx(styles.root, { [styles.clickable]: !! onClick })} onClick={onClick}>
       <Flex>
@@ -89,10 +97,10 @@ const ListTile = ({
 
 ListTile.propTypes = {
   /** Main text to be displayed */
-  title: PropTypes.string,
+  title: PropTypes.node.isRequired,
 
   /** Smaller text displayed below the title */
-  subtitle: PropTypes.string,
+  subtitle: PropTypes.node,
 
   /** Can be anything, will appear centered to the left of the title and/or subtitle */
   leading: PropTypes.node,
