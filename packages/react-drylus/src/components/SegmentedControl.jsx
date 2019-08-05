@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import Categories from '../base/Categories';
 import Badge from './Badge';
+import { validateOptions } from '../utils';
 
 
 const styles = {
@@ -82,11 +83,15 @@ const styles = {
 
 const SegmentedControl = ({
   value,
-  onChange=x=>x,
+  onChange,
   options,
   valueKey,
   labelKey,
 }) => {
+  if (! validateOptions(labelKey, valueKey, options)) {
+    return null;
+  }
+
   return (
     <div className={styles.root}>
       {options.map((option) => (
@@ -115,8 +120,8 @@ const SegmentedControl = ({
 SegmentedControl.propTypes = {
   /** Determines the controls which will be rendered */
   options: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    label: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    label: PropTypes.string,
     bullet: PropTypes.number,
     disabled: PropTypes.bool,
   })),
@@ -138,6 +143,7 @@ SegmentedControl.propTypes = {
 SegmentedControl.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
+  onChange: x=>x,
 };
 
 

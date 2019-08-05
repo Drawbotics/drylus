@@ -20,3 +20,18 @@ export function getIconForCategory(category) {
       return 'info';
   }
 }
+
+
+export function validateOptions(labelKey, valueKey, options) {
+  if (options.some((o) => ! o.hasOwnProperty(labelKey))) {
+    console.warn(`'labelKey' '${labelKey}' provided, but some options don't have property '${labelKey}'`);
+    return false;
+  }
+
+  if (options.some((o) => ! o.hasOwnProperty(valueKey))) {
+    console.warn(`'valueKey' '${valueKey}' provided, but some options don't have property '${valueKey}'`);
+    return false;
+  }
+
+  return true;
+}

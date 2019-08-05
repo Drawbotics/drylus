@@ -6,6 +6,7 @@ import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { Categories, Sizes } from '../base';
 import Badge from './Badge';
 import Spinner from './Spinner';
+import { validateOptions } from '../utils';
 
 
 const styles = {
@@ -130,6 +131,10 @@ const TabNavigation = ({
   vertical,
   linkComponent: Link,
 }) => {
+  if (! validateOptions(labelKey, valueKey, options)) {
+    return null;
+  }
+  
   const renderOption = (option) => (
     <div
       key={option[valueKey]}
@@ -177,8 +182,8 @@ const TabNavigation = ({
 TabNavigation.propTypes = {
   /** Determines the tabs which will be rendered */
   options: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    label: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    label: PropTypes.string,
     bullet: PropTypes.number,
     disabled: PropTypes.bool,
     loading: PropTypes.bool,

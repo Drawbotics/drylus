@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Hint from './Hint';
 import Icon from '../components/Icon';
 import { Sizes, Categories } from '../base';
-import { getEnumAsClass } from '../utils';
+import { getEnumAsClass, validateOptions } from '../utils';
 
 
 const styles = {
@@ -196,6 +196,9 @@ const RadioGroup = ({
   hint,
   ...rest,
 }) => {
+  if (! validateOptions(labelKey, valueKey, options)) {
+    return null;
+  }
 
   const handleOnChange = (e) => {
     e.stopPropagation();
@@ -234,8 +237,8 @@ const RadioGroup = ({
 RadioGroup.propTypes = {
   /** Determines the radio components which will be rendered */
   options: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    label: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    label: PropTypes.string,
     disabled: PropTypes.bool,
   })),
 

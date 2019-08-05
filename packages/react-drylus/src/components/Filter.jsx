@@ -7,6 +7,7 @@ import Enum from '@drawbotics/enums';
 import Icon from './Icon';
 import ListTile from './ListTile';
 import Checkbox from '../forms/Checkbox';
+import { validateOptions } from '../utils';
 
 
 const styles = {
@@ -191,9 +192,13 @@ export const SelectFilter = ({
   label,
   ...rest,
 }) => {
+  if (! validateOptions(labelKey, valueKey, options)) {
+    return null;
+  }
+
   const currentLabel = value ? options.find((option) => option[valueKey] === value)?.[labelKey] : label;
   return (
-    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel && value}>
+    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={Boolean(currentLabel) && Boolean(value)}>
       {options.map((option) => (
         <div
           key={option[valueKey]}
@@ -213,8 +218,8 @@ SelectFilter.propTypes = {
   /** The items to show in the filter panel */
   options: PropTypes.arrayOf(PropTypes.shape({
     leading: PropTypes.node,
-    label: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    label: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   })),
 
   /** Determines which value is currently active */
@@ -262,9 +267,13 @@ export const CheckboxFilter = ({
   label,
   ...rest,
 }) => {
+  if (! validateOptions(labelKey, valueKey, options)) {
+    return null;
+  }
+
   const currentLabel = getLabelForCheckboxFilter(label, options, values, valueKey, labelKey);
   return (
-    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel && values.length > 0}>
+    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={Boolean(currentLabel) && values.length > 0}>
       {options.map((option) => (
         <div key={option[valueKey]} className={cx(styles.option, styles.defaultCursor)}>
           <Checkbox
@@ -286,8 +295,8 @@ export const CheckboxFilter = ({
 CheckboxFilter.propTypes = {
   /** The items to show in the filter panel */
   options: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    label: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   })),
 
   /** Determines which values are currently active */
