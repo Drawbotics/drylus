@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import Categories from '../base/Categories';
 import Badge from './Badge';
-import { optionsPropType } from '../utils';
+import { CustomPropTypes } from '../utils';
 
 
 const styles = {
@@ -115,12 +115,10 @@ const SegmentedControl = ({
 
 SegmentedControl.propTypes = {
   /** Determines the controls which will be rendered */
-  options: (...props) => optionsPropType({
-    options: PropTypes.arrayOf(PropTypes.shape({
-      bullet: PropTypes.number,
-      disabled: PropTypes.bool,
-    })),
-  }, ...props),
+  options: CustomPropTypes.optionsWith({
+    bullet: PropTypes.number,
+    disabled: PropTypes.bool,
+  }),
 
   /** Used to pick each value in the options array */
   valueKey: PropTypes.string,

@@ -7,7 +7,7 @@ import RoundIcon from '../components/RoundIcon';
 import Sizes from '../base/Sizes';
 import Categories from '../base/Categories';
 import Hint from './Hint';
-import { optionsPropType } from '../utils';
+import { CustomPropTypes } from '../utils';
 
 
 const styles = {
@@ -155,11 +155,9 @@ const Select = ({
 
 Select.propTypes = {
   /** The options to show in the list of options */
-  options: (...props) => optionsPropType({
-    options: PropTypes.arrayOf(PropTypes.shape({
-      disabled: PropTypes.bool,
-    })),
-  }, ...props),
+  options: CustomPropTypes.optionsWith({
+    disabled: PropTypes.bool,
+  }),
 
   /** Determines which value is currently active */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

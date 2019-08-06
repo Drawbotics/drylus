@@ -9,7 +9,7 @@ import Tag from '../components/Tag';
 import RoundIcon from '../components/RoundIcon';
 import Hint from './Hint';
 import { Categories, Sizes } from '../base';
-import { optionsPropType } from '../utils';
+import { CustomPropTypes } from '../utils';
 
 
 const styles = {
@@ -296,11 +296,9 @@ const MultiSelect = ({
 
 MultiSelect.propTypes = {
   /** The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey */
-  options: (...props) => optionsPropType({
-    options: PropTypes.arrayOf(PropTypes.shape({
-      disabled: PropTypes.bool,
-    })),
-  }, ...props),
+  options: CustomPropTypes.optionsWith({
+    disabled: PropTypes.bool,
+  }),
 
   /** Determines which values are currently active */
   values: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,

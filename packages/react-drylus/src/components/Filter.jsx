@@ -7,7 +7,7 @@ import Enum from '@drawbotics/enums';
 import Icon from './Icon';
 import ListTile from './ListTile';
 import Checkbox from '../forms/Checkbox';
-import { optionsPropType } from '../utils';
+import { CustomPropTypes } from '../utils';
 
 
 const styles = {
@@ -212,11 +212,9 @@ export const SelectFilter = ({
 
 SelectFilter.propTypes = {
   /** The items to show in the filter panel */
-  options: (...props) => optionsPropType({
-    options: PropTypes.arrayOf(PropTypes.shape({
-      leading: PropTypes.node,
-    })),
-  }, ...props),
+  options: CustomPropTypes.optionsWith({
+    leading: PropTypes.node,
+  }),
 
   /** Determines which value is currently active */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -286,7 +284,7 @@ export const CheckboxFilter = ({
 
 CheckboxFilter.propTypes = {
   /** The items to show in the filter panel */
-  options: optionsPropType,
+  options: CustomPropTypes.optionsWith,
 
   /** Determines which values are currently active */
   values: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
