@@ -9,7 +9,7 @@ import Tag from '../components/Tag';
 import RoundIcon from '../components/RoundIcon';
 import Hint from './Hint';
 import { Categories, Sizes } from '../base';
-import { validateOptions } from '../utils';
+import { optionsPropType } from '../utils';
 
 
 const styles = {
@@ -163,10 +163,6 @@ const MultiSelect = ({
   const [ canBlur, setCanBlur ] = useState(true);
   const { isDesktop } = getDevice();
 
-  if (! validateOptions(labelKey, valueKey, options)) {
-    return null;
-  }
-
   const handleDocumentClick = (e) => ! rootRef.current.contains(e.target) ? setFocused(false) : null;
 
   useEffect(() => {
@@ -300,11 +296,11 @@ const MultiSelect = ({
 
 MultiSelect.propTypes = {
   /** The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey */
-  options: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    label: PropTypes.string,
-    disabled: PropTypes.bool,
-  })),
+  options: (...props) => optionsPropType({
+    options: PropTypes.arrayOf(PropTypes.shape({
+      disabled: PropTypes.bool,
+    })),
+  }, ...props),
 
   /** Determines which values are currently active */
   values: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
