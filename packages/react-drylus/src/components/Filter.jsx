@@ -284,7 +284,7 @@ export const CheckboxFilter = ({
 
 CheckboxFilter.propTypes = {
   /** The items to show in the filter panel */
-  options: CustomPropTypes.optionsWith,
+  options: CustomPropTypes.options,
 
   /** Determines which values are currently active */
   values: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),

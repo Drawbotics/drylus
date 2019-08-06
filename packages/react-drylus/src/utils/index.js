@@ -23,20 +23,28 @@ export function getIconForCategory(category) {
 }
 
 
+function _verifyOptions(props, propName, componentName) {
+  const options = props[propName];
+  const labelKey = props.labelKey;
+  const valueKey = props.valueKey;
+
+  if (options.some((o) => ! o.hasOwnProperty(labelKey))) {
+    return new TypeError(`Invalid Options Prop Value: 'labelKey' '${labelKey}' provided, but some options don't have property '${labelKey}' in ${componentName}`);
+  }
+
+  if (options.some((o) => ! o.hasOwnProperty(valueKey))) {
+    return new TypeError(`Invalid Options Prop Value: 'valueKey' '${valueKey}' provided, but some options don't have property '${valueKey}' in ${componentName}`);
+  }
+}
+
+
 export const CustomPropTypes = {
+  options: (props, propName, componentName) => {
+    return _verifyOptions(props, propName, componentName);
+  },
   optionsWith: (extraPropTypes={}) => {
     return (props, propName, componentName) => {
-      const options = props[propName];
-      const labelKey = props.labelKey;
-      const valueKey = props.valueKey;
-
-      if (options.some((o) => ! o.hasOwnProperty(labelKey))) {
-        return new TypeError(`Invalid Options Prop Value: 'labelKey' '${labelKey}' provided, but some options don't have property '${labelKey}' in ${componentName}`);
-      }
-
-      if (options.some((o) => ! o.hasOwnProperty(valueKey))) {
-        return new TypeError(`Invalid Options Prop Value: 'valueKey' '${valueKey}' provided, but some options don't have property '${valueKey}' in ${componentName}`);
-      }
+      _verifyOptions(props, propName, componentName);
 
       const propTypes = {
         options: PropTypes.arrayOf(PropTypes.shape({
@@ -47,6 +55,6 @@ export const CustomPropTypes = {
       };
 
       return PropTypes.checkPropTypes(propTypes, props, 'options', componentName);
-    }
+    };
   },
 };

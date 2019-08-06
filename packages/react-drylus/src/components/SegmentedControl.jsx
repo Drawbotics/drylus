@@ -137,7 +137,7 @@ SegmentedControl.propTypes = {
 SegmentedControl.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
-  onChange: x=>x,
+  onChange: x => x,
 };
 
 
