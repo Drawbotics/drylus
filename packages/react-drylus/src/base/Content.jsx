@@ -17,6 +17,7 @@ const styles = {
   `,
   fullWidth: css`
     max-width: none;
+    height: 100%;
   `,
 };
 
