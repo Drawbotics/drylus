@@ -13,13 +13,7 @@ export const Constants = () => {
     value: String(sv[key]),
   }));
   return (
-    <Panel body={
-      <PanelBody noPadding>
-        <PanelSection>
-          <Table data={data} header={['name', 'value']} />
-        </PanelSection>
-      </PanelBody>
-    } />
+    <Table data={data} header={['name', 'value']} />
   );
 };
 
