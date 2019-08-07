@@ -15,8 +15,8 @@ const styles = {
   `,
   item: css`
   `,
-  withSpan: (span, cols) => css`
-    grid-column: ${span};
+  withSpan: (span) => css`
+    grid-column: span ${span};
   `,
   hGuttersExtraSmall: css`
     grid-row-gap: ${sv.marginExtraSmall};
@@ -57,7 +57,10 @@ export const GridItem = ({
   span,
   columns,
 }) => {
-  const withSpan = styles.withSpan(span, columns);
+  if (span > columns) {
+    console.warn(`Warning: GridItem span cannot be more than number of columns`);
+  }
+  const withSpan = styles.withSpan(span);
   return (
     <div className={cx(styles.item, {
       [withSpan]: span,
