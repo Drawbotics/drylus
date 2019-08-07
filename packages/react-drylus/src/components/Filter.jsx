@@ -7,6 +7,7 @@ import Enum from '@drawbotics/enums';
 import Icon from './Icon';
 import ListTile from './ListTile';
 import Checkbox from '../forms/Checkbox';
+import { CustomPropTypes } from '../utils';
 
 
 const styles = {
@@ -48,7 +49,6 @@ const styles = {
     width: 100%;
     border-radius: ${sv.defaultBorderRadius};
     border: 1px solid ${sv.azure};
-    overflow: hidden;
     box-shadow: ${sv.elevation2};
     opacity: 0;
     transform: translateY(-5px);
@@ -194,7 +194,7 @@ export const SelectFilter = ({
 }) => {
   const currentLabel = value ? options.find((option) => option[valueKey] === value)?.[labelKey] : label;
   return (
-    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel && value}>
+    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel != null && value != null}>
       {options.map((option) => (
         <div
           key={option[valueKey]}
@@ -212,11 +212,9 @@ export const SelectFilter = ({
 
 SelectFilter.propTypes = {
   /** The items to show in the filter panel */
-  options: PropTypes.arrayOf(PropTypes.shape({
+  options: CustomPropTypes.optionsWith({
     leading: PropTypes.node,
-    label: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  })),
+  }),
 
   /** Determines which value is currently active */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -265,7 +263,7 @@ export const CheckboxFilter = ({
 }) => {
   const currentLabel = getLabelForCheckboxFilter(label, options, values, valueKey, labelKey);
   return (
-    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel && values.length > 0}>
+    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel != null && values.length > 0}>
       {options.map((option) => (
         <div key={option[valueKey]} className={cx(styles.option, styles.defaultCursor)}>
           <Checkbox
@@ -286,10 +284,7 @@ export const CheckboxFilter = ({
 
 CheckboxFilter.propTypes = {
   /** The items to show in the filter panel */
-  options: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  })),
+  options: CustomPropTypes.options,
 
   /** Determines which values are currently active */
   values: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),

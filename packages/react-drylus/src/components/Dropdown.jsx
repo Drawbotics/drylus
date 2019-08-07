@@ -27,7 +27,6 @@ const styles = {
     background: ${sv.white};
     border-radius: ${sv.defaultBorderRadius};
     border: 1px solid ${sv.azure};
-    overflow: hidden;
     box-shadow: ${sv.elevation2};
     opacity: 0;
     transform: translateY(-5px);

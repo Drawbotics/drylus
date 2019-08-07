@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import Categories from '../base/Categories';
 import Badge from './Badge';
+import { CustomPropTypes } from '../utils';
 
 
 const styles = {
@@ -82,7 +83,7 @@ const styles = {
 
 const SegmentedControl = ({
   value,
-  onChange=x=>x,
+  onChange,
   options,
   valueKey,
   labelKey,
@@ -114,12 +115,10 @@ const SegmentedControl = ({
 
 SegmentedControl.propTypes = {
   /** Determines the controls which will be rendered */
-  options: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    label: PropTypes.string.isRequired,
+  options: CustomPropTypes.optionsWith({
     bullet: PropTypes.number,
     disabled: PropTypes.bool,
-  })),
+  }),
 
   /** Used to pick each value in the options array */
   valueKey: PropTypes.string,
@@ -138,6 +137,7 @@ SegmentedControl.propTypes = {
 SegmentedControl.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
+  onChange: x => x,
 };
 
 

@@ -8,7 +8,11 @@ import {
   FlexItem,
   Sizes,
   Margin,
+  Icon,
+  ListTile,
+  Text,
 } from '@drawbotics/react-drylus';
+import sv from '@drawbotics/drylus-style-vars';
 
 import Playground from '~/components/Playground';
 
@@ -30,7 +34,15 @@ __Example__
     </Margin>
   </FlexItem>
   <FlexItem>
-    <Tooltip message="I am another tooltip">
+    <Tooltip
+      message={
+        <div style={{ textAlign: 'left' }}>
+          <Margin size={{ bottom: Sizes.EXTRA_SMALL }}>
+            <ListTile leading={<Icon name="alert-triangle" category={Categories.DANGER} />} title={<Text inversed size={Sizes.SMALL}>I'm custom content</Text>} />
+          </Margin>
+          <ListTile leading={<Icon name="check-circle" category={Categories.SUCCESS} />} title={<Text inversed size={Sizes.SMALL}>So am I</Text>} />
+        </div>
+      }>
       <Dot category={Categories.SUCCESS} />
     </Tooltip>
   </FlexItem>

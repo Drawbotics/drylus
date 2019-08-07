@@ -9,6 +9,7 @@ import Tag from '../components/Tag';
 import RoundIcon from '../components/RoundIcon';
 import Hint from './Hint';
 import { Categories, Sizes } from '../base';
+import { CustomPropTypes } from '../utils';
 
 
 const styles = {
@@ -146,9 +147,9 @@ const MultiSelect = ({
   values,
   options,
   onChange,
-  valueKey='value',
-  labelKey='label',
-  placeholder=' -- ',
+  valueKey,
+  labelKey,
+  placeholder,
   disabled,
   hint,
   error,
@@ -294,15 +295,13 @@ const MultiSelect = ({
 
 
 MultiSelect.propTypes = {
-  /** The options to show in the list of options */
-  options: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    label: PropTypes.string.isRequired,
+  /** The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey */
+  options: CustomPropTypes.optionsWith({
     disabled: PropTypes.bool,
-  })),
+  }),
 
   /** Determines which values are currently active */
-  values: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  values: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
 
   /** Name of the form element (target.name) */
   name: PropTypes.string,
