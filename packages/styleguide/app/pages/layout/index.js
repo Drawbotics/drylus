@@ -2,6 +2,7 @@ import layout from './layout';
 import flex from './flex';
 import margin from './margin';
 import padding from './padding';
+import grid from './grid';
 
 
 const components = {
@@ -9,6 +10,7 @@ const components = {
   flex,
   margin,
   padding,
+  grid,
 };
 
 
