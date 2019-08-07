@@ -67,7 +67,7 @@ const styles = {
   close: css`
     position: absolute;
     top: ${sv.marginSmall};
-    right: ${sv.marginSmall};
+    left: ${sv.marginSmall};
   `,
   drawerEnter: css`
     opacity: 0;
