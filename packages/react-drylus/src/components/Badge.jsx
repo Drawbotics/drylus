@@ -9,6 +9,7 @@ import { getEnumAsClass } from '../utils';
 
 const styles = {
   root: css`
+    min-width: ${sv.marginSmall};
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -17,6 +18,7 @@ const styles = {
     font-size: 0.8rem;
     background: ${sv.neutral};
     color: ${sv.colorPrimary};
+    letter-spacing: 0px;
   `,
   brand: css`
     background: ${sv.brand};
