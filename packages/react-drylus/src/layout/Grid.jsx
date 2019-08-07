@@ -62,9 +62,7 @@ export const GridItem = ({
   }
   const withSpan = styles.withSpan(span);
   return (
-    <div className={cx(styles.item, {
-      [withSpan]: span,
-    })} style={style}>
+    <div className={cx(styles.item, { [withSpan]: span })} style={style}>
       {children}
     </div>
   );
@@ -90,10 +88,12 @@ const Grid = ({
   style,
 }) => {
   return (
-    <div className={cx(styles.root(columns), {
-      [styles[`hGutters${upperFirst(camelCase(hGutters?.description))}`]]: hGutters,
-      [styles[`vGutters${upperFirst(camelCase(vGutters?.description))}`]]: vGutters,
-    })} style={style}>
+    <div
+      className={cx(styles.root(columns), {
+        [styles[`hGutters${upperFirst(camelCase(hGutters?.description))}`]]: hGutters,
+        [styles[`vGutters${upperFirst(camelCase(vGutters?.description))}`]]: vGutters,
+      })}
+      style={style}>
       {React.Children.map(children, (child) => React.cloneElement(child, { columns }))}
     </div>
   );
