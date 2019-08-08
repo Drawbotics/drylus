@@ -267,7 +267,19 @@ Below is the table that it generates. Note that you need to at least pass `heade
   <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
     <Table
       data={family}
-      header={['name', 'height', 'age', 'children']} />
+      header={[{
+        label: 'Name',
+        value: 'name',
+      }, {
+        label: 'Height (cm)',
+        value: 'height',
+      }, {
+        label: 'Age (yrs)',
+        value: 'age',
+      }, {
+        label: 'Children',
+        value: 'children',
+      }]} />
   </div>
 </Playground>
 
@@ -307,7 +319,19 @@ We can do the same for the cells within nested rows. Combined this yields:
       renderCell={customizeCell}
       renderChildCell={customizeCell}
       data={family}
-      header={['name', 'height', 'age', 'children']}
+      header={[{
+        label: 'Name',
+        value: 'name',
+      }, {
+        label: 'Height (cm)',
+        value: 'height',
+      }, {
+        label: 'Age (yrs)',
+        value: 'age',
+      }, {
+        label: 'Children',
+        value: 'children',
+      }]}
       childHeader={['height', 'name', 'age', 'children']} />
   </div>
 </Playground>

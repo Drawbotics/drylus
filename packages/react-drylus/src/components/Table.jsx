@@ -355,9 +355,10 @@ function generateTable(data, header, renderCell, renderChildCell, i=0, childHead
       <TRow key={uniqId} parent={hasData ? uniqId : undefined}>
         {do{
           if (header) {
-            header.map((key, i) => (
-              <TCell key={`${i}-${row[key]}`}>{renderData(row[key], i, header.length)}</TCell>
-            ))
+            header.map((item, i) => {
+              const key = typeof item === 'string' ? item : item.value;
+              return <TCell key={`${i}-${row[key]}`}>{renderData(row[key], i, header.length)}</TCell>;
+            })
           }
           else {
             Object.values(row).map((value, i, arr) => (
@@ -418,27 +419,30 @@ const Table = ({
           if (data && ! isLoading) {
             <>
               <THead>
-                {header.map((v) => (
-                  <TCell key={v}>
-                    {do{
-                      if (sortableBy?.includes(v)) {
-                        <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
-                          <span className={cx(styles.sortableIcons, {
-                            [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'asc',
-                            [styles.down]: activeHeader?.key === v && activeHeader?.direction === 'desc',
-                          })}>
-                            <Icon name="chevron-up" />
-                            <Icon name="chevron-down" />
+                {header.map((hItem) => {
+                  const v = typeof hItem === 'string' ? hItem : hItem.value;
+                  return (
+                    <TCell key={v}>
+                      {do{
+                        if (sortableBy?.includes(v)) {
+                          <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
+                            <span className={cx(styles.sortableIcons, {
+                              [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'asc',
+                              [styles.down]: activeHeader?.key === v && activeHeader?.direction === 'desc',
+                            })}>
+                              <Icon name="chevron-up" />
+                              <Icon name="chevron-down" />
+                            </span>
+                            {typeof hItem === 'string' ? hItem : hItem.label}
                           </span>
-                          {v}
-                        </span>
-                      }
-                      else {
-                        v
-                      }
-                    }}
-                  </TCell>
-                ))}
+                        }
+                        else {
+                          typeof hItem === 'string' ? hItem : hItem.label
+                        }
+                      }}
+                    </TCell>
+                  );
+                })}
               </THead>
               {generateTable(data, header, renderCell, renderChildCell, 0, childHeader)}
             </>
@@ -478,7 +482,13 @@ Table.propTypes = {
   renderChildCell: PropTypes.func,
 
   /** Array of strings to generate the header of the table (each string is a label). data prop keys will be filtered by these */
-  header: PropTypes.arrayOf(PropTypes.string),
+  header: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.arrayOf(PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    })),
+  ]),
 
   /** Array of strings to generate the order of the children of the table (each string is a key). data prop keys will be filtered by these */
   childHeader: PropTypes.arrayOf(PropTypes.string),
