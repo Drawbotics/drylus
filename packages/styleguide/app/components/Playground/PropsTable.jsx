@@ -10,6 +10,11 @@ import {
   Categories,
   Tooltip,
   TooltipSides,
+  Flex,
+  FlexItem,
+  FlexJustify,
+  Margin,
+  Icon,
 } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
@@ -51,9 +56,25 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
             <TRow key={key}>
               <TCell>{key}</TCell>
               <TCell>
-                <Tooltip message={<PropsInfo props={props[key].type} />} side={TooltipSides.RIGHT}>
-                  <div>{props[key].type.name}</div>
-                </Tooltip>
+                {do {
+                  if (props[key].type.value) {
+                    <Tooltip message={<PropsInfo props={props[key].type.value} />} side={TooltipSides.RIGHT}>
+                      <Flex justify={FlexJustify.START}>
+                        <FlexItem>
+                          {props[key].type.name}
+                        </FlexItem>
+                        <FlexItem>
+                          <Margin size={{ left: Sizes.EXTRA_SMALL }}>
+                            <span style={{ color: sv.colorSecondary }}><Icon name="info" /></span>
+                          </Margin>
+                        </FlexItem>
+                      </Flex>
+                    </Tooltip>
+                  }
+                  else {
+                    props[key].type.name
+                  }
+                }}
               </TCell>
               <TCell>{props[key].defaultValue?.value.replace(/'/g, '') || null}</TCell>
               <TCell>{String(props[key].required)}</TCell>
