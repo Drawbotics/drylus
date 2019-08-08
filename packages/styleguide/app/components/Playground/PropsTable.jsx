@@ -8,11 +8,14 @@ import {
   Sizes,
   Tiers,
   Categories,
+  Tooltip,
+  TooltipSides,
 } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 
 import Prop from './Prop';
+import PropsInfo from './PropsInfo';
 
 
 const styles = {
@@ -47,7 +50,11 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
           {Object.keys(props).sort().map((key) => (
             <TRow key={key}>
               <TCell>{key}</TCell>
-              <TCell>{props[key].type.name}</TCell>
+              <TCell>
+                <Tooltip message={<PropsInfo props={props[key].type} />} side={TooltipSides.RIGHT}>
+                  <div>{props[key].type.name}</div>
+                </Tooltip>
+              </TCell>
               <TCell>{props[key].defaultValue?.value.replace(/'/g, '') || null}</TCell>
               <TCell>{String(props[key].required)}</TCell>
               <TCell>

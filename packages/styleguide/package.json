@@ -21,6 +21,7 @@
     "fast-xml-parser": "^3.12.16",
     "hast-util-to-string": "^1.0.1",
     "react-hot-loader": "^4.8.8",
+    "react-json-pretty": "^2.1.0",
     "react-router-dom": "^5.0.0",
     "strip-indent": "^3.0.0",
     "unist-util-is": "^2.1.2"
