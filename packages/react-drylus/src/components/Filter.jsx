@@ -194,7 +194,7 @@ export const SelectFilter = ({
 }) => {
   const currentLabel = value ? options.find((option) => option[valueKey] === value)?.[labelKey] : label;
   return (
-    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel != null && value != null}>
+    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel != null && !! value}>
       {options.map((option) => (
         <div
           key={option[valueKey]}
