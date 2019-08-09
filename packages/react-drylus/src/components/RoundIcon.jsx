@@ -70,7 +70,7 @@ const styles = {
 };
 
 
-const RoundIcon = ({ name, size, category }) => {
+const RoundIcon = ({ name, size, category, bold }) => {
   const customSize = typeof size === 'number';
   return (
     <div className={cx(styles.root, {
@@ -78,7 +78,7 @@ const RoundIcon = ({ name, size, category }) => {
       [styles[! customSize && getEnumAsClass(size)]]: size,
       [styles.iconInherit]: customSize,
     })} style={customSize ? { height: size, width: size, fontSize: size * 0.5 } : null}>
-      <Icon name={name} bold />
+      <Icon name={name} bold={bold} />
     </div>
   );
 }
@@ -93,6 +93,9 @@ RoundIcon.propTypes = {
     PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE]),
     PropTypes.number,
   ]),
+
+  /** Makes the icon bold */
+  bold: PropTypes.bool,
 
   /** Category of the icon */
   category: PropTypes.oneOf([
