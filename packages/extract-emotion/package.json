@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/extract-emotion",
-  "version": "3.3.4",
+  "version": "3.4.0",
   "description": "Small utility to extract CSS styles from emotion components",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "",
