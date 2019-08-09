@@ -255,7 +255,15 @@ export const TCell = ({
 };
 
 
-export const TRow = ({ children, nested, parent, highlighted, alt, lastParentRow }) => {
+export const TRow = ({
+  children,
+  nested,
+  parent,
+  highlighted,
+  alt,
+  lastParentRow,
+  onClick,
+}) => {
   const [ rowsStates, handleSetRowState ] = useContext(RowsContext);
   const collapsed = nested && ! rowsStates[nested];
   return (
@@ -266,6 +274,7 @@ export const TRow = ({ children, nested, parent, highlighted, alt, lastParentRow
         [styles.highlightedRow]: highlighted,
         [styles.noBorderBottom]: !! parent && ! rowsStates[parent] && lastParentRow,
       })}
+      onClick={onClick}
       data-nested={nested || undefined}
       data-parent={parent || undefined}>
       {React.Children.toArray(children).filter((c) => Boolean(c)).map((child, key) => React.cloneElement(child, {
@@ -278,6 +287,17 @@ export const TRow = ({ children, nested, parent, highlighted, alt, lastParentRow
       }))}
     </tr>
   );
+};
+
+TRow.propTypes = {
+  /** Should be of type TCell */
+  children: PropTypes.node.isRequired,
+
+  /** If true sets the background to neutral */
+  highlighted: PropTypes.bool,
+
+  /** Triggered when any part of the row is clicked */
+  onClick: PropTypes.func,
 };
 
 
@@ -338,11 +358,11 @@ const FakeTable = ({ columns }) => {
 };
 
 
-function generateTable(data, header, renderCell, renderChildCell, i=0, childHeader) {
+function generateTable(data, header, renderCell, renderChildCell, i=0, childHeader, onClickRow=x=>x) {
   if (Array.isArray(data)) {
     return (
       <TBody>
-        {data.map((rows, i) => generateTable(rows, header, renderCell, renderChildCell, i, childHeader))}
+        {data.map((rows, i) => generateTable(rows, header, renderCell, renderChildCell, i, childHeader, onClickRow))}
       </TBody>
     );
   }
@@ -352,7 +372,7 @@ function generateTable(data, header, renderCell, renderChildCell, i=0, childHead
     const uniqId = Object.values(row).reduce((memo, v) => `${memo}-${v}`, '');
     const renderData = renderCell || renderChildCell;
     const parentRow = (
-      <TRow key={uniqId} parent={hasData ? uniqId : undefined}>
+      <TRow key={uniqId} parent={hasData ? uniqId : undefined} onClick={() => onClickRow(row)}>
         {do{
           if (header) {
             header.map((item, i) => {
@@ -371,7 +391,7 @@ function generateTable(data, header, renderCell, renderChildCell, i=0, childHead
 
     if (hasData) {
       return [parentRow, (
-        <TRow key={`${uniqId}-1`} nested={uniqId}>
+        <TRow key={`${uniqId}-1`} nested={uniqId} onClick={() => onClickRow(row)}>
           <TCell>
             <Table>
               {generateTable(data.data, childHeader, null, renderChildCell)}
@@ -401,6 +421,7 @@ const Table = ({
   onClickHeader,
   highlighted,
   isLoading,
+  onClickRow,
 }) => {
   const [ rowsStates, setRowState ] = useState({});
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
@@ -444,7 +465,7 @@ const Table = ({
                   );
                 })}
               </THead>
-              {generateTable(data, header, renderCell, renderChildCell, 0, childHeader)}
+              {generateTable(data, header, renderCell, renderChildCell, 0, childHeader, onClickRow)}
             </>
           }
           else if (header && isLoading) {
@@ -510,6 +531,9 @@ Table.propTypes = {
 
   /** If true the content of the table will be overridden by a "fake" table with animated cells to show loading. You MUST pass header to render this */
   isLoading: PropTypes.bool,
+
+  /** Triggered when a row is clicked, returns the given data object for that row. If used with nested tables, it will only return the root row object value */
+  onClickRow: PropTypes.func,
 };
 
 

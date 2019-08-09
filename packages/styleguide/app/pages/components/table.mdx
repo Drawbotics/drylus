@@ -8,7 +8,7 @@ import {
 } from '@drawbotics/react-drylus';
 import sv from '@drawbotics/drylus-style-vars';
 
-import Playground from '~/components/Playground';
+import Playground, { PropsTable } from '~/components/Playground';
 
 
 # Table
@@ -69,6 +69,9 @@ Particular rows can also be set as `highlighted`. This is useful if a row can be
     </Table>
   </div>
 </Playground>
+
+### Table Row
+<PropsTable component={TRow} />
 
 
 #### Complex example with nested data
