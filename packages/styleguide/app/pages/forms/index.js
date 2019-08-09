@@ -10,6 +10,7 @@ import dateInput from './date-input';
 import formGroup from './form-group';
 import inputGroup from './input-group';
 import hint from './hint';
+import textArea from './text-area';
 
 
 const components = {
@@ -25,6 +26,7 @@ const components = {
   formGroup,
   inputGroup,
   hint,
+  textArea,
 };
 
 
