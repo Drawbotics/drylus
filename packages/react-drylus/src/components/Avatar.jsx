@@ -14,7 +14,7 @@ const styles = {
     height: ${sv.marginLarge};
     width: ${sv.marginLarge};
     color: ${sv.colorPrimary};
-    background: ${sv.neutralLight};
+    background: ${sv.neutral};
     display: inline-flex;
     align-items: center;
     justify-content: center;
