@@ -336,9 +336,9 @@ const FakeTable = ({ columns }) => {
   return (
     <>
       <THead>
-        {columns.map((key, i) => (
+        {columns.map((column, i) => (
           <TCell key={i}>
-            {key}
+            {typeof column === 'string' ? column : column.label}
           </TCell>
         ))}
       </THead>
