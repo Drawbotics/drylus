@@ -44,8 +44,8 @@ const Collapsible = ({
   onClick,
 }) => {
   return (
-    <div className={styles.root} onClick={onClick}>
-      <div className={styles.header}>
+    <div className={styles.root}>
+      <div className={styles.header} onClick={onClick}>
         <div data-element="title">
           <Label ellipsized>{title}</Label>
         </div>
