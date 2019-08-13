@@ -24,7 +24,7 @@
     "publish": "lerna publish --force-publish",
     "update:assets": "mmdc -i assets/graph.mmd -o assets/graph.svg",
     "lint": "eslint --ext js,jsx --format node_modules/eslint-formatter-pretty packages/",
-    "prepublishOnly": "npm run publish:styleguide"
+    "postpack": "npm run publish:styleguide"
   },
   "husky": {
     "hooks": {
