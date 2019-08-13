@@ -55,10 +55,11 @@ const styles = {
   content: css`
     overflow: scroll;
     flex: 1;
+    padding-top: ${sv.paddingExtraSmall};
   `,
   title: css`
-    margin-top: calc(${sv.defaultMargin} * -1);
-    margin-bottom: ${sv.marginSmall};
+    margin-top: ${sv.marginExtraSmall};
+    margin-bottom: ${sv.marginExtraSmall};
   `,
   footer: css`
     padding-top: ${sv.defaultPadding};
