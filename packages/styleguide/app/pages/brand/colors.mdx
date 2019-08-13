@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import { Grid, GridItem } from '@drawbotics/react-drylus';
+import { Grid, GridItem, Sizes } from '@drawbotics/react-drylus';
 
 
 export const styles = {
@@ -8,31 +8,60 @@ export const styles = {
     border-radius: ${sv.defaultBorderRadius};
     overflow: hidden;
   `,
+  title: css`
+    padding: ${sv.paddingSmall};
+    color: ${sv.colorPrimaryInverse};
+    text-transform: uppercase;
+    font-size: 0.9rem;
+  `,
   color: css`
     padding: ${sv.paddingSmall};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: ${sv.defaultTransition};
+    position: relative;
+    &::after {
+      content: ' ';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      height: 10px;
+      width: 100%;
+      background: currentColor;
+    }
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-10px);
+    }
+    > div {
+      color: ${sv.colorPrimaryInverse};
+    }
   `,
   light: css`
+    > div {
+      color: ${sv.colorPrimary};
+    }
   `,
 }
 
 
 export const Palette = ({
-  colors,
-  title,
+  palette,
 }) => {
-  console.log(colors, title);
+  const { colors, title, background } = palette;
   return (
     <div className={styles.palette}>
-      <div className={styles.title}>
+      <div className={styles.title} style={{ background }}>
         {title}
       </div>
       {colors.map((color, i) => (
         <div
           key={i}
-          style={{ background: color.value }}
+          style={{ background: sv[color.name], color: sv[color.name] }}
           className={cx(styles.color, { [styles.light]: color.light })}>
-          {color.name}
-          {color.value}
+          <div>{color.name}</div>
+          <div>{sv[color.name]}</div>
         </div>
       ))}
     </div>
@@ -44,10 +73,10 @@ export const Colors = ({ palettes }) => {
   return (
     <Grid
       columns={3}
-      hGutters={sv.defaultPadding}
-      vGutters={sv.defaultPadding}>
+      hGutters={Sizes.DEFAULT}
+      vGutters={Sizes.DEFAULT}>
       {palettes.map((p, i) => (
-        <Palette key={i} colors={p.colors} title={p.title} />
+        <Palette key={i} palette={p} />
       ))}
     </Grid>
   );
@@ -56,22 +85,46 @@ export const Colors = ({ palettes }) => {
 
 # Colors
 
-export const greys = [
-  {
-    title: 'Greys',
-    colors: [
-      'white',
-      'grey50',
-      'grey100',
-      'grey300',
-      'grey400',
-      'grey500',
-      'grey600',
-      'grey700',
-      'grey800',
-      'grey900',
-    ],
-  },
-];
+export const greys = {
+  title: 'Greys',
+  background: sv.grey800,
+  colors: [
+    {
+      name: 'white',
+      light: true,
+    },
+    {
+      name: 'grey50',
+      light: true,
+    },
+    {
+      name: 'grey100',
+      light: true,
+    },
+    {
+      name: 'grey300',
+      light: true,
+    },
+    {
+      name: 'grey400',
+      light: true,
+    },
+    {
+      name: 'grey500',
+    },
+    {
+      name: 'grey600',
+    },
+    {
+      name: 'grey700',
+    },
+    {
+      name: 'grey800',
+    },
+    {
+      name: 'grey900',
+    },
+  ],
+};
 
 <Colors palettes={[greys]} />
