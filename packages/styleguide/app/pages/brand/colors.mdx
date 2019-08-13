@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import { Grid, GridItem, Sizes, Tooltip, Icon } from '@drawbotics/react-drylus';
+import { Grid, GridItem, Sizes, Tooltip, Icon, useAlert, Categories } from '@drawbotics/react-drylus';
 
 import {
   greys,
@@ -54,6 +54,11 @@ export const styles = {
     > div {
       color: ${sv.colorPrimaryInverse};
     }
+    input {
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+    }
   `,
   light: css`
     > div {
@@ -67,6 +72,12 @@ export const Palette = ({
   palette,
 }) => {
   const { colors, title, background, description } = palette;
+  const { show } = useAlert();
+  const copyToClipboard = async (name) => {
+    const target = document.querySelector(`[data-element="${name}"]`);
+    await navigator.clipboard.writeText(target.value);
+    show({ category: Categories.INFO, text: `Color code ${target.value} copied to clipboard!` });
+  };
   return (
     <div className={styles.palette}>
       <div className={styles.header} style={{ background }}>
@@ -77,11 +88,13 @@ export const Palette = ({
       </div>
       {colors.map((color, i) => (
         <div
+          onClick={() => copyToClipboard(color.name)}
           key={i}
           style={{ background: sv[color.name], color: sv[color.name] }}
           className={cx(styles.color, { [styles.light]: color.light })}>
           <div>{color.name}</div>
-          <div>{sv[color.name]}</div>
+          <input type="text" data-element={`${color.name}`} value={`${sv[color.name]}`} readOnly />
+          <div style={{ textTransform: 'uppercase' }}>{sv[color.name]}</div>
         </div>
       ))}
     </div>

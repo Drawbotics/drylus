@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import {
-  ThemeProvider,
+  DrylusProvider,
   Page,
   Layout,
   LayoutPositions,
@@ -25,7 +25,7 @@ window._drylus = drylus;
 const App = () => {
   return (
     <BrowserRouter basename="drylus">
-      <ThemeProvider>
+      <DrylusProvider>
         <Page>
           <Layout
             bar={
@@ -42,7 +42,7 @@ const App = () => {
             </Content>
           </Layout>
         </Page>
-      </ThemeProvider>
+      </DrylusProvider>
     </BrowserRouter>
   );
 };
