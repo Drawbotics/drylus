@@ -2,7 +2,17 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import { Grid, GridItem, Sizes, Tooltip, Icon } from '@drawbotics/react-drylus';
 
-import { greys, neutrals, azures } from './palettes';
+import {
+  greys,
+  neutrals,
+  azures,
+  brands,
+  reds,
+  greens,
+  oranges,
+  blues,
+  socials,
+} from './palettes';
 
 
 export const styles = {
@@ -102,3 +112,13 @@ export const Colors = ({ palettes }) => {
 These are used for elements which shouldn't bring much attention to the user, rather used to create separation between layers, or add texture.
 
 <Colors palettes={[greys, neutrals, azures]} />
+
+### Highlights
+
+These are the colors you will be using most often, since they represent statuses, are used for actions (desctructive, informative etc.) to help understand which elements of the page the user should focus on.
+
+<Colors palettes={[reds, oranges, blues, greens, brands]} />
+
+### Misc
+
+<Colors palettes={[socials]} />
