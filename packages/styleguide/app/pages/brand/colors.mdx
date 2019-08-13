@@ -1,6 +1,8 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import { Grid, GridItem, Sizes } from '@drawbotics/react-drylus';
+import { Grid, GridItem, Sizes, Tooltip, Icon } from '@drawbotics/react-drylus';
+
+import { greys, neutrals, azures } from './palettes';
 
 
 export const styles = {
@@ -8,9 +10,14 @@ export const styles = {
     border-radius: ${sv.defaultBorderRadius};
     overflow: hidden;
   `,
-  title: css`
+  header: css`
     padding: ${sv.paddingSmall};
     color: ${sv.colorPrimaryInverse};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  `,
+  title: css`
     text-transform: uppercase;
     font-size: 0.9rem;
   `,
@@ -49,11 +56,14 @@ export const styles = {
 export const Palette = ({
   palette,
 }) => {
-  const { colors, title, background } = palette;
+  const { colors, title, background, description } = palette;
   return (
     <div className={styles.palette}>
-      <div className={styles.title} style={{ background }}>
-        {title}
+      <div className={styles.header} style={{ background }}>
+        <div className={styles.title}>{title}</div>
+        <Tooltip message={description}>
+          <Icon name="info" />
+        </Tooltip>
       </div>
       {colors.map((color, i) => (
         <div
@@ -76,7 +86,9 @@ export const Colors = ({ palettes }) => {
       hGutters={Sizes.DEFAULT}
       vGutters={Sizes.DEFAULT}>
       {palettes.map((p, i) => (
-        <Palette key={i} palette={p} />
+        <div key={i}>
+          <Palette palette={p} />
+        </div>
       ))}
     </Grid>
   );
@@ -85,46 +97,8 @@ export const Colors = ({ palettes }) => {
 
 # Colors
 
-export const greys = {
-  title: 'Greys',
-  background: sv.grey800,
-  colors: [
-    {
-      name: 'white',
-      light: true,
-    },
-    {
-      name: 'grey50',
-      light: true,
-    },
-    {
-      name: 'grey100',
-      light: true,
-    },
-    {
-      name: 'grey300',
-      light: true,
-    },
-    {
-      name: 'grey400',
-      light: true,
-    },
-    {
-      name: 'grey500',
-    },
-    {
-      name: 'grey600',
-    },
-    {
-      name: 'grey700',
-    },
-    {
-      name: 'grey800',
-    },
-    {
-      name: 'grey900',
-    },
-  ],
-};
+### Basics
 
-<Colors palettes={[greys]} />
+These are used for elements which shouldn't bring much attention to the user, rather used to create separation between layers, or add texture.
+
+<Colors palettes={[greys, neutrals, azures]} />
