@@ -1,1 +1,77 @@
+import sv from '@drawbotics/drylus-style-vars';
+import { css, cx } from 'emotion';
+import { Grid, GridItem } from '@drawbotics/react-drylus';
+
+
+export const styles = {
+  palette: css`
+    border-radius: ${sv.defaultBorderRadius};
+    overflow: hidden;
+  `,
+  color: css`
+    padding: ${sv.paddingSmall};
+  `,
+  light: css`
+  `,
+}
+
+
+export const Palette = ({
+  colors,
+  title,
+}) => {
+  console.log(colors, title);
+  return (
+    <div className={styles.palette}>
+      <div className={styles.title}>
+        {title}
+      </div>
+      {colors.map((color, i) => (
+        <div
+          key={i}
+          style={{ background: color.value }}
+          className={cx(styles.color, { [styles.light]: color.light })}>
+          {color.name}
+          {color.value}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+
+export const Colors = ({ palettes }) => {
+  return (
+    <Grid
+      columns={3}
+      hGutters={sv.defaultPadding}
+      vGutters={sv.defaultPadding}>
+      {palettes.map((p, i) => (
+        <Palette key={i} colors={p.colors} title={p.title} />
+      ))}
+    </Grid>
+  );
+}
+
+
 # Colors
+
+export const greys = [
+  {
+    title: 'Greys',
+    colors: [
+      'white',
+      'grey50',
+      'grey100',
+      'grey300',
+      'grey400',
+      'grey500',
+      'grey600',
+      'grey700',
+      'grey800',
+      'grey900',
+    ],
+  },
+];
+
+<Colors palettes={[greys]} />
