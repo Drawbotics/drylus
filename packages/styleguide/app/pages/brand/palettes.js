@@ -188,7 +188,7 @@ export const oranges = {
 
 
 export const greens = {
-  title: 'Green',
+  title: 'Greens',
   background: sv.green,
   description: 'These are for constructive actions, or success events, essentially showing something "good" that happened or is displayed',
   colors: [
