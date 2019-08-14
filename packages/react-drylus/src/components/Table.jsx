@@ -485,7 +485,7 @@ const Table = ({
     })}>
       <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
         {do{
-          if (data && ! isLoading) {
+          if (data && ! isLoading && ! emptyContent) {
             <>
               <THead>
                 {header.map((hItem) => {
