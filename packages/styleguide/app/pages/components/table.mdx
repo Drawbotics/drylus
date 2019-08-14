@@ -47,7 +47,7 @@ Here is a simple example of a table. By default it has no elevation. If the tabl
 
 Particular rows can also be set as `highlighted`. This is useful if a row can be "active" and opens a modal or a panel when selected.
 <Playground>
-  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+  <div style={{ background: '#F1F5F9', padding: '20px', margin: '-24px' }}>
     <Table highlighted>
       <THead>
         <TCell>Name</TCell>
@@ -55,12 +55,17 @@ Particular rows can also be set as `highlighted`. This is useful if a row can be
         <TCell>Age</TCell>
       </THead>
       <TBody>
-        <TRow highlighted>
+        <TRow>
+          <TCell>Spongebob</TCell>
+          <TCell>Squarepants</TCell>
+          <TCell>35</TCell>
+        </TRow>
+        <TRow>
           <TCell>Nick</TCell>
           <TCell>Jonas</TCell>
           <TCell>20</TCell>
         </TRow>
-        <TRow>
+        <TRow highlighted>
           <TCell>Spongebob</TCell>
           <TCell>Squarepants</TCell>
           <TCell>35</TCell>

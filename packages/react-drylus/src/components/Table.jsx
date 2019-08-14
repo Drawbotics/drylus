@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext } from 'react';
 import { css, cx, keyframes } from 'emotion';
-import sv, { fade } from '@drawbotics/drylus-style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
 
@@ -46,7 +46,7 @@ const styles = {
   highlighted: css`
     tr {
       &:hover {
-        background: ${sv.neutralLight};
+        background: ${sv.backgroundColor};
       }
     }
   `,
@@ -147,7 +147,7 @@ const styles = {
     border-bottom: none !important;
   `,
   highlightedRow: css`
-    background: ${fade(sv.azure, 50)} !important;
+    background: ${sv.neutralLight} !important;
   `,
   collapsed: css`
     display: none;
