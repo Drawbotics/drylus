@@ -214,6 +214,9 @@ const styles = {
     background-size: 1000px 600px;
     animation: ${gradientAnimation} calc(${sv.defaultTransitionTime} * 4) linear forwards infinite;
   `,
+  emptyTableCell: css`
+    padding: ${sv.defaultPadding};
+  `,
 };
 
 
@@ -224,6 +227,7 @@ export const TCell = ({
   withChildToggle,
   onClickArrow,
   active,
+  ...props,
 }) => {
   const className = cx(styles.cell, {
     [styles.asContainer]: asContainer,
@@ -238,7 +242,7 @@ export const TCell = ({
     );
   }
   return (
-    <td className={className} colSpan={asContainer ? '100' : null}>
+    <td className={className} colSpan={asContainer ? '100' : null} {...props}>
       {do{
         if (withChildToggle) {
           <div className={styles.withToggle}>
@@ -346,12 +350,36 @@ const FakeTable = ({ columns }) => {
         {Array(5).fill(null).map((...args) => (
           <TRow key={args[1]}>
             {columns.map((...args) => (
-              <TCell key={args[1]} align>
+              <TCell key={args[1]}>
                 <div className={styles.loadingBodyCell} />
               </TCell>
             ))}
           </TRow>
         ))}
+      </TBody>
+    </>
+  );
+};
+
+
+const EmptyTable = ({ columns, emptyContent }) => {
+  return (
+    <>
+      <THead>
+        {columns.map((column, i) => (
+          <TCell key={i}>
+            {typeof column === 'string' ? column : column.label}
+          </TCell>
+        ))}
+      </THead>
+      <TBody>
+        <TRow>
+          <TCell colSpan="100">
+            <div className={styles.emptyTableCell}>
+              {emptyContent}
+            </div>
+          </TCell>
+        </TRow>
       </TBody>
     </>
   );
@@ -441,6 +469,7 @@ const Table = ({
   isLoading,
   onClickRow,
   activeRow,
+  emptyContent,
 }) => {
   const [ rowsStates, setRowState ] = useState({});
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
@@ -498,6 +527,9 @@ const Table = ({
           }
           else if (header && isLoading) {
             <FakeTable columns={header} />
+          }
+          else if (header && emptyContent) {
+            <EmptyTable columns={header} emptyContent={emptyContent} />
           }
           else {
             children
@@ -565,6 +597,9 @@ Table.propTypes = {
 
   /** Will set the row with the same `id` property to "highlighted", useful when working with data generated tables */
   activeRow: PropTypes.any,
+
+  /** If present, all the content of the table is replaced with this, used to show info when there is no data in the table */
+  emptyContent: PropTypes.node,
 };
 
 
