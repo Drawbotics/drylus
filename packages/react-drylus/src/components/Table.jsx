@@ -358,11 +358,29 @@ const FakeTable = ({ columns }) => {
 };
 
 
-function generateTable(data, header, renderCell, renderChildCell, i=0, childHeader, onClickRow=x=>x) {
+function generateTable({
+  data,
+  header,
+  renderCell,
+  renderChildCell,
+  i = 0,
+  childHeader,
+  onClickRow = x => x,
+  activeRow,
+}) {
   if (Array.isArray(data)) {
     return (
       <TBody>
-        {data.map((rows, i) => generateTable(rows, header, renderCell, renderChildCell, i, childHeader, onClickRow))}
+        {data.map((rows, i) => generateTable({
+          data: rows,
+          header,
+          renderCell,
+          renderChildCell,
+          i,
+          childHeader,
+          onClickRow,
+          activeRow,
+        }))}
       </TBody>
     );
   }
@@ -394,7 +412,7 @@ function generateTable(data, header, renderCell, renderChildCell, i=0, childHead
         <TRow key={`${uniqId}-1`} nested={uniqId} onClick={() => onClickRow(row)}>
           <TCell>
             <Table>
-              {generateTable(data.data, childHeader, null, renderChildCell)}
+              {generateTable({ data: data.data, header: childHeader, renderCell: null, renderChildCell })}
             </Table>
           </TCell>
         </TRow>
@@ -422,6 +440,7 @@ const Table = ({
   highlighted,
   isLoading,
   onClickRow,
+  activeRow,
 }) => {
   const [ rowsStates, setRowState ] = useState({});
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
@@ -465,7 +484,16 @@ const Table = ({
                   );
                 })}
               </THead>
-              {generateTable(data, header, renderCell, renderChildCell, 0, childHeader, onClickRow)}
+              {generateTable({
+                data,
+                header,
+                renderCell,
+                renderChildCell,
+                index: 0,
+                childHeader,
+                onClickRow,
+                activeRow,
+              })}
             </>
           }
           else if (header && isLoading) {
@@ -534,6 +562,9 @@ Table.propTypes = {
 
   /** Triggered when a row is clicked, returns the given data object for that row. If used with nested tables, it will only return the root row object value */
   onClickRow: PropTypes.func,
+
+  /** Will set the row with the same `id` property to "highlighted", useful when working with data generated tables */
+  activeRow: PropTypes.any,
 };
 
 
