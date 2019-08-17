@@ -233,6 +233,7 @@ const Drawer = ({
       timeout={300}
       mountOnEnter
       unmountOnExit
+      appear
       classNames={{
         enter: styles.drawerEnter,
         enterActive: styles.drawerEnterActive(width),
