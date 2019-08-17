@@ -219,6 +219,7 @@ const Modal = ({
         timeout={300}
         mountOnEnter
         unmountOnExit
+        appear
         classNames={{
           enter: styles.modalEnter,
           enterActive: styles.modalEnterActive,
