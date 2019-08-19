@@ -11,9 +11,10 @@ import {
   Tiers,
   Categories,
   Margin,
-  } from '@drawbotics/react-drylus';
+} from '@drawbotics/react-drylus';
 
-import Playground from '~/components/Playground';
+
+import Playground, { CodeBox } from '~/components/Playground';
 
 
 # Modal
@@ -93,3 +94,71 @@ As you can see when the window height is smaller than the content, the modal is 
     </Modal>
   } />
 </Playground>
+
+
+### Vanilla
+
+Because of the implementation of the modal in React that uses portals, it is not possible to have the vanilla equivalent out of the box, especially regarding documentation.
+
+So to use the modal in vanilla here is what you have to do:
+
+1. Create your modal markup. This can be done wherever is easiest for you, the element will then be moved to the root of the page anyway. See the code snippet below to create a valid modal.
+2. Add the `data-modal` property to the modal root element and give it a unique value e.g. `data-modal="1"`
+3. Set the root element of the modal to `display: none`. This is important otherwise your modal will be visible when the page first loads.
+4. Add the `data-modal-trigger` property to the element that when clicked, will display the modal. The value has to match the one given to the modal.
+
+<br />
+
+export const modalMarkup = `
+<div data-modal="1" class="Drylus-Modal__overlay" style="display: none">
+  <div class="Drylus-Modal__container" data-element="container">
+    <div class="Drylus-Modal__root">
+      <div class="Drylus-Modal__close">
+        <button data-element="close" class="Drylus-Button__root Drylus-Button__small Drylus-Button__round Drylus-Button__roundSmall Drylus-Button__tertiary">
+          <i class="Drylus-Icon__root Drycon Drycon-x"></i>
+        </button>
+      </div>
+      <div class="Drylus-Modal__title">
+        <h4 class="Drylus-Title__root Drylus-Title__h4 Drylus-Title__noMargin">Modal title</h4>
+      </div>
+      <div class="Drylus-Modal__content">
+        <p class="Drylus-Paragraph__root">Im some content</p>
+        <div style="height: 300px"></div>
+      </div>
+      <div class="Drylus-Modal__footer">
+        <div class="Drylus-Flex__root Drylus-Flex__horizontal Drylus-Flex__justifyEnd Drylus-Flex__alignCenter">
+          <div class="Drylus-Flex__item">
+            <div class="Drylus-Margin__root Drylus-Margin__resetMargin Drylus-Margin__extraSmallRight">
+              <button class="Drylus-Button__root Drylus-Button__tertiary">Secondary action</button>
+            </div>
+          </div>
+          <div class="Drylus-Flex__item">
+            <button onclick="_drylus.closeModal('1')" class="Drylus-Button__root Drylus-Button__brand">Main action</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+<CodeBox mode="html" format type="vanilla">{modalMarkup}</CodeBox>
+
+<div dangerouslySetInnerHTML={{ __html: modalMarkup }} />
+
+Open the vanilla modal with any element that has the `data-modal-trigger` property with value equivalent to the `data-modal` one.
+<Playground>
+  <button className="Drylus-Button__root" data-modal-trigger="1">
+    Click me
+  </button>
+</Playground>
+
+If you want to easily change parts of the modal, you can remove either of these parts to make your modal simpler: `Drylus-Modal__title`, `Drylus-Modal__footer`.
+
+If you need to close the modal manually (e.g. by clicking one of the actions in the footer) you can use the `closeModal(id)` function provided through Drylus. You can use it like so:
+
+```html
+<div onclick="_drylus.closeModal('1')">
+  some trigger
+</div>
+```

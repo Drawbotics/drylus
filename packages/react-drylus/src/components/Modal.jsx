@@ -76,6 +76,8 @@ const styles = {
     margin-bottom: calc(${sv.defaultPadding} * -1);
     margin-top: ${sv.defaultMargin};
     background: ${sv.neutralLight};
+    border-bottom-right-radius: ${sv.defaultBorderRadius};
+    border-bottom-left-radius: ${sv.defaultBorderRadius};
   `,
   close: css`
     position: absolute;

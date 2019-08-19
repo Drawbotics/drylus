@@ -4,7 +4,7 @@ export function addDocumentReady() {
       callback();
     }
     else {
-      document.addEventListener('DOMContentLoaded', (event) => {
+      document.addEventListener('readystatechange', (event) => {
         callback();
       });
     }

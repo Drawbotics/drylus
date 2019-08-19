@@ -15,6 +15,7 @@ const styles = {
     list-style: none;
     counter-reset: custom-counter;
     text-align: left;
+    color: ${sv.colorPrimary};
   `,
   ordered: css`
     > li {
