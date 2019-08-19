@@ -40,7 +40,7 @@ const Title = ({ children, size=1, noMargin }) => {
     return <h3 className={cx(styles.root, styles.h3, { [styles.noMargin]: noMargin })}>{children}</h3>;
   }
   else if (size === 4) {
-    return <h3 className={cx(styles.root, styles.h4, { [styles.noMargin]: noMargin })}>{children}</h3>;
+    return <h4 className={cx(styles.root, styles.h4, { [styles.noMargin]: noMargin })}>{children}</h4>;
   }
   else {
     console.warn('Unsupported title size');
