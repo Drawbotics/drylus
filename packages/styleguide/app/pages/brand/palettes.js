@@ -55,6 +55,10 @@ export const neutrals = {
       light: true,
     },
     {
+      name: 'backgroundColor',
+      light: true,
+    },
+    {
       name: 'neutralLight',
       light: true,
     },
