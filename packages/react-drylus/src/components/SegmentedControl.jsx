@@ -3,8 +3,9 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
-import Categories from '../base/Categories';
+import { Categories, Sizes } from '../base';
 import Badge from './Badge';
+import Spinner from './Spinner';
 import { CustomPropTypes } from '../utils';
 
 
@@ -70,11 +71,11 @@ const styles = {
       background: none !important;
     }
 
-    & > [data-element="bullet"] {
+    & > [data-element="extra"] {
       opacity: 0.5;
     }
   `,
-  bullet: css`
+  extra: css`
     display: inline-block;
     margin-left: ${sv.marginExtraSmall};
   `,
@@ -100,8 +101,13 @@ const SegmentedControl = ({
           onClick={! option.disabled ? () => onChange(option[valueKey]) : null}>
           <span>{option[labelKey]}</span>
           {do{
-            if (option.bullet) {
-              <div data-element="bullet" className={styles.bullet}>
+            if (option.loading === true) {
+              <div data-element="extra" className={styles.extra}>
+                <Spinner size={Sizes.SMALL} category={Categories.BRAND} />
+              </div>
+            }
+            else if (option.bullet != null) {
+              <div data-element="extra" className={styles.extra}>
                 <Badge category={Categories.BRAND} value={option.bullet} max={99} />
               </div>
             }
@@ -118,6 +124,7 @@ SegmentedControl.propTypes = {
   options: CustomPropTypes.optionsWith({
     bullet: PropTypes.number,
     disabled: PropTypes.bool,
+    loading: PropTypes.bool,
   }),
 
   /** Used to pick each value in the options array */
