@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { css, cx } from 'emotion';
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import omit from 'lodash/omit';
 import startCase from 'lodash/startCase';
 import kebabCase from 'lodash/kebabCase';
+import last from 'lodash/last';
 import { Title } from '@drawbotics/react-drylus';
 import { withRouter, Link } from 'react-router-dom';
 
@@ -130,6 +131,11 @@ export function generateLinks(route, routeName, parent='', pathname) {
 
 
 const LinksNavigation = ({ routes, location }) => {
+  useEffect(() => {
+    const current = last(location.pathname.split('/'));
+    document.title = `Drawbotics Styleguide - ${startCase(current)}`;
+  }, [location.pathname]);
+
   return (
     <div className={styles.linksNavigation}>
       <div className={styles.navigationTitle}>
