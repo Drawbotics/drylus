@@ -110,6 +110,7 @@ const NumberInput = ({
   min,
   name,
   withCounter,
+  loading,
 }) => {
   const inputRef = useRef(null);
 
@@ -154,6 +155,7 @@ const NumberInput = ({
         error={error}
         hint={hint}
         valid={valid}
+        loading={loading}
         onChange={handleInputOnChange}
         disabled={disabled}
         placeholder={placeholder}
@@ -218,6 +220,9 @@ NumberInput.propTypes = {
 
   /** If true, the counter arrows to increase/decrease are shown */
   withCounter: PropTypes.bool,
+
+  /** If true, a spinner is shown on the right corner, like with error and valid */
+  loading: PropTypes.bool,
 };
 
 

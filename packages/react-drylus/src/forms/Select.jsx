@@ -4,6 +4,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
 import RoundIcon from '../components/RoundIcon';
+import Spinner from '../components/Spinner';
 import Sizes from '../base/Sizes';
 import Categories from '../base/Categories';
 import Hint from './Hint';
@@ -97,6 +98,7 @@ const Select = ({
   hint,
   error,
   valid,
+  loading,
   ...rest,
 }) => {
   const handleOnChange = (e) => onChange(e.target.value, e.target.name);
@@ -108,7 +110,12 @@ const Select = ({
       [styles.error]: error,
     })}>
       {do{
-        if (error) {
+        if (loading) {
+          <div className={styles.icon}>
+            <Spinner size={Sizes.SMALL} />
+          </div>
+        }
+        else if (error) {
           <div className={styles.icon}>
             <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
           </div>
@@ -188,6 +195,9 @@ Select.propTypes = {
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid: PropTypes.bool,
+
+  /** If true, a spinner is shown in the right corner, like with error and valid */
+  loading: PropTypes.bool,
 };
 
 

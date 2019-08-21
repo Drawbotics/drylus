@@ -212,6 +212,7 @@ const DatePicker = ({
   minDate,
   calendarOptions,
   activeStartDate,
+  loading,
 }) => {
   const [ outletElement, setOutletElement ] = useState(null);
   const [ isFocused, setFocused ] = useState(false);
@@ -279,6 +280,7 @@ const DatePicker = ({
         valid={valid}
         error={error}
         hint={hint}
+        loading={loading}
         value={inputValue}
         onChange={isDesktop ? x=>x : (v) => Boolean(v) && onChange(_stringToDateObject(v), name)}
         ref={inputRef}
@@ -380,6 +382,9 @@ DatePicker.propTypes = {
     month: PropTypes.number.isRequired,
     year: PropTypes.number.isRequired,
   }),
+
+  /** If true, a spinner is shown in the right corner, like with error and valid */
+  loading: PropTypes.bool,
 };
 
 
