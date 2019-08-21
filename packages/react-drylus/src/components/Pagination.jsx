@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
+import sv from '@drawbotics/drylus-style-vars';
 
 import Button from './Button';
 import Icon from './Icon';
@@ -14,14 +15,14 @@ const styles = {
     justify-content: center;
   `,
   item: css`
-    margin: 0 5px;
+    margin: 0 calc(${sv.marginExtraSmall} / 2);
 
     &:first-of-type {
-      margin-left: 10px;
+      margin-left: ${sv.marginExtraSmall};
     }
 
     &:last-of-type {
-      margin-right: 10px;
+      margin-right: ${sv.marginExtraSmall};
     }
   `,
 };

@@ -4,6 +4,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
 import RoundIcon from '../components/RoundIcon';
+import Spinner from '../components/Spinner';
 import Sizes from '../base/Sizes';
 import Categories from '../base/Categories';
 import Hint from './Hint';
@@ -91,6 +92,7 @@ const RawTextArea = ({
   disabled,
   inputRef,
   className,
+  loading,
   ...rest,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
@@ -106,7 +108,12 @@ const RawTextArea = ({
       <div className={styles.outerWrapper}>
         <div className={styles.innerWrapper}>
           {do{
-            if (error) {
+            if (loading) {
+              <div className={styles.icon} data-element="icon">
+                <Spinner size={Sizes.SMALL} />
+              </div>
+            }
+            else if (error) {
               <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
                 <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
               </div>
@@ -180,6 +187,9 @@ TextArea.propTypes = {
 
   /** Additional class name to override styles */
   className: PropTypes.string,
+
+  /** If true, a spinner is shown on the right top corner, like with error and valid */
+  loading: PropTypes.bool,
 };
 
 

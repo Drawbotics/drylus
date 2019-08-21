@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import RoundIcon from '../components/RoundIcon';
 import Button from '../components/Button';
+import Spinner from '../components/Spinner';
 import Select from './Select';
 import Sizes from '../base/Sizes';
 import Categories from '../base/Categories';
@@ -154,6 +155,7 @@ const RawInput = ({
   disabled,
   inputRef,
   className,
+  loading,
   ...rest,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
@@ -183,7 +185,12 @@ const RawInput = ({
         }}
         <div className={styles.innerWrapper}>
           {do{
-            if (error) {
+            if (loading) {
+              <div className={styles.icon} data-element="icon">
+                <Spinner size={Sizes.SMALL} />
+              </div>
+            }
+            else if (error) {
               <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
                 <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
               </div>
@@ -286,6 +293,9 @@ Input.propTypes = {
     'tel',
     'url',
   ]),
+
+  /** If true, a spinner is shown in the right corner, like with error and valid */
+  loading: PropTypes.bool,
 };
 
 

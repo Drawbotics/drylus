@@ -7,6 +7,7 @@ import { getDevice } from '@drawbotics/use-is-device';
 
 import Tag from '../components/Tag';
 import RoundIcon from '../components/RoundIcon';
+import Spinner from '../components/Spinner';
 import Hint from './Hint';
 import { Categories, Sizes } from '../base';
 import { CustomPropTypes } from '../utils';
@@ -155,6 +156,7 @@ const MultiSelect = ({
   error,
   valid,
   name,
+  loading,
   ...rest,
 }) => {
   const selectRef = useRef();
@@ -208,7 +210,12 @@ const MultiSelect = ({
         [styles.error]: error,
       })} ref={rootRef}>
       {do{
-        if (error) {
+        if (loading) {
+          <div className={styles.icon}>
+            <Spinner size={Sizes.SMALL} />
+          </div>
+        }
+        else if (error) {
           <div className={styles.icon}>
             <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
           </div>
@@ -329,6 +336,9 @@ MultiSelect.propTypes = {
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid: PropTypes.bool,
+
+  /** If true, a spinner is shown on the right corner, like with error and valid */
+  loading: PropTypes.bool,
 };
 
 
