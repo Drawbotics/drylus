@@ -11,7 +11,7 @@ import env from '../utils/get-static-env';
 
 
 injectGlobal`
-  ${generateIconStyles(env === 'development' ? 'dev' : packageJson.version)}
+  ${generateIconStyles(env === "'development'" ? 'dev' : packageJson.version)}
 `;
 
 
