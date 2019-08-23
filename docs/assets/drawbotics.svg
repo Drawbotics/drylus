@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>Icon/Service/drawbotics</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M23.9337763,21.6266308 L16.1706739,1.61467948 C16.0698544,1.32038608 15.7673958,1.02609267 15.3641178,1.02609267 C15.0616592,0.927994873 14.6583812,1.12419047 14.4567422,1.32038608 L0.241191007,17.604621 C0.039551983,17.8989144 -0.0612675288,18.2913056 0.039551983,18.585599 C0.140371495,18.9779902 0.44283003,19.1741858 0.846108077,19.2722836 L22.8247616,23 C22.9255812,23 22.9255812,23 23.0264007,23 C23.3288592,23 23.6313177,22.9019022 23.8329568,22.6076088 C24.0345958,22.3133154 24.0345958,22.019022 23.9337763,21.6266308 Z M9.91986414,14.4654914 L3.97151294,16.3293496 L12.641991,6.4214717 L9.91986414,14.4654914 Z M10.6256007,16.3293496 L17.380508,20.057066 L5.18134708,17.9970122 L10.6256007,16.3293496 Z M11.9362544,14.7597848 L15.2632983,4.8519069 L21.0100104,19.7627726 L11.9362544,14.7597848 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Service/drawbotics" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Shape" fill="#172B4E" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Color/Neutral/Darkest" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>
