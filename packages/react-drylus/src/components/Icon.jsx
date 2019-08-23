@@ -9,6 +9,8 @@ import { Categories } from '../base';
 import { getEnumAsClass } from '../utils';
 import env from '../utils/get-static-env';
 
+console.log(env);
+
 
 injectGlobal`
   ${generateIconStyles(env === 'development' ? 'dev' : packageJson.version)}

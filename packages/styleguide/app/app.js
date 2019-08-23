@@ -9,7 +9,6 @@ import {
   Content,
 } from '@drawbotics/react-drylus';
 
-// vanilla import, will be in head for link and script
 import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
 import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
