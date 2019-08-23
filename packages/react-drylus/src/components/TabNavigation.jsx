@@ -130,9 +130,11 @@ const TabNavigation = ({
   labelKey,
   vertical,
   linkComponent: Link,
+  style,
 }) => {
   const renderOption = (option) => (
     <div
+      style={style}
       key={option[valueKey]}
       className={cx(styles.item, {
         [styles.active]: value === option[valueKey],
@@ -200,6 +202,9 @@ TabNavigation.propTypes = {
 
   /** If set, the rendered options will be wrapped in the component, which will be given the value as href */
   linkComponent: PropTypes.node,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

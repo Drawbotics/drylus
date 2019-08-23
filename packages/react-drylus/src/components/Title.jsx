@@ -29,18 +29,18 @@ const styles = {
 };
 
 
-const Title = ({ children, size=1, noMargin }) => {
+const Title = ({ children, size=1, noMargin, style }) => {
   if (size === 1) {
-    return <h1 className={cx(styles.root, styles.h1, { [styles.noMargin]: noMargin })}>{children}</h1>;
+    return <h1 style={style} className={cx(styles.root, styles.h1, { [styles.noMargin]: noMargin })}>{children}</h1>;
   }
   else if (size === 2) {
-    return <h2 className={cx(styles.root, styles.h2, { [styles.noMargin]: noMargin })}>{children}</h2>;
+    return <h2 style={style} className={cx(styles.root, styles.h2, { [styles.noMargin]: noMargin })}>{children}</h2>;
   }
   else if (size === 3) {
-    return <h3 className={cx(styles.root, styles.h3, { [styles.noMargin]: noMargin })}>{children}</h3>;
+    return <h3 style={style} className={cx(styles.root, styles.h3, { [styles.noMargin]: noMargin })}>{children}</h3>;
   }
   else if (size === 4) {
-    return <h4 className={cx(styles.root, styles.h4, { [styles.noMargin]: noMargin })}>{children}</h4>;
+    return <h4 style={style} className={cx(styles.root, styles.h4, { [styles.noMargin]: noMargin })}>{children}</h4>;
   }
   else {
     console.warn('Unsupported title size');
@@ -58,6 +58,9 @@ Title.propTypes = {
 
   /** Use this if you dont want the component to set margin. By default it has some top and bottom margin since it is a textual component */
   noMargin: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

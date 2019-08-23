@@ -130,10 +130,12 @@ const BaseModal = React.forwardRef(({
   footer,
   size,
   title,
+  style,
 }, ref) => (
-  <div className={cx(styles.root, {
-    [styles.large]: size === Sizes.LARGE,
-  })} ref={ref}>
+  <div
+    style={style}
+    className={cx(styles.root, { [styles.large]: size === Sizes.LARGE })}
+    ref={ref}>
     <div className={styles.close}>
       <Button size={Sizes.SMALL} onClick={onClickClose} tier={Tiers.TERTIARY} leading={<Icon name="x" />} />
     </div>
@@ -168,6 +170,7 @@ const Modal = ({
   size,
   raw,
   title,
+  style,
 }) => {
   const [ outletElement, setOutletElement ] = useState(null);
   const [ overflowing, setOverflowing ] = useState(false);
@@ -240,6 +243,7 @@ const Modal = ({
                   ref={modalElement}
                   onClickClose={onClickClose}
                   footer={footer}
+                  style={style}
                   title={title}>
                   {children}
                 </BaseModal>
@@ -277,6 +281,9 @@ Modal.propTypes = {
 
   /** Displayed at the top left of the modal window, not shown if raw is true */
   title: PropTypes.string,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

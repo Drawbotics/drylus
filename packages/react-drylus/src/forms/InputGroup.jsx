@@ -19,9 +19,10 @@ const InputGroup = ({
   error,
   valid,
   children,
+  style,
 }) => {
   return (
-    <div className={styles.root}>
+    <div style={style} className={styles.root}>
       <Flex
         direction={FlexDirections.VERTICAL}
         align={FlexAlign.STRETCH}>
@@ -61,6 +62,9 @@ InputGroup.propTypes = {
 
   /** If true all elements display a check icon and a green outline, overridden by "error" */
   valid: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

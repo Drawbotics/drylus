@@ -42,9 +42,10 @@ const Collapsible = ({
   isOpen,
   children,
   onClick,
+  style,
 }) => {
   return (
-    <div className={styles.root}>
+    <div style={style} className={styles.root}>
       <div className={styles.header} onClick={onClick}>
         <div data-element="title">
           <Label ellipsized>{title}</Label>
@@ -77,6 +78,9 @@ Collapsible.propTypes = {
 
   /** Triggered when the arrow is clicked */
   onClick: PropTypes.func,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

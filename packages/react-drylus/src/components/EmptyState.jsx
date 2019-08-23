@@ -82,9 +82,10 @@ const EmptyState = ({
   description,
   title,
   actions,
+  style,
 }) => {
   return (
-    <div className={styles.root}>
+    <div style={style} className={styles.root}>
       <Flex direction={FlexDirections.VERTICAL}>
         <FlexItem>
           <div className={styles.image}>
@@ -137,6 +138,9 @@ EmptyState.propTypes = {
 
   /** Array of components, usually Buttons */
   actions: PropTypes.arrayOf(PropTypes.node),
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

@@ -132,9 +132,10 @@ const BaseDrawer = ({
   onClickClose,
   footer,
   title,
+  style,
 }) => {
   return (
-    <div className={styles.root}>
+    <div style={style} className={styles.root}>
       <div className={styles.close}>
         <Button size={Sizes.SMALL} onClick={onClickClose} tier={Tiers.TERTIARY} leading={<Icon name="x" />} />
       </div>
@@ -278,6 +279,9 @@ Drawer.propTypes = {
 
   /** Shown at the top left of the drawer, not rendered if raw is true */
   title: PropTypes.string,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

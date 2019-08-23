@@ -113,6 +113,7 @@ const BaseFilter = ({
   onClear,
   align,
   active,
+  style,
 }) => {
   const ref = useRef();
   const [ panelOpen, setPanelOpen ] = useState(false);
@@ -128,7 +129,7 @@ const BaseFilter = ({
     };
   }, []);
   return (
-    <div ref={ref} className={styles.root}>
+    <div style={style} ref={ref} className={styles.root}>
       <div className={cx(styles.trigger, {
         [styles.active]: panelOpen || active,
       })} onClick={() => panelOpen ? setPanelOpen(false) : setPanelOpen(true)}>
@@ -174,6 +175,9 @@ BaseFilter.propTypes = {
 
   /** If true, the filter trigger is dark, and the close icon is shown to clear it when clicked */
   active: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 
@@ -227,6 +231,9 @@ SelectFilter.propTypes = {
 
   /** Triggered when an option is clicked */
   onChange: PropTypes.func.isRequired,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 
@@ -297,6 +304,9 @@ CheckboxFilter.propTypes = {
 
   /** Triggered when an option is clicked. Returns (valueKey, boolean) where the second argument is true if checked, false if not */
   onChange: PropTypes.func.isRequired,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

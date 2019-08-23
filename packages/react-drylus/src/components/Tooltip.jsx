@@ -145,7 +145,7 @@ function _getStyleForSide(side, rect, tooltipRect) {
 }
 
 
-const Tooltip = ({ children, message, side }) => {
+const Tooltip = ({ children, message, side, style }) => {
   const [ visible, setVisible ] = useState(false);
   const [ outletElement, setOutletElement ] = useState(null);
   const childrenRef = useRef();
@@ -228,7 +228,7 @@ const Tooltip = ({ children, message, side }) => {
               [styles.right]: side === TooltipSides.RIGHT,
               [styles.visible]: visible,
             })}
-            style={tooltipStyle}>
+            style={{ ...tooltipStyle, ...style }}>
             {message}
           </div>
         </div>,
@@ -247,11 +247,16 @@ Tooltip.propTypes = {
   children: PropTypes.node.isRequired,
 
   side: PropTypes.oneOf([ TooltipSides.LEFT, TooltipSides.RIGHT, TooltipSides.TOP, TooltipSides.BOTTOM ]),
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 
 Tooltip.defaultProps = {
   side: TooltipSides.TOP,
+
+  style: {},
 };
 
 

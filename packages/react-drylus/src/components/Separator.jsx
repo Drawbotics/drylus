@@ -20,9 +20,10 @@ const styles = {
 
 const Separator = ({
   vertical,
+  style,
 }) => {
   return (
-    <div className={cx(styles.root, { [styles.vertical]: vertical })} />
+    <div style={style} className={cx(styles.root, { [styles.vertical]: vertical })} />
   );
 };
 
@@ -30,6 +31,9 @@ const Separator = ({
 Separator.propTypes = {
   /** If true, the separator is rendered in a vertical fashion, by default it takes the full width of the container */
   vertical: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

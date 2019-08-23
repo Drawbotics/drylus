@@ -19,9 +19,10 @@ const styles = {
 }
 
 
-const Hint = ({ children, category }) => {
+const Hint = ({ children, category, style }) => {
   return (
     <div
+      style={style}
       className={cx(styles.root, {
         [styles[getEnumAsClass(category)]]: category,
       })}>
@@ -36,6 +37,9 @@ Hint.propTypes = {
   children: PropTypes.string.isRequired,
 
   category: PropTypes.oneOf([ Categories.DANGER ]),
+  
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

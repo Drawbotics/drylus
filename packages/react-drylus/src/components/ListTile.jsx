@@ -43,6 +43,7 @@ const ListTile = ({
   leading,
   trailing,
   onClick,
+  style,
 }) => {
   if (Boolean(title) && typeof title !== 'string' && title.type?.name !== 'Text') {
     console.warn('`title` should only be a string or a Text component');
@@ -53,7 +54,10 @@ const ListTile = ({
     return null;
   }
   return (
-    <div className={cx(styles.root, { [styles.clickable]: !! onClick })} onClick={onClick}>
+    <div
+      style={style}
+      className={cx(styles.root, { [styles.clickable]: !! onClick })}
+      onClick={onClick}>
       <Flex>
         {do {
           if (leading) {
@@ -110,6 +114,9 @@ ListTile.propTypes = {
 
   /** Triggered when the component is clicked */
   onClick: PropTypes.func,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

@@ -56,12 +56,15 @@ const Tag = ({
   category,
   onClickRemove,
   inversed,
+  style,
 }) => {
   return (
-    <div className={cx(styles.root, {
-      [styles[getEnumAsClass(category)]]: category,
-      [styles.inversed]: inversed,
-    })}>
+    <div
+      style={style}
+      className={cx(styles.root, {
+        [styles[getEnumAsClass(category)]]: category,
+        [styles.inversed]: inversed,
+      })}>
       {children}
       {do {
         if (onClickRemove) {
@@ -89,6 +92,9 @@ Tag.propTypes = {
 
   /** Takes precedence over category */
   inversed: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

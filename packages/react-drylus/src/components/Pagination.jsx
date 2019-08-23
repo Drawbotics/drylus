@@ -52,11 +52,12 @@ const Pagination = ({
   onChange=x=>x,
   value,
   maxVisiblePages,
+  style,
 }) => {
   if (maxVisiblePages < 4) console.warn("`maxVisiblePages` has to be at least 4");
   const labels = _getLabels(value, pages, Math.max(maxVisiblePages, 4));
   return (
-    <div className={styles.root}>
+    <div style={style} className={styles.root}>
       <Button
         onClick={value === 1 ? null : () => onChange(value - 1)}
         disabled={value === 1}
@@ -118,6 +119,9 @@ Pagination.propTypes = {
 
   /** Determines how many bullets of pagination are visible, if the total number is higher than this, ellipsis is applied. Minimum of 4 */
   maxVisiblePages: PropTypes.number,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

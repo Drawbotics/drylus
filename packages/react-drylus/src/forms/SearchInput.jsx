@@ -58,13 +58,14 @@ const SearchInput = ({
   placeholder,
   isLoading,
   name,
+  style,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
   const inputRef = useRef(null);
 
   const shouldDisplayResults = value !== '' && isFocused;
   return (
-    <div className={styles.root}>
+    <div style={style} className={styles.root}>
       <InputWithRef
         prefix={
           <Button
@@ -128,6 +129,9 @@ SearchInput.propTypes = {
 
   /** If true, the search button will display a spinner */
   isLoading: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

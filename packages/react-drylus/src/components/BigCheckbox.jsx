@@ -73,11 +73,13 @@ const BigCheckbox = ({
   children,
   name,
   label,
+  style,
 }) => {
   const isChecked = Boolean(value);
   const handleOnChange = () => ! disabled ? onChange(! isChecked, name) : null;
   return (
     <div
+      style={style}
       className={cx(styles.root, {
         [styles.checked]: isChecked,
         [styles.disabled]: disabled,
@@ -113,6 +115,9 @@ BigCheckbox.propTypes = {
 
   /** If true, checkbox is not clickable */
   disabled: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

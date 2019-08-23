@@ -9,8 +9,6 @@ import { Categories } from '../base';
 import { getEnumAsClass } from '../utils';
 import env from '../utils/get-static-env';
 
-console.log(env);
-
 
 injectGlobal`
   ${generateIconStyles(env === 'development' ? 'dev' : packageJson.version)}
@@ -47,13 +45,16 @@ const styles = {
 };
 
 
-const Icon = ({ name, bold, onClick, category }) => {
+const Icon = ({ name, bold, onClick, category, style }) => {
   return (
-    <i className={cx(styles.root, `Drycon Drycon-${name}`, {
-      [styles.bold]: bold,
-      [styles[getEnumAsClass(category)]]: category,
-      [styles.clickable]: onClick,
-    })} onClick={onClick} />
+    <i
+      style={style}
+      className={cx(styles.root, `Drycon Drycon-${name}`, {
+        [styles.bold]: bold,
+        [styles[getEnumAsClass(category)]]: category,
+        [styles.clickable]: onClick,
+      })}
+      onClick={onClick} />
   );
 }
 
@@ -76,6 +77,9 @@ Icon.propTypes = {
     Categories.WARNING,
     Categories.BRAND,
   ]),
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 }
 
 

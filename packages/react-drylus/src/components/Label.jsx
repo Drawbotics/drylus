@@ -18,9 +18,9 @@ const styles = {
 };
 
 
-const Label = ({ children, ellipsized }) => {
+const Label = ({ children, ellipsized, style }) => {
   return (
-    <div className={cx(styles.root, { [styles.ellipsized]: ellipsized })}>
+    <div style={style} className={cx(styles.root, { [styles.ellipsized]: ellipsized })}>
       {children}
     </div>
   );
@@ -33,6 +33,9 @@ Label.propTypes = {
 
   /** Cuts the text to stop at the max size of the container */
   ellipsized: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

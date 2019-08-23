@@ -267,11 +267,14 @@ export const TRow = ({
   alt,
   lastParentRow,
   onClick,
+  style,
 }) => {
   const [ rowsStates, handleSetRowState ] = useContext(RowsContext);
   const collapsed = nested && ! rowsStates[nested];
   return (
-    <tr className={cx(styles.row, {
+    <tr
+      style={style}
+      className={cx(styles.row, {
         [styles.collapsed]: collapsed,
         [styles.light]: ! alt,
         [styles.white]: alt,
@@ -302,6 +305,9 @@ TRow.propTypes = {
 
   /** Triggered when any part of the row is clicked */
   onClick: PropTypes.func,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 
@@ -470,6 +476,7 @@ const Table = ({
   onClickRow,
   activeRow,
   emptyContent,
+  style,
 }) => {
   const [ rowsStates, setRowState ] = useState({});
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
@@ -478,11 +485,13 @@ const Table = ({
     console.warn('`data` was passed as prop but no/empty header, cannot render');
   }
   return (
-    <table className={cx(styles.root, {
-      [styles.fullWidth]: fullWidth,
-      [styles.leftPadded]: hasNestedData || withNesting || sortableBy,
-      [styles.highlighted]: highlighted && ! (hasNestedData || withNesting),
-    })}>
+    <table
+      style={style}
+      className={cx(styles.root, {
+        [styles.fullWidth]: fullWidth,
+        [styles.leftPadded]: hasNestedData || withNesting || sortableBy,
+        [styles.highlighted]: highlighted && ! (hasNestedData || withNesting),
+      })}>
       <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
         {do{
           if (data && ! isLoading && ! emptyContent) {
@@ -600,6 +609,9 @@ Table.propTypes = {
 
   /** If present, all the content of the table is replaced with this, used to show info when there is no data in the table */
   emptyContent: PropTypes.node,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

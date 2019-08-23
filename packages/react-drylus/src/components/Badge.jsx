@@ -43,9 +43,9 @@ const styles = {
 };
 
 
-const Badge = ({ value, max, category }) => {
+const Badge = ({ value, max, category, style }) => {
   return (
-    <div className={cx(styles.root, {
+    <div style={style} className={cx(styles.root, {
       [styles[getEnumAsClass(category)]]: category,
     })}>
       {value > max ? `${max}+` : value}
@@ -69,6 +69,9 @@ Badge.propTypes = {
     Categories.WARNING,
     Categories.DANGER,
   ]),
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

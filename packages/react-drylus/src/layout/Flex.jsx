@@ -93,13 +93,13 @@ function prefixFlex(value) {
 }
 
 
-export const FlexItem = ({ children, flex }) => {
+export const FlexItem = ({ children, flex, style }) => {
   const equalSpan = flex === true;
-  const style = prefixFlex(flex);
+  const pStyle = prefixFlex(flex);
   return (
     <div
       className={cx(styles.item, { [styles.equalSpan]: equalSpan })}
-      style={flex && typeof flex !== 'boolean' ? style : null}>
+      style={flex && typeof flex !== 'boolean' ? { ...pStyle, ...style } : style}>
       {children}
     </div>
   );
@@ -109,6 +109,14 @@ export const FlexItem = ({ children, flex }) => {
 FlexItem.propTypes = {
   /** Determines how much space a flex item takes within the flex container. */
   flex: PropTypes.oneOfType([ PropTypes.bool, PropTypes.number ]),
+
+  /** Used for style overrides */
+  style: PropTypes.object,
+};
+
+
+FlexItem.defaultProps = {
+  style: {},
 };
 
 

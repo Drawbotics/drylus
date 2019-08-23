@@ -70,10 +70,12 @@ const BigRadio = ({
   children,
   name,
   label,
+  style,
 }) => {
   const handleOnChange = () => ! disabled ? onChange(value, name) : null;
   return (
     <div
+      style={style}
       className={cx(styles.root, {
         [styles.checked]: checked,
         [styles.disabled]: disabled,
@@ -112,6 +114,9 @@ BigRadio.propTypes = {
 
   /** If true, radio is not clickable */
   disabled: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

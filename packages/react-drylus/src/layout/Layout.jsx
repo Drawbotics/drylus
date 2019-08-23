@@ -93,11 +93,15 @@ const Layout = ({
   bar,
   fixed,
   barScrollable,
+  style,
 }) => {
   return (
-    <div data-element="layout" className={cx(styles.layout, {
-      [styles[getEnumAsClass(position)]]: position,
-    })}>
+    <div
+      style={style}
+      data-element="layout"
+      className={cx(styles.layout, {
+        [styles[getEnumAsClass(position)]]: position,
+      })}>
       <div className={cx(styles.bar, { [styles.scrollable]: barScrollable })} data-element="layout-bar">{bar}</div>
       <div className={cx(styles.content, { [styles.scrollable]: fixed })} data-element="layout-content">{children}</div>
     </div>
@@ -125,6 +129,9 @@ Layout.propTypes = {
 
   /** If false the sidebar container is not made scrollable */
   barScrollable: PropTypes.bool,
+
+  /** For custom overrides */
+  style: PropTypes.object,
 };
 
 

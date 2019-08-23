@@ -73,11 +73,11 @@ PanelHeader.propTypes = {
 };
 
 
-export const PanelBody = ({ children, noPadding }) => {
+export const PanelBody = ({ children, noPadding, style }) => {
   return (
-    <div className={cx(styles.body, {
-      [styles.noSpacing]: noPadding,
-    })}>
+    <div
+      style={style}
+      className={cx(styles.body, { [styles.noSpacing]: noPadding })}>
       {children}
     </div>
   );
@@ -89,12 +89,15 @@ PanelBody.propTypes = {
 
   /** If true there is no (minimal) space between the content and the border of the panel */
   noPadding: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 
-export const PanelSection = ({ children, title }) => {
+export const PanelSection = ({ children, title, style }) => {
   return (
-    <div className={styles.section}>
+    <div style={style} className={styles.section}>
       {do{
         if (title) {
           <div className={styles.sectionTitle}>
@@ -113,12 +116,15 @@ PanelSection.propTypes = {
 
   /** Displays a title on the top left of the section */
   title: PropTypes.string,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 
-export const PanelFooter = ({ children, noPadding }) => {
+export const PanelFooter = ({ children, noPadding, style }) => {
   return (
-    <div className={cx(styles.footer, {
+    <div style={style} className={cx(styles.footer, {
       [styles.noSpacing]: noPadding,
     })}>
       {children}
@@ -132,12 +138,15 @@ PanelFooter.propTypes = {
 
   /** If true there is no space between the content and the border of the panel */
   noPadding: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 
-const Panel = ({ header, body, footer }) => {
+const Panel = ({ header, body, footer, style }) => {
   return (
-    <div className={cx(styles.root, {
+    <div style={style} className={cx(styles.root, {
       [styles.doubleTopPadding]: ! header && ! body.props.noPadding,
       [styles.doubleBottomPadding]: ! footer && ! body.props.noPadding,
     })}>
@@ -158,6 +167,9 @@ Panel.propTypes = {
 
   /** Component: PanelFooter, will render as the footer of the panel */
   footer: PropTypes.node,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

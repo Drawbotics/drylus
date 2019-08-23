@@ -87,11 +87,13 @@ const CircularProgress = ({
   category,
   size,
   text,
+  style,
 }) => {
   const circumference = 84 * Math.PI;
   const offset = percentage * circumference;
   return (
     <div
+      style={style}
       className={cx(styles.root, {
         [styles[getEnumAsClass(size)]]: size,
         [styles[getEnumAsClass(category)]]: category,
@@ -143,6 +145,9 @@ CircularProgress.propTypes = {
     Sizes.LARGE,
     Sizes.EXTRA_LARGE,
   ]),
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

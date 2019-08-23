@@ -157,6 +157,7 @@ const MultiSelect = ({
   valid,
   name,
   loading,
+  style,
   ...rest,
 }) => {
   const selectRef = useRef();
@@ -204,11 +205,13 @@ const MultiSelect = ({
 
   return (
     <div
+      style={style}
       className={cx(styles.root, {
         [styles.disabled]: disabled,
         [styles.valid]: values?.length > 0 && valid,
         [styles.error]: error,
-      })} ref={rootRef}>
+      })}
+      ref={rootRef}>
       {do{
         if (loading) {
           <div className={styles.icon}>
@@ -339,6 +342,9 @@ MultiSelect.propTypes = {
 
   /** If true, a spinner is shown on the right corner, like with error and valid */
   loading: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

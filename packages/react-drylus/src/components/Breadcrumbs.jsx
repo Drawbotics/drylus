@@ -43,7 +43,7 @@ const styles = {
 };
 
 
-const Breadcrumbs = ({ crumbs, linkComponent: Link }) => {
+const Breadcrumbs = ({ crumbs, linkComponent: Link, style }) => {
   const renderCrumb = (crumb) => (
     <div
       className={cx(styles.crumb, {
@@ -54,7 +54,7 @@ const Breadcrumbs = ({ crumbs, linkComponent: Link }) => {
     </div>
   );
   return (
-    <div className={styles.root}>
+    <div className={styles.root} style={style}>
       {crumbs.map((crumb, i) => (
         <Fragment key={i}>
           {do {
@@ -82,6 +82,12 @@ Breadcrumbs.propTypes = {
       active: PropTypes.boolean,
     }),
   ).isRequired,
+
+  /** If provided, will wrap the breadcrumb and use its given url */
+  linkComponent: PropTypes.node,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

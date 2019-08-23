@@ -96,9 +96,11 @@ const Spinner = ({
   category,
   inversed,
   fullSize,
+  style,
 }) => {
   return (
     <div
+      style={style}
       className={cx(styles.container, {
         [styles.fullSizeContainer]: fullSize,
       })}>
@@ -130,6 +132,9 @@ Spinner.propTypes = {
 
   /** If true the spinner will be placed in the center of the parent container */
   fullSize: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

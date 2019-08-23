@@ -17,6 +17,7 @@ const ButtonLink = ({
   leading,
   trailing,
   fullWidth,
+  style,
 }) => {
   if (! children && trailing && leading) {
     throw new Error('If no children are given, only pass trailing or leading, but not both');
@@ -24,6 +25,7 @@ const ButtonLink = ({
   const round = ! children && (trailing || leading);
   return (
     <span
+      style={style}
       onClick={onClick}
       className={cx(styles.root, {
         [styles[getEnumAsClass(size)]]: size,
@@ -92,6 +94,9 @@ ButtonLink.propTypes = {
 
   /** Makes button take the full width of the container */
   fullWidth: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

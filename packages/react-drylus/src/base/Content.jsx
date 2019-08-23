@@ -22,11 +22,13 @@ const styles = {
 };
 
 
-const Content = ({ children, fullHeight, fullWidth }) => {
+const Content = ({ children, fullHeight, fullWidth, style }) => {
   return (
-    <div className={cx(styles.root, {
-      [styles.fullHeight]: fullHeight,
-    })}>
+    <div
+      style={style}
+      className={cx(styles.root, {
+        [styles.fullHeight]: fullHeight,
+      })}>
       <div className={cx(styles.children, { [styles.fullWidth]: fullWidth })}>
         {children}
       </div>
@@ -43,6 +45,9 @@ Content.propTypes = {
 
   /** If true, the content will not be limited to 1200px */
   fullWidth: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

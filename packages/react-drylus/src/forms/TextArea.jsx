@@ -93,6 +93,7 @@ const RawTextArea = ({
   inputRef,
   className,
   loading,
+  style,
   ...rest,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
@@ -100,11 +101,13 @@ const RawTextArea = ({
   const handleOnChange = (e) => onChange ? onChange(e.target.value, e.target.name) : null;
 
   return (
-    <div className={cx(styles.root, {
-      [styles.valid]: Boolean(value) && valid,
-      [styles.error]: error,
-      [className]: Boolean(className),
-    })}>
+    <div
+      style={style}
+      className={cx(styles.root, {
+        [styles.valid]: Boolean(value) && valid,
+        [styles.error]: error,
+        [className]: Boolean(className),
+      })}>
       <div className={styles.outerWrapper}>
         <div className={styles.innerWrapper}>
           {do{
@@ -190,6 +193,9 @@ TextArea.propTypes = {
 
   /** If true, a spinner is shown on the right top corner, like with error and valid */
   loading: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

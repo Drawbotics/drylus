@@ -46,10 +46,11 @@ const Banner = ({
   children,
   category,
   title,
+  style,
 }) => {
   const icon = getIconForCategory(category);
   return (
-    <div className={cx(styles.root, { [styles[getEnumAsClass(category)]]: category })}>
+    <div style={style} className={cx(styles.root, { [styles[getEnumAsClass(category)]]: category })}>
       <Flex align={FlexAlign.START} justify={FlexJustify.START}>
         <FlexItem>
           <Margin size={{ right: Sizes.SMALL }}>
@@ -87,6 +88,9 @@ Banner.propTypes = {
     Categories.INFO,
     Categories.WARNING,
   ]).isRequired,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

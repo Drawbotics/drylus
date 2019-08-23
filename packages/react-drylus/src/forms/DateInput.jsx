@@ -197,7 +197,7 @@ function _getShouldRenderTop(box) {
 }
 
 
-const DatePicker = ({
+const DateInput = ({
   value,
   onChange,
   locale,
@@ -213,6 +213,7 @@ const DatePicker = ({
   calendarOptions,
   activeStartDate,
   loading,
+  style,
 }) => {
   const [ outletElement, setOutletElement ] = useState(null);
   const [ isFocused, setFocused ] = useState(false);
@@ -268,7 +269,7 @@ const DatePicker = ({
   const topRender =  pickerBox ? _getShouldRenderTop(pickerBox) : false;
 
   return (
-    <div className={styles.root} ref={rootRef}>
+    <div style={style} className={styles.root} ref={rootRef}>
       <InputWithRef
         suffix={
           <Button
@@ -321,7 +322,7 @@ const DatePicker = ({
 };
 
 
-DatePicker.propTypes = {
+DateInput.propTypes = {
   /** Can be empty string, or object containing day, month, year as numbers */
   value: PropTypes.oneOfType([
     PropTypes.shape({
@@ -385,12 +386,15 @@ DatePicker.propTypes = {
 
   /** If true, a spinner is shown in the right corner, like with error and valid */
   loading: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 
-DatePicker.defaultProps = {
+DateInput.defaultProps = {
   locale: 'en',
 };
 
 
-export default DatePicker;
+export default DateInput;

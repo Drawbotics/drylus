@@ -74,10 +74,12 @@ const TextLink = ({
   children,
   category,
   underlined,
+  style,
   ...rest,
 }) => {
   return (
     <span
+      style={style}
       className={cx(styles.root, {
         [styles[getEnumAsClass(category)]]: category,
         [styles.underlinedHover]: underlined === LinkUnderlined.HOVER,
@@ -97,6 +99,9 @@ TextLink.propTypes = {
   category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
 
   underlined: PropTypes.oneOf([LinkUnderlined.ALWAYS, LinkUnderlined.HOVER]),
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

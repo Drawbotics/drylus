@@ -111,6 +111,7 @@ const NumberInput = ({
   name,
   withCounter,
   loading,
+  style,
 }) => {
   const inputRef = useRef(null);
 
@@ -137,7 +138,7 @@ const NumberInput = ({
   }
 
   return (
-    <div className={styles.root}>
+    <div style={style} className={styles.root}>
       {do {
         if (renderValue && (value === 0 || value)) {
           const sections = renderValue(value).split(value);
@@ -223,6 +224,9 @@ NumberInput.propTypes = {
 
   /** If true, a spinner is shown on the right corner, like with error and valid */
   loading: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

@@ -70,14 +70,16 @@ const styles = {
 };
 
 
-const RoundIcon = ({ name, size, category, bold }) => {
+const RoundIcon = ({ name, size, category, bold, style }) => {
   const customSize = typeof size === 'number';
   return (
-    <div className={cx(styles.root, {
-      [styles[getEnumAsClass(category)]]: category,
-      [styles[! customSize && getEnumAsClass(size)]]: size,
-      [styles.iconInherit]: customSize,
-    })} style={customSize ? { height: size, width: size, fontSize: size * 0.5 } : null}>
+    <div
+      className={cx(styles.root, {
+        [styles[getEnumAsClass(category)]]: category,
+        [styles[! customSize && getEnumAsClass(size)]]: size,
+        [styles.iconInherit]: customSize,
+      })}
+      style={customSize ? { height: size, width: size, fontSize: size * 0.5, ...style } : style}>
       <Icon name={name} bold={bold} />
     </div>
   );
@@ -105,11 +107,16 @@ RoundIcon.propTypes = {
     Categories.WARNING,
     Categories.BRAND,
   ]),
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 
 RoundIcon.defaultProps = {
   size: Sizes.DEFAULT,
+
+  style: {},
 };
 
 

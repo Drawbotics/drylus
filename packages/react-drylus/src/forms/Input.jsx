@@ -156,6 +156,7 @@ const RawInput = ({
   inputRef,
   className,
   loading,
+  style,
   ...rest,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
@@ -165,11 +166,13 @@ const RawInput = ({
   const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
   const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
   return (
-    <div className={cx(styles.root, {
-      [styles.valid]: Boolean(value) && valid,
-      [styles.error]: error,
-      [className]: Boolean(className),
-    })}>
+    <div
+      style={style}
+      className={cx(styles.root, {
+        [styles.valid]: Boolean(value) && valid,
+        [styles.error]: error,
+        [className]: Boolean(className),
+      })}>
       <div className={styles.outerWrapper}>
         {do{
           if (prefix) {
@@ -296,6 +299,9 @@ Input.propTypes = {
 
   /** If true, a spinner is shown in the right corner, like with error and valid */
   loading: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

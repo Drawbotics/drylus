@@ -65,9 +65,10 @@ export const ListItem = ({
   icon,
   category,
   disabled,
+  style,
 }) => {
   return (
-    <li className={cx(styles.item, { [styles.disabled]: disabled })}>
+    <li style={style} className={cx(styles.item, { [styles.disabled]: disabled })}>
       {children}
       {do {
         if (icon) {
@@ -102,6 +103,9 @@ ListItem.propTypes = {
 
   /** If true the item is less visible */
   disabled: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 ListItem.defaultProps = {
@@ -109,16 +113,16 @@ ListItem.defaultProps = {
 };
 
 
-const List = ({ children, ordered }) => {
+const List = ({ children, ordered, style }) => {
   if (ordered) {
     return (
-      <ol className={cx(styles.root, styles.ordered)}>
+      <ol style={style} className={cx(styles.root, styles.ordered)}>
         {children}
       </ol>
     );
   }
   return (
-    <ul className={styles.root}>
+    <ul style={style} className={styles.root}>
       {children}
     </ul>
   );
@@ -130,6 +134,9 @@ List.propTypes = {
   children: PropTypes.node.isRequired,
 
   ordered: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

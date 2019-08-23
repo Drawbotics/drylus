@@ -73,6 +73,7 @@ const Avatar = ({
   category,
   backgroundColor,
   hint,
+  style,
 }) => {
   const customSize = typeof size === 'number';
   const avatar = (
@@ -85,6 +86,7 @@ const Avatar = ({
       height: customSize ? size : undefined,
       width: customSize ? size : undefined,
       fontSize: customSize ? size * 0.5 : undefined,
+      ...style,
     }}>
       {do {
         if (image) {
@@ -136,6 +138,14 @@ Avatar.propTypes = {
 
   /** Custom override for the background color, useful for profiles */
   backgroundColor: PropTypes.string,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
+};
+
+
+Avatar.defaultProps = {
+  style: {},
 };
 
 

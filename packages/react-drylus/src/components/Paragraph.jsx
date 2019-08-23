@@ -12,14 +12,17 @@ const styles = {
 };
 
 
-const Paragraph = ({ children }) => {
-  return <p className={styles.root}>{children}</p>;
+const Paragraph = ({ children, style }) => {
+  return <p style={style} className={styles.root}>{children}</p>;
 };
 
 
 Paragraph.propTypes = {
   /** Text displayed by the paragraph */
   children: PropTypes.node,
+  
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

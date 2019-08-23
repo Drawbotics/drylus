@@ -194,6 +194,7 @@ const RadioGroup = ({
   size,
   className,
   hint,
+  style,
   ...rest,
 }) => {
   const handleOnChange = (e) => {
@@ -202,7 +203,7 @@ const RadioGroup = ({
   };
 
   return (
-    <div className={cx(styles.radioGroup, className)}>
+    <div style={style} className={cx(styles.radioGroup, className)}>
       <div className={styles.radios}>
         {options.map((option) => (
           <div key={option[valueKey]} className={styles.radioWrapper}>
@@ -265,6 +266,9 @@ RadioGroup.propTypes = {
 
   /** Small text shown below the group, replaced by error if present */
   hint: PropTypes.string,
+  
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

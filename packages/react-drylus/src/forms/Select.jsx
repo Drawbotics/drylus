@@ -99,16 +99,19 @@ const Select = ({
   error,
   valid,
   loading,
+  style,
   ...rest,
 }) => {
   const handleOnChange = (e) => onChange(e.target.value, e.target.name);
   return (
-    <div className={cx(styles.root, {
-      [styles.noValue]: ! value,
-      [styles.disabled]: disabled,
-      [styles.valid]: Boolean(value) && valid,
-      [styles.error]: error,
-    })}>
+    <div
+      style={style}
+      className={cx(styles.root, {
+        [styles.noValue]: ! value,
+        [styles.disabled]: disabled,
+        [styles.valid]: Boolean(value) && valid,
+        [styles.error]: error,
+      })}>
       {do{
         if (loading) {
           <div className={styles.icon}>
@@ -198,6 +201,9 @@ Select.propTypes = {
 
   /** If true, a spinner is shown in the right corner, like with error and valid */
   loading: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

@@ -142,9 +142,11 @@ export const DropdownOption = ({
   onClick,
   onClickClose,
   icon,
+  style,
 }) => {
   return (
     <div
+      style={style}
       className={cx(styles.option, {
         [styles[getEnumAsClass(category)]]: category,
         [styles.disabled]: disabled,
@@ -178,6 +180,9 @@ DropdownOption.propTypes = {
     Categories.SUCCESS,
     Categories.WARNING,
   ]),
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 DropdownOption.defaultProps = {
@@ -185,9 +190,9 @@ DropdownOption.defaultProps = {
 };
 
 
-export const DropdownTitle = ({ text }) => {
+export const DropdownTitle = ({ text, style }) => {
   return (
-    <div className={styles.title}>
+    <div style={style} className={styles.title}>
       {text}
     </div>
   );
@@ -196,6 +201,9 @@ export const DropdownTitle = ({ text }) => {
 DropdownTitle.propTypes = {
   /** Value of the title */
   text: PropTypes.string.isRequired,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 
@@ -206,7 +214,7 @@ export const DropdownSeparator = () => {
 };
 
 
-const Dropdown = ({ children, trigger, side }) => {
+const Dropdown = ({ children, trigger, side, style }) => {
   if (! React.isValidElement(trigger)) {
     console.warn('Dropdown only accepts a single child as trigger');
     return null;
@@ -223,7 +231,7 @@ const Dropdown = ({ children, trigger, side }) => {
     };
   }, []);
   return (
-    <div className={styles.wrapper}>
+    <div style={style} className={styles.wrapper}>
       <div onClick={() => setDropdowOpen(true)} className={styles.trigger}>
         {trigger}
       </div>
@@ -254,6 +262,9 @@ Dropdown.propTypes = {
     DropdownSides.TOP,
     DropdownSides.BOTTOM,
   ]),
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 Dropdown.defaultProps = {

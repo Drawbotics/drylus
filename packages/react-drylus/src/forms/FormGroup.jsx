@@ -18,9 +18,10 @@ const FormGroup = ({
   label,
   input,
   horizontal,
+  style,
 }) => {
   return (
-    <div className={styles.root}>
+    <div style={style} className={styles.root}>
       <Flex
         direction={horizontal ? FlexDirections.HORIZONTAL : FlexDirections.VERTICAL}
         align={horizontal ? FlexAlign.CENTER : FlexAlign.STRETCH}>
@@ -47,6 +48,9 @@ FormGroup.propTypes = {
 
   /** If true, the label will be placed on the left, and the input on the right (center flex aligned) */
   horizontal: PropTypes.bool,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

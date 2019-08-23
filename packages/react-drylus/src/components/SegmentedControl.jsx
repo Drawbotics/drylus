@@ -88,9 +88,10 @@ const SegmentedControl = ({
   options,
   valueKey,
   labelKey,
+  style,
 }) => {
   return (
-    <div className={styles.root}>
+    <div style={style} className={styles.root}>
       {options.map((option) => (
         <div
           key={option[valueKey]}
@@ -138,6 +139,9 @@ SegmentedControl.propTypes = {
 
   /** Triggered when a control is clicked */
   onChange: PropTypes.func,
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

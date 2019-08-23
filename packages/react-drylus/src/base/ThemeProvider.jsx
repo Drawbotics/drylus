@@ -54,6 +54,8 @@ const ThemeProvider = ({ children, style }) => {
 
 ThemeProvider.propTypes = {
   children: PropTypes.node.isRequired,
+  
+  /** Used for style overrides */
   style: PropTypes.object,
 };
 

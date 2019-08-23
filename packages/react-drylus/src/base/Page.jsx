@@ -24,6 +24,8 @@ const Page = ({ children, style }) => {
 
 Page.propTypes = {
   children: PropTypes.node.isRequired,
+
+  /** Used for style overrides */
   style: PropTypes.object,
 };
 

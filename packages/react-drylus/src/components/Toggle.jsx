@@ -82,9 +82,11 @@ const Toggle = ({
   disabled,
   value,
   size,
+  style,
 }) => {
   return (
     <div
+      style={style}
       className={cx(styles.root, {
         [styles.active]: value,
         [styles.small]: size === Sizes.SMALL,
@@ -108,6 +110,9 @@ Toggle.propTypes = {
   value: PropTypes.bool.isRequired,
 
   size: PropTypes.oneOf([ Sizes.SMALL, Sizes.DEFAULT ]),
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

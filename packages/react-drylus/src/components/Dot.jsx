@@ -36,9 +36,9 @@ const styles = {
 };
 
 
-const Dot = ({ category }) => {
+const Dot = ({ category, style }) => {
   return (
-    <div className={cx(styles.root, {
+    <div style={style} className={cx(styles.root, {
       [styles[getEnumAsClass(category)]]: category,
     })} />
   );
@@ -55,6 +55,9 @@ Dot.propTypes = {
     Categories.DANGER,
     Categories.PRIMARY,
   ]),
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 

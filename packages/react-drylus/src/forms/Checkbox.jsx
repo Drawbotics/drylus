@@ -137,6 +137,7 @@ const Checkbox = ({
   disabled,
   error,
   size,
+  style,
   ...rest,
 }) => {
   const isChecked = !! value;
@@ -148,7 +149,7 @@ const Checkbox = ({
 
   const uniqId = id ? id : v4();
   return (
-    <div className={styles.root}>
+    <div style={style} className={styles.root}>
       <label className={cx(styles.wrapper, {
         [styles[getEnumAsClass(size)]]: size,
         [styles.disabled]: disabled,
@@ -208,6 +209,9 @@ Checkbox.propTypes = {
 
   /** Size of the checkbox. Can be small or default */
   size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT]),
+
+  /** Used for style overrides */
+  style: PropTypes.object,
 };
 
 
