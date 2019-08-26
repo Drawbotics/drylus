@@ -424,7 +424,7 @@ function generateTable({
     const uniqId = Object.values(row).reduce((memo, v) => `${memo}-${v}`, '');
     const renderData = renderCell || renderChildCell;
     const parentRow = (
-      <TRow key={uniqId} parent={hasData ? uniqId : undefined} onClick={() => onClickRow(row)} highlighted={activeRow === row.id}>
+      <TRow key={uniqId} parent={hasData ? uniqId : undefined} onClick={() => onClickRow(row)} highlighted={activeRow && row.id && activeRow === row.id}>
         {do{
           if (header) {
             header.map((item, i) => {
