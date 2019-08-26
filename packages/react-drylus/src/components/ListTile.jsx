@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
 import Flex, { FlexItem } from '../layout/Flex';
+import Text from './Text';
 
 
 const styles = {
@@ -45,13 +46,11 @@ const ListTile = ({
   onClick,
   style,
 }) => {
-  if (Boolean(title) && typeof title !== 'string' && title.type?.name !== 'Text') {
+  if (Boolean(title) && typeof title !== 'string' && title.type !== Text) {
     console.warn('`title` should only be a string or a Text component');
-    return null;
   }
-  if (Boolean(subtitle) && typeof subtitle !== 'string' && subtitle.type?.name !== 'Text') {
+  if (Boolean(subtitle) && typeof subtitle !== 'string' && subtitle.type !== Text) {
     console.warn('`subtitle` should only be a string or a Text component');
-    return null;
   }
   return (
     <div
