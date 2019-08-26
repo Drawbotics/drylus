@@ -20,7 +20,7 @@ const styles = {
     width: 100%;
 
     &::after {
-      content: '\\eaa8';
+      content: '\\eaac';
       font-family: 'drycons';
       color: ${sv.colorPrimary};
       position: absolute;
