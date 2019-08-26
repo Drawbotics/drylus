@@ -6,16 +6,13 @@ import {
   Page,
   Layout,
   LayoutPositions,
-  Content,
 } from '@drawbotics/react-drylus';
 
 import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
 import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
 import Sidebar from './components/Sidebar';
-import LinksNavigation from './components/LinksNavigation';
-import RoutesRenderer from './components/RoutesRenderer';
-import pages from './pages';
+import Root from './routes/Root';
 
 
 window._drylus = drylus;
@@ -27,18 +24,12 @@ const App = () => {
       <DrylusProvider>
         <Page>
           <Layout
-            bar={
-              <Layout
-                bar={<Sidebar />}
-                position={LayoutPositions.LEFT}>
-                <LinksNavigation routes={pages} />
-              </Layout>
-            }
+            bar={<Sidebar />}
             position={LayoutPositions.LEFT}
             fixed>
-            <Content fullHeight>
-              <RoutesRenderer routes={pages} />
-            </Content>
+            <div style={{ height: '100vh' }}>
+              <Root />
+            </div>
           </Layout>
         </Page>
       </DrylusProvider>
