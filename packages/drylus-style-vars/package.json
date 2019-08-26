@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/drylus-style-vars",
-  "version": "3.6.3",
+  "version": "3.6.4",
   "description": "Style variable constants used by Drawbotics across different projects",
   "license": "UNLICENSED",
   "main": "dist/vars.js",
