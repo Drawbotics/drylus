@@ -25,7 +25,7 @@ const RoutesRenderer = ({ routes, base, ...props }) => {
   return (
     <Switch>
       <Route
-        path={`/${base}/*`}
+        path={[`/${base}/*`, `/${base}`]}
         render={() => <RoutesHandler {...props} base={base} routes={generatedRoutes} />} />
     </Switch>
   );

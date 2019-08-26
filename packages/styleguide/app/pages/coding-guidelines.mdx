@@ -1,0 +1,2841 @@
+# Coding Guidelines
+
+The style guidelines and best practices for our engineering team.
+
+- To-Do
+    - [x]  Indentation
+    - [x]  Talk about `const/let` and `var`
+    - [x]  Functions styles `() => {}` or `function`
+    - [x]  Arrow functions `(prop) => {}` vs `prop => {}`
+    - [x]  Naming conventions
+    - [x]  Prefixing internal functions with _
+    - [x]  Using triple equality `===`
+    - [x]  Undefined or null comparison `adsfa != null`
+    - [x]  Spacing
+    - [x]  Single quotes
+    - [x]  Semicolons
+    - [x]  Favor immutability
+    - [x]  Object destructuring over `Object.assign`
+    - [x]  Object params in functions
+    - [x]  String templates
+    - [x]  Anonymous function
+    - [x]  Pure functions
+    - [x]  Try to not reassing parameters
+    - [x]  Never use `() => \n more stuff` use `{}` instead
+    - [x]  Line length
+    - [x]  Prefer array methods over `for` loop
+    - [x]  Don't overcomplicate ternary operators
+    - [x]  Use of `object?.prop`
+    - [x]  Prefer `async/await`
+    - [x]  Don't chain variable assignments
+    - [x]  Prefer `variable += 1` over `variable++`
+    - [x]  Line breaks, where to place them
+    - [x]  Declare functions before using them (Yes, @Leo ) Except in a class
+    - [x]  Don't test for booleans `if (var === true)`
+    - [x]  Trailing commas
+    - [x]  Where to put implicit `key: values Ex: const object = { value };`
+    - [x]  New lines (2 vs 1)
+    - [x]  `import` order
+    - [x]  Don't break lines to early (unless it REALLY improves readability)
+    - [x]  Always try to exit early (list exceptions at the top)
+    - [x]  Comment spacing
+    - [x]  Comment placement
+    - [x]  Method chaining indentation and dot position
+    - [x]  When wrapping line, position of the operator
+    - [x]  Avoid use `self`
+    - [x]  Shorthand properties at the beginning of an object
+    - [x]  Use `slice` to clone an array
+    - [x]  Array of objects `{}` placement
+    - [x]  Array methods callback format (single line, multi-line)
+    - [x]  Use object destructuring when returning multiple data instead of an array
+    - [x]  Space when destructuring array but not when declaring it
+    - [x]  Long function signature indentation
+    - [x]  Always use methods instead of arrow functions in clases
+    - [x]  constructor always comes first
+    - [x]  always use class properties
+    - [x]  class properties always come first
+    - [x]  "private" methods last and starting with _
+    - [x]  in classes, always extract as much functionality as possible as pure functions in the same file
+    - [x]  pure function is class files always come at the top
+    - [x]  How to split ternary operators
+    - [x]  Use `Boolean` instead of `!!`
+    - [x]  Leave a blank line between a block and the next statement
+    - [x]  Don't pad blocks with blank lines
+    - [x]  Don't use multiple blank lines inside blocks
+    - [x]  Use two lines to separate conceptually different parts of the code
+    - [x]  Never have more than 2 blank lines
+    - [x]  Single line `if`
+    - [x]  `else` in a new line
+    - [x]  Use blocks `{}` in `switch`
+    - [x]  No globals
+    - [x]  `catch` new line
+    - [ ]  Every input component should follow *controlled/uncontrolled* paradigm
+    - [ ]  Alternative React syntax (no jsx)
+    - [x]  React component naming
+    - [ ]  Hooks usage (mention old classes and how we prefer hooks now, why etc)
+    - [x]  Expose "enums" when a prop can have one of several fixed values
+    - [x]  React components jsx syntax `<Component prop />` one line per prop, keep closing bracket on last prop
+    - [ ]  CSS in JS
+    - [ ]  BEM (CSS)
+    - [ ]  File naming (components are Uppercase, other files are lowercase)
+    - [ ]  Components in folders (includes `Component.jsx`, `index.js` )
+    - [ ]  Testing
+    - [ ]  Number of lines in a file/render
+    - [ ]  Separating components even in the same file
+    - [ ]  Use of `do {}`
+    - [ ]  Prefer standalone configuration files instead of config keys in `package.json`. Ex: `.browserlistrc` instead of `package.browserlist`
+    - [ ]  Don't export an object directly when writing functional react components `() => ()`
+    - [ ]  Don't use `React.Component` unless a version older than 16.8 is used
+    - [ ]  Avoid prop spreading
+    - [ ]  Don't use `index` as key
+    - [x]  Don't use `PropTypes.array`, use instead `PropTypes.arrayOf`
+    - [ ]  Component `className`
+    - [x]  Leave one blank line between component declaration and proptypes declaration
+    - [ ]  Always destructure props
+    - [ ]  Avoid useless intermediary variables
+    - [ ]  If using JSX, don't use spaces inside braces
+    - [ ]  No blank space in between tags
+
+# Intro
+
+> A style guide is about consistency. Consistency with this style guide is important. Consistency within a project is more important. Consistency within one module or function is the most important.
+
+> However, know when to be inconsistent -- sometimes style guide recommendations just aren't applicable. When in doubt, use your best judgment. Look at other examples and decide what looks best. And don't hesitate to ask!
+
+     — Python PEP8
+
+### The Zen of ~~Python~~ JavaScript
+
+    Beautiful is better than ugly.
+    Explicit is better than implicit.
+    Simple is better than complex.
+    Complex is better than complicated.
+    Flat is better than nested.
+    Sparse is better than dense.
+    Readability counts.
+    Special cases aren't special enough to break the rules.
+    Although practicality beats purity.
+    Errors should never pass silently.
+    Unless explicitly silenced.
+    In the face of ambiguity, refuse the temptation to guess.
+    There should be one-- and preferably only one --obvious way to do it.
+    Although that way may not be obvious at first unless you're Dutch.
+    Now is better than never.
+    Although never is often better than *right* now.
+    If the implementation is hard to explain, it's a bad idea.
+    If the implementation is easy to explain, it may be a good idea.
+    Namespaces are one honking great idea -- let's do more of those!
+
+# The Language
+
+## Value or Reference
+
+- When you use a primitive type (also called a scalar value) you always work with its value and they're immutable.
+
+        const foo = 1;
+        
+        function myFunc(arg) {
+          arg += 1;
+        	return arg;
+        }
+        
+        console.log(myFunc(foo));  // prints 2
+        console.log(foo);  // prints 1
+
+- When a complex type is used, a reference to its value is passed instead. Also, they're mutable.
+
+        const foo = [1, 2, 3, 4];
+        foo[5] = 5;
+        console.log(foo);  // prints [1, 2, 3, 4, 5]
+        
+        function myFunc(arg) {
+          arg[0] = 10;
+          return arg;
+        }
+        
+        console.log(myFunc(foo));  // prints [10, 2, 3, 4, 5];
+        console.log(foo);  // prints [10, 2, 3, 4, 5];
+
+## Casting
+
+- Use `String()` when casting a value to string.
+
+    Why? Specially when casting objects, if we use the `.toString()` method, we have to check the object exists first while `String()` would just return undefined making it safer.
+
+        // Bad
+        '' + 12;
+        new String(12);
+        person.toString();
+        
+        // Good
+        String(12);
+        String(person);
+
+- Use `Number()` when casting a value to a number instead of `parseInt` or `parseFloat`.
+
+    Why? Because its behavior is more consistent than `parseInt` or `parseFloat`. Also, `parseInt` and `parseFloat` take an additional argument that changes the base used and can lead to unwanted behavior.
+
+        // Bad
+        parseInt('12');     // 12
+        parseInt('2.2');    // 2
+        parseFloat('2.2');  // 2.2
+        parseInt('12a');    // 12
+        parseInt('a12');    // NaN
+        
+        // Good
+        Number('12');       // 12
+        Number('2.2');      // 2.2
+        Number('12a');      // NaN
+        Number('a12');      // NaN
+
+- Use available `Math` functions when casting a float number to an integer.
+
+    Why? They communicate intention much more explicitly.
+
+        // Bad
+        parseInt(12.2);    // 12
+        
+        // Good
+        Math.trunc(12.6);  // 12
+        Math.ceil(12.6);   // 13
+        Math.floor(12.6);  // 12
+        Math.round(12.6);  // 13
+
+- Use `Boolean()` instead of `!!` when casting to a boolean.
+
+    Why? Consistency first, that's the way we use for the other types and second, to make the code easier to read since `!` symbols sometimes get lost in the noise.
+
+        const a = 'string'
+        const b = 1;
+        const c = null;
+        
+        // Bad
+        !!a;  // true
+        !!b;  // true
+        !!c;  // false
+        
+        // Good
+        Boolean(a);  // true
+        Boolean(b);  // true
+        Boolean(c);  // false
+
+## Variables
+
+- Don't use `var`. Always use `const` or `let`.
+
+    Why? `var` hoists every assignment to the beginning of the function while `let` and `const` are block-scoped. Also, `var` will silently re-assing any values to the same var.
+
+        // Bad
+        function myFunc(arg) {
+          var foo = 1;
+          var bar = 1;
+        
+          if (arg) {
+            var foo = 2;
+            bar += foo;
+          }
+        
+          console.log(foo);  // prints 2
+          console.log(bar);  // prints 3;
+        
+          return bar;
+        }
+        
+        // Good
+        function myFunc(arg) {
+          const foo = 1;
+          let bar = 1;
+        
+          if (arg) {
+            const foo = 2;
+            bar += foo;
+          }
+        
+          console.log(foo);  // prints 1
+          console.log(bar);  // prints 3;
+        
+          return bar;
+        }
+        
+        var foo = 'string';
+        var foo = 'string2';  // will silently replace the value of foo
+        
+        let foo = 'string';
+        let foo = 'string2';  // will trigger an error
+
+- Note that `const` does not mean constant value, but constant assignment.
+
+    For scalar values however, constant assignment and value can be assumed, since those are immutable.
+
+        const foo = 1;
+        foo = 3;  // will trigger an error
+        
+        const bar = { name: 'User' };
+        bar.name = 'Object';
+        console.log(bar);  // prints { name: 'Object' }
+
+- Always use `const` for every declaration. If there's no way other than re-assigning a reference, then use `let`.
+
+    Why? This would prevent us re-assigning a different value accidentally to a variable. It will also help us write easier to reason about code.
+
+        // Bad
+        let foo = 1;
+        // ... more code ...
+        console.log(foo);  // we can't be sure it hasn't been modified and will print 1
+        
+        // Good
+        const bar = 1;
+        // ... more code ...
+        console.log(bar);  // we can be sure it will print 1
+
+- Never chain variable assigments.
+
+        // Bad
+        const a = b = 3;
+        
+        // Good
+        const a = 3;
+        const b = 3;
+
+- Never use comma operator `,` when declaring variables.
+
+        // Bad
+        let a, b, c;
+        
+        // Good
+        let a;
+        let b;
+        let c;
+
+- Try to group `const` and `let` logically.
+
+        // Bad
+        let items = [1, 2, 3];
+        const x = 2;
+        let index = 0;
+        const y = 4;
+        let coeff = 0.5;
+        
+        // Good
+        const x = 2;
+        const y = 4;
+        let items = [1, 2, 3];
+        let index = 0;
+        let coeff = 0.5;
+
+- Avoid linebreaks before or after `=` in an assignment.
+
+        // Bad
+        const foo =
+        	'value';
+        
+        // Good
+        const foo = 'value';
+
+- Never leave unused variables around.
+
+    That includes unused function arguments and unused imports.
+
+## Objects
+
+- Use literal syntax for object creation.
+
+        // Bad
+        const object = new Object();
+        
+        // Good
+        const object = {};
+
+- When adding functions to an object, use arrow functions instead of object method shorthand.
+
+    Why? Because arrow functions don't have a `this` reference. That would prevent you from using it and encountering difficult to track bugs when the objects are passed around potentially changing where `this` is pointing at.
+
+        // Bad
+        const object = {
+          prop: 1,
+          action() {
+        	  console.log(`Clicked and ${this.prop}`);
+          },
+        };
+        
+        document.addEventListener('click', object.action);  // After click, would print Clicked and undefined
+        
+        // Good
+        const object = {
+          prop: 1,
+          action: () => {
+        		console.log(`Clicked and ${object.prop}`); 
+          },
+        };
+        
+        document.addEventListener('click', object.action);  // After click, would print Clicked and 1
+
+- Always use property value shorthand.
+
+        const name = 'User';
+        
+        // Bad
+        const object = { name: name };
+        
+        // Good
+        const object = { name };
+
+- Always place shorthand properties at the beginning of an object declaration.
+
+        const name = 'User';
+        
+        // Bad
+        const object = {
+          lastName: 'Userface',
+          name,
+        };
+        
+        // Good
+        const object = {
+          name,
+          lastName: 'Userface',
+        };
+
+- Only quote property names when those are invalid identifiers.
+
+    Why? As we can see in the example, it's easier to differentiate the key from the value when using syntax highlighting.
+
+        // Bad
+        const object = { 'name': 'User' };
+        
+        // Good
+        const object = { name: 'User', 'last-name': 'Userface' };
+
+- Prefer object spread operator over `Object.assign`.
+
+    Why? It can lead to unexpected bugs mutating the original object. Also, it's less concise and difficult to read.
+
+        // Bad
+        const original = { name: 'User', age: 20 };
+        const copy = Object.assign(original, { name: 'User2', lastName: 'Userface' });  // in a slip, we mutated the original object
+        console.log(copy);  // prints { name: 'User2', lastName: 'Userface', age: 20 }
+        console.log(original);  // prints { name: 'User2', lastName: 'Userface', age: 20 }
+        
+        // Good
+        const original = { name: 'User', age: 20 };
+        const copy = { ...original, name: 'User2', lastName: 'Userface' };
+        console.log(copy);  // prints { name: 'User2', lastName: 'Userface', age: 20 }
+        console.log(original);  // prints { name: 'User', age: 20 }
+
+- Always use object destructuring when extracting properties from an object.
+
+        const object = { name: 'User', age: 20 };
+        
+        // Bad
+        const name = object.name;
+        const age = object.age;
+        
+        // Good
+        const { name, age } = object;
+
+- Always destructure all the properties from the same object in the same declaration.
+
+        const object = { name: 'User', age: 20 };
+        
+        // Bad
+        const { name } = object;
+        const { age } = object;
+        
+        // Good
+        const { name, age } = object;
+
+- Always use dot notation when accessing properties if possible.
+
+        const object = { name: 'User' };
+        
+        // Bad
+        object['name'];
+        
+        // Good
+        object.name;
+
+- Use bracket notation `[]` when accessing properties with a variable.
+
+        const propName = 'name';
+        const object = { name: 'User' };
+        object[propName];
+
+- If available, use the `?.` (optional chaining) operator when accesing potentially `null` or `undefined` objects instead of testing for existence.
+
+    Even though is only at Stage 1, it's already well supported in Babel
+
+        const object = {};
+        
+        // Bad
+        if (object.user != null) {
+          console.log(object.user.name);
+        }
+        
+        // Good
+        console.log(object.user?.name);
+
+    ⚠️  ***NOTE**: Don't overuse the `?.` operator. If a property must be present, don't test for it's inexistence, let the system notify you of unexpected data by failing early.*
+
+- Use computed property names when necessary.
+
+        const foo = 'property';
+        const object = { [foo]: 'bar' };
+        console.log(object);  // prints { property: 'bar' };
+
+- When having to mutate an object, always favor returning a copy of the object instead.
+
+        const object = { name: 'User', lastName: 'Userface' };
+        
+        // Bad
+        object.name = 'User2';
+        
+        // Good
+        const newObject = { ...object, name: 'User2' };
+
+- Always use `Object.keys(object)` over a `for` loop.
+
+    Why? `for` loop iterates over all properties of the object and the prototype chain while `Object.keys()` only iterates over the object own properties.
+
+        // Bad
+        for (let key in object) {
+        }
+        
+        // Good
+        Object.keys(object).forEach((key) => {
+        });
+
+## Arrays
+
+- Use literal syntax for array creation.
+
+        // Bad
+        const items =  new Array();
+        
+        // Good
+        const items = [];
+
+- Use `slice()` to clone an array instead of array spread `...`.
+
+    Why? It leads to more consistent code because it can also be used when chaining array methods that will mutate the original array. E.g: `sort`
+
+        const items = [2, 4, 3, 10];
+        const copy = items.slice();
+        const sortedArray = items.slice().sort();
+
+- To convert an iterable object into an array, use array spread `...`.
+
+        const Component = ({ children }) => {
+        	const childrenItems = [...children];
+          // ... render
+        };
+
+- Always favor array methods over `for` loops.
+
+        const items = [1, 2, 3, 4];
+        
+        // Bad
+        const newArray = [];
+        
+        for (let item of items) {
+          newArray.push(item * 2);
+        }
+        
+        // Good
+        const newArray = items.map((item) => item * 2);
+
+- If the index and the item is necessary, always favor `forEach` over a `foor` loop.
+
+        const items = [1, 2, 3, 4];
+        
+        // Bad
+        let index = 0;
+        for (let item of items) {
+          console.log('Item', item, 'at index', index);
+          index += 1;
+        }
+        
+        // Good
+        items.forEach((item, index) => {
+        	console.log('Item', item, 'at index', index);
+        });
+
+- If array methods are needed for an iterable object, always perform the transformation into an array at the point of usage.
+
+        // Bad
+        const items = [...iterableLike];
+        items.forEach(console.log);
+        
+        // Good
+        [...iterableLike].forEach(console.log);
+
+- Always use array destructuring when accessing items of an array.
+
+        const items = [1, 2];
+        
+        // Bad
+        const item1 = items[0];
+        const item3 = items[1];
+        
+        // Good
+        const [ item1, item2 ] = items;
+
+- Never use `_` for unused items in an array when destructuring, use empty commas instead.
+
+    Why? `_` doesn't have a special meaning, it's just another name for a variable. If used once, it can't be used again.
+
+        const items = [1, 2, 3, 4];
+        
+        // Bad
+        const [ item1, _, item3 ] = items;
+        const [ item1, _, _, item4 ] = items;  // will trigger an error
+        
+        // Good
+        const [ item1, , item3 ] = items;
+        const [ item1, , , item3 ] = items;
+
+- When using array methods that mutate the array, always clone the array first.
+
+        // Bad 
+        items.sort((a, b) => a - b);
+        
+        // Good
+        items.slice().sort((a, b) => a - b);
+
+- When adding new items to an array, always favor using the spread operator `...` instead of `push()`.
+
+        // Bad
+        items.push(5);
+        
+        // Good
+        const newArray = [...items, 5];
+
+## Strings
+
+- Use single quotes `' '` for strings.
+
+        // Bad
+        const name = "User";
+        
+        // Good
+        const name = 'User';
+
+- Only use back quotes ```` when there are variables to interpolate.
+
+        // Bad
+        const name = `User`;
+        
+        // Good
+        const name = `The name is: ${name}`;
+
+- When variables need to be added to an string, don't use concatenation, always use string templates.
+
+        // Bad
+        const string = 'The name is: ' + name;
+        
+        // Good
+        const string = `The name is: ${name}`;
+
+- When spliting long strings, don't use back quotes, they keep the indentation. Instead, concatenate them.
+
+        // Bad
+        function myFunction() {
+        	const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        	 Morbi convallis elit erat, quis faucibus metus gravida a. Quisque ac velit
+        	 eu nibh ultricies malesuada venenatis vitae magna.`;
+          // ... more code ...
+        }
+        
+        // Good
+        function myFunction() {
+        	const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+        	 'Morbi convallis elit erat, quis faucibus metus gravida a. Quisque ac velit ' +
+        	 'eu nibh ultricies malesuada venenatis vitae magna.';
+          // ... more code ...
+        }
+
+- Avoid escaping unnecessary characters. When single quotes need to be used inside a string, use back quotes instead.
+
+        // Bad
+        const string = 'It\'s a me, Mario!';
+        
+        // Good
+        const string = `It's a me, Mario!`;
+
+## Functions
+
+- Always use function expressions instead of function declarations.
+
+        // Bad
+        const foo = function () {
+        };
+        
+        // Good
+        function foo() {
+        }
+
+- Always use arrow functions when declaring immediately invoked functions.
+
+        // Bad
+        (function () {
+          // ... more code ...
+        })();
+        
+        // Good
+        (() => {
+          // ... more code ...
+        })();
+
+- Never use `arguments`.
+
+    Why? Since rest arguments are available, that's an obsolete practice. Plus, it's not supported in arrow functions.
+
+        // Bad
+        function foo() {
+        	const args = Array.prototype.slice.call(arguments);
+        	return args[0] + args[1];
+        }
+        
+        // Good
+        function foo(...args) {
+        	return args[0] + args[1];
+        }
+
+- Always use default parameters instead of mutating an argument when a default value is needed.
+
+        // Bad
+        function foo(arg) {
+        	arg = arg || {};
+          // ... more code ...
+        }
+        
+        // Good
+        function foo(arg = {}) {
+        	// ... more code ...
+        }
+
+- When using keyword arguments (an object), always put them in the last position.
+
+        // Bad
+        function foo(kwargs, arg) {
+        	return kwargs.bar + arg;
+        }
+        
+        // Good
+        function foo(arg, kwargs) {
+        	return kwargs.bar + arg;
+        }
+
+- When using optional keyword arguments, always assign a default value of an empty object to them.
+
+        // Bad
+        function foo(arg, kwargs) {
+          // ... more code ...
+        }
+        
+        foo('Hello');  // Can fail if the function tries to access kwargs in the body, leading to control statements
+        
+        // Good
+        function foo(args, kwargs = {}) {
+          // ... more code ...
+        }
+        
+        foo('Hello');  // Would lead to cleaner code inside the function body
+
+- Never use `eval()` for creating a dynamic function. Intead use `Function`.
+
+        // Bad
+        const foo = eval('function (a, b) { return a + b }');
+        
+        // Good
+        const foo = Function('a', 'b', 'return a + b');
+
+    ⚠️  ***NOTE**: Think twice if you ever need to do this.*
+
+- Avoid re-assigning arguments. Only good use case is when some sanitization of the arguments is needed.
+
+    If we mutate arguments, it's complicated to know further in the body of the function if the argument still holds the original value or not. When sanitizing, we're working with the intended value of that argument, so no confusion is present.
+
+        // Bad 
+        function foo(arg) {
+        	arg = 2;
+        	return arg;
+        }
+        
+        // Good
+        function foo(arg) {
+          arg = sanitize(arg);
+        	return arg;
+        }
+
+- Never mutate arguments. Instead, clone them.
+
+        // Bad
+        function foo(arg) {
+          arg[0] = 'Bar';
+        }
+        
+        // Good
+        function foo(arg) {
+          const newArg = arg.slice();
+        	newArg[0] = 'Bar';
+        }
+
+- Use the spread operator `...` to call functions with different number of arguments intead of `call()` or `apply()`
+
+        // Bad
+        function foo(array) {
+        	bar.apply(null, array);
+        }
+        
+        // Good
+        function foo(array) {
+        	bar(...array);
+        }
+
+- When declaring standalone functions, always use `function` keyword.
+
+        // Bad
+        const foo = () => {
+        	return 'bar';
+        };
+        
+        // Good
+        function foo() {
+          return 'bar';
+        }
+
+- When using function assignment, always use arrow functions.
+
+        // Bad
+        const foo = function () {
+        };
+        
+        // Good
+        const foo = () => {
+        };
+
+- When declaring a function in the body of another function, always use function assigment.
+
+    Why? Those functions can be thought as just variables like `const a = 1`, the only difference is that they contain a function value instead of a complex or scalar vlaue, so consistency dictates, we use the same assignment expression.
+
+        // Bad
+        function foo(arg) {
+        	const coef = 0.1;
+        
+        	function bar() {
+            // ... more code ...
+          }
+        
+        	return bar(arg * coef);
+        }
+        
+        // Good
+        function foo(arg) {
+        	const coef = 0.1;
+        	const bar = () => {
+            // ... more code ...
+          };
+        
+        	return bar(arg * coef);
+        }
+
+- Always declare pure functions as standalone functions. Always declare non-pure functions as close to the external parameters as possible.
+
+        // Bad
+        function foo(number1, number2) {
+        	const add = (a, b) => {
+        		return a + b;
+        	};
+        	return add(number1, number2);
+        }
+        
+        function bar(number1) {
+        	const number2 = 2;
+        
+          // ... more code ...
+        
+        	const add = (a) => {
+        		return a + number2;
+        	};
+        
+        	return add(number1);
+        }
+        
+        // Good
+        function add(a, b) {
+        	return a + b;
+        }
+        
+        function foo(number1, number2) {
+        	return add(number1, number2);
+        }
+        
+        function bar(number1) {
+        	const number2 = 2;
+        
+        	const add = (a) => {
+        		return a + number2;
+        	};
+        
+        	return add(number1);
+        }
+
+- Always declare scalar and complex values before, and functions after.
+
+        // Bad
+        function foo() {
+          const a = 1;
+        	const bar = () => a + 2;	
+        	const b = 2;
+        	return bar() + b;
+        }
+        
+        // Good
+        function foo() {
+        	const a = 1;
+        	const b = 2;
+        	const bar = () => a + 2;
+        	return bar() + b;
+        }
+
+- Always use arrow functions for anonymous functions.
+
+        // Bad
+        array.map(function (item) {
+        	return item * 2;
+        });
+        
+        // Good
+        array.map((item) => item * 2);
+
+- Always use parentheses when declaring arrow functions.
+
+    Why? Consistency again, when we have only one argument, we can choose to use parentheses or not but when having multiple arguements, we're forced to use parentheses. We remove the choice so we can focus more on the code. Also, it will lead to simpler changes if later we need to add more arguments to a single argument function.
+
+        // Bad
+        const foo = arg => arg + 2;
+        
+        // Good
+        const foo = (arg) => arg + 2;
+
+- If the list of arguments of a function is too long, favor using keyword arguments instead.
+
+        // Bad
+        function foo(name, lastName, age, country, region, username, password) {
+          // ... more code ...
+        }
+        
+        // Good
+        function foo({ name, lastName, age, country, region, username, password }) {
+          // ... more code ...
+        }
+
+- Always favor writing pure functions.
+
+        // Bad
+        function foo() {
+          const a = 1;
+        	const bar = () => a + 2;
+        	return bar();
+        }
+        
+        // Good
+        function bar(a) {
+          return a + 2;
+        }
+        
+        function foo() {
+        	const a = 1;
+        	return bar(a);
+        }
+
+- When using arrow functions, never split the implicit return between lines. Use `{}` instead.
+
+        // Bad
+        const foo = () =>
+        	'A very long return value that would not fit in the same line';
+        
+        const foo = () => (
+        	'A very long return value that would not fit in the same line';
+        );
+        
+        // Good
+        const foo = () => {
+        	return 'A very long return value that would not fit in the same line';
+        };
+
+- Declare functions before using them.
+
+    Why? Apart from difficulting reading the code (you won't expect to understand a word before you've seen its definition) it relies on hoisting for it to work, one of the worst things JavaScript does and one that people is still actively investigating how to remove without breaking existing code.
+
+        // Bad
+        function foo() {
+          return bar();
+        }
+        
+        function bar() {
+          // ... more code ...
+        }
+        
+        // Good
+        function bar() {
+          // ... more code ...
+        }
+        
+        function foo() {
+          return bar();
+        }
+
+- If an object it's the only thing an arrow function returns, use `()` instead of `return`.
+
+        // Bad
+        const foo = () => {
+        	return { 
+        		name: 'User',
+        	};
+        };
+        
+        // Good
+        const foo = () => ({
+          name: 'User',
+        });
+
+- When writing arrow functions, always use single line functions if possible.
+
+        // Bad
+        array.map((item) => {
+          return item * 2;
+        });
+        
+        // Good
+        array.map((item) => item * 2);
+
+- Never use implicit return with side effects.
+
+        let bar = true;
+        
+        // Bad
+        const foo = () => bar = false;
+        
+        // Good
+        const foo = () => {
+        	bar = false;
+        };
+
+- When returning multiple data, always use object destructuring instead of array destructuring.
+
+    Why? It makes returned result not order dependant when using the function.
+
+        // Bad
+        function foo() {
+        	const a = 1;
+        	const b = 2;
+        	return [a, b];
+        }
+        
+        // Good
+        function foo() {
+        	const a = 1;
+          const b = 2;
+          return { a, b };
+        }
+
+- Always favor returning early.
+
+        // Bad
+        function foo(a, b) {
+        	if (a !== b) {
+        		// ... more code ...
+          }
+        	return null;
+        }
+        
+        // Good
+        function foo(a, b) {
+        	if (a === b) {
+            return null;
+          }
+        
+          // ... more code ...
+        }
+
+- Add one level of indentation when splitting the list of arguments over multiple lines.
+
+        // Bad
+        function foo(
+        item1,
+        item2,
+        item3,
+        item4,
+        ) {
+          // ... more code ...
+        }
+        
+        function foo(item1, item2,
+        	item3, item4) {
+          // ... more code ...
+        }
+        
+        // Good
+        function foo(
+        	item1,
+        	item2,
+        	item3,
+        	item4,
+        ) {
+          // ... more code ...
+        }
+
+## Classes
+
+- Always use classes instead of protoype manipulation.
+
+        // Bad
+        function Person(name) {
+          this.name = name;
+        }
+        
+        Person.prototype.getName = function () {
+        	return this.name;
+        };
+        
+        // Good
+        class Person {
+        	constructor(name) {
+        		this.name = name;
+        	}
+        
+        	getName() {
+        		return this.name;
+        	}
+        }
+
+- It's ok to overwrite `toString()` method.
+
+        class Person {
+        	constructor(name) {
+            this.name = name;
+          }
+        
+        	toString() {
+            return `Person: ${this.name}`;
+        	}
+        }
+        
+        const person = new Person('User');
+        console.log(String(person));  // prints Person: User instead of [object Object]
+
+- Never use empty constructors.
+
+        // Bad
+        class Person {
+          constructor() {
+        	}
+        
+        	setName(name) {
+        	  this.name = name;
+          }
+        
+          getName() {
+            return this.name;
+          }
+        }
+        
+        // Good
+        class Person {
+        	setName(name) {
+        	  this.name = name;
+          }
+        
+          getName() {
+            return this.name;
+          }
+        }
+
+- Never have duplicate class members.
+
+    In JavaScript there is no method overloading, so it's mostly a programmer error.
+
+        class Person {
+        	setName(name) {
+        	  this.name = name;
+          }
+        
+        	setName(name, lastName) {
+        	  this.name = name;
+        		this.lastName = lastName;
+          }
+        }
+
+- Always use method shorthand when declaring methods in a class.
+
+        // Bad
+        class Person {
+        	constructor(name) {
+            this.name = name;
+          }
+        
+          getName = () => {
+        		return this.name;
+          };
+        }
+        
+        // Good
+        class Person {
+        	constructor(name) {
+            this.name = name;
+          }
+        
+        	getName() {
+        		return this.name;
+          }
+        }
+
+- Always use class fields when declaring initial values for class members.
+
+    It's already at Stage 3 and it's well supported on Babel
+
+        // Bad
+        class Person {
+          constructor(name) {
+            this.name = name;
+        		this.role = 'customer';
+          }
+        }
+        
+        // Good
+        class Person {
+          role = 'customer';
+        
+          constructor(name) {
+            this.name = name;
+          }
+        }
+
+- Class fields always come first in a class.
+
+        // Bad
+        class Person {
+          constructor(name) {
+            this.name = name;
+          }
+        
+        	role = 'customer';
+        }
+        
+        // Good
+        class Person {
+          role = 'customer';
+        
+          constructor(name) {
+            this.name = name;
+          }
+        }
+
+- The `constructor` always comes before the methods.
+
+        // Bad
+        class Person {
+        	getName() {
+        		return this.name;
+          }
+        
+        	constructor(name) {
+            this.name = name;
+          }
+        }
+        
+        // Good
+        class Person {
+        	constructor(name) {
+            this.name = name;
+          }
+        
+        	getName() {
+        		return this.name;
+          }
+        }
+
+- Always prefix methods indended for internal use in a class with `_`.
+
+    This won't prevent them to be accessed from the outside but provides a helpful visual indication to every developer of which methods are expected to be used outside of the class and which methods are just internal.
+
+        // Bad
+        class Person {
+          constructor(name, lastName) {
+        		this.name = name;
+            this.lastName = lastName;
+          }
+        
+          getFullName() {
+        		return this.joinNames();
+          }
+        
+        	joinNames() {
+            return `${this.name} ${this.lastName}`;
+          }
+        }
+        
+        const p = new Person('User', 'Userface');
+        p.joinNames();  // Should it be used like this?
+        
+        
+        // Good
+        class Person {
+          constructor(name, lastName) {
+        		this.name = name;
+            this.lastName = lastName;
+          }
+        
+          getFullName() {
+        		return this._joinNames();
+          }
+        
+        	_joinNames() {
+            return `${this.name} ${this.lastName}`;
+          }
+        }
+        
+        const p = new Person('User', 'Userface');
+        p._joinNames();  // We shouldn't be using this method like this
+
+- Never include pure functions as methods of a class. Extract them as a module function instead.
+
+    Why? This makes clearer that the function is indeed not depending on any internal value of the class.
+
+        // Bad
+        class Person {
+          constructor(name, lastName) {
+        		this.name = name;
+            this.lastName = lastName;
+          }
+        
+          getFullName() {
+        		return this._joinNames(name, lastName);
+          }
+        
+        	_joinNames(name, lastName) {
+            return `${name} ${lastName}`;
+          }
+        }
+        
+        // Good
+        function _joinNames(name, lastName) {
+        	return `${name} ${lastName};
+        }
+        
+        class Person {
+          constructor(name, lastName) {
+        		this.name = name;
+            this.lastName = lastName;
+          }
+        
+          getFullName() {
+        		return _joinNames(name, lastName);
+          }
+        }
+
+## Modules
+
+- Always use `import/export` when writing code for a browser. When writing code for a node app, it's still preferred but not enforced.
+
+        // Bad
+        const isEqual = require('lodash/isEqual');
+        const { uniq } = require('lodash');
+        
+        // Good
+        import isEqual from 'lodash/isEqual';
+        import { uniq } from 'lodash/isEqual';
+
+- Always use single line export instructions.
+
+        export foo from './utils';
+        export { bar as default } from './utils';
+        export { baz } from './utils';
+
+- Don't rename exports.
+
+        // Bad
+        export { foo as bar } from './utils';
+        
+        // Good
+        export { foo } from './utils';
+
+- All named exports should come above the default export.
+
+        // Bad
+        export default function foo() {
+          // ... more code ...
+        }
+        
+        export function bar() {
+          // ... more code ...
+        }
+        
+        // Good
+        export function bar() {
+          // ... more code ...
+        }
+        
+        export default function foo() {
+          // ... more code ...
+        }
+
+- Only import from a path in one place.
+
+        // Bad
+        import foo from './utils';
+        import { bar } from './utils';
+        
+        // Good
+        import foo, { bar } from './utils';
+
+- Put all `import` statements above all other statements.
+
+        // Bad
+        import foo from './foo';
+        foo();
+        
+        import bar from './bar';
+        
+        // Good
+        import foo from './foo';
+        import bar from './bar';
+        
+        foo();
+
+- Prefix all interal functions of a module with `_`.
+
+    Why? Because, even though it's easy to see which functions are internal and which functions are not when looking at the module code and noticing the exported ones, it's not that easy when looking at where those functions are used.
+
+        // Bad
+        function foo() {
+          // ... more code ...
+        }
+        
+        export function bar() {
+        	return foo();
+        }
+        
+        // Good
+        function _foo() {
+          // ... more code ...
+        }
+        
+        export function bar() {
+        	return _foo();
+        }
+
+- When exporting named exports, always favor exporting in the same line as the definition.
+
+        // Bad
+        function foo() {
+        	// ... more code ...
+        }
+        
+        export { foo };
+        
+        // Good
+        export function foo() {
+        	// ... more code ...
+        }
+
+- Favor exporting functions through an `index.js` file instead of having to import them directly.
+
+        // index.js
+        export Foo from './Foo';
+        
+        // Bad
+        import Foo from './utils/Foo';
+        
+        // Good
+        import { Foo } from './utils';
+
+- Always be consistent in the order of imports. First, external imports and below, project imports.
+
+    If using webpack and importing non JavaScript modules, those would come at the bottom.
+
+        // Bad
+        import { foo } from './utils';
+        import bar from './bar';
+        import styles from './styles.css';
+        import path from 'path';
+        
+        // Good
+        import path from 'path';
+        
+        import { foo } from './utils';
+        import bar from './bar';
+        
+        import styles from './styles.css';
+
+- If being forced to use `require`, always favor following the same rules as above.
+
+        // Bad
+        function foo() {
+          const bar = require('bar');
+        	return bar;
+        }
+        
+        // Good
+        const bar = require('bar');
+        
+        function foo() {
+        	return bar;
+        }
+        
+        // Bad
+        const bar = require('bar');
+        const baz = bar.baz;
+        
+        const baz = require('bar').baz;
+        
+        // Good
+        const { baz } = require('bar');
+
+## Operators
+
+- Use `===` and `!==` intead of `==` and `!=`.
+
+    Why? Because `==` and `!=` perform type coercion before making the comparison so `2 == '2'` would be equal.
+
+        // Bad
+        if (foo == 'bar' || foo != 'baz') {
+        	// ... more code ...
+        }
+        
+        // Good
+        if (foo === 'bar' || foo !== 'baz') {
+          // ... more code ...
+        }
+
+- Use `== null` or `!= null` when comparing for `null` or `undefined` values.
+
+        // Bad
+        if ( ! foo) {
+        }
+        
+        // Good
+        if (foo != null) {
+        }
+
+- Always use explicit comparisons.
+
+        // Bad
+        if (foo) {
+        	// ... more code ...
+        }
+        
+        // Good
+        if (foo !== '') {
+        	// ... more code ...
+        }
+        
+        if (foo != null) {
+        	// ... more code ...
+        }
+        
+        if (foo !== 0) {
+        	// ... more code ...
+        }
+
+- Always use simple comparisons for boolean values.
+
+        // Bad
+        if (isAlive !== false) {
+        	// ... more code ...
+        }
+        
+        if (isOpen === false) {
+        	// ... more code ...
+        }
+        
+        // Good
+        if (isAlive) {
+        	// ... more code ...
+        }
+        
+        if ( ! isOpen) {
+        	// ... more code ...
+        }
+
+- Never nest ternary operators.
+
+        // Bad
+        const foo = isOk ? isM ? 'John' : 'Jane' : null;
+        
+        // Good
+        const name = isM ? 'John' : 'Jane';
+        const foo = isOk ? name : null; 
+
+- Avoid unnecessary ternary operators.
+
+        // Bad
+        const foo = a ? true : false;
+        
+        // Good
+        const foo = Boolean(a);
+
+- When mixing logical operators, always put them in between parentheses.
+
+        // Bad
+        const foo = a > 0 && b < 0 || c > 0 && d + 1 === 0;
+        
+        // Good
+        const foo = (a > 0 && b < 0) || (c < 0 && d + 1 === 0);
+
+- Never use increment or decrement operators. Use the assignment form instead.
+
+        // Bad
+        let foo = 0;
+        foo++;
+        foo--;
+        console.log(foo);  // prints 0
+        
+        // Good
+        let foo = 0;
+        foo += 1;
+        foo -= 1;
+        console.log(foo);  // prints 0
+
+## Async
+
+- Always use `async/await` instead of `.then()`.
+
+        // Bad
+        function foo() {
+        	bar().then((value) => console.log(value));
+        }
+        
+        // Good
+        async function foo() {
+        	const value = await bar();
+        	console.log(value);
+        }
+
+- Always favor being explicit when working with asynchronous functions.
+
+    Why? In some other guides, it's stated that `return await` is redundant and even though that's "kinda true", that just misses a whole other point far more interesting: The Principle of Least Surprise. When we're writing `async/await` code, we expect it to behave like imperative code, however, when we forward the promise (just `return bar()`) instead of the value (using `return await bar()`) the [behavior would be different](https://www.reddit.com/r/javascript/comments/7idasp/await_vs_return_vs_return_await/dqy2z2h/). Also, it makes it less explicit as whether we should consume a function as asynchronous or synchronous.
+
+        // Bad
+        function foo() {
+        	return bar();  // is bar returning a promise? should await be used with foo()?
+        }
+        
+        // Good
+        async function foo() {
+        	return await bar();  // we know we should await for foo() when using it
+        }
+
+- Use a `for` loop when looking for sequential execution.
+
+        const items = [1, 2, 3, 4]
+        
+        async function foo(n) {
+        	await new Promise((r) => setTimeout(r, Math.random() * 1000));  // wait between 0s to 1s
+        	console.log(n);
+          return n * 2;
+        }
+        
+        const newArray = [];
+        for (let item of items) {
+        	newArray.push(await foo(item));  // prints 1, 2, 3 and 4
+        }
+        console.log(newArray);  // prints [2, 4, 6, 8]
+
+- Use `Promise.all` or `array.forEach` when looking for parallel execution.
+
+        const items = [1, 2, 3, 4]
+        
+        async function foo(n) {
+        	await new Promise((r) => setTimeout(r, Math.random() * 1000));  // wait between 0s to 1s
+        	console.log(n);
+          return n * 2;
+        }
+        
+        const newArray = await Promise.all(items.map(foo));  // prints 2, 4, 3, 1
+        console.log(newArray);  // prints [2, 4, 6, 8]
+        items.forEach(foo);  // prints 2, 3, 1, 4
+
+# Formatting
+
+## Comments
+
+- Only use `/** ... */` for documentation comments.
+
+        // Bad
+        // This function does something
+        // pretty cool and that we need
+        // in every system
+        function foo() {
+          return 'bar';
+        }
+        
+        function foo() {
+        	/**
+           * We use bar here because it's 
+           * much better than baz
+           */
+        	return 'bar';
+        }
+        
+        // Good
+        /**
+         * This function does something
+         * pretty cool and that we need
+         * in every system
+         */
+        function foo() {
+        	return 'bar';
+        }
+        
+        function foo() {
+          // We use bar here because it's 
+          // much better than baz
+        	return 'bar';
+        }
+
+    ⚠️  ***NOTE**: Notice the double asterisk `**` in the first line.*
+
+- Always favor placing the comment in the same line they're explaining.
+
+    Why? Because that way they don't disrupt the flow of the code with an extra line.
+
+        // Bad
+        function foo() {
+        	// if selected we return a 'bar'
+        	if (type === 'selected') {
+            return 'bar';
+          }
+        	
+          return 'baz';
+        }
+        
+        // Good
+        function foo() {
+        	if (type === 'selected') {  // if selected we return a 'bar'
+            return 'bar';
+          }
+        	
+          return 'baz';
+        }
+
+- If the comment is too long and wouldn't fit in the same line, move it to the line above.
+
+    Why? Because in that case, the disruption in the code flow is bigger adding empty lines than comment lines. Also, easier to maintain.
+
+        // Bad
+        function foo() {
+        	if (type === 'selected') {  // this is a really long
+                                      // comment that wouldn't have
+                                      // fit in a single line
+                                      // so we wrap it in multiple ones
+            return 'bar';
+          }
+        	
+          return 'baz';
+        }
+        
+        // Good
+        function foo() {
+        	// this is a really long
+          // comment that wouldn't have
+          // fit in a single line
+          // so we wrap it in multiple ones
+        	if (type === 'selected') {
+            return 'bar';
+          }
+        	
+          return 'baz';
+        }
+
+- Always leave two spaces between the end of the line of code and the comment for inline comments.
+
+        // Bad
+        function foo() {
+        	if (type === 'selected') {// if selected we return a 'bar'
+            return 'bar';
+          }
+          return 'baz';
+        }
+        
+        // Good
+        function foo() {
+        	if (type === 'selected') {  // if selected we return a 'bar'
+            return 'bar';
+          }
+          return 'baz';
+        }
+
+- Always start comments with a space.
+
+        // Bad
+        //this is a comment
+        /**
+         *this is a
+         *multiline comment
+         */
+        
+        // Good
+        // this is a comment
+        /**
+         * this is a 
+         * multiline comment
+         */
+
+- Use `// TODO:` comments to help other developers (and your future self) that something still needs more work.
+
+        function foo() {
+        	return 'bar';  // TODO: Return baz here instead
+        }
+
+- Never use any other kind of meta comments: `// FIXME:`, `// NOTE:`, etc.
+
+    Why? Because they're not standard and other developers might not be aware of their existence rendering them useless since they cannot be easily searched for. Basically, a `FIXME` is like a `TODO` and a `NOTE` is like normal comment would be enough.
+
+        // Bad
+        function foo() {
+        	return 'bar';  // FIXME: Return baz here instead
+        }
+        
+        function foo() {
+        	return 'bar';  // NOTE: We return bar here instead of baz
+        }
+        
+        // Good
+        function foo() {
+        	return 'bar';  // TODO: Return baz here instead
+        }
+        
+        function foo() {
+        	return 'bar';  // We return bar here instead of baz
+        }
+
+- Never leave commented out code.
+
+    Why? It's confusing for anyone else and even for your future self. What's the purpose of that code? It's an example implementation? It's something to be done in the future? Something that used to be done in the past? Can I delete it? Should I restore it? All of those are questions strangers to that code might want to ask themselves.
+
+    - If you want to keep a history of the code ⇒ That's what git is for.
+    - If you want to keep an useful piece of code for the future ⇒ Share it as a recipe.
+    - If it's something you need to do in the future ⇒ Label it with an explicit TODO comment and explain what needs to be done.
+
+        // Bad
+        function foo() {
+          // const bar = 'baz';
+          const baz = 'bar';
+        
+          // ... more code ...
+        }
+        
+        // Good
+        function foo() {
+          const baz = 'bar';
+        
+          // ... more code ...
+        }
+
+## Line Length
+
+- Always favor writing lines shorter than 80 characters. Never write lines longer than 100 characters.
+
+        // Bad
+        process.env.NODE_ENV === 'development' ? console.error(new Error(`Browser doesn't support Geolocation`)) : null;
+        
+        // Good
+        process.env.NODE_ENV === 'development' 
+        	? console.error(new Error('Browser doesn\'t support Geolocation')) 
+        	: null;
+
+- Never split lines too early.
+
+    Why? It's easier to read single line statements than multi-line ones.
+
+        // Bad
+        function foo(
+        	bar,
+          baz,
+        ) {
+        	return bar + baz;
+        }
+        
+        // Good
+        function foo(bar, baz) {
+          return bar + baz;
+        }
+
+- When spliting long arrays of objets, always put the braces in a separate line.
+
+    Why? Easier to add, remove, modify, copy/paste, etc. since each object is isolated.
+
+        // Bad
+        const people = [{
+        	name: 'John',
+          age: 23,
+        }, {
+          name: 'Jane',
+          age: 26,
+        }];
+        
+        const people = [
+          {
+        		name: 'John',
+        	  age: 23,
+          }, {
+        		name: 'Jane',
+        	  age: 26,
+          },
+        ];
+        
+        // Good
+        const people = [
+          {
+        		name: 'John',
+        	  age: 23,
+          },
+          {
+        		name: 'Jane',
+        	  age: 26,
+          },
+        ];
+        
+        // Also good
+        const people = [
+        	{ name: 'John', age: 23 },
+          { name: 'Jane', age: 26 },
+        ];
+
+- When splitting long lines, always position the operator at the beginning of the line.
+
+    Why? To differentiate it from a new statement.
+
+        // Bad
+        const shouldWe = reasonOne &&
+          reasonTwo &&
+          reasonThree;
+        
+        const bigOp = foo +
+          bar +
+        	baz;
+        
+        // Good
+        const shouldWe = reasonOne
+        	&& reasonTwo
+        	&& reasonThree;
+        
+        const bigOp = foo
+        	+ bar
+        	+ baz;
+
+    ⚠️  ***NOTE**: Don't forget to indent splitted lines correctly.*
+
+## Whitespace
+
+- Always use two spaces for identing your code.
+
+    Why? Well, it will delay the appearance of a ☥ 🔥  PYRAMID OF DOOM 🔥 ☥ (when your code grows faster horizontally than vertically)
+
+        function myFunction(arg) {
+          const myVar = 1;
+          
+          if (arg) {
+            return null;
+          }
+        
+          return myVar;
+        }
+
+- Use one space after commas.
+
+        // Bad
+        const items = [1,2,3,4];
+        const person = new Person('User','Userface');
+        const object = { a: 1,b: 2 };
+        
+        // Good
+        const items = [1, 2, 3, 4];
+        const person = new Person('User', 'Userface');
+        const object = { a: 1, b: 2 };
+
+- Don't use spaces before commas.
+
+        // Bad
+        const items = [1 , 2 , 3 , 4];
+        
+        function foo(a , b) {
+        }
+        
+        // Good
+        const items = [1, 2, 3, 4];
+        
+        function foo(a, b) {
+        }
+
+- Use one space between operators.
+
+        // Bad
+        const a=b+c;
+        const baz=foo&&bar;
+        const x+=1;
+        
+        // Good
+        const a = b + c;
+        const baz = foo && bar;
+        const x += 1;
+
+- Don't use spaces before `:` when declaring object literal properties.
+
+        // Bad
+        const object = { x : 2, y : 3 };
+        
+        // Good
+        const object = { x: 2, y: 3 };
+
+- Use one space after `:` when declaring object literal properties.
+
+        // Bad
+        const object = { x:2, y:3 };
+        
+        // Good
+        const object = { x: 2, y: 3 };
+
+- Use one space before opening braces.
+
+        // Bad
+        function foo(){
+        }
+        
+        if (){
+        }
+        
+        switch{
+          default:{
+          }
+        }
+        
+        // Good
+        function foo() {
+        }
+        
+        if () {
+        }
+        
+        switch {
+          default: {
+          }
+        }
+
+- Use one space before the opening parenthesis in control statements.
+
+        // Bad
+        if() {
+        }
+        
+        for(let item of items) {
+        }
+        
+        // Good
+        if () {
+        }
+        
+        for (let item of items) {
+        }
+
+- Don't use spaces between the name of a function and the opening parenthesis of the list of arguments.
+
+        // Bad
+        function foo () {
+        }
+        
+        // Good
+        function foo() {
+        }
+
+- Don't use spaces between the name of a function and the parentheses when invoking it.
+
+        // Bad
+        foo ();
+        
+        // Good
+        foo();
+
+- Don't use spaces inside parentheses.
+
+        // Bad
+        function foo( bar ) {
+        }
+        
+        if ( a == b ) {
+        }
+        
+        // Good
+        function foo(bar) {
+        }
+        
+        if (a == b) {
+        }
+
+- Don't use spaces inside brackets when declaring arrays.
+
+        // Bad
+        const items = [ 1, 2, 3, 4 ];
+        
+        // Good
+        const items = [1, 2, 3, 4];
+
+- Don't add spaces inside brackets when accesing properties or indexes
+
+        // Bad
+        items[ 0 ];
+        person[ 'first-name' ];
+        
+        // Good
+        items[0];
+        person['first-name'];
+
+- Add spaces inside brackets when destructuring an array.
+
+    Why? To highlight the fact that they're independent variables and differentiate it from array declaration.
+
+        // Bad
+        const [a, b, c] = items;
+        
+        // Good
+        const [ a, b, c ] = items;
+
+- Add spaces inside braces.
+
+        // Bad
+        const object = {x: 1, y: 2};
+        const {x, y} = object;
+        
+        // Good
+        const object = { x: 1, y: 2 };
+        const { x, y } = object;
+
+- Add one space before `!` when it's next to a parenthesis.
+
+        // Bad
+        if (! foo) {
+        }
+        
+        const foo = (! bar);
+        
+        // Good
+        if ( ! foo) {
+        }
+        
+        const foo = ( ! bar);
+
+- Use indentation when making long method chains.
+
+        // Bad
+        items.slice().sort((a, b) => a - b)
+        .filter((x) => x > 0).map((x) => x * 2);
+        
+        items.
+        	slice().
+        	sort((a, b) => a - b).
+        	filter((x) => x > 0).
+        	map((x) => x * 2);
+        
+        // Good
+        items
+        	.slice()
+        	.sort((a, b) => a - b)
+        	.filter((x) => x > 0)
+        	.map((x) => x * 2);
+
+    ⚠️  ***NOTE**: Use a leading dot to correctly differentiate method calls from another statement.*
+
+- Split long ternary operators putting each branch on it's own line and with the corresponding operator at the beginning of the line.
+
+        // Bad
+        const foo = bar ? items.slice().sort((a, b) => a - b) : items.slice().sort((a, b) => b - a);
+        
+        const foo = bar ? 
+        	items.slice().sort((a, b) => a - b) : items.slice().sort((a, b) => b - a);
+        
+        const foo = bar ? 
+        	items.slice().sort((a, b) => a - b) : 
+        	items.slice().sort((a, b) => b - a);
+        
+        // Good
+        const foo = bar 
+        	? items.slice().sort((a, b) => a - b)
+        	: items.slice().sort((a, b) => b - a);
+
+## Blank Lines
+
+- Never leave more than two contiguous blank lines.
+
+        // Bad
+        import foo from 'foo';
+        
+        
+        
+        function bar(arg) {
+        	return foo(arg + 3);
+        }
+        
+        // Good
+        import foo from 'foo';
+        
+        
+        function bar(arg) {
+          return foo(arg + 3);
+        }
+
+- Never have more than one blank line in a block of code.
+
+        // Bad
+        function foo(arg) {
+          const a = 1;
+        
+        
+        	return a + arg;
+        }
+        
+        if (a < b) {
+          const foo = 2;
+        	const bar = 4;
+        
+        
+          return foo + bar;
+        }
+        
+        class Person {
+          name;
+        
+          
+          constructor(name) {
+            this.name = name;
+          }
+        }
+        
+        // Good
+        function foo(arg) {
+          const a = 1;
+        
+          return a + arg;
+        }
+        
+        if (a < b) {
+          const foo = 2;
+          const bar = 4;
+        
+          return foo + bar;
+        }
+        
+        class Person {
+          name;
+          
+          constructor(name) {
+            this.name = name;
+          }
+        }
+
+- Don't pad blocks with blank lines.
+
+        // Bad
+        function foo(arg) {
+          
+          const a = 1;
+        
+          return a + arg;
+        
+        }
+        
+        if (a < b) {
+         
+          const foo = 2;
+          const bar = 3;
+        
+          return foo + bar;
+        
+        }
+        
+        class Person {
+        
+          constructor(name) {
+            this.name = name;
+          }
+        
+        	getName() {
+            return this.name;
+          }
+        
+        }
+        
+        // Good
+        function foo(arg) {
+          const a = 1;
+         
+          return a + arg;
+        }
+        
+        if (a < b) {
+          const foo = 2;
+          const bar = 3;
+        
+          return foo + bar;
+        }
+        
+        class Person {
+          constructor(name) {
+            this.name = name;
+          }
+        
+        	getName() {
+            return this.name;
+          }
+        }
+
+- Leave a blank line between a block and the next statement.
+
+        // Bad
+        function foo(arg) {
+          if (arg > 0) {
+            const b = 2;
+            return arg + b;
+          }
+          return arg;
+        }
+        
+        class Person {
+          constructor(name) {
+            this.name = name;
+          }
+        	getName() {
+            return this.name;
+          }
+        }
+        
+        // Good
+        function foo(arg) {
+          if (arg > 0) {
+            const b = 2;
+            return arg + b;
+          }
+        
+          return arg;
+        }
+        
+        class Person {
+          constructor(name) {
+            this.name = name;
+          }
+        
+        	getName() {
+            return this.name;
+          }
+        }
+
+- Use two blank lines to separate conceptually different parts in a module.
+
+        // Bad
+        import foo from 'foo';
+        
+        function bar() {
+        	return foo() + 2;
+        }
+        
+        function baz() {
+        	return foo() + 3;
+        }
+        
+        // Good
+        import foo from 'foo';
+        
+        
+        function bar() {
+        	return foo() + 2;
+        }
+        
+        
+        function baz() {
+        	return foo() + 3;
+        }
+
+## Semicolons
+
+- Always use semicolons.
+
+        // Bad
+        const a = 2
+        const b = 3
+        
+        // Good
+        const a = 2;
+        const b = 3;
+
+## Commas
+
+- Always use an additional trailing comma at the end of the line.
+
+    Why? Cleaner diffs and easier modifications.
+
+        // Bad
+        const point = {
+        	x: 2,
+          y: 2
+        };
+        
+        const items = [
+          'item1',
+          'item2'
+        ];
+        
+        function foo(
+          bar,
+          baz
+        ) {
+        }
+        
+        // Good
+        const point = {
+        	x: 2,
+          y: 2,
+        };
+        
+        const items = [
+          'item1',
+          'item2',
+        ];
+        
+        function foo(
+          bar,
+          baz,
+        ) {
+        }
+
+- Never use a trailing comma when it's not at the end of the line.
+
+        // Bad
+        const point = { x: 2, y: 2, };
+        const items = ['item1', 'item2',];
+        function foo(bar, baz,) {
+        }
+        
+        // Good
+        const point = { x: 2, y: 2 };
+        const items = ['item1', 'item2'];
+        function foo(bar, baz) {
+        }
+
+## Naming Conventions
+
+- Always favor creating long and descriptive names.
+
+        // Bad
+        const p = { x: 2, y: 3 };
+        
+        // Good
+        const point = { x: 2, y: 3 };
+
+- Use `camelCase` when naming variables, functions and methods.
+
+        // Bad
+        const FooBar = 2;
+        const an_object = {};
+        const iTeMs = [];
+        
+        // Good
+        const fooBar = 2;
+        const anObject = {};
+        const items = [];
+
+- Use `PascalCase` when naming classes.
+
+        // Bad
+        class person {
+        	constructor(name) {
+            this.name = name;
+          }
+        }
+        
+        const john = new person('John');
+        
+        // Good
+        class Person {
+        	constructor(name) {
+        	}
+        }
+        
+        const john = new Person('John');
+
+- A base filename should match the name of the default export if it's a `class` or a `kebab-cased` version if it's anything else.
+
+        // Bad
+        import Person from './person';
+        import fooBar from './fooBar';
+        
+        // Good
+        import Person from './Person';
+        import fooBar from './foo-bar';
+
+- Acronyms and initialisms should never be uppercased, they should follow normal naming conventions.
+
+    Why? A long string of uppercase characters make reading difficult.
+
+        // Bad
+        const HTTPRequest = null;
+        const GPSPosition = null;
+        const GPSByIP = null;
+        
+        // Good
+        const httpRequest = null;
+        const gpsPosition = null;
+        const gpsByIp = null;
+
+- Constant values that are never gonna change and that are not inside a block, should be all `UPPERCASED` and `SNAKE_CASED`.
+
+        // Bad
+        const friction_coeff = 0.5;
+        
+        function foo(arg) {
+        	const ITEMS = [];
+        	ITEMS.push(arg);
+        	return ITEMS;
+        }
+        
+        // Good
+        const FRICTION_COEFF = 0.5;
+        
+        function foo(arg) {
+        	const items = [];
+        	items.push(arg);
+        	return items;
+        }
+
+- For consistency, events should be named `e`.
+
+        // Bad
+        document.addEventListener('click', (event) => {
+        });
+        
+        // Good
+        document.addEventListener('click', (e) => {
+        });
+
+- For consistency, errors should be named by default `err`.
+
+        // Bad
+        try {
+        }
+        catch (error) {
+        }
+        
+        // Good
+        try {
+        }
+        catch (err) {
+        }
+
+- Always name functions and methods as the infinitive or imperative tense of the verb.
+
+        // Bad
+        const person = new Person();
+        person.walking();
+        
+        // Good
+        const person = new Person();
+        person.walk();
+        
+        // Exception
+        // When a boolean is returned in a getter
+        
+        // Bad
+        person.getWalking();
+        
+        // Good
+        person.isWalking();
+
+    ⚠️  ***NOTE**: Rule of thumb here, the name should always feel like an action to be done when calling the function.*
+
+- Always name variables as nouns. Always use adjectives to differentiate them.
+
+        // Bad
+        const deleteItem = items.pop();  // verb + noun
+        
+        const items1 = items.filter((x) => x % 2 !== 0);  // noun + suffix
+        const items2 = items.filter((x) => x % 2 === 0);  // noun + suffix
+        
+        // Good
+        const deletedItem = items.pop();  // adj + noun
+        
+        const oddItems = items.filter((x) => x % 2 !== 0);  // adj + noun
+        const evenItems = items.filter((x) => x % 2 === 0);  // adj + noun
+
+    ⚠️  ***NOTE**: Rule of thumb here, the name should always feel like it refers to an entity.*
+
+## Control Statements
+
+- Never use an `if` statement without braces unless it's a single line `if`.
+
+        // Bad
+        if (a < b)
+          return c;
+        
+        // Good
+        if (a < b) {
+        	return c;
+        }
+        
+        if (a < b) return c;
+
+- Never put `else` or `else if` in the ending brace line.
+
+        // Bad
+        if (a < b) {
+          return c;
+        } else {
+          return d;
+        }
+        
+        // Good
+        if (a < b) {
+          return c;
+        }
+        else {
+          return d;
+        }
+
+- Always wrap `switch` cases in a block.
+
+    Why? Because `let` and `const` are block scoped, that means that if no block is created in the different cases, the whole switch is the nearest block and an error would be triggered because of duplicate declaration, or worse, could silently rewrite values.
+
+        // Bad
+        switch (type) {
+          case 'primary':
+            const a = 2;
+            return a;
+          case 'secondary': 
+            const a = 1;  // triggers an error
+            return a;
+          default:
+            return 0;
+        }
+        
+        // Good
+        switch (type) {
+          case 'primary': {
+            const a = 2;
+            return a;
+        	}
+          case 'secondary': {
+            const a = 1; 
+            return a;
+          }
+          default: {
+            return 0;
+          }
+        }
+
+- Always put `catch` in a new line.
+
+        // Bad
+        try {
+          // ... more code ...
+        } catch (err) {
+          // ... more code ...
+        }
+        
+        // Good
+        try {
+          // ... more code ...
+        }
+        catch (err) {
+          // ... more code ...
+        }
+
+# React
+
+## Naming
+
+- Follow React standards.
+
+        // - PascalCase components
+        // - camelCase props
+        <Component fooBar="value" />
+
+## Quotes
+
+- Always use double quotes `"` for string props.
+
+        // Bad
+        <Component fooBar='value' />
+        
+        // Good
+        <Component fooBar="value" />
+
+## Style
+
+- Never put `/>` on a new line.
+
+        // Bad
+        <Component
+          prop="value"
+          />
+        
+        // Good
+        <Component
+          prop="value" />
+
+- Always favor single line tags when possible.
+
+        // Bad
+        <Component
+          prop="value">
+        	Foo
+        </Component>
+        
+        // Good
+        <Component prop="value">
+        	Foo
+        </Component>
+
+- Once a component is split between multiple lines, all props should be split the same way.
+
+        // Bad
+        <Component foo="value"
+          bar="baz" />
+        
+        // Good
+        <Component
+          foo="value"
+          bar="baz" />
+
+## PropTypes
+
+- Always use `PropTypes`.
+
+        // Bad
+        const Component = ({ title }) => {
+        	return title;
+        };
+        
+        // Good
+        const Component = ({ title }) => {
+          return title;
+        };
+        
+        Component.propTypes = {
+          title: PropTypes.string.isRequired,
+        };
+
+- Always favor being specific when declaring `PropTypes`.
+
+        // Bad
+        const Component = ({ user, title }) => {
+        	return `${title} ${user.name}`;
+        };
+        
+        Component.propTypes = {
+        	user: PropTypes.object,
+        	title: PropTypes.node,  // node would be ok, but we're using it clearly as a string
+        };
+        
+        // Good
+        const Component = ({ user, title }) => {
+        	return `${title} ${user.name}`;
+        };
+        
+        Component.propTypes = {
+        	user: PropTypes.shape({ name: PropTypes.string }),
+          title: PropTypes.string,
+        };
+
+- Ony declare `PropTypes` for consumed props.
+
+    Why? That's another line of code to maintain and if the unused props are needed by the children components, the `PropTypes` of those would warn.
+
+        // Bad
+        const Component = ({ user }) => {
+        	return user.name;
+        };
+        
+        Component.propTypes = {
+        	user: PropTypes.shape({ name: PropTypes.string, age: PropTypes.number }),,
+        };
+        
+        // Good
+        const Component = ({ user }) => {
+        	return user.name;
+        };
+        
+        Component.propTypes = {
+        	user: PropTypes.shape({ name: PropTypes.string }),
+        };
+
+- Never use `PropTypes.array`. Use instead `PropTypes.arrayOf`.
+
+    Why? `PropTypes.array` doesn't provide any useful information apart from it being an array.
+
+        // Bad
+        const Component = ({ users }) => {
+          // ... more code ...
+        };
+        
+        Component.propTypes = {
+          users: PropTypes.array,
+        };
+        
+        // Good
+        const Component = ({ users }) => {
+        	// ... more code ...
+        };
+        
+        Component.propTypes = {
+          users: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+        };
+
+- Everytime `PropTypes.oneOf` is used, your component must export an *enum* with the possible values.
+
+        // Bad
+        const Component = ({ category }) => {
+          // ... more code ...
+        };
+        
+        Component.propTypes = {
+          category: PropTypes.oneOf([ 'primary', 'secondary' ]),
+        };
+        
+        // Good
+        import Enum from 'Enum';
+        
+        
+        export const Categories = Enum('PRIMARY', 'SECONDARY');
+        
+        
+        const Component = ({ category }) => {
+          // ... more code ...
+        };
+        
+        Component.propTypes = {
+          category: PropTypes.oneOf(Object.values(Categories)),
+        };
+
+- Always leave only one blank line between the component declaration and the `PropTypes` declaration.
+
+        // Bad
+        const Component = ({ category }) => {
+          // ... more code ...
+        };
+        
+        
+        Component.propTypes = {
+          category: PropTypes.oneOf([ 'primary', 'secondary' ]),
+        };
+        
+        // Good
+        const Component = ({ category }) => {
+          // ... more code ...
+        };
+        
+        Component.propTypes = {
+          category: PropTypes.oneOf([ 'primary', 'secondary' ]),
+        };
+
+## Hooks
+
+# Project

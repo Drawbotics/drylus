@@ -27,7 +27,7 @@ import InlineCode from './InlineCode';
 
 const styles = {
   content: css`
-    margin: ${sv.marginLarge} ${sv.defaultMargin};
+    padding: ${sv.marginLarge} ${sv.defaultMargin};
   `,
 };
 

@@ -19,7 +19,7 @@ export function generateRoutes({ route, routeName, parent='', base }) {
   }
   else {
     return {
-      [withBase.replace(/\/+/g, '/')]: route,
+      [withBase.replace(/\/+/g, '/').replace(/\/$/, "")]: route,
     };
   }
 }
@@ -43,7 +43,7 @@ export function generateRouteObjects({ route, routeName, parent='', base }) {
     const baseName = parent.replace(/\//g, '');
     return [{
       name: routeName === 'index' ? startCase(baseName) : startCase(routeName),
-      url: withBase.replace(/\/+/g, '/'),
+      url: withBase.replace(/\/+/g, '/').replace(/\/$/, ""),
       base: baseName,
     }];
   }
