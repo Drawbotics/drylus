@@ -1,0 +1,116 @@
+# Variables
+
+Don't use `var`. Always use `const` or `let`.
+
+> Why? `var` hoists every assignment to the beginning of the function while `let` and `const` are block-scoped. Also, `var` will silently re-assing any values to the same var.
+
+    // Bad
+    function myFunc(arg) {
+      var foo = 1;
+      var bar = 1;
+    
+      if (arg) {
+        var foo = 2;
+        bar += foo;
+      }
+    
+      console.log(foo);  // prints 2
+      console.log(bar);  // prints 3;
+    
+      return bar;
+    }
+    
+    // Good
+    function myFunc(arg) {
+      const foo = 1;
+      let bar = 1;
+    
+      if (arg) {
+        const foo = 2;
+        bar += foo;
+      }
+    
+      console.log(foo);  // prints 1
+      console.log(bar);  // prints 3;
+    
+      return bar;
+    }
+    
+    var foo = 'string';
+    var foo = 'string2';  // will silently replace the value of foo
+    
+    let foo = 'string';
+    let foo = 'string2';  // will trigger an error
+
+Note that `const` does not mean constant value, but constant assignment.
+
+> For scalar values however, constant assignment and value can be assumed, since those are immutable.
+
+    const foo = 1;
+    foo = 3;  // will trigger an error
+    
+    const bar = { name: 'User' };
+    bar.name = 'Object';
+    console.log(bar);  // prints { name: 'Object' }
+
+Always use `const` for every declaration. If there's no way other than re-assigning a reference, then use `let`.
+
+> Why? This would prevent us re-assigning a different value accidentally to a variable. It will also help us write easier to reason about code.
+
+    // Bad
+    let foo = 1;
+    // ... more code ...
+    console.log(foo);  // we can't be sure it hasn't been modified and will print 1
+    
+    // Good
+    const bar = 1;
+    // ... more code ...
+    console.log(bar);  // we can be sure it will print 1
+
+Never chain variable assigments.
+
+    // Bad
+    const a = b = 3;
+    
+    // Good
+    const a = 3;
+    const b = 3;
+
+Never use comma operator `,` when declaring variables.
+
+    // Bad
+    let a, b, c;
+    
+    // Good
+    let a;
+    let b;
+    let c;
+
+Try to group `const` and `let` logically.
+
+    // Bad
+    let items = [1, 2, 3];
+    const x = 2;
+    let index = 0;
+    const y = 4;
+    let coeff = 0.5;
+    
+    // Good
+    const x = 2;
+    const y = 4;
+    let items = [1, 2, 3];
+    let index = 0;
+    let coeff = 0.5;
+
+Avoid linebreaks before or after `=` in an assignment.
+
+    // Bad
+    const foo =
+      'value';
+    
+    // Good
+    const foo = 'value';
+
+Never leave unused variables around.
+
+> That includes unused function arguments and unused imports.

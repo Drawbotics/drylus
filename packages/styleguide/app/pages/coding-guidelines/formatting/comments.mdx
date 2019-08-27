@@ -1,0 +1,176 @@
+# Comments
+
+Only use `/** ... */` for documentation comments.
+
+    // Bad
+    // This function does something
+    // pretty cool and that we need
+    // in every system
+    function foo() {
+      return 'bar';
+    }
+    
+    function foo() {
+      /**
+        * We use bar here because it's 
+        * much better than baz
+        */
+      return 'bar';
+    }
+    
+    // Good
+    /**
+      * This function does something
+      * pretty cool and that we need
+      * in every system
+      */
+    function foo() {
+      return 'bar';
+    }
+    
+    function foo() {
+      // We use bar here because it's 
+      // much better than baz
+      return 'bar';
+    }
+
+##### **NOTE**: Notice the double asterisk `**` in the first line.
+
+Always favor placing the comment in the same line they're explaining.
+
+> Why? Because that way they don't disrupt the flow of the code with an extra line.
+
+    // Bad
+    function foo() {
+      // if selected we return a 'bar'
+      if (type === 'selected') {
+        return 'bar';
+      }
+      
+      return 'baz';
+    }
+    
+    // Good
+    function foo() {
+      if (type === 'selected') {  // if selected we return a 'bar'
+        return 'bar';
+      }
+      
+      return 'baz';
+    }
+
+If the comment is too long and wouldn't fit in the same line, move it to the line above.
+
+> Why? Because in that case, the disruption in the code flow is bigger adding empty lines than comment lines. Also, easier to maintain.
+
+    // Bad
+    function foo() {
+      if (type === 'selected') {  // this is a really long
+                                  // comment that wouldn't have
+                                  // fit in a single line
+                                  // so we wrap it in multiple ones
+        return 'bar';
+      }
+      
+      return 'baz';
+    }
+    
+    // Good
+    function foo() {
+      // this is a really long
+      // comment that wouldn't have
+      // fit in a single line
+      // so we wrap it in multiple ones
+      if (type === 'selected') {
+        return 'bar';
+      }
+      
+      return 'baz';
+    }
+
+Always leave two spaces between the end of the line of code and the comment for inline comments.
+
+    // Bad
+    function foo() {
+      if (type === 'selected') {// if selected we return a 'bar'
+        return 'bar';
+      }
+      return 'baz';
+    }
+    
+    // Good
+    function foo() {
+      if (type === 'selected') {  // if selected we return a 'bar'
+        return 'bar';
+      }
+      return 'baz';
+    }
+
+Always start comments with a space.
+
+    // Bad
+    //this is a comment
+    /**
+      *this is a
+      *multiline comment
+      */
+    
+    // Good
+    // this is a comment
+    /**
+      * this is a 
+      * multiline comment
+      */
+
+Use `// TODO:` comments to help other developers (and your future self) that something still needs more work.
+
+    function foo() {
+      return 'bar';  // TODO: Return baz here instead
+    }
+
+Never use any other kind of meta comments: `// FIXME:`, `// NOTE:`, etc.
+
+> Why? Because they're not standard and other developers might not be aware of their existence rendering them useless since they cannot be easily searched for. Basically, a `FIXME` is like a `TODO` and a `NOTE` is like normal comment would be enough.
+
+    // Bad
+    function foo() {
+      return 'bar';  // FIXME: Return baz here instead
+    }
+    
+    function foo() {
+      return 'bar';  // NOTE: We return bar here instead of baz
+    }
+    
+    // Good
+    function foo() {
+      return 'bar';  // TODO: Return baz here instead
+    }
+    
+    function foo() {
+      return 'bar';  // We return bar here instead of baz
+    }
+
+Never leave commented out code.
+
+> Why? It's confusing for anyone else and even for your future self. What's the purpose of that code? It's an example implementation? It's something to be done in the future? Something that used to be done in the past? Can I delete it? Should I restore it? All of those are questions strangers to that code might want to ask themselves.
+
+If you want to keep a history of the code ⇒ That's what git is for.
+
+If you want to keep an useful piece of code for the future ⇒ Share it as a recipe.
+
+If it's something you need to do in the future ⇒ Label it with an explicit TODO comment and explain what needs to be done.
+
+    // Bad
+    function foo() {
+      // const bar = 'baz';
+      const baz = 'bar';
+    
+      // ... more code ...
+    }
+    
+    // Good
+    function foo() {
+      const baz = 'bar';
+    
+      // ... more code ...
+    }

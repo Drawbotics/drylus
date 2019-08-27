@@ -1,0 +1,167 @@
+# Objects
+
+Use literal syntax for object creation.
+
+    // Bad
+    const object = new Object();
+    
+    // Good
+    const object = {};
+
+When adding functions to an object, use arrow functions instead of object method shorthand.
+
+> Why? Because arrow functions don't have a `this` reference. That would prevent you from using it and encountering difficult to track bugs when the objects are passed around potentially changing where `this` is pointing at.
+
+    // Bad
+    const object = {
+      prop: 1,
+      action() {
+        console.log(`Clicked and ${this.prop}`);
+      },
+    };
+    
+    document.addEventListener('click', object.action);  // After click, would print Clicked and undefined
+    
+    // Good
+    const object = {
+      prop: 1,
+      action: () => {
+        console.log(`Clicked and ${object.prop}`); 
+      },
+    };
+    
+    document.addEventListener('click', object.action);  // After click, would print Clicked and 1
+
+Always use property value shorthand.
+
+    const name = 'User';
+    
+    // Bad
+    const object = { name: name };
+    
+    // Good
+    const object = { name };
+
+Always place shorthand properties at the beginning of an object declaration.
+
+    const name = 'User';
+    
+    // Bad
+    const object = {
+      lastName: 'Userface',
+      name,
+    };
+    
+    // Good
+    const object = {
+      name,
+      lastName: 'Userface',
+    };
+
+Only quote property names when those are invalid identifiers.
+
+> Why? As we can see in the example, it's easier to differentiate the key from the value when using syntax highlighting.
+
+    // Bad
+    const object = { 'name': 'User' };
+    
+    // Good
+    const object = { name: 'User', 'last-name': 'Userface' };
+
+Prefer object spread operator over `Object.assign`.
+
+> Why? It can lead to unexpected bugs mutating the original object. Also, it's less concise and difficult to read.
+
+    // Bad
+    const original = { name: 'User', age: 20 };
+    const copy = Object.assign(original, { name: 'User2', lastName: 'Userface' });  // in a slip, we mutated the original object
+    console.log(copy);  // prints { name: 'User2', lastName: 'Userface', age: 20 }
+    console.log(original);  // prints { name: 'User2', lastName: 'Userface', age: 20 }
+    
+    // Good
+    const original = { name: 'User', age: 20 };
+    const copy = { ...original, name: 'User2', lastName: 'Userface' };
+    console.log(copy);  // prints { name: 'User2', lastName: 'Userface', age: 20 }
+    console.log(original);  // prints { name: 'User', age: 20 }
+
+Always use object destructuring when extracting properties from an object.
+
+    const object = { name: 'User', age: 20 };
+    
+    // Bad
+    const name = object.name;
+    const age = object.age;
+    
+    // Good
+    const { name, age } = object;
+
+Always destructure all the properties from the same object in the same declaration.
+
+    const object = { name: 'User', age: 20 };
+    
+    // Bad
+    const { name } = object;
+    const { age } = object;
+    
+    // Good
+    const { name, age } = object;
+
+Always use dot notation when accessing properties if possible.
+
+    const object = { name: 'User' };
+    
+    // Bad
+    object['name'];
+    
+    // Good
+    object.name;
+
+Use bracket notation `[]` when accessing properties with a variable.
+
+    const propName = 'name';
+    const object = { name: 'User' };
+    object[propName];
+
+If available, use the `?.` (optional chaining) operator when accesing potentially `null` or `undefined` objects instead of testing for existence.
+
+> Even though is only at Stage 1, it's already well supported in Babel
+
+    const object = {};
+    
+    // Bad
+    if (object.user != null) {
+      console.log(object.user.name);
+    }
+    
+    // Good
+    console.log(object.user?.name);
+
+#####  **NOTE**: Don't overuse the `?.` operator. If a property must be present, don't test for it's inexistence, let the system notify you of unexpected data by failing early.
+
+Use computed property names when necessary.
+
+    const foo = 'property';
+    const object = { [foo]: 'bar' };
+    console.log(object);  // prints { property: 'bar' };
+
+When having to mutate an object, always favor returning a copy of the object instead.
+
+    const object = { name: 'User', lastName: 'Userface' };
+    
+    // Bad
+    object.name = 'User2';
+    
+    // Good
+    const newObject = { ...object, name: 'User2' };
+
+Always use `Object.keys(object)` over a `for` loop.
+
+> Why? `for` loop iterates over all properties of the object and the prototype chain while `Object.keys()` only iterates over the object own properties.
+
+    // Bad
+    for (let key in object) {
+    }
+    
+    // Good
+    Object.keys(object).forEach((key) => {
+    });

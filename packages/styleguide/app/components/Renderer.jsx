@@ -20,6 +20,8 @@ import {
   ListItem,
   Margin,
   Sizes,
+  Callout,
+  Categories,
 } from '@drawbotics/react-drylus';
 import { Link } from 'react-router-dom';
 
@@ -33,6 +35,10 @@ const styles = {
   `,
   blockquote: css`
     position: relative;
+    
+    p {
+      color: ${sv.colorSecondary} !important;
+    }
 
     &::before {
       content: ' ';
@@ -52,6 +58,7 @@ const components = {
   h2: (props) => <Title {...props} size={2} />,
   h3: (props) => <Title {...props} size={3} />,
   h4: (props) => <Title {...props} size={4} />,
+  h5: (props) => <Callout {...props} category={Categories.WARNING} />,
   pre: (props) => <div {...props} />,
   p: (props) => <Paragraph {...props} />,
   a: (props) => {
@@ -61,9 +68,17 @@ const components = {
     return <Link to={props.href}><TextLink {...props} underlined={LinkUnderlined.ALWAYS} /></Link>;
   },
   li: (props) => <ListItem {...props} />,
-  ol: (props) => <List {...props} ordered />,
-  ul: (props) => <List {...props} />,
-  code: Code,
+  ol: (props) => (
+    <Margin size={{ bottom: Sizes.SMALL, top: Sizes.DEFAULT }}>
+      <List {...props} ordered />
+    </Margin>
+  ),
+  ul: (props) => (
+    <Margin size={{ bottom: Sizes.SMALL, top: Sizes.DEFAULT }}>
+      <List {...props} />
+    </Margin>
+  ),
+  code: (props) => <Code className="language-js" {...props} />,
   inlineCode: InlineCode,
   table: (props) => <Table {...props} />,
   tr: (props) => <TRow {...props} />,
@@ -73,9 +88,7 @@ const components = {
   tbody: (props) => <TBody {...props} />,
   blockquote: (props) => (
     <div className={styles.blockquote}>
-      <Margin size={{ left: Sizes.DEFAULT }}>
-        <Paragraph {...props} />
-      </Margin>
+      <Margin size={{ left: Sizes.DEFAULT }} {...props} />
     </div>
   ),
   wrapper: ({ children, ...props }) => {

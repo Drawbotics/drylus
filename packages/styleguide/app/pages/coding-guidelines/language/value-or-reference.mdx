@@ -1,0 +1,31 @@
+# Value or Reference
+
+When you use a primitive type (also called a scalar value) you always work with its value and they're immutable.
+
+```js
+const foo = 1;
+
+function myFunc(arg) {
+  arg += 1;
+  return arg;
+}
+
+console.log(myFunc(foo));  // prints 2
+console.log(foo);  // prints 1
+```
+
+When a complex type is used, a reference to its value is passed instead. Also, they're mutable.
+
+```js
+const foo = [1, 2, 3, 4];
+foo[5] = 5;
+console.log(foo);  // prints [1, 2, 3, 4, 5]
+
+function myFunc(arg) {
+  arg[0] = 10;
+  return arg;
+}
+
+console.log(myFunc(foo));  // prints [10, 2, 3, 4, 5];
+console.log(foo);  // prints [10, 2, 3, 4, 5];
+```

@@ -16,6 +16,7 @@ const styles = {
     overflow: scroll;
     display: flex;
     border-radius: ${sv.defaultBorderRadius};
+    margin: ${sv.defaultMargin} 0;
   `,
   code: css`
     flex: 1;
@@ -25,7 +26,7 @@ const styles = {
                 inset 0px -6px 8px -6px ${sv.grey900};
 
     * {
-      font-family: 'Roboto Mono', monospace;
+      font-family: 'Roboto Mono', monospace !important;
     }
   `,
 };

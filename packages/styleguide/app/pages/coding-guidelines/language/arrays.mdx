@@ -1,0 +1,104 @@
+# Arrays
+
+Use literal syntax for array creation.
+
+    // Bad
+    const items =  new Array();
+    
+    // Good
+    const items = [];
+
+Use `slice()` to clone an array instead of array spread `...`.
+
+> Why? It leads to more consistent code because it can also be used when chaining array methods that will mutate the original array. E.g: `sort`
+
+    const items = [2, 4, 3, 10];
+    const copy = items.slice();
+    const sortedArray = items.slice().sort();
+
+To convert an iterable object into an array, use array spread `...`.
+
+    const Component = ({ children }) => {
+      const childrenItems = [...children];
+      // ... render
+    };
+
+Always favor array methods over `for` loops.
+
+    const items = [1, 2, 3, 4];
+    
+    // Bad
+    const newArray = [];
+    
+    for (let item of items) {
+      newArray.push(item * 2);
+    }
+    
+    // Good
+    const newArray = items.map((item) => item * 2);
+
+If the index and the item is necessary, always favor `forEach` over a `foor` loop.
+
+    const items = [1, 2, 3, 4];
+    
+    // Bad
+    let index = 0;
+    for (let item of items) {
+      console.log('Item', item, 'at index', index);
+      index += 1;
+    }
+    
+    // Good
+    items.forEach((item, index) => {
+      console.log('Item', item, 'at index', index);
+    });
+
+If array methods are needed for an iterable object, always perform the transformation into an array at the point of usage.
+
+    // Bad
+    const items = [...iterableLike];
+    items.forEach(console.log);
+    
+    // Good
+    [...iterableLike].forEach(console.log);
+
+Always use array destructuring when accessing items of an array.
+
+    const items = [1, 2];
+    
+    // Bad
+    const item1 = items[0];
+    const item3 = items[1];
+    
+    // Good
+    const [ item1, item2 ] = items;
+
+Never use `_` for unused items in an array when destructuring, use empty commas instead.
+
+> Why? `_` doesn't have a special meaning, it's just another name for a variable. If used once, it can't be used again.
+
+    const items = [1, 2, 3, 4];
+    
+    // Bad
+    const [ item1, _, item3 ] = items;
+    const [ item1, _, _, item4 ] = items;  // will trigger an error
+    
+    // Good
+    const [ item1, , item3 ] = items;
+    const [ item1, , , item3 ] = items;
+
+When using array methods that mutate the array, always clone the array first.
+
+    // Bad 
+    items.sort((a, b) => a b);
+    
+    // Good
+    items.slice().sort((a, b) => a b);
+
+When adding new items to an array, always favor using the spread operator `...` instead of `push()`.
+
+    // Bad
+    items.push(5);
+    
+    // Good
+    const newArray = [...items, 5];

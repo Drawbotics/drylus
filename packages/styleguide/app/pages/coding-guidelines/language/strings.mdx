@@ -1,0 +1,51 @@
+# Strings
+
+Use single quotes `' '` for strings.
+
+    // Bad
+    const name = "User";
+    
+    // Good
+    const name = 'User';
+
+Only use back quotes ```` when there are variables to interpolate.
+
+    // Bad
+    const name = `User`;
+    
+    // Good
+    const name = `The name is: ${name}`;
+
+When variables need to be added to an string, don't use concatenation, always use string templates.
+
+    // Bad
+    const string = 'The name is: ' + name;
+    
+    // Good
+    const string = `The name is: ${name}`;
+
+When spliting long strings, don't use back quotes, they keep the indentation. Instead, concatenate them.
+
+    // Bad
+    function myFunction() {
+      const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Morbi convallis elit erat, quis faucibus metus gravida a. Quisque ac velit
+        eu nibh ultricies malesuada venenatis vitae magna.`;
+      // ... more code ...
+    }
+    
+    // Good
+    function myFunction() {
+      const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+        'Morbi convallis elit erat, quis faucibus metus gravida a. Quisque ac velit ' +
+        'eu nibh ultricies malesuada venenatis vitae magna.';
+      // ... more code ...
+    }
+
+Avoid escaping unnecessary characters. When single quotes need to be used inside a string, use back quotes instead.
+
+    // Bad
+    const string = 'It\'s a me, Mario!';
+    
+    // Good
+    const string = `It's a me, Mario!`;
