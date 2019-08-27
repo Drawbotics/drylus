@@ -137,7 +137,7 @@ export function generateLinks({ route, routeName, parent='', pathname, base='' }
 }
 
 
-const LinksNavigation = ({ routes, location, base }) => {
+const LinksNavigation = ({ title, routes, location, base }) => {
   useEffect(() => {
     const current = last(location.pathname.split('/'));
     document.title = `Drawbotics Styleguide - ${startCase(current)}`;
@@ -145,7 +145,7 @@ const LinksNavigation = ({ routes, location, base }) => {
   return (
     <div className={styles.linksNavigation}>
       <div className={styles.navigationTitle}>
-        <Title size={4} noMargin>Component kit</Title>
+        <Title size={4} noMargin>{title}</Title>
       </div>
       <div className={styles.links}>
         {generateLinks({ route: routes, pathname: location.pathname, base })}

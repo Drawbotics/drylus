@@ -18,6 +18,8 @@ import {
   TCell,
   List,
   ListItem,
+  Margin,
+  Sizes,
 } from '@drawbotics/react-drylus';
 import { Link } from 'react-router-dom';
 
@@ -28,6 +30,19 @@ import InlineCode from './InlineCode';
 const styles = {
   content: css`
     padding: ${sv.marginLarge} ${sv.defaultMargin};
+  `,
+  blockquote: css`
+    position: relative;
+
+    &::before {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: ${sv.colorPrimary};
+    }
   `,
 };
 
@@ -56,6 +71,13 @@ const components = {
   th: (props) => <TCell {...props} />,
   thead: (props) => <THead>{props.children.props.children}</THead>,
   tbody: (props) => <TBody {...props} />,
+  blockquote: (props) => (
+    <div className={styles.blockquote}>
+      <Margin size={{ left: Sizes.DEFAULT }}>
+        <Paragraph {...props} />
+      </Margin>
+    </div>
+  ),
   wrapper: ({ children, ...props }) => {
     if (React.Children.count(children) <= 1) {
       return children;

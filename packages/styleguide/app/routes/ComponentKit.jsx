@@ -14,7 +14,7 @@ const ComponentKit = () => {
   return (
     <Layout
       fixed
-      bar={<LinksNavigation routes={componentKit} base='component-kit' />}
+      bar={<LinksNavigation title="Component kit" routes={componentKit} base='component-kit' />}
       position={LayoutPositions.LEFT}>
       <Content fullHeight>
         <RoutesRenderer routes={componentKit} base='component-kit' />
