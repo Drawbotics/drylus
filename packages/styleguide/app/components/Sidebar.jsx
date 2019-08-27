@@ -122,7 +122,7 @@ const Sidebar = () => {
               side={TooltipSides.RIGHT}>
               <Link to="/component-kit/introduction">
                 <div className={styles.button}>
-                  <Icon name="box" />
+                  <Icon name="package" />
                 </div>
               </Link>
             </Tooltip>
