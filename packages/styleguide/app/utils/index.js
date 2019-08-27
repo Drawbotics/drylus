@@ -36,6 +36,7 @@ export function generateRouteObjects({ route, routeName, parent='', base }) {
         route: route[routeName],
         routeName,
         parent: noIndex,
+        base,
       }),
     ]), []);
   }
@@ -44,7 +45,7 @@ export function generateRouteObjects({ route, routeName, parent='', base }) {
     return [{
       name: routeName === 'index' ? startCase(baseName) : startCase(routeName),
       url: withBase.replace(/\/+/g, '/').replace(/\/$/, ""),
-      base: baseName,
+      base,
     }];
   }
 }

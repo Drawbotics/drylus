@@ -18,9 +18,13 @@ import { Link } from 'react-router-dom';
 
 import { generateRouteObjects } from '../utils';
 import componentKit from '../pages/component-kit';
+import codingGuidelines from '../pages/coding-guidelines';
 
 
-const routes = generateRouteObjects({ route: componentKit, base: 'component-kit' });
+const componentRoutes = generateRouteObjects({ route: componentKit, base: 'component-kit' });
+const codingRoutes = generateRouteObjects({ route: codingGuidelines, base: 'coding-guidelines' });
+
+const routes = [ ...componentRoutes, ...codingRoutes ];
 
 
 const styles = {
@@ -43,14 +47,10 @@ const styles = {
 
 function _getIconForCategory(category) {
   switch (category) {
-    case 'brand':
-      return 'tag';
-    case 'components':
+    case 'component-kit':
       return 'package';
-    case 'forms':
-      return 'server';
-    case 'layout':
-      return 'layout';
+    case 'coding-guidelines':
+      return 'command';
     default:
       return 'sidebar';
   }
