@@ -213,7 +213,7 @@ export const SelectFilter = ({
             <ListTile title={option[labelKey]} leading={option.leading} />
           </div>
           {do {
-            if (option.trailing) {
+            if (option.trailing != null) {
               option.trailing
             }
           }}
