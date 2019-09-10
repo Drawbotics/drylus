@@ -1,0 +1,39 @@
+import { Map } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Map
+Used to display one or more points of interest on a map. This component uses [`mapbox`](https://www.mapbox.com/) internally, and [`react-mapbox-wrapper`](https://github.com/MeilleursAgents/react-mapbox-wrapper).
+
+__Usage__
+```jsx
+import { Map } from '@drawbotics/react-drylus';
+```
+__Example__
+
+The props shown here are only the most common ones, if you need more interactivity you can look at the available props [here](https://github.com/MeilleursAgents/react-mapbox-wrapper#api).
+
+To customize the markers and their interaction, you can use the `options` field (see `markers` in table) and use any option from the documentation of `react-mapbox-wrapper`. 
+
+<Playground component={Map}>
+  <Map
+    zoom={14}
+    accessToken={process.env.MAPBOX_ACCESS_TOKEN}
+    markers={[
+      {
+        label: 'Work',
+        coordinates: {
+          lat: 50.8,
+          lng: 4.4,
+        },
+      },
+      {
+        label: 'Home',
+        coordinates: {
+          lat: 50.3,
+          lng: 4.3,
+        },
+      },
+    ]} />
+</Playground>

@@ -35,6 +35,7 @@ import splashScreen from './splash-screen';
 import breadcrumbs from './breadcrumbs';
 import dropdown from './dropdown';
 import list from './list';
+import map from './map';
 
 
 const components = {
@@ -75,6 +76,7 @@ const components = {
   breadcrumbs,
   dropdown,
   list,
+  map,
 };
 
 

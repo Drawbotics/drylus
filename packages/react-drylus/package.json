@@ -18,10 +18,13 @@
     "@drawbotics/enums": "0.2.0",
     "@drawbotics/icons": "^3.6.4",
     "@drawbotics/use-is-device": "1.0.0",
+    "@turf/circle": "^6.0.1",
     "animejs": "^3.0.1",
     "core-js": "^2.6.5",
     "emotion": "^10.0.9",
+    "mapbox-gl": "^1.3.1",
     "react-calendar": "^2.19.0",
+    "react-mapbox-wrapper": "^2.4.0",
     "react-transition-group": "^4.0.1",
     "uuid": "^3.3.2"
   },
