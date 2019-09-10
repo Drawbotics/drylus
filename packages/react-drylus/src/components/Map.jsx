@@ -56,7 +56,7 @@ const Map = ({
 
   const handleFitMarkers = (map) => {
     const coordinatesToFit = markers.reduce((coords, marker) =>
-      coords.extend([ marker.coordinates.lng, marker.coordinates.lat ]), new LngLatBounds());
+      coords.extend([marker.coordinates.lng, marker.coordinates.lat]), new LngLatBounds());
     map.fitBounds(coordinatesToFit, { padding: { top: 60, bottom: 60, left: 60, right: 60 } });
     setMapRef(map);
   };
@@ -70,7 +70,7 @@ const Map = ({
         style="mapbox://styles/mapbox/light-v9"
         coordinates={markers[0]?.coordinates}
         {...props}>
-        {do{
+        {do {
           if (mapRef) {
             markers.map((marker, i) => (
               <MapboxMarker
