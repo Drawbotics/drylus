@@ -97,6 +97,9 @@ const styles = {
   activeOption: css`
     font-weight: 500;
   `,
+  label: css`
+    flex: 1;
+  `,
 };
 
 
@@ -206,7 +209,14 @@ export const SelectFilter = ({
             [styles.activeOption]: value === option[valueKey],
           })}
           onClick={() => onChange(option[valueKey])}>
-          <ListTile title={option[labelKey]} leading={option.leading} />
+          <div className={styles.label}>
+            <ListTile title={option[labelKey]} leading={option.leading} />
+          </div>
+          {do {
+            if (option.trailing) {
+              option.trailing
+            }
+          }}
         </div>
       ))}
     </BaseFilter>
@@ -215,9 +225,10 @@ export const SelectFilter = ({
 
 
 SelectFilter.propTypes = {
-  /** The items to show in the filter panel */
+  /** The items to show in the filter panel: value(string, number), label(string), leading(node), trailing(node) */
   options: CustomPropTypes.optionsWith({
     leading: PropTypes.node,
+    trailing: PropTypes.node,
   }),
 
   /** Determines which value is currently active */
@@ -290,7 +301,7 @@ export const CheckboxFilter = ({
 
 
 CheckboxFilter.propTypes = {
-  /** The items to show in the filter panel */
+  /** The items to show in the filter panel: value(string, number), label(string) */
   options: CustomPropTypes.options,
 
   /** Determines which values are currently active */

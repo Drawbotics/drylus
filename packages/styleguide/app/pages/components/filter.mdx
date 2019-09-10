@@ -11,6 +11,8 @@ import {
   FlexJustify,
   Icon,
   Margin,
+  Text,
+  Tiers,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -66,23 +68,46 @@ __Example__
         </Margin>
       </FlexItem>
       <FlexItem>
+        <Margin size={{ right: Sizes.SMALL }}>
+          <ControlledField component={
+            <SelectFilter
+              label="Notifications"
+              onClear={x=>x}
+              onChange={x=>x}
+              options={[{
+                leading: <Icon name="x" category={Categories.DANGER} />,
+                label: 'Dismissed',
+                value: 'dismissed',
+              }, {
+                leading: <Icon name="bell" category={Categories.WARNING} />,
+                label: 'Snoozed',
+                value: 'snoozed',
+              }, {
+                leading: <Icon name="check" category={Categories.SUCCESS} />,
+                label: 'Seen',
+                value: 'seen',
+              }]} />
+          } />
+        </Margin>
+      </FlexItem>
+      <FlexItem>
         <ControlledField component={
           <SelectFilter
-            label="Notifications"
+            label="Services"
             onClear={x=>x}
             onChange={x=>x}
             options={[{
-              leading: <Icon name="x" category={Categories.DANGER} />,
-              label: 'Dismissed',
-              value: 'dismissed',
+              trailing: <Text tier={Tiers.SECONDARY}>3</Text>,
+              label: '3D Exterior',
+              value: 'exterior',
             }, {
-              leading: <Icon name="bell" category={Categories.WARNING} />,
-              label: 'Snoozed',
-              value: 'snoozed',
+              trailing: <Text tier={Tiers.SECONDARY}>1</Text>,
+              label: '3D Interior',
+              value: 'interior',
             }, {
-              leading: <Icon name="check" category={Categories.SUCCESS} />,
-              label: 'Seen',
-              value: 'seen',
+              trailing: <Text tier={Tiers.SECONDARY}>10</Text>,
+              label: 'Shoebox',
+              value: 'shoebox',
             }]} />
         } />
       </FlexItem>
