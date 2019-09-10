@@ -7,11 +7,15 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ip = require('ip');
 const fs = require('fs-extra');
+const dotenv = require('dotenv');
 
 const rehypePlayground = require('./utils/rehype-playground');
 
 
 const WEBPACK_PORT = 4000;
+
+
+dotenv.config();
 
 
 checkEnv([ 'NODE_ENV' ]);
@@ -23,6 +27,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const basePlugins = [
   new webpack.EnvironmentPlugin({
     NODE_ENV: process.env.NODE_ENV,
+    MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
   }),
   new HtmlWebpackPlugin({
     filename: isProduction ? '404.html' : 'index.html',
