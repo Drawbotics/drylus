@@ -18,7 +18,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "f2a5407988d5f9ec9f42122339c2016702d17307",
+  "gitHead": "87d63af944d66b3ce83fd8c45373ef3e334e1c8d",
   "dependencies": {
     "core-js": "^2.6.9"
   }
