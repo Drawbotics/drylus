@@ -224,7 +224,7 @@ const MultiSelect = ({
       style={style}
       className={cx(styles.root, {
         [styles.disabled]: disabled,
-        [styles.readOnly]: ! onChange,
+        [styles.readOnly]: onChange == null,
         [styles.valid]: values?.length > 0 && valid,
         [styles.error]: error,
       })}
@@ -235,7 +235,7 @@ const MultiSelect = ({
             <Spinner size={Sizes.SMALL} />
           </div>
         }
-        else if (! onChange) {
+        else if (onChange == null) {
           <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
             <Icon name="lock" />
           </div>
@@ -256,7 +256,7 @@ const MultiSelect = ({
         className={cx(styles.select, {
           [styles.active]: isFocused,
         })}
-        onClick={onChange ? handleClickSelect : null}>
+        onClick={onChange != null ? handleClickSelect : null}>
         {do {
           if (placeholder && values?.length === 0) {
             <div className={styles.placeholder}>
@@ -267,7 +267,7 @@ const MultiSelect = ({
             <div className={styles.values}>
               {values.map((value) => (
                 <div key={value} className={styles.value}>
-                  <Tag inversed onClickRemove={onChange ? (e) => handleClickRemove(e, value) : null}>
+                  <Tag inversed onClickRemove={onChange != null ? (e) => handleClickRemove(e, value) : null}>
                     {options.find((option) => option[valueKey] === value)[labelKey]}
                   </Tag>
                 </div>
@@ -287,7 +287,7 @@ const MultiSelect = ({
                   [styles.disabledOption]: option.disabled || values.includes(option[valueKey]),
                 })}
                 key={option[valueKey]}
-                onClick={onChange ? () => handleOnChange(option[valueKey]) : null}>
+                onClick={onChange != null ? () => handleOnChange(option[valueKey]) : null}>
                 {option[labelKey]}
               </div>
             ))}
@@ -305,11 +305,11 @@ const MultiSelect = ({
       <select
         disabled={disabled}
         ref={selectRef}
-        onChange={onChange ? (e) => handleSelectChange(e.target.options) : null}
+        onChange={onChange != null ? (e) => handleSelectChange(e.target.options) : null}
         onFocus={() => setFocused(true)}
         onBlur={() => canBlur ? setFocused(false) : null}
         values={values}
-        readOnly={! onChange}
+        readOnly={onChange == null}
         multiple
         {...rest}>
         {options.map((option) => (

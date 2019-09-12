@@ -157,7 +157,7 @@ const NumberInput = ({
         hint={hint}
         valid={valid}
         loading={loading}
-        onChange={onChange ? handleInputOnChange : null}
+        onChange={onChange != null ? handleInputOnChange : null}
         disabled={disabled}
         placeholder={placeholder}
         value={value}
@@ -167,7 +167,7 @@ const NumberInput = ({
         min={min}
         inputMode="numeric"
         className={styles.numberInput}
-        suffix={withCounter && onChange ?
+        suffix={withCounter && onChange != null ?
           <div className={cx(styles.buttons, { [styles.disabled]: disabled })}>
             <button className={styles.button} onClick={() => ! disabled && value < max ? onChange((value || 0) + 1, name) : null}>
               <Icon name="plus" bold />

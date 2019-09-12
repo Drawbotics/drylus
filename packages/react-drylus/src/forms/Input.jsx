@@ -167,7 +167,7 @@ const RawInput = ({
 }) => {
   const [ isFocused, setFocused ] = useState(false);
 
-  const handleOnChange = (e) => onChange ? onChange(e.target.value, e.target.name) : null;
+  const handleOnChange = (e) => onChange != null ? onChange(e.target.value, e.target.name) : null;
 
   const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
   const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
@@ -199,7 +199,7 @@ const RawInput = ({
                 <Spinner size={Sizes.SMALL} />
               </div>
             }
-            else if (! onChange) {
+            else if (onChange == null) {
               <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
                 <Icon name="lock" />
               </div>
@@ -220,7 +220,7 @@ const RawInput = ({
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             onChange={handleOnChange}
-            readOnly={! onChange}
+            readOnly={onChange == null}
             className={cx(styles.input, {
               [styles.straightLeft]: prefix,
               [styles.straightRight]: suffix,

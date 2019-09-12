@@ -280,7 +280,7 @@ const DateInput = ({
   return (
     <div style={style} className={styles.root} ref={rootRef}>
       <InputWithRef
-        suffix={onChange
+        suffix={onChange != null
           ? <Button
             disabled={disabled}
             leading={<Icon name="calendar" />}
@@ -293,9 +293,9 @@ const DateInput = ({
         hint={hint}
         loading={loading}
         value={inputValue}
-        onChange={onChange ? handleOnChange : null}
+        onChange={onChange != null ? handleOnChange : null}
         ref={inputRef}
-        onFocus={onChange ? () => setFocused(true) : null}
+        onFocus={onChange != null ? () => setFocused(true) : null}
         placeholder={placeholder}
         type={isDesktop ? null : "date"}
         max={! isDesktop && maxDate ? _objectToDateString(maxDate) : null}
@@ -321,7 +321,7 @@ const DateInput = ({
               tileClassName={styles.tile}
               locale={locale}
               activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
-              onChange={onChange ? (v) => onChange(_dateToObject(v), name) : null}
+              onChange={onChange != null ? (v) => onChange(_dateToObject(v), name) : null}
               value={value === '' ? null : _objectToDate(value)} />
           </div>
         </div>,

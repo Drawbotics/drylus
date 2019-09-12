@@ -132,7 +132,7 @@ const Select = ({
             <Spinner size={Sizes.SMALL} />
           </div>
         }
-        else if (! onChange) {
+        else if (onChange == null) {
           <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
             <Icon name="lock" />
           </div>
@@ -153,7 +153,7 @@ const Select = ({
         className={styles.select}
         value={value}
         onChange={handleOnChange}
-        readOnly={! onChange}
+        readOnly={onChange == null}
         {...rest}>
         {do {
           if (! value) {

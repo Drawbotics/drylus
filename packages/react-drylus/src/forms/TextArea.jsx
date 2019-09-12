@@ -104,7 +104,7 @@ const RawTextArea = ({
 }) => {
   const [ isFocused, setFocused ] = useState(false);
 
-  const handleOnChange = (e) => onChange ? onChange(e.target.value, e.target.name) : null;
+  const handleOnChange = (e) => onChange != null ? onChange(e.target.value, e.target.name) : null;
 
   return (
     <div
@@ -122,7 +122,7 @@ const RawTextArea = ({
                 <Spinner size={Sizes.SMALL} />
               </div>
             }
-            else if (! onChange) {
+            else if (onChange == null) {
               <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
                 <Icon name="lock" />
               </div>
@@ -143,7 +143,7 @@ const RawTextArea = ({
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             onChange={handleOnChange}
-            readOnly={! onChange}
+            readOnly={onChange == null}
             className={styles.textarea}
             value={value}
             ref={inputRef}
