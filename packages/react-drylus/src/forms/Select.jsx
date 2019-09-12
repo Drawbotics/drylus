@@ -4,6 +4,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
 import RoundIcon from '../components/RoundIcon';
+import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
 import Sizes from '../base/Sizes';
 import Categories from '../base/Categories';
@@ -60,6 +61,11 @@ const styles = {
       color: ${sv.colorDisabled};
       border-color: ${sv.neutralLight};
       box-shadow: none;
+    }
+
+    &:read-only {
+      box-shadow: none !important;
+      pointer-events: none;
     }
   `,
   valid: css`
@@ -118,6 +124,11 @@ const Select = ({
             <Spinner size={Sizes.SMALL} />
           </div>
         }
+        else if (! onChange) {
+          <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
+            <Icon name="lock" />
+          </div>
+        }
         else if (error) {
           <div className={styles.icon}>
             <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
@@ -134,6 +145,7 @@ const Select = ({
         className={styles.select}
         value={value}
         onChange={handleOnChange}
+        readOnly={! onChange}
         {...rest}>
         {do {
           if (! value) {
@@ -187,8 +199,8 @@ Select.propTypes = {
   /** Text shown when no value is selected */
   placeholder: PropTypes.string,
 
-  /** Triggered when a new value is chosen, returns a value, key (label, value) pair */
-  onChange: PropTypes.func.isRequired,
+  /** Triggered when a new value is chosen, returns a value, key (label, value) pair. If not given, the field is read-only */
+  onChange: PropTypes.func,
 
   /** Small text shown below the box, replaced by error if present */
   hint: PropTypes.string,

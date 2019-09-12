@@ -63,7 +63,7 @@ const styles = {
     
     &:read-only {
       box-shadow: none !important;
-      cursor: default;
+      pointer-events: none;
     }
   `,
   straightLeft: css`
