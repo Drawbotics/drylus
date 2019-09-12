@@ -59,6 +59,12 @@ const styles = {
       border-color: ${sv.neutralLight};
       box-shadow: none;
     }
+    
+    &:read-only {
+      background: ${sv.neutralLight};
+      box-shadow: none;
+      border-color: ${sv.neutralLight};
+    }
   `,
   straightLeft: css`
     border-top-left-radius: 0;
