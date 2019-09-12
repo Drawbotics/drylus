@@ -129,6 +129,11 @@ const Flex = ({
   className,
   style,
 }) => {
+  const invalidChildren = React.Children.map(children, x => x)
+    .some((child) => child != null && child.type !== FlexItem);
+  if (invalidChildren) {
+    console.warn('Flex should only accept FlexItem as children');
+  }
   return (
     <div className={cx(styles.root, {
       [styles[getEnumAsClass(direction)]]: direction,
