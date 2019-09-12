@@ -4,6 +4,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
 import RoundIcon from '../components/RoundIcon';
+import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
 import Sizes from '../base/Sizes';
 import Categories from '../base/Categories';
@@ -56,6 +57,11 @@ const styles = {
       color: ${sv.colorDisabled};
       border-color: ${sv.neutralLight};
       box-shadow: none;
+    }
+
+    &:read-only {
+      box-shadow: none !important;
+      cursor: default;
     }
   `,
   valid: css`
@@ -116,6 +122,11 @@ const RawTextArea = ({
                 <Spinner size={Sizes.SMALL} />
               </div>
             }
+            else if (! onChange) {
+              <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
+                <Icon name="lock" />
+              </div>
+            }
             else if (error) {
               <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
                 <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
@@ -132,6 +143,7 @@ const RawTextArea = ({
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             onChange={handleOnChange}
+            readOnly={! onChange}
             className={styles.textarea}
             value={value}
             ref={inputRef}
@@ -176,8 +188,8 @@ TextArea.propTypes = {
   /** Text shown when no value is active */
   placeholder: PropTypes.string,
 
-  /** Triggered when the value is changed (typing) */
-  onChange: PropTypes.func.isRequired,
+  /** Triggered when the value is changed (typing). If not given, the field is read-only */
+  onChange: PropTypes.func,
 
   /** Small text shown below the box, replaced by error if present */
   hint: PropTypes.string,
