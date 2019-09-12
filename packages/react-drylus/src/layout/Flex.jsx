@@ -129,7 +129,8 @@ const Flex = ({
   className,
   style,
 }) => {
-  const invalidChildren = React.Children.map(children, x => x)
+  const invalidChildren = React.Children
+    .toArray(children)
     .some((child) => child != null && child.type !== FlexItem);
   if (invalidChildren) {
     console.warn('Flex should only accept FlexItem as children');
