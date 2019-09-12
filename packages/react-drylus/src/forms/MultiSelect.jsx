@@ -57,8 +57,19 @@ const styles = {
     }
   `,
   readOnly: css`
-    box-shadow: none !important;
     pointer-events: none;
+
+    [data-element="select"] {
+      box-shadow: none !important;
+    }
+
+    &::after {
+      content: none;
+    }
+
+    [data-element="icon"] {
+      right: ${sv.marginSmall};
+    }
   `,
   active: css`
     box-shadow: inset 0px 0px 0px 2px ${sv.brand} !important;
@@ -213,6 +224,7 @@ const MultiSelect = ({
       style={style}
       className={cx(styles.root, {
         [styles.disabled]: disabled,
+        [styles.readOnly]: ! onChange,
         [styles.valid]: values?.length > 0 && valid,
         [styles.error]: error,
       })}
@@ -243,7 +255,6 @@ const MultiSelect = ({
         data-element="select"
         className={cx(styles.select, {
           [styles.active]: isFocused,
-          [styles.readOnly]: ! onChange,
         })}
         onClick={onChange ? handleClickSelect : null}>
         {do {

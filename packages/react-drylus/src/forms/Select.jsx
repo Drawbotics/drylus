@@ -62,10 +62,17 @@ const styles = {
       border-color: ${sv.neutralLight};
       box-shadow: none;
     }
+  `,
+  readOnly: css`
+    box-shadow: none !important;
+    pointer-events: none;
 
-    &:read-only {
-      box-shadow: none !important;
-      pointer-events: none;
+    &::after {
+      content: none;
+    }
+
+    [data-element="icon"] {
+      right: ${sv.marginSmall};
     }
   `,
   valid: css`
@@ -114,6 +121,7 @@ const Select = ({
       style={style}
       className={cx(styles.root, {
         [styles.noValue]: ! value,
+        [styles.readOnly]: ! onChange,
         [styles.disabled]: disabled,
         [styles.valid]: Boolean(value) && valid,
         [styles.error]: error,
