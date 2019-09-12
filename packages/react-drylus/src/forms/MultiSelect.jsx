@@ -7,6 +7,7 @@ import { getDevice } from '@drawbotics/use-is-device';
 
 import Tag from '../components/Tag';
 import RoundIcon from '../components/RoundIcon';
+import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
 import Hint from './Hint';
 import { Categories, Sizes } from '../base';
@@ -54,6 +55,10 @@ const styles = {
     &:hover {
       box-shadow: inset 0px 0px 0px 1px ${sv.azureDark};
     }
+  `,
+  readOnly: css`
+    box-shadow: none !important;
+    pointer-events: none;
   `,
   active: css`
     box-shadow: inset 0px 0px 0px 2px ${sv.brand} !important;
@@ -218,6 +223,11 @@ const MultiSelect = ({
             <Spinner size={Sizes.SMALL} />
           </div>
         }
+        else if (! onChange) {
+          <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
+            <Icon name="lock" />
+          </div>
+        }
         else if (error) {
           <div className={styles.icon}>
             <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
@@ -233,8 +243,9 @@ const MultiSelect = ({
         data-element="select"
         className={cx(styles.select, {
           [styles.active]: isFocused,
+          [styles.readOnly]: ! onChange,
         })}
-        onClick={handleClickSelect}>
+        onClick={onChange ? handleClickSelect : null}>
         {do {
           if (placeholder && values?.length === 0) {
             <div className={styles.placeholder}>
@@ -245,7 +256,7 @@ const MultiSelect = ({
             <div className={styles.values}>
               {values.map((value) => (
                 <div key={value} className={styles.value}>
-                  <Tag inversed onClickRemove={(e) => handleClickRemove(e, value)}>
+                  <Tag inversed onClickRemove={onChange ? (e) => handleClickRemove(e, value) : null}>
                     {options.find((option) => option[valueKey] === value)[labelKey]}
                   </Tag>
                 </div>
@@ -265,7 +276,7 @@ const MultiSelect = ({
                   [styles.disabledOption]: option.disabled || values.includes(option[valueKey]),
                 })}
                 key={option[valueKey]}
-                onClick={() => handleOnChange(option[valueKey])}>
+                onClick={onChange ? () => handleOnChange(option[valueKey]) : null}>
                 {option[labelKey]}
               </div>
             ))}
@@ -283,10 +294,11 @@ const MultiSelect = ({
       <select
         disabled={disabled}
         ref={selectRef}
-        onChange={(e) => handleSelectChange(e.target.options)}
+        onChange={onChange ? (e) => handleSelectChange(e.target.options) : null}
         onFocus={() => setFocused(true)}
         onBlur={() => canBlur ? setFocused(false) : null}
         values={values}
+        readOnly={! onChange}
         multiple
         {...rest}>
         {options.map((option) => (
@@ -328,8 +340,8 @@ MultiSelect.propTypes = {
   /** Text shown when no value is selected */
   placeholder: PropTypes.string,
 
-  /** Triggered when a new value is chosen, returns a value, key (label, value) pair */
-  onChange: PropTypes.func.isRequired,
+  /** Triggered when a new value is chosen, returns a value, key (label, value) pair. If not given, the field is read-only */
+  onChange: PropTypes.func,
 
   /** Small text shown below the box, replaced by error if present */
   hint: PropTypes.string,
