@@ -268,14 +268,14 @@ const DateInput = ({
   const rootBox = rootRef.current?.getBoundingClientRect();
   const topRender =  pickerBox ? _getShouldRenderTop(pickerBox) : false;
 
-  const handleOnChange = onChange ? (v) => {
+  const handleOnChange = (v) => {
     if (isDesktop) {
       return v;
     }
     else {
       return Boolean(v) && onChange(_stringToDateObject(v), name);
     }
-  } : null;
+  };
 
   return (
     <div style={style} className={styles.root} ref={rootRef}>
@@ -293,7 +293,7 @@ const DateInput = ({
         hint={hint}
         loading={loading}
         value={inputValue}
-        onChange={handleOnChange}
+        onChange={onChange ? handleOnChange : null}
         ref={inputRef}
         onFocus={onChange ? () => setFocused(true) : null}
         placeholder={placeholder}

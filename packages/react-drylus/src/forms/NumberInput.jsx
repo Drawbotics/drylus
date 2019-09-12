@@ -157,7 +157,7 @@ const NumberInput = ({
         hint={hint}
         valid={valid}
         loading={loading}
-        onChange={handleInputOnChange}
+        onChange={onChange ? handleInputOnChange : null}
         disabled={disabled}
         placeholder={placeholder}
         value={value}
@@ -167,7 +167,7 @@ const NumberInput = ({
         min={min}
         inputMode="numeric"
         className={styles.numberInput}
-        suffix={withCounter ?
+        suffix={withCounter && onChange ?
           <div className={cx(styles.buttons, { [styles.disabled]: disabled })}>
             <button className={styles.button} onClick={() => ! disabled && value < max ? onChange((value || 0) + 1, name) : null}>
               <Icon name="plus" bold />
@@ -198,8 +198,8 @@ NumberInput.propTypes = {
   /** Text shown when no value is active */
   placeholder: PropTypes.string,
 
-  /** Triggered when the value is changed (typing or clicking +/-) */
-  onChange: PropTypes.func.isRequired,
+  /** Triggered when the value is changed (typing or clicking +/-). If not given, the field is read-only */
+  onChange: PropTypes.func,
 
   /** Small text shown below the box, replaced by error if present */
   hint: PropTypes.string,
