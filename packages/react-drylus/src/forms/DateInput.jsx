@@ -268,14 +268,24 @@ const DateInput = ({
   const rootBox = rootRef.current?.getBoundingClientRect();
   const topRender =  pickerBox ? _getShouldRenderTop(pickerBox) : false;
 
+  const handleOnChange = (v) => {
+    if (isDesktop) {
+      return v;
+    }
+    else {
+      return Boolean(v) && onChange(_stringToDateObject(v), name);
+    }
+  };
+
   return (
     <div style={style} className={styles.root} ref={rootRef}>
       <InputWithRef
-        suffix={
-          <Button
+        suffix={onChange != null
+          ? <Button
             disabled={disabled}
             leading={<Icon name="calendar" />}
             onClick={() => inputRef.current.focus()} />
+          : null
         }
         disabled={disabled}
         valid={valid}
@@ -283,9 +293,9 @@ const DateInput = ({
         hint={hint}
         loading={loading}
         value={inputValue}
-        onChange={isDesktop ? x=>x : (v) => Boolean(v) && onChange(_stringToDateObject(v), name)}
+        onChange={onChange != null ? handleOnChange : null}
         ref={inputRef}
-        onFocus={() => setFocused(true)}
+        onFocus={onChange != null ? () => setFocused(true) : null}
         placeholder={placeholder}
         type={isDesktop ? null : "date"}
         max={! isDesktop && maxDate ? _objectToDateString(maxDate) : null}
@@ -311,7 +321,7 @@ const DateInput = ({
               tileClassName={styles.tile}
               locale={locale}
               activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
-              onChange={(v) => onChange(_dateToObject(v), name)}
+              onChange={onChange != null ? (v) => onChange(_dateToObject(v), name) : null}
               value={value === '' ? null : _objectToDate(value)} />
           </div>
         </div>,
@@ -333,8 +343,8 @@ DateInput.propTypes = {
     PropTypes.oneOf(['']),
   ]).isRequired,
 
-  /** Triggered when the date is chosen from the calendar */
-  onChange: PropTypes.func.isRequired,
+  /** Triggered when the date is chosen from the calendar. If not given, the field is read-only */
+  onChange: PropTypes.func,
 
   /** Name of the form element (target.name) */
   name: PropTypes.string,

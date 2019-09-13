@@ -4,6 +4,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
 import RoundIcon from '../components/RoundIcon';
+import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
 import Sizes from '../base/Sizes';
 import Categories from '../base/Categories';
@@ -62,6 +63,18 @@ const styles = {
       box-shadow: none;
     }
   `,
+  readOnly: css`
+    box-shadow: none !important;
+    pointer-events: none;
+
+    &::after {
+      content: none;
+    }
+
+    [data-element="icon"] {
+      right: ${sv.marginSmall};
+    }
+  `,
   valid: css`
     > select {
       box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
@@ -108,6 +121,7 @@ const Select = ({
       style={style}
       className={cx(styles.root, {
         [styles.noValue]: ! value,
+        [styles.readOnly]: ! onChange,
         [styles.disabled]: disabled,
         [styles.valid]: Boolean(value) && valid,
         [styles.error]: error,
@@ -116,6 +130,11 @@ const Select = ({
         if (loading) {
           <div className={styles.icon}>
             <Spinner size={Sizes.SMALL} />
+          </div>
+        }
+        else if (onChange == null) {
+          <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
+            <Icon name="lock" />
           </div>
         }
         else if (error) {
@@ -134,6 +153,7 @@ const Select = ({
         className={styles.select}
         value={value}
         onChange={handleOnChange}
+        readOnly={onChange == null}
         {...rest}>
         {do {
           if (! value) {
@@ -187,8 +207,8 @@ Select.propTypes = {
   /** Text shown when no value is selected */
   placeholder: PropTypes.string,
 
-  /** Triggered when a new value is chosen, returns a value, key (label, value) pair */
-  onChange: PropTypes.func.isRequired,
+  /** Triggered when a new value is chosen, returns a value, key (label, value) pair. If not given, the field is read-only */
+  onChange: PropTypes.func,
 
   /** Small text shown below the box, replaced by error if present */
   hint: PropTypes.string,
