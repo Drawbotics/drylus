@@ -69,17 +69,17 @@ const SplashScreenProvider = ({ children }) => {
 
   const { text } = state;
 
-  const hide = () => {
+  const hideSplashScreen = () => {
     setVisibility(false);
     setTimeout(() => setState({}), 500);
   };
 
-  const show = (options) => {
+  const showSplashScreen = (options) => {
     setVisibility(true);
     setState(options);
   };
 
-  const update = (options) => setState({ ...state, ...options });
+  const updateSplashScreen = (options) => setState({ ...state, ...options });
 
   const handleEnter = () => {
     const timeline = anime.timeline({
@@ -129,7 +129,7 @@ const SplashScreenProvider = ({ children }) => {
   if (! outletElement) return null;
 
   return (
-    <Context.Provider value={{ show, hide, update }}>
+    <Context.Provider value={{ showSplashScreen, hideSplashScreen, updateSplashScreen }}>
       {children}
       {ReactDOM.createPortal(
         <div className={themeStyles.root}>
