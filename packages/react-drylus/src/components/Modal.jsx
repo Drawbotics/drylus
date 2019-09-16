@@ -35,6 +35,10 @@ const styles = {
     > * {
       pointer-events: auto;
     }
+
+    @media ${sv.phoneLandscape} {
+      padding: ${sv.paddingSmall};
+    }
   `,
   alignTop: css`
     align-items: flex-start;

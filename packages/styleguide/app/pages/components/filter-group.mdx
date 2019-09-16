@@ -1,0 +1,16 @@
+import {
+  FilterGroup,
+} from '@drawbotics/react-drylus';
+
+import Playground, { PropsTable } from '~/components/Playground';
+import { ControlledField, ControlledMultiField } from '../utils';
+
+
+
+# FilterGroup
+
+In order to allow decluttering of the UI in smaller screen sizes, we provide an additional component called `FilterGroup`. You can see the API below:
+
+<PropsTable component={FilterGroup} />
+
+By wrapping your filters (and other elements if necessary) with this component, they will be rendered in a separate panel in mobile, which is accesed by pressing the button rendered by the component.

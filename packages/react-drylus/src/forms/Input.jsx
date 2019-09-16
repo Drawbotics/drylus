@@ -65,6 +65,10 @@ const styles = {
       box-shadow: none !important;
       pointer-events: none;
     }
+
+    @media ${sv.phonePortrait} {
+      height: ${sv.marginExtraLarge};
+    }
   `,
   straightLeft: css`
     border-top-left-radius: 0;
