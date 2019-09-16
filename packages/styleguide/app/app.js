@@ -10,7 +10,7 @@ import {
 } from '@drawbotics/react-drylus';
 
 import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
-import '@drawbotics/vanilla-drylus/dist/drylus.css';
+// import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
 import Sidebar from './components/Sidebar';
 import LinksNavigation from './components/LinksNavigation';

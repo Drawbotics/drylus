@@ -13,6 +13,10 @@ injectGlobal`
     font-size: ${sv.defaultFontSize};
     line-height: ${sv.defaultLineHeight};
     letter-spacing: ${sv.defaultLetterSpacing};
+
+    @media ${sv.phonePortrait} {
+      font-size: calc(${sv.defaultFontSize} - 1px);
+    }
   }
 `;
 
