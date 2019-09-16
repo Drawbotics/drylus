@@ -7,7 +7,9 @@ import sv from '@drawbotics/drylus-style-vars';
 import Button from './Button';
 import Icon from './Icon';
 import Drawer from './Drawer';
+import Margin from '../layout/Margin';
 import { Tiers, Sizes, Categories } from '../base';
+import Flex, { FlexItem, FlexJustify } from '../layout/Flex';
 
 
 const styles = {
@@ -22,21 +24,36 @@ const styles = {
 const FilterGroup = ({
   label,
   icon,
-  children,
+  filters,
   renderButton,
   clearAllLabel,
+  active,
 }) => {
   const [ drawerOpen, setDrawerOpen ] = useState(false);
   const { isPhonePortrait } = useIsDevice();
 
   if (! isPhonePortrait) {
-    return children;
+    return (
+      <Flex justify={FlexJustify.START}>
+        {filters.map((filter, i) => (
+          <FlexItem key={i}>
+            {i === 0
+              ? filter
+              : <Margin size={{ left: Sizes.SMALL }}>
+                  {filter}
+                </Margin>
+            }
+          </FlexItem>
+        ))}
+      </Flex>
+    );
   }
 
   return (
     <Fragment>
       {renderButton(
         <Button
+          style={active ? { background: sv.neutralDarker, color: sv.white } : null}
           onClick={() => setDrawerOpen(true)}
           leading={<Icon name={icon} />} />
       )}
@@ -56,11 +73,16 @@ const FilterGroup = ({
         onClickClose={() => setDrawerOpen(false)}>
           <div className={styles.okButton}>
             <Button
+              onClick={() => setDrawerOpen(false)}
               category={Categories.BRAND}>
               OK
             </Button>
           </div>
-          {children}
+          {filters.map((filter, i) => (
+            <Margin key={i} size={{ top: Sizes.DEFAULT }}>
+              {filter}
+            </Margin>
+          ))}
       </Drawer>
     </Fragment>
   );
@@ -75,13 +97,19 @@ FilterGroup.propTypes = {
   icon: PropTypes.string.isRequired,
 
   /** Will be rendered within the content of the drawer */
-  children: PropTypes.node.isRequired,
+  filters: PropTypes.node.isRequired,
 
   /** Returns the button rendered by the group. With this you can wrap it in a component to arrange the spacing */
   renderButton: PropTypes.func,
 
   /** Text rendered on the button to clear all filters */
   clearAllLabel: PropTypes.string.isRequired,
+
+  /** Function triggered when the "clear all" button is pressed on the modal. It's up to you to perform the clearing yourself */
+  onClear: PropTypes.func.isRequired,
+
+  /** If true, the button will show that at least one filter is active. It is up to you to handle this behaviour */
+  active: PropTypes.bool,
 };
 
 
