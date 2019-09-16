@@ -1,5 +1,11 @@
 import {
   FilterGroup,
+  Flex,
+  FlexItem,
+  Margin,
+  Sizes,
+  SelectFilter,
+  FlexJustify,
 } from '@drawbotics/react-drylus';
 
 import Playground, { PropsTable } from '~/components/Playground';
@@ -14,3 +20,44 @@ In order to allow decluttering of the UI in smaller screen sizes, we provide an 
 <PropsTable component={FilterGroup} />
 
 By wrapping your filters (and other elements if necessary) with this component, they will be rendered in a separate panel in mobile, which is accesed by pressing the button rendered by the component.
+
+<Playground>
+  <Flex justify={FlexJustify.START}>
+    <FilterGroup label="Example" icon="filter">
+      <FlexItem>
+        <Margin size={{ right: Sizes.DEFAULT }}>
+          <SelectFilter
+            label="Example 1"
+            onClear={x=>x}
+            onChange={x=>x}
+            options={[{
+              label: 'Something 1',
+              value: '1',
+            }, {
+              label: 'Something 2',
+              value: '2',
+            }, {
+              label: 'Something 3',
+              value: '3',
+            }]} />
+        </Margin>
+      </FlexItem>
+      <FlexItem>
+        <SelectFilter
+          label="Example 2"
+          onClear={x=>x}
+          onChange={x=>x}
+          options={[{
+            label: 'Something 1',
+            value: '1',
+          }, {
+            label: 'Something 2',
+            value: '2',
+          }, {
+            label: 'Something 3',
+            value: '3',
+          }]} />
+      </FlexItem>
+    </FilterGroup>
+  </Flex>
+</Playground>
