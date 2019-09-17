@@ -10,24 +10,51 @@ const styles = {
     box-shadow: ${sv.elevation3};
     border-radius: ${sv.borderRadiusSmall};
     padding: ${sv.defaultPadding};
+
+    @media ${sv.phoneLandscape} {
+      padding: ${sv.paddingSmall};
+    }
   `,
   doubleTopPadding: css`
     padding-top: calc(${sv.defaultPadding} * 2);
+
+    @media ${sv.phoneLandscape} {
+      padding-top: ${sv.paddingLarge};
+    }
   `,
   doubleBottomPadding: css`
     padding-bottom: calc(${sv.defaultPadding} * 2);
+
+    @media ${sv.phoneLandscape} {
+      padding-bottom: ${sv.paddingLarge};
+    }
   `,
   header: css`
     padding-bottom: ${sv.defaultPadding};
     margin-bottom: ${sv.defaultMargin};
+
+    @media ${sv.phoneLandscape} {
+      padding-bottom: ${sv.paddingSmall};
+      margin-bottom: ${sv.marginSmall};
+    }
   `,
   body: css`
     margin-top: calc(${sv.defaultMargin} * -1);
     margin-bottom: calc(${sv.defaultMargin} * -1);
+
+    @media ${sv.phoneLandscape} {
+      margin-top: calc(${sv.marginSmall} * -1);
+      margin-bottom: calc(${sv.marginSmall} * -1);
+    }
   `,
   footer: css`
     margin-top: ${sv.defaultMargin};
     padding-top: ${sv.defaultPadding};
+
+    @media ${sv.phoneLandscape} {
+      margin-top: calc(${sv.marginSmall} * -1);
+      padding-top: calc(${sv.marginSmall} * -1);
+    }
   `,
   noSpacing: css`
     padding: 0;
@@ -36,12 +63,20 @@ const styles = {
     margin-top: 0;
     margin-bottom: 0;
     margin: calc(${sv.defaultMargin} * -1);
+
+    @media ${sv.phoneLandscape} {
+      margin: calc(${sv.marginSmall} * -1);
+    }
   `,
   section: css`
     margin-bottom: ${sv.marginLarge};
 
+    @media ${sv.phoneLandscape} {
+      margin-bottom: ${sv.defaultMargin};
+    }
+
     &:last-of-type {
-      margin-bottom: 0;
+      margin-bottom: 0 !important;
     }
   `,
   sectionTitle: css`
@@ -50,6 +85,10 @@ const styles = {
     font-weight: 500;
     font-size: 0.9rem;
     margin-bottom: ${sv.marginSmall};
+
+    @media ${sv.phoneLandscape} {
+      margin-bottom: ${sv.marginExtraSmall};
+    }
   `,
 };
 

@@ -28,6 +28,10 @@ import InlineCode from './InlineCode';
 const styles = {
   content: css`
     margin: ${sv.marginLarge} ${sv.defaultMargin};
+
+    @media ${sv.phoneLandscape} {
+      margin: ${sv.defaultMargin} ${sv.marginSmall};
+    }
   `,
 };
 
