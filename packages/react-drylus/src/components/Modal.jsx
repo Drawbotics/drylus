@@ -58,6 +58,9 @@ const styles = {
     @media ${sv.phoneLandscape} {
       padding: ${sv.paddingSmall};
       padding-top: ${sv.paddingLarge};
+    }
+
+    @media ${sv.phonePortrait} {
       min-width: auto;
       width: 100%;
     }
