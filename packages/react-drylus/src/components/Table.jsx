@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, useContext, createContext, Fragment } from 'react';
 import { css, cx, keyframes } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
@@ -154,7 +154,7 @@ const styles = {
         > div {
           display: table-cell;
           vertical-align: middle;
-          padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
+          padding: calc(${sv.paddingExtraSmall} / 2) ${sv.paddingSmall};
           width: 100%;
           text-align: left;
         }
@@ -168,7 +168,7 @@ const styles = {
           font-weight: 500;
           font-size: 0.88rem;
           text-align: left;
-          padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
+          padding: calc(${sv.paddingExtraSmall} / 2) ${sv.paddingSmall};
         }
       }
     }
@@ -265,6 +265,11 @@ const styles = {
     background: linear-gradient(to right, ${sv.neutralLight}, ${sv.neutral}, ${sv.neutralLight});
     background-size: 1000px 600px;
     animation: ${gradientAnimation} calc(${sv.defaultTransitionTime} * 4) linear forwards infinite;
+
+    @media ${sv.phoneLandscape} {
+      width: 100%;
+      min-width: 100px;
+    }
   `,
   emptyTableCell: css`
     padding: ${sv.defaultPadding};
@@ -281,6 +286,8 @@ export const TCell = ({
   active,
   ...props,
 }) => {
+  const { isPhone } = useIsDevice();
+  
   const className = cx(styles.cell, {
     [styles.asContainer]: asContainer,
   });
@@ -303,7 +310,7 @@ export const TCell = ({
           </div>
         }
         else {
-          children
+          isPhone ? <div>{children}</div> : children
         }
       }}
     </td>
@@ -396,7 +403,7 @@ export const TBody = ({ children }) => {
 
 const FakeTable = ({ columns }) => {
   return (
-    <>
+    <Fragment>
       <THead>
         {columns.map((column, i) => (
           <TCell key={i}>
@@ -407,22 +414,22 @@ const FakeTable = ({ columns }) => {
       <TBody>
         {Array(5).fill(null).map((...args) => (
           <TRow key={args[1]}>
-            {columns.map((...args) => (
-              <TCell key={args[1]}>
+            {columns.map((column, i) => (
+              <TCell key={i} data-th={typeof column === 'string' ? column : column.label}>
                 <div className={styles.loadingBodyCell} />
               </TCell>
             ))}
           </TRow>
         ))}
       </TBody>
-    </>
+    </Fragment>
   );
 };
 
 
 const EmptyTable = ({ columns, emptyContent }) => {
   return (
-    <>
+    <Fragment>
       <THead>
         {columns.map((column, i) => (
           <TCell key={i}>
@@ -439,7 +446,7 @@ const EmptyTable = ({ columns, emptyContent }) => {
           </TCell>
         </TRow>
       </TBody>
-    </>
+    </Fragment>
   );
 };
 
@@ -447,11 +454,12 @@ const EmptyTable = ({ columns, emptyContent }) => {
 function _addAttributesToCells(children = []) {
   if (children[0]?.type === THead && children[1]?.type === TBody) {
     const headerValues = children[0].props.children.map((child) => child.props.children);
-    const transformedRows = React.Children.map(children[1].props.children, (row) => {
+    const transformedRows = React.Children.map(children[1].props.children, (row, index) => {
       return React.cloneElement(row, {
+        key: index,
         children: React.Children.map(row.props.children, (cell, index) => React.cloneElement(cell, {
+          key: index,
           'data-th': headerValues[index],
-          children: <div>{cell.props.children}</div>,
         })),
       });
     });
@@ -567,7 +575,7 @@ const Table = ({
       style={style}
       className={cx(styles.root, {
         [styles.fullWidth]: fullWidth,
-        [styles.leftPadded]: hasNestedData || withNesting || sortableBy,
+        [styles.leftPadded]: (hasNestedData || withNesting || sortableBy) && ! isPhone,
         [styles.highlighted]: highlighted && ! (hasNestedData || withNesting),
       })}>
       <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
@@ -580,7 +588,7 @@ const Table = ({
                   return (
                     <TCell key={v}>
                       {do{
-                        if (sortableBy?.includes(v)) {
+                        if (sortableBy?.includes(v) && ! isPhone) {
                           <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
                             <span className={cx(styles.sortableIcons, {
                               [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'asc',
