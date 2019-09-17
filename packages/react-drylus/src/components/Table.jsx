@@ -7,6 +7,8 @@ import { useIsDevice } from '@drawbotics/use-is-device';
 
 import Label from './Label';
 import Icon from './Icon';
+import Sizes from '../base/Sizes';
+import Margin from '../layout/Margin';
 
 
 const RowsContext = createContext([{}, () => {}]);
@@ -273,6 +275,16 @@ const styles = {
   `,
   emptyTableCell: css`
     padding: ${sv.defaultPadding};
+
+    @media ${sv.phoneLandscape} {
+      display: flex;
+      align-items: center;
+      margin-left: calc(${sv.marginLarge} * -1);
+      padding: 0;
+    }
+  `,
+  emptyTableHeader: css`
+    padding-right: ${sv.paddingExtraSmall};
   `,
 };
 
@@ -428,6 +440,29 @@ const FakeTable = ({ columns }) => {
 
 
 const EmptyTable = ({ columns, emptyContent }) => {
+  const { isPhone } = useIsDevice();
+  if (isPhone) {
+    return (
+      <TBody>
+        <TRow>
+          <TCell>
+            <div className={styles.emptyTableCell}>
+              <div className={styles.emptyTableHeader}>
+                {columns.map((column, i) => (
+                  <Margin key={i} size={{ top: i === 0 ? null : Sizes.DEFAULT }}>
+                    <Label ellipsized>
+                      {typeof column === 'string' ? column : column.label}
+                    </Label>
+                  </Margin>
+                ))}
+              </div>
+              {emptyContent}
+            </div>
+          </TCell>
+        </TRow>
+      </TBody>
+    );
+  }
   return (
     <Fragment>
       <THead>
@@ -463,7 +498,12 @@ function _addAttributesToCells(children = []) {
         })),
       });
     });
-    return [ children[0], React.cloneElement(children[1], { children: transformedRows }) ];
+    return (
+      <Fragment>
+        {children[0]}
+        {React.cloneElement(children[1], { children: transformedRows })}
+      </Fragment>
+    );
   }
   else {
     return children;

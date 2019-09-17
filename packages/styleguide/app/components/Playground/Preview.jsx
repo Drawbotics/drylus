@@ -22,9 +22,9 @@ const styles = {
     top: ${sv.marginExtraSmall};
     left: ${sv.marginExtraSmall};
     z-index: 9999;
-    min-height: calc(100vh - ${sv.marginSmall});
-    min-width: calc(100vw - ${sv.marginSmall});
-    overflow: hidden;
+    height: calc(100vh - ${sv.marginSmall});
+    width: calc(100vw - ${sv.marginSmall});
+    overflow: scroll;
     border-radius: ${sv.defaultBorderRadius};
   `,
   fullScreenToggle: css`
@@ -34,6 +34,11 @@ const styles = {
     pointer-events: none;
     opacity: 0;
   `,
+  floating: css`
+    position: fixed;
+    bottom: ${sv.marginSmall};
+    right: ${sv.marginSmall};
+  `,
 };
 
 
@@ -41,8 +46,15 @@ const Preview = ({ children, raw }) => {
   const [ fullScreen, setFullScreen ] = useState(false);
   
   return (
-    <div className={cx(styles.preview, { [styles.fullScreen]: fullScreen })}>
-      <div className={styles.fullScreenToggle} data-element="full-screen-toggle">
+    <div
+      className={cx(styles.preview, {
+        [styles.fullScreen]: fullScreen,
+      })}>
+      <div
+        className={cx(styles.fullScreenToggle, {
+          [styles.floating]: fullScreen,
+        })}
+        data-element="full-screen-toggle">
         <div onClick={() => setFullScreen(! fullScreen)}>
           <TextLink>
             <Icon name={fullScreen ? 'minimize' : 'maximize'} />
