@@ -56,6 +56,8 @@ const styles = {
     border-radius: ${sv.defaultBorderRadius};
 
     @media ${sv.phoneLandscape} {
+      padding: ${sv.paddingSmall};
+      padding-top: ${sv.paddingLarge};
       min-width: auto;
       width: 100%;
     }
@@ -65,28 +67,48 @@ const styles = {
   `,
   title: css`
     border-bottom: 1px solid ${sv.neutralLight};
-    margin: 0 calc(${sv.defaultPadding} * -1);
-    margin-top: calc(${sv.defaultPadding} * -1);
+    margin: 0 calc(${sv.defaultMargin} * -1);
+    margin-top: calc(${sv.defaultMargin} * -1);
     margin-bottom: ${sv.defaultMargin};
     padding: ${sv.defaultPadding};
     padding-top: 0;
+
+    @media ${sv.phoneLandscape} {
+      margin: 0 calc(${sv.marginSmall} * -1);
+      margin-top: calc(${sv.marginSmall} * -1);
+      margin-bottom: ${sv.marginSmall};
+      padding: ${sv.paddingSmall};
+      padding-top: 0;
+    }
   `,
   content: css`
     flex: 1;
   `,
   footer: css`
     padding: ${sv.paddingSmall};
-    margin: 0 calc(${sv.defaultPadding} * -1);
-    margin-bottom: calc(${sv.defaultPadding} * -1);
+    margin: 0 calc(${sv.defaultMargin} * -1);
+    margin-bottom: calc(${sv.defaultMargin} * -1);
     margin-top: ${sv.defaultMargin};
     background: ${sv.neutralLight};
     border-bottom-right-radius: ${sv.defaultBorderRadius};
     border-bottom-left-radius: ${sv.defaultBorderRadius};
+
+    @media ${sv.phoneLandscape} {
+      padding: ${sv.paddingExtraSmall};
+      margin: 0 calc(${sv.marginSmall} * -1);
+      margin-bottom: calc(${sv.marginSmall} * -1);
+      margin-top: ${sv.marginSmall};
+    }
   `,
   close: css`
     position: absolute;
     top: ${sv.marginSmall};
     right: ${sv.marginSmall};
+
+    @media ${sv.phoneLandscape} {
+      top: ${sv.marginExtraSmall};
+      right: ${sv.marginExtraSmall};
+    }
   `,
   modalEnter: css`
     opacity: 0;
@@ -181,6 +203,14 @@ const Modal = ({
   const overlayElement = useRef();
   const modalElement = useRef();
 
+  const handleWindowResize = () => {
+    if (modalElement.current) {
+      modalElement.current.getBoundingClientRect().height > window.innerHeight
+        ? setOverflowing(true)
+        : setOverflowing(false);
+    }
+  };
+
   useEffect(() => {
     if ( ! document.getElementById('modals-outlet')) {
       const modalsOutlet = document.createElement('div');
@@ -203,13 +233,9 @@ const Modal = ({
     visible ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'initial';
   });
 
-  useEffect(() => {
-    const handleWindowResize = () => {
-      if (modalElement.current) {
-        modalElement.current.getBoundingClientRect().height > window.innerHeight ? setOverflowing(true) : setOverflowing(false);
-      }
-    };
+  useEffect(() => visible ? handleWindowResize() : undefined, [visible]);
 
+  useEffect(() => {
     window.addEventListener('resize', handleWindowResize);
 
     return () => {
