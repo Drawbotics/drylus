@@ -55,7 +55,7 @@ const styles = {
     min-width: 500px;
     border-radius: ${sv.defaultBorderRadius};
 
-    @media ${sv.screenL} {
+    @media ${sv.phoneLandscape} {
       min-width: auto;
       width: 100%;
     }

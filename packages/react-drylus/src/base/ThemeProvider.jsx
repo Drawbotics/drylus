@@ -14,7 +14,7 @@ injectGlobal`
     line-height: ${sv.defaultLineHeight};
     letter-spacing: ${sv.defaultLetterSpacing};
 
-    @media ${sv.phonePortrait} {
+    @media ${sv.phoneLandscape} {
       font-size: calc(${sv.defaultFontSize} - 1px);
     }
   }

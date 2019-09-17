@@ -12,21 +12,21 @@ const styles = {
   h1: css`
     font-size: 3.4rem;
     
-    @media ${sv.phonePortrait} {
+    @media ${sv.phoneLandscape} {
       font-size: 2.8rem;
     }
   `,
   h2: css`
     font-size: 2.4rem;
 
-    @media ${sv.phonePortrait} {
+    @media ${sv.phoneLandscape} {
       font-size: 2rem;
     }
   `,
   h3: css`
     font-size: 2rem;
 
-    @media ${sv.phonePortrait} {
+    @media ${sv.phoneLandscape} {
       font-size: 1.6rem;
     }
   `,
@@ -34,7 +34,7 @@ const styles = {
     font-size: 1.3rem;
     font-weight: 400;
 
-    @media ${sv.phonePortrait} {
+    @media ${sv.phoneLandscape} {
       font-size: 1.1rem;
     }
   `,
