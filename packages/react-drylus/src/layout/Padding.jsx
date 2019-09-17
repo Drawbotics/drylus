@@ -10,81 +10,185 @@ import Sizes from '../base/Sizes';
 const styles = {
   root: css`
     padding: ${sv.defaultPadding};
+
+    @media ${sv.phoneLandscape} {
+      padding: ${sv.paddingSmall};
+    }
   `,
   resetPadding: css`
     padding: 0;
+
+    @media ${sv.phoneLandscape} {
+      padding: 0;
+    }
   `,
   extraSmall: css`
     padding: ${sv.paddingExtraSmall};
+
+    @media ${sv.phoneLandscape} {
+      padding: calc(${sv.paddingExtraSmall} / 2);
+    }
   `,
   small: css`
     padding: ${sv.paddingSmall};
+
+    @media ${sv.phoneLandscape} {
+      padding: ${sv.paddingExtraSmall};
+    }
   `,
   large: css`
     padding: ${sv.paddingLarge};
+
+    @media ${sv.phoneLandscape} {
+      padding: ${sv.defaultPadding};
+    }
   `,
   extraLarge: css`
     padding: ${sv.paddingExtraLarge};
+
+    @media ${sv.phoneLandscape} {
+      padding: ${sv.paddingLarge};
+    }
   `,
   extraSmallLeft: css`
     padding-left: ${sv.paddingExtraSmall};
+
+    @media ${sv.phoneLandscape} {
+      padding-left: calc(${sv.paddingExtraSmall} / 2);
+    }
   `,
   extraSmallRight: css`
     padding-right: ${sv.paddingExtraSmall};
+
+    @media ${sv.phoneLandscape} {
+      padding-right: calc(${sv.paddingExtraSmall} / 2);
+    }
   `,
   extraSmallTop: css`
     padding-top: ${sv.paddingExtraSmall};
+
+    @media ${sv.phoneLandscape} {
+      padding-top: calc(${sv.paddingExtraSmall} / 2);
+    }
   `,
   extraSmallBottom: css`
     padding-bottom: ${sv.paddingExtraSmall};
+
+    @media ${sv.phoneLandscape} {
+      padding-bottom: calc(${sv.paddingExtraSmall} / 2);
+    }
   `,
   smallLeft: css`
     padding-left: ${sv.paddingSmall};
+
+    @media ${sv.phoneLandscape} {
+      padding-left: ${sv.paddingExtraSmall};
+    }
   `,
   smallRight: css`
     padding-right: ${sv.paddingSmall};
+
+    @media ${sv.phoneLandscape} {
+      padding-right: ${sv.paddingExtraSmall};
+    }
   `,
   smallTop: css`
     padding-top: ${sv.paddingSmall};
+
+    @media ${sv.phoneLandscape} {
+      padding-top: ${sv.paddingExtraSmall};
+    }
   `,
   smallBottom: css`
     padding-bottom: ${sv.paddingSmall};
+
+    @media ${sv.phoneLandscape} {
+      padding-bottom: ${sv.paddingExtraSmall};
+    }
   `,
   defaultLeft: css`
     padding-left: ${sv.defaultPadding};
+
+    @media ${sv.phoneLandscape} {
+      padding-left: ${sv.paddingSmall};
+    }
   `,
   defaultRight: css`
     padding-right: ${sv.defaultPadding};
+
+    @media ${sv.phoneLandscape} {
+      padding-right: ${sv.paddingSmall};
+    }
   `,
   defaultTop: css`
     padding-top: ${sv.defaultPadding};
+
+    @media ${sv.phoneLandscape} {
+      padding-top: ${sv.paddingSmall};
+    }
   `,
   defaultBottom: css`
     padding-bottom: ${sv.defaultPadding};
+
+    @media ${sv.phoneLandscape} {
+      padding-bottom: ${sv.paddingSmall};
+    }
   `,
   largeLeft: css`
     padding-left: ${sv.paddingLarge};
+
+    @media ${sv.phoneLandscape} {
+      padding-left: ${sv.defaultPadding};
+    }
   `,
   largeRight: css`
     padding-right: ${sv.paddingLarge};
+
+    @media ${sv.phoneLandscape} {
+      padding-right: ${sv.defaultPadding};
+    }
   `,
   largeTop: css`
     padding-top: ${sv.paddingLarge};
+
+    @media ${sv.phoneLandscape} {
+      padding-top: ${sv.defaultPadding};
+    }
   `,
   largeBottom: css`
     padding-bottom: ${sv.paddingLarge};
+
+    @media ${sv.phoneLandscape} {
+      padding-bottom: ${sv.defaultPadding};
+    }
   `,
   extraLargeLeft: css`
     padding-left: ${sv.paddingExtraLarge};
+
+    @media ${sv.phoneLandscape} {
+      padding-left: ${sv.paddingLarge};
+    }
   `,
   extraLargeRight: css`
     padding-right: ${sv.paddingExtraLarge};
+
+    @media ${sv.phoneLandscape} {
+      padding-right: ${sv.paddingLarge};
+    }
   `,
   extraLargeTop: css`
     padding-top: ${sv.paddingExtraLarge};
+
+    @media ${sv.phoneLandscape} {
+      padding-top: ${sv.paddingLarge};
+    }
   `,
   extraLargeBottom: css`
     padding-bottom: ${sv.paddingExtraLarge};
+
+    @media ${sv.phoneLandscape} {
+      padding-bottom: ${sv.paddingLarge};
+    }
   `,
 };
 
