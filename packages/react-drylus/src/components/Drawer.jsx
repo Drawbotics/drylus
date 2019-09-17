@@ -55,7 +55,7 @@ const styles = {
 
     @media ${sv.phoneLandscape} {
       padding: ${sv.paddingSmall};
-      padding-top: calc(${sv.paddingExtraLarge} + ${sv.paddingExtraSmall});
+      padding-top: ${sv.paddingLarge};
     }
   `,
   content: css`
@@ -79,6 +79,11 @@ const styles = {
     position: absolute;
     top: ${sv.marginSmall};
     left: ${sv.marginSmall};
+
+    @media ${sv.phoneLandscape} {
+      top: ${sv.marginExtraSmall};
+      left: ${sv.marginExtraSmall};
+    }
   `,
   drawerEnter: css`
     opacity: 0;
