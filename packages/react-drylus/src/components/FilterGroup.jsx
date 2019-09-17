@@ -30,9 +30,9 @@ const FilterGroup = ({
   active,
 }) => {
   const [ drawerOpen, setDrawerOpen ] = useState(false);
-  const { isPhoneLandscape } = useIsDevice();
+  const { isPhone } = useIsDevice();
 
-  if (! isPhoneLandscape) {
+  if (! isPhone) {
     return (
       <Flex justify={FlexJustify.START}>
         {filters.map((filter, i) => (

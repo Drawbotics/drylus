@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import sv from '@drawbotics/drylus-style-vars';
+import { useIsDevice } from '@drawbotics/use-is-device';
 
 import Button from './Button';
 import Title from './Title';
@@ -175,14 +176,16 @@ const Drawer = ({
   footer,
   asOverlay,
   visible,
-  onClickClose=x=>x,
-  onClickOverlay=x=>x,
+  onClickClose,
+  onClickOverlay,
   width: rawWidth,
   raw,
   title,
 }) => {
-  const [outletElement, setOutletElement] = useState(null);
+  const [ outletElement, setOutletElement ] = useState(null);
   const overlayElement = useRef();
+  const { isPhone } = useIsDevice();
+
   useEffect(() => {
     if ( ! document.getElementById('drawers-outlet')) {
       const drawersOutlet = document.createElement('div');
@@ -209,7 +212,7 @@ const Drawer = ({
 
   const content = raw ? children : <BaseDrawer title={title} onClickClose={onClickClose} footer={footer}>{children}</BaseDrawer>;
 
-  if (asOverlay) {
+  if (asOverlay || isPhone) {
     if (! outletElement) return '';
     const handleClickOverlay = (e) => e.target === overlayElement?.current ? onClickOverlay() : null;
 
@@ -298,6 +301,8 @@ Drawer.defaultProps = {
   asOverlay: false,
   width: 400,
   raw: false,
+  onClickClose: x => x,
+  onClickOverlay: x => x,
 };
 
 
