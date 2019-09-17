@@ -210,7 +210,7 @@ const Drawer = ({
   }, []);
 
   useEffect(() => {
-    visible ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'initial';
+    visible && asOverlay ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'initial';
   });
 
   const width = typeof rawWidth === 'number' ? `${rawWidth}px` : rawWidth;
