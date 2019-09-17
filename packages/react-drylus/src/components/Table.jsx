@@ -3,6 +3,7 @@ import { css, cx, keyframes } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
+import { useIsDevice } from '@drawbotics/use-is-device';
 
 import Label from './Label';
 import Icon from './Icon';
@@ -38,6 +39,13 @@ const styles = {
 
     [data-nested] tr {
       background: none !important;
+    }
+
+    @media ${sv.phoneLandscape} {
+      tbody {
+        display: table;
+        width: 100%;
+      }
     }
   `,
   fullWidth: css`
@@ -88,6 +96,10 @@ const styles = {
         text-align: right;
       }
     }
+
+    @media ${sv.phoneLandscape} {
+      display: none;
+    }
   `,
   row: css`
     & > td:last-of-type {
@@ -117,6 +129,46 @@ const styles = {
           &:last-of-type {
             padding-right: 0;
           }
+        }
+      }
+    }
+
+    @media ${sv.phoneLandscape} {
+      display: table-row-group;
+
+      > td {
+        display: table-row;
+
+        &:first-of-type {
+          > div, &::before {
+            padding-top: ${sv.paddingSmall};
+          }
+        }
+
+        &:last-of-type {
+          > div, &::before {
+            padding-bottom: ${sv.paddingSmall};
+          }
+        }
+
+        > div {
+          display: table-cell;
+          vertical-align: middle;
+          padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
+          width: 100%;
+          text-align: left;
+        }
+
+        &::before {
+          content: attr(data-th);
+          display: table-cell;
+          vertical-align: middle;
+          color: ${sv.colorTertiary};
+          text-transform: uppercase;
+          font-weight: 500;
+          font-size: 0.88rem;
+          text-align: left;
+          padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
         }
       }
     }
@@ -392,7 +444,26 @@ const EmptyTable = ({ columns, emptyContent }) => {
 };
 
 
-function generateTable({
+function _addAttributesToCells(children = []) {
+  if (children[0]?.type === THead && children[1]?.type === TBody) {
+    const headerValues = children[0].props.children.map((child) => child.props.children);
+    const transformedRows = React.Children.map(children[1].props.children, (row) => {
+      return React.cloneElement(row, {
+        children: React.Children.map(row.props.children, (cell, index) => React.cloneElement(cell, {
+          'data-th': headerValues[index],
+          children: <div>{cell.props.children}</div>,
+        })),
+      });
+    });
+    return [ children[0], React.cloneElement(children[1], { children: transformedRows }) ];
+  }
+  else {
+    return children;
+  }
+}
+
+
+function _generateTable({
   data,
   header,
   renderCell,
@@ -405,7 +476,7 @@ function generateTable({
   if (Array.isArray(data)) {
     return (
       <TBody>
-        {data.map((rows, i) => generateTable({
+        {data.map((rows, i) => _generateTable({
           data: rows,
           header,
           renderCell,
@@ -446,7 +517,7 @@ function generateTable({
         <TRow key={`${uniqId}-1`} nested={uniqId} onClick={() => onClickRow(row)}>
           <TCell>
             <Table>
-              {generateTable({ data: data.data, header: childHeader, renderCell: null, renderChildCell })}
+              {_generateTable({ data: data.data, header: childHeader, renderCell: null, renderChildCell })}
             </Table>
           </TCell>
         </TRow>
@@ -464,8 +535,8 @@ const Table = ({
   fullWidth,
   withNesting,
   data,
-  renderCell=x=>x,
-  renderChildCell=x=>x,
+  renderCell,
+  renderChildCell,
   header,
   childHeader,
   sortableBy,
@@ -479,11 +550,18 @@ const Table = ({
   style,
 }) => {
   const [ rowsStates, setRowState ] = useState({});
+  const { isPhone } = useIsDevice();
+
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
+  
   const hasNestedData = data && data.some((d) => d.data);
+
+  const transformedChildren = isPhone ? _addAttributesToCells(children) : children;
+  
   if (data && (! header || header.length === 0)) {
     console.warn('`data` was passed as prop but no/empty header, cannot render');
   }
+
   return (
     <table
       style={style}
@@ -522,7 +600,7 @@ const Table = ({
                   );
                 })}
               </THead>
-              {generateTable({
+              {_generateTable({
                 data,
                 header,
                 renderCell,
@@ -541,7 +619,7 @@ const Table = ({
             <EmptyTable columns={header} emptyContent={emptyContent} />
           }
           else {
-            children
+            transformedChildren
           }
         }}
       </RowsContext.Provider>
@@ -617,6 +695,8 @@ Table.propTypes = {
 
 Table.defaultProps = {
   fullWidth: true,
+  renderCell: x => x,
+  renderChildCell: x => x,
 };
 
 
