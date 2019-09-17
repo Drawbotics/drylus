@@ -51,6 +51,11 @@ const styles = {
     height: 100%;
     display: flex;
     flex-direction: column;
+
+    @media ${sv.phoneLandscape} {
+      padding: ${sv.paddingSmall};
+      padding-top: calc(${sv.paddingExtraLarge} + ${sv.paddingExtraSmall});
+    }
   `,
   content: css`
     overflow: scroll;
@@ -64,6 +69,10 @@ const styles = {
   footer: css`
     padding-top: ${sv.defaultPadding};
     border-top: 1px solid ${sv.neutralLight};
+
+    @media ${sv.phoneLandscape} {
+      padding-top: ${sv.paddingSmall};
+    }
   `,
   close: css`
     position: absolute;
