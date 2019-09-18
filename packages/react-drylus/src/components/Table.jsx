@@ -138,6 +138,10 @@ const styles = {
     @media ${sv.phoneLandscape} {
       display: table-row-group;
 
+      &[data-nested] {
+        display: none;
+      }
+
       > td {
         display: table-row;
 
@@ -220,6 +224,10 @@ const styles = {
 
       &:hover {
         cursor: pointer;
+      }
+
+      @media ${sv.phoneLandscape} {
+        display: none;
       }
     }
   `,
@@ -491,9 +499,7 @@ function _addAttributesToCells(children = []) {
     const headerValues = children[0].props.children.map((child) => child.props.children);
     const transformedRows = React.Children.map(children[1].props.children, (row, index) => {
       return React.cloneElement(row, {
-        key: index,
         children: React.Children.map(row.props.children, (cell, index) => React.cloneElement(cell, {
-          key: index,
           'data-th': headerValues[index],
         })),
       });
@@ -523,7 +529,7 @@ function _generateTable({
 }) {
   if (Array.isArray(data)) {
     return (
-      <TBody>
+      <TBody key="body">
         {data.map((rows, i) => _generateTable({
           data: rows,
           header,
@@ -533,7 +539,7 @@ function _generateTable({
           childHeader,
           onClickRow,
           activeRow,
-        }))}
+        })).reduce((memo, rows) => [ ...memo, ...rows ], [])}
       </TBody>
     );
   }
@@ -572,7 +578,7 @@ function _generateTable({
       )];
     }
     else {
-      return parentRow;
+      return [parentRow];
     }
   }
 }
@@ -604,7 +610,46 @@ const Table = ({
   
   const hasNestedData = data && data.some((d) => d.data);
 
-  const transformedChildren = isPhone ? _addAttributesToCells(children) : children;
+  const tableContents = data && ! isLoading && ! emptyContent ? [
+      <THead key="head">
+        {header.map((hItem) => {
+          const v = typeof hItem === 'string' ? hItem : hItem.value;
+          return (
+            <TCell key={v}>
+              {do{
+                if (sortableBy?.includes(v) && ! isPhone) {
+                  <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
+                    <span className={cx(styles.sortableIcons, {
+                      [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'asc',
+                      [styles.down]: activeHeader?.key === v && activeHeader?.direction === 'desc',
+                    })}>
+                      <Icon name="chevron-up" />
+                      <Icon name="chevron-down" />
+                    </span>
+                    {typeof hItem === 'string' ? hItem : hItem.label}
+                  </span>
+                }
+                else {
+                  typeof hItem === 'string' ? hItem : hItem.label
+                }
+              }}
+            </TCell>
+          );
+        })}
+      </THead>,
+      _generateTable({
+        data,
+        header,
+        renderCell,
+        renderChildCell,
+        index: 0,
+        childHeader,
+        onClickRow,
+        activeRow,
+      })
+     ] : children;
+
+  const transformedChildren = isPhone ? _addAttributesToCells(tableContents) : tableContents;
   
   if (data && (! header || header.length === 0)) {
     console.warn('`data` was passed as prop but no/empty header, cannot render');
@@ -620,47 +665,7 @@ const Table = ({
       })}>
       <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
         {do{
-          if (data && ! isLoading && ! emptyContent) {
-            <>
-              <THead>
-                {header.map((hItem) => {
-                  const v = typeof hItem === 'string' ? hItem : hItem.value;
-                  return (
-                    <TCell key={v}>
-                      {do{
-                        if (sortableBy?.includes(v) && ! isPhone) {
-                          <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
-                            <span className={cx(styles.sortableIcons, {
-                              [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'asc',
-                              [styles.down]: activeHeader?.key === v && activeHeader?.direction === 'desc',
-                            })}>
-                              <Icon name="chevron-up" />
-                              <Icon name="chevron-down" />
-                            </span>
-                            {typeof hItem === 'string' ? hItem : hItem.label}
-                          </span>
-                        }
-                        else {
-                          typeof hItem === 'string' ? hItem : hItem.label
-                        }
-                      }}
-                    </TCell>
-                  );
-                })}
-              </THead>
-              {_generateTable({
-                data,
-                header,
-                renderCell,
-                renderChildCell,
-                index: 0,
-                childHeader,
-                onClickRow,
-                activeRow,
-              })}
-            </>
-          }
-          else if (header && isLoading) {
+          if (header && isLoading) {
             <FakeTable columns={header} />
           }
           else if (header && emptyContent) {
