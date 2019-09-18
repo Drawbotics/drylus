@@ -55,7 +55,7 @@ const styles = {
 
     @media ${sv.phoneLandscape} {
       padding: ${sv.paddingSmall};
-      padding-top: ${sv.paddingLarge};
+      padding-top: ${sv.paddingExtraLarge};
     }
   `,
   content: css`
@@ -213,7 +213,14 @@ const Drawer = ({
     visible && asOverlay ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'initial';
   });
 
-  const width = typeof rawWidth === 'number' ? `${rawWidth}px` : rawWidth;
+  const width = do {
+    if (isPhone) {
+      '100vw';
+    }
+    else {
+      typeof rawWidth === 'number' ? `${rawWidth}px` : rawWidth;
+    }
+  }
 
   const content = raw ? children : <BaseDrawer title={title} onClickClose={onClickClose} footer={footer}>{children}</BaseDrawer>;
 
