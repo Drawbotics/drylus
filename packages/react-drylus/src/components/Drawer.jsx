@@ -189,7 +189,7 @@ const Drawer = ({
 }) => {
   const [ outletElement, setOutletElement ] = useState(null);
   const overlayElement = useRef();
-  const { isPhone } = useIsDevice();
+  const { isPhonePortrait, isPhone } = useIsDevice();
 
   useEffect(() => {
     if ( ! document.getElementById('drawers-outlet')) {
@@ -214,7 +214,7 @@ const Drawer = ({
   });
 
   const width = do {
-    if (isPhone) {
+    if (isPhonePortrait) {
       '100vw';
     }
     else {
