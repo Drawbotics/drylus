@@ -228,7 +228,7 @@ const screenL = 'only screen and (max-width: 768px)';
 exports.screenL = screenL;
 const screenXl = 'only screen and (max-width: 1024px)';
 exports.screenXl = screenXl;
-const screenHuge = 'only screen and (max-width: 1200px)'; // To target specific screen ratios
+const screenHuge = 'only screen and (min-width: 1024px)'; // To target specific screen ratios
 
 exports.screenHuge = screenHuge;
 const phoneSLandscape = `${screenS} and (orientation: landscape)`;
