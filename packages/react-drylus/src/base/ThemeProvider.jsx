@@ -14,10 +14,6 @@ injectGlobal`
     line-height: ${sv.defaultLineHeight};
     letter-spacing: ${sv.defaultLetterSpacing};
     -webkit-font-smoothing: auto;
-
-    @media ${sv.screenL} {
-      font-size: calc(${sv.defaultFontSize} - 1px);
-    }
   }
 `;
 
