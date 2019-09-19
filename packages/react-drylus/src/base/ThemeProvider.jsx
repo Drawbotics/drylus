@@ -15,7 +15,7 @@ injectGlobal`
     letter-spacing: ${sv.defaultLetterSpacing};
     -webkit-font-smoothing: auto;
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       font-size: calc(${sv.defaultFontSize} - 1px);
     }
   }

@@ -66,7 +66,7 @@ const styles = {
       pointer-events: none;
     }
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       height: ${sv.marginExtraLarge};
     }
   `,

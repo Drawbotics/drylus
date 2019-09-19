@@ -17,7 +17,7 @@ const styles = {
   image: css`
     width: 300px;
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       max-width: 170px;
       width: 90%;
       margin: auto;

@@ -29,7 +29,7 @@ const styles = {
   content: css`
     margin: ${sv.marginLarge} ${sv.defaultMargin};
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       margin: ${sv.defaultMargin} ${sv.marginSmall};
     }
   `,

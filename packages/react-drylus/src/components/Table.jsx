@@ -43,7 +43,7 @@ const styles = {
       background: none !important;
     }
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       tbody {
         display: table;
         width: 100%;
@@ -99,7 +99,7 @@ const styles = {
       }
     }
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       display: none;
     }
   `,
@@ -135,7 +135,7 @@ const styles = {
       }
     }
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       display: table-row-group;
 
       &[data-nested] {
@@ -226,7 +226,7 @@ const styles = {
         cursor: pointer;
       }
 
-      @media ${sv.phoneLandscape} {
+      @media ${sv.screenL} {
         display: none;
       }
     }
@@ -276,7 +276,7 @@ const styles = {
     background-size: 1000px 600px;
     animation: ${gradientAnimation} calc(${sv.defaultTransitionTime} * 4) linear forwards infinite;
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       width: 100%;
       min-width: 100px;
     }
@@ -284,7 +284,7 @@ const styles = {
   emptyTableCell: css`
     padding: ${sv.defaultPadding};
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       display: flex;
       align-items: center;
       margin-left: calc(${sv.marginLarge} * -1);

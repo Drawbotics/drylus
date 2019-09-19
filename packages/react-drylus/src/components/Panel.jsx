@@ -11,21 +11,21 @@ const styles = {
     border-radius: ${sv.borderRadiusSmall};
     padding: ${sv.defaultPadding};
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       padding: ${sv.paddingSmall};
     }
   `,
   doubleTopPadding: css`
     padding-top: calc(${sv.defaultPadding} * 2);
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       padding-top: ${sv.paddingLarge};
     }
   `,
   doubleBottomPadding: css`
     padding-bottom: calc(${sv.defaultPadding} * 2);
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       padding-bottom: ${sv.paddingLarge};
     }
   `,
@@ -33,7 +33,7 @@ const styles = {
     padding-bottom: ${sv.defaultPadding};
     margin-bottom: ${sv.defaultMargin};
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       padding-bottom: ${sv.paddingSmall};
       margin-bottom: ${sv.marginSmall};
     }
@@ -42,7 +42,7 @@ const styles = {
     margin-top: calc(${sv.defaultMargin} * -1);
     margin-bottom: calc(${sv.defaultMargin} * -1);
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       margin-top: calc(${sv.marginSmall} * -1);
       margin-bottom: calc(${sv.marginSmall} * -1);
     }
@@ -51,7 +51,7 @@ const styles = {
     margin-top: ${sv.defaultMargin};
     padding-top: ${sv.defaultPadding};
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       margin-top: ${sv.marginSmall};
       padding-top: ${sv.marginSmall};
     }
@@ -64,7 +64,7 @@ const styles = {
     margin-bottom: 0;
     margin: calc(${sv.defaultMargin} * -1);
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       margin: calc(${sv.marginSmall} * -1);
       margin-bottom: 0;
       padding-top: 0;
@@ -74,7 +74,7 @@ const styles = {
   section: css`
     margin-bottom: ${sv.marginLarge};
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       margin-bottom: ${sv.defaultMargin};
     }
 
@@ -89,7 +89,7 @@ const styles = {
     font-size: 0.9rem;
     margin-bottom: ${sv.marginSmall};
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       margin-bottom: ${sv.marginExtraSmall};
     }
   `,

@@ -36,7 +36,7 @@ const styles = {
       pointer-events: auto;
     }
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       padding: ${sv.paddingSmall};
     }
   `,
@@ -55,7 +55,7 @@ const styles = {
     min-width: 500px;
     border-radius: ${sv.defaultBorderRadius};
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       padding: ${sv.paddingSmall};
       padding-top: ${sv.paddingLarge};
     }
@@ -76,7 +76,7 @@ const styles = {
     padding: ${sv.defaultPadding};
     padding-top: 0;
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       margin: 0 calc(${sv.marginSmall} * -1);
       margin-top: calc(${sv.marginSmall} * -1);
       margin-bottom: ${sv.marginSmall};
@@ -96,7 +96,7 @@ const styles = {
     border-bottom-right-radius: ${sv.defaultBorderRadius};
     border-bottom-left-radius: ${sv.defaultBorderRadius};
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       padding: ${sv.paddingExtraSmall};
       margin: 0 calc(${sv.marginSmall} * -1);
       margin-bottom: calc(${sv.marginSmall} * -1);
@@ -108,7 +108,7 @@ const styles = {
     top: ${sv.marginSmall};
     right: ${sv.marginSmall};
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       top: ${sv.marginExtraSmall};
       right: ${sv.marginExtraSmall};
     }

@@ -53,7 +53,7 @@ const styles = {
     display: flex;
     flex-direction: column;
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       padding: ${sv.paddingSmall};
       padding-top: ${sv.paddingExtraLarge};
     }
@@ -71,7 +71,7 @@ const styles = {
     padding-top: ${sv.defaultPadding};
     border-top: 1px solid ${sv.neutralLight};
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       padding-top: ${sv.paddingSmall};
     }
   `,
@@ -80,7 +80,7 @@ const styles = {
     top: ${sv.marginSmall};
     left: ${sv.marginSmall};
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       top: ${sv.marginExtraSmall};
       left: ${sv.marginExtraSmall};
     }
