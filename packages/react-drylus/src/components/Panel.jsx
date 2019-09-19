@@ -52,8 +52,8 @@ const styles = {
     padding-top: ${sv.defaultPadding};
 
     @media ${sv.phoneLandscape} {
-      margin-top: calc(${sv.marginSmall} * -1);
-      padding-top: calc(${sv.marginSmall} * -1);
+      margin-top: ${sv.marginSmall};
+      padding-top: ${sv.marginSmall};
     }
   `,
   noSpacing: css`
@@ -66,6 +66,9 @@ const styles = {
 
     @media ${sv.phoneLandscape} {
       margin: calc(${sv.marginSmall} * -1);
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
     }
   `,
   section: css`
