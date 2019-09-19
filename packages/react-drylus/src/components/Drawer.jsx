@@ -184,7 +184,7 @@ const BaseDrawer = ({
 const Drawer = ({
   children,
   footer,
-  asOverlay,
+  asOverlay: _asOverlay,
   visible,
   onClickClose,
   onClickOverlay,
@@ -214,6 +214,8 @@ const Drawer = ({
     };
   }, []);
 
+  const asOverlay = _asOverlay || screenSize <= ScreenSizes.L;
+
   useEffect(() => {
     visible && asOverlay ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'initial';
   });
@@ -229,7 +231,7 @@ const Drawer = ({
 
   const content = raw ? children : <BaseDrawer title={title} onClickClose={onClickClose} footer={footer}>{children}</BaseDrawer>;
 
-  if (asOverlay || screenSize <= ScreenSizes.L) {
+  if (asOverlay) {
     if (! outletElement) return '';
     const handleClickOverlay = (e) => e.target === overlayElement?.current ? onClickOverlay() : null;
 
