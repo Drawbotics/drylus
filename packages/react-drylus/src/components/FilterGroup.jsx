@@ -28,6 +28,7 @@ const FilterGroup = ({
   renderButton,
   clearAllLabel,
   active,
+  onClear,
 }) => {
   const [ drawerOpen, setDrawerOpen ] = useState(false);
   const { screenSize, ScreenSizes } = useScreenSize();
@@ -60,6 +61,7 @@ const FilterGroup = ({
       <Drawer
         footer={
           <Button
+            onClick={onClear}
             fullWidth
             category={Categories.INFO}
             size={Sizes.LARGE}

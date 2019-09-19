@@ -55,7 +55,7 @@ const styles = {
 
     @media ${sv.screenL} {
       padding: ${sv.paddingSmall};
-      padding-top: ${sv.paddingExtraLarge};
+      padding-top: calc(${sv.paddingExtraLarge} + ${sv.paddingExtraSmall});
     }
   `,
   content: css`
@@ -149,10 +149,15 @@ const BaseDrawer = ({
   title,
   style,
 }) => {
+  const { screenSize, ScreenSizes } = useScreenSize();
   return (
     <div style={style} className={styles.root}>
       <div className={styles.close}>
-        <Button size={Sizes.SMALL} onClick={onClickClose} tier={Tiers.TERTIARY} leading={<Icon name="x" />} />
+        <Button
+          size={screenSize <= ScreenSizes.L ? Sizes.DEFAULT : Sizes.SMALL}
+          onClick={onClickClose}
+          tier={Tiers.TERTIARY}
+          leading={<Icon name="x" />} />
       </div>
       {do {
         if (title) {
