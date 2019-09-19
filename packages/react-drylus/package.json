@@ -14,9 +14,9 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@drawbotics/drylus-style-vars": "file:../drylus-style-vars",
+    "@drawbotics/drylus-style-vars": "^4.0.0-alpha.5",
     "@drawbotics/enums": "0.2.0",
-    "@drawbotics/icons": "file:../icons",
+    "@drawbotics/icons": "^4.0.0-alpha.5",
     "@drawbotics/use-screen-size": "^2.0.0",
     "@turf/circle": "^6.0.1",
     "animejs": "^3.0.1",
@@ -35,5 +35,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "0aab66da2fc26eb89dec45c203b189680fa18aae"
+  "gitHead": "3788994b767c84031a1981a271dd9f1f9ccbe110"
 }

@@ -19,10 +19,10 @@
     "prepublishOnly": "npm run build && NODE_ENV=production npm run sync"
   },
   "dependencies": {
-    "@drawbotics/react-drylus": "file:../react-drylus"
+    "@drawbotics/react-drylus": "^4.0.0-alpha.5"
   },
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "0aab66da2fc26eb89dec45c203b189680fa18aae"
+  "gitHead": "3788994b767c84031a1981a271dd9f1f9ccbe110"
 }
