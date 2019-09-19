@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import sv from '@drawbotics/drylus-style-vars';
-import { useIsDevice } from '@drawbotics/use-is-device';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 
 import Button from './Button';
 import Title from './Title';
@@ -189,7 +189,7 @@ const Drawer = ({
 }) => {
   const [ outletElement, setOutletElement ] = useState(null);
   const overlayElement = useRef();
-  const { isPhonePortrait, isPhone } = useIsDevice();
+  const { screenSize, ScreenSizes } = useScreenSize();
 
   useEffect(() => {
     if ( ! document.getElementById('drawers-outlet')) {
@@ -214,7 +214,7 @@ const Drawer = ({
   });
 
   const width = do {
-    if (isPhonePortrait) {
+    if (screenSize <= ScreenSizes.M) {
       '100vw';
     }
     else {
@@ -224,7 +224,7 @@ const Drawer = ({
 
   const content = raw ? children : <BaseDrawer title={title} onClickClose={onClickClose} footer={footer}>{children}</BaseDrawer>;
 
-  if (asOverlay || isPhone) {
+  if (asOverlay || screenSize <= ScreenSizes.L) {
     if (! outletElement) return '';
     const handleClickOverlay = (e) => e.target === overlayElement?.current ? onClickOverlay() : null;
 

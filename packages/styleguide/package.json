@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@drawbotics/react-drylus": "file:../react-drylus",
-    "@drawbotics/use-is-device": "^1.0.0",
     "@drawbotics/vanilla-drylus": "file:../vanilla-drylus",
     "core-js": "2",
     "fast-xml-parser": "^3.12.16",

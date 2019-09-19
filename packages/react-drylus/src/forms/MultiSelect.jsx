@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
-import { getDevice } from '@drawbotics/use-is-device';
+import { getScreenSize } from '@drawbotics/use-screen-size';
 
 
 import Tag from '../components/Tag';
@@ -180,7 +180,7 @@ const MultiSelect = ({
   const rootRef = useRef();
   const [ isFocused, setFocused ] = useState(false);
   const [ canBlur, setCanBlur ] = useState(true);
-  const { isDesktop } = getDevice();
+  const { screenSize, ScreenSizes } = getScreenSize();
 
   const handleDocumentClick = (e) => ! rootRef.current.contains(e.target) ? setFocused(false) : null;
 
@@ -277,7 +277,7 @@ const MultiSelect = ({
         }}
       </div>
       {do {
-        if (isDesktop) {
+        if (screenSize > ScreenSizes.XL) {
           <div className={cx(styles.options, {
             [styles.open]: isFocused,
           })}>

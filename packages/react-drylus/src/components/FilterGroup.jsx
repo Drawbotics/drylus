@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
-import { useIsDevice } from '@drawbotics/use-is-device';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 import sv from '@drawbotics/drylus-style-vars';
 
 import Button from './Button';
@@ -30,9 +30,9 @@ const FilterGroup = ({
   active,
 }) => {
   const [ drawerOpen, setDrawerOpen ] = useState(false);
-  const { isPhone } = useIsDevice();
+  const { screenSize, ScreenSizes } = useScreenSize();
 
-  if (! isPhone) {
+  if (screenSize > ScreenSizes.L) {
     return (
       <Flex justify={FlexJustify.START}>
         {filters.map((filter, i) => (

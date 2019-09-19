@@ -3,7 +3,7 @@ import { css, cx, keyframes } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
-import { useIsDevice } from '@drawbotics/use-is-device';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 
 import Label from './Label';
 import Icon from './Icon';
@@ -306,7 +306,7 @@ export const TCell = ({
   active,
   ...props,
 }) => {
-  const { isPhone } = useIsDevice();
+  const { screenSize, ScreenSizes } = useScreenSize();
   
   const className = cx(styles.cell, {
     [styles.asContainer]: asContainer,
@@ -330,7 +330,7 @@ export const TCell = ({
           </div>
         }
         else {
-          isPhone ? <div>{children}</div> : children
+          screenSize <= ScreenSizes.L ? <div>{children}</div> : children
         }
       }}
     </td>
@@ -448,8 +448,8 @@ const FakeTable = ({ columns }) => {
 
 
 const EmptyTable = ({ columns, emptyContent }) => {
-  const { isPhone } = useIsDevice();
-  if (isPhone) {
+  const { screenSize, ScreenSizes } = useScreenSize();
+  if (screenSize <= ScreenSizes.L) {
     return (
       <TBody>
         <TRow>
@@ -604,7 +604,7 @@ const Table = ({
   style,
 }) => {
   const [ rowsStates, setRowState ] = useState({});
-  const { isPhone } = useIsDevice();
+  const { screenSize, ScreenSizes } = useScreenSize();
 
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
   
@@ -617,7 +617,7 @@ const Table = ({
           return (
             <TCell key={v}>
               {do{
-                if (sortableBy?.includes(v) && ! isPhone) {
+                if (sortableBy?.includes(v) && screenSize > ScreenSizes.L) {
                   <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
                     <span className={cx(styles.sortableIcons, {
                       [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'asc',
@@ -649,7 +649,7 @@ const Table = ({
       })
      ] : children;
 
-  const transformedChildren = isPhone ? _addAttributesToCells(tableContents) : tableContents;
+  const transformedChildren = screenSize <= ScreenSizes.L ? _addAttributesToCells(tableContents) : tableContents;
   
   if (data && (! header || header.length === 0)) {
     console.warn('`data` was passed as prop but no/empty header, cannot render');
@@ -660,7 +660,7 @@ const Table = ({
       style={style}
       className={cx(styles.root, {
         [styles.fullWidth]: fullWidth,
-        [styles.leftPadded]: (hasNestedData || withNesting || sortableBy) && ! isPhone,
+        [styles.leftPadded]: (hasNestedData || withNesting || sortableBy) && screenSize > ScreenSizes.L,
         [styles.highlighted]: highlighted && ! (hasNestedData || withNesting),
       })}>
       <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
