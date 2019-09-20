@@ -14,6 +14,7 @@ injectGlobal`
     line-height: ${sv.defaultLineHeight};
     letter-spacing: ${sv.defaultLetterSpacing};
     -webkit-font-smoothing: auto;
+    -webkit-overflow-scrolling: touch;
   }
 `;
 

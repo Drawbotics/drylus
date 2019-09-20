@@ -13,11 +13,13 @@ injectGlobal`
 
 const styles = {
   codeWrapper: css`
-    overflow: scroll;
+    overflow: hidden;
     display: flex;
     border-radius: ${sv.defaultBorderRadius};
+    -webkit-transform: translateZ(0);
   `,
   code: css`
+    overflow: scroll;
     flex: 1;
     padding: ${sv.paddingSmall};
     margin: 0;
