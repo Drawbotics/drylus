@@ -219,14 +219,14 @@ export const SelectFilter = ({
   label,
   ...rest,
 }) => {
-  const currentLabel = value ? options.find((option) => option[valueKey] === value)?.[labelKey] : label;
+  const currentLabel = value ? options.find((option) => String(option[valueKey]) === String(value))?.[labelKey] : label;
   return (
     <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel != null && !! value}>
       {options.map((option) => (
         <div
           key={option[valueKey]}
           className={cx(styles.option, styles.smallPadding, {
-            [styles.activeOption]: value === option[valueKey],
+            [styles.activeOption]: String(value) === String(option[valueKey]),
           })}
           onClick={() => onChange(option[valueKey])}>
           <div className={styles.label}>
@@ -279,7 +279,7 @@ function getLabelForCheckboxFilter(label, options, values, valueKey, labelKey) {
     return label;
   }
   else if (values.length === 1) {
-    return options.find((option) => option[valueKey] === values[0])?.[labelKey];
+    return options.find((option) => String(option[valueKey]) === String(values[0]))?.[labelKey];
   }
   else if (values.length > 1) {
     return `${label} (${values.length})`;
@@ -308,7 +308,7 @@ export const CheckboxFilter = ({
             onChange={(checked) => {
               checked
                 ? onChange([...values, option[valueKey]])
-                : onChange(values.filter((v) => v !== option[valueKey]))
+                : onChange(values.filter((v) => String(v) !== String(option[valueKey])))
             }}
             value={values.includes(option[valueKey])}>
             {option[labelKey]}
