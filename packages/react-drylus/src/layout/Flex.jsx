@@ -5,6 +5,7 @@ import camelCase from 'lodash/camelCase';
 import Enum from '@drawbotics/enums';
 
 import { getEnumAsClass } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -121,14 +122,19 @@ FlexItem.defaultProps = {
 
 
 const Flex = ({
-  children,
-  direction=FlexDirections.HORIZONTAL,
-  justify=FlexJustify.CENTER,
-  align=FlexAlign.CENTER,
-  wrap=false,
-  className,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    children,
+    direction=FlexDirections.HORIZONTAL,
+    justify=FlexJustify.CENTER,
+    align=FlexAlign.CENTER,
+    wrap=false,
+    className,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   const invalidChildren = React.Children
     .toArray(children)
     .some((child) => child != null && child.type !== FlexItem);
@@ -181,6 +187,16 @@ Flex.propTypes = {
 
   /** If you need to customize the Flex container pass a custom className. E.g. if you want to use `display: inline-flex` */
   className: PropTypes.string,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
