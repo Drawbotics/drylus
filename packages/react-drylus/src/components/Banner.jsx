@@ -58,6 +58,7 @@ const Banner = ({
             responsive={{
               S: {
                 size: { right: Sizes.LARGE },
+                style: { background: 'black' },
               },
               L: {
                 style: { background: 'blue' },
