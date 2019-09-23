@@ -5,6 +5,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import camelCase from 'lodash/camelCase';
 
 import Sizes from '../base/Sizes';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -194,10 +195,11 @@ const styles = {
 
 
 const Margin = ({
-  children,
-  size,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const { children, size, style } = useResponsiveProps(rest, responsive);
+
   const isUniform = typeof size !== 'object';
   return (
     <div className={cx(styles.root, {
@@ -231,6 +233,9 @@ Margin.propTypes = {
 
   /** Prop to override any style if necessary, use sparingly */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.object,
 };
 
 
