@@ -3,6 +3,7 @@ import flex from './flex';
 import margin from './margin';
 import padding from './padding';
 import grid from './grid';
+import index from './index.mdx';
 
 
 const components = {
@@ -11,6 +12,7 @@ const components = {
   margin,
   padding,
   grid,
+  index,
 };
 
 
