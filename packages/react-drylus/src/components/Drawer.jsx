@@ -29,6 +29,8 @@ const styles = {
     display: flex;
     justify-content: flex-end;
     z-index: 99999;
+    pointer-events: auto;
+    overscroll-behavior: none;
 
     & [data-element="wrapper"] {
       box-shadow: -5px 0px 15px ${sv.neutralDarker};
@@ -217,8 +219,19 @@ const Drawer = ({
   const asOverlay = _asOverlay || screenSize <= ScreenSizes.L;
 
   useEffect(() => {
-    visible && asOverlay ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'initial';
-  });
+    if (visible) {
+      document.body.style.overflow = 'hidden';
+      if (screenSize <= ScreenSizes.L) {
+        document.body.style.pointerEvents = 'none';
+        document.body.parentElement.style.position = 'fixed';
+      }
+    }
+    else {
+      document.body.style.overflow = 'initial';
+      document.body.style.pointerEvents = 'auto';
+      document.body.parentElement.style.position = '';
+    }
+  }, [visible]);
 
   const width = do {
     if (screenSize <= ScreenSizes.M) {
