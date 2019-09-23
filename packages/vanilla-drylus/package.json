@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/vanilla-drylus",
-  "version": "4.0.0-alpha.8",
+  "version": "4.0.0-alpha.9",
   "description": "Vanilla JS/CSS export of component styles and logic",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "",
@@ -19,7 +19,7 @@
     "prepublishOnly": "npm run build && NODE_ENV=production npm run sync"
   },
   "dependencies": {
-    "@drawbotics/react-drylus": "^4.0.0-alpha.8"
+    "@drawbotics/react-drylus": "^4.0.0-alpha.9"
   },
   "publishConfig": {
     "access": "public"
