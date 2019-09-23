@@ -53,7 +53,16 @@ const Banner = ({
     <div style={style} className={cx(styles.root, { [styles[getEnumAsClass(category)]]: category })}>
       <Flex align={FlexAlign.START} justify={FlexJustify.START}>
         <FlexItem>
-          <Margin size={{ right: Sizes.SMALL }}>
+          <Margin
+            size={{ right: Sizes.SMALL }}
+            responsive={{
+              S: {
+                size: { right: Sizes.LARGE },
+              },
+              L: {
+                style: { background: 'blue' },
+              },
+            }}>
             <Icon name={icon} />
           </Margin>
         </FlexItem>
