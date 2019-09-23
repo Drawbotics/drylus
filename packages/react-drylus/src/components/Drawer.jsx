@@ -59,6 +59,11 @@ const styles = {
       padding: ${sv.paddingSmall};
       padding-top: calc(${sv.paddingExtraLarge} + ${sv.paddingExtraSmall});
     }
+
+    @media ${sv.screenM} {
+      ${'' /* To account for bottom bar in mobile */}
+      padding-bottom: 90px;
+    }
   `,
   content: css`
     overflow: scroll;
