@@ -24,6 +24,7 @@ const styles = {
     display: flex;
     z-index: 99999;
     pointer-events: auto;
+    overscroll-behavior: none;
   `,
   container: css`
     flex: 1;
@@ -33,6 +34,7 @@ const styles = {
     justify-content: center;
     pointer-events: none;
     padding: ${sv.defaultPadding};
+    overscroll-behavior: none;
 
     > * {
       pointer-events: auto;
@@ -40,6 +42,8 @@ const styles = {
 
     @media ${sv.screenL} {
       padding: ${sv.paddingSmall};
+      ${'' /* To account for bottom bar in mobile */}
+      padding-bottom: 100px;
     }
   `,
   alignTop: css`
