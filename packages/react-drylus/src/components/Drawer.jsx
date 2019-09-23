@@ -11,6 +11,7 @@ import Title from './Title';
 import Icon from './Icon';
 import { Sizes, Tiers } from '../base';
 import { styles as themeStyles } from '../base/ThemeProvider';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -189,16 +190,21 @@ const BaseDrawer = ({
 
 
 const Drawer = ({
-  children,
-  footer,
-  asOverlay: _asOverlay,
-  visible,
-  onClickClose,
-  onClickOverlay,
-  width: rawWidth,
-  raw,
-  title,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    children,
+    footer,
+    asOverlay: _asOverlay,
+    visible,
+    onClickClose,
+    onClickOverlay,
+    width: rawWidth,
+    raw,
+    title,
+  } = useResponsiveProps(rest, responsive);
+  
   const [ outletElement, setOutletElement ] = useState(null);
   const overlayElement = useRef();
   const { screenSize, ScreenSizes } = useScreenSize();
@@ -331,6 +337,16 @@ Drawer.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

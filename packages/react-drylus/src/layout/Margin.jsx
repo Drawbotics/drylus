@@ -235,7 +235,14 @@ Margin.propTypes = {
   style: PropTypes.object,
 
   /** Reponsive prop overrides */
-  responsive: PropTypes.object,
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

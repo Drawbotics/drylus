@@ -11,6 +11,7 @@ import Title from './Title';
 import Icon from './Icon';
 import { Sizes, Tiers } from '../base';
 import { styles as themeStyles } from '../base/ThemeProvider';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -198,15 +199,20 @@ BaseModal.displayName = 'BaseModal';
 
 
 const Modal = ({
-  children,
-  footer,
-  visible,
-  onClickClose,
-  size,
-  raw,
-  title,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    children,
+    footer,
+    visible,
+    onClickClose,
+    size,
+    raw,
+    title,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   const [ outletElement, setOutletElement ] = useState(null);
   const [ overflowing, setOverflowing ] = useState(false);
   const [ previousTouchY, setTouchY ] = useState(null);
@@ -365,6 +371,16 @@ Modal.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
