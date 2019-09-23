@@ -4,6 +4,7 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import { CSSTransition } from 'react-transition-group';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 
 import Button from './Button';
 import Title from './Title';
@@ -22,6 +23,7 @@ const styles = {
     background: ${sv.darkOverlay};
     display: flex;
     z-index: 99999;
+    pointer-events: auto;
   `,
   container: css`
     flex: 1;
@@ -203,14 +205,35 @@ const Modal = ({
 }) => {
   const [ outletElement, setOutletElement ] = useState(null);
   const [ overflowing, setOverflowing ] = useState(false);
+  const [ previousTouchY, setTouchY ] = useState(null);
+  const { screenSize, ScreenSizes } = useScreenSize();
   const overlayElement = useRef();
   const modalElement = useRef();
+  const containerElement = useRef();
 
   const handleWindowResize = () => {
     if (modalElement.current) {
       modalElement.current.getBoundingClientRect().height > window.innerHeight
         ? setOverflowing(true)
         : setOverflowing(false);
+    }
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchY(e.touches[0]?.clientY);
+  };
+
+  const handleTouchMove = (e) => {
+    if (modalElement?.current?.contains(e.target)) {
+      const touchY = e.changedTouches[0]?.clientY;
+      const touchDelta = Math.abs(touchY - previousTouchY);
+      if (touchY > previousTouchY && touchDelta < 50){
+        containerElement.current.scrollTop -= touchDelta;
+      }
+      else if (touchY < previousTouchY && touchDelta < 50){
+        containerElement.current.scrollTop += touchDelta;
+      }
+      touchY >= 0 && setTouchY(touchY);
     }
   };
 
@@ -226,23 +249,38 @@ const Modal = ({
     }
 
     return () => {
-      if (! visible && outletElement) {
+      if ( ! visible && outletElement) {
         document.body.removeChild(outletElement);
       }
     };
   }, []);
 
   useEffect(() => {
-    visible ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'initial';
-  });
+    if (visible) {
+      document.body.style.overflow = 'hidden';
+      if (screenSize <= ScreenSizes.L) {
+        document.body.style.pointerEvents = 'none';
+        document.body.parentElement.style.position = 'fixed';
+      }
+    }
+    else {
+      document.body.style.overflow = 'initial';
+      document.body.style.pointerEvents = 'auto';
+      document.body.parentElement.style.position = '';
+    }
+  }, [visible]);
 
   useEffect(() => visible ? handleWindowResize() : undefined, [visible]);
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowResize);
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchmove', handleTouchMove);
 
     return () => {
       window.removeEventListener('resize', handleWindowResize);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
     };
   });
 
@@ -264,8 +302,14 @@ const Modal = ({
           exit: styles.modalExit,
           exitActive: styles.modalExitActive,
         }}>
-        <div onClick={handleClickOverlay} className={styles.overlay} ref={overlayElement}>
-          <div className={cx(styles.container, { [styles.alignTop]: overflowing })} data-element="container">
+        <div
+          onClick={handleClickOverlay}
+          className={styles.overlay}
+          ref={overlayElement}>
+          <div
+            ref={containerElement}
+            className={cx(styles.container, { [styles.alignTop]: overflowing })}
+            data-element="container">
             {do {
               if (raw) {
                 children
