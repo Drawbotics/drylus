@@ -37,6 +37,7 @@ import dropdown from './dropdown';
 import list from './list';
 import map from './map';
 import filterGroup from './filter-group';
+import popover from './popover';
 
 
 const components = {
@@ -79,6 +80,7 @@ const components = {
   list,
   map,
   filterGroup,
+  popover,
 };
 
 

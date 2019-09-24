@@ -14,18 +14,19 @@ const styles = {
   root: css`
     position: fixed;
     padding: ${sv.paddingExtraSmall} ${sv.defaultPadding};
-    background: ${sv.neutralDarkest};
-    color: ${sv.colorPrimaryInverse};
+    background: ${sv.white};
+    color: ${sv.colorPrimary};
     border-radius: ${sv.defaultBorderRadius};
     font-size: 0.9rem;
     opacity: 0;
-    pointer-events: none;
     z-index: 99999;
     max-width: 300px;
     text-align: center;
     transform: translate(0, -5px);
     transition: transform ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve},
                 opacity ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    filter: drop-shadow(${sv.elevation1});
+    pointer-events: none;
 
     &::after {
       content: ' ';
@@ -37,7 +38,7 @@ const styles = {
       height: 0px;
       border-left: ${sv.marginExtraSmall} solid transparent;
       border-right: ${sv.marginExtraSmall} solid transparent;
-      border-top: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
+      border-top: ${sv.marginExtraSmall} solid ${sv.white};
     }
   `,
   bottom: css`
@@ -45,7 +46,7 @@ const styles = {
 
     &::after {
       top: calc(${sv.marginExtraSmall} * -1);
-      border-bottom: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
+      border-bottom: ${sv.marginExtraSmall} solid ${sv.white};
       border-left: ${sv.marginExtraSmall} solid transparent;
       border-right: ${sv.marginExtraSmall} solid transparent;
       border-top: 0;
@@ -58,7 +59,7 @@ const styles = {
       left: 100%;
       top: 50%;
       transform: translateY(-50%);
-      border-left: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
+      border-left: ${sv.marginExtraSmall} solid ${sv.white};
       border-bottom: ${sv.marginExtraSmall} solid transparent;
       border-top: ${sv.marginExtraSmall} solid transparent;
       border-right: 0;
@@ -71,7 +72,7 @@ const styles = {
       left: calc(${sv.marginExtraSmall} * -1);
       top: 50%;
       transform: translateY(-50%);
-      border-right: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
+      border-right: ${sv.marginExtraSmall} solid ${sv.white};
       border-bottom: ${sv.marginExtraSmall} solid transparent;
       border-top: ${sv.marginExtraSmall} solid transparent;
       border-left: 0;
@@ -80,11 +81,12 @@ const styles = {
   visible: css`
     opacity: 1;
     transform: translate(0, 0);
+    pointer-events: auto;
   `,
 };
 
 
-export const TooltipSides = new Enum(
+export const PopoverSides = new Enum(
   'TOP',
   'LEFT',
   'BOTTOM',
@@ -92,23 +94,29 @@ export const TooltipSides = new Enum(
 );
 
 
-const Tooltip = ({ children, message, side, style }) => {
+const Popover = ({
+  children,
+  message,
+  side,
+  style,
+  exitOnClick,
+}) => {
   const [ visible, setVisible ] = useState(false);
   const [ outletElement, setOutletElement ] = useState(null);
   const childrenRef = useRef();
-  const tooltipRef = useRef();
+  const popoverRef = useRef();
   const { rect, setRect } = useRect();
-  const tooltipRect = tooltipRef.current?.getBoundingClientRect();
+  const popoverRect = popoverRef.current?.getBoundingClientRect();
 
   useEffect(() => {
-    if ( ! document.getElementById('tooltips-outlet')) {
-      const tooltipsOutlet = document.createElement('div');
-      tooltipsOutlet.id = 'tooltips-outlet';
-      document.body.appendChild(tooltipsOutlet);
-      setOutletElement(tooltipsOutlet);
+    if ( ! document.getElementById('popovers-outlet')) {
+      const popoversOutlet = document.createElement('div');
+      popoversOutlet.id = 'popovers-outlet';
+      document.body.appendChild(popoversOutlet);
+      setOutletElement(popoversOutlet);
     }
     else {
-      setOutletElement(document.getElementById('tooltips-outlet'));
+      setOutletElement(document.getElementById('popovers-outlet'));
     }
 
     return () => {
@@ -119,28 +127,30 @@ const Tooltip = ({ children, message, side, style }) => {
   }, []);
 
   useEffect(() => {
-    let timeout = null;
-
-    const handleMouseEnter = () => {
-      timeout = setTimeout(() => setVisible(true), 200);
-    }
-
-    const handleMouseLeave = () => {
-      clearTimeout(timeout);
-      setVisible(false);
+    const handleWindowClick = (e) => {
+      if (visible
+        && e.target !== childrenRef.current
+        && ! childrenRef.current?.contains(e.target)
+        && e.target !== popoverRef.current
+        && ! popoverRef.current?.contains(e.target)
+        || exitOnClick) {
+        setVisible(false);
+      }
     };
 
-    if (childrenRef.current != null) {
-      childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
-      childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
+    const handleMouseClick = (e) => setVisible(true);
+    
+    const handleMouseLeave = () => setVisible(false);
 
+    if (childrenRef.current != null) {
+      childrenRef.current.addEventListener('click', handleMouseClick);
+      window.addEventListener('click', handleWindowClick, true);
       window.addEventListener('scroll', handleMouseLeave, true);
     }
 
     return () => {
-      childrenRef.current?.removeEventListener('mouseenter', handleMouseEnter);
-      childrenRef.current?.removeEventListener('mouseleave', handleMouseLeave);
-
+      childrenRef.current.removeEventListener('click', handleMouseClick);
+      window.removeEventListener('click', handleWindowClick);
       window.removeEventListener('scroll', handleMouseLeave);
     };
   });
@@ -151,6 +161,7 @@ const Tooltip = ({ children, message, side, style }) => {
     componentDidMount() {
       // eslint-disable-next-line react/no-find-dom-node
       const node = ReactDOM.findDOMNode(this);
+      node.style.cursor = 'pointer';
       childrenRef.current = node;
       setRect(node.getBoundingClientRect());
     }
@@ -160,11 +171,11 @@ const Tooltip = ({ children, message, side, style }) => {
     }
   }
 
-  const tooltipStyle = getStyleForSide({
+  const popoverStyle = getStyleForSide({
     side,
     rect,
-    rectComponent: tooltipRect,
-    sides: TooltipSides,
+    rectComponent: popoverRect,
+    sides: PopoverSides,
   });
 
   return (
@@ -173,43 +184,46 @@ const Tooltip = ({ children, message, side, style }) => {
       {ReactDOM.createPortal(
         <div className={themeStyles.root}>
           <div
-            ref={tooltipRef}
+            ref={popoverRef}
             className={cx(styles.root, {
-              [styles.bottom]: side === TooltipSides.BOTTOM,
-              [styles.left]: side === TooltipSides.LEFT,
-              [styles.right]: side === TooltipSides.RIGHT,
+              [styles.bottom]: side === PopoverSides.BOTTOM,
+              [styles.left]: side === PopoverSides.LEFT,
+              [styles.right]: side === PopoverSides.RIGHT,
               [styles.visible]: visible,
             })}
-            style={{ ...tooltipStyle, ...style }}>
+            style={{ ...popoverStyle, ...style }}>
             {message}
           </div>
         </div>,
-        document.getElementById('tooltips-outlet'),
+        document.getElementById('popovers-outlet'),
       )}
     </Fragment>
   );
 };
 
 
-Tooltip.propTypes = {
-  /** Content shown when the tooltip is visible */
+Popover.propTypes = {
+  /** Content shown when the Popover is visible */
   message: PropTypes.node.isRequired,
 
-  /** Component wrapped by the tooltip */
+  /** Component wrapped by the Popover */
   children: PropTypes.node.isRequired,
 
-  side: PropTypes.oneOf([ TooltipSides.LEFT, TooltipSides.RIGHT, TooltipSides.TOP, TooltipSides.BOTTOM ]),
+  side: PropTypes.oneOf([ PopoverSides.LEFT, PopoverSides.RIGHT, PopoverSides.TOP, PopoverSides.BOTTOM ]),
 
   /** Used for style overrides */
   style: PropTypes.object,
+  
+  /** If true, the popover will close when clicked */
+  exitOnClick: PropTypes.bool,
 };
 
 
-Tooltip.defaultProps = {
-  side: TooltipSides.TOP,
-
+Popover.defaultProps = {
+  side: PopoverSides.TOP,
   style: {},
+  exitOnClick: false,
 };
 
 
-export default Tooltip;
+export default Popover;
