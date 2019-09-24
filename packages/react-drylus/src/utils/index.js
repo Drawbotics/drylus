@@ -66,7 +66,7 @@ export function getStyleForSide({
   rectComponent,
   sides,
 }) {
-  if (! rect || ! rectComponent) return null;
+  if (rect == null || rectComponent == null) return null;
   const arrowHeight = 12;
 
   if (side === sides.TOP) {
