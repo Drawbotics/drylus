@@ -10,24 +10,51 @@ const styles = {
     box-shadow: ${sv.elevation3};
     border-radius: ${sv.borderRadiusSmall};
     padding: ${sv.defaultPadding};
+
+    @media ${sv.screenL} {
+      padding: ${sv.paddingSmall};
+    }
   `,
   doubleTopPadding: css`
     padding-top: calc(${sv.defaultPadding} * 2);
+
+    @media ${sv.screenL} {
+      padding-top: ${sv.paddingLarge};
+    }
   `,
   doubleBottomPadding: css`
     padding-bottom: calc(${sv.defaultPadding} * 2);
+
+    @media ${sv.screenL} {
+      padding-bottom: ${sv.paddingLarge};
+    }
   `,
   header: css`
     padding-bottom: ${sv.defaultPadding};
     margin-bottom: ${sv.defaultMargin};
+
+    @media ${sv.screenL} {
+      padding-bottom: ${sv.paddingSmall};
+      margin-bottom: ${sv.marginSmall};
+    }
   `,
   body: css`
     margin-top: calc(${sv.defaultMargin} * -1);
     margin-bottom: calc(${sv.defaultMargin} * -1);
+
+    @media ${sv.screenL} {
+      margin-top: calc(${sv.marginSmall} * -1);
+      margin-bottom: calc(${sv.marginSmall} * -1);
+    }
   `,
   footer: css`
     margin-top: ${sv.defaultMargin};
     padding-top: ${sv.defaultPadding};
+
+    @media ${sv.screenL} {
+      margin-top: ${sv.marginSmall};
+      padding-top: ${sv.marginSmall};
+    }
   `,
   noSpacing: css`
     padding: 0;
@@ -36,12 +63,23 @@ const styles = {
     margin-top: 0;
     margin-bottom: 0;
     margin: calc(${sv.defaultMargin} * -1);
+
+    @media ${sv.screenL} {
+      margin: calc(${sv.marginSmall} * -1);
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   `,
   section: css`
     margin-bottom: ${sv.marginLarge};
 
+    @media ${sv.screenL} {
+      margin-bottom: ${sv.defaultMargin};
+    }
+
     &:last-of-type {
-      margin-bottom: 0;
+      margin-bottom: 0 !important;
     }
   `,
   sectionTitle: css`
@@ -50,6 +88,10 @@ const styles = {
     font-weight: 500;
     font-size: 0.9rem;
     margin-bottom: ${sv.marginSmall};
+
+    @media ${sv.screenL} {
+      margin-bottom: ${sv.marginExtraSmall};
+    }
   `,
 };
 

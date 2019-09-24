@@ -44,17 +44,16 @@ function removeHash(css, replacement) {
 
 
 function runBrowser(code) {
-  const dom = new JSDOM(`
-    <html>
-      <head></head>
-      <body>
-        <script>${code}</script>
-      </body>
-    </html>
-  `, { runScripts: 'dangerously' });
-  const styles = Object.values(dom.window.document.querySelectorAll('[data-emotion]') || {}).map((element) =>
-    element.sheet.cssRules.map((rules) => rules.cssText)
-  );
+  const dom = new JSDOM(``, { runScripts: 'dangerously' });
+
+  Object.defineProperty(dom.window.URL, 'createObjectURL', { value: x => x, configurable: true });
+
+  const scriptEl = dom.window.document.createElement('script');
+  scriptEl.textContent = code;
+  dom.window.document.body.appendChild(scriptEl);
+
+  const styles = Object.values(dom.window.document.querySelectorAll('[data-emotion]') || {})
+    .map((element) => element.sheet.cssRules.map((rules) => rules.cssText));
   const stylesList = styles.reduce((memo, list) => [ ...memo, ...list.reduce((memo, rule) => [ ...memo, rule ], [])], []);
   return stylesList.join('');
 }

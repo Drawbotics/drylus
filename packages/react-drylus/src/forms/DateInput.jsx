@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import Calendar from 'react-calendar/dist/entry.nostyle';
-import { getDevice } from '@drawbotics/use-is-device';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 
 import { InputWithRef } from './Input';
 import Button from '../components/Button';
@@ -217,7 +217,9 @@ const DateInput = ({
 }) => {
   const [ outletElement, setOutletElement ] = useState(null);
   const [ isFocused, setFocused ] = useState(false);
-  const { isDesktop } = getDevice();
+  const { screenSize, ScreenSizes } = useScreenSize();
+
+  const isDesktop = screenSize > ScreenSizes.XL;
 
   const inputRef = useRef(null);
   const rootRef = useRef(null);

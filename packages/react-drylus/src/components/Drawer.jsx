@@ -4,12 +4,14 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import sv from '@drawbotics/drylus-style-vars';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 
 import Button from './Button';
 import Title from './Title';
 import Icon from './Icon';
 import { Sizes, Tiers } from '../base';
 import { styles as themeStyles } from '../base/ThemeProvider';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -28,6 +30,8 @@ const styles = {
     display: flex;
     justify-content: flex-end;
     z-index: 99999;
+    pointer-events: auto;
+    overscroll-behavior: none;
 
     & [data-element="wrapper"] {
       box-shadow: -5px 0px 15px ${sv.neutralDarker};
@@ -51,6 +55,16 @@ const styles = {
     height: 100%;
     display: flex;
     flex-direction: column;
+
+    @media ${sv.screenL} {
+      padding: ${sv.paddingSmall};
+      padding-top: calc(${sv.paddingExtraLarge} + ${sv.paddingExtraSmall});
+    }
+
+    @media ${sv.screenM} {
+      ${'' /* To account for bottom bar in mobile */}
+      padding-bottom: 90px;
+    }
   `,
   content: css`
     overflow: scroll;
@@ -64,11 +78,20 @@ const styles = {
   footer: css`
     padding-top: ${sv.defaultPadding};
     border-top: 1px solid ${sv.neutralLight};
+
+    @media ${sv.screenL} {
+      padding-top: ${sv.paddingSmall};
+    }
   `,
   close: css`
     position: absolute;
     top: ${sv.marginSmall};
     left: ${sv.marginSmall};
+
+    @media ${sv.screenL} {
+      top: ${sv.marginExtraSmall};
+      left: ${sv.marginExtraSmall};
+    }
   `,
   drawerEnter: css`
     opacity: 0;
@@ -134,10 +157,15 @@ const BaseDrawer = ({
   title,
   style,
 }) => {
+  const { screenSize, ScreenSizes } = useScreenSize();
   return (
     <div style={style} className={styles.root}>
       <div className={styles.close}>
-        <Button size={Sizes.SMALL} onClick={onClickClose} tier={Tiers.TERTIARY} leading={<Icon name="x" />} />
+        <Button
+          size={screenSize <= ScreenSizes.L ? Sizes.DEFAULT : Sizes.SMALL}
+          onClick={onClickClose}
+          tier={Tiers.TERTIARY}
+          leading={<Icon name="x" />} />
       </div>
       {do {
         if (title) {
@@ -162,18 +190,25 @@ const BaseDrawer = ({
 
 
 const Drawer = ({
-  children,
-  footer,
-  asOverlay,
-  visible,
-  onClickClose=x=>x,
-  onClickOverlay=x=>x,
-  width: rawWidth,
-  raw,
-  title,
+  responsive,
+  ...rest,
 }) => {
-  const [outletElement, setOutletElement] = useState(null);
+  const {
+    children,
+    footer,
+    asOverlay: _asOverlay,
+    visible,
+    onClickClose,
+    onClickOverlay,
+    width: rawWidth,
+    raw,
+    title,
+  } = useResponsiveProps(rest, responsive);
+  
+  const [ outletElement, setOutletElement ] = useState(null);
   const overlayElement = useRef();
+  const { screenSize, ScreenSizes } = useScreenSize();
+
   useEffect(() => {
     if ( ! document.getElementById('drawers-outlet')) {
       const drawersOutlet = document.createElement('div');
@@ -192,11 +227,31 @@ const Drawer = ({
     };
   }, []);
 
-  useEffect(() => {
-    visible ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'initial';
-  });
+  const asOverlay = _asOverlay || screenSize <= ScreenSizes.L;
 
-  const width = typeof rawWidth === 'number' ? `${rawWidth}px` : rawWidth;
+  useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = 'hidden';
+      if (screenSize <= ScreenSizes.L) {
+        document.body.style.pointerEvents = 'none';
+        document.body.parentElement.style.position = 'fixed';
+      }
+    }
+    else {
+      document.body.style.overflow = 'initial';
+      document.body.style.pointerEvents = 'auto';
+      document.body.parentElement.style.position = '';
+    }
+  }, [visible]);
+
+  const width = do {
+    if (screenSize <= ScreenSizes.M) {
+      '100vw';
+    }
+    else {
+      typeof rawWidth === 'number' ? `${rawWidth}px` : rawWidth;
+    }
+  }
 
   const content = raw ? children : <BaseDrawer title={title} onClickClose={onClickClose} footer={footer}>{children}</BaseDrawer>;
 
@@ -282,6 +337,16 @@ Drawer.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
@@ -289,6 +354,8 @@ Drawer.defaultProps = {
   asOverlay: false,
   width: 400,
   raw: false,
+  onClickClose: x => x,
+  onClickOverlay: x => x,
 };
 
 

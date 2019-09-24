@@ -5,7 +5,7 @@ import { css } from 'emotion';
 
 const styles = {
   rightAlign: css`
-    display: flex;
+    display: inline-flex;
     justify-content: flex-end;
   `,
 }

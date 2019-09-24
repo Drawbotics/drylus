@@ -5,95 +5,201 @@ import sv from '@drawbotics/drylus-style-vars';
 import camelCase from 'lodash/camelCase';
 
 import Sizes from '../base/Sizes';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
   root: css`
     padding: ${sv.defaultPadding};
+
+    @media ${sv.screenL} {
+      padding: ${sv.paddingSmall};
+    }
   `,
   resetPadding: css`
     padding: 0;
+
+    @media ${sv.screenL} {
+      padding: 0;
+    }
   `,
   extraSmall: css`
     padding: ${sv.paddingExtraSmall};
+
+    @media ${sv.screenL} {
+      padding: calc(${sv.paddingExtraSmall} / 2);
+    }
   `,
   small: css`
     padding: ${sv.paddingSmall};
+
+    @media ${sv.screenL} {
+      padding: ${sv.paddingExtraSmall};
+    }
   `,
   large: css`
     padding: ${sv.paddingLarge};
+
+    @media ${sv.screenL} {
+      padding: ${sv.defaultPadding};
+    }
   `,
   extraLarge: css`
     padding: ${sv.paddingExtraLarge};
+
+    @media ${sv.screenL} {
+      padding: ${sv.paddingLarge};
+    }
   `,
   extraSmallLeft: css`
     padding-left: ${sv.paddingExtraSmall};
+
+    @media ${sv.screenL} {
+      padding-left: calc(${sv.paddingExtraSmall} / 2);
+    }
   `,
   extraSmallRight: css`
     padding-right: ${sv.paddingExtraSmall};
+
+    @media ${sv.screenL} {
+      padding-right: calc(${sv.paddingExtraSmall} / 2);
+    }
   `,
   extraSmallTop: css`
     padding-top: ${sv.paddingExtraSmall};
+
+    @media ${sv.screenL} {
+      padding-top: calc(${sv.paddingExtraSmall} / 2);
+    }
   `,
   extraSmallBottom: css`
     padding-bottom: ${sv.paddingExtraSmall};
+
+    @media ${sv.screenL} {
+      padding-bottom: calc(${sv.paddingExtraSmall} / 2);
+    }
   `,
   smallLeft: css`
     padding-left: ${sv.paddingSmall};
+
+    @media ${sv.screenL} {
+      padding-left: ${sv.paddingExtraSmall};
+    }
   `,
   smallRight: css`
     padding-right: ${sv.paddingSmall};
+
+    @media ${sv.screenL} {
+      padding-right: ${sv.paddingExtraSmall};
+    }
   `,
   smallTop: css`
     padding-top: ${sv.paddingSmall};
+
+    @media ${sv.screenL} {
+      padding-top: ${sv.paddingExtraSmall};
+    }
   `,
   smallBottom: css`
     padding-bottom: ${sv.paddingSmall};
+
+    @media ${sv.screenL} {
+      padding-bottom: ${sv.paddingExtraSmall};
+    }
   `,
   defaultLeft: css`
     padding-left: ${sv.defaultPadding};
+
+    @media ${sv.screenL} {
+      padding-left: ${sv.paddingSmall};
+    }
   `,
   defaultRight: css`
     padding-right: ${sv.defaultPadding};
+
+    @media ${sv.screenL} {
+      padding-right: ${sv.paddingSmall};
+    }
   `,
   defaultTop: css`
     padding-top: ${sv.defaultPadding};
+
+    @media ${sv.screenL} {
+      padding-top: ${sv.paddingSmall};
+    }
   `,
   defaultBottom: css`
     padding-bottom: ${sv.defaultPadding};
+
+    @media ${sv.screenL} {
+      padding-bottom: ${sv.paddingSmall};
+    }
   `,
   largeLeft: css`
     padding-left: ${sv.paddingLarge};
+
+    @media ${sv.screenL} {
+      padding-left: ${sv.defaultPadding};
+    }
   `,
   largeRight: css`
     padding-right: ${sv.paddingLarge};
+
+    @media ${sv.screenL} {
+      padding-right: ${sv.defaultPadding};
+    }
   `,
   largeTop: css`
     padding-top: ${sv.paddingLarge};
+
+    @media ${sv.screenL} {
+      padding-top: ${sv.defaultPadding};
+    }
   `,
   largeBottom: css`
     padding-bottom: ${sv.paddingLarge};
+
+    @media ${sv.screenL} {
+      padding-bottom: ${sv.defaultPadding};
+    }
   `,
   extraLargeLeft: css`
     padding-left: ${sv.paddingExtraLarge};
+
+    @media ${sv.screenL} {
+      padding-left: ${sv.paddingLarge};
+    }
   `,
   extraLargeRight: css`
     padding-right: ${sv.paddingExtraLarge};
+
+    @media ${sv.screenL} {
+      padding-right: ${sv.paddingLarge};
+    }
   `,
   extraLargeTop: css`
     padding-top: ${sv.paddingExtraLarge};
+
+    @media ${sv.screenL} {
+      padding-top: ${sv.paddingLarge};
+    }
   `,
   extraLargeBottom: css`
     padding-bottom: ${sv.paddingExtraLarge};
+
+    @media ${sv.screenL} {
+      padding-bottom: ${sv.paddingLarge};
+    }
   `,
 };
 
 
 const Padding = ({
-  children,
-  size,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const { children, size, style } = useResponsiveProps(rest, responsive);
+
   const isUniform = typeof size !== 'object';
   return (
     <div className={cx(styles.root, {
@@ -127,6 +233,16 @@ Padding.propTypes = {
 
   /** Prop to override any style if necessary, use sparingly */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

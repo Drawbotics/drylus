@@ -100,6 +100,14 @@ const styles = {
   label: css`
     flex: 1;
   `,
+  fullWidth: css`
+    width: 100%;
+    flex: 1;
+
+    [data-element="trigger"] {
+      justify-content: center;
+    }
+  `,
 };
 
 
@@ -117,6 +125,7 @@ const BaseFilter = ({
   align,
   active,
   style,
+  fullWidth,
 }) => {
   const ref = useRef();
   const [ panelOpen, setPanelOpen ] = useState(false);
@@ -132,10 +141,18 @@ const BaseFilter = ({
     };
   }, []);
   return (
-    <div style={style} ref={ref} className={styles.root}>
-      <div className={cx(styles.trigger, {
-        [styles.active]: panelOpen || active,
-      })} onClick={() => panelOpen ? setPanelOpen(false) : setPanelOpen(true)}>
+    <div
+      style={style}
+      ref={ref}
+      className={cx(styles.root, {
+        [styles.fullWidth]: fullWidth,
+      })}>
+      <div
+        data-element="trigger"
+        className={cx(styles.trigger, {
+          [styles.active]: panelOpen || active,
+        })}
+        onClick={() => setPanelOpen( ! panelOpen)}>
         {label}
         <Icon
           onClick={(e) => {
@@ -181,6 +198,9 @@ BaseFilter.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** If true, the filter takes the whole space of the parent */
+  fullWidth: PropTypes.bool,
 };
 
 

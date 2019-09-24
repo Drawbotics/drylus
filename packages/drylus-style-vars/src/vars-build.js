@@ -3,8 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.phone = exports.phoneS = exports.screenXl = exports.screenL = exports.screenM = exports.screenS = exports.screenXs = exports.maxWidthMedium = exports.maxWidthLarge = exports.defaultTransition = exports.bouncyTransitionCurve = exports.transitionTimeShort = exports.defaultTransitionTime = exports.marginHuge = exports.marginExtraLarge = exports.marginLarge = exports.marginExtraSmall = exports.marginSmall = exports.defaultMargin = exports.baseMargin = exports.paddingHuge = exports.paddingExtraLarge = exports.paddingLarge = exports.paddingExtraSmall = exports.paddingSmall = exports.defaultPadding = exports.insetActiveLight = exports.insetActiveMedium = exports.insetActive = exports.elevation3 = exports.elevation2 = exports.elevation1 = exports.shadowColor = exports.colorDisabledInverse = exports.colorDisabled = exports.colorTertiaryInverse = exports.colorTertiary = exports.colorSecondaryInverse = exports.colorSecondary = exports.colorPrimaryInverse = exports.colorPrimary = exports.defaultLetterSpacing = exports.defaultLineHeight = exports.defaultFontFamily = exports.defaultFontSize = exports.borderRadiusSmall = exports.borderRadiusLarge = exports.defaultBorderRadius = exports.darkOverlay = exports.lightOverlay = exports.lighterOverlay = exports.linkedinColor = exports.twitterColor = exports.facebookColor = exports.success = exports.greenLighter = exports.greenLight = exports.green = exports.greenDark = exports.info = exports.blueLighter = exports.blueLight = exports.blue = exports.blueDark = exports.warning = exports.orangeLighter = exports.orangeLight = exports.orange = exports.orangeDark = exports.error = exports.danger = exports.redLighter = exports.redLight = exports.red = exports.redDark = exports.azureLight = exports.azure = exports.azureDark = exports.backgroundColor = exports.neutralLighter = exports.neutralLight = exports.neutral = exports.neutralDark = exports.neutralDarker = exports.neutralDarkest = exports.brandLighter = exports.brandLight = exports.brand = exports.brandDark = exports.grey900 = exports.grey800 = exports.grey700 = exports.grey600 = exports.grey500 = exports.grey400 = exports.grey300 = exports.grey200 = exports.grey100 = exports.grey50 = exports.white = void 0;
-exports.greaterThanMinimumWidth = exports.greaterThanMaximumWidth = exports.screenSOrM = exports.ipadLandscape = exports.phoneXlLandscape = exports.phoneLandscape = exports.phoneSLandscape = exports.desktopS = exports.ipad = exports.phoneXl = void 0;
+exports.phoneSLandscape = exports.screenHuge = exports.screenXl = exports.screenL = exports.screenM = exports.screenS = exports.screenXs = exports.maxWidthMedium = exports.maxWidthLarge = exports.defaultTransition = exports.bouncyTransitionCurve = exports.transitionTimeShort = exports.defaultTransitionTime = exports.marginHuge = exports.marginExtraLarge = exports.marginLarge = exports.marginExtraSmall = exports.marginSmall = exports.defaultMargin = exports.baseMargin = exports.paddingHuge = exports.paddingExtraLarge = exports.paddingLarge = exports.paddingExtraSmall = exports.paddingSmall = exports.defaultPadding = exports.insetActiveLight = exports.insetActiveMedium = exports.insetActive = exports.elevation3 = exports.elevation2 = exports.elevation1 = exports.shadowColor = exports.colorDisabledInverse = exports.colorDisabled = exports.colorTertiaryInverse = exports.colorTertiary = exports.colorSecondaryInverse = exports.colorSecondary = exports.colorPrimaryInverse = exports.colorPrimary = exports.defaultLetterSpacing = exports.defaultLineHeight = exports.defaultFontFamily = exports.defaultFontSize = exports.borderRadiusSmall = exports.borderRadiusLarge = exports.defaultBorderRadius = exports.darkOverlay = exports.lightOverlay = exports.lighterOverlay = exports.linkedinColor = exports.twitterColor = exports.facebookColor = exports.success = exports.greenLighter = exports.greenLight = exports.green = exports.greenDark = exports.info = exports.blueLighter = exports.blueLight = exports.blue = exports.blueDark = exports.warning = exports.orangeLighter = exports.orangeLight = exports.orange = exports.orangeDark = exports.error = exports.danger = exports.redLighter = exports.redLight = exports.red = exports.redDark = exports.azureLight = exports.azure = exports.azureDark = exports.backgroundColor = exports.neutralLighter = exports.neutralLight = exports.neutral = exports.neutralDark = exports.neutralDarker = exports.neutralDarkest = exports.brandLighter = exports.brandLight = exports.brand = exports.brandDark = exports.grey900 = exports.grey800 = exports.grey700 = exports.grey600 = exports.grey500 = exports.grey400 = exports.grey300 = exports.grey200 = exports.grey100 = exports.grey50 = exports.white = void 0;
+exports.greaterThanMinimumWidth = exports.greaterThanMaximumWidth = exports.desktop = exports.tabletPortrait = exports.tabletLandscape = exports.phonePortrait = exports.phoneLandscape = exports.phoneSPortrait = void 0;
 
 const {
   fade
@@ -228,26 +228,23 @@ const screenL = 'only screen and (max-width: 768px)';
 exports.screenL = screenL;
 const screenXl = 'only screen and (max-width: 1024px)';
 exports.screenXl = screenXl;
-const phoneS = screenXs;
-exports.phoneS = phoneS;
-const phone = screenS;
-exports.phone = phone;
-const phoneXl = screenM;
-exports.phoneXl = phoneXl;
-const ipad = screenL;
-exports.ipad = ipad;
-const desktopS = screenXl;
-exports.desktopS = desktopS;
-const phoneSLandscape = ipad;
+const screenHuge = 'only screen and (min-width: 1024px)'; // To target specific screen ratios
+
+exports.screenHuge = screenHuge;
+const phoneSLandscape = `${screenS} and (orientation: landscape)`;
 exports.phoneSLandscape = phoneSLandscape;
-const phoneLandscape = ipad;
+const phoneSPortrait = `${screenXs} and (orientation: portrait)`;
+exports.phoneSPortrait = phoneSPortrait;
+const phoneLandscape = `${screenL} and (orientation: landscape)`;
 exports.phoneLandscape = phoneLandscape;
-const phoneXlLandscape = ipad;
-exports.phoneXlLandscape = phoneXlLandscape;
-const ipadLandscape = desktopS;
-exports.ipadLandscape = ipadLandscape;
-const screenSOrM = '(max-width: 480px), (max-width: 768px)';
-exports.screenSOrM = screenSOrM;
+const phonePortrait = `${screenM} and (orientation: portrait)`;
+exports.phonePortrait = phonePortrait;
+const tabletLandscape = `${screenXl} and (orientation: landscape)`;
+exports.tabletLandscape = tabletLandscape;
+const tabletPortrait = `${screenL} and (orientation: portrait)`;
+exports.tabletPortrait = tabletPortrait;
+const desktop = `${screenHuge} and (orientation: landscape)`;
+exports.desktop = desktop;
 const greaterThanMaximumWidth = 'only screen and (min-width: 1200px)';
 exports.greaterThanMaximumWidth = greaterThanMaximumWidth;
 const greaterThanMinimumWidth = 'only screen and (min-width: 1024px)';
