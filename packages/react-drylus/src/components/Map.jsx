@@ -64,10 +64,10 @@ const PopoverContent = ({
       {do {
         if (subtitle) {
           <FlexItem>
-            <Margin size={{ top: Sizes.SMALL }}>
+            <Margin size={{ top: Sizes.EXTRA_SMALL }}>
               <Text
                 size={Sizes.SMALL}
-                tiers={Tiers.SECONDARY}>
+                tier={Tiers.SECONDARY}>
                 {subtitle}
               </Text>
             </Margin>
