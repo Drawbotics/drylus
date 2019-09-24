@@ -48,6 +48,21 @@ const styles = {
     color: ${sv.white};
     background: ${sv.neutralDarker};
   `,
+  brandInversed: css`
+    background: ${sv.brand};
+  `,
+  dangerInversed: css`
+    background: ${sv.red};
+  `,
+  successInversed: css`
+    background: ${sv.green};
+  `,
+  warningInversed: css`
+    background: ${sv.orange};
+  `,
+  infoInversed: css`
+    background: ${sv.blue};
+  `,
 };
 
 
@@ -58,12 +73,13 @@ const Tag = ({
   inversed,
   style,
 }) => {
+  const className = inversed ? `${getEnumAsClass(category)}Inversed` : getEnumAsClass(category);
   return (
     <div
       style={style}
       className={cx(styles.root, {
-        [styles[getEnumAsClass(category)]]: category,
         [styles.inversed]: inversed,
+        [styles[className]]: category,
       })}>
       {children}
       {do {
@@ -90,7 +106,7 @@ Tag.propTypes = {
   /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */
   onClickRemove: PropTypes.func,
 
-  /** Takes precedence over category */
+  /** Modifies the way the category is shown */
   inversed: PropTypes.bool,
 
   /** Used for style overrides */
