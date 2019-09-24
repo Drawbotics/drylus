@@ -112,7 +112,7 @@ const Tooltip = ({ children, message, side, style }) => {
     }
 
     return () => {
-      if (! visible && outletElement) {
+      if (! visible && outletElement != null) {
         document.body.removeChild(outletElement);
       }
     };
@@ -130,7 +130,7 @@ const Tooltip = ({ children, message, side, style }) => {
       setVisible(false);
     };
 
-    if (childrenRef.current) {
+    if (childrenRef.current != null) {
       childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
       childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
 
@@ -145,7 +145,7 @@ const Tooltip = ({ children, message, side, style }) => {
     };
   });
 
-  if (! outletElement) return '';
+  if (outletElement == null) return '';
 
   class Wrapper extends React.Component {
     componentDidMount() {

@@ -120,7 +120,7 @@ const Popover = ({
     }
 
     return () => {
-      if (! visible && outletElement) {
+      if (! visible && outletElement != null) {
         document.body.removeChild(outletElement);
       }
     };
@@ -142,7 +142,7 @@ const Popover = ({
     
     const handleMouseLeave = () => setVisible(false);
 
-    if (childrenRef.current) {
+    if (childrenRef.current != null) {
       childrenRef.current.addEventListener('click', handleMouseClick);
       window.addEventListener('click', handleWindowClick, true);
       window.addEventListener('scroll', handleMouseLeave, true);
@@ -155,7 +155,7 @@ const Popover = ({
     };
   });
 
-  if (! outletElement) return '';
+  if (outletElement == null) return '';
 
   class Wrapper extends React.Component {
     componentDidMount() {

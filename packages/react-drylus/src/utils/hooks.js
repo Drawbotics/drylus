@@ -30,6 +30,9 @@ function _getPropsForSize(responsive, sizes) {
 }
 
 
+// We use this instead of useState to get correct object equality
+// otherwise the hook will cause a re-render all the time when using
+// the rect object directly
 export function useRect() {
   const [ top, setTop ] = useState(0);
   const [ left, setLeft ] = useState(0);
