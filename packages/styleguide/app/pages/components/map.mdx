@@ -1,4 +1,8 @@
-import { Map } from '@drawbotics/react-drylus';
+import {
+  Map,
+  Text,
+  Icon,
+} from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -16,20 +20,25 @@ The props shown here are only the most common ones, if you need more interactivi
 
 To customize the markers and their interaction, you can use the `options` field (see `markers` in table) and use any option from the documentation of `react-mapbox-wrapper`. 
 
+When passing a `title` (and `subtitle`) to an option, a `Popover` will be rendered which is visible once the marker is clicked. If only `subtitle` is given, the popover is not rendered.
+
 <Playground component={Map}>
   <Map
     zoom={14}
     accessToken={process.env.MAPBOX_ACCESS_TOKEN}
     markers={[
       {
-        label: 'Work',
+        label: 5,
+        title: "House",
         coordinates: {
           lat: 50.8,
           lng: 4.4,
         },
       },
       {
-        label: 'Home',
+        label: <Icon name="check" />,
+        title: "Supermarket",
+        subtitle: "50.32343, 4.33423",
         coordinates: {
           lat: 50.3,
           lng: 4.3,

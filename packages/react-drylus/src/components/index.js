@@ -38,3 +38,4 @@ export Dropdown, { DropdownSides, DropdownOption, DropdownTitle, DropdownSeparat
 export List, { ListItem } from './List';
 export Map from './Map';
 export FilterGroup from './FilterGroup';
+export Popover, { PopoverSides } from './Popover';

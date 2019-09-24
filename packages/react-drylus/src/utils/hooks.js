@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import assign from 'lodash/assign';
 
@@ -26,6 +27,26 @@ function _getPropsForSize(responsive, sizes) {
   else {
     return {};
   }
+}
+
+
+export function useRect() {
+  const [ top, setTop ] = useState(0);
+  const [ left, setLeft ] = useState(0);
+  const [ height, setHeight ] = useState(0);
+  const [ width, setWidth ] = useState(0);
+
+  const rect = { top, left, height, width };
+  const setRect = ({ top, left, height, width }) => {
+    setTop(top);
+    setLeft(left);
+    setHeight(height);
+    setWidth(width);
+  };
+  return {
+    rect,
+    setRect,
+  };
 }
 
 

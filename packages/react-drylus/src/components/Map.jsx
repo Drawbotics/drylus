@@ -3,7 +3,13 @@ import { css } from 'emotion';
 import MapboxMap, { Marker as MapboxMarker } from 'react-mapbox-wrapper';
 import { LngLatBounds } from 'mapbox-gl';
 import PropTypes from 'prop-types';
-import sv, { fade } from '@drawbotics/drylus-style-vars';
+import sv from '@drawbotics/drylus-style-vars';
+
+import Flex, { FlexDirections, FlexItem } from '../layout/Flex';
+import { Sizes, Tiers } from '../base';
+import Popover from './Popover';
+import Text from './Text';
+import Margin from '../layout/Margin';
 
 
 const styles = {
@@ -23,24 +29,54 @@ const styles = {
   `,
   marker: css`
     position: relative;
-    height: ${sv.defaultMargin};
-    width: ${sv.defaultMargin};
-    border-radius: 1000px;
-    background: ${fade(sv.brand, 30)};
-    border: 1px solid ${sv.brand};
+  `,
+  dropContainer: css`
+    transform: scaleX(0.8);
+  `,
+  drop: css`
+    height: ${sv.marginLarge};
+    width: ${sv.marginLarge};
+    border-radius: 0 50% 80% 50%;
+    transform: rotate(-135deg);
+    background: ${sv.brand};
   `,
   label: css`
     position: absolute;
-    top: calc(-100% - 3px);
+    top: calc(${sv.marginLarge} / 2);
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 5px 10px;
-    border-radius: ${sv.defaultBorderRadius};
+    z-index: 9;
+    display: flex;
     color: ${sv.white};
-    background: ${sv.brand};
-    font-size: 0.9rem;
   `,
 };
+
+
+const PopoverContent = ({
+  title,
+  subtitle,
+}) => {
+  return (
+    <Flex direction={FlexDirections.VERTICAL}>
+      <FlexItem>
+        <Text>{title}</Text>
+      </FlexItem>
+      {do {
+        if (subtitle) {
+          <FlexItem>
+            <Margin size={{ top: Sizes.SMALL }}>
+              <Text
+                size={Sizes.SMALL}
+                tiers={Tiers.SECONDARY}>
+                {subtitle}
+              </Text>
+            </Margin>
+          </FlexItem>
+        }
+      }}
+    </Flex>
+  );
+}
 
 
 const Map = ({
@@ -62,6 +98,22 @@ const Map = ({
     map.fitBounds(coordinatesToFit, { padding: { top: 60, bottom: 60, left: 60, right: 60 } });
     setMapRef(map);
   };
+
+  const renderMarker = (marker) => {
+    return (
+      <div className={styles.marker}>
+        {do {
+          if (marker.label != null) {
+            <div className={styles.label}>{marker.label}</div>
+          }
+        }}
+        <div className={styles.dropContainer}>
+          <div className={styles.drop} />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className={styles.root} style={{ height, ...style }}>
       <MapboxMap
@@ -80,13 +132,21 @@ const Map = ({
                 coordinates={marker.coordinates}
                 map={mapRef}
                 {...marker.options}>
-                <div className={styles.marker}>
-                  {do {
-                    if (marker.label != null) {
-                      <div className={styles.label}>{marker.label}</div>
-                    }
-                  }}
-                </div>
+                {do {
+                  if (marker.title) {
+                    <Popover
+                      message={
+                        <PopoverContent
+                          title={marker.title}
+                          subtitle={marker.subtitle} />
+                      }>
+                      {renderMarker(marker)}
+                    </Popover>
+                  }
+                  else {
+                    renderMarker(marker)
+                  }
+                }}
               </MapboxMarker>
             ));
           }
@@ -112,7 +172,9 @@ Map.propTypes = {
 
   /** Elements you want to see on the map. To customize the Marker object, you can use the options field */
   markers: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string,
+    label: PropTypes.node,
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
     coordinates: PropTypes.shape({
       lng: PropTypes.number.isRequired,
       lat: PropTypes.number.isRequired,

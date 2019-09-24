@@ -58,3 +58,43 @@ export const CustomPropTypes = {
     };
   },
 };
+
+
+export function getStyleForSide({
+  side,
+  rect,
+  rectComponent,
+  sides,
+}) {
+  if (! rect || ! rectComponent) return null;
+  const arrowHeight = 12;
+
+  if (side === sides.TOP) {
+    return {
+      top: rect?.top - rectComponent?.height - arrowHeight,
+      left: rect?.left + (rect?.width / 2) - (rectComponent?.width / 2),
+    };
+  }
+  else if (side === sides.LEFT) {
+    return {
+      top: rect?.top + (rect?.height / 2) - (rectComponent?.height / 2),
+      left: rect?.left - rectComponent?.width - arrowHeight,
+    };
+  }
+  else if (side === sides.RIGHT) {
+    return {
+      top: rect?.top + (rect?.height / 2) - (rectComponent?.height / 2),
+      left: rect?.left + rect?.width + arrowHeight,
+    };
+  }
+  else if (side === sides.BOTTOM) {
+    return {
+      top: rect?.top + rect?.height + arrowHeight,
+      left: rect?.left + (rect?.width / 2) - (rectComponent?.width / 2),
+    };
+  }
+  else {
+    console.warn(`${String(side)} side value provided not supported`);
+    return null;
+  }
+}
