@@ -1,11 +1,14 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, useContext, createContext, Fragment } from 'react';
 import { css, cx, keyframes } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 
 import Label from './Label';
 import Icon from './Icon';
+import Sizes from '../base/Sizes';
+import Margin from '../layout/Margin';
 
 
 const RowsContext = createContext([{}, () => {}]);
@@ -38,6 +41,13 @@ const styles = {
 
     [data-nested] tr {
       background: none !important;
+    }
+
+    @media ${sv.screenL} {
+      tbody {
+        display: table;
+        width: 100%;
+      }
     }
   `,
   fullWidth: css`
@@ -88,6 +98,10 @@ const styles = {
         text-align: right;
       }
     }
+
+    @media ${sv.screenL} {
+      display: none;
+    }
   `,
   row: css`
     & > td:last-of-type {
@@ -117,6 +131,50 @@ const styles = {
           &:last-of-type {
             padding-right: 0;
           }
+        }
+      }
+    }
+
+    @media ${sv.screenL} {
+      display: table-row-group;
+
+      &[data-nested] {
+        display: none;
+      }
+
+      > td {
+        display: table-row;
+
+        &:first-of-type {
+          > div, &::before {
+            padding-top: ${sv.paddingSmall};
+          }
+        }
+
+        &:last-of-type {
+          > div, &::before {
+            padding-bottom: ${sv.paddingSmall};
+          }
+        }
+
+        > div {
+          display: table-cell;
+          vertical-align: middle;
+          padding: calc(${sv.paddingExtraSmall} / 2) ${sv.paddingSmall};
+          width: 100%;
+          text-align: left;
+        }
+
+        &::before {
+          content: attr(data-th);
+          display: table-cell;
+          vertical-align: middle;
+          color: ${sv.colorTertiary};
+          text-transform: uppercase;
+          font-weight: 500;
+          font-size: 0.8rem;
+          text-align: left;
+          padding: calc(${sv.paddingExtraSmall} / 2) ${sv.paddingSmall};
         }
       }
     }
@@ -167,6 +225,10 @@ const styles = {
       &:hover {
         cursor: pointer;
       }
+
+      @media ${sv.screenL} {
+        display: none;
+      }
     }
   `,
   headerWithArrows: css`
@@ -213,9 +275,24 @@ const styles = {
     background: linear-gradient(to right, ${sv.neutralLight}, ${sv.neutral}, ${sv.neutralLight});
     background-size: 1000px 600px;
     animation: ${gradientAnimation} calc(${sv.defaultTransitionTime} * 4) linear forwards infinite;
+
+    @media ${sv.screenL} {
+      width: 100%;
+      min-width: 100px;
+    }
   `,
   emptyTableCell: css`
     padding: ${sv.defaultPadding};
+
+    @media ${sv.screenL} {
+      display: flex;
+      align-items: center;
+      margin-left: calc(${sv.marginLarge} * -1);
+      padding: 0;
+    }
+  `,
+  emptyTableHeader: css`
+    padding-right: ${sv.paddingExtraSmall};
   `,
 };
 
@@ -229,6 +306,8 @@ export const TCell = ({
   active,
   ...props,
 }) => {
+  const { screenSize, ScreenSizes } = useScreenSize();
+  
   const className = cx(styles.cell, {
     [styles.asContainer]: asContainer,
   });
@@ -251,7 +330,7 @@ export const TCell = ({
           </div>
         }
         else {
-          children
+          screenSize <= ScreenSizes.L ? <div>{children}</div> : children
         }
       }}
     </td>
@@ -344,7 +423,7 @@ export const TBody = ({ children }) => {
 
 const FakeTable = ({ columns }) => {
   return (
-    <>
+    <Fragment>
       <THead>
         {columns.map((column, i) => (
           <TCell key={i}>
@@ -355,22 +434,45 @@ const FakeTable = ({ columns }) => {
       <TBody>
         {Array(5).fill(null).map((...args) => (
           <TRow key={args[1]}>
-            {columns.map((...args) => (
-              <TCell key={args[1]}>
+            {columns.map((column, i) => (
+              <TCell key={i} data-th={typeof column === 'string' ? column : column.label}>
                 <div className={styles.loadingBodyCell} />
               </TCell>
             ))}
           </TRow>
         ))}
       </TBody>
-    </>
+    </Fragment>
   );
 };
 
 
 const EmptyTable = ({ columns, emptyContent }) => {
+  const { screenSize, ScreenSizes } = useScreenSize();
+  if (screenSize <= ScreenSizes.L) {
+    return (
+      <TBody>
+        <TRow>
+          <TCell>
+            <div className={styles.emptyTableCell}>
+              <div className={styles.emptyTableHeader}>
+                {columns.map((column, i) => (
+                  <Margin key={i} size={{ top: i === 0 ? null : Sizes.DEFAULT }}>
+                    <Label ellipsized>
+                      {typeof column === 'string' ? column : column.label}
+                    </Label>
+                  </Margin>
+                ))}
+              </div>
+              {emptyContent}
+            </div>
+          </TCell>
+        </TRow>
+      </TBody>
+    );
+  }
   return (
-    <>
+    <Fragment>
       <THead>
         {columns.map((column, i) => (
           <TCell key={i}>
@@ -387,12 +489,35 @@ const EmptyTable = ({ columns, emptyContent }) => {
           </TCell>
         </TRow>
       </TBody>
-    </>
+    </Fragment>
   );
 };
 
 
-function generateTable({
+function _addAttributesToCells(children = []) {
+  if (children[0]?.type === THead && children[1]?.type === TBody) {
+    const headerValues = children[0].props.children.map((child) => child.props.children);
+    const transformedRows = React.Children.map(children[1].props.children, (row, index) => {
+      return React.cloneElement(row, {
+        children: React.Children.map(row.props.children, (cell, index) => React.cloneElement(cell, {
+          'data-th': headerValues[index],
+        })),
+      });
+    });
+    return (
+      <Fragment>
+        {children[0]}
+        {React.cloneElement(children[1], { children: transformedRows })}
+      </Fragment>
+    );
+  }
+  else {
+    return children;
+  }
+}
+
+
+function _generateTable({
   data,
   header,
   renderCell,
@@ -404,8 +529,8 @@ function generateTable({
 }) {
   if (Array.isArray(data)) {
     return (
-      <TBody>
-        {data.map((rows, i) => generateTable({
+      <TBody key="body">
+        {data.map((rows, i) => _generateTable({
           data: rows,
           header,
           renderCell,
@@ -414,7 +539,7 @@ function generateTable({
           childHeader,
           onClickRow,
           activeRow,
-        }))}
+        })).reduce((memo, rows) => [ ...memo, ...rows ], [])}
       </TBody>
     );
   }
@@ -446,14 +571,14 @@ function generateTable({
         <TRow key={`${uniqId}-1`} nested={uniqId} onClick={() => onClickRow(row)}>
           <TCell>
             <Table>
-              {generateTable({ data: data.data, header: childHeader, renderCell: null, renderChildCell })}
+              {_generateTable({ data: data.data, header: childHeader, renderCell: null, renderChildCell })}
             </Table>
           </TCell>
         </TRow>
       )];
     }
     else {
-      return parentRow;
+      return [parentRow];
     }
   }
 }
@@ -464,8 +589,8 @@ const Table = ({
   fullWidth,
   withNesting,
   data,
-  renderCell=x=>x,
-  renderChildCell=x=>x,
+  renderCell,
+  renderChildCell,
   header,
   childHeader,
   sortableBy,
@@ -479,69 +604,75 @@ const Table = ({
   style,
 }) => {
   const [ rowsStates, setRowState ] = useState({});
+  const { screenSize, ScreenSizes } = useScreenSize();
+
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
+  
   const hasNestedData = data && data.some((d) => d.data);
+
+  const tableContents = data && ! isLoading && ! emptyContent ? [
+      <THead key="head">
+        {header.map((hItem) => {
+          const v = typeof hItem === 'string' ? hItem : hItem.value;
+          return (
+            <TCell key={v}>
+              {do{
+                if (sortableBy?.includes(v) && screenSize > ScreenSizes.L) {
+                  <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
+                    <span className={cx(styles.sortableIcons, {
+                      [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'asc',
+                      [styles.down]: activeHeader?.key === v && activeHeader?.direction === 'desc',
+                    })}>
+                      <Icon name="chevron-up" />
+                      <Icon name="chevron-down" />
+                    </span>
+                    {typeof hItem === 'string' ? hItem : hItem.label}
+                  </span>
+                }
+                else {
+                  typeof hItem === 'string' ? hItem : hItem.label
+                }
+              }}
+            </TCell>
+          );
+        })}
+      </THead>,
+      _generateTable({
+        data,
+        header,
+        renderCell,
+        renderChildCell,
+        index: 0,
+        childHeader,
+        onClickRow,
+        activeRow,
+      })
+     ] : children;
+
+  const transformedChildren = screenSize <= ScreenSizes.L ? _addAttributesToCells(tableContents) : tableContents;
+  
   if (data && (! header || header.length === 0)) {
     console.warn('`data` was passed as prop but no/empty header, cannot render');
   }
+
   return (
     <table
       style={style}
       className={cx(styles.root, {
         [styles.fullWidth]: fullWidth,
-        [styles.leftPadded]: hasNestedData || withNesting || sortableBy,
+        [styles.leftPadded]: (hasNestedData || withNesting || sortableBy) && screenSize > ScreenSizes.L,
         [styles.highlighted]: highlighted && ! (hasNestedData || withNesting),
       })}>
       <RowsContext.Provider value={[ rowsStates, handleSetRowState ]}>
         {do{
-          if (data && ! isLoading && ! emptyContent) {
-            <>
-              <THead>
-                {header.map((hItem) => {
-                  const v = typeof hItem === 'string' ? hItem : hItem.value;
-                  return (
-                    <TCell key={v}>
-                      {do{
-                        if (sortableBy?.includes(v)) {
-                          <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
-                            <span className={cx(styles.sortableIcons, {
-                              [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'asc',
-                              [styles.down]: activeHeader?.key === v && activeHeader?.direction === 'desc',
-                            })}>
-                              <Icon name="chevron-up" />
-                              <Icon name="chevron-down" />
-                            </span>
-                            {typeof hItem === 'string' ? hItem : hItem.label}
-                          </span>
-                        }
-                        else {
-                          typeof hItem === 'string' ? hItem : hItem.label
-                        }
-                      }}
-                    </TCell>
-                  );
-                })}
-              </THead>
-              {generateTable({
-                data,
-                header,
-                renderCell,
-                renderChildCell,
-                index: 0,
-                childHeader,
-                onClickRow,
-                activeRow,
-              })}
-            </>
-          }
-          else if (header && isLoading) {
+          if (header && isLoading) {
             <FakeTable columns={header} />
           }
           else if (header && emptyContent) {
             <EmptyTable columns={header} emptyContent={emptyContent} />
           }
           else {
-            children
+            transformedChildren
           }
         }}
       </RowsContext.Provider>
@@ -617,6 +748,8 @@ Table.propTypes = {
 
 Table.defaultProps = {
   fullWidth: true,
+  renderCell: x => x,
+  renderChildCell: x => x,
 };
 
 

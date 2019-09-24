@@ -2,11 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
-import { getDevice } from '@drawbotics/use-is-device';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 
 
 import Tag from '../components/Tag';
 import RoundIcon from '../components/RoundIcon';
+import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
 import Hint from './Hint';
 import { Categories, Sizes } from '../base';
@@ -53,6 +54,21 @@ const styles = {
 
     &:hover {
       box-shadow: inset 0px 0px 0px 1px ${sv.azureDark};
+    }
+  `,
+  readOnly: css`
+    pointer-events: none;
+
+    [data-element="select"] {
+      box-shadow: none !important;
+    }
+
+    &::after {
+      content: none;
+    }
+
+    [data-element="icon"] {
+      right: ${sv.marginSmall};
     }
   `,
   active: css`
@@ -164,7 +180,7 @@ const MultiSelect = ({
   const rootRef = useRef();
   const [ isFocused, setFocused ] = useState(false);
   const [ canBlur, setCanBlur ] = useState(true);
-  const { isDesktop } = getDevice();
+  const { screenSize, ScreenSizes } = useScreenSize();
 
   const handleDocumentClick = (e) => ! rootRef.current.contains(e.target) ? setFocused(false) : null;
 
@@ -208,6 +224,7 @@ const MultiSelect = ({
       style={style}
       className={cx(styles.root, {
         [styles.disabled]: disabled,
+        [styles.readOnly]: onChange == null,
         [styles.valid]: values?.length > 0 && valid,
         [styles.error]: error,
       })}
@@ -216,6 +233,11 @@ const MultiSelect = ({
         if (loading) {
           <div className={styles.icon}>
             <Spinner size={Sizes.SMALL} />
+          </div>
+        }
+        else if (onChange == null) {
+          <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
+            <Icon name="lock" />
           </div>
         }
         else if (error) {
@@ -234,7 +256,7 @@ const MultiSelect = ({
         className={cx(styles.select, {
           [styles.active]: isFocused,
         })}
-        onClick={handleClickSelect}>
+        onClick={onChange != null ? handleClickSelect : null}>
         {do {
           if (placeholder && values?.length === 0) {
             <div className={styles.placeholder}>
@@ -245,7 +267,7 @@ const MultiSelect = ({
             <div className={styles.values}>
               {values.map((value) => (
                 <div key={value} className={styles.value}>
-                  <Tag inversed onClickRemove={(e) => handleClickRemove(e, value)}>
+                  <Tag inversed onClickRemove={onChange != null ? (e) => handleClickRemove(e, value) : null}>
                     {options.find((option) => option[valueKey] === value)[labelKey]}
                   </Tag>
                 </div>
@@ -255,7 +277,7 @@ const MultiSelect = ({
         }}
       </div>
       {do {
-        if (isDesktop) {
+        if (screenSize > ScreenSizes.XL) {
           <div className={cx(styles.options, {
             [styles.open]: isFocused,
           })}>
@@ -265,7 +287,7 @@ const MultiSelect = ({
                   [styles.disabledOption]: option.disabled || values.includes(option[valueKey]),
                 })}
                 key={option[valueKey]}
-                onClick={() => handleOnChange(option[valueKey])}>
+                onClick={onChange != null ? () => handleOnChange(option[valueKey]) : null}>
                 {option[labelKey]}
               </div>
             ))}
@@ -283,10 +305,11 @@ const MultiSelect = ({
       <select
         disabled={disabled}
         ref={selectRef}
-        onChange={(e) => handleSelectChange(e.target.options)}
+        onChange={onChange != null ? (e) => handleSelectChange(e.target.options) : null}
         onFocus={() => setFocused(true)}
         onBlur={() => canBlur ? setFocused(false) : null}
         values={values}
+        readOnly={onChange == null}
         multiple
         {...rest}>
         {options.map((option) => (
@@ -328,8 +351,8 @@ MultiSelect.propTypes = {
   /** Text shown when no value is selected */
   placeholder: PropTypes.string,
 
-  /** Triggered when a new value is chosen, returns a value, key (label, value) pair */
-  onChange: PropTypes.func.isRequired,
+  /** Triggered when a new value is chosen, returns a value, key (label, value) pair. If not given, the field is read-only */
+  onChange: PropTypes.func,
 
   /** Small text shown below the box, replaced by error if present */
   hint: PropTypes.string,

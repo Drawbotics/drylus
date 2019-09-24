@@ -37,3 +37,4 @@ export Breadcrumbs from './Breadcrumbs';
 export Dropdown, { DropdownSides, DropdownOption, DropdownTitle, DropdownSeparator } from './Dropdown';
 export List, { ListItem } from './List';
 export Map from './Map';
+export FilterGroup from './FilterGroup';

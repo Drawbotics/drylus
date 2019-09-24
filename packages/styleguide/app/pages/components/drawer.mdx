@@ -14,7 +14,7 @@ import { Drawer } from '@drawbotics/react-drylus';
 All the rendered drawers are automatically attached to the end of the DOM through a `drawers-outlet`.
 
 export const DrawerController = ({ component: Component }) => {
-  const [visible, setVisibility] = useState(false);
+  const [ visible, setVisibility ] = useState(false);
   return (
     <div style={{ border: '2px solid red', background: 'lightgrey' }}>
       <Layout bar={
@@ -45,7 +45,7 @@ export const DrawerController = ({ component: Component }) => {
 Usage:
 ```jsx
 const Example = () => {
-  const [drawerVisible, setDrawerVisibility] = useState(false);
+  const [ drawerVisible, setDrawerVisibility ] = useState(false);
 
   return (
     <div>
@@ -67,7 +67,7 @@ Interactive example:
 <Playground component={Drawer}>
   <DrawerController component={
     <Drawer visible={false}>
-      <div style={{ height: 1000 }}>
+      <div style={{ height: 1000, background: 'linear-gradient(red, blue)' }}>
         Im some content
       </div>
     </Drawer>
@@ -80,7 +80,7 @@ You may also have a footer and a title:
 <Playground>
   <DrawerController component={
     <Drawer visible={false} title="Title of drawer" footer={<Button category={Categories.BRAND} fullWidth>Footer action</Button>}>
-      <div style={{ height: 1000 }}>
+      <div style={{ height: 1000, background: 'linear-gradient(red, blue)' }}>
         Im some content
       </div>
     </Drawer>

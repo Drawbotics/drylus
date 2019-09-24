@@ -132,15 +132,19 @@ export const screenS = 'only screen and (max-width: 375px)';
 export const screenM = 'only screen and (max-width: 425px)';
 export const screenL = 'only screen and (max-width: 768px)';
 export const screenXl = 'only screen and (max-width: 1024px)';
-export const phoneS = screenXs;
-export const phone = screenS;
-export const phoneXl = screenM;
-export const ipad = screenL;
-export const desktopS = screenXl;
-export const phoneSLandscape = ipad;
-export const phoneLandscape = ipad;
-export const phoneXlLandscape = ipad;
-export const ipadLandscape = desktopS;
-export const screenSOrM = '(max-width: 480px), (max-width: 768px)';
+export const screenHuge = 'only screen and (min-width: 1024px)';
+
+// To target specific screen ratios
+export const phoneSLandscape = `${screenS} and (orientation: landscape)`;
+export const phoneSPortrait = `${screenXs} and (orientation: portrait)`;
+
+export const phoneLandscape = `${screenL} and (orientation: landscape)`;
+export const phonePortrait = `${screenM} and (orientation: portrait)`;
+
+export const tabletLandscape = `${screenXl} and (orientation: landscape)`;
+export const tabletPortrait = `${screenL} and (orientation: portrait)`;
+
+export const desktop = `${screenHuge} and (orientation: landscape)`;
+
 export const greaterThanMaximumWidth = 'only screen and (min-width: 1200px)';
 export const greaterThanMinimumWidth = 'only screen and (min-width: 1024px)';

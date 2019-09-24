@@ -5,95 +5,201 @@ import sv from '@drawbotics/drylus-style-vars';
 import camelCase from 'lodash/camelCase';
 
 import Sizes from '../base/Sizes';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
   root: css`
     margin: ${sv.defaultMargin};
+
+    @media ${sv.screenL} {
+      margin: ${sv.marginSmall};
+    }
   `,
   resetMargin: css`
     margin: 0;
+
+    @media ${sv.screenL} {
+      margin: 0;
+    }
   `,
   extraSmall: css`
     margin: ${sv.marginExtraSmall};
+
+    @media ${sv.screenL} {
+      margin: calc(${sv.marginExtraSmall} / 2);
+    }
   `,
   small: css`
     margin: ${sv.marginSmall};
+
+    @media ${sv.screenL} {
+      margin: ${sv.marginExtraSmall};
+    }
   `,
   large: css`
     margin: ${sv.marginLarge};
+
+    @media ${sv.screenL} {
+      margin: ${sv.defaultMargin};
+    }
   `,
   extraLarge: css`
     margin: ${sv.marginExtraLarge};
+
+    @media ${sv.screenL} {
+      margin: ${sv.defaultMargin};
+    }
   `,
   extraSmallLeft: css`
     margin-left: ${sv.marginExtraSmall};
+
+    @media ${sv.screenL} {
+      margin-left: calc(${sv.marginExtraSmall} / 2);
+    }
   `,
   extraSmallRight: css`
     margin-right: ${sv.marginExtraSmall};
+
+    @media ${sv.screenL} {
+      margin-right: calc(${sv.marginExtraSmall} / 2);
+    }
   `,
   extraSmallTop: css`
     margin-top: ${sv.marginExtraSmall};
+
+    @media ${sv.screenL} {
+      margin-top: calc(${sv.marginExtraSmall} / 2);
+    }
   `,
   extraSmallBottom: css`
     margin-bottom: ${sv.marginExtraSmall};
+
+    @media ${sv.screenL} {
+      margin-bottom: calc(${sv.marginExtraSmall} / 2);
+    }
   `,
   smallLeft: css`
     margin-left: ${sv.marginSmall};
+
+    @media ${sv.screenL} {
+      margin-left: ${sv.marginExtraSmall};
+    }
   `,
   smallRight: css`
     margin-right: ${sv.marginSmall};
+
+    @media ${sv.screenL} {
+      margin-right: ${sv.marginExtraSmall};
+    }
   `,
   smallTop: css`
     margin-top: ${sv.marginSmall};
+
+    @media ${sv.screenL} {
+      margin-top: ${sv.marginExtraSmall};
+    }
   `,
   smallBottom: css`
     margin-bottom: ${sv.marginSmall};
+
+    @media ${sv.screenL} {
+      margin-bottom: ${sv.marginExtraSmall};
+    }
   `,
   defaultLeft: css`
     margin-left: ${sv.defaultMargin};
+
+    @media ${sv.screenL} {
+      margin-left: ${sv.marginSmall};
+    }
   `,
   defaultRight: css`
     margin-right: ${sv.defaultMargin};
+
+    @media ${sv.screenL} {
+      margin-right: ${sv.marginSmall};
+    }
   `,
   defaultTop: css`
     margin-top: ${sv.defaultMargin};
+
+    @media ${sv.screenL} {
+      margin-top: ${sv.marginSmall};
+    }
   `,
   defaultBottom: css`
     margin-bottom: ${sv.defaultMargin};
+    
+    @media ${sv.screenL} {
+      margin-bottom: ${sv.marginSmall};
+    }
   `,
   largeLeft: css`
     margin-left: ${sv.marginLarge};
+
+    @media ${sv.screenL} {
+      margin-left: ${sv.defaultMargin};
+    }
   `,
   largeRight: css`
     margin-right: ${sv.marginLarge};
+
+    @media ${sv.screenL} {
+      margin-right: ${sv.defaultMargin};
+    }
   `,
   largeTop: css`
     margin-top: ${sv.marginLarge};
+
+    @media ${sv.screenL} {
+      margin-top: ${sv.defaultMargin};
+    }
   `,
   largeBottom: css`
     margin-bottom: ${sv.marginLarge};
+
+    @media ${sv.screenL} {
+      margin-bottom: ${sv.defaultMargin};
+    }
   `,
   extraLargeLeft: css`
     margin-left: ${sv.marginExtraLarge};
+
+    @media ${sv.screenL} {
+      margin-left: ${sv.marginLarge};
+    }
   `,
   extraLargeRight: css`
     margin-right: ${sv.marginExtraLarge};
+
+    @media ${sv.screenL} {
+      margin-right: ${sv.marginLarge};
+    }
   `,
   extraLargeTop: css`
     margin-top: ${sv.marginExtraLarge};
+
+    @media ${sv.screenL} {
+      margin-top: ${sv.marginLarge};
+    }
   `,
   extraLargeBottom: css`
     margin-bottom: ${sv.marginExtraLarge};
+
+    @media ${sv.screenL} {
+      margin-bottom: ${sv.marginLarge};
+    }
   `,
 };
 
 
 const Margin = ({
-  children,
-  size,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const { children, size, style } = useResponsiveProps(rest, responsive);
+
   const isUniform = typeof size !== 'object';
   return (
     <div className={cx(styles.root, {
@@ -127,6 +233,16 @@ Margin.propTypes = {
 
   /** Prop to override any style if necessary, use sparingly */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

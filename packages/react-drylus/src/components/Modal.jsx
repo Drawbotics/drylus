@@ -4,12 +4,14 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import { CSSTransition } from 'react-transition-group';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 
 import Button from './Button';
 import Title from './Title';
 import Icon from './Icon';
 import { Sizes, Tiers } from '../base';
 import { styles as themeStyles } from '../base/ThemeProvider';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -22,6 +24,8 @@ const styles = {
     background: ${sv.darkOverlay};
     display: flex;
     z-index: 99999;
+    pointer-events: auto;
+    overscroll-behavior: none;
   `,
   container: css`
     flex: 1;
@@ -31,9 +35,16 @@ const styles = {
     justify-content: center;
     pointer-events: none;
     padding: ${sv.defaultPadding};
+    overscroll-behavior: none;
 
     > * {
       pointer-events: auto;
+    }
+
+    @media ${sv.screenL} {
+      padding: ${sv.paddingSmall};
+      ${'' /* To account for bottom bar in mobile */}
+      padding-bottom: 100px;
     }
   `,
   alignTop: css`
@@ -52,6 +63,11 @@ const styles = {
     border-radius: ${sv.defaultBorderRadius};
 
     @media ${sv.screenL} {
+      padding: ${sv.paddingSmall};
+      padding-top: ${sv.paddingLarge};
+    }
+
+    @media ${sv.phonePortrait} {
       min-width: auto;
       width: 100%;
     }
@@ -61,28 +77,48 @@ const styles = {
   `,
   title: css`
     border-bottom: 1px solid ${sv.neutralLight};
-    margin: 0 calc(${sv.defaultPadding} * -1);
-    margin-top: calc(${sv.defaultPadding} * -1);
+    margin: 0 calc(${sv.defaultMargin} * -1);
+    margin-top: calc(${sv.defaultMargin} * -1);
     margin-bottom: ${sv.defaultMargin};
     padding: ${sv.defaultPadding};
     padding-top: 0;
+
+    @media ${sv.screenL} {
+      margin: 0 calc(${sv.marginSmall} * -1);
+      margin-top: calc(${sv.marginSmall} * -1);
+      margin-bottom: ${sv.marginSmall};
+      padding: ${sv.paddingSmall};
+      padding-top: 0;
+    }
   `,
   content: css`
     flex: 1;
   `,
   footer: css`
     padding: ${sv.paddingSmall};
-    margin: 0 calc(${sv.defaultPadding} * -1);
-    margin-bottom: calc(${sv.defaultPadding} * -1);
+    margin: 0 calc(${sv.defaultMargin} * -1);
+    margin-bottom: calc(${sv.defaultMargin} * -1);
     margin-top: ${sv.defaultMargin};
     background: ${sv.neutralLight};
     border-bottom-right-radius: ${sv.defaultBorderRadius};
     border-bottom-left-radius: ${sv.defaultBorderRadius};
+
+    @media ${sv.screenL} {
+      padding: ${sv.paddingExtraSmall};
+      margin: 0 calc(${sv.marginSmall} * -1);
+      margin-bottom: calc(${sv.marginSmall} * -1);
+      margin-top: ${sv.marginSmall};
+    }
   `,
   close: css`
     position: absolute;
     top: ${sv.marginSmall};
     right: ${sv.marginSmall};
+
+    @media ${sv.screenL} {
+      top: ${sv.marginExtraSmall};
+      right: ${sv.marginExtraSmall};
+    }
   `,
   modalEnter: css`
     opacity: 0;
@@ -163,19 +199,53 @@ BaseModal.displayName = 'BaseModal';
 
 
 const Modal = ({
-  children,
-  footer,
-  visible,
-  onClickClose,
-  size,
-  raw,
-  title,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    children,
+    footer,
+    visible,
+    onClickClose,
+    size,
+    raw,
+    title,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   const [ outletElement, setOutletElement ] = useState(null);
   const [ overflowing, setOverflowing ] = useState(false);
+  const [ previousTouchY, setTouchY ] = useState(null);
+  const { screenSize, ScreenSizes } = useScreenSize();
   const overlayElement = useRef();
   const modalElement = useRef();
+  const containerElement = useRef();
+
+  const handleWindowResize = () => {
+    if (modalElement.current) {
+      modalElement.current.getBoundingClientRect().height > window.innerHeight
+        ? setOverflowing(true)
+        : setOverflowing(false);
+    }
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchY(e.touches[0]?.clientY);
+  };
+
+  const handleTouchMove = (e) => {
+    if (modalElement?.current?.contains(e.target)) {
+      const touchY = e.changedTouches[0]?.clientY;
+      const touchDelta = Math.abs(touchY - previousTouchY);
+      if (touchY > previousTouchY && touchDelta < 50){
+        containerElement.current.scrollTop -= touchDelta;
+      }
+      else if (touchY < previousTouchY && touchDelta < 50){
+        containerElement.current.scrollTop += touchDelta;
+      }
+      touchY >= 0 && setTouchY(touchY);
+    }
+  };
 
   useEffect(() => {
     if ( ! document.getElementById('modals-outlet')) {
@@ -189,27 +259,38 @@ const Modal = ({
     }
 
     return () => {
-      if (! visible && outletElement) {
+      if ( ! visible && outletElement) {
         document.body.removeChild(outletElement);
       }
     };
   }, []);
 
   useEffect(() => {
-    visible ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'initial';
-  });
+    if (visible) {
+      document.body.style.overflow = 'hidden';
+      if (screenSize <= ScreenSizes.L) {
+        document.body.style.pointerEvents = 'none';
+        document.body.parentElement.style.position = 'fixed';
+      }
+    }
+    else {
+      document.body.style.overflow = 'initial';
+      document.body.style.pointerEvents = 'auto';
+      document.body.parentElement.style.position = '';
+    }
+  }, [visible]);
+
+  useEffect(() => visible ? handleWindowResize() : undefined, [visible]);
 
   useEffect(() => {
-    const handleWindowResize = () => {
-      if (modalElement.current) {
-        modalElement.current.getBoundingClientRect().height > window.innerHeight ? setOverflowing(true) : setOverflowing(false);
-      }
-    };
-
     window.addEventListener('resize', handleWindowResize);
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchmove', handleTouchMove);
 
     return () => {
       window.removeEventListener('resize', handleWindowResize);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
     };
   });
 
@@ -231,8 +312,14 @@ const Modal = ({
           exit: styles.modalExit,
           exitActive: styles.modalExitActive,
         }}>
-        <div onClick={handleClickOverlay} className={styles.overlay} ref={overlayElement}>
-          <div className={cx(styles.container, { [styles.alignTop]: overflowing })} data-element="container">
+        <div
+          onClick={handleClickOverlay}
+          className={styles.overlay}
+          ref={overlayElement}>
+          <div
+            ref={containerElement}
+            className={cx(styles.container, { [styles.alignTop]: overflowing })}
+            data-element="container">
             {do {
               if (raw) {
                 children
@@ -284,6 +371,16 @@ Modal.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
