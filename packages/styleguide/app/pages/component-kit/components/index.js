@@ -38,6 +38,7 @@ import list from './list';
 import paragraph from './paragraph';
 import map from './map';
 import filterGroup from './filter-group';
+import popover from './popover';
 
 
 const components = {
@@ -81,6 +82,7 @@ const components = {
   paragraph,
   map,
   filterGroup,
+  popover,
 };
 
 

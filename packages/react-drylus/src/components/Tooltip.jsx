@@ -6,6 +6,8 @@ import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
+import { useRect } from '../utils/hooks';
+import { getStyleForSide } from '../utils';
 
 
 const styles = {
@@ -90,61 +92,6 @@ export const TooltipSides = new Enum(
 );
 
 
-function useRect() {
-  const [ top, setTop ] = useState(0);
-  const [ left, setLeft ] = useState(0);
-  const [ height, setHeight ] = useState(0);
-  const [ width, setWidth ] = useState(0);
-
-  const rect = { top, left, height, width };
-  const setRect = ({ top, left, height, width }) => {
-    setTop(top);
-    setLeft(left);
-    setHeight(height);
-    setWidth(width);
-  };
-  return {
-    rect,
-    setRect,
-  };
-}
-
-
-function _getStyleForSide(side, rect, tooltipRect) {
-  if (! rect || ! tooltipRect) return null;
-  const arrowHeight = 12;
-
-  if (side === TooltipSides.TOP) {
-    return {
-      top: rect?.top - tooltipRect?.height - arrowHeight,
-      left: rect?.left + (rect?.width / 2) - (tooltipRect?.width / 2),
-    };
-  }
-  else if (side === TooltipSides.LEFT) {
-    return {
-      top: rect?.top + (rect?.height / 2) - (tooltipRect?.height / 2),
-      left: rect?.left - tooltipRect?.width - arrowHeight,
-    };
-  }
-  else if (side === TooltipSides.RIGHT) {
-    return {
-      top: rect?.top + (rect?.height / 2) - (tooltipRect?.height / 2),
-      left: rect?.left + rect?.width + arrowHeight,
-    };
-  }
-  else if (side === TooltipSides.BOTTOM) {
-    return {
-      top: rect?.top + rect?.height + arrowHeight,
-      left: rect?.left + (rect?.width / 2) - (tooltipRect?.width / 2),
-    };
-  }
-  else {
-    console.warn(`${String(side)} side value provided not supported`);
-    return null;
-  }
-}
-
-
 const Tooltip = ({ children, message, side, style }) => {
   const [ visible, setVisible ] = useState(false);
   const [ outletElement, setOutletElement ] = useState(null);
@@ -165,7 +112,7 @@ const Tooltip = ({ children, message, side, style }) => {
     }
 
     return () => {
-      if (! visible && outletElement) {
+      if (! visible && outletElement != null) {
         document.body.removeChild(outletElement);
       }
     };
@@ -183,7 +130,7 @@ const Tooltip = ({ children, message, side, style }) => {
       setVisible(false);
     };
 
-    if (childrenRef.current) {
+    if (childrenRef.current != null) {
       childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
       childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
 
@@ -198,7 +145,7 @@ const Tooltip = ({ children, message, side, style }) => {
     };
   });
 
-  if (! outletElement) return '';
+  if (outletElement == null) return '';
 
   class Wrapper extends React.Component {
     componentDidMount() {
@@ -213,7 +160,12 @@ const Tooltip = ({ children, message, side, style }) => {
     }
   }
 
-  const tooltipStyle = _getStyleForSide(side, rect, tooltipRect);
+  const tooltipStyle = getStyleForSide({
+    side,
+    rect,
+    rectComponent: tooltipRect,
+    sides: TooltipSides,
+  });
 
   return (
     <Fragment>

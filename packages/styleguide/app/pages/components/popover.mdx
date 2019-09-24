@@ -1,0 +1,50 @@
+import {
+  Popover,
+  PopoverSides,
+  Button,
+  Categories,
+  Flex,
+  FlexItem,
+  Sizes,
+  Margin,
+  Icon,
+  ListTile,
+  Text,
+  Avatar,
+} from '@drawbotics/react-drylus';
+import sv from '@drawbotics/drylus-style-vars';
+
+import Playground from '~/components/Playground';
+
+
+# Popover
+It can be used to wrap any component/element and display a hint when _clicked_. The component is uncontrolled and uses portals to be rendered on top of the content.
+```jsx
+import { Popover, PopoverSides } from '@drawbotics/react-drylus';
+```
+
+__Example__
+<Playground component={Popover} enums={{ PopoverSides }}>
+<Flex>
+  <FlexItem>
+    <Margin size={{ right: Sizes.LARGE }}>
+      <Popover message="I am a popover">
+        <Button category={Categories.BRAND}>Click me</Button>
+      </Popover>
+    </Margin>
+  </FlexItem>
+  <FlexItem>
+    <Popover
+      message={
+        <div style={{ textAlign: 'left' }}>
+          <Margin size={{ bottom: Sizes.EXTRA_SMALL }}>
+            <ListTile leading={<Icon name="alert-triangle" category={Categories.DANGER} />} title={<Text size={Sizes.SMALL}>I'm custom content</Text>} />
+          </Margin>
+          <ListTile leading={<Icon name="check-circle" category={Categories.SUCCESS} />} title={<Text size={Sizes.SMALL}>So am I</Text>} />
+        </div>
+      }>
+      <Avatar category={Categories.SUCCESS} text="PO" />
+    </Popover>
+  </FlexItem>
+</Flex>
+</Playground>
