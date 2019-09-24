@@ -26,6 +26,7 @@ const styles = {
     transition: transform ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve},
                 opacity ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
     filter: drop-shadow(${sv.elevation1});
+    pointer-events: none;
 
     &::after {
       content: ' ';
@@ -58,7 +59,7 @@ const styles = {
       left: 100%;
       top: 50%;
       transform: translateY(-50%);
-      border-left: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
+      border-left: ${sv.marginExtraSmall} solid ${sv.white};
       border-bottom: ${sv.marginExtraSmall} solid transparent;
       border-top: ${sv.marginExtraSmall} solid transparent;
       border-right: 0;
@@ -71,7 +72,7 @@ const styles = {
       left: calc(${sv.marginExtraSmall} * -1);
       top: 50%;
       transform: translateY(-50%);
-      border-right: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
+      border-right: ${sv.marginExtraSmall} solid ${sv.white};
       border-bottom: ${sv.marginExtraSmall} solid transparent;
       border-top: ${sv.marginExtraSmall} solid transparent;
       border-left: 0;
@@ -80,6 +81,7 @@ const styles = {
   visible: css`
     opacity: 1;
     transform: translate(0, 0);
+    pointer-events: auto;
   `,
 };
 
@@ -128,9 +130,9 @@ const Popover = ({
     const handleWindowClick = (e) => {
       if (visible
         && e.target !== childrenRef.current
-        && ! childrenRef.current.contains(e.target)
+        && ! childrenRef.current?.contains(e.target)
         && e.target !== popoverRef.current
-        && ! popoverRef.current.contains(e.target)
+        && ! popoverRef.current?.contains(e.target)
         || exitOnClick) {
         setVisible(false);
       }
