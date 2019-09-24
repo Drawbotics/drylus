@@ -5,6 +5,8 @@ import {
   Categories,
   Sizes,
   Margin,
+  Button,
+  Icon,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -49,4 +51,13 @@ For small information snippets you can leave it without title to be more concise
       Congratulation, you can now send your items to production.
     </Banner>
   </>
+</Playground>
+
+Banners can also be given a CTA by passing a trailing component, which should always be a `Button`. CTAs are _especially_ useful in `DANGER` category banners, as they provide the user with a possible solution. Here is an example:
+<Playground>
+  <Banner
+    category={Categories.DANGER}
+    trailing={<Button trailing={<Icon name="alert-triangle" />}>Buy credits</Button>}>
+    Your floorplans will not go into production, we need them to get started.
+  </Banner>
 </Playground>
