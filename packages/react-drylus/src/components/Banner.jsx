@@ -1,12 +1,13 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import sv, { fade } from '@drawbotics/drylus-style-vars';
 
 import { Categories, Sizes } from '../base';
 import Icon from './Icon';
 import Flex, { FlexItem, FlexAlign, FlexJustify } from '../layout/Flex';
 import Margin from '../layout/Margin';
+import Button from './Button';
 import { getEnumAsClass, getIconForCategory } from '../utils';
 
 
@@ -15,10 +16,6 @@ const styles = {
     border-radius: ${sv.defaultBorderRadius};
     color: ${sv.white};
     padding: ${sv.paddingSmall};
-
-    & * {
-      color: ${sv.white} !important;
-    }
   `,
   danger: css`
     background: ${sv.red};
@@ -47,28 +44,53 @@ const Banner = ({
   category,
   title,
   style,
+  trailing,
 }) => {
+  if (trailing != null && trailing?.type !== Button) {
+    console.warn('`trailing` type should only be Button');
+  }
   const icon = getIconForCategory(category);
+
   return (
     <div style={style} className={cx(styles.root, { [styles[getEnumAsClass(category)]]: category })}>
-      <Flex align={FlexAlign.START} justify={FlexJustify.START}>
+      <Flex justify={FlexJustify.SPACE_BETWEEN}>
         <FlexItem>
-          <Margin size={{ right: Sizes.SMALL }}>
-            <Icon name={icon} />
-          </Margin>
-        </FlexItem>
-        <FlexItem>
-          {do {
-            if (title) {
-              <div className={styles.title}>
-                {title}
+          <Flex align={FlexAlign.START} justify={FlexJustify.START}>
+            <FlexItem>
+              <Margin size={{ right: Sizes.SMALL }}>
+                <Icon name={icon} />
+              </Margin>
+            </FlexItem>
+            <FlexItem>
+              {do {
+                if (title != null) {
+                  <div className={styles.title}>
+                    {title}
+                  </div>
+                }
+              }}
+              <div className={styles.message}>
+                {children}
               </div>
-            }
-          }}
-          <div className={styles.message}>
-            {children}
-          </div>
+            </FlexItem>
+          </Flex>
         </FlexItem>
+        {do {
+          if (trailing != null) {
+            <FlexItem>
+              <Margin size={{ left: Sizes.EXTRA_SMALL }}>
+                {React.cloneElement(trailing, {
+                  size: Sizes.SMALL,
+                  style: {
+                    whiteSpace: 'nowrap',
+                    color: sv.colorPrimary,
+                    background: fade(sv.white, 60),
+                  },
+                })}
+              </Margin>
+            </FlexItem>
+          }
+        }}
       </Flex>
     </div>
   );
@@ -91,6 +113,9 @@ Banner.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Component to be displayed on the far right of the banner. Should only be of type Button */
+  trailing: PropTypes.node,
 };
 
 
