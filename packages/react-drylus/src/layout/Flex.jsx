@@ -127,10 +127,10 @@ const Flex = ({
 }) => {
   const {
     children,
-    direction=FlexDirections.HORIZONTAL,
-    justify=FlexJustify.CENTER,
-    align=FlexAlign.CENTER,
-    wrap=false,
+    direction = FlexDirections.HORIZONTAL,
+    justify = FlexJustify.CENTER,
+    align = FlexAlign.CENTER,
+    wrap = false,
     className,
     style,
   } = useResponsiveProps(rest, responsive);

@@ -38,12 +38,16 @@ const FilterGroup = ({
       <Flex justify={FlexJustify.START}>
         {filters.map((filter, i) => (
           <FlexItem key={i}>
-            {i === 0
-              ? filter
-              : <Margin size={{ left: Sizes.SMALL }}>
+            {do {
+              if (i === 0) {
+                filter
+              }
+              else {
+                <Margin size={{ left: Sizes.SMALL }}>
                   {filter}
                 </Margin>
-            }
+              }
+            }}
           </FlexItem>
         ))}
       </Flex>
