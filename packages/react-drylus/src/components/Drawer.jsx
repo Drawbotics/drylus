@@ -230,12 +230,10 @@ const Drawer = ({
   const asOverlay = _asOverlay || screenSize <= ScreenSizes.L;
 
   useEffect(() => {
-    if (visible) {
+    if (visible && asOverlay) {
       document.body.style.overflow = 'hidden';
-      if (screenSize <= ScreenSizes.L) {
-        document.body.style.pointerEvents = 'none';
-        document.body.parentElement.style.position = 'fixed';
-      }
+      document.body.style.pointerEvents = 'none';
+      document.body.parentElement.style.position = 'fixed';
     }
     else {
       document.body.style.overflow = 'initial';

@@ -12,6 +12,7 @@ function sync() {
     folder: 'drycons',
     version,
     dev: isDev,
+    forceSync: true,
   });
 }
 
