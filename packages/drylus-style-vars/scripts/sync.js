@@ -12,6 +12,7 @@ function sync() {
     folder: 'drylus-style-vars',
     version,
     dev: isDev,
+    forceSync: true,
   });
 }
 

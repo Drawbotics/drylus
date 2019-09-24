@@ -219,10 +219,10 @@ const Context = React.createContext();
 
 function reducer(alerts, action) {
   const { type, payload } = action;
-  if (type === 'show') {
+  if (type === 'showAlert') {
     return [ ...alerts, payload.alert ];
   }
-  else if (type === 'hide') {
+  else if (type === 'hideAlert') {
     return alerts.filter((a) => payload.id !== a.id);
   }
   else {
@@ -235,14 +235,14 @@ const AlertsProvider = ({ children }) => {
   const [ outletElement, setOutletElement ] = useState(null);
   const [ alerts, dispatch ] = useReducer(reducer, []);
 
-  const hide = (id) => {
-    dispatch({ type: 'hide', payload: { id } });
+  const hideAlert = (id) => {
+    dispatch({ type: 'hideAlert', payload: { id } });
   };
 
-  const show = (alertProps) => {
+  const showAlert = (alertProps) => {
     const id = v4();
     const alert = { id, ...alertProps };
-    dispatch({ type: 'show', payload: { alert } });
+    dispatch({ type: 'showAlert', payload: { alert } });
   };
 
   useEffect(() => {
@@ -266,7 +266,7 @@ const AlertsProvider = ({ children }) => {
   if (! outletElement) return null;
 
   return (
-    <Context.Provider value={{ show, hide }}>
+    <Context.Provider value={{ showAlert, hideAlert }}>
       {children}
       {ReactDOM.createPortal(
         <div className={themeStyles.root}>
@@ -285,7 +285,7 @@ const AlertsProvider = ({ children }) => {
                   exitActive: styles.alertExitActive,
                 }}>
                 <Margin size={{ top: Sizes.SMALL }}>
-                  <Alert onClickDismiss={(id) => hide(id, alerts)} {...alert} />
+                  <Alert onClickDismiss={(id) => hideAlert(id, alerts)} {...alert} />
                 </Margin>
               </CSSTransition>
             ))}

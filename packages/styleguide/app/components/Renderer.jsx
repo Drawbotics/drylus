@@ -31,7 +31,11 @@ import InlineCode from './InlineCode';
 
 const styles = {
   content: css`
-    padding: ${sv.marginLarge} ${sv.defaultMargin};
+    padding: ${sv.paddingLarge} ${sv.defaultPadding};
+
+    @media ${sv.screenL} {
+      padding: ${sv.defaultPadding} ${sv.paddingSmall};
+    }
   `,
   blockquote: css`
     position: relative;

@@ -97,6 +97,17 @@ const styles = {
   activeOption: css`
     font-weight: 500;
   `,
+  label: css`
+    flex: 1;
+  `,
+  fullWidth: css`
+    width: 100%;
+    flex: 1;
+
+    [data-element="trigger"] {
+      justify-content: center;
+    }
+  `,
 };
 
 
@@ -114,6 +125,7 @@ const BaseFilter = ({
   align,
   active,
   style,
+  fullWidth,
 }) => {
   const ref = useRef();
   const [ panelOpen, setPanelOpen ] = useState(false);
@@ -129,10 +141,18 @@ const BaseFilter = ({
     };
   }, []);
   return (
-    <div style={style} ref={ref} className={styles.root}>
-      <div className={cx(styles.trigger, {
-        [styles.active]: panelOpen || active,
-      })} onClick={() => panelOpen ? setPanelOpen(false) : setPanelOpen(true)}>
+    <div
+      style={style}
+      ref={ref}
+      className={cx(styles.root, {
+        [styles.fullWidth]: fullWidth,
+      })}>
+      <div
+        data-element="trigger"
+        className={cx(styles.trigger, {
+          [styles.active]: panelOpen || active,
+        })}
+        onClick={() => setPanelOpen( ! panelOpen)}>
         {label}
         <Icon
           onClick={(e) => {
@@ -178,6 +198,9 @@ BaseFilter.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** If true, the filter takes the whole space of the parent */
+  fullWidth: PropTypes.bool,
 };
 
 
@@ -196,17 +219,24 @@ export const SelectFilter = ({
   label,
   ...rest,
 }) => {
-  const currentLabel = value ? options.find((option) => option[valueKey] === value)?.[labelKey] : label;
+  const currentLabel = value ? options.find((option) => String(option[valueKey]) === String(value))?.[labelKey] : label;
   return (
     <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel != null && !! value}>
       {options.map((option) => (
         <div
           key={option[valueKey]}
           className={cx(styles.option, styles.smallPadding, {
-            [styles.activeOption]: value === option[valueKey],
+            [styles.activeOption]: String(value) === String(option[valueKey]),
           })}
           onClick={() => onChange(option[valueKey])}>
-          <ListTile title={option[labelKey]} leading={option.leading} />
+          <div className={styles.label}>
+            <ListTile title={option[labelKey]} leading={option.leading} />
+          </div>
+          {do {
+            if (option.trailing != null) {
+              option.trailing
+            }
+          }}
         </div>
       ))}
     </BaseFilter>
@@ -215,9 +245,10 @@ export const SelectFilter = ({
 
 
 SelectFilter.propTypes = {
-  /** The items to show in the filter panel */
+  /** The items to show in the filter panel: value(string, number), label(string), leading(node), trailing(node) */
   options: CustomPropTypes.optionsWith({
     leading: PropTypes.node,
+    trailing: PropTypes.node,
   }),
 
   /** Determines which value is currently active */
@@ -248,7 +279,7 @@ function getLabelForCheckboxFilter(label, options, values, valueKey, labelKey) {
     return label;
   }
   else if (values.length === 1) {
-    return options.find((option) => option[valueKey] === values[0])?.[labelKey];
+    return options.find((option) => String(option[valueKey]) === String(values[0]))?.[labelKey];
   }
   else if (values.length > 1) {
     return `${label} (${values.length})`;
@@ -277,7 +308,7 @@ export const CheckboxFilter = ({
             onChange={(checked) => {
               checked
                 ? onChange([...values, option[valueKey]])
-                : onChange(values.filter((v) => v !== option[valueKey]))
+                : onChange(values.filter((v) => String(v) !== String(option[valueKey])))
             }}
             value={values.includes(option[valueKey])}>
             {option[labelKey]}
@@ -290,7 +321,7 @@ export const CheckboxFilter = ({
 
 
 CheckboxFilter.propTypes = {
-  /** The items to show in the filter panel */
+  /** The items to show in the filter panel: value(string, number), label(string) */
   options: CustomPropTypes.options,
 
   /** Determines which values are currently active */

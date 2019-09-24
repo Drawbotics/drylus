@@ -17,7 +17,7 @@ const styles = {
     flex-direction: column;
     height: 100vh;
 
-    @media ${sv.phoneLandscape} {
+    @media ${sv.screenL} {
       display: none;
     }
   `,

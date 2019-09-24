@@ -12,6 +12,7 @@ function sync() {
     folder: 'vanilla-drylus',
     version,
     dev: isDev,
+    forceSync: true,
   });
 }
 

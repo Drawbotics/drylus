@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
+import sv from '@drawbotics/drylus-style-vars';
 
 import Flex, { FlexItem, FlexDirections } from '../layout/Flex';
 import Margin from '../layout/Margin';
@@ -15,6 +16,12 @@ const styles = {
   `,
   image: css`
     width: 300px;
+
+    @media ${sv.screenL} {
+      max-width: 170px;
+      width: 90%;
+      margin: auto;
+    }
   `,
   description: css`
     max-width: 500px;

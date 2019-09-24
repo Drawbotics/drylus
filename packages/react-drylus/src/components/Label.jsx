@@ -10,6 +10,10 @@ const styles = {
     text-transform: uppercase;
     font-weight: 500;
     font-size: 0.88rem;
+
+    @media ${sv.screenL} {
+      font-size: 0.8rem;
+    }
   `,
   ellipsized: css`
     overflow: hidden;

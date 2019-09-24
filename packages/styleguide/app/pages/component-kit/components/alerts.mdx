@@ -33,10 +33,10 @@ import { AlertsProvider } from '@drawbotics/react-drylus';
 import { useAlert } from '@drawbotics/react-drylus';
 
 const ComponentWithAlerts = () => {
-  const { show } = useAlert();
+  const { showAlert } = useAlert();
 
   return (
-    <button onClick={() => show({ text: 'I am an alert' })}>Show alert when clicked!</button>
+    <button onClick={() => showAlert({ text: 'I am an alert' })}>Show alert when clicked!</button>
   );
 };
 ```
@@ -48,12 +48,12 @@ Alerts automatically disappear (except for `danger` alerts, which need to be man
 import { useAlert } from '@drawbotics/react-drylus';
 
 const ComponentWithAlerts = () => {
-  const { show, hide } = useAlert();
+  const { showAlert, hideAlert } = useAlert();
 
   return (
     <div>
-      <button onClick={() => show({ text: 'I am an alert', id: 'my-alert' })}>Show alert when clicked!</button>
-      <button onClick={() => hide('my-alert')}>Hide alert!</button>
+      <button onClick={() => showAlert({ text: 'I am an alert', id: 'my-alert' })}>Show alert when clicked!</button>
+      <button onClick={() => hideAlert('my-alert')}>Hide alert!</button>
     </div>
   );
 };
@@ -71,32 +71,32 @@ The `show` function takes exactly the same arguments as the props of `Alert`, wh
 Click on the buttons to trigger different alert types.
 
 export const Demo = ({ component: Component }) => {
-  const { show, hide } = useAlert();
+  const { showAlert, hideAlert } = useAlert();
   return (
     <Flex justify={FlexJustify.START}>
       <FlexItem>
         <Margin size={{ right: Sizes.SMALL }}>
-          <Button category={Categories.SUCCESS} onClick={() => show({ category: Categories.SUCCESS, text: 'Congrats you did it!' })}>
+          <Button category={Categories.SUCCESS} onClick={() => showAlert({ category: Categories.SUCCESS, text: 'Congrats you did it!' })}>
             Show success
           </Button>
         </Margin>
       </FlexItem>
       <FlexItem>
         <Margin size={{ right: Sizes.SMALL }}>
-          <Button category={Categories.DANGER} onClick={() => show({ category: Categories.DANGER, text: 'Oh oh! Something went bad.' })}>
+          <Button category={Categories.DANGER} onClick={() => showAlert({ category: Categories.DANGER, text: 'Oh oh! Something went bad.' })}>
             Show danger
           </Button>
         </Margin>
       </FlexItem>
       <FlexItem>
         <Margin size={{ right: Sizes.SMALL }}>
-          <Button category={Categories.WARNING} onClick={() => show({ category: Categories.WARNING, text: 'Oh oh! Careful there.' })}>
+          <Button category={Categories.WARNING} onClick={() => showAlert({ category: Categories.WARNING, text: 'Oh oh! Careful there.' })}>
             Show warning
           </Button>
         </Margin>
       </FlexItem>
       <FlexItem>
-        <Button category={Categories.INFO} onClick={() => show({ category: Categories.INFO, text: 'Here is some info. You are welcome.' })}>
+        <Button category={Categories.INFO} onClick={() => showAlert({ category: Categories.INFO, text: 'Here is some info. You are welcome.' })}>
           Show info
         </Button>
       </FlexItem>

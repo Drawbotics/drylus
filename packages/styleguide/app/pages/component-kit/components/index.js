@@ -36,6 +36,8 @@ import breadcrumbs from './breadcrumbs';
 import dropdown from './dropdown';
 import list from './list';
 import paragraph from './paragraph';
+import map from './map';
+import filterGroup from './filter-group';
 
 
 const components = {
@@ -77,6 +79,8 @@ const components = {
   dropdown,
   list,
   paragraph,
+  map,
+  filterGroup,
 };
 
 

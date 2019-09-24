@@ -4,6 +4,7 @@ import sv, { fade } from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
 import RoundIcon from '../components/RoundIcon';
+import Icon from '../components/Icon';
 import Button from '../components/Button';
 import Spinner from '../components/Spinner';
 import Select from './Select';
@@ -58,6 +59,15 @@ const styles = {
       color: ${sv.colorDisabled};
       border-color: ${sv.neutralLight};
       box-shadow: none;
+    }
+    
+    &:read-only {
+      box-shadow: none !important;
+      pointer-events: none;
+    }
+
+    @media ${sv.screenL} {
+      height: ${sv.marginExtraLarge};
     }
   `,
   straightLeft: css`
@@ -161,7 +171,7 @@ const RawInput = ({
 }) => {
   const [ isFocused, setFocused ] = useState(false);
 
-  const handleOnChange = (e) => onChange ? onChange(e.target.value, e.target.name) : null;
+  const handleOnChange = (e) => onChange != null ? onChange(e.target.value, e.target.name) : null;
 
   const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
   const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
@@ -193,6 +203,11 @@ const RawInput = ({
                 <Spinner size={Sizes.SMALL} />
               </div>
             }
+            else if (onChange == null) {
+              <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
+                <Icon name="lock" />
+              </div>
+            }
             else if (error) {
               <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
                 <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
@@ -209,6 +224,7 @@ const RawInput = ({
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             onChange={handleOnChange}
+            readOnly={onChange == null}
             className={cx(styles.input, {
               [styles.straightLeft]: prefix,
               [styles.straightRight]: suffix,
@@ -268,8 +284,8 @@ Input.propTypes = {
   /** Text shown when no value is active */
   placeholder: PropTypes.string,
 
-  /** Triggered when the value is changed (typing) */
-  onChange: PropTypes.func.isRequired,
+  /** Triggered when the value is changed (typing). If not given, the field is read-only */
+  onChange: PropTypes.func,
 
   /** Small text shown below the box, replaced by error if present */
   hint: PropTypes.string,

@@ -87,6 +87,12 @@ const Grid = ({
   vGutters,
   style,
 }) => {
+  const invalidChildren = React.Children
+    .toArray(children)
+    .some((child) => child != null && child.type !== GridItem);
+  if (invalidChildren) {
+    console.warn('Grid should only accept GridItem as children');
+  }
   return (
     <div
       className={cx(styles.root(columns), {
