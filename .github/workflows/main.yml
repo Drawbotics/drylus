@@ -1,18 +1,19 @@
-name: CI
+name: Release
 
-on:
-  push:
-    tags:
-      - '*'
-    branches-ignore:
-      - '*'
+on: push
 
 jobs:
-  notify:
-    name: Create release
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Create release
-        uses: frankjuniorr/github-create-release-action@master
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Generate Changelog
+        run: echo "# Check the changelog for changes" > ${{ github.workflow }}-CHANGELOG.txt
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body_path: ${{ github.workflow }}-CHANGELOG.txt
         env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
