@@ -1,6 +1,8 @@
 name: CI
 
-on: push
+on:
+  release
+    types: [published]
 
 jobs:
   notify:
@@ -15,5 +17,4 @@ jobs:
           SLACK_ICON : 'https://www.drawbotics.com/favicon-32x32.png'
           SLACK_COLOR: '#3DB5D0'
           SLACK_TITLE: New release
-          SLACK_MESSAGE: 'Check the changelog: https://www.notion.so/drawbotics/Changelog-Design-System-07f11499fda24ddea5c368d5133b08c4'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
