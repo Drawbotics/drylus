@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/react-drylus",
-  "version": "4.1.0-test.0",
+  "version": "4.1.0-test.1",
   "description": "React components for the Drawbotics' ecosystem",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "",
@@ -14,9 +14,9 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@drawbotics/drylus-style-vars": "^4.1.0-test.0",
+    "@drawbotics/drylus-style-vars": "^4.1.0-test.1",
     "@drawbotics/enums": "0.2.0",
-    "@drawbotics/icons": "^4.1.0-test.0",
+    "@drawbotics/icons": "^4.1.0-test.1",
     "@drawbotics/use-screen-size": "^2.0.0",
     "@turf/circle": "^6.0.1",
     "animejs": "^3.0.1",
