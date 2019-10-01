@@ -14,3 +14,5 @@ jobs:
     steps:
       - name: Create release
         uses: frankjuniorr/github-create-release-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
