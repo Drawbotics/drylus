@@ -10,10 +10,10 @@ jobs:
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@master
         env:
-          SLACK_CHANNEL: '@nick'
-          SLACK_USERNAME: rtCamp
-          SLACK_ICON : 'https://github.com/rtCamp.png?size=48'
-          SLACK_COLOR: '#3278B'
-          SLACK_TITLE: Post Title
-          SLACK_MESSAGE: 'Post Content :rocket:'
+          SLACK_CHANNEL: 'drylus-releases'
+          SLACK_USERNAME: Drylus
+          SLACK_ICON : 'https://www.drawbotics.com/favicon-32x32.png'
+          SLACK_COLOR: '#3DB5D0'
+          SLACK_TITLE: New release
+          SLACK_MESSAGE: 'Check the changelog: https://www.notion.so/drawbotics/Changelog-Design-System-07f11499fda24ddea5c368d5133b08c4'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

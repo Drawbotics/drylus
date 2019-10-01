@@ -80,11 +80,11 @@ export const Palette = ({
   palette,
 }) => {
   const { colors, title, background, description } = palette;
-  const { show } = useAlert();
+  const { showAlert } = useAlert();
   const copyToClipboard = async (name) => {
     const target = document.querySelector(`[data-element="${name}"]`);
     await navigator.clipboard.writeText(target.value);
-    show({ category: Categories.INFO, text: `Color code ${target.value} copied to clipboard!` });
+    showAlert({ category: Categories.INFO, text: `Color code ${target.value} copied to clipboard!` });
   };
   return (
     <div className={styles.palette}>
