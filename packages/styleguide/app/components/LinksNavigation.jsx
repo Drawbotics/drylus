@@ -11,7 +11,7 @@ import { withRouter, Link } from 'react-router-dom';
 
 const styles = {
   linksNavigation: css`
-    background: ${sv.neutralLightest};
+    background: ${sv.white};
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -79,9 +79,10 @@ const styles = {
 };
 
 
-export function generateLinks(route, routeName, parent='', pathname) {
+export function generateLinks({ route, routeName, parent='', pathname, base='' }) {
   const newPath = routeName ? `/${kebabCase(parent)}/${kebabCase(routeName)}` : `/${kebabCase(parent)}`;
-  const cleaned = newPath.replace(/\/+/g, '/');
+  const withBase = `/${base}/${newPath}`;
+  const cleaned = withBase.replace(/\/+/g, '/');
   const active = pathname === cleaned;
   if (typeof route !== 'function') {
     return (
@@ -109,7 +110,13 @@ export function generateLinks(route, routeName, parent='', pathname) {
           }
         }}
         <div className={cx(styles.sublinks, { [styles.root]: ! routeName })}>
-          {Object.keys(omit(route, 'index')).map((routeName) => generateLinks(route[routeName], routeName, newPath, pathname))}
+          {Object.keys(omit(route, 'index')).map((routeName) => generateLinks({
+            route: route[routeName],
+            routeName,
+            parent: newPath,
+            pathname,
+            base,
+          }))}
         </div>
       </div>
     );
@@ -130,19 +137,18 @@ export function generateLinks(route, routeName, parent='', pathname) {
 }
 
 
-const LinksNavigation = ({ routes, location }) => {
+const LinksNavigation = ({ title, routes, location, base }) => {
   useEffect(() => {
     const current = last(location.pathname.split('/'));
     document.title = `Drawbotics Styleguide - ${startCase(current)}`;
   }, [location.pathname]);
-
   return (
     <div className={styles.linksNavigation}>
       <div className={styles.navigationTitle}>
-        <Title size={4} noMargin>Component kit</Title>
+        <Title size={4} noMargin>{title}</Title>
       </div>
       <div className={styles.links}>
-        {generateLinks(routes, undefined, undefined, location.pathname)}
+        {generateLinks({ route: routes, pathname: location.pathname, base })}
       </div>
     </div>
   );

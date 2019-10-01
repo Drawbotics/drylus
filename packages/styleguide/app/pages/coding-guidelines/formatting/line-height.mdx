@@ -1,0 +1,93 @@
+# Line Length
+
+Always favor writing lines shorter than 80 characters. Never write lines longer than 100 characters.
+
+    // Bad
+    process.env.NODE_ENV === 'development' ? console.error(new Error(`Browser doesn't support Geolocation`)) : null;
+    
+    // Good
+    process.env.NODE_ENV === 'development' 
+      ? console.error(new Error('Browser doesn\'t support Geolocation')) 
+      : null;
+
+Never split lines too early.
+
+> Why? It's easier to read single line statements than multi-line ones.
+
+    // Bad
+    function foo(
+      bar,
+      baz,
+    ) {
+      return bar + baz;
+    }
+    
+    // Good
+    function foo(bar, baz) {
+      return bar + baz;
+    }
+
+When spliting long arrays of objets, always put the braces in a separate line.
+
+> Why? Easier to add, remove, modify, copy/paste, etc. since each object is isolated.
+
+    // Bad
+    const people = [{
+      name: 'John',
+      age: 23,
+    }, {
+      name: 'Jane',
+      age: 26,
+    }];
+    
+    const people = [
+      {
+        name: 'John',
+        age: 23,
+      }, {
+        name: 'Jane',
+        age: 26,
+      },
+    ];
+    
+    // Good
+    const people = [
+      {
+        name: 'John',
+        age: 23,
+      },
+      {
+        name: 'Jane',
+        age: 26,
+      },
+    ];
+    
+    // Also good
+    const people = [
+      { name: 'John', age: 23 },
+      { name: 'Jane', age: 26 },
+    ];
+
+When splitting long lines, always position the operator at the beginning of the line.
+
+> Why? To differentiate it from a new statement.
+
+    // Bad
+    const shouldWe = reasonOne &&
+      reasonTwo &&
+      reasonThree;
+    
+    const bigOp = foo +
+      bar +
+      baz;
+    
+    // Good
+    const shouldWe = reasonOne
+      && reasonTwo
+      && reasonThree;
+    
+    const bigOp = foo
+      + bar
+      + baz;
+
+##### **NOTE**: Don't forget to indent splitted lines correctly.

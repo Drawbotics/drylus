@@ -1,0 +1,157 @@
+# Modules
+
+Always use `import/export` when writing code for a browser. When writing code for a node app, it's still preferred but not enforced.
+
+    // Bad
+    const isEqual = require('lodash/isEqual');
+    const { uniq } = require('lodash');
+    
+    // Good
+    import isEqual from 'lodash/isEqual';
+    import { uniq } from 'lodash/isEqual';
+
+Always use single line export instructions.
+
+    export foo from './utils';
+    export { bar as default } from './utils';
+    export { baz } from './utils';
+
+Don't rename exports.
+
+    // Bad
+    export { foo as bar } from './utils';
+    
+    // Good
+    export { foo } from './utils';
+
+All named exports should come above the default export.
+
+    // Bad
+    export default function foo() {
+      // ... more code ...
+    }
+    
+    export function bar() {
+      // ... more code ...
+    }
+    
+    // Good
+    export function bar() {
+      // ... more code ...
+    }
+    
+    export default function foo() {
+      // ... more code ...
+    }
+
+Only import from a path in one place.
+
+    // Bad
+    import foo from './utils';
+    import { bar } from './utils';
+    
+    // Good
+    import foo, { bar } from './utils';
+
+Put all `import` statements above all other statements.
+
+    // Bad
+    import foo from './foo';
+    foo();
+    
+    import bar from './bar';
+    
+    // Good
+    import foo from './foo';
+    import bar from './bar';
+    
+    foo();
+
+Prefix all interal functions of a module with `_`.
+
+> Why? Because, even though it's easy to see which functions are internal and which functions are not when looking at the module code and noticing the exported ones, it's not that easy when looking at where those functions are used.
+
+    // Bad
+    function foo() {
+      // ... more code ...
+    }
+    
+    export function bar() {
+      return foo();
+    }
+    
+    // Good
+    function _foo() {
+      // ... more code ...
+    }
+    
+    export function bar() {
+      return _foo();
+    }
+
+When exporting named exports, always favor exporting in the same line as the definition.
+
+    // Bad
+    function foo() {
+      // ... more code ...
+    }
+    
+    export { foo };
+    
+    // Good
+    export function foo() {
+      // ... more code ...
+    }
+
+Favor exporting functions through an `index.js` file instead of having to import them directly.
+
+    // index.js
+    export Foo from './Foo';
+    
+    // Bad
+    import Foo from './utils/Foo';
+    
+    // Good
+    import { Foo } from './utils';
+
+Always be consistent in the order of imports. First, external imports and below, project imports.
+
+> If using webpack and importing non JavaScript modules, those would come at the bottom.
+
+    // Bad
+    import { foo } from './utils';
+    import bar from './bar';
+    import styles from './styles.css';
+    import path from 'path';
+    
+    // Good
+    import path from 'path';
+    
+    import { foo } from './utils';
+    import bar from './bar';
+    
+    import styles from './styles.css';
+
+If being forced to use `require`, always favor following the same rules as above.
+
+    // Bad
+    function foo() {
+      const bar = require('bar');
+      return bar;
+    }
+    
+    // Good
+    const bar = require('bar');
+    
+    function foo() {
+      return bar;
+    }
+    
+    // Bad
+    const bar = require('bar');
+    const baz = bar.baz;
+    
+    const baz = require('bar').baz;
+    
+    // Good
+    const { baz } = require('bar');

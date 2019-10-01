@@ -1,0 +1,36 @@
+# Style
+
+Never put `/>` on a new line.
+
+    // Bad
+    <Component
+      prop="value"
+      />
+    
+    // Good
+    <Component
+      prop="value" />
+
+Always favor single line tags when possible.
+
+    // Bad
+    <Component
+      prop="value">
+      Foo
+    </Component>
+    
+    // Good
+    <Component prop="value">
+      Foo
+    </Component>
+
+Once a component is split between multiple lines, all props should be split the same way.
+
+    // Bad
+    <Component foo="value"
+      bar="baz" />
+    
+    // Good
+    <Component
+      foo="value"
+      bar="baz" />

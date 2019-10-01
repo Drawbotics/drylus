@@ -1,0 +1,424 @@
+# Functions
+
+Always use function expressions instead of function declarations.
+
+    // Bad
+    const foo = function () {
+    };
+    
+    // Good
+    function foo() {
+    }
+
+Always use arrow functions when declaring immediately invoked functions.
+
+    // Bad
+    (function () {
+      // ... more code ...
+    })();
+    
+    // Good
+    (() => {
+      // ... more code ...
+    })();
+
+Never use `arguments`.
+
+> Why? Since rest arguments are available, that's an obsolete practice. Plus, it's not supported in arrow functions.
+
+    // Bad
+    function foo() {
+      const args = Array.prototype.slice.call(arguments);
+      return args[0] + args[1];
+    }
+    
+    // Good
+    function foo(...args) {
+      return args[0] + args[1];
+    }
+
+Always use default parameters instead of mutating an argument when a default value is needed.
+
+    // Bad
+    function foo(arg) {
+      arg = arg || {};
+      // ... more code ...
+    }
+    
+    // Good
+    function foo(arg = {}) {
+      // ... more code ...
+    }
+
+When using keyword arguments (an object), always put them in the last position.
+
+    // Bad
+    function foo(kwargs, arg) {
+      return kwargs.bar + arg;
+    }
+    
+    // Good
+    function foo(arg, kwargs) {
+      return kwargs.bar + arg;
+    }
+
+When using optional keyword arguments, always assign a default value of an empty object to them.
+
+    // Bad
+    function foo(arg, kwargs) {
+      // ... more code ...
+    }
+    
+    foo('Hello');  // Can fail if the function tries to access kwargs in the body, leading to control statements
+    
+    // Good
+    function foo(args, kwargs = {}) {
+      // ... more code ...
+    }
+    
+    foo('Hello');  // Would lead to cleaner code inside the function body
+
+Never use `eval()` for creating a dynamic function. Intead use `Function`.
+
+    // Bad
+    const foo = eval('function (a, b) { return a + b }');
+    
+    // Good
+    const foo = Function('a', 'b', 'return a + b');
+
+##### **NOTE**: Think twice if you ever need to do this.
+
+Avoid re-assigning arguments. Only good use case is when some sanitization of the arguments is needed.
+
+> If we mutate arguments, it's complicated to know further in the body of the function if the argument still holds the original value or not. When sanitizing, we're working with the intended value of that argument, so no confusion is present.
+
+    // Bad 
+    function foo(arg) {
+      arg = 2;
+      return arg;
+    }
+    
+    // Good
+    function foo(arg) {
+      arg = sanitize(arg);
+      return arg;
+    }
+
+Never mutate arguments. Instead, clone them.
+
+    // Bad
+    function foo(arg) {
+      arg[0] = 'Bar';
+    }
+    
+    // Good
+    function foo(arg) {
+      const newArg = arg.slice();
+      newArg[0] = 'Bar';
+    }
+
+Use the spread operator `...` to call functions with different number of arguments intead of `call()` or `apply()`
+
+    // Bad
+    function foo(array) {
+      bar.apply(null, array);
+    }
+    
+    // Good
+    function foo(array) {
+      bar(...array);
+    }
+
+When declaring standalone functions, always use `function` keyword.
+
+    // Bad
+    const foo = () => {
+      return 'bar';
+    };
+    
+    // Good
+    function foo() {
+      return 'bar';
+    }
+
+When using function assignment, always use arrow functions.
+
+    // Bad
+    const foo = function () {
+    };
+    
+    // Good
+    const foo = () => {
+    };
+
+When declaring a function in the body of another function, always use function assigment.
+
+> Why? Those functions can be thought as just variables like `const a = 1`, the only difference is that they contain a function value instead of a complex or scalar vlaue, so consistency dictates, we use the same assignment expression.
+
+    // Bad
+    function foo(arg) {
+      const coef = 0.1;
+    
+      function bar() {
+        // ... more code ...
+      }
+    
+      return bar(arg * coef);
+    }
+    
+    // Good
+    function foo(arg) {
+      const coef = 0.1;
+      const bar = () => {
+        // ... more code ...
+      };
+    
+      return bar(arg * coef);
+    }
+
+Always declare pure functions as standalone functions. Always declare non-pure functions as close to the external parameters as possible.
+
+    // Bad
+    function foo(number1, number2) {
+      const add = (a, b) => {
+        return a + b;
+      };
+      return add(number1, number2);
+    }
+    
+    function bar(number1) {
+      const number2 = 2;
+    
+      // ... more code ...
+    
+      const add = (a) => {
+        return a + number2;
+      };
+    
+      return add(number1);
+    }
+    
+    // Good
+    function add(a, b) {
+      return a + b;
+    }
+    
+    function foo(number1, number2) {
+      return add(number1, number2);
+    }
+    
+    function bar(number1) {
+      const number2 = 2;
+    
+      const add = (a) => {
+        return a + number2;
+      };
+    
+      return add(number1);
+    }
+
+Always declare scalar and complex values before, and functions after.
+
+    // Bad
+    function foo() {
+      const a = 1;
+      const bar = () => a + 2;	
+      const b = 2;
+      return bar() + b;
+    }
+    
+    // Good
+    function foo() {
+      const a = 1;
+      const b = 2;
+      const bar = () => a + 2;
+      return bar() + b;
+    }
+
+Always use arrow functions for anonymous functions.
+
+    // Bad
+    array.map(function (item) {
+      return item * 2;
+    });
+    
+    // Good
+    array.map((item) => item * 2);
+
+Always use parentheses when declaring arrow functions.
+
+> Why? Consistency again, when we have only one argument, we can choose to use parentheses or not but when having multiple arguements, we're forced to use parentheses. We remove the choice so we can focus more on the code. Also, it will lead to simpler changes if later we need to add more arguments to a single argument function.
+
+    // Bad
+    const foo = arg => arg + 2;
+    
+    // Good
+    const foo = (arg) => arg + 2;
+
+If the list of arguments of a function is too long, favor using keyword arguments instead.
+
+    // Bad
+    function foo(name, lastName, age, country, region, username, password) {
+      // ... more code ...
+    }
+    
+    // Good
+    function foo({ name, lastName, age, country, region, username, password }) {
+      // ... more code ...
+    }
+
+Always favor writing pure functions.
+
+    // Bad
+    function foo() {
+      const a = 1;
+      const bar = () => a + 2;
+      return bar();
+    }
+    
+    // Good
+    function bar(a) {
+      return a + 2;
+    }
+    
+    function foo() {
+      const a = 1;
+      return bar(a);
+    }
+
+When using arrow functions, never split the implicit return between lines. Use `{}` instead.
+
+    // Bad
+    const foo = () =>
+      'A very long return value that would not fit in the same line';
+    
+    const foo = () => (
+      'A very long return value that would not fit in the same line';
+    );
+    
+    // Good
+    const foo = () => {
+      return 'A very long return value that would not fit in the same line';
+    };
+
+Declare functions before using them.
+
+> Why? Apart from difficulting reading the code (you won't expect to understand a word before you've seen its definition) it relies on hoisting for it to work, one of the worst things JavaScript does and one that people is still actively investigating how to remove without breaking existing code.
+
+    // Bad
+    function foo() {
+      return bar();
+    }
+    
+    function bar() {
+      // ... more code ...
+    }
+    
+    // Good
+    function bar() {
+      // ... more code ...
+    }
+    
+    function foo() {
+      return bar();
+    }
+
+If an object it's the only thing an arrow function returns, use `()` instead of `return`.
+
+    // Bad
+    const foo = () => {
+      return { 
+        name: 'User',
+      };
+    };
+    
+    // Good
+    const foo = () => ({
+      name: 'User',
+    });
+
+When writing arrow functions, always use single line functions if possible.
+
+    // Bad
+    array.map((item) => {
+      return item * 2;
+    });
+    
+    // Good
+    array.map((item) => item * 2);
+
+Never use implicit return with side effects.
+
+    let bar = true;
+    
+    // Bad
+    const foo = () => bar = false;
+    
+    // Good
+    const foo = () => {
+      bar = false;
+    };
+
+When returning multiple data, always use object destructuring instead of array destructuring.
+
+> Why? It makes returned result not order dependant when using the function.
+
+    // Bad
+    function foo() {
+      const a = 1;
+      const b = 2;
+      return [a, b];
+    }
+    
+    // Good
+    function foo() {
+      const a = 1;
+      const b = 2;
+      return { a, b };
+    }
+
+Always favor returning early.
+
+    // Bad
+    function foo(a, b) {
+      if (a !== b) {
+        // ... more code ...
+      }
+      return null;
+    }
+    
+    // Good
+    function foo(a, b) {
+      if (a === b) {
+        return null;
+      }
+    
+      // ... more code ...
+    }
+
+Add one level of indentation when splitting the list of arguments over multiple lines.
+
+    // Bad
+    function foo(
+    item1,
+    item2,
+    item3,
+    item4,
+    ) {
+      // ... more code ...
+    }
+    
+    function foo(item1, item2,
+      item3, item4) {
+      // ... more code ...
+    }
+    
+    // Good
+    function foo(
+      item1,
+      item2,
+      item3,
+      item4,
+    ) {
+      // ... more code ...
+    }

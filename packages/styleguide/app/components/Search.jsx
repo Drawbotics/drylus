@@ -17,10 +17,14 @@ import sv from '@drawbotics/drylus-style-vars';
 import { Link } from 'react-router-dom';
 
 import { generateRouteObjects } from '../utils';
-import pages from '../pages';
+import componentKit from '../pages/component-kit';
+import codingGuidelines from '../pages/coding-guidelines';
 
 
-const routes = generateRouteObjects(pages);
+const componentRoutes = generateRouteObjects({ route: componentKit, base: 'component-kit' });
+const codingRoutes = generateRouteObjects({ route: codingGuidelines, base: 'coding-guidelines' });
+
+const routes = [ ...componentRoutes, ...codingRoutes ];
 
 
 const styles = {
@@ -43,14 +47,10 @@ const styles = {
 
 function _getIconForCategory(category) {
   switch (category) {
-    case 'brand':
-      return 'tag';
-    case 'components':
+    case 'component-kit':
       return 'package';
-    case 'forms':
-      return 'server';
-    case 'layout':
-      return 'layout';
+    case 'coding-guidelines':
+      return 'command';
     default:
       return 'sidebar';
   }
@@ -98,6 +98,11 @@ const Search = ({ open, onClickClose }) => {
     setTimeout(() => { setValue(''); setTerm('') }, 500);
   };
 
+  const results = searchTerm ? routes.filter((route) => {
+    return route.url.toLowerCase().includes(searchTerm.toLowerCase())
+      || route.name.toLowerCase().includes(searchTerm.toLowerCase());
+  }) : [];
+
   return (
     <Modal
       title="Search documentation"
@@ -116,11 +121,8 @@ const Search = ({ open, onClickClose }) => {
         } />
       <div className={styles.results}>
         {do {
-          if (searchTerm) {
-            routes.filter((route) => {
-              return route.url.toLowerCase().includes(searchTerm.toLowerCase()) || route.name.toLowerCase().includes(searchTerm.toLowerCase());
-            })
-            .map((route, i, array) => (
+          if (searchTerm && results.length > 0) {
+            results.map((route, i, array) => (
               <Fragment key={i}>
                 <Result
                   onClick={handleOnClose}
@@ -134,6 +136,11 @@ const Search = ({ open, onClickClose }) => {
                 }}
               </Fragment>
             ));
+          }
+          else if (searchTerm) {
+            <Margin size={{ top: Sizes.DEFAULT }}>
+              <EmptyState description="No results match your search." />
+            </Margin>
           }
           else {
             <Margin size={{ top: Sizes.DEFAULT }}>

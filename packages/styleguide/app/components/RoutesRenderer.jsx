@@ -1,12 +1,12 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
 import Renderer from './Renderer';
 import { generateRoutes } from '../utils';
 
 
-const RoutesHandler = ({ match, routes }) => {
-  const route = routes[match.url];
+const RoutesHandler = ({ location, match, routes, base }) => {
+  const route = routes[location.pathname];
   if (route) {
     return (
       <Renderer>
@@ -15,19 +15,21 @@ const RoutesHandler = ({ match, routes }) => {
     );
   }
   else {
-    return <Redirect to="/introduction" />;
+    return <Redirect to={`/${base}/introduction`} />;
   }
 };
 
 
-const RoutesRenderer = ({ routes }) => {
-  const generatedRoutes = generateRoutes(routes);
+const RoutesRenderer = ({ routes, base, ...props }) => {
+  const generatedRoutes = generateRoutes({ route: routes, base });
   return (
     <Switch>
-      <Route path="*" render={(props) => <RoutesHandler {...props} routes={generatedRoutes} />} />
+      <Route
+        path={[`/${base}/*`, `/${base}`]}
+        render={() => <RoutesHandler {...props} base={base} routes={generatedRoutes} />} />
     </Switch>
   );
 };
 
 
-export default RoutesRenderer;
+export default withRouter(RoutesRenderer);

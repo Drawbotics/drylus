@@ -1,0 +1,145 @@
+# Naming Conventions
+
+Always favor creating long and descriptive names.
+
+    // Bad
+    const p = { x: 2, y: 3 };
+    
+    // Good
+    const point = { x: 2, y: 3 };
+
+Use `camelCase` when naming variables, functions and methods.
+
+    // Bad
+    const FooBar = 2;
+    const an_object = {};
+    const iTeMs = [];
+    
+    // Good
+    const fooBar = 2;
+    const anObject = {};
+    const items = [];
+
+Use `PascalCase` when naming classes.
+
+    // Bad
+    class person {
+      constructor(name) {
+        this.name = name;
+      }
+    }
+    
+    const john = new person('John');
+    
+    // Good
+    class Person {
+      constructor(name) {
+      }
+    }
+    
+    const john = new Person('John');
+
+A base filename should match the name of the default export if it's a `class` or a `kebab-cased` version if it's anything else.
+
+    // Bad
+    import Person from './person';
+    import fooBar from './fooBar';
+    
+    // Good
+    import Person from './Person';
+    import fooBar from './foo-bar';
+
+Acronyms and initialisms should never be uppercased, they should follow normal naming conventions.
+
+> Why? A long string of uppercase characters make reading difficult.
+
+    // Bad
+    const HTTPRequest = null;
+    const GPSPosition = null;
+    const GPSByIP = null;
+    
+    // Good
+    const httpRequest = null;
+    const gpsPosition = null;
+    const gpsByIp = null;
+
+Constant values that are never gonna change and that are not inside a block, should be all `UPPERCASED` and `SNAKE_CASED`.
+
+    // Bad
+    const friction_coeff = 0.5;
+    
+    function foo(arg) {
+      const ITEMS = [];
+      ITEMS.push(arg);
+      return ITEMS;
+    }
+    
+    // Good
+    const FRICTION_COEFF = 0.5;
+    
+    function foo(arg) {
+      const items = [];
+      items.push(arg);
+      return items;
+    }
+
+For consistency, events should be named `e`.
+
+    // Bad
+    document.addEventListener('click', (event) => {
+    });
+    
+    // Good
+    document.addEventListener('click', (e) => {
+    });
+
+For consistency, errors should be named by default `err`.
+
+    // Bad
+    try {
+    }
+    catch (error) {
+    }
+    
+    // Good
+    try {
+    }
+    catch (err) {
+    }
+
+Always name functions and methods as the infinitive or imperative tense of the verb.
+
+    // Bad
+    const person = new Person();
+    person.walking();
+    
+    // Good
+    const person = new Person();
+    person.walk();
+    
+    // Exception
+    // When a boolean is returned in a getter
+    
+    // Bad
+    person.getWalking();
+    
+    // Good
+    person.isWalking();
+
+##### **NOTE**: Rule of thumb here, the name should always feel like an action to be done when calling the function.
+
+Always name variables as nouns. Always use adjectives to differentiate them.
+
+    // Bad
+    const deleteItem = items.pop();  // verb + noun
+    
+    const items1 = items.filter((x) => x % 2 !== 0);  // noun + suffix
+    const items2 = items.filter((x) => x % 2 === 0);  // noun + suffix
+    
+    // Good
+    const deletedItem = items.pop();  // adj + noun
+    
+    const oddItems = items.filter((x) => x % 2 !== 0);  // adj + noun
+    const evenItems = items.filter((x) => x % 2 === 0);  // adj + noun
+
+##### **NOTE**: Rule of thumb here, the name should always feel like it refers to an entity.

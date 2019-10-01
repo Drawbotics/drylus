@@ -1,0 +1,191 @@
+# Blank Lines
+
+Never leave more than two contiguous blank lines.
+
+    // Bad
+    import foo from 'foo';
+    
+    
+    
+    function bar(arg) {
+      return foo(arg + 3);
+    }
+    
+    // Good
+    import foo from 'foo';
+    
+    
+    function bar(arg) {
+      return foo(arg + 3);
+    }
+
+Never have more than one blank line in a block of code.
+
+    // Bad
+    function foo(arg) {
+      const a = 1;
+    
+    
+      return a + arg;
+    }
+    
+    if (a < b) {
+      const foo = 2;
+      const bar = 4;
+    
+    
+      return foo + bar;
+    }
+    
+    class Person {
+      name;
+    
+      
+      constructor(name) {
+        this.name = name;
+      }
+    }
+    
+    // Good
+    function foo(arg) {
+      const a = 1;
+    
+      return a + arg;
+    }
+    
+    if (a < b) {
+      const foo = 2;
+      const bar = 4;
+    
+      return foo + bar;
+    }
+    
+    class Person {
+      name;
+      
+      constructor(name) {
+        this.name = name;
+      }
+    }
+
+Don't pad blocks with blank lines.
+
+    // Bad
+    function foo(arg) {
+      
+      const a = 1;
+    
+      return a + arg;
+    
+    }
+    
+    if (a < b) {
+      
+      const foo = 2;
+      const bar = 3;
+    
+      return foo + bar;
+    
+    }
+    
+    class Person {
+    
+      constructor(name) {
+        this.name = name;
+      }
+    
+      getName() {
+        return this.name;
+      }
+    
+    }
+    
+    // Good
+    function foo(arg) {
+      const a = 1;
+      
+      return a + arg;
+    }
+    
+    if (a < b) {
+      const foo = 2;
+      const bar = 3;
+    
+      return foo + bar;
+    }
+    
+    class Person {
+      constructor(name) {
+        this.name = name;
+      }
+    
+      getName() {
+        return this.name;
+      }
+    }
+
+Leave a blank line between a block and the next statement.
+
+    // Bad
+    function foo(arg) {
+      if (arg > 0) {
+        const b = 2;
+        return arg + b;
+      }
+      return arg;
+    }
+    
+    class Person {
+      constructor(name) {
+        this.name = name;
+      }
+      getName() {
+        return this.name;
+      }
+    }
+    
+    // Good
+    function foo(arg) {
+      if (arg > 0) {
+        const b = 2;
+        return arg + b;
+      }
+    
+      return arg;
+    }
+    
+    class Person {
+      constructor(name) {
+        this.name = name;
+      }
+    
+      getName() {
+        return this.name;
+      }
+    }
+
+Use two blank lines to separate conceptually different parts in a module.
+
+    // Bad
+    import foo from 'foo';
+    
+    function bar() {
+      return foo() + 2;
+    }
+    
+    function baz() {
+      return foo() + 3;
+    }
+    
+    // Good
+    import foo from 'foo';
+    
+    
+    function bar() {
+      return foo() + 2;
+    }
+    
+    
+    function baz() {
+      return foo() + 3;
+    }

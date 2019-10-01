@@ -1,0 +1,62 @@
+# Casting
+
+Use `String()` when casting a value to string.
+
+> Why? Specially when casting objects, if we use the `.toString()` method, we have to check the object exists first while `String()` would just return undefined making it safer.
+
+    // Bad
+    '' + 12;
+    new String(12);
+    person.toString();
+
+    // Good
+    String(12);
+    String(person);
+
+Use `Number()` when casting a value to a number instead of `parseInt` or `parseFloat`.
+
+> Why? Because its behavior is more consistent than `parseInt` or `parseFloat`. Also, `parseInt` and `parseFloat` take an additional argument that changes the base used and can lead to unwanted behavior.
+
+    // Bad
+    parseInt('12');     // 12
+    parseInt('2.2');    // 2
+    parseFloat('2.2');  // 2.2
+    parseInt('12a');    // 12
+    parseInt('a12');    // NaN
+    
+    // Good
+    Number('12');       // 12
+    Number('2.2');      // 2.2
+    Number('12a');      // NaN
+    Number('a12');      // NaN
+
+Use available `Math` functions when casting a float number to an integer.
+
+> Why? They communicate intention much more explicitly.
+
+    // Bad
+    parseInt(12.2);    // 12
+
+    // Good
+    Math.trunc(12.6);  // 12
+    Math.ceil(12.6);   // 13
+    Math.floor(12.6);  // 12
+    Math.round(12.6);  // 13
+
+Use `Boolean()` instead of `!!` when casting to a boolean.
+
+> Why? Consistency first, that's the way we use for the other types and second, to make the code easier to read since `!` symbols sometimes get lost in the noise.
+
+    const a = 'string'
+    const b = 1;
+    const c = null;
+    
+    // Bad
+    !!a;  // true
+    !!b;  // true
+    !!c;  // false
+    
+    // Good
+    Boolean(a);  // true
+    Boolean(b);  // true
+    Boolean(c);  // false

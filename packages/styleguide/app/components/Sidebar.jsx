@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
 import sv, { fade } from '@drawbotics/drylus-style-vars';
+import { Link } from 'react-router-dom';
 import {
   Icon,
   Margin,
@@ -9,6 +10,8 @@ import {
   FlexItem,
   FlexDirections,
   FlexJustify,
+  Tooltip,
+  TooltipSides,
 } from '@drawbotics/react-drylus';
 
 import Search from './Search';
@@ -97,9 +100,11 @@ const Sidebar = () => {
       <Flex direction={FlexDirections.VERTICAL} justify={FlexJustify.START}>
         <FlexItem>
           <Margin size={{ bottom: Sizes.SMALL }}>
-            <div className={styles.logo}>
-              <Logo />
-            </div>
+            <Link to="/">
+              <div className={styles.logo}>
+                <Logo />
+              </div>
+            </Link>
           </Margin>
         </FlexItem>
         <FlexItem>
@@ -111,9 +116,44 @@ const Sidebar = () => {
         </FlexItem>
         <FlexItem>
           <Margin size={{ bottom: Sizes.SMALL }}>
-            <div className={styles.button}>
-              <Icon name="menu" />
-            </div>
+            <Tooltip
+              message="Component kit"
+              style={{ marginLeft: sv.marginSmall }}
+              side={TooltipSides.RIGHT}>
+              <Link to="/component-kit/introduction">
+                <div className={styles.button}>
+                  <Icon name="package" />
+                </div>
+              </Link>
+            </Tooltip>
+          </Margin>
+        </FlexItem>
+        <FlexItem>
+          <Margin size={{ bottom: Sizes.SMALL }}>
+            <Tooltip
+              message="Coding guidelines"
+              style={{ marginLeft: sv.marginSmall }}
+              side={TooltipSides.RIGHT}>
+              <Link to="/coding-guidelines">
+                <div className={styles.button}>
+                  <Icon name="command" />
+                </div>
+              </Link>
+            </Tooltip>
+          </Margin>
+        </FlexItem>
+        <FlexItem>
+          <Margin size={{ bottom: Sizes.SMALL }}>
+            <Tooltip
+              message="Design guidelines"
+              style={{ marginLeft: sv.marginSmall }}
+              side={TooltipSides.RIGHT}>
+              <Link to="/design-guidelines">
+                <div className={styles.button}>
+                  <Icon name="layout" />
+                </div>
+              </Link>
+            </Tooltip>
           </Margin>
         </FlexItem>
       </Flex>

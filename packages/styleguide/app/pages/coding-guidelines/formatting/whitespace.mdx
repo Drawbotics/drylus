@@ -1,0 +1,235 @@
+# Whitespace
+
+Always use two spaces for identing your code.
+
+> Why? Well, it will delay the appearance of a ☥ 🔥  PYRAMID OF DOOM 🔥 ☥ (when your code grows faster horizontally than vertically)
+
+    function myFunction(arg) {
+      const myVar = 1;
+      
+      if (arg) {
+        return null;
+      }
+    
+      return myVar;
+    }
+
+Use one space after commas.
+
+    // Bad
+    const items = [1,2,3,4];
+    const person = new Person('User','Userface');
+    const object = { a: 1,b: 2 };
+    
+    // Good
+    const items = [1, 2, 3, 4];
+    const person = new Person('User', 'Userface');
+    const object = { a: 1, b: 2 };
+
+Don't use spaces before commas.
+
+    // Bad
+    const items = [1 , 2 , 3 , 4];
+    
+    function foo(a , b) {
+    }
+    
+    // Good
+    const items = [1, 2, 3, 4];
+    
+    function foo(a, b) {
+    }
+
+Use one space between operators.
+
+    // Bad
+    const a=b+c;
+    const baz=foo&&bar;
+    const x+=1;
+    
+    // Good
+    const a = b + c;
+    const baz = foo && bar;
+    const x += 1;
+
+Don't use spaces before `:` when declaring object literal properties.
+
+    // Bad
+    const object = { x : 2, y : 3 };
+    
+    // Good
+    const object = { x: 2, y: 3 };
+
+Use one space after `:` when declaring object literal properties.
+
+    // Bad
+    const object = { x:2, y:3 };
+    
+    // Good
+    const object = { x: 2, y: 3 };
+
+Use one space before opening braces.
+
+    // Bad
+    function foo(){
+    }
+    
+    if (){
+    }
+    
+    switch{
+      default:{
+      }
+    }
+    
+    // Good
+    function foo() {
+    }
+    
+    if () {
+    }
+    
+    switch {
+      default: {
+      }
+    }
+
+Use one space before the opening parenthesis in control statements.
+
+    // Bad
+    if() {
+    }
+    
+    for(let item of items) {
+    }
+    
+    // Good
+    if () {
+    }
+    
+    for (let item of items) {
+    }
+
+Don't use spaces between the name of a function and the opening parenthesis of the list of arguments.
+
+    // Bad
+    function foo () {
+    }
+    
+    // Good
+    function foo() {
+    }
+
+Don't use spaces between the name of a function and the parentheses when invoking it.
+
+    // Bad
+    foo ();
+    
+    // Good
+    foo();
+
+Don't use spaces inside parentheses.
+
+    // Bad
+    function foo( bar ) {
+    }
+    
+    if ( a == b ) {
+    }
+    
+    // Good
+    function foo(bar) {
+    }
+    
+    if (a == b) {
+    }
+
+Don't use spaces inside brackets when declaring arrays.
+
+    // Bad
+    const items = [ 1, 2, 3, 4 ];
+    
+    // Good
+    const items = [1, 2, 3, 4];
+
+Don't add spaces inside brackets when accesing properties or indexes
+
+    // Bad
+    items[ 0 ];
+    person[ 'first-name' ];
+    
+    // Good
+    items[0];
+    person['first-name'];
+
+Add spaces inside brackets when destructuring an array.
+
+> Why? To highlight the fact that they're independent variables and differentiate it from array declaration.
+
+    // Bad
+    const [a, b, c] = items;
+    
+    // Good
+    const [ a, b, c ] = items;
+
+Add spaces inside braces.
+
+    // Bad
+    const object = {x: 1, y: 2};
+    const {x, y} = object;
+    
+    // Good
+    const object = { x: 1, y: 2 };
+    const { x, y } = object;
+
+Add one space before `!` when it's next to a parenthesis.
+
+    // Bad
+    if (! foo) {
+    }
+    
+    const foo = (! bar);
+    
+    // Good
+    if ( ! foo) {
+    }
+    
+    const foo = ( ! bar);
+
+Use indentation when making long method chains.
+
+    // Bad
+    items.slice().sort((a, b) => a b)
+    .filter((x) => x > 0).map((x) => x * 2);
+    
+    items.
+      slice().
+      sort((a, b) => a b).
+      filter((x) => x > 0).
+      map((x) => x * 2);
+    
+    // Good
+    items
+      .slice()
+      .sort((a, b) => a b)
+      .filter((x) => x > 0)
+      .map((x) => x * 2);
+
+##### **NOTE**: Use a leading dot to correctly differentiate method calls from another statement.
+
+Split long ternary operators putting each branch on it's own line and with the corresponding operator at the beginning of the line.
+
+    // Bad
+    const foo = bar ? items.slice().sort((a, b) => a b) : items.slice().sort((a, b) => b a);
+    
+    const foo = bar ? 
+      items.slice().sort((a, b) => a b) : items.slice().sort((a, b) => b a);
+    
+    const foo = bar ? 
+      items.slice().sort((a, b) => a b) : 
+      items.slice().sort((a, b) => b a);
+    
+    // Good
+    const foo = bar 
+      ? items.slice().sort((a, b) => a b)
+      : items.slice().sort((a, b) => b a);

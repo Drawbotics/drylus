@@ -1,0 +1,79 @@
+# Control Statements
+
+Never use an `if` statement without braces unless it's a single line `if`.
+
+    // Bad
+    if (a < b)
+      return c;
+    
+    // Good
+    if (a < b) {
+      return c;
+    }
+    
+    if (a < b) return c;
+
+Never put `else` or `else if` in the ending brace line.
+
+    // Bad
+    if (a < b) {
+      return c;
+    } else {
+      return d;
+    }
+    
+    // Good
+    if (a < b) {
+      return c;
+    }
+    else {
+      return d;
+    }
+
+Always wrap `switch` cases in a block.
+
+> Why? Because `let` and `const` are block scoped, that means that if no block is created in the different cases, the whole switch is the nearest block and an error would be triggered because of duplicate declaration, or worse, could silently rewrite values.
+
+    // Bad
+    switch (type) {
+      case 'primary':
+        const a = 2;
+        return a;
+      case 'secondary': 
+        const a = 1;  // triggers an error
+        return a;
+      default:
+        return 0;
+    }
+    
+    // Good
+    switch (type) {
+      case 'primary': {
+        const a = 2;
+        return a;
+      }
+      case 'secondary': {
+        const a = 1; 
+        return a;
+      }
+      default: {
+        return 0;
+      }
+    }
+
+Always put `catch` in a new line.
+
+    // Bad
+    try {
+      // ... more code ...
+    } catch (err) {
+      // ... more code ...
+    }
+    
+    // Good
+    try {
+      // ... more code ...
+    }
+    catch (err) {
+      // ... more code ...
+    }

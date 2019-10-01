@@ -35,6 +35,7 @@ import splashScreen from './splash-screen';
 import breadcrumbs from './breadcrumbs';
 import dropdown from './dropdown';
 import list from './list';
+import paragraph from './paragraph';
 import map from './map';
 import filterGroup from './filter-group';
 import popover from './popover';
@@ -78,6 +79,7 @@ const components = {
   breadcrumbs,
   dropdown,
   list,
+  paragraph,
   map,
   filterGroup,
   popover,

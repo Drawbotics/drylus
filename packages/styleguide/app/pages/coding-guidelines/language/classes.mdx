@@ -1,0 +1,248 @@
+# Classes
+
+Always use classes instead of protoype manipulation.
+
+    // Bad
+    function Person(name) {
+      this.name = name;
+    }
+    
+    Person.prototype.getName = function () {
+      return this.name;
+    };
+    
+    // Good
+    class Person {
+      constructor(name) {
+        this.name = name;
+      }
+    
+      getName() {
+        return this.name;
+      }
+    }
+
+It's ok to overwrite `toString()` method.
+
+    class Person {
+      constructor(name) {
+        this.name = name;
+      }
+    
+      toString() {
+        return `Person: ${this.name}`;
+      }
+    }
+    
+    const person = new Person('User');
+    console.log(String(person));  // prints Person: User instead of [object Object]
+
+Never use empty constructors.
+
+    // Bad
+    class Person {
+      constructor() {
+      }
+    
+      setName(name) {
+        this.name = name;
+      }
+    
+      getName() {
+        return this.name;
+      }
+    }
+    
+    // Good
+    class Person {
+      setName(name) {
+        this.name = name;
+      }
+    
+      getName() {
+        return this.name;
+      }
+    }
+
+Never have duplicate class members.
+
+> In JavaScript there is no method overloading, so it's mostly a programmer error.
+
+    class Person {
+      setName(name) {
+        this.name = name;
+      }
+    
+      setName(name, lastName) {
+        this.name = name;
+        this.lastName = lastName;
+      }
+    }
+
+Always use method shorthand when declaring methods in a class.
+
+    // Bad
+    class Person {
+      constructor(name) {
+        this.name = name;
+      }
+    
+      getName = () => {
+        return this.name;
+      };
+    }
+    
+    // Good
+    class Person {
+      constructor(name) {
+        this.name = name;
+      }
+    
+      getName() {
+        return this.name;
+      }
+    }
+
+Always use class fields when declaring initial values for class members.
+
+> It's already at Stage 3 and it's well supported on Babel
+
+    // Bad
+    class Person {
+      constructor(name) {
+        this.name = name;
+        this.role = 'customer';
+      }
+    }
+    
+    // Good
+    class Person {
+      role = 'customer';
+    
+      constructor(name) {
+        this.name = name;
+      }
+    }
+
+Class fields always come first in a class.
+
+    // Bad
+    class Person {
+      constructor(name) {
+        this.name = name;
+      }
+    
+      role = 'customer';
+    }
+    
+    // Good
+    class Person {
+      role = 'customer';
+    
+      constructor(name) {
+        this.name = name;
+      }
+    }
+
+The `constructor` always comes before the methods.
+
+    // Bad
+    class Person {
+      getName() {
+        return this.name;
+      }
+    
+      constructor(name) {
+        this.name = name;
+      }
+    }
+    
+    // Good
+    class Person {
+      constructor(name) {
+        this.name = name;
+      }
+    
+      getName() {
+        return this.name;
+      }
+    }
+
+Always prefix methods indended for internal use in a class with `_`.
+
+> This won't prevent them to be accessed from the outside but provides a helpful visual indication to every developer of which methods are expected to be used outside of the class and which methods are just internal.
+
+    // Bad
+    class Person {
+      constructor(name, lastName) {
+        this.name = name;
+        this.lastName = lastName;
+      }
+    
+      getFullName() {
+        return this.joinNames();
+      }
+    
+      joinNames() {
+        return `${this.name} ${this.lastName}`;
+      }
+    }
+    
+    const p = new Person('User', 'Userface');
+    p.joinNames();  // Should it be used like this?
+    
+    
+    // Good
+    class Person {
+      constructor(name, lastName) {
+        this.name = name;
+        this.lastName = lastName;
+      }
+    
+      getFullName() {
+        return this._joinNames();
+      }
+    
+      _joinNames() {
+        return `${this.name} ${this.lastName}`;
+      }
+    }
+    
+    const p = new Person('User', 'Userface');
+    p._joinNames();  // We shouldn't be using this method like this
+
+Never include pure functions as methods of a class. Extract them as a module function instead.
+
+> Why? This makes clearer that the function is indeed not depending on any internal value of the class.
+
+    // Bad
+    class Person {
+      constructor(name, lastName) {
+        this.name = name;
+        this.lastName = lastName;
+      }
+    
+      getFullName() {
+        return this._joinNames(name, lastName);
+      }
+    
+      _joinNames(name, lastName) {
+        return `${name} ${lastName}`;
+      }
+    }
+    
+    // Good
+    function _joinNames(name, lastName) {
+      return `${name} ${lastName};
+    }
+    
+    class Person {
+      constructor(name, lastName) {
+        this.name = name;
+        this.lastName = lastName;
+      }
+    
+      getFullName() {
+        return _joinNames(name, lastName);
+      }
+    }

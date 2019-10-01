@@ -1,0 +1,104 @@
+# Operators
+
+Use `===` and `!==` intead of `==` and `!=`.
+
+> Why? Because `==` and `!=` perform type coercion before making the comparison so `2 == '2'` would be equal.
+
+    // Bad
+    if (foo == 'bar' || foo != 'baz') {
+      // ... more code ...
+    }
+    
+    // Good
+    if (foo === 'bar' || foo !== 'baz') {
+      // ... more code ...
+    }
+
+Use `== null` or `!= null` when comparing for `null` or `undefined` values.
+
+    // Bad
+    if ( ! foo) {
+    }
+    
+    // Good
+    if (foo != null) {
+    }
+
+Always use explicit comparisons.
+
+    // Bad
+    if (foo) {
+      // ... more code ...
+    }
+    
+    // Good
+    if (foo !== '') {
+      // ... more code ...
+    }
+    
+    if (foo != null) {
+      // ... more code ...
+    }
+    
+    if (foo !== 0) {
+      // ... more code ...
+    }
+
+Always use simple comparisons for boolean values.
+
+    // Bad
+    if (isAlive !== false) {
+      // ... more code ...
+    }
+    
+    if (isOpen === false) {
+      // ... more code ...
+    }
+    
+    // Good
+    if (isAlive) {
+      // ... more code ...
+    }
+    
+    if ( ! isOpen) {
+      // ... more code ...
+    }
+
+Never nest ternary operators.
+
+    // Bad
+    const foo = isOk ? isM ? 'John' : 'Jane' : null;
+    
+    // Good
+    const name = isM ? 'John' : 'Jane';
+    const foo = isOk ? name : null; 
+
+Avoid unnecessary ternary operators.
+
+    // Bad
+    const foo = a ? true : false;
+    
+    // Good
+    const foo = Boolean(a);
+
+When mixing logical operators, always put them in between parentheses.
+
+    // Bad
+    const foo = a > 0 && b < 0 || c > 0 && d + 1 === 0;
+    
+    // Good
+    const foo = (a > 0 && b < 0) || (c < 0 && d + 1 === 0);
+
+Never use increment or decrement operators. Use the assignment form instead.
+
+    // Bad
+    let foo = 0;
+    foo++;
+    foo--;
+    console.log(foo);  // prints 0
+    
+    // Good
+    let foo = 0;
+    foo += 1;
+    foo -= 1;
+    console.log(foo);  // prints 0

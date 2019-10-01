@@ -1,0 +1,58 @@
+# Async
+
+Always use `async/await` instead of `.then()`.
+
+    // Bad
+    function foo() {
+      bar().then((value) => console.log(value));
+    }
+    
+    // Good
+    async function foo() {
+      const value = await bar();
+      console.log(value);
+    }
+
+Always favor being explicit when working with asynchronous functions.
+
+> Why? In some other guides, it's stated that `return await` is redundant and even though that's "kinda true", that just misses a whole other point far more interesting: The Principle of Least Surprise. When we're writing `async/await` code, we expect it to behave like imperative code, however, when we forward the promise (just `return bar()`) instead of the value (using `return await bar()`) the [behavior would be different](https://www.reddit.com/r/javascript/comments/7idasp/await_vs_return_vs_return_await/dqy2z2h/). Also, it makes it less explicit as whether we should consume a function as asynchronous or synchronous.
+
+    // Bad
+    function foo() {
+      return bar();  // is bar returning a promise? should await be used with foo()?
+    }
+    
+    // Good
+    async function foo() {
+      return await bar();  // we know we should await for foo() when using it
+    }
+
+Use a `for` loop when looking for sequential execution.
+
+    const items = [1, 2, 3, 4]
+    
+    async function foo(n) {
+      await new Promise((r) => setTimeout(r, Math.random() * 1000));  // wait between 0s to 1s
+      console.log(n);
+      return n * 2;
+    }
+    
+    const newArray = [];
+    for (let item of items) {
+      newArray.push(await foo(item));  // prints 1, 2, 3 and 4
+    }
+    console.log(newArray);  // prints [2, 4, 6, 8]
+
+Use `Promise.all` or `array.forEach` when looking for parallel execution.
+
+    const items = [1, 2, 3, 4]
+    
+    async function foo(n) {
+      await new Promise((r) => setTimeout(r, Math.random() * 1000));  // wait between 0s to 1s
+      console.log(n);
+      return n * 2;
+    }
+    
+    const newArray = await Promise.all(items.map(foo));  // prints 2, 4, 3, 1
+    console.log(newArray);  // prints [2, 4, 6, 8]
+    items.forEach(foo);  // prints 2, 3, 1, 4

@@ -1,0 +1,130 @@
+# PropTypes
+
+Always use `PropTypes`.
+
+    // Bad
+    const Component = ({ title }) => {
+      return title;
+    };
+    
+    // Good
+    const Component = ({ title }) => {
+      return title;
+    };
+    
+    Component.propTypes = {
+      title: PropTypes.string.isRequired,
+    };
+
+Always favor being specific when declaring `PropTypes`.
+
+    // Bad
+    const Component = ({ user, title }) => {
+      return `${title} ${user.name}`;
+    };
+    
+    Component.propTypes = {
+      user: PropTypes.object,
+      title: PropTypes.node,  // node would be ok, but we're using it clearly as a string
+    };
+    
+    // Good
+    const Component = ({ user, title }) => {
+      return `${title} ${user.name}`;
+    };
+    
+    Component.propTypes = {
+      user: PropTypes.shape({ name: PropTypes.string }),
+      title: PropTypes.string,
+    };
+
+Ony declare `PropTypes` for consumed props.
+
+> Why? That's another line of code to maintain and if the unused props are needed by the children components, the `PropTypes` of those would warn.
+
+    // Bad
+    const Component = ({ user }) => {
+      return user.name;
+    };
+    
+    Component.propTypes = {
+      user: PropTypes.shape({ name: PropTypes.string, age: PropTypes.number }),,
+    };
+    
+    // Good
+    const Component = ({ user }) => {
+      return user.name;
+    };
+    
+    Component.propTypes = {
+      user: PropTypes.shape({ name: PropTypes.string }),
+    };
+
+Never use `PropTypes.array`. Use instead `PropTypes.arrayOf`.
+
+> Why? `PropTypes.array` doesn't provide any useful information apart from it being an array.
+
+    // Bad
+    const Component = ({ users }) => {
+      // ... more code ...
+    };
+    
+    Component.propTypes = {
+      users: PropTypes.array,
+    };
+    
+    // Good
+    const Component = ({ users }) => {
+      // ... more code ...
+    };
+    
+    Component.propTypes = {
+      users: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string }))
+    };
+
+Everytime `PropTypes.oneOf` is used, your component must export an *enum* with the possible values.
+
+    // Bad
+    const Component = ({ category }) => {
+      // ... more code ...
+    };
+    
+    Component.propTypes = {
+      category: PropTypes.oneOf([ 'primary', 'secondary' ]),
+    };
+    
+    // Good
+    import Enum from 'Enum';
+    
+    
+    export const Categories = Enum('PRIMARY', 'SECONDARY');
+    
+    
+    const Component = ({ category }) => {
+      // ... more code ...
+    };
+    
+    Component.propTypes = {
+      category: PropTypes.oneOf(Object.values(Categories)),
+    };
+
+Always leave only one blank line between the component declaration and the `PropTypes` declaration.
+
+    // Bad
+    const Component = ({ category }) => {
+      // ... more code ...
+    };
+    
+    
+    Component.propTypes = {
+      category: PropTypes.oneOf([ 'primary', 'secondary' ]),
+    };
+    
+    // Good
+    const Component = ({ category }) => {
+      // ... more code ...
+    };
+    
+    Component.propTypes = {
+      category: PropTypes.oneOf([ 'primary', 'secondary' ]),
+    };

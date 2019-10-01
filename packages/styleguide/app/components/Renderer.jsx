@@ -18,6 +18,10 @@ import {
   TCell,
   List,
   ListItem,
+  Margin,
+  Sizes,
+  Callout,
+  Categories,
 } from '@drawbotics/react-drylus';
 import { Link } from 'react-router-dom';
 
@@ -27,10 +31,27 @@ import InlineCode from './InlineCode';
 
 const styles = {
   content: css`
-    margin: ${sv.marginLarge} ${sv.defaultMargin};
+    padding: ${sv.paddingLarge} ${sv.defaultPadding};
 
     @media ${sv.screenL} {
-      margin: ${sv.defaultMargin} ${sv.marginSmall};
+      padding: ${sv.defaultPadding} ${sv.paddingSmall};
+    }
+  `,
+  blockquote: css`
+    position: relative;
+    
+    p {
+      color: ${sv.colorSecondary} !important;
+    }
+
+    &::before {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: ${sv.colorPrimary};
     }
   `,
 };
@@ -41,6 +62,7 @@ const components = {
   h2: (props) => <Title {...props} size={2} />,
   h3: (props) => <Title {...props} size={3} />,
   h4: (props) => <Title {...props} size={4} />,
+  h5: (props) => <Callout {...props} category={Categories.WARNING} />,
   pre: (props) => <div {...props} />,
   p: (props) => <Paragraph {...props} />,
   a: (props) => {
@@ -50,9 +72,17 @@ const components = {
     return <Link to={props.href}><TextLink {...props} underlined={LinkUnderlined.ALWAYS} /></Link>;
   },
   li: (props) => <ListItem {...props} />,
-  ol: (props) => <List {...props} ordered />,
-  ul: (props) => <List {...props} />,
-  code: Code,
+  ol: (props) => (
+    <Margin size={{ bottom: Sizes.SMALL, top: Sizes.DEFAULT }}>
+      <List {...props} ordered />
+    </Margin>
+  ),
+  ul: (props) => (
+    <Margin size={{ bottom: Sizes.SMALL, top: Sizes.DEFAULT }}>
+      <List {...props} />
+    </Margin>
+  ),
+  code: (props) => <Code className="language-js" {...props} />,
   inlineCode: InlineCode,
   table: (props) => <Table {...props} />,
   tr: (props) => <TRow {...props} />,
@@ -60,6 +90,11 @@ const components = {
   th: (props) => <TCell {...props} />,
   thead: (props) => <THead>{props.children.props.children}</THead>,
   tbody: (props) => <TBody {...props} />,
+  blockquote: (props) => (
+    <div className={styles.blockquote}>
+      <Margin size={{ left: Sizes.DEFAULT }} {...props} />
+    </div>
+  ),
   wrapper: ({ children, ...props }) => {
     if (React.Children.count(children) <= 1) {
       return children;
