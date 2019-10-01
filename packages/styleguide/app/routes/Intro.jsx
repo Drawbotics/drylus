@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
   Flex,
   FlexItem,
   FlexJustify,
   Title,
+  TextLink,
 } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
@@ -19,9 +20,13 @@ import designGuidelines from '~/assets/design-guidelines.svg';
 
 const styles = {
   intro: css`
+    position: relative;
     height: 100%;
     width: 100%;
     padding: 0px ${sv.paddingExtraLarge};
+    background-image: radial-gradient(${sv.neutralLight} 10%, ${sv.white} 10%);
+    background-position: 0 0;
+    background-size: 20px 20px;
   `,
   imageWrapper: css`
     position: relative;
@@ -37,6 +42,14 @@ const styles = {
       bottom: 0;
       right: 0;
       margin: auto;
+      transition: ${sv.defaultTransition};
+    }
+
+    [data-element="background"] {
+      transform: translateX(-5px);
+    }
+    [data-element="foreground"] {
+      transform: translateX(5px) scale(0.95);
     }
   `,
   item: css`
@@ -49,8 +62,17 @@ const styles = {
 
       [data-element="images"] {
         opacity: 1;
+
+        img {
+          transform: none;
+        }
       }
     }
+  `,
+  link: css`
+    position: fixed;
+    bottom: ${sv.marginSmall};
+    right: ${sv.marginSmall};
   `,
 };
 
@@ -65,8 +87,8 @@ const Item = ({
     <Link to={url}>
       <div className={styles.item}>
         <div className={styles.imageWrapper} data-element="images">
-          <img src={background} />
-          <img src={foreground} />
+          <img src={background} data-element="background" />
+          <img src={foreground} data-element="foreground" />
         </div>
         <Title size={3}>{title}</Title>
       </div>
@@ -77,29 +99,36 @@ const Item = ({
 
 const Intro = () => {
   return (
-    <Flex className={styles.intro} justify={FlexJustify.SPACE_AROUND}>
-      <FlexItem>
-        <Item
-          title="Design guidelines"
-          url="/design-guidelines"
-          background={background1}
-          foreground={designGuidelines} />
-      </FlexItem>
-      <FlexItem>
-        <Item
-          title="Coding guidelines"
-          url="/coding-guidelines"
-          background={background2}
-          foreground={codingGuidelines} />
-      </FlexItem>
-      <FlexItem>
-        <Item
-          title="Component kit"
-          url="/component-kit"
-          background={background3}
-          foreground={componentKit} />
-      </FlexItem>
-    </Flex>
+    <Fragment>
+      <Flex className={styles.intro} justify={FlexJustify.SPACE_AROUND}>
+        <FlexItem>
+          <Item
+            title="Design guidelines"
+            url="/design-guidelines"
+            background={background1}
+            foreground={designGuidelines} />
+        </FlexItem>
+        <FlexItem>
+          <Item
+            title="Coding guidelines"
+            url="/coding-guidelines"
+            background={background2}
+            foreground={codingGuidelines} />
+        </FlexItem>
+        <FlexItem>
+          <Item
+            title="Component kit"
+            url="/component-kit"
+            background={background3}
+            foreground={componentKit} />
+        </FlexItem>
+      </Flex>
+      <div className={styles.link}>
+        <a href="https://www.drawbotics.com/" target="_blank" rel="noopener noreferrer">
+          <TextLink>Made by Drawbotics</TextLink>
+        </a>
+      </div>
+    </Fragment>
   );
 };
 
