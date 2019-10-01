@@ -16,3 +16,4 @@ jobs:
           SLACK_COLOR: '#3278B'
           SLACK_TITLE: Post Title
           SLACK_MESSAGE: 'Post Content :rocket:'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
