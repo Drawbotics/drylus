@@ -9,15 +9,8 @@ on:
 
 jobs:
   notify:
-    name: Slack Notification
+    name: Create release
     runs-on: ubuntu-latest
     steps:
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@master
-        env:
-          SLACK_CHANNEL: 'drylus-releases'
-          SLACK_USERNAME: Drylus
-          SLACK_ICON : 'https://www.drawbotics.com/favicon-32x32.png'
-          SLACK_COLOR: '#3DB5D0'
-          SLACK_TITLE: New release
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Create release
+        uses: frankjuniorr/github-create-release-action@master
