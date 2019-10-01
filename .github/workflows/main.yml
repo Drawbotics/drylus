@@ -14,10 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Generate Changelog
-        run: |
-          echo "[Check the changelog for changes]
-          (https://www.notion.so/drawbotics/Changelog-Design-System-07f11499fda24ddea5c368d5133b08c4)" >
-          ${{ github.workflow }}-CHANGELOG.txt
+        run: echo "[Check the changelog for changes](https://www.notion.so/drawbotics/Changelog-Design-System-07f11499fda24ddea5c368d5133b08c4)" > ${{ github.workflow }}-CHANGELOG.txt
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
