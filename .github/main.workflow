@@ -1,6 +1,6 @@
 workflow "Slack Notification Demo" {
   resolves = ["Slack Notification"]
-  on = "publish"
+  on = "push"
 }
 
 action "Slack Notification" {
