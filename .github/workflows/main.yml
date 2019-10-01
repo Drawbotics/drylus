@@ -4,14 +4,15 @@ on: push
 
 jobs:
   notify:
-
+    name: Slack Notification
     runs-on: ubuntu-latest
-    
     steps:
-    - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: '@nick'
+          SLACK_USERNAME: rtCamp
+          SLACK_ICON : 'https://github.com/rtCamp.png?size=48'
+          SLACK_COLOR: '#3278B'
+          SLACK_TITLE: Post Title
+          SLACK_MESSAGE: 'Post Content :rocket:'
