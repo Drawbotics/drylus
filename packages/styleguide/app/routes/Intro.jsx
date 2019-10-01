@@ -5,6 +5,7 @@ import {
   FlexJustify,
   Title,
   TextLink,
+  FlexDirections,
 } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
@@ -100,7 +101,14 @@ const Item = ({
 const Intro = () => {
   return (
     <Fragment>
-      <Flex className={styles.intro} justify={FlexJustify.SPACE_AROUND}>
+      <Flex
+        className={styles.intro}
+        justify={FlexJustify.SPACE_AROUND}
+        responsive={{
+          S: {
+            direction: FlexDirections.VERTICAL,
+          },
+        }}>
         <FlexItem>
           <Item
             title="Design guidelines"

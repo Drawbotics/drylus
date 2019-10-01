@@ -27,7 +27,7 @@ const App = () => {
             bar={<Sidebar />}
             position={LayoutPositions.LEFT}
             fixed>
-            <div style={{ height: '100vh' }}>
+            <div style={{ height: '100%' }}>
               <Root />
             </div>
           </Layout>
