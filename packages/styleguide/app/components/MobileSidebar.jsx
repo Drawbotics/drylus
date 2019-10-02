@@ -13,6 +13,7 @@ import {
   FlexItem,
   Padding,
   FlexAlign,
+  Title,
 } from '@drawbotics/react-drylus';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router';
@@ -33,6 +34,7 @@ const styles = {
   logo: css`
     height: 100%;
     display: inline-block;
+    margin-right: ${sv.marginSmall};
   `,
   content: css`
     background: ${sv.neutralDarkest};
@@ -86,6 +88,19 @@ function _generateLinks(pathname, onClick) {
 }
 
 
+function _getTitleFromPathname(pathname) {
+  if (pathname.includes('component-kit')) {
+    return 'Component Kit';
+  }
+  else if (pathname.includes('coding-guidelines')) {
+    return 'Coding Guidelines'
+  }
+  else {
+    return '';
+  }
+}
+
+
 const MobileSidebar = () => {
   const { pathname } = useLocation();
   const [ sidebarOpen, toggleSidebar ] = useState(false);
@@ -104,6 +119,7 @@ const MobileSidebar = () => {
   }, [pathname]);
 
   const links = _generateLinks(pathname, () => toggleSidebar(false));
+  const title = _getTitleFromPathname(pathname);
 
   return (
     <div className={styles.sidebar}>
@@ -132,6 +148,29 @@ const MobileSidebar = () => {
                 <Logo />
               </div>
             </Link>
+            {do {
+              if (linksVisible) {
+                <Flex>
+                  <FlexItem>
+                    <Title
+                      size={3}
+                      style={{ color: sv.colorPrimaryInverse }}>
+                      {title}
+                    </Title>
+                  </FlexItem>
+                  <FlexItem>
+                    <Padding
+                      style={{ display: 'flex' }}
+                      size={{ left: Sizes.LARGE }}>
+                      <Icon
+                        style={{ color: sv.colorPrimaryInverse }}
+                        onClick={() => toggleLinks(false)}
+                        name="arrow-left" />
+                    </Padding>
+                  </FlexItem>
+                </Flex>
+              }
+            }}
           </div>
           {do {
             if (linksVisible) {

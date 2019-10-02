@@ -35,6 +35,10 @@ const styles = {
     flex: 1;
     overflow: scroll;
     padding-top: ${sv.defaultPadding};
+
+    @media ${sv.screenL} {
+      padding-top: 0;
+    }
   `,
   title: css`
     color: ${sv.colorSecondary} !important;
