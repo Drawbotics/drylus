@@ -7,7 +7,7 @@ import Enum from '@drawbotics/enums';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { useRect } from '../utils/hooks';
-import { getStyleForSide } from '../utils';
+import { getStyleForSide, CustomPropTypes } from '../utils';
 
 
 const styles = {
@@ -106,10 +106,6 @@ const Tooltip = ({
   const { rect, setRect } = useRect();
   const tooltipRect = tooltipRef.current?.getBoundingClientRect();
 
-  if (message != null) {
-    console.warn('Deprecation warning: `message` has been replaced by `content`. It will be removed in the next major version');
-  }
-
   const content = _content != null ? _content : message;
 
   useEffect(() => {
@@ -205,10 +201,16 @@ const Tooltip = ({
 
 Tooltip.propTypes = {
   /** DEPRECATED */
-  message: PropTypes.node,
+  message: CustomPropTypes.mutuallyExclusive('content', {
+    type: PropTypes.node,
+    deprecated: true,
+  }),
 
   /** Content shown when the tooltip is visible */
-  content: PropTypes.node,
+  content: CustomPropTypes.mutuallyExclusive('message', {
+    type: PropTypes.node,
+    required: true,
+  }),
 
   /** Component wrapped by the tooltip */
   children: PropTypes.node.isRequired,

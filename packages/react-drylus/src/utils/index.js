@@ -39,6 +39,24 @@ function _verifyOptions(props, propName, componentName) {
 
 
 export const CustomPropTypes = {
+  mutuallyExclusive: (mutuallyExclusiveProp, options) => {
+    return (props, propName, componentName) => {
+      if (props[propName] != null && options.deprecated) {
+        console.warn(`Deprecation warning: \`${propName}\` has been deprecated in favour of \`${mutuallyExclusiveProp}\`. It will be removed in the next major version (${componentName})`);
+      }
+      if (props[propName] != null && props[mutuallyExclusiveProp] != null) {
+        return new TypeError(`Prop \`${propName}\` cannot be used with \`${mutuallyExclusiveProp}\` (${componentName})`);
+      }
+
+      const propTypes = {
+        [propName]: options.required && props[mutuallyExclusiveProp] == null
+          ? options.type.isRequired
+          : options.type,
+      };
+
+      return PropTypes.checkPropTypes(propTypes, props, propName, componentName);
+    };
+  },
   options: (props, propName, componentName) => {
     return _verifyOptions(props, propName, componentName);
   },
