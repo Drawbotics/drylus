@@ -5,6 +5,7 @@ import sv from '@drawbotics/drylus-style-vars';
 
 import { Categories, Sizes, Tiers } from '../base';
 import { getEnumAsClass } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 export const styles = {
@@ -131,6 +132,13 @@ export const styles = {
       color: ${sv.greenDark};
     }
   `,
+  primaryAlt: css`
+    color: ${sv.colorPrimary};
+
+    &:hover {
+      color: ${sv.colorPrimary};
+    }
+  `,
   small: css`
     padding: ${sv.paddingExtraSmall} ${sv.paddingExtraSmall};
     font-size: 0.9rem;
@@ -209,21 +217,28 @@ export const styles = {
 
 
 const Button = ({
-  children,
-  disabled,
-  onClick,
-  category,
-  size,
-  tier,
-  leading,
-  trailing,
-  fullWidth,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    children,
+    disabled,
+    onClick,
+    category,
+    size,
+    tier,
+    leading,
+    trailing,
+    fullWidth,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   if (! children && trailing && leading) {
     throw new Error('If no children are given, only pass trailing or leading, but not both');
   }
+
   const round = ! children && (trailing || leading);
+
   return (
     <button
       style={style}
@@ -274,6 +289,7 @@ Button.propTypes = {
     Categories.SUCCESS,
     Categories.INFO,
     Categories.WARNING,
+    Categories.PRIMARY,
   ]),
 
   size: PropTypes.oneOf([
@@ -299,6 +315,16 @@ Button.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
