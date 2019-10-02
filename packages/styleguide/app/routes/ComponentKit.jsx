@@ -15,7 +15,10 @@ const ComponentKit = () => {
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const content = (
-    <Content fullHeight>
+    <Content
+      fullHeight
+      style={{ height: screenSize <= ScreenSizes.L ? '100vh' : null,
+    }}>
       <RoutesRenderer routes={componentKit} base='component-kit' />
     </Content>
   );

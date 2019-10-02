@@ -15,7 +15,10 @@ const CodingGuidelines = () => {
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const content = (
-    <Content fullHeight>
+    <Content
+      fullHeight
+      style={{ height: screenSize <= ScreenSizes.L ? '100vh' : null,
+    }}>
       <RoutesRenderer routes={codingGuidelines} base='coding-guidelines' />
     </Content>
   );
