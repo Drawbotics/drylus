@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Enum from '@drawbotics/enums';
 
 import { getEnumAsClass } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -88,13 +89,18 @@ export const LayoutPositions = new Enum(
 
 
 const Layout = ({
-  children,
-  position,
-  bar,
-  fixed,
-  barScrollable,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    children,
+    position,
+    bar,
+    fixed,
+    barScrollable,
+    style,
+  } = useResponsiveProps(rest, responsive);
+  
   return (
     <div
       style={style}
@@ -132,6 +138,16 @@ Layout.propTypes = {
 
   /** For custom overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

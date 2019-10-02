@@ -1,13 +1,13 @@
 import brand from './brand';
 import components from './components';
-import installation from './installation';
+import introduction from './introduction';
 import layout from './layout';
 import forms from './forms';
 import base from './base';
 
 
 export default {
-  installation,
+  introduction,
   brand,
   base,
   components,

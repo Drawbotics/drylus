@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
 import Renderer from './Renderer';
@@ -16,10 +16,7 @@ const RoutesHandler = ({ location, match, routes, base }) => {
   }
   else {
     return (
-      <Fragment>
-        <Redirect to={`/${base}/introduction`} />
-        <Redirect exact from="/component-kit/introduction" to="/component-kit/installation" />
-      </Fragment>
+      <Redirect to={`/${base}/introduction`} />
     );
   }
 };

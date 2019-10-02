@@ -18,7 +18,8 @@ const styles = {
     height: 100vh;
 
     @media ${sv.screenL} {
-      display: none;
+      background: ${sv.neutralDarkest};
+      height: calc(100vh - 150px);
     }
   `,
   navigationTitle: css`
@@ -26,11 +27,20 @@ const styles = {
     padding-left: 0;
     margin: 0 ${sv.marginSmall};
     border-bottom: 1px solid ${sv.neutral};
+    
+    @media ${sv.screenL} {
+      display: none;
+    }
   `,
   links: css`
     flex: 1;
     overflow: scroll;
     padding-top: ${sv.defaultPadding};
+
+    @media ${sv.screenL} {
+      padding-top: 0;
+      padding-bottom: ${sv.paddingHuge};
+    }
   `,
   title: css`
     color: ${sv.colorSecondary} !important;
@@ -58,6 +68,10 @@ const styles = {
       z-index: 2;
       transition: ${sv.defaultTransition};
     }
+
+    @media ${sv.screenL} {
+      color: ${sv.colorPrimaryInverse};
+    }
   `,
   sublinks: css`
     & > a > [data-element="link"] {
@@ -75,11 +89,22 @@ const styles = {
     &::after {
       width: 4px !important;
     }
+
+    @media ${sv.screenL} {
+      background: ${sv.neutralDarker} !important;
+    }
   `,
 };
 
 
-export function generateLinks({ route, routeName, parent='', pathname, base='' }) {
+export function generateLinks({
+  route,
+  routeName,
+  parent='',
+  pathname,
+  base='',
+  onClickLink,
+}) {
   const newPath = routeName ? `/${kebabCase(parent)}/${kebabCase(routeName)}` : `/${kebabCase(parent)}`;
   const withBase = `/${base}/${newPath}`;
   const cleaned = withBase.replace(/\/+/g, '/');
@@ -99,7 +124,7 @@ export function generateLinks({ route, routeName, parent='', pathname, base='' }
             );
             if (route.index) {
               return (
-                <Link to={cleaned}>
+                <Link onClick={onClickLink} to={cleaned}>
                   {link}
                 </Link>
               );
@@ -116,6 +141,7 @@ export function generateLinks({ route, routeName, parent='', pathname, base='' }
             parent: newPath,
             pathname,
             base,
+            onClickLink,
           }))}
         </div>
       </div>
@@ -123,7 +149,7 @@ export function generateLinks({ route, routeName, parent='', pathname, base='' }
   }
   else {
     return (
-      <Link key={cleaned} to={cleaned}>
+      <Link onClick={onClickLink} key={cleaned} to={cleaned}>
         <div
           className={cx(styles.link, {
             [styles.active]: active,
@@ -137,7 +163,13 @@ export function generateLinks({ route, routeName, parent='', pathname, base='' }
 }
 
 
-const LinksNavigation = ({ title, routes, location, base }) => {
+const LinksNavigation = ({
+  title,
+  routes,
+  location,
+  base,
+  onClickLink,
+}) => {
   useEffect(() => {
     const current = last(location.pathname.split('/'));
     document.title = `Drawbotics Styleguide - ${startCase(current)}`;
@@ -148,7 +180,12 @@ const LinksNavigation = ({ title, routes, location, base }) => {
         <Title size={4} noMargin>{title}</Title>
       </div>
       <div className={styles.links}>
-        {generateLinks({ route: routes, pathname: location.pathname, base })}
+        {generateLinks({
+          route: routes,
+          pathname: location.pathname,
+          base,
+          onClickLink,
+        })}
       </div>
     </div>
   );

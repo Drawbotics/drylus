@@ -7,11 +7,13 @@ import {
   Layout,
   LayoutPositions,
 } from '@drawbotics/react-drylus';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 
 import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
 import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
 import Sidebar from './components/Sidebar';
+import MobileSidebar from './components/MobileSidebar';
 import Root from './routes/Root';
 
 
@@ -19,6 +21,7 @@ window._drylus = drylus;
 
 
 const App = () => {
+  const { screenSize, ScreenSizes } = useScreenSize();
   return (
     <BrowserRouter basename="drylus">
       <DrylusProvider>
@@ -26,8 +29,19 @@ const App = () => {
           <Layout
             bar={<Sidebar />}
             position={LayoutPositions.LEFT}
-            fixed>
-            <div style={{ height: '100%' }}>
+            fixed
+            responsive={{
+              L: {
+                bar: <MobileSidebar />,
+                position: LayoutPositions.TOP,
+                fixed: false,
+              }
+            }}>
+            <div
+              style={{
+                height: '100%',
+                width: screenSize <= ScreenSizes.L ? '100vw' : null,
+              }}>
               <Root />
             </div>
           </Layout>

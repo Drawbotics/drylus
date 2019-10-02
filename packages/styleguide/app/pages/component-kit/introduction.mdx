@@ -1,8 +1,43 @@
-# Introduction
+import packageJson from '../../../package.json';
+import Code from '~/components/Code';
 
-Drylus is the design system used at Drawbotics. It contains all the styling (CSS) and components (React) needed to create interfaces with the Drawbotics visual identity.
 
-On this website you'll find:
-- [How to install `drylus`](/installation)
-- Coding guidelines and usage
-- Design guidelines
+# Component kit
+
+__Installation guide__
+
+## React components
+If you're using `drylus` in a React project install like so:
+```bash
+npm install @drawbotics/react-drylus@latest
+```
+The usage for each component is explained in the respective page.
+
+## Vanilla
+If you're working on a vanilla (or React-less) project, you should use the standard CSS and JS bundles to handle the styling of your page and components.
+
+export const HTMLImport = () => {
+  return (
+    <div>
+      <Code className="html">
+        {`<link rel="stylesheet" type="text/css" href="//cdn.drawbotics.com/vanilla-drylus/${packageJson.version}/drylus.css" />
+<script src="//cdn.drawbotics.com/vanilla-drylus/${packageJson.version}/drylus.js"></script>`}
+      </Code>
+    </div>
+  );
+};
+
+
+Include the CSS and JS bundles somewhere in your index:
+<HTMLImport />
+
+If you prefer to import via the npm package you can include them like so:
+```js
+import '@drawbotics/vanilla-drylus/dist/drylus.css';
+import drylus from  '@drawbotics/vanilla-drylus/dist/drylus.js';
+```
+
+And then initialise the JS bundle through:
+```js
+drylus.default.all();
+```

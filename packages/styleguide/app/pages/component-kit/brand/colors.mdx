@@ -115,11 +115,19 @@ export const Colors = ({ palettes }) => {
     <Grid
       columns={3}
       hGutters={Sizes.DEFAULT}
-      vGutters={Sizes.DEFAULT}>
+      vGutters={Sizes.DEFAULT}
+      responsive={{
+        L: {
+          columns: 2,
+        },
+        M: {
+          columns: 1,
+        },
+      }}>
       {palettes.map((p, i) => (
-        <div key={i}>
+        <GridItem key={i}>
           <Palette palette={p} />
-        </div>
+        </GridItem>
       ))}
     </Grid>
   );

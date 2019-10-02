@@ -28,6 +28,11 @@ const styles = {
     background-image: radial-gradient(${sv.neutralLight} 10%, ${sv.white} 10%);
     background-position: 0 0;
     background-size: 20px 20px;
+
+    @media ${sv.screenM} {
+      height: auto;
+      padding: ${sv.paddingExtraLarge} ${sv.defaultPadding};
+    }
   `,
   imageWrapper: css`
     position: relative;
@@ -35,6 +40,7 @@ const styles = {
     height: 330px;
     opacity: 0.8;
     transition: ${sv.defaultTransition};
+    margin: auto;
 
     > img {
       position: absolute;
@@ -49,8 +55,14 @@ const styles = {
     [data-element="background"] {
       transform: translateX(-5px);
     }
+
     [data-element="foreground"] {
       transform: translateX(5px) scale(0.95);
+    }
+
+    @media ${sv.screenL} {
+      width: 150px;
+      height: 160px;
     }
   `,
   item: css`
@@ -69,11 +81,31 @@ const styles = {
         }
       }
     }
+    
+    @media ${sv.screenM} {
+      filter: grayscale(0%);
+
+      [data-element="images"] {
+        opacity: 1;
+
+        img {
+          transform: none;
+        }
+      }
+    }
   `,
   link: css`
-    position: fixed;
+    position: relative;
     bottom: ${sv.marginSmall};
     right: ${sv.marginSmall};
+
+    @media ${sv.screenM} {
+      left: 0;
+      right: 0;
+      width: 100%;
+      text-align: center;
+      transform: translateY(-100%);
+    }
   `,
 };
 
@@ -91,7 +123,7 @@ const Item = ({
           <img src={background} data-element="background" />
           <img src={foreground} data-element="foreground" />
         </div>
-        <Title size={3}>{title}</Title>
+        <Title size={3} responsive={{ L: { size: 4 } }}>{title}</Title>
       </div>
     </Link>
   );
@@ -105,10 +137,17 @@ const Intro = () => {
         className={styles.intro}
         justify={FlexJustify.SPACE_AROUND}
         responsive={{
-          S: {
+          M: {
             direction: FlexDirections.VERTICAL,
           },
         }}>
+        <FlexItem>
+          <Item
+            title="Component kit"
+            url="/component-kit"
+            background={background3}
+            foreground={componentKit} />
+        </FlexItem>
         <FlexItem>
           <Item
             title="Design guidelines"
@@ -122,13 +161,6 @@ const Intro = () => {
             url="/coding-guidelines"
             background={background2}
             foreground={codingGuidelines} />
-        </FlexItem>
-        <FlexItem>
-          <Item
-            title="Component kit"
-            url="/component-kit"
-            background={background3}
-            foreground={componentKit} />
         </FlexItem>
       </Flex>
       <div className={styles.link}>

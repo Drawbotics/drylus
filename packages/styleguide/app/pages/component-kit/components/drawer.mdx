@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { Drawer, Layout, LayoutPositions, Button, Categories } from '@drawbotics/react-drylus';
+import {
+  Drawer,
+  DrawerSides,
+  Layout,
+  LayoutPositions,
+  Button,
+  Categories,
+} from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -64,7 +71,7 @@ const Example = () => {
 
 Interactive example:
 
-<Playground component={Drawer}>
+<Playground component={Drawer} enums={{ DrawerSides }}>
   <DrawerController component={
     <Drawer visible={false}>
       <div style={{ height: 1000, background: 'linear-gradient(red, blue)' }}>

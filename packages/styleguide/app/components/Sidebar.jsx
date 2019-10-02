@@ -15,6 +15,7 @@ import {
 } from '@drawbotics/react-drylus';
 
 import Search from './Search';
+import Logo from './Logo';
 
 
 const styles = {
@@ -43,58 +44,9 @@ const styles = {
 };
 
 
-const Logo = () => {
-  return (
-    <svg x = "0px" y = "0px" width = "100%" height = "100%" viewBox = "0 0 65.375 61.236" >
-      <g>
-        <g>
-          <g>
-            <defs>
-              <polygon id="SVGID_1_" points="0,49.853 65.375,61.236 28.219,42.138"/>
-            </defs>
-            <use xlinkHref="#SVGID_1_" overflow="visible" fill="#FFFFFF"/>
-            <clipPath id="SVGID_2_">
-              <use xlinkHref="#SVGID_1_" overflow="visible"/>
-            </clipPath>
-            <rect y="42.138" clipPath="url(#SVGID_2_)" fill="#FFFFFF" width="65.375" height="19.098"/>
-          </g>
-        </g>
-      </g>
-      <g>
-        <g>
-          <g>
-            <defs>
-              <polygon id="SVGID_3_" points="30.284,40.589 65.375,61.236 42.329,0"/>
-            </defs>
-            <use xlinkHref="#SVGID_3_" overflow="visible" fill="#FFFFFF"/>
-            <clipPath id="SVGID_4_">
-              <use xlinkHref="#SVGID_3_" overflow="visible"/>
-            </clipPath>
-            <rect x="30.284" y="0" clipPath="url(#SVGID_4_)" fill="#FFFFFF" width="35.091" height="61.236"/>
-          </g>
-        </g>
-      </g>
-      <g>
-        <g>
-          <g>
-            <defs>
-              <polygon id="SVGID_5_" points="0,49.853 27.276,39.835 42.329,0"/>
-            </defs>
-            <use xlinkHref="#SVGID_5_" overflow="visible" fill="#FFFFFF"/>
-            <clipPath id="SVGID_6_">
-              <use xlinkHref="#SVGID_5_" overflow="visible"/>
-            </clipPath>
-            <rect y="0" clipPath="url(#SVGID_6_)" fill="#FFFFFF" width="42.329" height="49.854"/>
-          </g>
-        </g>
-      </g>
-    </svg>
-  );
-};
-
-
 const Sidebar = () => {
   const [ searchOpen, toggleSearch ] = useState(false);
+  
   return (
     <div className={styles.sidebar}>
       <Flex direction={FlexDirections.VERTICAL} justify={FlexJustify.START}>
@@ -120,23 +72,9 @@ const Sidebar = () => {
               message="Component kit"
               style={{ marginLeft: sv.marginSmall }}
               side={TooltipSides.RIGHT}>
-              <Link to="/component-kit/introduction">
+              <Link to="/component-kit">
                 <div className={styles.button}>
                   <Icon name="package" />
-                </div>
-              </Link>
-            </Tooltip>
-          </Margin>
-        </FlexItem>
-        <FlexItem>
-          <Margin size={{ bottom: Sizes.SMALL }}>
-            <Tooltip
-              message="Coding guidelines"
-              style={{ marginLeft: sv.marginSmall }}
-              side={TooltipSides.RIGHT}>
-              <Link to="/coding-guidelines">
-                <div className={styles.button}>
-                  <Icon name="command" />
                 </div>
               </Link>
             </Tooltip>
@@ -151,6 +89,20 @@ const Sidebar = () => {
               <Link to="/design-guidelines">
                 <div className={styles.button}>
                   <Icon name="layout" />
+                </div>
+              </Link>
+            </Tooltip>
+          </Margin>
+        </FlexItem>
+        <FlexItem>
+          <Margin size={{ bottom: Sizes.SMALL }}>
+            <Tooltip
+              message="Coding guidelines"
+              style={{ marginLeft: sv.marginSmall }}
+              side={TooltipSides.RIGHT}>
+              <Link to="/coding-guidelines">
+                <div className={styles.button}>
+                  <Icon name="command" />
                 </div>
               </Link>
             </Tooltip>
