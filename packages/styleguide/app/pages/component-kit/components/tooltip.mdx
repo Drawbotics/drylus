@@ -28,14 +28,14 @@ __Example__
 <Flex>
   <FlexItem>
     <Margin size={{ right: Sizes.LARGE }}>
-      <Tooltip message="I am a tooltip">
+      <Tooltip content="I am a tooltip">
         <Button category={Categories.BRAND}>Hover me</Button>
       </Tooltip>
     </Margin>
   </FlexItem>
   <FlexItem>
     <Tooltip
-      message={
+      content={
         <div style={{ textAlign: 'left' }}>
           <Margin size={{ bottom: Sizes.EXTRA_SMALL }}>
             <ListTile leading={<Icon name="alert-triangle" category={Categories.DANGER} />} title={<Text inversed size={Sizes.SMALL}>I'm custom content</Text>} />
