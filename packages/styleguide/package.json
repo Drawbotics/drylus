@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/styleguide",
-  "version": "4.1.0-test.8",
+  "version": "4.2.0",
   "description": "Drawbotics Styleguide",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "",
@@ -16,13 +16,14 @@
   },
   "dependencies": {
     "@drawbotics/react-drylus": "file:../react-drylus",
+    "@drawbotics/use-screen-size": "^2.0.0",
     "@drawbotics/vanilla-drylus": "file:../vanilla-drylus",
     "core-js": "2",
     "fast-xml-parser": "^3.12.16",
     "hast-util-to-string": "^1.0.1",
     "react-hot-loader": "^4.8.8",
     "react-json-pretty": "^2.1.0",
-    "react-router-dom": "^5.0.0",
+    "react-router-dom": "^5.1.2",
     "strip-indent": "^3.0.0",
     "unist-util-is": "^2.1.2"
   }

@@ -35,6 +35,8 @@ const styles = {
 
     @media ${sv.screenL} {
       padding: ${sv.defaultPadding} ${sv.paddingSmall};
+      padding-top: ${sv.paddingHuge};
+      margin-top: calc(${sv.marginHuge} * -1);
     }
   `,
   blockquote: css`
