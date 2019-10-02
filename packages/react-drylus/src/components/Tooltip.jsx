@@ -92,13 +92,25 @@ export const TooltipSides = new Enum(
 );
 
 
-const Tooltip = ({ children, message, side, style }) => {
+const Tooltip = ({
+  children,
+  message,
+  content: _content,
+  side,
+  style,
+}) => {
   const [ visible, setVisible ] = useState(false);
   const [ outletElement, setOutletElement ] = useState(null);
   const childrenRef = useRef();
   const tooltipRef = useRef();
   const { rect, setRect } = useRect();
   const tooltipRect = tooltipRef.current?.getBoundingClientRect();
+
+  if (message != null) {
+    console.warn('Deprecation warning: `message` has been replaced by `content`. It will be removed in the next major version');
+  }
+
+  const content = _content != null ? _content : message;
 
   useEffect(() => {
     if ( ! document.getElementById('tooltips-outlet')) {
@@ -181,7 +193,7 @@ const Tooltip = ({ children, message, side, style }) => {
               [styles.visible]: visible,
             })}
             style={{ ...tooltipStyle, ...style }}>
-            {message}
+            {content}
           </div>
         </div>,
         document.getElementById('tooltips-outlet'),
@@ -192,8 +204,11 @@ const Tooltip = ({ children, message, side, style }) => {
 
 
 Tooltip.propTypes = {
+  /** DEPRECATED */
+  message: PropTypes.node,
+
   /** Content shown when the tooltip is visible */
-  message: PropTypes.node.isRequired,
+  content: PropTypes.node,
 
   /** Component wrapped by the tooltip */
   children: PropTypes.node.isRequired,

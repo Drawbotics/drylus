@@ -97,6 +97,7 @@ export const PopoverSides = new Enum(
 const Popover = ({
   children,
   message,
+  content: _content,
   side,
   style,
   exitOnClick,
@@ -107,6 +108,12 @@ const Popover = ({
   const popoverRef = useRef();
   const { rect, setRect } = useRect();
   const popoverRect = popoverRef.current?.getBoundingClientRect();
+
+  if (message != null) {
+    console.warn('Deprecation warning: `message` has been replaced by `content`. It will be removed in the next major version');
+  }
+
+  const content = _content != null ? _content : message;
 
   useEffect(() => {
     if ( ! document.getElementById('popovers-outlet')) {
@@ -192,7 +199,7 @@ const Popover = ({
               [styles.visible]: visible,
             })}
             style={{ ...popoverStyle, ...style }}>
-            {message}
+            {content}
           </div>
         </div>,
         document.getElementById('popovers-outlet'),
@@ -203,8 +210,11 @@ const Popover = ({
 
 
 Popover.propTypes = {
+  /** DEPRECATED */
+  message: PropTypes.node,
+
   /** Content shown when the Popover is visible */
-  message: PropTypes.node.isRequired,
+  content: PropTypes.node,
 
   /** Component wrapped by the Popover */
   children: PropTypes.node.isRequired,
