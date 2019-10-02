@@ -72,7 +72,7 @@ const Sidebar = () => {
               message="Component kit"
               style={{ marginLeft: sv.marginSmall }}
               side={TooltipSides.RIGHT}>
-              <Link to="/component-kit/introduction">
+              <Link to="/component-kit">
                 <div className={styles.button}>
                   <Icon name="package" />
                 </div>
