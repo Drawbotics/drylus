@@ -36,6 +36,10 @@ const styles = {
     @media ${sv.screenL} {
       padding: ${sv.defaultPadding} ${sv.paddingSmall};
     }
+
+    @media ${sv.screenM} {
+      padding-top: 0;
+    }
   `,
   blockquote: css`
     position: relative;

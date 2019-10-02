@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import sv from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
+import Enum from '@drawbotics/enums';
 
 import Button from './Button';
 import Title from './Title';
@@ -36,6 +37,9 @@ const styles = {
     & [data-element="wrapper"] {
       box-shadow: -5px 0px 15px ${sv.neutralDarker};
     }
+  `,
+  leftOverlay: css`
+    justify-content: flex-start;
   `,
   wrapper: css`
     position: absolute;
@@ -121,6 +125,13 @@ const styles = {
       transform: translateX(100%);
     }
   `,
+  drawerOverlayEnterLeft: css`
+    opacity: 0;
+
+    & [data-element="wrapper"] {
+      transform: translateX(-100%);
+    }
+  `,
   drawerOverlayEnterActive: css`
     opacity: 1;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
@@ -147,7 +158,18 @@ const styles = {
       transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
     }
   `,
+  drawerOverlayExitActiveLeft: css`
+    & [data-element="wrapper"] {
+      transform: translateX(-100%);
+    }
+  `,
 };
+
+
+export const DrawerSides = new Enum(
+  'RIGHT',
+  'LEFT',
+);
 
 
 const BaseDrawer = ({
@@ -203,6 +225,7 @@ const Drawer = ({
     width: rawWidth,
     raw,
     title,
+    side,
   } = useResponsiveProps(rest, responsive);
   
   const [ outletElement, setOutletElement ] = useState(null);
@@ -265,12 +288,22 @@ const Drawer = ({
           mountOnEnter
           unmountOnExit
           classNames={{
-            enter: styles.drawerOverlayEnter,
+            enter: side === DrawerSides.LEFT
+              ? styles.drawerOverlayEnterLeft
+              : styles.drawerOverlayEnter
+            ,
             enterActive: styles.drawerOverlayEnterActive,
             exit: styles.drawerOverlayExit,
-            exitActive: styles.drawerOverlayExitActive,
+            exitActive: cx(styles.drawerOverlayExitActive, {
+              [styles.drawerOverlayExitActiveLeft]: side === DrawerSides.LEFT,
+            }),
           }}>
-          <div onClick={handleClickOverlay} className={styles.overlay} ref={overlayElement}>
+          <div
+            onClick={handleClickOverlay}
+            className={cx(styles.overlay, {
+              [styles.leftOverlay]: side === DrawerSides.LEFT,
+            })}
+            ref={overlayElement}>
             <div data-element="wrapper" style={{ width }}>
               {content}
             </div>
@@ -345,6 +378,12 @@ Drawer.propTypes = {
     XL: PropTypes.object,
     HUGE: PropTypes.object,
   }),
+
+  /** Only applies when the drawer is used with "asOverlay" */
+  side: PropTypes.oneOf([
+    DrawerSides.LEFT,
+    DrawerSides.RIGHT,
+  ]),
 };
 
 
@@ -354,6 +393,7 @@ Drawer.defaultProps = {
   raw: false,
   onClickClose: x => x,
   onClickOverlay: x => x,
+  side: DrawerSides.RIGHT,
 };
 
 

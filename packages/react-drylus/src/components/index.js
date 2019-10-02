@@ -9,7 +9,7 @@ export Label from './Label';
 export Panel, { PanelHeader, PanelBody, PanelFooter, PanelSection } from './Panel';
 export Pagination from './Pagination';
 export Badge from './Badge';
-export Drawer from './Drawer';
+export Drawer, { DrawerSides } from './Drawer';
 export BaseFilter, { FilterAlign, SelectFilter, CheckboxFilter } from './Filter';
 export TabNavigation from './TabNavigation';
 export ListTile from './ListTile';
