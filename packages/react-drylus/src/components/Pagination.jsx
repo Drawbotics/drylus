@@ -102,7 +102,7 @@ const Pagination = ({
 
 
 Pagination.propTypes = {
-  /** An array representing the available pages */
+  /** A number representing the amount of available pages */
   pages: PropTypes.number.isRequired,
 
   /** Text displayed beside the "previous" arrow */
@@ -111,10 +111,10 @@ Pagination.propTypes = {
   /** Text displayed beside the "next" arrow */
   nextLabel: PropTypes.string,
 
-  /** Triggered when clicking a page item, or an arrow. Returns the index of the currently active page */
+  /** Triggered when clicking a page item, or an arrow. Returns the value of the currently active page */
   onChange: PropTypes.func,
 
-  /** Index of the currently active page */
+  /** Value of the currently active page i.e. page 1 = 1 */
   value: PropTypes.number,
 
   /** Determines how many bullets of pagination are visible, if the total number is higher than this, ellipsis is applied. Minimum of 4 */
