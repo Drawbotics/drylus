@@ -7,7 +7,7 @@ import Enum from '@drawbotics/enums';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { useRect } from '../utils/hooks';
-import { getStyleForSide } from '../utils';
+import { getStyleForSide, CustomPropTypes } from '../utils';
 
 
 const styles = {
@@ -97,6 +97,7 @@ export const PopoverSides = new Enum(
 const Popover = ({
   children,
   message,
+  content: _content,
   side,
   style,
   exitOnClick,
@@ -107,6 +108,8 @@ const Popover = ({
   const popoverRef = useRef();
   const { rect, setRect } = useRect();
   const popoverRect = popoverRef.current?.getBoundingClientRect();
+
+  const content = _content != null ? _content : message;
 
   useEffect(() => {
     if ( ! document.getElementById('popovers-outlet')) {
@@ -192,7 +195,7 @@ const Popover = ({
               [styles.visible]: visible,
             })}
             style={{ ...popoverStyle, ...style }}>
-            {message}
+            {content}
           </div>
         </div>,
         document.getElementById('popovers-outlet'),
@@ -203,8 +206,17 @@ const Popover = ({
 
 
 Popover.propTypes = {
-  /** Content shown when the Popover is visible */
-  message: PropTypes.node.isRequired,
+  /** DEPRECATED */
+  message: CustomPropTypes.mutuallyExclusive('content', {
+    type: PropTypes.node,
+    deprecated: true,
+  }),
+
+  /** Content shown when the tooltip is visible */
+  content: CustomPropTypes.mutuallyExclusive('message', {
+    type: PropTypes.node,
+    required: true,
+  }),
 
   /** Component wrapped by the Popover */
   children: PropTypes.node.isRequired,

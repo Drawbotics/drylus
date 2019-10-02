@@ -58,7 +58,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
               <TCell>
                 {do {
                   if (props[key].type.value) {
-                    <Tooltip message={<PropsInfo props={props[key].type.value} />} side={TooltipSides.RIGHT}>
+                    <Tooltip content={<PropsInfo props={props[key].type.value} />} side={TooltipSides.RIGHT}>
                       <Flex justify={FlexJustify.START}>
                         <FlexItem>
                           {props[key].type.name}

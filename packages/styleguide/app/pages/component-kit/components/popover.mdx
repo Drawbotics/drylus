@@ -28,14 +28,14 @@ __Example__
 <Flex>
   <FlexItem>
     <Margin size={{ right: Sizes.LARGE }}>
-      <Popover message="I am a popover">
+      <Popover content="I am a popover">
         <Button category={Categories.BRAND}>Click me</Button>
       </Popover>
     </Margin>
   </FlexItem>
   <FlexItem>
     <Popover
-      message={
+      content={
         <div style={{ textAlign: 'left' }}>
           <Margin size={{ bottom: Sizes.EXTRA_SMALL }}>
             <ListTile leading={<Icon name="alert-triangle" category={Categories.DANGER} />} title={<Text size={Sizes.SMALL}>I'm custom content</Text>} />

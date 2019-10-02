@@ -100,7 +100,7 @@ const Avatar = ({
   );
   if (hint) {
     return (
-      <Tooltip message={hint}>
+      <Tooltip content={hint}>
         {avatar}
       </Tooltip>
     );

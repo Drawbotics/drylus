@@ -135,7 +135,7 @@ const Map = ({
                 {do {
                   if (marker.title) {
                     <Popover
-                      message={
+                      content={
                         <PopoverContent
                           title={marker.title}
                           subtitle={marker.subtitle} />

@@ -69,7 +69,7 @@ const Sidebar = () => {
         <FlexItem>
           <Margin size={{ bottom: Sizes.SMALL }}>
             <Tooltip
-              message="Component kit"
+              content="Component kit"
               style={{ marginLeft: sv.marginSmall }}
               side={TooltipSides.RIGHT}>
               <Link to="/component-kit">
@@ -83,7 +83,7 @@ const Sidebar = () => {
         <FlexItem>
           <Margin size={{ bottom: Sizes.SMALL }}>
             <Tooltip
-              message="Design guidelines"
+              content="Design guidelines"
               style={{ marginLeft: sv.marginSmall }}
               side={TooltipSides.RIGHT}>
               <Link to="/design-guidelines">
@@ -97,7 +97,7 @@ const Sidebar = () => {
         <FlexItem>
           <Margin size={{ bottom: Sizes.SMALL }}>
             <Tooltip
-              message="Coding guidelines"
+              content="Coding guidelines"
               style={{ marginLeft: sv.marginSmall }}
               side={TooltipSides.RIGHT}>
               <Link to="/coding-guidelines">
