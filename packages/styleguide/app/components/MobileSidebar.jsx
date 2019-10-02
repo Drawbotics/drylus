@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { css } from 'emotion';
+import { css, keyframes } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import {
   Drawer,
@@ -25,6 +25,16 @@ import codingGuidelines from '../pages/coding-guidelines';
 import componentKit from '../pages/component-kit';
 
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+
 const styles = {
   sidebar: css`
     height: calc(${sv.marginExtraLarge} + ${sv.marginExtraSmall});
@@ -42,12 +52,14 @@ const styles = {
     min-height: 100vh;
   `,
   close: css`
-    position: absolute;
+    position: fixed;
     top: ${sv.marginSmall};
     right: ${sv.marginSmall};
     color: ${sv.colorPrimaryInverse};
-    transition: opacity ${sv.defaultTransitionTime} ease-in-out;
-    z-index: 99999999;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    animation: ${fadeIn} ${sv.defaultTransitionTime} ${sv.defaultTransitionTime} ease-in forwards;
   `,
   header: css`
     padding: ${sv.paddingSmall};
@@ -109,7 +121,7 @@ const MobileSidebar = () => {
   const [ searchOpen, toggleSearch ] = useState(false);
 
   const handleClickNav = () => {
-    toggleSidebar(false);
+    // toggleSidebar(false);
   };
 
   const handleCloseSearch = () => {
@@ -127,10 +139,7 @@ const MobileSidebar = () => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.logo} onClick={() => toggleSidebar(true)}>
-        <Logo color={sv.neutralDarkest} />
-      </div>
-      <div className={styles.close} style={{ opacity: sidebarOpen ? '1' : '0' }}>
-        <Icon name="x" />
+        <Logo key={sidebarOpen} color={sv.neutralDarkest} />
       </div>
       <Drawer
         width="auto"
@@ -144,6 +153,9 @@ const MobileSidebar = () => {
             width: 'auto',
           },
         }}>
+        <div className={styles.close} style={{ display: sidebarOpen ? null : 'none' }}>
+          <Icon name="x" />
+        </div>
         <div className={styles.content}>
           <div className={styles.header}>
             <Link onClick={handleClickNav} to="/">

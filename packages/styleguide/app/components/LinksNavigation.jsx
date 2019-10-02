@@ -19,7 +19,7 @@ const styles = {
 
     @media ${sv.screenL} {
       background: ${sv.neutralDarkest};
-      height: calc(100vh - 120px);
+      height: calc(100vh - 150px);
     }
   `,
   navigationTitle: css`
@@ -39,6 +39,7 @@ const styles = {
 
     @media ${sv.screenL} {
       padding-top: 0;
+      padding-bottom: ${sv.paddingHuge};
     }
   `,
   title: css`

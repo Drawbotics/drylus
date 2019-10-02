@@ -1,5 +1,12 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { Table, Panel, PanelBody, PanelSection } from '@drawbotics/react-drylus';
+import {
+  Table,
+  Panel,
+  PanelBody,
+  PanelSection,
+} from '@drawbotics/react-drylus';
+
+import InlineCode from '~/components/InlineCode';
 
 
 # Style Variables
@@ -10,10 +17,12 @@ All of the following (except functions) are available as CSS and LESS variables.
 export const Constants = () => {
   const data = Object.keys(sv).map((key) => ({
     name: key,
-    value: String(sv[key]),
+    value: <InlineCode>{String(sv[key])}</InlineCode>,
   }));
   return (
-    <Table data={data} header={['name', 'value']} />
+    <div style={{ overflow: 'scroll' }}>
+      <Table data={data} header={['name', 'value']} />
+    </div>
   );
 };
 

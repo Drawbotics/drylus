@@ -17,7 +17,7 @@ const ComponentKit = () => {
   const content = (
     <Content
       fullHeight
-      style={{ height: screenSize <= ScreenSizes.L ? '100vh' : null,
+      style={{ minHeight: screenSize <= ScreenSizes.L ? '100vh' : null,
     }}>
       <RoutesRenderer routes={componentKit} base='component-kit' />
     </Content>
