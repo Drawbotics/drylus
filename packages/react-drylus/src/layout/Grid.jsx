@@ -6,6 +6,7 @@ import camelCase from 'lodash/camelCase';
 import sv from '@drawbotics/drylus-style-vars';
 
 import Sizes from '../base/Sizes';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -81,12 +82,17 @@ GridItem.propTypes = {
 
 
 const Grid = ({
-  children,
-  columns,
-  hGutters,
-  vGutters,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    children,
+    columns,
+    hGutters,
+    vGutters,
+    style,
+  } = useResponsiveProps(rest, responsive);
+  
   const invalidChildren = React.Children
     .toArray(children)
     .some((child) => child != null && child.type !== GridItem);
@@ -133,6 +139,16 @@ Grid.propTypes = {
 
   /** For custom overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

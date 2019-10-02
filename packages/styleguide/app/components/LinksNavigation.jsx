@@ -19,6 +19,7 @@ const styles = {
 
     @media ${sv.screenL} {
       background: ${sv.neutralDarkest};
+      height: calc(100vh - 120px);
     }
   `,
   navigationTitle: css`
