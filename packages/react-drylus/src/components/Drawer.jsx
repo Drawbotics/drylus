@@ -266,7 +266,10 @@ const Drawer = ({
   }, [visible]);
 
   const width = do {
-    if (screenSize <= ScreenSizes.M) {
+    if (! responsive?.M?.width
+      && ! responsive?.S?.width
+      && ! responsive?.XS?.width
+      && screenSize <= ScreenSizes.M) {
       '100vw';
     }
     else {

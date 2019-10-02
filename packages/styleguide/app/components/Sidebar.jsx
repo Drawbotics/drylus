@@ -46,6 +46,7 @@ const styles = {
 
 const Sidebar = () => {
   const [ searchOpen, toggleSearch ] = useState(false);
+  
   return (
     <div className={styles.sidebar}>
       <Flex direction={FlexDirections.VERTICAL} justify={FlexJustify.START}>

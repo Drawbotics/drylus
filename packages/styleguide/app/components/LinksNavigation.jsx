@@ -16,10 +16,6 @@ const styles = {
     display: flex;
     flex-direction: column;
     height: 100vh;
-
-    @media ${sv.screenL} {
-      display: none;
-    }
   `,
   navigationTitle: css`
     padding: ${sv.paddingExtraLarge} ${sv.defaultPadding};

@@ -30,7 +30,11 @@ const App = () => {
             bar={screenSize <= ScreenSizes.L ? <MobileSidebar /> : <Sidebar />}
             position={screenSize <= ScreenSizes.L ? LayoutPositions.TOP : LayoutPositions.LEFT}
             fixed={screenSize > ScreenSizes.L}>
-            <div style={{ height: '100%' }}>
+            <div
+              style={{
+                height: '100%',
+                width: screenSize <= ScreenSizes.L ? '100vw' : null,
+              }}>
               <Root />
             </div>
           </Layout>
