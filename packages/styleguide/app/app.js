@@ -27,9 +27,16 @@ const App = () => {
       <DrylusProvider>
         <Page>
           <Layout
-            bar={screenSize <= ScreenSizes.L ? <MobileSidebar /> : <Sidebar />}
-            position={screenSize <= ScreenSizes.L ? LayoutPositions.TOP : LayoutPositions.LEFT}
-            fixed={screenSize > ScreenSizes.L}>
+            bar={<Sidebar />}
+            position={LayoutPositions.LEFT}
+            fixed
+            responsive={{
+              L: {
+                bar: <MobileSidebar />,
+                position: LayoutPositions.TOP,
+                fixed: false,
+              }
+            }}>
             <div
               style={{
                 height: '100%',

@@ -120,11 +120,7 @@ const MobileSidebar = () => {
   const [ linksVisible, toggleLinks ] = useState(pathname !== '/');
   const [ searchOpen, toggleSearch ] = useState(false);
 
-  const handleClickNav = () => {
-    // toggleSidebar(false);
-  };
-
-  const handleCloseSearch = () => {
+  const hideAll = () => {
     toggleSidebar(false);
     toggleSearch(false);
   };
@@ -158,7 +154,7 @@ const MobileSidebar = () => {
         </div>
         <div className={styles.content}>
           <div className={styles.header}>
-            <Link onClick={handleClickNav} to="/">
+            <Link onClick={hideAll} to="/">
               <div className={styles.logo} style={{ height: sv.defaultMargin }}>
                 <Logo />
               </div>
@@ -204,9 +200,7 @@ const MobileSidebar = () => {
                   </FlexItem>
                   <FlexItem>
                     <Padding size={{ top: Sizes.LARGE }}>
-                      <Link
-                        to="/component-kit"
-                        onClick={handleClickNav}>
+                      <Link to="/component-kit">
                         <ListTile
                           leading={<Icon name="package" />}
                           title={<Text inversed size={Sizes.LARGE}>Component kit</Text>} />
@@ -215,23 +209,19 @@ const MobileSidebar = () => {
                   </FlexItem>
                   <FlexItem>
                     <Padding size={{ top: Sizes.LARGE }}>
-                      <Link
-                        to="/coding-guidelines"
-                        onClick={handleClickNav}>
+                      <Link to="/design-guidelines">
                         <ListTile
-                          leading={<Icon name="command" />}
-                          title={<Text inversed size={Sizes.LARGE}>Coding guidelines</Text>} />
+                          leading={<Icon name="layout" />}
+                          title={<Text inversed size={Sizes.LARGE}>Design guidelines</Text>} />
                       </Link>
                     </Padding>
                   </FlexItem>
                   <FlexItem>
                     <Padding size={{ top: Sizes.LARGE }}>
-                      <Link
-                        to="/design-guidelines"
-                        onClick={handleClickNav}>
+                      <Link to="/coding-guidelines">
                         <ListTile
-                          leading={<Icon name="layout" />}
-                          title={<Text inversed size={Sizes.LARGE}>Design guidelines</Text>} />
+                          leading={<Icon name="command" />}
+                          title={<Text inversed size={Sizes.LARGE}>Coding guidelines</Text>} />
                       </Link>
                     </Padding>
                   </FlexItem>
@@ -243,7 +233,7 @@ const MobileSidebar = () => {
       </Drawer>
       <Search
         open={searchOpen}
-        onClickClose={handleCloseSearch} />
+        onClickClose={hideAll} />
     </div>
   );
 };

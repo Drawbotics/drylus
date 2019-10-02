@@ -83,12 +83,12 @@ const Sidebar = () => {
         <FlexItem>
           <Margin size={{ bottom: Sizes.SMALL }}>
             <Tooltip
-              message="Coding guidelines"
+              message="Design guidelines"
               style={{ marginLeft: sv.marginSmall }}
               side={TooltipSides.RIGHT}>
-              <Link to="/coding-guidelines">
+              <Link to="/design-guidelines">
                 <div className={styles.button}>
-                  <Icon name="command" />
+                  <Icon name="layout" />
                 </div>
               </Link>
             </Tooltip>
@@ -97,12 +97,12 @@ const Sidebar = () => {
         <FlexItem>
           <Margin size={{ bottom: Sizes.SMALL }}>
             <Tooltip
-              message="Design guidelines"
+              message="Coding guidelines"
               style={{ marginLeft: sv.marginSmall }}
               side={TooltipSides.RIGHT}>
-              <Link to="/design-guidelines">
+              <Link to="/coding-guidelines">
                 <div className={styles.button}>
-                  <Icon name="layout" />
+                  <Icon name="command" />
                 </div>
               </Link>
             </Tooltip>
