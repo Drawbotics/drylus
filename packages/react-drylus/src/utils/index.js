@@ -39,6 +39,15 @@ function _verifyOptions(props, propName, componentName) {
 
 
 export const CustomPropTypes = {
+  deprecated: (type) => {
+    return (props, propName, componentName) => {
+      if (props[propName]) {
+        console.warn(`Deprecation warning: \`${propName}\` has been deprecated. It will be removed in the next major version (${componentName})`); 
+      }
+
+      return PropTypes.checkPropTypes({ [propName]: type }, props, propName, componentName);
+    };
+  },
   mutuallyExclusive: (mutuallyExclusiveProp, options) => {
     return (props, propName, componentName) => {
       if (props[propName] != null && options.deprecated) {

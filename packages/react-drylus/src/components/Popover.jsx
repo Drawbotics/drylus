@@ -7,7 +7,7 @@ import Enum from '@drawbotics/enums';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { useRect } from '../utils/hooks';
-import { getStyleForSide } from '../utils';
+import { getStyleForSide, CustomPropTypes } from '../utils';
 
 
 const styles = {
@@ -109,10 +109,6 @@ const Popover = ({
   const { rect, setRect } = useRect();
   const popoverRect = popoverRef.current?.getBoundingClientRect();
 
-  if (message != null) {
-    console.warn('Deprecation warning: `message` has been replaced by `content`. It will be removed in the next major version');
-  }
-
   const content = _content != null ? _content : message;
 
   useEffect(() => {
@@ -211,10 +207,16 @@ const Popover = ({
 
 Popover.propTypes = {
   /** DEPRECATED */
-  message: PropTypes.node,
+  message: CustomPropTypes.mutuallyExclusive('content', {
+    type: PropTypes.node,
+    deprecated: true,
+  }),
 
-  /** Content shown when the Popover is visible */
-  content: PropTypes.node,
+  /** Content shown when the tooltip is visible */
+  content: CustomPropTypes.mutuallyExclusive('message', {
+    type: PropTypes.node,
+    required: true,
+  }),
 
   /** Component wrapped by the Popover */
   children: PropTypes.node.isRequired,
