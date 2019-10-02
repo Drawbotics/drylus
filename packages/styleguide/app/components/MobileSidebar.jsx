@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router';
 
 import Logo from './Logo';
+import Search from './Search';
 import LinksNavigation from './LinksNavigation';
 import codingGuidelines from '../pages/coding-guidelines';
 import componentKit from '../pages/component-kit';
@@ -67,7 +68,7 @@ function _generateLinks(pathname, onClick) {
   if (pathname.includes('component-kit')) {
     return (
       <LinksNavigation
-        onClickLink={onclick}
+        onClickLink={onClick}
         title="Component kit"
         routes={componentKit}
         base='component-kit' />
@@ -105,13 +106,15 @@ const MobileSidebar = () => {
   const { pathname } = useLocation();
   const [ sidebarOpen, toggleSidebar ] = useState(false);
   const [ linksVisible, toggleLinks ] = useState(pathname !== '/');
+  const [ searchOpen, toggleSearch ] = useState(false);
 
   const handleClickNav = () => {
     toggleSidebar(false);
   };
 
-  const handleClickHome = () => {
+  const handleCloseSearch = () => {
     toggleSidebar(false);
+    toggleSearch(false);
   };
 
   useEffect(() => {
@@ -143,7 +146,7 @@ const MobileSidebar = () => {
         }}>
         <div className={styles.content}>
           <div className={styles.header}>
-            <Link onClick={handleClickHome} to="/">
+            <Link onClick={handleClickNav} to="/">
               <div className={styles.logo} style={{ height: sv.defaultMargin }}>
                 <Logo />
               </div>
@@ -182,6 +185,7 @@ const MobileSidebar = () => {
                   <FlexItem>
                     <Padding size={{ top: Sizes.DEFAULT }}>
                       <ListTile
+                        onClick={() => toggleSearch(true)}
                         leading={<Icon name="search" />}
                         title={<Text inversed size={Sizes.LARGE}>Search</Text>} />
                     </Padding>
@@ -225,6 +229,9 @@ const MobileSidebar = () => {
           }}
         </div>
       </Drawer>
+      <Search
+        open={searchOpen}
+        onClickClose={handleCloseSearch} />
     </div>
   );
 };
