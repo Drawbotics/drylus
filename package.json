@@ -50,6 +50,7 @@
     "@hot-loader/react-dom": "^16.8.6",
     "@mdx-js/loader": "^1.0.0-rc.4",
     "@mdx-js/react": "^1.0.0-rc.5",
+    "auto": "^7.6.2",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.5",
