@@ -15,6 +15,7 @@ import {
   FlexJustify,
   Margin,
   Icon,
+  Tag,
 } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
@@ -81,7 +82,8 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
               <TCell>
                 {do{
                   if (props[key].description) {
-                    props[key].description;
+                    const val = props[key].description;
+                    val === 'DEPRECATED' ? <Tag category={Categories.WARNING} inversed>{val}</Tag> : val;
                   }
                   else if (props[key].type.name === 'enum') {
                     const values = props[key].type.value.map((v) => v.value.replace(/'/g, ''));
