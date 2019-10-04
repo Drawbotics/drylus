@@ -1,8 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const checkEnv = require('@drawbotics/check-env');
-// const betterWebpackProgress = require('better-webpack-progress');
-// const ProgressPlugin = require('webpack/lib/ProgressPlugin');
+const betterWebpackProgress = require('better-webpack-progress');
+const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ip = require('ip');
@@ -35,9 +35,9 @@ const basePlugins = [
     inject: true,
     favicon: './public/favicon.ico',
   }),
-  // new ProgressPlugin(betterWebpackProgress({
-  //   mode: 'compact',
-  // })),
+  new ProgressPlugin(betterWebpackProgress({
+    mode: 'compact',
+  })),
 ];
 
 
