@@ -20,7 +20,7 @@ jobs:
       - name: Build styleguide docs
         run: |
           npm install
-          npm run build:styleguide
+          npm run build
 
       - name: Commit changes
         uses: elstudio/actions-js-build/commit@v2
