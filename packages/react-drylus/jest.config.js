@@ -19,11 +19,4 @@ module.exports = {
   setupFilesAfterEnv: [
     './jest.setup.js',
   ],
-  moduleNameMapper: {
-    '@drawbotics/drylus-style-vars$': "<rootDir>/../drylus-style-vars/dist/vars.js",
-    '@drawbotics/extract-emotion$': "<rootDir>/../extract-emotion/lib/",
-    '@drawbotics/icons$': "<rootDir>/../icons/dist/drycons.css",
-    '@drawbotics/react-drylus$': "<rootDir>/../react-drylus/dist/drylus.js",
-    '@drawbotics/vanilla-drylus$': "<rootDir>/../vanilla-drylus",
-  },
 };
