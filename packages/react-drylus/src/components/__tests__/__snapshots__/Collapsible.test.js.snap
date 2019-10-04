@@ -26,3 +26,35 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
   </div>
 </div>
 `;
+
+exports[`Collapsible matches snapshot when it is open 1`] = `
+<div
+  className="css-1pcrpvn-Collapsible__root"
+>
+  <div
+    className="css-1os74zx-Collapsible__header"
+  >
+    <div
+      data-element="title"
+    >
+      <div
+        className="css-l008e6-Label__root-Label__ellipsized"
+      >
+        Title
+      </div>
+    </div>
+    <div
+      className="css-11npev5-Collapsible__icon"
+    >
+      <i
+        className="css-10jseif-Icon__root Drycon Drycon-chevron-up"
+      />
+    </div>
+  </div>
+  <div
+    className="css-1lgpi2b-Collapsible__content"
+  >
+    Collapsible content
+  </div>
+</div>
+`;
