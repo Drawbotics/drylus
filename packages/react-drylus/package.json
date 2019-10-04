@@ -12,6 +12,7 @@
     "watch": "npm run clean && NODE_ENV=development npm run build:commonjs -- --watch",
     "build": "npm run clean && NODE_ENV=production npm run build:commonjs",
     "test": "jest",
+    "test:watch": "jest --watchAll",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
