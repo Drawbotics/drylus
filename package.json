@@ -27,7 +27,8 @@
     "update:assets": "mmdc -i assets/graph.mmd -o assets/graph.svg",
     "lint": "eslint --ext js,jsx --format node_modules/eslint-formatter-pretty packages/",
     "postpack": "npm run publish:styleguide",
-    "test": "lerna run test --stream"
+    "pre-test": "npm run build:vars && npm run build:icons && npm run build:extract-emotion",
+    "test": "npm run pre-test && lerna run test --stream"
   },
   "husky": {
     "hooks": {
