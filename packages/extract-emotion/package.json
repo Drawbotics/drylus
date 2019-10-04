@@ -9,8 +9,8 @@
   "scripts": {
     "clean:test": "rimraf **/output",
     "clean:lib": "rimraf lib/",
-    "test": "npm run clean:test && jest",
     "build": "npm run clean:lib && NODE_ENV=production babel ./index.js --out-dir lib/",
+    "test": "npm run build && npm run clean:test && jest",
     "extract-emotion": "node ./bin/cli.js",
     "prepublishOnly": "npm run build"
   },

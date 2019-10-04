@@ -29,10 +29,21 @@ module.exports = function(api) {
     "@babel/plugin-proposal-do-expressions",
   ];
 
+  const env = {
+    test: {
+      presets,
+      plugins: [
+        ...plugins,
+        "@babel/plugin-transform-modules-commonjs",
+      ],
+    },
+  };
+
   return {
     presets,
     plugins,
     babelrcRoots,
     sourceType: 'unambiguous',
+    env,
   };
 }

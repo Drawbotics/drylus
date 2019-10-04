@@ -68,7 +68,7 @@ const Collapsible = ({
 
 Collapsible.propTypes = {
   /** Shown on the left side as a label */
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
 
   /** Determines whether the content of the collapsible is visible */
   isOpen: PropTypes.bool,
