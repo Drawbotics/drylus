@@ -6,10 +6,19 @@ on:
       - master
 
 jobs:
-  test:
+  build-docs:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+      - uses: actions/checkout@v1
+
       - name: Build styleguide docs
         run: |
           npm install
           npm run build:styleguide
+
+      - name: Commit changes
+        uses: elstudio/actions-js-build/commit@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          PUSH_BRANCH: 'master'
