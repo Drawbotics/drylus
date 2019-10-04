@@ -19,13 +19,14 @@
     "dev:vanilla": "cd packages/vanilla-drylus && npm run build:dev",
     "dev:vars": "cd packages/drylus-style-vars && npm run build:dev",
     "build:icons": "cd packages/icons && npm run build",
-    "build": "lerna run build",
-    "watch": "lerna run watch",
+    "build": "lerna run build --stream",
+    "watch": "lerna run watch --stream",
     "bootstrap": "lerna link convert && lerna exec npm install && npm install",
     "publish": "lerna publish --force-publish",
     "update:assets": "mmdc -i assets/graph.mmd -o assets/graph.svg",
     "lint": "eslint --ext js,jsx --format node_modules/eslint-formatter-pretty packages/",
-    "postpack": "npm run publish:styleguide"
+    "postpack": "npm run publish:styleguide",
+    "test": "lerna run test --stream"
   },
   "husky": {
     "hooks": {

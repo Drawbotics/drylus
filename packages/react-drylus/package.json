@@ -11,7 +11,7 @@
     "build:commonjs": "babel --ignore **/__tests__/ --root-mode upward src/ --out-dir lib/",
     "watch": "npm run clean && NODE_ENV=development npm run build:commonjs -- --watch",
     "build": "npm run clean && NODE_ENV=production npm run build:commonjs",
-    "test": "jest --watchAll",
+    "test": "jest",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
