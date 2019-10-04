@@ -8,7 +8,7 @@ describe('Collapsible', () => {
   describe('matches snapshot when', () => {
     it('is not open', () => {
       const tree = renderer.create(
-        <Collapsible isOpen={false}>Collapsible title</Collapsible>
+        <Collapsible title="Title" isOpen={false}>Collapsible content</Collapsible>
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });

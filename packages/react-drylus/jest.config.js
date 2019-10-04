@@ -11,6 +11,11 @@ module.exports = {
   transform: {
     '^.+\\.(js|jsx)?$': ['babel-jest', { rootMode: 'upward' }],
   },
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/lib/',
+    '/dist/',
+  ],
   setupFilesAfterEnv: [
     './jest.setup.js',
   ],

@@ -12,7 +12,9 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
     >
       <div
         className="css-l008e6-Label__root-Label__ellipsized"
-      />
+      >
+        Title
+      </div>
     </div>
     <div
       className="css-11npev5-Collapsible__icon"
