@@ -8,8 +8,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: npm install, build and test
+      - name: npm install and test
         run: |
           npm install
-          npm run build --if-present
           npm test
