@@ -4,9 +4,13 @@ on: [push, pull_request]
 
 jobs:
   test:
-    name: Run tests
+    name: Test
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@master
-    - name: Test
-      uses: skx/github-action-tester@master
+    - name: Checkout
+    - uses: actions/checkout@v1
+    - name: npm install and test
+      run: |
+        npm install
+        npm test
