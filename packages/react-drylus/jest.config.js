@@ -8,7 +8,6 @@ module.exports = {
     '**/*.test.js',
     '**/*.test.jsx',
   ],
-  // rootDir: '../../',
   transform: {
     '^.+\\.(js|jsx)?$': ['babel-jest', { rootMode: 'upward' }],
   },
@@ -21,10 +20,10 @@ module.exports = {
     './jest.setup.js',
   ],
   moduleNameMapper: {
-    '@drawbotics/drylus-style-vars$': path.resolve(__dirname, '../drylus-style-vars'),
-    '@drawbotics/extract-emotion$': path.resolve(__dirname, '../extract-emotion'),
-    '@drawbotics/icons$': path.resolve(__dirname, '../icons'),
-    '@drawbotics/react-drylus$': path.resolve(__dirname, '../react-drylus'),
-    '@drawbotics/vanilla-drylus$': path.resolve(__dirname, '../vanilla-drylus'),
+    '@drawbotics/drylus-style-vars$': "<rootDir>/../drylus-style-vars/dist/vars.js",
+    '@drawbotics/extract-emotion$': "<rootDir>/../extract-emotion/lib/",
+    '@drawbotics/icons$': "<rootDir>/../icons/dist/drycons.css",
+    '@drawbotics/react-drylus$': "<rootDir>/../react-drylus/dist/drylus.js",
+    '@drawbotics/vanilla-drylus$': "<rootDir>/../vanilla-drylus",
   },
 };
