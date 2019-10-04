@@ -11,4 +11,5 @@ jobs:
       - name: npm install and test
         run: |
           npm install
+          npm run build --if-present
           npm test
