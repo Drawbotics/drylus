@@ -72,7 +72,7 @@ const prodPlugins = [
 module.exports = {
   mode: process.env.NODE_ENV,
   devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
-  stats: 'none',
+  stats: 'verbose',
   entry: './app/index.js',
   resolve: {
     modules: [
