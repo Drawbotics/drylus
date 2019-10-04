@@ -39,6 +39,10 @@
     "*.{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0"
   },
   "author": "nicmosc <nick@drawbotics.com>",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/Drawbotics/drylus"
+  },
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.4.4",
