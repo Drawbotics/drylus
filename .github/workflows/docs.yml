@@ -25,3 +25,5 @@ jobs:
 
       - name: Commit changes
         run: npm run publish:styleguide
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
