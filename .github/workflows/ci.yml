@@ -18,4 +18,5 @@ jobs:
       - name: npm install and test
         run: |
           npm install
-          npm test
+          npx lerna link convert
+          npm run test
