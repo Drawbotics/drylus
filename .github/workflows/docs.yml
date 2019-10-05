@@ -11,8 +11,8 @@ jobs:
   build-docs:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
+      # - name: Checkout
+      #   uses: actions/checkout@v1
 
       - name: Build styleguide docs
         env:

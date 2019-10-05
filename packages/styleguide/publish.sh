@@ -7,4 +7,4 @@ git add ../../docs
 
 git commit -m "New styleguide build" --no-verify --allow-empty
 
-git push HEAD:master
+git push -u origin HEAD
