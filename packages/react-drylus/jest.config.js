@@ -14,7 +14,6 @@ module.exports = {
   testPathIgnorePatterns: [
     '/node_modules/',
     '/lib/',
-    '/dist/',
   ],
   setupFilesAfterEnv: [
     './jest.setup.js',
