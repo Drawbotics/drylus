@@ -6,5 +6,3 @@ git config --global user.name "nicmosc"
 git add ../../docs
 
 git commit -m "New styleguide build" --no-verify --allow-empty
-
-git push -u origin HEAD
