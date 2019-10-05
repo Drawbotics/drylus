@@ -1,36 +1,27 @@
-# name: Docs
+name: Docs
 
-# on:
-#   push:
-#     branches:    
-#       - master
-#     paths-ignore:
-#     - 'docs/**'
+on:
+  push:
+    branches:    
+      - master
+    paths-ignore:
+    - 'docs/**'
 
-# jobs:
-#   build-docs:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v1
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
 
-#       - name: Set up node 9
-#         uses: actions/setup-node@v1
-#         with:
-#           node-version: '9.x'
+      - name: Build styleguide docs
+        env:
+          MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
 
-#       - name: Build styleguide docs
-#         env:
-#           MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
+        run: |
+          npm install
+          npx lerna exec npm install && npx lerna link convert
+          npm run build
 
-#         run: |
-#           npm install
-#           npx lerna exec npm install
-#           npx lerna link convert
-#           npm run build
-
-#       - name: Commit changes
-#         uses: elstudio/actions-js-build/commit@v2
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           PUSH_BRANCH: 'master'
+      - name: Commit changes
+        run: npm run publish:styleguide

@@ -1,8 +1,8 @@
 #!/bin/sh
 npm run build
 
-git add --all
+git add docs
 
-git commit -m "new styleguide build" --no-verify
+git commit -m "New styleguide build" --no-verify --allow-empty
 
-git push
+git push -u origin HEAD
