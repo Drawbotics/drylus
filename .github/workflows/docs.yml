@@ -25,11 +25,10 @@ jobs:
           npx lerna exec npm install && npx lerna link convert
           npm run build
 
-      - name: Commit changes
-        run: npm run publish:styleguide
-        
+      # - name: Commit changes
+      #   run: npm run publish:styleguide
+
       - uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          directory: 'docs'
