@@ -18,9 +18,6 @@ jobs:
           node-version: '9.x'
 
       - name: Build styleguide docs
-        env:
-          MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
-
         run: |
           npm install
           npx lerna exec npm install
