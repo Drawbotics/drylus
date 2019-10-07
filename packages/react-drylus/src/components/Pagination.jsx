@@ -49,7 +49,7 @@ const Pagination = ({
   prevLabel,
   nextLabel,
   pages,
-  onChange=x=>x,
+  onChange,
   value,
   maxVisiblePages,
   style,
@@ -112,7 +112,7 @@ Pagination.propTypes = {
   nextLabel: PropTypes.string,
 
   /** Triggered when clicking a page item, or an arrow. Returns the value of the currently active page */
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
 
   /** Value of the currently active page i.e. page 1 = 1 */
   value: PropTypes.number,
