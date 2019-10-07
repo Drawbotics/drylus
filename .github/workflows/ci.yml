@@ -50,4 +50,5 @@ jobs:
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: |
         git remote -v
+        git checkout -- .
         npm run release
