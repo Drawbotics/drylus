@@ -26,8 +26,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@master
-
+      # uses: actions/checkout@master
+      run: git checkout "${GITHUB_REF:11}"
+        
     - name: Release
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
