@@ -2,6 +2,8 @@
 
 export PATH=$(npm bin):$PATH
 
+git checkout -- .
+
 VERSION=`npx auto version`
 
 if [ ! -z "$VERSION" ]; then
