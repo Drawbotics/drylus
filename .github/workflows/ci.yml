@@ -14,6 +14,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
+    - name: Skip CI
+      uses: veggiemonk/skip-commit@master
+      env:
+        COMMIT_FILTER: skip ci
       
     - name: Install dependencies and run tests
       run: |
@@ -26,10 +30,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Skip CI
-      uses: veggiemonk/skip-commit@master
-      env:
-        COMMIT_FILTER: skip-ci
 
     - name: Prepare repository
       env:
