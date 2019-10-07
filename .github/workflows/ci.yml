@@ -30,7 +30,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-
+    - name: Install dependencies
+      run: |
+        npm install
+        npx lerna exec npm install && npx lerna link convert
+    
     - name: Prepare repository
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
