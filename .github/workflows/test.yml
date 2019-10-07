@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches:    
+      - master
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        
+      - name: npm install and test
+        run: |
+          npm install
+          npx lerna exec npm install && npx lerna link convert
+          npm run test
+  
+  build-and-release:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run:
+        npm run release
