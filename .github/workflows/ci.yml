@@ -12,22 +12,34 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-        
-      - name: Install dependencies and run tests
-        run: |
-          npm install
-          npx lerna exec npm install && npx lerna link convert
-          npm run test
+    - name: Checkout
+      uses: actions/checkout@v1
+      
+    - name: Install dependencies and run tests
+      run: |
+        npm install
+        npx lerna exec npm install && npx lerna link convert
+        npm run test
   
-  build-and-release:
+  release:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      # uses: actions/checkout@master
-      run: git checkout "${GITHUB_REF:11}"
+    - uses: actions/checkout@v1
+    - name: Skip CI
+      uses: veggiemonk/skip-commit@master
+      env:
+        COMMIT_FILTER: skip ci
+
+    - name: Prepare repository
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        git checkout "${GITHUB_REF:11}"
+        git remote rm origin
+        git remote add origin "https://$GH_TOKEN@github.com/drawbotics/drylus.git"
+        git fetch origin
+        git branch --set-upstream-to origin/master
         
     - name: Release
       env:
@@ -36,5 +48,6 @@ jobs:
         AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
         MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      run:
+      run: |
+        git remote -v
         npm run release
