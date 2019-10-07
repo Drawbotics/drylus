@@ -37,7 +37,9 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0"
+    "linters": {
+      "!(bundle*).{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0"
+    }
   },
   "author": "nicmosc <nick@drawbotics.com>",
   "repository": {

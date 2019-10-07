@@ -13,7 +13,7 @@ function setFontSize(size, file) {
 function generateJSFunction(file) {
   const contents = fs.readFileSync(file, 'utf8');
   const withPattern = contents.replace(/url\(".\/(\S+)"\)/gm, `url(${ICONS_CDN_PATH}/#{version}/$1)`);
-  const jsString = `export default function(version) {
+  const jsString = `module.exports = function(version) {
     return \`${withPattern}\`.replace(/#{version}/gm, version);
   }`;
   const escapedContent = jsString.replace(/(content: "\\)/gm, '$1\\');

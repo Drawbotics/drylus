@@ -14,7 +14,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+        
       - name: npm install and test
         run: |
           npm install
-          npm test
+          npx lerna exec npm install && npx lerna link convert
+          npm run test

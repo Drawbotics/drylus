@@ -4,7 +4,7 @@ import React from 'react';
 const DesignGuidelines = () => {
   return (
     <div>
-      Design guidelines
+      Design Guidelines
     </div>
   );
 };
