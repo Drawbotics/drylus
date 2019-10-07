@@ -36,7 +36,10 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0"
+    "linters": {
+      "*.{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0"
+    },
+    "ignore": ["docs"]
   },
   "author": "nicmosc <nick@drawbotics.com>",
   "license": "ISC",
