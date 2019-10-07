@@ -6,7 +6,6 @@ VERSION=`npx auto version`
 
 if [ ! -z "$VERSION" ]; then
   npx auto changelog
-  git checkout -- .
   npx lerna publish --yes $VERSION -m '%v [skip ci]'
   npx auto release
 fi
