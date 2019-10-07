@@ -27,7 +27,6 @@
     "postpack": "npm run publish:styleguide",
     "pre-test": "npm run build:vars && npm run build:icons && npm run build:extract-emotion",
     "test": "npm run pre-test && lerna run test --stream",
-    "version": "git checkout -- . && npm version `npx auto version` -m 'Bump version to: %s [skip ci]'",
     "publish": "npm publish && git push --follow-tags --set-upstream origin $branch",
     "release": "./release.sh"
   },
