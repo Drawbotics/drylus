@@ -1,3 +1,17 @@
+# v4.2.7 (Tue Oct 08 2019)
+
+#### ⚠️  Pushed to master
+
+- add github token to generate changelog step  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - add responsive prop to Spinner  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.2.6 (Tue Oct 08 2019)
 
 #### ⚠️  Pushed to master
