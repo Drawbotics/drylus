@@ -30,10 +30,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Install dependencies
+    - name: Install dependencies & build libs
       run: |
         npm install
         npx lerna exec npm install && npx lerna link convert
+        npm run build-libs
     
     - name: Prepare repository
       env:

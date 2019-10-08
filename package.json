@@ -24,8 +24,8 @@
     "bootstrap": "lerna link convert && lerna exec npm install && npm install",
     "update:assets": "mmdc -i assets/graph.mmd -o assets/graph.svg",
     "lint": "eslint --ext js,jsx --format node_modules/eslint-formatter-pretty packages/",
-    "pre-test": "npm run build:vars && npm run build:icons && npm run build:extract-emotion",
-    "test": "npm run pre-test && lerna run test --stream",
+    "build-libs": "npm run build:vars && npm run build:icons && npm run build:extract-emotion",
+    "test": "npm run build-libs && lerna run test --stream",
     "release": "./release.sh"
   },
   "husky": {
