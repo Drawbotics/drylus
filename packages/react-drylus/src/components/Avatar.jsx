@@ -6,6 +6,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import { Categories, Sizes } from '../base';
 import Tooltip from '../components/Tooltip';
 import { getEnumAsClass } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -67,14 +68,19 @@ const styles = {
 
 
 const Avatar = ({
-  image,
-  text,
-  size,
-  category,
-  backgroundColor,
-  hint,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    image,
+    text,
+    size,
+    category,
+    backgroundColor,
+    hint,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   const customSize = typeof size === 'number';
   const avatar = (
     <div className={cx(styles.root, {
@@ -141,6 +147,16 @@ Avatar.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
