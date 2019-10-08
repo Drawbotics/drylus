@@ -16,6 +16,8 @@ jobs:
     - name: Generate Changelog
       run: |
         npx auto changelog --dry-run | grep -vE "lerna notice|lerna success|New Release Notes" > ${{ github.workflow }}-CHANGELOG.md
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
     - name: Release
       uses: softprops/action-gh-release@v1
