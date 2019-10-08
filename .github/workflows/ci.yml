@@ -46,7 +46,7 @@ jobs:
         git fetch origin
         git branch --set-upstream-to origin/master
         
-    - name: Release
+    - name: Publish
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
@@ -58,3 +58,12 @@ jobs:
         git remote -v
         git checkout -- .
         npm run release
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        body_path: CHANGELOG.md
+        prerelease: ${{ contains(github.ref, '-') }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
