@@ -9,18 +9,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install dependencies
-        uses: actions/checkout@v1
-        run: npm install
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: npm install
 
-      - name: Generate Changelog
-        run: |
-          npx auto changelog --dry-run | grep -vE "lerna notice|lerna success|New Release Notes" > ${{ github.workflow }}-CHANGELOG.md
+    - name: Generate Changelog
+      run: |
+        npx auto changelog --dry-run | grep -vE "lerna notice|lerna success|New Release Notes" > ${{ github.workflow }}-CHANGELOG.md
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          body_path: ${{ github.workflow }}-CHANGELOG.md
-          prerelease: ${{ contains(github.ref, '-') }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        body_path: ${{ github.workflow }}-CHANGELOG.md
+        prerelease: ${{ contains(github.ref, '-') }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
