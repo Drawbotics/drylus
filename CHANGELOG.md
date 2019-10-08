@@ -1,3 +1,23 @@
+# v4.2.4 (Tue Oct 08 2019)
+
+#### ⚠️  Pushed to master
+
+- remove from-package option from lerna publish  ([@nicmosc](https://github.com/nicmosc))
+- make release a separate action to get the tag  ([@nicmosc](https://github.com/nicmosc))
+- use from-package option in lerna publish  ([@nicmosc](https://github.com/nicmosc))
+- use auto release dry run to generate new changelog for release  ([@nicmosc](https://github.com/nicmosc))
+- use from-package in lerna publish  ([@nicmosc](https://github.com/nicmosc))
+- make guidelines lowercase  ([@nicmosc](https://github.com/nicmosc))
+- use action-gh-release instead of auto release  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - add responsive props to avatar  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.2.3 (Tue Oct 08 2019)
 
 #### ⚠️  Pushed to master
