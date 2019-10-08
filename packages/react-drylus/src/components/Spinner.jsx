@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
 import { Sizes, Categories } from '../base';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const rotate = keyframes`
@@ -92,12 +93,16 @@ const styles = {
 
 
 const Spinner = ({
-  size,
-  category,
-  inversed,
-  fullSize,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    size,
+    category,
+    inversed,
+    fullSize,
+    style,
+  } = useResponsiveProps(rest, responsive);
   return (
     <div
       style={style}
@@ -135,6 +140,16 @@ Spinner.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
