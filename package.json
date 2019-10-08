@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Drawbotics' Design System Library",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "watch:react": "cd packages/react-drylus && npm run watch",
     "build:react": "cd packages/react-drylus && npm run build",
