@@ -1,3 +1,19 @@
+# v4.2.3 (Tue Oct 08 2019)
+
+#### ⚠️  Pushed to master
+
+- remove auto release step  ([@nicmosc](https://github.com/nicmosc))
+- add build-libs to release step  ([@nicmosc](https://github.com/nicmosc))
+- remove publish script in root package and use if for job condition  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - set onChange to default props in tab navigation  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.2.2 (Tue Oct 08 2019)
 
 #### 🐛  Bug Fix
