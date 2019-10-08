@@ -2,9 +2,12 @@ name: CI
 
 on:
   push:
-    # paths-ignore:
-    #   - '!packages/**'
-    #   - 'packages/styleguide/**'
+    paths:
+      - 'packages/react-drylus/**'
+      - 'packages/extract-emotion/**'
+      - 'packages/vanilla-drylus/**'
+      - 'packages/drylus-style-vars/**'
+      - 'packages/icons/**'
     branches:
       - master
   pull_request:
