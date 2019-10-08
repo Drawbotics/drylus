@@ -59,11 +59,14 @@ jobs:
         git checkout -- .
         npm run release
 
+    - name: Generate Changelog
+      run: |
+        npx auto changelog --dry-run | grep -vE "lerna notice|lerna success|New Release Notes" > ${{ github.workflow }}-CHANGELOG.md
+
     - name: Release
       uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
       with:
-        body_path: CHANGELOG.md
+        body_path: ${{ github.workflow }}-CHANGELOG.md
         prerelease: ${{ contains(github.ref, '-') }}
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
