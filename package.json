@@ -26,7 +26,6 @@
     "lint": "eslint --ext js,jsx --format node_modules/eslint-formatter-pretty packages/",
     "pre-test": "npm run build:vars && npm run build:icons && npm run build:extract-emotion",
     "test": "npm run pre-test && lerna run test --stream",
-    "publish": "npm publish && git push --follow-tags --set-upstream origin $branch",
     "release": "./release.sh"
   },
   "husky": {

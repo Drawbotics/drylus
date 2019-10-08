@@ -11,13 +11,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: contains(github.event.commits[0].message, '[skip ci]') == false
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: Skip CI
-      uses: veggiemonk/skip-commit@master
-      env:
-        COMMIT_FILTER: skip ci
       
     - name: Install dependencies and run tests
       run: |
