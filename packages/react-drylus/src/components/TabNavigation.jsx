@@ -124,7 +124,7 @@ const styles = {
 
 const TabNavigation = ({
   value,
-  onChange=x=>x,
+  onChange,
   options,
   valueKey,
   labelKey,
@@ -212,6 +212,7 @@ TabNavigation.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
   vertical: false,
+  onChange: x => x,
 };
 
 
