@@ -4,6 +4,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
 import Sizes from '../base/Sizes';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const TRIGGER_DIMENSIONS = '21px';
@@ -78,12 +79,16 @@ const styles = {
 
 
 const Toggle = ({
-  onChange,
-  disabled,
-  value,
-  size,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    onChange,
+    disabled,
+    value,
+    size,
+    style,
+  } = useResponsiveProps(rest, responsive);
   return (
     <div
       style={style}
@@ -113,6 +118,16 @@ Toggle.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
