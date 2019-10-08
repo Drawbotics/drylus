@@ -1,5 +1,11 @@
 {
   "plugins": [
-    "npm"
+    "npm",
+    [
+      "omit-commits",
+      {
+        "subject": ["[skip ci]"]
+      }
+    ]
   ]
 }
