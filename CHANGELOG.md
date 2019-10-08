@@ -1,3 +1,18 @@
+# v4.2.5 (Tue Oct 08 2019)
+
+#### ⚠️  Pushed to master
+
+- only trigger CI for packages that get released  ([@nicmosc](https://github.com/nicmosc))
+- fix release script  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - add responsive props to ButtonLink  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.2.4 (Tue Oct 08 2019)
 
 #### ⚠️  Pushed to master
