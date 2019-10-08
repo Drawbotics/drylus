@@ -5,20 +5,26 @@ import PropTypes from 'prop-types';
 import { Categories, Sizes, Tiers } from '../base';
 import { getEnumAsClass } from '../utils';
 import { styles } from './Button';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const ButtonLink = ({
-  children,
-  disabled,
-  onClick,
-  category,
-  size,
-  tier,
-  leading,
-  trailing,
-  fullWidth,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    children,
+    disabled,
+    onClick,
+    category,
+    size,
+    tier,
+    leading,
+    trailing,
+    fullWidth,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   if (! children && trailing && leading) {
     throw new Error('If no children are given, only pass trailing or leading, but not both');
   }
@@ -97,6 +103,16 @@ ButtonLink.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
