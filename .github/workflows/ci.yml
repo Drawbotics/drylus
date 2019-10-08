@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies and run tests
       run: |
         npm install
-        npx lerna exec npm install && npx lerna link convert
+        npx lerna link convert
         npm run test
   
   release:
@@ -36,7 +36,7 @@ jobs:
     - name: Install dependencies & build libs
       run: |
         npm install
-        npx lerna exec npm install && npx lerna link convert
+        npx lerna link convert
         npm run build-libs
     
     - name: Prepare repository
