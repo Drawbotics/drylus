@@ -2,16 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ThemeProvider from './ThemeProvider';
-import { AlertsProvider, SplashScreenProvider } from '../components';
+import { AlertsProvider } from '../components';
 
 
 const DrylusProvider = ({ children, style }) => {
   return (
     <ThemeProvider style={style}>
       <AlertsProvider>
-        <SplashScreenProvider>
-          {children}
-        </SplashScreenProvider>
+        {children}
       </AlertsProvider>
     </ThemeProvider>
   );
