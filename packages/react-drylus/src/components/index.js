@@ -32,7 +32,7 @@ export Banner from './Banner';
 export Callout from './Callout';
 export ButtonLink from './ButtonLink';
 export AlertsProvider, { Alert, useAlert } from './AlertsProvider';
-export SplashScreenProvider, { useSplashScreen } from './SplashScreenProvider';
+export SplashScreen from './SplashScreen';
 export Breadcrumbs from './Breadcrumbs';
 export Dropdown, { DropdownSides, DropdownOption, DropdownTitle, DropdownSeparator } from './Dropdown';
 export List, { ListItem } from './List';

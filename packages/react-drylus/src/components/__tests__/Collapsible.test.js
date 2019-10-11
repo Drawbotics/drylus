@@ -20,6 +20,7 @@ describe('Collapsible', () => {
       expect(tree).toMatchSnapshot();
     });
   });
+  
   describe('opens when clicked', () => {
     let open = false;
 

@@ -59,27 +59,11 @@ const styles = {
 };
 
 
-const Context = React.createContext();
-
-
-const SplashScreenProvider = ({ children }) => {
+const SplashScreen = ({
+  text,
+  visible,
+}) => {
   const [ outletElement, setOutletElement ] = useState(null);
-  const [ visible, setVisibility ] = useState(false);
-  const [ state, setState ] = useState({});
-
-  const { text } = state;
-
-  const hideSplashScreen = () => {
-    setVisibility(false);
-    setTimeout(() => setState({}), 500);
-  };
-
-  const showSplashScreen = (options) => {
-    setVisibility(true);
-    setState(options);
-  };
-
-  const updateSplashScreen = (options) => setState({ ...state, ...options });
 
   const handleEnter = () => {
     const timeline = anime.timeline({
@@ -128,61 +112,58 @@ const SplashScreenProvider = ({ children }) => {
 
   if (! outletElement) return null;
 
-  return (
-    <Context.Provider value={{ showSplashScreen, hideSplashScreen, updateSplashScreen }}>
-      {children}
-      {ReactDOM.createPortal(
-        <div className={themeStyles.root}>
-          <CSSTransition
-            timeout={300}
-            in={visible}
-            mountOnEnter
-            unmountOnExit
-            onEnter={handleEnter}
-            classNames={{
-              enter: styles.splashEnter,
-              enterActive: styles.splashEnterActive,
-              exit: styles.splashExit,
-              exitActive: styles.splashExitActive,
-            }}>
-            <div className={styles.root}>
-              <div className={styles.animation}>
-                <svg height="100%" width="100%" viewBox="0 0 300 300">
-                  <defs>
-                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
-                      <stop offset="0%" style={{ stopColor: sv.brand, stopOpacity: 1 }} />
-                      <stop offset="100%" style={{ stopColor: sv.brandDark, stopOpacity: 1 }} />
-                    </linearGradient>
-                  </defs>
-                  <polygon className="first" id="1" stroke="url('#gradient')" fill="none" points="5,228 195,5 295,280" />
-                  <polyline className="second" id="2" stroke="url('#gradient')" fill="none" points="5,228 132,188 295,280" />
-                  <polyline className="third" id="3" stroke="url('#gradient')" fill="none" points="132,188 195,5" />
-                </svg>
+  return ReactDOM.createPortal(
+    <div className={themeStyles.root}>
+      <CSSTransition
+        timeout={300}
+        in={visible}
+        mountOnEnter
+        unmountOnExit
+        onEnter={handleEnter}
+        classNames={{
+          enter: styles.splashEnter,
+          enterActive: styles.splashEnterActive,
+          exit: styles.splashExit,
+          exitActive: styles.splashExitActive,
+        }}>
+        <div className={styles.root}>
+          <div className={styles.animation}>
+            <svg height="100%" width="100%" viewBox="0 0 300 300">
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" style={{ stopColor: sv.brand, stopOpacity: 1 }} />
+                  <stop offset="100%" style={{ stopColor: sv.brandDark, stopOpacity: 1 }} />
+                </linearGradient>
+              </defs>
+              <polygon className="first" id="1" stroke="url('#gradient')" fill="none" points="5,228 195,5 295,280" />
+              <polyline className="second" id="2" stroke="url('#gradient')" fill="none" points="5,228 132,188 295,280" />
+              <polyline className="third" id="3" stroke="url('#gradient')" fill="none" points="132,188 195,5" />
+            </svg>
+          </div>
+          {do {
+            if (text != null) {
+              <div className={styles.text}>
+                {text}
               </div>
-              {do {
-                if (text) {
-                  <div className={styles.text}>
-                    {text}
-                  </div>
-                }
-              }}
-            </div>
-          </CSSTransition>
-        </div>,
-        document.getElementById('splash-outlet'),
-      )}
-    </Context.Provider>
+            }
+          }}
+        </div>
+      </CSSTransition>
+    </div>,
+    document.getElementById('splash-outlet'),
   );
+  // eslint-disable-next-line no-unreachable
+  return <div></div>;  // NOTE: proptypes fail if no "concrete" element is returned
 };
 
-SplashScreenProvider.propTypes = {
-  children: PropTypes.node.isRequired,
+
+SplashScreen.propTypes = {
+  /** Determines if the splash screen is visible or not */
+  visible: PropTypes.bool.isRequired,
+
+  /** Displayed under the animated logo */
+  text: PropTypes.string,
 };
 
 
-export default SplashScreenProvider;
-
-
-export function useSplashScreen() {
-  return React.useContext(Context);
-}
+export default SplashScreen;
