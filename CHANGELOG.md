@@ -1,3 +1,23 @@
+# v4.3.0 (Fri Oct 11 2019)
+
+#### 🚀  Enhancement
+
+- `@drawbotics/react-drylus`
+  - implement new splashcreen api with tests [#70](https://github.com/Drawbotics/drylus/pull/70) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- try with small letter  ([@nicmosc](https://github.com/nicmosc))
+- don't install in each package  ([@nicmosc](https://github.com/nicmosc))
+- only install at root  ([@nicmosc](https://github.com/nicmosc))
+- remove lodash from drylus-style-vars deps  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.2.7 (Tue Oct 08 2019)
 
 #### ⚠️  Pushed to master
