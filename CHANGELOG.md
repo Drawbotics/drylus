@@ -1,3 +1,29 @@
+# v4.4.0 (Fri Oct 18 2019)
+
+#### 🚀  Enhancement
+
+- `@drawbotics/drylus-style-vars`, `@drawbotics/react-drylus`
+  - Feature/tile [#72](https://github.com/Drawbotics/drylus/pull/72) ([@nicmosc](https://github.com/nicmosc))
+
+#### 🐛  Bug Fix
+
+- `@drawbotics/react-drylus`
+  - Deprecate splashscreen visible prop [#71](https://github.com/Drawbotics/drylus/pull/71) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- check that ref contains master, rather than equals master  ([@nicmosc](https://github.com/nicmosc))
+- log current ref in workflow  ([@nicmosc](https://github.com/nicmosc))
+- fix syntax error in ci workflow  ([@nicmosc](https://github.com/nicmosc))
+- hide accessToken from generated code preview  ([@nicmosc](https://github.com/nicmosc))
+- only trigger release when branch is master and changes are made to required packages  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.3.0 (Fri Oct 11 2019)
 
 #### 🚀  Enhancement
