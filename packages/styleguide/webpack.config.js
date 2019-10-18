@@ -116,12 +116,14 @@ module.exports = {
       },
       {
         test: /\.mdx$/,
-        use: [{
+        use: [
+          {
             loader: 'babel-loader',
             options: {
               rootMode: 'upward',
             },
-          }, {
+          },
+          {
             loader: '@mdx-js/loader',
             options: {
               rehypePlugins: [ rehypePlayground ],

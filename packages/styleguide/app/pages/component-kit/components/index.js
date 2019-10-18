@@ -39,6 +39,7 @@ import paragraph from './paragraph';
 import map from './map';
 import filterGroup from './filter-group';
 import popover from './popover';
+import tile from './tile';
 
 
 const components = {
@@ -83,6 +84,7 @@ const components = {
   map,
   filterGroup,
   popover,
+  tile,
 };
 
 
