@@ -17,6 +17,7 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@master
       env:
         ACCESS_TOKEN: ${{ secrets.GH_TOKEN }}
+        MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
         BRANCH: gh-pages
         FOLDER: docs
         BUILD_SCRIPT: |
