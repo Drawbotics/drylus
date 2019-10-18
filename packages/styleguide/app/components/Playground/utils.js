@@ -24,6 +24,16 @@ function prependString(string) {
 }
 
 
+export function hideSecrets(string) {
+  return string.replace(/accessToken="\S+"/gm, 'accessToken="*"');
+}
+
+
+export function replaceSymbol(string) {
+  return string.replace(/Symbol\((.+?)\)/gm, '$1');
+}
+
+
 export function transformClassname(string) {
   if (string.includes('noreplace')) {
     return string;

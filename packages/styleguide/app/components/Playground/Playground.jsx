@@ -4,12 +4,18 @@ import ReactElementToString from 'react-element-to-jsx-string';
 import omit from 'lodash/omit';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
+import flow from 'lodash/flow';
 
 import CodeBox from './CodeBox';
 import Preview from './Preview';
 import PropsTable from './PropsTable';
 import ModeSwitcher from './ModeSwitcher';
-import { adaptForVanilla, recursiveMdxTransform } from './utils';
+import {
+  adaptForVanilla,
+  recursiveMdxTransform,
+  hideSecrets,
+  replaceSymbol,
+} from './utils';
 
 
 const styles = {
@@ -54,6 +60,7 @@ const styles = {
     opacity: 0;
     transform: translateY(-5px);
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    z-index: 10;
   `,
   toggle: css`
     padding: ${sv.paddingSmall};
@@ -91,11 +98,6 @@ function getMarkupForMode(mode, component) {
 }
 
 
-function replaceSymbol(value) {
-  return value.replace(/Symbol\((.+?)\)/gm, '$1');
-}
-
-
 const supportedModes = ['react', 'vanilla'];
 
 
@@ -128,7 +130,9 @@ const Playground = ({ component, children, mode, __code, enums }) => {
                 onChange={setMode} />
             </div>
             <div className={styles.codeBox}>
-              <CodeBox format mode={mode} type={activeMode}>{activeMode === 'react' && ! component ? __code : replaceSymbol(generatedMarkup)}</CodeBox>
+              <CodeBox format mode={mode} type={activeMode}>
+                {activeMode === 'react' && ! component ? __code : flow(replaceSymbol, hideSecrets)(generatedMarkup)}
+              </CodeBox>
             </div>
           </div>
         </div>
@@ -143,7 +147,9 @@ const Playground = ({ component, children, mode, __code, enums }) => {
               enums={enums}
               component={component}
               activeProps={props}
-              onChange={(v, n) => v === '_empty' || v === '' ? setProps(omit(props, n)) : setProps({ ...props, [n]: v })} />
+              onChange={(v, n) => v === '_empty' || v === ''
+                ? setProps(omit(props, n))
+                : setProps({ ...props, [n]: v })} />
           </div>
         }
       }}
