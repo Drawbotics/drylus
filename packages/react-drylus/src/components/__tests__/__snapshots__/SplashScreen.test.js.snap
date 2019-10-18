@@ -62,73 +62,75 @@ exports[`SplashScreen matches snapshot when is visible with some text 1`] = `
 <div
   className="css-xbdtd3-ThemeProvider__root"
 >
-  <div
-    className="css-6s53rl-SplashScreen__root"
-  >
+  <div>
     <div
-      className="css-2xobb-SplashScreen__animation"
+      className="css-6s53rl-SplashScreen__root"
     >
-      <svg
-        height="100%"
-        viewBox="0 0 300 300"
-        width="100%"
+      <div
+        className="css-2xobb-SplashScreen__animation"
       >
-        <defs>
-          <linearGradient
-            gradientUnits="userSpaceOnUse"
-            id="gradient"
-            x1="0%"
-            x2="0%"
-            y1="0%"
-            y2="100%"
-          >
-            <stop
-              offset="0%"
-              style={
-                Object {
-                  "stopColor": "#3DB5D0",
-                  "stopOpacity": 1,
+        <svg
+          height="100%"
+          viewBox="0 0 300 300"
+          width="100%"
+        >
+          <defs>
+            <linearGradient
+              gradientUnits="userSpaceOnUse"
+              id="gradient"
+              x1="0%"
+              x2="0%"
+              y1="0%"
+              y2="100%"
+            >
+              <stop
+                offset="0%"
+                style={
+                  Object {
+                    "stopColor": "#3DB5D0",
+                    "stopOpacity": 1,
+                  }
                 }
-              }
-            />
-            <stop
-              offset="100%"
-              style={
-                Object {
-                  "stopColor": "#247488",
-                  "stopOpacity": 1,
+              />
+              <stop
+                offset="100%"
+                style={
+                  Object {
+                    "stopColor": "#247488",
+                    "stopOpacity": 1,
+                  }
                 }
-              }
-            />
-          </linearGradient>
-        </defs>
-        <polygon
-          className="first"
-          fill="none"
-          id="1"
-          points="5,228 195,5 295,280"
-          stroke="url('#gradient')"
-        />
-        <polyline
-          className="second"
-          fill="none"
-          id="2"
-          points="5,228 132,188 295,280"
-          stroke="url('#gradient')"
-        />
-        <polyline
-          className="third"
-          fill="none"
-          id="3"
-          points="132,188 195,5"
-          stroke="url('#gradient')"
-        />
-      </svg>
-    </div>
-    <div
-      className="css-tevnk8-SplashScreen__text"
-    >
-      Loading...
+              />
+            </linearGradient>
+          </defs>
+          <polygon
+            className="first"
+            fill="none"
+            id="1"
+            points="5,228 195,5 295,280"
+            stroke="url('#gradient')"
+          />
+          <polyline
+            className="second"
+            fill="none"
+            id="2"
+            points="5,228 132,188 295,280"
+            stroke="url('#gradient')"
+          />
+          <polyline
+            className="third"
+            fill="none"
+            id="3"
+            points="132,188 195,5"
+            stroke="url('#gradient')"
+          />
+        </svg>
+      </div>
+      <div
+        className="css-tevnk8-SplashScreen__text"
+      >
+        Loading...
+      </div>
     </div>
   </div>
 </div>

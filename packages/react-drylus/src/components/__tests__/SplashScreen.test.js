@@ -19,23 +19,16 @@ describe('SplashScreen', () => {
   describe('matches snapshot when', () => {
     it('is visible without text', () => {
       const tree = create(
-        <SplashScreen visible={true} />
+        <SplashScreen />
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
 
     it('is visible with some text', () => {
       const tree = create(
-        <SplashScreen visible={true} text="Loading..." />
+        <SplashScreen text="Loading..." />
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
-  });
-
-  it('does not appear in the dom when not visible', () => {
-    const tree = create(
-      <SplashScreen visible={false} />
-    ).toJSON();
-    expect(tree).toBe(null);
   });
 });
