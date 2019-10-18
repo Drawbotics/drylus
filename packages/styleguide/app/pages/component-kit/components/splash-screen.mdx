@@ -27,9 +27,14 @@ export const Demo = () => {
       window.removeEventListener('keydown', handlePressKey);
     };
   });
-  return (
-    <SplashScreen text="Loading..." visible={visible} />
-  );
+  if (visible) {
+    return (
+      <SplashScreen text="Loading..." />
+    ); 
+  }
+  else {
+    return null;
+  }
 };
 
 <Demo />

@@ -7,6 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
+import { CustomPropTypes } from '../utils';
 
 
 const styles = {
@@ -44,16 +45,6 @@ const styles = {
   `,
   splashEnterActive: css`
     opacity: 1;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-  `,
-  splashEnterDone: css`
-  `,
-  splashExit: css`
-    opacity: 1;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-  `,
-  splashExitActive: css`
-    opacity: 0.01;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
   `,
 };
@@ -116,15 +107,14 @@ const SplashScreen = ({
     <div className={themeStyles.root}>
       <CSSTransition
         timeout={300}
-        in={visible}
+        in
+        appear
         mountOnEnter
         unmountOnExit
         onEnter={handleEnter}
         classNames={{
-          enter: styles.splashEnter,
-          enterActive: styles.splashEnterActive,
-          exit: styles.splashExit,
-          exitActive: styles.splashExitActive,
+          appear: styles.splashEnter,
+          appearActive: styles.splashEnterActive,
         }}>
         <div className={styles.root}>
           <div className={styles.animation}>
@@ -158,8 +148,8 @@ const SplashScreen = ({
 
 
 SplashScreen.propTypes = {
-  /** Determines if the splash screen is visible or not */
-  visible: PropTypes.bool.isRequired,
+  /** DEPRECATED */
+  visible: CustomPropTypes.deprecated(PropTypes.bool),
 
   /** Displayed under the animated logo */
   text: PropTypes.string,
