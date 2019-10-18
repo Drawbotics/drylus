@@ -39,3 +39,4 @@ export List, { ListItem } from './List';
 export Map from './Map';
 export FilterGroup from './FilterGroup';
 export Popover, { PopoverSides } from './Popover';
+export Tile from './Tile';

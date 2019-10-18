@@ -25,7 +25,7 @@ const styles = {
     transform: translate(0, -5px);
     transition: transform ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve},
                 opacity ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-    filter: drop-shadow(${sv.elevation1});
+    filter: drop-shadow(${sv.elevation2});
     pointer-events: none;
 
     &::after {

@@ -1,0 +1,53 @@
+import {
+  Tile,
+  Grid,
+  GridItem,
+  Sizes,
+} from '@drawbotics/react-drylus';
+import sv from '@drawbotics/drylus-style-vars';
+
+import Playground from '~/components/Playground';
+
+
+# Tile
+Used to display information in an enclosed context, often used with `Grid` to create a "tiled" layout. Similar to a `Card` but not clickable. It is also different from a `Panel` as it has:
+- 1 title and some content, a `Panel` can have many sections with titles
+- Lighter shadow for shorter elevation
+- Hard edges
+
+```jsx
+import { Tile } from '@drawbotics/react-drylus';
+```
+
+<Playground component={Tile}>
+  <Tile title="Some title">
+    <div style={{ height: 200, background: sv.grey100 }} />
+  </Tile>
+</Playground>
+
+
+### Example with Grid
+export const CustomTile = () => {
+  return (
+    <Tile title="Some title">
+      <div style={{ height: 150, background: sv.grey100 }} />
+    </Tile>
+  );
+};
+
+<Playground>
+  <div
+    style={{
+      background: sv.backgroundColor,
+      padding: '20px',
+      margin: '-24px',
+    }}>
+    <Grid columns={3} hGutters={Sizes.DEFAULT} vGutters={Sizes.DEFAULT}>
+      {[ ...Array(9) ].map((_, i) => (
+        <GridItem key={i}>
+          <CustomTile />
+        </GridItem>
+      ))}
+    </Grid>
+  </div>
+</Playground>
