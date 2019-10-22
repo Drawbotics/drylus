@@ -1,3 +1,16 @@
+# v4.4.1 (Tue Oct 22 2019)
+
+#### 🐛  Bug Fix
+
+- `@drawbotics/react-drylus`
+  - Fix/leaking styles [#73](https://github.com/Drawbotics/drylus/pull/73) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.4.0 (Fri Oct 18 2019)
 
 #### 🚀  Enhancement
