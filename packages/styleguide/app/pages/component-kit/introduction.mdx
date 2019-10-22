@@ -41,3 +41,10 @@ And then initialise the JS bundle through:
 ```js
 drylus.default.all();
 ```
+
+__NOTE__
+Since the styles are built from React, the global styles are set by the `ThemeProvider` component, so don't forget to wrap your application with:
+```
+<div class="Drylus-ThemeProvider__root">...</div>
+```
+To enable styles throughout.
