@@ -3,7 +3,6 @@
   "version": "4.4.1",
   "description": "React components for the Drawbotics' ecosystem",
   "author": "nicmosc <nmoscholios@gmail.com>",
-  "homepage": "",
   "license": "ISC",
   "main": "index.js",
   "scripts": {
