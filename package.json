@@ -59,6 +59,7 @@
     "@babel/preset-react": "^7.0.0",
     "@drawbotics/check-env": "^1.0.0",
     "@drawbotics/s3sync": "^0.1.0",
+    "@emotion/core": "^10.0.21",
     "@hot-loader/react-dom": "^16.8.6",
     "@mdx-js/loader": "^1.0.0-rc.4",
     "@mdx-js/react": "^1.0.0-rc.5",
