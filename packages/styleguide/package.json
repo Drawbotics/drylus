@@ -3,7 +3,6 @@
   "version": "4.4.2",
   "description": "Drawbotics Styleguide",
   "author": "nicmosc <nmoscholios@gmail.com>",
-  "homepage": "",
   "license": "ISC",
   "main": "index.js",
   "private": true,
