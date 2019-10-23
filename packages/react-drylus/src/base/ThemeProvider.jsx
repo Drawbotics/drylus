@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { css, cx } from 'emotion';
-import { Global } from '@emotion/core';
+import { cx, css } from 'emotion';
+import { Global, css as globalCSS } from '@emotion/core';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
@@ -11,7 +11,7 @@ normalize();
 
 
 export const styles = {
-  global: css`
+  global: globalCSS`
     @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
 
     html, body {
