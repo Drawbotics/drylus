@@ -23,4 +23,5 @@ jobs:
         BUILD_SCRIPT: |
           npm install
           npx lerna link convert
+          npx lerna run npm install
           npm run build
