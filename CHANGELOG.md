@@ -1,3 +1,20 @@
+# v4.4.3 (Wed Oct 23 2019)
+
+#### ⚠️  Pushed to master
+
+- use lerna exec instead of run  ([@nicmosc](https://github.com/nicmosc))
+- fix typo in deploy workflow  ([@nicmosc](https://github.com/nicmosc))
+- install all deps before building styleguide  ([@nicmosc](https://github.com/nicmosc))
+- remove homepage field in styleguide package  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - use css from emotion/core to set global styles  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.4.2 (Tue Oct 22 2019)
 
 #### ⚠️  Pushed to master
