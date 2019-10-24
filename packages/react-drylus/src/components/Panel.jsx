@@ -66,7 +66,6 @@ const styles = {
 
     @media ${sv.screenL} {
       margin: calc(${sv.marginSmall} * -1);
-      margin-bottom: 0;
       padding-top: 0;
       padding-bottom: 0;
     }
