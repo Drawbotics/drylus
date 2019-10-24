@@ -51,6 +51,27 @@ const styles = {
       padding: ${sv.paddingLarge};
     }
   `,
+  huge: css`
+    padding: ${sv.paddingHuge};
+
+    @media ${sv.screenL} {
+      padding: ${sv.paddingExtraLarge};
+    }
+  `,
+  extraHuge: css`
+    padding: ${sv.paddingExtraHuge};
+
+    @media ${sv.screenL} {
+      padding: ${sv.paddingHuge};
+    }
+  `,
+  massive: css`
+    padding: ${sv.paddingMassive};
+
+    @media ${sv.screenL} {
+      padding: ${sv.paddingExtraHuge};
+    }
+  `,
   extraSmallLeft: css`
     padding-left: ${sv.paddingExtraSmall};
 
@@ -191,6 +212,90 @@ const styles = {
       padding-bottom: ${sv.paddingLarge};
     }
   `,
+  hugeLeft: css`
+    padding-left: ${sv.paddingHuge};
+
+    @media ${sv.screenL} {
+      padding-left: ${sv.paddingExtraLarge};
+    }
+  `,
+  hugeRight: css`
+    padding-right: ${sv.paddingHuge};
+
+    @media ${sv.screenL} {
+      padding-right: ${sv.paddingExtraLarge};
+    }
+  `,
+  hugeTop: css`
+    padding-top: ${sv.paddingHuge};
+
+    @media ${sv.screenL} {
+      padding-top: ${sv.paddingExtraLarge};
+    }
+  `,
+  hugeBottom: css`
+    padding-bottom: ${sv.paddingHuge};
+
+    @media ${sv.screenL} {
+      padding-bottom: ${sv.paddingExtraLarge};
+    }
+  `,
+  extraHugeLeft: css`
+    padding-left: ${sv.paddingExtraHuge};
+
+    @media ${sv.screenL} {
+      padding-left: ${sv.paddingHuge};
+    }
+  `,
+  extraHugeRight: css`
+    padding-right: ${sv.paddingExtraHuge};
+
+    @media ${sv.screenL} {
+      padding-right: ${sv.paddingHuge};
+    }
+  `,
+  extraHugeTop: css`
+    padding-top: ${sv.paddingExtraHuge};
+
+    @media ${sv.screenL} {
+      padding-top: ${sv.paddingHuge};
+    }
+  `,
+  extraHugeBottom: css`
+    padding-bottom: ${sv.paddingExtraHuge};
+
+    @media ${sv.screenL} {
+      padding-bottom: ${sv.paddingHuge};
+    }
+  `,
+  massiveLeft: css`
+    padding-left: ${sv.paddingMassive};
+
+    @media ${sv.screenL} {
+      padding-left: ${sv.paddingExtraHuge};
+    }
+  `,
+  massiveRight: css`
+    padding-right: ${sv.paddingMassive};
+
+    @media ${sv.screenL} {
+      padding-right: ${sv.paddingExtraHuge};
+    }
+  `,
+  massiveTop: css`
+    padding-top: ${sv.paddingMassive};
+
+    @media ${sv.screenL} {
+      padding-top: ${sv.paddingExtraHuge};
+    }
+  `,
+  massiveBottom: css`
+    padding-bottom: ${sv.paddingMassive};
+
+    @media ${sv.screenL} {
+      padding-bottom: ${sv.paddingExtraHuge};
+    }
+  `,
 };
 
 
@@ -219,12 +324,57 @@ const Padding = ({
 Padding.propTypes = {
   /** Determines the amount of padding given to the component. If a single value, the padding is applied equally to each side */
   size: PropTypes.oneOfType([
-    PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
+    PropTypes.oneOf([
+      Sizes.DEFAULT,
+      Sizes.SMALL,
+      Sizes.EXTRA_SMALL,
+      Sizes.LARGE,
+      Sizes.EXTRA_LARGE,
+      Sizes.HUGE,
+      Sizes.EXTRA_HUGE,
+      Sizes.MASSIVE,
+    ]),
     PropTypes.shape({
-      left: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-      right: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-      bottom: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-      top: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
+      left: PropTypes.oneOf([
+        Sizes.DEFAULT,
+        Sizes.SMALL,
+        Sizes.EXTRA_SMALL,
+        Sizes.LARGE,
+        Sizes.EXTRA_LARGE,
+        Sizes.HUGE,
+        Sizes.EXTRA_HUGE,
+        Sizes.MASSIVE,
+      ]),
+      right: PropTypes.oneOf([
+        Sizes.DEFAULT,
+        Sizes.SMALL,
+        Sizes.EXTRA_SMALL,
+        Sizes.LARGE,
+        Sizes.EXTRA_LARGE,
+        Sizes.HUGE,
+        Sizes.EXTRA_HUGE,
+        Sizes.MASSIVE,
+      ]),
+      bottom: PropTypes.oneOf([
+        Sizes.DEFAULT,
+        Sizes.SMALL,
+        Sizes.EXTRA_SMALL,
+        Sizes.LARGE,
+        Sizes.EXTRA_LARGE,
+        Sizes.HUGE,
+        Sizes.EXTRA_HUGE,
+        Sizes.MASSIVE,
+      ]),
+      top: PropTypes.oneOf([
+        Sizes.DEFAULT,
+        Sizes.SMALL,
+        Sizes.EXTRA_SMALL,
+        Sizes.LARGE,
+        Sizes.EXTRA_LARGE,
+        Sizes.HUGE,
+        Sizes.EXTRA_HUGE,
+        Sizes.MASSIVE,
+      ]),
     }),
   ]),
 

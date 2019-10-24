@@ -1,8 +1,8 @@
 export Button from './Button';
 export Icon from './Icon';
-export Title from './Title';
+export Title, { TitleAlign } from './Title';
 export RoundIcon from './RoundIcon';
-export Paragraph from './Paragraph';
+export Paragraph, { ParagraphAlign } from './Paragraph';
 export SegmentedControl from './SegmentedControl';
 export Table, { TCell, TBody, TRow, THead } from './Table';
 export Label from './Label';

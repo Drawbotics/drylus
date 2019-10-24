@@ -48,7 +48,28 @@ const styles = {
     margin: ${sv.marginExtraLarge};
 
     @media ${sv.screenL} {
-      margin: ${sv.defaultMargin};
+      margin: ${sv.marginLarge};
+    }
+  `,
+  huge: css`
+    margin: ${sv.marginHuge};
+
+    @media ${sv.screenL} {
+      margin: ${sv.marginExtraLarge};
+    }
+  `,
+  extraHuge: css`
+    margin: ${sv.marginExtraHuge};
+
+    @media ${sv.screenL} {
+      margin: ${sv.marginHuge};
+    }
+  `,
+  massive: css`
+    margin: ${sv.marginMassive};
+
+    @media ${sv.screenL} {
+      margin: ${sv.marginExtraHuge};
     }
   `,
   extraSmallLeft: css`
@@ -191,6 +212,90 @@ const styles = {
       margin-bottom: ${sv.marginLarge};
     }
   `,
+  hugeLeft: css`
+    margin-left: ${sv.marginHuge};
+
+    @media ${sv.screenL} {
+      margin-left: ${sv.marginExtraLarge};
+    }
+  `,
+  hugeRight: css`
+    margin-right: ${sv.marginHuge};
+
+    @media ${sv.screenL} {
+      margin-right: ${sv.marginExtraLarge};
+    }
+  `,
+  hugeTop: css`
+    margin-top: ${sv.marginHuge};
+
+    @media ${sv.screenL} {
+      margin-top: ${sv.marginExtraLarge};
+    }
+  `,
+  hugeBottom: css`
+    margin-bottom: ${sv.marginHuge};
+
+    @media ${sv.screenL} {
+      margin-bottom: ${sv.marginExtraLarge};
+    }
+  `,
+  extraHugeLeft: css`
+    margin-left: ${sv.marginExtraHuge};
+
+    @media ${sv.screenL} {
+      margin-left: ${sv.marginHuge};
+    }
+  `,
+  extraHugeRight: css`
+    margin-right: ${sv.marginExtraHuge};
+
+    @media ${sv.screenL} {
+      margin-right: ${sv.marginHuge};
+    }
+  `,
+  extraHugeTop: css`
+    margin-top: ${sv.marginExtraHuge};
+
+    @media ${sv.screenL} {
+      margin-top: ${sv.marginHuge};
+    }
+  `,
+  extraHugeBottom: css`
+    margin-bottom: ${sv.marginExtraHuge};
+
+    @media ${sv.screenL} {
+      margin-bottom: ${sv.marginHuge};
+    }
+  `,
+  massiveLeft: css`
+    margin-left: ${sv.marginMassive};
+
+    @media ${sv.screenL} {
+      margin-left: ${sv.marginExtraHuge};
+    }
+  `,
+  massiveRight: css`
+    margin-right: ${sv.marginMassive};
+
+    @media ${sv.screenL} {
+      margin-right: ${sv.marginExtraHuge};
+    }
+  `,
+  massiveTop: css`
+    margin-top: ${sv.marginMassive};
+
+    @media ${sv.screenL} {
+      margin-top: ${sv.marginExtraHuge};
+    }
+  `,
+  massiveBottom: css`
+    margin-bottom: ${sv.marginMassive};
+
+    @media ${sv.screenL} {
+      margin-bottom: ${sv.marginExtraHuge};
+    }
+  `,
 };
 
 
@@ -219,12 +324,57 @@ const Margin = ({
 Margin.propTypes = {
   /** Determines the amount of margin given to the component. If a single value, the margin is applied equally to each side */
   size: PropTypes.oneOfType([
-    PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
+    PropTypes.oneOf([
+      Sizes.DEFAULT,
+      Sizes.SMALL,
+      Sizes.EXTRA_SMALL,
+      Sizes.LARGE,
+      Sizes.EXTRA_LARGE,
+      Sizes.HUGE,
+      Sizes.EXTRA_HUGE,
+      Sizes.MASSIVE,
+    ]),
     PropTypes.shape({
-      left: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-      right: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-      bottom: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-      top: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
+      left: PropTypes.oneOf([
+        Sizes.DEFAULT,
+        Sizes.SMALL,
+        Sizes.EXTRA_SMALL,
+        Sizes.LARGE,
+        Sizes.EXTRA_LARGE,
+        Sizes.HUGE,
+        Sizes.EXTRA_HUGE,
+        Sizes.MASSIVE,
+      ]),
+      right: PropTypes.oneOf([
+        Sizes.DEFAULT,
+        Sizes.SMALL,
+        Sizes.EXTRA_SMALL,
+        Sizes.LARGE,
+        Sizes.EXTRA_LARGE,
+        Sizes.HUGE,
+        Sizes.EXTRA_HUGE,
+        Sizes.MASSIVE,
+      ]),
+      bottom: PropTypes.oneOf([
+        Sizes.DEFAULT,
+        Sizes.SMALL,
+        Sizes.EXTRA_SMALL,
+        Sizes.LARGE,
+        Sizes.EXTRA_LARGE,
+        Sizes.HUGE,
+        Sizes.EXTRA_HUGE,
+        Sizes.MASSIVE,
+      ]),
+      top: PropTypes.oneOf([
+        Sizes.DEFAULT,
+        Sizes.SMALL,
+        Sizes.EXTRA_SMALL,
+        Sizes.LARGE,
+        Sizes.EXTRA_LARGE,
+        Sizes.HUGE,
+        Sizes.EXTRA_HUGE,
+        Sizes.MASSIVE,
+      ]),
     }),
   ]),
 

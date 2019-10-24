@@ -5,6 +5,7 @@ import sv from '@drawbotics/drylus-style-vars';
 
 import { Tiers, Sizes, Categories } from '../base';
 import { getEnumAsClass } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -14,6 +15,10 @@ const styles = {
   bold: css`
     font-weight: 500;
     letter-spacing: 0.01rem;
+  `,
+  light: css`
+    font-weight: 300;
+    letter-spacing: 0.06rem;
   `,
   primary: css`
     color: ${sv.colorPrimary};
@@ -67,18 +72,24 @@ const styles = {
 
 
 const Text = ({
-  inversed,
-  bold,
-  size,
-  tier,
-  disabled,
-  children,
-  category,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    inversed,
+    bold,
+    size,
+    tier,
+    disabled,
+    children,
+    category,
+    style,
+    light,
+  } = useResponsiveProps(rest, responsive);
   return (
     <span className={cx(styles.root, {
       [styles.bold]: bold,
+      [styles.light]: light,
       [styles.primary]: tier === Tiers.PRIMARY && ! disabled && ! inversed,
       [styles.secondary]: tier === Tiers.SECONDARY && ! disabled && ! inversed,
       [styles.tertiary]: tier === Tiers.TERTIARY && ! disabled && ! inversed,
@@ -104,6 +115,9 @@ Text.propTypes = {
 
   bold: PropTypes.bool,
 
+  /** The opposite of bold, will set the font weight to 300 (useful with `inversed` on dark backgrounds) */
+  light: PropTypes.bool,
+
   size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE]),
 
   tier: PropTypes.oneOf([Tiers.PRIMARY, Tiers.SECONDARY, Tiers.TERTIARY]),
@@ -111,18 +125,38 @@ Text.propTypes = {
   /** Makes the text appear disabled, but still selectable */
   disabled: PropTypes.bool,
 
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
 
-  category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
+  category: PropTypes.oneOf([
+    Categories.BRAND,
+    Categories.DANGER,
+    Categories.SUCCESS,
+    Categories.INFO,
+    Categories.WARNING,
+  ]),
 
   /** Custom style object override */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
 Text.defaultProps = {
   inversed: false,
   bold: false,
+  light: false,
   size: Sizes.DEFAULT,
   tier: Tiers.PRIMARY,
   disabled: false,

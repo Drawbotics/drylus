@@ -4,6 +4,7 @@ const { m, d, s, a } = require('./operations');
 
 // COLORS
 export const white = '#fff';
+export const black = '#000';
 export const grey50 = '#fafafa';
 export const grey100 = '#f5f5f5';
 export const grey200 = '#eeeeee';
@@ -107,6 +108,8 @@ export const paddingExtraSmall = s(paddingSmall, 8);
 export const paddingLarge = a(basePadding, 8);
 export const paddingExtraLarge = a(paddingLarge, 8);
 export const paddingHuge = m(paddingExtraSmall, 7);
+export const paddingExtraHuge = m(basePadding, 3);
+export const paddingMassive = m(basePadding, 5);
 export const baseMargin = '24px';
 export const defaultMargin = basePadding;
 export const marginSmall = s(baseMargin, 8);
@@ -114,6 +117,8 @@ export const marginExtraSmall = s(marginSmall, 8);
 export const marginLarge = a(baseMargin, 8);
 export const marginExtraLarge = a(marginLarge, 8);
 export const marginHuge = m(marginExtraSmall, 7);
+export const marginExtraHuge = m(baseMargin, 3);
+export const marginMassive = m(baseMargin, 5);
 
 // TRANSITIONS AND ANIMATIONS
 const baseTransitionTime = '0.3s';

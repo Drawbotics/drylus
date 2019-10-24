@@ -1,4 +1,4 @@
-import { Title } from '@drawbotics/react-drylus';
+import { Title, TitleAlign } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -21,6 +21,6 @@ __Example__
 
 
 ### Interactive Example
-<Playground component={Title}>
+<Playground component={Title} enums={{ TitleAlign }}>
   <Title><span style={{ fontWeight: 500 }}>Title</span> text</Title>
 </Playground>
