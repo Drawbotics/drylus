@@ -111,9 +111,18 @@ Text.propTypes = {
   /** Makes the text appear disabled, but still selectable */
   disabled: PropTypes.bool,
 
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
 
-  category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
+  category: PropTypes.oneOf([
+    Categories.BRAND,
+    Categories.DANGER,
+    Categories.SUCCESS,
+    Categories.INFO,
+    Categories.WARNING,
+  ]),
 
   /** Custom style object override */
   style: PropTypes.object,
