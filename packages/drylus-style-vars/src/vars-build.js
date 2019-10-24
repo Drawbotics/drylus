@@ -3,8 +3,8 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.screenHuge = exports.screenXl = exports.screenL = exports.screenM = exports.screenS = exports.screenXs = exports.maxWidthMedium = exports.maxWidthLarge = exports.defaultTransition = exports.bouncyTransitionCurve = exports.transitionTimeShort = exports.defaultTransitionTime = exports.marginHuge = exports.marginExtraLarge = exports.marginLarge = exports.marginExtraSmall = exports.marginSmall = exports.defaultMargin = exports.baseMargin = exports.paddingHuge = exports.paddingExtraLarge = exports.paddingLarge = exports.paddingExtraSmall = exports.paddingSmall = exports.defaultPadding = exports.insetActiveLight = exports.insetActiveMedium = exports.insetActive = exports.elevation3 = exports.elevation2 = exports.elevation1 = exports.shadowColor = exports.colorDisabledInverse = exports.colorDisabled = exports.colorTertiaryInverse = exports.colorTertiary = exports.colorSecondaryInverse = exports.colorSecondary = exports.colorPrimaryInverse = exports.colorPrimary = exports.defaultLetterSpacing = exports.defaultLineHeight = exports.defaultFontFamily = exports.defaultFontSize = exports.borderRadiusSmall = exports.borderRadiusLarge = exports.defaultBorderRadius = exports.darkOverlay = exports.lightOverlay = exports.lighterOverlay = exports.linkedinColor = exports.twitterColor = exports.facebookColor = exports.success = exports.greenLighter = exports.greenLight = exports.green = exports.greenDark = exports.info = exports.blueLighter = exports.blueLight = exports.blue = exports.blueDark = exports.warning = exports.orangeLighter = exports.orangeLight = exports.orange = exports.orangeDark = exports.error = exports.danger = exports.redLighter = exports.redLight = exports.red = exports.redDark = exports.azureLight = exports.azure = exports.azureDark = exports.backgroundColor = exports.neutralLighter = exports.neutralLight = exports.neutral = exports.neutralDark = exports.neutralDarker = exports.neutralDarkest = exports.brandLighter = exports.brandLight = exports.brand = exports.brandDark = exports.grey900 = exports.grey800 = exports.grey700 = exports.grey600 = exports.grey500 = exports.grey400 = exports.grey300 = exports.grey200 = exports.grey100 = exports.grey50 = exports.black = exports.white = void 0;
-exports.greaterThanMinimumWidth = exports.greaterThanMaximumWidth = exports.desktop = exports.tabletPortrait = exports.tabletLandscape = exports.phonePortrait = exports.phoneLandscape = exports.phoneSPortrait = exports.phoneSLandscape = void 0;
+exports.screenS = exports.screenXs = exports.maxWidthMedium = exports.maxWidthLarge = exports.defaultTransition = exports.bouncyTransitionCurve = exports.transitionTimeShort = exports.defaultTransitionTime = exports.marginMassive = exports.marginExtraHuge = exports.marginHuge = exports.marginExtraLarge = exports.marginLarge = exports.marginExtraSmall = exports.marginSmall = exports.defaultMargin = exports.baseMargin = exports.paddingMassive = exports.paddingExtraHuge = exports.paddingHuge = exports.paddingExtraLarge = exports.paddingLarge = exports.paddingExtraSmall = exports.paddingSmall = exports.defaultPadding = exports.insetActiveLight = exports.insetActiveMedium = exports.insetActive = exports.elevation3 = exports.elevation2 = exports.elevation1 = exports.shadowColor = exports.colorDisabledInverse = exports.colorDisabled = exports.colorTertiaryInverse = exports.colorTertiary = exports.colorSecondaryInverse = exports.colorSecondary = exports.colorPrimaryInverse = exports.colorPrimary = exports.defaultLetterSpacing = exports.defaultLineHeight = exports.defaultFontFamily = exports.defaultFontSize = exports.borderRadiusSmall = exports.borderRadiusLarge = exports.defaultBorderRadius = exports.darkOverlay = exports.lightOverlay = exports.lighterOverlay = exports.linkedinColor = exports.twitterColor = exports.facebookColor = exports.success = exports.greenLighter = exports.greenLight = exports.green = exports.greenDark = exports.info = exports.blueLighter = exports.blueLight = exports.blue = exports.blueDark = exports.warning = exports.orangeLighter = exports.orangeLight = exports.orange = exports.orangeDark = exports.error = exports.danger = exports.redLighter = exports.redLight = exports.red = exports.redDark = exports.azureLight = exports.azure = exports.azureDark = exports.backgroundColor = exports.neutralLighter = exports.neutralLight = exports.neutral = exports.neutralDark = exports.neutralDarker = exports.neutralDarkest = exports.brandLighter = exports.brandLight = exports.brand = exports.brandDark = exports.grey900 = exports.grey800 = exports.grey700 = exports.grey600 = exports.grey500 = exports.grey400 = exports.grey300 = exports.grey200 = exports.grey100 = exports.grey50 = exports.black = exports.white = void 0;
+exports.greaterThanMinimumWidth = exports.greaterThanMaximumWidth = exports.desktop = exports.tabletPortrait = exports.tabletLandscape = exports.phonePortrait = exports.phoneLandscape = exports.phoneSPortrait = exports.phoneSLandscape = exports.screenHuge = exports.screenXl = exports.screenL = exports.screenM = void 0;
 
 const {
   fade
@@ -190,6 +190,10 @@ const paddingExtraLarge = a(paddingLarge, 8);
 exports.paddingExtraLarge = paddingExtraLarge;
 const paddingHuge = m(paddingExtraSmall, 7);
 exports.paddingHuge = paddingHuge;
+const paddingExtraHuge = m(basePadding, 3);
+exports.paddingExtraHuge = paddingExtraHuge;
+const paddingMassive = m(basePadding, 5);
+exports.paddingMassive = paddingMassive;
 const baseMargin = '24px';
 exports.baseMargin = baseMargin;
 const defaultMargin = basePadding;
@@ -202,9 +206,13 @@ const marginLarge = a(baseMargin, 8);
 exports.marginLarge = marginLarge;
 const marginExtraLarge = a(marginLarge, 8);
 exports.marginExtraLarge = marginExtraLarge;
-const marginHuge = m(marginExtraSmall, 7); // TRANSITIONS AND ANIMATIONS
-
+const marginHuge = m(marginExtraSmall, 7);
 exports.marginHuge = marginHuge;
+const marginExtraHuge = m(baseMargin, 3);
+exports.marginExtraHuge = marginExtraHuge;
+const marginMassive = m(baseMargin, 5); // TRANSITIONS AND ANIMATIONS
+
+exports.marginMassive = marginMassive;
 const baseTransitionTime = '0.3s';
 const defaultTransitionTime = baseTransitionTime;
 exports.defaultTransitionTime = defaultTransitionTime;
