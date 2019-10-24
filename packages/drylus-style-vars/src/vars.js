@@ -4,6 +4,7 @@ const { m, d, s, a } = require('./operations');
 
 // COLORS
 export const white = '#fff';
+export const black = '#000';
 export const grey50 = '#fafafa';
 export const grey100 = '#f5f5f5';
 export const grey200 = '#eeeeee';
