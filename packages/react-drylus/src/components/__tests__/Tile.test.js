@@ -19,5 +19,12 @@ describe('Tile', () => {
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
+
+    it('does not have any padding', () => {
+      const tree = create(
+        <Tile noPadding>Tile content</Tile>
+      ).toJSON();
+      expect(tree).toMatchSnapshot();
+    });
   });
 });

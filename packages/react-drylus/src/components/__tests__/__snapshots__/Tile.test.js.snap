@@ -20,6 +20,27 @@ exports[`Tile matches snapshot when does not have a title 1`] = `
 </div>
 `;
 
+exports[`Tile matches snapshot when does not have any padding 1`] = `
+.css-188vw44-Tile__root-Tile__noPadding {
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(135,155,166,0.1);
+  padding: 24px;
+  padding: 0px !important;
+}
+
+@media only screen and (max-width:768px) {
+  .css-188vw44-Tile__root-Tile__noPadding {
+    padding: 16px;
+  }
+}
+
+<div
+  className="css-188vw44-Tile__root-Tile__noPadding"
+>
+  Tile content
+</div>
+`;
+
 exports[`Tile matches snapshot when has a title 1`] = `
 .css-1v9jhx3-Tile__root {
   background: #fff;

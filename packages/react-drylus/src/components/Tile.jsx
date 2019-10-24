@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
@@ -25,6 +25,9 @@ const styles = {
       margin-bottom: ${sv.marginExtraSmall};
     }
   `,
+  noPadding: css`
+    padding: 0px !important;
+  `,
 };
 
 
@@ -32,9 +35,14 @@ const Tile = ({
   style,
   title,
   children,
+  noPadding,
 }) => {
   return (
-    <div style={style} className={styles.root}>
+    <div
+      style={style}
+      className={cx(styles.root, {
+        [styles.noPadding]: noPadding,
+      })}>
       {do{
         if (title != null) {
           <div className={styles.title}>
@@ -57,6 +65,9 @@ Tile.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Removes the space between the content and the borders (good for full size images in the tile) */
+  noPadding: PropTypes.bool,
 };
 
 
