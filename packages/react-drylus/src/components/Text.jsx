@@ -16,6 +16,10 @@ const styles = {
     font-weight: 500;
     letter-spacing: 0.01rem;
   `,
+  light: css`
+    font-weight: 300;
+    letter-spacing: 0.06rem;
+  `,
   primary: css`
     color: ${sv.colorPrimary};
   `,
@@ -80,10 +84,12 @@ const Text = ({
     children,
     category,
     style,
+    light,
   } = useResponsiveProps(rest, responsive);
   return (
     <span className={cx(styles.root, {
       [styles.bold]: bold,
+      [styles.light]: light,
       [styles.primary]: tier === Tiers.PRIMARY && ! disabled && ! inversed,
       [styles.secondary]: tier === Tiers.SECONDARY && ! disabled && ! inversed,
       [styles.tertiary]: tier === Tiers.TERTIARY && ! disabled && ! inversed,
@@ -108,6 +114,9 @@ Text.propTypes = {
   inversed: PropTypes.bool,
 
   bold: PropTypes.bool,
+
+  /** The opposite of bold, will set the font weight to 300 (useful with `inversed` on dark backgrounds) */
+  light: PropTypes.bool,
 
   size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE]),
 
@@ -147,6 +156,7 @@ Text.propTypes = {
 Text.defaultProps = {
   inversed: false,
   bold: false,
+  light: false,
   size: Sizes.DEFAULT,
   tier: Tiers.PRIMARY,
   disabled: false,
