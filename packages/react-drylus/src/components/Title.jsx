@@ -67,7 +67,10 @@ const Title = ({ children, size=1, noMargin, style }) => {
 
 Title.propTypes = {
   /** Text displayed by the title */
-  children: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+  ]),
 
   /** Each number is equivalent to the h[n] in html, smaller value equals larger title */
   size: PropTypes.oneOf([1, 2, 3, 4]),
