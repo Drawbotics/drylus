@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Paragraph matches snapshot when is aligned to the left 1`] = `
+.css-kd3s5k-Paragraph__root {
+  color: #172b4e;
+  line-height: calc(1.2 * 1.5);
+}
+
+<p
+  className="css-kd3s5k-Paragraph__root"
+>
+  Some content
+</p>
+`;
+
+exports[`Paragraph matches snapshot when is aligned to the right 1`] = `
+.css-162tk1p-Paragraph__root-Paragraph__alignRight {
+  color: #172b4e;
+  line-height: calc(1.2 * 1.5);
+  text-align: right;
+}
+
+<p
+  className="css-162tk1p-Paragraph__root-Paragraph__alignRight"
+>
+  Some content
+</p>
+`;
+
+exports[`Paragraph matches snapshot when is center aligned 1`] = `
+.css-1a8t6va-Paragraph__root-Paragraph__alignCenter {
+  color: #172b4e;
+  line-height: calc(1.2 * 1.5);
+  text-align: center;
+}
+
+<p
+  className="css-1a8t6va-Paragraph__root-Paragraph__alignCenter"
+>
+  Some content
+</p>
+`;
