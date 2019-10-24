@@ -194,14 +194,6 @@ const styles = {
 };
 
 
-function _getMarginForObject(size) {
-  return Object.keys(size).reduce((memo, side) => size[side].description == null ? {
-    [camelCase(`margin_${side}`)]: size[side],
-    ...memo,
-  } : memo, {});
-}
-
-
 const Margin = ({
   responsive,
   ...rest,
@@ -209,29 +201,15 @@ const Margin = ({
   const { children, size, style } = useResponsiveProps(rest, responsive);
 
   const isUniform = typeof size !== 'object';
-  const customSize = size != null
-    && (typeof size === 'number' || Object.values(size).some((s) => typeof s === 'number'));
   return (
-    <div
-      className={cx(styles.root, {
-        [styles[camelCase(size?.description)]]: isUniform && size,
-        [styles.resetMargin]: ! isUniform,
-        [styles[camelCase(`${size?.left?.description}_LEFT`)]]: ! isUniform && size?.left,
-        [styles[camelCase(`${size?.right?.description}_RIGHT`)]]: ! isUniform && size?.right,
-        [styles[camelCase(`${size?.top?.description}_TOP`)]]: ! isUniform && size?.top,
-        [styles[camelCase(`${size?.bottom?.description}_BOTTOM`)]]: ! isUniform && size?.bottom,
-      })}
-      style={do {
-        if (isUniform && customSize) {
-          return { margin: size, ...style };
-        }
-        else if (! isUniform && customSize) {
-          return { ...(_getMarginForObject(size)), ...style };
-        }
-        else {
-          return style;
-        }
-      }}>
+    <div className={cx(styles.root, {
+      [styles[camelCase(size?.description)]]: isUniform && size,
+      [styles.resetMargin]: ! isUniform,
+      [styles[camelCase(`${size?.left?.description}_LEFT`)]]: ! isUniform && size?.left,
+      [styles[camelCase(`${size?.right?.description}_RIGHT`)]]: ! isUniform && size?.right,
+      [styles[camelCase(`${size?.top?.description}_TOP`)]]: ! isUniform && size?.top,
+      [styles[camelCase(`${size?.bottom?.description}_BOTTOM`)]]: ! isUniform && size?.bottom,
+    })} style={style}>
       {children}
     </div>
   );
@@ -241,25 +219,12 @@ const Margin = ({
 Margin.propTypes = {
   /** Determines the amount of margin given to the component. If a single value, the margin is applied equally to each side */
   size: PropTypes.oneOfType([
-    PropTypes.number,
     PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
     PropTypes.shape({
-      left: PropTypes.oneOfType([
-        PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-        PropTypes.number,
-      ]),
-      right: PropTypes.oneOfType([
-        PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-        PropTypes.number,
-      ]),
-      bottom: PropTypes.oneOfType([
-        PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-        PropTypes.number,
-      ]),
-      top: PropTypes.oneOfType([
-        PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-        PropTypes.number,
-      ]),
+      left: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
+      right: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
+      bottom: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
+      top: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
     }),
   ]),
 
