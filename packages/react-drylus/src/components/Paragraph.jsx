@@ -4,6 +4,8 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import Enum from '@drawbotics/enums';
 
+import { useResponsiveProps } from '../utils/hooks';
+
 
 const styles = {
   root: css`
@@ -27,10 +29,14 @@ export const ParagraphAlign = new Enum(
 
 
 const Paragraph = ({
-  children,
-  style,
-  align,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    children,
+    style,
+    align,
+  } = useResponsiveProps(rest, responsive);
   return (
     <p
       style={style}
@@ -56,6 +62,16 @@ Paragraph.propTypes = {
     ParagraphAlign.LEFT,
     ParagraphAlign.RIGHT,
   ]),
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
