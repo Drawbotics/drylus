@@ -194,14 +194,6 @@ const styles = {
 };
 
 
-function _getPaddingForObject(size) {
-  return Object.keys(size).reduce((memo, side) => size[side].description == null ? {
-    [camelCase(`padding_${side}`)]: size[side],
-    ...memo,
-  } : memo, {});
-}
-
-
 const Padding = ({
   responsive,
   ...rest,
@@ -209,29 +201,15 @@ const Padding = ({
   const { children, size, style } = useResponsiveProps(rest, responsive);
 
   const isUniform = typeof size !== 'object';
-  const customSize = size != null
-    && (typeof size === 'number' || Object.values(size).some((s) => typeof s === 'number'));
   return (
-    <div
-      className={cx(styles.root, {
-        [styles[camelCase(size?.description)]]: isUniform && size,
-        [styles.resetPadding]: ! isUniform,
-        [styles[camelCase(`${size?.left?.description}_LEFT`)]]: ! isUniform && size?.left,
-        [styles[camelCase(`${size?.right?.description}_RIGHT`)]]: ! isUniform && size?.right,
-        [styles[camelCase(`${size?.top?.description}_TOP`)]]: ! isUniform && size?.top,
-        [styles[camelCase(`${size?.bottom?.description}_BOTTOM`)]]: ! isUniform && size?.bottom,
-      })}
-      style={do {
-        if (isUniform && customSize) {
-          return { padding: size, ...style };
-        }
-        else if (! isUniform && customSize) {
-          return { ...(_getPaddingForObject(size)), ...style };
-        }
-        else {
-          return style;
-        }
-      }}>
+    <div className={cx(styles.root, {
+      [styles[camelCase(size?.description)]]: isUniform && size,
+      [styles.resetPadding]: ! isUniform,
+      [styles[camelCase(`${size?.left?.description}_LEFT`)]]: ! isUniform && size?.left,
+      [styles[camelCase(`${size?.right?.description}_RIGHT`)]]: ! isUniform && size?.right,
+      [styles[camelCase(`${size?.top?.description}_TOP`)]]: ! isUniform && size?.top,
+      [styles[camelCase(`${size?.bottom?.description}_BOTTOM`)]]: ! isUniform && size?.bottom,
+    })} style={style}>
       {children}
     </div>
   );
@@ -244,22 +222,10 @@ Padding.propTypes = {
     PropTypes.number,
     PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
     PropTypes.shape({
-      left: PropTypes.oneOfType([
-        PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-        PropTypes.number,
-      ]),
-      right: PropTypes.oneOfType([
-        PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-        PropTypes.number,
-      ]),
-      bottom: PropTypes.oneOfType([
-        PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-        PropTypes.number,
-      ]),
-      top: PropTypes.oneOfType([
-        PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
-        PropTypes.number,
-      ]),
+      left: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
+      right: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
+      bottom: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
+      top: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
     }),
   ]),
 
