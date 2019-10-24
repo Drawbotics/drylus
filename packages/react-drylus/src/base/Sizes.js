@@ -8,6 +8,8 @@ const Sizes = new Enum(
   'LARGE',
   'EXTRA_LARGE',
   'HUGE',
+  'EXTRA_HUGE',
+  'MASSIVE',
 );
 
 
