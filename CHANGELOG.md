@@ -1,3 +1,20 @@
+# v4.4.5 (Thu Oct 24 2019)
+
+#### 🐛  Bug Fix
+
+- `@drawbotics/drylus-style-vars`, `@drawbotics/react-drylus`
+  - Feature/small tweaks [#76](https://github.com/Drawbotics/drylus/pull/76) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- add node example to title  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.4.4 (Thu Oct 24 2019)
 
 #### 🐛  Bug Fix
