@@ -131,3 +131,45 @@ exports[`Title matches snapshot when has a node as children 1`] = `
    content
 </h2>
 `;
+
+exports[`Title matches snapshot when is aligned to the right 1`] = `
+.css-133mayl-Title__root-Title__h1-Title__alignRight {
+  color: #172b4e;
+  font-weight: 300;
+  font-size: 3.4rem;
+  text-align: right;
+}
+
+@media only screen and (max-width:768px) {
+  .css-133mayl-Title__root-Title__h1-Title__alignRight {
+    font-size: 2.8rem;
+  }
+}
+
+<h1
+  className="css-133mayl-Title__root-Title__h1-Title__alignRight"
+>
+  Some content
+</h1>
+`;
+
+exports[`Title matches snapshot when is center aligned 1`] = `
+.css-e74esb-Title__root-Title__h1-Title__alignCenter {
+  color: #172b4e;
+  font-weight: 300;
+  font-size: 3.4rem;
+  text-align: center;
+}
+
+@media only screen and (max-width:768px) {
+  .css-e74esb-Title__root-Title__h1-Title__alignCenter {
+    font-size: 2.8rem;
+  }
+}
+
+<h1
+  className="css-e74esb-Title__root-Title__h1-Title__alignCenter"
+>
+  Some content
+</h1>
+`;

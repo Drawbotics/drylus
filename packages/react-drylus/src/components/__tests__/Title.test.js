@@ -1,7 +1,7 @@
 import React from 'react';
 import { create } from 'react-test-renderer';
 
-import Title from '../Title';
+import Title, { TitleAlign } from '../Title';
 
 
 describe('Title', () => {
@@ -45,6 +45,24 @@ describe('Title', () => {
       const tree = create(
         <Title size={2}>
           <span style={{ fontWeight: 500 }}>Some </span> content
+        </Title>
+      ).toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('is aligned to the right', () => {
+      const tree = create(
+        <Title align={TitleAlign.RIGHT}>
+         Some content
+        </Title>
+      ).toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('is center aligned', () => {
+      const tree = create(
+        <Title align={TitleAlign.CENTER}>
+         Some content
         </Title>
       ).toJSON();
       expect(tree).toMatchSnapshot();
