@@ -219,6 +219,7 @@ const Padding = ({
 Padding.propTypes = {
   /** Determines the amount of padding given to the component. If a single value, the padding is applied equally to each side */
   size: PropTypes.oneOfType([
+    PropTypes.number,
     PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
     PropTypes.shape({
       left: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.EXTRA_SMALL, Sizes.LARGE, Sizes.EXTRA_LARGE ]),
