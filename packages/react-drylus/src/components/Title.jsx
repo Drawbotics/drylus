@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
+import Enum from '@drawbotics/enums';
+
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -42,21 +45,85 @@ const styles = {
     margin-top: 0;
     margin-bottom: 0;
   `,
+  alignRight: css`
+    text-align: right;
+  `,
+  alignCenter: css`
+    text-align: center;
+  `,
 };
 
 
-const Title = ({ children, size=1, noMargin, style }) => {
+export const TitleAlign = new Enum(
+  'CENTER',
+  'LEFT',
+  'RIGHT',
+);
+
+
+const Title = ({
+  responsive,
+  ...rest,
+}) => {
+  const {
+    children,
+    size,
+    noMargin,
+    style,
+    align,
+  } = useResponsiveProps(rest, responsive);
+
   if (size === 1) {
-    return <h1 style={style} className={cx(styles.root, styles.h1, { [styles.noMargin]: noMargin })}>{children}</h1>;
+    return (
+      <h1
+        style={style}
+        className={cx(styles.root, styles.h1, {
+          [styles.noMargin]: noMargin,
+          [styles.alignCenter]: align === TitleAlign.CENTER,
+          [styles.alignRight]: align === TitleAlign.RIGHT,
+        })}>
+        {children}
+      </h1>
+    );
   }
   else if (size === 2) {
-    return <h2 style={style} className={cx(styles.root, styles.h2, { [styles.noMargin]: noMargin })}>{children}</h2>;
+    return (
+      <h2
+        style={style}
+        className={cx(styles.root, styles.h2, {
+          [styles.noMargin]: noMargin,
+          [styles.alignCenter]: align === TitleAlign.CENTER,
+          [styles.alignRight]: align === TitleAlign.RIGHT,
+        })}>
+        {children}
+      </h2>
+    );
   }
   else if (size === 3) {
-    return <h3 style={style} className={cx(styles.root, styles.h3, { [styles.noMargin]: noMargin })}>{children}</h3>;
+    return (
+      <h3
+        style={style}
+        className={cx(styles.root, styles.h3, {
+          [styles.noMargin]: noMargin,
+          [styles.alignCenter]: align === TitleAlign.CENTER,
+          [styles.alignRight]: align === TitleAlign.RIGHT,
+        })}>
+        {children}
+      </h3>
+    );
   }
   else if (size === 4) {
-    return <h4 style={style} className={cx(styles.root, styles.h4, { [styles.noMargin]: noMargin })}>{children}</h4>;
+    return (
+      <h4
+        style={style}
+        className={cx(styles.root, styles.h4, {
+          [styles.noMargin]: noMargin,
+          [styles.alignCenter]: align === TitleAlign.CENTER,
+          [styles.alignRight]: align === TitleAlign.RIGHT,
+        })}>
+        {children}
+      </h4>
+    );
   }
   else {
     console.warn('Unsupported title size');
@@ -80,11 +147,28 @@ Title.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  align: PropTypes.oneOf([
+    TitleAlign.CENTER,
+    TitleAlign.LEFT,
+    TitleAlign.RIGHT,
+  ]),
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
 Title.defaultProps = {
   size: 1,
+  align: TitleAlign.LEFT, 
 };
 
 
