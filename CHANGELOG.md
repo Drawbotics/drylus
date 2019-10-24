@@ -1,3 +1,18 @@
+# v4.4.4 (Thu Oct 24 2019)
+
+#### 🐛  Bug Fix
+
+- `@drawbotics/react-drylus`
+  - Feature/no padding tile [#75](https://github.com/Drawbotics/drylus/pull/75) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Add node as child type to title [#74](https://github.com/Drawbotics/drylus/pull/74) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.4.3 (Wed Oct 23 2019)
 
 #### ⚠️  Pushed to master
