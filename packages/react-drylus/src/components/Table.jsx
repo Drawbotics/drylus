@@ -201,6 +201,9 @@ const styles = {
       }
     }
   `,
+  pointer: css`
+    cursor: pointer;
+  `,
   noBorderBottom: css`
     border-bottom: none !important;
   `,
@@ -357,6 +360,7 @@ export const TRow = ({
         [styles.collapsed]: collapsed,
         [styles.light]: ! alt,
         [styles.white]: alt,
+        [styles.pointer]: onClick != null,
         [styles.highlightedRow]: highlighted,
         [styles.noBorderBottom]: !! parent && ! rowsStates[parent] && lastParentRow,
       })}
@@ -611,43 +615,43 @@ const Table = ({
   const hasNestedData = data && data.some((d) => d.data);
 
   const tableContents = data && ! isLoading && ! emptyContent ? [
-      <THead key="head">
-        {header.map((hItem) => {
-          const v = typeof hItem === 'string' ? hItem : hItem.value;
-          return (
-            <TCell key={v}>
-              {do{
-                if (sortableBy?.includes(v) && screenSize > ScreenSizes.L) {
-                  <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
-                    <span className={cx(styles.sortableIcons, {
-                      [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'asc',
-                      [styles.down]: activeHeader?.key === v && activeHeader?.direction === 'desc',
-                    })}>
-                      <Icon name="chevron-up" />
-                      <Icon name="chevron-down" />
-                    </span>
-                    {typeof hItem === 'string' ? hItem : hItem.label}
+    <THead key="head">
+      {header.map((hItem) => {
+        const v = typeof hItem === 'string' ? hItem : hItem.value;
+        return (
+          <TCell key={v}>
+            {do{
+              if (sortableBy?.includes(v) && screenSize > ScreenSizes.L) {
+                <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
+                  <span className={cx(styles.sortableIcons, {
+                    [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'asc',
+                    [styles.down]: activeHeader?.key === v && activeHeader?.direction === 'desc',
+                  })}>
+                    <Icon name="chevron-up" />
+                    <Icon name="chevron-down" />
                   </span>
-                }
-                else {
-                  typeof hItem === 'string' ? hItem : hItem.label
-                }
-              }}
-            </TCell>
-          );
-        })}
-      </THead>,
-      _generateTable({
-        data,
-        header,
-        renderCell,
-        renderChildCell,
-        index: 0,
-        childHeader,
-        onClickRow,
-        activeRow,
-      })
-     ] : children;
+                  {typeof hItem === 'string' ? hItem : hItem.label}
+                </span>
+              }
+              else {
+                typeof hItem === 'string' ? hItem : hItem.label
+              }
+            }}
+          </TCell>
+        );
+      })}
+    </THead>,
+    _generateTable({
+      data,
+      header,
+      renderCell,
+      renderChildCell,
+      index: 0,
+      childHeader,
+      onClickRow,
+      activeRow,
+    })
+  ] : children;
 
   const transformedChildren = screenSize <= ScreenSizes.L ? _addAttributesToCells(tableContents) : tableContents;
   
