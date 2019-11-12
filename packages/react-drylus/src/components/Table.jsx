@@ -349,7 +349,7 @@ export const TRow = ({
   alt,
   lastParentRow,
   onClick,
-  showPointer,
+  clickable,
   style,
 }) => {
   const [ rowsStates, handleSetRowState ] = useContext(RowsContext);
@@ -361,7 +361,7 @@ export const TRow = ({
         [styles.collapsed]: collapsed,
         [styles.light]: ! alt,
         [styles.white]: alt,
-        [styles.pointer]: showPointer,
+        [styles.pointer]: clickable && onClick != null,
         [styles.highlightedRow]: highlighted,
         [styles.noBorderBottom]: !! parent && ! rowsStates[parent] && lastParentRow,
       })}
@@ -390,8 +390,8 @@ TRow.propTypes = {
   /** Triggered when any part of the row is clicked */
   onClick: PropTypes.func,
 
-  /** If true, sets the cursor to pointer when hovering the row */
-  showPointer: PropTypes.func,
+  /** If true and `onClick` is provided, shows a pointer when hovering the row */
+  clickable: PropTypes.func,
 
   /** Used for style overrides */
   style: PropTypes.object,
@@ -533,10 +533,9 @@ function _generateTable({
   i = 0,
   childHeader,
   onClickRow = x => x,
-  showPointer,
+  clickable,
   activeRow,
 }) {
-  console.log('Show pointer in generate table:', showPointer);
   if (Array.isArray(data)) {
     return (
       <TBody key="body">
@@ -548,7 +547,7 @@ function _generateTable({
           i,
           childHeader,
           onClickRow,
-          showPointer,
+          clickable,
           activeRow,
         })).reduce((memo, rows) => [ ...memo, ...rows ], [])}
       </TBody>
@@ -564,7 +563,7 @@ function _generateTable({
         key={uniqId}
         parent={hasData ? uniqId : undefined}
         onClick={() => onClickRow(row)}
-        showPointer={showPointer}
+        clickable={clickable}
         highlighted={activeRow && row.id && activeRow === row.id}>
         {do{
           if (header) {
@@ -584,10 +583,10 @@ function _generateTable({
 
     if (hasData) {
       return [parentRow, (
-        <TRow key={`${uniqId}-1`} nested={uniqId} onClick={() => onClickRow(row)} showPointer={showPointer}>
+        <TRow key={`${uniqId}-1`} nested={uniqId} onClick={() => onClickRow(row)} clickable={clickable}>
           <TCell>
             <Table>
-              {_generateTable({ data: data.data, header: childHeader, renderCell: null, renderChildCell, showPointer })}
+              {_generateTable({ data: data.data, header: childHeader, renderCell: null, renderChildCell, clickable })}
             </Table>
           </TCell>
         </TRow>
@@ -623,8 +622,6 @@ const Table = ({
   const [ rowsStates, setRowState ] = useState({});
   const { screenSize, ScreenSizes } = useScreenSize();
 
-  const showPointer = clickable;
-  console.log({clickable, onClickRow, showPointer});
   const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
   
   const hasNestedData = data && data.some((d) => d.data);
@@ -664,7 +661,7 @@ const Table = ({
       index: 0,
       childHeader,
       onClickRow,
-      showPointer,
+      clickable,
       activeRow,
     })
   ] : children;
