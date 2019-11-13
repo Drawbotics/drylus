@@ -201,6 +201,9 @@ const styles = {
       }
     }
   `,
+  pointer: css`
+    cursor: pointer;
+  `,
   noBorderBottom: css`
     border-bottom: none !important;
   `,
@@ -346,6 +349,7 @@ export const TRow = ({
   alt,
   lastParentRow,
   onClick,
+  clickable,
   style,
 }) => {
   const [ rowsStates, handleSetRowState ] = useContext(RowsContext);
@@ -357,6 +361,7 @@ export const TRow = ({
         [styles.collapsed]: collapsed,
         [styles.light]: ! alt,
         [styles.white]: alt,
+        [styles.pointer]: clickable && onClick != null,
         [styles.highlightedRow]: highlighted,
         [styles.noBorderBottom]: !! parent && ! rowsStates[parent] && lastParentRow,
       })}
@@ -384,6 +389,9 @@ TRow.propTypes = {
 
   /** Triggered when any part of the row is clicked */
   onClick: PropTypes.func,
+
+  /** If true and `onClick` is provided, shows a pointer when hovering the row */
+  clickable: PropTypes.func,
 
   /** Used for style overrides */
   style: PropTypes.object,
@@ -525,6 +533,7 @@ function _generateTable({
   i = 0,
   childHeader,
   onClickRow = x => x,
+  clickable,
   activeRow,
 }) {
   if (Array.isArray(data)) {
@@ -538,6 +547,7 @@ function _generateTable({
           i,
           childHeader,
           onClickRow,
+          clickable,
           activeRow,
         })).reduce((memo, rows) => [ ...memo, ...rows ], [])}
       </TBody>
@@ -549,7 +559,12 @@ function _generateTable({
     const uniqId = Object.values(row).reduce((memo, v) => `${memo}-${v}`, '');
     const renderData = renderCell || renderChildCell;
     const parentRow = (
-      <TRow key={uniqId} parent={hasData ? uniqId : undefined} onClick={() => onClickRow(row)} highlighted={activeRow && row.id && activeRow === row.id}>
+      <TRow
+        key={uniqId}
+        parent={hasData ? uniqId : undefined}
+        onClick={() => onClickRow(row)}
+        clickable={clickable}
+        highlighted={activeRow && row.id && activeRow === row.id}>
         {do{
           if (header) {
             header.map((item, i) => {
@@ -568,10 +583,10 @@ function _generateTable({
 
     if (hasData) {
       return [parentRow, (
-        <TRow key={`${uniqId}-1`} nested={uniqId} onClick={() => onClickRow(row)}>
+        <TRow key={`${uniqId}-1`} nested={uniqId} onClick={() => onClickRow(row)} clickable={clickable}>
           <TCell>
             <Table>
-              {_generateTable({ data: data.data, header: childHeader, renderCell: null, renderChildCell })}
+              {_generateTable({ data: data.data, header: childHeader, renderCell: null, renderChildCell, clickable })}
             </Table>
           </TCell>
         </TRow>
@@ -599,6 +614,7 @@ const Table = ({
   highlighted,
   isLoading,
   onClickRow,
+  clickable,
   activeRow,
   emptyContent,
   style,
@@ -611,43 +627,44 @@ const Table = ({
   const hasNestedData = data && data.some((d) => d.data);
 
   const tableContents = data && ! isLoading && ! emptyContent ? [
-      <THead key="head">
-        {header.map((hItem) => {
-          const v = typeof hItem === 'string' ? hItem : hItem.value;
-          return (
-            <TCell key={v}>
-              {do{
-                if (sortableBy?.includes(v) && screenSize > ScreenSizes.L) {
-                  <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
-                    <span className={cx(styles.sortableIcons, {
-                      [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'asc',
-                      [styles.down]: activeHeader?.key === v && activeHeader?.direction === 'desc',
-                    })}>
-                      <Icon name="chevron-up" />
-                      <Icon name="chevron-down" />
-                    </span>
-                    {typeof hItem === 'string' ? hItem : hItem.label}
+    <THead key="head">
+      {header.map((hItem) => {
+        const v = typeof hItem === 'string' ? hItem : hItem.value;
+        return (
+          <TCell key={v}>
+            {do{
+              if (sortableBy?.includes(v) && screenSize > ScreenSizes.L) {
+                <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
+                  <span className={cx(styles.sortableIcons, {
+                    [styles.up]: activeHeader?.key === v && activeHeader?.direction === 'asc',
+                    [styles.down]: activeHeader?.key === v && activeHeader?.direction === 'desc',
+                  })}>
+                    <Icon name="chevron-up" />
+                    <Icon name="chevron-down" />
                   </span>
-                }
-                else {
-                  typeof hItem === 'string' ? hItem : hItem.label
-                }
-              }}
-            </TCell>
-          );
-        })}
-      </THead>,
-      _generateTable({
-        data,
-        header,
-        renderCell,
-        renderChildCell,
-        index: 0,
-        childHeader,
-        onClickRow,
-        activeRow,
-      })
-     ] : children;
+                  {typeof hItem === 'string' ? hItem : hItem.label}
+                </span>
+              }
+              else {
+                typeof hItem === 'string' ? hItem : hItem.label
+              }
+            }}
+          </TCell>
+        );
+      })}
+    </THead>,
+    _generateTable({
+      data,
+      header,
+      renderCell,
+      renderChildCell,
+      index: 0,
+      childHeader,
+      onClickRow,
+      clickable,
+      activeRow,
+    })
+  ] : children;
 
   const transformedChildren = screenSize <= ScreenSizes.L ? _addAttributesToCells(tableContents) : tableContents;
   
@@ -729,6 +746,9 @@ Table.propTypes = {
   /** Highlights the rows when hovered. Does not work on tables with nested data */
   highlighted: PropTypes.bool,
 
+  /** Displays a cursor when hovering a row if `onClickRow` is a function */
+  clickable: PropTypes.bool,
+
   /** If true the content of the table will be overridden by a "fake" table with animated cells to show loading. You MUST pass header to render this */
   isLoading: PropTypes.bool,
 
@@ -750,6 +770,7 @@ Table.defaultProps = {
   fullWidth: true,
   renderCell: x => x,
   renderChildCell: x => x,
+  clickable: false,
 };
 
 
