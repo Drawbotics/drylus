@@ -41,7 +41,7 @@ const styles = {
     padding-right: ${sv.paddingExtraLarge};
     border: none;
     border-radius: ${sv.defaultBorderRadius};
-    appearance: button;
+    appearance: none;
     width: 100%;
     outline: none !important;
     box-shadow: inset 0px 0px 0px 1px ${sv.azure};
