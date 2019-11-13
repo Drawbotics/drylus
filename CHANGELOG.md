@@ -1,3 +1,16 @@
+# v4.4.7 (Wed Nov 13 2019)
+
+#### 🐛  Bug Fix
+
+- `@drawbotics/react-drylus`
+  - set select appearance to none instead of button [#78](https://github.com/Drawbotics/drylus/pull/78) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.4.6 (Wed Nov 13 2019)
 
 #### 🐛  Bug Fix
