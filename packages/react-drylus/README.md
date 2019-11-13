@@ -22,6 +22,7 @@ The library exposes the components at the root, to be used as follows:
 import { ThemeProvider, Button, Icon } from '@drawbotics/react-drylus';
 ```
 
+
 **NOTE**: Because of the way `ThemeProvider` styles the elements to be self-contained (mainly affects children nodes, and not the `html` element), it has to be imported _before_ other components (as shown above) otherwise the component-specific styles will not override the base styles from `ThemeProvider`.
 
 ---
