@@ -1,3 +1,16 @@
+# v4.4.6 (Wed Nov 13 2019)
+
+#### 🐛  Bug Fix
+
+- `@drawbotics/react-drylus`
+  - Add clickable attribute to Table [#77](https://github.com/Drawbotics/drylus/pull/77) ([@LeopoldArkham](https://github.com/LeopoldArkham))
+
+#### Authors: 1
+
+- [@LeopoldArkham](https://github.com/LeopoldArkham)
+
+---
+
 # v4.4.5 (Thu Oct 24 2019)
 
 #### 🐛  Bug Fix
