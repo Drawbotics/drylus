@@ -16,7 +16,6 @@ npm run build
 
 The components' code is simply transpiled, no bundles are generated here.
 
-
 ### Some comments
 The library exposes the components at the root, to be used as follows:
 ```jsx
