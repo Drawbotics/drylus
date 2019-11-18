@@ -18,7 +18,7 @@ async function build(input, output) {
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
-      if (err || stats.hasErrors()) {
+      if (err) {
         reject();
       }
       const content = fs.readFileSync(path.resolve(output, 'bundle.js'), 'utf8');
