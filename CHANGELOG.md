@@ -1,3 +1,16 @@
+# v4.4.9 (Mon Nov 18 2019)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - inject global styles to vanilla  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.4.7 (Wed Nov 13 2019)
 
 #### 🐛  Bug Fix
