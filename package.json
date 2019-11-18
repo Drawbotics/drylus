@@ -74,7 +74,7 @@
     "chalk": "^2.4.2",
     "copy-webpack-plugin": "^5.0.2",
     "css-loader": "^2.1.1",
-    "emotion": "^10.0.9",
+    "emotion": "^10.0.23",
     "eslint": "^5.16.0",
     "eslint-formatter-pretty": "^2.1.1",
     "eslint-plugin-react": "^7.12.4",
