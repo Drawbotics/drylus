@@ -10,18 +10,21 @@ import normalize from '../utils/normalize';
 normalize();
 
 
-export const styles = {
-  global: globalCSS`
-    @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
+export const staticStyles = `
+  @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
 
-    html, body {
-      font-size: ${sv.defaultFontSize};
-      line-height: ${sv.defaultLineHeight};
-      letter-spacing: ${sv.defaultLetterSpacing};
-      -webkit-font-smoothing: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-  `,
+  html, body {
+    font-size: ${sv.defaultFontSize};
+    line-height: ${sv.defaultLineHeight};
+    letter-spacing: ${sv.defaultLetterSpacing};
+    -webkit-font-smoothing: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+`
+
+
+export const styles = {
+  global: globalCSS(staticStyles),
   root: css`
     * {
       font-family: ${sv.defaultFontFamily};
