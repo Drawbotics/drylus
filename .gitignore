@@ -4,6 +4,7 @@ lib
 output
 dist
 .env
+docs
 
 .DS_Store
 **/.DS_Store
