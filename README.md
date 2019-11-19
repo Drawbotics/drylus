@@ -6,11 +6,12 @@ npm install
 ```
 
 There are 7 total packages:
-- [drylus-style-vars](/packages/drylus-style-vars): This package holds all the variables used in the Drawbotics styles. Exports js, less and css vars.
-- [icons](/packages/icons): This package holds all the icons used throughout the Drawbotics design system
-- [react-drylus](/packages/react-drylus): This is basically the source of all the components for the library; it uses React
-- [vanilla-drylus](/packages/vanilla-drylus): The vanilla JS version of the library. The styles (CSS) is extracted from `react-drylus` using `extract-emotion` (see next point) and bundled to be used in non-react apps. Since we can't extract JS logic from React, the component logic is re-written in non-react code and bundled separately as well
-- [extract-emotion](/packages/extract-emotion): A small CLI tool to extract the CSS from React components that use [emotion](https://github.com/emotion-js/emotion) for styling (see [readme](/packages/extract-emotion/README.md))
+- [![npm version](https://badge.fury.io/js/%40drawbotics%2Fdrylus-style-vars.svg)](https://badge.fury.io/js/%40drawbotics%2Fdrylus-style-vars) [drylus-style-vars](/packages/drylus-style-vars):
+ This package holds all the variables used in the Drawbotics styles. Exports js, less and css vars.
+- [![npm version](https://badge.fury.io/js/%40drawbotics%2Ficons.svg)](https://badge.fury.io/js/%40drawbotics%2Ficons) [icons](/packages/icons): This package holds all the icons used throughout the Drawbotics design system
+- [![npm version](https://badge.fury.io/js/%40drawbotics%2Freact-drylus.svg)](https://badge.fury.io/js/%40drawbotics%2Freact-drylus) [react-drylus](/packages/react-drylus): This is basically the source of all the components for the library; it uses React
+- [![npm version](https://badge.fury.io/js/%40drawbotics%2Fvanilla-drylus.svg)](https://badge.fury.io/js/%40drawbotics%2Fvanilla-drylus) [vanilla-drylus](/packages/vanilla-drylus): The vanilla JS version of the library. The styles (CSS) is extracted from `react-drylus` using `extract-emotion` (see next point) and bundled to be used in non-react apps. Since we can't extract JS logic from React, the component logic is re-written in non-react code and bundled separately as well
+- [![npm version](https://badge.fury.io/js/%40drawbotics%2Fextract-emotion.svg)](https://badge.fury.io/js/%40drawbotics%2Fextract-emotion) [extract-emotion](/packages/extract-emotion): A small CLI tool to extract the CSS from React components that use [emotion](https://github.com/emotion-js/emotion) for styling (see [readme](/packages/extract-emotion/README.md))
 - [drylus-web-components](/packages/drylus-web-components): __WIP__ Auto generated from `react-drylus`
 - [styleguide](/packages/styleguide): This is where we write all the documentation and code examples for the library; examples are written in React and the equivalent HTML and web-components version are auto generated
 
