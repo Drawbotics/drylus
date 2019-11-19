@@ -1,7 +1,6 @@
-import { injectGlobal } from 'emotion';
+const { injectGlobalStyles } = require('@drawbotics/react-drylus/lib/utils/inject-global-styles');
 
-import '@drawbotics/react-drylus';
-import { staticStyles } from '@drawbotics/react-drylus/lib/base/ThemeProvider';
+injectGlobalStyles();
 
 
-injectGlobal(staticStyles);
+require('@drawbotics/react-drylus');

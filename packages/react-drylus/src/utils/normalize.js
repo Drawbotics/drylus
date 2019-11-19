@@ -1,7 +1,4 @@
-import { injectGlobal } from 'emotion';
-
-
-export default () => injectGlobal`
+export default `
   html {
     box-sizing: border-box;
   }

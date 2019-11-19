@@ -5,26 +5,12 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
 import normalize from '../utils/normalize';
-
-
-normalize();
-
-
-export const staticStyles = `
-  @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
-
-  html, body {
-    font-size: ${sv.defaultFontSize};
-    line-height: ${sv.defaultLineHeight};
-    letter-spacing: ${sv.defaultLetterSpacing};
-    -webkit-font-smoothing: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-`
+import { globalStyles } from '../utils/inject-global-styles';
 
 
 export const styles = {
-  global: globalCSS(staticStyles),
+  global: globalCSS(globalStyles),
+  normalize: globalCSS(normalize),
   root: css`
     * {
       font-family: ${sv.defaultFontFamily};
@@ -50,7 +36,7 @@ export const styles = {
 const ThemeProvider = ({ children, style }) => {
   return (
     <Fragment>
-      <Global styles={styles.global} />
+      <Global styles={[styles.global, styles.normalize]} />
       <div className={cx(styles.root, styles.wrapper)} style={style}>
         {children}
       </div>
