@@ -1,0 +1,68 @@
+import {
+  Grid,
+  GridItem,
+  Sizes,
+  Flex,
+  FlexItem,
+  FlexJustify,
+  TextLink,
+  Categories,
+} from '@drawbotics/react-drylus';
+import { css } from 'emotion';
+import sv from '@drawbotics/drylus-style-vars';
+
+
+# Packages
+
+
+Below are the different packages and their current version.
+
+export const Package = ({ children }) => {
+  return (
+    <div className={css`
+      border: 1px solid ${sv.neutral};
+      border-radius: ${sv.defaultBorderRadius};
+      padding: ${sv.defaultPadding};
+    `}>
+      {children}
+    </div>
+  );
+};
+
+export const packages = [
+  'drylus-style-vars',
+  'icons',
+  'extract-emotion',
+  'react-drylus',
+  'vanilla-drylus',
+];
+
+<Grid
+  hGutters={Sizes.DEFAULT}
+  vGutters={Sizes.DEFAULT}
+  columns={3}
+  responsive={{
+    XL: {
+      columns: 2,
+    },
+    L: {
+      columns: 1,
+    },
+  }}>
+  {packages.map((name) => (
+    <GridItem key={name}>
+      <Package>
+        <Flex justify={FlexJustify.SPACE_BETWEEN}>
+          <FlexItem>
+            <a href={`https://badge.fury.io/js/%40drawbotics%2F${name}`}>
+              <TextLink category={Categories.INFO}>{name}</TextLink>
+            </a>
+          </FlexItem>
+          <FlexItem>
+            <img src={`https://badge.fury.io/js/%40drawbotics%2F${name}.svg`} />
+          </FlexItem>
+        </Flex>
+      </Package>
+    </GridItem>
+  ))}
+</Grid>
