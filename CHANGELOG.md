@@ -1,3 +1,16 @@
+# v4.4.11 (Tue Nov 19 2019)
+
+#### 🐛  Bug Fix
+
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - Fix/get @import statement in css bundle to be always at the top [#80](https://github.com/Drawbotics/drylus/pull/80) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.4.10 (Mon Nov 18 2019)
 
 #### 🐛  Bug Fix
