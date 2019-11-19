@@ -91,13 +91,8 @@ Some package require extra configuration to be used (this is also mentioned in e
 ## Publishing
 We use Lerna's `publish` command to automate the correct versioning and tagging of packages. All packages in this repo are published, with the exception of `styleguide` since it is only used to build the web app for the styleguide.
 
-Once you've finished with the changes and are ready to publish:
-```
-npm run publish
-```
-Which will essentially run
-```
-npx lerna pulbish --force-publish
-```
+We've started to use [Github Actions](https://github.com/features/actions) to enable continuous deployment for the different packages, including the styleguide. The set up for this is found in the `.github/workflows` folder.
 
-And follow the CLI prompts to release a new version for all the packages, even the unchanged ones.
+In order to enable automatic versioning we use [auto](https://github.com/intuit/auto) which uses the labels added to PRs to know what version to publish.
+
+Any push to master is automatically recognised as a bug fix (patch). You can look at the workflow configuration for more details.
