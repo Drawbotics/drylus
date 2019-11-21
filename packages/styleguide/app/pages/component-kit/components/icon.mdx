@@ -10,13 +10,18 @@ import icons from '~/../../icons/icons';
 # Icon
 By default the icon has no color, it inherits it from the parent component/element, unless a `category` is specified.
 ```jsx
-import { Icon } from '@drawbotics/react-drylus';
+import { Icon, Icons } from '@drawbotics/react-drylus';
 ```
 
 __Example__
 <Playground component={Icon}>
   <Icon name="globe" />
 </Playground>
+
+The `Icons` object is also exposed, which is basically a mapping of the icon names (camel cased) and their value (string). This way you can do:
+```jsx
+<Icon name={Icons.arrowUp} />
+```
 
 
 Here is the full set of available icons:

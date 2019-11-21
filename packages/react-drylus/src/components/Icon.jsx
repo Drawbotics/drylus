@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx, injectGlobal } from 'emotion';
 import PropTypes from 'prop-types';
-import generateIconStyles from '@drawbotics/icons/dist/drycons.js';
+import { generateIconStyles, mapping } from '@drawbotics/icons/dist/drycons.js';
 import packageJson from '@drawbotics/icons/package.json';
 import sv from '@drawbotics/drylus-style-vars';
 
@@ -45,6 +45,9 @@ const styles = {
 };
 
 
+export const Icons = mapping;
+
+
 const Icon = ({ name, bold, onClick, category, style }) => {
   return (
     <i
@@ -56,7 +59,7 @@ const Icon = ({ name, bold, onClick, category, style }) => {
       })}
       onClick={onClick} />
   );
-}
+};
 
 
 Icon.propTypes = {

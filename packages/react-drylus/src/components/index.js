@@ -1,5 +1,5 @@
 export Button from './Button';
-export Icon from './Icon';
+export Icon, { Icons } from './Icon';
 export Title, { TitleAlign } from './Title';
 export RoundIcon from './RoundIcon';
 export Paragraph, { ParagraphAlign } from './Paragraph';
