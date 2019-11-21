@@ -12,7 +12,6 @@ export Badge from './Badge';
 export Drawer, { DrawerSides } from './Drawer';
 export BaseFilter, { FilterAlign, SelectFilter, CheckboxFilter } from './Filter';
 export TabNavigation from './TabNavigation';
-export ListTile from './ListTile';
 export Avatar from './Avatar';
 export Text from './Text';
 export Dot from './Dot';

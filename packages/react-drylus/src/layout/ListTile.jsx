@@ -3,8 +3,8 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
-import Flex, { FlexItem } from '../layout/Flex';
-import Text from './Text';
+import Flex, { FlexItem } from './Flex';
+import Text from '../components/Text';
 
 
 const styles = {
