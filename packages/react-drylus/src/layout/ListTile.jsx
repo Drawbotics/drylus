@@ -46,12 +46,7 @@ const ListTile = ({
   onClick,
   style,
 }) => {
-  if (Boolean(title) && typeof title !== 'string' && title.type !== Text) {
-    console.warn('`title` should only be a string or a Text component');
-  }
-  if (Boolean(subtitle) && typeof subtitle !== 'string' && subtitle.type !== Text) {
-    console.warn('`subtitle` should only be a string or a Text component');
-  }
+ 
   return (
     <div
       style={style}

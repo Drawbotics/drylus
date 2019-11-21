@@ -5,7 +5,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
 
 import Icon from './Icon';
-import ListTile from './ListTile';
+import ListTile from '../layout/ListTile';
 import Checkbox from '../forms/Checkbox';
 import { CustomPropTypes } from '../utils';
 
