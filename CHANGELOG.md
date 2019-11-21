@@ -1,3 +1,29 @@
+# v4.5.0 (Thu Nov 21 2019)
+
+#### 🚀  Enhancement
+
+- `@drawbotics/react-drylus`
+  - add variations to EmptyState [#81](https://github.com/Drawbotics/drylus/pull/81) ([@nicmosc](https://github.com/nicmosc))
+
+#### 🐛  Bug Fix
+
+- `@drawbotics/icons`, `@drawbotics/react-drylus`
+  - expose icon names mapping object [#82](https://github.com/Drawbotics/drylus/pull/82) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- add packages in documentation with current version  ([@nicmosc](https://github.com/nicmosc))
+- use skip-commit package in github workflow  ([@nicmosc](https://github.com/nicmosc))
+- change publishing documentation  ([@nicmosc](https://github.com/nicmosc))
+- add version badges to main readme  ([@nicmosc](https://github.com/nicmosc))
+- fix links within styleguide  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.4.11 (Tue Nov 19 2019)
 
 #### 🐛  Bug Fix
