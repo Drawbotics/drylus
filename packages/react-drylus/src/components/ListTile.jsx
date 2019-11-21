@@ -70,16 +70,28 @@ const ListTile = ({
         <FlexItem flex>
           {do {
             if (title != null) {
-              <div className={cx(styles.title, { [styles.withMargin]: subtitle })}>
-                {title}
-              </div>
+              if (typeof title === 'string' || title.type === Text) {
+                <div className={cx(styles.title, { [styles.withMargin]: subtitle })}>
+                  {title}
+                </div>
+              }
+              else {
+                <div className={styles.withMargin}>
+                  {title}
+                </div>
+              }
             }
           }}
           {do {
             if (subtitle != null) {
-              <div className={styles.subtitle}>
-                {subtitle}
-              </div>
+              if (typeof subtitle === 'string' || subtitle.type === Text) {
+                <div className={styles.subtitle}>
+                  {subtitle}
+                </div>
+              }
+              else {
+                subtitle
+              }
             }
           }}
         </FlexItem>
