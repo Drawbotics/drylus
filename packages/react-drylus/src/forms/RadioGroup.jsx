@@ -15,7 +15,7 @@ const styles = {
     display: inline-block;
   `,
   radioWrapper: css`
-    margin-bottom: ${sv.marginSmall};
+    margin-bottom: ${sv.marginExtraSmall};
   `,
   root: css`
     position: relative;
@@ -125,10 +125,6 @@ const styles = {
        > i {
          font-size: 0.7rem;
        }
-    }
-
-    [data-element="label"] {
-      font-size: 0.9rem;
     }
   `,
 };

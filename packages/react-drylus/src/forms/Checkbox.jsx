@@ -120,10 +120,6 @@ const styles = {
          font-size: 0.7rem;
        }
     }
-
-    [data-element="label"] {
-      font-size: 0.9rem;
-    }
   `,
 };
 
