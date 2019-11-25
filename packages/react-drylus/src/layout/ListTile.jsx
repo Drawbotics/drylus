@@ -3,8 +3,8 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
-import Flex, { FlexItem } from '../layout/Flex';
-import Text from './Text';
+import Flex, { FlexItem } from './Flex';
+import Text from '../components/Text';
 
 
 const styles = {
@@ -46,12 +46,7 @@ const ListTile = ({
   onClick,
   style,
 }) => {
-  if (Boolean(title) && typeof title !== 'string' && title.type !== Text) {
-    console.warn('`title` should only be a string or a Text component');
-  }
-  if (Boolean(subtitle) && typeof subtitle !== 'string' && subtitle.type !== Text) {
-    console.warn('`subtitle` should only be a string or a Text component');
-  }
+ 
   return (
     <div
       style={style}
@@ -70,16 +65,28 @@ const ListTile = ({
         <FlexItem flex>
           {do {
             if (title != null) {
-              <div className={cx(styles.title, { [styles.withMargin]: subtitle })}>
-                {title}
-              </div>
+              if (typeof title === 'string' || title.type === Text) {
+                <div className={cx(styles.title, { [styles.withMargin]: subtitle })}>
+                  {title}
+                </div>
+              }
+              else {
+                <div className={styles.withMargin}>
+                  {title}
+                </div>
+              }
             }
           }}
           {do {
             if (subtitle != null) {
-              <div className={styles.subtitle}>
-                {subtitle}
-              </div>
+              if (typeof subtitle === 'string' || subtitle.type === Text) {
+                <div className={styles.subtitle}>
+                  {subtitle}
+                </div>
+              }
+              else {
+                subtitle
+              }
             }
           }}
         </FlexItem>

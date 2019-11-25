@@ -5,7 +5,7 @@ import Categories from '../base/Categories';
 
 
 export function getEnumAsClass(enumVal) {
-  return camelCase(enumVal?.description.toLowerCase());
+  return camelCase(enumVal?.description?.toLowerCase());
 }
 
 
