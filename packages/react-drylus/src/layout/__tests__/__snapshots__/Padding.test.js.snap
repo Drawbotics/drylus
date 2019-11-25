@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Padding matches snapshot when has a different size on each side 1`] = `
+.css-1qj5pl9-Padding__root-Padding__resetPadding {
+  padding: 24px;
+  padding: 0;
+}
+
+@media only screen and (max-width:768px) {
+  .css-1qj5pl9-Padding__root-Padding__resetPadding {
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .css-1qj5pl9-Padding__root-Padding__resetPadding {
+    padding: 0;
+  }
+}
+
+<div
+  className="undefined css-1qj5pl9-Padding__root-Padding__resetPadding"
+>
+  Content
+</div>
+`;
+
+exports[`Padding matches snapshot when has a size only on 1 side 1`] = `
+.css-1qj5pl9-Padding__root-Padding__resetPadding {
+  padding: 24px;
+  padding: 0;
+}
+
+@media only screen and (max-width:768px) {
+  .css-1qj5pl9-Padding__root-Padding__resetPadding {
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .css-1qj5pl9-Padding__root-Padding__resetPadding {
+    padding: 0;
+  }
+}
+
+<div
+  className="css-1qj5pl9-Padding__root-Padding__resetPadding"
+>
+  Content
+</div>
+`;
+
+exports[`Padding matches snapshot when has a uniform size 1`] = `
+.css-1ox71jp-Padding__root {
+  padding: 24px;
+}
+
+@media only screen and (max-width:768px) {
+  .css-1ox71jp-Padding__root {
+    padding: 16px;
+  }
+}
+
+<div
+  className="css-1ox71jp-Padding__root"
+>
+  Content
+</div>
+`;
+
+exports[`Padding matches snapshot when has vertical and horizontal sizes 1`] = `
+.css-1qj5pl9-Padding__root-Padding__resetPadding {
+  padding: 24px;
+  padding: 0;
+}
+
+@media only screen and (max-width:768px) {
+  .css-1qj5pl9-Padding__root-Padding__resetPadding {
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .css-1qj5pl9-Padding__root-Padding__resetPadding {
+    padding: 0;
+  }
+}
+
+<div
+  className="undefined css-1qj5pl9-Padding__root-Padding__resetPadding"
+>
+  Content
+</div>
+`;

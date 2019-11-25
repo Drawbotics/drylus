@@ -299,22 +299,45 @@ const styles = {
 };
 
 
+function _computeSize(sizeDescription) {
+  let size = {};
+
+  if (sizeDescription.horizontal) {
+    size.left = sizeDescription.horizontal;
+    size.right = sizeDescription.horizontal;
+  }
+  if (sizeDescription.vertical) {
+    size.top = sizeDescription.vertical;
+    size.bottom = sizeDescription.vertical;
+  }
+
+  return size;
+}
+
+
 const Padding = ({
   responsive,
   ...rest,
 }) => {
-  const { children, size, style } = useResponsiveProps(rest, responsive);
+  const { children, size: rawSize, style } = useResponsiveProps(rest, responsive);
 
-  const isUniform = typeof size !== 'object';
+  const isUniform = typeof rawSize !== 'object';
+
+  const size = ! isUniform && (rawSize.vertical || rawSize.horizontal)
+    ? _computeSize(rawSize)
+    : rawSize;
+  
   return (
-    <div className={cx(styles.root, {
-      [styles[camelCase(size?.description)]]: isUniform && size,
-      [styles.resetPadding]: ! isUniform,
-      [styles[camelCase(`${size?.left?.description}_LEFT`)]]: ! isUniform && size?.left,
-      [styles[camelCase(`${size?.right?.description}_RIGHT`)]]: ! isUniform && size?.right,
-      [styles[camelCase(`${size?.top?.description}_TOP`)]]: ! isUniform && size?.top,
-      [styles[camelCase(`${size?.bottom?.description}_BOTTOM`)]]: ! isUniform && size?.bottom,
-    })} style={style}>
+    <div
+      className={cx(styles.root, {
+        [styles[camelCase(size?.description)]]: isUniform && size,
+        [styles.resetPadding]: ! isUniform,
+        [styles[camelCase(`${size?.left?.description}_LEFT`)]]: ! isUniform && size?.left,
+        [styles[camelCase(`${size?.right?.description}_RIGHT`)]]: ! isUniform && size?.right,
+        [styles[camelCase(`${size?.top?.description}_TOP`)]]: ! isUniform && size?.top,
+        [styles[camelCase(`${size?.bottom?.description}_BOTTOM`)]]: ! isUniform && size?.bottom,
+      })}
+      style={style}>
       {children}
     </div>
   );
@@ -334,6 +357,28 @@ Padding.propTypes = {
       Sizes.EXTRA_HUGE,
       Sizes.MASSIVE,
     ]),
+    PropTypes.shape({
+      vertical: PropTypes.oneOf([
+        Sizes.DEFAULT,
+        Sizes.SMALL,
+        Sizes.EXTRA_SMALL,
+        Sizes.LARGE,
+        Sizes.EXTRA_LARGE,
+        Sizes.HUGE,
+        Sizes.EXTRA_HUGE,
+        Sizes.MASSIVE,
+      ]),
+      horizontal: PropTypes.oneOf([
+        Sizes.DEFAULT,
+        Sizes.SMALL,
+        Sizes.EXTRA_SMALL,
+        Sizes.LARGE,
+        Sizes.EXTRA_LARGE,
+        Sizes.HUGE,
+        Sizes.EXTRA_HUGE,
+        Sizes.MASSIVE,
+      ]),
+    }),
     PropTypes.shape({
       left: PropTypes.oneOf([
         Sizes.DEFAULT,
