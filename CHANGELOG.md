@@ -1,3 +1,18 @@
+# v4.5.1 (Mon Nov 25 2019)
+
+#### 🐛  Bug Fix
+
+- `@drawbotics/react-drylus`
+  - Feature/horizontal vertical [#84](https://github.com/Drawbotics/drylus/pull/84) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Fix/list tile [#83](https://github.com/Drawbotics/drylus/pull/83) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.5.0 (Thu Nov 21 2019)
 
 #### 🚀  Enhancement
