@@ -16,7 +16,7 @@ const styles = {
     display: inline-block;
   `,
   trigger: css`
-    padding: calc(${sv.paddingExtraSmall} * 1.5) ${sv.paddingSmall};
+    padding: calc(${sv.paddingExtraSmall} * 1.5 - 1px) ${sv.paddingSmall};
     border-radius: ${sv.defaultBorderRadius};
     box-shadow: inset 0 0 0 1px ${sv.neutral};
     color: ${sv.colorSecondary};
