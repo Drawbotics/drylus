@@ -183,7 +183,7 @@ const styles = {
       background-size: 1200px 100%;
       animation: ${shimmer} 2s forwards infinite linear;
     }
-  `, 
+  `,
 };
 
 
