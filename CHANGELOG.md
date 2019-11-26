@@ -1,3 +1,16 @@
+# v4.5.2 (Tue Nov 26 2019)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix filter trigger padding to match button  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.5.1 (Mon Nov 25 2019)
 
 #### 🐛  Bug Fix
