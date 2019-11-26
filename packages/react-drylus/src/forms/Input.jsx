@@ -1,5 +1,5 @@
 import React, { useState, forwardRef } from 'react';
-import { css, cx } from 'emotion';
+import { css, cx, keyframes } from 'emotion';
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
@@ -11,6 +11,16 @@ import Select from './Select';
 import Sizes from '../base/Sizes';
 import Categories from '../base/Categories';
 import Hint from './Hint';
+
+
+const shimmer = keyframes`
+  0% {
+    background-position: -1200px 0;
+  }
+  100% {
+    background-position: 1200px 0;
+  }
+`;
 
 
 const styles = {
@@ -151,6 +161,29 @@ const styles = {
       background-color: transparent;
     }
   `,
+  withPlaceholderOverlay: css`
+    position: relative;
+
+    &::after {
+      content: ' ';
+      position: absolute;
+      z-index: 9;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: ${sv.neutralLight};
+      border-radius: ${sv.defaultBorderRadius};
+      overflow: hidden;
+      background: linear-gradient(to right,
+        ${sv.neutralLight} 8%,
+        ${sv.neutralLighter} 18%,
+        ${sv.neutralLight} 33%
+      );
+      background-size: 1200px 100%;
+      animation: ${shimmer} 2s forwards infinite linear;
+    }
+  `, 
 };
 
 
@@ -167,6 +200,7 @@ const RawInput = ({
   className,
   loading,
   style,
+  isPlaceholder,
   ...rest,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
@@ -182,6 +216,7 @@ const RawInput = ({
         [styles.valid]: Boolean(value) && valid,
         [styles.error]: error,
         [className]: Boolean(className),
+        [styles.withPlaceholderOverlay]: isPlaceholder,
       })}>
       <div className={styles.outerWrapper}>
         {do{
@@ -318,6 +353,9 @@ Input.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** If true, a loading overlay is displayed on top of the component */
+  isPlaceholder: PropTypes.bool,
 };
 
 
