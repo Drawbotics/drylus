@@ -1,3 +1,77 @@
+import { useState, Fragment } from 'react';
+import {
+  FormGroup,
+  Label,
+  Input,
+  Checkbox,
+  Margin,
+  Flex,
+  FlexItem,
+  FlexJustify,
+  InputGroup,
+  Sizes,
+  Toggle,
+  Separator,
+} from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
 # Forms
 
-### Here are some examples of forms
+export const PlaceholderExample = () => {
+  const [ isPlaceholder, setIsPlaceholder ] = useState(false);
+  return (
+    <Fragment>
+      <Margin size={{ bottom: Sizes.DEFAULT }}>
+        <Toggle value={isPlaceholder} onChange={setIsPlaceholder} />
+      </Margin>
+      <Margin size={{ bottom: Sizes.DEFAULT }}>
+        <Separator />
+      </Margin>
+      <Flex>
+        <FlexItem flex>
+          <Margin size={{ right: Sizes.SMALL }}>
+            <FormGroup
+              input={
+                <Input
+                  isPlaceholder={isPlaceholder}
+                  placeholder="Something..."
+                  value=""
+                  onChange={x=>x} />
+              }
+              label={<Label isPlaceholder={isPlaceholder}>My input label</Label>}/>
+          </Margin>
+        </FlexItem>
+        <FlexItem flex>
+          <FormGroup
+            input={
+              <Input
+                isPlaceholder={isPlaceholder}
+                placeholder="Something..."
+                value=""
+                onChange={x=>x} />
+            }
+            label={<Label isPlaceholder={isPlaceholder}>My input label</Label>}/>
+        </FlexItem>
+      </Flex>
+      <Margin size={{ vertical: Sizes.SMALL }}>
+        <Input
+          isPlaceholder={isPlaceholder}
+          placeholder="Something..."
+          value=""
+          onChange={x=>x} />
+      </Margin>
+      <Checkbox isPlaceholder={isPlaceholder}>
+        This is a checkbox with a label
+      </Checkbox>
+    </Fragment>
+  );
+};
+
+#### isPlaceholder example
+Click the switch to enable or disable the placeholder state of the components. This is a field available on some components in the system as `isPlaceholder`.
+
+<Playground>
+  <PlaceholderExample />
+</Playground>
