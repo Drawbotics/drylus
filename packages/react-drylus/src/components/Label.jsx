@@ -33,6 +33,7 @@ const styles = {
   `,
   withPlaceholderOverlay: css`
     position: relative;
+    pointer-events: none;
 
     &::after {
       content: ' ';
