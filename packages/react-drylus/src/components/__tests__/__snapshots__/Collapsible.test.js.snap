@@ -40,7 +40,8 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
   color: #879ba6;
 }
 
-.css-l008e6-Label__root-Label__ellipsized {
+.css-9f7ejq-Label__root-Label__ellipsized {
+  display: inline-block;
   color: rgba(135,155,166,0.7);
   text-transform: uppercase;
   font-weight: 500;
@@ -50,7 +51,7 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-l008e6-Label__root-Label__ellipsized {
+  .css-9f7ejq-Label__root-Label__ellipsized {
     font-size: 0.8rem;
   }
 }
@@ -65,7 +66,7 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
       data-element="title"
     >
       <div
-        className="css-l008e6-Label__root-Label__ellipsized"
+        className="css-9f7ejq-Label__root-Label__ellipsized"
       >
         Title
       </div>
@@ -125,7 +126,8 @@ exports[`Collapsible matches snapshot when it is open 1`] = `
   padding-top: 8px;
 }
 
-.css-l008e6-Label__root-Label__ellipsized {
+.css-9f7ejq-Label__root-Label__ellipsized {
+  display: inline-block;
   color: rgba(135,155,166,0.7);
   text-transform: uppercase;
   font-weight: 500;
@@ -135,7 +137,7 @@ exports[`Collapsible matches snapshot when it is open 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-l008e6-Label__root-Label__ellipsized {
+  .css-9f7ejq-Label__root-Label__ellipsized {
     font-size: 0.8rem;
   }
 }
@@ -150,7 +152,7 @@ exports[`Collapsible matches snapshot when it is open 1`] = `
       data-element="title"
     >
       <div
-        className="css-l008e6-Label__root-Label__ellipsized"
+        className="css-9f7ejq-Label__root-Label__ellipsized"
       >
         Title
       </div>

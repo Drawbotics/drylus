@@ -8,7 +8,7 @@
     "watch:react": "cd packages/react-drylus && npm run watch",
     "build:react": "cd packages/react-drylus && npm run build",
     "test:react": "cd packages/react-drylus && npm run test",
-    "test:watch:react": "cd packages/react-drylus && npm run test:watch",
+    "test:react:watch": "cd packages/react-drylus && npm run test:watch",
     "build:vanilla": "cd packages/vanilla-drylus && npm run build",
     "watch:vanilla": "cd packages/vanilla-drylus && npm run watch",
     "test:extract-emotion": "cd packages/extract-emotion && npm run test",
