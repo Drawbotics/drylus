@@ -1,3 +1,18 @@
+# v4.5.6 (Wed Nov 27 2019)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add Button snapshot tests  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - make tertiary button background visible on grey backgrounds  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.5.5 (Wed Nov 27 2019)
 
 #### 🐛  Bug Fix
