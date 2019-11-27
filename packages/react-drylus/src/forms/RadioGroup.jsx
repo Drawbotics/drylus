@@ -155,11 +155,12 @@ const styles = {
       height: ${sv.marginSmall};
       width: ${sv.marginSmall};
     }
-    [data-element="icon"] {
+
+    [data-element="icon"], [data-element="locked-icon"] {
       line-height: calc(${sv.marginSmall} + 1px);
 
        > i {
-         font-size: 0.7rem;
+         font-size: 0.7rem !important;
        }
     }
   `,
