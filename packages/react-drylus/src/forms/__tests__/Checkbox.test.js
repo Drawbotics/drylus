@@ -5,28 +5,33 @@ import Checkbox from '../Checkbox';
 import { Sizes } from '../../base';
 
 
+jest.mock('uuid/v4', () => {
+  return jest.fn(() => 1);
+});
+
+
+
 describe('Checkbox', () => {
   const onChange = jest.fn();
-  const id = 1;  // otherwise snapshots differ every time
 
   describe('matches snapshot when', () => {
     it('is not checked', () => {
       const tree = create(
-        <Checkbox onChange={onChange} id={id} />
+        <Checkbox onChange={onChange} />
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
 
     it('is checked', () => {
       const tree = create(
-        <Checkbox value={true} onChange={onChange} id={id} />
+        <Checkbox value={true} onChange={onChange} />
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
 
     it('has a label', () => {
       const tree = create(
-        <Checkbox onChange={onChange} id={id}>
+        <Checkbox onChange={onChange}>
           Label
         </Checkbox>
       ).toJSON();
@@ -35,7 +40,7 @@ describe('Checkbox', () => {
 
     it('is read only', () => {
       const tree = create(
-        <Checkbox value={true} id={id} />
+        <Checkbox value={true} />
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
@@ -43,7 +48,6 @@ describe('Checkbox', () => {
     it('is small', () => {
       const tree = create(
         <Checkbox
-          id={id}
           size={Sizes.SMALL}
           onChange={onChange} />
       ).toJSON();
