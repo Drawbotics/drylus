@@ -1,7 +1,7 @@
 import React from 'react';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import sv, { fade } from '@drawbotics/drylus-style-vars';
 
 import { Categories, Sizes, Tiers } from '../base';
 import { getEnumAsClass } from '../utils';
@@ -164,7 +164,7 @@ export const styles = {
     color: ${sv.blue};
 
     &:hover {
-      background: ${sv.neutralLight};
+      background: ${fade(sv.neutral, 50)};
       color: ${sv.blueDark};
     }
 
