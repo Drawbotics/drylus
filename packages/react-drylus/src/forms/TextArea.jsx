@@ -1,5 +1,5 @@
 import React, { useState, forwardRef } from 'react';
-import { css, cx } from 'emotion';
+import { css, cx, keyframes } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
@@ -9,6 +9,16 @@ import Spinner from '../components/Spinner';
 import Sizes from '../base/Sizes';
 import Categories from '../base/Categories';
 import Hint from './Hint';
+
+
+const shimmer = keyframes`
+  0% {
+    background-position: -1200px 0;
+  }
+  100% {
+    background-position: 1200px 0;
+  }
+`;
 
 
 const styles = {
@@ -86,6 +96,30 @@ const styles = {
     opacity: 0;
     transform: scale(0);
   `,
+  withPlaceholderOverlay: css`
+    position: relative;
+    pointer-events: none;
+
+    &::after {
+      content: ' ';
+      position: absolute;
+      z-index: 9;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: ${sv.neutralLight};
+      border-radius: ${sv.defaultBorderRadius};
+      overflow: hidden;
+      background: linear-gradient(to right,
+        ${sv.neutralLight} 8%,
+        ${sv.neutralLighter} 18%,
+        ${sv.neutralLight} 33%
+      );
+      background-size: 1200px 100%;
+      animation: ${shimmer} 2s forwards infinite linear;
+    }
+  `,
 };
 
 
@@ -100,6 +134,7 @@ const RawTextArea = ({
   className,
   loading,
   style,
+  isPlaceholder,
   ...rest,
 }) => {
   const [ isFocused, setFocused ] = useState(false);
@@ -113,6 +148,7 @@ const RawTextArea = ({
         [styles.valid]: Boolean(value) && valid,
         [styles.error]: error,
         [className]: Boolean(className),
+        [styles.withPlaceholderOverlay]: isPlaceholder,
       })}>
       <div className={styles.outerWrapper}>
         <div className={styles.innerWrapper}>
@@ -208,6 +244,9 @@ TextArea.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** If true, a loading overlay is displayed on top of the component */
+  isPlaceholder: PropTypes.bool,
 };
 
 
