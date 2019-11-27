@@ -1,4 +1,4 @@
-import { Checkbox } from '@drawbotics/react-drylus';
+import { Checkbox, InputGroup } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 import { ControlledBoolField } from '../utils';
@@ -15,4 +15,16 @@ __Example__
   <ControlledBoolField component={
     <Checkbox />
   } />
+</Playground>
+
+`Checkbox` also has a `read-only` state when no `onChange` function is specified:
+<Playground>
+  <InputGroup>
+    <Checkbox>
+      I'm a read-only checkbox
+    </Checkbox>
+    <Checkbox value={true}>
+      I'm a read-only checkbox
+    </Checkbox>
+  </InputGroup>
 </Playground>

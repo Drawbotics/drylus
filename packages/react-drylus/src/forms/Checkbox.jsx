@@ -37,6 +37,24 @@ const styles = {
       }
     }
   `,
+  readOnly: css`
+    pointer-events: none;
+
+    [data-element="sprite"] {
+      background: ${sv.neutralLight} !important;
+    }
+
+    [data-element="locked-icon"] {
+        transform: scale(1);
+        border-radius: 0;
+        background: none;
+        color: ${sv.colorSecondary};
+        
+        > i {
+          margin-right: -1px;
+        }
+      }
+  `,
   disabled: css`
     cursor: not-allowed !important;
 
@@ -67,6 +85,10 @@ const styles = {
       [data-element="icon"] {
         transform: scale(1);
         border-radius: 0;
+      }
+      [data-element='locked-icon'] {
+        background: ${sv.green};
+        color: ${sv.colorPrimaryInverse};
       }
     }
 
@@ -123,11 +145,11 @@ const styles = {
       height: ${sv.marginSmall};
       width: ${sv.marginSmall};
     }
-    [data-element="icon"] {
+    [data-element="icon"], [data-element="locked-icon"] {
       line-height: calc(${sv.marginSmall} + 1px);
 
        > i {
-         font-size: 0.7rem;
+         font-size: 0.7rem !important;
        }
     }
   `,
@@ -179,12 +201,14 @@ const Checkbox = ({
   };
 
   const uniqId = id ? id : v4();
+  const readOnly = onChange == null;
   return (
     <div style={style} className={styles.root}>
       <label className={cx(styles.wrapper, {
         [styles[getEnumAsClass(size)]]: size,
         [styles.disabled]: disabled,
         [styles.error]: error,
+        [styles.readOnly]: readOnly,
         [styles.withPlaceholderOverlay]: isPlaceholder,
       })} htmlFor={uniqId}>
         <div className={styles.checkbox}>
@@ -195,11 +219,21 @@ const Checkbox = ({
             type="checkbox"
             className={styles.input}
             onChange={handleOnChange}
+            readOnly={readOnly}
             {...rest} />
           <div data-element="sprite" className={styles.sprite}>
-            <label data-element="icon" className={styles.iconLabel} htmlFor={uniqId}>
-              <Icon bold name="check" />
-            </label>
+            {do {
+              if (readOnly) {
+                <label data-element="locked-icon" className={styles.iconLabel}>
+                  <Icon name="lock" />
+                </label>
+              }
+              else {
+                <label data-element="icon" className={styles.iconLabel} htmlFor={uniqId}>
+                  <Icon bold name="check" />
+                </label>
+              }
+            }}
           </div>
         </div>
         {do{
