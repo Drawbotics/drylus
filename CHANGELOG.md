@@ -1,3 +1,18 @@
+# v4.5.4 (Wed Nov 27 2019)
+
+#### 🐛  Bug Fix
+
+- `@drawbotics/react-drylus`
+  - add read-only support to checkbox [#86](https://github.com/Drawbotics/drylus/pull/86) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - add read-only support to radio component [#87](https://github.com/Drawbotics/drylus/pull/87) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.5.3 (Tue Nov 26 2019)
 
 #### 🐛  Bug Fix
