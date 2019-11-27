@@ -1,3 +1,16 @@
+# v4.5.5 (Wed Nov 27 2019)
+
+#### 🐛  Bug Fix
+
+- `@drawbotics/react-drylus`
+  - add isPlaceholder to textarea [#88](https://github.com/Drawbotics/drylus/pull/88) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.5.4 (Wed Nov 27 2019)
 
 #### 🐛  Bug Fix
