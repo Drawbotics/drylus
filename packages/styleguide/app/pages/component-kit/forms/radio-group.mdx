@@ -1,4 +1,4 @@
-import { RadioGroup } from '@drawbotics/react-drylus';
+import { RadioGroup, InputGroup } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 import { ControlledField } from '../utils';
@@ -44,4 +44,33 @@ You can also disable individual options by adding `disabled` to the options:
         value: 'IT',
       }]} />
   } />
+</Playground>
+
+Not specifying an `onChange` function will render the component `read-only`:
+<Playground>
+  <InputGroup>
+    <RadioGroup
+      options={[{
+        label: 'Belgium',
+        value: 'BE',
+      }, {
+        label: 'France',
+        value: 'FR',
+      }, {
+        label: 'Italy',
+        value: 'IT',
+      }]} />
+    <RadioGroup
+      value="BE"
+      options={[{
+        label: 'Belgium',
+        value: 'BE',
+      }, {
+        label: 'France',
+        value: 'FR',
+      }, {
+        label: 'Italy',
+        value: 'IT',
+      }]} />
+  </InputGroup>
 </Playground>

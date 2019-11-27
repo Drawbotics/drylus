@@ -51,6 +51,28 @@ const styles = {
       color: ${sv.colorDisabled};
     }
   `,
+  readOnly: css`
+    pointer-events: none;
+
+    [data-element="sprite"] {
+      background: ${sv.neutralLight} !important;
+    }
+
+    [data-element="locked-icon"] {
+        transform: scale(1);
+        border-radius: 0;
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: ${sv.colorSecondary};
+        
+        > i {
+          margin-right: -1px;
+          font-size: 1rem;
+        }
+      }
+  `,
   error: css`
     [data-element="sprite"] {
       box-shadow: inset 0px 0px 0px 2px ${sv.red};
@@ -73,6 +95,10 @@ const styles = {
       [data-element="icon"] {
         transform: scale(1);
         border-radius: 0;
+      }
+      [data-element='locked-icon'] {
+        background: ${sv.green};
+        color: ${sv.colorPrimaryInverse};
       }
     }
 
@@ -175,6 +201,7 @@ const Radio = ({
   checked,
   children,
   isPlaceholder,
+  readOnly,
   ...rest,
 }) => {
   const id = v4();
@@ -184,6 +211,7 @@ const Radio = ({
         [styles[getEnumAsClass(size)]]: size,
         [styles.disabled]: disabled,
         [styles.error]: error,
+        [styles.readOnly]: readOnly,
         [styles.withPlaceholderOverlay]: isPlaceholder,
       })} htmlFor={id}>
         <div className={styles.radio}>
@@ -197,9 +225,18 @@ const Radio = ({
             onChange={onChange}
             {...rest} />
           <div data-element="sprite" className={styles.sprite}>
-            <label data-element="icon" className={styles.iconLabel} htmlFor={id}>
-              <Icon bold name="check" />
-            </label>
+            {do {
+              if (readOnly) {
+                <label data-element="locked-icon" className={styles.iconLabel}>
+                  <Icon name="lock" />
+                </label>
+              }
+              else {
+                <label data-element="icon" className={styles.iconLabel} htmlFor={id}>
+                  <Icon bold name="check" />
+                </label>
+              }
+            }}
           </div>
         </div>
         {do{
@@ -234,12 +271,15 @@ const RadioGroup = ({
     onChange ? onChange(e.target.value, e.target.name) : null;
   };
 
+  const readOnly = onChange == null;
+
   return (
     <div style={style} className={cx(styles.radioGroup, className)}>
       <div className={styles.radios}>
         {options.map((option) => (
           <div key={option[valueKey]} className={styles.radioWrapper}>
             <Radio
+              readOnly={readOnly}
               size={size}
               error={!! error}
               onChange={handleOnChange}
