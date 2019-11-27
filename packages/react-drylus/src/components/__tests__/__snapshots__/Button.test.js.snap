@@ -1,0 +1,331 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button matches snapshot when has a category 1`] = `
+.css-1h157w9-Button__root {
+  background: #eaeff4;
+  color: #172b4e;
+  border-radius: 5px;
+  padding: calc(8px * 1.5) 24px;
+  outline: 0;
+  border: 0;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.css-1h157w9-Button__root:hover {
+  cursor: pointer;
+  background: #d3dce6;
+}
+
+.css-1h157w9-Button__root:active {
+  box-shadow: 0 1px 6px #879ba6 inset;
+}
+
+.css-1h157w9-Button__root:disabled {
+  cursor: not-allowed;
+  background: #eaeff4 !important;
+  color: rgba(135,155,166,0.5) !important;
+  box-shadow: none;
+}
+
+<button
+  className="css-1h157w9-Button__root"
+>
+  Some content
+</button>
+`;
+
+exports[`Button matches snapshot when has a leading component 1`] = `
+.css-10jseif-Icon__root {
+  color: inherit;
+}
+
+.css-1h157w9-Button__root {
+  background: #eaeff4;
+  color: #172b4e;
+  border-radius: 5px;
+  padding: calc(8px * 1.5) 24px;
+  outline: 0;
+  border: 0;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.css-1h157w9-Button__root:hover {
+  cursor: pointer;
+  background: #d3dce6;
+}
+
+.css-1h157w9-Button__root:active {
+  box-shadow: 0 1px 6px #879ba6 inset;
+}
+
+.css-1h157w9-Button__root:disabled {
+  cursor: not-allowed;
+  background: #eaeff4 !important;
+  color: rgba(135,155,166,0.5) !important;
+  box-shadow: none;
+}
+
+.css-1vj2iq8-Button__leading {
+  margin-right: 8px;
+  height: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<button
+  className="css-1h157w9-Button__root"
+>
+  <div
+    className="css-1vj2iq8-Button__leading"
+  >
+    <i
+      className="css-10jseif-Icon__root Drycon Drycon-check"
+    />
+  </div>
+  Some content
+</button>
+`;
+
+exports[`Button matches snapshot when has a tier 1`] = `
+.css-1h157w9-Button__root {
+  background: #eaeff4;
+  color: #172b4e;
+  border-radius: 5px;
+  padding: calc(8px * 1.5) 24px;
+  outline: 0;
+  border: 0;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.css-1h157w9-Button__root:hover {
+  cursor: pointer;
+  background: #d3dce6;
+}
+
+.css-1h157w9-Button__root:active {
+  box-shadow: 0 1px 6px #879ba6 inset;
+}
+
+.css-1h157w9-Button__root:disabled {
+  cursor: not-allowed;
+  background: #eaeff4 !important;
+  color: rgba(135,155,166,0.5) !important;
+  box-shadow: none;
+}
+
+<button
+  className="css-1h157w9-Button__root"
+>
+  Some content
+</button>
+`;
+
+exports[`Button matches snapshot when has a trailing component 1`] = `
+.css-10jseif-Icon__root {
+  color: inherit;
+}
+
+.css-1h157w9-Button__root {
+  background: #eaeff4;
+  color: #172b4e;
+  border-radius: 5px;
+  padding: calc(8px * 1.5) 24px;
+  outline: 0;
+  border: 0;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.css-1h157w9-Button__root:hover {
+  cursor: pointer;
+  background: #d3dce6;
+}
+
+.css-1h157w9-Button__root:active {
+  box-shadow: 0 1px 6px #879ba6 inset;
+}
+
+.css-1h157w9-Button__root:disabled {
+  cursor: not-allowed;
+  background: #eaeff4 !important;
+  color: rgba(135,155,166,0.5) !important;
+  box-shadow: none;
+}
+
+.css-11fcumw-Button__trailing {
+  margin-left: 8px;
+  height: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<button
+  className="css-1h157w9-Button__root"
+>
+  Some content
+  <div
+    className="css-11fcumw-Button__trailing"
+  >
+    <i
+      className="css-10jseif-Icon__root Drycon Drycon-check"
+    />
+  </div>
+</button>
+`;
+
+exports[`Button matches snapshot when is basic 1`] = `
+.css-1h157w9-Button__root {
+  background: #eaeff4;
+  color: #172b4e;
+  border-radius: 5px;
+  padding: calc(8px * 1.5) 24px;
+  outline: 0;
+  border: 0;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.css-1h157w9-Button__root:hover {
+  cursor: pointer;
+  background: #d3dce6;
+}
+
+.css-1h157w9-Button__root:active {
+  box-shadow: 0 1px 6px #879ba6 inset;
+}
+
+.css-1h157w9-Button__root:disabled {
+  cursor: not-allowed;
+  background: #eaeff4 !important;
+  color: rgba(135,155,166,0.5) !important;
+  box-shadow: none;
+}
+
+<button
+  className="css-1h157w9-Button__root"
+>
+  Some content
+</button>
+`;
+
+exports[`Button matches snapshot when is small 1`] = `
+.css-1h157w9-Button__root {
+  background: #eaeff4;
+  color: #172b4e;
+  border-radius: 5px;
+  padding: calc(8px * 1.5) 24px;
+  outline: 0;
+  border: 0;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.css-1h157w9-Button__root:hover {
+  cursor: pointer;
+  background: #d3dce6;
+}
+
+.css-1h157w9-Button__root:active {
+  box-shadow: 0 1px 6px #879ba6 inset;
+}
+
+.css-1h157w9-Button__root:disabled {
+  cursor: not-allowed;
+  background: #eaeff4 !important;
+  color: rgba(135,155,166,0.5) !important;
+  box-shadow: none;
+}
+
+<button
+  className="css-1h157w9-Button__root"
+>
+  Some content
+</button>
+`;
