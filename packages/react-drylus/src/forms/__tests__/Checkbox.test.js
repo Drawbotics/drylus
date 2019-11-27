@@ -51,33 +51,25 @@ describe('Checkbox', () => {
     });
   });
   
-  // describe('changes state when clicked', () => {
-  //   let checked = false;
+  describe('changes state when clicked', () => {
+    let checked = false;
 
-  //   expect(checked).toBeFalsy();
+    expect(checked).toBeFalsy();
 
-  //   let component;
-  //   act(() => {
-  //     component = create(
-  //       <Checkbox
-  //         value={checked}
-  //         onChange={(c) => checked = c}>
-  //         Label
-  //       </Checkbox>
-  //     );
-  //   });
+    const component = create(
+      <Checkbox
+        value={checked}
+        onChange={(c) => checked = c}>
+        Label
+      </Checkbox>
+    );
 
-  //   // const label = component.findByProps({ 'data-element': 'label' });
-  //   const input = component.findByProps({ type: 'checkbox' });
+    const input = component.root.findByProps({ type: 'checkbox' });
+    const changeEvent = new Event('change');
+    Object.defineProperty(changeEvent, 'target', { writable: false, value: input });
 
-  //   act(() => {
-  //     input.dispatchEvent(new Event('change'));
-  //   });
-    
-  //   // act(() => {
-  //   //   label.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-  //   // });
-    
-  //   expect(checked).toBeTruthy();
-  // });
+    input.props.onChange(changeEvent);
+
+    expect(checked).toBeTruthy();
+  });
 });
