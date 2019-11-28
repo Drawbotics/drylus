@@ -13,8 +13,8 @@ const shimmer = keyframes`
   }
 `;
 
-const styles = {
-  root: css`
+export const styles = {
+  shimmer: css`
     position: relative;
     pointer-events: none;
 
@@ -44,7 +44,7 @@ const styles = {
 const LoadingPlaceholder = ({ height, width }) => {
   return (
     <div
-      className={styles.root}
+      className={styles.shimmer}
       style={{ height, width }} />
   );
 };
