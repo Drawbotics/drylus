@@ -49,10 +49,6 @@ const styles = {
         border-radius: 0;
         background: none;
         color: ${sv.colorSecondary};
-        
-        > i {
-          margin-right: -1px;
-        }
       }
   `,
   disabled: css`
@@ -73,8 +69,8 @@ const styles = {
     }
   `,
   checkbox: css`
-    height: ${sv.defaultMargin};
-    width: ${sv.defaultMargin};
+    height: calc(${sv.defaultMargin} - 4px);
+    width: calc(${sv.defaultMargin} - 4px);
     position: relative;
     overflow: hidden;
   `,
@@ -104,6 +100,8 @@ const styles = {
   label: css`
     margin-left: ${sv.marginExtraSmall};
     color: ${sv.colorPrimary};
+    position: relative;
+    top: 1px;
 
     &:hover {
       cursor: pointer;
@@ -131,25 +129,32 @@ const styles = {
     height: 100%;
     width: 100%;
     background: ${sv.green};
-    line-height: ${sv.marginLarge};
+    line-height: ${sv.defaultMargin};
     transform: scale(0);
     transition: all ${sv.transitionTimeShort} ${sv.bouncyTransitionCurve};
     border-radius: 100px;
 
     > i {
-      font-size: 1.1rem;
+      font-size: 0.8rem;
     }
   `,
-  small: css`
+  large: css`
     > div {
-      height: ${sv.marginSmall};
-      width: ${sv.marginSmall};
+      height: ${sv.marginLarge};
+      width: ${sv.marginLarge};
     }
+
+    [data-element="label"] {
+      font-size: 1.1rem;
+      margin-left: ${sv.marginSmall};
+      top: 0;
+    }
+
     [data-element="icon"], [data-element="locked-icon"] {
-      line-height: calc(${sv.marginSmall} + 1px);
+      line-height: calc(${sv.marginLarge} + 5px);
 
        > i {
-         font-size: 0.7rem !important;
+         font-size: 1.2rem !important;
        }
     }
   `,
@@ -273,8 +278,8 @@ Checkbox.propTypes = {
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
-  /** Size of the checkbox. Can be small or default */
-  size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT]),
+  /** Size of the checkbox. Can be large or default */
+  size: PropTypes.oneOf([Sizes.LARGE, Sizes.DEFAULT]),
 
   /** Used for style overrides */
   style: PropTypes.object,
