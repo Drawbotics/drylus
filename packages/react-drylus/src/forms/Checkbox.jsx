@@ -45,11 +45,11 @@ const styles = {
     }
 
     [data-element="locked-icon"] {
-        transform: scale(1);
-        border-radius: 0;
-        background: none;
-        color: ${sv.colorSecondary};
-      }
+      transform: scale(1);
+      border-radius: 0;
+      background: none;
+      color: ${sv.colorSecondary};
+    }
   `,
   disabled: css`
     cursor: not-allowed !important;
