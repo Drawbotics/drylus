@@ -40,3 +40,4 @@ export FilterGroup from './FilterGroup';
 export Popover, { PopoverSides } from './Popover';
 export Tile from './Tile';
 export ProgressBar from './ProgressBar';
+export LoadingPlaceholder from './LoadingPlaceholder';

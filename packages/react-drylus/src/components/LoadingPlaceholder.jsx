@@ -45,28 +45,29 @@ const LoadingPlaceholder = ({ height, width }) => {
   return (
     <div
       className={styles.root}
-      styles={{ height, width }} />
+      style={{ height, width }} />
   );
 };
 
 
 LoadingPlaceholder.propTypes = {
   /** Determines the height of the placeholder */
-  height: PropTypes.oneOfType(
+  height: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
-  ).isRequired,
+  ]).isRequired,
 
   /** Determines the height of the placeholder */
-  width: PropTypes.oneOfType(
+  width: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
-  ).isRequired,
+  ]).isRequired,
 };
 
 
 LoadingPlaceholder.defaultProps = {
-  
+  height: sv.defaultMargin,
+  width: 200,
 };
 
 
