@@ -1,3 +1,21 @@
+# v4.6.0 (Thu Nov 28 2019)
+
+#### 🚀  Enhancement
+
+- `@drawbotics/react-drylus`
+  - reduce default radio and checkbox size, remove small support [#90](https://github.com/Drawbotics/drylus/pull/90) ([@nicmosc](https://github.com/nicmosc))
+
+#### 🐛  Bug Fix
+
+- `@drawbotics/react-drylus`
+  - add LoadingPlaceholder component [#91](https://github.com/Drawbotics/drylus/pull/91) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.5.7 (Thu Nov 28 2019)
 
 #### 🐛  Bug Fix
