@@ -2,7 +2,6 @@ import React from 'react';
 import { create } from 'react-test-renderer';
 
 import RadioGroup from '../RadioGroup';
-import { Sizes } from '../../base';
 
 
 jest.mock('uuid/v4', () => {
@@ -49,22 +48,6 @@ describe('RadioGroup', () => {
       const tree = create(
         <RadioGroup
           value="1"
-          options={[{
-            label: '1',
-            value: '1',
-          }, {
-            label: '2',
-            value: '3',
-          }]} />
-      ).toJSON();
-      expect(tree).toMatchSnapshot();
-    });
-
-    it('is small', () => {
-      const tree = create(
-        <RadioGroup
-          size={Sizes.SMALL}
-          onChange={onChange}
           options={[{
             label: '1',
             value: '1',
