@@ -24,7 +24,7 @@ const styles = {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: ${sv.colorPrimary};
+    color: ${sv.colorTertiary};
     text-align: center;
   `,
   circle: css`
