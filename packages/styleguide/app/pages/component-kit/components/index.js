@@ -41,6 +41,7 @@ import filterGroup from './filter-group';
 import popover from './popover';
 import tile from './tile';
 import progressBar from './progress-bar';
+import loadingPlaceholder from './loading-placeholder';
 
 
 const components = {
@@ -87,6 +88,7 @@ const components = {
   popover,
   tile,
   progressBar,
+  loadingPlaceholder,
 };
 
 

@@ -1,18 +1,9 @@
 import React from 'react';
-import { css, cx, keyframes } from 'emotion';
+import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
-
-const shimmer = keyframes`
-  0% {
-    background-position: -1200px 0;
-  }
-  100% {
-    background-position: 1200px 0;
-  }
-`;
-
+import { styles as placeholderStyles } from './LoadingPlaceholder';
 
 
 const styles = {
@@ -31,30 +22,6 @@ const styles = {
     overflow: hidden;
     text-overflow: ellipsis;
   `,
-  withPlaceholderOverlay: css`
-    position: relative;
-    pointer-events: none;
-
-    &::after {
-      content: ' ';
-      position: absolute;
-      z-index: 9;
-      height: 100%;
-      width: 100%;
-      top: 0;
-      left: 0;
-      background: ${sv.neutralLight};
-      border-radius: ${sv.defaultBorderRadius};
-      overflow: hidden;
-      background: linear-gradient(to right,
-        ${sv.neutralLight} 8%,
-        ${sv.neutralLighter} 18%,
-        ${sv.neutralLight} 33%
-      );
-      background-size: 1200px 100%;
-      animation: ${shimmer} 2s forwards infinite linear;
-    }
-  `,
 };
 
 
@@ -69,7 +36,7 @@ const Label = ({
       style={style}
       className={cx(styles.root, {
         [styles.ellipsized]: ellipsized,
-        [styles.withPlaceholderOverlay]: isPlaceholder,
+        [placeholderStyles.shimmer]: isPlaceholder,
       })}>
       {children}
     </div>
