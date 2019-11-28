@@ -40,6 +40,7 @@ import map from './map';
 import filterGroup from './filter-group';
 import popover from './popover';
 import tile from './tile';
+import progressBar from './progress-bar';
 
 
 const components = {
@@ -85,6 +86,7 @@ const components = {
   filterGroup,
   popover,
   tile,
+  progressBar,
 };
 
 

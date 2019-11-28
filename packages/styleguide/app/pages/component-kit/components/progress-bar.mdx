@@ -1,0 +1,17 @@
+import { ProgressBar } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Progress Bar
+Used to display loading of uploads, or other elements that require the user to know the amount ot loading left.
+The component takes the full width of the parent container.
+
+```jsx
+import { ProgressBar } from '@drawbotics/react-drylus';
+```
+__Example__
+
+<Playground component={ProgressBar}>
+  <ProgressBar percentage={0.6} />
+</Playground>

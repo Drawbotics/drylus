@@ -39,3 +39,4 @@ export Map from './Map';
 export FilterGroup from './FilterGroup';
 export Popover, { PopoverSides } from './Popover';
 export Tile from './Tile';
+export ProgressBar from './ProgressBar';

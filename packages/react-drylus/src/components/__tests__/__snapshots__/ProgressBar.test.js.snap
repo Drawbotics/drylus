@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressBar matches snapshot when has a category 1`] = `
+.css-4tsrq9-ProgressBar__root {
+  height: 8px;
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eaeff4;
+}
+
+.css-4tsrq9-ProgressBar__root [data-element="bar"] {
+  border-radius: 8px;
+}
+
+.css-1pd5anp-ProgressBar__bar {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+}
+
+<div
+  className="css-4tsrq9-ProgressBar__root undefined"
+>
+  <div
+    className="css-1pd5anp-ProgressBar__bar undefined"
+    data-element="bar"
+    style={
+      Object {
+        "width": "0%",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`ProgressBar matches snapshot when has a value 1`] = `
+.css-4tsrq9-ProgressBar__root {
+  height: 8px;
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eaeff4;
+}
+
+.css-4tsrq9-ProgressBar__root [data-element="bar"] {
+  border-radius: 8px;
+}
+
+.css-1pd5anp-ProgressBar__bar {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+}
+
+<div
+  className="css-4tsrq9-ProgressBar__root undefined"
+>
+  <div
+    className="css-1pd5anp-ProgressBar__bar"
+    data-element="bar"
+    style={
+      Object {
+        "width": "0%",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`ProgressBar matches snapshot when is small 1`] = `
+.css-4tsrq9-ProgressBar__root {
+  height: 8px;
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eaeff4;
+}
+
+.css-4tsrq9-ProgressBar__root [data-element="bar"] {
+  border-radius: 8px;
+}
+
+.css-1pd5anp-ProgressBar__bar {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+}
+
+<div
+  className="css-4tsrq9-ProgressBar__root undefined"
+>
+  <div
+    className="css-1pd5anp-ProgressBar__bar"
+    data-element="bar"
+    style={
+      Object {
+        "width": "0%",
+      }
+    }
+  />
+</div>
+`;
