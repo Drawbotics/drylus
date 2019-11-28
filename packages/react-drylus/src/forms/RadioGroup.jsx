@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 
 import Hint from './Hint';
 import Icon from '../components/Icon';
-import { Sizes, Categories } from '../base';
-import { getEnumAsClass, CustomPropTypes } from '../utils';
+import { Categories } from '../base';
+import { CustomPropTypes } from '../utils';
 
 
 const shimmer = keyframes`
@@ -59,19 +59,14 @@ const styles = {
     }
 
     [data-element="locked-icon"] {
-        transform: scale(1);
-        border-radius: 0;
-        background: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: ${sv.colorSecondary};
-        
-        > i {
-          margin-right: -1px;
-          font-size: 1rem;
-        }
-      }
+      transform: scale(1);
+      border-radius: 0;
+      background: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: ${sv.colorSecondary};
+    }
   `,
   error: css`
     [data-element="sprite"] {
@@ -83,8 +78,8 @@ const styles = {
     }
   `,
   radio: css`
-    height: ${sv.defaultMargin};
-    width: ${sv.defaultMargin};
+    height: calc(${sv.defaultMargin} - 4px);
+    width: calc(${sv.defaultMargin} - 4px);
     position: relative;
     overflow: hidden;
   `,
@@ -114,6 +109,8 @@ const styles = {
   label: css`
     margin-left: ${sv.marginExtraSmall};
     color: ${sv.colorPrimary};
+    position: relative;
+    top: 1px;
 
     &:hover {
       cursor: pointer;
@@ -141,27 +138,13 @@ const styles = {
     height: 100%;
     width: 100%;
     background: ${sv.green};
-    line-height: ${sv.marginLarge};
+    line-height: ${sv.defaultMargin};
     transform: scale(0);
     transition: all ${sv.transitionTimeShort} ${sv.bouncyTransitionCurve};
     border-radius: 100px;
 
     > i {
-      font-size: 1.1rem;
-    }
-  `,
-  small: css`
-    > div {
-      height: ${sv.marginSmall};
-      width: ${sv.marginSmall};
-    }
-
-    [data-element="icon"], [data-element="locked-icon"] {
-      line-height: calc(${sv.marginSmall} + 1px);
-
-       > i {
-         font-size: 0.7rem !important;
-       }
+      font-size: 0.8rem;
     }
   `,
   withPlaceholderOverlay: css`
@@ -198,7 +181,6 @@ const Radio = ({
   labelKey='label',
   disabled,
   error,
-  size,
   checked,
   children,
   isPlaceholder,
@@ -209,7 +191,6 @@ const Radio = ({
   return (
     <div className={styles.root}>
       <label className={cx(styles.wrapper, {
-        [styles[getEnumAsClass(size)]]: size,
         [styles.disabled]: disabled,
         [styles.error]: error,
         [styles.readOnly]: readOnly,
@@ -261,7 +242,6 @@ const RadioGroup = ({
   valueKey='value',
   labelKey='label',
   error,
-  size,
   className,
   hint,
   style,
@@ -281,7 +261,6 @@ const RadioGroup = ({
           <div key={option[valueKey]} className={styles.radioWrapper}>
             <Radio
               readOnly={readOnly}
-              size={size}
               error={!! error}
               onChange={handleOnChange}
               checked={value === option[valueKey]}
@@ -331,9 +310,6 @@ RadioGroup.propTypes = {
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
-  /** Size of the radio buttons. Can be small */
-  size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT]),
-
   /** Passed to the wrapper component, to override any styles */
   className: PropTypes.string,
 
@@ -351,7 +327,6 @@ RadioGroup.propTypes = {
 RadioGroup.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
-  size: Sizes.DEFAULT,
 };
 
 

@@ -45,10 +45,10 @@ describe('Checkbox', () => {
       expect(tree).toMatchSnapshot();
     });
 
-    it('is small', () => {
+    it('is large', () => {
       const tree = create(
         <Checkbox
-          size={Sizes.SMALL}
+          size={Sizes.LARGE}
           onChange={onChange} />
       ).toJSON();
       expect(tree).toMatchSnapshot();
