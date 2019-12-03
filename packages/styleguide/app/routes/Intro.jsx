@@ -98,6 +98,7 @@ const styles = {
     position: relative;
     bottom: ${sv.marginSmall};
     right: ${sv.marginSmall};
+    text-align: right;
 
     @media ${sv.screenM} {
       left: 0;
