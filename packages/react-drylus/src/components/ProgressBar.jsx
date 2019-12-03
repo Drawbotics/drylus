@@ -1,10 +1,20 @@
 import React from 'react';
-import { css, cx } from 'emotion';
+import { css, cx, keyframes } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
 import { Categories, Sizes } from '../base';
 import { getEnumAsClass } from '../utils';
+
+
+const translateX = keyframes`
+  0% {
+    transform: translateX(-40%);
+  }
+  100% {
+    transform: translateX(140%);
+  }
+`;
 
 
 const styles = {
@@ -30,6 +40,14 @@ const styles = {
     background: ${sv.neutralDark};
     transition: ${sv.defaultTransition};
     overflow: hidden;
+  `,
+  indeterminate: css`
+    width: 50% !important;
+    animation: ${translateX}
+      calc(${sv.defaultTransitionTime} * 2)
+      ease-in-out
+      alternate
+      infinite;
   `,
   large: css`
     height: ${sv.marginSmall};
@@ -74,6 +92,8 @@ const ProgressBar = ({
   size,
   style,
 }) => {
+  const indeterminate = percentage == null;
+
   return (
     <div
       style={style}
@@ -84,6 +104,7 @@ const ProgressBar = ({
         data-element="bar"
         className={cx(styles.bar, {
           [styles[getEnumAsClass(category)]]: category,
+          [styles.indeterminate]: indeterminate,
         })}
         style={{ width: `${percentage * 100}%` }} />
     </div>
@@ -92,8 +113,8 @@ const ProgressBar = ({
 
 
 ProgressBar.propTypes = {
-  /** Determines the amount of the bar which is completed, between 0 and 1 */
-  percentage: PropTypes.number.isRequired,
+  /** Determines the amount of the bar which is completed, between 0 and 1. If not given the bar is indeterminate */
+  percentage: PropTypes.number,
 
   category: PropTypes.oneOf([
     Categories.BRAND,
@@ -115,7 +136,6 @@ ProgressBar.propTypes = {
 
 
 ProgressBar.defaultProps = {
-  percentage: 0,
   size: Sizes.DEFAULT,
 };
 
