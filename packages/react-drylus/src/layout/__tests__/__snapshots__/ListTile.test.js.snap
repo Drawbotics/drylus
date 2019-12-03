@@ -9,7 +9,7 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
   margin: 0;
 }
 
-.css-1h157w9-Button__root {
+.css-q36stu-Button__root {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
@@ -32,19 +32,19 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
   justify-content: center;
 }
 
-.css-1h157w9-Button__root:hover {
+.css-q36stu-Button__root:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-1h157w9-Button__root:active {
+.css-q36stu-Button__root:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-1h157w9-Button__root:disabled {
+.css-q36stu-Button__root:disabled {
   cursor: not-allowed;
-  background: #eaeff4 !important;
-  color: rgba(135,155,166,0.5) !important;
+  background: #eaeff4;
+  color: rgba(135,155,166,0.5);
   box-shadow: none;
 }
 
@@ -76,7 +76,7 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
         className="css-1b0ebn8-ListTile__withMargin"
       >
         <button
-          className="css-1h157w9-Button__root"
+          className="css-q36stu-Button__root"
         >
           Button
         </button>
@@ -192,7 +192,7 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   margin: 0;
 }
 
-.css-1h157w9-Button__root {
+.css-q36stu-Button__root {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
@@ -215,19 +215,19 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   justify-content: center;
 }
 
-.css-1h157w9-Button__root:hover {
+.css-q36stu-Button__root:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-1h157w9-Button__root:active {
+.css-q36stu-Button__root:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-1h157w9-Button__root:disabled {
+.css-q36stu-Button__root:disabled {
   cursor: not-allowed;
-  background: #eaeff4 !important;
-  color: rgba(135,155,166,0.5) !important;
+  background: #eaeff4;
+  color: rgba(135,155,166,0.5);
   box-shadow: none;
 }
 
@@ -282,7 +282,7 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
         className="css-1pdxkj1-ListTile__leading"
       >
         <button
-          className="css-1h157w9-Button__root"
+          className="css-q36stu-Button__root"
         >
           Leading
         </button>
@@ -306,7 +306,7 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
         className="css-1sf91dp-ListTile__trailing"
       >
         <button
-          className="css-1h157w9-Button__root"
+          className="css-q36stu-Button__root"
         >
           Trailing
         </button>

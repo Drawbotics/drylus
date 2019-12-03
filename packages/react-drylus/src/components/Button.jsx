@@ -32,14 +32,14 @@ export const styles = {
 
     &:disabled {
       cursor: not-allowed;
-      background: ${sv.neutralLight} !important;
-      color: ${sv.colorDisabled} !important;
+      background: ${sv.neutralLight};
+      color: ${sv.colorDisabled};
       box-shadow: none;
     }
   `,
   brand: css`
     background: ${sv.brand};
-    color: ${sv.white};
+    color: ${sv.white} !important;
 
     &:hover {
       background: ${sv.brandDark};
@@ -48,10 +48,14 @@ export const styles = {
     &:active {
       box-shadow: ${sv.insetActive};
     }
+
+    &:disabled {
+      background: ${fade(sv.brand, 40)};
+    }
   `,
   danger: css`
     background: ${sv.red};
-    color: ${sv.white};
+    color: ${sv.white} !important;
 
     &:hover {
       background: ${sv.redDark};
@@ -60,10 +64,14 @@ export const styles = {
     &:active {
       box-shadow: ${sv.insetActive};
     }
+
+    &:disabled {
+      background: ${fade(sv.red, 40)};
+    }
   `,
   info: css`
     background: ${sv.blue};
-    color: ${sv.white};
+    color: ${sv.white} !important;
 
     &:hover {
       background: ${sv.blueDark};
@@ -72,10 +80,14 @@ export const styles = {
     &:active {
       box-shadow: ${sv.insetActive};
     }
+
+    &:disabled {
+      background: ${fade(sv.blue, 40)};
+    }
   `,
   success: css`
     background: ${sv.green};
-    color: ${sv.white};
+    color: ${sv.white} !important;
 
     &:hover {
       background: ${sv.greenDark};
@@ -84,10 +96,14 @@ export const styles = {
     &:active {
       box-shadow: ${sv.insetActive};
     }
+
+    &:disabled {
+      background: ${fade(sv.green, 40)};
+    }
   `,
   warning: css`
     background: ${sv.orange};
-    color: ${sv.white};
+    color: ${sv.white} !important;
 
     &:hover {
       background: ${sv.orangeDark};
@@ -96,12 +112,20 @@ export const styles = {
     &:active {
       box-shadow: ${sv.insetActive};
     }
+
+    &:disabled {
+      background: ${fade(sv.orange, 40)};
+    }
   `,
   brandAlt: css`
     color: ${sv.brand};
 
     &:hover {
       color: ${sv.brandDark};
+    }
+
+    &:disabled {
+      color: ${fade(sv.brand, 40)};
     }
   `,
   dangerAlt: css`
@@ -110,12 +134,20 @@ export const styles = {
     &:hover {
       color: ${sv.redDark};
     }
+
+    &:disabled {
+      color: ${fade(sv.red, 40)};
+    }
   `,
   warningAlt: css`
     color: ${sv.orange};
 
     &:hover {
       color: ${sv.orangeDark};
+    }
+
+    &:disabled {
+      color: ${fade(sv.orange, 40)};
     }
   `,
   infoAlt: css`
@@ -124,6 +156,10 @@ export const styles = {
     &:hover {
       color: ${sv.blueDark};
     }
+
+    &:disabled {
+      color: ${fade(sv.blue, 40)};
+    }
   `,
   successAlt: css`
     color: ${sv.green};
@@ -131,12 +167,20 @@ export const styles = {
     &:hover {
       color: ${sv.greenDark};
     }
+
+    &:disabled {
+      color: ${fade(sv.green, 40)};
+    }
   `,
   primaryAlt: css`
     color: ${sv.colorPrimary};
 
     &:hover {
       color: ${sv.colorPrimary};
+    }
+
+    &:disabled {
+      color: ${sv.colorDisabled};
     }
   `,
   small: css`
@@ -158,6 +202,11 @@ export const styles = {
     &:active {
       box-shadow: 0 0 0 1px ${sv.neutral} inset, ${sv.insetActiveLight};
     }
+
+    &:disabled {
+      box-shadow: 0 0 0 1px ${sv.neutralLight} inset;
+      background: none;
+    }
   `,
   tertiary: css`
     background: transparent;
@@ -170,6 +219,10 @@ export const styles = {
 
     &:active {
       box-shadow: ${sv.insetActiveLight};
+    }
+
+    &:disabled {
+      background: none;
     }
   `,
   round: css`
