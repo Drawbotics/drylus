@@ -1,6 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProgressBar matches snapshot when has a category 1`] = `
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: translateX(-40%);
+    -ms-transform: translateX(-40%);
+    transform: translateX(-40%);
+  }
+
+  100% {
+    -webkit-transform: translateX(140%);
+    -ms-transform: translateX(140%);
+    transform: translateX(140%);
+  }
+}
+
 .css-4tsrq9-ProgressBar__root {
   height: 8px;
   width: 100%;
@@ -14,7 +28,7 @@ exports[`ProgressBar matches snapshot when has a category 1`] = `
   border-radius: 8px;
 }
 
-.css-1pd5anp-ProgressBar__bar {
+.css-uft3dr-ProgressBar__bar-ProgressBar__indeterminate {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -25,17 +39,20 @@ exports[`ProgressBar matches snapshot when has a category 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
+  width: 50% !important;
+  -webkit-animation: animation-0 calc(0.3s * 2) ease-in-out alternate infinite;
+  animation: animation-0 calc(0.3s * 2) ease-in-out alternate infinite;
 }
 
 <div
   className="css-4tsrq9-ProgressBar__root undefined"
 >
   <div
-    className="css-1pd5anp-ProgressBar__bar undefined"
+    className="undefined css-uft3dr-ProgressBar__bar-ProgressBar__indeterminate"
     data-element="bar"
     style={
       Object {
-        "width": "0%",
+        "width": "NaN%",
       }
     }
   />
@@ -43,6 +60,20 @@ exports[`ProgressBar matches snapshot when has a category 1`] = `
 `;
 
 exports[`ProgressBar matches snapshot when has a value 1`] = `
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: translateX(-40%);
+    -ms-transform: translateX(-40%);
+    transform: translateX(-40%);
+  }
+
+  100% {
+    -webkit-transform: translateX(140%);
+    -ms-transform: translateX(140%);
+    transform: translateX(140%);
+  }
+}
+
 .css-4tsrq9-ProgressBar__root {
   height: 8px;
   width: 100%;
@@ -56,7 +87,7 @@ exports[`ProgressBar matches snapshot when has a value 1`] = `
   border-radius: 8px;
 }
 
-.css-1pd5anp-ProgressBar__bar {
+.css-uft3dr-ProgressBar__bar-ProgressBar__indeterminate {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -67,17 +98,20 @@ exports[`ProgressBar matches snapshot when has a value 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
+  width: 50% !important;
+  -webkit-animation: animation-0 calc(0.3s * 2) ease-in-out alternate infinite;
+  animation: animation-0 calc(0.3s * 2) ease-in-out alternate infinite;
 }
 
 <div
   className="css-4tsrq9-ProgressBar__root undefined"
 >
   <div
-    className="css-1pd5anp-ProgressBar__bar"
+    className="css-uft3dr-ProgressBar__bar-ProgressBar__indeterminate"
     data-element="bar"
     style={
       Object {
-        "width": "0%",
+        "width": "NaN%",
       }
     }
   />
@@ -85,6 +119,20 @@ exports[`ProgressBar matches snapshot when has a value 1`] = `
 `;
 
 exports[`ProgressBar matches snapshot when is small 1`] = `
+@keyframes animation-0 {
+  0% {
+    -webkit-transform: translateX(-40%);
+    -ms-transform: translateX(-40%);
+    transform: translateX(-40%);
+  }
+
+  100% {
+    -webkit-transform: translateX(140%);
+    -ms-transform: translateX(140%);
+    transform: translateX(140%);
+  }
+}
+
 .css-4tsrq9-ProgressBar__root {
   height: 8px;
   width: 100%;
@@ -98,7 +146,7 @@ exports[`ProgressBar matches snapshot when is small 1`] = `
   border-radius: 8px;
 }
 
-.css-1pd5anp-ProgressBar__bar {
+.css-uft3dr-ProgressBar__bar-ProgressBar__indeterminate {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -109,17 +157,20 @@ exports[`ProgressBar matches snapshot when is small 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
+  width: 50% !important;
+  -webkit-animation: animation-0 calc(0.3s * 2) ease-in-out alternate infinite;
+  animation: animation-0 calc(0.3s * 2) ease-in-out alternate infinite;
 }
 
 <div
   className="css-4tsrq9-ProgressBar__root undefined"
 >
   <div
-    className="css-1pd5anp-ProgressBar__bar"
+    className="css-uft3dr-ProgressBar__bar-ProgressBar__indeterminate"
     data-element="bar"
     style={
       Object {
-        "width": "0%",
+        "width": "NaN%",
       }
     }
   />
