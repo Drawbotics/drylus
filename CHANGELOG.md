@@ -1,3 +1,24 @@
+# v4.6.1 (Tue Dec 03 2019)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - keep category when button is disabled [#93](https://github.com/Drawbotics/drylus/pull/93) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - support indeterminate value in progress bar [#92](https://github.com/Drawbotics/drylus/pull/92) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- fix auto config file  ([@nicmosc](https://github.com/nicmosc))
+- customise changelog versioning titles  ([@nicmosc](https://github.com/nicmosc))
+- fix position of drawbotics website link  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v4.6.0 (Thu Nov 28 2019)
 
 #### 🚀  Enhancement
