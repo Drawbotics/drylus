@@ -8,4 +8,15 @@
       }
     ]
   ]
+  "labels": {
+    "patch": {
+      "title": "🐛 Bug fix - Patch"
+    },
+    "minor": {
+      "title": "🚀 Enhancement - Minor change"
+    }
+    "major": {
+      "title": "💥 Breaking - Major release"
+    }
+  }
 }
