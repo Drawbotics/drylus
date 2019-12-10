@@ -2,11 +2,11 @@ import {
   Tooltip,
   TooltipSides,
   Button,
-  Categories,
+  Category,
   Dot,
   Flex,
   FlexItem,
-  Sizes,
+  Size,
   Margin,
   Icon,
   ListTile,
@@ -27,9 +27,9 @@ __Example__
 <Playground component={Tooltip} enums={{ TooltipSides }}>
 <Flex>
   <FlexItem>
-    <Margin size={{ right: Sizes.LARGE }}>
+    <Margin size={{ right: Size.LARGE }}>
       <Tooltip content="I am a tooltip">
-        <Button category={Categories.BRAND}>Hover me</Button>
+        <Button category={Category.BRAND}>Hover me</Button>
       </Tooltip>
     </Margin>
   </FlexItem>
@@ -37,13 +37,13 @@ __Example__
     <Tooltip
       content={
         <div style={{ textAlign: 'left' }}>
-          <Margin size={{ bottom: Sizes.EXTRA_SMALL }}>
-            <ListTile leading={<Icon name="alert-triangle" category={Categories.DANGER} />} title={<Text inversed size={Sizes.SMALL}>I'm custom content</Text>} />
+          <Margin size={{ bottom: Size.EXTRA_SMALL }}>
+            <ListTile leading={<Icon name="alert-triangle" category={Category.DANGER} />} title={<Text inversed size={Size.SMALL}>I'm custom content</Text>} />
           </Margin>
-          <ListTile leading={<Icon name="check-circle" category={Categories.SUCCESS} />} title={<Text inversed size={Sizes.SMALL}>So am I</Text>} />
+          <ListTile leading={<Icon name="check-circle" category={Category.SUCCESS} />} title={<Text inversed size={Size.SMALL}>So am I</Text>} />
         </div>
       }>
-      <Dot category={Categories.SUCCESS} />
+      <Dot category={Category.SUCCESS} />
     </Tooltip>
   </FlexItem>
 </Flex>

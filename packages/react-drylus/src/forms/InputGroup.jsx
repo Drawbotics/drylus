@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from 'emotion';
 
 import Flex, { FlexItem, FlexDirections, FlexAlign } from '../layout/Flex';
-import { Sizes, Categories } from '../enums';
+import { Size, Category } from '../enums';
 import Margin from '../layout/Margin';
 import Hint from './Hint';
 
@@ -28,7 +28,7 @@ const InputGroup = ({
         align={FlexAlign.STRETCH}>
         {React.Children.map(children, (child, i) => (
           <FlexItem flex>
-            <Margin size={{ top: i === 0 ? null : Sizes.EXTRA_SMALL }}>
+            <Margin size={{ top: i === 0 ? null : Size.EXTRA_SMALL }}>
               {React.cloneElement(child, {
                 error: child.props.valid ? false : Boolean(error),
                 valid: valid !== undefined ? valid : child.props.valid,
@@ -39,7 +39,7 @@ const InputGroup = ({
       </Flex>
       {do{
         if (error && typeof error === 'string') {
-          <Hint category={Categories.DANGER}>{error}</Hint>
+          <Hint category={Category.DANGER}>{error}</Hint>
         }
         else if (hint) {
           <Hint>{hint}</Hint>

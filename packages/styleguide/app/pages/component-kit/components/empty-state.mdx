@@ -2,8 +2,8 @@ import {
   EmptyState,
   EmptyStateVariations,
   Button,
-  Categories,
-  Tiers,
+  Category,
+  Tier,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -21,7 +21,7 @@ __Example__
     title="This place is empty"
     description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
     actions={[
-      <Button tier={Tiers.SECONDARY}>Cancel</Button>,
-      <Button category={Categories.BRAND}>Go to home</Button>
+      <Button tier={Tier.SECONDARY}>Cancel</Button>,
+      <Button category={Category.BRAND}>Go to home</Button>
     ]} />
 </Playground>

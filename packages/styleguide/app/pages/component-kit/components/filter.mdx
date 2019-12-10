@@ -4,15 +4,15 @@ import {
   SelectFilter,
   CheckboxFilter,
   Avatar,
-  Sizes,
-  Categories,
+  Size,
+  Category,
   Flex,
   FlexItem,
   FlexJustify,
   Icon,
   Margin,
   Text,
-  Tiers,
+  Tier,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -45,22 +45,22 @@ __Example__
   <div style={{ height: 200 }}>
     <Flex justify={FlexJustify.END}>
       <FlexItem>
-        <Margin size={{ right: Sizes.SMALL }}>
+        <Margin size={{ right: Size.SMALL }}>
           <ControlledField component={
             <SelectFilter
               label="Country"
               onClear={x=>x}
               onChange={x=>x}
               options={[{
-                leading: <Avatar text="Belgium" backgroundColor="#E00D2B" size={Sizes.SMALL} />,
+                leading: <Avatar text="Belgium" backgroundColor="#E00D2B" size={Size.SMALL} />,
                 label: 'Belgium',
                 value: 'BE',
               }, {
-                leading: <Avatar text="France" backgroundColor="#011082" size={Sizes.SMALL} />,
+                leading: <Avatar text="France" backgroundColor="#011082" size={Size.SMALL} />,
                 label: 'France',
                 value: 'FR',
               }, {
-                leading: <Avatar text="Italy" backgroundColor="#128435" size={Sizes.SMALL} />,
+                leading: <Avatar text="Italy" backgroundColor="#128435" size={Size.SMALL} />,
                 label: 'Italy',
                 value: 'IT',
               }]} />
@@ -68,22 +68,22 @@ __Example__
         </Margin>
       </FlexItem>
       <FlexItem>
-        <Margin size={{ right: Sizes.SMALL }}>
+        <Margin size={{ right: Size.SMALL }}>
           <ControlledField component={
             <SelectFilter
               label="Notifications"
               onClear={x=>x}
               onChange={x=>x}
               options={[{
-                leading: <Icon name="x" category={Categories.DANGER} />,
+                leading: <Icon name="x" category={Category.DANGER} />,
                 label: 'Dismissed',
                 value: 'dismissed',
               }, {
-                leading: <Icon name="bell" category={Categories.WARNING} />,
+                leading: <Icon name="bell" category={Category.WARNING} />,
                 label: 'Snoozed',
                 value: 'snoozed',
               }, {
-                leading: <Icon name="check" category={Categories.SUCCESS} />,
+                leading: <Icon name="check" category={Category.SUCCESS} />,
                 label: 'Seen',
                 value: 'seen',
               }]} />
@@ -97,15 +97,15 @@ __Example__
             onClear={x=>x}
             onChange={x=>x}
             options={[{
-              trailing: <Text tier={Tiers.SECONDARY}>3</Text>,
+              trailing: <Text tier={Tier.SECONDARY}>3</Text>,
               label: '3D Exterior',
               value: 'exterior',
             }, {
-              trailing: <Text tier={Tiers.SECONDARY}>1</Text>,
+              trailing: <Text tier={Tier.SECONDARY}>1</Text>,
               label: '3D Interior',
               value: 'interior',
             }, {
-              trailing: <Text tier={Tiers.SECONDARY}>10</Text>,
+              trailing: <Text tier={Tier.SECONDARY}>10</Text>,
               label: 'Shoebox',
               value: 'shoebox',
             }]} />

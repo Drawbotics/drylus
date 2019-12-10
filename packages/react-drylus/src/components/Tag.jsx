@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
-import Categories from '../enums/Categories';
+import Category from '../enums/Category';
 import Icon from './Icon';
 import { getEnumAsClass } from '../utils';
 
@@ -96,11 +96,11 @@ Tag.propTypes = {
   children: PropTypes.string.isRequired,
 
   category: PropTypes.oneOf([
-    Categories.BRAND,
-    Categories.DANGER,
-    Categories.SUCCESS,
-    Categories.INFO,
-    Categories.WARNING,
+    Category.BRAND,
+    Category.DANGER,
+    Category.SUCCESS,
+    Category.INFO,
+    Category.WARNING,
   ]),
 
   /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */
@@ -115,7 +115,7 @@ Tag.propTypes = {
 
 
 Tag.defaultProps = {
-  category: Categories.DEFAULT,
+  category: Category.DEFAULT,
 };
 
 

@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
-import { Categories } from '../enums';
+import { Category } from '../enums';
 import Icon from './Icon';
 import Dot from './Dot';
 
@@ -72,7 +72,7 @@ export const ListItem = ({
       {children}
       {do {
         if (icon) {
-          <Icon name={icon} category={category === Categories.PRIMARY ? null : category} bold />
+          <Icon name={icon} category={category === Category.PRIMARY ? null : category} bold />
         }
         else {
           <div data-element="dot">
@@ -90,12 +90,12 @@ ListItem.propTypes = {
   children: PropTypes.node.isRequired,
 
   category: PropTypes.oneOf([
-    Categories.BRAND,
-    Categories.DANGER,
-    Categories.SUCCESS,
-    Categories.INFO,
-    Categories.WARNING,
-    Categories.PRIMARY,
+    Category.BRAND,
+    Category.DANGER,
+    Category.SUCCESS,
+    Category.INFO,
+    Category.WARNING,
+    Category.PRIMARY,
   ]),
 
   /** If passed, the specified icon will be displayed instead of the bullet */
@@ -109,7 +109,7 @@ ListItem.propTypes = {
 };
 
 ListItem.defaultProps = {
-  category: Categories.PRIMARY,
+  category: Category.PRIMARY,
 };
 
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from 'emotion';
 
 import Flex, { FlexItem, FlexDirections, FlexAlign } from '../layout/Flex';
-import { Sizes } from '../enums';
+import { Size } from '../enums';
 import Margin from '../layout/Margin';
 
 
@@ -26,7 +26,7 @@ const FormGroup = ({
         direction={horizontal ? FlexDirections.HORIZONTAL : FlexDirections.VERTICAL}
         align={horizontal ? FlexAlign.CENTER : FlexAlign.STRETCH}>
         <FlexItem>
-          <Margin size={horizontal ? { right: Sizes.SMALL } : { bottom: Sizes.EXTRA_SMALL }}>
+          <Margin size={horizontal ? { right: Size.SMALL } : { bottom: Size.EXTRA_SMALL }}>
             {label}
           </Margin>
         </FlexItem>

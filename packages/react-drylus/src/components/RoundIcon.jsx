@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
 import Icon from './Icon';
-import { Categories, Sizes } from '../enums';
+import { Category, Size } from '../enums';
 import { getEnumAsClass } from '../utils';
 
 
@@ -92,7 +92,7 @@ RoundIcon.propTypes = {
 
   /** Size of the icon */
   size: PropTypes.oneOfType([
-    PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE]),
+    PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
     PropTypes.number,
   ]),
 
@@ -101,11 +101,11 @@ RoundIcon.propTypes = {
 
   /** Category of the icon */
   category: PropTypes.oneOf([
-    Categories.DANGER,
-    Categories.INFO,
-    Categories.SUCCESS,
-    Categories.WARNING,
-    Categories.BRAND,
+    Category.DANGER,
+    Category.INFO,
+    Category.SUCCESS,
+    Category.WARNING,
+    Category.BRAND,
   ]),
 
   /** Used for style overrides */
@@ -114,7 +114,7 @@ RoundIcon.propTypes = {
 
 
 RoundIcon.defaultProps = {
-  size: Sizes.DEFAULT,
+  size: Size.DEFAULT,
 
   style: {},
 };

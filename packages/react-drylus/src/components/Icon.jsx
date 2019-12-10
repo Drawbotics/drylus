@@ -5,7 +5,7 @@ import { generateIconStyles, mapping } from '@drawbotics/icons/dist/drycons.js';
 import packageJson from '@drawbotics/icons/package.json';
 import sv from '@drawbotics/drylus-style-vars';
 
-import { Categories } from '../enums';
+import { Category } from '../enums';
 import { getEnumAsClass } from '../utils';
 import env from '../utils/get-static-env';
 
@@ -74,11 +74,11 @@ Icon.propTypes = {
 
   /** Category of the icon */
   category: PropTypes.oneOf([
-    Categories.DANGER,
-    Categories.INFO,
-    Categories.SUCCESS,
-    Categories.WARNING,
-    Categories.BRAND,
+    Category.DANGER,
+    Category.INFO,
+    Category.SUCCESS,
+    Category.WARNING,
+    Category.BRAND,
   ]),
 
   /** Used for style overrides */

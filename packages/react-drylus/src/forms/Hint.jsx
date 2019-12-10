@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
-import Categories from '../enums/Categories';
+import Category from '../enums/Category';
 import { getEnumAsClass } from '../utils';
 
 
@@ -36,7 +36,7 @@ Hint.propTypes = {
   /** Text displayed by the hint */
   children: PropTypes.string.isRequired,
 
-  category: PropTypes.oneOf([ Categories.DANGER ]),
+  category: PropTypes.oneOf([ Category.DANGER ]),
   
   /** Used for style overrides */
   style: PropTypes.object,

@@ -5,7 +5,7 @@ import sv from '@drawbotics/drylus-style-vars';
 
 import Label from './Label';
 import RoundIcon from './RoundIcon';
-import { Categories } from '../enums';
+import { Category } from '../enums';
 
 
 const styles = {
@@ -84,7 +84,7 @@ const BigRadio = ({
       <div data-element="header" className={styles.header}>
         <Label>{label}</Label>
         <div data-element="icon">
-          <RoundIcon name="check" category={Categories.SUCCESS} />
+          <RoundIcon name="check" category={Category.SUCCESS} />
         </div>
       </div>
       {children}

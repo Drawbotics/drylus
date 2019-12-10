@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
-import { Categories, Sizes } from '../enums';
+import { Category, Size } from '../enums';
 import Icon from './Icon';
 import Flex, { FlexItem, FlexAlign, FlexJustify } from '../layout/Flex';
 import Margin from '../layout/Margin';
@@ -60,7 +60,7 @@ const Callout = ({
     <div style={style} className={cx(styles.root, { [styles[getEnumAsClass(category)]]: category })}>
       <Flex align={FlexAlign.START} justify={FlexJustify.START}>
         <FlexItem>
-          <Margin size={{ right: Sizes.SMALL }}>
+          <Margin size={{ right: Size.SMALL }}>
             <Icon name={icon} />
           </Margin>
         </FlexItem>
@@ -80,10 +80,10 @@ Callout.propTypes = {
   children: PropTypes.node.isRequired,
 
   category: PropTypes.oneOf([
-    Categories.DANGER,
-    Categories.SUCCESS,
-    Categories.INFO,
-    Categories.WARNING,
+    Category.DANGER,
+    Category.SUCCESS,
+    Category.INFO,
+    Category.WARNING,
   ]).isRequired,
 
   /** Used for style overrides */

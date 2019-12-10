@@ -10,10 +10,10 @@ import {
   FlexJustify,
   Select,
   Title,
-  Sizes,
+  Size,
   Button,
-  Tiers,
-  Categories,
+  Tier,
+  Category,
   Table,
   Pagination,
   Margin,
@@ -48,7 +48,7 @@ export const Content = () => {
             <Title size={4} noMargin>Header of the panel</Title>
           </FlexItem>
           <FlexItem>
-            <Margin size={{ right: Sizes.SMALL }}>
+            <Margin size={{ right: Size.SMALL }}>
               <Select
                 placeholder="Filter 1..."
                 options={[
@@ -84,17 +84,17 @@ export const Content = () => {
       <PanelFooter>
         <Flex justify={FlexJustify.END}>
           <FlexItem>
-            <Margin size={{ right: Sizes.SMALL }}>
-              <Button tier={Tiers.TERTIARY}>Tertiary action</Button>
+            <Margin size={{ right: Size.SMALL }}>
+              <Button tier={Tier.TERTIARY}>Tertiary action</Button>
             </Margin>
           </FlexItem>
           <FlexItem>
-            <Margin size={{ right: Sizes.SMALL }}>
-              <Button tier={Tiers.SECONDARY}>Secondary action</Button>
+            <Margin size={{ right: Size.SMALL }}>
+              <Button tier={Tier.SECONDARY}>Secondary action</Button>
             </Margin>
           </FlexItem>
           <FlexItem>
-            <Button category={Categories.BRAND}>Primary action</Button>
+            <Button category={Category.BRAND}>Primary action</Button>
           </FlexItem>
         </Flex>
       </PanelFooter>

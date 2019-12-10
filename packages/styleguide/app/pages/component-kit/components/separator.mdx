@@ -4,7 +4,7 @@ import {
   PanelBody,
   PanelSection,
   Margin,
-  Sizes,
+  Size,
   Flex,
   FlexItem,
   FlexJustify,
@@ -36,35 +36,35 @@ __Example__
       body={
         <PanelBody>
           <PanelSection title="Actions">
-            <Margin size={{ bottom: Sizes.SMALL }}>
+            <Margin size={{ bottom: Size.SMALL }}>
               <Flex justify={FlexJustify.SPACE_BETWEEN}>
                 <FlexItem>
                   <Label>First thing</Label>
                 </FlexItem>
                 <FlexItem>
-                  <Toggle value={true} onChange={x=>x} size={Sizes.SMALL} />
+                  <Toggle value={true} onChange={x=>x} size={Size.SMALL} />
                 </FlexItem>
               </Flex>
             </Margin>
             <Separator />
-            <Margin size={{ top: Sizes.SMALL, bottom: Sizes.SMALL }}>
+            <Margin size={{ top: Size.SMALL, bottom: Size.SMALL }}>
               <Flex justify={FlexJustify.SPACE_BETWEEN}>
                 <FlexItem>
                   <Label>Second thing</Label>
                 </FlexItem>
                 <FlexItem>
-                  <Toggle value={false} onChange={x=>x} size={Sizes.SMALL} />
+                  <Toggle value={false} onChange={x=>x} size={Size.SMALL} />
                 </FlexItem>
               </Flex>
             </Margin>
             <Separator />
-            <Margin size={{ top: Sizes.SMALL }}>
+            <Margin size={{ top: Size.SMALL }}>
               <Flex justify={FlexJustify.SPACE_BETWEEN}>
                 <FlexItem>
                   <Label>Third thing</Label>
                 </FlexItem>
                 <FlexItem>
-                  <Toggle value={true} onChange={x=>x} size={Sizes.SMALL} />
+                  <Toggle value={true} onChange={x=>x} size={Size.SMALL} />
                 </FlexItem>
               </Flex>
             </Margin>

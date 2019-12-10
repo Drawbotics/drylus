@@ -8,8 +8,8 @@ import Icon from '../components/Icon';
 import Button from '../components/Button';
 import Spinner from '../components/Spinner';
 import Select from './Select';
-import Sizes from '../enums/Sizes';
-import Categories from '../enums/Categories';
+import Size from '../enums/Size';
+import Category from '../enums/Category';
 import Hint from './Hint';
 import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
 
@@ -203,7 +203,7 @@ const RawInput = ({
           {do{
             if (loading) {
               <div className={styles.icon} data-element="icon">
-                <Spinner size={Sizes.SMALL} />
+                <Spinner size={Size.SMALL} />
               </div>
             }
             else if (onChange == null) {
@@ -213,12 +213,12 @@ const RawInput = ({
             }
             else if (error) {
               <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
-                <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
+                <RoundIcon name="x" size={Size.SMALL} category={Category.DANGER} />
               </div>
             }
             else if (Boolean(value) && valid) {
               <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
-                <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
+                <RoundIcon name="check" size={Size.SMALL} category={Category.SUCCESS} />
               </div>
             }
           }}
@@ -251,7 +251,7 @@ const RawInput = ({
       </div>
       {do{
         if (error && typeof error === 'string') {
-          <Hint category={Categories.DANGER}>{error}</Hint>
+          <Hint category={Category.DANGER}>{error}</Hint>
         }
         else if (hint) {
           <Hint>{hint}</Hint>

@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
-import { Categories, Sizes } from '../enums';
+import { Category, Size } from '../enums';
 import { getEnumAsClass } from '../utils';
 
 
@@ -99,7 +99,7 @@ const CircularProgress = ({
         [styles[getEnumAsClass(category)]]: category,
       })}>
       {do{
-        if (text && size !== Sizes.SMALL) {
+        if (text && size !== Size.SMALL) {
           <div className={styles.text}>
             {text}
           </div>
@@ -132,18 +132,18 @@ CircularProgress.propTypes = {
   text: PropTypes.string,
 
   category: PropTypes.oneOf([
-    Categories.BRAND,
-    Categories.DANGER,
-    Categories.SUCCESS,
-    Categories.INFO,
-    Categories.WARNING,
+    Category.BRAND,
+    Category.DANGER,
+    Category.SUCCESS,
+    Category.INFO,
+    Category.WARNING,
   ]),
 
   size: PropTypes.oneOf([
-    Sizes.SMALL,
-    Sizes.DEFAULT,
-    Sizes.LARGE,
-    Sizes.EXTRA_LARGE,
+    Size.SMALL,
+    Size.DEFAULT,
+    Size.LARGE,
+    Size.EXTRA_LARGE,
   ]),
 
   /** Used for style overrides */
@@ -153,7 +153,7 @@ CircularProgress.propTypes = {
 
 CircularProgress.defaultProps = {
   percentage: 0,
-  size: Sizes.DEFAULT,
+  size: Size.DEFAULT,
 };
 
 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
 
-import { Categories } from '../enums';
+import { Category } from '../enums';
 import Icon from './Icon';
 import { getEnumAsClass } from '../utils';
 
@@ -176,9 +176,9 @@ DropdownOption.propTypes = {
   icon: PropTypes.string,
 
   category: PropTypes.oneOf([
-    Categories.DANGER,
-    Categories.SUCCESS,
-    Categories.WARNING,
+    Category.DANGER,
+    Category.SUCCESS,
+    Category.WARNING,
   ]),
 
   /** Used for style overrides */

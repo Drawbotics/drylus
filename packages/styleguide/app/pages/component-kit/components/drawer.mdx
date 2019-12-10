@@ -5,7 +5,7 @@ import {
   Layout,
   LayoutPositions,
   Button,
-  Categories,
+  Category,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -86,7 +86,7 @@ You may also have a footer and a title:
 
 <Playground>
   <DrawerController component={
-    <Drawer visible={false} title="Title of drawer" footer={<Button category={Categories.BRAND} fullWidth>Footer action</Button>}>
+    <Drawer visible={false} title="Title of drawer" footer={<Button category={Category.BRAND} fullWidth>Footer action</Button>}>
       <div style={{ height: 1000, background: 'linear-gradient(red, blue)' }}>
         Im some content
       </div>

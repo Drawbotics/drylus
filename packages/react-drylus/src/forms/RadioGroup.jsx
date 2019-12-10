@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import Hint from './Hint';
 import Icon from '../components/Icon';
-import { Categories } from '../enums';
+import { Category } from '../enums';
 import { CustomPropTypes } from '../utils';
 import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
 
@@ -239,7 +239,7 @@ const RadioGroup = ({
       </div>
       {do{
         if (error && typeof error === 'string') {
-          <Hint category={Categories.DANGER}>{error}</Hint>
+          <Hint category={Category.DANGER}>{error}</Hint>
         }
         else if (hint) {
           <Hint>{hint}</Hint>

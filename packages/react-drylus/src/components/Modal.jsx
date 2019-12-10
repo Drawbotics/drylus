@@ -9,7 +9,7 @@ import { useScreenSize } from '@drawbotics/use-screen-size';
 import Button from './Button';
 import Title from './Title';
 import Icon from './Icon';
-import { Sizes, Tiers } from '../enums';
+import { Size, Tier } from '../enums';
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { useResponsiveProps } from '../utils/hooks';
 
@@ -170,10 +170,10 @@ const BaseModal = React.forwardRef(({
 }, ref) => (
   <div
     style={style}
-    className={cx(styles.root, { [styles.large]: size === Sizes.LARGE })}
+    className={cx(styles.root, { [styles.large]: size === Size.LARGE })}
     ref={ref}>
     <div className={styles.close}>
-      <Button size={Sizes.SMALL} onClick={onClickClose} tier={Tiers.TERTIARY} leading={<Icon name="x" />} />
+      <Button size={Size.SMALL} onClick={onClickClose} tier={Tier.TERTIARY} leading={<Icon name="x" />} />
     </div>
     {do {
       if (title) {
@@ -361,7 +361,7 @@ Modal.propTypes = {
   onClickClose: PropTypes.func,
 
   /** Determines the minimum width of the modal */
-  size: PropTypes.oneOf([Sizes.DEFAULT, Sizes.LARGE]),
+  size: PropTypes.oneOf([Size.DEFAULT, Size.LARGE]),
 
   /** If true, the children are rendered without decoration, you have to style your own modal */
   raw: PropTypes.bool,
@@ -385,7 +385,7 @@ Modal.propTypes = {
 
 
 Modal.defaultProps = {
-  size: Sizes.DEFAULT,
+  size: Size.DEFAULT,
   raw: false,
 };
 

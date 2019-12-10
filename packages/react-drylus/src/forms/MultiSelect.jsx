@@ -10,7 +10,7 @@ import RoundIcon from '../components/RoundIcon';
 import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
 import Hint from './Hint';
-import { Categories, Sizes } from '../enums';
+import { Category, Size } from '../enums';
 import { CustomPropTypes } from '../utils';
 
 
@@ -232,7 +232,7 @@ const MultiSelect = ({
       {do{
         if (loading) {
           <div className={styles.icon}>
-            <Spinner size={Sizes.SMALL} />
+            <Spinner size={Size.SMALL} />
           </div>
         }
         else if (onChange == null) {
@@ -242,12 +242,12 @@ const MultiSelect = ({
         }
         else if (error) {
           <div className={styles.icon}>
-            <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
+            <RoundIcon name="x" size={Size.SMALL} category={Category.DANGER} />
           </div>
         }
         else if (values?.length > 0 && valid) {
           <div className={styles.icon}>
-            <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
+            <RoundIcon name="check" size={Size.SMALL} category={Category.SUCCESS} />
           </div>
         }
       }}
@@ -296,7 +296,7 @@ const MultiSelect = ({
       }}
       {do{
         if (error && typeof error === 'string') {
-          <Hint category={Categories.DANGER}>{error}</Hint>
+          <Hint category={Category.DANGER}>{error}</Hint>
         }
         else if (hint) {
           <Hint>{hint}</Hint>

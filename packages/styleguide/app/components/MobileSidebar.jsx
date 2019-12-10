@@ -6,7 +6,7 @@ import {
   DrawerSides,
   Icon,
   Text,
-  Sizes,
+  Size,
   ListTile,
   FlexDirections,
   Flex,
@@ -172,7 +172,7 @@ const MobileSidebar = () => {
                   <FlexItem>
                     <Padding
                       style={{ display: 'flex' }}
-                      size={{ left: Sizes.LARGE }}>
+                      size={{ left: Size.LARGE }}>
                       <Icon
                         style={{ color: sv.colorPrimaryInverse }}
                         onClick={() => toggleLinks(false)}
@@ -191,37 +191,37 @@ const MobileSidebar = () => {
               <div className={styles.navigation}>
                 <Flex direction={FlexDirections.VERTICAL} align={FlexAlign.START}>
                   <FlexItem>
-                    <Padding size={{ top: Sizes.DEFAULT }}>
+                    <Padding size={{ top: Size.DEFAULT }}>
                       <ListTile
                         onClick={() => toggleSearch(true)}
                         leading={<Icon name="search" />}
-                        title={<Text inversed size={Sizes.LARGE}>Search</Text>} />
+                        title={<Text inversed size={Size.LARGE}>Search</Text>} />
                     </Padding>
                   </FlexItem>
                   <FlexItem>
-                    <Padding size={{ top: Sizes.LARGE }}>
+                    <Padding size={{ top: Size.LARGE }}>
                       <Link to="/component-kit">
                         <ListTile
                           leading={<Icon name="package" />}
-                          title={<Text inversed size={Sizes.LARGE}>Component kit</Text>} />
+                          title={<Text inversed size={Size.LARGE}>Component kit</Text>} />
                       </Link>
                     </Padding>
                   </FlexItem>
                   <FlexItem>
-                    <Padding size={{ top: Sizes.LARGE }}>
+                    <Padding size={{ top: Size.LARGE }}>
                       <Link to="/design-guidelines">
                         <ListTile
                           leading={<Icon name="layout" />}
-                          title={<Text inversed size={Sizes.LARGE}>Design guidelines</Text>} />
+                          title={<Text inversed size={Size.LARGE}>Design guidelines</Text>} />
                       </Link>
                     </Padding>
                   </FlexItem>
                   <FlexItem>
-                    <Padding size={{ top: Sizes.LARGE }}>
+                    <Padding size={{ top: Size.LARGE }}>
                       <Link to="/coding-guidelines">
                         <ListTile
                           leading={<Icon name="command" />}
-                          title={<Text inversed size={Sizes.LARGE}>Coding guidelines</Text>} />
+                          title={<Text inversed size={Size.LARGE}>Coding guidelines</Text>} />
                       </Link>
                     </Padding>
                   </FlexItem>

@@ -4,10 +4,10 @@ import {
   Modal,
   Input,
   Icon,
-  Categories,
+  Category,
   Button,
   Spinner,
-  Sizes,
+  Size,
   ListTile,
   Separator,
   EmptyState,
@@ -116,8 +116,8 @@ const Search = ({ open, onClickClose }) => {
         suffix={
           <Button
             onClick={() => setSearching(true)}
-            category={Categories.BRAND}
-            trailing={searching ? <Spinner size={Sizes.SMALL} inversed /> : <Icon name="search" />} />
+            category={Category.BRAND}
+            trailing={searching ? <Spinner size={Size.SMALL} inversed /> : <Icon name="search" />} />
         } />
       <div className={styles.results}>
         {do {
@@ -138,12 +138,12 @@ const Search = ({ open, onClickClose }) => {
             ));
           }
           else if (searchTerm) {
-            <Margin size={{ top: Sizes.DEFAULT }}>
+            <Margin size={{ top: Size.DEFAULT }}>
               <EmptyState description="No results match your search." />
             </Margin>
           }
           else {
-            <Margin size={{ top: Sizes.DEFAULT }}>
+            <Margin size={{ top: Size.DEFAULT }}>
               <EmptyState description="No results. Type to find documentation." />
             </Margin>
           }

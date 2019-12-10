@@ -2,7 +2,7 @@ import React from 'react';
 import { create } from 'react-test-renderer';
 
 import Checkbox from '../Checkbox';
-import { Sizes } from '../../enums';
+import { Size } from '../../enums';
 
 
 jest.mock('uuid/v4', () => {
@@ -48,7 +48,7 @@ describe('Checkbox', () => {
     it('is large', () => {
       const tree = create(
         <Checkbox
-          size={Sizes.LARGE}
+          size={Size.LARGE}
           onChange={onChange} />
       ).toJSON();
       expect(tree).toMatchSnapshot();

@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 
-import { Categories, Sizes } from '../enums';
+import { Category, Size } from '../enums';
 import Icon from './Icon';
 import Flex, { FlexItem, FlexAlign, FlexJustify } from '../layout/Flex';
 import Margin from '../layout/Margin';
@@ -57,7 +57,7 @@ const Banner = ({
         <FlexItem>
           <Flex align={FlexAlign.START} justify={FlexJustify.START}>
             <FlexItem>
-              <Margin size={{ right: Sizes.SMALL }}>
+              <Margin size={{ right: Size.SMALL }}>
                 <Icon name={icon} />
               </Margin>
             </FlexItem>
@@ -78,9 +78,9 @@ const Banner = ({
         {do {
           if (trailing != null) {
             <FlexItem>
-              <Margin size={{ left: Sizes.EXTRA_SMALL }}>
+              <Margin size={{ left: Size.EXTRA_SMALL }}>
                 {React.cloneElement(trailing, {
-                  size: Sizes.SMALL,
+                  size: Size.SMALL,
                   style: {
                     whiteSpace: 'nowrap',
                     color: sv.colorPrimary,
@@ -105,10 +105,10 @@ Banner.propTypes = {
   title: PropTypes.string,
 
   category: PropTypes.oneOf([
-    Categories.DANGER,
-    Categories.SUCCESS,
-    Categories.INFO,
-    Categories.WARNING,
+    Category.DANGER,
+    Category.SUCCESS,
+    Category.INFO,
+    Category.WARNING,
   ]).isRequired,
 
   /** Used for style overrides */

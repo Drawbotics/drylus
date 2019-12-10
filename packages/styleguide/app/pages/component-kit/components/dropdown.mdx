@@ -5,12 +5,12 @@ import {
   DropdownTitle,
   DropdownSeparator,
   Button,
-  Categories,
+  Category,
   Avatar,
   Margin,
-  Sizes,
+  Size,
   Text,
-  Tiers,
+  Tier,
 } from '@drawbotics/react-drylus';
 
 import Playground, { PropsTable } from '~/components/Playground';
@@ -47,9 +47,9 @@ __Example__
 ### Example with categories & Icons
 <Playground>
   <Dropdown trigger={<Avatar text="MK" />} side={DropdownSides.RIGHT}>
-    <DropdownOption text="Alright option" category={Categories.SUCCESS} />
-    <DropdownOption text="Not okay" category={Categories.DANGER} icon="alert-circle" />
-    <DropdownOption text="Maybe okay" category={Categories.WARNING} />
+    <DropdownOption text="Alright option" category={Category.SUCCESS} />
+    <DropdownOption text="Not okay" category={Category.DANGER} icon="alert-circle" />
+    <DropdownOption text="Maybe okay" category={Category.WARNING} />
   </Dropdown>
 </Playground>
 
@@ -71,11 +71,11 @@ __Example__
 You can also put whatever you want in a dropdown, as long as it respects the design system
 <Playground>
   <Dropdown trigger={<Avatar text="JD" />} side={DropdownSides.RIGHT}>
-    <Margin size={{ top: Sizes.EXTRA_SMALL, right: Sizes.SMALL, left: Sizes.SMALL }}>
+    <Margin size={{ top: Size.EXTRA_SMALL, right: Size.SMALL, left: Size.SMALL }}>
       <Text style={{ whiteSpace: 'nowrap' }}>John Doe</Text>
     </Margin>
-    <Margin size={{ right: Sizes.SMALL, left: Sizes.SMALL }}>
-      <Text tier={Tiers.SECONDARY} size={Sizes.SMALL}>Drawer</Text>
+    <Margin size={{ right: Size.SMALL, left: Size.SMALL }}>
+      <Text tier={Tier.SECONDARY} size={Size.SMALL}>Drawer</Text>
     </Margin>
     <DropdownSeparator />
     <DropdownOption text="Settings" />

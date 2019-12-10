@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
-import Sizes from '../enums/Sizes';
+import Size from '../enums/Size';
 import { useResponsiveProps } from '../utils/hooks';
 
 
@@ -94,7 +94,7 @@ const Toggle = ({
       style={style}
       className={cx(styles.root, {
         [styles.active]: value,
-        [styles.small]: size === Sizes.SMALL,
+        [styles.small]: size === Size.SMALL,
         [styles.disabled]: disabled,
       })}
       onClick={() => disabled ? null : onChange(! value)}>
@@ -114,7 +114,7 @@ Toggle.propTypes = {
   /** Determines if toggle is active */
   value: PropTypes.bool.isRequired,
 
-  size: PropTypes.oneOf([ Sizes.SMALL, Sizes.DEFAULT ]),
+  size: PropTypes.oneOf([ Size.SMALL, Size.DEFAULT ]),
 
   /** Used for style overrides */
   style: PropTypes.object,

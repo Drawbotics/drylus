@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 
-import { Categories, Sizes } from '../enums';
+import { Category, Size } from '../enums';
 import Tooltip from '../components/Tooltip';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
@@ -129,17 +129,17 @@ Avatar.propTypes = {
 
   /** Size of the avatar */
   size: PropTypes.oneOfType([
-    PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE]),
+    PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
     PropTypes.number,
   ]),
 
   /** Category of the avatar */
   category: PropTypes.oneOf([
-    Categories.DANGER,
-    Categories.INFO,
-    Categories.SUCCESS,
-    Categories.WARNING,
-    Categories.BRAND,
+    Category.DANGER,
+    Category.INFO,
+    Category.SUCCESS,
+    Category.WARNING,
+    Category.BRAND,
   ]),
 
   /** Custom override for the background color, useful for profiles */

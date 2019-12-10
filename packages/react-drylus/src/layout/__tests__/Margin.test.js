@@ -2,14 +2,14 @@ import React from 'react';
 import { create } from 'react-test-renderer';
 
 import Margin from '../Margin';
-import { Sizes } from '../../enums';
+import { Size } from '../../enums';
 
 
 describe('Margin', () => {
   describe('matches snapshot when', () => {
     it('has a uniform size', () => {
       const tree = create(
-        <Margin size={Sizes.LARGE}>
+        <Margin size={Size.LARGE}>
           Content
         </Margin>
       ).toJSON();
@@ -18,7 +18,7 @@ describe('Margin', () => {
 
     it('has a size only on 1 side', () => {
       const tree = create(
-        <Margin size={{ left: Sizes.LARGE }}>
+        <Margin size={{ left: Size.LARGE }}>
           Content
         </Margin>
       ).toJSON();
@@ -29,10 +29,10 @@ describe('Margin', () => {
       const tree = create(
         <Margin
           size={{
-            left: Sizes.LARGE,
-            top: Sizes.SMALL,
-            bottom: Sizes.DEFAULT,
-            right: Sizes.EXTRA_SMALL,
+            left: Size.LARGE,
+            top: Size.SMALL,
+            bottom: Size.DEFAULT,
+            right: Size.EXTRA_SMALL,
           }}>
           Content
         </Margin>
@@ -44,8 +44,8 @@ describe('Margin', () => {
       const tree = create(
         <Margin
           size={{
-            vertical: Sizes.LARGE,
-            horizontal: Sizes.SMALL,
+            vertical: Size.LARGE,
+            horizontal: Size.SMALL,
           }}>
           Content
         </Margin>

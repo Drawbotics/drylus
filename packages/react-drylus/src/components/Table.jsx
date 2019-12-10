@@ -7,7 +7,7 @@ import { useScreenSize } from '@drawbotics/use-screen-size';
 
 import Label from './Label';
 import Icon from './Icon';
-import Sizes from '../enums/Sizes';
+import Size from '../enums/Size';
 import Margin from '../layout/Margin';
 
 
@@ -465,7 +465,7 @@ const EmptyTable = ({ columns, emptyContent }) => {
             <div className={styles.emptyTableCell}>
               <div className={styles.emptyTableHeader}>
                 {columns.map((column, i) => (
-                  <Margin key={i} size={{ top: i === 0 ? null : Sizes.DEFAULT }}>
+                  <Margin key={i} size={{ top: i === 0 ? null : Size.DEFAULT }}>
                     <Label ellipsized>
                       {typeof column === 'string' ? column : column.label}
                     </Label>

@@ -3,7 +3,7 @@ import { css, cx, keyframes } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
-import { Categories, Sizes } from '../enums';
+import { Category, Size } from '../enums';
 import { getEnumAsClass } from '../utils';
 
 
@@ -117,17 +117,17 @@ ProgressBar.propTypes = {
   percentage: PropTypes.number,
 
   category: PropTypes.oneOf([
-    Categories.BRAND,
-    Categories.DANGER,
-    Categories.SUCCESS,
-    Categories.INFO,
-    Categories.WARNING,
+    Category.BRAND,
+    Category.DANGER,
+    Category.SUCCESS,
+    Category.INFO,
+    Category.WARNING,
   ]),
 
   size: PropTypes.oneOf([
-    Sizes.SMALL,
-    Sizes.DEFAULT,
-    Sizes.LARGE,
+    Size.SMALL,
+    Size.DEFAULT,
+    Size.LARGE,
   ]),
 
   /** Used for style overrides */
@@ -136,7 +136,7 @@ ProgressBar.propTypes = {
 
 
 ProgressBar.defaultProps = {
-  size: Sizes.DEFAULT,
+  size: Size.DEFAULT,
 };
 
 

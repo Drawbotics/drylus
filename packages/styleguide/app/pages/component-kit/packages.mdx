@@ -1,12 +1,12 @@
 import {
   Grid,
   GridItem,
-  Sizes,
+  Size,
   Flex,
   FlexItem,
   FlexJustify,
   TextLink,
-  Categories,
+  Category,
 } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
@@ -38,8 +38,8 @@ export const packages = [
 ];
 
 <Grid
-  hGutters={Sizes.DEFAULT}
-  vGutters={Sizes.DEFAULT}
+  hGutters={Size.DEFAULT}
+  vGutters={Size.DEFAULT}
   columns={3}
   responsive={{
     XL: {
@@ -55,7 +55,7 @@ export const packages = [
         <Flex justify={FlexJustify.SPACE_BETWEEN}>
           <FlexItem>
             <a href={`https://badge.fury.io/js/%40drawbotics%2F${name}`}>
-              <TextLink category={Categories.INFO}>{name}</TextLink>
+              <TextLink category={Category.INFO}>{name}</TextLink>
             </a>
           </FlexItem>
           <FlexItem>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
 
-import { Categories } from '../enums';
+import { Category } from '../enums';
 import { getEnumAsClass } from '../utils';
 
 
@@ -96,7 +96,7 @@ TextLink.propTypes = {
   /** Text of the link */
   children: PropTypes.string,
 
-  category: PropTypes.oneOf([Categories.BRAND, Categories.DANGER, Categories.SUCCESS, Categories.INFO, Categories.WARNING]),
+  category: PropTypes.oneOf([Category.BRAND, Category.DANGER, Category.SUCCESS, Category.INFO, Category.WARNING]),
 
   underlined: PropTypes.oneOf([LinkUnderlined.ALWAYS, LinkUnderlined.HOVER]),
 
@@ -107,7 +107,7 @@ TextLink.propTypes = {
 
 TextLink.defaultProps = {
   underlined: LinkUnderlined.HOVER,
-  category: Categories.INFO,
+  category: Category.INFO,
 };
 
 

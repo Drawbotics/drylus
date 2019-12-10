@@ -10,7 +10,7 @@ import Enum from '@drawbotics/enums';
 import Button from './Button';
 import Title from './Title';
 import Icon from './Icon';
-import { Sizes, Tiers } from '../enums';
+import { Size, Tier } from '../enums';
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { useResponsiveProps } from '../utils/hooks';
 
@@ -184,9 +184,9 @@ const BaseDrawer = ({
     <div style={style} className={styles.root}>
       <div className={styles.close}>
         <Button
-          size={screenSize <= ScreenSizes.L ? Sizes.DEFAULT : Sizes.SMALL}
+          size={screenSize <= ScreenSizes.L ? Size.DEFAULT : Size.SMALL}
           onClick={onClickClose}
-          tier={Tiers.TERTIARY}
+          tier={Tier.TERTIARY}
           leading={<Icon name="x" />} />
       </div>
       {do {

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import {
   Icon,
   Margin,
-  Sizes,
+  Size,
   Flex,
   FlexItem,
   FlexDirections,
@@ -51,7 +51,7 @@ const Sidebar = () => {
     <div className={styles.sidebar}>
       <Flex direction={FlexDirections.VERTICAL} justify={FlexJustify.START}>
         <FlexItem>
-          <Margin size={{ bottom: Sizes.SMALL }}>
+          <Margin size={{ bottom: Size.SMALL }}>
             <Link to="/">
               <div className={styles.logo}>
                 <Logo />
@@ -60,14 +60,14 @@ const Sidebar = () => {
           </Margin>
         </FlexItem>
         <FlexItem>
-          <Margin size={{ bottom: Sizes.SMALL }}>
+          <Margin size={{ bottom: Size.SMALL }}>
             <div className={styles.button} onClick={() => toggleSearch(true)}>
               <Icon name="search" />
             </div>
           </Margin>
         </FlexItem>
         <FlexItem>
-          <Margin size={{ bottom: Sizes.SMALL }}>
+          <Margin size={{ bottom: Size.SMALL }}>
             <Tooltip
               content="Component kit"
               style={{ marginLeft: sv.marginSmall }}
@@ -81,7 +81,7 @@ const Sidebar = () => {
           </Margin>
         </FlexItem>
         <FlexItem>
-          <Margin size={{ bottom: Sizes.SMALL }}>
+          <Margin size={{ bottom: Size.SMALL }}>
             <Tooltip
               content="Design guidelines"
               style={{ marginLeft: sv.marginSmall }}
@@ -95,7 +95,7 @@ const Sidebar = () => {
           </Margin>
         </FlexItem>
         <FlexItem>
-          <Margin size={{ bottom: Sizes.SMALL }}>
+          <Margin size={{ bottom: Size.SMALL }}>
             <Tooltip
               content="Coding guidelines"
               style={{ marginLeft: sv.marginSmall }}

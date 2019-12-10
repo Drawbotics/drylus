@@ -6,12 +6,12 @@ import {
   Checkbox,
   Select,
   Margin,
-  Sizes,
+  Size,
   Hint,
   Flex,
   FlexItem,
   FlexJustify,
-  Categories,
+  Category,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -60,7 +60,7 @@ And can be horizontal too of course and have a global error or validation:
         </InputGroup>
       }
       label={<Label>My group of checkboxes</Label>} />
-    <Margin size={{ bottom: Sizes.DEFAULT }} />
+    <Margin size={{ bottom: Size.DEFAULT }} />
     <FormGroup
       horizontal
       input={
@@ -83,17 +83,17 @@ Sometimes you might need to create complex form groups, for example for an addre
       <>
         <Flex justify={FlexJustify.START} wrap>
           <FlexItem flex={3/4}>
-            <Margin size={{ right: Sizes.EXTRA_SMALL, bottom: Sizes.EXTRA_SMALL }}>
+            <Margin size={{ right: Size.EXTRA_SMALL, bottom: Size.EXTRA_SMALL }}>
               <Input valid placeholder="Street & Number" value="1 Real Avenue" onChange={x=>x} />
             </Margin>
           </FlexItem>
           <FlexItem flex={1/4}>
-            <Margin size={{ bottom: Sizes.EXTRA_SMALL }}>
+            <Margin size={{ bottom: Size.EXTRA_SMALL }}>
               <Input error placeholder="ZIP" onChange={x=>x} value="" />
             </Margin>
           </FlexItem>
           <FlexItem flex={1/2}>
-            <Margin size={{ right: Sizes.EXTRA_SMALL }}>
+            <Margin size={{ right: Size.EXTRA_SMALL }}>
               <Input valid placeholder="City" onChange={x=>x} value="Brussels" />
             </Margin>
           </FlexItem>
@@ -101,7 +101,7 @@ Sometimes you might need to create complex form groups, for example for an addre
             <Select error placeholder="Country" options={[{ value: 'IT', label: 'Italy' }, { value: 'FR', label: 'France' }]} onChange={x=>x} />
           </FlexItem>
         </Flex>
-        <Hint category={Categories.DANGER}>All fields are required</Hint>
+        <Hint category={Category.DANGER}>All fields are required</Hint>
       </>
     }
     label={<Label>Address of residence</Label>} />
