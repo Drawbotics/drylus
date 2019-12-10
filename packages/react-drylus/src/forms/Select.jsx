@@ -45,7 +45,7 @@ const styles = {
     width: 100%;
     outline: none !important;
     box-shadow: inset 0px 0px 0px 1px ${sv.azure};
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
 
     &:hover {
       box-shadow: inset 0px 0px 0px 1px ${sv.azureDark};

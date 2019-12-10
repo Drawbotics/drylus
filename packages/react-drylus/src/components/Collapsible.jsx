@@ -16,7 +16,7 @@ const styles = {
     justify-content: space-between;
 
     & [data-element="title"] {
-      transition: ${sv.defaultTransition};
+      transition: ${sv.transitionShort};
     }
 
     &:hover {

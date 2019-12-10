@@ -32,7 +32,7 @@ const styles = {
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
     fill: none;
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
   `,
   background: css`
     stroke: ${sv.neutralLight};

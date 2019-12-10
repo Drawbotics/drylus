@@ -68,7 +68,7 @@ const styles = {
     align-items: center;
     padding: ${sv.defaultPadding} ${sv.paddingExtraLarge};
     color: ${sv.colorSecondary};
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
     position: relative;
 
     &:hover {
@@ -86,7 +86,7 @@ const styles = {
       height: 0px;
       background: ${sv.brand};
       z-index: 2;
-      transition: ${sv.defaultTransition};
+      transition: ${sv.transitionShort};
     }
   `,
   active: css`
