@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
-import Categories from '../base/Categories';
+import Categories from '../enums/Categories';
 import Icon from './Icon';
 import { getEnumAsClass } from '../utils';
 

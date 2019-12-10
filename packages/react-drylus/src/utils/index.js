@@ -1,7 +1,7 @@
 import camelCase from 'lodash/camelCase';
 import PropTypes from 'prop-types';
 
-import Categories from '../base/Categories';
+import Categories from '../enums/Categories';
 
 
 export function getEnumAsClass(enumVal) {

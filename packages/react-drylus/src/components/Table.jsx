@@ -7,7 +7,7 @@ import { useScreenSize } from '@drawbotics/use-screen-size';
 
 import Label from './Label';
 import Icon from './Icon';
-import Sizes from '../base/Sizes';
+import Sizes from '../enums/Sizes';
 import Margin from '../layout/Margin';
 
 

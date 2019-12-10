@@ -8,8 +8,8 @@ import Icon from '../components/Icon';
 import Button from '../components/Button';
 import Spinner from '../components/Spinner';
 import Select from './Select';
-import Sizes from '../base/Sizes';
-import Categories from '../base/Categories';
+import Sizes from '../enums/Sizes';
+import Categories from '../enums/Categories';
 import Hint from './Hint';
 import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
 

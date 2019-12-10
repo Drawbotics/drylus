@@ -7,7 +7,7 @@ import { InputWithRef } from './Input';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
-import Sizes from '../base/Sizes';
+import Sizes from '../enums/Sizes';
 
 
 const styles = {

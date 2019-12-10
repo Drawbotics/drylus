@@ -1,7 +1,13 @@
 import Enum from '@drawbotics/enums';
 
+import { deprecateProperty } from '../utils';
 
-const Sizes = new Enum(
+
+/**
+ * @deprecated and will be removed in version 6.0
+ */
+
+const Sizes = deprecateProperty(new Enum(
   'EXTRA_SMALL',
   'SMALL',
   'DEFAULT',
@@ -10,7 +16,7 @@ const Sizes = new Enum(
   'HUGE',
   'EXTRA_HUGE',
   'MASSIVE',
-);
+), 'Sizes', 'Size');
 
 
 export default Sizes;

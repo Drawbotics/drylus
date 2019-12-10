@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import RoundIcon from '../components/RoundIcon';
 import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
-import Sizes from '../base/Sizes';
-import Categories from '../base/Categories';
+import Sizes from '../enums/Sizes';
+import Categories from '../enums/Categories';
 import Hint from './Hint';
 import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
 

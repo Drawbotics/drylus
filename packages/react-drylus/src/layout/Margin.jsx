@@ -4,7 +4,7 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import camelCase from 'lodash/camelCase';
 
-import Sizes from '../base/Sizes';
+import Sizes from '../enums/Sizes';
 import { useResponsiveProps } from '../utils/hooks';
 
 
