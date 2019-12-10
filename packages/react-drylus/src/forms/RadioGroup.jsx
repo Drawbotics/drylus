@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import Hint from './Hint';
 import Icon from '../components/Icon';
-import { Categories } from '../base';
+import { Categories } from '../enums';
 import { CustomPropTypes } from '../utils';
 import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
 

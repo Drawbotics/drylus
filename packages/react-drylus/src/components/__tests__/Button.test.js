@@ -6,7 +6,7 @@ import {
   Sizes,
   Tiers,
   Categories,
-} from '../../base';
+} from '../../enums';
 import Icon from '../Icon';
 
 

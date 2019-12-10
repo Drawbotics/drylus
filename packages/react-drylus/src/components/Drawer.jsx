@@ -10,7 +10,7 @@ import Enum from '@drawbotics/enums';
 import Button from './Button';
 import Title from './Title';
 import Icon from './Icon';
-import { Sizes, Tiers } from '../base';
+import { Sizes, Tiers } from '../enums';
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { useResponsiveProps } from '../utils/hooks';
 

@@ -8,7 +8,7 @@ import Button from './Button';
 import Icon from './Icon';
 import Drawer from './Drawer';
 import Margin from '../layout/Margin';
-import { Tiers, Sizes, Categories } from '../base';
+import { Tiers, Sizes, Categories } from '../enums';
 import Flex, { FlexItem, FlexJustify } from '../layout/Flex';
 
 

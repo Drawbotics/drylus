@@ -10,7 +10,7 @@ import RoundIcon from '../components/RoundIcon';
 import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
 import Hint from './Hint';
-import { Categories, Sizes } from '../base';
+import { Categories, Sizes } from '../enums';
 import { CustomPropTypes } from '../utils';
 
 

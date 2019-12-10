@@ -5,7 +5,7 @@ import sv from '@drawbotics/drylus-style-vars';
 
 import Label from './Label';
 import RoundIcon from './RoundIcon';
-import { Categories } from '../base';
+import { Categories } from '../enums';
 
 
 const styles = {

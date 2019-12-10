@@ -2,7 +2,7 @@ import React from 'react';
 import { create } from 'react-test-renderer';
 
 import Padding from '../Padding';
-import { Sizes } from '../../base';
+import { Sizes } from '../../enums';
 
 
 describe('Padding', () => {

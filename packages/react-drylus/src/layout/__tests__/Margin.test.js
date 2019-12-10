@@ -2,7 +2,7 @@ import React from 'react';
 import { create } from 'react-test-renderer';
 
 import Margin from '../Margin';
-import { Sizes } from '../../base';
+import { Sizes } from '../../enums';
 
 
 describe('Margin', () => {

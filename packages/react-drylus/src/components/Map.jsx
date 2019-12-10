@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
 import Flex, { FlexDirections, FlexItem } from '../layout/Flex';
-import { Sizes, Tiers } from '../base';
+import { Sizes, Tiers } from '../enums';
 import Popover from './Popover';
 import Text from './Text';
 import Margin from '../layout/Margin';

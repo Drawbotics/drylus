@@ -9,7 +9,7 @@ import {
   TransitionGroup,
 } from 'react-transition-group';
 
-import { Categories, Sizes, Tiers } from '../base';
+import { Categories, Sizes, Tiers } from '../enums';
 import {
   Margin,
   Flex,

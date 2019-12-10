@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css } from 'emotion';
 
 import Flex, { FlexItem, FlexDirections, FlexAlign } from '../layout/Flex';
-import { Sizes, Categories } from '../base';
+import { Sizes, Categories } from '../enums';
 import Margin from '../layout/Margin';
 import Hint from './Hint';
 

@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
-import { Categories, Sizes } from '../base';
+import { Categories, Sizes } from '../enums';
 import Icon from './Icon';
 import Flex, { FlexItem, FlexAlign, FlexJustify } from '../layout/Flex';
 import Margin from '../layout/Margin';

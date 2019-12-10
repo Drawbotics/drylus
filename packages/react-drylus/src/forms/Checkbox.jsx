@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Hint from './Hint';
 import Icon from '../components/Icon';
 import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
-import { Sizes, Categories } from '../base';
+import { Sizes, Categories } from '../enums';
 import { getEnumAsClass } from '../utils';
 
 

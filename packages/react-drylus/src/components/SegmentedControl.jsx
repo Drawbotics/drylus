@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
-import { Categories, Sizes } from '../base';
+import { Categories, Sizes } from '../enums';
 import Badge from './Badge';
 import Spinner from './Spinner';
 import { CustomPropTypes } from '../utils';

@@ -87,6 +87,19 @@ export const CustomPropTypes = {
 };
 
 
+export const deprecateProperty = (target, oldName, newName) => {
+  if (process.env.NODE_ENV === 'production') {
+    return target;
+  }
+  return new Proxy(target, {
+    get(target, key) {
+      console.warn(`${oldName} is deprecated. Use ${newName} instead.`);
+      return Reflect.get(...arguments);
+    }
+  });
+};
+
+
 export function getStyleForSide({
   side,
   rect,

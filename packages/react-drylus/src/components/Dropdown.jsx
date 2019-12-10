@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
 
-import { Categories } from '../base';
+import { Categories } from '../enums';
 import Icon from './Icon';
 import { getEnumAsClass } from '../utils';
 

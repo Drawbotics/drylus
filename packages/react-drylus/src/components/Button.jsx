@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 
-import { Categories, Sizes, Tiers } from '../base';
+import { Categories, Sizes, Tiers } from '../enums';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 

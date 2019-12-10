@@ -9,7 +9,7 @@ import Margin from '../layout/Margin';
 import Title from './Title';
 import Text from './Text';
 import Paragraph from './Paragraph';
-import { Sizes, Tiers } from '../base';
+import { Sizes, Tiers } from '../enums';
 import { useResponsiveProps } from '../utils/hooks';
 import {
   Empty,

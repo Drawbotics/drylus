@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 
-import { Categories, Sizes } from '../base';
+import { Categories, Sizes } from '../enums';
 import Tooltip from '../components/Tooltip';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';

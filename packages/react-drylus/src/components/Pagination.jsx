@@ -5,7 +5,7 @@ import sv from '@drawbotics/drylus-style-vars';
 
 import Button from './Button';
 import Icon from './Icon';
-import { Sizes, Tiers, Categories } from '../base';
+import { Sizes, Tiers, Categories } from '../enums';
 
 
 const styles = {

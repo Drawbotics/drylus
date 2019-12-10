@@ -2,7 +2,7 @@ import React from 'react';
 import { create } from 'react-test-renderer';
 
 import ProgressBar from '../ProgressBar';
-import { Categories, Sizes } from '../../base';
+import { Categories, Sizes } from '../../enums';
 
 
 describe('ProgressBar', () => {

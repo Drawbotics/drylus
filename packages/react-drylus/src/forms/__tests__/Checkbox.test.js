@@ -2,7 +2,7 @@ import React from 'react';
 import { create } from 'react-test-renderer';
 
 import Checkbox from '../Checkbox';
-import { Sizes } from '../../base';
+import { Sizes } from '../../enums';
 
 
 jest.mock('uuid/v4', () => {

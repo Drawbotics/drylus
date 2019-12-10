@@ -2,7 +2,7 @@ import React from 'react';
 import { cx } from 'emotion';
 import PropTypes from 'prop-types';
 
-import { Categories, Sizes, Tiers } from '../base';
+import { Categories, Sizes, Tiers } from '../enums';
 import { getEnumAsClass } from '../utils';
 import { styles } from './Button';
 import { useResponsiveProps } from '../utils/hooks';
