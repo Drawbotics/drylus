@@ -333,7 +333,7 @@ CheckboxFilter.propTypes = {
   /** Used to pick each label in the options array */
   labelKey: PropTypes.string,
 
-  /** Triggered when an option is clicked. Returns (valueKey, boolean) where the second argument is true if checked, false if not */
+  /** Triggered when an option is clicked. Returns the list of currently selected elements */
   onChange: PropTypes.func.isRequired,
 
   /** Used for style overrides */
