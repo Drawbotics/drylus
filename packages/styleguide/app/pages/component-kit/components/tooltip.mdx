@@ -1,6 +1,6 @@
 import {
   Tooltip,
-  TooltipSides,
+  Position,
   Button,
   Category,
   Dot,
@@ -20,11 +20,11 @@ import Playground from '~/components/Playground';
 # Tooltip
 It can be used to wrap any component/element and display a hint when hovered. The component is uncontrolled and uses portals to be rendered on top of the content.
 ```jsx
-import { Tooltip, TooltipSides } from '@drawbotics/react-drylus';
+import { Tooltip } from '@drawbotics/react-drylus';
 ```
 
 __Example__
-<Playground component={Tooltip} enums={{ TooltipSides }}>
+<Playground component={Tooltip}>
 <Flex>
   <FlexItem>
     <Margin size={{ right: Size.LARGE }}>

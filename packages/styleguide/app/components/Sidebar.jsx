@@ -11,7 +11,7 @@ import {
   FlexDirections,
   FlexJustify,
   Tooltip,
-  TooltipSides,
+  Position,
 } from '@drawbotics/react-drylus';
 
 import Search from './Search';
@@ -71,7 +71,7 @@ const Sidebar = () => {
             <Tooltip
               content="Component kit"
               style={{ marginLeft: sv.marginSmall }}
-              side={TooltipSides.RIGHT}>
+              side={Position.RIGHT}>
               <Link to="/component-kit">
                 <div className={styles.button}>
                   <Icon name="package" />
@@ -85,7 +85,7 @@ const Sidebar = () => {
             <Tooltip
               content="Design guidelines"
               style={{ marginLeft: sv.marginSmall }}
-              side={TooltipSides.RIGHT}>
+              side={Position.RIGHT}>
               <Link to="/design-guidelines">
                 <div className={styles.button}>
                   <Icon name="layout" />
@@ -99,7 +99,7 @@ const Sidebar = () => {
             <Tooltip
               content="Coding guidelines"
               style={{ marginLeft: sv.marginSmall }}
-              side={TooltipSides.RIGHT}>
+              side={Position.RIGHT}>
               <Link to="/coding-guidelines">
                 <div className={styles.button}>
                   <Icon name="command" />

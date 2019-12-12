@@ -9,7 +9,6 @@ import {
   Tier,
   Category,
   Tooltip,
-  TooltipSides,
   Flex,
   FlexItem,
   FlexJustify,
@@ -61,7 +60,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
               <TCell>
                 {do {
                   if (props[key].type.value) {
-                    <Tooltip content={<PropsInfo props={props[key].type.value} />} side={TooltipSides.RIGHT}>
+                    <Tooltip content={<PropsInfo props={props[key].type.value} />} side={Position.RIGHT}>
                       <Flex justify={FlexJustify.START}>
                         <FlexItem>
                           {props[key].type.name}
