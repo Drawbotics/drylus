@@ -1,6 +1,6 @@
 import {
   BaseFilter,
-  FilterAlign,
+  Align,
   SelectFilter,
   CheckboxFilter,
   Avatar,
@@ -23,11 +23,11 @@ import { ControlledField, ControlledMultiField } from '../utils';
 
 A filter uses a number of other UI elements. For example, we may use a date picker to filter by date, or a list of checkboxes to filter by a particular criterium. The component exposes the `BaseFilter`, which is used to create custom filters, but also provides pre-built common components, see the examples below for more details.
 ```jsx
-import { BaseFilter, SelectFilter, CheckboxFilter, FilterAlign } from '@drawbotics/react-drylus';
+import { BaseFilter, SelectFilter, CheckboxFilter } from '@drawbotics/react-drylus';
 ```
 
 __Example__
-<Playground component={BaseFilter} enums={{ FilterAlign }}>
+<Playground component={BaseFilter}>
   <div style={{ height: 200, marginLeft: 100 }}>
     <BaseFilter label="Base filter" onClear={x=>x}>
       <div style={{ height: 70, background: 'red', padding: 20 }}>
@@ -122,7 +122,7 @@ __Example__
   <div style={{ height: 200, marginLeft: 100 }}>
     <ControlledMultiField component={
       <CheckboxFilter
-        align={FilterAlign.LEFT}
+        align={Align.LEFT}
         label="Products"
         onClear={x=>x}
         onChange={x=>x}
