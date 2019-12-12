@@ -1,9 +1,9 @@
 import {
   Dropdown,
   DropdownOption,
-  DropdownSides,
   DropdownTitle,
   DropdownSeparator,
+  Position,
   Button,
   Category,
   Avatar,
@@ -20,11 +20,11 @@ import Playground, { PropsTable } from '~/components/Playground';
 A little floating menu used to perform actions. Can also contain some information, but should be kept at a minimum. If you see that the content of the dropdown is becoming excessive, use a [`Modal`](/component-kit/components/modal) instead.
 
 ```jsx
-import { Dropdown, DropdownOption, DropdownTitle, DropdownSeparator, DropdownSides } from '@drawbotics/react-drylus';
+import { Dropdown, DropdownOption, DropdownTitle, DropdownSeparator } from '@drawbotics/react-drylus';
 ```
 __Example__
 
-<Playground component={Dropdown} enums={{ DropdownSides }}>
+<Playground component={Dropdown}>
   <Dropdown trigger={
     <Button>I show the menu</Button>
   }>
@@ -46,7 +46,7 @@ __Example__
 
 ### Example with categories & Icons
 <Playground>
-  <Dropdown trigger={<Avatar text="MK" />} side={DropdownSides.RIGHT}>
+  <Dropdown trigger={<Avatar text="MK" />} side={Position.RIGHT}>
     <DropdownOption text="Alright option" category={Category.SUCCESS} />
     <DropdownOption text="Not okay" category={Category.DANGER} icon="alert-circle" />
     <DropdownOption text="Maybe okay" category={Category.WARNING} />
@@ -55,7 +55,7 @@ __Example__
 
 ### Example with titles
 <Playground>
-  <Dropdown trigger={<Avatar text="MK" />} side={DropdownSides.TOP}>
+  <Dropdown trigger={<Avatar text="MK" />} side={Position.TOP}>
     <DropdownTitle text="First section" />
     <DropdownOption text="First option" />
     <DropdownOption text="Second option" />
@@ -70,7 +70,7 @@ __Example__
 ### Example with custom content
 You can also put whatever you want in a dropdown, as long as it respects the design system
 <Playground>
-  <Dropdown trigger={<Avatar text="JD" />} side={DropdownSides.RIGHT}>
+  <Dropdown trigger={<Avatar text="JD" />} side={Position.RIGHT}>
     <Margin size={{ top: Size.EXTRA_SMALL, right: Size.SMALL, left: Size.SMALL }}>
       <Text style={{ whiteSpace: 'nowrap' }}>John Doe</Text>
     </Margin>
