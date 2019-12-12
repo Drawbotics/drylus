@@ -17,15 +17,15 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
   margin-bottom: calc(8px / 2);
 }
 
-.css-j75p6z-Button__root {
+.css-q36stu-Button__root {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -40,16 +40,16 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
   justify-content: center;
 }
 
-.css-j75p6z-Button__root:hover {
+.css-q36stu-Button__root:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-j75p6z-Button__root:active {
+.css-q36stu-Button__root:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-j75p6z-Button__root:disabled {
+.css-q36stu-Button__root:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
@@ -76,7 +76,7 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
         className="css-1b0ebn8-ListTile__withMargin"
       >
         <button
-          className="css-j75p6z-Button__root"
+          className="css-q36stu-Button__root"
         >
           Button
         </button>
@@ -223,15 +223,15 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   color: #172b4e;
 }
 
-.css-j75p6z-Button__root {
+.css-q36stu-Button__root {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -246,16 +246,16 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   justify-content: center;
 }
 
-.css-j75p6z-Button__root:hover {
+.css-q36stu-Button__root:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-j75p6z-Button__root:active {
+.css-q36stu-Button__root:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-j75p6z-Button__root:disabled {
+.css-q36stu-Button__root:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
@@ -282,7 +282,7 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
         className="css-1pdxkj1-ListTile__leading"
       >
         <button
-          className="css-j75p6z-Button__root"
+          className="css-q36stu-Button__root"
         >
           Leading
         </button>
@@ -306,7 +306,7 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
         className="css-1sf91dp-ListTile__trailing"
       >
         <button
-          className="css-j75p6z-Button__root"
+          className="css-q36stu-Button__root"
         >
           Trailing
         </button>

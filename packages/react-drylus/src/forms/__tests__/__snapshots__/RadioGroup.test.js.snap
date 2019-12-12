@@ -77,7 +77,7 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
   cursor: pointer;
 }
 
-.css-w8mlgb-RadioGroup__sprite {
+.css-krpxjy-RadioGroup__sprite {
   position: absolute;
   top: 0;
   left: 0;
@@ -99,8 +99,8 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
   justify-content: center;
   text-align: center;
   cursor: pointer;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
   overflow: hidden;
 }
 
@@ -154,7 +154,7 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
               value="1"
             />
             <div
-              className="css-w8mlgb-RadioGroup__sprite"
+              className="css-krpxjy-RadioGroup__sprite"
               data-element="sprite"
             >
               <label
@@ -200,7 +200,7 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
               value="3"
             />
             <div
-              className="css-w8mlgb-RadioGroup__sprite"
+              className="css-krpxjy-RadioGroup__sprite"
               data-element="sprite"
             >
               <label
@@ -305,7 +305,7 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
   cursor: pointer;
 }
 
-.css-w8mlgb-RadioGroup__sprite {
+.css-krpxjy-RadioGroup__sprite {
   position: absolute;
   top: 0;
   left: 0;
@@ -327,8 +327,8 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
   justify-content: center;
   text-align: center;
   cursor: pointer;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
   overflow: hidden;
 }
 
@@ -382,7 +382,7 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
               value="1"
             />
             <div
-              className="css-w8mlgb-RadioGroup__sprite"
+              className="css-krpxjy-RadioGroup__sprite"
               data-element="sprite"
             >
               <label
@@ -428,7 +428,7 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
               value="3"
             />
             <div
-              className="css-w8mlgb-RadioGroup__sprite"
+              className="css-krpxjy-RadioGroup__sprite"
               data-element="sprite"
             >
               <label
@@ -517,7 +517,7 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
   cursor: pointer;
 }
 
-.css-w8mlgb-RadioGroup__sprite {
+.css-krpxjy-RadioGroup__sprite {
   position: absolute;
   top: 0;
   left: 0;
@@ -539,8 +539,8 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
   justify-content: center;
   text-align: center;
   cursor: pointer;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
   overflow: hidden;
 }
 
@@ -635,7 +635,7 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
               value="1"
             />
             <div
-              className="css-w8mlgb-RadioGroup__sprite"
+              className="css-krpxjy-RadioGroup__sprite"
               data-element="sprite"
             >
               <label
@@ -680,7 +680,7 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
               value="3"
             />
             <div
-              className="css-w8mlgb-RadioGroup__sprite"
+              className="css-krpxjy-RadioGroup__sprite"
               data-element="sprite"
             >
               <label
