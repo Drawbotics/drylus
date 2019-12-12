@@ -10,9 +10,10 @@ import Enum from '@drawbotics/enums';
 import Button from './Button';
 import Title from './Title';
 import Icon from './Icon';
-import { Size, Tier } from '../enums';
+import { Size, Tier, Position } from '../enums';
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { useResponsiveProps } from '../utils/hooks';
+import { deprecateProperty } from '../utils';
 
 
 const styles = {
@@ -166,10 +167,13 @@ const styles = {
 };
 
 
-export const DrawerSides = new Enum(
+/**
+ * @deprecated and will be removed in version 6.0
+ */
+export const DrawerSides = deprecateProperty(new Enum(
   'RIGHT',
   'LEFT',
-);
+), 'DrawerSides', 'Position');
 
 
 const BaseDrawer = ({
@@ -291,20 +295,20 @@ const Drawer = ({
           mountOnEnter
           unmountOnExit
           classNames={{
-            enter: side === DrawerSides.LEFT
+            enter: side === Position.LEFT
               ? styles.drawerOverlayEnterLeft
               : styles.drawerOverlayEnter
             ,
             enterActive: styles.drawerOverlayEnterActive,
             exit: styles.drawerOverlayExit,
             exitActive: cx(styles.drawerOverlayExitActive, {
-              [styles.drawerOverlayExitActiveLeft]: side === DrawerSides.LEFT,
+              [styles.drawerOverlayExitActiveLeft]: side === Position.LEFT,
             }),
           }}>
           <div
             onClick={handleClickOverlay}
             className={cx(styles.overlay, {
-              [styles.leftOverlay]: side === DrawerSides.LEFT,
+              [styles.leftOverlay]: side === Position.LEFT,
             })}
             ref={overlayElement}>
             <div data-element="wrapper" style={{ width }}>
@@ -384,8 +388,8 @@ Drawer.propTypes = {
 
   /** Only applies when the drawer is used with "asOverlay" */
   side: PropTypes.oneOf([
-    DrawerSides.LEFT,
-    DrawerSides.RIGHT,
+    Position.LEFT,
+    Position.RIGHT,
   ]),
 };
 
@@ -396,7 +400,7 @@ Drawer.defaultProps = {
   raw: false,
   onClickClose: x => x,
   onClickOverlay: x => x,
-  side: DrawerSides.RIGHT,
+  side: Position.RIGHT,
 };
 
 
