@@ -38,7 +38,7 @@ const styles = {
     appearance: button;
     outline: none !important;
     box-shadow: inset 0px 0px 0px 1px ${sv.azure};
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
     z-index: 1;
     width: 100%;
 

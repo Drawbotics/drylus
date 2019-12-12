@@ -19,7 +19,7 @@ const styles = {
     background: ${sv.neutral};
     border-radius: ${TRIGGER_DIMENSIONS};
     width: calc(${TRIGGER_DIMENSIONS} * 2 + ${TRIGGER_OFFSET});
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
     overflow: hidden;
 
     &:hover {

@@ -18,6 +18,7 @@ import {
   NotAllowed,
   Failed,
 } from '../utils/illustrations';
+import { CustomPropTypes } from '../utils';
 
 
 const styles = {
@@ -71,10 +72,13 @@ const EmptyState = ({
   const {
     description,
     title,
-    actions,
+    actions: _actions,
     style,
-    variation,  
+    variation,
+    children,
   } = useResponsiveProps(rest, responsive);
+
+  const actions = children != null ? React.Children.map(children, x => x) : _actions;
 
   return (
     <div style={style} className={styles.root}>
@@ -99,7 +103,7 @@ const EmptyState = ({
           }
         }}
         {do {
-          if (actions) {
+          if (actions != null) {
             <FlexItem>
               <Margin size={{ top: Size.DEFAULT }}>
                 <Flex>
@@ -128,8 +132,16 @@ EmptyState.propTypes = {
   /** Text shown to explain the situation */
   description: PropTypes.string,
 
-  /** Array of components, usually Buttons */
-  actions: PropTypes.arrayOf(PropTypes.node),
+  /** DEPRECATED */
+  actions: CustomPropTypes.mutuallyExclusive('children', {
+    type: PropTypes.arrayOf(PropTypes.node),
+    deprecated: true,
+  }),
+
+  /** Shown below the illustrations, usually Buttons */
+  children: CustomPropTypes.mutuallyExclusive('actions', {
+    type: PropTypes.node,
+  }),
 
   /** Used for style overrides */
   style: PropTypes.object,

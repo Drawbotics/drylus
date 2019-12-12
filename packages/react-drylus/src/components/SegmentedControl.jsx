@@ -24,7 +24,7 @@ const styles = {
     white-space: nowrap;
     color: ${sv.colorSecondary};
     margin: 0 2px;
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
     position: relative;
     display: flex;
 

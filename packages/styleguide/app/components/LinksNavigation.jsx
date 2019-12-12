@@ -66,7 +66,7 @@ const styles = {
       height: 100%;
       background: ${sv.brand};
       z-index: 2;
-      transition: ${sv.defaultTransition};
+      transition: ${sv.transitionShort};
     }
 
     @media ${sv.screenL} {

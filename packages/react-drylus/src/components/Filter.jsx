@@ -21,7 +21,7 @@ const styles = {
     border-radius: ${sv.defaultBorderRadius};
     box-shadow: inset 0 0 0 1px ${sv.neutral};
     color: ${sv.colorSecondary};
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
     display: flex;
     align-items: center;
 
@@ -69,7 +69,7 @@ const styles = {
     padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
     margin: ${sv.marginExtraSmall} 0;
     color: ${sv.blue};
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
 
     &:hover {
       cursor: pointer;
@@ -80,7 +80,7 @@ const styles = {
     display: flex;
     align-items: center;
     padding: 5px ${sv.paddingExtraSmall};
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
 
     &:hover {
       cursor: pointer;

@@ -111,7 +111,7 @@ const styles = {
     justify-content: center;
     text-align: center;
     cursor: pointer;
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
     overflow: hidden;
   `,
   iconLabel: css`
