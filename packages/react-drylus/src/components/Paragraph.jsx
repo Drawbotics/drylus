@@ -5,6 +5,8 @@ import { css, cx } from 'emotion';
 import Enum from '@drawbotics/enums';
 
 import { useResponsiveProps } from '../utils/hooks';
+import { deprecateProperty } from '../utils';
+import { Align } from '../enums';
 
 
 const styles = {
@@ -21,11 +23,14 @@ const styles = {
 };
 
 
-export const ParagraphAlign = new Enum(
+/**
+ * @deprecated and will be removed in version 6.0
+ */
+export const ParagraphAlign = deprecateProperty(new Enum(
   'CENTER',
   'LEFT',
   'RIGHT',
-);
+), 'ParagraphAlign', 'Align');
 
 
 const Paragraph = ({
@@ -41,8 +46,8 @@ const Paragraph = ({
     <p
       style={style}
       className={cx(styles.root, {
-        [styles.alignCenter]: align === ParagraphAlign.CENTER,
-        [styles.alignRight]: align === ParagraphAlign.RIGHT,
+        [styles.alignCenter]: align === Align.CENTER,
+        [styles.alignRight]: align === Align.RIGHT,
       })}>
       {children}
     </p>
@@ -58,9 +63,9 @@ Paragraph.propTypes = {
   style: PropTypes.object,
 
   align: PropTypes.oneOf([
-    ParagraphAlign.CENTER,
-    ParagraphAlign.LEFT,
-    ParagraphAlign.RIGHT,
+    Align.CENTER,
+    Align.LEFT,
+    Align.RIGHT,
   ]),
 
   /** Reponsive prop overrides */
@@ -76,7 +81,7 @@ Paragraph.propTypes = {
 
 
 Paragraph.defaultProps = {
-  align: ParagraphAlign.LEFT,
+  align: Align.LEFT,
 };
 
 
