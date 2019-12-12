@@ -16,6 +16,8 @@ import {
   Margin,
   Icon,
   Tag,
+  Align,
+  Position,
 } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
@@ -95,7 +97,14 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                 {do{
                   if (activeProps) {
                     <Prop
-                      enums={{ ...enums, Category, Size, Tier }}
+                      enums={{
+                        ...enums,
+                        Category,
+                        Size,
+                        Tier,
+                        Align,
+                        Position,
+                      }}
                       name={key}
                       prop={props[key]}
                       value={activeProps[key]}
