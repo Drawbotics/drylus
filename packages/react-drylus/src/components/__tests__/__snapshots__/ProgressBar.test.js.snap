@@ -28,7 +28,7 @@ exports[`ProgressBar matches snapshot when has a category 1`] = `
   border-radius: 8px;
 }
 
-.css-uft3dr-ProgressBar__bar-ProgressBar__indeterminate {
+.css-hsfh3p-ProgressBar__bar-ProgressBar__indeterminate {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -36,8 +36,8 @@ exports[`ProgressBar matches snapshot when has a category 1`] = `
   height: 100%;
   width: 0;
   background: #879ba6;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   overflow: hidden;
   width: 50% !important;
   -webkit-animation: animation-0 calc(0.3s * 2) ease-in-out alternate infinite;
@@ -48,7 +48,7 @@ exports[`ProgressBar matches snapshot when has a category 1`] = `
   className="css-4tsrq9-ProgressBar__root undefined"
 >
   <div
-    className="undefined css-uft3dr-ProgressBar__bar-ProgressBar__indeterminate"
+    className="undefined css-hsfh3p-ProgressBar__bar-ProgressBar__indeterminate"
     data-element="bar"
     style={
       Object {
@@ -87,7 +87,7 @@ exports[`ProgressBar matches snapshot when has a value 1`] = `
   border-radius: 8px;
 }
 
-.css-uft3dr-ProgressBar__bar-ProgressBar__indeterminate {
+.css-hsfh3p-ProgressBar__bar-ProgressBar__indeterminate {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -95,8 +95,8 @@ exports[`ProgressBar matches snapshot when has a value 1`] = `
   height: 100%;
   width: 0;
   background: #879ba6;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   overflow: hidden;
   width: 50% !important;
   -webkit-animation: animation-0 calc(0.3s * 2) ease-in-out alternate infinite;
@@ -107,7 +107,7 @@ exports[`ProgressBar matches snapshot when has a value 1`] = `
   className="css-4tsrq9-ProgressBar__root undefined"
 >
   <div
-    className="css-uft3dr-ProgressBar__bar-ProgressBar__indeterminate"
+    className="css-hsfh3p-ProgressBar__bar-ProgressBar__indeterminate"
     data-element="bar"
     style={
       Object {
@@ -146,7 +146,7 @@ exports[`ProgressBar matches snapshot when is small 1`] = `
   border-radius: 8px;
 }
 
-.css-uft3dr-ProgressBar__bar-ProgressBar__indeterminate {
+.css-hsfh3p-ProgressBar__bar-ProgressBar__indeterminate {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -154,8 +154,8 @@ exports[`ProgressBar matches snapshot when is small 1`] = `
   height: 100%;
   width: 0;
   background: #879ba6;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   overflow: hidden;
   width: 50% !important;
   -webkit-animation: animation-0 calc(0.3s * 2) ease-in-out alternate infinite;
@@ -166,7 +166,7 @@ exports[`ProgressBar matches snapshot when is small 1`] = `
   className="css-4tsrq9-ProgressBar__root undefined"
 >
   <div
-    className="css-uft3dr-ProgressBar__bar-ProgressBar__indeterminate"
+    className="css-hsfh3p-ProgressBar__bar-ProgressBar__indeterminate"
     data-element="bar"
     style={
       Object {

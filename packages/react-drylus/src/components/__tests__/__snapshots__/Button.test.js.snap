@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button matches snapshot when has a category 1`] = `
-.css-q36stu-Button__root {
+.css-j75p6z-Button__root {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -24,16 +24,16 @@ exports[`Button matches snapshot when has a category 1`] = `
   justify-content: center;
 }
 
-.css-q36stu-Button__root:hover {
+.css-j75p6z-Button__root:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-q36stu-Button__root:active {
+.css-j75p6z-Button__root:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-q36stu-Button__root:disabled {
+.css-j75p6z-Button__root:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
@@ -41,26 +41,22 @@ exports[`Button matches snapshot when has a category 1`] = `
 }
 
 <button
-  className="css-q36stu-Button__root"
+  className="css-j75p6z-Button__root"
 >
   Some content
 </button>
 `;
 
 exports[`Button matches snapshot when has a leading component 1`] = `
-.css-10jseif-Icon__root {
-  color: inherit;
-}
-
-.css-q36stu-Button__root {
+.css-j75p6z-Button__root {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -75,16 +71,16 @@ exports[`Button matches snapshot when has a leading component 1`] = `
   justify-content: center;
 }
 
-.css-q36stu-Button__root:hover {
+.css-j75p6z-Button__root:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-q36stu-Button__root:active {
+.css-j75p6z-Button__root:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-q36stu-Button__root:disabled {
+.css-j75p6z-Button__root:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
@@ -104,8 +100,12 @@ exports[`Button matches snapshot when has a leading component 1`] = `
   align-items: center;
 }
 
+.css-10jseif-Icon__root {
+  color: inherit;
+}
+
 <button
-  className="css-q36stu-Button__root"
+  className="css-j75p6z-Button__root"
 >
   <div
     className="css-1vj2iq8-Button__leading"
@@ -119,15 +119,15 @@ exports[`Button matches snapshot when has a leading component 1`] = `
 `;
 
 exports[`Button matches snapshot when has a tier 1`] = `
-.css-q36stu-Button__root {
+.css-j75p6z-Button__root {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -142,16 +142,16 @@ exports[`Button matches snapshot when has a tier 1`] = `
   justify-content: center;
 }
 
-.css-q36stu-Button__root:hover {
+.css-j75p6z-Button__root:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-q36stu-Button__root:active {
+.css-j75p6z-Button__root:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-q36stu-Button__root:disabled {
+.css-j75p6z-Button__root:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
@@ -159,26 +159,22 @@ exports[`Button matches snapshot when has a tier 1`] = `
 }
 
 <button
-  className="css-q36stu-Button__root"
+  className="css-j75p6z-Button__root"
 >
   Some content
 </button>
 `;
 
 exports[`Button matches snapshot when has a trailing component 1`] = `
-.css-10jseif-Icon__root {
-  color: inherit;
-}
-
-.css-q36stu-Button__root {
+.css-j75p6z-Button__root {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -193,16 +189,16 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
   justify-content: center;
 }
 
-.css-q36stu-Button__root:hover {
+.css-j75p6z-Button__root:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-q36stu-Button__root:active {
+.css-j75p6z-Button__root:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-q36stu-Button__root:disabled {
+.css-j75p6z-Button__root:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
@@ -222,8 +218,12 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
   align-items: center;
 }
 
+.css-10jseif-Icon__root {
+  color: inherit;
+}
+
 <button
-  className="css-q36stu-Button__root"
+  className="css-j75p6z-Button__root"
 >
   Some content
   <div
@@ -237,15 +237,15 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
 `;
 
 exports[`Button matches snapshot when is basic 1`] = `
-.css-q36stu-Button__root {
+.css-j75p6z-Button__root {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -260,16 +260,16 @@ exports[`Button matches snapshot when is basic 1`] = `
   justify-content: center;
 }
 
-.css-q36stu-Button__root:hover {
+.css-j75p6z-Button__root:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-q36stu-Button__root:active {
+.css-j75p6z-Button__root:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-q36stu-Button__root:disabled {
+.css-j75p6z-Button__root:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
@@ -277,22 +277,22 @@ exports[`Button matches snapshot when is basic 1`] = `
 }
 
 <button
-  className="css-q36stu-Button__root"
+  className="css-j75p6z-Button__root"
 >
   Some content
 </button>
 `;
 
 exports[`Button matches snapshot when is small 1`] = `
-.css-q36stu-Button__root {
+.css-j75p6z-Button__root {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -307,16 +307,16 @@ exports[`Button matches snapshot when is small 1`] = `
   justify-content: center;
 }
 
-.css-q36stu-Button__root:hover {
+.css-j75p6z-Button__root:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-q36stu-Button__root:active {
+.css-j75p6z-Button__root:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-q36stu-Button__root:disabled {
+.css-j75p6z-Button__root:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
@@ -324,7 +324,7 @@ exports[`Button matches snapshot when is small 1`] = `
 }
 
 <button
-  className="css-q36stu-Button__root"
+  className="css-j75p6z-Button__root"
 >
   Some content
 </button>

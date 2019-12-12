@@ -9,15 +9,23 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
   margin: 0;
 }
 
-.css-q36stu-Button__root {
+.css-1uy3mmc-ListTile__root {
+  display: inline-block;
+}
+
+.css-1b0ebn8-ListTile__withMargin {
+  margin-bottom: calc(8px / 2);
+}
+
+.css-j75p6z-Button__root {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -32,28 +40,20 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
   justify-content: center;
 }
 
-.css-q36stu-Button__root:hover {
+.css-j75p6z-Button__root:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-q36stu-Button__root:active {
+.css-j75p6z-Button__root:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-q36stu-Button__root:disabled {
+.css-j75p6z-Button__root:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
   box-shadow: none;
-}
-
-.css-1uy3mmc-ListTile__root {
-  display: inline-block;
-}
-
-.css-1b0ebn8-ListTile__withMargin {
-  margin-bottom: calc(8px / 2);
 }
 
 .css-pvflhp-Flex__item-Flex__equalSpan {
@@ -76,7 +76,7 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
         className="css-1b0ebn8-ListTile__withMargin"
       >
         <button
-          className="css-q36stu-Button__root"
+          className="css-j75p6z-Button__root"
         >
           Button
         </button>
@@ -192,45 +192,6 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   margin: 0;
 }
 
-.css-q36stu-Button__root {
-  background: #eaeff4;
-  color: #172b4e;
-  border-radius: 5px;
-  padding: calc(8px * 1.5) 24px;
-  outline: 0;
-  border: 0;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.css-q36stu-Button__root:hover {
-  cursor: pointer;
-  background: #d3dce6;
-}
-
-.css-q36stu-Button__root:active {
-  box-shadow: 0 1px 6px #879ba6 inset;
-}
-
-.css-q36stu-Button__root:disabled {
-  cursor: not-allowed;
-  background: #eaeff4;
-  color: rgba(135,155,166,0.5);
-  box-shadow: none;
-}
-
 .css-1uy3mmc-ListTile__root {
   display: inline-block;
 }
@@ -262,6 +223,45 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   color: #172b4e;
 }
 
+.css-j75p6z-Button__root {
+  background: #eaeff4;
+  color: #172b4e;
+  border-radius: 5px;
+  padding: calc(8px * 1.5) 24px;
+  outline: 0;
+  border: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.css-j75p6z-Button__root:hover {
+  cursor: pointer;
+  background: #d3dce6;
+}
+
+.css-j75p6z-Button__root:active {
+  box-shadow: 0 1px 6px #879ba6 inset;
+}
+
+.css-j75p6z-Button__root:disabled {
+  cursor: not-allowed;
+  background: #eaeff4;
+  color: rgba(135,155,166,0.5);
+  box-shadow: none;
+}
+
 .css-pvflhp-Flex__item-Flex__equalSpan {
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -282,7 +282,7 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
         className="css-1pdxkj1-ListTile__leading"
       >
         <button
-          className="css-q36stu-Button__root"
+          className="css-j75p6z-Button__root"
         >
           Leading
         </button>
@@ -306,7 +306,7 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
         className="css-1sf91dp-ListTile__trailing"
       >
         <button
-          className="css-q36stu-Button__root"
+          className="css-j75p6z-Button__root"
         >
           Trailing
         </button>
