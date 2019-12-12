@@ -13,7 +13,7 @@ const styles = {
     border-radius: ${sv.borderRadiusLarge};
     padding: ${sv.paddingSmall};
     box-shadow: inset 0px 0px 0px 1px ${sv.neutral};
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
 
     & [data-element="icon"] {
       transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
@@ -25,7 +25,7 @@ const styles = {
     }
 
     & [data-element="header"] > div {
-      transition: ${sv.defaultTransition};
+      transition: ${sv.transitionShort};
     }
 
     &:hover {

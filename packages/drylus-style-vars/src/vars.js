@@ -125,7 +125,8 @@ const baseTransitionTime = '0.3s';
 export const defaultTransitionTime = baseTransitionTime;
 export const transitionTimeShort = d(baseTransitionTime, 2);
 export const bouncyTransitionCurve = 'cubic-bezier(0.44, 0.11, 0.07, 1.29)';
-export const defaultTransition = `all ${transitionTimeShort} ease-in-out`;
+export const defaultTransition = `all ${defaultTransitionTime} ease-in-out`;
+export const transitionShort = `all ${transitionTimeShort} ease-in-out`;
 
 // SIZES
 export const maxWidthLarge = '1200px';

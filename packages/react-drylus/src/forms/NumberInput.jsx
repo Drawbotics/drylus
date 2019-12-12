@@ -41,7 +41,7 @@ const styles = {
     padding: 0 ${sv.paddingSmall};
     display: flex;
     align-items: center;
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
     border: none;
 
     &:hover {

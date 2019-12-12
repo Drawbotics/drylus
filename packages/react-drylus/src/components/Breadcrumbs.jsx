@@ -12,7 +12,7 @@ const styles = {
   `,
   crumb: css`
     padding: 5px;
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
     color: ${sv.colorSecondary};
     border-radius: ${sv.defaultBorderRadius};
 

@@ -12,7 +12,7 @@ const styles = {
   root: css`
     color: inherit;
     text-decoration: none;
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
 
     &:hover {
       cursor: pointer;

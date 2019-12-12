@@ -38,7 +38,7 @@ const styles = {
     height: 100%;
     width: 0;
     background: ${sv.neutralDark};
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
     overflow: hidden;
   `,
   indeterminate: css`

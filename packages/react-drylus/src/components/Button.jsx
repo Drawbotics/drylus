@@ -16,7 +16,7 @@ export const styles = {
     padding: calc(${sv.paddingExtraSmall} * 1.5) ${sv.defaultPadding};
     outline: 0;
     border: 0;
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
     display: inline-flex;
     align-items: center;
     justify-content: center;

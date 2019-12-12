@@ -39,7 +39,7 @@ const styles = {
     width: 300px;
     height: 330px;
     opacity: 0.8;
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
     margin: auto;
 
     > img {
@@ -49,7 +49,7 @@ const styles = {
       bottom: 0;
       right: 0;
       margin: auto;
-      transition: ${sv.defaultTransition};
+      transition: ${sv.transitionShort};
     }
 
     [data-element="background"] {
@@ -68,7 +68,7 @@ const styles = {
   item: css`
     text-align: center;
     filter: grayscale(80%);
-    transition: ${sv.defaultTransition};
+    transition: ${sv.transitionShort};
 
     &:hover {
       filter: grayscale(0%);
