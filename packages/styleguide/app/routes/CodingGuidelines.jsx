@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Layout,
-  LayoutPositions,
+  Position,
   Content,
 } from '@drawbotics/react-drylus';
 import { useScreenSize } from '@drawbotics/use-screen-size';
@@ -31,7 +31,7 @@ const CodingGuidelines = () => {
     <Layout
       fixed
       bar={<LinksNavigation title="Coding guidelines" routes={codingGuidelines} base='coding-guidelines' />}
-      position={LayoutPositions.LEFT}>
+      position={Position.LEFT}>
       {content}
     </Layout>
   );

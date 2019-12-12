@@ -3,8 +3,9 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import Enum from '@drawbotics/enums';
 
-import { getEnumAsClass } from '../utils';
+import { getEnumAsClass, deprecateProperty } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
+import { Position } from '../enums';
 
 
 const styles = {
@@ -80,12 +81,15 @@ const styles = {
 };
 
 
-export const LayoutPositions = new Enum(
+/**
+ * @deprecated and will be removed in version 6.0
+ */
+export const LayoutPositions = deprecateProperty(new Enum(
   'LEFT',
   'RIGHT',
   'BOTTOM',
   'TOP',
-);
+), 'LayoutPositions', 'Position');
 
 
 const Layout = ({
@@ -124,10 +128,10 @@ Layout.propTypes = {
 
   /** Determines on which side of the layout the bar component will be shown */
   position: PropTypes.oneOf([
-    LayoutPositions.LEFT,
-    LayoutPositions.RIGHT,
-    LayoutPositions.TOP,
-    LayoutPositions.BOTTOM,
+    Position.LEFT,
+    Position.RIGHT,
+    Position.TOP,
+    Position.BOTTOM,
   ]).isRequired,
 
   /** If true the component will be fixed in place, and the children will scroll independently */
