@@ -3,7 +3,7 @@ import { css, keyframes } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import {
   Drawer,
-  DrawerSides,
+  Position,
   Icon,
   Text,
   Size,
@@ -141,7 +141,7 @@ const MobileSidebar = () => {
         width="auto"
         onClickOverlay={() => toggleSidebar(false)}
         visible={sidebarOpen}
-        side={DrawerSides.LEFT}
+        side={Position.LEFT}
         asOverlay
         raw
         responsive={{
