@@ -7,7 +7,8 @@ import Enum from '@drawbotics/enums';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { useRect } from '../utils/hooks';
-import { getStyleForSide, CustomPropTypes } from '../utils';
+import { getStyleForSide, CustomPropTypes, deprecateProperty } from '../utils';
+import { Position } from '../enums';
 
 
 const styles = {
@@ -86,12 +87,15 @@ const styles = {
 };
 
 
-export const PopoverSides = new Enum(
+/**
+ * @deprecated and will be removed in version 6.0
+ */
+export const PopoverSides = deprecateProperty(new Enum(
   'TOP',
   'LEFT',
   'BOTTOM',
   'RIGHT',
-);
+), 'PopoverSides', 'Position');
 
 
 const Popover = ({
@@ -178,7 +182,7 @@ const Popover = ({
     side,
     rect,
     rectComponent: popoverRect,
-    sides: PopoverSides,
+    sides: Position,
   });
 
   return (
@@ -189,9 +193,9 @@ const Popover = ({
           <div
             ref={popoverRef}
             className={cx(styles.root, {
-              [styles.bottom]: side === PopoverSides.BOTTOM,
-              [styles.left]: side === PopoverSides.LEFT,
-              [styles.right]: side === PopoverSides.RIGHT,
+              [styles.bottom]: side === Position.BOTTOM,
+              [styles.left]: side === Position.LEFT,
+              [styles.right]: side === Position.RIGHT,
               [styles.visible]: visible,
             })}
             style={{ ...popoverStyle, ...style }}>
@@ -221,7 +225,7 @@ Popover.propTypes = {
   /** Component wrapped by the Popover */
   children: PropTypes.node.isRequired,
 
-  side: PropTypes.oneOf([ PopoverSides.LEFT, PopoverSides.RIGHT, PopoverSides.TOP, PopoverSides.BOTTOM ]),
+  side: PropTypes.oneOf([ Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM ]),
 
   /** Used for style overrides */
   style: PropTypes.object,
@@ -232,7 +236,7 @@ Popover.propTypes = {
 
 
 Popover.defaultProps = {
-  side: PopoverSides.TOP,
+  side: Position.TOP,
   style: {},
   exitOnClick: false,
 };

@@ -1,6 +1,6 @@
 import {
   Popover,
-  PopoverSides,
+  Position,
   Button,
   Category,
   Flex,
@@ -20,11 +20,11 @@ import Playground from '~/components/Playground';
 # Popover
 It can be used to wrap any component/element and display a hint when _clicked_. The component is uncontrolled and uses portals to be rendered on top of the content.
 ```jsx
-import { Popover, PopoverSides } from '@drawbotics/react-drylus';
+import { Popover } from '@drawbotics/react-drylus';
 ```
 
 __Example__
-<Playground component={Popover} enums={{ PopoverSides }}>
+<Playground component={Popover}>
 <Flex>
   <FlexItem>
     <Margin size={{ right: Size.LARGE }}>
