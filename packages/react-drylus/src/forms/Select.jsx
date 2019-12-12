@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import RoundIcon from '../components/RoundIcon';
 import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
-import Sizes from '../base/Sizes';
-import Categories from '../base/Categories';
+import Size from '../enums/Size';
+import Category from '../enums/Category';
 import Hint from './Hint';
 import { CustomPropTypes } from '../utils';
 
@@ -129,7 +129,7 @@ const Select = ({
       {do{
         if (loading) {
           <div className={styles.icon}>
-            <Spinner size={Sizes.SMALL} />
+            <Spinner size={Size.SMALL} />
           </div>
         }
         else if (onChange == null) {
@@ -139,12 +139,12 @@ const Select = ({
         }
         else if (error) {
           <div className={styles.icon}>
-            <RoundIcon name="x" size={Sizes.SMALL} category={Categories.DANGER} />
+            <RoundIcon name="x" size={Size.SMALL} category={Category.DANGER} />
           </div>
         }
         else if (value && valid) {
           <div className={styles.icon}>
-            <RoundIcon name="check" size={Sizes.SMALL} category={Categories.SUCCESS} />
+            <RoundIcon name="check" size={Size.SMALL} category={Category.SUCCESS} />
           </div>
         }
       }}
@@ -172,7 +172,7 @@ const Select = ({
       </select>
       {do{
         if (error && typeof error === 'string') {
-          <Hint category={Categories.DANGER}>{error}</Hint>
+          <Hint category={Category.DANGER}>{error}</Hint>
         }
         else if (hint) {
           <Hint>{hint}</Hint>

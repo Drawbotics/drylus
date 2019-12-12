@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
 
-import { Categories } from '../base';
+import { Category, Position } from '../enums';
 import Icon from './Icon';
-import { getEnumAsClass } from '../utils';
+import { getEnumAsClass, deprecateProperty } from '../utils';
 
 
 const styles = {
@@ -126,13 +126,15 @@ const styles = {
 };
 
 
-
-export const DropdownSides = new Enum(
+/**
+ * @deprecated and will be removed in version 6.0
+ */
+export const DropdownSides = deprecateProperty(new Enum(
   'TOP',
   'LEFT',
   'BOTTOM',
   'RIGHT',
-);
+), 'DropdownSides', 'Position');
 
 
 export const DropdownOption = ({
@@ -176,9 +178,9 @@ DropdownOption.propTypes = {
   icon: PropTypes.string,
 
   category: PropTypes.oneOf([
-    Categories.DANGER,
-    Categories.SUCCESS,
-    Categories.WARNING,
+    Category.DANGER,
+    Category.SUCCESS,
+    Category.WARNING,
   ]),
 
   /** Used for style overrides */
@@ -257,10 +259,10 @@ Dropdown.propTypes = {
   children: PropTypes.node,
 
   side: PropTypes.oneOf([
-    DropdownSides.LEFT,
-    DropdownSides.RIGHT,
-    DropdownSides.TOP,
-    DropdownSides.BOTTOM,
+    Position.LEFT,
+    Position.RIGHT,
+    Position.TOP,
+    Position.BOTTOM,
   ]),
 
   /** Used for style overrides */
@@ -268,7 +270,7 @@ Dropdown.propTypes = {
 };
 
 Dropdown.defaultProps = {
-  side: DropdownSides.BOTTOM,
+  side: Position.BOTTOM,
 };
 
 

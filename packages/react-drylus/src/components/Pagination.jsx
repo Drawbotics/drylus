@@ -5,7 +5,7 @@ import sv from '@drawbotics/drylus-style-vars';
 
 import Button from './Button';
 import Icon from './Icon';
-import { Sizes, Tiers, Categories } from '../base';
+import { Size, Tier, Category } from '../enums';
 
 
 const styles = {
@@ -61,8 +61,8 @@ const Pagination = ({
       <Button
         onClick={value === 1 ? null : () => onChange(value - 1)}
         disabled={value === 1}
-        tier={Tiers.TERTIARY}
-        size={Sizes.SMALL}
+        tier={Tier.TERTIARY}
+        size={Size.SMALL}
         leading={<Icon name="chevron-left" />}>
         {prevLabel}
       </Button>
@@ -71,17 +71,17 @@ const Pagination = ({
           {do {
             if (label === '...') {
               <Button
-                tier={Tiers.TERTIARY}
-                size={Sizes.SMALL}>
+                tier={Tier.TERTIARY}
+                size={Size.SMALL}>
                 {label}
               </Button>
             }
             else {
               <Button
                 onClick={() => onChange(label)}
-                category={value === label ? Categories.BRAND : null}
-                tier={value === label ? Tiers.PRIMARY : Tiers.TERTIARY}
-                size={Sizes.SMALL}>
+                category={value === label ? Category.BRAND : null}
+                tier={value === label ? Tier.PRIMARY : Tier.TERTIARY}
+                size={Size.SMALL}>
                 {`${label}`}
               </Button>
             }
@@ -91,8 +91,8 @@ const Pagination = ({
       <Button
         onClick={value === pages ? null : () => onChange(value + 1)}
         disabled={value === pages}
-        tier={Tiers.TERTIARY}
-        size={Sizes.SMALL}
+        tier={Tier.TERTIARY}
+        size={Size.SMALL}
         trailing={<Icon name="chevron-right" />}>
         {nextLabel}
       </Button>

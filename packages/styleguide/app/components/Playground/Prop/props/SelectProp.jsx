@@ -23,7 +23,7 @@ const SelectProp = ({
           label: 'none',
           value: '_empty',
         }, ...values.map((v) => ({
-          label: isEnum ? displayValue(v.value) : normalizeValue(v.value),
+          label: isEnum ? `${displayValue(v.value)}` : `${normalizeValue(v.value)}`,
           value: isEnum ? displayValue(v.value) : normalizeValue(v.value),
         }))]}
         onChange={(v, k) => onChange(normalizeValue(v, enums), k)} />

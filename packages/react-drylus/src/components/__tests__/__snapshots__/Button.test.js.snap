@@ -48,10 +48,6 @@ exports[`Button matches snapshot when has a category 1`] = `
 `;
 
 exports[`Button matches snapshot when has a leading component 1`] = `
-.css-10jseif-Icon__root {
-  color: inherit;
-}
-
 .css-q36stu-Button__root {
   background: #eaeff4;
   color: #172b4e;
@@ -102,6 +98,10 @@ exports[`Button matches snapshot when has a leading component 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.css-10jseif-Icon__root {
+  color: inherit;
 }
 
 <button
@@ -166,10 +166,6 @@ exports[`Button matches snapshot when has a tier 1`] = `
 `;
 
 exports[`Button matches snapshot when has a trailing component 1`] = `
-.css-10jseif-Icon__root {
-  color: inherit;
-}
-
 .css-q36stu-Button__root {
   background: #eaeff4;
   color: #172b4e;
@@ -220,6 +216,10 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.css-10jseif-Icon__root {
+  color: inherit;
 }
 
 <button

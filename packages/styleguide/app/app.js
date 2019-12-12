@@ -5,7 +5,7 @@ import {
   DrylusProvider,
   Page,
   Layout,
-  LayoutPositions,
+  Position,
 } from '@drawbotics/react-drylus';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 
@@ -28,12 +28,12 @@ const App = () => {
         <Page>
           <Layout
             bar={<Sidebar />}
-            position={LayoutPositions.LEFT}
+            position={Position.LEFT}
             fixed
             responsive={{
               L: {
                 bar: <MobileSidebar />,
-                position: LayoutPositions.TOP,
+                position: Position.TOP,
                 fixed: false,
               }
             }}>

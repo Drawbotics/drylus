@@ -3,7 +3,7 @@ import { css, cx, keyframes } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
-import { Sizes, Categories } from '../base';
+import { Size, Category } from '../enums';
 import { useResponsiveProps } from '../utils/hooks';
 
 
@@ -110,13 +110,13 @@ const Spinner = ({
         [styles.fullSizeContainer]: fullSize,
       })}>
       <div className={cx(styles.root, {
-        [styles.small]: size === Sizes.SMALL,
-        [styles.large]: size === Sizes.LARGE,
+        [styles.small]: size === Size.SMALL,
+        [styles.large]: size === Size.LARGE,
       })}>
         <svg className={styles.circle} viewBox="25 25 50 50">
           <circle className={cx(styles.path, {
-            [styles.brand]: category === Categories.BRAND,
-            [styles.info]: category === Categories.INFO,
+            [styles.brand]: category === Category.BRAND,
+            [styles.info]: category === Category.INFO,
             [styles.white]: inversed,
           })} cx="50" cy="50" r="20" fill="none" />
         </svg>
@@ -127,10 +127,10 @@ const Spinner = ({
 
 
 Spinner.propTypes = {
-  size: PropTypes.oneOf([ Sizes.DEFAULT, Sizes.SMALL, Sizes.LARGE ]),
+  size: PropTypes.oneOf([ Size.DEFAULT, Size.SMALL, Size.LARGE ]),
 
   /** For now limited to BRAND and INFO only, could have more in the future */
-  category: PropTypes.oneOf([ Categories.BRAND, Categories.INFO ]),
+  category: PropTypes.oneOf([ Category.BRAND, Category.INFO ]),
 
   /** If true, sets the color of the spinner to white (to be used against colored backgrounds) */
   inversed: PropTypes.bool,
@@ -154,7 +154,7 @@ Spinner.propTypes = {
 
 
 Spinner.defaultProps = {
-  size: Sizes.DEFAULT,
+  size: Size.DEFAULT,
 };
 
 

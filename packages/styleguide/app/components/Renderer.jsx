@@ -19,9 +19,9 @@ import {
   List,
   ListItem,
   Margin,
-  Sizes,
+  Size,
   Callout,
-  Categories,
+  Category,
 } from '@drawbotics/react-drylus';
 import { Link } from 'react-router-dom';
 
@@ -64,7 +64,7 @@ const components = {
   h2: (props) => <Title {...props} size={2} />,
   h3: (props) => <Title {...props} size={3} />,
   h4: (props) => <Title {...props} size={4} />,
-  h5: (props) => <Callout {...props} category={Categories.WARNING} />,
+  h5: (props) => <Callout {...props} category={Category.WARNING} />,
   pre: (props) => <div {...props} />,
   p: (props) => <Paragraph {...props} />,
   a: (props) => {
@@ -75,12 +75,12 @@ const components = {
   },
   li: (props) => <ListItem {...props} />,
   ol: (props) => (
-    <Margin size={{ bottom: Sizes.SMALL, top: Sizes.DEFAULT }}>
+    <Margin size={{ bottom: Size.SMALL, top: Size.DEFAULT }}>
       <List {...props} ordered />
     </Margin>
   ),
   ul: (props) => (
-    <Margin size={{ bottom: Sizes.SMALL, top: Sizes.DEFAULT }}>
+    <Margin size={{ bottom: Size.SMALL, top: Size.DEFAULT }}>
       <List {...props} />
     </Margin>
   ),
@@ -94,7 +94,7 @@ const components = {
   tbody: (props) => <TBody {...props} />,
   blockquote: (props) => (
     <div className={styles.blockquote}>
-      <Margin size={{ left: Sizes.DEFAULT }} {...props} />
+      <Margin size={{ left: Size.DEFAULT }} {...props} />
     </div>
   ),
   wrapper: ({ children, ...props }) => {

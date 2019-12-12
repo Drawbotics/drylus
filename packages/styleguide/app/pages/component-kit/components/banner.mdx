@@ -2,8 +2,8 @@ import {
   Banner,
   TextLink,
   LinkUnderlined,
-  Categories,
-  Sizes,
+  Category,
+  Size,
   Margin,
   Button,
   Icon,
@@ -20,9 +20,9 @@ import { Banner } from '@drawbotics/react-drylus';
 ```
 __Example__
 <Playground component={Banner}>
-  <Banner title="You don't have enough credits" category={Categories.DANGER}>
+  <Banner title="You don't have enough credits" category={Category.DANGER}>
     Your order will not go into production because your credit number is below 0. Click <TextLink underlined={LinkUnderlined.ALWAYS}>here</TextLink> to buy more credits.
-    <Margin size={{ top: Sizes.SMALL }}>
+    <Margin size={{ top: Size.SMALL }}>
       If you don't buy more in 10 days your order will be void.
     </Margin>
   </Banner>
@@ -32,22 +32,22 @@ For small information snippets you can leave it without title to be more concise
 
 <Playground>
   <>
-    <Margin size={{ bottom: Sizes.DEFAULT }}>
-      <Banner category={Categories.INFO}>
+    <Margin size={{ bottom: Size.DEFAULT }}>
+      <Banner category={Category.INFO}>
         A new service is now available.
       </Banner>
     </Margin>
-    <Margin size={{ bottom: Sizes.DEFAULT }}>
-      <Banner category={Categories.WARNING}>
+    <Margin size={{ bottom: Size.DEFAULT }}>
+      <Banner category={Category.WARNING}>
         You used all your correction rounds.
       </Banner>
     </Margin>
-    <Margin size={{ bottom: Sizes.DEFAULT }}>
-      <Banner category={Categories.DANGER}>
+    <Margin size={{ bottom: Size.DEFAULT }}>
+      <Banner category={Category.DANGER}>
         Your floorplans will not go into production, we need them to get started.
       </Banner>
     </Margin>
-    <Banner category={Categories.SUCCESS}>
+    <Banner category={Category.SUCCESS}>
       Congratulation, you can now send your items to production.
     </Banner>
   </>
@@ -56,7 +56,7 @@ For small information snippets you can leave it without title to be more concise
 Banners can also be given a CTA by passing a trailing component, which should always be a `Button`. CTAs are _especially_ useful in `DANGER` category banners, as they provide the user with a possible solution. Here is an example:
 <Playground>
   <Banner
-    category={Categories.DANGER}
+    category={Category.DANGER}
     trailing={<Button trailing={<Icon name="alert-triangle" />}>Buy credits</Button>}>
     Your floorplans will not go into production, we need them to get started.
   </Banner>

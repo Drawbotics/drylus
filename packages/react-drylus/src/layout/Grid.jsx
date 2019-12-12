@@ -5,7 +5,7 @@ import upperFirst from 'lodash/upperFirst';
 import camelCase from 'lodash/camelCase';
 import sv from '@drawbotics/drylus-style-vars';
 
-import Sizes from '../base/Sizes';
+import Size from '../enums/Size';
 import { useResponsiveProps } from '../utils/hooks';
 
 
@@ -121,20 +121,20 @@ Grid.propTypes = {
 
   /** Space between items above and below */
   hGutters: PropTypes.oneOf([
-    Sizes.EXTRA_SMALL,
-    Sizes.SMALL,
-    Sizes.DEFAULT,
-    Sizes.LARGE,
-    Sizes.EXTRA_LARGE,
+    Size.EXTRA_SMALL,
+    Size.SMALL,
+    Size.DEFAULT,
+    Size.LARGE,
+    Size.EXTRA_LARGE,
   ]),
 
   /** Space between items left and right */
   vGutters: PropTypes.oneOf([
-    Sizes.EXTRA_SMALL,
-    Sizes.SMALL,
-    Sizes.DEFAULT,
-    Sizes.LARGE,
-    Sizes.EXTRA_LARGE,
+    Size.EXTRA_SMALL,
+    Size.SMALL,
+    Size.DEFAULT,
+    Size.LARGE,
+    Size.EXTRA_LARGE,
   ]),
 
   /** For custom overrides */

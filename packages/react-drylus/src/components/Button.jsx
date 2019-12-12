@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 
-import { Categories, Sizes, Tiers } from '../base';
+import { Category, Size, Tier } from '../enums';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 
@@ -299,10 +299,10 @@ const Button = ({
       className={cx(styles.root, {
         [styles[getEnumAsClass(size)]]: size,
         [styles.round]: round,
-        [styles.roundSmall]: round && size === Sizes.SMALL,
-        [styles[getEnumAsClass(category)]]: category && tier === Tiers.PRIMARY,
+        [styles.roundSmall]: round && size === Size.SMALL,
+        [styles[getEnumAsClass(category)]]: category && tier === Tier.PRIMARY,
         [styles[getEnumAsClass(tier)]]: tier,
-        [styles[`${category?.description?.toLowerCase()}Alt`]]: category && tier !== Tiers.PRIMARY,
+        [styles[`${category?.description?.toLowerCase()}Alt`]]: category && tier !== Tier.PRIMARY,
         [styles.fullWidth]: fullWidth,
       })}
       disabled={disabled}>
@@ -337,24 +337,24 @@ Button.propTypes = {
   onClick: PropTypes.func,
 
   category: PropTypes.oneOf([
-    Categories.BRAND,
-    Categories.DANGER,
-    Categories.SUCCESS,
-    Categories.INFO,
-    Categories.WARNING,
-    Categories.PRIMARY,
+    Category.BRAND,
+    Category.DANGER,
+    Category.SUCCESS,
+    Category.INFO,
+    Category.WARNING,
+    Category.PRIMARY,
   ]),
 
   size: PropTypes.oneOf([
-    Sizes.SMALL,
-    Sizes.DEFAULT,
-    Sizes.LARGE,
+    Size.SMALL,
+    Size.DEFAULT,
+    Size.LARGE,
   ]),
 
   tier: PropTypes.oneOf([
-    Tiers.PRIMARY,
-    Tiers.SECONDARY,
-    Tiers.TERTIARY,
+    Tier.PRIMARY,
+    Tier.SECONDARY,
+    Tier.TERTIARY,
   ]),
 
   /** Shown in front of the button text, can be a Spinner or Icon */
@@ -382,8 +382,8 @@ Button.propTypes = {
 
 
 Button.defaultProps = {
-  size: Sizes.DEFAULT,
-  tier: Tiers.PRIMARY,
+  size: Size.DEFAULT,
+  tier: Tier.PRIMARY,
 };
 
 

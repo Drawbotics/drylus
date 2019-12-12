@@ -2,7 +2,7 @@ import {
   Tile,
   Grid,
   GridItem,
-  Sizes,
+  Size,
 } from '@drawbotics/react-drylus';
 import sv from '@drawbotics/drylus-style-vars';
 
@@ -42,7 +42,7 @@ export const CustomTile = () => {
       padding: '20px',
       margin: '-24px',
     }}>
-    <Grid columns={3} hGutters={Sizes.DEFAULT} vGutters={Sizes.DEFAULT}>
+    <Grid columns={3} hGutters={Size.DEFAULT} vGutters={Size.DEFAULT}>
       {[ ...Array(9) ].map((_, i) => (
         <GridItem key={i}>
           <CustomTile />

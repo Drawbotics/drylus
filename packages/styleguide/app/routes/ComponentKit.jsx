@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Layout,
-  LayoutPositions,
+  Position,
   Content,
 } from '@drawbotics/react-drylus';
 import { useScreenSize } from '@drawbotics/use-screen-size';
@@ -31,7 +31,7 @@ const ComponentKit = () => {
     <Layout
       fixed
       bar={<LinksNavigation title="Component kit" routes={componentKit} base='component-kit' />}
-      position={LayoutPositions.LEFT}>
+      position={Position.LEFT}>
       {content}
     </Layout>
   );

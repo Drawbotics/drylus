@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BigCheckbox, Flex, FlexItem, Sizes, Margin } from '@drawbotics/react-drylus';
+import { BigCheckbox, Flex, FlexItem, Size, Margin } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -17,7 +17,7 @@ export const Wrapper = () => {
     <Playground component={BigCheckbox}>
       <Flex>
         <FlexItem flex>
-          <Margin size={{ right: Sizes.DEFAULT }}>
+          <Margin size={{ right: Size.DEFAULT }}>
             <BigCheckbox
               label="Title"
               value={values.first}
@@ -27,7 +27,7 @@ export const Wrapper = () => {
           </Margin>
         </FlexItem>
         <FlexItem flex>
-          <Margin size={{ right: Sizes.DEFAULT }}>
+          <Margin size={{ right: Size.DEFAULT }}>
             <BigCheckbox
               label="Another title"
               value={values.second}

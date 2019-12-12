@@ -3,11 +3,11 @@ import { css, cx } from 'emotion';
 import {
   Grid,
   GridItem,
-  Sizes,
+  Size,
   Tooltip,
   Icon,
   useAlert,
-  Categories,
+  Category,
 } from '@drawbotics/react-drylus';
 
 import {
@@ -84,7 +84,7 @@ export const Palette = ({
   const copyToClipboard = async (name) => {
     const target = document.querySelector(`[data-element="${name}"]`);
     await navigator.clipboard.writeText(target.value);
-    showAlert({ category: Categories.INFO, text: `Color code ${target.value} copied to clipboard!` });
+    showAlert({ category: Category.INFO, text: `Color code ${target.value} copied to clipboard!` });
   };
   return (
     <div className={styles.palette}>
@@ -114,8 +114,8 @@ export const Colors = ({ palettes }) => {
   return (
     <Grid
       columns={3}
-      hGutters={Sizes.DEFAULT}
-      vGutters={Sizes.DEFAULT}
+      hGutters={Size.DEFAULT}
+      vGutters={Size.DEFAULT}
       responsive={{
         L: {
           columns: 2,

@@ -1,7 +1,8 @@
 import React from 'react';
 import { create } from 'react-test-renderer';
 
-import Title, { TitleAlign } from '../Title';
+import Title from '../Title';
+import { Align } from '../../enums';
 
 
 describe('Title', () => {
@@ -52,7 +53,7 @@ describe('Title', () => {
 
     it('is aligned to the right', () => {
       const tree = create(
-        <Title align={TitleAlign.RIGHT}>
+        <Title align={Align.RIGHT}>
          Some content
         </Title>
       ).toJSON();
@@ -61,7 +62,7 @@ describe('Title', () => {
 
     it('is center aligned', () => {
       const tree = create(
-        <Title align={TitleAlign.CENTER}>
+        <Title align={Align.CENTER}>
          Some content
         </Title>
       ).toJSON();

@@ -1,4 +1,4 @@
-import { Layout, LayoutPositions } from '@drawbotics/react-drylus';
+import { Layout, Position } from '@drawbotics/react-drylus';
 
 import Playground, { PropsTable } from '~/components/Playground';
 
@@ -25,7 +25,7 @@ export const BottomBar = () => {
 # Layout component
 Usage
 ```jsx
-import { Layout, LayoutPositions } from '@drawbotics/react-drylus';
+import { Layout } from '@drawbotics/react-drylus';
 ```
 
 __Examples__
@@ -35,8 +35,8 @@ Example with fixed navbar and standard bottom bar
 
 <Playground>
   <div style={{ height: 400 }}>
-    <Layout bar={<Navbar />} position={LayoutPositions.TOP} fixed>
-      <Layout bar={<BottomBar />} position={LayoutPositions.BOTTOM}>
+    <Layout bar={<Navbar />} position={Position.TOP} fixed>
+      <Layout bar={<BottomBar />} position={Position.BOTTOM}>
         <div style={{ background: 'green', height: 500, padding: 20 }}>Content</div>
       </Layout>
     </Layout>
@@ -47,8 +47,8 @@ Example like Backoffice layout
 
 <Playground>
   <div style={{ height: 400 }}>
-    <Layout bar={<Sidebar />} position={LayoutPositions.LEFT} fixed>
-      <Layout bar={<Navbar />} position={LayoutPositions.TOP}>
+    <Layout bar={<Sidebar />} position={Position.LEFT} fixed>
+      <Layout bar={<Navbar />} position={Position.TOP}>
         <div style={{ background: 'green', height: 500, padding: 20 }}>Content</div>
       </Layout>
     </Layout>
@@ -60,9 +60,9 @@ Example with sidebar and floating bottom bar
 
 <Playground>
   <div style={{ height: 400 }}>
-    <Layout bar={<BottomBar />} position={LayoutPositions.BOTTOM} fixed>
-      <Layout bar={<Navbar />} position={LayoutPositions.TOP}>
-        <Layout bar={<Sidebar width={400} />} position={LayoutPositions.RIGHT}>
+    <Layout bar={<BottomBar />} position={Position.BOTTOM} fixed>
+      <Layout bar={<Navbar />} position={Position.TOP}>
+        <Layout bar={<Sidebar width={400} />} position={Position.RIGHT}>
           <div style={{ background: 'green', height: 500, padding: 20 }}>Content</div>
         </Layout>
       </Layout>

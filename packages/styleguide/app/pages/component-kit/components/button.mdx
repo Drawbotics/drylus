@@ -1,8 +1,8 @@
 import {
   Button,
-  Tiers,
-  Sizes,
-  Categories,
+  Tier,
+  Size,
+  Category,
   Icon,
   Spinner,
   Flex,
@@ -30,37 +30,37 @@ You can also have buttons with just the icon, or just the spinner; for this don'
 <Playground>
   <Flex justify={FlexJustify.START}>
     <FlexItem>
-      <Margin size={{ right: Sizes.SMALL }}>
-        <Button leading={<Icon name="command" />} tier={Tiers.TERTIARY} />
+      <Margin size={{ right: Size.SMALL }}>
+        <Button leading={<Icon name="command" />} tier={Tier.TERTIARY} />
       </Margin>
     </FlexItem>
     <FlexItem>
-      <Margin size={{ right: Sizes.SMALL }}>
-        <Button tier={Tiers.TERTIARY} leading={<Spinner category={Categories.INFO} size={Sizes.SMALL} />} />
+      <Margin size={{ right: Size.SMALL }}>
+        <Button tier={Tier.TERTIARY} leading={<Spinner category={Category.INFO} size={Size.SMALL} />} />
       </Margin>
     </FlexItem>
     <FlexItem>
-      <Margin size={{ right: Sizes.SMALL }}>
-        <Button leading={<Icon name="command" />} size={Sizes.SMALL} />
+      <Margin size={{ right: Size.SMALL }}>
+        <Button leading={<Icon name="command" />} size={Size.SMALL} />
       </Margin>
     </FlexItem>
     <FlexItem>
-      <Margin size={{ right: Sizes.SMALL }}>
-        <Button leading={<Icon name="command" />} size={Sizes.SMALL}>Small with text</Button>
+      <Margin size={{ right: Size.SMALL }}>
+        <Button leading={<Icon name="command" />} size={Size.SMALL}>Small with text</Button>
       </Margin>
     </FlexItem>
     <FlexItem>
-      <Margin size={{ right: Sizes.SMALL }}>
-        <Button leading={<Icon name="command" />} tier={Tiers.SECONDARY} />
+      <Margin size={{ right: Size.SMALL }}>
+        <Button leading={<Icon name="command" />} tier={Tier.SECONDARY} />
       </Margin>
     </FlexItem>
     <FlexItem>
-      <Margin size={{ right: Sizes.SMALL }}>
-        <Button leading={<Icon name="command" />} category={Categories.BRAND}>Brand with text</Button>
+      <Margin size={{ right: Size.SMALL }}>
+        <Button leading={<Icon name="command" />} category={Category.BRAND}>Brand with text</Button>
       </Margin>
     </FlexItem>
     <FlexItem>
-      <Button trailing={<Spinner size={Sizes.SMALL} inversed />} category={Categories.SUCCESS}>Text with spinner</Button>
+      <Button trailing={<Spinner size={Size.SMALL} inversed />} category={Category.SUCCESS}>Text with spinner</Button>
     </FlexItem>
   </Flex>
 </Playground>

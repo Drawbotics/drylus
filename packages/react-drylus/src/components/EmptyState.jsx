@@ -9,7 +9,7 @@ import Margin from '../layout/Margin';
 import Title from './Title';
 import Text from './Text';
 import Paragraph from './Paragraph';
-import { Sizes, Tiers } from '../base';
+import { Size, Tier } from '../enums';
 import { useResponsiveProps } from '../utils/hooks';
 import {
   Empty,
@@ -96,7 +96,7 @@ const EmptyState = ({
             <FlexItem>
               <div className={styles.description}>
                 <Paragraph>
-                  <Text tier={Tiers.SECONDARY}>{description}</Text>
+                  <Text tier={Tier.SECONDARY}>{description}</Text>
                 </Paragraph>
               </div>
             </FlexItem>
@@ -105,11 +105,11 @@ const EmptyState = ({
         {do {
           if (actions != null) {
             <FlexItem>
-              <Margin size={{ top: Sizes.DEFAULT }}>
+              <Margin size={{ top: Size.DEFAULT }}>
                 <Flex>
                   {actions.map((action, i) => (
                     <FlexItem key={i}>
-                      <Margin size={{ left: i === 0 ? null : Sizes.SMALL }}>
+                      <Margin size={{ left: i === 0 ? null : Size.SMALL }}>
                         {action}
                       </Margin>
                     </FlexItem>

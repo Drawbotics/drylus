@@ -7,7 +7,7 @@ import { InputWithRef } from './Input';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
-import Sizes from '../base/Sizes';
+import Size from '../enums/Size';
 
 
 const styles = {
@@ -69,7 +69,7 @@ const SearchInput = ({
       <InputWithRef
         prefix={
           <Button
-            leading={isLoading ? <Spinner size={Sizes.SMALL} /> : <Icon name="search" />}
+            leading={isLoading ? <Spinner size={Size.SMALL} /> : <Icon name="search" />}
             onClick={() => inputRef.current.focus()} />
         }
         value={value}

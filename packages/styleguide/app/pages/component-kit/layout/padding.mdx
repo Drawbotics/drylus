@@ -1,4 +1,4 @@
-import { Padding, Sizes } from '@drawbotics/react-drylus';
+import { Padding, Size } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -17,7 +17,7 @@ __Example__
   </div>
 </Playground>
 
-You can also pass an object to specify the padding on each side. You can pass an object containing each side definition (`left`, `right`, `top`, `bottom`) or each direction (`vertical`, `horizontal`). Each key can contain a value of `Sizes`.
+You can also pass an object to specify the padding on each side. You can pass an object containing each side definition (`left`, `right`, `top`, `bottom`) or each direction (`vertical`, `horizontal`). Each key can contain a value of `Size`.
 
 As you can see, the paddings are not combined and each element keeps its padding as expected.
 
@@ -25,26 +25,26 @@ As you can see, the paddings are not combined and each element keeps its padding
   <>
     <Padding
       size={{
-        top: Sizes.LARGE,
-        bottom: Sizes.EXTRA_SMALL,
-        left: Sizes.DEFAULT,
+        top: Size.LARGE,
+        bottom: Size.EXTRA_SMALL,
+        left: Size.DEFAULT,
       }}
       style={{ border: '1px solid red' }}>
       <div style={{ background: 'green', height: 100, width: 100 }} />
     </Padding>
     <Padding
       size={{
-        top: Sizes.LARGE,
-        bottom: Sizes.EXTRA_SMALL,
-        left: Sizes.MASSIVE,
+        top: Size.LARGE,
+        bottom: Size.EXTRA_SMALL,
+        left: Size.MASSIVE,
       }}
       style={{ border: '1px solid red' }}>
       <div style={{ background: 'green', height: 100, width: 100 }} />
     </Padding>
     <Padding
       size={{
-        vertical: Sizes.SMALL,
-        horizontal: Sizes.LARGE,
+        vertical: Size.SMALL,
+        horizontal: Size.LARGE,
       }}
       style={{ border: '1px solid red' }}>
       <div style={{ background: 'green', height: 100, width: 100 }} />

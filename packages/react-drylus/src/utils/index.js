@@ -1,7 +1,7 @@
 import camelCase from 'lodash/camelCase';
 import PropTypes from 'prop-types';
 
-import Categories from '../base/Categories';
+import Category from '../enums/Category';
 
 
 export function getEnumAsClass(enumVal) {
@@ -11,11 +11,11 @@ export function getEnumAsClass(enumVal) {
 
 export function getIconForCategory(category) {
   switch (category) {
-    case Categories.DANGER:
+    case Category.DANGER:
       return 'alert-circle';
-    case Categories.SUCCESS:
+    case Category.SUCCESS:
       return 'check-circle';
-    case Categories.WARNING:
+    case Category.WARNING:
       return 'alert-triangle';
     default:
       return 'info';
@@ -84,6 +84,19 @@ export const CustomPropTypes = {
       return PropTypes.checkPropTypes(propTypes, props, 'options', componentName);
     };
   },
+};
+
+
+export const deprecateProperty = (target, oldName, newName) => {
+  if (process.env.NODE_ENV === 'production') {
+    return target;
+  }
+  return new Proxy(target, {
+    get(target, key) {
+      console.warn(`${oldName} is deprecated. Use ${newName} instead.`);
+      return Reflect.get(...arguments);
+    }
+  });
 };
 
 

@@ -9,7 +9,7 @@ import {
   FlexItem,
   FlexJustify,
   InputGroup,
-  Sizes,
+  Size,
   Toggle,
   Separator,
 } from '@drawbotics/react-drylus';
@@ -23,15 +23,15 @@ export const PlaceholderExample = () => {
   const [ isPlaceholder, setIsPlaceholder ] = useState(false);
   return (
     <Fragment>
-      <Margin size={{ bottom: Sizes.DEFAULT }}>
+      <Margin size={{ bottom: Size.DEFAULT }}>
         <Toggle value={isPlaceholder} onChange={setIsPlaceholder} />
       </Margin>
-      <Margin size={{ bottom: Sizes.DEFAULT }}>
+      <Margin size={{ bottom: Size.DEFAULT }}>
         <Separator />
       </Margin>
       <Flex>
         <FlexItem flex>
-          <Margin size={{ right: Sizes.SMALL }}>
+          <Margin size={{ right: Size.SMALL }}>
             <FormGroup
               input={
                 <Input
@@ -55,7 +55,7 @@ export const PlaceholderExample = () => {
             label={<Label isPlaceholder={isPlaceholder}>My input label</Label>}/>
         </FlexItem>
       </Flex>
-      <Margin size={{ vertical: Sizes.SMALL }}>
+      <Margin size={{ vertical: Size.SMALL }}>
         <Input
           isPlaceholder={isPlaceholder}
           placeholder="Something..."

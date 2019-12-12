@@ -9,7 +9,7 @@ import {
   TransitionGroup,
 } from 'react-transition-group';
 
-import { Categories, Sizes, Tiers } from '../base';
+import { Category, Size, Tier } from '../enums';
 import {
   Margin,
   Flex,
@@ -124,11 +124,11 @@ const styles = {
 
 function _getIconForCategory(category) {
   switch (category) {
-    case Categories.DANGER:
+    case Category.DANGER:
       return 'alert-circle';
-    case Categories.SUCCESS:
+    case Category.SUCCESS:
       return 'check-circle';
-    case Categories.WARNING:
+    case Category.WARNING:
       return 'alert-triangle';
     default:
       return 'info';
@@ -146,7 +146,7 @@ export const Alert = ({
   const icon = _getIconForCategory(category);
 
   useEffect(() => {
-    if (category !== Categories.DANGER) {
+    if (category !== Category.DANGER) {
       setTimeout(() => onClickDismiss(id), hideDelay);
     }
   }, []);
@@ -158,23 +158,23 @@ export const Alert = ({
       })}>
       <Flex justify={FlexJustify.START} align={FlexAlign.START}>
         <FlexItem>
-          <Margin size={{ right: Sizes.SMALL, top: Sizes.EXTRA_SMALL }}>
+          <Margin size={{ right: Size.SMALL, top: Size.EXTRA_SMALL }}>
             <div data-element="icon">
               <Icon name={icon} />
             </div>
           </Margin>
         </FlexItem>
         <FlexItem flex>
-          <Margin size={{ top: Sizes.EXTRA_SMALL, bottom: Sizes.EXTRA_SMALL }}>
+          <Margin size={{ top: Size.EXTRA_SMALL, bottom: Size.EXTRA_SMALL }}>
             <span data-element="text">{text}</span>
           </Margin>
         </FlexItem>
         <FlexItem>
-          <Margin size={{ left: Sizes.DEFAULT }}>
+          <Margin size={{ left: Size.DEFAULT }}>
             <Button
-              size={Sizes.SMALL}
+              size={Size.SMALL}
               onClick={() => onClickDismiss(id)}
-              tier={Tiers.TERTIARY}
+              tier={Tier.TERTIARY}
               leading={<Icon name="x" />} />
           </Margin>
         </FlexItem>
@@ -189,10 +189,10 @@ Alert.propTypes = {
   text: PropTypes.string.isRequired,
 
   category: PropTypes.oneOf([
-    Categories.DANGER,
-    Categories.SUCCESS,
-    Categories.INFO,
-    Categories.WARNING,
+    Category.DANGER,
+    Category.SUCCESS,
+    Category.INFO,
+    Category.WARNING,
   ]).isRequired,
 
   /** Triggered when the dismiss button is clicked */
@@ -284,7 +284,7 @@ const AlertsProvider = ({ children }) => {
                   exit: styles.alertExit,
                   exitActive: styles.alertExitActive,
                 }}>
-                <Margin size={{ top: Sizes.SMALL }}>
+                <Margin size={{ top: Size.SMALL }}>
                   <Alert onClickDismiss={(id) => hideAlert(id, alerts)} {...alert} />
                 </Margin>
               </CSSTransition>

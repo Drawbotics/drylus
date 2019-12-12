@@ -97,7 +97,7 @@ Everytime `PropTypes.oneOf` is used, your component must export an *enum* with t
     import Enum from 'Enum';
     
     
-    export const Categories = Enum('PRIMARY', 'SECONDARY');
+    export const Category = Enum('PRIMARY', 'SECONDARY');
     
     
     const Component = ({ category }) => {
@@ -105,7 +105,7 @@ Everytime `PropTypes.oneOf` is used, your component must export an *enum* with t
     };
     
     Component.propTypes = {
-      category: PropTypes.oneOf(Object.values(Categories)),
+      category: PropTypes.oneOf(Object.values(Category)),
     };
 
 Always leave only one blank line between the component declaration and the `PropTypes` declaration.

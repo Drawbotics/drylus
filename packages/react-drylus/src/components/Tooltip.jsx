@@ -7,7 +7,8 @@ import Enum from '@drawbotics/enums';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { useRect } from '../utils/hooks';
-import { getStyleForSide, CustomPropTypes } from '../utils';
+import { getStyleForSide, CustomPropTypes, deprecateProperty } from '../utils';
+import { Position } from '../enums';
 
 
 const styles = {
@@ -84,12 +85,15 @@ const styles = {
 };
 
 
-export const TooltipSides = new Enum(
+/**
+ * @deprecated and will be removed in version 6.0
+ */
+export const TooltipSides = deprecateProperty(new Enum(
   'TOP',
   'LEFT',
   'BOTTOM',
   'RIGHT',
-);
+), 'TooltipSides', 'Position');
 
 
 const Tooltip = ({
@@ -172,7 +176,7 @@ const Tooltip = ({
     side,
     rect,
     rectComponent: tooltipRect,
-    sides: TooltipSides,
+    sides: Position,
   });
 
   return (
@@ -183,9 +187,9 @@ const Tooltip = ({
           <div
             ref={tooltipRef}
             className={cx(styles.root, {
-              [styles.bottom]: side === TooltipSides.BOTTOM,
-              [styles.left]: side === TooltipSides.LEFT,
-              [styles.right]: side === TooltipSides.RIGHT,
+              [styles.bottom]: side === Position.BOTTOM,
+              [styles.left]: side === Position.LEFT,
+              [styles.right]: side === Position.RIGHT,
               [styles.visible]: visible,
             })}
             style={{ ...tooltipStyle, ...style }}>
@@ -215,7 +219,7 @@ Tooltip.propTypes = {
   /** Component wrapped by the tooltip */
   children: PropTypes.node.isRequired,
 
-  side: PropTypes.oneOf([ TooltipSides.LEFT, TooltipSides.RIGHT, TooltipSides.TOP, TooltipSides.BOTTOM ]),
+  side: PropTypes.oneOf([ Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM ]),
 
   /** Used for style overrides */
   style: PropTypes.object,
@@ -223,7 +227,7 @@ Tooltip.propTypes = {
 
 
 Tooltip.defaultProps = {
-  side: TooltipSides.TOP,
+  side: Position.TOP,
 
   style: {},
 };

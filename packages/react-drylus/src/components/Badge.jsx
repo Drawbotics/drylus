@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
-import Categories from '../base/Categories';
+import Category from '../enums/Category';
 import { getEnumAsClass } from '../utils';
 
 
@@ -63,11 +63,11 @@ Badge.propTypes = {
 
   /** Determines the background color of the badge */
   category: PropTypes.oneOf([
-    Categories.BRAND,
-    Categories.SUCCESS,
-    Categories.INFO,
-    Categories.WARNING,
-    Categories.DANGER,
+    Category.BRAND,
+    Category.SUCCESS,
+    Category.INFO,
+    Category.WARNING,
+    Category.DANGER,
   ]),
 
   /** Used for style overrides */

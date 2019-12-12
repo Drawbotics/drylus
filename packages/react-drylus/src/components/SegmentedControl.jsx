@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 
-import { Categories, Sizes } from '../base';
+import { Category, Size } from '../enums';
 import Badge from './Badge';
 import Spinner from './Spinner';
 import { CustomPropTypes } from '../utils';
@@ -104,12 +104,12 @@ const SegmentedControl = ({
           {do{
             if (option.loading === true) {
               <div data-element="extra" className={styles.extra}>
-                <Spinner size={Sizes.SMALL} category={Categories.BRAND} />
+                <Spinner size={Size.SMALL} category={Category.BRAND} />
               </div>
             }
             else if (option.bullet != null) {
               <div data-element="extra" className={styles.extra}>
-                <Badge category={Categories.BRAND} value={option.bullet} max={99} />
+                <Badge category={Category.BRAND} value={option.bullet} max={99} />
               </div>
             }
           }}

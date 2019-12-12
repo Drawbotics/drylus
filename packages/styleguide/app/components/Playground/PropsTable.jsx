@@ -5,17 +5,18 @@ import {
   THead,
   TCell,
   TRow,
-  Sizes,
-  Tiers,
-  Categories,
+  Size,
+  Tier,
+  Category,
   Tooltip,
-  TooltipSides,
   Flex,
   FlexItem,
   FlexJustify,
   Margin,
   Icon,
   Tag,
+  Align,
+  Position,
 } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
@@ -59,13 +60,13 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
               <TCell>
                 {do {
                   if (props[key].type.value) {
-                    <Tooltip content={<PropsInfo props={props[key].type.value} />} side={TooltipSides.RIGHT}>
+                    <Tooltip content={<PropsInfo props={props[key].type.value} />} side={Position.RIGHT}>
                       <Flex justify={FlexJustify.START}>
                         <FlexItem>
                           {props[key].type.name}
                         </FlexItem>
                         <FlexItem>
-                          <Margin size={{ left: Sizes.EXTRA_SMALL }}>
+                          <Margin size={{ left: Size.EXTRA_SMALL }}>
                             <span style={{ color: sv.colorSecondary }}><Icon name="info" /></span>
                           </Margin>
                         </FlexItem>
@@ -83,7 +84,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                 {do{
                   if (props[key].description) {
                     const val = props[key].description;
-                    val === 'DEPRECATED' ? <Tag category={Categories.WARNING} inversed>{val}</Tag> : val;
+                    val === 'DEPRECATED' ? <Tag category={Category.WARNING} inversed>{val}</Tag> : val;
                   }
                   else if (props[key].type.name === 'enum') {
                     const values = props[key].type.value.map((v) => v.value.replace(/'/g, ''));
@@ -95,7 +96,14 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                 {do{
                   if (activeProps) {
                     <Prop
-                      enums={{ ...enums, Categories, Sizes, Tiers }}
+                      enums={{
+                        ...enums,
+                        Category,
+                        Size,
+                        Tier,
+                        Align,
+                        Position,
+                      }}
                       name={key}
                       prop={props[key]}
                       value={activeProps[key]}

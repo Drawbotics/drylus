@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Hint from './Hint';
 import Icon from '../components/Icon';
 import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
-import { Sizes, Categories } from '../base';
+import { Size, Category } from '../enums';
 import { getEnumAsClass } from '../utils';
 
 
@@ -218,7 +218,7 @@ const Checkbox = ({
       </label>
       {do{
         if (error && typeof error === 'string') {
-          <Hint category={Categories.DANGER}>{error}</Hint>
+          <Hint category={Category.DANGER}>{error}</Hint>
         }
       }}
     </div>
@@ -246,7 +246,7 @@ Checkbox.propTypes = {
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
   /** Size of the checkbox. Can be large or default */
-  size: PropTypes.oneOf([Sizes.LARGE, Sizes.DEFAULT]),
+  size: PropTypes.oneOf([Size.LARGE, Size.DEFAULT]),
 
   /** Used for style overrides */
   style: PropTypes.object,
@@ -257,7 +257,7 @@ Checkbox.propTypes = {
 
 
 Checkbox.defaultProps = {
-  size: Sizes.DEFAULT,
+  size: Size.DEFAULT,
 };
 
 

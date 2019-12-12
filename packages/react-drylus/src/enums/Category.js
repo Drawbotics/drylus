@@ -1,7 +1,7 @@
 import Enum from '@drawbotics/enums';
 
 
-const Categories = new Enum(
+const Category = new Enum(
   'BRAND',
   'SUCCESS',
   'INFO',
@@ -11,4 +11,4 @@ const Categories = new Enum(
 );
 
 
-export default Categories;
+export default Category;

@@ -7,9 +7,9 @@ import {
   Flex,
   FlexItem,
   FlexJustify,
-  Sizes,
-  Tiers,
-  Categories,
+  Size,
+  Tier,
+  Category,
   Margin,
 } from '@drawbotics/react-drylus';
 
@@ -80,12 +80,12 @@ As you can see when the window height is smaller than the content, the modal is 
     <Modal visible={false} title="Modal title" footer={
       <Flex justify={FlexJustify.END}>
         <FlexItem>
-          <Margin size={{ right: Sizes.EXTRA_SMALL }}>
-            <Button tier={Tiers.TERTIARY}>Secondary action</Button>
+          <Margin size={{ right: Size.EXTRA_SMALL }}>
+            <Button tier={Tier.TERTIARY}>Secondary action</Button>
           </Margin>
         </FlexItem>
         <FlexItem>
-          <Button category={Categories.BRAND}>Main action</Button>
+          <Button category={Category.BRAND}>Main action</Button>
         </FlexItem>
       </Flex>
     }>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 
-import { Tiers, Sizes, Categories } from '../base';
+import { Tier, Size, Category } from '../enums';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 
@@ -90,17 +90,17 @@ const Text = ({
     <span className={cx(styles.root, {
       [styles.bold]: bold,
       [styles.light]: light,
-      [styles.primary]: tier === Tiers.PRIMARY && ! disabled && ! inversed,
-      [styles.secondary]: tier === Tiers.SECONDARY && ! disabled && ! inversed,
-      [styles.tertiary]: tier === Tiers.TERTIARY && ! disabled && ! inversed,
+      [styles.primary]: tier === Tier.PRIMARY && ! disabled && ! inversed,
+      [styles.secondary]: tier === Tier.SECONDARY && ! disabled && ! inversed,
+      [styles.tertiary]: tier === Tier.TERTIARY && ! disabled && ! inversed,
       [styles.disabled]: disabled && ! inversed,
-      [styles.primaryInversed]: tier === Tiers.PRIMARY && ! disabled && inversed,
-      [styles.secondaryInversed]: tier === Tiers.SECONDARY && ! disabled && inversed,
-      [styles.tertiaryInversed]: tier === Tiers.TERTIARY && ! disabled && inversed,
+      [styles.primaryInversed]: tier === Tier.PRIMARY && ! disabled && inversed,
+      [styles.secondaryInversed]: tier === Tier.SECONDARY && ! disabled && inversed,
+      [styles.tertiaryInversed]: tier === Tier.TERTIARY && ! disabled && inversed,
       [styles.disabledInversed]: disabled && inversed,
-      [styles.small]: size === Sizes.SMALL,
-      [styles.default]: size === Sizes.DEFAULT,
-      [styles.large]: size === Sizes.LARGE,
+      [styles.small]: size === Size.SMALL,
+      [styles.default]: size === Size.DEFAULT,
+      [styles.large]: size === Size.LARGE,
       [styles[getEnumAsClass(category)]]: category && ! disabled && ! inversed,
     })} style={style}>
       {children}
@@ -118,9 +118,9 @@ Text.propTypes = {
   /** The opposite of bold, will set the font weight to 300 (useful with `inversed` on dark backgrounds) */
   light: PropTypes.bool,
 
-  size: PropTypes.oneOf([Sizes.SMALL, Sizes.DEFAULT, Sizes.LARGE]),
+  size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
 
-  tier: PropTypes.oneOf([Tiers.PRIMARY, Tiers.SECONDARY, Tiers.TERTIARY]),
+  tier: PropTypes.oneOf([Tier.PRIMARY, Tier.SECONDARY, Tier.TERTIARY]),
 
   /** Makes the text appear disabled, but still selectable */
   disabled: PropTypes.bool,
@@ -131,11 +131,11 @@ Text.propTypes = {
   ]).isRequired,
 
   category: PropTypes.oneOf([
-    Categories.BRAND,
-    Categories.DANGER,
-    Categories.SUCCESS,
-    Categories.INFO,
-    Categories.WARNING,
+    Category.BRAND,
+    Category.DANGER,
+    Category.SUCCESS,
+    Category.INFO,
+    Category.WARNING,
   ]),
 
   /** Custom style object override */
@@ -157,8 +157,8 @@ Text.defaultProps = {
   inversed: false,
   bold: false,
   light: false,
-  size: Sizes.DEFAULT,
-  tier: Tiers.PRIMARY,
+  size: Size.DEFAULT,
+  tier: Tier.PRIMARY,
   disabled: false,
   children: '',
 };

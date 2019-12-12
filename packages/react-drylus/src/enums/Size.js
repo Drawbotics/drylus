@@ -1,7 +1,7 @@
 import Enum from '@drawbotics/enums';
 
 
-const Sizes = new Enum(
+const Size = new Enum(
   'EXTRA_SMALL',
   'SMALL',
   'DEFAULT',
@@ -13,4 +13,4 @@ const Sizes = new Enum(
 );
 
 
-export default Sizes;
+export default Size;

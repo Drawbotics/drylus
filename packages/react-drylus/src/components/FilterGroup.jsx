@@ -8,7 +8,7 @@ import Button from './Button';
 import Icon from './Icon';
 import Drawer from './Drawer';
 import Margin from '../layout/Margin';
-import { Tiers, Sizes, Categories } from '../base';
+import { Tier, Size, Category } from '../enums';
 import Flex, { FlexItem, FlexJustify } from '../layout/Flex';
 
 
@@ -43,7 +43,7 @@ const FilterGroup = ({
                 filter
               }
               else {
-                <Margin size={{ left: Sizes.SMALL }}>
+                <Margin size={{ left: Size.SMALL }}>
                   {filter}
                 </Margin>
               }
@@ -67,9 +67,9 @@ const FilterGroup = ({
           <Button
             onClick={onClear}
             fullWidth
-            category={Categories.INFO}
-            size={Sizes.LARGE}
-            tier={Tiers.SECONDARY}>
+            category={Category.INFO}
+            size={Size.LARGE}
+            tier={Tier.SECONDARY}>
             {clearAllLabel}
           </Button>
         }
@@ -80,12 +80,12 @@ const FilterGroup = ({
           <div className={styles.okButton}>
             <Button
               onClick={() => setDrawerOpen(false)}
-              category={Categories.BRAND}>
+              category={Category.BRAND}>
               OK
             </Button>
           </div>
           {filters.map((filter, i) => (
-            <Margin key={i} size={{ top: Sizes.DEFAULT }}>
+            <Margin key={i} size={{ top: Size.DEFAULT }}>
               {filter}
             </Margin>
           ))}

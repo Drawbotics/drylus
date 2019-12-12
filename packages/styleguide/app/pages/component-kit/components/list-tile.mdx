@@ -1,10 +1,10 @@
 import {
   ListTile,
   RoundIcon,
-  Categories,
+  Category,
   Icon,
   Margin,
-  Sizes,
+  Size,
   Avatar,
   Text,
 } from '@drawbotics/react-drylus';
@@ -32,18 +32,18 @@ The same component can be used for many things, such as combining an icon, or an
 
 <Playground>
   <>
-    <Margin size={{ bottom: Sizes.EXTRA_SMALL }}>
-      <ListTile title="Destructive action" leading={<Icon name="x" category={Categories.DANGER} />} />
+    <Margin size={{ bottom: Size.EXTRA_SMALL }}>
+      <ListTile title="Destructive action" leading={<Icon name="x" category={Category.DANGER} />} />
     </Margin>
-    <Margin size={{ bottom: Sizes.EXTRA_LARGE }}>
-      <ListTile title="Success action" leading={<Icon name="check" category={Categories.SUCCESS} />} />
+    <Margin size={{ bottom: Size.EXTRA_LARGE }}>
+      <ListTile title="Success action" leading={<Icon name="check" category={Category.SUCCESS} />} />
     </Margin>
-    <ListTile title="Mr Man Boy" leading={<Avatar text="mb" category={Categories.SUCCESS} />} />
+    <ListTile title="Mr Man Boy" leading={<Avatar text="mb" category={Category.SUCCESS} />} />
   </>
 </Playground>
 
 You can use a custom Text component to change the look of the text for the `ListTile` `title` and `subtitle` properties:
 
 <Playground>
-  <ListTile title={<Text bold>Custom text</Text>} subtitle={<Text category={Categories.DANGER}>Same</Text>} leading={<RoundIcon name="check" size={50} />} />
+  <ListTile title={<Text bold>Custom text</Text>} subtitle={<Text category={Category.DANGER}>Same</Text>} leading={<RoundIcon name="check" size={50} />} />
 </Playground>

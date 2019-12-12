@@ -5,6 +5,8 @@ import { css, cx } from 'emotion';
 import Enum from '@drawbotics/enums';
 
 import { useResponsiveProps } from '../utils/hooks';
+import { deprecateProperty } from '../utils';
+import { Align } from '../enums';
 
 
 const styles = {
@@ -54,11 +56,14 @@ const styles = {
 };
 
 
-export const TitleAlign = new Enum(
+/**
+ * @deprecated and will be removed in version 6.0
+ */
+export const TitleAlign = deprecateProperty(new Enum(
   'CENTER',
   'LEFT',
   'RIGHT',
-);
+), 'TitleAlign', 'Align');
 
 
 const Title = ({
@@ -79,8 +84,8 @@ const Title = ({
         style={style}
         className={cx(styles.root, styles.h1, {
           [styles.noMargin]: noMargin,
-          [styles.alignCenter]: align === TitleAlign.CENTER,
-          [styles.alignRight]: align === TitleAlign.RIGHT,
+          [styles.alignCenter]: align === Align.CENTER,
+          [styles.alignRight]: align === Align.RIGHT,
         })}>
         {children}
       </h1>
@@ -92,8 +97,8 @@ const Title = ({
         style={style}
         className={cx(styles.root, styles.h2, {
           [styles.noMargin]: noMargin,
-          [styles.alignCenter]: align === TitleAlign.CENTER,
-          [styles.alignRight]: align === TitleAlign.RIGHT,
+          [styles.alignCenter]: align === Align.CENTER,
+          [styles.alignRight]: align === Align.RIGHT,
         })}>
         {children}
       </h2>
@@ -105,8 +110,8 @@ const Title = ({
         style={style}
         className={cx(styles.root, styles.h3, {
           [styles.noMargin]: noMargin,
-          [styles.alignCenter]: align === TitleAlign.CENTER,
-          [styles.alignRight]: align === TitleAlign.RIGHT,
+          [styles.alignCenter]: align === Align.CENTER,
+          [styles.alignRight]: align === Align.RIGHT,
         })}>
         {children}
       </h3>
@@ -118,8 +123,8 @@ const Title = ({
         style={style}
         className={cx(styles.root, styles.h4, {
           [styles.noMargin]: noMargin,
-          [styles.alignCenter]: align === TitleAlign.CENTER,
-          [styles.alignRight]: align === TitleAlign.RIGHT,
+          [styles.alignCenter]: align === Align.CENTER,
+          [styles.alignRight]: align === Align.RIGHT,
         })}>
         {children}
       </h4>
@@ -149,9 +154,9 @@ Title.propTypes = {
   style: PropTypes.object,
 
   align: PropTypes.oneOf([
-    TitleAlign.CENTER,
-    TitleAlign.LEFT,
-    TitleAlign.RIGHT,
+    Align.CENTER,
+    Align.LEFT,
+    Align.RIGHT,
   ]),
 
   /** Reponsive prop overrides */
@@ -168,7 +173,7 @@ Title.propTypes = {
 
 Title.defaultProps = {
   size: 1,
-  align: TitleAlign.LEFT, 
+  align: Align.LEFT, 
 };
 
 

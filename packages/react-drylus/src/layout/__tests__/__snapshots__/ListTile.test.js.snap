@@ -9,6 +9,14 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
   margin: 0;
 }
 
+.css-1uy3mmc-ListTile__root {
+  display: inline-block;
+}
+
+.css-1b0ebn8-ListTile__withMargin {
+  margin-bottom: calc(8px / 2);
+}
+
 .css-q36stu-Button__root {
   background: #eaeff4;
   color: #172b4e;
@@ -46,14 +54,6 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
   box-shadow: none;
-}
-
-.css-1uy3mmc-ListTile__root {
-  display: inline-block;
-}
-
-.css-1b0ebn8-ListTile__withMargin {
-  margin-bottom: calc(8px / 2);
 }
 
 .css-pvflhp-Flex__item-Flex__equalSpan {
@@ -192,6 +192,37 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   margin: 0;
 }
 
+.css-1uy3mmc-ListTile__root {
+  display: inline-block;
+}
+
+.css-1pdxkj1-ListTile__leading {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.css-1sf91dp-ListTile__trailing {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.css-1nawdhh-ListTile__title {
+  color: #172b4e;
+}
+
 .css-q36stu-Button__root {
   background: #eaeff4;
   color: #172b4e;
@@ -229,37 +260,6 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
   box-shadow: none;
-}
-
-.css-1uy3mmc-ListTile__root {
-  display: inline-block;
-}
-
-.css-1pdxkj1-ListTile__leading {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-right: 8px;
-}
-
-.css-1sf91dp-ListTile__trailing {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.css-1nawdhh-ListTile__title {
-  color: #172b4e;
 }
 
 .css-pvflhp-Flex__item-Flex__equalSpan {

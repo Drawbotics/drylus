@@ -3,10 +3,10 @@ import { create } from 'react-test-renderer';
 
 import Button from '../Button';
 import {
-  Sizes,
-  Tiers,
-  Categories,
-} from '../../base';
+  Size,
+  Tier,
+  Category,
+} from '../../enums';
 import Icon from '../Icon';
 
 
@@ -23,7 +23,7 @@ describe('Button', () => {
 
     it('has a category', () => {
       const tree = create(
-        <Button category={Categories.WARNING}>
+        <Button category={Category.WARNING}>
           Some content
         </Button>
       ).toJSON();
@@ -32,7 +32,7 @@ describe('Button', () => {
 
     it('has a tier', () => {
       const tree = create(
-        <Button tier={Tiers.SECONDARY}>
+        <Button tier={Tier.SECONDARY}>
           Some content
         </Button>
       ).toJSON();
@@ -41,7 +41,7 @@ describe('Button', () => {
 
     it('is small', () => {
       const tree = create(
-        <Button size={Sizes.SMALL}>
+        <Button size={Size.SMALL}>
           Some content
         </Button>
       ).toJSON();

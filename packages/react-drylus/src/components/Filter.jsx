@@ -7,7 +7,8 @@ import Enum from '@drawbotics/enums';
 import Icon from './Icon';
 import ListTile from '../layout/ListTile';
 import Checkbox from '../forms/Checkbox';
-import { CustomPropTypes } from '../utils';
+import { CustomPropTypes, deprecateProperty } from '../utils';
+import { Align } from '../enums';
 
 
 const styles = {
@@ -111,10 +112,13 @@ const styles = {
 };
 
 
-export const FilterAlign = new Enum(
+/**
+ * @deprecated and will be removed in version 6.0
+ */
+export const FilterAlign = deprecateProperty(new Enum(
   'RIGHT',
   'LEFT',
-);
+), 'FilterAlign', 'Align');
 
 
 const BaseFilter = ({
@@ -165,7 +169,7 @@ const BaseFilter = ({
       </div>
       <div className={cx(styles.panel, {
         [styles.visible]: panelOpen,
-        [styles.rightAlign]: align === FilterAlign.RIGHT,
+        [styles.rightAlign]: align === Align.RIGHT,
       })} onClick={() => setPanelOpen(false)}>
         {children}
         <div className={styles.clear} onClick={handleClickClear}>
@@ -191,7 +195,7 @@ BaseFilter.propTypes = {
   children: PropTypes.node,
 
   /** Determines on which side the panel is aligned */
-  align: PropTypes.oneOf([ FilterAlign.LEFT, FilterAlign.RIGHT ]),
+  align: PropTypes.oneOf([ Align.LEFT, Align.RIGHT ]),
 
   /** If true, the filter trigger is dark, and the close icon is shown to clear it when clicked */
   active: PropTypes.bool,
@@ -206,7 +210,7 @@ BaseFilter.propTypes = {
 
 BaseFilter.defaultProps = {
   clearLabel: 'Clear',
-  align: FilterAlign.RIGHT,
+  align: Align.RIGHT,
 };
 
 
@@ -333,7 +337,7 @@ CheckboxFilter.propTypes = {
   /** Used to pick each label in the options array */
   labelKey: PropTypes.string,
 
-  /** Triggered when an option is clicked. Returns (valueKey, boolean) where the second argument is true if checked, false if not */
+  /** Triggered when an option is clicked. Returns the list of currently selected elements */
   onChange: PropTypes.func.isRequired,
 
   /** Used for style overrides */

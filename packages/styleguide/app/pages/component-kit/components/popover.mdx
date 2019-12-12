@@ -1,11 +1,11 @@
 import {
   Popover,
-  PopoverSides,
+  Position,
   Button,
-  Categories,
+  Category,
   Flex,
   FlexItem,
-  Sizes,
+  Size,
   Margin,
   Icon,
   ListTile,
@@ -20,16 +20,16 @@ import Playground from '~/components/Playground';
 # Popover
 It can be used to wrap any component/element and display a hint when _clicked_. The component is uncontrolled and uses portals to be rendered on top of the content.
 ```jsx
-import { Popover, PopoverSides } from '@drawbotics/react-drylus';
+import { Popover } from '@drawbotics/react-drylus';
 ```
 
 __Example__
-<Playground component={Popover} enums={{ PopoverSides }}>
+<Playground component={Popover}>
 <Flex>
   <FlexItem>
-    <Margin size={{ right: Sizes.LARGE }}>
+    <Margin size={{ right: Size.LARGE }}>
       <Popover content="I am a popover">
-        <Button category={Categories.BRAND}>Click me</Button>
+        <Button category={Category.BRAND}>Click me</Button>
       </Popover>
     </Margin>
   </FlexItem>
@@ -37,13 +37,13 @@ __Example__
     <Popover
       content={
         <div style={{ textAlign: 'left' }}>
-          <Margin size={{ bottom: Sizes.EXTRA_SMALL }}>
-            <ListTile leading={<Icon name="alert-triangle" category={Categories.DANGER} />} title={<Text size={Sizes.SMALL}>I'm custom content</Text>} />
+          <Margin size={{ bottom: Size.EXTRA_SMALL }}>
+            <ListTile leading={<Icon name="alert-triangle" category={Category.DANGER} />} title={<Text size={Size.SMALL}>I'm custom content</Text>} />
           </Margin>
-          <ListTile leading={<Icon name="check-circle" category={Categories.SUCCESS} />} title={<Text size={Sizes.SMALL}>So am I</Text>} />
+          <ListTile leading={<Icon name="check-circle" category={Category.SUCCESS} />} title={<Text size={Size.SMALL}>So am I</Text>} />
         </div>
       }>
-      <Avatar category={Categories.SUCCESS} text="PO" />
+      <Avatar category={Category.SUCCESS} text="PO" />
     </Popover>
   </FlexItem>
 </Flex>

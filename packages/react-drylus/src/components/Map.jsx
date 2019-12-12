@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
 import Flex, { FlexDirections, FlexItem } from '../layout/Flex';
-import { Sizes, Tiers } from '../base';
+import { Size, Tier } from '../enums';
 import Popover from './Popover';
 import Text from './Text';
 import Margin from '../layout/Margin';
@@ -64,10 +64,10 @@ const PopoverContent = ({
       {do {
         if (subtitle) {
           <FlexItem>
-            <Margin size={{ top: Sizes.EXTRA_SMALL }}>
+            <Margin size={{ top: Size.EXTRA_SMALL }}>
               <Text
-                size={Sizes.SMALL}
-                tier={Tiers.SECONDARY}>
+                size={Size.SMALL}
+                tier={Tier.SECONDARY}>
                 {subtitle}
               </Text>
             </Margin>
