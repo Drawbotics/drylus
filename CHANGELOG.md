@@ -1,3 +1,16 @@
+# v5.0.1 (Fri Dec 13 2019)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/drylus-style-vars`
+  - Generate type definition for style vars [#97](https://github.com/Drawbotics/drylus/pull/97) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.0.0 (Thu Dec 12 2019)
 
 #### 💥 Breaking - Major release

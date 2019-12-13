@@ -20,6 +20,17 @@ async function createJs(vars, buildDir) {
 }
 
 
+async function createTs(vars, buildDir) {
+  const lines = [];
+  lines.push(`declare module '@drawbotics/drylus-style-vars' {`);
+  Object.keys(vars).forEach((key) => lines.push(`  export const ${key} = '${vars[key]}';`));
+  lines.push('}');
+  const text = lines.join('\n');
+
+  await fs.writeFile(path.resolve(buildDir, './vars.d.ts'), text, 'utf-8');
+}
+
+
 async function createLess(vars, buildDir) {
   const lines = [];
   Object.keys(vars).forEach((key) => {
@@ -38,9 +49,9 @@ async function createLess(vars, buildDir) {
 
 async function createCss(vars, buildDir) {
   const lines = [];
-  lines.push(':root {')
+  lines.push(':root {');
   Object.keys(vars).forEach((key) => lines.push(`  --${kebabCase(key)}: ${vars[key]};`));
-  lines.push('}')
+  lines.push('}');
   const text = lines.join('\n');
   await fs.writeFile(path.resolve(buildDir, './vars.css'), text, 'utf-8');
 }
@@ -50,6 +61,7 @@ async function main() {
   const buildDir = path.resolve(__dirname, '../dist');
   await fs.ensureDir(buildDir);
   await createJs(vars, buildDir);
+  await createTs(vars, buildDir);
   await createLess(vars, buildDir);
   await createCss(vars, buildDir);
 }
