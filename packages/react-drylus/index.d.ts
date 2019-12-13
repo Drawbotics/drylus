@@ -1,5 +1,7 @@
 declare module '@drawbotics/react-drylus' {
 
+  import { FunctionComponent, ReactNode } from 'react';
+
   declare interface Responsive {
     XS?: object;
     S?: object;
@@ -13,17 +15,17 @@ declare module '@drawbotics/react-drylus' {
     children?: string;
     disabled?: boolean;
     onClick?(): void;
-    category?:
-      | Category.BRAND
-      | Category.DANGER
-      | Category.SUCCESS
-      | Category.INFO
-      | Category.WARNING
-      | Category.PRIMARY;
-    size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
-    tier?: Tier.PRIMARY | Tier.SECONDARY | Tier.TERTIARY;
-    leading?: React.ReactNode;
-    trailing?: React.ReactNode;
+    // category?:
+    //   | Category.BRAND
+    //   | Category.DANGER
+    //   | Category.SUCCESS
+    //   | Category.INFO
+    //   | Category.WARNING
+    //   | Category.PRIMARY;
+    // size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
+    // tier?: Tier.PRIMARY | Tier.SECONDARY | Tier.TERTIARY;
+    leading?: ReactNode;
+    trailing?: ReactNode;
     fullWidth?: boolean;
     style?: object;
     responsive?: Responsive;
