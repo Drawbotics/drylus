@@ -31,5 +31,4 @@ declare module '@drawbotics/react-drylus' {
 
   // export default class Button<T = any> extends React.Component<T> {}
   export const Button: FunctionComponent<ButtonProps>;
-
 }
