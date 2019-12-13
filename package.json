@@ -46,8 +46,8 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@auto-it/npm": "^7.8.0",
-    "@auto-it/omit-commits": "^7.8.0",
+    "@auto-it/npm": "^8.0.0",
+    "@auto-it/omit-commits": "^8.0.0",
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
     "@babel/plugin-proposal-do-expressions": "^7.2.0",
