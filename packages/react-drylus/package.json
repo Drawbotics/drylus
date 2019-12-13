@@ -5,6 +5,7 @@
   "author": "nicmosc <nmoscholios@gmail.com>",
   "license": "ISC",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "clean": "rimraf lib/",
     "build:commonjs": "babel --ignore **/__tests__/ --root-mode upward src/ --out-dir lib/",
