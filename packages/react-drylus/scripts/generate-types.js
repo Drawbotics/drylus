@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const { generate } = require('react-dts-generator');
 
+const { generate } = require('./generate');
 const { generateCustomDefinitions } = require('./custom-definitions');
 
 
@@ -34,6 +34,8 @@ for (const folder of folders) {
     const fileName = path.basename(input);
     const componentName = fileName.replace('.jsx', '');
 
+    console.info('Gonna generate', file);
+
     try {
       let result = generate({
         input,
@@ -42,11 +44,11 @@ for (const folder of folders) {
       });
 
       // remove react import
-      result = result.substring(result.indexOf('\n') + 1);
+      // result = result.substring(result.indexOf('\n') + 1);
 
       // change class to function component definition
       result = result.replace(
-        /export default class.*{}/gms,
+        /export default class.*?{}/gms,
         `export const ${componentName}: React.FunctionComponent<${componentName}Props>;`
       );
   
