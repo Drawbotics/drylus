@@ -203,7 +203,7 @@ export interface AlertProps {
     | Category.SUCCESS
     | Category.INFO
     | Category.WARNING;
-  onClickDismiss: OnClickCallback;
+  onClickDismiss?(): OnClickCallback;
   id?: number | string;
   hideDelay?: number;
 }
@@ -316,7 +316,7 @@ declare interface Responsive {
 export interface ButtonProps {
   children?: string;
   disabled?: boolean;
-  onClick: OnClickCallback;
+  onClick?(): OnClickCallback;
   category?:
     | Category.BRAND
     | Category.DANGER
@@ -347,7 +347,7 @@ declare interface Responsive {
 export interface ButtonLinkProps {
   children?: string;
   disabled?: boolean;
-  onClick: OnClickCallback;
+  onClick?(): OnClickCallback;
   category?:
     | Category.BRAND
     | Category.DANGER
@@ -396,7 +396,7 @@ export interface CollapsibleProps {
   title: string;
   isOpen?: boolean;
   children: React.ReactNode;
-  onClick: OnClickCallback;
+  onClick?(): OnClickCallback;
   style?: React.CSSProperties;
 }
 
@@ -428,8 +428,8 @@ export interface DrawerProps {
   children: React.ReactNode;
   footer?: React.ReactNode;
   visible: boolean;
-  onClickClose: OnClickCallback;
-  onClickOverlay: OnClickCallback;
+  onClickClose?(): OnClickCallback;
+  onClickOverlay?(): OnClickCallback;
   asOverlay?: boolean;
   width?: number | string;
   raw?: boolean;
@@ -444,7 +444,7 @@ export const Drawer: React.FunctionComponent<DrawerProps>;
 export interface DropdownOptionProps {
   text: string;
   disabled?: boolean;
-  onClick: OnClickCallback;
+  onClick?(): OnClickCallback;
   icon?: string;
   category?: Category.DANGER | Category.SUCCESS | Category.WARNING;
   style?: React.CSSProperties;
@@ -511,7 +511,7 @@ export const FilterGroup: React.FunctionComponent<FilterGroupProps>;
 export interface IconProps {
   name: string;
   bold?: boolean;
-  onClick: OnClickCallback;
+  onClick?(): OnClickCallback;
   category?:
     | Category.DANGER
     | Category.INFO
@@ -587,7 +587,7 @@ export interface ModalProps {
   children: React.ReactNode;
   footer?: React.ReactNode;
   visible: boolean;
-  onClickClose: OnClickCallback;
+  onClickClose?(): OnClickCallback;
   size?: Size.DEFAULT | Size.LARGE;
   raw?: boolean;
   title?: string;
@@ -770,7 +770,7 @@ export const TCell: React.FunctionComponent<TCellProps>;
 export interface TRowProps {
   children: React.ReactNode;
   highlighted?: boolean;
-  onClick: OnClickCallback;
+  onClick?(): OnClickCallback;
   clickable?(): void;
   style?: React.CSSProperties;
 }
@@ -797,11 +797,11 @@ export interface TableProps {
   childHeader?: string[];
   sortableBy?: string[];
   activeHeader?: ActiveHeader;
-  onClickHeader: OnClickCallback;
+  onClickHeader?(): OnClickCallback;
   highlighted?: boolean;
   clickable?: boolean;
   isLoading?: boolean;
-  onClickRow: OnClickCallback;
+  onClickRow?(): OnClickCallback;
   activeRow?: any;
   emptyContent?: React.ReactNode;
   style?: object;
@@ -817,7 +817,7 @@ export interface TagProps {
     | Category.SUCCESS
     | Category.INFO
     | Category.WARNING;
-  onClickRemove: OnClickCallback;
+  onClickRemove?(): OnClickCallback;
   inversed?: boolean;
   style?: React.CSSProperties;
 }
@@ -1240,7 +1240,7 @@ export interface ListTileProps {
   subtitle?: React.ReactNode;
   leading?: React.ReactNode;
   trailing?: React.ReactNode;
-  onClick: OnClickCallback;
+  onClick?(): OnClickCallback;
   style?: React.CSSProperties;
 }
 
