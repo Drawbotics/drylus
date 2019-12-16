@@ -18,7 +18,7 @@ const Utils = __importStar(require("react-dts-generator/bin/src/utils"));
 function generate(options) {
   let result = '';
   let baseType = 'React.Component';
-  const { input, output, isBaseClass, propTypesComposition, imports } = options;
+  const { input, isBaseClass, propTypesComposition, imports } = options;
   const rawContent = fs.readFileSync(input, 'utf8');
   
   // strip out custom prop types and use defined `type` value if specified
