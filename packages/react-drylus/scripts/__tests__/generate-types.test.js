@@ -13,9 +13,9 @@ describe('generate-types', () => {
     it('matches previous version', () => {
       const definitions = generateTypes();
       
-      expect(definitions, `
+      expect(definitions.replace(/\s/g, ''), `
         Did you add a component or modify prop types? If so, re-build types and update the snapshot at 'snapshot.d.ts'
-      `).toMatch(currentVersion);
+      `).toMatch(currentVersion.replace(/\s/g, ''));
     });
   });
 });
