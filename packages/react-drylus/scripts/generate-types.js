@@ -32,7 +32,7 @@ function generateTypes(targetFile) {
         continue;
       }
 
-      console.info('Gonna generate', file);
+      console.info(`Gonna generate ${file} definitions`);
 
       try {
         let result = generate({

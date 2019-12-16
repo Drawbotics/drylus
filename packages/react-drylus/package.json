@@ -10,8 +10,8 @@
     "clean": "rimraf lib/",
     "build:commonjs": "babel --ignore **/__tests__/ --root-mode upward src/ --out-dir lib/",
     "watch": "npm run clean && NODE_ENV=development npm run build:commonjs -- --watch",
-    "build": "npm run clean && NODE_ENV=production npm run build:commonjs",
     "build:types": "node scripts/build-types.js",
+    "build": "npm run clean && NODE_ENV=production npm run build:commonjs && npm run build:types",
     "test": "jest",
     "test:watch": "jest --watchAll",
     "prepublishOnly": "npm run build"

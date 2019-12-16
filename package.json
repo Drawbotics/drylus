@@ -7,7 +7,6 @@
   "scripts": {
     "watch:react": "cd packages/react-drylus && npm run watch",
     "build:react": "cd packages/react-drylus && npm run build",
-    "build:types": "cd packages/react-drylus && npm run build:types",
     "test:react": "cd packages/react-drylus && npm run test",
     "test:react:watch": "cd packages/react-drylus && npm run test:watch",
     "build:vanilla": "cd packages/vanilla-drylus && npm run build",
