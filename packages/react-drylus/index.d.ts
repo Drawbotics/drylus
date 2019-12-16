@@ -482,8 +482,8 @@ declare interface Responsive {
 export interface EmptyStateProps {
   title?: string;
   description?: string;
-  actions?: any;
-  children?: any;
+  actions?: React.ReactNode[];
+  children?: React.ReactNode;
   style?: React.CSSProperties;
   variation?:
     | EmptyStateVariation.DEFAULT
@@ -668,8 +668,8 @@ export interface ParagraphProps {
 export const Paragraph: React.FunctionComponent<ParagraphProps>;
 
 export interface PopoverProps {
-  message?: any;
-  content?: any;
+  message?: React.ReactNode;
+  content?: React.ReactNode;
   children: React.ReactNode;
   side?: Position.LEFT | Position.RIGHT | Position.TOP | Position.BOTTOM;
   style?: React.CSSProperties;
@@ -917,8 +917,8 @@ export interface ToggleProps {
 export const Toggle: React.FunctionComponent<ToggleProps>;
 
 export interface TooltipProps {
-  message?: any;
-  content?: any;
+  message?: React.ReactNode;
+  content?: React.ReactNode;
   children: React.ReactNode;
   side?: Position.LEFT | Position.RIGHT | Position.TOP | Position.BOTTOM;
   style?: React.CSSProperties;

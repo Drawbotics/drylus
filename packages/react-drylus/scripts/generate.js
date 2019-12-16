@@ -19,7 +19,11 @@ function generate(options) {
   let result = '';
   let baseType = 'React.Component';
   const { input, output, isBaseClass, propTypesComposition, imports } = options;
-  const content = fs.readFileSync(input, 'utf8');
+  const rawContent = fs.readFileSync(input, 'utf8');
+  
+  // strip out custom prop types and use defined `type` value if specified
+  const content = rawContent.replace(/CustomPropTypes.mutuallyExclusive.*?(type: (.*?,)).*?}\),/gms, '$2');
+
   const componentInfos = react_docgen_1.parse(content, findAllExportedComponentDefinitions);
   for (const componentInfo of componentInfos) {
     const className = isBaseClass ? Utils.writeGeneric(componentInfo.displayName, 'T = any') : componentInfo.displayName;
