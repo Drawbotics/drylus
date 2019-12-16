@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 const prettier = __importStar(require("prettier"));
 const react_docgen_1 = require("react-docgen");
-const { findAllComponentDefinitions } = require('react-docgen/dist/resolver');
+const { findAllExportedComponentDefinitions } = require('react-docgen/dist/resolver');
 const dom = __importStar(require("react-dts-generator/bin/src/dts-dom"));
 const Utils = __importStar(require("react-dts-generator/bin/src/utils"));
 
@@ -20,7 +20,7 @@ function generate(options) {
   let baseType = 'React.Component';
   const { input, output, isBaseClass, propTypesComposition, imports } = options;
   const content = fs.readFileSync(input, 'utf8');
-  const componentInfos = react_docgen_1.parse(content, findAllComponentDefinitions);
+  const componentInfos = react_docgen_1.parse(content, findAllExportedComponentDefinitions);
   for (const componentInfo of componentInfos) {
     const className = isBaseClass ? Utils.writeGeneric(componentInfo.displayName, 'T = any') : componentInfo.displayName;
     const importDefinitions = [];

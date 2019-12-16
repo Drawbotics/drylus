@@ -208,7 +208,7 @@ export interface AlertProps {
   hideDelay?: number;
 }
 
-export const AlertsProvider: React.FunctionComponent<AlertsProviderProps>;
+export const Alert: React.FunctionComponent<AlertProps>;
 
 export interface AlertsProviderProps {
   children: React.ReactNode;
@@ -415,8 +415,6 @@ export interface DotProps {
 
 export const Dot: React.FunctionComponent<DotProps>;
 
-export const Drawer: React.FunctionComponent<DrawerProps>;
-
 declare interface Responsive {
   XS?: object;
   S?: object;
@@ -452,16 +450,16 @@ export interface DropdownOptionProps {
   style?: React.CSSProperties;
 }
 
-export const Dropdown: React.FunctionComponent<DropdownProps>;
+export const DropdownOption: React.FunctionComponent<DropdownOptionProps>;
 
 export interface DropdownTitleProps {
   text: string;
   style?: object;
 }
 
-export const Dropdown: React.FunctionComponent<DropdownProps>;
+export const DropdownTitle: React.FunctionComponent<DropdownTitleProps>;
 
-export const Dropdown: React.FunctionComponent<DropdownProps>;
+export const DropdownSeparator: React.FunctionComponent<DropdownSeparatorProps>;
 
 export interface DropdownProps {
   trigger?: React.ReactNode;
@@ -471,8 +469,6 @@ export interface DropdownProps {
 }
 
 export const Dropdown: React.FunctionComponent<DropdownProps>;
-
-export const EmptyState: React.FunctionComponent<EmptyStateProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -550,7 +546,7 @@ export interface ListItemProps {
   style?: React.CSSProperties;
 }
 
-export const List: React.FunctionComponent<ListProps>;
+export const ListItem: React.FunctionComponent<ListItemProps>;
 
 export interface ListProps {
   children: React.ReactNode;
@@ -567,8 +563,6 @@ export interface LoadingPlaceholderProps {
 
 export const LoadingPlaceholder: React.FunctionComponent<LoadingPlaceholderProps>;
 
-export const Map: React.FunctionComponent<MapProps>;
-
 export interface MapProps {
   height?: number;
   interactive?: boolean;
@@ -579,8 +573,6 @@ export interface MapProps {
 }
 
 export const Map: React.FunctionComponent<MapProps>;
-
-export const Modal: React.FunctionComponent<ModalProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -622,7 +614,7 @@ export interface PanelHeaderProps {
   noPadding?: boolean;
 }
 
-export const Panel: React.FunctionComponent<PanelProps>;
+export const PanelHeader: React.FunctionComponent<PanelHeaderProps>;
 
 export interface PanelBodyProps {
   children: React.ReactNode;
@@ -630,7 +622,7 @@ export interface PanelBodyProps {
   style?: React.CSSProperties;
 }
 
-export const Panel: React.FunctionComponent<PanelProps>;
+export const PanelBody: React.FunctionComponent<PanelBodyProps>;
 
 export interface PanelSectionProps {
   children: React.ReactNode;
@@ -638,7 +630,7 @@ export interface PanelSectionProps {
   style?: object;
 }
 
-export const Panel: React.FunctionComponent<PanelProps>;
+export const PanelSection: React.FunctionComponent<PanelSectionProps>;
 
 export interface PanelFooterProps {
   children: React.ReactNode;
@@ -646,7 +638,7 @@ export interface PanelFooterProps {
   style?: object;
 }
 
-export const Panel: React.FunctionComponent<PanelProps>;
+export const PanelFooter: React.FunctionComponent<PanelFooterProps>;
 
 export interface PanelProps {
   header?: React.ReactNode;
@@ -773,7 +765,7 @@ export interface TabNavigationProps {
 
 export const TabNavigation: React.FunctionComponent<TabNavigationProps>;
 
-export const Table: React.FunctionComponent<TableProps>;
+export const TCell: React.FunctionComponent<TCellProps>;
 
 export interface TRowProps {
   children: React.ReactNode;
@@ -783,21 +775,11 @@ export interface TRowProps {
   style?: React.CSSProperties;
 }
 
-export const Table: React.FunctionComponent<TableProps>;
+export const TRow: React.FunctionComponent<TRowProps>;
 
-export const Table: React.FunctionComponent<TableProps>;
+export const THead: React.FunctionComponent<THeadProps>;
 
-export const Table: React.FunctionComponent<TableProps>;
-
-export const Table: React.FunctionComponent<TableProps>;
-
-export const Table: React.FunctionComponent<TableProps>;
-
-export const Table: React.FunctionComponent<TableProps>;
-
-export interface _generateTableProps {}
-
-export const Table: React.FunctionComponent<TableProps>;
+export const TBody: React.FunctionComponent<TBodyProps>;
 
 declare interface ActiveHeader {
   key?: string;
@@ -1089,10 +1071,6 @@ export interface NumberInputProps {
 
 export const NumberInput: React.FunctionComponent<NumberInputProps>;
 
-export interface RadioProps {}
-
-export const RadioGroup: React.FunctionComponent<RadioGroupProps>;
-
 export interface RadioGroupProps {
   options?: any;
   name?: string;
@@ -1141,7 +1119,7 @@ export interface SelectProps {
 
 export const Select: React.FunctionComponent<SelectProps>;
 
-export const TextArea: React.FunctionComponent<TextAreaProps>;
+export const Input: React.FunctionComponent<InputProps>;
 
 export interface TextAreaProps {
   value: string | number;
@@ -1165,7 +1143,7 @@ export interface FlexItemProps {
   style?: React.CSSProperties;
 }
 
-export const Flex: React.FunctionComponent<FlexProps>;
+export const FlexItem: React.FunctionComponent<FlexItemProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -1204,7 +1182,7 @@ export interface GridItemProps {
   style?: React.CSSProperties;
 }
 
-export const Grid: React.FunctionComponent<GridProps>;
+export const GridItem: React.FunctionComponent<GridItemProps>;
 
 declare interface Responsive {
   XS?: object;

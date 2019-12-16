@@ -61,8 +61,8 @@ for (const folder of folders) {
 
       // change class to function component definition
       result = result.replace(
-        /export default class.*?{}/gms,
-        `export const ${componentName}: React.FunctionComponent<${componentName}Props>;`
+        /export default class (\S*) .*? {}/gms,
+        'export const $1: React.FunctionComponent<$1Props>;'
       );
   
       types.push(result);
