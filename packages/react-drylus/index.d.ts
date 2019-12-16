@@ -125,6 +125,15 @@ export const CheckboxFilter: React.FunctionComponent<CheckboxFilterProps>;
 type Icons = 'activity' | 'airplay' | 'alert-circle' | 'alert-octagon' | 'alert-triangle' | 'align-center' | 'align-justify' | 'align-left' | 'align-right' | 'anchor' | 'aperture' | 'arrow-down-left' | 'arrow-down-right' | 'arrow-down' | 'arrow-left' | 'arrow-right' | 'arrow-up-left' | 'arrow-up-right' | 'arrow-up' | 'at-sign' | 'award' | 'bar-chart-2' | 'bar-chart' | 'battery-charging' | 'battery' | 'bell-off' | 'bell' | 'billboard' | 'bluetooth' | 'book' | 'bookmark' | 'box' | 'brand-id' | 'briefcase' | 'brochure' | 'burger' | 'calendar' | 'camera-off' | 'camera' | 'cast' | 'check-circle' | 'check-square' | 'check' | 'chevron-down' | 'chevron-left' | 'chevron-right' | 'chevron-up' | 'chevrons-down' | 'chevrons-left' | 'chevrons-right' | 'chevrons-up' | 'chrome' | 'circle' | 'clipboard' | 'clock' | 'cloud-drizzle' | 'cloud-lightning' | 'cloud-off' | 'cloud-rain' | 'cloud-snow' | 'cloud' | 'command' | 'commercial-floorplan' | 'compass' | 'copy' | 'corner-down-left' | 'corner-down-right' | 'corner-left-down' | 'corner-left-up' | 'corner-right-down' | 'corner-right-up' | 'corner-up-left' | 'corner-up-right' | 'cpu' | 'credit-card' | 'crosshair' | 'delete' | 'disc' | 'download-cloud' | 'download' | 'drawbotics' | 'drone-shooting' | 'droplet' | 'edit-2' | 'edit-3' | 'edit' | 'exterior-3d' | 'exterior-restyling' | 'external-link' | 'eye-off' | 'eye' | 'facebook' | 'fast-forward' | 'feather' | 'file-minus' | 'file-plus' | 'file-text' | 'file' | 'film' | 'filter' | 'flag' | 'flyer' | 'folder' | 'github' | 'globe' | 'grid' | 'hash' | 'headphones' | 'heart' | 'home' | 'image' | 'inbox' | 'index.js' | 'info' | 'instagram' | 'interior-3d' | 'interior-tour-3d' | 'landing-page' | 'layers' | 'layout' | 'life-buoy' | 'link-2' | 'link' | 'loader' | 'lock' | 'log-in' | 'log-out' | 'mail' | 'map-pin' | 'map' | 'maximize-2' | 'maximize' | 'media-kit' | 'menu' | 'message-circle' | 'message-square' | 'mic-off' | 'mic' | 'minimize-2' | 'minimize' | 'minus-circle' | 'minus-square' | 'minus' | 'model-360' | 'monitor' | 'moon' | 'more-horizontal' | 'more-vertical' | 'move' | 'music' | 'navigation-2' | 'navigation' | 'newsletter' | 'octagon' | 'package' | 'panorama-360' | 'pause-circle' | 'pause' | 'percent' | 'phone-call' | 'phone-forwarded' | 'phone-incoming' | 'phone-missed' | 'phone-off' | 'phone-outgoing' | 'phone' | 'photo-editing' | 'photo-shooting' | 'pie-chart' | 'plan-2d' | 'play-circle' | 'play' | 'plus-circle' | 'plus-square' | 'plus' | 'pocket' | 'power' | 'printer' | 'radio' | 'refresh-ccw' | 'refresh-cw' | 'repeat' | 'revo-alt' | 'revo' | 'rewind' | 'rotate-ccw' | 'rotate-cw' | 'save' | 'scissors' | 'search' | 'server' | 'settings' | 'share-2' | 'share' | 'shield' | 'shoebox' | 'shuffle' | 'sidebar' | 'site-plan' | 'skip-back' | 'skip-forward' | 'slack' | 'slash' | 'smartphone' | 'social-media-kit' | 'speaker' | 'square' | 'star' | 'stop-circle' | 'sun' | 'sunrise' | 'sunset' | 'tablet' | 'tag' | 'target' | 'thermometer' | 'thumbs-down' | 'thumbs-up' | 'toggle-left' | 'toggle-right' | 'tour-3d' | 'trash-2' | 'trash' | 'trending-down' | 'trending-up' | 'triangle' | 'twitter' | 'type' | 'umbrella' | 'unlock' | 'upload-cloud' | 'upload' | 'user-check' | 'user-minus' | 'user-plus' | 'user-x' | 'user' | 'users' | 'video-animation' | 'video-off' | 'video' | 'voicemail' | 'volume-1' | 'volume-2' | 'volume-x' | 'volume' | 'vr' | 'watch' | 'website' | 'wifi' | 'wind' | 'x-circle' | 'x-square' | 'x' | 'zap' | 'zoom-in' | 'zoom-out';
 
 
+interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
+
 interface SizeDescription {
   top?: Size;
   right?: Size;
@@ -194,7 +203,7 @@ export interface AlertProps {
     | Category.SUCCESS
     | Category.INFO
     | Category.WARNING;
-  onClickDismiss?(): void;
+  onClickDismiss: OnClickCallback;
   id?: number | string;
   hideDelay?: number;
 }
@@ -263,7 +272,7 @@ export interface BannerProps {
 export const Banner: React.FunctionComponent<BannerProps>;
 
 export interface BigCheckboxProps {
-  onChange(): void;
+  onChange(): OnChangeCallback;
   value: boolean;
   children?: React.ReactNode;
   label: string;
@@ -276,7 +285,7 @@ export const BigCheckbox: React.FunctionComponent<BigCheckboxProps>;
 
 export interface BigRadioProps {
   checked?: boolean;
-  onChange(): void;
+  onChange(): OnChangeCallback;
   value: string | number;
   children?: React.ReactNode;
   label: string;
@@ -307,7 +316,7 @@ declare interface Responsive {
 export interface ButtonProps {
   children?: string;
   disabled?: boolean;
-  : void;
+  onClick: OnClickCallback;
   category?:
     | Category.BRAND
     | Category.DANGER
@@ -338,7 +347,7 @@ declare interface Responsive {
 export interface ButtonLinkProps {
   children?: string;
   disabled?: boolean;
-  : void;
+  onClick: OnClickCallback;
   category?:
     | Category.BRAND
     | Category.DANGER
@@ -387,7 +396,7 @@ export interface CollapsibleProps {
   title: string;
   isOpen?: boolean;
   children: React.ReactNode;
-  : void;
+  onClick: OnClickCallback;
   style?: React.CSSProperties;
 }
 
@@ -421,8 +430,8 @@ export interface DrawerProps {
   children: React.ReactNode;
   footer?: React.ReactNode;
   visible: boolean;
-  onClickClose?(): void;
-  onClickOverlay?(): void;
+  onClickClose: OnClickCallback;
+  onClickOverlay: OnClickCallback;
   asOverlay?: boolean;
   width?: number | string;
   raw?: boolean;
@@ -437,7 +446,7 @@ export const Drawer: React.FunctionComponent<DrawerProps>;
 export interface DropdownOptionProps {
   text: string;
   disabled?: boolean;
-  : void;
+  onClick: OnClickCallback;
   icon?: string;
   category?: Category.DANGER | Category.SUCCESS | Category.WARNING;
   style?: React.CSSProperties;
@@ -506,7 +515,7 @@ export const FilterGroup: React.FunctionComponent<FilterGroupProps>;
 export interface IconProps {
   name: string;
   bold?: boolean;
-  : void;
+  onClick: OnClickCallback;
   category?:
     | Category.DANGER
     | Category.INFO
@@ -586,7 +595,7 @@ export interface ModalProps {
   children: React.ReactNode;
   footer?: React.ReactNode;
   visible: boolean;
-  onClickClose?(): void;
+  onClickClose: OnClickCallback;
   size?: Size.DEFAULT | Size.LARGE;
   raw?: boolean;
   title?: string;
@@ -600,7 +609,7 @@ export interface PaginationProps {
   pages: number;
   prevLabel?: string;
   nextLabel?: string;
-  onChange(): void;
+  onChange(): OnChangeCallback;
   value?: number;
   maxVisiblePages?: number;
   style?: React.CSSProperties;
@@ -711,7 +720,7 @@ export interface SegmentedControlProps {
   valueKey?: string;
   labelKey?: string;
   value?: string | number;
-  onChange?(): void;
+  onChange?(): OnChangeCallback;
   style?: React.CSSProperties;
 }
 
@@ -756,7 +765,7 @@ export interface TabNavigationProps {
   valueKey?: string;
   labelKey?: string;
   value?: string | number;
-  onChange?(): void;
+  onChange?(): OnChangeCallback;
   vertical?: boolean;
   linkComponent?: React.ReactNode;
   style?: React.CSSProperties;
@@ -769,7 +778,7 @@ export const Table: React.FunctionComponent<TableProps>;
 export interface TRowProps {
   children: React.ReactNode;
   highlighted?: boolean;
-  : void;
+  onClick: OnClickCallback;
   clickable?(): void;
   style?: React.CSSProperties;
 }
@@ -806,11 +815,11 @@ export interface TableProps {
   childHeader?: string[];
   sortableBy?: string[];
   activeHeader?: ActiveHeader;
-  onClickHeader?(): void;
+  onClickHeader: OnClickCallback;
   highlighted?: boolean;
   clickable?: boolean;
   isLoading?: boolean;
-  onClickRow?(): void;
+  onClickRow: OnClickCallback;
   activeRow?: any;
   emptyContent?: React.ReactNode;
   style?: object;
@@ -826,7 +835,7 @@ export interface TagProps {
     | Category.SUCCESS
     | Category.INFO
     | Category.WARNING;
-  onClickRemove?(): void;
+  onClickRemove: OnClickCallback;
   inversed?: boolean;
   style?: React.CSSProperties;
 }
@@ -915,7 +924,7 @@ declare interface Responsive {
 }
 
 export interface ToggleProps {
-  onChange(): void;
+  onChange(): OnChangeCallback;
   disabled?: boolean;
   value: boolean;
   size?: Size.SMALL | Size.DEFAULT;
@@ -937,7 +946,7 @@ export const Tooltip: React.FunctionComponent<TooltipProps>;
 
 export interface CheckboxProps {
   children?: string;
-  onChange?(): void;
+  onChange?(): OnChangeCallback;
   disabled?: boolean;
   value?: boolean;
   name?: string;
@@ -975,7 +984,7 @@ declare interface ActiveStartDate {
 
 export interface DateInputProps {
   value: any;
-  onChange?(): void;
+  onChange?(): OnChangeCallback;
   name?: string;
   locale?: string;
   disabled?: boolean;
@@ -1018,7 +1027,7 @@ export interface InputProps {
   name?: string;
   disabled?: boolean;
   placeholder?: string;
-  onChange?(): void;
+  onChange?(): OnChangeCallback;
   hint?: string;
   error?: string | boolean;
   valid?: boolean;
@@ -1051,7 +1060,7 @@ export interface MultiSelectProps {
   valueKey?: string;
   labelKey?: string;
   placeholder?: string;
-  onChange?(): void;
+  onChange?(): OnChangeCallback;
   hint?: string;
   error?: string | boolean;
   valid?: boolean;
@@ -1066,7 +1075,7 @@ export interface NumberInputProps {
   name?: string;
   disabled?: boolean;
   placeholder?: string;
-  onChange?(): void;
+  onChange?(): OnChangeCallback;
   hint?: string;
   error?: string | boolean;
   valid?: boolean;
@@ -1089,7 +1098,7 @@ export interface RadioGroupProps {
   name?: string;
   valueKey?: string;
   labelKey?: string;
-  onChange?(): void;
+  onChange?(): OnChangeCallback;
   disabled?: boolean;
   value?: string | number;
   error?: string | boolean;
@@ -1105,7 +1114,7 @@ export interface SearchInputProps {
   options?: string[];
   value: string;
   name?: string;
-  onChange(): void;
+  onChange(): OnChangeCallback;
   noResultLabel?: string;
   placeholder?: string;
   isLoading?: boolean;
@@ -1122,7 +1131,7 @@ export interface SelectProps {
   valueKey?: string;
   labelKey?: string;
   placeholder?: string;
-  onChange?(): void;
+  onChange?(): OnChangeCallback;
   hint?: string;
   error?: string | boolean;
   valid?: boolean;
@@ -1139,7 +1148,7 @@ export interface TextAreaProps {
   name?: string;
   disabled?: boolean;
   placeholder?: string;
-  onChange?(): void;
+  onChange?(): OnChangeCallback;
   hint?: string;
   error?: string | boolean;
   valid?: boolean;
@@ -1253,7 +1262,7 @@ export interface ListTileProps {
   subtitle?: React.ReactNode;
   leading?: React.ReactNode;
   trailing?: React.ReactNode;
-  : void;
+  onClick: OnClickCallback;
   style?: React.CSSProperties;
 }
 

@@ -54,7 +54,10 @@ for (const folder of folders) {
       result = result.replace('style?: object', 'style?: React.CSSProperties');
 
       // replace generic onClick with specific definition
-      result = result.replace('onClick?()', '');
+      result = result.replace(/onClick(.*?)\?\(\): void/gm, 'onClick$1: OnClickCallback');
+
+      // replace generic onChange with specific definition
+      result = result.replace(/onChange(.*?\(\)): void/gm, 'onChange$1: OnChangeCallback');
 
       // change class to function component definition
       result = result.replace(
