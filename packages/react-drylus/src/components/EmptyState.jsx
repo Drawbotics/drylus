@@ -40,7 +40,7 @@ const styles = {
 };
 
 
-export const EmptyStateVariations = new Enum(
+export const EmptyStateVariation = new Enum(
   'DEFAULT',
   'PROCESSING',
   'NOT_FOUND',
@@ -51,13 +51,13 @@ export const EmptyStateVariations = new Enum(
 
 function _getImageForVariation(variation) {
   switch (variation) {
-    case EmptyStateVariations.PROCESSING:
+    case EmptyStateVariation.PROCESSING:
       return <Processing />;
-    case EmptyStateVariations.NOT_FOUND:
+    case EmptyStateVariation.NOT_FOUND:
         return <NotFound />;
-    case EmptyStateVariations.NOT_ALLOWED:
+    case EmptyStateVariation.NOT_ALLOWED:
       return <NotAllowed />;
-    case EmptyStateVariations.FAILED:
+    case EmptyStateVariation.FAILED:
       return <Failed />;
     default:
       return <Empty />;
@@ -147,11 +147,11 @@ EmptyState.propTypes = {
   style: PropTypes.object,
 
   variation: PropTypes.oneOf([
-    EmptyStateVariations.DEFAULT,
-    EmptyStateVariations.PROCESSING,
-    EmptyStateVariations.NOT_FOUND,
-    EmptyStateVariations.NOT_ALLOWED,
-    EmptyStateVariations.FAILED,
+    EmptyStateVariation.DEFAULT,
+    EmptyStateVariation.PROCESSING,
+    EmptyStateVariation.NOT_FOUND,
+    EmptyStateVariation.NOT_ALLOWED,
+    EmptyStateVariation.FAILED,
   ]),
 
   /** Reponsive prop overrides */
@@ -167,7 +167,7 @@ EmptyState.propTypes = {
 
 
 EmptyState.defaultProps = {
-  variation: EmptyStateVariations.DEFAULT,
+  variation: EmptyStateVariation.DEFAULT,
 };
 
 

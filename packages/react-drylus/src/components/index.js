@@ -26,7 +26,7 @@ export BigCheckbox from './BigCheckbox';
 export Toggle from './Toggle';
 export Separator from './Separator';
 export CircularProgress from './CircularProgress';
-export EmptyState, { EmptyStateVariations } from './EmptyState';
+export EmptyState, { EmptyStateVariation } from './EmptyState';
 export Banner from './Banner';
 export Callout from './Callout';
 export ButtonLink from './ButtonLink';
