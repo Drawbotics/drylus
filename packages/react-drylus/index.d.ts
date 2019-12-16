@@ -1,5 +1,9 @@
 import React from 'react';
 
+type OnClickCallback<T> = (event: React.MouseEvent<T, React.MouseEvent>) => void;
+type OnChangeCallback<T> = (event: React.ChangeEvent<T>) => void;
+
+
 export enum Category {
   BRAND = 'BRAND',
   INFO = 'INFO',
@@ -71,34 +75,114 @@ export enum FlexAlign = {
 }
 
 
+export interface BaseFilterProps {
+  clearLabel?: string;
+  label: string;
+  onClear?(): OnClickCallback<HTMLButtonElement>;
+  children?: React.ReactNode;
+  align?: Align.LEFT | Align.RIGHT;
+  active?: boolean;
+  style?: React.CSSProperties;
+  fullWidth?: boolean;
+}
+
+interface Option {
+  value?: string | number;
+  label?: string;
+  leading?: React.ReactNode;
+  trailing?: React.ReactNode;
+}
+
+type OnChangeOptionCallback = (value: string | number) => void;
+
+export const Filter: React.FunctionComponent<FilterProps>;
+
+export interface SelectFilterProps extends BaseFilterProps {
+  options?: Array<Option>;
+  value?: string | number;
+  valueKey?: string;
+  labelKey?: string;
+  onChange(): OnChangeOptionCallback;
+  style?: CSSProperties;
+}
+
+export const SelectFilter: React.FunctionComponent<SelectFilterProps>;
+
+interface Value = string | number;
+
+export interface CheckboxFilterProps {
+  options?: Array<Option>;
+  values?: Array<Value>;
+  valueKey?: string;
+  labelKey?: string;
+  onChange(): OnChangeOptionCallback;
+  style?: CSSProperties;
+}
+
+export const CheckboxFilter: React.FunctionComponent<CheckboxFilterProps>;
+
+
 type Icons = 'activity' | 'airplay' | 'alert-circle' | 'alert-octagon' | 'alert-triangle' | 'align-center' | 'align-justify' | 'align-left' | 'align-right' | 'anchor' | 'aperture' | 'arrow-down-left' | 'arrow-down-right' | 'arrow-down' | 'arrow-left' | 'arrow-right' | 'arrow-up-left' | 'arrow-up-right' | 'arrow-up' | 'at-sign' | 'award' | 'bar-chart-2' | 'bar-chart' | 'battery-charging' | 'battery' | 'bell-off' | 'bell' | 'billboard' | 'bluetooth' | 'book' | 'bookmark' | 'box' | 'brand-id' | 'briefcase' | 'brochure' | 'burger' | 'calendar' | 'camera-off' | 'camera' | 'cast' | 'check-circle' | 'check-square' | 'check' | 'chevron-down' | 'chevron-left' | 'chevron-right' | 'chevron-up' | 'chevrons-down' | 'chevrons-left' | 'chevrons-right' | 'chevrons-up' | 'chrome' | 'circle' | 'clipboard' | 'clock' | 'cloud-drizzle' | 'cloud-lightning' | 'cloud-off' | 'cloud-rain' | 'cloud-snow' | 'cloud' | 'command' | 'commercial-floorplan' | 'compass' | 'copy' | 'corner-down-left' | 'corner-down-right' | 'corner-left-down' | 'corner-left-up' | 'corner-right-down' | 'corner-right-up' | 'corner-up-left' | 'corner-up-right' | 'cpu' | 'credit-card' | 'crosshair' | 'delete' | 'disc' | 'download-cloud' | 'download' | 'drawbotics' | 'drone-shooting' | 'droplet' | 'edit-2' | 'edit-3' | 'edit' | 'exterior-3d' | 'exterior-restyling' | 'external-link' | 'eye-off' | 'eye' | 'facebook' | 'fast-forward' | 'feather' | 'file-minus' | 'file-plus' | 'file-text' | 'file' | 'film' | 'filter' | 'flag' | 'flyer' | 'folder' | 'github' | 'globe' | 'grid' | 'hash' | 'headphones' | 'heart' | 'home' | 'image' | 'inbox' | 'index.js' | 'info' | 'instagram' | 'interior-3d' | 'interior-tour-3d' | 'landing-page' | 'layers' | 'layout' | 'life-buoy' | 'link-2' | 'link' | 'loader' | 'lock' | 'log-in' | 'log-out' | 'mail' | 'map-pin' | 'map' | 'maximize-2' | 'maximize' | 'media-kit' | 'menu' | 'message-circle' | 'message-square' | 'mic-off' | 'mic' | 'minimize-2' | 'minimize' | 'minus-circle' | 'minus-square' | 'minus' | 'model-360' | 'monitor' | 'moon' | 'more-horizontal' | 'more-vertical' | 'move' | 'music' | 'navigation-2' | 'navigation' | 'newsletter' | 'octagon' | 'package' | 'panorama-360' | 'pause-circle' | 'pause' | 'percent' | 'phone-call' | 'phone-forwarded' | 'phone-incoming' | 'phone-missed' | 'phone-off' | 'phone-outgoing' | 'phone' | 'photo-editing' | 'photo-shooting' | 'pie-chart' | 'plan-2d' | 'play-circle' | 'play' | 'plus-circle' | 'plus-square' | 'plus' | 'pocket' | 'power' | 'printer' | 'radio' | 'refresh-ccw' | 'refresh-cw' | 'repeat' | 'revo-alt' | 'revo' | 'rewind' | 'rotate-ccw' | 'rotate-cw' | 'save' | 'scissors' | 'search' | 'server' | 'settings' | 'share-2' | 'share' | 'shield' | 'shoebox' | 'shuffle' | 'sidebar' | 'site-plan' | 'skip-back' | 'skip-forward' | 'slack' | 'slash' | 'smartphone' | 'social-media-kit' | 'speaker' | 'square' | 'star' | 'stop-circle' | 'sun' | 'sunrise' | 'sunset' | 'tablet' | 'tag' | 'target' | 'thermometer' | 'thumbs-down' | 'thumbs-up' | 'toggle-left' | 'toggle-right' | 'tour-3d' | 'trash-2' | 'trash' | 'trending-down' | 'trending-up' | 'triangle' | 'twitter' | 'type' | 'umbrella' | 'unlock' | 'upload-cloud' | 'upload' | 'user-check' | 'user-minus' | 'user-plus' | 'user-x' | 'user' | 'users' | 'video-animation' | 'video-off' | 'video' | 'voicemail' | 'volume-1' | 'volume-2' | 'volume-x' | 'volume' | 'vr' | 'watch' | 'website' | 'wifi' | 'wind' | 'x-circle' | 'x-square' | 'x' | 'zap' | 'zoom-in' | 'zoom-out';
+
+
+interface SizeDescription {
+  top?: Size;
+  right?: Size;
+  bottom?: Size;
+  left?: Size;
+}
+
+declare interface SizeDescriptionAlt {
+  vertical?: Size;
+  horizontal?: Size;
+}
+
+
+export interface PaddingProps {
+  size?: Sizes | SizeDescription | SizeDescriptionAlt;
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
+  responsive?: Responsive;
+}
+
+export const Padding: React.FunctionComponent<PaddingProps>;
+
+
+export interface MarginProps {
+  size?: Sizes | SizeDescription | SizeDescriptionAlt;
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
+  responsive?: Responsive;
+}
+
+export const Margin: React.FunctionComponent<MarginProps>;
 
 export interface ContentProps {
   children: React.ReactNode;
   fullHeight?: boolean;
   fullWidth?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Content: React.FunctionComponent<ContentProps>;
 
 export interface DrylusProviderProps {
   children: React.ReactNode;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const DrylusProvider: React.FunctionComponent<DrylusProviderProps>;
 
 export interface PageProps {
   children: React.ReactNode;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Page: React.FunctionComponent<PageProps>;
 
 export interface ThemeProviderProps {
   children: React.ReactNode;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const ThemeProvider: React.FunctionComponent<ThemeProviderProps>;
@@ -144,7 +228,7 @@ export interface AvatarProps {
     | Category.WARNING
     | Category.BRAND;
   backgroundColor?: string;
-  style?: object;
+  style?: React.CSSProperties;
   responsive?: Responsive;
 }
 
@@ -159,7 +243,7 @@ export interface BadgeProps {
     | Category.INFO
     | Category.WARNING
     | Category.DANGER;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Badge: React.FunctionComponent<BadgeProps>;
@@ -172,7 +256,7 @@ export interface BannerProps {
     | Category.SUCCESS
     | Category.INFO
     | Category.WARNING;
-  style?: object;
+  style?: React.CSSProperties;
   trailing?: React.ReactNode;
 }
 
@@ -185,7 +269,7 @@ export interface BigCheckboxProps {
   label: string;
   name?: string;
   disabled?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const BigCheckbox: React.FunctionComponent<BigCheckboxProps>;
@@ -198,7 +282,7 @@ export interface BigRadioProps {
   label: string;
   name?: string;
   disabled?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const BigRadio: React.FunctionComponent<BigRadioProps>;
@@ -206,7 +290,7 @@ export const BigRadio: React.FunctionComponent<BigRadioProps>;
 export interface BreadcrumbsProps {
   crumbs: shape[];
   linkComponent?: React.ReactNode;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Breadcrumbs: React.FunctionComponent<BreadcrumbsProps>;
@@ -223,7 +307,7 @@ declare interface Responsive {
 export interface ButtonProps {
   children?: string;
   disabled?: boolean;
-  onClick?(): void;
+  : void;
   category?:
     | Category.BRAND
     | Category.DANGER
@@ -236,7 +320,7 @@ export interface ButtonProps {
   leading?: React.ReactNode;
   trailing?: React.ReactNode;
   fullWidth?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
   responsive?: Responsive;
 }
 
@@ -254,7 +338,7 @@ declare interface Responsive {
 export interface ButtonLinkProps {
   children?: string;
   disabled?: boolean;
-  onClick?(): void;
+  : void;
   category?:
     | Category.BRAND
     | Category.DANGER
@@ -266,7 +350,7 @@ export interface ButtonLinkProps {
   leading?: React.ReactNode;
   trailing?: React.ReactNode;
   fullWidth?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
   responsive?: Responsive;
 }
 
@@ -279,7 +363,7 @@ export interface CalloutProps {
     | Category.SUCCESS
     | Category.INFO
     | Category.WARNING;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Callout: React.FunctionComponent<CalloutProps>;
@@ -294,7 +378,7 @@ export interface CircularProgressProps {
     | Category.INFO
     | Category.WARNING;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const CircularProgress: React.FunctionComponent<CircularProgressProps>;
@@ -303,8 +387,8 @@ export interface CollapsibleProps {
   title: string;
   isOpen?: boolean;
   children: React.ReactNode;
-  onClick?(): void;
-  style?: object;
+  : void;
+  style?: React.CSSProperties;
 }
 
 export const Collapsible: React.FunctionComponent<CollapsibleProps>;
@@ -317,7 +401,7 @@ export interface DotProps {
     | Category.WARNING
     | Category.DANGER
     | Category.PRIMARY;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Dot: React.FunctionComponent<DotProps>;
@@ -343,7 +427,7 @@ export interface DrawerProps {
   width?: number | string;
   raw?: boolean;
   title?: string;
-  style?: object;
+  style?: React.CSSProperties;
   responsive?: Responsive;
   side?: Position.LEFT | Position.RIGHT;
 }
@@ -353,10 +437,10 @@ export const Drawer: React.FunctionComponent<DrawerProps>;
 export interface DropdownOptionProps {
   text: string;
   disabled?: boolean;
-  onClick?(): void;
+  : void;
   icon?: string;
   category?: Category.DANGER | Category.SUCCESS | Category.WARNING;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Dropdown: React.FunctionComponent<DropdownProps>;
@@ -395,7 +479,7 @@ export interface EmptyStateProps {
   description?: string;
   actions?: any;
   children?: any;
-  style?: object;
+  style?: React.CSSProperties;
   variation?:
     | EmptyStateVariation.DEFAULT
     | EmptyStateVariation.PROCESSING
@@ -406,41 +490,6 @@ export interface EmptyStateProps {
 }
 
 export const EmptyState: React.FunctionComponent<EmptyStateProps>;
-
-export interface BaseFilterProps {
-  clearLabel?: string;
-  label: string;
-  onClear?(): void;
-  children?: React.ReactNode;
-  align?: Align.LEFT | Align.RIGHT;
-  active?: boolean;
-  style?: object;
-  fullWidth?: boolean;
-}
-
-export const Filter: React.FunctionComponent<FilterProps>;
-
-export interface SelectFilterProps {
-  options?: any;
-  value?: string | number;
-  valueKey?: string;
-  labelKey?: string;
-  onChange(): void;
-  style?: object;
-}
-
-export const Filter: React.FunctionComponent<FilterProps>;
-
-export interface CheckboxFilterProps {
-  options?: any;
-  values?: any[];
-  valueKey?: string;
-  labelKey?: string;
-  onChange(): void;
-  style?: object;
-}
-
-export const Filter: React.FunctionComponent<FilterProps>;
 
 export interface FilterGroupProps {
   label: string;
@@ -457,14 +506,14 @@ export const FilterGroup: React.FunctionComponent<FilterGroupProps>;
 export interface IconProps {
   name: string;
   bold?: boolean;
-  onClick?(): void;
+  : void;
   category?:
     | Category.DANGER
     | Category.INFO
     | Category.SUCCESS
     | Category.WARNING
     | Category.BRAND;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Icon: React.FunctionComponent<IconProps>;
@@ -472,7 +521,7 @@ export const Icon: React.FunctionComponent<IconProps>;
 export interface LabelProps {
   children?: string | React.ReactNode;
   ellipsized?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
   isPlaceholder?: boolean;
 }
 
@@ -489,7 +538,7 @@ export interface ListItemProps {
     | Category.PRIMARY;
   icon?: string;
   disabled?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const List: React.FunctionComponent<ListProps>;
@@ -517,7 +566,7 @@ export interface MapProps {
   zoom?: number;
   accessToken: string;
   markers: shape[];
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Map: React.FunctionComponent<MapProps>;
@@ -541,7 +590,7 @@ export interface ModalProps {
   size?: Size.DEFAULT | Size.LARGE;
   raw?: boolean;
   title?: string;
-  style?: object;
+  style?: React.CSSProperties;
   responsive?: Responsive;
 }
 
@@ -554,7 +603,7 @@ export interface PaginationProps {
   onChange(): void;
   value?: number;
   maxVisiblePages?: number;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Pagination: React.FunctionComponent<PaginationProps>;
@@ -569,7 +618,7 @@ export const Panel: React.FunctionComponent<PanelProps>;
 export interface PanelBodyProps {
   children: React.ReactNode;
   noPadding?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Panel: React.FunctionComponent<PanelProps>;
@@ -610,7 +659,7 @@ declare interface Responsive {
 
 export interface ParagraphProps {
   children?: React.ReactNode;
-  style?: object;
+  style?: React.CSSProperties;
   align?: Align.CENTER | Align.LEFT | Align.RIGHT;
   responsive?: Responsive;
 }
@@ -622,7 +671,7 @@ export interface PopoverProps {
   content?: any;
   children: React.ReactNode;
   side?: Position.LEFT | Position.RIGHT | Position.TOP | Position.BOTTOM;
-  style?: object;
+  style?: React.CSSProperties;
   exitOnClick?: boolean;
 }
 
@@ -637,7 +686,7 @@ export interface ProgressBarProps {
     | Category.INFO
     | Category.WARNING;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const ProgressBar: React.FunctionComponent<ProgressBarProps>;
@@ -652,7 +701,7 @@ export interface RoundIconProps {
     | Category.SUCCESS
     | Category.WARNING
     | Category.BRAND;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const RoundIcon: React.FunctionComponent<RoundIconProps>;
@@ -663,14 +712,14 @@ export interface SegmentedControlProps {
   labelKey?: string;
   value?: string | number;
   onChange?(): void;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const SegmentedControl: React.FunctionComponent<SegmentedControlProps>;
 
 export interface SeparatorProps {
   vertical?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Separator: React.FunctionComponent<SeparatorProps>;
@@ -689,7 +738,7 @@ export interface SpinnerProps {
   category?: Category.BRAND | Category.INFO;
   inversed?: boolean;
   fullSize?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
   responsive?: Responsive;
 }
 
@@ -710,7 +759,7 @@ export interface TabNavigationProps {
   onChange?(): void;
   vertical?: boolean;
   linkComponent?: React.ReactNode;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const TabNavigation: React.FunctionComponent<TabNavigationProps>;
@@ -720,9 +769,9 @@ export const Table: React.FunctionComponent<TableProps>;
 export interface TRowProps {
   children: React.ReactNode;
   highlighted?: boolean;
-  onClick?(): void;
+  : void;
   clickable?(): void;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Table: React.FunctionComponent<TableProps>;
@@ -779,7 +828,7 @@ export interface TagProps {
     | Category.WARNING;
   onClickRemove?(): void;
   inversed?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Tag: React.FunctionComponent<TagProps>;
@@ -807,7 +856,7 @@ export interface TextProps {
     | Category.SUCCESS
     | Category.INFO
     | Category.WARNING;
-  style?: object;
+  style?: React.CSSProperties;
   responsive?: Responsive;
 }
 
@@ -822,7 +871,7 @@ export interface TextLinkProps {
     | Category.INFO
     | Category.WARNING;
   underlined?: LinkUnderlined.ALWAYS | LinkUnderlined.HOVER;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const TextLink: React.FunctionComponent<TextLinkProps>;
@@ -830,7 +879,7 @@ export const TextLink: React.FunctionComponent<TextLinkProps>;
 export interface TileProps {
   title?: string;
   children: React.ReactNode;
-  style?: object;
+  style?: React.CSSProperties;
   noPadding?: boolean;
 }
 
@@ -849,7 +898,7 @@ export interface TitleProps {
   children?: React.ReactNode | string;
   size?: 1 | 2 | 3 | 4;
   noMargin?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
   align?: Align.CENTER | Align.LEFT | Align.RIGHT;
   responsive?: Responsive;
 }
@@ -870,7 +919,7 @@ export interface ToggleProps {
   disabled?: boolean;
   value: boolean;
   size?: Size.SMALL | Size.DEFAULT;
-  style?: object;
+  style?: React.CSSProperties;
   responsive?: Responsive;
 }
 
@@ -881,7 +930,7 @@ export interface TooltipProps {
   content?: any;
   children: React.ReactNode;
   side?: Position.LEFT | Position.RIGHT | Position.TOP | Position.BOTTOM;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Tooltip: React.FunctionComponent<TooltipProps>;
@@ -894,7 +943,7 @@ export interface CheckboxProps {
   name?: string;
   error?: string | boolean;
   size?: Size.LARGE | Size.DEFAULT;
-  style?: object;
+  style?: React.CSSProperties;
   isPlaceholder?: boolean;
 }
 
@@ -940,7 +989,7 @@ export interface DateInputProps {
   minDate?: MinDate;
   activeStartDate?: ActiveStartDate;
   loading?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const DateInput: React.FunctionComponent<DateInputProps>;
@@ -949,7 +998,7 @@ export interface FormGroupProps {
   label: React.ReactNode;
   input: React.ReactNode;
   horizontal?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const FormGroup: React.FunctionComponent<FormGroupProps>;
@@ -957,7 +1006,7 @@ export const FormGroup: React.FunctionComponent<FormGroupProps>;
 export interface HintProps {
   children: string;
   category?: Category.DANGER;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Hint: React.FunctionComponent<HintProps>;
@@ -978,7 +1027,7 @@ export interface InputProps {
   className?: string;
   type?: "text" | "password" | "email" | "tel" | "url";
   loading?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
   isPlaceholder?: boolean;
 }
 
@@ -989,7 +1038,7 @@ export interface InputGroupProps {
   hint?: string;
   error?: string | boolean;
   valid?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const InputGroup: React.FunctionComponent<InputGroupProps>;
@@ -1007,7 +1056,7 @@ export interface MultiSelectProps {
   error?: string | boolean;
   valid?: boolean;
   loading?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const MultiSelect: React.FunctionComponent<MultiSelectProps>;
@@ -1026,7 +1075,7 @@ export interface NumberInputProps {
   min?: number;
   withCounter?: boolean;
   loading?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const NumberInput: React.FunctionComponent<NumberInputProps>;
@@ -1046,7 +1095,7 @@ export interface RadioGroupProps {
   error?: string | boolean;
   className?: string;
   hint?: string;
-  style?: object;
+  style?: React.CSSProperties;
   isPlaceholder?: boolean;
 }
 
@@ -1060,7 +1109,7 @@ export interface SearchInputProps {
   noResultLabel?: string;
   placeholder?: string;
   isLoading?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const SearchInput: React.FunctionComponent<SearchInputProps>;
@@ -1078,7 +1127,7 @@ export interface SelectProps {
   error?: string | boolean;
   valid?: boolean;
   loading?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Select: React.FunctionComponent<SelectProps>;
@@ -1096,7 +1145,7 @@ export interface TextAreaProps {
   valid?: boolean;
   className?: string;
   loading?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
   isPlaceholder?: boolean;
 }
 
@@ -1104,7 +1153,7 @@ export const TextArea: React.FunctionComponent<TextAreaProps>;
 
 export interface FlexItemProps {
   flex?: boolean | number;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Flex: React.FunctionComponent<FlexProps>;
@@ -1143,7 +1192,7 @@ export const Flex: React.FunctionComponent<FlexProps>;
 export interface GridItemProps {
   children: React.ReactNode;
   span?: number;
-  style?: object;
+  style?: React.CSSProperties;
 }
 
 export const Grid: React.FunctionComponent<GridProps>;
@@ -1193,7 +1242,7 @@ export interface LayoutProps {
   position: Position.LEFT | Position.RIGHT | Position.TOP | Position.BOTTOM;
   fixed?: boolean;
   barScrollable?: boolean;
-  style?: object;
+  style?: React.CSSProperties;
   responsive?: Responsive;
 }
 
@@ -1204,68 +1253,8 @@ export interface ListTileProps {
   subtitle?: React.ReactNode;
   leading?: React.ReactNode;
   trailing?: React.ReactNode;
-  onClick?(): void;
-  style?: object;
+  : void;
+  style?: React.CSSProperties;
 }
 
 export const ListTile: React.FunctionComponent<ListTileProps>;
-
-declare interface Size {
-  vertical?: any;
-  horizontal?: any;
-}
-
-declare interface Size {
-  left?: any;
-  right?: any;
-  bottom?: any;
-  top?: any;
-}
-
-declare interface Responsive {
-  XS?: object;
-  S?: object;
-  M?: object;
-  L?: object;
-  XL?: object;
-  HUGE?: object;
-}
-
-export interface MarginProps {
-  size?: any;
-  children?: React.ReactNode;
-  style?: object;
-  responsive?: Responsive;
-}
-
-export const Margin: React.FunctionComponent<MarginProps>;
-
-declare interface Size {
-  vertical?: any;
-  horizontal?: any;
-}
-
-declare interface Size {
-  left?: any;
-  right?: any;
-  bottom?: any;
-  top?: any;
-}
-
-declare interface Responsive {
-  XS?: object;
-  S?: object;
-  M?: object;
-  L?: object;
-  XL?: object;
-  HUGE?: object;
-}
-
-export interface PaddingProps {
-  size?: any;
-  children?: React.ReactNode;
-  style?: object;
-  responsive?: Responsive;
-}
-
-export const Padding: React.FunctionComponent<PaddingProps>;

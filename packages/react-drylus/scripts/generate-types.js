@@ -21,6 +21,8 @@ const folders = [
   path.resolve(__dirname, '../src/layout'),
 ];
 
+const skippedComponents = ['Filter', 'Padding', 'Margin'];
+
 
  let types = [generateCustomDefinitions()];
 
@@ -34,6 +36,11 @@ for (const folder of folders) {
     const fileName = path.basename(input);
     const componentName = fileName.replace('.jsx', '');
 
+    if (skippedComponents.includes(componentName)) {
+      console.warn('Skipping', componentName);
+      continue;
+    }
+
     console.info('Gonna generate', file);
 
     try {
@@ -42,6 +49,12 @@ for (const folder of folders) {
         isBaseClass: false,
         output: `${cache}/temp.d.ts`,
       });
+
+      // replace style object with more precise definition
+      result = result.replace('style?: object', 'style?: React.CSSProperties');
+
+      // replace generic onClick with specific definition
+      result = result.replace('onClick?()', '');
 
       // change class to function component definition
       result = result.replace(
