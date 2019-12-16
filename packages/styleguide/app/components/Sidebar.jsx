@@ -8,7 +8,7 @@ import {
   Size,
   Flex,
   FlexItem,
-  FlexDirections,
+  FlexDirection,
   FlexJustify,
   Tooltip,
   Position,
@@ -49,7 +49,7 @@ const Sidebar = () => {
   
   return (
     <div className={styles.sidebar}>
-      <Flex direction={FlexDirections.VERTICAL} justify={FlexJustify.START}>
+      <Flex direction={FlexDirection.VERTICAL} justify={FlexJustify.START}>
         <FlexItem>
           <Margin size={{ bottom: Size.SMALL }}>
             <Link to="/">

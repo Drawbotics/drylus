@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
 
-import Flex, { FlexItem, FlexDirections } from '../layout/Flex';
+import Flex, { FlexItem, FlexDirection } from '../layout/Flex';
 import Margin from '../layout/Margin';
 import Title from './Title';
 import Text from './Text';
@@ -18,7 +18,7 @@ import {
   NotAllowed,
   Failed,
 } from '../utils/illustrations';
-import { CustomPropTypes } from '../utils';
+import { CustomPropTypes, deprecateProperty } from '../utils';
 
 
 const styles = {
@@ -38,6 +38,18 @@ const styles = {
     text-align: center;
   `,
 };
+
+
+/**
+ * @deprecated and will be removed in version 6.0
+ */
+export const EmptyStateVariations = deprecateProperty(new Enum(
+  'DEFAULT',
+  'PROCESSING',
+  'NOT_FOUND',
+  'NOT_ALLOWED',
+  'FAILED',
+), 'EmptyStateVariations', 'EmptyStateVariation');
 
 
 export const EmptyStateVariation = new Enum(
@@ -82,7 +94,7 @@ const EmptyState = ({
 
   return (
     <div style={style} className={styles.root}>
-      <Flex direction={FlexDirections.VERTICAL}>
+      <Flex direction={FlexDirection.VERTICAL}>
         <FlexItem>
           <div className={styles.image}>
             {_getImageForVariation(variation)}

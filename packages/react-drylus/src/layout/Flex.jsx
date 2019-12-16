@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import camelCase from 'lodash/camelCase';
 import Enum from '@drawbotics/enums';
 
-import { getEnumAsClass } from '../utils';
+import { getEnumAsClass, deprecateProperty } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 
 
@@ -60,7 +60,16 @@ const styles = {
 };
 
 
-export const FlexDirections = new Enum(
+/**
+ * @deprecated and will be removed in version 6.0
+ */
+export const FlexDirections = deprecateProperty(new Enum(
+  'HORIZONTAL',
+  'VERTICAL',
+), 'FlexDirections', 'FlexDirection');
+
+
+export const FlexDirection = new Enum(
   'HORIZONTAL',
   'VERTICAL',
 );
@@ -127,7 +136,7 @@ const Flex = ({
 }) => {
   const {
     children,
-    direction = FlexDirections.HORIZONTAL,
+    direction = FlexDirection.HORIZONTAL,
     justify = FlexJustify.CENTER,
     align = FlexAlign.CENTER,
     wrap = false,
@@ -157,8 +166,8 @@ const Flex = ({
 Flex.propTypes = {
   /** Determines which way the flex layout should be */
   direction: PropTypes.oneOf([
-    FlexDirections.HORIZONTAL,
-    FlexDirections.VERTICAL,
+    FlexDirection.HORIZONTAL,
+    FlexDirection.VERTICAL,
   ]),
 
   /** See flexbox justify-content */
@@ -201,7 +210,7 @@ Flex.propTypes = {
 
 
 Flex.defaultProps = {
-  direction: FlexDirections.HORIZONTAL,
+  direction: FlexDirection.HORIZONTAL,
   justify: FlexJustify.CENTER,
   align: FlexAlign.CENTER,
   wrap: false,

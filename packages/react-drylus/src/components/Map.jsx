@@ -5,7 +5,7 @@ import { LngLatBounds } from 'mapbox-gl';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
-import Flex, { FlexDirections, FlexItem } from '../layout/Flex';
+import Flex, { FlexDirection, FlexItem } from '../layout/Flex';
 import { Size, Tier } from '../enums';
 import Popover from './Popover';
 import Text from './Text';
@@ -57,7 +57,7 @@ const PopoverContent = ({
   subtitle,
 }) => {
   return (
-    <Flex direction={FlexDirections.VERTICAL}>
+    <Flex direction={FlexDirection.VERTICAL}>
       <FlexItem>
         <Text>{title}</Text>
       </FlexItem>

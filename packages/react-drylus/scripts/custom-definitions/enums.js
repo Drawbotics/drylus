@@ -46,4 +46,26 @@ export enum LinkUnderlined {
   ALWAYS = 'ALWAYS',
   HOVER = 'HOVER',
 }
+
+// components/Flex
+export enum FlexDirection = {
+  HORIZONTAL = 'HORIZONTAL',
+  VERTICAL = 'VERTICAL',
+}
+
+export enum FlexJustify = {
+  START = 'START',
+  END = 'END',
+  CENTER = 'CENTER',
+  SPACE_AROUND = 'SPACE_AROUND',
+  SPACE_BETWEEN = 'SPACE_BETWEEN',
+  SPACE_EVENLY = 'SPACE_EVENLY',
+}
+
+export enum FlexAlign = {
+  STRETCH = 'STRETCH',
+  START = 'START',
+  END = 'END',
+  CENTER = 'CENTER',
+}
 `;

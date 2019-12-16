@@ -48,6 +48,28 @@ export enum LinkUnderlined {
   HOVER = 'HOVER',
 }
 
+// components/Flex
+export enum FlexDirection = {
+  HORIZONTAL = 'HORIZONTAL',
+  VERTICAL = 'VERTICAL',
+}
+
+export enum FlexJustify = {
+  START = 'START',
+  END = 'END',
+  CENTER = 'CENTER',
+  SPACE_AROUND = 'SPACE_AROUND',
+  SPACE_BETWEEN = 'SPACE_BETWEEN',
+  SPACE_EVENLY = 'SPACE_EVENLY',
+}
+
+export enum FlexAlign = {
+  STRETCH = 'STRETCH',
+  START = 'START',
+  END = 'END',
+  CENTER = 'CENTER',
+}
+
 export interface ContentProps {
   children: React.ReactNode;
   fullHeight?: boolean;
@@ -1094,7 +1116,7 @@ declare interface Responsive {
 }
 
 export interface FlexProps {
-  direction?: FlexDirections.HORIZONTAL | FlexDirections.VERTICAL;
+  direction?: FlexDirection.HORIZONTAL | FlexDirection.VERTICAL;
   justify?:
     | FlexJustify.START
     | FlexJustify.END

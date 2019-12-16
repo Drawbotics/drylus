@@ -5,7 +5,7 @@ import {
   FlexJustify,
   Title,
   TextLink,
-  FlexDirections,
+  FlexDirection,
 } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
@@ -139,7 +139,7 @@ const Intro = () => {
         justify={FlexJustify.SPACE_AROUND}
         responsive={{
           M: {
-            direction: FlexDirections.VERTICAL,
+            direction: FlexDirection.VERTICAL,
           },
         }}>
         <FlexItem>

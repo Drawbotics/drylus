@@ -43,9 +43,6 @@ for (const folder of folders) {
         output: `${cache}/temp.d.ts`,
       });
 
-      // remove react import
-      // result = result.substring(result.indexOf('\n') + 1);
-
       // change class to function component definition
       result = result.replace(
         /export default class.*?{}/gms,

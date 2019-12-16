@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
 
-import Flex, { FlexItem, FlexDirections, FlexAlign } from '../layout/Flex';
+import Flex, { FlexItem, FlexDirection, FlexAlign } from '../layout/Flex';
 import { Size } from '../enums';
 import Margin from '../layout/Margin';
 
@@ -23,7 +23,7 @@ const FormGroup = ({
   return (
     <div style={style} className={styles.root}>
       <Flex
-        direction={horizontal ? FlexDirections.HORIZONTAL : FlexDirections.VERTICAL}
+        direction={horizontal ? FlexDirection.HORIZONTAL : FlexDirection.VERTICAL}
         align={horizontal ? FlexAlign.CENTER : FlexAlign.STRETCH}>
         <FlexItem>
           <Margin size={horizontal ? { right: Size.SMALL } : { bottom: Size.EXTRA_SMALL }}>
