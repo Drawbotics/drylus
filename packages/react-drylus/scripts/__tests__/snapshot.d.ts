@@ -1,7 +1,7 @@
 import React from 'react';
 
-type OnClickCallback<T> = (event: React.MouseEvent<T, React.MouseEvent>) => void;
-type OnChangeCallback<T> = (event: React.ChangeEvent<T>) => void;
+type OnClickCallback = (event: React.MouseEvent<React.MouseEvent>) => void;
+type OnChangeCallback = (event: React.ChangeEvent) => void;
 
 
 export enum Category {
@@ -28,6 +28,12 @@ export enum Tier {
   PRIMARY = 'PRIMARY',
   SECONDARY = 'SECONDARY',
   TERTIARY = 'TERTIARY',
+}
+
+export enum Align {
+  LEFT   = 'LEFT',
+  CENTER = 'CENTER',
+  RIGHT = 'RIGHT',
 }
 
 export enum Position {
@@ -78,7 +84,7 @@ export enum FlexAlign {
 export interface BaseFilterProps {
   clearLabel?: string;
   label: string;
-  onClear?(): OnClickCallback<HTMLButtonElement>;
+  onClear?(): OnClickCallback;
   children?: React.ReactNode;
   align?: Align.LEFT | Align.RIGHT;
   active?: boolean;
@@ -95,7 +101,7 @@ interface Option {
 
 type OnChangeOptionCallback = (value: string | number) => void;
 
-export const Filter: React.FunctionComponent<FilterProps>;
+export declare const BaseFilter: React.FunctionComponent<BaseFilterProps>;
 
 export interface SelectFilterProps extends BaseFilterProps {
   options?: Array<Option>;
@@ -103,23 +109,21 @@ export interface SelectFilterProps extends BaseFilterProps {
   valueKey?: string;
   labelKey?: string;
   onChange(): OnChangeOptionCallback;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
 }
 
-export const SelectFilter: React.FunctionComponent<SelectFilterProps>;
-
-interface Value = string | number;
+export declare const SelectFilter: React.FunctionComponent<SelectFilterProps>;
 
 export interface CheckboxFilterProps {
   options?: Array<Option>;
-  values?: Array<Value>;
+  values?: Array<string|number>;
   valueKey?: string;
   labelKey?: string;
   onChange(): OnChangeOptionCallback;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
 }
 
-export const CheckboxFilter: React.FunctionComponent<CheckboxFilterProps>;
+export declare const CheckboxFilter: React.FunctionComponent<CheckboxFilterProps>;
 
 
 type Icons = 'activity' | 'airplay' | 'alert-circle' | 'alert-octagon' | 'alert-triangle' | 'align-center' | 'align-justify' | 'align-left' | 'align-right' | 'anchor' | 'aperture' | 'arrow-down-left' | 'arrow-down-right' | 'arrow-down' | 'arrow-left' | 'arrow-right' | 'arrow-up-left' | 'arrow-up-right' | 'arrow-up' | 'at-sign' | 'award' | 'bar-chart-2' | 'bar-chart' | 'battery-charging' | 'battery' | 'bell-off' | 'bell' | 'billboard' | 'bluetooth' | 'book' | 'bookmark' | 'box' | 'brand-id' | 'briefcase' | 'brochure' | 'burger' | 'calendar' | 'camera-off' | 'camera' | 'cast' | 'check-circle' | 'check-square' | 'check' | 'chevron-down' | 'chevron-left' | 'chevron-right' | 'chevron-up' | 'chevrons-down' | 'chevrons-left' | 'chevrons-right' | 'chevrons-up' | 'chrome' | 'circle' | 'clipboard' | 'clock' | 'cloud-drizzle' | 'cloud-lightning' | 'cloud-off' | 'cloud-rain' | 'cloud-snow' | 'cloud' | 'command' | 'commercial-floorplan' | 'compass' | 'copy' | 'corner-down-left' | 'corner-down-right' | 'corner-left-down' | 'corner-left-up' | 'corner-right-down' | 'corner-right-up' | 'corner-up-left' | 'corner-up-right' | 'cpu' | 'credit-card' | 'crosshair' | 'delete' | 'disc' | 'download-cloud' | 'download' | 'drawbotics' | 'drone-shooting' | 'droplet' | 'edit-2' | 'edit-3' | 'edit' | 'exterior-3d' | 'exterior-restyling' | 'external-link' | 'eye-off' | 'eye' | 'facebook' | 'fast-forward' | 'feather' | 'file-minus' | 'file-plus' | 'file-text' | 'file' | 'film' | 'filter' | 'flag' | 'flyer' | 'folder' | 'github' | 'globe' | 'grid' | 'hash' | 'headphones' | 'heart' | 'home' | 'image' | 'inbox' | 'index.js' | 'info' | 'instagram' | 'interior-3d' | 'interior-tour-3d' | 'landing-page' | 'layers' | 'layout' | 'life-buoy' | 'link-2' | 'link' | 'loader' | 'lock' | 'log-in' | 'log-out' | 'mail' | 'map-pin' | 'map' | 'maximize-2' | 'maximize' | 'media-kit' | 'menu' | 'message-circle' | 'message-square' | 'mic-off' | 'mic' | 'minimize-2' | 'minimize' | 'minus-circle' | 'minus-square' | 'minus' | 'model-360' | 'monitor' | 'moon' | 'more-horizontal' | 'more-vertical' | 'move' | 'music' | 'navigation-2' | 'navigation' | 'newsletter' | 'octagon' | 'package' | 'panorama-360' | 'pause-circle' | 'pause' | 'percent' | 'phone-call' | 'phone-forwarded' | 'phone-incoming' | 'phone-missed' | 'phone-off' | 'phone-outgoing' | 'phone' | 'photo-editing' | 'photo-shooting' | 'pie-chart' | 'plan-2d' | 'play-circle' | 'play' | 'plus-circle' | 'plus-square' | 'plus' | 'pocket' | 'power' | 'printer' | 'radio' | 'refresh-ccw' | 'refresh-cw' | 'repeat' | 'revo-alt' | 'revo' | 'rewind' | 'rotate-ccw' | 'rotate-cw' | 'save' | 'scissors' | 'search' | 'server' | 'settings' | 'share-2' | 'share' | 'shield' | 'shoebox' | 'shuffle' | 'sidebar' | 'site-plan' | 'skip-back' | 'skip-forward' | 'slack' | 'slash' | 'smartphone' | 'social-media-kit' | 'speaker' | 'square' | 'star' | 'stop-circle' | 'sun' | 'sunrise' | 'sunset' | 'tablet' | 'tag' | 'target' | 'thermometer' | 'thumbs-down' | 'thumbs-up' | 'toggle-left' | 'toggle-right' | 'tour-3d' | 'trash-2' | 'trash' | 'trending-down' | 'trending-up' | 'triangle' | 'twitter' | 'type' | 'umbrella' | 'unlock' | 'upload-cloud' | 'upload' | 'user-check' | 'user-minus' | 'user-plus' | 'user-x' | 'user' | 'users' | 'video-animation' | 'video-off' | 'video' | 'voicemail' | 'volume-1' | 'volume-2' | 'volume-x' | 'volume' | 'vr' | 'watch' | 'website' | 'wifi' | 'wind' | 'x-circle' | 'x-square' | 'x' | 'zap' | 'zoom-in' | 'zoom-out';
@@ -148,23 +152,23 @@ declare interface SizeDescriptionAlt {
 
 
 export interface PaddingProps {
-  size?: Sizes | SizeDescription | SizeDescriptionAlt;
+  size?: Size | SizeDescription | SizeDescriptionAlt;
   children?: React.ReactNode;
   style?: React.CSSProperties;
   responsive?: Responsive;
 }
 
-export const Padding: React.FunctionComponent<PaddingProps>;
+export declare const Padding: React.FunctionComponent<PaddingProps>;
 
 
 export interface MarginProps {
-  size?: Sizes | SizeDescription | SizeDescriptionAlt;
+  size?: Size | SizeDescription | SizeDescriptionAlt;
   children?: React.ReactNode;
   style?: React.CSSProperties;
   responsive?: Responsive;
 }
 
-export const Margin: React.FunctionComponent<MarginProps>;
+export declare const Margin: React.FunctionComponent<MarginProps>;
 
 export interface ContentProps {
   children: React.ReactNode;
@@ -173,28 +177,28 @@ export interface ContentProps {
   style?: React.CSSProperties;
 }
 
-export const Content: React.FunctionComponent<ContentProps>;
+export declare const Content: React.FunctionComponent<ContentProps>;
 
 export interface DrylusProviderProps {
   children: React.ReactNode;
   style?: React.CSSProperties;
 }
 
-export const DrylusProvider: React.FunctionComponent<DrylusProviderProps>;
+export declare const DrylusProvider: React.FunctionComponent<DrylusProviderProps>;
 
 export interface PageProps {
   children: React.ReactNode;
   style?: React.CSSProperties;
 }
 
-export const Page: React.FunctionComponent<PageProps>;
+export declare const Page: React.FunctionComponent<PageProps>;
 
 export interface ThemeProviderProps {
   children: React.ReactNode;
   style?: React.CSSProperties;
 }
 
-export const ThemeProvider: React.FunctionComponent<ThemeProviderProps>;
+export declare const ThemeProvider: React.FunctionComponent<ThemeProviderProps>;
 
 export interface AlertProps {
   text: string;
@@ -208,13 +212,13 @@ export interface AlertProps {
   hideDelay?: number;
 }
 
-export const Alert: React.FunctionComponent<AlertProps>;
+export declare const Alert: React.FunctionComponent<AlertProps>;
 
 export interface AlertsProviderProps {
   children: React.ReactNode;
 }
 
-export const AlertsProvider: React.FunctionComponent<AlertsProviderProps>;
+export declare const AlertsProvider: React.FunctionComponent<AlertsProviderProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -241,7 +245,7 @@ export interface AvatarProps {
   responsive?: Responsive;
 }
 
-export const Avatar: React.FunctionComponent<AvatarProps>;
+export declare const Avatar: React.FunctionComponent<AvatarProps>;
 
 export interface BadgeProps {
   value: number;
@@ -255,7 +259,7 @@ export interface BadgeProps {
   style?: React.CSSProperties;
 }
 
-export const Badge: React.FunctionComponent<BadgeProps>;
+export declare const Badge: React.FunctionComponent<BadgeProps>;
 
 export interface BannerProps {
   children: React.ReactNode;
@@ -269,7 +273,7 @@ export interface BannerProps {
   trailing?: React.ReactNode;
 }
 
-export const Banner: React.FunctionComponent<BannerProps>;
+export declare const Banner: React.FunctionComponent<BannerProps>;
 
 export interface BigCheckboxProps {
   onChange(): OnChangeCallback;
@@ -281,7 +285,7 @@ export interface BigCheckboxProps {
   style?: React.CSSProperties;
 }
 
-export const BigCheckbox: React.FunctionComponent<BigCheckboxProps>;
+export declare const BigCheckbox: React.FunctionComponent<BigCheckboxProps>;
 
 export interface BigRadioProps {
   checked?: boolean;
@@ -294,7 +298,7 @@ export interface BigRadioProps {
   style?: React.CSSProperties;
 }
 
-export const BigRadio: React.FunctionComponent<BigRadioProps>;
+export declare const BigRadio: React.FunctionComponent<BigRadioProps>;
 
 export interface BreadcrumbsProps {
   crumbs: shape[];
@@ -302,7 +306,7 @@ export interface BreadcrumbsProps {
   style?: React.CSSProperties;
 }
 
-export const Breadcrumbs: React.FunctionComponent<BreadcrumbsProps>;
+export declare const Breadcrumbs: React.FunctionComponent<BreadcrumbsProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -333,7 +337,7 @@ export interface ButtonProps {
   responsive?: Responsive;
 }
 
-export const Button: React.FunctionComponent<ButtonProps>;
+export declare const Button: React.FunctionComponent<ButtonProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -363,7 +367,7 @@ export interface ButtonLinkProps {
   responsive?: Responsive;
 }
 
-export const ButtonLink: React.FunctionComponent<ButtonLinkProps>;
+export declare const ButtonLink: React.FunctionComponent<ButtonLinkProps>;
 
 export interface CalloutProps {
   children: React.ReactNode;
@@ -375,7 +379,7 @@ export interface CalloutProps {
   style?: React.CSSProperties;
 }
 
-export const Callout: React.FunctionComponent<CalloutProps>;
+export declare const Callout: React.FunctionComponent<CalloutProps>;
 
 export interface CircularProgressProps {
   percentage?: number;
@@ -390,7 +394,7 @@ export interface CircularProgressProps {
   style?: React.CSSProperties;
 }
 
-export const CircularProgress: React.FunctionComponent<CircularProgressProps>;
+export declare const CircularProgress: React.FunctionComponent<CircularProgressProps>;
 
 export interface CollapsibleProps {
   title: string;
@@ -400,7 +404,7 @@ export interface CollapsibleProps {
   style?: React.CSSProperties;
 }
 
-export const Collapsible: React.FunctionComponent<CollapsibleProps>;
+export declare const Collapsible: React.FunctionComponent<CollapsibleProps>;
 
 export interface DotProps {
   category?:
@@ -413,7 +417,7 @@ export interface DotProps {
   style?: React.CSSProperties;
 }
 
-export const Dot: React.FunctionComponent<DotProps>;
+export declare const Dot: React.FunctionComponent<DotProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -439,7 +443,7 @@ export interface DrawerProps {
   side?: Position.LEFT | Position.RIGHT;
 }
 
-export const Drawer: React.FunctionComponent<DrawerProps>;
+export declare const Drawer: React.FunctionComponent<DrawerProps>;
 
 export interface DropdownOptionProps {
   text: string;
@@ -450,16 +454,16 @@ export interface DropdownOptionProps {
   style?: React.CSSProperties;
 }
 
-export const DropdownOption: React.FunctionComponent<DropdownOptionProps>;
+export declare const DropdownOption: React.FunctionComponent<DropdownOptionProps>;
 
 export interface DropdownTitleProps {
   text: string;
   style?: object;
 }
 
-export const DropdownTitle: React.FunctionComponent<DropdownTitleProps>;
+export declare const DropdownTitle: React.FunctionComponent<DropdownTitleProps>;
 
-export const DropdownSeparator: React.FunctionComponent<DropdownSeparatorProps>;
+export declare const DropdownSeparator: React.FunctionComponent;
 
 export interface DropdownProps {
   trigger?: React.ReactNode;
@@ -468,7 +472,7 @@ export interface DropdownProps {
   style?: object;
 }
 
-export const Dropdown: React.FunctionComponent<DropdownProps>;
+export declare const Dropdown: React.FunctionComponent<DropdownProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -494,7 +498,7 @@ export interface EmptyStateProps {
   responsive?: Responsive;
 }
 
-export const EmptyState: React.FunctionComponent<EmptyStateProps>;
+export declare const EmptyState: React.FunctionComponent<EmptyStateProps>;
 
 export interface FilterGroupProps {
   label: string;
@@ -506,7 +510,7 @@ export interface FilterGroupProps {
   active?: boolean;
 }
 
-export const FilterGroup: React.FunctionComponent<FilterGroupProps>;
+export declare const FilterGroup: React.FunctionComponent<FilterGroupProps>;
 
 export interface IconProps {
   name: string;
@@ -521,7 +525,7 @@ export interface IconProps {
   style?: React.CSSProperties;
 }
 
-export const Icon: React.FunctionComponent<IconProps>;
+export declare const Icon: React.FunctionComponent<IconProps>;
 
 export interface LabelProps {
   children?: string | React.ReactNode;
@@ -530,7 +534,7 @@ export interface LabelProps {
   isPlaceholder?: boolean;
 }
 
-export const Label: React.FunctionComponent<LabelProps>;
+export declare const Label: React.FunctionComponent<LabelProps>;
 
 export interface ListItemProps {
   children: React.ReactNode;
@@ -546,7 +550,7 @@ export interface ListItemProps {
   style?: React.CSSProperties;
 }
 
-export const ListItem: React.FunctionComponent<ListItemProps>;
+export declare const ListItem: React.FunctionComponent<ListItemProps>;
 
 export interface ListProps {
   children: React.ReactNode;
@@ -554,14 +558,14 @@ export interface ListProps {
   style?: object;
 }
 
-export const List: React.FunctionComponent<ListProps>;
+export declare const List: React.FunctionComponent<ListProps>;
 
 export interface LoadingPlaceholderProps {
   height?: number | string;
   width?: number | string;
 }
 
-export const LoadingPlaceholder: React.FunctionComponent<LoadingPlaceholderProps>;
+export declare const LoadingPlaceholder: React.FunctionComponent<LoadingPlaceholderProps>;
 
 export interface MapProps {
   height?: number;
@@ -572,7 +576,7 @@ export interface MapProps {
   style?: React.CSSProperties;
 }
 
-export const Map: React.FunctionComponent<MapProps>;
+export declare const Map: React.FunctionComponent<MapProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -595,7 +599,7 @@ export interface ModalProps {
   responsive?: Responsive;
 }
 
-export const Modal: React.FunctionComponent<ModalProps>;
+export declare const Modal: React.FunctionComponent<ModalProps>;
 
 export interface PaginationProps {
   pages: number;
@@ -607,14 +611,14 @@ export interface PaginationProps {
   style?: React.CSSProperties;
 }
 
-export const Pagination: React.FunctionComponent<PaginationProps>;
+export declare const Pagination: React.FunctionComponent<PaginationProps>;
 
 export interface PanelHeaderProps {
   children: React.ReactNode;
   noPadding?: boolean;
 }
 
-export const PanelHeader: React.FunctionComponent<PanelHeaderProps>;
+export declare const PanelHeader: React.FunctionComponent<PanelHeaderProps>;
 
 export interface PanelBodyProps {
   children: React.ReactNode;
@@ -622,7 +626,7 @@ export interface PanelBodyProps {
   style?: React.CSSProperties;
 }
 
-export const PanelBody: React.FunctionComponent<PanelBodyProps>;
+export declare const PanelBody: React.FunctionComponent<PanelBodyProps>;
 
 export interface PanelSectionProps {
   children: React.ReactNode;
@@ -630,7 +634,7 @@ export interface PanelSectionProps {
   style?: object;
 }
 
-export const PanelSection: React.FunctionComponent<PanelSectionProps>;
+export declare const PanelSection: React.FunctionComponent<PanelSectionProps>;
 
 export interface PanelFooterProps {
   children: React.ReactNode;
@@ -638,7 +642,7 @@ export interface PanelFooterProps {
   style?: object;
 }
 
-export const PanelFooter: React.FunctionComponent<PanelFooterProps>;
+export declare const PanelFooter: React.FunctionComponent<PanelFooterProps>;
 
 export interface PanelProps {
   header?: React.ReactNode;
@@ -647,7 +651,7 @@ export interface PanelProps {
   style?: object;
 }
 
-export const Panel: React.FunctionComponent<PanelProps>;
+export declare const Panel: React.FunctionComponent<PanelProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -665,7 +669,7 @@ export interface ParagraphProps {
   responsive?: Responsive;
 }
 
-export const Paragraph: React.FunctionComponent<ParagraphProps>;
+export declare const Paragraph: React.FunctionComponent<ParagraphProps>;
 
 export interface PopoverProps {
   message?: React.ReactNode;
@@ -676,7 +680,7 @@ export interface PopoverProps {
   exitOnClick?: boolean;
 }
 
-export const Popover: React.FunctionComponent<PopoverProps>;
+export declare const Popover: React.FunctionComponent<PopoverProps>;
 
 export interface ProgressBarProps {
   percentage?: number;
@@ -690,7 +694,7 @@ export interface ProgressBarProps {
   style?: React.CSSProperties;
 }
 
-export const ProgressBar: React.FunctionComponent<ProgressBarProps>;
+export declare const ProgressBar: React.FunctionComponent<ProgressBarProps>;
 
 export interface RoundIconProps {
   name: string;
@@ -705,7 +709,7 @@ export interface RoundIconProps {
   style?: React.CSSProperties;
 }
 
-export const RoundIcon: React.FunctionComponent<RoundIconProps>;
+export declare const RoundIcon: React.FunctionComponent<RoundIconProps>;
 
 export interface SegmentedControlProps {
   options?: any;
@@ -716,14 +720,14 @@ export interface SegmentedControlProps {
   style?: React.CSSProperties;
 }
 
-export const SegmentedControl: React.FunctionComponent<SegmentedControlProps>;
+export declare const SegmentedControl: React.FunctionComponent<SegmentedControlProps>;
 
 export interface SeparatorProps {
   vertical?: boolean;
   style?: React.CSSProperties;
 }
 
-export const Separator: React.FunctionComponent<SeparatorProps>;
+export declare const Separator: React.FunctionComponent<SeparatorProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -743,14 +747,14 @@ export interface SpinnerProps {
   responsive?: Responsive;
 }
 
-export const Spinner: React.FunctionComponent<SpinnerProps>;
+export declare const Spinner: React.FunctionComponent<SpinnerProps>;
 
 export interface SplashScreenProps {
   visible?: any;
   text?: string;
 }
 
-export const SplashScreen: React.FunctionComponent<SplashScreenProps>;
+export declare const SplashScreen: React.FunctionComponent<SplashScreenProps>;
 
 export interface TabNavigationProps {
   options?: any;
@@ -763,9 +767,9 @@ export interface TabNavigationProps {
   style?: React.CSSProperties;
 }
 
-export const TabNavigation: React.FunctionComponent<TabNavigationProps>;
+export declare const TabNavigation: React.FunctionComponent<TabNavigationProps>;
 
-export const TCell: React.FunctionComponent<TCellProps>;
+export declare const TCell: React.FunctionComponent;
 
 export interface TRowProps {
   children: React.ReactNode;
@@ -775,11 +779,11 @@ export interface TRowProps {
   style?: React.CSSProperties;
 }
 
-export const TRow: React.FunctionComponent<TRowProps>;
+export declare const TRow: React.FunctionComponent<TRowProps>;
 
-export const THead: React.FunctionComponent<THeadProps>;
+export declare const THead: React.FunctionComponent;
 
-export const TBody: React.FunctionComponent<TBodyProps>;
+export declare const TBody: React.FunctionComponent;
 
 declare interface ActiveHeader {
   key?: string;
@@ -807,7 +811,7 @@ export interface TableProps {
   style?: object;
 }
 
-export const Table: React.FunctionComponent<TableProps>;
+export declare const Table: React.FunctionComponent<TableProps>;
 
 export interface TagProps {
   children: string;
@@ -822,7 +826,7 @@ export interface TagProps {
   style?: React.CSSProperties;
 }
 
-export const Tag: React.FunctionComponent<TagProps>;
+export declare const Tag: React.FunctionComponent<TagProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -851,7 +855,7 @@ export interface TextProps {
   responsive?: Responsive;
 }
 
-export const Text: React.FunctionComponent<TextProps>;
+export declare const Text: React.FunctionComponent<TextProps>;
 
 export interface TextLinkProps {
   children?: string;
@@ -865,7 +869,7 @@ export interface TextLinkProps {
   style?: React.CSSProperties;
 }
 
-export const TextLink: React.FunctionComponent<TextLinkProps>;
+export declare const TextLink: React.FunctionComponent<TextLinkProps>;
 
 export interface TileProps {
   title?: string;
@@ -874,7 +878,7 @@ export interface TileProps {
   noPadding?: boolean;
 }
 
-export const Tile: React.FunctionComponent<TileProps>;
+export declare const Tile: React.FunctionComponent<TileProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -894,7 +898,7 @@ export interface TitleProps {
   responsive?: Responsive;
 }
 
-export const Title: React.FunctionComponent<TitleProps>;
+export declare const Title: React.FunctionComponent<TitleProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -914,7 +918,7 @@ export interface ToggleProps {
   responsive?: Responsive;
 }
 
-export const Toggle: React.FunctionComponent<ToggleProps>;
+export declare const Toggle: React.FunctionComponent<ToggleProps>;
 
 export interface TooltipProps {
   message?: React.ReactNode;
@@ -924,7 +928,7 @@ export interface TooltipProps {
   style?: React.CSSProperties;
 }
 
-export const Tooltip: React.FunctionComponent<TooltipProps>;
+export declare const Tooltip: React.FunctionComponent<TooltipProps>;
 
 export interface CheckboxProps {
   children?: string;
@@ -938,7 +942,7 @@ export interface CheckboxProps {
   isPlaceholder?: boolean;
 }
 
-export const Checkbox: React.FunctionComponent<CheckboxProps>;
+export declare const Checkbox: React.FunctionComponent<CheckboxProps>;
 
 declare interface Value {
   day: number;
@@ -983,7 +987,7 @@ export interface DateInputProps {
   style?: React.CSSProperties;
 }
 
-export const DateInput: React.FunctionComponent<DateInputProps>;
+export declare const DateInput: React.FunctionComponent<DateInputProps>;
 
 export interface FormGroupProps {
   label: React.ReactNode;
@@ -992,7 +996,7 @@ export interface FormGroupProps {
   style?: React.CSSProperties;
 }
 
-export const FormGroup: React.FunctionComponent<FormGroupProps>;
+export declare const FormGroup: React.FunctionComponent<FormGroupProps>;
 
 export interface HintProps {
   children: string;
@@ -1000,9 +1004,7 @@ export interface HintProps {
   style?: React.CSSProperties;
 }
 
-export const Hint: React.FunctionComponent<HintProps>;
-
-export const Input: React.FunctionComponent<InputProps>;
+export declare const Hint: React.FunctionComponent<HintProps>;
 
 export interface InputProps {
   value: string | number;
@@ -1022,7 +1024,7 @@ export interface InputProps {
   isPlaceholder?: boolean;
 }
 
-export const Input: React.FunctionComponent<InputProps>;
+export declare const Input: React.FunctionComponent<InputProps>;
 
 export interface InputGroupProps {
   children: React.ReactNode;
@@ -1032,7 +1034,7 @@ export interface InputGroupProps {
   style?: React.CSSProperties;
 }
 
-export const InputGroup: React.FunctionComponent<InputGroupProps>;
+export declare const InputGroup: React.FunctionComponent<InputGroupProps>;
 
 export interface MultiSelectProps {
   options?: any;
@@ -1050,7 +1052,7 @@ export interface MultiSelectProps {
   style?: React.CSSProperties;
 }
 
-export const MultiSelect: React.FunctionComponent<MultiSelectProps>;
+export declare const MultiSelect: React.FunctionComponent<MultiSelectProps>;
 
 export interface NumberInputProps {
   value: any;
@@ -1069,7 +1071,7 @@ export interface NumberInputProps {
   style?: React.CSSProperties;
 }
 
-export const NumberInput: React.FunctionComponent<NumberInputProps>;
+export declare const NumberInput: React.FunctionComponent<NumberInputProps>;
 
 export interface RadioGroupProps {
   options?: any;
@@ -1086,7 +1088,7 @@ export interface RadioGroupProps {
   isPlaceholder?: boolean;
 }
 
-export const RadioGroup: React.FunctionComponent<RadioGroupProps>;
+export declare const RadioGroup: React.FunctionComponent<RadioGroupProps>;
 
 export interface SearchInputProps {
   options?: string[];
@@ -1099,7 +1101,7 @@ export interface SearchInputProps {
   style?: React.CSSProperties;
 }
 
-export const SearchInput: React.FunctionComponent<SearchInputProps>;
+export declare const SearchInput: React.FunctionComponent<SearchInputProps>;
 
 export interface SelectProps {
   options?: any;
@@ -1117,9 +1119,7 @@ export interface SelectProps {
   style?: React.CSSProperties;
 }
 
-export const Select: React.FunctionComponent<SelectProps>;
-
-export const Input: React.FunctionComponent<InputProps>;
+export declare const Select: React.FunctionComponent<SelectProps>;
 
 export interface TextAreaProps {
   value: string | number;
@@ -1136,14 +1136,14 @@ export interface TextAreaProps {
   isPlaceholder?: boolean;
 }
 
-export const TextArea: React.FunctionComponent<TextAreaProps>;
+export declare const TextArea: React.FunctionComponent<TextAreaProps>;
 
 export interface FlexItemProps {
   flex?: boolean | number;
   style?: React.CSSProperties;
 }
 
-export const FlexItem: React.FunctionComponent<FlexItemProps>;
+export declare const FlexItem: React.FunctionComponent<FlexItemProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -1174,7 +1174,7 @@ export interface FlexProps {
   responsive?: Responsive;
 }
 
-export const Flex: React.FunctionComponent<FlexProps>;
+export declare const Flex: React.FunctionComponent<FlexProps>;
 
 export interface GridItemProps {
   children: React.ReactNode;
@@ -1182,7 +1182,7 @@ export interface GridItemProps {
   style?: React.CSSProperties;
 }
 
-export const GridItem: React.FunctionComponent<GridItemProps>;
+export declare const GridItem: React.FunctionComponent<GridItemProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -1212,7 +1212,7 @@ export interface GridProps {
   responsive?: Responsive;
 }
 
-export const Grid: React.FunctionComponent<GridProps>;
+export declare const Grid: React.FunctionComponent<GridProps>;
 
 declare interface Responsive {
   XS?: object;
@@ -1233,7 +1233,7 @@ export interface LayoutProps {
   responsive?: Responsive;
 }
 
-export const Layout: React.FunctionComponent<LayoutProps>;
+export declare const Layout: React.FunctionComponent<LayoutProps>;
 
 export interface ListTileProps {
   title: React.ReactNode;
@@ -1244,4 +1244,4 @@ export interface ListTileProps {
   style?: React.CSSProperties;
 }
 
-export const ListTile: React.FunctionComponent<ListTileProps>;
+export declare const ListTile: React.FunctionComponent<ListTileProps>;
