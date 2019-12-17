@@ -5,7 +5,7 @@ const filter = `
 export interface BaseFilterProps {
   clearLabel?: string;
   label: string;
-  onClear?(): OnClickCallback<HTMLButtonElement>;
+  onClear?(): OnClickCallback;
   children?: React.ReactNode;
   align?: Align.LEFT | Align.RIGHT;
   active?: boolean;
@@ -22,7 +22,7 @@ interface Option {
 
 type OnChangeOptionCallback = (value: string | number) => void;
 
-export const Filter: React.FunctionComponent<FilterProps>;
+export const BaseFilter: React.FunctionComponent<BaseFilterProps>;
 
 export interface SelectFilterProps extends BaseFilterProps {
   options?: Array<Option>;
@@ -30,20 +30,18 @@ export interface SelectFilterProps extends BaseFilterProps {
   valueKey?: string;
   labelKey?: string;
   onChange(): OnChangeOptionCallback;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
 }
 
 export const SelectFilter: React.FunctionComponent<SelectFilterProps>;
 
-interface Value = string | number;
-
 export interface CheckboxFilterProps {
   options?: Array<Option>;
-  values?: Array<Value>;
+  values?: Array<string|number>;
   valueKey?: string;
   labelKey?: string;
   onChange(): OnChangeOptionCallback;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
 }
 
 export const CheckboxFilter: React.FunctionComponent<CheckboxFilterProps>;

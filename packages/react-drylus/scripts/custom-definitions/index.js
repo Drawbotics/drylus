@@ -6,8 +6,8 @@ const layoutDefinitions = require('./layout');
 const baseImport = `import React from 'react';`;
 
 const customTypes = `
-type OnClickCallback<T> = (event: React.MouseEvent<T, React.MouseEvent>) => void;
-type OnChangeCallback<T> = (event: React.ChangeEvent<T>) => void;
+type OnClickCallback = (event: React.MouseEvent<React.MouseEvent>) => void;
+type OnChangeCallback = (event: React.ChangeEvent) => void;
 `;
 
 

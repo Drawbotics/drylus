@@ -33,9 +33,12 @@ function generate(options) {
     if (componentInfo) {
       const propsIntefaceName = `${componentInfo.displayName}Props`;
       const propsDefinition = dom.create.interface(propsIntefaceName, dom.DeclarationFlags.Export);
-      // const importDefinition = dom.create.importAll('React', 'react');
       const classDefinition = dom.create.class(className, dom.DeclarationFlags.ExportDefault);
-      // importDefinitions.push(importDefinition);
+
+      if (componentInfo.description.includes('forward-ref')) {
+        continue;
+      }
+
       if (imports && imports.length > 0) {
         imports.forEach(x => {
           importDefinitions.push(Utils.createImport(x.from, x.default, x.named));
@@ -97,6 +100,9 @@ function generate(options) {
       interfaceDefinitions.forEach(x => result += dom.emit(x));
       classDefinition.baseType = baseType;
       result += dom.emit(classDefinition);
+      // if (componentInfo.displayName === 'THead') {
+      //   console.log(componentInfo, result);
+      // }
       if (result) {
         result = prettier.format(result, { parser: 'typescript' });
       }

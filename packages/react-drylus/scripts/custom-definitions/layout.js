@@ -24,7 +24,7 @@ declare interface SizeDescriptionAlt {
 
 const margin = `
 export interface MarginProps {
-  size?: Sizes | SizeDescription | SizeDescriptionAlt;
+  size?: Size | SizeDescription | SizeDescriptionAlt;
   children?: React.ReactNode;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -36,7 +36,7 @@ export const Margin: React.FunctionComponent<MarginProps>;
 
 const padding = `
 export interface PaddingProps {
-  size?: Sizes | SizeDescription | SizeDescriptionAlt;
+  size?: Size | SizeDescription | SizeDescriptionAlt;
   children?: React.ReactNode;
   style?: React.CSSProperties;
   responsive?: Responsive;

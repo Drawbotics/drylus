@@ -25,6 +25,12 @@ export enum Tier {
   TERTIARY = 'TERTIARY',
 }
 
+export enum Align {
+  LEFT   = 'LEFT',
+  CENTER = 'CENTER',
+  RIGHT = 'RIGHT',
+}
+
 export enum Position {
   TOP = 'TOP',
   BOTTOM = 'BOTTOM',

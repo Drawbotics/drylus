@@ -1,7 +1,7 @@
 import React from 'react';
 
-type OnClickCallback<T> = (event: React.MouseEvent<T, React.MouseEvent>) => void;
-type OnChangeCallback<T> = (event: React.ChangeEvent<T>) => void;
+type OnClickCallback = (event: React.MouseEvent<React.MouseEvent>) => void;
+type OnChangeCallback = (event: React.ChangeEvent) => void;
 
 
 export enum Category {
@@ -28,6 +28,12 @@ export enum Tier {
   PRIMARY = 'PRIMARY',
   SECONDARY = 'SECONDARY',
   TERTIARY = 'TERTIARY',
+}
+
+export enum Align {
+  LEFT   = 'LEFT',
+  CENTER = 'CENTER',
+  RIGHT = 'RIGHT',
 }
 
 export enum Position {
@@ -78,7 +84,7 @@ export enum FlexAlign {
 export interface BaseFilterProps {
   clearLabel?: string;
   label: string;
-  onClear?(): OnClickCallback<HTMLButtonElement>;
+  onClear?(): OnClickCallback;
   children?: React.ReactNode;
   align?: Align.LEFT | Align.RIGHT;
   active?: boolean;
@@ -95,7 +101,7 @@ interface Option {
 
 type OnChangeOptionCallback = (value: string | number) => void;
 
-export const Filter: React.FunctionComponent<FilterProps>;
+export const BaseFilter: React.FunctionComponent<BaseFilterProps>;
 
 export interface SelectFilterProps extends BaseFilterProps {
   options?: Array<Option>;
@@ -103,20 +109,18 @@ export interface SelectFilterProps extends BaseFilterProps {
   valueKey?: string;
   labelKey?: string;
   onChange(): OnChangeOptionCallback;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
 }
 
 export const SelectFilter: React.FunctionComponent<SelectFilterProps>;
 
-interface Value = string | number;
-
 export interface CheckboxFilterProps {
   options?: Array<Option>;
-  values?: Array<Value>;
+  values?: Array<string|number>;
   valueKey?: string;
   labelKey?: string;
   onChange(): OnChangeOptionCallback;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
 }
 
 export const CheckboxFilter: React.FunctionComponent<CheckboxFilterProps>;
@@ -148,7 +152,7 @@ declare interface SizeDescriptionAlt {
 
 
 export interface PaddingProps {
-  size?: Sizes | SizeDescription | SizeDescriptionAlt;
+  size?: Size | SizeDescription | SizeDescriptionAlt;
   children?: React.ReactNode;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -158,7 +162,7 @@ export const Padding: React.FunctionComponent<PaddingProps>;
 
 
 export interface MarginProps {
-  size?: Sizes | SizeDescription | SizeDescriptionAlt;
+  size?: Size | SizeDescription | SizeDescriptionAlt;
   children?: React.ReactNode;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -1002,8 +1006,6 @@ export interface HintProps {
 
 export const Hint: React.FunctionComponent<HintProps>;
 
-export const Input: React.FunctionComponent<InputProps>;
-
 export interface InputProps {
   value: string | number;
   name?: string;
@@ -1118,8 +1120,6 @@ export interface SelectProps {
 }
 
 export const Select: React.FunctionComponent<SelectProps>;
-
-export const Input: React.FunctionComponent<InputProps>;
 
 export interface TextAreaProps {
   value: string | number;
