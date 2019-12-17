@@ -1,3 +1,15 @@
+# v5.1.2 (Tue Dec 17 2019)
+
+#### 🐛  Bug Fix
+
+- deprecate filter group prop and use children instead  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.1.1 (Tue Dec 17 2019)
 
 #### 🐛  Bug Fix
