@@ -49,6 +49,10 @@ function generateTypes(targetFile) {
         // replace generic onChange with specific definition
         result = result.replace(/onChange(.*?\(\)): void/gm, 'onChange$1: OnChangeCallback');
 
+        // replace shape by any for now
+        // TODO handle nested props
+        result = result.replace(': shape', ': any');
+
         // change class to function component definition
         result = result.replace(
           /export default class (\S*) extends (.*?) \{\}/gms,
