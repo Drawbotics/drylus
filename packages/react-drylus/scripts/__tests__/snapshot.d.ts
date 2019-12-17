@@ -1,85 +1,83 @@
-import React from 'react';
+import React from "react";
 
 type OnClickCallback = (event: React.MouseEvent<React.MouseEvent>) => void;
 type OnChangeCallback = (event: React.ChangeEvent) => void;
 
-
 export enum Category {
-  BRAND = 'BRAND',
-  INFO = 'INFO',
-  DANGER = 'DANGER',
-  SUCCESS = 'SUCCESS',
-  WARNING = 'WARNING',
-  PRIMARY = 'PRIMARY',
+  BRAND = "BRAND",
+  INFO = "INFO",
+  DANGER = "DANGER",
+  SUCCESS = "SUCCESS",
+  WARNING = "WARNING",
+  PRIMARY = "PRIMARY"
 }
 
 export enum Size {
-  EXTRA_SMALL = 'EXTRA_SMALL',
-  SMALL = 'SMALL',
-  DEFAULT = 'DEFAULT',
-  LARGE = 'LARGE',
-  EXTRA_LARGE = 'EXTRA_LARGE',
-  HUGE = 'HUGE',
-  EXTRA_HUGE = 'EXTRA_HUGE',
-  MASSIVE = 'MASSIVE',
+  EXTRA_SMALL = "EXTRA_SMALL",
+  SMALL = "SMALL",
+  DEFAULT = "DEFAULT",
+  LARGE = "LARGE",
+  EXTRA_LARGE = "EXTRA_LARGE",
+  HUGE = "HUGE",
+  EXTRA_HUGE = "EXTRA_HUGE",
+  MASSIVE = "MASSIVE"
 }
 
 export enum Tier {
-  PRIMARY = 'PRIMARY',
-  SECONDARY = 'SECONDARY',
-  TERTIARY = 'TERTIARY',
+  PRIMARY = "PRIMARY",
+  SECONDARY = "SECONDARY",
+  TERTIARY = "TERTIARY"
 }
 
 export enum Align {
-  LEFT   = 'LEFT',
-  CENTER = 'CENTER',
-  RIGHT = 'RIGHT',
+  LEFT = "LEFT",
+  CENTER = "CENTER",
+  RIGHT = "RIGHT"
 }
 
 export enum Position {
-  TOP = 'TOP',
-  BOTTOM = 'BOTTOM',
-  LEFT = 'LEFT',
-  RIGHT = 'RIGHT',
+  TOP = "TOP",
+  BOTTOM = "BOTTOM",
+  LEFT = "LEFT",
+  RIGHT = "RIGHT"
 }
 
 // components/EmptyState
 export enum EmptyStateVariation {
-  DEFAULT = 'DEFAULT',
-  PROCESSING = 'PROCESSING',
-  NOT_FOUND = 'NOT_FOUND',
-  NOT_ALLOWED = 'NOT_ALLOWED',
-  FAILED = 'FAILED',
+  DEFAULT = "DEFAULT",
+  PROCESSING = "PROCESSING",
+  NOT_FOUND = "NOT_FOUND",
+  NOT_ALLOWED = "NOT_ALLOWED",
+  FAILED = "FAILED"
 }
 
 // components/TextLink
 export enum LinkUnderlined {
-  ALWAYS = 'ALWAYS',
-  HOVER = 'HOVER',
+  ALWAYS = "ALWAYS",
+  HOVER = "HOVER"
 }
 
 // components/Flex
 export enum FlexDirection {
-  HORIZONTAL = 'HORIZONTAL',
-  VERTICAL = 'VERTICAL',
+  HORIZONTAL = "HORIZONTAL",
+  VERTICAL = "VERTICAL"
 }
 
 export enum FlexJustify {
-  START = 'START',
-  END = 'END',
-  CENTER = 'CENTER',
-  SPACE_AROUND = 'SPACE_AROUND',
-  SPACE_BETWEEN = 'SPACE_BETWEEN',
-  SPACE_EVENLY = 'SPACE_EVENLY',
+  START = "START",
+  END = "END",
+  CENTER = "CENTER",
+  SPACE_AROUND = "SPACE_AROUND",
+  SPACE_BETWEEN = "SPACE_BETWEEN",
+  SPACE_EVENLY = "SPACE_EVENLY"
 }
 
 export enum FlexAlign {
-  STRETCH = 'STRETCH',
-  START = 'START',
-  END = 'END',
-  CENTER = 'CENTER',
+  STRETCH = "STRETCH",
+  START = "START",
+  END = "END",
+  CENTER = "CENTER"
 }
-
 
 export interface BaseFilterProps {
   clearLabel?: string;
@@ -116,18 +114,275 @@ export declare const SelectFilter: React.FunctionComponent<SelectFilterProps>;
 
 export interface CheckboxFilterProps {
   options?: Array<Option>;
-  values?: Array<string|number>;
+  values?: Array<string | number>;
   valueKey?: string;
   labelKey?: string;
   onChange(): OnChangeOptionCallback;
   style?: React.CSSProperties;
 }
 
-export declare const CheckboxFilter: React.FunctionComponent<CheckboxFilterProps>;
+export declare const CheckboxFilter: React.FunctionComponent<
+  CheckboxFilterProps
+>;
 
-
-type Icons = 'activity' | 'airplay' | 'alert-circle' | 'alert-octagon' | 'alert-triangle' | 'align-center' | 'align-justify' | 'align-left' | 'align-right' | 'anchor' | 'aperture' | 'arrow-down-left' | 'arrow-down-right' | 'arrow-down' | 'arrow-left' | 'arrow-right' | 'arrow-up-left' | 'arrow-up-right' | 'arrow-up' | 'at-sign' | 'award' | 'bar-chart-2' | 'bar-chart' | 'battery-charging' | 'battery' | 'bell-off' | 'bell' | 'billboard' | 'bluetooth' | 'book' | 'bookmark' | 'box' | 'brand-id' | 'briefcase' | 'brochure' | 'burger' | 'calendar' | 'camera-off' | 'camera' | 'cast' | 'check-circle' | 'check-square' | 'check' | 'chevron-down' | 'chevron-left' | 'chevron-right' | 'chevron-up' | 'chevrons-down' | 'chevrons-left' | 'chevrons-right' | 'chevrons-up' | 'chrome' | 'circle' | 'clipboard' | 'clock' | 'cloud-drizzle' | 'cloud-lightning' | 'cloud-off' | 'cloud-rain' | 'cloud-snow' | 'cloud' | 'command' | 'commercial-floorplan' | 'compass' | 'copy' | 'corner-down-left' | 'corner-down-right' | 'corner-left-down' | 'corner-left-up' | 'corner-right-down' | 'corner-right-up' | 'corner-up-left' | 'corner-up-right' | 'cpu' | 'credit-card' | 'crosshair' | 'delete' | 'disc' | 'download-cloud' | 'download' | 'drawbotics' | 'drone-shooting' | 'droplet' | 'edit-2' | 'edit-3' | 'edit' | 'exterior-3d' | 'exterior-restyling' | 'external-link' | 'eye-off' | 'eye' | 'facebook' | 'fast-forward' | 'feather' | 'file-minus' | 'file-plus' | 'file-text' | 'file' | 'film' | 'filter' | 'flag' | 'flyer' | 'folder' | 'github' | 'globe' | 'grid' | 'hash' | 'headphones' | 'heart' | 'home' | 'image' | 'inbox' | 'index.js' | 'info' | 'instagram' | 'interior-3d' | 'interior-tour-3d' | 'landing-page' | 'layers' | 'layout' | 'life-buoy' | 'link-2' | 'link' | 'loader' | 'lock' | 'log-in' | 'log-out' | 'mail' | 'map-pin' | 'map' | 'maximize-2' | 'maximize' | 'media-kit' | 'menu' | 'message-circle' | 'message-square' | 'mic-off' | 'mic' | 'minimize-2' | 'minimize' | 'minus-circle' | 'minus-square' | 'minus' | 'model-360' | 'monitor' | 'moon' | 'more-horizontal' | 'more-vertical' | 'move' | 'music' | 'navigation-2' | 'navigation' | 'newsletter' | 'octagon' | 'package' | 'panorama-360' | 'pause-circle' | 'pause' | 'percent' | 'phone-call' | 'phone-forwarded' | 'phone-incoming' | 'phone-missed' | 'phone-off' | 'phone-outgoing' | 'phone' | 'photo-editing' | 'photo-shooting' | 'pie-chart' | 'plan-2d' | 'play-circle' | 'play' | 'plus-circle' | 'plus-square' | 'plus' | 'pocket' | 'power' | 'printer' | 'radio' | 'refresh-ccw' | 'refresh-cw' | 'repeat' | 'revo-alt' | 'revo' | 'rewind' | 'rotate-ccw' | 'rotate-cw' | 'save' | 'scissors' | 'search' | 'server' | 'settings' | 'share-2' | 'share' | 'shield' | 'shoebox' | 'shuffle' | 'sidebar' | 'site-plan' | 'skip-back' | 'skip-forward' | 'slack' | 'slash' | 'smartphone' | 'social-media-kit' | 'speaker' | 'square' | 'star' | 'stop-circle' | 'sun' | 'sunrise' | 'sunset' | 'tablet' | 'tag' | 'target' | 'thermometer' | 'thumbs-down' | 'thumbs-up' | 'toggle-left' | 'toggle-right' | 'tour-3d' | 'trash-2' | 'trash' | 'trending-down' | 'trending-up' | 'triangle' | 'twitter' | 'type' | 'umbrella' | 'unlock' | 'upload-cloud' | 'upload' | 'user-check' | 'user-minus' | 'user-plus' | 'user-x' | 'user' | 'users' | 'video-animation' | 'video-off' | 'video' | 'voicemail' | 'volume-1' | 'volume-2' | 'volume-x' | 'volume' | 'vr' | 'watch' | 'website' | 'wifi' | 'wind' | 'x-circle' | 'x-square' | 'x' | 'zap' | 'zoom-in' | 'zoom-out';
-
+type Icons =
+  | "activity"
+  | "airplay"
+  | "alert-circle"
+  | "alert-octagon"
+  | "alert-triangle"
+  | "align-center"
+  | "align-justify"
+  | "align-left"
+  | "align-right"
+  | "anchor"
+  | "aperture"
+  | "arrow-down-left"
+  | "arrow-down-right"
+  | "arrow-down"
+  | "arrow-left"
+  | "arrow-right"
+  | "arrow-up-left"
+  | "arrow-up-right"
+  | "arrow-up"
+  | "at-sign"
+  | "award"
+  | "bar-chart-2"
+  | "bar-chart"
+  | "battery-charging"
+  | "battery"
+  | "bell-off"
+  | "bell"
+  | "billboard"
+  | "bluetooth"
+  | "book"
+  | "bookmark"
+  | "box"
+  | "brand-id"
+  | "briefcase"
+  | "brochure"
+  | "burger"
+  | "calendar"
+  | "camera-off"
+  | "camera"
+  | "cast"
+  | "check-circle"
+  | "check-square"
+  | "check"
+  | "chevron-down"
+  | "chevron-left"
+  | "chevron-right"
+  | "chevron-up"
+  | "chevrons-down"
+  | "chevrons-left"
+  | "chevrons-right"
+  | "chevrons-up"
+  | "chrome"
+  | "circle"
+  | "clipboard"
+  | "clock"
+  | "cloud-drizzle"
+  | "cloud-lightning"
+  | "cloud-off"
+  | "cloud-rain"
+  | "cloud-snow"
+  | "cloud"
+  | "command"
+  | "commercial-floorplan"
+  | "compass"
+  | "copy"
+  | "corner-down-left"
+  | "corner-down-right"
+  | "corner-left-down"
+  | "corner-left-up"
+  | "corner-right-down"
+  | "corner-right-up"
+  | "corner-up-left"
+  | "corner-up-right"
+  | "cpu"
+  | "credit-card"
+  | "crosshair"
+  | "delete"
+  | "disc"
+  | "download-cloud"
+  | "download"
+  | "drawbotics"
+  | "drone-shooting"
+  | "droplet"
+  | "edit-2"
+  | "edit-3"
+  | "edit"
+  | "exterior-3d"
+  | "exterior-restyling"
+  | "external-link"
+  | "eye-off"
+  | "eye"
+  | "facebook"
+  | "fast-forward"
+  | "feather"
+  | "file-minus"
+  | "file-plus"
+  | "file-text"
+  | "file"
+  | "film"
+  | "filter"
+  | "flag"
+  | "flyer"
+  | "folder"
+  | "github"
+  | "globe"
+  | "grid"
+  | "hash"
+  | "headphones"
+  | "heart"
+  | "home"
+  | "image"
+  | "inbox"
+  | "index.js"
+  | "info"
+  | "instagram"
+  | "interior-3d"
+  | "interior-tour-3d"
+  | "landing-page"
+  | "layers"
+  | "layout"
+  | "life-buoy"
+  | "link-2"
+  | "link"
+  | "loader"
+  | "lock"
+  | "log-in"
+  | "log-out"
+  | "mail"
+  | "map-pin"
+  | "map"
+  | "maximize-2"
+  | "maximize"
+  | "media-kit"
+  | "menu"
+  | "message-circle"
+  | "message-square"
+  | "mic-off"
+  | "mic"
+  | "minimize-2"
+  | "minimize"
+  | "minus-circle"
+  | "minus-square"
+  | "minus"
+  | "model-360"
+  | "monitor"
+  | "moon"
+  | "more-horizontal"
+  | "more-vertical"
+  | "move"
+  | "music"
+  | "navigation-2"
+  | "navigation"
+  | "newsletter"
+  | "octagon"
+  | "package"
+  | "panorama-360"
+  | "pause-circle"
+  | "pause"
+  | "percent"
+  | "phone-call"
+  | "phone-forwarded"
+  | "phone-incoming"
+  | "phone-missed"
+  | "phone-off"
+  | "phone-outgoing"
+  | "phone"
+  | "photo-editing"
+  | "photo-shooting"
+  | "pie-chart"
+  | "plan-2d"
+  | "play-circle"
+  | "play"
+  | "plus-circle"
+  | "plus-square"
+  | "plus"
+  | "pocket"
+  | "power"
+  | "printer"
+  | "radio"
+  | "refresh-ccw"
+  | "refresh-cw"
+  | "repeat"
+  | "revo-alt"
+  | "revo"
+  | "rewind"
+  | "rotate-ccw"
+  | "rotate-cw"
+  | "save"
+  | "scissors"
+  | "search"
+  | "server"
+  | "settings"
+  | "share-2"
+  | "share"
+  | "shield"
+  | "shoebox"
+  | "shuffle"
+  | "sidebar"
+  | "site-plan"
+  | "skip-back"
+  | "skip-forward"
+  | "slack"
+  | "slash"
+  | "smartphone"
+  | "social-media-kit"
+  | "speaker"
+  | "square"
+  | "star"
+  | "stop-circle"
+  | "sun"
+  | "sunrise"
+  | "sunset"
+  | "tablet"
+  | "tag"
+  | "target"
+  | "thermometer"
+  | "thumbs-down"
+  | "thumbs-up"
+  | "toggle-left"
+  | "toggle-right"
+  | "tour-3d"
+  | "trash-2"
+  | "trash"
+  | "trending-down"
+  | "trending-up"
+  | "triangle"
+  | "twitter"
+  | "type"
+  | "umbrella"
+  | "unlock"
+  | "upload-cloud"
+  | "upload"
+  | "user-check"
+  | "user-minus"
+  | "user-plus"
+  | "user-x"
+  | "user"
+  | "users"
+  | "video-animation"
+  | "video-off"
+  | "video"
+  | "voicemail"
+  | "volume-1"
+  | "volume-2"
+  | "volume-x"
+  | "volume"
+  | "vr"
+  | "watch"
+  | "website"
+  | "wifi"
+  | "wind"
+  | "x-circle"
+  | "x-square"
+  | "x"
+  | "zap"
+  | "zoom-in"
+  | "zoom-out";
 
 interface Responsive {
   XS?: object;
@@ -150,7 +405,6 @@ declare interface SizeDescriptionAlt {
   horizontal?: Size;
 }
 
-
 export interface PaddingProps {
   size?: Size | SizeDescription | SizeDescriptionAlt;
   children?: React.ReactNode;
@@ -159,7 +413,6 @@ export interface PaddingProps {
 }
 
 export declare const Padding: React.FunctionComponent<PaddingProps>;
-
 
 export interface MarginProps {
   size?: Size | SizeDescription | SizeDescriptionAlt;
@@ -184,7 +437,9 @@ export interface DrylusProviderProps {
   style?: React.CSSProperties;
 }
 
-export declare const DrylusProvider: React.FunctionComponent<DrylusProviderProps>;
+export declare const DrylusProvider: React.FunctionComponent<
+  DrylusProviderProps
+>;
 
 export interface PageProps {
   children: React.ReactNode;
@@ -218,7 +473,9 @@ export interface AlertsProviderProps {
   children: React.ReactNode;
 }
 
-export declare const AlertsProvider: React.FunctionComponent<AlertsProviderProps>;
+export declare const AlertsProvider: React.FunctionComponent<
+  AlertsProviderProps
+>;
 
 declare interface Responsive {
   XS?: object;
@@ -301,7 +558,7 @@ export interface BigRadioProps {
 export declare const BigRadio: React.FunctionComponent<BigRadioProps>;
 
 export interface BreadcrumbsProps {
-  crumbs: shape[];
+  crumbs: object[];
   linkComponent?: React.ReactNode;
   style?: React.CSSProperties;
 }
@@ -394,7 +651,9 @@ export interface CircularProgressProps {
   style?: React.CSSProperties;
 }
 
-export declare const CircularProgress: React.FunctionComponent<CircularProgressProps>;
+export declare const CircularProgress: React.FunctionComponent<
+  CircularProgressProps
+>;
 
 export interface CollapsibleProps {
   title: string;
@@ -454,7 +713,9 @@ export interface DropdownOptionProps {
   style?: React.CSSProperties;
 }
 
-export declare const DropdownOption: React.FunctionComponent<DropdownOptionProps>;
+export declare const DropdownOption: React.FunctionComponent<
+  DropdownOptionProps
+>;
 
 export interface DropdownTitleProps {
   text: string;
@@ -565,14 +826,16 @@ export interface LoadingPlaceholderProps {
   width?: number | string;
 }
 
-export declare const LoadingPlaceholder: React.FunctionComponent<LoadingPlaceholderProps>;
+export declare const LoadingPlaceholder: React.FunctionComponent<
+  LoadingPlaceholderProps
+>;
 
 export interface MapProps {
   height?: number;
   interactive?: boolean;
   zoom?: number;
   accessToken: string;
-  markers: shape[];
+  markers: object[];
   style?: React.CSSProperties;
 }
 
@@ -720,7 +983,9 @@ export interface SegmentedControlProps {
   style?: React.CSSProperties;
 }
 
-export declare const SegmentedControl: React.FunctionComponent<SegmentedControlProps>;
+export declare const SegmentedControl: React.FunctionComponent<
+  SegmentedControlProps
+>;
 
 export interface SeparatorProps {
   vertical?: boolean;
@@ -794,7 +1059,7 @@ export interface TableProps {
   children?: React.ReactNode;
   fullWidth?: boolean;
   withNesting?: boolean;
-  data?: shape[];
+  data?: object[];
   renderCell?(): void;
   renderChildCell?(): void;
   header?: any;
