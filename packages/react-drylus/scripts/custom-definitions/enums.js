@@ -48,12 +48,12 @@ export enum LinkUnderlined {
 }
 
 // components/Flex
-export enum FlexDirection = {
+export enum FlexDirection {
   HORIZONTAL = 'HORIZONTAL',
   VERTICAL = 'VERTICAL',
 }
 
-export enum FlexJustify = {
+export enum FlexJustify {
   START = 'START',
   END = 'END',
   CENTER = 'CENTER',
@@ -62,7 +62,7 @@ export enum FlexJustify = {
   SPACE_EVENLY = 'SPACE_EVENLY',
 }
 
-export enum FlexAlign = {
+export enum FlexAlign {
   STRETCH = 'STRETCH',
   START = 'START',
   END = 'END',
