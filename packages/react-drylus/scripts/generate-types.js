@@ -51,7 +51,7 @@ function generateTypes(targetFile) {
 
         // replace shape by any for now
         // TODO handle nested props
-        result = result.replace(': shape', ': any');
+        result = result.replace(': shape', ': object');
 
         // change class to function component definition
         result = result.replace(

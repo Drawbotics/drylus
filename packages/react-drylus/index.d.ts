@@ -301,7 +301,7 @@ export interface BigRadioProps {
 export declare const BigRadio: React.FunctionComponent<BigRadioProps>;
 
 export interface BreadcrumbsProps {
-  crumbs: any[];
+  crumbs: object[];
   linkComponent?: React.ReactNode;
   style?: React.CSSProperties;
 }
@@ -572,7 +572,7 @@ export interface MapProps {
   interactive?: boolean;
   zoom?: number;
   accessToken: string;
-  markers: any[];
+  markers: object[];
   style?: React.CSSProperties;
 }
 
@@ -794,7 +794,7 @@ export interface TableProps {
   children?: React.ReactNode;
   fullWidth?: boolean;
   withNesting?: boolean;
-  data?: any[];
+  data?: object[];
   renderCell?(): void;
   renderChildCell?(): void;
   header?: any;
