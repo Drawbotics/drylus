@@ -8,7 +8,7 @@ import {
   Text,
   Size,
   ListTile,
-  FlexDirections,
+  FlexDirection,
   Flex,
   FlexItem,
   Padding,
@@ -189,7 +189,7 @@ const MobileSidebar = () => {
             }
             else {
               <div className={styles.navigation}>
-                <Flex direction={FlexDirections.VERTICAL} align={FlexAlign.START}>
+                <Flex direction={FlexDirection.VERTICAL} align={FlexAlign.START}>
                   <FlexItem>
                     <Padding size={{ top: Size.DEFAULT }}>
                       <ListTile

@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/vanilla-drylus",
-  "version": "5.0.1",
+  "version": "5.1.0-next.3",
   "description": "Vanilla JS/CSS export of component styles and logic",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "",
@@ -24,5 +24,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "8314d678c0c364d2aab35300a51324982cc0b85a"
+  "gitHead": "2132c65dc070c386b7736959b4b6022145038bf7"
 }

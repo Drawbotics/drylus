@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
 
-import Flex, { FlexItem, FlexDirections } from '../layout/Flex';
+import Flex, { FlexItem, FlexDirection } from '../layout/Flex';
 import Margin from '../layout/Margin';
 import Title from './Title';
 import Text from './Text';
@@ -18,7 +18,7 @@ import {
   NotAllowed,
   Failed,
 } from '../utils/illustrations';
-import { CustomPropTypes } from '../utils';
+import { CustomPropTypes, deprecateProperty } from '../utils';
 
 
 const styles = {
@@ -40,7 +40,19 @@ const styles = {
 };
 
 
-export const EmptyStateVariations = new Enum(
+/**
+ * @deprecated and will be removed in version 6.0
+ */
+export const EmptyStateVariations = deprecateProperty(new Enum(
+  'DEFAULT',
+  'PROCESSING',
+  'NOT_FOUND',
+  'NOT_ALLOWED',
+  'FAILED',
+), 'EmptyStateVariations', 'EmptyStateVariation');
+
+
+export const EmptyStateVariation = new Enum(
   'DEFAULT',
   'PROCESSING',
   'NOT_FOUND',
@@ -51,13 +63,13 @@ export const EmptyStateVariations = new Enum(
 
 function _getImageForVariation(variation) {
   switch (variation) {
-    case EmptyStateVariations.PROCESSING:
+    case EmptyStateVariation.PROCESSING:
       return <Processing />;
-    case EmptyStateVariations.NOT_FOUND:
+    case EmptyStateVariation.NOT_FOUND:
         return <NotFound />;
-    case EmptyStateVariations.NOT_ALLOWED:
+    case EmptyStateVariation.NOT_ALLOWED:
       return <NotAllowed />;
-    case EmptyStateVariations.FAILED:
+    case EmptyStateVariation.FAILED:
       return <Failed />;
     default:
       return <Empty />;
@@ -82,7 +94,7 @@ const EmptyState = ({
 
   return (
     <div style={style} className={styles.root}>
-      <Flex direction={FlexDirections.VERTICAL}>
+      <Flex direction={FlexDirection.VERTICAL}>
         <FlexItem>
           <div className={styles.image}>
             {_getImageForVariation(variation)}
@@ -147,11 +159,11 @@ EmptyState.propTypes = {
   style: PropTypes.object,
 
   variation: PropTypes.oneOf([
-    EmptyStateVariations.DEFAULT,
-    EmptyStateVariations.PROCESSING,
-    EmptyStateVariations.NOT_FOUND,
-    EmptyStateVariations.NOT_ALLOWED,
-    EmptyStateVariations.FAILED,
+    EmptyStateVariation.DEFAULT,
+    EmptyStateVariation.PROCESSING,
+    EmptyStateVariation.NOT_FOUND,
+    EmptyStateVariation.NOT_ALLOWED,
+    EmptyStateVariation.FAILED,
   ]),
 
   /** Reponsive prop overrides */
@@ -167,7 +179,7 @@ EmptyState.propTypes = {
 
 
 EmptyState.defaultProps = {
-  variation: EmptyStateVariations.DEFAULT,
+  variation: EmptyStateVariation.DEFAULT,
 };
 
 

@@ -166,11 +166,14 @@ const RawTextArea = ({
 };
 
 
+/**
+ * forward-ref
+ */
 export const TextAreaWithRef = forwardRef((props, ref) => {
   return <RawTextArea {...props} inputRef={ref} />
 });
 
-TextAreaWithRef.displayName = 'Input';
+TextAreaWithRef.displayName = 'TextArea';
 
 
 const TextArea = (props) => {

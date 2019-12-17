@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
 
-import Flex, { FlexItem, FlexDirections, FlexAlign } from '../layout/Flex';
+import Flex, { FlexItem, FlexDirection, FlexAlign } from '../layout/Flex';
 import { Size, Category } from '../enums';
 import Margin from '../layout/Margin';
 import Hint from './Hint';
@@ -24,7 +24,7 @@ const InputGroup = ({
   return (
     <div style={style} className={styles.root}>
       <Flex
-        direction={FlexDirections.VERTICAL}
+        direction={FlexDirection.VERTICAL}
         align={FlexAlign.STRETCH}>
         {React.Children.map(children, (child, i) => (
           <FlexItem flex>
