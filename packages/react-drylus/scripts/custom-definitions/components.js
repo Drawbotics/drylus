@@ -22,7 +22,7 @@ interface Option {
 
 type OnChangeOptionCallback = (value: string | number) => void;
 
-export const BaseFilter: React.FunctionComponent<BaseFilterProps>;
+export declare const BaseFilter: React.FunctionComponent<BaseFilterProps>;
 
 export interface SelectFilterProps extends BaseFilterProps {
   options?: Array<Option>;
@@ -33,7 +33,7 @@ export interface SelectFilterProps extends BaseFilterProps {
   style?: React.CSSProperties;
 }
 
-export const SelectFilter: React.FunctionComponent<SelectFilterProps>;
+export declare const SelectFilter: React.FunctionComponent<SelectFilterProps>;
 
 export interface CheckboxFilterProps {
   options?: Array<Option>;
@@ -44,7 +44,7 @@ export interface CheckboxFilterProps {
   style?: React.CSSProperties;
 }
 
-export const CheckboxFilter: React.FunctionComponent<CheckboxFilterProps>;
+export declare const CheckboxFilter: React.FunctionComponent<CheckboxFilterProps>;
 `;
 
 

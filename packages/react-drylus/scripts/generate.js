@@ -100,9 +100,6 @@ function generate(options) {
       interfaceDefinitions.forEach(x => result += dom.emit(x));
       classDefinition.baseType = baseType;
       result += dom.emit(classDefinition);
-      // if (componentInfo.displayName === 'THead') {
-      //   console.log(componentInfo, result);
-      // }
       if (result) {
         result = prettier.format(result, { parser: 'typescript' });
       }

@@ -51,14 +51,16 @@ function generateTypes(targetFile) {
 
         // change class to function component definition
         result = result.replace(
-          /export default class (\S*) .*? \{\}/gms,
-          'export const $1: React.FunctionComponent<$1Props>;'
+          /export default class (\S*) extends (.*?) \{\}/gms,
+          (match, p1, p2='') => p2.includes(p1)
+            ? `export declare const ${p1}: React.FunctionComponent<${p1}Props>;`
+            : `export declare const ${p1}: React.FunctionComponent;`,
         );
     
         types.push(result);
       }
       catch(error) {
-        console.warn(`Impossible to create definition for ${file}. Will use custom definition.`);
+        console.error(`Impossible to create definition for ${file}. ${error}`);
       }
     }
   }

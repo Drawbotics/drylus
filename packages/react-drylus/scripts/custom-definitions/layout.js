@@ -30,7 +30,7 @@ export interface MarginProps {
   responsive?: Responsive;
 }
 
-export const Margin: React.FunctionComponent<MarginProps>;
+export declare const Margin: React.FunctionComponent<MarginProps>;
 `;
 
 
@@ -42,7 +42,7 @@ export interface PaddingProps {
   responsive?: Responsive;
 }
 
-export const Padding: React.FunctionComponent<PaddingProps>;
+export declare const Padding: React.FunctionComponent<PaddingProps>;
 `;
 
 
