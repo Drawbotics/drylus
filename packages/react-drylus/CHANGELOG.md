@@ -1,3 +1,16 @@
+# v5.1.1 (Tue Dec 17 2019)
+
+#### 🐛  Bug Fix
+
+- update snapshot  ([@nicmosc](https://github.com/nicmosc))
+- fix filter custom definition  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.1.0 (Tue Dec 17 2019)
 
 #### 🐛  Bug Fix
