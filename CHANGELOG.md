@@ -1,3 +1,20 @@
+# (Tue Dec 17 2019)
+
+#### 🚀  Enhancement
+
+- `@drawbotics/drylus-style-vars@5.1.0`, `@drawbotics/extract-emotion@5.1.0`, `@drawbotics/icons@5.1.0`, `@drawbotics/react-drylus@5.1.0`, `@drawbotics/vanilla-drylus@5.1.0`
+  - Add type definitions to drylus [#98](https://github.com/Drawbotics/drylus/pull/98) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- upgrade to auto 8  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.0.1 (Fri Dec 13 2019)
 
 #### 🐛 Bug fix - Patch
