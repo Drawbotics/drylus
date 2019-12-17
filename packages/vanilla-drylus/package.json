@@ -19,7 +19,7 @@
     "prepublishOnly": "npm run build && NODE_ENV=production npm run sync"
   },
   "dependencies": {
-    "@drawbotics/react-drylus": "^5.0.2-next.4"
+    "@drawbotics/react-drylus": "file:../react-drylus"
   },
   "publishConfig": {
     "access": "public"
