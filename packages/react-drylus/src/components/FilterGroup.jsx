@@ -10,6 +10,7 @@ import Drawer from './Drawer';
 import Margin from '../layout/Margin';
 import { Tier, Size, Category } from '../enums';
 import Flex, { FlexItem, FlexJustify } from '../layout/Flex';
+import { CustomPropTypes } from '../utils';
 
 
 const styles = {
@@ -24,14 +25,17 @@ const styles = {
 const FilterGroup = ({
   label,
   icon,
-  filters,
+  filters: _filters,
   renderButton,
   clearAllLabel,
   active,
   onClear,
+  children,
 }) => {
   const [ drawerOpen, setDrawerOpen ] = useState(false);
   const { screenSize, ScreenSizes } = useScreenSize();
+
+  const filters = children != null ? React.Children.map(children, x => x) : _filters;
 
   if (screenSize > ScreenSizes.L) {
     return (
@@ -43,7 +47,7 @@ const FilterGroup = ({
                 filter
               }
               else {
-                <Margin size={{ left: Size.SMALL }}>
+                <Margin size={{ left: Size.EXTRA_SMALL }}>
                   {filter}
                 </Margin>
               }
@@ -102,8 +106,16 @@ FilterGroup.propTypes = {
   /** Icon rendered on the button that replaces the filters */
   icon: PropTypes.string.isRequired,
 
-  /** Will be rendered within the content of the drawer */
-  filters: PropTypes.node.isRequired,
+  /** DEPRECATED */
+  filters: CustomPropTypes.mutuallyExclusive('children', {
+    type: PropTypes.node,
+    deprecated: true,
+  }),
+
+  /** Will be rendered within the content of the drawer, must be a filter */
+  children: CustomPropTypes.mutuallyExclusive('filters', {
+    type: PropTypes.node.isRequired,
+  }),
 
   /** Returns the button rendered by the group. With this you can wrap it in a component to arrange the spacing */
   renderButton: PropTypes.func,

@@ -20,37 +20,36 @@ By wrapping your filters (and other elements if necessary) with this component, 
   <FilterGroup
     label="Example"
     icon="filter"
-    onClear={x => x}
-    filters={[
-      <SelectFilter
-        fullWidth
-        label="Example 1"
-        onClear={x => x}
-        onChange={x => x}
-        options={[{
-          label: 'Something 1',
-          value: '1',
-        }, {
-          label: 'Something 2',
-          value: '2',
-        }, {
-          label: 'Something 3',
-          value: '3',
-        }]} />,
-      <SelectFilter
-        fullWidth
-        label="Example 2"
-        onClear={x => x}
-        onChange={x => x}
-        options={[{
-          label: 'Something 1',
-          value: '1',
-        }, {
-          label: 'Something 2',
-          value: '2',
-        }, {
-          label: 'Something 3',
-          value: '3',
-        }]} />
-      ]} />
+    onClear={x => x}>
+    <SelectFilter
+      fullWidth
+      label="Example 1"
+      onClear={x => x}
+      onChange={x => x}
+      options={[{
+        label: 'Something 1',
+        value: '1',
+      }, {
+        label: 'Something 2',
+        value: '2',
+      }, {
+        label: 'Something 3',
+        value: '3',
+      }]} />
+    <SelectFilter
+      fullWidth
+      label="Example 2"
+      onClear={x => x}
+      onChange={x => x}
+      options={[{
+        label: 'Something 1',
+        value: '1',
+      }, {
+        label: 'Something 2',
+        value: '2',
+      }, {
+        label: 'Something 3',
+        value: '3',
+      }]} />
+  </FilterGroup>
 </Playground>

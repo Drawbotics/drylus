@@ -501,7 +501,8 @@ export declare const EmptyState: React.FunctionComponent<EmptyStateProps>;
 export interface FilterGroupProps {
   label: string;
   icon: string;
-  filters: React.ReactNode;
+  filters?: React.ReactNode;
+  children: React.ReactNode;
   renderButton?(): void;
   clearAllLabel?: string;
   onClear(): void;
