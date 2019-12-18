@@ -1,3 +1,18 @@
+# v5.1.4 (Wed Dec 18 2019)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - replace wrong type object with any for now  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix disabled button hover  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.1.3 (Wed Dec 18 2019)
 
 #### ⚠️  Pushed to master
