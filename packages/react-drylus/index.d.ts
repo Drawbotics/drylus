@@ -205,7 +205,7 @@ export interface AlertProps {
     | Category.SUCCESS
     | Category.INFO
     | Category.WARNING;
-  onClickDismiss?(): OnClickCallback;
+  onClickDismiss?: OnClickCallback;
   id?: number | string;
   hideDelay?: number;
 }
@@ -274,7 +274,7 @@ export interface BannerProps {
 export declare const Banner: React.FunctionComponent<BannerProps>;
 
 export interface BigCheckboxProps {
-  onChange(): OnChangeCallback;
+  onChange: OnChangeCallback;
   value: boolean;
   children?: React.ReactNode;
   label: string;
@@ -287,7 +287,7 @@ export declare const BigCheckbox: React.FunctionComponent<BigCheckboxProps>;
 
 export interface BigRadioProps {
   checked?: boolean;
-  onChange(): OnChangeCallback;
+  onChange: OnChangeCallback;
   value: string | number;
   children?: React.ReactNode;
   label: string;
@@ -318,7 +318,7 @@ declare interface Responsive {
 export interface ButtonProps {
   children?: string;
   disabled?: boolean;
-  onClick?(): OnClickCallback;
+  onClick?: OnClickCallback;
   category?:
     | Category.BRAND
     | Category.DANGER
@@ -349,7 +349,7 @@ declare interface Responsive {
 export interface ButtonLinkProps {
   children?: string;
   disabled?: boolean;
-  onClick?(): OnClickCallback;
+  onClick?: OnClickCallback;
   category?:
     | Category.BRAND
     | Category.DANGER
@@ -398,7 +398,7 @@ export interface CollapsibleProps {
   title: string;
   isOpen?: boolean;
   children: React.ReactNode;
-  onClick?(): OnClickCallback;
+  onClick?: OnClickCallback;
   style?: React.CSSProperties;
 }
 
@@ -430,8 +430,8 @@ export interface DrawerProps {
   children: React.ReactNode;
   footer?: React.ReactNode;
   visible: boolean;
-  onClickClose?(): OnClickCallback;
-  onClickOverlay?(): OnClickCallback;
+  onClickClose?: OnClickCallback;
+  onClickOverlay?: OnClickCallback;
   asOverlay?: boolean;
   width?: number | string;
   raw?: boolean;
@@ -446,7 +446,7 @@ export declare const Drawer: React.FunctionComponent<DrawerProps>;
 export interface DropdownOptionProps {
   text: string;
   disabled?: boolean;
-  onClick?(): OnClickCallback;
+  onClick?: OnClickCallback;
   icon?: string;
   category?: Category.DANGER | Category.SUCCESS | Category.WARNING;
   style?: React.CSSProperties;
@@ -514,7 +514,7 @@ export declare const FilterGroup: React.FunctionComponent<FilterGroupProps>;
 export interface IconProps {
   name: string;
   bold?: boolean;
-  onClick?(): OnClickCallback;
+  onClick?: OnClickCallback;
   category?:
     | Category.DANGER
     | Category.INFO
@@ -590,7 +590,7 @@ export interface ModalProps {
   children: React.ReactNode;
   footer?: React.ReactNode;
   visible: boolean;
-  onClickClose?(): OnClickCallback;
+  onClickClose?: OnClickCallback;
   size?: Size.DEFAULT | Size.LARGE;
   raw?: boolean;
   title?: string;
@@ -604,7 +604,7 @@ export interface PaginationProps {
   pages: number;
   prevLabel?: string;
   nextLabel?: string;
-  onChange(): OnChangeCallback;
+  onChange: OnChangeCallback;
   value?: number;
   maxVisiblePages?: number;
   style?: React.CSSProperties;
@@ -715,7 +715,7 @@ export interface SegmentedControlProps {
   valueKey?: string;
   labelKey?: string;
   value?: string | number;
-  onChange?(): OnChangeCallback;
+  onChange?: OnChangeCallback;
   style?: React.CSSProperties;
 }
 
@@ -760,7 +760,7 @@ export interface TabNavigationProps {
   valueKey?: string;
   labelKey?: string;
   value?: string | number;
-  onChange?(): OnChangeCallback;
+  onChange?: OnChangeCallback;
   vertical?: boolean;
   linkComponent?: React.ReactNode;
   style?: React.CSSProperties;
@@ -773,7 +773,7 @@ export declare const TCell: React.FunctionComponent;
 export interface TRowProps {
   children: React.ReactNode;
   highlighted?: boolean;
-  onClick?(): OnClickCallback;
+  onClick?: OnClickCallback;
   clickable?(): void;
   style?: React.CSSProperties;
 }
@@ -800,11 +800,11 @@ export interface TableProps {
   childHeader?: string[];
   sortableBy?: string[];
   activeHeader?: ActiveHeader;
-  onClickHeader?(): OnClickCallback;
+  onClickHeader?: OnClickCallback;
   highlighted?: boolean;
   clickable?: boolean;
   isLoading?: boolean;
-  onClickRow?(): OnClickCallback;
+  onClickRow?: OnClickCallback;
   activeRow?: any;
   emptyContent?: React.ReactNode;
   style?: object;
@@ -820,7 +820,7 @@ export interface TagProps {
     | Category.SUCCESS
     | Category.INFO
     | Category.WARNING;
-  onClickRemove?(): OnClickCallback;
+  onClickRemove?: OnClickCallback;
   inversed?: boolean;
   style?: React.CSSProperties;
 }
@@ -909,7 +909,7 @@ declare interface Responsive {
 }
 
 export interface ToggleProps {
-  onChange(): OnChangeCallback;
+  onChange: OnChangeCallback;
   disabled?: boolean;
   value: boolean;
   size?: Size.SMALL | Size.DEFAULT;
@@ -931,7 +931,7 @@ export declare const Tooltip: React.FunctionComponent<TooltipProps>;
 
 export interface CheckboxProps {
   children?: string;
-  onChange?(): OnChangeCallback;
+  onChange?: OnChangeCallback;
   disabled?: boolean;
   value?: boolean;
   name?: string;
@@ -969,7 +969,7 @@ declare interface ActiveStartDate {
 
 export interface DateInputProps {
   value: any;
-  onChange?(): OnChangeCallback;
+  onChange?: OnChangeCallback;
   name?: string;
   locale?: string;
   disabled?: boolean;
@@ -1010,7 +1010,7 @@ export interface InputProps {
   name?: string;
   disabled?: boolean;
   placeholder?: string;
-  onChange?(): OnChangeCallback;
+  onChange?: OnChangeCallback;
   hint?: string;
   error?: string | boolean;
   valid?: boolean;
@@ -1043,7 +1043,7 @@ export interface MultiSelectProps {
   valueKey?: string;
   labelKey?: string;
   placeholder?: string;
-  onChange?(): OnChangeCallback;
+  onChange?: OnChangeCallback;
   hint?: string;
   error?: string | boolean;
   valid?: boolean;
@@ -1058,7 +1058,7 @@ export interface NumberInputProps {
   name?: string;
   disabled?: boolean;
   placeholder?: string;
-  onChange?(): OnChangeCallback;
+  onChange?: OnChangeCallback;
   hint?: string;
   error?: string | boolean;
   valid?: boolean;
@@ -1077,7 +1077,7 @@ export interface RadioGroupProps {
   name?: string;
   valueKey?: string;
   labelKey?: string;
-  onChange?(): OnChangeCallback;
+  onChange?: OnChangeCallback;
   disabled?: boolean;
   value?: string | number;
   error?: string | boolean;
@@ -1093,7 +1093,7 @@ export interface SearchInputProps {
   options?: string[];
   value: string;
   name?: string;
-  onChange(): OnChangeCallback;
+  onChange: OnChangeCallback;
   noResultLabel?: string;
   placeholder?: string;
   isLoading?: boolean;
@@ -1110,7 +1110,7 @@ export interface SelectProps {
   valueKey?: string;
   labelKey?: string;
   placeholder?: string;
-  onChange?(): OnChangeCallback;
+  onChange?: OnChangeCallback;
   hint?: string;
   error?: string | boolean;
   valid?: boolean;
@@ -1125,7 +1125,7 @@ export interface TextAreaProps {
   name?: string;
   disabled?: boolean;
   placeholder?: string;
-  onChange?(): OnChangeCallback;
+  onChange?: OnChangeCallback;
   hint?: string;
   error?: string | boolean;
   valid?: boolean;
@@ -1239,7 +1239,7 @@ export interface ListTileProps {
   subtitle?: React.ReactNode;
   leading?: React.ReactNode;
   trailing?: React.ReactNode;
-  onClick?(): OnClickCallback;
+  onClick?: OnClickCallback;
   style?: React.CSSProperties;
 }
 

@@ -44,10 +44,10 @@ function generateTypes(targetFile) {
         result = result.replace('style?: object', 'style?: React.CSSProperties');
 
         // replace generic onClick with specific definition
-        result = result.replace(/onClick(.*?\(\)): void/gm, 'onClick$1: OnClickCallback');
+        result = result.replace(/onClick(.*?)\(\): void/gm, 'onClick$1: OnClickCallback');
 
         // replace generic onChange with specific definition
-        result = result.replace(/onChange(.*?\(\)): void/gm, 'onChange$1: OnChangeCallback');
+        result = result.replace(/onChange(.*?)\(\): void/gm, 'onChange$1: OnChangeCallback');
 
         // replace shape by any for now
         // TODO handle nested props
