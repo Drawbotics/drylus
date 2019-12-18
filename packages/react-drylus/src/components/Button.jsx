@@ -223,6 +223,7 @@ export const styles = {
 
     &:disabled {
       background: none;
+      color: ${sv.colorDisabled};
     }
   `,
   round: css`
