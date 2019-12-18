@@ -1,3 +1,17 @@
+# v5.1.3 (Wed Dec 18 2019)
+
+#### ⚠️  Pushed to master
+
+- downgrade back to auto 7, 8 broke changelog  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix onChange and onClick function definitions  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.1.2 (Tue Dec 17 2019)
 
 #### ⚠️  Pushed to master
