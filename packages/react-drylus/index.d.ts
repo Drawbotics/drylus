@@ -984,6 +984,7 @@ export interface DateInputProps {
   activeStartDate?: ActiveStartDate;
   loading?: boolean;
   style?: React.CSSProperties;
+  align?: Align.LEFT | Align.RIGHT;
 }
 
 export declare const DateInput: React.FunctionComponent<DateInputProps>;
