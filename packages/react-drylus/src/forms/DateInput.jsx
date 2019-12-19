@@ -10,6 +10,7 @@ import { InputWithRef } from './Input';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
 import { styles as themeStyles } from '../base/ThemeProvider';
+import { Align } from '../enums';
 
 
 const styles = {
@@ -214,6 +215,7 @@ const DateInput = ({
   activeStartDate,
   loading,
   style,
+  align,
 }) => {
   const [ outletElement, setOutletElement ] = useState(null);
   const [ isFocused, setFocused ] = useState(false);
@@ -307,7 +309,8 @@ const DateInput = ({
           <div
             style={{
               top: rootBox?.top,
-              left: rootBox?.left,
+              left: align === Align.LEFT ? rootBox?.left : null,
+              right: align === Align.RIGHT ? (rootBox?.right + pickerBox?.width / 2) : null,
             }}
             ref={pickerElement}
             className={cx(styles.calendarContainer, {
@@ -401,11 +404,15 @@ DateInput.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Determines on which side the picker is aligned */
+  align: PropTypes.oneOf([ Align.LEFT, Align.RIGHT ]),
 };
 
 
 DateInput.defaultProps = {
   locale: 'en',
+  align: Align.LEFT,
 };
 
 
