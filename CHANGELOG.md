@@ -1,3 +1,21 @@
+# v5.2.0 (Thu Dec 19 2019)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - use placeholder component in table loader, increase placeholder contrast [#99](https://github.com/Drawbotics/drylus/pull/99) ([@nicmosc](https://github.com/nicmosc))
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - add align prop to date picker [#100](https://github.com/Drawbotics/drylus/pull/100) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.1.5 (Thu Dec 19 2019)
 
 #### ⚠️  Pushed to master
