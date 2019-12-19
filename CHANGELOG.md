@@ -1,3 +1,16 @@
+# v5.1.5 (Thu Dec 19 2019)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix renderValue type in NumberInput  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.1.4 (Wed Dec 18 2019)
 
 #### ⚠️  Pushed to master
