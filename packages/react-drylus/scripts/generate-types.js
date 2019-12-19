@@ -60,6 +60,10 @@ function generateTypes(targetFile) {
             ? `export declare const ${p1}: React.FunctionComponent<${p1}Props>;`
             : `export declare const ${p1}: React.FunctionComponent;`,
         );
+
+        // TODO move this to separate function
+        // replace renderValue in NumberInput to specific function
+        result = result.replace('renderValue?(): void', 'renderValue?(v: React.ReactText): string');
     
         types.push(result);
       }

@@ -1062,7 +1062,7 @@ export interface NumberInputProps {
   hint?: string;
   error?: string | boolean;
   valid?: boolean;
-  renderValue?(): void;
+  renderValue?(v: React.ReactText): string;
   max?: number;
   min?: number;
   withCounter?: boolean;
