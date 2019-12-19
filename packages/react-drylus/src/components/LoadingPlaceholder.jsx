@@ -26,13 +26,13 @@ export const styles = {
       width: 100%;
       top: 0;
       left: 0;
-      background: ${sv.neutralLight};
+      background: ${sv.neutral};
       border-radius: ${sv.defaultBorderRadius};
       overflow: hidden;
       background: linear-gradient(to right,
-        ${sv.neutralLight} 8%,
-        ${sv.neutralLighter} 18%,
-        ${sv.neutralLight} 33%
+        ${sv.neutral} 8%,
+        ${sv.neutralLight} 18%,
+        ${sv.neutral} 33%
       );
       background-size: 1200px 100%;
       animation: ${shimmer} 2s forwards infinite linear;

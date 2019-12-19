@@ -11,12 +11,12 @@ exports[`LoadingPlaceholder matches snapshot when has custom sizes 1`] = `
   }
 }
 
-.css-16lvo4x-LoadingPlaceholder__shimmer {
+.css-1kpu34c-LoadingPlaceholder__shimmer {
   position: relative;
   pointer-events: none;
 }
 
-.css-16lvo4x-LoadingPlaceholder__shimmer::after {
+.css-1kpu34c-LoadingPlaceholder__shimmer::after {
   content: ' ';
   position: absolute;
   z-index: 9;
@@ -24,17 +24,17 @@ exports[`LoadingPlaceholder matches snapshot when has custom sizes 1`] = `
   width: 100%;
   top: 0;
   left: 0;
-  background: #eaeff4;
+  background: #d3dce6;
   border-radius: 5px;
   overflow: hidden;
-  background: linear-gradient(to right,#eaeff4 8%,#f8f9fa 18%,#eaeff4 33% );
+  background: linear-gradient(to right,#d3dce6 8%,#eaeff4 18%,#d3dce6 33% );
   background-size: 1200px 100%;
   -webkit-animation: animation-0 2s forwards infinite linear;
   animation: animation-0 2s forwards infinite linear;
 }
 
 <div
-  className="css-16lvo4x-LoadingPlaceholder__shimmer"
+  className="css-1kpu34c-LoadingPlaceholder__shimmer"
   style={
     Object {
       "height": 200,
@@ -55,12 +55,12 @@ exports[`LoadingPlaceholder matches snapshot when has no specified sizes 1`] = `
   }
 }
 
-.css-16lvo4x-LoadingPlaceholder__shimmer {
+.css-1kpu34c-LoadingPlaceholder__shimmer {
   position: relative;
   pointer-events: none;
 }
 
-.css-16lvo4x-LoadingPlaceholder__shimmer::after {
+.css-1kpu34c-LoadingPlaceholder__shimmer::after {
   content: ' ';
   position: absolute;
   z-index: 9;
@@ -68,17 +68,17 @@ exports[`LoadingPlaceholder matches snapshot when has no specified sizes 1`] = `
   width: 100%;
   top: 0;
   left: 0;
-  background: #eaeff4;
+  background: #d3dce6;
   border-radius: 5px;
   overflow: hidden;
-  background: linear-gradient(to right,#eaeff4 8%,#f8f9fa 18%,#eaeff4 33% );
+  background: linear-gradient(to right,#d3dce6 8%,#eaeff4 18%,#d3dce6 33% );
   background-size: 1200px 100%;
   -webkit-animation: animation-0 2s forwards infinite linear;
   animation: animation-0 2s forwards infinite linear;
 }
 
 <div
-  className="css-16lvo4x-LoadingPlaceholder__shimmer"
+  className="css-1kpu34c-LoadingPlaceholder__shimmer"
   style={
     Object {
       "height": "24px",
