@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext, Fragment } from 'react';
-import { css, cx, keyframes } from 'emotion';
+import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
@@ -9,19 +9,11 @@ import Label from './Label';
 import Icon from './Icon';
 import Size from '../enums/Size';
 import Margin from '../layout/Margin';
+import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
 
 
 const RowsContext = createContext([{}, () => {}]);
 
-
-const gradientAnimation = keyframes`
-  0%{
-      background-position: -500px 0;
-  }
-  100%{
-      background-position: 500px 0;
-  }
-`;
 
 const styles = {
   root: css`
@@ -274,10 +266,6 @@ const styles = {
     display: inline-block;
     height: 20px;
     width: 70%;
-    background: ${sv.neutralLight};
-    background: linear-gradient(to right, ${sv.neutralLight}, ${sv.neutral}, ${sv.neutralLight});
-    background-size: 1000px 600px;
-    animation: ${gradientAnimation} calc(${sv.defaultTransitionTime} * 4) linear forwards infinite;
 
     @media ${sv.screenL} {
       width: 100%;
@@ -444,7 +432,7 @@ const FakeTable = ({ columns }) => {
           <TRow key={args[1]}>
             {columns.map((column, i) => (
               <TCell key={i} data-th={typeof column === 'string' ? column : column.label}>
-                <div className={styles.loadingBodyCell} />
+                <div className={cx(styles.loadingBodyCell, placeholderStyles.shimmer)} />
               </TCell>
             ))}
           </TRow>
