@@ -379,7 +379,7 @@ TRow.propTypes = {
   onClick: PropTypes.func,
 
   /** If true and `onClick` is provided, shows a pointer when hovering the row */
-  clickable: PropTypes.func,
+  clickable: PropTypes.bool,
 
   /** Used for style overrides */
   style: PropTypes.object,

@@ -774,7 +774,7 @@ export interface TRowProps {
   children: React.ReactNode;
   highlighted?: boolean;
   onClick?: OnClickCallback;
-  clickable?(): void;
+  clickable?: boolean;
   style?: React.CSSProperties;
 }
 
