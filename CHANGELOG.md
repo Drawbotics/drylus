@@ -1,3 +1,16 @@
+# v5.2.1 (Fri Dec 20 2019)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix wrong TRow clickable prop  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.2.0 (Thu Dec 19 2019)
 
 #### 🚀 Enhancement - Minor change
