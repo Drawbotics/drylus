@@ -309,8 +309,9 @@ const DateInput = ({
           <div
             style={{
               top: rootBox?.top,
-              left: align === Align.LEFT ? rootBox?.left : null,
-              right: align === Align.RIGHT ? (rootBox?.right + pickerBox?.width / 2) : null,
+              left: align === Align.LEFT
+                ? rootBox?.left
+                : (rootBox?.left - Math.abs(rootBox?.width - pickerBox?.width) || null),
             }}
             ref={pickerElement}
             className={cx(styles.calendarContainer, {
