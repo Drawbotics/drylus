@@ -24,6 +24,7 @@ const styles = {
   trailing: css`
     display: flex;
     align-items: center;
+    margin-left: ${sv.marginExtraSmall};
   `,
   title: css`
     color: ${sv.colorPrimary};
