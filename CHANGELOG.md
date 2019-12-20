@@ -1,3 +1,16 @@
+# v5.2.3 (Fri Dec 20 2019)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix right align in date input  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.2.2 (Fri Dec 20 2019)
 
 #### ⚠️  Pushed to master
