@@ -11,7 +11,7 @@ import { getStyleForSide, CustomPropTypes, deprecateProperty } from '../utils';
 import { Position } from '../enums';
 
 
-const styles = {
+export const styles = {
   root: css`
     position: fixed;
     padding: ${sv.paddingExtraSmall} ${sv.defaultPadding};

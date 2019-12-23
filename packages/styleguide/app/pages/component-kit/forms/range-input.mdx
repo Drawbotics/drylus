@@ -1,0 +1,32 @@
+import { RangeInput } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+import { ControlledField } from '../utils';
+
+
+# Range Input
+Similar to the native `input` of `range` type, but allows also more than 1 handle i.e. more than 1 value.
+```jsx
+import { RangeInput } from '@drawbotics/react-drylus';
+```
+
+__Example__
+<Playground component={RangeInput}>
+  <ControlledField style={{ maxWidth: 300, width: '100%' }} initialValue={0} component={
+    <RangeInput step={1} onChange={x => x} max={100} min={0} value={0} />
+  } />
+</Playground>
+
+
+### Range with 2 possible values
+<Playground>
+  <ControlledField style={{ maxWidth: 300, width: '100%' }} initialValue={[20000, 100000]} component={
+    <RangeInput
+      step={1000}
+      onChange={x => x}
+      max={250000}
+      min={10000}
+      value={[20000, 100000]}
+      renderValue={(v) => v.toLocaleString() + ' €'} />
+  } />
+</Playground>
