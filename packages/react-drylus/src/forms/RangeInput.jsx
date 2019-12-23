@@ -15,11 +15,18 @@ const styles = {
     width: 100%;
     user-select: none;
   `,
+  disabled: css`
+    cursor: not-allowed;
+  `,
   rail: css`
     width: 100%;
     height: calc(${sv.marginExtraSmall} / 2);
     border-radius: calc(${sv.marginExtraSmall} / 2);
     background-color: ${sv.neutralLight};
+  `,
+  disabledRail: css`
+    background-color: ${sv.neutralLighter};
+    cursor: not-allowed;
   `,
   handle: css`
     top: 0;
@@ -32,10 +39,11 @@ const styles = {
     border: 4px solid ${sv.brand};
     margin-top: -6px;
     margin-left: -6px;
-
-    &:hover {
-      cursor: pointer;
-    }
+    cursor: pointer;
+  `,
+  disabledHandle: css`
+    border-color: ${sv.neutral};
+    cursor: not-allowed;
   `,
   track: css`
     top: 0;
@@ -44,10 +52,11 @@ const styles = {
     z-index: 1;
     background-color: ${sv.brand};
     border-radius: ${sv.defaultBorderRadius};
-
-    &:hover {
-      cursor: pointer;
-    }
+    cursor: pointer;
+  `,
+  disabledTrack: css`
+    background-color: ${sv.neutral};
+    cursor: not-allowed;
   `,
   labels: css`
     display: flex;
@@ -85,6 +94,7 @@ const Handle = ({
   handle,
   getHandleProps,
   renderValue,
+  disabled,
 }) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const { id, value, percent } = handle;
@@ -101,8 +111,8 @@ const Handle = ({
   return (
     <div
       style={{ left: `${percent}%` }}
-      className={styles.handle}
-      {...getHandleProps(id, {
+      className={cx(styles.handle, { [styles.disabledHandle]: disabled })}
+      {...getHandleProps(id, disabled ? {} : {
         onMouseDown: handleShowTooltip,
         onMouseUp: handleHideTooltip,
         onTouchStart: handleShowTooltip,
@@ -118,6 +128,7 @@ const Track = ({
   source,
   target,
   getTrackProps,
+  disabled,
 }) => {
   return (
     <div
@@ -125,7 +136,7 @@ const Track = ({
         left: `${source.percent}%`,
         width: `${target.percent - source.percent}%`,
       }}
-      className={styles.track}
+      className={cx(styles.track, { [styles.disabledTrack]: disabled })}
       {...getTrackProps()} />
   );
 };
@@ -146,16 +157,19 @@ const RangeInput = ({
   const values = isMultiHandle ? value : [value];
   return (
     <Slider
+      disabled={disabled}
       onUpdate={(values) => onUpdate(isMultiHandle ? values : values[0])}
       onChange={(values) => onChange(isMultiHandle ? values : values[0])}
       mode={3}
       step={step}
-      className={styles.root}
+      className={cx(styles.root, { [styles.disabled]: disabled })}
       domain={[min, max]}
       values={values}>
       <Rail>
         {({ getRailProps }) => (
-          <div className={styles.rail} {...getRailProps()} />
+          <div
+            className={cx(styles.rail, { [styles.disabledRail]: disabled })}
+            {...getRailProps()} />
         )}
       </Rail>
       <Handles>
@@ -163,6 +177,7 @@ const RangeInput = ({
           <div>
             {handles.map((handle) => (
               <Handle
+                disabled={disabled}
                 renderValue={renderValue}
                 key={handle.id}
                 handle={handle}
@@ -177,6 +192,7 @@ const RangeInput = ({
           <div>
             {tracks.map(({ id, source, target }) => (
               <Track
+                disabled={disabled}
                 key={id}
                 source={source}
                 target={target}
@@ -186,7 +202,7 @@ const RangeInput = ({
           </div>
         )}
       </Tracks>
-      <div className={styles.labels}>
+      <div className={cx(styles.labels)}>
         <div className={styles.min}>
           <Text size={Size.SMALL}>{renderValue(min)}</Text>
         </div>
