@@ -1,3 +1,18 @@
+# v5.2.6 (Wed Jan 08 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - rebuild types  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - improve checkbox filter & add closeOnClick prop to base filter  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.2.5 (Wed Jan 08 2020)
 
 #### ⚠️  Pushed to master
