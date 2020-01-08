@@ -133,24 +133,32 @@ const BaseFilter = ({
   active,
   style,
   fullWidth,
+  closeOnClick,
 }) => {
-  const ref = useRef();
+  const childrenRef = useRef();
   const [ panelOpen, setPanelOpen ] = useState(false);
-  const handleDocumentClick = (e) => ! ref.current.contains(e.target) ? setPanelOpen(false) : null;
+
+  const handleDocumentClick = (e) => {
+    if (! childrenRef.current.contains(e.target) && childrenRef.current !== e.target) {
+      setPanelOpen(false);
+    }
+  };
+  
   const handleClickClear = () => {
     setPanelOpen(false);
     onClear();
   };
+
   useEffect(() => {
     document.addEventListener('mousedown', handleDocumentClick);
     return () => {
       document.removeEventListener('mousedown', handleDocumentClick);
     };
   }, []);
+
   return (
     <div
       style={style}
-      ref={ref}
       className={cx(styles.root, {
         [styles.fullWidth]: fullWidth,
       })}>
@@ -176,8 +184,10 @@ const BaseFilter = ({
           [styles.visible]: panelOpen,
           [styles.rightAlign]: align === Align.RIGHT,
         })}
-        onClick={() => setPanelOpen(false)}>
-        {children}
+        onClick={closeOnClick ? () => setPanelOpen(false) : null}>
+        <div ref={childrenRef}>
+          {children}
+        </div>
         <div className={styles.clear} onClick={handleClickClear}>
           {clearLabel}
         </div>
@@ -211,12 +221,16 @@ BaseFilter.propTypes = {
 
   /** If true, the filter takes the whole space of the parent */
   fullWidth: PropTypes.bool,
+
+  /** If true, the panel closes when clicked */
+  closeOnClick: PropTypes.bool,
 };
 
 
 BaseFilter.defaultProps = {
   clearLabel: 'Clear',
   align: Align.RIGHT,
+  closeOnClick: false,
 };
 
 
@@ -231,7 +245,11 @@ export const SelectFilter = ({
 }) => {
   const currentLabel = value ? options.find((option) => String(option[valueKey]) === String(value))?.[labelKey] : label;
   return (
-    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel != null && !! value}>
+    <BaseFilter
+      {...rest}
+      closeOnClick
+      label={currentLabel != null ? currentLabel : label}
+      active={currentLabel != null && !! value}>
       {options.map((option) => (
         <div
           key={option[valueKey]}
@@ -313,8 +331,12 @@ export const CheckboxFilter = ({
   return (
     <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel != null && values.length > 0}>
       {options.map((option) => (
-        <div key={option[valueKey]} className={cx(styles.option, styles.defaultCursor)}>
+        <label
+          htmlFor={option.value}
+          key={option[valueKey]}
+          className={cx(styles.option, styles.defaultCursor)}>
           <Checkbox
+            id={option.value}
             onChange={(checked) => {
               checked
                 ? onChange([...values, option[valueKey]])
@@ -323,7 +345,7 @@ export const CheckboxFilter = ({
             value={values.includes(option[valueKey])}>
             {option[labelKey]}
           </Checkbox>
-        </div>
+        </label>
       ))}
     </BaseFilter>
   );
