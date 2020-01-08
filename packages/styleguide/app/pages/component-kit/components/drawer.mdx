@@ -2,7 +2,6 @@ import { useState } from 'react';
 import {
   Drawer,
   Layout,
-  LayoutPositions,
   Button,
   Category,
   Position,
@@ -30,7 +29,7 @@ export const DrawerController = ({ component: Component }) => {
           onClickClose: () => setVisibility(false),
           onClickOverlay: () => setVisibility(false),
         })
-      } position={LayoutPositions.RIGHT}>
+      } position={Position.RIGHT}>
         <div style={{ height: 500, padding: 20 }}>
           <Button onClick={() => setVisibility(true)}>Show drawer</Button>
           <div style={{

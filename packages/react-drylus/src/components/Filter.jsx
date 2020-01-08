@@ -47,7 +47,6 @@ const styles = {
     margin-top: ${sv.marginExtraSmall};
     background: ${sv.white};
     min-width: 180px;
-    width: 100%;
     border-radius: ${sv.defaultBorderRadius};
     border: 1px solid ${sv.azure};
     box-shadow: ${sv.elevation2};
@@ -108,6 +107,10 @@ const styles = {
     [data-element="trigger"] {
       justify-content: center;
     }
+
+    [data-element="panel"] {
+      width: 100%;
+    }
   `,
 };
 
@@ -167,10 +170,13 @@ const BaseFilter = ({
           }}
           name={active ? 'x' : (panelOpen ? 'chevron-up' : 'chevron-down')} />
       </div>
-      <div className={cx(styles.panel, {
-        [styles.visible]: panelOpen,
-        [styles.rightAlign]: align === Align.RIGHT,
-      })} onClick={() => setPanelOpen(false)}>
+      <div
+        data-element="panel"
+        className={cx(styles.panel, {
+          [styles.visible]: panelOpen,
+          [styles.rightAlign]: align === Align.RIGHT,
+        })}
+        onClick={() => setPanelOpen(false)}>
         {children}
         <div className={styles.clear} onClick={handleClickClear}>
           {clearLabel}
