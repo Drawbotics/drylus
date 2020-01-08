@@ -1,3 +1,16 @@
+# v5.2.4 (Wed Jan 08 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/slider [#101](https://github.com/Drawbotics/drylus/pull/101) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.2.3 (Fri Dec 20 2019)
 
 #### ⚠️  Pushed to master
