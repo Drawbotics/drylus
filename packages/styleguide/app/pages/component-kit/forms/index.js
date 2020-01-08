@@ -11,6 +11,7 @@ import formGroup from './form-group';
 import inputGroup from './input-group';
 import hint from './hint';
 import textArea from './text-area';
+import rangeInput from './range-input';
 
 
 const components = {
@@ -27,6 +28,7 @@ const components = {
   inputGroup,
   hint,
   textArea,
+  rangeInput,
 };
 
 

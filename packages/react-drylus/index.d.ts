@@ -1090,6 +1090,19 @@ export interface RadioGroupProps {
 
 export declare const RadioGroup: React.FunctionComponent<RadioGroupProps>;
 
+export interface RangeInputProps {
+  min: number;
+  max: number;
+  value: any;
+  step?: number;
+  onChange: OnChangeCallback;
+  onUpdate?(): void;
+  disabled?: boolean;
+  renderValue?(v: React.ReactText): string;
+}
+
+export declare const RangeInput: React.FunctionComponent<RangeInputProps>;
+
 export interface SearchInputProps {
   options?: string[];
   value: string;

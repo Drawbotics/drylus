@@ -10,3 +10,4 @@ export FormGroup from './FormGroup';
 export InputGroup from './InputGroup';
 export Hint from './Hint';
 export TextArea from './TextArea';
+export RangeInput from './RangeInput';
