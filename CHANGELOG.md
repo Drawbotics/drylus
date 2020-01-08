@@ -1,3 +1,16 @@
+# v5.2.5 (Wed Jan 08 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - only make filter panel width 100% when fullWidth prop is present  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.2.4 (Wed Jan 08 2020)
 
 #### 🐛 Bug fix - Patch
