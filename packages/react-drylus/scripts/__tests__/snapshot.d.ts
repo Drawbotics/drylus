@@ -90,6 +90,7 @@ export interface BaseFilterProps {
   active?: boolean;
   style?: React.CSSProperties;
   fullWidth?: boolean;
+  closeOnClick?: boolean;
 }
 
 interface Option {
