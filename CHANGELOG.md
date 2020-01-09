@@ -1,3 +1,16 @@
+# v5.3.2 (Thu Jan 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - avoid drawer content x overflow  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.3.1 (Thu Jan 09 2020)
 
 #### ⚠️  Pushed to master
