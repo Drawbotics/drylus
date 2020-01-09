@@ -1,3 +1,16 @@
+# v5.3.1 (Thu Jan 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add responsive to flex item  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.3.0 (Thu Jan 09 2020)
 
 #### 🚀 Enhancement - Minor change
