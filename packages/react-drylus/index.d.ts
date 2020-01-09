@@ -417,7 +417,7 @@ export interface CircularProgressProps {
 export declare const CircularProgress: React.FunctionComponent<CircularProgressProps>;
 
 export interface CollapsibleProps {
-  title: string;
+  title: React.ReactNode | string;
   isOpen?: boolean;
   children: React.ReactNode;
   onClick?: OnClickCallback;

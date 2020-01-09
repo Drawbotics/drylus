@@ -2,6 +2,7 @@ import React from 'react';
 import { create } from 'react-test-renderer';
 
 import Collapsible from '../Collapsible';
+import Text from '../Text';
 
 
 describe('Collapsible', () => {
@@ -16,6 +17,13 @@ describe('Collapsible', () => {
     it('it is open', () => {
       const tree = create(
         <Collapsible title="Title" isOpen={true}>Collapsible content</Collapsible>
+      ).toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('the title is a node', () => {
+      const tree = create(
+        <Collapsible title={<Text>The title</Text>} isOpen={true}>Collapsible content</Collapsible>
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });

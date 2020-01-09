@@ -48,7 +48,14 @@ const Collapsible = ({
     <div style={style} className={styles.root}>
       <div className={styles.header} onClick={onClick}>
         <div data-element="title">
-          <Label ellipsized>{title}</Label>
+          {do {
+            if (typeof title === 'string') {
+              <Label ellipsized>{title}</Label>
+            }
+            else {
+              title
+            }
+          }}
         </div>
         <div className={styles.icon}>
           <Icon name={isOpen ? 'chevron-up' : 'chevron-down'} />
@@ -68,7 +75,10 @@ const Collapsible = ({
 
 Collapsible.propTypes = {
   /** Shown on the left side as a label */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string,
+  ]).isRequired,
 
   /** Determines whether the content of the collapsible is visible */
   isOpen: PropTypes.bool,
