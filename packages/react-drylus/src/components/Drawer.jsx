@@ -80,6 +80,7 @@ const styles = {
   content: css`
     overflow-x: hidden;
     padding-top: ${sv.paddingExtraSmall};
+    height: 100%;
   `,
   title: css`
     margin-top: ${sv.marginExtraSmall};
