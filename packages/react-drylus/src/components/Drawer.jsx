@@ -71,9 +71,14 @@ const styles = {
       padding-bottom: 90px;
     }
   `,
-  content: css`
-    overflow: scroll;
+  contentWrapper: css`
     flex: 1;
+    width: 100%;
+    overflow-x: visible;
+    overflow-y: hidden;
+  `,
+  content: css`
+    overflow-x: hidden;
     padding-top: ${sv.paddingExtraSmall};
   `,
   title: css`
@@ -200,8 +205,10 @@ const BaseDrawer = ({
           </div>
         }
       }}
-      <div className={styles.content}>
-        {children}
+      <div className={styles.contentWrapper}>
+        <div className={styles.content}>
+          {children}
+        </div>
       </div>
       {do {
         if (footer) {
