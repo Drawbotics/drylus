@@ -10,6 +10,7 @@ import Size from '../enums/Size';
 import Category from '../enums/Category';
 import Hint from './Hint';
 import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -91,19 +92,24 @@ const styles = {
 
 
 const RawTextArea = ({
-  value,
-  onChange,
-  error,
-  valid,
-  hint,
-  disabled,
-  inputRef,
-  className,
-  loading,
-  style,
-  isPlaceholder,
+  responsive,
   ...rest,
 }) => {
+  const {
+    value,
+    onChange,
+    error,
+    valid,
+    hint,
+    disabled,
+    inputRef,
+    className,
+    loading,
+    style,
+    isPlaceholder,
+    ...props
+  } = useResponsiveProps(rest, responsive);
+
   const [ isFocused, setFocused ] = useState(false);
 
   const handleOnChange = (e) => onChange != null ? onChange(e.target.value, e.target.name) : null;
@@ -150,7 +156,7 @@ const RawTextArea = ({
             className={styles.textarea}
             value={value}
             ref={inputRef}
-            {...rest} />
+            {...props} />
         </div>
       </div>
       {do{
@@ -217,6 +223,16 @@ TextArea.propTypes = {
 
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder: PropTypes.bool,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

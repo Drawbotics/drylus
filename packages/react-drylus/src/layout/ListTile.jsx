@@ -5,6 +5,7 @@ import sv from '@drawbotics/drylus-style-vars';
 
 import Flex, { FlexItem } from './Flex';
 import Text from '../components/Text';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -40,14 +41,18 @@ const styles = {
 
 
 const ListTile = ({
-  title,
-  subtitle,
-  leading,
-  trailing,
-  onClick,
-  style,
+  responsive,
+  ...rest,
 }) => {
- 
+  const {
+    title,
+    subtitle,
+    leading,
+    trailing,
+    onClick,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   return (
     <div
       style={style}
@@ -124,6 +129,16 @@ ListTile.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

@@ -91,6 +91,7 @@ export interface BaseFilterProps {
   style?: React.CSSProperties;
   fullWidth?: boolean;
   closeOnClick?: boolean;
+  responsive?: Responsive;
 }
 
 interface Option {
@@ -260,6 +261,15 @@ export interface BadgeProps {
 
 export declare const Badge: React.FunctionComponent<BadgeProps>;
 
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
+
 export interface BannerProps {
   children: React.ReactNode;
   title?: string;
@@ -270,6 +280,7 @@ export interface BannerProps {
   | Category.WARNING;
   style?: React.CSSProperties;
   trailing?: React.ReactNode;
+  responsive?: Responsive;
 }
 
 export declare const Banner: React.FunctionComponent<BannerProps>;
@@ -380,6 +391,15 @@ export interface CalloutProps {
 
 export declare const Callout: React.FunctionComponent<CalloutProps>;
 
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
+
 export interface CircularProgressProps {
   percentage?: number;
   text?: string;
@@ -391,6 +411,7 @@ export interface CircularProgressProps {
   | Category.WARNING;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const CircularProgress: React.FunctionComponent<CircularProgressProps>;
@@ -444,6 +465,15 @@ export interface DrawerProps {
 
 export declare const Drawer: React.FunctionComponent<DrawerProps>;
 
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
+
 export interface DropdownOptionProps {
   text: string;
   disabled?: boolean;
@@ -451,6 +481,7 @@ export interface DropdownOptionProps {
   icon?: string;
   category?: Category.DANGER | Category.SUCCESS | Category.WARNING;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const DropdownOption: React.FunctionComponent<DropdownOptionProps>;
@@ -464,11 +495,21 @@ export declare const DropdownTitle: React.FunctionComponent<DropdownTitleProps>;
 
 export declare const DropdownSeparator: React.FunctionComponent;
 
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
+
 export interface DropdownProps {
   trigger?: React.ReactNode;
   children?: React.ReactNode;
   side?: Position.LEFT | Position.RIGHT | Position.TOP | Position.BOTTOM;
   style?: object;
+  responsive?: Responsive;
 }
 
 export declare const Dropdown: React.FunctionComponent<DropdownProps>;
@@ -560,9 +601,19 @@ export interface ListProps {
 
 export declare const List: React.FunctionComponent<ListProps>;
 
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
+
 export interface LoadingPlaceholderProps {
   height?: number | string;
   width?: number | string;
+  responsive?: Responsive;
 }
 
 export declare const LoadingPlaceholder: React.FunctionComponent<LoadingPlaceholderProps>;
@@ -682,6 +733,15 @@ export interface PopoverProps {
 
 export declare const Popover: React.FunctionComponent<PopoverProps>;
 
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
+
 export interface ProgressBarProps {
   percentage?: number;
   category?:
@@ -692,9 +752,19 @@ export interface ProgressBarProps {
   | Category.WARNING;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const ProgressBar: React.FunctionComponent<ProgressBarProps>;
+
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
 
 export interface RoundIconProps {
   name: string;
@@ -707,6 +777,7 @@ export interface RoundIconProps {
   | Category.WARNING
   | Category.BRAND;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const RoundIcon: React.FunctionComponent<RoundIconProps>;
@@ -920,15 +991,34 @@ export interface ToggleProps {
 
 export declare const Toggle: React.FunctionComponent<ToggleProps>;
 
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
+
 export interface TooltipProps {
   message?: React.ReactNode;
   content?: React.ReactNode;
   children: React.ReactNode;
   side?: Position.LEFT | Position.RIGHT | Position.TOP | Position.BOTTOM;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const Tooltip: React.FunctionComponent<TooltipProps>;
+
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
 
 export interface CheckboxProps {
   children?: string;
@@ -940,6 +1030,7 @@ export interface CheckboxProps {
   size?: Size.LARGE | Size.DEFAULT;
   style?: React.CSSProperties;
   isPlaceholder?: boolean;
+  responsive?: Responsive;
 }
 
 export declare const Checkbox: React.FunctionComponent<CheckboxProps>;
@@ -968,6 +1059,15 @@ declare interface ActiveStartDate {
   year: number;
 }
 
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
+
 export interface DateInputProps {
   value: any;
   onChange?: OnChangeCallback;
@@ -986,26 +1086,56 @@ export interface DateInputProps {
   loading?: boolean;
   style?: React.CSSProperties;
   align?: Align.LEFT | Align.RIGHT;
+  responsive?: Responsive;
 }
 
 export declare const DateInput: React.FunctionComponent<DateInputProps>;
+
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
 
 export interface FormGroupProps {
   label: React.ReactNode;
   input: React.ReactNode;
   horizontal?: boolean;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const FormGroup: React.FunctionComponent<FormGroupProps>;
+
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
 
 export interface HintProps {
   children: string;
   category?: Category.DANGER;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const Hint: React.FunctionComponent<HintProps>;
+
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
 
 export interface InputProps {
   value: string | number;
@@ -1023,9 +1153,19 @@ export interface InputProps {
   loading?: boolean;
   style?: React.CSSProperties;
   isPlaceholder?: boolean;
+  responsive?: Responsive;
 }
 
 export declare const Input: React.FunctionComponent<InputProps>;
+
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
 
 export interface InputGroupProps {
   children: React.ReactNode;
@@ -1033,9 +1173,19 @@ export interface InputGroupProps {
   error?: string | boolean;
   valid?: boolean;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const InputGroup: React.FunctionComponent<InputGroupProps>;
+
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
 
 export interface MultiSelectProps {
   options?: any;
@@ -1051,9 +1201,19 @@ export interface MultiSelectProps {
   valid?: boolean;
   loading?: boolean;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const MultiSelect: React.FunctionComponent<MultiSelectProps>;
+
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
 
 export interface NumberInputProps {
   value: any;
@@ -1070,9 +1230,19 @@ export interface NumberInputProps {
   withCounter?: boolean;
   loading?: boolean;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const NumberInput: React.FunctionComponent<NumberInputProps>;
+
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
 
 export interface RadioGroupProps {
   options?: any;
@@ -1087,9 +1257,19 @@ export interface RadioGroupProps {
   hint?: string;
   style?: React.CSSProperties;
   isPlaceholder?: boolean;
+  responsive?: Responsive;
 }
 
 export declare const RadioGroup: React.FunctionComponent<RadioGroupProps>;
+
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
 
 export interface RangeInputProps {
   min: number;
@@ -1100,9 +1280,19 @@ export interface RangeInputProps {
   onUpdate?(): void;
   disabled?: boolean;
   renderValue?(v: React.ReactText): string;
+  responsive?: Responsive;
 }
 
 export declare const RangeInput: React.FunctionComponent<RangeInputProps>;
+
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
 
 export interface SearchInputProps {
   options?: string[];
@@ -1113,9 +1303,19 @@ export interface SearchInputProps {
   placeholder?: string;
   isLoading?: boolean;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const SearchInput: React.FunctionComponent<SearchInputProps>;
+
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
 
 export interface SelectProps {
   options?: any;
@@ -1131,9 +1331,19 @@ export interface SelectProps {
   valid?: boolean;
   loading?: boolean;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const Select: React.FunctionComponent<SelectProps>;
+
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
 
 export interface TextAreaProps {
   value: string | number;
@@ -1148,6 +1358,7 @@ export interface TextAreaProps {
   loading?: boolean;
   style?: React.CSSProperties;
   isPlaceholder?: boolean;
+  responsive?: Responsive;
 }
 
 export declare const TextArea: React.FunctionComponent<TextAreaProps>;
@@ -1249,6 +1460,15 @@ export interface LayoutProps {
 
 export declare const Layout: React.FunctionComponent<LayoutProps>;
 
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
+
 export interface ListTileProps {
   title: React.ReactNode;
   subtitle?: React.ReactNode;
@@ -1256,6 +1476,7 @@ export interface ListTileProps {
   trailing?: React.ReactNode;
   onClick?: OnClickCallback;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const ListTile: React.FunctionComponent<ListTileProps>;

@@ -9,6 +9,7 @@ import { styles as themeStyles } from '../base/ThemeProvider';
 import { useRect } from '../utils/hooks';
 import { getStyleForSide, CustomPropTypes, deprecateProperty } from '../utils';
 import { Position } from '../enums';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 export const styles = {
@@ -97,12 +98,17 @@ export const TooltipSides = deprecateProperty(new Enum(
 
 
 const Tooltip = ({
-  children,
-  message,
-  content: _content,
-  side,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    children,
+    message,
+    content: _content,
+    side,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   const [ visible, setVisible ] = useState(false);
   const [ outletElement, setOutletElement ] = useState(null);
   const childrenRef = useRef();
@@ -223,6 +229,16 @@ Tooltip.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

@@ -12,6 +12,7 @@ export interface BaseFilterProps {
   style?: React.CSSProperties;
   fullWidth?: boolean;
   closeOnClick?: boolean;
+  responsive?: Responsive;
 }
 
 interface Option {

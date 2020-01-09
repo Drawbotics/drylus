@@ -11,6 +11,7 @@ import Button from '../components/Button';
 import Icon from '../components/Icon';
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { Align } from '../enums';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -199,24 +200,29 @@ function _getShouldRenderTop(box) {
 
 
 const DateInput = ({
-  value,
-  onChange,
-  locale,
-  disabled,
-  placeholder,
-  displayOptions,
-  valid,
-  hint,
-  error,
-  name,
-  maxDate,
-  minDate,
-  calendarOptions,
-  activeStartDate,
-  loading,
-  style,
-  align,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    value,
+    onChange,
+    locale,
+    disabled,
+    placeholder,
+    displayOptions,
+    valid,
+    hint,
+    error,
+    name,
+    maxDate,
+    minDate,
+    calendarOptions,
+    activeStartDate,
+    loading,
+    style,
+    align,
+  } = useResponsiveProps(rest, responsive);
+
   const [ outletElement, setOutletElement ] = useState(null);
   const [ isFocused, setFocused ] = useState(false);
   const { screenSize, ScreenSizes } = useScreenSize();
@@ -408,6 +414,16 @@ DateInput.propTypes = {
 
   /** Determines on which side the picker is aligned */
   align: PropTypes.oneOf([ Align.LEFT, Align.RIGHT ]),
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

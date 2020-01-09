@@ -9,6 +9,7 @@ import Icon from '../components/Icon';
 import { Category } from '../enums';
 import { CustomPropTypes } from '../utils';
 import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -203,17 +204,22 @@ const Radio = ({
 
 
 const RadioGroup = ({
-  value,
-  onChange,
-  options=[],
-  valueKey='value',
-  labelKey='label',
-  error,
-  className,
-  hint,
-  style,
+  responsive,
   ...rest,
 }) => {
+  const {
+    value,
+    onChange,
+    options=[],
+    valueKey='value',
+    labelKey='label',
+    error,
+    className,
+    hint,
+    style,
+    ...props
+  } = useResponsiveProps(rest, responsive);
+
   const handleOnChange = (e) => {
     e.stopPropagation();
     onChange ? onChange(e.target.value, e.target.name) : null;
@@ -233,7 +239,7 @@ const RadioGroup = ({
               checked={value === option[valueKey]}
               value={option[valueKey]}
               disabled={option.disabled}
-              {...rest}>{option[labelKey]}</Radio>
+              {...props}>{option[labelKey]}</Radio>
           </div>
         ))}
       </div>
@@ -288,6 +294,16 @@ RadioGroup.propTypes = {
 
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder: PropTypes.bool,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

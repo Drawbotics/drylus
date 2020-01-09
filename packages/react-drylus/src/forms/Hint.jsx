@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import Category from '../enums/Category';
 import { getEnumAsClass } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -19,7 +20,16 @@ const styles = {
 }
 
 
-const Hint = ({ children, category, style }) => {
+const Hint = ({
+  responsive,
+  ...rest,
+}) => {
+  const {
+    children,
+    category,
+    style,
+  } = useResponsiveProps(rest, responsive);
+  
   return (
     <div
       style={style}
@@ -40,6 +50,16 @@ Hint.propTypes = {
   
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
