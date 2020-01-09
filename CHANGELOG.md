@@ -1,3 +1,16 @@
+# v5.3.4 (Thu Jan 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix drawer content not taking full height  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.3.3 (Thu Jan 09 2020)
 
 #### ⚠️  Pushed to master
