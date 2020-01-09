@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
 import Size from '../enums/Size';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -51,15 +52,20 @@ const styles = {
 
 
 const SearchInput = ({
-  options,
-  value,
-  onChange,
-  noResultLabel,
-  placeholder,
-  isLoading,
-  name,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    options,
+    value,
+    onChange,
+    noResultLabel,
+    placeholder,
+    isLoading,
+    name,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   const [ isFocused, setFocused ] = useState(false);
   const inputRef = useRef(null);
 
@@ -132,6 +138,16 @@ SearchInput.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

@@ -5,6 +5,7 @@ import sv from '@drawbotics/drylus-style-vars';
 
 import { InputWithRef } from './Input';
 import Icon from '../components/Icon';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -98,21 +99,26 @@ const styles = {
 
 
 const NumberInput = ({
-  value: rawValue,
-  placeholder,
-  disabled,
-  onChange,
-  hint,
-  error,
-  valid,
-  renderValue,
-  max,
-  min,
-  name,
-  withCounter,
-  loading,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    value: rawValue,
+    placeholder,
+    disabled,
+    onChange,
+    hint,
+    error,
+    valid,
+    renderValue,
+    max,
+    min,
+    name,
+    withCounter,
+    loading,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   const inputRef = useRef(null);
 
   const handleInputOnChange = (v) => {
@@ -227,6 +233,16 @@ NumberInput.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

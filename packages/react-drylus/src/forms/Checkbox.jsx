@@ -9,6 +9,7 @@ import Icon from '../components/Icon';
 import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
 import { Size, Category } from '../enums';
 import { getEnumAsClass } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -154,17 +155,22 @@ const styles = {
 
 
 const Checkbox = ({
-  onChange,
-  value,
-  id,
-  children,
-  disabled,
-  error,
-  size,
-  style,
-  isPlaceholder,
+  responsive,
   ...rest,
 }) => {
+  const {
+    onChange,
+    value,
+    id,
+    children,
+    disabled,
+    error,
+    size,
+    style,
+    isPlaceholder,
+    ...props
+  } = useResponsiveProps(rest, responsive);
+
   const isChecked = !! value;
 
   const handleOnChange = (e) => {
@@ -192,7 +198,7 @@ const Checkbox = ({
             className={styles.input}
             onChange={handleOnChange}
             readOnly={readOnly}
-            {...rest} />
+            {...props} />
           <div data-element="sprite" className={styles.sprite}>
             {do {
               if (readOnly) {
@@ -253,6 +259,16 @@ Checkbox.propTypes = {
 
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder: PropTypes.bool,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

@@ -9,6 +9,7 @@ import Flex, { FlexItem, FlexAlign, FlexJustify } from '../layout/Flex';
 import Margin from '../layout/Margin';
 import Button from './Button';
 import { getEnumAsClass, getIconForCategory } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -40,12 +41,17 @@ const styles = {
 
 
 const Banner = ({
-  children,
-  category,
-  title,
-  style,
-  trailing,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    children,
+    category,
+    title,
+    style,
+    trailing,
+  } = useResponsiveProps(rest, responsive);
+
   if (trailing != null && trailing?.type !== Button) {
     console.warn('`trailing` type should only be Button');
   }
@@ -116,6 +122,16 @@ Banner.propTypes = {
 
   /** Component to be displayed on the far right of the banner. Should only be of type Button */
   trailing: PropTypes.node,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

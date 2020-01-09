@@ -10,6 +10,7 @@ import Size from '../enums/Size';
 import Category from '../enums/Category';
 import Hint from './Hint';
 import { CustomPropTypes } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -101,20 +102,25 @@ const styles = {
 
 
 const Select = ({
-  value,
-  options=[],
-  onChange,
-  valueKey,
-  labelKey,
-  placeholder,
-  disabled,
-  hint,
-  error,
-  valid,
-  loading,
-  style,
+  responsive,
   ...rest,
 }) => {
+  const {
+    value,
+    options=[],
+    onChange,
+    valueKey,
+    labelKey,
+    placeholder,
+    disabled,
+    hint,
+    error,
+    valid,
+    loading,
+    style,
+    ...props
+  } = useResponsiveProps(rest, responsive);
+
   const handleOnChange = (e) => onChange(e.target.value, e.target.name);
   return (
     <div
@@ -154,7 +160,7 @@ const Select = ({
         value={value}
         onChange={handleOnChange}
         readOnly={onChange == null}
-        {...rest}>
+        {...props}>
         {do {
           if (! value) {
             <option key={options.length}>{placeholder}</option>
@@ -224,6 +230,16 @@ Select.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

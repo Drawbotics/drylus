@@ -5,6 +5,7 @@ import sv from '@drawbotics/drylus-style-vars';
 
 import { Category, Size } from '../enums';
 import { getEnumAsClass } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -83,14 +84,20 @@ const styles = {
 
 
 const CircularProgress = ({
-  percentage,
-  category,
-  size,
-  text,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    percentage,
+    category,
+    size,
+    text,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   const circumference = 84 * Math.PI;
   const offset = percentage * circumference;
+
   return (
     <div
       style={style}
@@ -148,6 +155,16 @@ CircularProgress.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

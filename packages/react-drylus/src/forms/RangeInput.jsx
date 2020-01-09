@@ -7,6 +7,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import Text from '../components/Text';
 import { styles as tooltipStyles } from '../components/Tooltip';
 import { Size } from '../enums';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -143,18 +144,23 @@ const Track = ({
 
 
 const RangeInput = ({
-  min,
-  max,
-  value,
-  handles,
-  step,
-  onChange,
-  onUpdate,
-  disabled,
-  renderValue,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    min,
+    max,
+    value,
+    step,
+    onChange,
+    onUpdate,
+    disabled,
+    renderValue,
+  } = useResponsiveProps(rest, responsive);
+
   const isMultiHandle = value.length > 1;
   const values = isMultiHandle ? value : [value];
+
   return (
     <Slider
       disabled={disabled}
@@ -242,6 +248,16 @@ RangeInput.propTypes = {
 
   /** Function to custom display the given value(s): (v) => {} */
   renderValue: PropTypes.func,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 RangeInput.defaultProps = {

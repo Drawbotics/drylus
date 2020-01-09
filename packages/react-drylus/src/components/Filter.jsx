@@ -9,6 +9,7 @@ import ListTile from '../layout/ListTile';
 import Checkbox from '../forms/Checkbox';
 import { CustomPropTypes, deprecateProperty } from '../utils';
 import { Align } from '../enums';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -125,16 +126,21 @@ export const FilterAlign = deprecateProperty(new Enum(
 
 
 const BaseFilter = ({
-  clearLabel,
-  label,
-  children,
-  onClear,
-  align,
-  active,
-  style,
-  fullWidth,
-  closeOnClick,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    clearLabel,
+    label,
+    children,
+    onClear,
+    align,
+    active,
+    style,
+    fullWidth,
+    closeOnClick,
+  } = useResponsiveProps(rest, responsive);
+
   const childrenRef = useRef();
   const [ panelOpen, setPanelOpen ] = useState(false);
 
@@ -370,6 +376,7 @@ CheckboxFilter.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+  
 };
 
 

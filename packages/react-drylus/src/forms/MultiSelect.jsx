@@ -12,6 +12,7 @@ import Spinner from '../components/Spinner';
 import Hint from './Hint';
 import { Category, Size } from '../enums';
 import { CustomPropTypes } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -161,21 +162,26 @@ const styles = {
 
 
 const MultiSelect = ({
-  values,
-  options,
-  onChange,
-  valueKey,
-  labelKey,
-  placeholder,
-  disabled,
-  hint,
-  error,
-  valid,
-  name,
-  loading,
-  style,
+  responsive,
   ...rest,
 }) => {
+  const {
+    values,
+    options,
+    onChange,
+    valueKey,
+    labelKey,
+    placeholder,
+    disabled,
+    hint,
+    error,
+    valid,
+    name,
+    loading,
+    style,
+    ...props
+  } = useResponsiveProps(rest, responsive);
+
   const selectRef = useRef();
   const rootRef = useRef();
   const [ isFocused, setFocused ] = useState(false);
@@ -311,7 +317,7 @@ const MultiSelect = ({
         values={values}
         readOnly={onChange == null}
         multiple
-        {...rest}>
+        {...props}>
         {options.map((option) => (
           <option
             key={option[valueKey]}
@@ -368,6 +374,16 @@ MultiSelect.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

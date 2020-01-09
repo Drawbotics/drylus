@@ -5,6 +5,7 @@ import { css } from 'emotion';
 import Flex, { FlexItem, FlexDirection, FlexAlign } from '../layout/Flex';
 import { Size } from '../enums';
 import Margin from '../layout/Margin';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -15,11 +16,16 @@ const styles = {
 
 
 const FormGroup = ({
-  label,
-  input,
-  horizontal,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    label,
+    input,
+    horizontal,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   return (
     <div style={style} className={styles.root}>
       <Flex
@@ -51,6 +57,16 @@ FormGroup.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

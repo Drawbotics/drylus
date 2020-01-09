@@ -5,6 +5,7 @@ import sv from '@drawbotics/drylus-style-vars';
 
 import { Category, Size } from '../enums';
 import { getEnumAsClass } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const translateX = keyframes`
@@ -87,11 +88,16 @@ const styles = {
 
 
 const ProgressBar = ({
-  percentage,
-  category,
-  size,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    percentage,
+    category,
+    size,
+    style,
+  } = useResponsiveProps(rest, responsive);
+  
   const indeterminate = percentage == null;
 
   return (
@@ -132,6 +138,16 @@ ProgressBar.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

@@ -7,6 +7,7 @@ import Enum from '@drawbotics/enums';
 import { Category, Position } from '../enums';
 import Icon from './Icon';
 import { getEnumAsClass, deprecateProperty } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const styles = {
@@ -138,14 +139,19 @@ export const DropdownSides = deprecateProperty(new Enum(
 
 
 export const DropdownOption = ({
-  text,
-  category,
-  disabled,
-  onClick,
-  onClickClose,
-  icon,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    text,
+    category,
+    disabled,
+    onClick,
+    onClickClose,
+    icon,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   return (
     <div
       style={style}
@@ -185,6 +191,16 @@ DropdownOption.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 DropdownOption.defaultProps = {
@@ -216,7 +232,17 @@ export const DropdownSeparator = () => {
 };
 
 
-const Dropdown = ({ children, trigger, side, style }) => {
+const Dropdown = ({
+  responsive,
+  ...rest,
+}) => {
+  const {
+    children,
+    trigger,
+    side,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   if (! React.isValidElement(trigger)) {
     console.warn('Dropdown only accepts a single child as trigger');
     return null;
@@ -267,6 +293,16 @@ Dropdown.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 Dropdown.defaultProps = {

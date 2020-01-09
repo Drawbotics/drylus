@@ -1,28 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'emotion';
 
 import Flex, { FlexItem, FlexDirection, FlexAlign } from '../layout/Flex';
 import { Size, Category } from '../enums';
 import Margin from '../layout/Margin';
 import Hint from './Hint';
-
-
-const styles = {
-  root: css`
-  `,
-};
+import { useResponsiveProps } from '../utils/hooks';
 
 
 const InputGroup = ({
-  hint,
-  error,
-  valid,
-  children,
-  style,
+  responsive,
+  ...rest,
 }) => {
+  const {
+    hint,
+    error,
+    valid,
+    children,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   return (
-    <div style={style} className={styles.root}>
+    <div style={style}>
       <Flex
         direction={FlexDirection.VERTICAL}
         align={FlexAlign.STRETCH}>
@@ -65,6 +64,16 @@ InputGroup.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 

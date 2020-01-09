@@ -3,6 +3,8 @@ import { css, keyframes } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 
+import { useResponsiveProps } from '../utils/hooks';
+
 
 const shimmer = keyframes`
   0% {
@@ -41,7 +43,15 @@ export const styles = {
 };
 
 
-const LoadingPlaceholder = ({ height, width }) => {
+const LoadingPlaceholder = ({
+  responsive,
+  ...rest,
+}) => {
+  const {
+    height,
+    width,
+  } = useResponsiveProps(rest, responsive);
+
   return (
     <div
       className={styles.shimmer}
@@ -62,6 +72,16 @@ LoadingPlaceholder.propTypes = {
     PropTypes.number,
     PropTypes.string,
   ]).isRequired,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
