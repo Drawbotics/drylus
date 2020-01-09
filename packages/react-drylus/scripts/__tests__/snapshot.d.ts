@@ -1363,9 +1363,19 @@ export interface TextAreaProps {
 
 export declare const TextArea: React.FunctionComponent<TextAreaProps>;
 
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
+
 export interface FlexItemProps {
   flex?: boolean | number;
   style?: React.CSSProperties;
+  responsive?: Responsive;
 }
 
 export declare const FlexItem: React.FunctionComponent<FlexItemProps>;

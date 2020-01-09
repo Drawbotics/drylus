@@ -103,9 +103,19 @@ function prefixFlex(value) {
 }
 
 
-export const FlexItem = ({ children, flex, style }) => {
+export const FlexItem = ({
+  responsive,
+  ...rest,
+}) => {
+  const {
+    children,
+    flex,
+    style,
+  } = useResponsiveProps(rest, responsive);
+
   const equalSpan = flex === true;
   const pStyle = prefixFlex(flex);
+
   return (
     <div
       className={cx(styles.item, { [styles.equalSpan]: equalSpan })}
@@ -122,6 +132,16 @@ FlexItem.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
+
+  /** Reponsive prop overrides */
+  responsive: PropTypes.shape({
+    XS: PropTypes.object,
+    S: PropTypes.object,
+    M: PropTypes.object,
+    L: PropTypes.object,
+    XL: PropTypes.object,
+    HUGE: PropTypes.object,
+  }),
 };
 
 
