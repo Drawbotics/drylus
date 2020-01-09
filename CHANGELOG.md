@@ -1,3 +1,16 @@
+# v5.3.0 (Thu Jan 09 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature/missing responsive props [#102](https://github.com/Drawbotics/drylus/pull/102) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.2.6 (Wed Jan 08 2020)
 
 #### ⚠️  Pushed to master
