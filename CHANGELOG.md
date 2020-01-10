@@ -1,3 +1,16 @@
+# v5.4.0 (Fri Jan 10 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Improve tags distinction with different text colors [#103](https://github.com/Drawbotics/drylus/pull/103) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.3.5 (Fri Jan 10 2020)
 
 #### ⚠️  Pushed to master
