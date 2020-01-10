@@ -1,3 +1,16 @@
+# v5.4.1 (Fri Jan 10 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - properly pick object property from table header object value  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.4.0 (Fri Jan 10 2020)
 
 #### 🚀 Enhancement - Minor change
