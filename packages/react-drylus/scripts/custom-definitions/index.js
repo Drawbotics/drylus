@@ -7,7 +7,7 @@ const baseImport = `import React from 'react';`;
 
 const customTypes = `
 type OnClickCallback = (event: React.MouseEvent<React.MouseEvent>) => void;
-type OnChangeCallback = (event: React.ChangeEvent) => void;
+type OnChangeCallback = (value: any, name?: string) => void;
 `;
 
 

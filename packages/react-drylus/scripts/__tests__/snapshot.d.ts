@@ -1,7 +1,7 @@
 import React from 'react';
 
 type OnClickCallback = (event: React.MouseEvent<React.MouseEvent>) => void;
-type OnChangeCallback = (event: React.ChangeEvent) => void;
+type OnChangeCallback = (value: any, name?: string) => void;
 
 
 export enum Category {
