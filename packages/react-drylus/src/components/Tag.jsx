@@ -31,18 +31,23 @@ const styles = {
   `,
   brand: css`
     background: ${sv.brandLight};
+    color: ${sv.brandDark};
   `,
   danger: css`
     background: ${sv.redLight};
+    color: ${sv.redDark};
   `,
   success: css`
     background: ${sv.greenLight};
+    color: ${sv.greenDark};
   `,
   warning: css`
     background: ${sv.orangeLight};
+    color: ${sv.orangeDark};
   `,
   info: css`
     background: ${sv.blueLight};
+    color: ${sv.blueDark};
   `,
   inversed: css`
     color: ${sv.white};
