@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import PropTypes from 'prop-types';
 import omit from 'lodash/omit';
+import get from 'lodash/get';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 
 import Label from './Label';
@@ -556,8 +557,8 @@ function _generateTable({
         {do{
           if (header) {
             header.map((item, i) => {
-              const key = typeof item === 'string' ? item : item.value;
-              return <TCell key={`${i}-${row[key]}`}>{renderData(row[key], i, header.length)}</TCell>;
+              const path = typeof item === 'string' ? item : item.value;
+              return <TCell key={`${i}-${get(row, path)}`}>{renderData(get(row, path), i, header.length)}</TCell>;
             })
           }
           else {
