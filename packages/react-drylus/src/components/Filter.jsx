@@ -141,11 +141,11 @@ const BaseFilter = ({
     closeOnClick,
   } = useResponsiveProps(rest, responsive);
 
-  const childrenRef = useRef();
+  const panelRef = useRef();
   const [ panelOpen, setPanelOpen ] = useState(false);
 
   const handleDocumentClick = (e) => {
-    if (! childrenRef.current.contains(e.target) && childrenRef.current !== e.target) {
+    if (! panelRef.current.contains(e.target) && panelRef.current !== e.target) {
       setPanelOpen(false);
     }
   };
@@ -185,13 +185,14 @@ const BaseFilter = ({
           name={active ? 'x' : (panelOpen ? 'chevron-up' : 'chevron-down')} />
       </div>
       <div
+        ref={panelRef}
         data-element="panel"
         className={cx(styles.panel, {
           [styles.visible]: panelOpen,
           [styles.rightAlign]: align === Align.RIGHT,
         })}
         onClick={closeOnClick ? () => setPanelOpen(false) : null}>
-        <div ref={childrenRef}>
+        <div>
           {children}
         </div>
         <div className={styles.clear} onClick={handleClickClear}>
