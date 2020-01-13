@@ -256,7 +256,7 @@ export const SelectFilter = ({
       {...rest}
       closeOnClick
       label={currentLabel != null ? currentLabel : label}
-      active={currentLabel != null && !! value}>
+      active={currentLabel != null && value != null}>
       {options.map((option) => (
         <div
           key={option[valueKey]}
