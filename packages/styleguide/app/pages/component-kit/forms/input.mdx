@@ -49,6 +49,7 @@ export const Example = ({ children }) => {
 <Playground>
   <Example>
     <Input placeholder="Something..." prefix="$" value="" onChange={x=>x} />
+    <Input placeholder="Something..." prefix={<Icon name="command" />} value="" onChange={x=>x} />
     <Input placeholder="Something..." suffix=".com" value="" onChange={x=>x} />
     <Input placeholder="Something..." prefix={
       <Select value="option" options={[{ label: 'Option', value: 'option' }]} placeholder="Select..." onChange={x=>x} />

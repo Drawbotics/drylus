@@ -116,6 +116,10 @@ const styles = {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     margin-right: -1px;
+
+    i {
+      font-size: 1.2rem;
+    }
   `,
   prefixComponent: css`
     padding: 0;
@@ -134,6 +138,10 @@ const styles = {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     margin-left: -1px;
+
+    i {
+      font-size: 1.2rem;
+    }
   `,
   suffixComponent: css`
     padding: 0;
