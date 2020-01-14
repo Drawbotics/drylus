@@ -50,10 +50,17 @@ function generateTypes(targetFile) {
           onClickExceptions.some((exception) => match.includes(exception))
             ? match
             : `onClick${p1}: OnClickCallback`,
-        ); 
+        );
 
         // replace generic onChange with specific definition
         result = result.replace(/onChange(.*?)\(\): void/gm, 'onChange$1: OnChangeCallback');
+
+        // TODO move this to separate function
+        // replace renderValue in NumberInput to specific function
+        result = result.replace('renderValue?(): void', 'renderValue?(v: React.ReactText): string');
+
+        // replace restrictive function with more flexible definition
+        result = result.replace(/\(\): void/gm, '(...args: Array<any>): void');
 
         // replace shape by any for now
         // TODO handle nested props
@@ -66,10 +73,6 @@ function generateTypes(targetFile) {
             ? `export declare const ${p1}: React.FunctionComponent<${p1}Props>;`
             : `export declare const ${p1}: React.FunctionComponent;`,
         );
-
-        // TODO move this to separate function
-        // replace renderValue in NumberInput to specific function
-        result = result.replace('renderValue?(): void', 'renderValue?(v: React.ReactText): string');
     
         types.push(result);
       }
