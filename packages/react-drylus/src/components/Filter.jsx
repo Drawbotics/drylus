@@ -250,7 +250,7 @@ export const SelectFilter = ({
   label,
   ...rest,
 }) => {
-  const currentLabel = value ? options.find((option) => String(option[valueKey]) === String(value))?.[labelKey] : label;
+  const currentLabel = value != null ? options.find((option) => String(option[valueKey]) === String(value))?.[labelKey] : label;
   return (
     <BaseFilter
       {...rest}
