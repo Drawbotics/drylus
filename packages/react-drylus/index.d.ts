@@ -1,6 +1,6 @@
 import React from 'react';
 
-type OnClickCallback = (event: React.MouseEvent<React.MouseEvent>) => void;
+type OnClickCallback = (event?: React.MouseEvent<React.MouseEvent>) => void;
 type OnChangeCallback = (value: any, name?: string) => void;
 
 
@@ -872,7 +872,7 @@ export interface TableProps {
   childHeader?: string[];
   sortableBy?: string[];
   activeHeader?: ActiveHeader;
-  onClickHeader?: OnClickCallback;
+  onClickHeader?(): void;
   highlighted?: boolean;
   clickable?: boolean;
   isLoading?: boolean;

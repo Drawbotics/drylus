@@ -16,6 +16,8 @@ const folders = [
 function generateTypes(targetFile) {
   const skippedComponents = ['Filter', 'Padding', 'Margin'];
 
+  const onClickExceptions = ['onClickHeader'];
+
   let types = [generateCustomDefinitions()];
 
   for (const folder of folders) {
@@ -44,7 +46,11 @@ function generateTypes(targetFile) {
         result = result.replace('style?: object', 'style?: React.CSSProperties');
 
         // replace generic onClick with specific definition
-        result = result.replace(/onClick(.*?)\(\): void/gm, 'onClick$1: OnClickCallback');
+        result = result.replace(/onClick(.*?)\(\): void/gm, (match, p1) =>
+          onClickExceptions.some((exception) => match.includes(exception))
+            ? match
+            : `onClick${p1}: OnClickCallback`,
+        ); 
 
         // replace generic onChange with specific definition
         result = result.replace(/onChange(.*?)\(\): void/gm, 'onChange$1: OnChangeCallback');
