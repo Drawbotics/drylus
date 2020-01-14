@@ -1,3 +1,16 @@
+# v5.4.4 (Tue Jan 14 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix prefix and suffix icon size in input component  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.4.3 (Mon Jan 13 2020)
 
 #### ⚠️  Pushed to master
