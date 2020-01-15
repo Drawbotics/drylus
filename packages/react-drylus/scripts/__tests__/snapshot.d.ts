@@ -1,6 +1,6 @@
 import React from 'react';
 
-type OnClickCallback = (event: React.MouseEvent<React.MouseEvent>) => void;
+type OnClickCallback = (event?: React.MouseEvent<React.MouseEvent>) => void;
 type OnChangeCallback = (value: any, name?: string) => void;
 
 
@@ -545,9 +545,9 @@ export interface FilterGroupProps {
   icon: string;
   filters?: React.ReactNode;
   children: React.ReactNode;
-  renderButton?(): void;
+  renderButton?(...args: Array<any>): void;
   clearAllLabel?: string;
-  onClear(): void;
+  onClear(...args: Array<any>): void;
   active?: boolean;
 }
 
@@ -866,13 +866,13 @@ export interface TableProps {
   fullWidth?: boolean;
   withNesting?: boolean;
   data?: any[];
-  renderCell?(): void;
-  renderChildCell?(): void;
+  renderCell?(...args: Array<any>): void;
+  renderChildCell?(...args: Array<any>): void;
   header?: any;
   childHeader?: string[];
   sortableBy?: string[];
   activeHeader?: ActiveHeader;
-  onClickHeader?: OnClickCallback;
+  onClickHeader?(...args: Array<any>): void;
   highlighted?: boolean;
   clickable?: boolean;
   isLoading?: boolean;
@@ -1277,7 +1277,7 @@ export interface RangeInputProps {
   value: any;
   step?: number;
   onChange: OnChangeCallback;
-  onUpdate?(): void;
+  onUpdate?(...args: Array<any>): void;
   disabled?: boolean;
   renderValue?(v: React.ReactText): string;
   responsive?: Responsive;
