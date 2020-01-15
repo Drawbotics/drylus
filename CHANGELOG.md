@@ -1,3 +1,20 @@
+# v5.4.6 (Wed Jan 15 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix types test  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - improve void function types  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix table onClickHeader type  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.4.5 (Tue Jan 14 2020)
 
 #### ⚠️  Pushed to master
