@@ -1,3 +1,20 @@
+# v5.4.7 (Thu Jan 16 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - check that InputGroup child is not null before cloning [#104](https://github.com/Drawbotics/drylus/pull/104) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- fix documentation  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.4.6 (Wed Jan 15 2020)
 
 #### ⚠️  Pushed to master
