@@ -25,7 +25,7 @@ const InputGroup = ({
       <Flex
         direction={FlexDirection.VERTICAL}
         align={FlexAlign.STRETCH}>
-        {React.Children.map(children, (child, i) => (
+        {React.Children.map(children, (child, i) => child != null ? (
           <FlexItem flex>
             <Margin size={{ top: i === 0 ? null : Size.EXTRA_SMALL }}>
               {React.cloneElement(child, {
@@ -34,7 +34,7 @@ const InputGroup = ({
               })}
             </Margin>
           </FlexItem>
-        ))}
+        ) : null)}
       </Flex>
       {do{
         if (error && typeof error === 'string') {
