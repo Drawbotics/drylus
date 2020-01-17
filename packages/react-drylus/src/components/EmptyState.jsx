@@ -101,7 +101,7 @@ const EmptyState = ({
           </div>
         </FlexItem>
         <FlexItem>
-          <Title size={3}>{title}</Title>
+          <Title style={{ textAlign: 'center' }} size={3}>{title}</Title>
         </FlexItem>
         {do {
           if (description) {
