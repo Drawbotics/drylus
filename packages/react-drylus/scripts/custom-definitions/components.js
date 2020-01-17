@@ -48,14 +48,33 @@ export declare const CheckboxFilter: React.FunctionComponent<CheckboxFilterProps
 `;
 
 
+const icon = `
+export interface IconProps {
+  name: IconName;
+  bold?: boolean;
+  onClick?: OnClickCallback;
+  category?:
+    | Category.DANGER
+    | Category.INFO
+    | Category.SUCCESS
+    | Category.WARNING
+    | Category.BRAND;
+  style?: React.CSSProperties;
+}
+
+export declare const Icon: React.FunctionComponent<IconProps>;
+`;
+
+
 const generatedIconType = Object.values(mapping).map((v) => `'${v}'`).join(' | ');
 
 const icons = `
-type Icons = ${generatedIconType};
+type IconName = ${generatedIconType};
 `;
 
 
 module.exports = {
   filter,
   icons,
+  icon,
 };
