@@ -1,3 +1,17 @@
+# v5.4.8 (Fri Jan 17 2020)
+
+#### ⚠️  Pushed to master
+
+- fix empty state documentation  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - make empty state title center aligned  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.4.7 (Thu Jan 16 2020)
 
 #### 🐛 Bug fix - Patch
