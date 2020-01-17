@@ -10,6 +10,14 @@ type OnClickCallback = (event?: React.MouseEvent<React.MouseEvent>) => void;
 type OnChangeCallback = (value: any, name?: string) => void;
 `;
 
+const customAdditionalDefinitions = `
+function showAlert(args: { text: string; id?: string; category?: Categories }): void;
+
+function hideAlert(args: { id: string }): void;
+
+export function useAlert(): { showAlert: typeof showAlert; hideAlert: typeof hideAlert };
+`;
+
 
 function generateCustomDefinitions() {
   let lines = [];
@@ -25,10 +33,13 @@ function generateCustomDefinitions() {
     lines.push(definition);
   }
 
+  lines.push(customAdditionalDefinitions);
+
   return lines.join('\n');
 }
 
 
 module.exports = {
   generateCustomDefinitions,
+  customAdditionalDefinitions,
 };
