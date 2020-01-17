@@ -31,7 +31,7 @@ export enum Tier {
 }
 
 export enum Align {
-  LEFT = 'LEFT',
+  LEFT   = 'LEFT',
   CENTER = 'CENTER',
   RIGHT = 'RIGHT',
 }
@@ -126,7 +126,23 @@ export interface CheckboxFilterProps {
 export declare const CheckboxFilter: React.FunctionComponent<CheckboxFilterProps>;
 
 
-type Icons = 'activity' | 'airplay' | 'alert-circle' | 'alert-octagon' | 'alert-triangle' | 'align-center' | 'align-justify' | 'align-left' | 'align-right' | 'anchor' | 'aperture' | 'arrow-down-left' | 'arrow-down-right' | 'arrow-down' | 'arrow-left' | 'arrow-right' | 'arrow-up-left' | 'arrow-up-right' | 'arrow-up' | 'at-sign' | 'award' | 'bar-chart-2' | 'bar-chart' | 'battery-charging' | 'battery' | 'bell-off' | 'bell' | 'billboard' | 'bluetooth' | 'book' | 'bookmark' | 'box' | 'brand-id' | 'briefcase' | 'brochure' | 'burger' | 'calendar' | 'camera-off' | 'camera' | 'cast' | 'check-circle' | 'check-square' | 'check' | 'chevron-down' | 'chevron-left' | 'chevron-right' | 'chevron-up' | 'chevrons-down' | 'chevrons-left' | 'chevrons-right' | 'chevrons-up' | 'chrome' | 'circle' | 'clipboard' | 'clock' | 'cloud-drizzle' | 'cloud-lightning' | 'cloud-off' | 'cloud-rain' | 'cloud-snow' | 'cloud' | 'command' | 'commercial-floorplan' | 'compass' | 'copy' | 'corner-down-left' | 'corner-down-right' | 'corner-left-down' | 'corner-left-up' | 'corner-right-down' | 'corner-right-up' | 'corner-up-left' | 'corner-up-right' | 'cpu' | 'credit-card' | 'crosshair' | 'delete' | 'disc' | 'download-cloud' | 'download' | 'drawbotics' | 'drone-shooting' | 'droplet' | 'edit-2' | 'edit-3' | 'edit' | 'exterior-3d' | 'exterior-restyling' | 'external-link' | 'eye-off' | 'eye' | 'facebook' | 'fast-forward' | 'feather' | 'file-minus' | 'file-plus' | 'file-text' | 'file' | 'film' | 'filter' | 'flag' | 'flyer' | 'folder' | 'github' | 'globe' | 'grid' | 'hash' | 'headphones' | 'heart' | 'home' | 'image' | 'inbox' | 'index.js' | 'info' | 'instagram' | 'interior-3d' | 'interior-tour-3d' | 'landing-page' | 'layers' | 'layout' | 'life-buoy' | 'link-2' | 'link' | 'loader' | 'lock' | 'log-in' | 'log-out' | 'mail' | 'map-pin' | 'map' | 'maximize-2' | 'maximize' | 'media-kit' | 'menu' | 'message-circle' | 'message-square' | 'mic-off' | 'mic' | 'minimize-2' | 'minimize' | 'minus-circle' | 'minus-square' | 'minus' | 'model-360' | 'monitor' | 'moon' | 'more-horizontal' | 'more-vertical' | 'move' | 'music' | 'navigation-2' | 'navigation' | 'newsletter' | 'octagon' | 'package' | 'panorama-360' | 'pause-circle' | 'pause' | 'percent' | 'phone-call' | 'phone-forwarded' | 'phone-incoming' | 'phone-missed' | 'phone-off' | 'phone-outgoing' | 'phone' | 'photo-editing' | 'photo-shooting' | 'pie-chart' | 'plan-2d' | 'play-circle' | 'play' | 'plus-circle' | 'plus-square' | 'plus' | 'pocket' | 'power' | 'printer' | 'radio' | 'refresh-ccw' | 'refresh-cw' | 'repeat' | 'revo-alt' | 'revo' | 'rewind' | 'rotate-ccw' | 'rotate-cw' | 'save' | 'scissors' | 'search' | 'server' | 'settings' | 'share-2' | 'share' | 'shield' | 'shoebox' | 'shuffle' | 'sidebar' | 'site-plan' | 'skip-back' | 'skip-forward' | 'slack' | 'slash' | 'smartphone' | 'social-media-kit' | 'speaker' | 'square' | 'star' | 'stop-circle' | 'sun' | 'sunrise' | 'sunset' | 'tablet' | 'tag' | 'target' | 'thermometer' | 'thumbs-down' | 'thumbs-up' | 'toggle-left' | 'toggle-right' | 'tour-3d' | 'trash-2' | 'trash' | 'trending-down' | 'trending-up' | 'triangle' | 'twitter' | 'type' | 'umbrella' | 'unlock' | 'upload-cloud' | 'upload' | 'user-check' | 'user-minus' | 'user-plus' | 'user-x' | 'user' | 'users' | 'video-animation' | 'video-off' | 'video' | 'voicemail' | 'volume-1' | 'volume-2' | 'volume-x' | 'volume' | 'vr' | 'watch' | 'website' | 'wifi' | 'wind' | 'x-circle' | 'x-square' | 'x' | 'zap' | 'zoom-in' | 'zoom-out';
+type IconName = 'activity' | 'airplay' | 'alert-circle' | 'alert-octagon' | 'alert-triangle' | 'align-center' | 'align-justify' | 'align-left' | 'align-right' | 'anchor' | 'aperture' | 'arrow-down-left' | 'arrow-down-right' | 'arrow-down' | 'arrow-left' | 'arrow-right' | 'arrow-up-left' | 'arrow-up-right' | 'arrow-up' | 'at-sign' | 'award' | 'bar-chart-2' | 'bar-chart' | 'battery-charging' | 'battery' | 'bell-off' | 'bell' | 'billboard' | 'bluetooth' | 'book' | 'bookmark' | 'box' | 'brand-id' | 'briefcase' | 'brochure' | 'burger' | 'calendar' | 'camera-off' | 'camera' | 'cast' | 'check-circle' | 'check-square' | 'check' | 'chevron-down' | 'chevron-left' | 'chevron-right' | 'chevron-up' | 'chevrons-down' | 'chevrons-left' | 'chevrons-right' | 'chevrons-up' | 'chrome' | 'circle' | 'clipboard' | 'clock' | 'cloud-drizzle' | 'cloud-lightning' | 'cloud-off' | 'cloud-rain' | 'cloud-snow' | 'cloud' | 'command' | 'commercial-floorplan' | 'compass' | 'copy' | 'corner-down-left' | 'corner-down-right' | 'corner-left-down' | 'corner-left-up' | 'corner-right-down' | 'corner-right-up' | 'corner-up-left' | 'corner-up-right' | 'cpu' | 'credit-card' | 'crosshair' | 'delete' | 'disc' | 'download-cloud' | 'download' | 'drawbotics' | 'drone-shooting' | 'droplet' | 'edit-2' | 'edit-3' | 'edit' | 'exterior-3d' | 'exterior-restyling' | 'external-link' | 'eye-off' | 'eye' | 'facebook' | 'fast-forward' | 'feather' | 'file-minus' | 'file-plus' | 'file-text' | 'file' | 'film' | 'filter' | 'flag' | 'flyer' | 'folder' | 'github' | 'globe' | 'grid' | 'hash' | 'headphones' | 'heart' | 'home' | 'image' | 'inbox' | 'index.js' | 'info' | 'instagram' | 'interior-3d' | 'interior-tour-3d' | 'landing-page' | 'layers' | 'layout' | 'life-buoy' | 'link-2' | 'link' | 'loader' | 'lock' | 'log-in' | 'log-out' | 'mail' | 'map-pin' | 'map' | 'maximize-2' | 'maximize' | 'media-kit' | 'menu' | 'message-circle' | 'message-square' | 'mic-off' | 'mic' | 'minimize-2' | 'minimize' | 'minus-circle' | 'minus-square' | 'minus' | 'model-360' | 'monitor' | 'moon' | 'more-horizontal' | 'more-vertical' | 'move' | 'music' | 'navigation-2' | 'navigation' | 'newsletter' | 'octagon' | 'package' | 'panorama-360' | 'pause-circle' | 'pause' | 'percent' | 'phone-call' | 'phone-forwarded' | 'phone-incoming' | 'phone-missed' | 'phone-off' | 'phone-outgoing' | 'phone' | 'photo-editing' | 'photo-shooting' | 'pie-chart' | 'plan-2d' | 'play-circle' | 'play' | 'plus-circle' | 'plus-square' | 'plus' | 'pocket' | 'power' | 'printer' | 'radio' | 'refresh-ccw' | 'refresh-cw' | 'repeat' | 'revo-alt' | 'revo' | 'rewind' | 'rotate-ccw' | 'rotate-cw' | 'save' | 'scissors' | 'search' | 'server' | 'settings' | 'share-2' | 'share' | 'shield' | 'shoebox' | 'shuffle' | 'sidebar' | 'site-plan' | 'skip-back' | 'skip-forward' | 'slack' | 'slash' | 'smartphone' | 'social-media-kit' | 'speaker' | 'square' | 'star' | 'stop-circle' | 'sun' | 'sunrise' | 'sunset' | 'tablet' | 'tag' | 'target' | 'thermometer' | 'thumbs-down' | 'thumbs-up' | 'toggle-left' | 'toggle-right' | 'tour-3d' | 'trash-2' | 'trash' | 'trending-down' | 'trending-up' | 'triangle' | 'twitter' | 'type' | 'umbrella' | 'unlock' | 'upload-cloud' | 'upload' | 'user-check' | 'user-minus' | 'user-plus' | 'user-x' | 'user' | 'users' | 'video-animation' | 'video-off' | 'video' | 'voicemail' | 'volume-1' | 'volume-2' | 'volume-x' | 'volume' | 'vr' | 'watch' | 'website' | 'wifi' | 'wind' | 'x-circle' | 'x-square' | 'x' | 'zap' | 'zoom-in' | 'zoom-out';
+
+
+export interface IconProps {
+  name: IconName;
+  bold?: boolean;
+  onClick?: OnClickCallback;
+  category?:
+    | Category.DANGER
+    | Category.INFO
+    | Category.SUCCESS
+    | Category.WARNING
+    | Category.BRAND;
+  style?: React.CSSProperties;
+}
+
+export declare const Icon: React.FunctionComponent<IconProps>;
 
 
 interface Responsive {
@@ -170,6 +186,13 @@ export interface MarginProps {
 
 export declare const Margin: React.FunctionComponent<MarginProps>;
 
+
+function showAlert(args: { text: string; id?: string; category?: Categories }): void;
+
+function hideAlert(args: { id: string }): void;
+
+export function useAlert(): { showAlert: typeof showAlert; hideAlert: typeof hideAlert };
+
 export interface ContentProps {
   children: React.ReactNode;
   fullHeight?: boolean;
@@ -203,10 +226,10 @@ export declare const ThemeProvider: React.FunctionComponent<ThemeProviderProps>;
 export interface AlertProps {
   text: string;
   category:
-  | Category.DANGER
-  | Category.SUCCESS
-  | Category.INFO
-  | Category.WARNING;
+    | Category.DANGER
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING;
   onClickDismiss?: OnClickCallback;
   id?: number | string;
   hideDelay?: number;
@@ -235,11 +258,11 @@ export interface AvatarProps {
   hint?: string;
   size?: any;
   category?:
-  | Category.DANGER
-  | Category.INFO
-  | Category.SUCCESS
-  | Category.WARNING
-  | Category.BRAND;
+    | Category.DANGER
+    | Category.INFO
+    | Category.SUCCESS
+    | Category.WARNING
+    | Category.BRAND;
   backgroundColor?: string;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -251,11 +274,11 @@ export interface BadgeProps {
   value: number;
   max?: number;
   category?:
-  | Category.BRAND
-  | Category.SUCCESS
-  | Category.INFO
-  | Category.WARNING
-  | Category.DANGER;
+    | Category.BRAND
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING
+    | Category.DANGER;
   style?: React.CSSProperties;
 }
 
@@ -274,10 +297,10 @@ export interface BannerProps {
   children: React.ReactNode;
   title?: string;
   category:
-  | Category.DANGER
-  | Category.SUCCESS
-  | Category.INFO
-  | Category.WARNING;
+    | Category.DANGER
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING;
   style?: React.CSSProperties;
   trailing?: React.ReactNode;
   responsive?: Responsive;
@@ -332,12 +355,12 @@ export interface ButtonProps {
   disabled?: boolean;
   onClick?: OnClickCallback;
   category?:
-  | Category.BRAND
-  | Category.DANGER
-  | Category.SUCCESS
-  | Category.INFO
-  | Category.WARNING
-  | Category.PRIMARY;
+    | Category.BRAND
+    | Category.DANGER
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING
+    | Category.PRIMARY;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
   tier?: Tier.PRIMARY | Tier.SECONDARY | Tier.TERTIARY;
   leading?: React.ReactNode;
@@ -363,11 +386,11 @@ export interface ButtonLinkProps {
   disabled?: boolean;
   onClick?: OnClickCallback;
   category?:
-  | Category.BRAND
-  | Category.DANGER
-  | Category.SUCCESS
-  | Category.INFO
-  | Category.WARNING;
+    | Category.BRAND
+    | Category.DANGER
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
   tier?: Tier.PRIMARY | Tier.SECONDARY | Tier.TERTIARY;
   leading?: React.ReactNode;
@@ -382,10 +405,10 @@ export declare const ButtonLink: React.FunctionComponent<ButtonLinkProps>;
 export interface CalloutProps {
   children: React.ReactNode;
   category:
-  | Category.DANGER
-  | Category.SUCCESS
-  | Category.INFO
-  | Category.WARNING;
+    | Category.DANGER
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING;
   style?: React.CSSProperties;
 }
 
@@ -404,11 +427,11 @@ export interface CircularProgressProps {
   percentage?: number;
   text?: string;
   category?:
-  | Category.BRAND
-  | Category.DANGER
-  | Category.SUCCESS
-  | Category.INFO
-  | Category.WARNING;
+    | Category.BRAND
+    | Category.DANGER
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -428,12 +451,12 @@ export declare const Collapsible: React.FunctionComponent<CollapsibleProps>;
 
 export interface DotProps {
   category?:
-  | Category.BRAND
-  | Category.SUCCESS
-  | Category.INFO
-  | Category.WARNING
-  | Category.DANGER
-  | Category.PRIMARY;
+    | Category.BRAND
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING
+    | Category.DANGER
+    | Category.PRIMARY;
   style?: React.CSSProperties;
 }
 
@@ -478,7 +501,7 @@ export interface DropdownOptionProps {
   text: string;
   disabled?: boolean;
   onClick?: OnClickCallback;
-  icon?: string;
+  icon?: IconName;
   category?: Category.DANGER | Category.SUCCESS | Category.WARNING;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -530,11 +553,11 @@ export interface EmptyStateProps {
   children?: React.ReactNode;
   style?: React.CSSProperties;
   variation?:
-  | EmptyStateVariation.DEFAULT
-  | EmptyStateVariation.PROCESSING
-  | EmptyStateVariation.NOT_FOUND
-  | EmptyStateVariation.NOT_ALLOWED
-  | EmptyStateVariation.FAILED;
+    | EmptyStateVariation.DEFAULT
+    | EmptyStateVariation.PROCESSING
+    | EmptyStateVariation.NOT_FOUND
+    | EmptyStateVariation.NOT_ALLOWED
+    | EmptyStateVariation.FAILED;
   responsive?: Responsive;
 }
 
@@ -542,7 +565,7 @@ export declare const EmptyState: React.FunctionComponent<EmptyStateProps>;
 
 export interface FilterGroupProps {
   label: string;
-  icon: string;
+  icon: IconName;
   filters?: React.ReactNode;
   children: React.ReactNode;
   renderButton?(...args: Array<any>): void;
@@ -552,21 +575,6 @@ export interface FilterGroupProps {
 }
 
 export declare const FilterGroup: React.FunctionComponent<FilterGroupProps>;
-
-export interface IconProps {
-  name: string;
-  bold?: boolean;
-  onClick?: OnClickCallback;
-  category?:
-  | Category.DANGER
-  | Category.INFO
-  | Category.SUCCESS
-  | Category.WARNING
-  | Category.BRAND;
-  style?: React.CSSProperties;
-}
-
-export declare const Icon: React.FunctionComponent<IconProps>;
 
 export interface LabelProps {
   children?: string | React.ReactNode;
@@ -580,13 +588,13 @@ export declare const Label: React.FunctionComponent<LabelProps>;
 export interface ListItemProps {
   children: React.ReactNode;
   category?:
-  | Category.BRAND
-  | Category.DANGER
-  | Category.SUCCESS
-  | Category.INFO
-  | Category.WARNING
-  | Category.PRIMARY;
-  icon?: string;
+    | Category.BRAND
+    | Category.DANGER
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING
+    | Category.PRIMARY;
+  icon?: IconName;
   disabled?: boolean;
   style?: React.CSSProperties;
 }
@@ -745,11 +753,11 @@ declare interface Responsive {
 export interface ProgressBarProps {
   percentage?: number;
   category?:
-  | Category.BRAND
-  | Category.DANGER
-  | Category.SUCCESS
-  | Category.INFO
-  | Category.WARNING;
+    | Category.BRAND
+    | Category.DANGER
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -771,11 +779,11 @@ export interface RoundIconProps {
   size?: any;
   bold?: boolean;
   category?:
-  | Category.DANGER
-  | Category.INFO
-  | Category.SUCCESS
-  | Category.WARNING
-  | Category.BRAND;
+    | Category.DANGER
+    | Category.INFO
+    | Category.SUCCESS
+    | Category.WARNING
+    | Category.BRAND;
   style?: React.CSSProperties;
   responsive?: Responsive;
 }
@@ -887,11 +895,11 @@ export declare const Table: React.FunctionComponent<TableProps>;
 export interface TagProps {
   children: string;
   category?:
-  | Category.BRAND
-  | Category.DANGER
-  | Category.SUCCESS
-  | Category.INFO
-  | Category.WARNING;
+    | Category.BRAND
+    | Category.DANGER
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING;
   onClickRemove?: OnClickCallback;
   inversed?: boolean;
   style?: React.CSSProperties;
@@ -917,11 +925,11 @@ export interface TextProps {
   disabled?: boolean;
   children?: string | number;
   category?:
-  | Category.BRAND
-  | Category.DANGER
-  | Category.SUCCESS
-  | Category.INFO
-  | Category.WARNING;
+    | Category.BRAND
+    | Category.DANGER
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING;
   style?: React.CSSProperties;
   responsive?: Responsive;
 }
@@ -931,11 +939,11 @@ export declare const Text: React.FunctionComponent<TextProps>;
 export interface TextLinkProps {
   children?: string;
   category?:
-  | Category.BRAND
-  | Category.DANGER
-  | Category.SUCCESS
-  | Category.INFO
-  | Category.WARNING;
+    | Category.BRAND
+    | Category.DANGER
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING;
   underlined?: LinkUnderlined.ALWAYS | LinkUnderlined.HOVER;
   style?: React.CSSProperties;
 }
@@ -1392,17 +1400,17 @@ declare interface Responsive {
 export interface FlexProps {
   direction?: FlexDirection.HORIZONTAL | FlexDirection.VERTICAL;
   justify?:
-  | FlexJustify.START
-  | FlexJustify.END
-  | FlexJustify.CENTER
-  | FlexJustify.SPACE_AROUND
-  | FlexJustify.SPACE_BETWEEN
-  | FlexJustify.SPACE_EVENLY;
+    | FlexJustify.START
+    | FlexJustify.END
+    | FlexJustify.CENTER
+    | FlexJustify.SPACE_AROUND
+    | FlexJustify.SPACE_BETWEEN
+    | FlexJustify.SPACE_EVENLY;
   align?:
-  | FlexAlign.STRETCH
-  | FlexAlign.START
-  | FlexAlign.END
-  | FlexAlign.CENTER;
+    | FlexAlign.STRETCH
+    | FlexAlign.START
+    | FlexAlign.END
+    | FlexAlign.CENTER;
   wrap?: boolean;
   style?: object;
   className?: string;
@@ -1432,17 +1440,17 @@ export interface GridProps {
   children: React.ReactNode;
   columns: number;
   hGutters?:
-  | Size.EXTRA_SMALL
-  | Size.SMALL
-  | Size.DEFAULT
-  | Size.LARGE
-  | Size.EXTRA_LARGE;
+    | Size.EXTRA_SMALL
+    | Size.SMALL
+    | Size.DEFAULT
+    | Size.LARGE
+    | Size.EXTRA_LARGE;
   vGutters?:
-  | Size.EXTRA_SMALL
-  | Size.SMALL
-  | Size.DEFAULT
-  | Size.LARGE
-  | Size.EXTRA_LARGE;
+    | Size.EXTRA_SMALL
+    | Size.SMALL
+    | Size.DEFAULT
+    | Size.LARGE
+    | Size.EXTRA_LARGE;
   style?: object;
   responsive?: Responsive;
 }
@@ -1490,3 +1498,10 @@ export interface ListTileProps {
 }
 
 export declare const ListTile: React.FunctionComponent<ListTileProps>;
+
+
+function showAlert(args: { text: string; id?: string; category?: Categories }): void;
+
+function hideAlert(args: { id: string }): void;
+
+export function useAlert(): { showAlert: typeof showAlert; hideAlert: typeof hideAlert };
