@@ -42,6 +42,7 @@ import popover from './popover';
 import tile from './tile';
 import progressBar from './progress-bar';
 import loadingPlaceholder from './loading-placeholder';
+import date from './date';
 
 
 const components = {
@@ -89,6 +90,7 @@ const components = {
   tile,
   progressBar,
   loadingPlaceholder,
+  date,
 };
 
 
