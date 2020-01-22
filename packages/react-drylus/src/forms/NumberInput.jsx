@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
@@ -93,7 +93,7 @@ const styles = {
     color: ${sv.colorSecondary};
   `,
   value: css`
-    color: ${sv.colorPrimary};
+    color: transparent;
   `,
 };
 
@@ -117,9 +117,11 @@ const NumberInput = ({
     withCounter,
     loading,
     style,
+    step,
   } = useResponsiveProps(rest, responsive);
-
   const inputRef = useRef(null);
+  const leftSpanRef = useRef(null);
+  const [extraLeftPadding, setExtraLeftPadding] = useState(null);
 
   const handleInputOnChange = (v) => {
     const numericalValue = Number(v);
@@ -133,24 +135,31 @@ const NumberInput = ({
     }
   };
 
-  const value = rawValue === '-' || rawValue === '' ? rawValue : Number(rawValue);
+  const value = (rawValue === '-' || rawValue === '') ? rawValue : Number(rawValue);
 
   if (value !== '-' && value !== '' && value !== 0 && ! value) {
     console.warn('Only numbers allowed as value for NumberInput');
   }
 
-  if (inputRef.current && renderValue) {
-    inputRef.current.style.color = 'transparent';
-  }
+  useEffect(() => {
+    if (value === 0 || value) {
+      setExtraLeftPadding(leftSpanRef.current?.getBoundingClientRect()?.width);
+    }
+    else if (value === '' || value == null) {
+      setExtraLeftPadding(null);
+    }
+  }, [rawValue]);
+
+  const decimalPlaces = (String(step).split('.')[1] || []).length;
 
   return (
     <div style={style} className={styles.root}>
       {do {
-        if (renderValue && (value === 0 || value)) {
+        if (renderValue != null && (value === 0 || value)) {
           const sections = renderValue(value).split(value);
           return (
             <span className={styles.renderedValue}>
-              <span>{sections[0]}</span>
+              <span ref={leftSpanRef}>{sections[0]}</span>
               <span className={styles.value}>{value}</span>
               <span>{sections[1]}</span>
             </span>
@@ -171,14 +180,26 @@ const NumberInput = ({
         type="number"
         max={max}
         min={min}
+        step={String(step)}
         inputMode="numeric"
         className={styles.numberInput}
+        extraLeftPadding={extraLeftPadding}
         suffix={withCounter && onChange != null ?
           <div className={cx(styles.buttons, { [styles.disabled]: disabled })}>
-            <button className={styles.button} onClick={() => ! disabled && value < max ? onChange((value || 0) + 1, name) : null}>
+            <button className={styles.button} onClick={() => {
+              const res = (value || 0) + step;
+              if (! disabled && value < max) {
+                onChange(Number.isInteger(res) ? res : res.toFixed(decimalPlaces), name);
+              }
+            }}>
               <Icon name="plus" bold />
             </button>
-            <button className={styles.button} onClick={() => ! disabled && value > min ? onChange((value || 0) - 1, name) : null}>
+            <button className={styles.button} onClick={() => {
+              const res = (value || 0) - step;
+              if (! disabled && value > min) {
+                onChange(Number.isInteger(res) ? res : res.toFixed(decimalPlaces), name);
+              }
+            }}>
               <Icon name="minus" bold />
             </button>
           </div>
@@ -234,6 +255,9 @@ NumberInput.propTypes = {
   /** Used for style overrides */
   style: PropTypes.object,
 
+  /** The amount by which the value is increased or decresed */
+  step: PropTypes.number,
+
   /** Reponsive prop overrides */
   responsive: PropTypes.shape({
     XS: PropTypes.object,
@@ -250,6 +274,7 @@ NumberInput.defaultProps = {
   min: -Infinity,
   max: Infinity,
   withCounter: true,
+  step: 1,
 };
 
 

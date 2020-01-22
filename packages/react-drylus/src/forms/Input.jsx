@@ -182,6 +182,7 @@ const RawInput = ({
     loading,
     style,
     isPlaceholder,
+    extraLeftPadding,
     ...props
   } = useResponsiveProps(rest, responsive);
 
@@ -248,6 +249,7 @@ const RawInput = ({
             })}
             value={value}
             ref={inputRef}
+            style={{ paddingLeft: extraLeftPadding != null ? `calc(${sv.paddingSmall} + ${extraLeftPadding}px)` : null }}
             {...props} />
         </div>
         {do{
