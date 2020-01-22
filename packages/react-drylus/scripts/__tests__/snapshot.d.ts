@@ -31,7 +31,7 @@ export enum Tier {
 }
 
 export enum Align {
-  LEFT   = 'LEFT',
+  LEFT = 'LEFT',
   CENTER = 'CENTER',
   RIGHT = 'RIGHT',
 }
@@ -134,11 +134,11 @@ export interface IconProps {
   bold?: boolean;
   onClick?: OnClickCallback;
   category?:
-    | Category.DANGER
-    | Category.INFO
-    | Category.SUCCESS
-    | Category.WARNING
-    | Category.BRAND;
+  | Category.DANGER
+  | Category.INFO
+  | Category.SUCCESS
+  | Category.WARNING
+  | Category.BRAND;
   style?: React.CSSProperties;
 }
 
@@ -226,10 +226,10 @@ export declare const ThemeProvider: React.FunctionComponent<ThemeProviderProps>;
 export interface AlertProps {
   text: string;
   category:
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING;
+  | Category.DANGER
+  | Category.SUCCESS
+  | Category.INFO
+  | Category.WARNING;
   onClickDismiss?: OnClickCallback;
   id?: number | string;
   hideDelay?: number;
@@ -258,11 +258,11 @@ export interface AvatarProps {
   hint?: string;
   size?: any;
   category?:
-    | Category.DANGER
-    | Category.INFO
-    | Category.SUCCESS
-    | Category.WARNING
-    | Category.BRAND;
+  | Category.DANGER
+  | Category.INFO
+  | Category.SUCCESS
+  | Category.WARNING
+  | Category.BRAND;
   backgroundColor?: string;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -274,11 +274,11 @@ export interface BadgeProps {
   value: number;
   max?: number;
   category?:
-    | Category.BRAND
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING
-    | Category.DANGER;
+  | Category.BRAND
+  | Category.SUCCESS
+  | Category.INFO
+  | Category.WARNING
+  | Category.DANGER;
   style?: React.CSSProperties;
 }
 
@@ -297,10 +297,10 @@ export interface BannerProps {
   children: React.ReactNode;
   title?: string;
   category:
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING;
+  | Category.DANGER
+  | Category.SUCCESS
+  | Category.INFO
+  | Category.WARNING;
   style?: React.CSSProperties;
   trailing?: React.ReactNode;
   responsive?: Responsive;
@@ -355,12 +355,12 @@ export interface ButtonProps {
   disabled?: boolean;
   onClick?: OnClickCallback;
   category?:
-    | Category.BRAND
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING
-    | Category.PRIMARY;
+  | Category.BRAND
+  | Category.DANGER
+  | Category.SUCCESS
+  | Category.INFO
+  | Category.WARNING
+  | Category.PRIMARY;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
   tier?: Tier.PRIMARY | Tier.SECONDARY | Tier.TERTIARY;
   leading?: React.ReactNode;
@@ -386,11 +386,11 @@ export interface ButtonLinkProps {
   disabled?: boolean;
   onClick?: OnClickCallback;
   category?:
-    | Category.BRAND
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING;
+  | Category.BRAND
+  | Category.DANGER
+  | Category.SUCCESS
+  | Category.INFO
+  | Category.WARNING;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
   tier?: Tier.PRIMARY | Tier.SECONDARY | Tier.TERTIARY;
   leading?: React.ReactNode;
@@ -405,10 +405,10 @@ export declare const ButtonLink: React.FunctionComponent<ButtonLinkProps>;
 export interface CalloutProps {
   children: React.ReactNode;
   category:
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING;
+  | Category.DANGER
+  | Category.SUCCESS
+  | Category.INFO
+  | Category.WARNING;
   style?: React.CSSProperties;
 }
 
@@ -427,11 +427,11 @@ export interface CircularProgressProps {
   percentage?: number;
   text?: string;
   category?:
-    | Category.BRAND
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING;
+  | Category.BRAND
+  | Category.DANGER
+  | Category.SUCCESS
+  | Category.INFO
+  | Category.WARNING;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -451,12 +451,12 @@ export declare const Collapsible: React.FunctionComponent<CollapsibleProps>;
 
 export interface DotProps {
   category?:
-    | Category.BRAND
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING
-    | Category.DANGER
-    | Category.PRIMARY;
+  | Category.BRAND
+  | Category.SUCCESS
+  | Category.INFO
+  | Category.WARNING
+  | Category.DANGER
+  | Category.PRIMARY;
   style?: React.CSSProperties;
 }
 
@@ -553,11 +553,11 @@ export interface EmptyStateProps {
   children?: React.ReactNode;
   style?: React.CSSProperties;
   variation?:
-    | EmptyStateVariation.DEFAULT
-    | EmptyStateVariation.PROCESSING
-    | EmptyStateVariation.NOT_FOUND
-    | EmptyStateVariation.NOT_ALLOWED
-    | EmptyStateVariation.FAILED;
+  | EmptyStateVariation.DEFAULT
+  | EmptyStateVariation.PROCESSING
+  | EmptyStateVariation.NOT_FOUND
+  | EmptyStateVariation.NOT_ALLOWED
+  | EmptyStateVariation.FAILED;
   responsive?: Responsive;
 }
 
@@ -588,12 +588,12 @@ export declare const Label: React.FunctionComponent<LabelProps>;
 export interface ListItemProps {
   children: React.ReactNode;
   category?:
-    | Category.BRAND
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING
-    | Category.PRIMARY;
+  | Category.BRAND
+  | Category.DANGER
+  | Category.SUCCESS
+  | Category.INFO
+  | Category.WARNING
+  | Category.PRIMARY;
   icon?: IconName;
   disabled?: boolean;
   style?: React.CSSProperties;
@@ -753,11 +753,11 @@ declare interface Responsive {
 export interface ProgressBarProps {
   percentage?: number;
   category?:
-    | Category.BRAND
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING;
+  | Category.BRAND
+  | Category.DANGER
+  | Category.SUCCESS
+  | Category.INFO
+  | Category.WARNING;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -779,11 +779,11 @@ export interface RoundIconProps {
   size?: any;
   bold?: boolean;
   category?:
-    | Category.DANGER
-    | Category.INFO
-    | Category.SUCCESS
-    | Category.WARNING
-    | Category.BRAND;
+  | Category.DANGER
+  | Category.INFO
+  | Category.SUCCESS
+  | Category.WARNING
+  | Category.BRAND;
   style?: React.CSSProperties;
   responsive?: Responsive;
 }
@@ -895,11 +895,11 @@ export declare const Table: React.FunctionComponent<TableProps>;
 export interface TagProps {
   children: string;
   category?:
-    | Category.BRAND
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING;
+  | Category.BRAND
+  | Category.DANGER
+  | Category.SUCCESS
+  | Category.INFO
+  | Category.WARNING;
   onClickRemove?: OnClickCallback;
   inversed?: boolean;
   style?: React.CSSProperties;
@@ -925,11 +925,11 @@ export interface TextProps {
   disabled?: boolean;
   children?: string | number;
   category?:
-    | Category.BRAND
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING;
+  | Category.BRAND
+  | Category.DANGER
+  | Category.SUCCESS
+  | Category.INFO
+  | Category.WARNING;
   style?: React.CSSProperties;
   responsive?: Responsive;
 }
@@ -939,11 +939,11 @@ export declare const Text: React.FunctionComponent<TextProps>;
 export interface TextLinkProps {
   children?: string;
   category?:
-    | Category.BRAND
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING;
+  | Category.BRAND
+  | Category.DANGER
+  | Category.SUCCESS
+  | Category.INFO
+  | Category.WARNING;
   underlined?: LinkUnderlined.ALWAYS | LinkUnderlined.HOVER;
   style?: React.CSSProperties;
 }
@@ -1238,6 +1238,7 @@ export interface NumberInputProps {
   withCounter?: boolean;
   loading?: boolean;
   style?: React.CSSProperties;
+  step?: number;
   responsive?: Responsive;
 }
 
@@ -1400,17 +1401,17 @@ declare interface Responsive {
 export interface FlexProps {
   direction?: FlexDirection.HORIZONTAL | FlexDirection.VERTICAL;
   justify?:
-    | FlexJustify.START
-    | FlexJustify.END
-    | FlexJustify.CENTER
-    | FlexJustify.SPACE_AROUND
-    | FlexJustify.SPACE_BETWEEN
-    | FlexJustify.SPACE_EVENLY;
+  | FlexJustify.START
+  | FlexJustify.END
+  | FlexJustify.CENTER
+  | FlexJustify.SPACE_AROUND
+  | FlexJustify.SPACE_BETWEEN
+  | FlexJustify.SPACE_EVENLY;
   align?:
-    | FlexAlign.STRETCH
-    | FlexAlign.START
-    | FlexAlign.END
-    | FlexAlign.CENTER;
+  | FlexAlign.STRETCH
+  | FlexAlign.START
+  | FlexAlign.END
+  | FlexAlign.CENTER;
   wrap?: boolean;
   style?: object;
   className?: string;
@@ -1440,17 +1441,17 @@ export interface GridProps {
   children: React.ReactNode;
   columns: number;
   hGutters?:
-    | Size.EXTRA_SMALL
-    | Size.SMALL
-    | Size.DEFAULT
-    | Size.LARGE
-    | Size.EXTRA_LARGE;
+  | Size.EXTRA_SMALL
+  | Size.SMALL
+  | Size.DEFAULT
+  | Size.LARGE
+  | Size.EXTRA_LARGE;
   vGutters?:
-    | Size.EXTRA_SMALL
-    | Size.SMALL
-    | Size.DEFAULT
-    | Size.LARGE
-    | Size.EXTRA_LARGE;
+  | Size.EXTRA_SMALL
+  | Size.SMALL
+  | Size.DEFAULT
+  | Size.LARGE
+  | Size.EXTRA_LARGE;
   style?: object;
   responsive?: Responsive;
 }

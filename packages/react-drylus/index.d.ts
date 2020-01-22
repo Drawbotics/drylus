@@ -1238,6 +1238,7 @@ export interface NumberInputProps {
   withCounter?: boolean;
   loading?: boolean;
   style?: React.CSSProperties;
+  step?: number;
   responsive?: Responsive;
 }
 
