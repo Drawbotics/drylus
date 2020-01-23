@@ -1,3 +1,16 @@
+# v5.4.11 (Thu Jan 23 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - allow pointer through number input rendered vale  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.4.10 (Wed Jan 22 2020)
 
 #### ⚠️  Pushed to master
