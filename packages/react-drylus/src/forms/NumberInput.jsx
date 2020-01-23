@@ -91,6 +91,7 @@ const styles = {
     text-overflow: ellipsis;
     overflow: hidden;
     color: ${sv.colorSecondary};
+    pointer-events: none;
   `,
   value: css`
     color: transparent;
