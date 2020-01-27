@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const { generate } = require('./generate');
-const { generateCustomDefinitions } = require('./custom-definitions');
+const { generateCustomDefinitions, customAdditionalDefinitions } = require('./custom-definitions');
 
 
 const folders = [
@@ -14,7 +14,7 @@ const folders = [
 
 
 function generateTypes(targetFile) {
-  const skippedComponents = ['Filter', 'Padding', 'Margin'];
+  const skippedComponents = ['Filter', 'Padding', 'Margin', 'Icon'];
 
   const onClickExceptions = ['onClickHeader'];
 
@@ -73,6 +73,9 @@ function generateTypes(targetFile) {
             ? `export declare const ${p1}: React.FunctionComponent<${p1}Props>;`
             : `export declare const ${p1}: React.FunctionComponent;`,
         );
+
+        // replace icon?: string with IconName type
+        result = result.replace(/(icon\??:) string/g, '$1 IconName');
     
         types.push(result);
       }
@@ -81,6 +84,8 @@ function generateTypes(targetFile) {
       }
     }
   }
+
+  types.push(customAdditionalDefinitions);
 
   const text = types.join('\n');
 

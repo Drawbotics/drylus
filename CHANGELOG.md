@@ -1,3 +1,58 @@
+# v5.4.11 (Thu Jan 23 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - allow pointer through number input rendered vale  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v5.4.10 (Wed Jan 22 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - update types  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix rendervalue in number input  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v5.4.9 (Fri Jan 17 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Fix/alert and icon definitions [#105](https://github.com/Drawbotics/drylus/pull/105) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v5.4.8 (Fri Jan 17 2020)
+
+#### ⚠️  Pushed to master
+
+- fix empty state documentation  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - make empty state title center aligned  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.4.7 (Thu Jan 16 2020)
 
 #### 🐛 Bug fix - Patch
