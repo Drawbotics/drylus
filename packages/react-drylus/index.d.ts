@@ -451,6 +451,7 @@ export declare const Collapsible: React.FunctionComponent<CollapsibleProps>;
 
 export interface DateFormatProps {
   value?: any;
+  locale?: string;
 }
 
 export declare const DateFormat: React.FunctionComponent<DateFormatProps>;

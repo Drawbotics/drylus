@@ -41,4 +41,4 @@ export Popover, { PopoverSides } from './Popover';
 export Tile from './Tile';
 export ProgressBar from './ProgressBar';
 export LoadingPlaceholder from './LoadingPlaceholder';
-export DateFormat from './DateFormat';
+export DateFormat, { DateFormatShowTime } from './DateFormat';

@@ -1,5 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Enum from '@drawbotics/enums';
+import omit from 'lodash/omit';
+
+
+const defaultTranslations = {
+  yesterday: 'Yesterday',
+  tomorrow: 'Tomorrow',
+  today: 'Today',
+};
 
 
 const defaultOptions = {
@@ -20,26 +29,63 @@ const TimePeriod = {
   NOW: 0,
 };
 
-function _generateOptions(date) {
+export const DateFormatShowTime = new Enum(
+  'DEFAULT',
+  'ALWAYS',
+  'NEVER',
+);
+
+function _getCurrentLocale() {
+  if (navigator.languages != null && navigator.languages.length != null) {
+    return navigator.languages[0];
+  }
+  else {
+    return navigator.userLanguage
+      || navigator.language
+      || navigator.browserLanguage
+      || 'en-GB';
+  }
+}
+
+function _getDifferenceFromToday(date) {
   const today = new Date();
   const hoursDifference = Math.round((date - today) / 36e5);
   const daysDifference = Math.round(hoursDifference / 24);
 
+  return {
+    hoursDifference,
+    daysDifference,
+  };
+}
+
+function _generateOptions({ date, showTime, activeLocale }) {
+  const { hoursDifference, daysDifference } = _getDifferenceFromToday(date);
+  let options = {};
+
   // Time in the future
   if (daysDifference >= TimePeriod.IN_A_YEAR) {
-    // 30/12/2021
-    return defaultOptions;
+    options = defaultOptions;
   }
   else if (daysDifference >= TimePeriod.IN_A_WEEK) {
-    // 6 May
-    return { day: 'numeric', month: 'long' };
+    options = { day: 'numeric', month: 'long' };
   }
   else if (hoursDifference >= TimePeriod.IN_2_DAYS) {
-    // Mon, 3 Jan, 8:00 AM 
-    return { day: 'numeric', month: 'short', weekday: 'short' };
+    options = {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'short',
+      hour: 'numeric',
+      minute: '2-digit',
+    };
   }
   else if (hoursDifference >= TimePeriod.IN_A_DAY) {
     // Tomorrow at 8:30 AM
+    options = {
+      day: 'numeric',
+      month: 'short',
+      hour: 'numeric',
+      minute: '2-digit',
+    };
   }
   else if (hoursDifference >= TimePeriod.NOW) {
     // Today at 1:32 PM
@@ -59,19 +105,41 @@ function _generateOptions(date) {
   }
   else {
     // 30/12/2019
-    return defaultOptions;
+    options = defaultOptions;
   }
 
-  return defaultOptions;
+  // If french or dutch, we omit AM/PM
+  if (activeLocale.includes('fr') || activeLocale.includes('nl')) {
+    options.hour12 = false;
+  }
+  else {
+    options.hour12 = true;
+  }
+
+  if (showTime === DateFormatShowTime.ALWAYS) {
+    options = {
+      ...options,
+      hour: 'numeric',
+      minute: '2-digit',
+    };
+  }
+  else if (showTime === DateFormatShowTime.NEVER) {
+    options = omit(options, ['hour', 'minute']);
+  }
+
+  return options;
 }
 
-const DateFormat = ({ value, locale }) => {
+const DateFormat = ({ value, locale, showTime }) => {
   const date = value ?? new Date();
-  const options = _generateOptions(date);
-  // console.log(locale, options);
-  const formatter = locale != null
-    ? new Intl.DateTimeFormat(locale, options)
-    : new Intl.DateTimeFormat(options);
+  const activeLocale = locale ?? _getCurrentLocale();
+  const options = _generateOptions({ date, showTime, activeLocale });
+  const formatter = new Intl.DateTimeFormat(activeLocale, options);
+
+  const { hoursDifference } = _getDifferenceFromToday(date);
+
+  const prefix = hoursDifference
+
   return (
     <span>{formatter.format(date)}</span>
   );
@@ -83,6 +151,17 @@ DateFormat.propTypes = {
 
   /** If not specified, takes the browser defined one */
   locale: PropTypes.string,
+
+  /** Shows the hour/minutes, default depends on the distance from today */
+  showHour: PropTypes.oneOf([
+    DateFormatShowTime.DEFAULT,
+    DateFormatShowTime.ALWAYS,
+    DateFormatShowTime.NEVER,
+  ]),
+};
+
+DateFormat.defaultProps = {
+  showHour: DateFormatShowTime.DEFAULT,
 };
 
 

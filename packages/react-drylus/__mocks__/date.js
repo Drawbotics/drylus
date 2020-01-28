@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 const constantDate = new Date('January 1, 2020');
 
 Date = class extends Date {
@@ -10,3 +11,7 @@ Date = class extends Date {
     return constantDate;
   }
 }
+
+Intl = require('intl');
+
+Intl.__disableRegExpRestore();
