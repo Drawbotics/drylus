@@ -138,7 +138,7 @@ const DateFormat = ({ value, locale, showTime }) => {
 
   const { hoursDifference } = _getDifferenceFromToday(date);
 
-  const prefix = hoursDifference
+  // const prefix = hoursDifference
 
   return (
     <span>{formatter.format(date)}</span>
