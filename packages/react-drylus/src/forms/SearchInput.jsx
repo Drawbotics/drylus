@@ -53,7 +53,7 @@ const styles = {
 
 const SearchInput = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     options,

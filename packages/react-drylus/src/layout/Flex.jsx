@@ -105,7 +105,7 @@ function prefixFlex(value) {
 
 export const FlexItem = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,
@@ -152,7 +152,7 @@ FlexItem.defaultProps = {
 
 const Flex = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,

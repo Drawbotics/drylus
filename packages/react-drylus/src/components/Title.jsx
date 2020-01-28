@@ -68,7 +68,7 @@ export const TitleAlign = deprecateProperty(new Enum(
 
 const Title = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,

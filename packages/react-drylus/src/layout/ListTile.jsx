@@ -42,7 +42,7 @@ const styles = {
 
 const ListTile = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     title,

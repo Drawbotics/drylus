@@ -89,7 +89,7 @@ const styles = {
 
 const ProgressBar = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     percentage,

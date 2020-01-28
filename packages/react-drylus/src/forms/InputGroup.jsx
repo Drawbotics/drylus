@@ -10,7 +10,7 @@ import { useResponsiveProps } from '../utils/hooks';
 
 const InputGroup = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     hint,

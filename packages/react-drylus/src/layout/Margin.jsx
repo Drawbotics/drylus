@@ -317,7 +317,7 @@ function _computeSize(sizeDescription) {
 
 const Margin = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const { children, size: rawSize, style } = useResponsiveProps(rest, responsive);
 

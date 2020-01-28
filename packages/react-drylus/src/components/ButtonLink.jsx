@@ -10,7 +10,7 @@ import { useResponsiveProps } from '../utils/hooks';
 
 const ButtonLink = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,

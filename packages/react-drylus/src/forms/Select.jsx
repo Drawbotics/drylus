@@ -103,7 +103,7 @@ const styles = {
 
 const Select = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     value,

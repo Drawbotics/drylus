@@ -84,7 +84,7 @@ const Map = ({
   markers,
   height,
   style,
-  ...props,
+  ...props
 }) => {
   const ref = useRef();
 

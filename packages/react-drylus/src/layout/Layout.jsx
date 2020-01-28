@@ -94,7 +94,7 @@ export const LayoutPositions = deprecateProperty(new Enum(
 
 const Layout = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,

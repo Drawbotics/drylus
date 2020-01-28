@@ -94,7 +94,7 @@ const styles = {
 
 const Spinner = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     size,

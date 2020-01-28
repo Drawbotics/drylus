@@ -73,7 +73,7 @@ const styles = {
 
 const Text = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     inversed,

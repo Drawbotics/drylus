@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
-const Date = ({ value }) => {
+const DateFormat = ({ value }) => {
   const date = value ?? new Date();
   return '';
 };
 
-Date.propTypes = {
+DateFormat.propTypes = {
   /** If no date is passed, today is displayed */
   value: PropTypes.instanceOf(Date),
 }
 
 
-export default Date;
+export default DateFormat;

@@ -83,7 +83,7 @@ GridItem.propTypes = {
 
 const Grid = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,

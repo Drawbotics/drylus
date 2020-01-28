@@ -145,7 +145,7 @@ const Track = ({
 
 const RangeInput = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     min,

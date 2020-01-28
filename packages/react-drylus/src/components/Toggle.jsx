@@ -80,7 +80,7 @@ const styles = {
 
 const Toggle = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     onChange,

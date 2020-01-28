@@ -153,7 +153,7 @@ const Radio = ({
   children,
   isPlaceholder,
   readOnly,
-  ...rest,
+  ...rest
 }) => {
   const id = v4();
   return (
@@ -205,7 +205,7 @@ const Radio = ({
 
 const RadioGroup = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     value,

@@ -69,7 +69,7 @@ const styles = {
 
 const Avatar = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     image,

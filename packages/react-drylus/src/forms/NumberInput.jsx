@@ -101,7 +101,7 @@ const styles = {
 
 const NumberInput = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     value: rawValue,

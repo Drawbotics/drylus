@@ -35,7 +35,7 @@ export const ParagraphAlign = deprecateProperty(new Enum(
 
 const Paragraph = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,

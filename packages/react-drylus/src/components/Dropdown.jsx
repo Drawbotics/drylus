@@ -140,7 +140,7 @@ export const DropdownSides = deprecateProperty(new Enum(
 
 export const DropdownOption = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     text,
@@ -234,7 +234,7 @@ export const DropdownSeparator = () => {
 
 const Dropdown = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,

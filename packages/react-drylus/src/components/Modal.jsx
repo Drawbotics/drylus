@@ -200,7 +200,7 @@ BaseModal.displayName = 'BaseModal';
 
 const Modal = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,

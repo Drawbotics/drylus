@@ -166,7 +166,7 @@ const styles = {
 
 const RawInput = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     value,
