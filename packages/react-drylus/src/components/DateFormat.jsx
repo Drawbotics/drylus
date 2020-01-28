@@ -1,9 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
+const defaultOptions = {
+
+};
+
 const DateFormat = ({ value }) => {
   const date = value ?? new Date();
-  return '';
+  const formatter = new Intl.DateTimeFormat(defaultOptions);
+  return (
+    <span>{formatter.format(date)}</span>
+  );
 };
 
 DateFormat.propTypes = {
