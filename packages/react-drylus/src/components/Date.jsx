@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 
 
 const Date = ({ value }) => {
-  return (
-    <div>
-
-    </div>
-  );
+  const date = value ?? new Date();
+  return '';
 };
 
 Date.propTypes = {
+  /** If no date is passed, today is displayed */
   value: PropTypes.instanceOf(Date),
 }
 
