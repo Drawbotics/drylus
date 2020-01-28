@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Title matches snapshot when does not have margins 1`] = `
-.css-17thm8e-Title__root-Title__h1-Title__noMargin {
+.css-12yjwpe-Title__root-Title__h1-Title__noMargin {
   color: #172b4e;
   font-weight: 300;
   font-size: 3.4rem;
@@ -10,80 +10,80 @@ exports[`Title matches snapshot when does not have margins 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-17thm8e-Title__root-Title__h1-Title__noMargin {
+  .css-12yjwpe-Title__root-Title__h1-Title__noMargin {
     font-size: 2.8rem;
   }
 }
 
 <h1
-  className="css-17thm8e-Title__root-Title__h1-Title__noMargin"
+  className="css-12yjwpe-Title__root-Title__h1-Title__noMargin"
 >
   Title content
 </h1>
 `;
 
 exports[`Title matches snapshot when has a h1 size 1`] = `
-.css-jn5qyg-Title__root-Title__h1 {
+.css-1ab2uo3-Title__root-Title__h1 {
   color: #172b4e;
   font-weight: 300;
   font-size: 3.4rem;
 }
 
 @media only screen and (max-width:768px) {
-  .css-jn5qyg-Title__root-Title__h1 {
+  .css-1ab2uo3-Title__root-Title__h1 {
     font-size: 2.8rem;
   }
 }
 
 <h1
-  className="css-jn5qyg-Title__root-Title__h1"
+  className="css-1ab2uo3-Title__root-Title__h1"
 >
   Title content
 </h1>
 `;
 
 exports[`Title matches snapshot when has a h2 size 1`] = `
-.css-1d267us-Title__root-Title__h2 {
+.css-x1nd3x-Title__root-Title__h2 {
   color: #172b4e;
   font-weight: 300;
   font-size: 2.4rem;
 }
 
 @media only screen and (max-width:768px) {
-  .css-1d267us-Title__root-Title__h2 {
+  .css-x1nd3x-Title__root-Title__h2 {
     font-size: 2rem;
   }
 }
 
 <h2
-  className="css-1d267us-Title__root-Title__h2"
+  className="css-x1nd3x-Title__root-Title__h2"
 >
   Title content
 </h2>
 `;
 
 exports[`Title matches snapshot when has a h3 size 1`] = `
-.css-eqynv4-Title__root-Title__h3 {
+.css-g26idt-Title__root-Title__h3 {
   color: #172b4e;
   font-weight: 300;
   font-size: 2rem;
 }
 
 @media only screen and (max-width:768px) {
-  .css-eqynv4-Title__root-Title__h3 {
+  .css-g26idt-Title__root-Title__h3 {
     font-size: 1.6rem;
   }
 }
 
 <h3
-  className="css-eqynv4-Title__root-Title__h3"
+  className="css-g26idt-Title__root-Title__h3"
 >
   Title content
 </h3>
 `;
 
 exports[`Title matches snapshot when has a h4 size 1`] = `
-.css-ucdkco-Title__root-Title__h4 {
+.css-1mnms9a-Title__root-Title__h4 {
   color: #172b4e;
   font-weight: 300;
   font-size: 1.3rem;
@@ -91,33 +91,33 @@ exports[`Title matches snapshot when has a h4 size 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-ucdkco-Title__root-Title__h4 {
+  .css-1mnms9a-Title__root-Title__h4 {
     font-size: 1.1rem;
   }
 }
 
 <h4
-  className="css-ucdkco-Title__root-Title__h4"
+  className="css-1mnms9a-Title__root-Title__h4"
 >
   Title content
 </h4>
 `;
 
 exports[`Title matches snapshot when has a node as children 1`] = `
-.css-1d267us-Title__root-Title__h2 {
+.css-x1nd3x-Title__root-Title__h2 {
   color: #172b4e;
   font-weight: 300;
   font-size: 2.4rem;
 }
 
 @media only screen and (max-width:768px) {
-  .css-1d267us-Title__root-Title__h2 {
+  .css-x1nd3x-Title__root-Title__h2 {
     font-size: 2rem;
   }
 }
 
 <h2
-  className="css-1d267us-Title__root-Title__h2"
+  className="css-x1nd3x-Title__root-Title__h2"
 >
   <span
     style={
@@ -133,7 +133,7 @@ exports[`Title matches snapshot when has a node as children 1`] = `
 `;
 
 exports[`Title matches snapshot when is aligned to the right 1`] = `
-.css-133mayl-Title__root-Title__h1-Title__alignRight {
+.css-1irn0sx-Title__root-Title__h1-Title__alignRight {
   color: #172b4e;
   font-weight: 300;
   font-size: 3.4rem;
@@ -141,20 +141,20 @@ exports[`Title matches snapshot when is aligned to the right 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-133mayl-Title__root-Title__h1-Title__alignRight {
+  .css-1irn0sx-Title__root-Title__h1-Title__alignRight {
     font-size: 2.8rem;
   }
 }
 
 <h1
-  className="css-133mayl-Title__root-Title__h1-Title__alignRight"
+  className="css-1irn0sx-Title__root-Title__h1-Title__alignRight"
 >
   Some content
 </h1>
 `;
 
 exports[`Title matches snapshot when is center aligned 1`] = `
-.css-e74esb-Title__root-Title__h1-Title__alignCenter {
+.css-3ie0mi-Title__root-Title__h1-Title__alignCenter {
   color: #172b4e;
   font-weight: 300;
   font-size: 3.4rem;
@@ -162,13 +162,13 @@ exports[`Title matches snapshot when is center aligned 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-e74esb-Title__root-Title__h1-Title__alignCenter {
+  .css-3ie0mi-Title__root-Title__h1-Title__alignCenter {
     font-size: 2.8rem;
   }
 }
 
 <h1
-  className="css-e74esb-Title__root-Title__h1-Title__alignCenter"
+  className="css-3ie0mi-Title__root-Title__h1-Title__alignCenter"
 >
   Some content
 </h1>

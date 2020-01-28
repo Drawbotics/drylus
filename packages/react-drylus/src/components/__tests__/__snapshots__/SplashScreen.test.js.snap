@@ -1,22 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SplashScreen matches snapshot when is visible with some text 1`] = `
-.css-xbdtd3-ThemeProvider__root * {
+.css-zaxdq7-ThemeProvider__root * {
   font-family: "Rubik",sans-serif;
 }
 
-.css-xbdtd3-ThemeProvider__root a {
+.css-zaxdq7-ThemeProvider__root a {
   -webkit-text-decoration: none;
   text-decoration: none;
   color: inherit;
 }
 
-.css-xbdtd3-ThemeProvider__root b,
-.css-xbdtd3-ThemeProvider__root strong {
+.css-zaxdq7-ThemeProvider__root b,
+.css-zaxdq7-ThemeProvider__root strong {
   font-weight: 500;
 }
 
-.css-6s53rl-SplashScreen__root {
+.css-1p711fp-SplashScreen__root {
   position: fixed;
   top: 0;
   left: 0;
@@ -41,33 +41,33 @@ exports[`SplashScreen matches snapshot when is visible with some text 1`] = `
   justify-content: center;
 }
 
-.css-2xobb-SplashScreen__animation {
+.css-1u31k88-SplashScreen__animation {
   width: 130px;
   height: 130px;
   position: relative;
 }
 
-.css-2xobb-SplashScreen__animation > svg {
+.css-1u31k88-SplashScreen__animation > svg {
   stroke-width: 7;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke: black;
 }
 
-.css-tevnk8-SplashScreen__text {
+.css-1snvs7w-SplashScreen__text {
   margin-top: 32px;
   color: rgba(135,155,166,0.7);
 }
 
 <div
-  className="css-xbdtd3-ThemeProvider__root"
+  className="css-zaxdq7-ThemeProvider__root"
 >
   <div>
     <div
-      className="css-6s53rl-SplashScreen__root"
+      className="css-1p711fp-SplashScreen__root"
     >
       <div
-        className="css-2xobb-SplashScreen__animation"
+        className="css-1u31k88-SplashScreen__animation"
       >
         <svg
           height="100%"
@@ -127,7 +127,7 @@ exports[`SplashScreen matches snapshot when is visible with some text 1`] = `
         </svg>
       </div>
       <div
-        className="css-tevnk8-SplashScreen__text"
+        className="css-1snvs7w-SplashScreen__text"
       >
         Loading...
       </div>

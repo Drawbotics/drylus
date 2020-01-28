@@ -449,6 +449,12 @@ export interface CollapsibleProps {
 
 export declare const Collapsible: React.FunctionComponent<CollapsibleProps>;
 
+export interface DateFormatProps {
+  value?: any;
+}
+
+export declare const DateFormat: React.FunctionComponent<DateFormatProps>;
+
 export interface DotProps {
   category?:
   | Category.BRAND
