@@ -6,6 +6,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import { Tier, Size, Category } from '../enums';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
+import isObject from 'lodash/isObject';
 
 
 const styles = {
@@ -87,6 +88,24 @@ const Text = ({
     light,
   } = useResponsiveProps(rest, responsive);
 
+  const transformedChildren = [...children].map((child) => {
+    if (isObject(child)) {
+      if (child instanceof Date) {
+        // Handle dates
+        return child.toUTCString();
+      }
+      else if (child.value != null && child.currency != null) {
+        // Handle currency
+        return '[currency]';
+      }
+      else {
+        console.warn('Unsupported Text child type. Please provde text, Date or Currency');
+        return '';
+      }
+    }
+    return child;
+  });
+
   return (
     <span className={cx(styles.root, {
       [styles.bold]: bold,
@@ -104,7 +123,7 @@ const Text = ({
       [styles.large]: size === Size.LARGE,
       [styles[getEnumAsClass(category)]]: category && ! disabled && ! inversed,
     })} style={style}>
-      {children}
+      {transformedChildren.join('')}
     </span>
   );
 };
@@ -134,15 +153,17 @@ Text.propTypes = {
       value: PropTypes.number.isRequired,
     }),
     PropTypes.instanceOf(Date),
-    PropTypes.arrayOf([
-      PropTypes.string,
-      PropTypes.number,
-      PropTypes.shape({
-        currency: PropTypes.string.isRequired,
-        value: PropTypes.number.isRequired,
-      }),
-      PropTypes.instanceOf(Date),
-    ]),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.shape({
+          currency: PropTypes.string.isRequired,
+          value: PropTypes.number.isRequired,
+        }),
+        PropTypes.instanceOf(Date),
+      ])
+    ),
   ]).isRequired,
 
   category: PropTypes.oneOf([

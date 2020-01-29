@@ -44,7 +44,7 @@ const styles = {
 
 const Preview = ({ children, raw }) => {
   const [ fullScreen, setFullScreen ] = useState(false);
-  
+
   return (
     <div
       className={cx(styles.preview, {
