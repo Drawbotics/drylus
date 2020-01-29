@@ -86,6 +86,7 @@ const Text = ({
     style,
     light,
   } = useResponsiveProps(rest, responsive);
+
   return (
     <span className={cx(styles.root, {
       [styles.bold]: bold,
@@ -128,6 +129,20 @@ Text.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
+    PropTypes.shape({
+      currency: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+    }),
+    PropTypes.instanceOf(Date),
+    PropTypes.arrayOf([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.shape({
+        currency: PropTypes.string.isRequired,
+        value: PropTypes.number.isRequired,
+      }),
+      PropTypes.instanceOf(Date),
+    ]),
   ]).isRequired,
 
   category: PropTypes.oneOf([
