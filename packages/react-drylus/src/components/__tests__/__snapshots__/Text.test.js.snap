@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text matches snapshot when it has a size and category 1`] = `
+.css-12yj60s-Text__root-Text__primary-Text__large {
+  display: inline;
+  color: #172b4e;
+  font-size: 1.1rem;
+}
+
+<span
+  className="undefined css-12yj60s-Text__root-Text__primary-Text__large"
+>
+  Text content
+</span>
+`;
+
+exports[`Text matches snapshot when it has children 1`] = `
+.css-1y3lkgh-Text__root-Text__primary-Text__default {
+  display: inline;
+  color: #172b4e;
+  font-size: 1rem;
+}
+
+<span
+  className="css-1y3lkgh-Text__root-Text__primary-Text__default"
+>
+  Text content
+</span>
+`;
+
+exports[`Text matches snapshot when it is bold 1`] = `
+.css-1agyjwc-Text__root-Text__bold-Text__primary-Text__default {
+  display: inline;
+  font-weight: 500;
+  -webkit-letter-spacing: 0.01rem;
+  -moz-letter-spacing: 0.01rem;
+  -ms-letter-spacing: 0.01rem;
+  letter-spacing: 0.01rem;
+  color: #172b4e;
+  font-size: 1rem;
+}
+
+<span
+  className="css-1agyjwc-Text__root-Text__bold-Text__primary-Text__default"
+>
+  Text content
+</span>
+`;
+
+exports[`Text matches snapshot when it is light and inversed 1`] = `
+.css-1rpdnon-Text__root-Text__light-Text__primaryInversed-Text__default {
+  display: inline;
+  font-weight: 300;
+  -webkit-letter-spacing: 0.06rem;
+  -moz-letter-spacing: 0.06rem;
+  -ms-letter-spacing: 0.06rem;
+  letter-spacing: 0.06rem;
+  color: #fff;
+  font-size: 1rem;
+}
+
+<span
+  className="css-1rpdnon-Text__root-Text__light-Text__primaryInversed-Text__default"
+>
+  Text content
+</span>
+`;

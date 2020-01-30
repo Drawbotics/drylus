@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-const constantDate = new Date('January 1, 2020');
+const constantDate = new Date('2020-06-01 12:00');
 
 Date = class extends Date {
   constructor(date) {
