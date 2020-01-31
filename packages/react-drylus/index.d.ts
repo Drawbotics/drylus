@@ -961,6 +961,7 @@ export interface TextProps {
   style?: React.CSSProperties;
   responsive?: Responsive;
   dateOptions?: DateOptions;
+  locale?: string;
 }
 
 export declare const Text: React.FunctionComponent<TextProps>;

@@ -74,13 +74,14 @@ const styles = {
 };
 
 
-function _processChild(child, dateOptions) {
+function _processChild(child, dateOptions, locale) {
   if (isObject(child)) {
     if (child instanceof Date) {
       // Handle dates
       return generateDisplayedDate({
         date: child,
         options: dateOptions,
+        activeLocale: locale,
       });
     }
     else if (child.value != null && child.currency != null) {
@@ -111,11 +112,12 @@ const Text = ({
     style,
     light,
     dateOptions,
+    locale,
   } = useResponsiveProps(rest, responsive);
 
   const transformedChildren = isArray(children)
-    ? [...children].map((child) => _processChild(child, dateOptions)).join('')
-    : _processChild(children, dateOptions);
+    ? [...children].map((child) => _processChild(child, dateOptions, locale)).join('')
+    : _processChild(children, dateOptions, locale);
 
   return (
     <span className={cx(styles.root, {
@@ -208,6 +210,9 @@ Text.propTypes = {
     asArchive: PropTypes.bool,
     // need to add options for dayjs
   }),
+
+  /** Used to override the current locale if necessary (e.g. if the browser locale is not explicitely defined) */
+  locale: PropTypes.string,
 };
 
 
@@ -218,6 +223,7 @@ Text.defaultProps = {
   size: Size.DEFAULT,
   tier: Tier.PRIMARY,
   disabled: false,
+  locale: 'en',
 };
 
 

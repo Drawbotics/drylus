@@ -29,8 +29,10 @@ const en = {
   calendar: ({ format }) => ({
     sameElse: format,
     nextWeek: format,
-    lastWeek: `[Last] ${format}`,
-    nextDay: `[Tomorrow], ${format}`,
+    lastDay: `[yesterday at] h:mm A`,
+    sameDay: '[today at] h:mm A',
+    lastWeek: `[last] ${format}`,
+    nextDay: `[tomorrow], ${format}`,
   }),
 }
 

@@ -61,7 +61,7 @@ describe('generateDisplayedDate', () => {
   
       const res = generateDisplayedDate({ date });
       
-      expect(res).toEqual('Tomorrow, 2 Jun, 8:00 AM');
+      expect(res).toEqual('tomorrow, 2 Jun, 8:00 AM');
     });
 
     it('is the same day, in the future', () => {
@@ -69,7 +69,7 @@ describe('generateDisplayedDate', () => {
 
       const res = generateDisplayedDate({ date });
       
-      expect(res).toEqual('Today at 3:00 PM');
+      expect(res).toEqual('today at 3:00 PM');
     });
 
     it('is the same day, in the past', () => {
@@ -85,7 +85,7 @@ describe('generateDisplayedDate', () => {
 
       const res = generateDisplayedDate({ date });
       
-      expect(res).toEqual('Yesterday at 1:00 PM');
+      expect(res).toEqual('yesterday at 1:00 PM');
     });
 
     it('is the previous week', () => {
@@ -93,7 +93,7 @@ describe('generateDisplayedDate', () => {
 
       const res = generateDisplayedDate({ date });
       
-      expect(res).toEqual('Last Thu, 28 May, 8:00 AM');
+      expect(res).toEqual('last Thu, 28 May, 8:00 AM');
     });
 
     it('is less than 365 days ago, same year', () => {
