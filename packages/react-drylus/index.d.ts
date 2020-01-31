@@ -80,6 +80,13 @@ export enum FlexAlign {
   CENTER = 'CENTER',
 }
 
+// Utils/date
+export enum ShowDateTime {
+  DEFAULT = 'DEFAULT',
+  ALWAYS = 'ALWAYS',
+  NEVER = 'NEVER',
+}
+
 
 export interface BaseFilterProps {
   clearLabel?: string;
@@ -452,6 +459,10 @@ export declare const Collapsible: React.FunctionComponent<CollapsibleProps>;
 export interface DateFormatProps {
   value?: any;
   locale?: string;
+  showHour?:
+    | DateFormatShowTime.DEFAULT
+    | DateFormatShowTime.ALWAYS
+    | DateFormatShowTime.NEVER;
 }
 
 export declare const DateFormat: React.FunctionComponent<DateFormatProps>;
@@ -914,6 +925,11 @@ export interface TagProps {
 
 export declare const Tag: React.FunctionComponent<TagProps>;
 
+declare interface Children {
+  currency: string;
+  value: number;
+}
+
 declare interface Responsive {
   XS?: object;
   S?: object;
@@ -923,6 +939,11 @@ declare interface Responsive {
   HUGE?: object;
 }
 
+declare interface DateOptions {
+  showTime?: any;
+  asArchive?: boolean;
+}
+
 export interface TextProps {
   inversed?: boolean;
   bold?: boolean;
@@ -930,7 +951,7 @@ export interface TextProps {
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
   tier?: Tier.PRIMARY | Tier.SECONDARY | Tier.TERTIARY;
   disabled?: boolean;
-  children?: string | number;
+  children: any;
   category?:
     | Category.BRAND
     | Category.DANGER
@@ -939,6 +960,7 @@ export interface TextProps {
     | Category.WARNING;
   style?: React.CSSProperties;
   responsive?: Responsive;
+  dateOptions?: DateOptions;
 }
 
 export declare const Text: React.FunctionComponent<TextProps>;

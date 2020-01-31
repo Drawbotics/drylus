@@ -19,4 +19,7 @@ module.exports = {
     './jest.setup.js',
     'jest-expect-message',
   ],
+  'moduleNameMapper': {
+    '~': '<rootDir>',
+  }
 };
