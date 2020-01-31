@@ -8,7 +8,9 @@ import isArray from 'lodash/isArray';
 import { Tier, Size, Category } from '../enums';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
-import { generateDisplayedDate, ShowDateTime } from '../utils/date/date';
+import { generateDisplayedDate, ShowDateTime } from '../utils/date';
+
+export { ShowDateTime } from '../utils/date';
 
 
 const styles = {
@@ -77,7 +79,6 @@ const styles = {
 function _processChild(child, dateOptions, locale) {
   if (isObject(child)) {
     if (child instanceof Date) {
-      // Handle dates
       return generateDisplayedDate({
         date: child,
         options: dateOptions,
@@ -85,7 +86,6 @@ function _processChild(child, dateOptions, locale) {
       });
     }
     else if (child.value != null && child.currency != null) {
-      // Handle currency
       return '[currency]';
     }
     else {

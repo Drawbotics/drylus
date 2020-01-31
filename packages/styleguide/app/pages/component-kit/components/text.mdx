@@ -15,6 +15,12 @@ __Example__
 </Playground>
 
 
+## Auto format
+
+<Playground mode="jsx">
+  <Text locale="en">I bought a bread for {{ value: 1, currency: 'EUR' }} on the {new Date('04-20-2019')}</Text>
+</Playground>
+
 ### With Date
 `Text` is also a smart component in the sense that depending on the children passed to it, it will render them accordingly.
 For example, if you pass an instance of `Date`, the date will be formatted following the Drawbotics conventions using the current locale. You can modify the formatting through the `dateOptions` prop.
@@ -25,10 +31,6 @@ For example, if you pass an instance of `Date`, the date will be formatted follo
   <Text locale="fr">Ceci est du texte avec une date: {new Date()}</Text>
   <br/>
   <Text locale="nl">Blabla: {new Date()}</Text>
-  <br/>
-  <Text>This is a text with currency: {{ value: 30, currency: 'EUR' }}</Text>
-  <br/>
-  <Text>I bought a bread for {{ value: 1, currency: 'EUR' }} on the {new Date('04-20-2019')}</Text>
 </Playground>
 
 ### With Currency
