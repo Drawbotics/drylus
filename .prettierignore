@@ -1,0 +1,5 @@
+*.test.js
+__tests__
+__mocks__
+*.config.js
+*.setup.js
