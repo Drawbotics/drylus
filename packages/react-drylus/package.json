@@ -12,8 +12,8 @@
     "watch": "npm run clean && NODE_ENV=development npm run build:commonjs -- --watch",
     "build:types": "node scripts/build-types.js",
     "build": "npm run clean && NODE_ENV=production npm run build:commonjs && npm run build:types",
-    "test": "jest",
-    "test:watch": "jest --watchAll",
+    "test": "NODE_ICU_DATA=../../node_modules/full-icu jest",
+    "test:watch": "NODE_ICU_DATA=../../node_modules/full-icu jest --watchAll",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
@@ -41,8 +41,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "2132c65dc070c386b7736959b4b6022145038bf7",
-  "devDependencies": {
-    "dayjs": "^1.8.19"
-  }
+  "gitHead": "2132c65dc070c386b7736959b4b6022145038bf7"
 }
