@@ -48,5 +48,16 @@ describe('Text', () => {
       
       expect(children).toEqual('Thu 4 Jun, 6:00 PM');
     });
+
+    it('contains a price', () => {
+     const price = { value: 10000, currency: 'GBP' };
+  
+      const tree = create(
+        <Text>{price}</Text>
+      ).toJSON();
+      const children = get(tree, 'children[0]', '');
+      
+      expect(children).toEqual('£10,000');
+    });
   });
 });

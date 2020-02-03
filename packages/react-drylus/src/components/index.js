@@ -13,7 +13,7 @@ export Drawer, { DrawerSides } from './Drawer';
 export BaseFilter, { FilterAlign, SelectFilter, CheckboxFilter } from './Filter';
 export TabNavigation from './TabNavigation';
 export Avatar from './Avatar';
-export Text, { ShowDateTime, formatDate } from './Text';
+export Text, { ShowDateTime, formatDate, formatPrice } from './Text';
 export Dot from './Dot';
 export Tooltip, { TooltipSides } from './Tooltip';
 export Collapsible from './Collapsible';

@@ -9,7 +9,9 @@ import { Tier, Size, Category } from '../enums';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 import { generateDisplayedDate, ShowDateTime } from '../utils/date';
+import { generateDisplayedPrice } from '../utils/price';
 
+export { generateDisplayedPrice as formatPrice } from '../utils/price';
 export { ShowDateTime, generateDisplayedDate as formatDate } from '../utils/date';
 
 
@@ -76,7 +78,7 @@ const styles = {
 };
 
 
-function _processChild(child, dateOptions, locale) {
+function _processChild(child, { dateOptions, locale, priceOptions }) {
   if (isObject(child)) {
     if (child instanceof Date) {
       return generateDisplayedDate({
@@ -85,8 +87,12 @@ function _processChild(child, dateOptions, locale) {
         locale,
       });
     }
-    else if (child.value != null && child.currency != null) {
-      return '[currency]';
+    else if (child.value != null) {
+      return generateDisplayedPrice({
+        price: child,
+        options: priceOptions,
+        locale,
+      });
     }
     else {
       console.warn('Unsupported Text child type. Please provde text, Date or Currency');
@@ -112,12 +118,17 @@ const Text = ({
     style,
     light,
     dateOptions,
+    priceOptions,
     locale,
   } = useResponsiveProps(rest, responsive);
 
   const transformedChildren = isArray(children)
-    ? [...children].map((child) => _processChild(child, dateOptions, locale)).join('')
-    : _processChild(children, dateOptions, locale);
+    ? [...children].map((child) => _processChild(child, {
+      dateOptions,
+      locale,
+      priceOptions,
+    })).join('')
+    : _processChild(children, { dateOptions, locale, priceOptions });
 
   return (
     <span className={cx(styles.root, {
@@ -210,6 +221,9 @@ Text.propTypes = {
     asArchive: PropTypes.bool,
     format: PropTypes.any,
   }),
+  
+  /** Formatting options for the .toLocaleString method used internally when formatting numbers */
+  priceOptions: PropTypes.any,
 
   /** Used to override the current locale if necessary (e.g. if the browser locale is not explicitely defined) */
   locale: PropTypes.string,

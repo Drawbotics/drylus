@@ -962,6 +962,7 @@ export interface TextProps {
   style?: React.CSSProperties;
   responsive?: Responsive;
   dateOptions?: DateOptions;
+  priceOptions?: any;
   locale?: string;
 }
 
