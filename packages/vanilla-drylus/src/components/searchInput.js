@@ -11,5 +11,4 @@ const searchInput = () => {
   });
 };
 
-
 export default () => document._ready(searchInput);

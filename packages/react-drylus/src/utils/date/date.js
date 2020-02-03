@@ -1,12 +1,11 @@
+import Enum from '@drawbotics/enums';
 import Dayjs from 'dayjs';
 import calendar from 'dayjs/plugin/calendar';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import updateLocale from 'dayjs/plugin/updateLocale';
-import Enum from '@drawbotics/enums';
 
+import { getCurrentLocale, getTimeDifferenceFromToday } from '../';
 import extendedLocales from './extended-locales';
-import { getTimeDifferenceFromToday, getCurrentLocale } from '../';
-
 
 const TimePeriod = {
   YEAR_AGO: -365,
@@ -20,22 +19,11 @@ const TimePeriod = {
   NOW: 0,
 };
 
-
-export const ShowDateTime = new Enum(
-  'DEFAULT',
-  'ALWAYS',
-  'NEVER',
-);
-
+export const ShowDateTime = new Enum('DEFAULT', 'ALWAYS', 'NEVER');
 
 Dayjs.extend(calendar);
 
-
-export function generateDisplayedDate({
-  date,
-  options,
-  locale=getCurrentLocale(),
-}) {
+export function generateDisplayedDate({ date, options, locale = getCurrentLocale() }) {
   const {
     hoursDifference,
     daysDifference,
@@ -53,27 +41,22 @@ export function generateDisplayedDate({
   // Time in the future
   if (daysDifference >= TimePeriod.IN_A_YEAR) {
     dateFormat = 'DD/MM/YYYY';
-  }
-  else if (daysDifference >= TimePeriod.IN_A_WEEK) {
+  } else if (daysDifference >= TimePeriod.IN_A_WEEK) {
     dateFormat = 'D MMM';
 
-    if (! isSameYear) {
+    if (!isSameYear) {
       dateFormat = dateFormat + ' YYYY';
     }
-  }
-  else if (hoursDifference >= TimePeriod.IN_2_DAYS) {
+  } else if (hoursDifference >= TimePeriod.IN_2_DAYS) {
     dateFormat = 'ddd D MMM';
     timeFormat = 'HH:mm';
-  }
-  else if (hoursDifference >= TimePeriod.IN_A_DAY || isTomorrow) {
+  } else if (hoursDifference >= TimePeriod.IN_A_DAY || isTomorrow) {
     dateFormat = 'D MMM';
     timeFormat = 'HH:mm';
   }
   // Time in the past
-  else if (hoursDifference >= TimePeriod.DAY_AGO
-    && hoursDifference < TimePeriod.NOW
-    && isToday) {
-    const relativeMinutesDiff = (hoursDifference * 60) - minutesDifference;
+  else if (hoursDifference >= TimePeriod.DAY_AGO && hoursDifference < TimePeriod.NOW && isToday) {
+    const relativeMinutesDiff = hoursDifference * 60 - minutesDifference;
 
     Dayjs.extend(relativeTime);
 
@@ -84,34 +67,32 @@ export function generateDisplayedDate({
         extendedLocales[localeRoot].relative({ relativeMinutesDiff, hoursDifference }),
       );
     }
-  
-    return Dayjs(date).locale(localeRoot).fromNow();
-  }
-  else if (daysDifference >= TimePeriod.WEEK_AGO && hoursDifference < TimePeriod.DAYS_AGO) {
+
+    return Dayjs(date)
+      .locale(localeRoot)
+      .fromNow();
+  } else if (daysDifference >= TimePeriod.WEEK_AGO && hoursDifference < TimePeriod.DAYS_AGO) {
     dateFormat = 'ddd, D MMM';
     timeFormat = 'HH:mm';
-  }
-  else if (daysDifference >= TimePeriod.YEAR_AGO) {
+  } else if (daysDifference >= TimePeriod.YEAR_AGO) {
     // 6 Apr
     dateFormat = 'D MMM';
 
-    if (! isSameYear) {
+    if (!isSameYear) {
       dateFormat = dateFormat + ' YYYY';
     }
-  }
-  else {
+  } else {
     dateFormat = 'DD/MM/YYYY';
   }
 
   if (options?.showTime === ShowDateTime.ALWAYS) {
     timeFormat = 'HH:mm';
-  }
-  else if (options?.showTime === ShowDateTime.NEVER) {
+  } else if (options?.showTime === ShowDateTime.NEVER) {
     timeFormat = null;
   }
 
   // If french or dutch, we don't show AM/PM
-  if (! localeRoot.includes('fr') && ! localeRoot.includes('nl')) {
+  if (!localeRoot.includes('fr') && !localeRoot.includes('nl')) {
     timeFormat = timeFormat ? timeFormat.replace(/HH/g, 'h') + ' A' : null;
   }
 
@@ -129,8 +110,7 @@ export function generateDisplayedDate({
 
   if (localeRoot.includes('fr')) {
     return result.replace(':', 'h');
-  }
-  else if (localeRoot.includes('nl')) {
+  } else if (localeRoot.includes('nl')) {
     return result.replace(':', 'u');
   }
 

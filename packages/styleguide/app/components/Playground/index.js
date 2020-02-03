@@ -1,6 +1,5 @@
 import Playground from './Playground';
 
-
 export Preview from './Preview';
 
 export CodeBox from './CodeBox';

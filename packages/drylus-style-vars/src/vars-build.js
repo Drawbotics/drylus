@@ -1,22 +1,14 @@
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+Object.defineProperty(exports, '__esModule', {
+  value: true,
 });
 exports.screenXs = exports.maxWidthMedium = exports.maxWidthLarge = exports.transitionShort = exports.defaultTransition = exports.bouncyTransitionCurve = exports.transitionTimeShort = exports.defaultTransitionTime = exports.marginMassive = exports.marginExtraHuge = exports.marginHuge = exports.marginExtraLarge = exports.marginLarge = exports.marginExtraSmall = exports.marginSmall = exports.defaultMargin = exports.baseMargin = exports.paddingMassive = exports.paddingExtraHuge = exports.paddingHuge = exports.paddingExtraLarge = exports.paddingLarge = exports.paddingExtraSmall = exports.paddingSmall = exports.defaultPadding = exports.insetActiveLight = exports.insetActiveMedium = exports.insetActive = exports.elevation3 = exports.elevation2 = exports.elevation1 = exports.shadowColor = exports.colorDisabledInverse = exports.colorDisabled = exports.colorTertiaryInverse = exports.colorTertiary = exports.colorSecondaryInverse = exports.colorSecondary = exports.colorPrimaryInverse = exports.colorPrimary = exports.defaultLetterSpacing = exports.defaultLineHeight = exports.defaultFontFamily = exports.defaultFontSize = exports.borderRadiusSmall = exports.borderRadiusLarge = exports.defaultBorderRadius = exports.darkOverlay = exports.lightOverlay = exports.lighterOverlay = exports.linkedinColor = exports.twitterColor = exports.facebookColor = exports.success = exports.greenLighter = exports.greenLight = exports.green = exports.greenDark = exports.info = exports.blueLighter = exports.blueLight = exports.blue = exports.blueDark = exports.warning = exports.orangeLighter = exports.orangeLight = exports.orange = exports.orangeDark = exports.error = exports.danger = exports.redLighter = exports.redLight = exports.red = exports.redDark = exports.azureLight = exports.azure = exports.azureDark = exports.backgroundColor = exports.neutralLighter = exports.neutralLight = exports.neutral = exports.neutralDark = exports.neutralDarker = exports.neutralDarkest = exports.brandLighter = exports.brandLight = exports.brand = exports.brandDark = exports.grey900 = exports.grey800 = exports.grey700 = exports.grey600 = exports.grey500 = exports.grey400 = exports.grey300 = exports.grey200 = exports.grey100 = exports.grey50 = exports.black = exports.white = void 0;
 exports.greaterThanMinimumWidth = exports.greaterThanMaximumWidth = exports.desktop = exports.tabletPortrait = exports.tabletLandscape = exports.phonePortrait = exports.phoneLandscape = exports.phoneSPortrait = exports.phoneSLandscape = exports.screenHuge = exports.screenXl = exports.screenL = exports.screenM = exports.screenS = void 0;
 
-const {
-  fade
-} = require('./colors');
+const { fade } = require('./colors');
 
-const {
-  m,
-  d,
-  s,
-  a
-} = require('./operations'); // COLORS
-
+const { m, d, s, a } = require('./operations'); // COLORS
 
 const white = '#fff';
 exports.white = white;

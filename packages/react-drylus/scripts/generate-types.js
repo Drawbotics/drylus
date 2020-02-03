@@ -4,14 +4,12 @@ const path = require('path');
 const { generate } = require('./generate');
 const { generateCustomDefinitions, customAdditionalDefinitions } = require('./custom-definitions');
 
-
 const folders = [
   path.resolve(__dirname, '../src/base'),
   path.resolve(__dirname, '../src/components'),
   path.resolve(__dirname, '../src/forms'),
   path.resolve(__dirname, '../src/layout'),
 ];
-
 
 function generateTypes(targetFile) {
   const skippedComponents = ['Filter', 'Padding', 'Margin', 'Icon'];
@@ -22,7 +20,7 @@ function generateTypes(targetFile) {
 
   for (const folder of folders) {
     const dir = fs.readdirSync(folder);
-    const files = dir.filter((element) => element.match(/.*\.jsx/ig));
+    const files = dir.filter((element) => element.match(/.*\.jsx/gi));
 
     for (const file of files) {
       const input = `${folder}/${file}`;
@@ -69,17 +67,17 @@ function generateTypes(targetFile) {
         // change class to function component definition
         result = result.replace(
           /export default class (\S*) extends (.*?) \{\}/gms,
-          (match, p1, p2='') => p2.includes(p1)
-            ? `export declare const ${p1}: React.FunctionComponent<${p1}Props>;`
-            : `export declare const ${p1}: React.FunctionComponent;`,
+          (match, p1, p2 = '') =>
+            p2.includes(p1)
+              ? `export declare const ${p1}: React.FunctionComponent<${p1}Props>;`
+              : `export declare const ${p1}: React.FunctionComponent;`,
         );
 
         // replace icon?: string with IconName type
         result = result.replace(/(icon\??:) string/g, '$1 IconName');
-    
+
         types.push(result);
-      }
-      catch(error) {
+      } catch (error) {
         console.error(`Impossible to create definition for ${file}. ${error}`);
       }
     }
@@ -95,7 +93,6 @@ function generateTypes(targetFile) {
 
   return text;
 }
-
 
 module.exports = {
   generateTypes,

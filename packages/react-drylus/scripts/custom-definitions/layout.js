@@ -21,7 +21,6 @@ declare interface SizeDescriptionAlt {
 }
 `;
 
-
 const margin = `
 export interface MarginProps {
   size?: Size | SizeDescription | SizeDescriptionAlt;
@@ -33,7 +32,6 @@ export interface MarginProps {
 export declare const Margin: React.FunctionComponent<MarginProps>;
 `;
 
-
 const padding = `
 export interface PaddingProps {
   size?: Size | SizeDescription | SizeDescriptionAlt;
@@ -44,7 +42,6 @@ export interface PaddingProps {
 
 export declare const Padding: React.FunctionComponent<PaddingProps>;
 `;
-
 
 module.exports = {
   sizeDescription,

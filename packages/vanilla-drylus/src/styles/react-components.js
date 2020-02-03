@@ -2,5 +2,4 @@ const { injectGlobalStyles } = require('@drawbotics/react-drylus/lib/utils/injec
 
 injectGlobalStyles();
 
-
 require('@drawbotics/react-drylus');

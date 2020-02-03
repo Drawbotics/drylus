@@ -1,32 +1,39 @@
 /* eslint-disable */
-"use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-  result["default"] = mod;
-  return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs = __importStar(require("fs"));
-const prettier = __importStar(require("prettier"));
-const react_docgen_1 = require("react-docgen");
+'use strict';
+var __importStar =
+  (this && this.__importStar) ||
+  function(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result['default'] = mod;
+    return result;
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
+const fs = __importStar(require('fs'));
+const prettier = __importStar(require('prettier'));
+const react_docgen_1 = require('react-docgen');
 const { findAllExportedComponentDefinitions } = require('react-docgen/dist/resolver');
-const dom = __importStar(require("react-dts-generator/bin/src/dts-dom"));
-const Utils = __importStar(require("react-dts-generator/bin/src/utils"));
+const dom = __importStar(require('react-dts-generator/bin/src/dts-dom'));
+const Utils = __importStar(require('react-dts-generator/bin/src/utils'));
 
 function generate(options) {
   let result = '';
   let baseType = 'React.Component';
   const { input, isBaseClass, propTypesComposition, imports } = options;
   const rawContent = fs.readFileSync(input, 'utf8');
-  
+
   // strip out custom prop types and use defined `type` value if specified
-  const content = rawContent.replace(/CustomPropTypes.mutuallyExclusive.*?(type: (.*?,)).*?}\),/gms, '$2');
+  const content = rawContent.replace(
+    /CustomPropTypes.mutuallyExclusive.*?(type: (.*?,)).*?}\),/gms,
+    '$2',
+  );
 
   const componentInfos = react_docgen_1.parse(content, findAllExportedComponentDefinitions);
   for (const componentInfo of componentInfos) {
-    const className = isBaseClass ? Utils.writeGeneric(componentInfo.displayName, 'T = any') : componentInfo.displayName;
+    const className = isBaseClass
+      ? Utils.writeGeneric(componentInfo.displayName, 'T = any')
+      : componentInfo.displayName;
     const importDefinitions = [];
     const interfaceDefinitions = [];
 
@@ -40,7 +47,7 @@ function generate(options) {
       }
 
       if (imports && imports.length > 0) {
-        imports.forEach(x => {
+        imports.forEach((x) => {
           importDefinitions.push(Utils.createImport(x.from, x.default, x.named));
         });
       }
@@ -48,7 +55,7 @@ function generate(options) {
         const props = componentInfo.props;
         const keys = Object.keys(props);
         if (keys.length > 0) {
-          keys.forEach(key => {
+          keys.forEach((key) => {
             const prop = Object.assign({}, props[key], { name: key });
             if (!prop.type) {
               return;
@@ -68,7 +75,7 @@ function generate(options) {
       }
       if (propTypesComposition && propTypesComposition.length > 0) {
         propsDefinition.baseTypes = [];
-        propTypesComposition.forEach(x => {
+        propTypesComposition.forEach((x) => {
           importDefinitions.push(Utils.createImport(x.from, x.default, x.named));
           propsDefinition.baseTypes.push(x.default || x.named);
         });
@@ -83,21 +90,23 @@ function generate(options) {
         }
       }
       if (componentInfo.methods) {
-        componentInfo.methods.forEach(method => {
+        componentInfo.methods.forEach((method) => {
           const { params, returns } = method;
           const parameters = [];
           if (params && params.length > 0) {
-            params.forEach(param => {
+            params.forEach((param) => {
               const type = param.type ? param.type.name : 'any';
               parameters.push(dom.create.parameter(param.name, Utils.getType(type)));
             });
           }
           const returnType = returns ? returns.type.name : 'any';
-          classDefinition.members.push(dom.create.method(method.name, parameters, Utils.getType(returnType)));
+          classDefinition.members.push(
+            dom.create.method(method.name, parameters, Utils.getType(returnType)),
+          );
         });
       }
       result += dom.emit(dom.create.imports(importDefinitions));
-      interfaceDefinitions.forEach(x => result += dom.emit(x));
+      interfaceDefinitions.forEach((x) => (result += dom.emit(x)));
       classDefinition.baseType = baseType;
       result += dom.emit(classDefinition);
       if (result) {

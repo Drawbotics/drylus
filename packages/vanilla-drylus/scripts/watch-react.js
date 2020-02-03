@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const extractEmotion = require('@drawbotics/extract-emotion');
 
-
 const options = {
   inputFile: path.resolve(__dirname, '../src/react-components'),
   output: path.resolve(__dirname, '../dist'),
@@ -10,13 +9,15 @@ const options = {
   prefix: 'Drylus',
 };
 
-
-fs.watch(path.resolve(__dirname, '../../react-drylus/lib'), { recursive: true }, (eventType, filename) => {
-  if (eventType === 'change') {
-    extractEmotion(options);
-  }
-});
-
+fs.watch(
+  path.resolve(__dirname, '../../react-drylus/lib'),
+  { recursive: true },
+  (eventType, filename) => {
+    if (eventType === 'change') {
+      extractEmotion(options);
+    }
+  },
+);
 
 // NOTE initial call
 extractEmotion(options);
