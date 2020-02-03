@@ -10,7 +10,7 @@ import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 import { generateDisplayedDate, ShowDateTime } from '../utils/date';
 
-export { ShowDateTime } from '../utils/date';
+export { ShowDateTime, generateDisplayedDate as formatDate } from '../utils/date';
 
 
 const styles = {
