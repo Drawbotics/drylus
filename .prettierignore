@@ -3,3 +3,8 @@ __tests__
 __mocks__
 *.config.js
 *.setup.js
+lib
+docs
+dist
+*rc.js
+node_modules
