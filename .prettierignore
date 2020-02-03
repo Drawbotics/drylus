@@ -8,3 +8,4 @@ docs
 dist
 *rc.js
 node_modules
+build.js

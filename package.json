@@ -65,6 +65,7 @@
     "@hot-loader/react-dom": "^16.8.6",
     "@mdx-js/loader": "^1.0.0-rc.4",
     "@mdx-js/react": "^1.0.0-rc.5",
+    "@typescript-eslint/typescript-estree": "^2.19.0",
     "auto": "^7.6.2",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.9.0",
