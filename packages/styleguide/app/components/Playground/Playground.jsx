@@ -108,8 +108,11 @@ const Playground = ({ component, children, mode, __code, enums }) => {
   const childrenRef = useRef();
   const parentRef = useRef();
 
+  const staticReact = mode === 'jsx';
+
   const generatedComponent = recursiveMdxTransform(children, { component, props });
-  const generatedMarkup = getMarkupForMode(activeMode, generatedComponent);
+  const generatedMarkup = staticReact ? null : getMarkupForMode(activeMode, generatedComponent);
+
   return (
     <div className={styles.playground}>
       <div
@@ -123,15 +126,19 @@ const Playground = ({ component, children, mode, __code, enums }) => {
             {activeMode === 'vanilla' ? generatedMarkup : generatedComponent}
           </Preview>
           <div className={cx(styles.code, { [styles.codeHidden]: ! codeOpen })}>
-            <div className={styles.switcher} data-element="switcher">
-              <ModeSwitcher
-                modes={supportedModes}
-                activeMode={activeMode}
-                onChange={setMode} />
-            </div>
+            {do {
+              if (! staticReact) {
+                <div className={styles.switcher} data-element="switcher">
+                  <ModeSwitcher
+                    modes={supportedModes}
+                    activeMode={activeMode}
+                    onChange={setMode} />
+                </div>
+              }
+            }}
             <div className={styles.codeBox}>
-              <CodeBox format mode={mode} type={activeMode}>
-                {activeMode === 'react' && ! component ? __code : flow(replaceSymbol, hideSecrets)(generatedMarkup)}
+              <CodeBox format mode={mode} type={activeMode} style={{ margin: 0 }}>
+                {staticReact ? __code : flow(replaceSymbol, hideSecrets)(generatedMarkup)}
               </CodeBox>
             </div>
           </div>

@@ -156,7 +156,7 @@ const styles = {
 
 const Checkbox = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     onChange,

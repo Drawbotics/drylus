@@ -24,10 +24,10 @@ function beautifyString(string, mode, type) {
 }
 
 
-const CodeBox = ({ children, mode='jsx', format, type }) => {
+const CodeBox = ({ children, mode='jsx', format, type, style={} }) => {
   const beautified = format ? beautifyString(children, mode, type) : children;
   return (
-    <Code className={mode} style={{ minHeight: '100px' }}>
+    <Code className={mode} style={{ minHeight: '100px', ...style }}>
       {beautified}
     </Code>
   );

@@ -272,7 +272,7 @@ export const styles = {
 
 const Button = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,

@@ -17,7 +17,7 @@ const styles = {
 
 const FormGroup = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     label,

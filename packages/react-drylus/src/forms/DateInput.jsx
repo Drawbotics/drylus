@@ -201,7 +201,7 @@ function _getShouldRenderTop(box) {
 
 const DateInput = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     value,

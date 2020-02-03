@@ -27,6 +27,7 @@ module.exports = function(api) {
     "@babel/plugin-proposal-export-default-from",
     ["@babel/plugin-proposal-optional-chaining", { "loose": false }],
     "@babel/plugin-proposal-do-expressions",
+    "@babel/plugin-proposal-nullish-coalescing-operator",
   ];
 
   const env = {

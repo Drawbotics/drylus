@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Checkbox matches snapshot when has a label 1`] = `
-.css-3p38eh-Checkbox__root {
+.css-y5rx2e-Checkbox__root {
   position: relative;
   display: inline-block;
 }
 
-.css-13kuuuo-Checkbox__wrapper {
+.css-1tp5q0a-Checkbox__wrapper {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -22,54 +22,54 @@ exports[`Checkbox matches snapshot when has a label 1`] = `
   cursor: pointer;
 }
 
-.css-13kuuuo-Checkbox__wrapper:hover [data-element="sprite"] {
+.css-1tp5q0a-Checkbox__wrapper:hover [data-element="sprite"] {
   background: #879ba6;
 }
 
-.css-ykkr4o-Checkbox__checkbox {
+.css-1kd1p7k-Checkbox__checkbox {
   height: calc(24px - 4px);
   width: calc(24px - 4px);
   position: relative;
   overflow: hidden;
 }
 
-.css-1rwz2my-Checkbox__input {
+.css-nb67y4-Checkbox__input {
   visibility: hidden;
 }
 
-.css-1rwz2my-Checkbox__input:checked + [data-element="sprite"] [data-element="icon"] {
+.css-nb67y4-Checkbox__input:checked + [data-element="sprite"] [data-element="icon"] {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
   border-radius: 0;
 }
 
-.css-1rwz2my-Checkbox__input:checked + [data-element="sprite"] [data-element='locked-icon'] {
+.css-nb67y4-Checkbox__input:checked + [data-element="sprite"] [data-element='locked-icon'] {
   background: #3FBC9B;
   color: #fff;
 }
 
-.css-1rwz2my-Checkbox__input:disabled + [data-element="sprite"] {
+.css-nb67y4-Checkbox__input:disabled + [data-element="sprite"] {
   cursor: not-allowed;
   background: #eaeff4 !important;
 }
 
-.css-1rwz2my-Checkbox__input:disabled + [data-element="sprite"] [data-element="icon"] {
+.css-nb67y4-Checkbox__input:disabled + [data-element="sprite"] [data-element="icon"] {
   opacity: 0.7;
 }
 
-.css-10yqxah-Checkbox__label {
+.css-1mryc00-Checkbox__label {
   margin-left: 8px;
   color: #172b4e;
   position: relative;
   top: 1px;
 }
 
-.css-10yqxah-Checkbox__label:hover {
+.css-1mryc00-Checkbox__label:hover {
   cursor: pointer;
 }
 
-.css-1ebalvo-Checkbox__sprite {
+.css-u2ali-Checkbox__sprite {
   position: absolute;
   top: 0;
   left: 0;
@@ -96,7 +96,7 @@ exports[`Checkbox matches snapshot when has a label 1`] = `
   overflow: hidden;
 }
 
-.css-eb8p1c-Checkbox__iconLabel {
+.css-yk4w75-Checkbox__iconLabel {
   cursor: inherit;
   color: #fff;
   height: 100%;
@@ -111,50 +111,50 @@ exports[`Checkbox matches snapshot when has a label 1`] = `
   border-radius: 100px;
 }
 
-.css-eb8p1c-Checkbox__iconLabel > i {
+.css-yk4w75-Checkbox__iconLabel > i {
   font-size: 0.8rem;
 }
 
-.css-g1tqqb-Icon__root-Icon__bold {
+.css-uxniji-Icon__root-Icon__bold {
   color: inherit;
   font-weight: bold !important;
 }
 
 <div
-  className="css-3p38eh-Checkbox__root"
+  className="css-y5rx2e-Checkbox__root"
 >
   <label
-    className="css-13kuuuo-Checkbox__wrapper undefined"
+    className="css-1tp5q0a-Checkbox__wrapper undefined"
     htmlFor={1}
   >
     <div
-      className="css-ykkr4o-Checkbox__checkbox"
+      className="css-1kd1p7k-Checkbox__checkbox"
     >
       <input
         checked={false}
-        className="css-1rwz2my-Checkbox__input"
+        className="css-nb67y4-Checkbox__input"
         id={1}
         onChange={[Function]}
         readOnly={false}
         type="checkbox"
       />
       <div
-        className="css-1ebalvo-Checkbox__sprite"
+        className="css-u2ali-Checkbox__sprite"
         data-element="sprite"
       >
         <label
-          className="css-eb8p1c-Checkbox__iconLabel"
+          className="css-yk4w75-Checkbox__iconLabel"
           data-element="icon"
           htmlFor={1}
         >
           <i
-            className="Drycon Drycon-check css-g1tqqb-Icon__root-Icon__bold"
+            className="Drycon Drycon-check css-uxniji-Icon__root-Icon__bold"
           />
         </label>
       </div>
     </div>
     <label
-      className="css-10yqxah-Checkbox__label"
+      className="css-1mryc00-Checkbox__label"
       data-element="label"
       htmlFor={1}
     >
@@ -165,12 +165,12 @@ exports[`Checkbox matches snapshot when has a label 1`] = `
 `;
 
 exports[`Checkbox matches snapshot when is checked 1`] = `
-.css-3p38eh-Checkbox__root {
+.css-y5rx2e-Checkbox__root {
   position: relative;
   display: inline-block;
 }
 
-.css-13kuuuo-Checkbox__wrapper {
+.css-1tp5q0a-Checkbox__wrapper {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -186,43 +186,43 @@ exports[`Checkbox matches snapshot when is checked 1`] = `
   cursor: pointer;
 }
 
-.css-13kuuuo-Checkbox__wrapper:hover [data-element="sprite"] {
+.css-1tp5q0a-Checkbox__wrapper:hover [data-element="sprite"] {
   background: #879ba6;
 }
 
-.css-ykkr4o-Checkbox__checkbox {
+.css-1kd1p7k-Checkbox__checkbox {
   height: calc(24px - 4px);
   width: calc(24px - 4px);
   position: relative;
   overflow: hidden;
 }
 
-.css-1rwz2my-Checkbox__input {
+.css-nb67y4-Checkbox__input {
   visibility: hidden;
 }
 
-.css-1rwz2my-Checkbox__input:checked + [data-element="sprite"] [data-element="icon"] {
+.css-nb67y4-Checkbox__input:checked + [data-element="sprite"] [data-element="icon"] {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
   border-radius: 0;
 }
 
-.css-1rwz2my-Checkbox__input:checked + [data-element="sprite"] [data-element='locked-icon'] {
+.css-nb67y4-Checkbox__input:checked + [data-element="sprite"] [data-element='locked-icon'] {
   background: #3FBC9B;
   color: #fff;
 }
 
-.css-1rwz2my-Checkbox__input:disabled + [data-element="sprite"] {
+.css-nb67y4-Checkbox__input:disabled + [data-element="sprite"] {
   cursor: not-allowed;
   background: #eaeff4 !important;
 }
 
-.css-1rwz2my-Checkbox__input:disabled + [data-element="sprite"] [data-element="icon"] {
+.css-nb67y4-Checkbox__input:disabled + [data-element="sprite"] [data-element="icon"] {
   opacity: 0.7;
 }
 
-.css-1ebalvo-Checkbox__sprite {
+.css-u2ali-Checkbox__sprite {
   position: absolute;
   top: 0;
   left: 0;
@@ -249,7 +249,7 @@ exports[`Checkbox matches snapshot when is checked 1`] = `
   overflow: hidden;
 }
 
-.css-eb8p1c-Checkbox__iconLabel {
+.css-yk4w75-Checkbox__iconLabel {
   cursor: inherit;
   color: #fff;
   height: 100%;
@@ -264,44 +264,44 @@ exports[`Checkbox matches snapshot when is checked 1`] = `
   border-radius: 100px;
 }
 
-.css-eb8p1c-Checkbox__iconLabel > i {
+.css-yk4w75-Checkbox__iconLabel > i {
   font-size: 0.8rem;
 }
 
-.css-g1tqqb-Icon__root-Icon__bold {
+.css-uxniji-Icon__root-Icon__bold {
   color: inherit;
   font-weight: bold !important;
 }
 
 <div
-  className="css-3p38eh-Checkbox__root"
+  className="css-y5rx2e-Checkbox__root"
 >
   <label
-    className="css-13kuuuo-Checkbox__wrapper undefined"
+    className="css-1tp5q0a-Checkbox__wrapper undefined"
     htmlFor={1}
   >
     <div
-      className="css-ykkr4o-Checkbox__checkbox"
+      className="css-1kd1p7k-Checkbox__checkbox"
     >
       <input
         checked={true}
-        className="css-1rwz2my-Checkbox__input"
+        className="css-nb67y4-Checkbox__input"
         id={1}
         onChange={[Function]}
         readOnly={false}
         type="checkbox"
       />
       <div
-        className="css-1ebalvo-Checkbox__sprite"
+        className="css-u2ali-Checkbox__sprite"
         data-element="sprite"
       >
         <label
-          className="css-eb8p1c-Checkbox__iconLabel"
+          className="css-yk4w75-Checkbox__iconLabel"
           data-element="icon"
           htmlFor={1}
         >
           <i
-            className="Drycon Drycon-check css-g1tqqb-Icon__root-Icon__bold"
+            className="Drycon Drycon-check css-uxniji-Icon__root-Icon__bold"
           />
         </label>
       </div>
@@ -311,12 +311,12 @@ exports[`Checkbox matches snapshot when is checked 1`] = `
 `;
 
 exports[`Checkbox matches snapshot when is large 1`] = `
-.css-3p38eh-Checkbox__root {
+.css-y5rx2e-Checkbox__root {
   position: relative;
   display: inline-block;
 }
 
-.css-13kuuuo-Checkbox__wrapper {
+.css-1tp5q0a-Checkbox__wrapper {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -332,43 +332,43 @@ exports[`Checkbox matches snapshot when is large 1`] = `
   cursor: pointer;
 }
 
-.css-13kuuuo-Checkbox__wrapper:hover [data-element="sprite"] {
+.css-1tp5q0a-Checkbox__wrapper:hover [data-element="sprite"] {
   background: #879ba6;
 }
 
-.css-ykkr4o-Checkbox__checkbox {
+.css-1kd1p7k-Checkbox__checkbox {
   height: calc(24px - 4px);
   width: calc(24px - 4px);
   position: relative;
   overflow: hidden;
 }
 
-.css-1rwz2my-Checkbox__input {
+.css-nb67y4-Checkbox__input {
   visibility: hidden;
 }
 
-.css-1rwz2my-Checkbox__input:checked + [data-element="sprite"] [data-element="icon"] {
+.css-nb67y4-Checkbox__input:checked + [data-element="sprite"] [data-element="icon"] {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
   border-radius: 0;
 }
 
-.css-1rwz2my-Checkbox__input:checked + [data-element="sprite"] [data-element='locked-icon'] {
+.css-nb67y4-Checkbox__input:checked + [data-element="sprite"] [data-element='locked-icon'] {
   background: #3FBC9B;
   color: #fff;
 }
 
-.css-1rwz2my-Checkbox__input:disabled + [data-element="sprite"] {
+.css-nb67y4-Checkbox__input:disabled + [data-element="sprite"] {
   cursor: not-allowed;
   background: #eaeff4 !important;
 }
 
-.css-1rwz2my-Checkbox__input:disabled + [data-element="sprite"] [data-element="icon"] {
+.css-nb67y4-Checkbox__input:disabled + [data-element="sprite"] [data-element="icon"] {
   opacity: 0.7;
 }
 
-.css-1ebalvo-Checkbox__sprite {
+.css-u2ali-Checkbox__sprite {
   position: absolute;
   top: 0;
   left: 0;
@@ -395,7 +395,7 @@ exports[`Checkbox matches snapshot when is large 1`] = `
   overflow: hidden;
 }
 
-.css-eb8p1c-Checkbox__iconLabel {
+.css-yk4w75-Checkbox__iconLabel {
   cursor: inherit;
   color: #fff;
   height: 100%;
@@ -410,44 +410,44 @@ exports[`Checkbox matches snapshot when is large 1`] = `
   border-radius: 100px;
 }
 
-.css-eb8p1c-Checkbox__iconLabel > i {
+.css-yk4w75-Checkbox__iconLabel > i {
   font-size: 0.8rem;
 }
 
-.css-g1tqqb-Icon__root-Icon__bold {
+.css-uxniji-Icon__root-Icon__bold {
   color: inherit;
   font-weight: bold !important;
 }
 
 <div
-  className="css-3p38eh-Checkbox__root"
+  className="css-y5rx2e-Checkbox__root"
 >
   <label
-    className="css-13kuuuo-Checkbox__wrapper undefined"
+    className="css-1tp5q0a-Checkbox__wrapper undefined"
     htmlFor={1}
   >
     <div
-      className="css-ykkr4o-Checkbox__checkbox"
+      className="css-1kd1p7k-Checkbox__checkbox"
     >
       <input
         checked={false}
-        className="css-1rwz2my-Checkbox__input"
+        className="css-nb67y4-Checkbox__input"
         id={1}
         onChange={[Function]}
         readOnly={false}
         type="checkbox"
       />
       <div
-        className="css-1ebalvo-Checkbox__sprite"
+        className="css-u2ali-Checkbox__sprite"
         data-element="sprite"
       >
         <label
-          className="css-eb8p1c-Checkbox__iconLabel"
+          className="css-yk4w75-Checkbox__iconLabel"
           data-element="icon"
           htmlFor={1}
         >
           <i
-            className="Drycon Drycon-check css-g1tqqb-Icon__root-Icon__bold"
+            className="Drycon Drycon-check css-uxniji-Icon__root-Icon__bold"
           />
         </label>
       </div>
@@ -457,12 +457,12 @@ exports[`Checkbox matches snapshot when is large 1`] = `
 `;
 
 exports[`Checkbox matches snapshot when is not checked 1`] = `
-.css-3p38eh-Checkbox__root {
+.css-y5rx2e-Checkbox__root {
   position: relative;
   display: inline-block;
 }
 
-.css-13kuuuo-Checkbox__wrapper {
+.css-1tp5q0a-Checkbox__wrapper {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -478,43 +478,43 @@ exports[`Checkbox matches snapshot when is not checked 1`] = `
   cursor: pointer;
 }
 
-.css-13kuuuo-Checkbox__wrapper:hover [data-element="sprite"] {
+.css-1tp5q0a-Checkbox__wrapper:hover [data-element="sprite"] {
   background: #879ba6;
 }
 
-.css-ykkr4o-Checkbox__checkbox {
+.css-1kd1p7k-Checkbox__checkbox {
   height: calc(24px - 4px);
   width: calc(24px - 4px);
   position: relative;
   overflow: hidden;
 }
 
-.css-1rwz2my-Checkbox__input {
+.css-nb67y4-Checkbox__input {
   visibility: hidden;
 }
 
-.css-1rwz2my-Checkbox__input:checked + [data-element="sprite"] [data-element="icon"] {
+.css-nb67y4-Checkbox__input:checked + [data-element="sprite"] [data-element="icon"] {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
   border-radius: 0;
 }
 
-.css-1rwz2my-Checkbox__input:checked + [data-element="sprite"] [data-element='locked-icon'] {
+.css-nb67y4-Checkbox__input:checked + [data-element="sprite"] [data-element='locked-icon'] {
   background: #3FBC9B;
   color: #fff;
 }
 
-.css-1rwz2my-Checkbox__input:disabled + [data-element="sprite"] {
+.css-nb67y4-Checkbox__input:disabled + [data-element="sprite"] {
   cursor: not-allowed;
   background: #eaeff4 !important;
 }
 
-.css-1rwz2my-Checkbox__input:disabled + [data-element="sprite"] [data-element="icon"] {
+.css-nb67y4-Checkbox__input:disabled + [data-element="sprite"] [data-element="icon"] {
   opacity: 0.7;
 }
 
-.css-1ebalvo-Checkbox__sprite {
+.css-u2ali-Checkbox__sprite {
   position: absolute;
   top: 0;
   left: 0;
@@ -541,7 +541,7 @@ exports[`Checkbox matches snapshot when is not checked 1`] = `
   overflow: hidden;
 }
 
-.css-eb8p1c-Checkbox__iconLabel {
+.css-yk4w75-Checkbox__iconLabel {
   cursor: inherit;
   color: #fff;
   height: 100%;
@@ -556,44 +556,44 @@ exports[`Checkbox matches snapshot when is not checked 1`] = `
   border-radius: 100px;
 }
 
-.css-eb8p1c-Checkbox__iconLabel > i {
+.css-yk4w75-Checkbox__iconLabel > i {
   font-size: 0.8rem;
 }
 
-.css-g1tqqb-Icon__root-Icon__bold {
+.css-uxniji-Icon__root-Icon__bold {
   color: inherit;
   font-weight: bold !important;
 }
 
 <div
-  className="css-3p38eh-Checkbox__root"
+  className="css-y5rx2e-Checkbox__root"
 >
   <label
-    className="css-13kuuuo-Checkbox__wrapper undefined"
+    className="css-1tp5q0a-Checkbox__wrapper undefined"
     htmlFor={1}
   >
     <div
-      className="css-ykkr4o-Checkbox__checkbox"
+      className="css-1kd1p7k-Checkbox__checkbox"
     >
       <input
         checked={false}
-        className="css-1rwz2my-Checkbox__input"
+        className="css-nb67y4-Checkbox__input"
         id={1}
         onChange={[Function]}
         readOnly={false}
         type="checkbox"
       />
       <div
-        className="css-1ebalvo-Checkbox__sprite"
+        className="css-u2ali-Checkbox__sprite"
         data-element="sprite"
       >
         <label
-          className="css-eb8p1c-Checkbox__iconLabel"
+          className="css-yk4w75-Checkbox__iconLabel"
           data-element="icon"
           htmlFor={1}
         >
           <i
-            className="Drycon Drycon-check css-g1tqqb-Icon__root-Icon__bold"
+            className="Drycon Drycon-check css-uxniji-Icon__root-Icon__bold"
           />
         </label>
       </div>
@@ -603,48 +603,48 @@ exports[`Checkbox matches snapshot when is not checked 1`] = `
 `;
 
 exports[`Checkbox matches snapshot when is read only 1`] = `
-.css-10jseif-Icon__root {
+.css-z8uzdf-Icon__root {
   color: inherit;
 }
 
-.css-3p38eh-Checkbox__root {
+.css-y5rx2e-Checkbox__root {
   position: relative;
   display: inline-block;
 }
 
-.css-ykkr4o-Checkbox__checkbox {
+.css-1kd1p7k-Checkbox__checkbox {
   height: calc(24px - 4px);
   width: calc(24px - 4px);
   position: relative;
   overflow: hidden;
 }
 
-.css-1rwz2my-Checkbox__input {
+.css-nb67y4-Checkbox__input {
   visibility: hidden;
 }
 
-.css-1rwz2my-Checkbox__input:checked + [data-element="sprite"] [data-element="icon"] {
+.css-nb67y4-Checkbox__input:checked + [data-element="sprite"] [data-element="icon"] {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
   border-radius: 0;
 }
 
-.css-1rwz2my-Checkbox__input:checked + [data-element="sprite"] [data-element='locked-icon'] {
+.css-nb67y4-Checkbox__input:checked + [data-element="sprite"] [data-element='locked-icon'] {
   background: #3FBC9B;
   color: #fff;
 }
 
-.css-1rwz2my-Checkbox__input:disabled + [data-element="sprite"] {
+.css-nb67y4-Checkbox__input:disabled + [data-element="sprite"] {
   cursor: not-allowed;
   background: #eaeff4 !important;
 }
 
-.css-1rwz2my-Checkbox__input:disabled + [data-element="sprite"] [data-element="icon"] {
+.css-nb67y4-Checkbox__input:disabled + [data-element="sprite"] [data-element="icon"] {
   opacity: 0.7;
 }
 
-.css-1ebalvo-Checkbox__sprite {
+.css-u2ali-Checkbox__sprite {
   position: absolute;
   top: 0;
   left: 0;
@@ -671,7 +671,7 @@ exports[`Checkbox matches snapshot when is read only 1`] = `
   overflow: hidden;
 }
 
-.css-eb8p1c-Checkbox__iconLabel {
+.css-yk4w75-Checkbox__iconLabel {
   cursor: inherit;
   color: #fff;
   height: 100%;
@@ -686,11 +686,11 @@ exports[`Checkbox matches snapshot when is read only 1`] = `
   border-radius: 100px;
 }
 
-.css-eb8p1c-Checkbox__iconLabel > i {
+.css-yk4w75-Checkbox__iconLabel > i {
   font-size: 0.8rem;
 }
 
-.css-1blpa9u-Checkbox__wrapper-Checkbox__readOnly {
+.css-1aaiqce-Checkbox__wrapper-Checkbox__readOnly {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -707,15 +707,15 @@ exports[`Checkbox matches snapshot when is read only 1`] = `
   pointer-events: none;
 }
 
-.css-1blpa9u-Checkbox__wrapper-Checkbox__readOnly:hover [data-element="sprite"] {
+.css-1aaiqce-Checkbox__wrapper-Checkbox__readOnly:hover [data-element="sprite"] {
   background: #879ba6;
 }
 
-.css-1blpa9u-Checkbox__wrapper-Checkbox__readOnly [data-element="sprite"] {
+.css-1aaiqce-Checkbox__wrapper-Checkbox__readOnly [data-element="sprite"] {
   background: #eaeff4 !important;
 }
 
-.css-1blpa9u-Checkbox__wrapper-Checkbox__readOnly [data-element="locked-icon"] {
+.css-1aaiqce-Checkbox__wrapper-Checkbox__readOnly [data-element="locked-icon"] {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
@@ -725,33 +725,33 @@ exports[`Checkbox matches snapshot when is read only 1`] = `
 }
 
 <div
-  className="css-3p38eh-Checkbox__root"
+  className="css-y5rx2e-Checkbox__root"
 >
   <label
-    className="undefined css-1blpa9u-Checkbox__wrapper-Checkbox__readOnly"
+    className="undefined css-1aaiqce-Checkbox__wrapper-Checkbox__readOnly"
     htmlFor={1}
   >
     <div
-      className="css-ykkr4o-Checkbox__checkbox"
+      className="css-1kd1p7k-Checkbox__checkbox"
     >
       <input
         checked={true}
-        className="css-1rwz2my-Checkbox__input"
+        className="css-nb67y4-Checkbox__input"
         id={1}
         onChange={[Function]}
         readOnly={true}
         type="checkbox"
       />
       <div
-        className="css-1ebalvo-Checkbox__sprite"
+        className="css-u2ali-Checkbox__sprite"
         data-element="sprite"
       >
         <label
-          className="css-eb8p1c-Checkbox__iconLabel"
+          className="css-yk4w75-Checkbox__iconLabel"
           data-element="locked-icon"
         >
           <i
-            className="css-10jseif-Icon__root Drycon Drycon-lock"
+            className="css-z8uzdf-Icon__root Drycon Drycon-lock"
           />
         </label>
       </div>

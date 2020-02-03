@@ -74,4 +74,11 @@ export enum FlexAlign {
   END = 'END',
   CENTER = 'CENTER',
 }
+
+// Utils/date
+export enum ShowDateTime {
+  DEFAULT = 'DEFAULT',
+  ALWAYS = 'ALWAYS',
+  NEVER = 'NEVER',
+}
 `;

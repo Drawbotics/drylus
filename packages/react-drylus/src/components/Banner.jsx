@@ -42,7 +42,7 @@ const styles = {
 
 const Banner = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,

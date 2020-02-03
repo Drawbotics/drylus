@@ -317,7 +317,7 @@ function _computeSize(sizeDescription) {
 
 const Padding = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const { children, size: rawSize, style } = useResponsiveProps(rest, responsive);
 

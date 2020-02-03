@@ -85,7 +85,7 @@ const styles = {
 
 const CircularProgress = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     percentage,

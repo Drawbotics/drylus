@@ -225,7 +225,7 @@ const BaseDrawer = ({
 
 const Drawer = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,

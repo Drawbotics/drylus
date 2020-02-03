@@ -2,10 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
+import isObject from 'lodash/isObject';
+import isArray from 'lodash/isArray';
 
 import { Tier, Size, Category } from '../enums';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
+import { generateDisplayedDate, ShowDateTime } from '../utils/date';
+
+export { ShowDateTime, generateDisplayedDate as formatDate } from '../utils/date';
 
 
 const styles = {
@@ -71,9 +76,30 @@ const styles = {
 };
 
 
+function _processChild(child, dateOptions, locale) {
+  if (isObject(child)) {
+    if (child instanceof Date) {
+      return generateDisplayedDate({
+        date: child,
+        options: dateOptions,
+        locale,
+      });
+    }
+    else if (child.value != null && child.currency != null) {
+      return '[currency]';
+    }
+    else {
+      console.warn('Unsupported Text child type. Please provde text, Date or Currency');
+      return '';
+    }
+  }
+  return child;
+}
+
+
 const Text = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     inversed,
@@ -85,7 +111,14 @@ const Text = ({
     category,
     style,
     light,
+    dateOptions,
+    locale,
   } = useResponsiveProps(rest, responsive);
+
+  const transformedChildren = isArray(children)
+    ? [...children].map((child) => _processChild(child, dateOptions, locale)).join('')
+    : _processChild(children, dateOptions, locale);
+
   return (
     <span className={cx(styles.root, {
       [styles.bold]: bold,
@@ -103,7 +136,7 @@ const Text = ({
       [styles.large]: size === Size.LARGE,
       [styles[getEnumAsClass(category)]]: category && ! disabled && ! inversed,
     })} style={style}>
-      {children}
+      {transformedChildren}
     </span>
   );
 };
@@ -128,6 +161,22 @@ Text.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
+    PropTypes.shape({
+      currency: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+    }),
+    PropTypes.instanceOf(Date),
+    PropTypes.arrayOf(
+      PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.shape({
+          currency: PropTypes.string.isRequired,
+          value: PropTypes.number.isRequired,
+        }),
+        PropTypes.instanceOf(Date),
+      ])
+    ),
   ]).isRequired,
 
   category: PropTypes.oneOf([
@@ -150,6 +199,20 @@ Text.propTypes = {
     XL: PropTypes.object,
     HUGE: PropTypes.object,
   }),
+  
+  /** Options to change the way the date is displayed, if provided. showTime toggles display of hour/minutes, format for dayjs overrides */
+  dateOptions: PropTypes.shape({
+    showTime: PropTypes.oneOf([
+      ShowDateTime.DEFAULT,
+      ShowDateTime.NEVER,
+      ShowDateTime.ALWAYS,
+    ]),
+    asArchive: PropTypes.bool,
+    format: PropTypes.any,
+  }),
+
+  /** Used to override the current locale if necessary (e.g. if the browser locale is not explicitely defined) */
+  locale: PropTypes.string,
 };
 
 
@@ -160,7 +223,7 @@ Text.defaultProps = {
   size: Size.DEFAULT,
   tier: Tier.PRIMARY,
   disabled: false,
-  children: '',
+  locale: 'en',
 };
 
 

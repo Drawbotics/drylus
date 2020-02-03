@@ -75,7 +75,7 @@ const TextLink = ({
   category,
   underlined,
   style,
-  ...rest,
+  ...rest
 }) => {
   return (
     <span

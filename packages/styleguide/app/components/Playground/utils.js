@@ -78,7 +78,7 @@ export function recursiveMdxTransform(tree, target) {
         const propValue = _tree.props[propKey];
 
         if (propKey === 'children' && Array.isArray(propValue)) {
-          newProp = React.Children.map(propValue, (child) => child.$$typeof ? mdxTransform(child) : child);
+          newProp = propValue.map((child) => child.$$typeof ? mdxTransform(child) : child);
         }
         else {
           if (Array.isArray(propValue)) {

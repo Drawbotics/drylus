@@ -127,7 +127,7 @@ export const FilterAlign = deprecateProperty(new Enum(
 
 const BaseFilter = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     clearLabel,
@@ -248,7 +248,7 @@ export const SelectFilter = ({
   labelKey,
   onChange,
   label,
-  ...rest,
+  ...rest
 }) => {
   const currentLabel = value != null ? options.find((option) => String(option[valueKey]) === String(value))?.[labelKey] : label;
   return (
@@ -332,7 +332,7 @@ export const CheckboxFilter = ({
   labelKey,
   onChange,
   label,
-  ...rest,
+  ...rest
 }) => {
   const currentLabel = getLabelForCheckboxFilter(label, options, values, valueKey, labelKey);
   return (

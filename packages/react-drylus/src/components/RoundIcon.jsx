@@ -73,7 +73,7 @@ const styles = {
 
 const RoundIcon = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     name,

@@ -79,7 +79,7 @@ function _getImageForVariation(variation) {
 
 const EmptyState = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     description,

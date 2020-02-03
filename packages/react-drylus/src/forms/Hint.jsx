@@ -22,7 +22,7 @@ const styles = {
 
 const Hint = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,

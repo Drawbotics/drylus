@@ -45,7 +45,7 @@ export const styles = {
 
 const LoadingPlaceholder = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     height,

@@ -99,7 +99,7 @@ export const TooltipSides = deprecateProperty(new Enum(
 
 const Tooltip = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     children,

@@ -163,7 +163,7 @@ const styles = {
 
 const MultiSelect = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     values,

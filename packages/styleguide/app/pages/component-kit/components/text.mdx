@@ -1,6 +1,6 @@
-import { Text } from '@drawbotics/react-drylus';
+import { Text, ShowDateTime } from '@drawbotics/react-drylus';
 
-import Playground from '~/components/Playground';
+import Playground  from '~/components/Playground';
 
 
 # Text
@@ -10,6 +10,39 @@ import { Text } from '@drawbotics/react-drylus';
 ```
 
 __Example__
-<Playground component={Text}>
+<Playground component={Text} enums={{ ShowDateTime }}>
   <Text>Text text</Text>
 </Playground>
+
+
+## Auto format
+
+<Playground mode="jsx">
+  <Text locale="en">I bought a bread for {{ value: 1, currency: 'EUR' }} on the {new Date('04-20-2019')}</Text>
+</Playground>
+
+### With Date
+`Text` is also a smart component in the sense that depending on the children passed to it, it will render them accordingly.
+For example, if you pass an instance of `Date`, the date will be formatted following the Drawbotics conventions using the current locale. You can modify the formatting through the `dateOptions` prop.
+
+<Playground mode="jsx">
+  <Text locale="en">This is a text with a date: {new Date()}</Text>
+  <br/>
+  <Text locale="fr">Ceci est du texte avec une date: {new Date()}</Text>
+  <br/>
+  <Text locale="nl">Blabla: {new Date()}</Text>
+</Playground>
+
+The internal function used for this is exposed as `formatDate`, which you can import from the package. Formatting options are from [Day.js](https://day.js.org/docs/en/display/format)
+```jsx
+import { formatDate } from '@drawbotics/react-drylus';
+
+// Usage
+formatDate({
+  date,                  // Javascript Date object
+  options: dateOptions,  // { showTime: Enum, asArchive: boolean, format: Day.js options }
+  locale,                // To override the automatically recognised locale
+});
+```
+
+### With Currency

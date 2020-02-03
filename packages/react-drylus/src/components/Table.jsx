@@ -296,7 +296,7 @@ export const TCell = ({
   withChildToggle,
   onClickArrow,
   active,
-  ...props,
+  ...props
 }) => {
   const { screenSize, ScreenSizes } = useScreenSize();
   

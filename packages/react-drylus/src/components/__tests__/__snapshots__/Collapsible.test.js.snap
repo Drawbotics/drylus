@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Collapsible matches snapshot when is not open 1`] = `
-.css-10jseif-Icon__root {
+.css-z8uzdf-Icon__root {
   color: inherit;
 }
 
-.css-1os74zx-Collapsible__header {
+.css-jmoamz-Collapsible__header {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -20,27 +20,27 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
   justify-content: space-between;
 }
 
-.css-1os74zx-Collapsible__header [data-element="title"] {
+.css-jmoamz-Collapsible__header [data-element="title"] {
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
 }
 
-.css-1os74zx-Collapsible__header:hover {
+.css-jmoamz-Collapsible__header:hover {
   cursor: pointer;
 }
 
-.css-1os74zx-Collapsible__header:hover [data-element="title"] {
+.css-jmoamz-Collapsible__header:hover [data-element="title"] {
   -webkit-transform: translateX(5px);
   -ms-transform: translateX(5px);
   transform: translateX(5px);
 }
 
-.css-11npev5-Collapsible__icon {
+.css-1rh3g0j-Collapsible__icon {
   margin-bottom: -2px;
   color: #879ba6;
 }
 
-.css-9f7ejq-Label__root-Label__ellipsized {
+.css-6kwq2t-Label__root-Label__ellipsized {
   display: inline-block;
   color: rgba(135,155,166,0.7);
   text-transform: uppercase;
@@ -51,31 +51,31 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-9f7ejq-Label__root-Label__ellipsized {
+  .css-6kwq2t-Label__root-Label__ellipsized {
     font-size: 0.8rem;
   }
 }
 
 <div
-  className="css-1pcrpvn-Collapsible__root"
+  className="css-1k7784t-Collapsible__root"
 >
   <div
-    className="css-1os74zx-Collapsible__header"
+    className="css-jmoamz-Collapsible__header"
   >
     <div
       data-element="title"
     >
       <div
-        className="css-9f7ejq-Label__root-Label__ellipsized"
+        className="css-6kwq2t-Label__root-Label__ellipsized"
       >
         Title
       </div>
     </div>
     <div
-      className="css-11npev5-Collapsible__icon"
+      className="css-1rh3g0j-Collapsible__icon"
     >
       <i
-        className="css-10jseif-Icon__root Drycon Drycon-chevron-down"
+        className="css-z8uzdf-Icon__root Drycon Drycon-chevron-down"
       />
     </div>
   </div>
@@ -83,11 +83,11 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
 `;
 
 exports[`Collapsible matches snapshot when it is open 1`] = `
-.css-10jseif-Icon__root {
+.css-z8uzdf-Icon__root {
   color: inherit;
 }
 
-.css-1os74zx-Collapsible__header {
+.css-jmoamz-Collapsible__header {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -102,31 +102,31 @@ exports[`Collapsible matches snapshot when it is open 1`] = `
   justify-content: space-between;
 }
 
-.css-1os74zx-Collapsible__header [data-element="title"] {
+.css-jmoamz-Collapsible__header [data-element="title"] {
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
 }
 
-.css-1os74zx-Collapsible__header:hover {
+.css-jmoamz-Collapsible__header:hover {
   cursor: pointer;
 }
 
-.css-1os74zx-Collapsible__header:hover [data-element="title"] {
+.css-jmoamz-Collapsible__header:hover [data-element="title"] {
   -webkit-transform: translateX(5px);
   -ms-transform: translateX(5px);
   transform: translateX(5px);
 }
 
-.css-11npev5-Collapsible__icon {
+.css-1rh3g0j-Collapsible__icon {
   margin-bottom: -2px;
   color: #879ba6;
 }
 
-.css-1lgpi2b-Collapsible__content {
+.css-1jwj8t7-Collapsible__content {
   padding-top: 8px;
 }
 
-.css-9f7ejq-Label__root-Label__ellipsized {
+.css-6kwq2t-Label__root-Label__ellipsized {
   display: inline-block;
   color: rgba(135,155,166,0.7);
   text-transform: uppercase;
@@ -137,36 +137,36 @@ exports[`Collapsible matches snapshot when it is open 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-9f7ejq-Label__root-Label__ellipsized {
+  .css-6kwq2t-Label__root-Label__ellipsized {
     font-size: 0.8rem;
   }
 }
 
 <div
-  className="css-1pcrpvn-Collapsible__root"
+  className="css-1k7784t-Collapsible__root"
 >
   <div
-    className="css-1os74zx-Collapsible__header"
+    className="css-jmoamz-Collapsible__header"
   >
     <div
       data-element="title"
     >
       <div
-        className="css-9f7ejq-Label__root-Label__ellipsized"
+        className="css-6kwq2t-Label__root-Label__ellipsized"
       >
         Title
       </div>
     </div>
     <div
-      className="css-11npev5-Collapsible__icon"
+      className="css-1rh3g0j-Collapsible__icon"
     >
       <i
-        className="css-10jseif-Icon__root Drycon Drycon-chevron-up"
+        className="css-z8uzdf-Icon__root Drycon Drycon-chevron-up"
       />
     </div>
   </div>
   <div
-    className="css-1lgpi2b-Collapsible__content"
+    className="css-1jwj8t7-Collapsible__content"
   >
     Collapsible content
   </div>
@@ -174,11 +174,11 @@ exports[`Collapsible matches snapshot when it is open 1`] = `
 `;
 
 exports[`Collapsible matches snapshot when the title is a node 1`] = `
-.css-10jseif-Icon__root {
+.css-z8uzdf-Icon__root {
   color: inherit;
 }
 
-.css-1os74zx-Collapsible__header {
+.css-jmoamz-Collapsible__header {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -193,61 +193,61 @@ exports[`Collapsible matches snapshot when the title is a node 1`] = `
   justify-content: space-between;
 }
 
-.css-1os74zx-Collapsible__header [data-element="title"] {
+.css-jmoamz-Collapsible__header [data-element="title"] {
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
 }
 
-.css-1os74zx-Collapsible__header:hover {
+.css-jmoamz-Collapsible__header:hover {
   cursor: pointer;
 }
 
-.css-1os74zx-Collapsible__header:hover [data-element="title"] {
+.css-jmoamz-Collapsible__header:hover [data-element="title"] {
   -webkit-transform: translateX(5px);
   -ms-transform: translateX(5px);
   transform: translateX(5px);
 }
 
-.css-11npev5-Collapsible__icon {
+.css-1rh3g0j-Collapsible__icon {
   margin-bottom: -2px;
   color: #879ba6;
 }
 
-.css-1lgpi2b-Collapsible__content {
+.css-1jwj8t7-Collapsible__content {
   padding-top: 8px;
 }
 
-.css-rmewu6-Text__root-Text__primary-Text__default {
+.css-1y3lkgh-Text__root-Text__primary-Text__default {
   display: inline;
   color: #172b4e;
   font-size: 1rem;
 }
 
 <div
-  className="css-1pcrpvn-Collapsible__root"
+  className="css-1k7784t-Collapsible__root"
 >
   <div
-    className="css-1os74zx-Collapsible__header"
+    className="css-jmoamz-Collapsible__header"
   >
     <div
       data-element="title"
     >
       <span
-        className="css-rmewu6-Text__root-Text__primary-Text__default"
+        className="css-1y3lkgh-Text__root-Text__primary-Text__default"
       >
         The title
       </span>
     </div>
     <div
-      className="css-11npev5-Collapsible__icon"
+      className="css-1rh3g0j-Collapsible__icon"
     >
       <i
-        className="css-10jseif-Icon__root Drycon Drycon-chevron-up"
+        className="css-z8uzdf-Icon__root Drycon Drycon-chevron-up"
       />
     </div>
   </div>
   <div
-    className="css-1lgpi2b-Collapsible__content"
+    className="css-1jwj8t7-Collapsible__content"
   >
     Collapsible content
   </div>

@@ -11,12 +11,12 @@ exports[`LoadingPlaceholder matches snapshot when has custom sizes 1`] = `
   }
 }
 
-.css-1kpu34c-LoadingPlaceholder__shimmer {
+.css-1fxivg0-LoadingPlaceholder__shimmer {
   position: relative;
   pointer-events: none;
 }
 
-.css-1kpu34c-LoadingPlaceholder__shimmer::after {
+.css-1fxivg0-LoadingPlaceholder__shimmer::after {
   content: ' ';
   position: absolute;
   z-index: 9;
@@ -34,7 +34,7 @@ exports[`LoadingPlaceholder matches snapshot when has custom sizes 1`] = `
 }
 
 <div
-  className="css-1kpu34c-LoadingPlaceholder__shimmer"
+  className="css-1fxivg0-LoadingPlaceholder__shimmer"
   style={
     Object {
       "height": 200,
@@ -55,12 +55,12 @@ exports[`LoadingPlaceholder matches snapshot when has no specified sizes 1`] = `
   }
 }
 
-.css-1kpu34c-LoadingPlaceholder__shimmer {
+.css-1fxivg0-LoadingPlaceholder__shimmer {
   position: relative;
   pointer-events: none;
 }
 
-.css-1kpu34c-LoadingPlaceholder__shimmer::after {
+.css-1fxivg0-LoadingPlaceholder__shimmer::after {
   content: ' ';
   position: absolute;
   z-index: 9;
@@ -78,7 +78,7 @@ exports[`LoadingPlaceholder matches snapshot when has no specified sizes 1`] = `
 }
 
 <div
-  className="css-1kpu34c-LoadingPlaceholder__shimmer"
+  className="css-1fxivg0-LoadingPlaceholder__shimmer"
   style={
     Object {
       "height": "24px",

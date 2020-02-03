@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createSerializer } from 'jest-emotion';
 
 
@@ -11,6 +12,20 @@ expect.addSnapshotSerializer(
 
 // Create missing function
 window.URL.createObjectURL = function() {};
+
+
+// Create fixed date
+const constantDate = new Date('2020-06-01 12:00');
+
+Date = class extends Date {
+  constructor(date) {
+    if (date) {
+      return super(date);
+    }
+
+    return constantDate;
+  }
+}
 
 
 // Fail tests if prop-types throw warning

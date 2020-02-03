@@ -93,7 +93,7 @@ const styles = {
 
 const RawTextArea = ({
   responsive,
-  ...rest,
+  ...rest
 }) => {
   const {
     value,
