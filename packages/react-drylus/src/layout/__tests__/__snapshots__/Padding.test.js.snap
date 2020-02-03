@@ -1,93 +1,93 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Padding matches snapshot when has a different size on each side 1`] = `
-.css-1ne67i0-Padding__root-Padding__resetPadding {
+.emotion-0 {
   padding: 24px;
   padding: 0;
 }
 
 @media only screen and (max-width:768px) {
-  .css-1ne67i0-Padding__root-Padding__resetPadding {
+  .emotion-0 {
     padding: 16px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .css-1ne67i0-Padding__root-Padding__resetPadding {
+  .emotion-0 {
     padding: 0;
   }
 }
 
 <div
-  className="undefined css-1ne67i0-Padding__root-Padding__resetPadding"
+  className="undefined emotion-0"
 >
   Content
 </div>
 `;
 
 exports[`Padding matches snapshot when has a size only on 1 side 1`] = `
-.css-1ne67i0-Padding__root-Padding__resetPadding {
+.emotion-0 {
   padding: 24px;
   padding: 0;
 }
 
 @media only screen and (max-width:768px) {
-  .css-1ne67i0-Padding__root-Padding__resetPadding {
+  .emotion-0 {
     padding: 16px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .css-1ne67i0-Padding__root-Padding__resetPadding {
+  .emotion-0 {
     padding: 0;
   }
 }
 
 <div
-  className="css-1ne67i0-Padding__root-Padding__resetPadding"
+  className="emotion-0"
 >
   Content
 </div>
 `;
 
 exports[`Padding matches snapshot when has a uniform size 1`] = `
-.css-4qa2nc-Padding__root {
+.emotion-0 {
   padding: 24px;
 }
 
 @media only screen and (max-width:768px) {
-  .css-4qa2nc-Padding__root {
+  .emotion-0 {
     padding: 16px;
   }
 }
 
 <div
-  className="css-4qa2nc-Padding__root"
+  className="emotion-0"
 >
   Content
 </div>
 `;
 
 exports[`Padding matches snapshot when has vertical and horizontal sizes 1`] = `
-.css-1ne67i0-Padding__root-Padding__resetPadding {
+.emotion-0 {
   padding: 24px;
   padding: 0;
 }
 
 @media only screen and (max-width:768px) {
-  .css-1ne67i0-Padding__root-Padding__resetPadding {
+  .emotion-0 {
     padding: 16px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .css-1ne67i0-Padding__root-Padding__resetPadding {
+  .emotion-0 {
     padding: 0;
   }
 }
 
 <div
-  className="undefined css-1ne67i0-Padding__root-Padding__resetPadding"
+  className="undefined emotion-0"
 >
   Content
 </div>

@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Collapsible matches snapshot when is not open 1`] = `
-.css-z8uzdf-Icon__root {
+.emotion-1 {
   color: inherit;
 }
 
-.css-jmoamz-Collapsible__header {
+.emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -20,27 +20,27 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
   justify-content: space-between;
 }
 
-.css-jmoamz-Collapsible__header [data-element="title"] {
+.emotion-3 [data-element='title'] {
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
 }
 
-.css-jmoamz-Collapsible__header:hover {
+.emotion-3:hover {
   cursor: pointer;
 }
 
-.css-jmoamz-Collapsible__header:hover [data-element="title"] {
+.emotion-3:hover [data-element='title'] {
   -webkit-transform: translateX(5px);
   -ms-transform: translateX(5px);
   transform: translateX(5px);
 }
 
-.css-1rh3g0j-Collapsible__icon {
+.emotion-2 {
   margin-bottom: -2px;
   color: #879ba6;
 }
 
-.css-6kwq2t-Label__root-Label__ellipsized {
+.emotion-0 {
   display: inline-block;
   color: rgba(135,155,166,0.7);
   text-transform: uppercase;
@@ -51,31 +51,31 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-6kwq2t-Label__root-Label__ellipsized {
+  .emotion-0 {
     font-size: 0.8rem;
   }
 }
 
 <div
-  className="css-1k7784t-Collapsible__root"
+  className="emotion-4"
 >
   <div
-    className="css-jmoamz-Collapsible__header"
+    className="emotion-3"
   >
     <div
       data-element="title"
     >
       <div
-        className="css-6kwq2t-Label__root-Label__ellipsized"
+        className="emotion-0"
       >
         Title
       </div>
     </div>
     <div
-      className="css-1rh3g0j-Collapsible__icon"
+      className="emotion-2"
     >
       <i
-        className="css-z8uzdf-Icon__root Drycon Drycon-chevron-down"
+        className="emotion-1 Drycon Drycon-chevron-down"
       />
     </div>
   </div>
@@ -83,11 +83,11 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
 `;
 
 exports[`Collapsible matches snapshot when it is open 1`] = `
-.css-z8uzdf-Icon__root {
+.emotion-1 {
   color: inherit;
 }
 
-.css-jmoamz-Collapsible__header {
+.emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -102,31 +102,31 @@ exports[`Collapsible matches snapshot when it is open 1`] = `
   justify-content: space-between;
 }
 
-.css-jmoamz-Collapsible__header [data-element="title"] {
+.emotion-3 [data-element='title'] {
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
 }
 
-.css-jmoamz-Collapsible__header:hover {
+.emotion-3:hover {
   cursor: pointer;
 }
 
-.css-jmoamz-Collapsible__header:hover [data-element="title"] {
+.emotion-3:hover [data-element='title'] {
   -webkit-transform: translateX(5px);
   -ms-transform: translateX(5px);
   transform: translateX(5px);
 }
 
-.css-1rh3g0j-Collapsible__icon {
+.emotion-2 {
   margin-bottom: -2px;
   color: #879ba6;
 }
 
-.css-1jwj8t7-Collapsible__content {
+.emotion-4 {
   padding-top: 8px;
 }
 
-.css-6kwq2t-Label__root-Label__ellipsized {
+.emotion-0 {
   display: inline-block;
   color: rgba(135,155,166,0.7);
   text-transform: uppercase;
@@ -137,36 +137,36 @@ exports[`Collapsible matches snapshot when it is open 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-6kwq2t-Label__root-Label__ellipsized {
+  .emotion-0 {
     font-size: 0.8rem;
   }
 }
 
 <div
-  className="css-1k7784t-Collapsible__root"
+  className="emotion-5"
 >
   <div
-    className="css-jmoamz-Collapsible__header"
+    className="emotion-3"
   >
     <div
       data-element="title"
     >
       <div
-        className="css-6kwq2t-Label__root-Label__ellipsized"
+        className="emotion-0"
       >
         Title
       </div>
     </div>
     <div
-      className="css-1rh3g0j-Collapsible__icon"
+      className="emotion-2"
     >
       <i
-        className="css-z8uzdf-Icon__root Drycon Drycon-chevron-up"
+        className="emotion-1 Drycon Drycon-chevron-up"
       />
     </div>
   </div>
   <div
-    className="css-1jwj8t7-Collapsible__content"
+    className="emotion-4"
   >
     Collapsible content
   </div>
@@ -174,11 +174,11 @@ exports[`Collapsible matches snapshot when it is open 1`] = `
 `;
 
 exports[`Collapsible matches snapshot when the title is a node 1`] = `
-.css-z8uzdf-Icon__root {
+.emotion-1 {
   color: inherit;
 }
 
-.css-jmoamz-Collapsible__header {
+.emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -193,61 +193,61 @@ exports[`Collapsible matches snapshot when the title is a node 1`] = `
   justify-content: space-between;
 }
 
-.css-jmoamz-Collapsible__header [data-element="title"] {
+.emotion-3 [data-element='title'] {
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
 }
 
-.css-jmoamz-Collapsible__header:hover {
+.emotion-3:hover {
   cursor: pointer;
 }
 
-.css-jmoamz-Collapsible__header:hover [data-element="title"] {
+.emotion-3:hover [data-element='title'] {
   -webkit-transform: translateX(5px);
   -ms-transform: translateX(5px);
   transform: translateX(5px);
 }
 
-.css-1rh3g0j-Collapsible__icon {
+.emotion-2 {
   margin-bottom: -2px;
   color: #879ba6;
 }
 
-.css-1jwj8t7-Collapsible__content {
+.emotion-4 {
   padding-top: 8px;
 }
 
-.css-1y3lkgh-Text__root-Text__primary-Text__default {
+.emotion-0 {
   display: inline;
   color: #172b4e;
   font-size: 1rem;
 }
 
 <div
-  className="css-1k7784t-Collapsible__root"
+  className="emotion-5"
 >
   <div
-    className="css-jmoamz-Collapsible__header"
+    className="emotion-3"
   >
     <div
       data-element="title"
     >
       <span
-        className="css-1y3lkgh-Text__root-Text__primary-Text__default"
+        className="emotion-0"
       >
         The title
       </span>
     </div>
     <div
-      className="css-1rh3g0j-Collapsible__icon"
+      className="emotion-2"
     >
       <i
-        className="css-z8uzdf-Icon__root Drycon Drycon-chevron-up"
+        className="emotion-1 Drycon Drycon-chevron-up"
       />
     </div>
   </div>
   <div
-    className="css-1jwj8t7-Collapsible__content"
+    className="emotion-4"
   >
     Collapsible content
   </div>

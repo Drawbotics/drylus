@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Title matches snapshot when does not have margins 1`] = `
-.css-12yjwpe-Title__root-Title__h1-Title__noMargin {
+.emotion-0 {
   color: #172b4e;
   font-weight: 300;
   font-size: 3.4rem;
@@ -10,80 +10,80 @@ exports[`Title matches snapshot when does not have margins 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-12yjwpe-Title__root-Title__h1-Title__noMargin {
+  .emotion-0 {
     font-size: 2.8rem;
   }
 }
 
 <h1
-  className="css-12yjwpe-Title__root-Title__h1-Title__noMargin"
+  className="emotion-0"
 >
   Title content
 </h1>
 `;
 
 exports[`Title matches snapshot when has a h1 size 1`] = `
-.css-1ab2uo3-Title__root-Title__h1 {
+.emotion-0 {
   color: #172b4e;
   font-weight: 300;
   font-size: 3.4rem;
 }
 
 @media only screen and (max-width:768px) {
-  .css-1ab2uo3-Title__root-Title__h1 {
+  .emotion-0 {
     font-size: 2.8rem;
   }
 }
 
 <h1
-  className="css-1ab2uo3-Title__root-Title__h1"
+  className="emotion-0"
 >
   Title content
 </h1>
 `;
 
 exports[`Title matches snapshot when has a h2 size 1`] = `
-.css-x1nd3x-Title__root-Title__h2 {
+.emotion-0 {
   color: #172b4e;
   font-weight: 300;
   font-size: 2.4rem;
 }
 
 @media only screen and (max-width:768px) {
-  .css-x1nd3x-Title__root-Title__h2 {
+  .emotion-0 {
     font-size: 2rem;
   }
 }
 
 <h2
-  className="css-x1nd3x-Title__root-Title__h2"
+  className="emotion-0"
 >
   Title content
 </h2>
 `;
 
 exports[`Title matches snapshot when has a h3 size 1`] = `
-.css-g26idt-Title__root-Title__h3 {
+.emotion-0 {
   color: #172b4e;
   font-weight: 300;
   font-size: 2rem;
 }
 
 @media only screen and (max-width:768px) {
-  .css-g26idt-Title__root-Title__h3 {
+  .emotion-0 {
     font-size: 1.6rem;
   }
 }
 
 <h3
-  className="css-g26idt-Title__root-Title__h3"
+  className="emotion-0"
 >
   Title content
 </h3>
 `;
 
 exports[`Title matches snapshot when has a h4 size 1`] = `
-.css-1mnms9a-Title__root-Title__h4 {
+.emotion-0 {
   color: #172b4e;
   font-weight: 300;
   font-size: 1.3rem;
@@ -91,33 +91,33 @@ exports[`Title matches snapshot when has a h4 size 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-1mnms9a-Title__root-Title__h4 {
+  .emotion-0 {
     font-size: 1.1rem;
   }
 }
 
 <h4
-  className="css-1mnms9a-Title__root-Title__h4"
+  className="emotion-0"
 >
   Title content
 </h4>
 `;
 
 exports[`Title matches snapshot when has a node as children 1`] = `
-.css-x1nd3x-Title__root-Title__h2 {
+.emotion-0 {
   color: #172b4e;
   font-weight: 300;
   font-size: 2.4rem;
 }
 
 @media only screen and (max-width:768px) {
-  .css-x1nd3x-Title__root-Title__h2 {
+  .emotion-0 {
     font-size: 2rem;
   }
 }
 
 <h2
-  className="css-x1nd3x-Title__root-Title__h2"
+  className="emotion-0"
 >
   <span
     style={
@@ -133,7 +133,7 @@ exports[`Title matches snapshot when has a node as children 1`] = `
 `;
 
 exports[`Title matches snapshot when is aligned to the right 1`] = `
-.css-1irn0sx-Title__root-Title__h1-Title__alignRight {
+.emotion-0 {
   color: #172b4e;
   font-weight: 300;
   font-size: 3.4rem;
@@ -141,20 +141,20 @@ exports[`Title matches snapshot when is aligned to the right 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-1irn0sx-Title__root-Title__h1-Title__alignRight {
+  .emotion-0 {
     font-size: 2.8rem;
   }
 }
 
 <h1
-  className="css-1irn0sx-Title__root-Title__h1-Title__alignRight"
+  className="emotion-0"
 >
   Some content
 </h1>
 `;
 
 exports[`Title matches snapshot when is center aligned 1`] = `
-.css-3ie0mi-Title__root-Title__h1-Title__alignCenter {
+.emotion-0 {
   color: #172b4e;
   font-weight: 300;
   font-size: 3.4rem;
@@ -162,13 +162,13 @@ exports[`Title matches snapshot when is center aligned 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .css-3ie0mi-Title__root-Title__h1-Title__alignCenter {
+  .emotion-0 {
     font-size: 2.8rem;
   }
 }
 
 <h1
-  className="css-3ie0mi-Title__root-Title__h1-Title__alignCenter"
+  className="emotion-0"
 >
   Some content
 </h1>

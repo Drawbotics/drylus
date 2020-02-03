@@ -9,3 +9,4 @@ dist
 *rc.js
 node_modules
 build.js
+.snap

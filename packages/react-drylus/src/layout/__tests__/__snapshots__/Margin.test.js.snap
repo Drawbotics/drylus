@@ -1,93 +1,93 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Margin matches snapshot when has a different size on each side 1`] = `
-.css-znzz4z-Margin__root-Margin__resetMargin {
+.emotion-0 {
   margin: 24px;
   margin: 0;
 }
 
 @media only screen and (max-width:768px) {
-  .css-znzz4z-Margin__root-Margin__resetMargin {
+  .emotion-0 {
     margin: 16px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .css-znzz4z-Margin__root-Margin__resetMargin {
+  .emotion-0 {
     margin: 0;
   }
 }
 
 <div
-  className="undefined css-znzz4z-Margin__root-Margin__resetMargin"
+  className="undefined emotion-0"
 >
   Content
 </div>
 `;
 
 exports[`Margin matches snapshot when has a size only on 1 side 1`] = `
-.css-znzz4z-Margin__root-Margin__resetMargin {
+.emotion-0 {
   margin: 24px;
   margin: 0;
 }
 
 @media only screen and (max-width:768px) {
-  .css-znzz4z-Margin__root-Margin__resetMargin {
+  .emotion-0 {
     margin: 16px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .css-znzz4z-Margin__root-Margin__resetMargin {
+  .emotion-0 {
     margin: 0;
   }
 }
 
 <div
-  className="css-znzz4z-Margin__root-Margin__resetMargin"
+  className="emotion-0"
 >
   Content
 </div>
 `;
 
 exports[`Margin matches snapshot when has a uniform size 1`] = `
-.css-1elarmb-Margin__root {
+.emotion-0 {
   margin: 24px;
 }
 
 @media only screen and (max-width:768px) {
-  .css-1elarmb-Margin__root {
+  .emotion-0 {
     margin: 16px;
   }
 }
 
 <div
-  className="css-1elarmb-Margin__root"
+  className="emotion-0"
 >
   Content
 </div>
 `;
 
 exports[`Margin matches snapshot when has vertical and horizontal sizes 1`] = `
-.css-znzz4z-Margin__root-Margin__resetMargin {
+.emotion-0 {
   margin: 24px;
   margin: 0;
 }
 
 @media only screen and (max-width:768px) {
-  .css-znzz4z-Margin__root-Margin__resetMargin {
+  .emotion-0 {
     margin: 16px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .css-znzz4z-Margin__root-Margin__resetMargin {
+  .emotion-0 {
     margin: 0;
   }
 }
 
 <div
-  className="undefined css-znzz4z-Margin__root-Margin__resetMargin"
+  className="undefined emotion-0"
 >
   Content
 </div>

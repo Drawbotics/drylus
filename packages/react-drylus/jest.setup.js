@@ -1,17 +1,14 @@
 /* eslint-disable */
-import { createSerializer } from 'jest-emotion';
-
+import serializer from 'jest-emotion';
 
 // Set up for jest to display css values in snapshot
 expect.addSnapshotSerializer(
-  createSerializer({
-    classNameReplacer: (className, index) => className,
-  })
+  serializer,
 );
 
 
 // Create missing function
-window.URL.createObjectURL = function() {};
+window.URL.createObjectURL = function () { };
 
 
 // Create fixed date
