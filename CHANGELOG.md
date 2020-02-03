@@ -1,3 +1,18 @@
+# v5.5.0 (Mon Feb 03 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature/currency text format [#107](https://github.com/Drawbotics/drylus/pull/107) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/drylus-style-vars`, `@drawbotics/extract-emotion`, `@drawbotics/icons`, `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - Feature/text date formatting [#106](https://github.com/Drawbotics/drylus/pull/106) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.4.11 (Thu Jan 23 2020)
 
 #### ⚠️  Pushed to master
