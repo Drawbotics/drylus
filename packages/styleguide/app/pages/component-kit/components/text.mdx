@@ -34,3 +34,18 @@ For example, if you pass an instance of `Date`, the date will be formatted follo
 </Playground>
 
 ### With Currency
+It also accepts objects with the following shape:
+```js
+{
+  value: number,
+  currency?: string,
+}
+```
+And will render the price/value depending on the currency and current locale.
+<Playground mode="jsx">
+  <Text locale="en">This is a text with a price: {{ value: 10000, currency: 'USD' }}</Text>
+  <br/>
+  <Text locale="fr">Ceci est du texte avec un prix: {{ value: 10000, currency: 'EUR' }}</Text>
+  <br/>
+  <Text locale="fr">Ceci est du texte avec un prix: {{ value: 10000, currency: 'EUR' }}</Text>
+</Playground>
