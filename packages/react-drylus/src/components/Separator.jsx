@@ -1,8 +1,7 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
-
+import React from 'react';
 
 const styles = {
   root: css`
@@ -17,16 +16,9 @@ const styles = {
   `,
 };
 
-
-const Separator = ({
-  vertical,
-  style,
-}) => {
-  return (
-    <div style={style} className={cx(styles.root, { [styles.vertical]: vertical })} />
-  );
+const Separator = ({ vertical, style }) => {
+  return <div style={style} className={cx(styles.root, { [styles.vertical]: vertical })} />;
 };
-
 
 Separator.propTypes = {
   /** If true, the separator is rendered in a vertical fashion, by default it takes the full width of the container */
@@ -36,10 +28,8 @@ Separator.propTypes = {
   style: PropTypes.object,
 };
 
-
 Separator.defaultProps = {
   vertical: false,
 };
-
 
 export default Separator;

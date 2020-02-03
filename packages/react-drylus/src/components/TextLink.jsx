@@ -1,12 +1,11 @@
-import React from 'react';
-import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
+import { css, cx } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import { Category } from '../enums';
 import { getEnumAsClass } from '../utils';
-
 
 const styles = {
   root: css`
@@ -63,20 +62,9 @@ const styles = {
   `,
 };
 
+export const LinkUnderlined = new Enum('ALWAYS', 'HOVER');
 
-export const LinkUnderlined = new Enum(
-  'ALWAYS',
-  'HOVER',
-);
-
-
-const TextLink = ({
-  children,
-  category,
-  underlined,
-  style,
-  ...rest
-}) => {
+const TextLink = ({ children, category, underlined, style, ...rest }) => {
   return (
     <span
       style={style}
@@ -91,12 +79,17 @@ const TextLink = ({
   );
 };
 
-
 TextLink.propTypes = {
   /** Text of the link */
   children: PropTypes.string,
 
-  category: PropTypes.oneOf([Category.BRAND, Category.DANGER, Category.SUCCESS, Category.INFO, Category.WARNING]),
+  category: PropTypes.oneOf([
+    Category.BRAND,
+    Category.DANGER,
+    Category.SUCCESS,
+    Category.INFO,
+    Category.WARNING,
+  ]),
 
   underlined: PropTypes.oneOf([LinkUnderlined.ALWAYS, LinkUnderlined.HOVER]),
 
@@ -104,11 +97,9 @@ TextLink.propTypes = {
   style: PropTypes.object,
 };
 
-
 TextLink.defaultProps = {
   underlined: LinkUnderlined.HOVER,
   category: Category.INFO,
 };
-
 
 export default TextLink;

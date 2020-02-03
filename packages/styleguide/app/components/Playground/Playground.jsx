@@ -1,26 +1,19 @@
-import React, { useState, useRef } from 'react';
+import sv from '@drawbotics/drylus-style-vars';
+import { css, cx } from 'emotion';
+import flow from 'lodash/flow';
+import omit from 'lodash/omit';
+import React, { useRef, useState } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import ReactElementToString from 'react-element-to-jsx-string';
-import omit from 'lodash/omit';
-import { css, cx } from 'emotion';
-import sv from '@drawbotics/drylus-style-vars';
-import flow from 'lodash/flow';
 
 import CodeBox from './CodeBox';
+import ModeSwitcher from './ModeSwitcher';
 import Preview from './Preview';
 import PropsTable from './PropsTable';
-import ModeSwitcher from './ModeSwitcher';
-import {
-  adaptForVanilla,
-  recursiveMdxTransform,
-  hideSecrets,
-  replaceSymbol,
-} from './utils';
-
+import { adaptForVanilla, hideSecrets, recursiveMdxTransform, replaceSymbol } from './utils';
 
 const styles = {
-  playground: css`
-  `,
+  playground: css``,
   codeWrapper: css`
     padding: ${sv.paddingExtraSmall};
     background: ${sv.neutralLight};
@@ -44,7 +37,7 @@ const styles = {
     margin-top: ${sv.marginExtraSmall};
 
     &:hover {
-      & > [data-element="switcher"] {
+      & > [data-element='switcher'] {
         opacity: 1;
         transform: translateY(0);
       }
@@ -74,10 +67,11 @@ const styles = {
   `,
 };
 
-
 function getMarkupForMode(mode, component) {
   if (component.length > 0) {
-    console.error('More than 1 element at root level. If you want to do that, use fragments: <>...</>');
+    console.error(
+      'More than 1 element at root level. If you want to do that, use fragments: <>...</>',
+    );
     return '';
   }
   const generatedHTMLString = ReactDOMServer.renderToStaticMarkup(component);
@@ -97,9 +91,7 @@ function getMarkupForMode(mode, component) {
   }
 }
 
-
 const supportedModes = ['react', 'vanilla'];
-
 
 const Playground = ({ component, children, mode, __code, enums }) => {
   const [props, setProps] = useState({});
@@ -119,21 +111,20 @@ const Playground = ({ component, children, mode, __code, enums }) => {
         ref={parentRef}
         className={styles.codeWrapper}
         onClick={(e) =>
-          ! childrenRef.current.contains(e.target) && parentRef.current.contains(e.target) ?
-          setCodeOpen(! codeOpen) : null}>
+          !childrenRef.current.contains(e.target) && parentRef.current.contains(e.target)
+            ? setCodeOpen(!codeOpen)
+            : null
+        }>
         <div ref={childrenRef}>
           <Preview raw={activeMode === 'vanilla'}>
             {activeMode === 'vanilla' ? generatedMarkup : generatedComponent}
           </Preview>
-          <div className={cx(styles.code, { [styles.codeHidden]: ! codeOpen })}>
+          <div className={cx(styles.code, { [styles.codeHidden]: !codeOpen })}>
             {do {
-              if (! staticReact) {
+              if (!staticReact) {
                 <div className={styles.switcher} data-element="switcher">
-                  <ModeSwitcher
-                    modes={supportedModes}
-                    activeMode={activeMode}
-                    onChange={setMode} />
-                </div>
+                  <ModeSwitcher modes={supportedModes} activeMode={activeMode} onChange={setMode} />
+                </div>;
               }
             }}
             <div className={styles.codeBox}>
@@ -143,26 +134,26 @@ const Playground = ({ component, children, mode, __code, enums }) => {
             </div>
           </div>
         </div>
-        <div className={styles.toggle}>
-          Toggle code
-        </div>
+        <div className={styles.toggle}>Toggle code</div>
       </div>
-      {do{
+      {do {
         if (component) {
           <div className={styles.table}>
             <PropsTable
               enums={enums}
               component={component}
               activeProps={props}
-              onChange={(v, n) => v === '_empty' || v === ''
-                ? setProps(omit(props, n))
-                : setProps({ ...props, [n]: v })} />
-          </div>
+              onChange={(v, n) =>
+                v === '_empty' || v === ''
+                  ? setProps(omit(props, n))
+                  : setProps({ ...props, [n]: v })
+              }
+            />
+          </div>;
         }
       }}
     </div>
   );
 };
-
 
 export default Playground;

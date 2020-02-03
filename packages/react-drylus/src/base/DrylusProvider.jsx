@@ -1,20 +1,16 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import ThemeProvider from './ThemeProvider';
 import { AlertsProvider } from '../components';
-
+import ThemeProvider from './ThemeProvider';
 
 const DrylusProvider = ({ children, style }) => {
   return (
     <ThemeProvider style={style}>
-      <AlertsProvider>
-        {children}
-      </AlertsProvider>
+      <AlertsProvider>{children}</AlertsProvider>
     </ThemeProvider>
   );
 };
-
 
 DrylusProvider.propTypes = {
   children: PropTypes.node.isRequired,
@@ -22,6 +18,5 @@ DrylusProvider.propTypes = {
   /** This prop will be passed down to ThemeProvider */
   style: PropTypes.object,
 };
-
 
 export default DrylusProvider;

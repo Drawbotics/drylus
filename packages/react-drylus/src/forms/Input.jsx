@@ -1,19 +1,18 @@
-import React, { useState, forwardRef } from 'react';
-import { css, cx } from 'emotion';
 import sv, { fade } from '@drawbotics/drylus-style-vars';
+import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
+import React, { forwardRef, useState } from 'react';
 
-import RoundIcon from '../components/RoundIcon';
-import Icon from '../components/Icon';
 import Button from '../components/Button';
-import Spinner from '../components/Spinner';
-import Select from './Select';
-import Size from '../enums/Size';
-import Category from '../enums/Category';
-import Hint from './Hint';
+import Icon from '../components/Icon';
 import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
+import RoundIcon from '../components/RoundIcon';
+import Spinner from '../components/Spinner';
+import Category from '../enums/Category';
+import Size from '../enums/Size';
 import { useResponsiveProps } from '../utils/hooks';
-
+import Hint from './Hint';
+import Select from './Select';
 
 const styles = {
   root: css`
@@ -62,7 +61,7 @@ const styles = {
       border-color: ${sv.neutralLight};
       box-shadow: none;
     }
-    
+
     &:read-only {
       box-shadow: none !important;
       pointer-events: none;
@@ -124,7 +123,8 @@ const styles = {
   prefixComponent: css`
     padding: 0;
 
-    select, button {
+    select,
+    button {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       border-top-left-radius: ${sv.defaultBorderRadius};
@@ -146,7 +146,8 @@ const styles = {
   suffixComponent: css`
     padding: 0;
 
-    select, button {
+    select,
+    button {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       border-top-right-radius: ${sv.defaultBorderRadius};
@@ -163,11 +164,7 @@ const styles = {
   `,
 };
 
-
-const RawInput = ({
-  responsive,
-  ...rest
-}) => {
+const RawInput = ({ responsive, ...rest }) => {
   const {
     value,
     onChange,
@@ -186,9 +183,9 @@ const RawInput = ({
     ...props
   } = useResponsiveProps(rest, responsive);
 
-  const [ isFocused, setFocused ] = useState(false);
+  const [isFocused, setFocused] = useState(false);
 
-  const handleOnChange = (e) => onChange != null ? onChange(e.target.value, e.target.name) : null;
+  const handleOnChange = (e) => (onChange != null ? onChange(e.target.value, e.target.name) : null);
 
   const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
   const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
@@ -202,39 +199,36 @@ const RawInput = ({
         [placeholderStyles.shimmer]: isPlaceholder,
       })}>
       <div className={styles.outerWrapper}>
-        {do{
+        {do {
           if (prefix) {
             <div
               data-element="prefix"
               className={cx(styles.fix, styles.prefix, {
                 [styles.prefixComponent]: isPrefixComponent,
-                [styles.transparentButton]: ! prefix?.props?.category,
+                [styles.transparentButton]: !prefix?.props?.category,
               })}>
               {prefix}
-            </div>
+            </div>;
           }
         }}
         <div className={styles.innerWrapper}>
-          {do{
+          {do {
             if (loading) {
               <div className={styles.icon} data-element="icon">
                 <Spinner size={Size.SMALL} />
-              </div>
-            }
-            else if (onChange == null) {
+              </div>;
+            } else if (onChange == null) {
               <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
                 <Icon name="lock" />
-              </div>
-            }
-            else if (error) {
+              </div>;
+            } else if (error) {
               <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
                 <RoundIcon name="x" size={Size.SMALL} category={Category.DANGER} />
-              </div>
-            }
-            else if (Boolean(value) && valid) {
+              </div>;
+            } else if (Boolean(value) && valid) {
               <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
                 <RoundIcon name="check" size={Size.SMALL} category={Category.SUCCESS} />
-              </div>
+              </div>;
             }
           }}
           <input
@@ -249,53 +243,55 @@ const RawInput = ({
             })}
             value={value}
             ref={inputRef}
-            style={{ paddingLeft: extraLeftPadding != null ? `calc(${sv.paddingSmall} + ${extraLeftPadding}px)` : null }}
-            {...props} />
+            style={{
+              paddingLeft:
+                extraLeftPadding != null
+                  ? `calc(${sv.paddingSmall} + ${extraLeftPadding}px)`
+                  : null,
+            }}
+            {...props}
+          />
         </div>
-        {do{
+        {do {
           if (suffix) {
             <div
               data-element="suffix"
               className={cx(styles.fix, styles.suffix, {
                 [styles.suffixComponent]: isSuffixComponent,
-                [styles.transparentButton]: ! suffix?.props?.category,
+                [styles.transparentButton]: !suffix?.props?.category,
               })}>
               {suffix}
-            </div>
+            </div>;
           }
         }}
       </div>
-      {do{
+      {do {
         if (error && typeof error === 'string') {
-          <Hint category={Category.DANGER}>{error}</Hint>
-        }
-        else if (hint) {
-          <Hint>{hint}</Hint>
+          <Hint category={Category.DANGER}>{error}</Hint>;
+        } else if (hint) {
+          <Hint>{hint}</Hint>;
         }
       }}
     </div>
   );
 };
 
-
 /**
  * forward-ref
  */
 export const InputWithRef = forwardRef((props, ref) => {
-  return <RawInput {...props} inputRef={ref} />
+  return <RawInput {...props} inputRef={ref} />;
 });
 
 InputWithRef.displayName = 'Input';
-
 
 const Input = (props) => {
   return <RawInput {...props} />;
 };
 
-
 Input.propTypes = {
   /** Value displayed in the field */
-  value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 
   /** Name of the form element (target.name) */
   name: PropTypes.string,
@@ -313,7 +309,7 @@ Input.propTypes = {
   hint: PropTypes.string,
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error: PropTypes.oneOfType([ PropTypes.string, PropTypes.bool ]),
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid: PropTypes.bool,
@@ -327,13 +323,7 @@ Input.propTypes = {
   /** Additional class name to override styles */
   className: PropTypes.string,
 
-  type: PropTypes.oneOf([
-    'text',
-    'password',
-    'email',
-    'tel',
-    'url',
-  ]),
+  type: PropTypes.oneOf(['text', 'password', 'email', 'tel', 'url']),
 
   /** If true, a spinner is shown in the right corner, like with error and valid */
   loading: PropTypes.bool,
@@ -355,10 +345,8 @@ Input.propTypes = {
   }),
 };
 
-
 Input.defaultProps = {
   type: 'text',
 };
-
 
 export default Input;

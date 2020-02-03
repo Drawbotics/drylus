@@ -1,13 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
+import { css, cx } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { Category, Size } from '../enums';
 import Tooltip from '../components/Tooltip';
+import { Category, Size } from '../enums';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
-
 
 const styles = {
   root: css`
@@ -66,56 +65,42 @@ const styles = {
   `,
 };
 
-
-const Avatar = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    image,
-    text,
-    size,
-    category,
-    backgroundColor,
-    hint,
-    style,
-  } = useResponsiveProps(rest, responsive);
+const Avatar = ({ responsive, ...rest }) => {
+  const { image, text, size, category, backgroundColor, hint, style } = useResponsiveProps(
+    rest,
+    responsive,
+  );
 
   const customSize = typeof size === 'number';
   const avatar = (
-    <div className={cx(styles.root, {
-      [styles[getEnumAsClass(category)]]: category,
-      [styles[! customSize && getEnumAsClass(size)]]: size,
-      [styles.customBackground]: backgroundColor,
-    })} style={{
-      backgroundColor,
-      height: customSize ? size : undefined,
-      width: customSize ? size : undefined,
-      fontSize: customSize ? size * 0.5 : undefined,
-      ...style,
-    }}>
+    <div
+      className={cx(styles.root, {
+        [styles[getEnumAsClass(category)]]: category,
+        [styles[!customSize && getEnumAsClass(size)]]: size,
+        [styles.customBackground]: backgroundColor,
+      })}
+      style={{
+        backgroundColor,
+        height: customSize ? size : undefined,
+        width: customSize ? size : undefined,
+        fontSize: customSize ? size * 0.5 : undefined,
+        ...style,
+      }}>
       {do {
         if (image) {
-          <img src={image} />
-        }
-        else if (text) {
-          text.substring(0, 2)
+          <img src={image} />;
+        } else if (text) {
+          text.substring(0, 2);
         }
       }}
     </div>
   );
   if (hint) {
-    return (
-      <Tooltip content={hint}>
-        {avatar}
-      </Tooltip>
-    );
-  }
-  else {
+    return <Tooltip content={hint}>{avatar}</Tooltip>;
+  } else {
     return avatar;
   }
 };
-
 
 Avatar.propTypes = {
   /** Image url. Takes the full background of the avatar if given, will be fit to cover surface. Takes precedence over text */
@@ -159,10 +144,8 @@ Avatar.propTypes = {
   }),
 };
 
-
 Avatar.defaultProps = {
   style: {},
 };
-
 
 export default Avatar;

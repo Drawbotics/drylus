@@ -1,15 +1,14 @@
-import React, { useState, useRef } from 'react';
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
+import React, { useRef, useState } from 'react';
 
-import { InputWithRef } from './Input';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
 import Size from '../enums/Size';
 import { useResponsiveProps } from '../utils/hooks';
-
+import { InputWithRef } from './Input';
 
 const styles = {
   root: css`
@@ -50,11 +49,7 @@ const styles = {
   `,
 };
 
-
-const SearchInput = ({
-  responsive,
-  ...rest
-}) => {
+const SearchInput = ({ responsive, ...rest }) => {
   const {
     options,
     value,
@@ -66,7 +61,7 @@ const SearchInput = ({
     style,
   } = useResponsiveProps(rest, responsive);
 
-  const [ isFocused, setFocused ] = useState(false);
+  const [isFocused, setFocused] = useState(false);
   const inputRef = useRef(null);
 
   const shouldDisplayResults = value !== '' && isFocused;
@@ -76,7 +71,8 @@ const SearchInput = ({
         prefix={
           <Button
             leading={isLoading ? <Spinner size={Size.SMALL} /> : <Icon name="search" />}
-            onClick={() => inputRef.current.focus()} />
+            onClick={() => inputRef.current.focus()}
+          />
         }
         value={value}
         onChange={onChange}
@@ -84,36 +80,33 @@ const SearchInput = ({
         ref={inputRef}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
-        placeholder={placeholder} />
+        placeholder={placeholder}
+      />
       {do {
         if (options == null) {
           return null;
-        }
-        else {
-          <div className={cx(styles.list, {
-            [styles.visible]: shouldDisplayResults,
-          })}>
+        } else {
+          <div
+            className={cx(styles.list, {
+              [styles.visible]: shouldDisplayResults,
+            })}>
             {do {
               if (options.length === 0) {
-                <div className={cx(styles.item, styles.noResult)}>
-                  {noResultLabel}
-                </div>
-              }
-              else {
+                <div className={cx(styles.item, styles.noResult)}>{noResultLabel}</div>;
+              } else {
                 options.map((option) => (
                   <div key={option} className={styles.item} onClick={() => onChange(option)}>
                     {option}
                   </div>
-                ))
+                ));
               }
             }}
-          </div>
+          </div>;
         }
       }}
     </div>
   );
 };
-
 
 SearchInput.propTypes = {
   /** The list of items displayed under the input */
@@ -150,10 +143,8 @@ SearchInput.propTypes = {
   }),
 };
 
-
 SearchInput.defaultProps = {
   noResultLabel: 'No results',
 };
-
 
 export default SearchInput;

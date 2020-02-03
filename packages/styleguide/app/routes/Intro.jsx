@@ -1,23 +1,21 @@
-import React, { Fragment } from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import {
   Flex,
+  FlexDirection,
   FlexItem,
   FlexJustify,
-  Title,
   TextLink,
-  FlexDirection,
+  Title,
 } from '@drawbotics/react-drylus';
-import { css } from 'emotion';
-import sv from '@drawbotics/drylus-style-vars';
-import { Link } from 'react-router-dom';
-
 import background1 from '~/assets/background-1.svg';
 import background2 from '~/assets/background-2.svg';
 import background3 from '~/assets/background-3.svg';
 import codingGuidelines from '~/assets/coding-guidelines.svg';
 import componentKit from '~/assets/component-kit.svg';
 import designGuidelines from '~/assets/design-guidelines.svg';
-
+import { css } from 'emotion';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 const styles = {
   intro: css`
@@ -52,11 +50,11 @@ const styles = {
       transition: ${sv.transitionShort};
     }
 
-    [data-element="background"] {
+    [data-element='background'] {
       transform: translateX(-5px);
     }
 
-    [data-element="foreground"] {
+    [data-element='foreground'] {
       transform: translateX(5px) scale(0.95);
     }
 
@@ -73,7 +71,7 @@ const styles = {
     &:hover {
       filter: grayscale(0%);
 
-      [data-element="images"] {
+      [data-element='images'] {
         opacity: 1;
 
         img {
@@ -81,11 +79,11 @@ const styles = {
         }
       }
     }
-    
+
     @media ${sv.screenM} {
       filter: grayscale(0%);
 
-      [data-element="images"] {
+      [data-element='images'] {
         opacity: 1;
 
         img {
@@ -110,13 +108,7 @@ const styles = {
   `,
 };
 
-
-const Item = ({
-  url,
-  background,
-  foreground,
-  title,
-}) => {
+const Item = ({ url, background, foreground, title }) => {
   return (
     <Link to={url}>
       <div className={styles.item}>
@@ -124,12 +116,13 @@ const Item = ({
           <img src={background} data-element="background" />
           <img src={foreground} data-element="foreground" />
         </div>
-        <Title size={3} responsive={{ L: { size: 4 } }}>{title}</Title>
+        <Title size={3} responsive={{ L: { size: 4 } }}>
+          {title}
+        </Title>
       </div>
     </Link>
   );
 };
-
 
 const Intro = () => {
   return (
@@ -147,21 +140,24 @@ const Intro = () => {
             title="Component kit"
             url="/component-kit"
             background={background3}
-            foreground={componentKit} />
+            foreground={componentKit}
+          />
         </FlexItem>
         <FlexItem>
           <Item
             title="Design guidelines"
             url="/design-guidelines"
             background={background1}
-            foreground={designGuidelines} />
+            foreground={designGuidelines}
+          />
         </FlexItem>
         <FlexItem>
           <Item
             title="Coding guidelines"
             url="/coding-guidelines"
             background={background2}
-            foreground={codingGuidelines} />
+            foreground={codingGuidelines}
+          />
         </FlexItem>
       </Flex>
       <div className={styles.link}>
@@ -172,6 +168,5 @@ const Intro = () => {
     </Fragment>
   );
 };
-
 
 export default Intro;

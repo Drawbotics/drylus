@@ -1,8 +1,7 @@
-import React, { Fragment, useState } from 'react';
-import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
-import { TextLink, Icon } from '@drawbotics/react-drylus';
-
+import { Icon, TextLink } from '@drawbotics/react-drylus';
+import { css, cx } from 'emotion';
+import React, { Fragment, useState } from 'react';
 
 const styles = {
   preview: css`
@@ -11,7 +10,7 @@ const styles = {
     background: ${sv.white};
 
     &:hover {
-      [data-element="full-screen-toggle"] {
+      [data-element='full-screen-toggle'] {
         opacity: 1;
         pointer-events: auto;
       }
@@ -41,9 +40,8 @@ const styles = {
   `,
 };
 
-
 const Preview = ({ children, raw }) => {
-  const [ fullScreen, setFullScreen ] = useState(false);
+  const [fullScreen, setFullScreen] = useState(false);
 
   return (
     <div
@@ -55,25 +53,21 @@ const Preview = ({ children, raw }) => {
           [styles.floating]: fullScreen,
         })}
         data-element="full-screen-toggle">
-        <div onClick={() => setFullScreen(! fullScreen)}>
+        <div onClick={() => setFullScreen(!fullScreen)}>
           <TextLink>
             <Icon name={fullScreen ? 'minimize' : 'maximize'} />
           </TextLink>
         </div>
       </div>
-      {do{
+      {do {
         if (raw) {
-          <div dangerouslySetInnerHTML={{ __html: children }} />
-        }
-        else {
-          <Fragment>
-            {children}
-          </Fragment>
+          <div dangerouslySetInnerHTML={{ __html: children }} />;
+        } else {
+          <Fragment>{children}</Fragment>;
         }
       }}
     </div>
   );
 };
-
 
 export default Preview;

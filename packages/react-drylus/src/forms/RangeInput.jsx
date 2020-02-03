@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { css, cx } from 'emotion';
-import { Slider, Handles, Tracks, Rail } from 'react-compound-slider';
 import sv from '@drawbotics/drylus-style-vars';
+import { css, cx } from 'emotion';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { Handles, Rail, Slider, Tracks } from 'react-compound-slider';
 
 import Text from '../components/Text';
 import { styles as tooltipStyles } from '../components/Tooltip';
 import { Size } from '../enums';
 import { useResponsiveProps } from '../utils/hooks';
-
 
 const styles = {
   root: css`
@@ -77,7 +76,6 @@ const styles = {
   `,
 };
 
-
 const Tooltip = ({ value, visible }) => {
   return (
     <div
@@ -90,13 +88,7 @@ const Tooltip = ({ value, visible }) => {
   );
 };
 
-
-const Handle = ({
-  handle,
-  getHandleProps,
-  renderValue,
-  disabled,
-}) => {
+const Handle = ({ handle, getHandleProps, renderValue, disabled }) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const { id, value, percent } = handle;
 
@@ -113,24 +105,23 @@ const Handle = ({
     <div
       style={{ left: `${percent}%` }}
       className={cx(styles.handle, { [styles.disabledHandle]: disabled })}
-      {...getHandleProps(id, disabled ? {} : {
-        onMouseDown: handleShowTooltip,
-        onMouseUp: handleHideTooltip,
-        onTouchStart: handleShowTooltip,
-        onTouchEnd: handleHideTooltip,
-      })}>
+      {...getHandleProps(
+        id,
+        disabled
+          ? {}
+          : {
+              onMouseDown: handleShowTooltip,
+              onMouseUp: handleHideTooltip,
+              onTouchStart: handleShowTooltip,
+              onTouchEnd: handleHideTooltip,
+            },
+      )}>
       <Tooltip visible={tooltipVisible} value={renderValue(value)} />
     </div>
   );
 };
 
-
-const Track = ({
-  source,
-  target,
-  getTrackProps,
-  disabled,
-}) => {
+const Track = ({ source, target, getTrackProps, disabled }) => {
   return (
     <div
       style={{
@@ -138,25 +129,16 @@ const Track = ({
         width: `${target.percent - source.percent}%`,
       }}
       className={cx(styles.track, { [styles.disabledTrack]: disabled })}
-      {...getTrackProps()} />
+      {...getTrackProps()}
+    />
   );
 };
 
-
-const RangeInput = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    min,
-    max,
-    value,
-    step,
-    onChange,
-    onUpdate,
-    disabled,
-    renderValue,
-  } = useResponsiveProps(rest, responsive);
+const RangeInput = ({ responsive, ...rest }) => {
+  const { min, max, value, step, onChange, onUpdate, disabled, renderValue } = useResponsiveProps(
+    rest,
+    responsive,
+  );
 
   const isMultiHandle = value.length > 1;
   const values = isMultiHandle ? value : [value];
@@ -175,7 +157,8 @@ const RangeInput = ({
         {({ getRailProps }) => (
           <div
             className={cx(styles.rail, { [styles.disabledRail]: disabled })}
-            {...getRailProps()} />
+            {...getRailProps()}
+          />
         )}
       </Rail>
       <Handles>
@@ -193,7 +176,7 @@ const RangeInput = ({
           </div>
         )}
       </Handles>
-      <Tracks left={! isMultiHandle} right={false}>
+      <Tracks left={!isMultiHandle} right={false}>
         {({ tracks, getTrackProps }) => (
           <div>
             {tracks.map(({ id, source, target }) => (
@@ -220,7 +203,6 @@ const RangeInput = ({
   );
 };
 
-
 RangeInput.propTypes = {
   /** The minimum value displayed on the input, and the minimum selectable value */
   min: PropTypes.number.isRequired,
@@ -229,10 +211,7 @@ RangeInput.propTypes = {
   max: PropTypes.number.isRequired,
 
   /** If value is an array of numbers, then we display n handles, otherwise only 1 value shows 1 handle. If the value is larger than max, or smaller than min, the max or min will be used */
-  value: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.arrayOf(PropTypes.number),
-  ]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]).isRequired,
 
   /** Determines the range between each value, can be float or int */
   step: PropTypes.number,
@@ -261,9 +240,8 @@ RangeInput.propTypes = {
 };
 
 RangeInput.defaultProps = {
-  renderValue: x=>x,
-  onUpdate: x=>x,
-}
-
+  renderValue: (x) => x,
+  onUpdate: (x) => x,
+};
 
 export default RangeInput;

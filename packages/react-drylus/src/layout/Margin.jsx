@@ -1,12 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
+import { css, cx } from 'emotion';
 import camelCase from 'lodash/camelCase';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import Size from '../enums/Size';
 import { useResponsiveProps } from '../utils/hooks';
-
 
 const styles = {
   root: css`
@@ -151,7 +150,7 @@ const styles = {
   `,
   defaultBottom: css`
     margin-bottom: ${sv.defaultMargin};
-    
+
     @media ${sv.screenL} {
       margin-bottom: ${sv.marginSmall};
     }
@@ -298,7 +297,6 @@ const styles = {
   `,
 };
 
-
 function _computeSize(sizeDescription) {
   let size = {};
 
@@ -314,33 +312,29 @@ function _computeSize(sizeDescription) {
   return size;
 }
 
-
-const Margin = ({
-  responsive,
-  ...rest
-}) => {
+const Margin = ({ responsive, ...rest }) => {
   const { children, size: rawSize, style } = useResponsiveProps(rest, responsive);
 
   const isUniform = typeof rawSize !== 'object';
 
-  const size = ! isUniform && (rawSize.vertical || rawSize.horizontal)
-    ? _computeSize(rawSize)
-    : rawSize;
+  const size =
+    !isUniform && (rawSize.vertical || rawSize.horizontal) ? _computeSize(rawSize) : rawSize;
 
   return (
-    <div className={cx(styles.root, {
-      [styles[camelCase(size?.description)]]: isUniform && size,
-      [styles.resetMargin]: ! isUniform,
-      [styles[camelCase(`${size?.left?.description}_LEFT`)]]: ! isUniform && size?.left,
-      [styles[camelCase(`${size?.right?.description}_RIGHT`)]]: ! isUniform && size?.right,
-      [styles[camelCase(`${size?.top?.description}_TOP`)]]: ! isUniform && size?.top,
-      [styles[camelCase(`${size?.bottom?.description}_BOTTOM`)]]: ! isUniform && size?.bottom,
-    })} style={style}>
+    <div
+      className={cx(styles.root, {
+        [styles[camelCase(size?.description)]]: isUniform && size,
+        [styles.resetMargin]: !isUniform,
+        [styles[camelCase(`${size?.left?.description}_LEFT`)]]: !isUniform && size?.left,
+        [styles[camelCase(`${size?.right?.description}_RIGHT`)]]: !isUniform && size?.right,
+        [styles[camelCase(`${size?.top?.description}_TOP`)]]: !isUniform && size?.top,
+        [styles[camelCase(`${size?.bottom?.description}_BOTTOM`)]]: !isUniform && size?.bottom,
+      })}
+      style={style}>
       {children}
     </div>
   );
 };
-
 
 Margin.propTypes = {
   /** Determines the amount of margin given to the component. If a single value, the margin is applied equally to each side */
@@ -437,6 +431,5 @@ Margin.propTypes = {
     HUGE: PropTypes.object,
   }),
 };
-
 
 export default Margin;

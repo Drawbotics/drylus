@@ -1,17 +1,13 @@
-import React from 'react';
 import { cx } from 'emotion';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import { Category, Size, Tier } from '../enums';
 import { getEnumAsClass } from '../utils';
-import { styles } from './Button';
 import { useResponsiveProps } from '../utils/hooks';
+import { styles } from './Button';
 
-
-const ButtonLink = ({
-  responsive,
-  ...rest
-}) => {
+const ButtonLink = ({ responsive, ...rest }) => {
   const {
     children,
     disabled,
@@ -25,10 +21,10 @@ const ButtonLink = ({
     style,
   } = useResponsiveProps(rest, responsive);
 
-  if (! children && trailing && leading) {
+  if (!children && trailing && leading) {
     throw new Error('If no children are given, only pass trailing or leading, but not both');
   }
-  const round = ! children && (trailing || leading);
+  const round = !children && (trailing || leading);
   return (
     <span
       style={style}
@@ -42,25 +38,20 @@ const ButtonLink = ({
         [styles.fullWidth]: fullWidth,
       })}
       disabled={disabled}>
-      {do{
+      {do {
         if (leading) {
-          <div className={cx({ [styles.leading]: ! round })}>
-            {leading}
-          </div>
+          <div className={cx({ [styles.leading]: !round })}>{leading}</div>;
         }
       }}
       {children}
-      {do{
+      {do {
         if (trailing) {
-          <div className={cx({ [styles.trailing]: ! round })}>
-            {trailing}
-          </div>
+          <div className={cx({ [styles.trailing]: !round })}>{trailing}</div>;
         }
       }}
     </span>
   );
-}
-
+};
 
 ButtonLink.propTypes = {
   /** Just text for the button */
@@ -80,17 +71,9 @@ ButtonLink.propTypes = {
     Category.WARNING,
   ]),
 
-  size: PropTypes.oneOf([
-    Size.SMALL,
-    Size.DEFAULT,
-    Size.LARGE,
-  ]),
+  size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
 
-  tier: PropTypes.oneOf([
-    Tier.PRIMARY,
-    Tier.SECONDARY,
-    Tier.TERTIARY,
-  ]),
+  tier: PropTypes.oneOf([Tier.PRIMARY, Tier.SECONDARY, Tier.TERTIARY]),
 
   /** Shown in front of the button text, can be a Spinner or Icon */
   leading: PropTypes.node,
@@ -115,11 +98,9 @@ ButtonLink.propTypes = {
   }),
 };
 
-
 ButtonLink.defaultProps = {
   size: Size.DEFAULT,
   tier: Tier.PRIMARY,
 };
-
 
 export default ButtonLink;

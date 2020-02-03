@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react';
-import { css, cx } from 'emotion';
 import sv, { fade } from '@drawbotics/drylus-style-vars';
-import omit from 'lodash/omit';
-import startCase from 'lodash/startCase';
+import { Title } from '@drawbotics/react-drylus';
+import { css, cx } from 'emotion';
 import kebabCase from 'lodash/kebabCase';
 import last from 'lodash/last';
-import { Title } from '@drawbotics/react-drylus';
-import { withRouter, Link } from 'react-router-dom';
-
+import omit from 'lodash/omit';
+import startCase from 'lodash/startCase';
+import React, { useEffect } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 
 const styles = {
   linksNavigation: css`
@@ -27,7 +26,7 @@ const styles = {
     padding-left: 0;
     margin: 0 ${sv.marginSmall};
     border-bottom: 1px solid ${sv.neutral};
-    
+
     @media ${sv.screenL} {
       display: none;
     }
@@ -74,12 +73,12 @@ const styles = {
     }
   `,
   sublinks: css`
-    & > a > [data-element="link"] {
+    & > a > [data-element='link'] {
       padding-left: ${sv.paddingExtraLarge};
     }
   `,
   root: css`
-    & > a > [data-element="link"] {
+    & > a > [data-element='link'] {
       padding-left: ${sv.defaultPadding};
     }
   `,
@@ -96,29 +95,24 @@ const styles = {
   `,
 };
 
-
-export function generateLinks({
-  route,
-  routeName,
-  parent='',
-  pathname,
-  base='',
-  onClickLink,
-}) {
-  const newPath = routeName ? `/${kebabCase(parent)}/${kebabCase(routeName)}` : `/${kebabCase(parent)}`;
+export function generateLinks({ route, routeName, parent = '', pathname, base = '', onClickLink }) {
+  const newPath = routeName
+    ? `/${kebabCase(parent)}/${kebabCase(routeName)}`
+    : `/${kebabCase(parent)}`;
   const withBase = `/${base}/${newPath}`;
   const cleaned = withBase.replace(/\/+/g, '/');
   const active = pathname === cleaned;
   if (typeof route !== 'function') {
     return (
       <div key={cleaned} className={styles.section}>
-        {do{
+        {do {
           if (routeName) {
             const link = (
-              <div className={cx(styles.title, {
-                [styles.link]: route.index,
-                [styles.active]: active,
-              })}>
+              <div
+                className={cx(styles.title, {
+                  [styles.link]: route.index,
+                  [styles.active]: active,
+                })}>
                 {startCase(routeName)}
               </div>
             );
@@ -128,26 +122,26 @@ export function generateLinks({
                   {link}
                 </Link>
               );
-            }
-            else {
+            } else {
               return link;
             }
           }
         }}
-        <div className={cx(styles.sublinks, { [styles.root]: ! routeName })}>
-          {Object.keys(omit(route, 'index')).map((routeName) => generateLinks({
-            route: route[routeName],
-            routeName,
-            parent: newPath,
-            pathname,
-            base,
-            onClickLink,
-          }))}
+        <div className={cx(styles.sublinks, { [styles.root]: !routeName })}>
+          {Object.keys(omit(route, 'index')).map((routeName) =>
+            generateLinks({
+              route: route[routeName],
+              routeName,
+              parent: newPath,
+              pathname,
+              base,
+              onClickLink,
+            }),
+          )}
         </div>
       </div>
     );
-  }
-  else {
+  } else {
     return (
       <Link onClick={onClickLink} key={cleaned} to={cleaned}>
         <div
@@ -162,14 +156,7 @@ export function generateLinks({
   }
 }
 
-
-const LinksNavigation = ({
-  title,
-  routes,
-  location,
-  base,
-  onClickLink,
-}) => {
+const LinksNavigation = ({ title, routes, location, base, onClickLink }) => {
   useEffect(() => {
     const current = last(location.pathname.split('/'));
     document.title = `Drawbotics Styleguide - ${startCase(current)}`;
@@ -177,7 +164,9 @@ const LinksNavigation = ({
   return (
     <div className={styles.linksNavigation}>
       <div className={styles.navigationTitle}>
-        <Title size={4} noMargin>{title}</Title>
+        <Title size={4} noMargin>
+          {title}
+        </Title>
       </div>
       <div className={styles.links}>
         {generateLinks({
@@ -190,6 +179,5 @@ const LinksNavigation = ({
     </div>
   );
 };
-
 
 export default withRouter(LinksNavigation);

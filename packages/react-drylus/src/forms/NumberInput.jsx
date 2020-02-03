@@ -1,12 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React, { useEffect, useRef, useState } from 'react';
 
-import { InputWithRef } from './Input';
 import Icon from '../components/Icon';
 import { useResponsiveProps } from '../utils/hooks';
-
+import { InputWithRef } from './Input';
 
 const styles = {
   root: css`
@@ -14,14 +13,14 @@ const styles = {
     display: inline-block;
     width: 100%;
 
-    & [data-element="suffix"] {
+    & [data-element='suffix'] {
       padding: 0;
       align-items: stretch;
       overflow: hidden;
     }
   `,
   numberInput: css`
-    & [type="number"] {
+    & [type='number'] {
       &::-webkit-outer-spin-button {
         appearance: none;
         margin: 0;
@@ -98,11 +97,7 @@ const styles = {
   `,
 };
 
-
-const NumberInput = ({
-  responsive,
-  ...rest
-}) => {
+const NumberInput = ({ responsive, ...rest }) => {
   const {
     value: rawValue,
     placeholder,
@@ -129,24 +124,22 @@ const NumberInput = ({
 
     if (v === '-' || v === '') {
       onChange(v, name);
-    }
-    else if (numericalValue === 0 || numericalValue) {
-      const finalValue = numericalValue > max ? max : (numericalValue < min ? min : numericalValue);
+    } else if (numericalValue === 0 || numericalValue) {
+      const finalValue = numericalValue > max ? max : numericalValue < min ? min : numericalValue;
       onChange(finalValue, name);
     }
   };
 
-  const value = (rawValue === '-' || rawValue === '') ? rawValue : Number(rawValue);
+  const value = rawValue === '-' || rawValue === '' ? rawValue : Number(rawValue);
 
-  if (value !== '-' && value !== '' && value !== 0 && ! value) {
+  if (value !== '-' && value !== '' && value !== 0 && !value) {
     console.warn('Only numbers allowed as value for NumberInput');
   }
 
   useEffect(() => {
     if (value === 0 || value) {
       setExtraLeftPadding(leftSpanRef.current?.getBoundingClientRect()?.width);
-    }
-    else if (value === '' || value == null) {
+    } else if (value === '' || value == null) {
       setExtraLeftPadding(null);
     }
   }, [rawValue]);
@@ -185,37 +178,40 @@ const NumberInput = ({
         inputMode="numeric"
         className={styles.numberInput}
         extraLeftPadding={extraLeftPadding}
-        suffix={withCounter && onChange != null ?
-          <div className={cx(styles.buttons, { [styles.disabled]: disabled })}>
-            <button className={styles.button} onClick={() => {
-              const res = (value || 0) + step;
-              if (! disabled && value < max) {
-                onChange(Number.isInteger(res) ? res : res.toFixed(decimalPlaces), name);
-              }
-            }}>
-              <Icon name="plus" bold />
-            </button>
-            <button className={styles.button} onClick={() => {
-              const res = (value || 0) - step;
-              if (! disabled && value > min) {
-                onChange(Number.isInteger(res) ? res : res.toFixed(decimalPlaces), name);
-              }
-            }}>
-              <Icon name="minus" bold />
-            </button>
-          </div>
-        : null} />
+        suffix={
+          withCounter && onChange != null ? (
+            <div className={cx(styles.buttons, { [styles.disabled]: disabled })}>
+              <button
+                className={styles.button}
+                onClick={() => {
+                  const res = (value || 0) + step;
+                  if (!disabled && value < max) {
+                    onChange(Number.isInteger(res) ? res : res.toFixed(decimalPlaces), name);
+                  }
+                }}>
+                <Icon name="plus" bold />
+              </button>
+              <button
+                className={styles.button}
+                onClick={() => {
+                  const res = (value || 0) - step;
+                  if (!disabled && value > min) {
+                    onChange(Number.isInteger(res) ? res : res.toFixed(decimalPlaces), name);
+                  }
+                }}>
+                <Icon name="minus" bold />
+              </button>
+            </div>
+          ) : null
+        }
+      />
     </div>
   );
 };
 
-
 NumberInput.propTypes = {
   /** Value displayed in the field */
-  value: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.oneOf(['-', '']),
-  ]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf(['-', ''])]).isRequired,
 
   /** Name of the form element (target.name) */
   name: PropTypes.string,
@@ -233,7 +229,7 @@ NumberInput.propTypes = {
   hint: PropTypes.string,
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error: PropTypes.oneOfType([ PropTypes.string, PropTypes.bool ]),
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid: PropTypes.bool,
@@ -270,13 +266,11 @@ NumberInput.propTypes = {
   }),
 };
 
-
 NumberInput.defaultProps = {
   min: -Infinity,
   max: Infinity,
   withCounter: true,
   step: 1,
 };
-
 
 export default NumberInput;

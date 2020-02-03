@@ -1,8 +1,7 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
-
+import React from 'react';
 
 const styles = {
   root: css`
@@ -94,12 +93,12 @@ const styles = {
   `,
 };
 
-
 export const PanelHeader = ({ children, noPadding }) => {
   return (
-    <div className={cx(styles.header, {
-      [styles.noSpacing]: noPadding,
-    })}>
+    <div
+      className={cx(styles.header, {
+        [styles.noSpacing]: noPadding,
+      })}>
       {children}
     </div>
   );
@@ -113,12 +112,9 @@ PanelHeader.propTypes = {
   noPadding: PropTypes.bool,
 };
 
-
 export const PanelBody = ({ children, noPadding, style }) => {
   return (
-    <div
-      style={style}
-      className={cx(styles.body, { [styles.noSpacing]: noPadding })}>
+    <div style={style} className={cx(styles.body, { [styles.noSpacing]: noPadding })}>
       {children}
     </div>
   );
@@ -135,15 +131,12 @@ PanelBody.propTypes = {
   style: PropTypes.object,
 };
 
-
 export const PanelSection = ({ children, title, style }) => {
   return (
     <div style={style} className={styles.section}>
-      {do{
+      {do {
         if (title) {
-          <div className={styles.sectionTitle}>
-            {title}
-          </div>
+          <div className={styles.sectionTitle}>{title}</div>;
         }
       }}
       {children}
@@ -162,12 +155,13 @@ PanelSection.propTypes = {
   style: PropTypes.object,
 };
 
-
 export const PanelFooter = ({ children, noPadding, style }) => {
   return (
-    <div style={style} className={cx(styles.footer, {
-      [styles.noSpacing]: noPadding,
-    })}>
+    <div
+      style={style}
+      className={cx(styles.footer, {
+        [styles.noSpacing]: noPadding,
+      })}>
       {children}
     </div>
   );
@@ -184,20 +178,20 @@ PanelFooter.propTypes = {
   style: PropTypes.object,
 };
 
-
 const Panel = ({ header, body, footer, style }) => {
   return (
-    <div style={style} className={cx(styles.root, {
-      [styles.doubleTopPadding]: ! header && ! body.props.noPadding,
-      [styles.doubleBottomPadding]: ! footer && ! body.props.noPadding,
-    })}>
+    <div
+      style={style}
+      className={cx(styles.root, {
+        [styles.doubleTopPadding]: !header && !body.props.noPadding,
+        [styles.doubleBottomPadding]: !footer && !body.props.noPadding,
+      })}>
       {header}
       {body}
       {footer}
     </div>
   );
 };
-
 
 Panel.propTypes = {
   /** Component: PanelHeader, will render as the header of the panel */
@@ -212,6 +206,5 @@ Panel.propTypes = {
   /** Used for style overrides */
   style: PropTypes.object,
 };
-
 
 export default Panel;

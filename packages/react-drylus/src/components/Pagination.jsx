@@ -1,12 +1,11 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React from 'react';
 
+import { Category, Size, Tier } from '../enums';
 import Button from './Button';
 import Icon from './Icon';
-import { Size, Tier, Category } from '../enums';
-
 
 const styles = {
   root: css`
@@ -27,34 +26,44 @@ const styles = {
   `,
 };
 
-
 function _getLabels(value, pages, maxVisiblePages) {
   const shouldEllipsise = pages > maxVisiblePages;
-  if (! shouldEllipsise) {
-    return Array(pages).fill(0).map((_, i) => i + 1);
+  if (!shouldEllipsise) {
+    return Array(pages)
+      .fill(0)
+      .map((_, i) => i + 1);
   }
   if (value < maxVisiblePages) {
-    return [ ...Array(maxVisiblePages - 1).fill(0).map((_, i) => i + 1), '...', pages ];
-  }
-  else if (value >= maxVisiblePages && value <= pages - (maxVisiblePages - 1)) {
-    return [ 1, '...', ...Array(maxVisiblePages - 2).fill(value - 2).map((v, i) => v + i + 1), '...', pages ];
-  }
-  else {
-    return [ 1, '...', ...Array(maxVisiblePages - 1).fill(pages - (maxVisiblePages - 1)).map((v, i) => v + i + 1) ];
+    return [
+      ...Array(maxVisiblePages - 1)
+        .fill(0)
+        .map((_, i) => i + 1),
+      '...',
+      pages,
+    ];
+  } else if (value >= maxVisiblePages && value <= pages - (maxVisiblePages - 1)) {
+    return [
+      1,
+      '...',
+      ...Array(maxVisiblePages - 2)
+        .fill(value - 2)
+        .map((v, i) => v + i + 1),
+      '...',
+      pages,
+    ];
+  } else {
+    return [
+      1,
+      '...',
+      ...Array(maxVisiblePages - 1)
+        .fill(pages - (maxVisiblePages - 1))
+        .map((v, i) => v + i + 1),
+    ];
   }
 }
 
-
-const Pagination = ({
-  prevLabel,
-  nextLabel,
-  pages,
-  onChange,
-  value,
-  maxVisiblePages,
-  style,
-}) => {
-  if (maxVisiblePages < 4) console.warn("`maxVisiblePages` has to be at least 4");
+const Pagination = ({ prevLabel, nextLabel, pages, onChange, value, maxVisiblePages, style }) => {
+  if (maxVisiblePages < 4) console.warn('`maxVisiblePages` has to be at least 4');
   const labels = _getLabels(value, pages, Math.max(maxVisiblePages, 4));
   return (
     <div style={style} className={styles.root}>
@@ -70,20 +79,17 @@ const Pagination = ({
         <div key={i} className={styles.item}>
           {do {
             if (label === '...') {
-              <Button
-                tier={Tier.TERTIARY}
-                size={Size.SMALL}>
+              <Button tier={Tier.TERTIARY} size={Size.SMALL}>
                 {label}
-              </Button>
-            }
-            else {
+              </Button>;
+            } else {
               <Button
                 onClick={() => onChange(label)}
                 category={value === label ? Category.BRAND : null}
                 tier={value === label ? Tier.PRIMARY : Tier.TERTIARY}
                 size={Size.SMALL}>
                 {`${label}`}
-              </Button>
+              </Button>;
             }
           }}
         </div>
@@ -99,7 +105,6 @@ const Pagination = ({
     </div>
   );
 };
-
 
 Pagination.propTypes = {
   /** A number representing the amount of available pages */
@@ -124,12 +129,10 @@ Pagination.propTypes = {
   style: PropTypes.object,
 };
 
-
 Pagination.defaultProps = {
   prevLabel: 'Previous',
   nextLabel: 'Next',
   maxVisiblePages: 5,
 };
-
 
 export default Pagination;

@@ -1,16 +1,15 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
-import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
+import { css, cx } from 'emotion';
+import PropTypes from 'prop-types';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
-import { useRect } from '../utils/hooks';
-import { getStyleForSide, CustomPropTypes, deprecateProperty } from '../utils';
 import { Position } from '../enums';
+import { CustomPropTypes, deprecateProperty, getStyleForSide } from '../utils';
+import { useRect } from '../utils/hooks';
 import { useResponsiveProps } from '../utils/hooks';
-
 
 export const styles = {
   root: css`
@@ -27,7 +26,7 @@ export const styles = {
     text-align: center;
     transform: translate(0, -5px);
     transition: transform ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve},
-                opacity ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+      opacity ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
 
     &::after {
       content: ' ';
@@ -85,32 +84,23 @@ export const styles = {
   `,
 };
 
-
 /**
  * @deprecated and will be removed in version 6.0
  */
-export const TooltipSides = deprecateProperty(new Enum(
-  'TOP',
-  'LEFT',
-  'BOTTOM',
-  'RIGHT',
-), 'TooltipSides', 'Position');
+export const TooltipSides = deprecateProperty(
+  new Enum('TOP', 'LEFT', 'BOTTOM', 'RIGHT'),
+  'TooltipSides',
+  'Position',
+);
 
+const Tooltip = ({ responsive, ...rest }) => {
+  const { children, message, content: _content, side, style } = useResponsiveProps(
+    rest,
+    responsive,
+  );
 
-const Tooltip = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    children,
-    message,
-    content: _content,
-    side,
-    style,
-  } = useResponsiveProps(rest, responsive);
-
-  const [ visible, setVisible ] = useState(false);
-  const [ outletElement, setOutletElement ] = useState(null);
+  const [visible, setVisible] = useState(false);
+  const [outletElement, setOutletElement] = useState(null);
   const childrenRef = useRef();
   const tooltipRef = useRef();
   const { rect, setRect } = useRect();
@@ -119,18 +109,17 @@ const Tooltip = ({
   const content = _content != null ? _content : message;
 
   useEffect(() => {
-    if ( ! document.getElementById('tooltips-outlet')) {
+    if (!document.getElementById('tooltips-outlet')) {
       const tooltipsOutlet = document.createElement('div');
       tooltipsOutlet.id = 'tooltips-outlet';
       document.body.appendChild(tooltipsOutlet);
       setOutletElement(tooltipsOutlet);
-    }
-    else {
+    } else {
       setOutletElement(document.getElementById('tooltips-outlet'));
     }
 
     return () => {
-      if (! visible && outletElement != null) {
+      if (!visible && outletElement != null) {
         document.body.removeChild(outletElement);
       }
     };
@@ -141,7 +130,7 @@ const Tooltip = ({
 
     const handleMouseEnter = () => {
       timeout = setTimeout(() => setVisible(true), 200);
-    }
+    };
 
     const handleMouseLeave = () => {
       clearTimeout(timeout);
@@ -208,7 +197,6 @@ const Tooltip = ({
   );
 };
 
-
 Tooltip.propTypes = {
   /** DEPRECATED */
   message: CustomPropTypes.mutuallyExclusive('content', {
@@ -225,7 +213,7 @@ Tooltip.propTypes = {
   /** Component wrapped by the tooltip */
   children: PropTypes.node.isRequired,
 
-  side: PropTypes.oneOf([ Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM ]),
+  side: PropTypes.oneOf([Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM]),
 
   /** Used for style overrides */
   style: PropTypes.object,
@@ -241,12 +229,10 @@ Tooltip.propTypes = {
   }),
 };
 
-
 Tooltip.defaultProps = {
   side: Position.TOP,
 
   style: {},
 };
-
 
 export default Tooltip;

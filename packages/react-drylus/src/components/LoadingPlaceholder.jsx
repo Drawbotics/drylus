@@ -1,10 +1,9 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, keyframes } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React from 'react';
 
 import { useResponsiveProps } from '../utils/hooks';
-
 
 const shimmer = keyframes`
   0% {
@@ -31,7 +30,8 @@ export const styles = {
       background: ${sv.neutral};
       border-radius: ${sv.defaultBorderRadius};
       overflow: hidden;
-      background: linear-gradient(to right,
+      background: linear-gradient(
+        to right,
         ${sv.neutral} 8%,
         ${sv.neutralLight} 18%,
         ${sv.neutral} 33%
@@ -42,36 +42,18 @@ export const styles = {
   `,
 };
 
+const LoadingPlaceholder = ({ responsive, ...rest }) => {
+  const { height, width } = useResponsiveProps(rest, responsive);
 
-const LoadingPlaceholder = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    height,
-    width,
-  } = useResponsiveProps(rest, responsive);
-
-  return (
-    <div
-      className={styles.shimmer}
-      style={{ height, width }} />
-  );
+  return <div className={styles.shimmer} style={{ height, width }} />;
 };
-
 
 LoadingPlaceholder.propTypes = {
   /** Determines the height of the placeholder */
-  height: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]).isRequired,
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 
   /** Determines the height of the placeholder */
-  width: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]).isRequired,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 
   /** Reponsive prop overrides */
   responsive: PropTypes.shape({
@@ -84,11 +66,9 @@ LoadingPlaceholder.propTypes = {
   }),
 };
 
-
 LoadingPlaceholder.defaultProps = {
   height: sv.defaultMargin,
   width: 200,
 };
-
 
 export default LoadingPlaceholder;

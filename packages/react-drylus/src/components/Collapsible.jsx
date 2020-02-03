@@ -1,28 +1,26 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React from 'react';
 
-import Label from './Label';
 import Icon from './Icon';
-
+import Label from './Label';
 
 const styles = {
-  root: css`
-  `,
+  root: css``,
   header: css`
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    & [data-element="title"] {
+    & [data-element='title'] {
       transition: ${sv.transitionShort};
     }
 
     &:hover {
       cursor: pointer;
 
-      & [data-element="title"] {
+      & [data-element='title'] {
         transform: translateX(5px);
       }
     }
@@ -36,24 +34,16 @@ const styles = {
   `,
 };
 
-
-const Collapsible = ({
-  title,
-  isOpen,
-  children,
-  onClick,
-  style,
-}) => {
+const Collapsible = ({ title, isOpen, children, onClick, style }) => {
   return (
     <div style={style} className={styles.root}>
       <div className={styles.header} onClick={onClick}>
         <div data-element="title">
           {do {
             if (typeof title === 'string') {
-              <Label ellipsized>{title}</Label>
-            }
-            else {
-              title
+              <Label ellipsized>{title}</Label>;
+            } else {
+              title;
             }
           }}
         </div>
@@ -63,22 +53,16 @@ const Collapsible = ({
       </div>
       {do {
         if (isOpen) {
-          <div className={styles.content}>
-            {children}
-          </div>
+          <div className={styles.content}>{children}</div>;
         }
       }}
     </div>
   );
 };
 
-
 Collapsible.propTypes = {
   /** Shown on the left side as a label */
-  title: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.string,
-  ]).isRequired,
+  title: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
 
   /** Determines whether the content of the collapsible is visible */
   isOpen: PropTypes.bool,
@@ -92,6 +76,5 @@ Collapsible.propTypes = {
   /** Used for style overrides */
   style: PropTypes.object,
 };
-
 
 export default Collapsible;

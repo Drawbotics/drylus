@@ -1,14 +1,9 @@
-import React from 'react';
-import { css } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
+import { css } from 'emotion';
+import React from 'react';
 
-import {
-  SelectProp,
-  InputProp,
-  ToggleProp,
-} from './props';
+import { InputProp, SelectProp, ToggleProp } from './props';
 import { normalizeValue } from './utils';
-
 
 const styles = {
   union: css`
@@ -18,32 +13,23 @@ const styles = {
   `,
 };
 
-
-const Prop = ({
-  name,
-  prop,
-  value,
-  onChange,
-  enums,
-}) => {
+const Prop = ({ name, prop, value, onChange, enums }) => {
   const { name: type } = prop.type;
   const propWithKey = { ...prop, key: name };
   switch (type) {
     case 'bool':
-      return (
-        <ToggleProp prop={propWithKey} value={value} onChange={onChange} />
-      );
+      return <ToggleProp prop={propWithKey} value={value} onChange={onChange} />;
     case 'enum':
-      return (
-        <SelectProp prop={propWithKey} value={value} onChange={onChange} enums={enums} />
-      );
+      return <SelectProp prop={propWithKey} value={value} onChange={onChange} enums={enums} />;
     case 'string':
-      return (
-        <InputProp prop={propWithKey} value={value} onChange={onChange} />
-      );
+      return <InputProp prop={propWithKey} value={value} onChange={onChange} />;
     case 'number':
       return (
-        <InputProp prop={propWithKey} value={value} onChange={(v, n) => onChange(normalizeValue(v), n)} />
+        <InputProp
+          prop={propWithKey}
+          value={value}
+          onChange={(v, n) => onChange(normalizeValue(v), n)}
+        />
       );
     case 'union':
       return (
@@ -55,7 +41,8 @@ const Prop = ({
               prop={{ type }}
               enums={enums}
               value={value}
-              onChange={onChange} />
+              onChange={onChange}
+            />
           ))}
         </div>
       );
@@ -64,6 +51,5 @@ const Prop = ({
       return null;
   }
 };
-
 
 export default Prop;

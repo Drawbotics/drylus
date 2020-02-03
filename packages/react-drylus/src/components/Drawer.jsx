@@ -1,20 +1,19 @@
-import React, { useEffect, useState, useRef } from 'react';
-import ReactDOM from 'react-dom';
+import sv from '@drawbotics/drylus-style-vars';
+import Enum from '@drawbotics/enums';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
-import sv from '@drawbotics/drylus-style-vars';
-import { useScreenSize } from '@drawbotics/use-screen-size';
-import Enum from '@drawbotics/enums';
 
-import Button from './Button';
-import Title from './Title';
-import Icon from './Icon';
-import { Size, Tier, Position } from '../enums';
 import { styles as themeStyles } from '../base/ThemeProvider';
-import { useResponsiveProps } from '../utils/hooks';
+import { Position, Size, Tier } from '../enums';
 import { deprecateProperty } from '../utils';
-
+import { useResponsiveProps } from '../utils/hooks';
+import Button from './Button';
+import Icon from './Icon';
+import Title from './Title';
 
 const styles = {
   outerWrapper: css`
@@ -35,7 +34,7 @@ const styles = {
     pointer-events: auto;
     overscroll-behavior: none;
 
-    & [data-element="wrapper"] {
+    & [data-element='wrapper'] {
       box-shadow: -5px 0px 15px ${sv.neutralDarker};
     }
   `,
@@ -128,14 +127,14 @@ const styles = {
   drawerOverlayEnter: css`
     opacity: 0;
 
-    & [data-element="wrapper"] {
+    & [data-element='wrapper'] {
       transform: translateX(100%);
     }
   `,
   drawerOverlayEnterLeft: css`
     opacity: 0;
 
-    & [data-element="wrapper"] {
+    & [data-element='wrapper'] {
       transform: translateX(-100%);
     }
   `,
@@ -143,7 +142,7 @@ const styles = {
     opacity: 1;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
 
-    & [data-element="wrapper"] {
+    & [data-element='wrapper'] {
       transform: translateX(0);
       transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
     }
@@ -152,7 +151,7 @@ const styles = {
     opacity: 1;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
 
-    & [data-element="wrapper"] {
+    & [data-element='wrapper'] {
       transform: translateX(0);
     }
   `,
@@ -160,35 +159,24 @@ const styles = {
     opacity: 0.01;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
 
-    & [data-element="wrapper"] {
+    & [data-element='wrapper'] {
       transform: translateX(100%);
       transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
     }
   `,
   drawerOverlayExitActiveLeft: css`
-    & [data-element="wrapper"] {
+    & [data-element='wrapper'] {
       transform: translateX(-100%);
     }
   `,
 };
 
-
 /**
  * @deprecated and will be removed in version 6.0
  */
-export const DrawerSides = deprecateProperty(new Enum(
-  'RIGHT',
-  'LEFT',
-), 'DrawerSides', 'Position');
+export const DrawerSides = deprecateProperty(new Enum('RIGHT', 'LEFT'), 'DrawerSides', 'Position');
 
-
-const BaseDrawer = ({
-  children,
-  onClickClose,
-  footer,
-  title,
-  style,
-}) => {
+const BaseDrawer = ({ children, onClickClose, footer, title, style }) => {
   const { screenSize, ScreenSizes } = useScreenSize();
   return (
     <div style={style} className={styles.root}>
@@ -197,36 +185,31 @@ const BaseDrawer = ({
           size={screenSize <= ScreenSizes.L ? Size.DEFAULT : Size.SMALL}
           onClick={onClickClose}
           tier={Tier.TERTIARY}
-          leading={<Icon name="x" />} />
+          leading={<Icon name="x" />}
+        />
       </div>
       {do {
         if (title) {
           <div className={styles.title}>
-            <Title size={4} noMargin>{title}</Title>
-          </div>
+            <Title size={4} noMargin>
+              {title}
+            </Title>
+          </div>;
         }
       }}
       <div className={styles.contentWrapper}>
-        <div className={styles.content}>
-          {children}
-        </div>
+        <div className={styles.content}>{children}</div>
       </div>
       {do {
         if (footer) {
-          <div className={styles.footer}>
-            {footer}
-          </div>
+          <div className={styles.footer}>{footer}</div>;
         }
       }}
     </div>
   );
 };
 
-
-const Drawer = ({
-  responsive,
-  ...rest
-}) => {
+const Drawer = ({ responsive, ...rest }) => {
   const {
     children,
     footer,
@@ -239,24 +222,23 @@ const Drawer = ({
     title,
     side,
   } = useResponsiveProps(rest, responsive);
-  
-  const [ outletElement, setOutletElement ] = useState(null);
+
+  const [outletElement, setOutletElement] = useState(null);
   const overlayElement = useRef();
   const { screenSize, ScreenSizes } = useScreenSize();
 
   useEffect(() => {
-    if ( ! document.getElementById('drawers-outlet')) {
+    if (!document.getElementById('drawers-outlet')) {
       const drawersOutlet = document.createElement('div');
       drawersOutlet.id = 'drawers-outlet';
       document.body.appendChild(drawersOutlet);
       setOutletElement(drawersOutlet);
-    }
-    else {
+    } else {
       setOutletElement(document.getElementById('drawers-outlet'));
     }
 
     return () => {
-      if (! visible && outletElement) {
+      if (!visible && outletElement) {
         document.body.removeChild(outletElement);
       }
     };
@@ -269,8 +251,7 @@ const Drawer = ({
       document.body.style.overflow = 'hidden';
       document.body.style.pointerEvents = 'none';
       document.body.parentElement.style.position = 'fixed';
-    }
-    else {
+    } else {
       document.body.style.overflow = 'initial';
       document.body.style.pointerEvents = 'auto';
       document.body.parentElement.style.position = '';
@@ -278,22 +259,30 @@ const Drawer = ({
   }, [visible]);
 
   const width = do {
-    if (! responsive?.M?.width
-      && ! responsive?.S?.width
-      && ! responsive?.XS?.width
-      && screenSize <= ScreenSizes.M) {
-      '100vw';
-    }
-    else {
+    if (
+      !responsive?.M?.width &&
+      !responsive?.S?.width &&
+      !responsive?.XS?.width &&
+      screenSize <= ScreenSizes.M
+    ) {
+      ('100vw');
+    } else {
       typeof rawWidth === 'number' ? `${rawWidth}px` : rawWidth;
     }
-  }
+  };
 
-  const content = raw ? children : <BaseDrawer title={title} onClickClose={onClickClose} footer={footer}>{children}</BaseDrawer>;
+  const content = raw ? (
+    children
+  ) : (
+    <BaseDrawer title={title} onClickClose={onClickClose} footer={footer}>
+      {children}
+    </BaseDrawer>
+  );
 
   if (asOverlay) {
-    if (! outletElement) return '';
-    const handleClickOverlay = (e) => e.target === overlayElement?.current ? onClickOverlay() : null;
+    if (!outletElement) return '';
+    const handleClickOverlay = (e) =>
+      e.target === overlayElement?.current ? onClickOverlay() : null;
 
     return ReactDOM.createPortal(
       <div className={themeStyles.root}>
@@ -303,10 +292,8 @@ const Drawer = ({
           mountOnEnter
           unmountOnExit
           classNames={{
-            enter: side === Position.LEFT
-              ? styles.drawerOverlayEnterLeft
-              : styles.drawerOverlayEnter
-            ,
+            enter:
+              side === Position.LEFT ? styles.drawerOverlayEnterLeft : styles.drawerOverlayEnter,
             enterActive: styles.drawerOverlayEnterActive,
             exit: styles.drawerOverlayExit,
             exitActive: cx(styles.drawerOverlayExitActive, {
@@ -344,14 +331,11 @@ const Drawer = ({
         exitActive: styles.drawerExitActive,
       }}>
       <div className={styles.outerWrapper}>
-        <div className={styles.wrapper}>
-          {content}
-        </div>
+        <div className={styles.wrapper}>{content}</div>
       </div>
     </CSSTransition>
   );
 };
-
 
 Drawer.propTypes = {
   /** Content rendered within the drawer */
@@ -373,7 +357,7 @@ Drawer.propTypes = {
   asOverlay: PropTypes.bool,
 
   /** Width of the drawer */
-  width: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   /** If true, the children are rendered without decoration, you have to style your own drawer */
   raw: PropTypes.bool,
@@ -395,21 +379,16 @@ Drawer.propTypes = {
   }),
 
   /** Only applies when the drawer is used with "asOverlay" */
-  side: PropTypes.oneOf([
-    Position.LEFT,
-    Position.RIGHT,
-  ]),
+  side: PropTypes.oneOf([Position.LEFT, Position.RIGHT]),
 };
-
 
 Drawer.defaultProps = {
   asOverlay: false,
   width: 400,
   raw: false,
-  onClickClose: x => x,
-  onClickOverlay: x => x,
+  onClickClose: (x) => x,
+  onClickOverlay: (x) => x,
   side: Position.RIGHT,
 };
-
 
 export default Drawer;

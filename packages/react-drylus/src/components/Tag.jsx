@@ -1,12 +1,11 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React from 'react';
 
 import Category from '../enums/Category';
-import Icon from './Icon';
 import { getEnumAsClass } from '../utils';
-
+import Icon from './Icon';
 
 const styles = {
   root: css`
@@ -70,14 +69,7 @@ const styles = {
   `,
 };
 
-
-const Tag = ({
-  children,
-  category,
-  onClickRemove,
-  inversed,
-  style,
-}) => {
+const Tag = ({ children, category, onClickRemove, inversed, style }) => {
   const className = inversed ? `${getEnumAsClass(category)}Inversed` : getEnumAsClass(category);
   return (
     <div
@@ -89,13 +81,12 @@ const Tag = ({
       {children}
       {do {
         if (onClickRemove) {
-          <Icon name="x" onClick={onClickRemove} />
+          <Icon name="x" onClick={onClickRemove} />;
         }
       }}
     </div>
   );
 };
-
 
 Tag.propTypes = {
   children: PropTypes.string.isRequired,
@@ -118,10 +109,8 @@ Tag.propTypes = {
   style: PropTypes.object,
 };
 
-
 Tag.defaultProps = {
   category: Category.DEFAULT,
 };
-
 
 export default Tag;

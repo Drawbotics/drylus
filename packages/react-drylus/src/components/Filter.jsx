@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
+import { css, cx } from 'emotion';
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
 
-import Icon from './Icon';
-import ListTile from '../layout/ListTile';
-import Checkbox from '../forms/Checkbox';
-import { CustomPropTypes, deprecateProperty } from '../utils';
 import { Align } from '../enums';
+import Checkbox from '../forms/Checkbox';
+import ListTile from '../layout/ListTile';
+import { CustomPropTypes, deprecateProperty } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
-
+import Icon from './Icon';
 
 const styles = {
   root: css`
@@ -105,30 +104,22 @@ const styles = {
     width: 100%;
     flex: 1;
 
-    [data-element="trigger"] {
+    [data-element='trigger'] {
       justify-content: center;
     }
 
-    [data-element="panel"] {
+    [data-element='panel'] {
       width: 100%;
     }
   `,
 };
 
-
 /**
  * @deprecated and will be removed in version 6.0
  */
-export const FilterAlign = deprecateProperty(new Enum(
-  'RIGHT',
-  'LEFT',
-), 'FilterAlign', 'Align');
+export const FilterAlign = deprecateProperty(new Enum('RIGHT', 'LEFT'), 'FilterAlign', 'Align');
 
-
-const BaseFilter = ({
-  responsive,
-  ...rest
-}) => {
+const BaseFilter = ({ responsive, ...rest }) => {
   const {
     clearLabel,
     label,
@@ -142,14 +133,14 @@ const BaseFilter = ({
   } = useResponsiveProps(rest, responsive);
 
   const panelRef = useRef();
-  const [ panelOpen, setPanelOpen ] = useState(false);
+  const [panelOpen, setPanelOpen] = useState(false);
 
   const handleDocumentClick = (e) => {
-    if (! panelRef.current.contains(e.target) && panelRef.current !== e.target) {
+    if (!panelRef.current.contains(e.target) && panelRef.current !== e.target) {
       setPanelOpen(false);
     }
   };
-  
+
   const handleClickClear = () => {
     setPanelOpen(false);
     onClear();
@@ -173,7 +164,7 @@ const BaseFilter = ({
         className={cx(styles.trigger, {
           [styles.active]: panelOpen || active,
         })}
-        onClick={() => setPanelOpen( ! panelOpen)}>
+        onClick={() => setPanelOpen(!panelOpen)}>
         {label}
         <Icon
           onClick={(e) => {
@@ -182,7 +173,8 @@ const BaseFilter = ({
               onClear();
             }
           }}
-          name={active ? 'x' : (panelOpen ? 'chevron-up' : 'chevron-down')} />
+          name={active ? 'x' : panelOpen ? 'chevron-up' : 'chevron-down'}
+        />
       </div>
       <div
         ref={panelRef}
@@ -192,9 +184,7 @@ const BaseFilter = ({
           [styles.rightAlign]: align === Align.RIGHT,
         })}
         onClick={closeOnClick ? () => setPanelOpen(false) : null}>
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
         <div className={styles.clear} onClick={handleClickClear}>
           {clearLabel}
         </div>
@@ -202,7 +192,6 @@ const BaseFilter = ({
     </div>
   );
 };
-
 
 BaseFilter.propTypes = {
   /** Text shown in the last row of the panel */
@@ -218,7 +207,7 @@ BaseFilter.propTypes = {
   children: PropTypes.node,
 
   /** Determines on which side the panel is aligned */
-  align: PropTypes.oneOf([ Align.LEFT, Align.RIGHT ]),
+  align: PropTypes.oneOf([Align.LEFT, Align.RIGHT]),
 
   /** If true, the filter trigger is dark, and the close icon is shown to clear it when clicked */
   active: PropTypes.bool,
@@ -233,24 +222,17 @@ BaseFilter.propTypes = {
   closeOnClick: PropTypes.bool,
 };
 
-
 BaseFilter.defaultProps = {
   clearLabel: 'Clear',
   align: Align.RIGHT,
   closeOnClick: false,
 };
 
-
-export const SelectFilter = ({
-  options,
-  value,
-  valueKey,
-  labelKey,
-  onChange,
-  label,
-  ...rest
-}) => {
-  const currentLabel = value != null ? options.find((option) => String(option[valueKey]) === String(value))?.[labelKey] : label;
+export const SelectFilter = ({ options, value, valueKey, labelKey, onChange, label, ...rest }) => {
+  const currentLabel =
+    value != null
+      ? options.find((option) => String(option[valueKey]) === String(value))?.[labelKey]
+      : label;
   return (
     <BaseFilter
       {...rest}
@@ -269,7 +251,7 @@ export const SelectFilter = ({
           </div>
           {do {
             if (option.trailing != null) {
-              option.trailing
+              option.trailing;
             }
           }}
         </div>
@@ -277,7 +259,6 @@ export const SelectFilter = ({
     </BaseFilter>
   );
 };
-
 
 SelectFilter.propTypes = {
   /** The items to show in the filter panel: value(string, number), label(string), leading(node), trailing(node) */
@@ -302,28 +283,22 @@ SelectFilter.propTypes = {
   style: PropTypes.object,
 };
 
-
 SelectFilter.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
 };
 
-
 function getLabelForCheckboxFilter(label, options, values, valueKey, labelKey) {
   if (values == null) {
     return label;
-  }
-  else if (values.length === 1) {
+  } else if (values.length === 1) {
     return options.find((option) => String(option[valueKey]) === String(values[0]))?.[labelKey];
-  }
-  else if (values.length > 1) {
+  } else if (values.length > 1) {
     return `${label} (${values.length})`;
-  }
-  else {
+  } else {
     return label;
   }
 }
-
 
 export const CheckboxFilter = ({
   options,
@@ -336,7 +311,10 @@ export const CheckboxFilter = ({
 }) => {
   const currentLabel = getLabelForCheckboxFilter(label, options, values, valueKey, labelKey);
   return (
-    <BaseFilter {...rest} label={currentLabel != null ? currentLabel : label} active={currentLabel != null && values.length > 0}>
+    <BaseFilter
+      {...rest}
+      label={currentLabel != null ? currentLabel : label}
+      active={currentLabel != null && values.length > 0}>
       {options.map((option) => (
         <label
           htmlFor={option.value}
@@ -347,7 +325,7 @@ export const CheckboxFilter = ({
             onChange={(checked) => {
               checked
                 ? onChange([...values, option[valueKey]])
-                : onChange(values.filter((v) => String(v) !== String(option[valueKey])))
+                : onChange(values.filter((v) => String(v) !== String(option[valueKey])));
             }}
             value={values.includes(option[valueKey])}>
             {option[labelKey]}
@@ -357,7 +335,6 @@ export const CheckboxFilter = ({
     </BaseFilter>
   );
 };
-
 
 CheckboxFilter.propTypes = {
   /** The items to show in the filter panel: value(string, number), label(string) */
@@ -377,14 +354,11 @@ CheckboxFilter.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
-  
 };
-
 
 CheckboxFilter.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
 };
-
 
 export default BaseFilter;

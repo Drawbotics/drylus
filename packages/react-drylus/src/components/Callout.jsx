@@ -1,14 +1,13 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React from 'react';
 
 import { Category, Size } from '../enums';
-import Icon from './Icon';
-import Flex, { FlexItem, FlexAlign, FlexJustify } from '../layout/Flex';
+import Flex, { FlexAlign, FlexItem, FlexJustify } from '../layout/Flex';
 import Margin from '../layout/Margin';
 import { getEnumAsClass, getIconForCategory } from '../utils';
-
+import Icon from './Icon';
 
 const styles = {
   root: css`
@@ -49,15 +48,12 @@ const styles = {
   `,
 };
 
-
-const Callout = ({
-  children,
-  category,
-  style,
-}) => {
+const Callout = ({ children, category, style }) => {
   const icon = getIconForCategory(category);
   return (
-    <div style={style} className={cx(styles.root, { [styles[getEnumAsClass(category)]]: category })}>
+    <div
+      style={style}
+      className={cx(styles.root, { [styles[getEnumAsClass(category)]]: category })}>
       <Flex align={FlexAlign.START} justify={FlexJustify.START}>
         <FlexItem>
           <Margin size={{ right: Size.SMALL }}>
@@ -65,30 +61,22 @@ const Callout = ({
           </Margin>
         </FlexItem>
         <FlexItem>
-          <div className={styles.message}>
-            {children}
-          </div>
+          <div className={styles.message}>{children}</div>
         </FlexItem>
       </Flex>
     </div>
   );
 };
 
-
 Callout.propTypes = {
   /** Message shown in the callout */
   children: PropTypes.node.isRequired,
 
-  category: PropTypes.oneOf([
-    Category.DANGER,
-    Category.SUCCESS,
-    Category.INFO,
-    Category.WARNING,
-  ]).isRequired,
+  category: PropTypes.oneOf([Category.DANGER, Category.SUCCESS, Category.INFO, Category.WARNING])
+    .isRequired,
 
   /** Used for style overrides */
   style: PropTypes.object,
 };
-
 
 export default Callout;

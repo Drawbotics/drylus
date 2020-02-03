@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
-
 const Link = ({ children, href, ...rest }) => {
   return (
     <RouterLink {...rest} to={href}>
@@ -9,6 +8,5 @@ const Link = ({ children, href, ...rest }) => {
     </RouterLink>
   );
 };
-
 
 export default Link;

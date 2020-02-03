@@ -1,19 +1,17 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
-import PropTypes from 'prop-types';
 import { useScreenSize } from '@drawbotics/use-screen-size';
+import { css, cx } from 'emotion';
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
 
-
-import Tag from '../components/Tag';
-import RoundIcon from '../components/RoundIcon';
 import Icon from '../components/Icon';
+import RoundIcon from '../components/RoundIcon';
 import Spinner from '../components/Spinner';
-import Hint from './Hint';
+import Tag from '../components/Tag';
 import { Category, Size } from '../enums';
 import { CustomPropTypes } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
-
+import Hint from './Hint';
 
 const styles = {
   root: css`
@@ -60,7 +58,7 @@ const styles = {
   readOnly: css`
     pointer-events: none;
 
-    [data-element="select"] {
+    [data-element='select'] {
       box-shadow: none !important;
     }
 
@@ -68,7 +66,7 @@ const styles = {
       content: none;
     }
 
-    [data-element="icon"] {
+    [data-element='icon'] {
       right: ${sv.marginSmall};
     }
   `,
@@ -76,7 +74,7 @@ const styles = {
     box-shadow: inset 0px 0px 0px 2px ${sv.brand} !important;
   `,
   disabled: css`
-    & > [data-element="select"] {
+    & > [data-element='select'] {
       cursor: not-allowed;
       background: ${sv.neutralLight};
       color: ${sv.colorDisabled};
@@ -94,13 +92,13 @@ const styles = {
     }
   `,
   valid: css`
-    > [data-element="select"] {
+    > [data-element='select'] {
       box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
       padding-right: calc(${sv.paddingExtraLarge} + ${sv.defaultPadding});
     }
   `,
   error: css`
-    > [data-element="select"] {
+    > [data-element='select'] {
       box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
       padding-right: calc(${sv.paddingExtraLarge} + ${sv.defaultPadding});
     }
@@ -160,11 +158,7 @@ const styles = {
   `,
 };
 
-
-const MultiSelect = ({
-  responsive,
-  ...rest
-}) => {
+const MultiSelect = ({ responsive, ...rest }) => {
   const {
     values,
     options,
@@ -184,11 +178,12 @@ const MultiSelect = ({
 
   const selectRef = useRef();
   const rootRef = useRef();
-  const [ isFocused, setFocused ] = useState(false);
-  const [ canBlur, setCanBlur ] = useState(true);
+  const [isFocused, setFocused] = useState(false);
+  const [canBlur, setCanBlur] = useState(true);
   const { screenSize, ScreenSizes } = useScreenSize();
 
-  const handleDocumentClick = (e) => ! rootRef.current.contains(e.target) ? setFocused(false) : null;
+  const handleDocumentClick = (e) =>
+    !rootRef.current.contains(e.target) ? setFocused(false) : null;
 
   useEffect(() => {
     rootRef.current.addEventListener('mousedown', () => setCanBlur(false));
@@ -204,8 +199,11 @@ const MultiSelect = ({
 
   const handleOnChange = (value) => {
     values.includes(value)
-      ? onChange(values.filter((v) => v !== value), name)
-      : onChange([ ...values, value ], name);
+      ? onChange(
+          values.filter((v) => v !== value),
+          name,
+        )
+      : onChange([...values, value], name);
   };
 
   // used for mobile
@@ -235,26 +233,23 @@ const MultiSelect = ({
         [styles.error]: error,
       })}
       ref={rootRef}>
-      {do{
+      {do {
         if (loading) {
           <div className={styles.icon}>
             <Spinner size={Size.SMALL} />
-          </div>
-        }
-        else if (onChange == null) {
+          </div>;
+        } else if (onChange == null) {
           <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
             <Icon name="lock" />
-          </div>
-        }
-        else if (error) {
+          </div>;
+        } else if (error) {
           <div className={styles.icon}>
             <RoundIcon name="x" size={Size.SMALL} category={Category.DANGER} />
-          </div>
-        }
-        else if (values?.length > 0 && valid) {
+          </div>;
+        } else if (values?.length > 0 && valid) {
           <div className={styles.icon}>
             <RoundIcon name="check" size={Size.SMALL} category={Category.SUCCESS} />
-          </div>
+          </div>;
         }
       }}
       <div
@@ -265,28 +260,28 @@ const MultiSelect = ({
         onClick={onChange != null ? handleClickSelect : null}>
         {do {
           if (placeholder && values?.length === 0) {
-            <div className={styles.placeholder}>
-              {placeholder}
-            </div>
-          }
-          else {
+            <div className={styles.placeholder}>{placeholder}</div>;
+          } else {
             <div className={styles.values}>
               {values.map((value) => (
                 <div key={value} className={styles.value}>
-                  <Tag inversed onClickRemove={onChange != null ? (e) => handleClickRemove(e, value) : null}>
+                  <Tag
+                    inversed
+                    onClickRemove={onChange != null ? (e) => handleClickRemove(e, value) : null}>
                     {options.find((option) => option[valueKey] === value)[labelKey]}
                   </Tag>
                 </div>
               ))}
-            </div>
+            </div>;
           }
         }}
       </div>
       {do {
         if (screenSize > ScreenSizes.XL) {
-          <div className={cx(styles.options, {
-            [styles.open]: isFocused,
-          })}>
+          <div
+            className={cx(styles.options, {
+              [styles.open]: isFocused,
+            })}>
             {options.map((option) => (
               <div
                 className={cx(styles.option, {
@@ -297,15 +292,14 @@ const MultiSelect = ({
                 {option[labelKey]}
               </div>
             ))}
-          </div>
+          </div>;
         }
       }}
-      {do{
+      {do {
         if (error && typeof error === 'string') {
-          <Hint category={Category.DANGER}>{error}</Hint>
-        }
-        else if (hint) {
-          <Hint>{hint}</Hint>
+          <Hint category={Category.DANGER}>{error}</Hint>;
+        } else if (hint) {
+          <Hint>{hint}</Hint>;
         }
       }}
       <select
@@ -313,7 +307,7 @@ const MultiSelect = ({
         ref={selectRef}
         onChange={onChange != null ? (e) => handleSelectChange(e.target.options) : null}
         onFocus={() => setFocused(true)}
-        onBlur={() => canBlur ? setFocused(false) : null}
+        onBlur={() => (canBlur ? setFocused(false) : null)}
         values={values}
         readOnly={onChange == null}
         multiple
@@ -331,7 +325,6 @@ const MultiSelect = ({
     </div>
   );
 };
-
 
 MultiSelect.propTypes = {
   /** The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey */
@@ -364,7 +357,7 @@ MultiSelect.propTypes = {
   hint: PropTypes.string,
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error: PropTypes.oneOfType([ PropTypes.string, PropTypes.bool ]),
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid: PropTypes.bool,
@@ -386,13 +379,11 @@ MultiSelect.propTypes = {
   }),
 };
 
-
 MultiSelect.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
   placeholder: ' -- ',
   options: [],
 };
-
 
 export default MultiSelect;

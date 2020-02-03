@@ -1,29 +1,21 @@
-import React from 'react';
-import { css } from 'emotion';
-import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
+import { css } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import Flex, { FlexItem, FlexDirection } from '../layout/Flex';
-import Margin from '../layout/Margin';
-import Title from './Title';
-import Text from './Text';
-import Paragraph from './Paragraph';
 import { Size, Tier } from '../enums';
-import { useResponsiveProps } from '../utils/hooks';
-import {
-  Empty,
-  Processing,
-  NotFound,
-  NotAllowed,
-  Failed,
-} from '../utils/illustrations';
+import Flex, { FlexDirection, FlexItem } from '../layout/Flex';
+import Margin from '../layout/Margin';
 import { CustomPropTypes, deprecateProperty } from '../utils';
-
+import { useResponsiveProps } from '../utils/hooks';
+import { Empty, Failed, NotAllowed, NotFound, Processing } from '../utils/illustrations';
+import Paragraph from './Paragraph';
+import Text from './Text';
+import Title from './Title';
 
 const styles = {
-  root: css`
-  `,
+  root: css``,
   image: css`
     width: 300px;
 
@@ -39,18 +31,14 @@ const styles = {
   `,
 };
 
-
 /**
  * @deprecated and will be removed in version 6.0
  */
-export const EmptyStateVariations = deprecateProperty(new Enum(
-  'DEFAULT',
-  'PROCESSING',
-  'NOT_FOUND',
-  'NOT_ALLOWED',
-  'FAILED',
-), 'EmptyStateVariations', 'EmptyStateVariation');
-
+export const EmptyStateVariations = deprecateProperty(
+  new Enum('DEFAULT', 'PROCESSING', 'NOT_FOUND', 'NOT_ALLOWED', 'FAILED'),
+  'EmptyStateVariations',
+  'EmptyStateVariation',
+);
 
 export const EmptyStateVariation = new Enum(
   'DEFAULT',
@@ -60,13 +48,12 @@ export const EmptyStateVariation = new Enum(
   'FAILED',
 );
 
-
 function _getImageForVariation(variation) {
   switch (variation) {
     case EmptyStateVariation.PROCESSING:
       return <Processing />;
     case EmptyStateVariation.NOT_FOUND:
-        return <NotFound />;
+      return <NotFound />;
     case EmptyStateVariation.NOT_ALLOWED:
       return <NotAllowed />;
     case EmptyStateVariation.FAILED:
@@ -76,32 +63,24 @@ function _getImageForVariation(variation) {
   }
 }
 
+const EmptyState = ({ responsive, ...rest }) => {
+  const { description, title, actions: _actions, style, variation, children } = useResponsiveProps(
+    rest,
+    responsive,
+  );
 
-const EmptyState = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    description,
-    title,
-    actions: _actions,
-    style,
-    variation,
-    children,
-  } = useResponsiveProps(rest, responsive);
-
-  const actions = children != null ? React.Children.map(children, x => x) : _actions;
+  const actions = children != null ? React.Children.map(children, (x) => x) : _actions;
 
   return (
     <div style={style} className={styles.root}>
       <Flex direction={FlexDirection.VERTICAL}>
         <FlexItem>
-          <div className={styles.image}>
-            {_getImageForVariation(variation)}
-          </div>
+          <div className={styles.image}>{_getImageForVariation(variation)}</div>
         </FlexItem>
         <FlexItem>
-          <Title style={{ textAlign: 'center' }} size={3}>{title}</Title>
+          <Title style={{ textAlign: 'center' }} size={3}>
+            {title}
+          </Title>
         </FlexItem>
         {do {
           if (description) {
@@ -111,7 +90,7 @@ const EmptyState = ({
                   <Text tier={Tier.SECONDARY}>{description}</Text>
                 </Paragraph>
               </div>
-            </FlexItem>
+            </FlexItem>;
           }
         }}
         {do {
@@ -121,21 +100,18 @@ const EmptyState = ({
                 <Flex>
                   {actions.map((action, i) => (
                     <FlexItem key={i}>
-                      <Margin size={{ left: i === 0 ? null : Size.SMALL }}>
-                        {action}
-                      </Margin>
+                      <Margin size={{ left: i === 0 ? null : Size.SMALL }}>{action}</Margin>
                     </FlexItem>
                   ))}
                 </Flex>
               </Margin>
-            </FlexItem>
+            </FlexItem>;
           }
         }}
       </Flex>
     </div>
   );
 };
-
 
 EmptyState.propTypes = {
   /** Main title to explain the situation */
@@ -177,10 +153,8 @@ EmptyState.propTypes = {
   }),
 };
 
-
 EmptyState.defaultProps = {
   variation: EmptyStateVariation.DEFAULT,
 };
-
 
 export default EmptyState;

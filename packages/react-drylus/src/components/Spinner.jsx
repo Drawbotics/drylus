@@ -1,18 +1,16 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx, keyframes } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React from 'react';
 
-import { Size, Category } from '../enums';
+import { Category, Size } from '../enums';
 import { useResponsiveProps } from '../utils/hooks';
-
 
 const rotate = keyframes`
   100% {
     transform: rotate(360deg);
   }
 `;
-
 
 const dash = keyframes`
   0% {
@@ -29,10 +27,8 @@ const dash = keyframes`
   }
 `;
 
-
 const styles = {
-  container: css`
-  `,
+  container: css``,
   fullSizeContainer: css`
     height: 100%;
     width: 100%;
@@ -91,46 +87,42 @@ const styles = {
   `,
 };
 
-
-const Spinner = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    size,
-    category,
-    inversed,
-    fullSize,
-    style,
-  } = useResponsiveProps(rest, responsive);
+const Spinner = ({ responsive, ...rest }) => {
+  const { size, category, inversed, fullSize, style } = useResponsiveProps(rest, responsive);
   return (
     <div
       style={style}
       className={cx(styles.container, {
         [styles.fullSizeContainer]: fullSize,
       })}>
-      <div className={cx(styles.root, {
-        [styles.small]: size === Size.SMALL,
-        [styles.large]: size === Size.LARGE,
-      })}>
+      <div
+        className={cx(styles.root, {
+          [styles.small]: size === Size.SMALL,
+          [styles.large]: size === Size.LARGE,
+        })}>
         <svg className={styles.circle} viewBox="25 25 50 50">
-          <circle className={cx(styles.path, {
-            [styles.brand]: category === Category.BRAND,
-            [styles.info]: category === Category.INFO,
-            [styles.white]: inversed,
-          })} cx="50" cy="50" r="20" fill="none" />
+          <circle
+            className={cx(styles.path, {
+              [styles.brand]: category === Category.BRAND,
+              [styles.info]: category === Category.INFO,
+              [styles.white]: inversed,
+            })}
+            cx="50"
+            cy="50"
+            r="20"
+            fill="none"
+          />
         </svg>
       </div>
     </div>
   );
 };
 
-
 Spinner.propTypes = {
-  size: PropTypes.oneOf([ Size.DEFAULT, Size.SMALL, Size.LARGE ]),
+  size: PropTypes.oneOf([Size.DEFAULT, Size.SMALL, Size.LARGE]),
 
   /** For now limited to BRAND and INFO only, could have more in the future */
-  category: PropTypes.oneOf([ Category.BRAND, Category.INFO ]),
+  category: PropTypes.oneOf([Category.BRAND, Category.INFO]),
 
   /** If true, sets the color of the spinner to white (to be used against colored backgrounds) */
   inversed: PropTypes.bool,
@@ -152,10 +144,8 @@ Spinner.propTypes = {
   }),
 };
 
-
 Spinner.defaultProps = {
   size: Size.DEFAULT,
 };
-
 
 export default Spinner;

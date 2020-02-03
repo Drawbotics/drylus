@@ -1,12 +1,11 @@
-import React from 'react';
-import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
-import camelCase from 'lodash/camelCase';
 import Enum from '@drawbotics/enums';
+import { css, cx } from 'emotion';
+import camelCase from 'lodash/camelCase';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { getEnumAsClass, deprecateProperty } from '../utils';
+import { deprecateProperty, getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
-
 
 const styles = {
   root: css`
@@ -52,28 +51,22 @@ const styles = {
   wrap: css`
     flex-wrap: wrap;
   `,
-  item: css`
-  `,
+  item: css``,
   equalSpan: css`
     flex: 1;
   `,
 };
 
-
 /**
  * @deprecated and will be removed in version 6.0
  */
-export const FlexDirections = deprecateProperty(new Enum(
-  'HORIZONTAL',
-  'VERTICAL',
-), 'FlexDirections', 'FlexDirection');
-
-
-export const FlexDirection = new Enum(
-  'HORIZONTAL',
-  'VERTICAL',
+export const FlexDirections = deprecateProperty(
+  new Enum('HORIZONTAL', 'VERTICAL'),
+  'FlexDirections',
+  'FlexDirection',
 );
 
+export const FlexDirection = new Enum('HORIZONTAL', 'VERTICAL');
 
 export const FlexJustify = new Enum(
   'START',
@@ -84,34 +77,19 @@ export const FlexJustify = new Enum(
   'SPACE_EVENLY',
 );
 
-
-export const FlexAlign = new Enum(
-  'STRETCH',
-  'START',
-  'END',
-  'CENTER',
-);
-
+export const FlexAlign = new Enum('STRETCH', 'START', 'END', 'CENTER');
 
 function prefixFlex(value) {
   const prefixed = value < 1 ? `0 0 ${value * 100}%` : value;
   return {
-    'WebkitFlex': prefixed,
-    'msFlex': prefixed,
+    WebkitFlex: prefixed,
+    msFlex: prefixed,
     flex: prefixed,
   };
 }
 
-
-export const FlexItem = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    children,
-    flex,
-    style,
-  } = useResponsiveProps(rest, responsive);
+export const FlexItem = ({ responsive, ...rest }) => {
+  const { children, flex, style } = useResponsiveProps(rest, responsive);
 
   const equalSpan = flex === true;
   const pStyle = prefixFlex(flex);
@@ -125,10 +103,9 @@ export const FlexItem = ({
   );
 };
 
-
 FlexItem.propTypes = {
   /** Determines how much space a flex item takes within the flex container. */
-  flex: PropTypes.oneOfType([ PropTypes.bool, PropTypes.number ]),
+  flex: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
 
   /** Used for style overrides */
   style: PropTypes.object,
@@ -144,16 +121,11 @@ FlexItem.propTypes = {
   }),
 };
 
-
 FlexItem.defaultProps = {
   style: {},
 };
 
-
-const Flex = ({
-  responsive,
-  ...rest
-}) => {
+const Flex = ({ responsive, ...rest }) => {
   const {
     children,
     direction = FlexDirection.HORIZONTAL,
@@ -164,31 +136,33 @@ const Flex = ({
     style,
   } = useResponsiveProps(rest, responsive);
 
-  const invalidChildren = React.Children
-    .toArray(children)
-    .some((child) => child != null && child.type !== FlexItem);
+  const invalidChildren = React.Children.toArray(children).some(
+    (child) => child != null && child.type !== FlexItem,
+  );
   if (invalidChildren) {
     console.warn('Flex should only accept FlexItem as children');
   }
   return (
-    <div className={cx(styles.root, {
-      [styles[getEnumAsClass(direction)]]: direction,
-      [styles[camelCase(`JUSTIFY_${justify?.description}`)]]: justify,
-      [styles[camelCase(`ALIGN_${align?.description}`)]]: align,
-      [styles.wrap]: wrap,
-    }, className)} style={style}>
+    <div
+      className={cx(
+        styles.root,
+        {
+          [styles[getEnumAsClass(direction)]]: direction,
+          [styles[camelCase(`JUSTIFY_${justify?.description}`)]]: justify,
+          [styles[camelCase(`ALIGN_${align?.description}`)]]: align,
+          [styles.wrap]: wrap,
+        },
+        className,
+      )}
+      style={style}>
       {children}
     </div>
   );
 };
 
-
 Flex.propTypes = {
   /** Determines which way the flex layout should be */
-  direction: PropTypes.oneOf([
-    FlexDirection.HORIZONTAL,
-    FlexDirection.VERTICAL,
-  ]),
+  direction: PropTypes.oneOf([FlexDirection.HORIZONTAL, FlexDirection.VERTICAL]),
 
   /** See flexbox justify-content */
   justify: PropTypes.oneOf([
@@ -201,12 +175,7 @@ Flex.propTypes = {
   ]),
 
   /** See flexbox align-items */
-  align: PropTypes.oneOf([
-    FlexAlign.STRETCH,
-    FlexAlign.START,
-    FlexAlign.END,
-    FlexAlign.CENTER,
-  ]),
+  align: PropTypes.oneOf([FlexAlign.STRETCH, FlexAlign.START, FlexAlign.END, FlexAlign.CENTER]),
 
   /** See flexbox flex-wrap. If true, sets to `wrap` */
   wrap: PropTypes.bool,
@@ -228,13 +197,11 @@ Flex.propTypes = {
   }),
 };
 
-
 Flex.defaultProps = {
   direction: FlexDirection.HORIZONTAL,
   justify: FlexJustify.CENTER,
   align: FlexAlign.CENTER,
   wrap: false,
 };
-
 
 export default Flex;

@@ -1,12 +1,11 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React from 'react';
 
-import Flex, { FlexItem } from './Flex';
 import Text from '../components/Text';
 import { useResponsiveProps } from '../utils/hooks';
-
+import Flex, { FlexItem } from './Flex';
 
 const styles = {
   root: css`
@@ -39,59 +38,41 @@ const styles = {
   `,
 };
 
-
-const ListTile = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    title,
-    subtitle,
-    leading,
-    trailing,
-    onClick,
-    style,
-  } = useResponsiveProps(rest, responsive);
+const ListTile = ({ responsive, ...rest }) => {
+  const { title, subtitle, leading, trailing, onClick, style } = useResponsiveProps(
+    rest,
+    responsive,
+  );
 
   return (
     <div
       style={style}
-      className={cx(styles.root, { [styles.clickable]: !! onClick })}
+      className={cx(styles.root, { [styles.clickable]: !!onClick })}
       onClick={onClick}>
       <Flex>
         {do {
           if (leading) {
             <FlexItem>
-              <div className={styles.leading}>
-                {leading}
-              </div>
-            </FlexItem>
+              <div className={styles.leading}>{leading}</div>
+            </FlexItem>;
           }
         }}
         <FlexItem flex>
           {do {
             if (title != null) {
               if (typeof title === 'string' || title.type === Text) {
-                <div className={cx(styles.title, { [styles.withMargin]: subtitle })}>
-                  {title}
-                </div>
-              }
-              else {
-                <div className={styles.withMargin}>
-                  {title}
-                </div>
+                <div className={cx(styles.title, { [styles.withMargin]: subtitle })}>{title}</div>;
+              } else {
+                <div className={styles.withMargin}>{title}</div>;
               }
             }
           }}
           {do {
             if (subtitle != null) {
               if (typeof subtitle === 'string' || subtitle.type === Text) {
-                <div className={styles.subtitle}>
-                  {subtitle}
-                </div>
-              }
-              else {
-                subtitle
+                <div className={styles.subtitle}>{subtitle}</div>;
+              } else {
+                subtitle;
               }
             }
           }}
@@ -99,17 +80,14 @@ const ListTile = ({
         {do {
           if (trailing != null) {
             <FlexItem>
-              <div className={styles.trailing}>
-                {trailing}
-              </div>
-            </FlexItem>
+              <div className={styles.trailing}>{trailing}</div>
+            </FlexItem>;
           }
         }}
       </Flex>
     </div>
   );
 };
-
 
 ListTile.propTypes = {
   /** Main text to be displayed */
@@ -140,6 +118,5 @@ ListTile.propTypes = {
     HUGE: PropTypes.object,
   }),
 };
-
 
 export default ListTile;

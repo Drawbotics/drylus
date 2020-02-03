@@ -1,16 +1,15 @@
+import sv from '@drawbotics/drylus-style-vars';
+import { css, cx } from 'emotion';
+import PropTypes from 'prop-types';
 import React from 'react';
 import v4 from 'uuid/v4';
-import { css, cx } from 'emotion';
-import sv from '@drawbotics/drylus-style-vars';
-import PropTypes from 'prop-types';
 
-import Hint from './Hint';
 import Icon from '../components/Icon';
+import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
 import { Category } from '../enums';
 import { CustomPropTypes } from '../utils';
-import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
 import { useResponsiveProps } from '../utils/hooks';
-
+import Hint from './Hint';
 
 const styles = {
   radioGroup: css`
@@ -30,7 +29,7 @@ const styles = {
     cursor: pointer;
 
     &:hover {
-      [data-element="sprite"] {
+      [data-element='sprite'] {
         background: ${sv.neutralDark};
       }
     }
@@ -46,11 +45,11 @@ const styles = {
   readOnly: css`
     pointer-events: none;
 
-    [data-element="sprite"] {
+    [data-element='sprite'] {
       background: ${sv.neutralLight} !important;
     }
 
-    [data-element="locked-icon"] {
+    [data-element='locked-icon'] {
       transform: scale(1);
       border-radius: 0;
       background: none;
@@ -61,11 +60,11 @@ const styles = {
     }
   `,
   error: css`
-    [data-element="sprite"] {
+    [data-element='sprite'] {
       box-shadow: inset 0px 0px 0px 2px ${sv.red};
     }
 
-    [data-element="icon"] {
+    [data-element='icon'] {
       background: ${sv.red};
     }
   `,
@@ -78,8 +77,8 @@ const styles = {
   input: css`
     visibility: hidden;
 
-    &:checked + [data-element="sprite"] {
-      [data-element="icon"] {
+    &:checked + [data-element='sprite'] {
+      [data-element='icon'] {
         transform: scale(1);
         border-radius: 0;
       }
@@ -89,11 +88,11 @@ const styles = {
       }
     }
 
-    &:disabled + [data-element="sprite"] {
+    &:disabled + [data-element='sprite'] {
       cursor: not-allowed;
       background: ${sv.neutralLight} !important;
 
-      [data-element="icon"] {
+      [data-element='icon'] {
         opacity: 0.7;
       }
     }
@@ -141,12 +140,11 @@ const styles = {
   `,
 };
 
-
 const Radio = ({
   value,
   onChange,
-  valueKey='value',
-  labelKey='label',
+  valueKey = 'value',
+  labelKey = 'label',
   disabled,
   error,
   checked,
@@ -158,12 +156,14 @@ const Radio = ({
   const id = v4();
   return (
     <div className={styles.root}>
-      <label className={cx(styles.wrapper, {
-        [styles.disabled]: disabled,
-        [styles.error]: error,
-        [styles.readOnly]: readOnly,
-        [placeholderStyles.shimmer]: isPlaceholder,
-      })} htmlFor={id}>
+      <label
+        className={cx(styles.wrapper, {
+          [styles.disabled]: disabled,
+          [styles.error]: error,
+          [styles.readOnly]: readOnly,
+          [placeholderStyles.shimmer]: isPlaceholder,
+        })}
+        htmlFor={id}>
         <div className={styles.radio}>
           <input
             disabled={disabled}
@@ -173,27 +173,27 @@ const Radio = ({
             type="radio"
             className={styles.input}
             onChange={onChange}
-            {...rest} />
+            {...rest}
+          />
           <div data-element="sprite" className={styles.sprite}>
             {do {
               if (readOnly) {
                 <label data-element="locked-icon" className={styles.iconLabel}>
                   <Icon name="lock" />
-                </label>
-              }
-              else {
+                </label>;
+              } else {
                 <label data-element="icon" className={styles.iconLabel} htmlFor={id}>
                   <Icon bold name="check" />
-                </label>
+                </label>;
               }
             }}
           </div>
         </div>
-        {do{
+        {do {
           if (children) {
             <label data-element="label" className={styles.label} htmlFor={id}>
               {children}
-            </label>
+            </label>;
           }
         }}
       </label>
@@ -201,18 +201,13 @@ const Radio = ({
   );
 };
 
-
-
-const RadioGroup = ({
-  responsive,
-  ...rest
-}) => {
+const RadioGroup = ({ responsive, ...rest }) => {
   const {
     value,
     onChange,
-    options=[],
-    valueKey='value',
-    labelKey='label',
+    options = [],
+    valueKey = 'value',
+    labelKey = 'label',
     error,
     className,
     hint,
@@ -234,27 +229,27 @@ const RadioGroup = ({
           <div key={option[valueKey]} className={styles.radioWrapper}>
             <Radio
               readOnly={readOnly}
-              error={!! error}
+              error={!!error}
               onChange={handleOnChange}
               checked={value === option[valueKey]}
               value={option[valueKey]}
               disabled={option.disabled}
-              {...props}>{option[labelKey]}</Radio>
+              {...props}>
+              {option[labelKey]}
+            </Radio>
           </div>
         ))}
       </div>
-      {do{
+      {do {
         if (error && typeof error === 'string') {
-          <Hint category={Category.DANGER}>{error}</Hint>
-        }
-        else if (hint) {
-          <Hint>{hint}</Hint>
+          <Hint category={Category.DANGER}>{error}</Hint>;
+        } else if (hint) {
+          <Hint>{hint}</Hint>;
         }
       }}
     </div>
   );
 };
-
 
 RadioGroup.propTypes = {
   /** Determines the radio components which will be rendered */
@@ -288,7 +283,7 @@ RadioGroup.propTypes = {
 
   /** Small text shown below the group, replaced by error if present */
   hint: PropTypes.string,
-  
+
   /** Used for style overrides */
   style: PropTypes.object,
 
@@ -306,11 +301,9 @@ RadioGroup.propTypes = {
   }),
 };
 
-
 RadioGroup.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
 };
-
 
 export default RadioGroup;

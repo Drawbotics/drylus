@@ -1,29 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { css, keyframes } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import {
   Drawer,
-  Position,
-  Icon,
-  Text,
-  Size,
-  ListTile,
-  FlexDirection,
   Flex,
-  FlexItem,
-  Padding,
   FlexAlign,
+  FlexDirection,
+  FlexItem,
+  Icon,
+  ListTile,
+  Padding,
+  Position,
+  Size,
+  Text,
   Title,
 } from '@drawbotics/react-drylus';
-import { Link } from 'react-router-dom';
+import { css, keyframes } from 'emotion';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
 
-import Logo from './Logo';
-import Search from './Search';
-import LinksNavigation from './LinksNavigation';
 import codingGuidelines from '../pages/coding-guidelines';
 import componentKit from '../pages/component-kit';
-
+import LinksNavigation from './LinksNavigation';
+import Logo from './Logo';
+import Search from './Search';
 
 const fadeIn = keyframes`
   from {
@@ -33,7 +32,6 @@ const fadeIn = keyframes`
     opacity: 1;
   }
 `;
-
 
 const styles = {
   sidebar: css`
@@ -75,7 +73,6 @@ const styles = {
   `,
 };
 
-
 function _generateLinks(pathname, onClick) {
   if (pathname.includes('component-kit')) {
     return (
@@ -83,42 +80,38 @@ function _generateLinks(pathname, onClick) {
         onClickLink={onClick}
         title="Component kit"
         routes={componentKit}
-        base='component-kit' />
+        base="component-kit"
+      />
     );
-  }
-  else if (pathname.includes('coding-guidelines')) {
+  } else if (pathname.includes('coding-guidelines')) {
     return (
       <LinksNavigation
         onClickLink={onClick}
         title="Coding guidelines"
         routes={codingGuidelines}
-        base='coding-guidelines' />
+        base="coding-guidelines"
+      />
     );
-  }
-  else {
+  } else {
     return '';
   }
 }
-
 
 function _getTitleFromPathname(pathname) {
   if (pathname.includes('component-kit')) {
     return 'Component Kit';
-  }
-  else if (pathname.includes('coding-guidelines')) {
-    return 'Coding Guidelines'
-  }
-  else {
+  } else if (pathname.includes('coding-guidelines')) {
+    return 'Coding Guidelines';
+  } else {
     return '';
   }
 }
 
-
 const MobileSidebar = () => {
   const { pathname } = useLocation();
-  const [ sidebarOpen, toggleSidebar ] = useState(false);
-  const [ linksVisible, toggleLinks ] = useState(pathname !== '/');
-  const [ searchOpen, toggleSearch ] = useState(false);
+  const [sidebarOpen, toggleSidebar] = useState(false);
+  const [linksVisible, toggleLinks] = useState(pathname !== '/');
+  const [searchOpen, toggleSearch] = useState(false);
 
   const hideAll = () => {
     toggleSidebar(false);
@@ -126,7 +119,7 @@ const MobileSidebar = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => toggleLinks(pathname !== '/'), 500); 
+    setTimeout(() => toggleLinks(pathname !== '/'), 500);
   }, [pathname]);
 
   const links = _generateLinks(pathname, () => toggleSidebar(false));
@@ -163,31 +156,27 @@ const MobileSidebar = () => {
               if (linksVisible) {
                 <Flex>
                   <FlexItem>
-                    <Title
-                      size={3}
-                      style={{ color: sv.colorPrimaryInverse }}>
+                    <Title size={3} style={{ color: sv.colorPrimaryInverse }}>
                       {title}
                     </Title>
                   </FlexItem>
                   <FlexItem>
-                    <Padding
-                      style={{ display: 'flex' }}
-                      size={{ left: Size.LARGE }}>
+                    <Padding style={{ display: 'flex' }} size={{ left: Size.LARGE }}>
                       <Icon
                         style={{ color: sv.colorPrimaryInverse }}
                         onClick={() => toggleLinks(false)}
-                        name="arrow-left" />
+                        name="arrow-left"
+                      />
                     </Padding>
                   </FlexItem>
-                </Flex>
+                </Flex>;
               }
             }}
           </div>
           {do {
             if (linksVisible) {
-              links
-            }
-            else {
+              links;
+            } else {
               <div className={styles.navigation}>
                 <Flex direction={FlexDirection.VERTICAL} align={FlexAlign.START}>
                   <FlexItem>
@@ -195,7 +184,12 @@ const MobileSidebar = () => {
                       <ListTile
                         onClick={() => toggleSearch(true)}
                         leading={<Icon name="search" />}
-                        title={<Text inversed size={Size.LARGE}>Search</Text>} />
+                        title={
+                          <Text inversed size={Size.LARGE}>
+                            Search
+                          </Text>
+                        }
+                      />
                     </Padding>
                   </FlexItem>
                   <FlexItem>
@@ -203,7 +197,12 @@ const MobileSidebar = () => {
                       <Link to="/component-kit">
                         <ListTile
                           leading={<Icon name="package" />}
-                          title={<Text inversed size={Size.LARGE}>Component kit</Text>} />
+                          title={
+                            <Text inversed size={Size.LARGE}>
+                              Component kit
+                            </Text>
+                          }
+                        />
                       </Link>
                     </Padding>
                   </FlexItem>
@@ -212,7 +211,12 @@ const MobileSidebar = () => {
                       <Link to="/design-guidelines">
                         <ListTile
                           leading={<Icon name="layout" />}
-                          title={<Text inversed size={Size.LARGE}>Design guidelines</Text>} />
+                          title={
+                            <Text inversed size={Size.LARGE}>
+                              Design guidelines
+                            </Text>
+                          }
+                        />
                       </Link>
                     </Padding>
                   </FlexItem>
@@ -221,22 +225,24 @@ const MobileSidebar = () => {
                       <Link to="/coding-guidelines">
                         <ListTile
                           leading={<Icon name="command" />}
-                          title={<Text inversed size={Size.LARGE}>Coding guidelines</Text>} />
+                          title={
+                            <Text inversed size={Size.LARGE}>
+                              Coding guidelines
+                            </Text>
+                          }
+                        />
                       </Link>
                     </Padding>
                   </FlexItem>
                 </Flex>
-              </div>
+              </div>;
             }
           }}
         </div>
       </Drawer>
-      <Search
-        open={searchOpen}
-        onClickClose={hideAll} />
+      <Search open={searchOpen} onClickClose={hideAll} />
     </div>
   );
 };
-
 
 export default MobileSidebar;

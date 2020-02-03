@@ -1,12 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
+import { css, cx } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 
+import { Category } from '../enums';
 import Label from './Label';
 import RoundIcon from './RoundIcon';
-import { Category } from '../enums';
-
 
 const styles = {
   root: css`
@@ -15,7 +14,7 @@ const styles = {
     box-shadow: inset 0px 0px 0px 1px ${sv.neutral};
     transition: ${sv.transitionShort};
 
-    & [data-element="icon"] {
+    & [data-element='icon'] {
       transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
       transform: scale(0);
 
@@ -24,7 +23,7 @@ const styles = {
       }
     }
 
-    & [data-element="header"] > div {
+    & [data-element='header'] > div {
       transition: ${sv.transitionShort};
     }
 
@@ -32,7 +31,7 @@ const styles = {
       cursor: pointer;
       box-shadow: inset 0px 0px 0px 1px ${sv.neutralDark};
 
-      & [data-element="header"] > div {
+      & [data-element='header'] > div {
         color: ${sv.colorSecondary};
       }
     }
@@ -40,7 +39,7 @@ const styles = {
   checked: css`
     box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
 
-    & [data-element="icon"] {
+    & [data-element='icon'] {
       transform: scale(1);
     }
   `,
@@ -58,25 +57,16 @@ const styles = {
       cursor: not-allowed;
       box-shadow: inset 0px 0px 0px 1px ${sv.neutral};
 
-      & [data-element="header"] > div {
+      & [data-element='header'] > div {
         color: ${sv.colorTertiary};
       }
     }
   `,
 };
 
-
-const BigCheckbox = ({
-  value,
-  onChange,
-  disabled,
-  children,
-  name,
-  label,
-  style,
-}) => {
+const BigCheckbox = ({ value, onChange, disabled, children, name, label, style }) => {
   const isChecked = Boolean(value);
-  const handleOnChange = () => ! disabled ? onChange(! isChecked, name) : null;
+  const handleOnChange = () => (!disabled ? onChange(!isChecked, name) : null);
   return (
     <div
       style={style}
@@ -95,7 +85,6 @@ const BigCheckbox = ({
     </div>
   );
 };
-
 
 BigCheckbox.propTypes = {
   /** Triggered when big checkbox is clicked */
@@ -119,6 +108,5 @@ BigCheckbox.propTypes = {
   /** Used for style overrides */
   style: PropTypes.object,
 };
-
 
 export default BigCheckbox;
