@@ -87,7 +87,7 @@ function _processChild(child, { dateOptions, locale, priceOptions }) {
         activeLocale: locale,
       });
     }
-    else if (child.value != null && child.currency != null) {
+    else if (child.value != null) {
       return generateDisplayedPrice({
         price: child,
         options: priceOptions,
