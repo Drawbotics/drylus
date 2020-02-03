@@ -119,7 +119,7 @@ export function generateDisplayedDate({
     dateFormat = 'YYYY-MM-DD';
   }
 
-  const outputFormat = dateFormat + (timeFormat ? `, ${timeFormat}` : '');
+  const outputFormat = options?.format ?? dateFormat + (timeFormat ? `, ${timeFormat}` : '');
 
   const withLocale = Dayjs(date).locale(localeRoot);
 

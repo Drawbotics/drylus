@@ -208,7 +208,7 @@ Text.propTypes = {
       ShowDateTime.ALWAYS,
     ]),
     asArchive: PropTypes.bool,
-    // need to add options for dayjs
+    format: PropTypes.any,
   }),
 
   /** Used to override the current locale if necessary (e.g. if the browser locale is not explicitely defined) */
