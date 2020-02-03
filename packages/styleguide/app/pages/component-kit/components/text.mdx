@@ -33,6 +33,18 @@ For example, if you pass an instance of `Date`, the date will be formatted follo
   <Text locale="nl">Blabla: {new Date()}</Text>
 </Playground>
 
+The internal function used for this is exposed as `formatDate`, which you can import from the package. Formatting options are from [Day.js](https://day.js.org/docs/en/display/format)
+```jsx
+import { formatDate } from '@drawbotics/react-drylus';
+
+// Usage
+formatDate({
+  date,                  // Javascript Date object
+  options: dateOptions,  // { showTime: Enum, asArchive: boolean, format: Day.js options }
+  locale,                // To override the automatically recognised locale
+});
+```
+
 ### With Currency
 It also accepts objects with the following shape:
 ```js
@@ -49,3 +61,5 @@ And will render the price/value depending on the currency and current locale.
   <br/>
   <Text locale="en">The number {{ value: 10000 }} is just a number</Text>
 </Playground>
+
+

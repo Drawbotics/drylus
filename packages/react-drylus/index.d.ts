@@ -942,6 +942,7 @@ declare interface Responsive {
 declare interface DateOptions {
   showTime?: any;
   asArchive?: boolean;
+  format?: any;
 }
 
 export interface TextProps {

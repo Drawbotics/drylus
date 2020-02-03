@@ -11,8 +11,8 @@ import { useResponsiveProps } from '../utils/hooks';
 import { generateDisplayedDate, ShowDateTime } from '../utils/date';
 import { generateDisplayedPrice } from '../utils/price';
 
-export { ShowDateTime } from '../utils/date';
 export { generateDisplayedPrice as formatPrice } from '../utils/price';
+export { ShowDateTime, generateDisplayedDate as formatDate } from '../utils/date';
 
 
 const styles = {
@@ -84,7 +84,7 @@ function _processChild(child, { dateOptions, locale, priceOptions }) {
       return generateDisplayedDate({
         date: child,
         options: dateOptions,
-        activeLocale: locale,
+        locale,
       });
     }
     else if (child.value != null) {
@@ -219,7 +219,7 @@ Text.propTypes = {
       ShowDateTime.ALWAYS,
     ]),
     asArchive: PropTypes.bool,
-    // need to add options for dayjs
+    format: PropTypes.any,
   }),
   
   /** Formatting options for the .toLocaleString method used internally when formatting numbers */
