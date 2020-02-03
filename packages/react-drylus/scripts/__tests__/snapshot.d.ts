@@ -926,7 +926,7 @@ export interface TagProps {
 export declare const Tag: React.FunctionComponent<TagProps>;
 
 declare interface Children {
-  currency: string;
+  currency?: string;
   value: number;
 }
 

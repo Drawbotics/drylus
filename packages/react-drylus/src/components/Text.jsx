@@ -173,7 +173,7 @@ Text.propTypes = {
     PropTypes.string,
     PropTypes.number,
     PropTypes.shape({
-      currency: PropTypes.string.isRequired,
+      currency: PropTypes.string,
       value: PropTypes.number.isRequired,
     }),
     PropTypes.instanceOf(Date),
@@ -182,7 +182,7 @@ Text.propTypes = {
         PropTypes.string,
         PropTypes.number,
         PropTypes.shape({
-          currency: PropTypes.string.isRequired,
+          currency: PropTypes.string,
           value: PropTypes.number.isRequired,
         }),
         PropTypes.instanceOf(Date),
