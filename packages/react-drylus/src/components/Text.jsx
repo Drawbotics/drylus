@@ -82,7 +82,7 @@ function _processChild(child, dateOptions, locale) {
       return generateDisplayedDate({
         date: child,
         options: dateOptions,
-        activeLocale: locale,
+        locale,
       });
     }
     else if (child.value != null && child.currency != null) {

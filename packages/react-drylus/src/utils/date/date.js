@@ -34,7 +34,7 @@ Dayjs.extend(calendar);
 export function generateDisplayedDate({
   date,
   options,
-  activeLocale=getCurrentLocale(),
+  locale=getCurrentLocale(),
 }) {
   const {
     hoursDifference,
@@ -45,7 +45,7 @@ export function generateDisplayedDate({
     minutesDifference,
   } = getTimeDifferenceFromToday(date);
 
-  const localeRoot = activeLocale.split('-')[0];
+  const localeRoot = locale.split('-')[0];
 
   let dateFormat = '';
   let timeFormat = null;
