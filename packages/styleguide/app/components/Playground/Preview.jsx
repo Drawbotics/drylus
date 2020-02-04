@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { Icon, TextLink } from '@drawbotics/react-drylus';
+import { Button, Icon, Size, Tier } from '@drawbotics/react-drylus';
 import { css, cx } from 'emotion';
 import React, { Fragment, useState } from 'react';
 
@@ -53,11 +53,12 @@ const Preview = ({ children, raw }) => {
           [styles.floating]: fullScreen,
         })}
         data-element="full-screen-toggle">
-        <div onClick={() => setFullScreen(!fullScreen)}>
-          <TextLink>
-            <Icon name={fullScreen ? 'minimize' : 'maximize'} />
-          </TextLink>
-        </div>
+        <Button
+          onClick={() => setFullScreen(!fullScreen)}
+          size={Size.SMALL}
+          tier={Tier.TERTIARY}
+          trailing={<Icon name={fullScreen ? 'minimize' : 'maximize'} />}
+        />
       </div>
       {do {
         if (raw) {
