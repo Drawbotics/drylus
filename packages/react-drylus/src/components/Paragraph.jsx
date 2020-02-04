@@ -1,13 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
 import Enum from '@drawbotics/enums';
+import { css, cx } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { useResponsiveProps } from '../utils/hooks';
-import { deprecateProperty } from '../utils';
 import { Align } from '../enums';
-
+import { deprecateProperty } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 const styles = {
   root: css`
@@ -22,26 +21,17 @@ const styles = {
   `,
 };
 
-
 /**
  * @deprecated and will be removed in version 6.0
  */
-export const ParagraphAlign = deprecateProperty(new Enum(
-  'CENTER',
-  'LEFT',
-  'RIGHT',
-), 'ParagraphAlign', 'Align');
+export const ParagraphAlign = deprecateProperty(
+  new Enum('CENTER', 'LEFT', 'RIGHT'),
+  'ParagraphAlign',
+  'Align',
+);
 
-
-const Paragraph = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    children,
-    style,
-    align,
-  } = useResponsiveProps(rest, responsive);
+const Paragraph = ({ responsive, ...rest }) => {
+  const { children, style, align } = useResponsiveProps(rest, responsive);
   return (
     <p
       style={style}
@@ -54,19 +44,14 @@ const Paragraph = ({
   );
 };
 
-
 Paragraph.propTypes = {
   /** Text displayed by the paragraph */
   children: PropTypes.node,
-  
+
   /** Used for style overrides */
   style: PropTypes.object,
 
-  align: PropTypes.oneOf([
-    Align.CENTER,
-    Align.LEFT,
-    Align.RIGHT,
-  ]),
+  align: PropTypes.oneOf([Align.CENTER, Align.LEFT, Align.RIGHT]),
 
   /** Reponsive prop overrides */
   responsive: PropTypes.shape({
@@ -79,10 +64,8 @@ Paragraph.propTypes = {
   }),
 };
 
-
 Paragraph.defaultProps = {
   align: Align.LEFT,
 };
-
 
 export default Paragraph;

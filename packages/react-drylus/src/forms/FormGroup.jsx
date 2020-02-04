@@ -1,12 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { css } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import Flex, { FlexItem, FlexDirection, FlexAlign } from '../layout/Flex';
 import { Size } from '../enums';
+import Flex, { FlexAlign, FlexDirection, FlexItem } from '../layout/Flex';
 import Margin from '../layout/Margin';
 import { useResponsiveProps } from '../utils/hooks';
-
 
 const styles = {
   root: css`
@@ -14,17 +13,8 @@ const styles = {
   `,
 };
 
-
-const FormGroup = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    label,
-    input,
-    horizontal,
-    style,
-  } = useResponsiveProps(rest, responsive);
+const FormGroup = ({ responsive, ...rest }) => {
+  const { label, input, horizontal, style } = useResponsiveProps(rest, responsive);
 
   return (
     <div style={style} className={styles.root}>
@@ -36,14 +26,11 @@ const FormGroup = ({
             {label}
           </Margin>
         </FlexItem>
-        <FlexItem flex>
-          {input}
-        </FlexItem>
+        <FlexItem flex>{input}</FlexItem>
       </Flex>
     </div>
   );
 };
-
 
 FormGroup.propTypes = {
   /** The label of the group, should be a Label component */
@@ -68,6 +55,5 @@ FormGroup.propTypes = {
     HUGE: PropTypes.object,
   }),
 };
-
 
 export default FormGroup;

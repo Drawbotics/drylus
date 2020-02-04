@@ -1,7 +1,7 @@
 const modal = () => {
   let outlet = document.getElementById('vanilla-modals-outlet');
 
-  if (! outlet) {
+  if (!outlet) {
     const outletElement = document.createElement('div');
     outletElement.setAttribute('id', 'vanilla-modals-outlet');
     document.body.appendChild(outletElement);
@@ -13,13 +13,13 @@ const modal = () => {
 
   const handleClickTrigger = (id) => {
     const modal = Array.from(modals).find((modal) => modal.getAttribute('data-modal') === id);
-    
+
     if (modal) {
       modal.style = null;
       modal.classList.remove('Drylus-Modal__modalExit');
       modal.classList.remove('Drylus-Modal__modalExitActive');
       modal.classList.add('Drylus-Modal__modalEnter');
-  
+
       setTimeout(() => {
         modal.classList.add('Drylus-Modal__modalEnterActive');
       }, 100);
@@ -35,7 +35,7 @@ const modal = () => {
     setTimeout(() => {
       modal.style = 'display: none';
     }, 300);
-  }
+  };
 
   const handleClickOverlay = (e, modal) => {
     if (e.target === modal) {
@@ -48,10 +48,12 @@ const modal = () => {
     if (modal) {
       hideModal(modal);
     }
-  }
+  };
 
   Array.from(triggers).forEach((trigger) => {
-    trigger.addEventListener('click', () => handleClickTrigger(trigger.getAttribute('data-modal-trigger')));
+    trigger.addEventListener('click', () =>
+      handleClickTrigger(trigger.getAttribute('data-modal-trigger')),
+    );
   });
 
   Array.from(modals).forEach((modal) => {
@@ -66,7 +68,6 @@ const modal = () => {
   });
 };
 
-
 export const closeModal = (id) => {
   const modal = document.querySelector(`[data-modal="${id}"]`);
   modal.classList.add('Drylus-Modal__modalExit');
@@ -77,7 +78,6 @@ export const closeModal = (id) => {
   setTimeout(() => {
     modal.style = 'display: none';
   }, 300);
-}
-
+};
 
 export default () => document._ready(modal);

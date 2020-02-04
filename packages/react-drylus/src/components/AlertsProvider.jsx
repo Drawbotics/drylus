@@ -1,27 +1,17 @@
-import React, { useEffect, useState, useReducer } from 'react';
-import ReactDOM from 'react-dom';
-import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
+import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
+import React, { useEffect, useReducer, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import v4 from 'uuid/v4';
-import {
-  CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group';
 
-import { Category, Size, Tier } from '../enums';
-import {
-  Margin,
-  Flex,
-  FlexItem,
-  FlexAlign,
-  FlexJustify,
-} from '../layout';
-import Icon from './Icon';
-import Button from './Button';
-import { getEnumAsClass } from '../utils';
 import { styles as themeStyles } from '../base/ThemeProvider';
-
+import { Category, Size, Tier } from '../enums';
+import { Flex, FlexAlign, FlexItem, FlexJustify, Margin } from '../layout';
+import { getEnumAsClass } from '../utils';
+import Button from './Button';
+import Icon from './Icon';
 
 const styles = {
   provider: css`
@@ -45,11 +35,11 @@ const styles = {
     color: ${sv.colorPrimary};
     overflow: hidden;
 
-    [data-element="text"] {
+    [data-element='text'] {
       font-size: 0.95rem;
     }
 
-    [data-element="icon"] {
+    [data-element='icon'] {
       margin-top: -1px;
     }
 
@@ -63,7 +53,7 @@ const styles = {
     }
   `,
   danger: css`
-    [data-element="icon"] {
+    [data-element='icon'] {
       color: ${sv.red};
     }
 
@@ -72,7 +62,7 @@ const styles = {
     }
   `,
   info: css`
-    [data-element="icon"] {
+    [data-element='icon'] {
       color: ${sv.blue};
     }
 
@@ -81,7 +71,7 @@ const styles = {
     }
   `,
   warning: css`
-    [data-element="icon"] {
+    [data-element='icon'] {
       color: ${sv.orange};
     }
 
@@ -90,7 +80,7 @@ const styles = {
     }
   `,
   success: css`
-    [data-element="icon"] {
+    [data-element='icon'] {
       color: ${sv.green};
     }
 
@@ -107,8 +97,7 @@ const styles = {
     transform: translateY(0);
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
   `,
-  alertEnterDone: css`
-  `,
+  alertEnterDone: css``,
   alertExit: css`
     opacity: 1;
     transform: translateY(0);
@@ -120,7 +109,6 @@ const styles = {
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
   `,
 };
-
 
 function _getIconForCategory(category) {
   switch (category) {
@@ -135,14 +123,7 @@ function _getIconForCategory(category) {
   }
 }
 
-
-export const Alert = ({
-  id,
-  text,
-  category,
-  onClickDismiss,
-  hideDelay,
-}) => {
+export const Alert = ({ id, text, category, onClickDismiss, hideDelay }) => {
   const icon = _getIconForCategory(category);
 
   useEffect(() => {
@@ -175,7 +156,8 @@ export const Alert = ({
               size={Size.SMALL}
               onClick={() => onClickDismiss(id)}
               tier={Tier.TERTIARY}
-              leading={<Icon name="x" />} />
+              leading={<Icon name="x" />}
+            />
           </Margin>
         </FlexItem>
       </Flex>
@@ -183,57 +165,43 @@ export const Alert = ({
   );
 };
 
-
 Alert.propTypes = {
   /** Text shown within the alert */
   text: PropTypes.string.isRequired,
 
-  category: PropTypes.oneOf([
-    Category.DANGER,
-    Category.SUCCESS,
-    Category.INFO,
-    Category.WARNING,
-  ]).isRequired,
+  category: PropTypes.oneOf([Category.DANGER, Category.SUCCESS, Category.INFO, Category.WARNING])
+    .isRequired,
 
   /** Triggered when the dismiss button is clicked */
   onClickDismiss: PropTypes.func,
 
   /** If you need to manually hide the alert, you can pass your own ID to call hide */
-  id: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   /** Amount of milliseconds before the alert is dismissed (except for danger) */
   hideDelay: PropTypes.number,
 };
 
-
 Alert.defaultProps = {
   hideDelay: 4000,
 };
 
-
 const Context = React.createContext();
-
 
 function reducer(alerts, action) {
   const { type, payload } = action;
   if (type === 'showAlert') {
-    return [ ...alerts, payload.alert ];
-  }
-  else if (type === 'hideAlert') {
+    return [...alerts, payload.alert];
+  } else if (type === 'hideAlert') {
     return alerts.filter((a) => payload.id !== a.id);
-  }
-  else {
+  } else {
     return alerts;
   }
 }
 
-
 const AlertsProvider = ({ children }) => {
-  const [ outletElement, setOutletElement ] = useState(null);
-  const [ alerts, dispatch ] = useReducer(reducer, []);
+  const [outletElement, setOutletElement] = useState(null);
+  const [alerts, dispatch] = useReducer(reducer, []);
 
   const hideAlert = (id) => {
     dispatch({ type: 'hideAlert', payload: { id } });
@@ -246,13 +214,12 @@ const AlertsProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if ( ! document.getElementById('alerts-outlet')) {
+    if (!document.getElementById('alerts-outlet')) {
       const alertsOutlet = document.createElement('div');
       alertsOutlet.id = 'alerts-outlet';
       document.body.appendChild(alertsOutlet);
       setOutletElement(alertsOutlet);
-    }
-    else {
+    } else {
       setOutletElement(document.getElementById('alerts-outlet'));
     }
 
@@ -263,7 +230,7 @@ const AlertsProvider = ({ children }) => {
     };
   }, []);
 
-  if (! outletElement) return null;
+  if (!outletElement) return null;
 
   return (
     <Context.Provider value={{ showAlert, hideAlert }}>
@@ -301,9 +268,7 @@ AlertsProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-
 export default AlertsProvider;
-
 
 export function useAlert() {
   return React.useContext(Context);

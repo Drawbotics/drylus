@@ -2,17 +2,11 @@ const path = require('path');
 
 const generate = require('./webfont-generate');
 const transformIcons = require('./transform-icons');
-const {
-  setFontSize,
-  generateJSFunction,
-  generateObjectMappings,
-} = require('./utils');
-
+const { setFontSize, generateJSFunction, generateObjectMappings } = require('./utils');
 
 const ICONS_FOLDER = path.resolve(__dirname, '../icons');
 const CACHE_FOLDER = path.resolve(__dirname, '../.cache');
 const DIST_FOLDER = path.resolve(__dirname, '../dist');
-
 
 async function build() {
   await transformIcons(ICONS_FOLDER, CACHE_FOLDER);
@@ -35,6 +29,5 @@ async function build() {
   generateObjectMappings(path.resolve(DIST_FOLDER, 'drycons.js'), ICONS_FOLDER);
   console.log('Finished applying transforms');
 }
-
 
 build();

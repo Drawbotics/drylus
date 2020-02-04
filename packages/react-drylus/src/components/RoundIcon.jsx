@@ -1,13 +1,12 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React from 'react';
 
-import Icon from './Icon';
 import { Category, Size } from '../enums';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
-
+import Icon from './Icon';
 
 const styles = {
   root: css`
@@ -70,33 +69,22 @@ const styles = {
   `,
 };
 
-
-const RoundIcon = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    name,
-    size,
-    category,
-    bold,
-    style,
-  } = useResponsiveProps(rest, responsive);
+const RoundIcon = ({ responsive, ...rest }) => {
+  const { name, size, category, bold, style } = useResponsiveProps(rest, responsive);
 
   const customSize = typeof size === 'number';
   return (
     <div
       className={cx(styles.root, {
         [styles[getEnumAsClass(category)]]: category,
-        [styles[! customSize && getEnumAsClass(size)]]: size,
+        [styles[!customSize && getEnumAsClass(size)]]: size,
         [styles.iconInherit]: customSize,
       })}
       style={customSize ? { height: size, width: size, fontSize: size * 0.5, ...style } : style}>
       <Icon name={name} bold={bold} />
     </div>
   );
-}
-
+};
 
 RoundIcon.propTypes = {
   /** Name of the icon */
@@ -134,12 +122,10 @@ RoundIcon.propTypes = {
   }),
 };
 
-
 RoundIcon.defaultProps = {
   size: Size.DEFAULT,
 
   style: {},
 };
-
 
 export default RoundIcon;

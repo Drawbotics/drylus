@@ -1,17 +1,16 @@
-import React, { Fragment, useState } from 'react';
+import sv from '@drawbotics/drylus-style-vars';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
-import { useScreenSize } from '@drawbotics/use-screen-size';
-import sv from '@drawbotics/drylus-style-vars';
+import React, { Fragment, useState } from 'react';
 
-import Button from './Button';
-import Icon from './Icon';
-import Drawer from './Drawer';
-import Margin from '../layout/Margin';
-import { Tier, Size, Category } from '../enums';
+import { Category, Size, Tier } from '../enums';
 import Flex, { FlexItem, FlexJustify } from '../layout/Flex';
+import Margin from '../layout/Margin';
 import { CustomPropTypes } from '../utils';
-
+import Button from './Button';
+import Drawer from './Drawer';
+import Icon from './Icon';
 
 const styles = {
   okButton: css`
@@ -20,7 +19,6 @@ const styles = {
     right: ${sv.marginSmall};
   `,
 };
-
 
 const FilterGroup = ({
   label,
@@ -32,10 +30,10 @@ const FilterGroup = ({
   onClear,
   children,
 }) => {
-  const [ drawerOpen, setDrawerOpen ] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const { screenSize, ScreenSizes } = useScreenSize();
 
-  const filters = children != null ? React.Children.map(children, x => x) : _filters;
+  const filters = children != null ? React.Children.map(children, (x) => x) : _filters;
 
   if (screenSize > ScreenSizes.L) {
     return (
@@ -44,12 +42,9 @@ const FilterGroup = ({
           <FlexItem key={i}>
             {do {
               if (i === 0) {
-                filter
-              }
-              else {
-                <Margin size={{ left: Size.EXTRA_SMALL }}>
-                  {filter}
-                </Margin>
+                filter;
+              } else {
+                <Margin size={{ left: Size.EXTRA_SMALL }}>{filter}</Margin>;
               }
             }}
           </FlexItem>
@@ -64,7 +59,8 @@ const FilterGroup = ({
         <Button
           style={active ? { background: sv.neutralDarker, color: sv.white } : null}
           onClick={() => setDrawerOpen(true)}
-          leading={<Icon name={icon} />} />
+          leading={<Icon name={icon} />}
+        />,
       )}
       <Drawer
         footer={
@@ -81,23 +77,20 @@ const FilterGroup = ({
         visible={drawerOpen}
         title={label}
         onClickClose={() => setDrawerOpen(false)}>
-          <div className={styles.okButton}>
-            <Button
-              onClick={() => setDrawerOpen(false)}
-              category={Category.BRAND}>
-              OK
-            </Button>
-          </div>
-          {filters.map((filter, i) => (
-            <Margin key={i} size={{ top: Size.DEFAULT }}>
-              {filter}
-            </Margin>
-          ))}
+        <div className={styles.okButton}>
+          <Button onClick={() => setDrawerOpen(false)} category={Category.BRAND}>
+            OK
+          </Button>
+        </div>
+        {filters.map((filter, i) => (
+          <Margin key={i} size={{ top: Size.DEFAULT }}>
+            {filter}
+          </Margin>
+        ))}
       </Drawer>
     </Fragment>
   );
 };
-
 
 FilterGroup.propTypes = {
   /** Title which appears on top of the modal */
@@ -130,11 +123,9 @@ FilterGroup.propTypes = {
   active: PropTypes.bool,
 };
 
-
 FilterGroup.defaultProps = {
-  renderButton: x => x,
+  renderButton: (x) => x,
   clearAllLabel: 'Clear all',
 };
-
 
 export default FilterGroup;

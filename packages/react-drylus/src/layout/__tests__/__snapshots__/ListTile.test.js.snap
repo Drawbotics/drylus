@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ListTile matches snapshot when has a custom title 1`] = `
-.css-1kgtu2h-Flex__root {
+.emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9,15 +9,15 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
   margin: 0;
 }
 
-.css-8312sn-ListTile__root {
+.emotion-4 {
   display: inline-block;
 }
 
-.css-94tip-ListTile__withMargin {
+.emotion-1 {
   margin-bottom: calc(8px / 2);
 }
 
-.css-qq01sn-Button__root {
+.emotion-0 {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
@@ -40,43 +40,43 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
   justify-content: center;
 }
 
-.css-qq01sn-Button__root:hover {
+.emotion-0:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-qq01sn-Button__root:active {
+.emotion-0:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-qq01sn-Button__root:disabled {
+.emotion-0:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
   box-shadow: none;
 }
 
-.css-iempa9-Flex__item-Flex__equalSpan {
+.emotion-2 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
 }
 
 <div
-  className="css-8312sn-ListTile__root"
+  className="emotion-4"
 >
   <div
-    className="css-1kgtu2h-Flex__root undefined"
+    className="emotion-3 undefined"
   >
     <div
-      className="css-iempa9-Flex__item-Flex__equalSpan"
+      className="emotion-2"
       style={Object {}}
     >
       <div
-        className="css-94tip-ListTile__withMargin"
+        className="emotion-1"
       >
         <button
-          className="css-qq01sn-Button__root"
+          className="emotion-0"
         >
           Button
         </button>
@@ -87,7 +87,7 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
 `;
 
 exports[`ListTile matches snapshot when has a subtitle 1`] = `
-.css-1kgtu2h-Flex__root {
+.emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -95,43 +95,43 @@ exports[`ListTile matches snapshot when has a subtitle 1`] = `
   margin: 0;
 }
 
-.css-8312sn-ListTile__root {
+.emotion-4 {
   display: inline-block;
 }
 
-.css-1wodq5h-ListTile__subtitle {
+.emotion-1 {
   color: #879ba6;
   font-size: 0.9rem;
 }
 
-.css-iempa9-Flex__item-Flex__equalSpan {
+.emotion-2 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
 }
 
-.css-rhrm0e-ListTile__title-ListTile__withMargin {
+.emotion-0 {
   color: #172b4e;
   margin-bottom: calc(8px / 2);
 }
 
 <div
-  className="css-8312sn-ListTile__root"
+  className="emotion-4"
 >
   <div
-    className="css-1kgtu2h-Flex__root undefined"
+    className="emotion-3 undefined"
   >
     <div
-      className="css-iempa9-Flex__item-Flex__equalSpan"
+      className="emotion-2"
       style={Object {}}
     >
       <div
-        className="css-rhrm0e-ListTile__title-ListTile__withMargin"
+        className="emotion-0"
       >
         Title
       </div>
       <div
-        className="css-1wodq5h-ListTile__subtitle"
+        className="emotion-1"
       >
         Subtitle
       </div>
@@ -141,7 +141,7 @@ exports[`ListTile matches snapshot when has a subtitle 1`] = `
 `;
 
 exports[`ListTile matches snapshot when has a title 1`] = `
-.css-1kgtu2h-Flex__root {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -149,32 +149,32 @@ exports[`ListTile matches snapshot when has a title 1`] = `
   margin: 0;
 }
 
-.css-8312sn-ListTile__root {
+.emotion-3 {
   display: inline-block;
 }
 
-.css-12l3x5o-ListTile__title {
+.emotion-0 {
   color: #172b4e;
 }
 
-.css-iempa9-Flex__item-Flex__equalSpan {
+.emotion-1 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
 }
 
 <div
-  className="css-8312sn-ListTile__root"
+  className="emotion-3"
 >
   <div
-    className="css-1kgtu2h-Flex__root undefined"
+    className="emotion-2 undefined"
   >
     <div
-      className="css-iempa9-Flex__item-Flex__equalSpan"
+      className="emotion-1"
       style={Object {}}
     >
       <div
-        className="css-12l3x5o-ListTile__title"
+        className="emotion-0"
       >
         Title
       </div>
@@ -184,7 +184,7 @@ exports[`ListTile matches snapshot when has a title 1`] = `
 `;
 
 exports[`ListTile matches snapshot when has a trailing and leading component 1`] = `
-.css-1kgtu2h-Flex__root {
+.emotion-8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -192,11 +192,11 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   margin: 0;
 }
 
-.css-8312sn-ListTile__root {
+.emotion-9 {
   display: inline-block;
 }
 
-.css-1nr0qeo-ListTile__leading {
+.emotion-1 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -208,7 +208,7 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   margin-right: 8px;
 }
 
-.css-1vo6ywr-ListTile__trailing {
+.emotion-6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -220,11 +220,11 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   margin-left: 8px;
 }
 
-.css-12l3x5o-ListTile__title {
+.emotion-3 {
   color: #172b4e;
 }
 
-.css-qq01sn-Button__root {
+.emotion-0 {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
@@ -247,67 +247,67 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   justify-content: center;
 }
 
-.css-qq01sn-Button__root:hover {
+.emotion-0:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-qq01sn-Button__root:active {
+.emotion-0:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-qq01sn-Button__root:disabled {
+.emotion-0:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
   box-shadow: none;
 }
 
-.css-iempa9-Flex__item-Flex__equalSpan {
+.emotion-4 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
 }
 
 <div
-  className="css-8312sn-ListTile__root"
+  className="emotion-9"
 >
   <div
-    className="css-1kgtu2h-Flex__root undefined"
+    className="emotion-8 undefined"
   >
     <div
-      className="css-19bskwp-Flex__item"
+      className="emotion-2"
       style={Object {}}
     >
       <div
-        className="css-1nr0qeo-ListTile__leading"
+        className="emotion-1"
       >
         <button
-          className="css-qq01sn-Button__root"
+          className="emotion-0"
         >
           Leading
         </button>
       </div>
     </div>
     <div
-      className="css-iempa9-Flex__item-Flex__equalSpan"
+      className="emotion-4"
       style={Object {}}
     >
       <div
-        className="css-12l3x5o-ListTile__title"
+        className="emotion-3"
       >
         Title
       </div>
     </div>
     <div
-      className="css-19bskwp-Flex__item"
+      className="emotion-2"
       style={Object {}}
     >
       <div
-        className="css-1vo6ywr-ListTile__trailing"
+        className="emotion-6"
       >
         <button
-          className="css-qq01sn-Button__root"
+          className="emotion-0"
         >
           Trailing
         </button>

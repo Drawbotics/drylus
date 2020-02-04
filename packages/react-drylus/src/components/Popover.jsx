@@ -1,15 +1,14 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
-import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
+import { css, cx } from 'emotion';
+import PropTypes from 'prop-types';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
-import { useRect } from '../utils/hooks';
-import { getStyleForSide, CustomPropTypes, deprecateProperty } from '../utils';
 import { Position } from '../enums';
-
+import { CustomPropTypes, deprecateProperty, getStyleForSide } from '../utils';
+import { useRect } from '../utils/hooks';
 
 const styles = {
   root: css`
@@ -25,7 +24,7 @@ const styles = {
     text-align: center;
     transform: translate(0, -5px);
     transition: transform ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve},
-                opacity ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+      opacity ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
     filter: drop-shadow(${sv.elevation2});
     pointer-events: none;
 
@@ -86,28 +85,18 @@ const styles = {
   `,
 };
 
-
 /**
  * @deprecated and will be removed in version 6.0
  */
-export const PopoverSides = deprecateProperty(new Enum(
-  'TOP',
-  'LEFT',
-  'BOTTOM',
-  'RIGHT',
-), 'PopoverSides', 'Position');
+export const PopoverSides = deprecateProperty(
+  new Enum('TOP', 'LEFT', 'BOTTOM', 'RIGHT'),
+  'PopoverSides',
+  'Position',
+);
 
-
-const Popover = ({
-  children,
-  message,
-  content: _content,
-  side,
-  style,
-  exitOnClick,
-}) => {
-  const [ visible, setVisible ] = useState(false);
-  const [ outletElement, setOutletElement ] = useState(null);
+const Popover = ({ children, message, content: _content, side, style, exitOnClick }) => {
+  const [visible, setVisible] = useState(false);
+  const [outletElement, setOutletElement] = useState(null);
   const childrenRef = useRef();
   const popoverRef = useRef();
   const { rect, setRect } = useRect();
@@ -116,18 +105,17 @@ const Popover = ({
   const content = _content != null ? _content : message;
 
   useEffect(() => {
-    if ( ! document.getElementById('popovers-outlet')) {
+    if (!document.getElementById('popovers-outlet')) {
       const popoversOutlet = document.createElement('div');
       popoversOutlet.id = 'popovers-outlet';
       document.body.appendChild(popoversOutlet);
       setOutletElement(popoversOutlet);
-    }
-    else {
+    } else {
       setOutletElement(document.getElementById('popovers-outlet'));
     }
 
     return () => {
-      if (! visible && outletElement != null) {
+      if (!visible && outletElement != null) {
         document.body.removeChild(outletElement);
       }
     };
@@ -135,18 +123,20 @@ const Popover = ({
 
   useEffect(() => {
     const handleWindowClick = (e) => {
-      if (visible
-        && e.target !== childrenRef.current
-        && ! childrenRef.current?.contains(e.target)
-        && e.target !== popoverRef.current
-        && ! popoverRef.current?.contains(e.target)
-        || exitOnClick) {
+      if (
+        (visible &&
+          e.target !== childrenRef.current &&
+          !childrenRef.current?.contains(e.target) &&
+          e.target !== popoverRef.current &&
+          !popoverRef.current?.contains(e.target)) ||
+        exitOnClick
+      ) {
         setVisible(false);
       }
     };
 
     const handleMouseClick = (e) => setVisible(true);
-    
+
     const handleMouseLeave = () => setVisible(false);
 
     if (childrenRef.current != null) {
@@ -208,7 +198,6 @@ const Popover = ({
   );
 };
 
-
 Popover.propTypes = {
   /** DEPRECATED */
   message: CustomPropTypes.mutuallyExclusive('content', {
@@ -225,21 +214,19 @@ Popover.propTypes = {
   /** Component wrapped by the Popover */
   children: PropTypes.node.isRequired,
 
-  side: PropTypes.oneOf([ Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM ]),
+  side: PropTypes.oneOf([Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM]),
 
   /** Used for style overrides */
   style: PropTypes.object,
-  
+
   /** If true, the popover will close when clicked */
   exitOnClick: PropTypes.bool,
 };
-
 
 Popover.defaultProps = {
   side: Position.TOP,
   style: {},
   exitOnClick: false,
 };
-
 
 export default Popover;

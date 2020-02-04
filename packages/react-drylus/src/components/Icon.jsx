@@ -1,19 +1,17 @@
-import React from 'react';
-import { css, cx, injectGlobal } from 'emotion';
-import PropTypes from 'prop-types';
+import sv from '@drawbotics/drylus-style-vars';
 import { generateIconStyles, mapping } from '@drawbotics/icons/dist/drycons.js';
 import packageJson from '@drawbotics/icons/package.json';
-import sv from '@drawbotics/drylus-style-vars';
+import { css, cx, injectGlobal } from 'emotion';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import { Category } from '../enums';
 import { getEnumAsClass } from '../utils';
 import env from '../utils/get-static-env';
 
-
 injectGlobal`
   ${generateIconStyles(env === "'development'" ? 'dev' : packageJson.version)}
 `;
-
 
 const styles = {
   root: css`
@@ -44,9 +42,7 @@ const styles = {
   `,
 };
 
-
 export const Icons = mapping;
-
 
 const Icon = ({ name, bold, onClick, category, style }) => {
   return (
@@ -57,10 +53,10 @@ const Icon = ({ name, bold, onClick, category, style }) => {
         [styles[getEnumAsClass(category)]]: category,
         [styles.clickable]: onClick,
       })}
-      onClick={onClick} />
+      onClick={onClick}
+    />
   );
 };
-
 
 Icon.propTypes = {
   /** Name of the icon */
@@ -83,7 +79,6 @@ Icon.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
-}
-
+};
 
 export default Icon;

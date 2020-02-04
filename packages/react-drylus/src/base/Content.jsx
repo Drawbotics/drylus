@@ -1,8 +1,7 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
-
+import React from 'react';
 
 const styles = {
   root: css`
@@ -21,7 +20,6 @@ const styles = {
   `,
 };
 
-
 const Content = ({ children, fullHeight, fullWidth, style }) => {
   return (
     <div
@@ -29,13 +27,10 @@ const Content = ({ children, fullHeight, fullWidth, style }) => {
       className={cx(styles.root, {
         [styles.fullHeight]: fullHeight,
       })}>
-      <div className={cx(styles.children, { [styles.fullWidth]: fullWidth })}>
-        {children}
-      </div>
+      <div className={cx(styles.children, { [styles.fullWidth]: fullWidth })}>{children}</div>
     </div>
   );
 };
-
 
 Content.propTypes = {
   children: PropTypes.node.isRequired,
@@ -49,6 +44,5 @@ Content.propTypes = {
   /** Used for style overrides */
   style: PropTypes.object,
 };
-
 
 export default Content;

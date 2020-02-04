@@ -1,16 +1,15 @@
-import React, { useRef, useState } from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
-import MapboxMap, { Marker as MapboxMarker } from 'react-mapbox-wrapper';
 import { LngLatBounds } from 'mapbox-gl';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React, { useRef, useState } from 'react';
+import MapboxMap, { Marker as MapboxMarker } from 'react-mapbox-wrapper';
 
-import Flex, { FlexDirection, FlexItem } from '../layout/Flex';
 import { Size, Tier } from '../enums';
+import Flex, { FlexDirection, FlexItem } from '../layout/Flex';
+import Margin from '../layout/Margin';
 import Popover from './Popover';
 import Text from './Text';
-import Margin from '../layout/Margin';
-
 
 const styles = {
   root: css`
@@ -18,7 +17,7 @@ const styles = {
   `,
   map: css`
     height: 100%;
-    
+
     & .mapboxgl-control-container {
       display: none;
     }
@@ -51,11 +50,7 @@ const styles = {
   `,
 };
 
-
-const PopoverContent = ({
-  title,
-  subtitle,
-}) => {
+const PopoverContent = ({ title, subtitle }) => {
   return (
     <Flex direction={FlexDirection.VERTICAL}>
       <FlexItem>
@@ -65,30 +60,21 @@ const PopoverContent = ({
         if (subtitle) {
           <FlexItem>
             <Margin size={{ top: Size.EXTRA_SMALL }}>
-              <Text
-                size={Size.SMALL}
-                tier={Tier.SECONDARY}>
+              <Text size={Size.SMALL} tier={Tier.SECONDARY}>
                 {subtitle}
               </Text>
             </Margin>
-          </FlexItem>
+          </FlexItem>;
         }
       }}
     </Flex>
   );
-}
+};
 
-
-const Map = ({
-  accessToken,
-  markers,
-  height,
-  style,
-  ...props
-}) => {
+const Map = ({ accessToken, markers, height, style, ...props }) => {
   const ref = useRef();
 
-  const [ mapRef, setMapRef ] = useState(ref.current);
+  const [mapRef, setMapRef] = useState(ref.current);
 
   const handleFitMarkers = (map) => {
     const coordinatesToFit = markers.reduce((coords, marker) => {
@@ -104,7 +90,7 @@ const Map = ({
       <div className={styles.marker}>
         {do {
           if (marker.label != null) {
-            <div className={styles.label}>{marker.label}</div>
+            <div className={styles.label}>{marker.label}</div>;
           }
         }}
         <div className={styles.dropContainer}>
@@ -135,16 +121,11 @@ const Map = ({
                 {do {
                   if (marker.title) {
                     <Popover
-                      content={
-                        <PopoverContent
-                          title={marker.title}
-                          subtitle={marker.subtitle} />
-                      }>
+                      content={<PopoverContent title={marker.title} subtitle={marker.subtitle} />}>
                       {renderMarker(marker)}
-                    </Popover>
-                  }
-                  else {
-                    renderMarker(marker)
+                    </Popover>;
+                  } else {
+                    renderMarker(marker);
                   }
                 }}
               </MapboxMarker>
@@ -155,7 +136,6 @@ const Map = ({
     </div>
   );
 };
-
 
 Map.propTypes = {
   /** Determines the height of the map in pixels */
@@ -171,26 +151,26 @@ Map.propTypes = {
   accessToken: PropTypes.string.isRequired,
 
   /** Elements you want to see on the map. To customize the Marker object, you can use the options field */
-  markers: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.node,
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
-    coordinates: PropTypes.shape({
-      lng: PropTypes.number.isRequired,
-      lat: PropTypes.number.isRequired,
-    }).isRequired,
-    options: PropTypes.object,
-  })).isRequired,
+  markers: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.node,
+      title: PropTypes.string,
+      subtitle: PropTypes.string,
+      coordinates: PropTypes.shape({
+        lng: PropTypes.number.isRequired,
+        lat: PropTypes.number.isRequired,
+      }).isRequired,
+      options: PropTypes.object,
+    }),
+  ).isRequired,
 
   /** Used for style overrides, applied to Map */
   style: PropTypes.object,
 };
 
-
 Map.defaultProps = {
   interactive: false,
   height: 300,
 };
-
 
 export default Map;

@@ -1,7 +1,6 @@
 const { fade } = require('./colors');
 const { m, d, s, a } = require('./operations');
 
-
 // COLORS
 export const white = '#fff';
 export const black = '#000';
@@ -96,7 +95,7 @@ export const shadowColor = fade(neutralDark, 30);
 export const elevation1 = `0 2px 10px ${fade(neutralDark, 10)}`;
 export const elevation2 = `0 7px 14px ${fade(neutralDark, 20)}`;
 export const elevation3 = `0 10px 17px ${shadowColor}`;
-export const insetActive =`0 1px 6px ${neutralDarkest} inset`;
+export const insetActive = `0 1px 6px ${neutralDarkest} inset`;
 export const insetActiveMedium = `0 1px 6px ${neutralDark} inset`;
 export const insetActiveLight = `0 1px 6px ${neutral} inset`;
 

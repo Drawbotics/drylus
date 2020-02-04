@@ -1,12 +1,11 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx, keyframes } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React from 'react';
 
 import { Category, Size } from '../enums';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
-
 
 const translateX = keyframes`
   0% {
@@ -17,7 +16,6 @@ const translateX = keyframes`
   }
 `;
 
-
 const styles = {
   root: css`
     height: ${sv.marginExtraSmall};
@@ -27,7 +25,7 @@ const styles = {
     overflow: hidden;
     background: ${sv.neutralLight};
 
-    [data-element="bar"] {
+    [data-element='bar'] {
       border-radius: ${sv.marginExtraSmall};
     }
   `,
@@ -44,17 +42,13 @@ const styles = {
   `,
   indeterminate: css`
     width: 50% !important;
-    animation: ${translateX}
-      calc(${sv.defaultTransitionTime} * 2)
-      ease-in-out
-      alternate
-      infinite;
+    animation: ${translateX} calc(${sv.defaultTransitionTime} * 2) ease-in-out alternate infinite;
   `,
   large: css`
     height: ${sv.marginSmall};
     border-radius: ${sv.marginSmall};
 
-    [data-element="bar"] {
+    [data-element='bar'] {
       border-radius: ${sv.marginSmall};
     }
   `,
@@ -65,7 +59,7 @@ const styles = {
     height: calc(${sv.marginExtraSmall} / 2);
     border-radius: calc(${sv.marginExtraSmall} / 2);
 
-    [data-element="bar"] {
+    [data-element='bar'] {
       border-radius: calc(${sv.marginExtraSmall} / 2);
     }
   `,
@@ -86,18 +80,9 @@ const styles = {
   `,
 };
 
+const ProgressBar = ({ responsive, ...rest }) => {
+  const { percentage, category, size, style } = useResponsiveProps(rest, responsive);
 
-const ProgressBar = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    percentage,
-    category,
-    size,
-    style,
-  } = useResponsiveProps(rest, responsive);
-  
   const indeterminate = percentage == null;
 
   return (
@@ -112,11 +97,11 @@ const ProgressBar = ({
           [styles[getEnumAsClass(category)]]: category,
           [styles.indeterminate]: indeterminate,
         })}
-        style={{ width: `${percentage * 100}%` }} />
+        style={{ width: `${percentage * 100}%` }}
+      />
     </div>
   );
 };
-
 
 ProgressBar.propTypes = {
   /** Determines the amount of the bar which is completed, between 0 and 1. If not given the bar is indeterminate */
@@ -130,11 +115,7 @@ ProgressBar.propTypes = {
     Category.WARNING,
   ]),
 
-  size: PropTypes.oneOf([
-    Size.SMALL,
-    Size.DEFAULT,
-    Size.LARGE,
-  ]),
+  size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
 
   /** Used for style overrides */
   style: PropTypes.object,
@@ -150,10 +131,8 @@ ProgressBar.propTypes = {
   }),
 };
 
-
 ProgressBar.defaultProps = {
   size: Size.DEFAULT,
 };
-
 
 export default ProgressBar;

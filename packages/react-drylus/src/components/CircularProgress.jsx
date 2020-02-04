@@ -1,12 +1,11 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React from 'react';
 
 import { Category, Size } from '../enums';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
-
 
 const styles = {
   root: css`
@@ -56,44 +55,34 @@ const styles = {
     width: 30px;
   `,
   brand: css`
-    & [data-element="circle"] {
+    & [data-element='circle'] {
       stroke: ${sv.brand};
     }
   `,
   danger: css`
-    & [data-element="circle"] {
+    & [data-element='circle'] {
       stroke: ${sv.red};
     }
   `,
   info: css`
-    & [data-element="circle"] {
+    & [data-element='circle'] {
       stroke: ${sv.blue};
     }
   `,
   warning: css`
-    & [data-element="circle"] {
+    & [data-element='circle'] {
       stroke: ${sv.orange};
     }
   `,
   success: css`
-    & [data-element="circle"] {
+    & [data-element='circle'] {
       stroke: ${sv.green};
     }
   `,
 };
 
-
-const CircularProgress = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    percentage,
-    category,
-    size,
-    text,
-    style,
-  } = useResponsiveProps(rest, responsive);
+const CircularProgress = ({ responsive, ...rest }) => {
+  const { percentage, category, size, text, style } = useResponsiveProps(rest, responsive);
 
   const circumference = 84 * Math.PI;
   const offset = percentage * circumference;
@@ -105,31 +94,25 @@ const CircularProgress = ({
         [styles[getEnumAsClass(size)]]: size,
         [styles[getEnumAsClass(category)]]: category,
       })}>
-      {do{
+      {do {
         if (text && size !== Size.SMALL) {
-          <div className={styles.text}>
-            {text}
-          </div>
+          <div className={styles.text}>{text}</div>;
         }
       }}
       <svg viewBox="0 0 100 100">
-        <circle
-          cx="50"
-          cy="50"
-          r="42"
-          className={cx(styles.circle, styles.background)} />
+        <circle cx="50" cy="50" r="42" className={cx(styles.circle, styles.background)} />
         <circle
           cx="50"
           cy="50"
           r="42"
           data-element="circle"
           className={cx(styles.circle, styles.progress)}
-          style={{ strokeDasharray: `${offset}, ${circumference}` }} />
+          style={{ strokeDasharray: `${offset}, ${circumference}` }}
+        />
       </svg>
     </div>
   );
 };
-
 
 CircularProgress.propTypes = {
   /** Determines the amount of the circle which is completed, between 0 and 1 */
@@ -146,12 +129,7 @@ CircularProgress.propTypes = {
     Category.WARNING,
   ]),
 
-  size: PropTypes.oneOf([
-    Size.SMALL,
-    Size.DEFAULT,
-    Size.LARGE,
-    Size.EXTRA_LARGE,
-  ]),
+  size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE, Size.EXTRA_LARGE]),
 
   /** Used for style overrides */
   style: PropTypes.object,
@@ -167,11 +145,9 @@ CircularProgress.propTypes = {
   }),
 };
 
-
 CircularProgress.defaultProps = {
   percentage: 0,
   size: Size.DEFAULT,
 };
-
 
 export default CircularProgress;

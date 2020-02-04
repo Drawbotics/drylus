@@ -1,9 +1,8 @@
 import get from 'lodash/get';
 
-
 export function normalizeValue(v, enums) {
-  if (! v) return '';
-  
+  if (!v) return '';
+
   const asSymbol = get(enums, v);
 
   if (asSymbol) {
@@ -24,7 +23,6 @@ export function normalizeValue(v, enums) {
 
   return v;
 }
-
 
 export function displayValue(v) {
   return v;

@@ -1,7 +1,6 @@
-import React from 'react';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
-
+import React from 'react';
 
 const styles = {
   root: css`
@@ -12,7 +11,6 @@ const styles = {
   `,
 };
 
-
 const Page = ({ children, style }) => {
   return (
     <div className={styles.root} style={style}>
@@ -21,13 +19,11 @@ const Page = ({ children, style }) => {
   );
 };
 
-
 Page.propTypes = {
   children: PropTypes.node.isRequired,
 
   /** Used for style overrides */
   style: PropTypes.object,
 };
-
 
 export default Page;

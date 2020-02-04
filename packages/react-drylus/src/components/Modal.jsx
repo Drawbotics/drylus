@@ -1,18 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import sv from '@drawbotics/drylus-style-vars';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
-import { useScreenSize } from '@drawbotics/use-screen-size';
 
-import Button from './Button';
-import Title from './Title';
-import Icon from './Icon';
-import { Size, Tier } from '../enums';
 import { styles as themeStyles } from '../base/ThemeProvider';
+import { Size, Tier } from '../enums';
 import { useResponsiveProps } from '../utils/hooks';
-
+import Button from './Button';
+import Icon from './Icon';
+import Title from './Title';
 
 const styles = {
   overlay: css`
@@ -123,7 +122,7 @@ const styles = {
   modalEnter: css`
     opacity: 0;
 
-    & [data-element="container"] {
+    & [data-element='container'] {
       transform: scale(1.3);
       opacity: 0;
     }
@@ -132,7 +131,7 @@ const styles = {
     opacity: 1;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
 
-    & [data-element="container"] {
+    & [data-element='container'] {
       transform: scale(1);
       opacity: 1;
       transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
@@ -142,7 +141,7 @@ const styles = {
     opacity: 1;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
 
-    & [data-element="container"] {
+    & [data-element='container'] {
       transform: scale(1);
       opacity: 1;
     }
@@ -151,7 +150,7 @@ const styles = {
     opacity: 0.01;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
 
-    & [data-element="container"] {
+    & [data-element='container'] {
       transform: scale(1.2);
       opacity: 0.01;
       transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
@@ -159,63 +158,50 @@ const styles = {
   `,
 };
 
-
-const BaseModal = React.forwardRef(({
-  children,
-  onClickClose,
-  footer,
-  size,
-  title,
-  style,
-}, ref) => (
-  <div
-    style={style}
-    className={cx(styles.root, { [styles.large]: size === Size.LARGE })}
-    ref={ref}>
-    <div className={styles.close}>
-      <Button size={Size.SMALL} onClick={onClickClose} tier={Tier.TERTIARY} leading={<Icon name="x" />} />
+const BaseModal = React.forwardRef(
+  ({ children, onClickClose, footer, size, title, style }, ref) => (
+    <div
+      style={style}
+      className={cx(styles.root, { [styles.large]: size === Size.LARGE })}
+      ref={ref}>
+      <div className={styles.close}>
+        <Button
+          size={Size.SMALL}
+          onClick={onClickClose}
+          tier={Tier.TERTIARY}
+          leading={<Icon name="x" />}
+        />
+      </div>
+      {do {
+        if (title) {
+          <div className={styles.title}>
+            <Title size={4} noMargin>
+              {title}
+            </Title>
+          </div>;
+        }
+      }}
+      <div className={styles.content}>{children}</div>
+      {do {
+        if (footer) {
+          <div className={styles.footer}>{footer}</div>;
+        }
+      }}
     </div>
-    {do {
-      if (title) {
-        <div className={styles.title}>
-          <Title size={4} noMargin>{title}</Title>
-        </div>
-      }
-    }}
-    <div className={styles.content}>
-      {children}
-    </div>
-    {do {
-      if (footer) {
-        <div className={styles.footer}>
-          {footer}
-        </div>
-      }
-    }}
-  </div>
-));
+  ),
+);
 
 BaseModal.displayName = 'BaseModal';
 
+const Modal = ({ responsive, ...rest }) => {
+  const { children, footer, visible, onClickClose, size, raw, title, style } = useResponsiveProps(
+    rest,
+    responsive,
+  );
 
-const Modal = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    children,
-    footer,
-    visible,
-    onClickClose,
-    size,
-    raw,
-    title,
-    style,
-  } = useResponsiveProps(rest, responsive);
-
-  const [ outletElement, setOutletElement ] = useState(null);
-  const [ overflowing, setOverflowing ] = useState(false);
-  const [ previousTouchY, setTouchY ] = useState(null);
+  const [outletElement, setOutletElement] = useState(null);
+  const [overflowing, setOverflowing] = useState(false);
+  const [previousTouchY, setTouchY] = useState(null);
   const { screenSize, ScreenSizes } = useScreenSize();
   const overlayElement = useRef();
   const modalElement = useRef();
@@ -237,10 +223,9 @@ const Modal = ({
     if (modalElement?.current?.contains(e.target)) {
       const touchY = e.changedTouches[0]?.clientY;
       const touchDelta = Math.abs(touchY - previousTouchY);
-      if (touchY > previousTouchY && touchDelta < 50){
+      if (touchY > previousTouchY && touchDelta < 50) {
         containerElement.current.scrollTop -= touchDelta;
-      }
-      else if (touchY < previousTouchY && touchDelta < 50){
+      } else if (touchY < previousTouchY && touchDelta < 50) {
         containerElement.current.scrollTop += touchDelta;
       }
       touchY >= 0 && setTouchY(touchY);
@@ -248,18 +233,17 @@ const Modal = ({
   };
 
   useEffect(() => {
-    if ( ! document.getElementById('modals-outlet')) {
+    if (!document.getElementById('modals-outlet')) {
       const modalsOutlet = document.createElement('div');
       modalsOutlet.id = 'modals-outlet';
       document.body.appendChild(modalsOutlet);
       setOutletElement(modalsOutlet);
-    }
-    else {
+    } else {
       setOutletElement(document.getElementById('modals-outlet'));
     }
 
     return () => {
-      if ( ! visible && outletElement) {
+      if (!visible && outletElement) {
         document.body.removeChild(outletElement);
       }
     };
@@ -272,15 +256,14 @@ const Modal = ({
         document.body.style.pointerEvents = 'none';
         document.body.parentElement.style.position = 'fixed';
       }
-    }
-    else {
+    } else {
       document.body.style.overflow = 'initial';
       document.body.style.pointerEvents = 'auto';
       document.body.parentElement.style.position = '';
     }
   }, [visible]);
 
-  useEffect(() => visible ? handleWindowResize() : undefined, [visible]);
+  useEffect(() => (visible ? handleWindowResize() : undefined), [visible]);
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowResize);
@@ -294,9 +277,9 @@ const Modal = ({
     };
   });
 
-  if (! outletElement) return '';
+  if (!outletElement) return '';
 
-  const handleClickOverlay = (e) => e.target === overlayElement?.current ? onClickClose() : null;
+  const handleClickOverlay = (e) => (e.target === overlayElement?.current ? onClickClose() : null);
 
   return ReactDOM.createPortal(
     <div className={themeStyles.root}>
@@ -312,19 +295,15 @@ const Modal = ({
           exit: styles.modalExit,
           exitActive: styles.modalExitActive,
         }}>
-        <div
-          onClick={handleClickOverlay}
-          className={styles.overlay}
-          ref={overlayElement}>
+        <div onClick={handleClickOverlay} className={styles.overlay} ref={overlayElement}>
           <div
             ref={containerElement}
             className={cx(styles.container, { [styles.alignTop]: overflowing })}
             data-element="container">
             {do {
               if (raw) {
-                children
-              }
-              else {
+                children;
+              } else {
                 <BaseModal
                   size={size}
                   ref={modalElement}
@@ -333,7 +312,7 @@ const Modal = ({
                   style={style}
                   title={title}>
                   {children}
-                </BaseModal>
+                </BaseModal>;
               }
             }}
           </div>
@@ -343,9 +322,8 @@ const Modal = ({
     document.getElementById('modals-outlet'),
   );
   // eslint-disable-next-line no-unreachable
-  return <div></div>;  // NOTE: proptypes fail if no "concrete" element is returned
+  return <div></div>; // NOTE: proptypes fail if no "concrete" element is returned
 };
-
 
 Modal.propTypes = {
   /** Content rendered within the modal */
@@ -383,12 +361,9 @@ Modal.propTypes = {
   }),
 };
 
-
 Modal.defaultProps = {
   size: Size.DEFAULT,
   raw: false,
 };
-
-
 
 export default Modal;

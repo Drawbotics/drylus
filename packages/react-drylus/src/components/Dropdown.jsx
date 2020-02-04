@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
+import { css, cx } from 'emotion';
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Category, Position } from '../enums';
-import Icon from './Icon';
-import { getEnumAsClass, deprecateProperty } from '../utils';
+import { deprecateProperty, getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
-
+import Icon from './Icon';
 
 const styles = {
   wrapper: css`
@@ -40,8 +39,7 @@ const styles = {
     pointer-events: auto;
     transform: translateY(0);
   `,
-  bottom: css`
-  `,
+  bottom: css``,
   top: css`
     top: auto;
     bottom: 100%;
@@ -126,31 +124,20 @@ const styles = {
   `,
 };
 
-
 /**
  * @deprecated and will be removed in version 6.0
  */
-export const DropdownSides = deprecateProperty(new Enum(
-  'TOP',
-  'LEFT',
-  'BOTTOM',
-  'RIGHT',
-), 'DropdownSides', 'Position');
+export const DropdownSides = deprecateProperty(
+  new Enum('TOP', 'LEFT', 'BOTTOM', 'RIGHT'),
+  'DropdownSides',
+  'Position',
+);
 
-
-export const DropdownOption = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    text,
-    category,
-    disabled,
-    onClick,
-    onClickClose,
-    icon,
-    style,
-  } = useResponsiveProps(rest, responsive);
+export const DropdownOption = ({ responsive, ...rest }) => {
+  const { text, category, disabled, onClick, onClickClose, icon, style } = useResponsiveProps(
+    rest,
+    responsive,
+  );
 
   return (
     <div
@@ -159,10 +146,17 @@ export const DropdownOption = ({
         [styles[getEnumAsClass(category)]]: category,
         [styles.disabled]: disabled,
       })}
-      onClick={disabled ? null : () => { onClickClose(); onClick(); }}>
+      onClick={
+        disabled
+          ? null
+          : () => {
+              onClickClose();
+              onClick();
+            }
+      }>
       {do {
         if (icon) {
-          <Icon name={icon} />
+          <Icon name={icon} />;
         }
       }}
       {text}
@@ -183,11 +177,7 @@ DropdownOption.propTypes = {
   /** Name of the icon to be shown on the left side */
   icon: PropTypes.string,
 
-  category: PropTypes.oneOf([
-    Category.DANGER,
-    Category.SUCCESS,
-    Category.WARNING,
-  ]),
+  category: PropTypes.oneOf([Category.DANGER, Category.SUCCESS, Category.WARNING]),
 
   /** Used for style overrides */
   style: PropTypes.object,
@@ -204,9 +194,8 @@ DropdownOption.propTypes = {
 };
 
 DropdownOption.defaultProps = {
-  onClick: x=>x,
+  onClick: (x) => x,
 };
-
 
 export const DropdownTitle = ({ text, style }) => {
   return (
@@ -224,34 +213,23 @@ DropdownTitle.propTypes = {
   style: PropTypes.object,
 };
 
-
 export const DropdownSeparator = () => {
-  return (
-    <div className={styles.separator} />
-  );
+  return <div className={styles.separator} />;
 };
 
+const Dropdown = ({ responsive, ...rest }) => {
+  const { children, trigger, side, style } = useResponsiveProps(rest, responsive);
 
-const Dropdown = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    children,
-    trigger,
-    side,
-    style,
-  } = useResponsiveProps(rest, responsive);
-
-  if (! React.isValidElement(trigger)) {
+  if (!React.isValidElement(trigger)) {
     console.warn('Dropdown only accepts a single child as trigger');
     return null;
   }
 
   const ref = useRef();
-  const [ isOpen, setDropdowOpen ] = useState(false);
+  const [isOpen, setDropdowOpen] = useState(false);
 
-  const handleDocumentClick = (e) => ! ref.current.contains(e.target) ? setDropdowOpen(false) : null;
+  const handleDocumentClick = (e) =>
+    !ref.current.contains(e.target) ? setDropdowOpen(false) : null;
   useEffect(() => {
     document.addEventListener('mousedown', handleDocumentClick);
     return () => {
@@ -269,9 +247,11 @@ const Dropdown = ({
           [styles.visible]: isOpen,
           [styles[getEnumAsClass(side)]]: side,
         })}>
-        {React.Children.map(children, (child) => React.cloneElement(child, {
-          onClickClose: () => setDropdowOpen(false),
-        }))}
+        {React.Children.map(children, (child) =>
+          React.cloneElement(child, {
+            onClickClose: () => setDropdowOpen(false),
+          }),
+        )}
       </div>
     </div>
   );
@@ -284,12 +264,7 @@ Dropdown.propTypes = {
   /** This is the content of the dropdown menu */
   children: PropTypes.node,
 
-  side: PropTypes.oneOf([
-    Position.LEFT,
-    Position.RIGHT,
-    Position.TOP,
-    Position.BOTTOM,
-  ]),
+  side: PropTypes.oneOf([Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM]),
 
   /** Used for style overrides */
   style: PropTypes.object,
@@ -308,6 +283,5 @@ Dropdown.propTypes = {
 Dropdown.defaultProps = {
   side: Position.BOTTOM,
 };
-
 
 export default Dropdown;

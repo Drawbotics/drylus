@@ -1,11 +1,10 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
-import ComponentKit from './ComponentKit';
 import CodingGuidelines from './CodingGuidelines';
+import ComponentKit from './ComponentKit';
 import DesignGuidelines from './DesignGuidelines';
 import Intro from './Intro';
-
 
 const Root = () => {
   return (
@@ -17,6 +16,5 @@ const Root = () => {
     </Switch>
   );
 };
-
 
 export default Root;

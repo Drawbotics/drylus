@@ -1,13 +1,12 @@
-import React from 'react';
+import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv, { fade } from '@drawbotics/drylus-style-vars';
+import React from 'react';
 
 import { Category, Size } from '../enums';
+import { CustomPropTypes } from '../utils';
 import Badge from './Badge';
 import Spinner from './Spinner';
-import { CustomPropTypes } from '../utils';
-
 
 const styles = {
   root: css`
@@ -40,7 +39,8 @@ const styles = {
       content: none;
     }
 
-    & > div, > a > div {
+    & > div,
+    > a > div {
       flex: 1;
       justify-content: space-between;
       color: ${sv.colorPrimary};
@@ -111,7 +111,7 @@ const styles = {
       background: none;
     }
 
-    & > [data-element="trailing"] {
+    & > [data-element='trailing'] {
       opacity: 0.5;
     }
   `,
@@ -120,7 +120,6 @@ const styles = {
     margin-left: ${sv.marginExtraSmall};
   `,
 };
-
 
 const TabNavigation = ({
   value,
@@ -141,41 +140,47 @@ const TabNavigation = ({
         [styles.verticalActive]: vertical && value === option[valueKey],
         [styles.disabled]: option.disabled,
       })}
-      onClick={! option.disabled ? () => onChange(option[valueKey]) : null}>
+      onClick={!option.disabled ? () => onChange(option[valueKey]) : null}>
       {option[labelKey]}
       {do {
         if (option.loading) {
           <div className={styles.trailing} data-element="trailing">
             <Spinner category={vertical ? null : Category.BRAND} size={Size.SMALL} />
-          </div>
-        }
-        else if (option.bullet != null) {
+          </div>;
+        } else if (option.bullet != null) {
           <div data-element="trailing" className={styles.trailing}>
-            {do{
+            {do {
               if (vertical) {
-                option.bullet
-              }
-              else {
-                <Badge category={Category.BRAND} value={option.bullet} max={99} />
+                option.bullet;
+              } else {
+                <Badge category={Category.BRAND} value={option.bullet} max={99} />;
               }
             }}
-          </div>
+          </div>;
         }
       }}
     </div>
   );
   return (
-    <div className={cx(styles.root, {
-      [styles.vertical]: vertical,
-    })}>
-      {options.map((option) => Link ? React.createElement(Link, {
-        href: option.disabled ? null : option[valueKey],
-        key: option[valueKey],
-      }, renderOption(option)) : renderOption(option))}
+    <div
+      className={cx(styles.root, {
+        [styles.vertical]: vertical,
+      })}>
+      {options.map((option) =>
+        Link
+          ? React.createElement(
+              Link,
+              {
+                href: option.disabled ? null : option[valueKey],
+                key: option[valueKey],
+              },
+              renderOption(option),
+            )
+          : renderOption(option),
+      )}
     </div>
   );
 };
-
 
 TabNavigation.propTypes = {
   /** Determines the tabs which will be rendered */
@@ -207,13 +212,11 @@ TabNavigation.propTypes = {
   style: PropTypes.object,
 };
 
-
 TabNavigation.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
   vertical: false,
-  onChange: x => x,
+  onChange: (x) => x,
 };
-
 
 export default TabNavigation;

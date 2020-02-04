@@ -4,7 +4,6 @@ const { kebabCase } = require('lodash');
 
 const vars = require('./vars-build');
 
-
 async function createJs(vars, buildDir) {
   const lines = [];
   lines.push('module.exports = {');
@@ -19,7 +18,6 @@ async function createJs(vars, buildDir) {
   await fs.writeFile(path.resolve(buildDir, './vars.js'), text, 'utf-8');
 }
 
-
 async function createTs(vars, buildDir) {
   const lines = [];
   lines.push(`declare module '@drawbotics/drylus-style-vars' {`);
@@ -30,22 +28,20 @@ async function createTs(vars, buildDir) {
   await fs.writeFile(path.resolve(buildDir, './vars.d.ts'), text, 'utf-8');
 }
 
-
 async function createLess(vars, buildDir) {
   const lines = [];
   Object.keys(vars).forEach((key) => {
     const value = vars[key];
-    if (value.match(/\sonly\s|\sscreen\s|\sand\s|max-width:/) != null) {  // is media query
-      lines.push(`@${kebabCase(key)}: ~'${value}';`)
-    }
-    else {
-      lines.push(`@${kebabCase(key)}: ${value};`)
+    if (value.match(/\sonly\s|\sscreen\s|\sand\s|max-width:/) != null) {
+      // is media query
+      lines.push(`@${kebabCase(key)}: ~'${value}';`);
+    } else {
+      lines.push(`@${kebabCase(key)}: ${value};`);
     }
   });
   const text = lines.join('\n');
   await fs.writeFile(path.resolve(buildDir, './vars.less'), text, 'utf-8');
 }
-
 
 async function createCss(vars, buildDir) {
   const lines = [];
@@ -56,7 +52,6 @@ async function createCss(vars, buildDir) {
   await fs.writeFile(path.resolve(buildDir, './vars.css'), text, 'utf-8');
 }
 
-
 async function main() {
   const buildDir = path.resolve(__dirname, '../dist');
   await fs.ensureDir(buildDir);
@@ -66,7 +61,9 @@ async function main() {
   await createCss(vars, buildDir);
 }
 
-
 if (require.main === module) {
-  main().catch((err) => { console.error(err); process.exit(1); });
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
 }

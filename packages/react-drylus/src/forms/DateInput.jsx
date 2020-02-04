@@ -1,18 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
-import Calendar from 'react-calendar/dist/entry.nostyle';
 import { useScreenSize } from '@drawbotics/use-screen-size';
+import { css, cx } from 'emotion';
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
+import Calendar from 'react-calendar/dist/entry.nostyle';
+import { createPortal } from 'react-dom';
 
-import { InputWithRef } from './Input';
+import { styles as themeStyles } from '../base/ThemeProvider';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
-import { styles as themeStyles } from '../base/ThemeProvider';
 import { Align } from '../enums';
 import { useResponsiveProps } from '../utils/hooks';
-
+import { InputWithRef } from './Input';
 
 const styles = {
   root: css`
@@ -155,18 +154,15 @@ const styles = {
   `,
 };
 
-
 const DEFAULT_OPTIONS = {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
 };
 
-
 function _objectToDate(object) {
   return new Date(object.year, object.month - 1, object.day);
 }
-
 
 function _dateToObject(date) {
   return {
@@ -177,7 +173,7 @@ function _dateToObject(date) {
 }
 
 function _stringToDateObject(string) {
-  const [ year, month, day ] = string.split('-');
+  const [year, month, day] = string.split('-');
   return {
     year: Number(year),
     month: Number(month),
@@ -185,11 +181,12 @@ function _stringToDateObject(string) {
   };
 }
 
-
 function _objectToDateString(object) {
-  return `${object.year}-${String(object.month).padStart(2, '0')}-${String(object.day).padStart(2, '0')}`;
+  return `${object.year}-${String(object.month).padStart(2, '0')}-${String(object.day).padStart(
+    2,
+    '0',
+  )}`;
 }
-
 
 function _getShouldRenderTop(box) {
   if (box?.bottom > window.innerHeight) {
@@ -198,11 +195,7 @@ function _getShouldRenderTop(box) {
   return false;
 }
 
-
-const DateInput = ({
-  responsive,
-  ...rest
-}) => {
+const DateInput = ({ responsive, ...rest }) => {
   const {
     value,
     onChange,
@@ -223,8 +216,8 @@ const DateInput = ({
     align,
   } = useResponsiveProps(rest, responsive);
 
-  const [ outletElement, setOutletElement ] = useState(null);
-  const [ isFocused, setFocused ] = useState(false);
+  const [outletElement, setOutletElement] = useState(null);
+  const [isFocused, setFocused] = useState(false);
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const isDesktop = screenSize > ScreenSizes.XL;
@@ -234,7 +227,8 @@ const DateInput = ({
   const pickerElement = useRef(null);
 
   useEffect(() => {
-    const handleDocumentClick = (e) => ! pickerElement.current?.contains(e.target) ? setFocused(false) : null;
+    const handleDocumentClick = (e) =>
+      !pickerElement.current?.contains(e.target) ? setFocused(false) : null;
     const handleWindowScroll = () => {
       if (isDesktop) {
         setFocused(false);
@@ -252,13 +246,12 @@ const DateInput = ({
   }, []);
 
   useEffect(() => {
-    if ( ! document.getElementById('picker-outlet')) {
+    if (!document.getElementById('picker-outlet')) {
       const pickerOutlet = document.createElement('div');
       pickerOutlet.id = 'picker-outlet';
       document.body.appendChild(pickerOutlet);
       setOutletElement(pickerOutlet);
-    }
-    else {
+    } else {
       setOutletElement(document.getElementById('picker-outlet'));
     }
 
@@ -269,20 +262,24 @@ const DateInput = ({
     };
   }, []);
 
-  const inputValue = value === '' ? value : (isDesktop ?_objectToDate(value).toLocaleDateString(locale, {
-    ...DEFAULT_OPTIONS,
-    ...displayOptions,
-  }) : _objectToDateString(value));
+  const inputValue =
+    value === ''
+      ? value
+      : isDesktop
+      ? _objectToDate(value).toLocaleDateString(locale, {
+          ...DEFAULT_OPTIONS,
+          ...displayOptions,
+        })
+      : _objectToDateString(value);
 
   const pickerBox = pickerElement.current?.getBoundingClientRect();
   const rootBox = rootRef.current?.getBoundingClientRect();
-  const topRender =  pickerBox ? _getShouldRenderTop(pickerBox) : false;
+  const topRender = pickerBox ? _getShouldRenderTop(pickerBox) : false;
 
   const handleOnChange = (v) => {
     if (isDesktop) {
       return v;
-    }
-    else {
+    } else {
       return Boolean(v) && onChange(_stringToDateObject(v), name);
     }
   };
@@ -290,12 +287,14 @@ const DateInput = ({
   return (
     <div style={style} className={styles.root} ref={rootRef}>
       <InputWithRef
-        suffix={onChange != null
-          ? <Button
-            disabled={disabled}
-            leading={<Icon name="calendar" />}
-            onClick={() => inputRef.current.focus()} />
-          : null
+        suffix={
+          onChange != null ? (
+            <Button
+              disabled={disabled}
+              leading={<Icon name="calendar" />}
+              onClick={() => inputRef.current.focus()}
+            />
+          ) : null
         }
         disabled={disabled}
         valid={valid}
@@ -307,42 +306,46 @@ const DateInput = ({
         ref={inputRef}
         onFocus={onChange != null ? () => setFocused(true) : null}
         placeholder={placeholder}
-        type={isDesktop ? null : "date"}
-        max={! isDesktop && maxDate ? _objectToDateString(maxDate) : null}
-        min={! isDesktop && minDate ? _objectToDateString(minDate) : null} />
-      {isDesktop && outletElement && createPortal(
-        <div className={themeStyles.root}>
-          <div
-            style={{
-              top: rootBox?.top,
-              left: align === Align.LEFT
-                ? rootBox?.left
-                : (rootBox?.left - Math.abs(rootBox?.width - pickerBox?.width) || null),
-            }}
-            ref={pickerElement}
-            className={cx(styles.calendarContainer, {
-              [styles.visible]: isFocused,
-            })}>
-            <Calendar
-              {...calendarOptions}
-              maxDate={maxDate && _objectToDate(maxDate)}
-              minDate={minDate && _objectToDate(minDate)}
-              className={cx(styles.calendar, {
-                [styles.topRender]: topRender,
-              })}
-              tileClassName={styles.tile}
-              locale={locale}
-              activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
-              onChange={onChange != null ? (v) => onChange(_dateToObject(v), name) : null}
-              value={value === '' ? null : _objectToDate(value)} />
-          </div>
-        </div>,
-        document.getElementById('picker-outlet'),
-      )}
+        type={isDesktop ? null : 'date'}
+        max={!isDesktop && maxDate ? _objectToDateString(maxDate) : null}
+        min={!isDesktop && minDate ? _objectToDateString(minDate) : null}
+      />
+      {isDesktop &&
+        outletElement &&
+        createPortal(
+          <div className={themeStyles.root}>
+            <div
+              style={{
+                top: rootBox?.top,
+                left:
+                  align === Align.LEFT
+                    ? rootBox?.left
+                    : rootBox?.left - Math.abs(rootBox?.width - pickerBox?.width) || null,
+              }}
+              ref={pickerElement}
+              className={cx(styles.calendarContainer, {
+                [styles.visible]: isFocused,
+              })}>
+              <Calendar
+                {...calendarOptions}
+                maxDate={maxDate && _objectToDate(maxDate)}
+                minDate={minDate && _objectToDate(minDate)}
+                className={cx(styles.calendar, {
+                  [styles.topRender]: topRender,
+                })}
+                tileClassName={styles.tile}
+                locale={locale}
+                activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
+                onChange={onChange != null ? (v) => onChange(_dateToObject(v), name) : null}
+                value={value === '' ? null : _objectToDate(value)}
+              />
+            </div>
+          </div>,
+          document.getElementById('picker-outlet'),
+        )}
     </div>
   );
 };
-
 
 DateInput.propTypes = {
   /** Can be empty string, or object containing day, month, year as numbers */
@@ -374,7 +377,7 @@ DateInput.propTypes = {
   hint: PropTypes.string,
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error: PropTypes.oneOfType([ PropTypes.string, PropTypes.bool ]),
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid: PropTypes.bool,
@@ -413,7 +416,7 @@ DateInput.propTypes = {
   style: PropTypes.object,
 
   /** Determines on which side the picker is aligned */
-  align: PropTypes.oneOf([ Align.LEFT, Align.RIGHT ]),
+  align: PropTypes.oneOf([Align.LEFT, Align.RIGHT]),
 
   /** Reponsive prop overrides */
   responsive: PropTypes.shape({
@@ -426,11 +429,9 @@ DateInput.propTypes = {
   }),
 };
 
-
 DateInput.defaultProps = {
   locale: 'en',
   align: Align.LEFT,
 };
-
 
 export default DateInput;

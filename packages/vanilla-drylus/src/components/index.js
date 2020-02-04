@@ -1,13 +1,10 @@
-import dropdown from './dropdown';
-import searchInput from './searchInput';
-import alerts from './alerts';
-import modal, { closeModal } from './modal';
-
 import { addDocumentReady } from '../utils';
-
+import alerts from './alerts';
+import dropdown from './dropdown';
+import modal, { closeModal } from './modal';
+import searchInput from './searchInput';
 
 addDocumentReady();
-
 
 export default {
   dropdown,
@@ -21,4 +18,4 @@ export default {
     alerts();
     modal();
   },
-}
+};

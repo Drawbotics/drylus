@@ -2,8 +2,7 @@ export function addDocumentReady() {
   document._ready = (callback) => {
     if (document.readyState === 'complete') {
       callback();
-    }
-    else {
+    } else {
       document.addEventListener('readystatechange', (event) => {
         callback();
       });

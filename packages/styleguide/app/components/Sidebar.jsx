@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
-import { css } from 'emotion';
 import sv, { fade } from '@drawbotics/drylus-style-vars';
-import { Link } from 'react-router-dom';
 import {
+  Flex,
+  FlexDirection,
+  FlexItem,
+  FlexJustify,
   Icon,
   Margin,
-  Size,
-  Flex,
-  FlexItem,
-  FlexDirection,
-  FlexJustify,
-  Tooltip,
   Position,
+  Size,
+  Tooltip,
 } from '@drawbotics/react-drylus';
+import { css } from 'emotion';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import Search from './Search';
 import Logo from './Logo';
-
+import Search from './Search';
 
 const styles = {
   sidebar: css`
@@ -43,10 +42,9 @@ const styles = {
   `,
 };
 
-
 const Sidebar = () => {
-  const [ searchOpen, toggleSearch ] = useState(false);
-  
+  const [searchOpen, toggleSearch] = useState(false);
+
   return (
     <div className={styles.sidebar}>
       <Flex direction={FlexDirection.VERTICAL} justify={FlexJustify.START}>
@@ -109,12 +107,9 @@ const Sidebar = () => {
           </Margin>
         </FlexItem>
       </Flex>
-      <Search
-        open={searchOpen}
-        onClickClose={() => toggleSearch(false)} />
+      <Search open={searchOpen} onClickClose={() => toggleSearch(false)} />
     </div>
   );
 };
-
 
 export default Sidebar;

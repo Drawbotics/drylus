@@ -1,21 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css, cx } from 'emotion';
-import upperFirst from 'lodash/upperFirst';
-import camelCase from 'lodash/camelCase';
 import sv from '@drawbotics/drylus-style-vars';
+import { css, cx } from 'emotion';
+import camelCase from 'lodash/camelCase';
+import upperFirst from 'lodash/upperFirst';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import Size from '../enums/Size';
 import { useResponsiveProps } from '../utils/hooks';
-
 
 const styles = {
   root: (cols) => css`
     display: grid;
     grid-template-columns: repeat(${cols}, 1fr);
   `,
-  item: css`
-  `,
+  item: css``,
   withSpan: (span) => css`
     grid-column: span ${span};
   `,
@@ -51,13 +49,7 @@ const styles = {
   `,
 };
 
-
-export const GridItem = ({
-  children,
-  style,
-  span,
-  columns,
-}) => {
+export const GridItem = ({ children, style, span, columns }) => {
   if (span > columns) {
     console.warn(`Warning: GridItem span cannot be more than number of columns`);
   }
@@ -80,22 +72,12 @@ GridItem.propTypes = {
   style: PropTypes.object,
 };
 
+const Grid = ({ responsive, ...rest }) => {
+  const { children, columns, hGutters, vGutters, style } = useResponsiveProps(rest, responsive);
 
-const Grid = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    children,
-    columns,
-    hGutters,
-    vGutters,
-    style,
-  } = useResponsiveProps(rest, responsive);
-  
-  const invalidChildren = React.Children
-    .toArray(children)
-    .some((child) => child != null && child.type !== GridItem);
+  const invalidChildren = React.Children.toArray(children).some(
+    (child) => child != null && child.type !== GridItem,
+  );
   if (invalidChildren) {
     console.warn('Grid should only accept GridItem as children');
   }
@@ -110,7 +92,6 @@ const Grid = ({
     </div>
   );
 };
-
 
 Grid.propTypes = {
   /** Should all be of type GridItem */
@@ -150,6 +131,5 @@ Grid.propTypes = {
     HUGE: PropTypes.object,
   }),
 };
-
 
 export default Grid;

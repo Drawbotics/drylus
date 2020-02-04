@@ -1,12 +1,11 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
+import React from 'react';
 
 import { Category } from '../enums';
-import Icon from './Icon';
 import Dot from './Dot';
-
+import Icon from './Icon';
 
 const styles = {
   root: css`
@@ -26,10 +25,11 @@ const styles = {
         left: calc(${sv.marginSmall} * -1.2);
         top: calc(50% - 1px);
         transform: translate(-25%, -50%);
-        content: counter(custom-counter) ". ";
+        content: counter(custom-counter) '. ';
       }
 
-      > i, [data-element="dot"] {
+      > i,
+      [data-element='dot'] {
         display: none;
       }
     }
@@ -42,7 +42,8 @@ const styles = {
       margin-bottom: 0;
     }
 
-    > i, [data-element="dot"] {
+    > i,
+    [data-element='dot'] {
       position: absolute;
       left: calc(${sv.marginSmall} * -1.2);
       top: calc(50% - 1px);
@@ -59,31 +60,22 @@ const styles = {
   `,
 };
 
-
-export const ListItem = ({
-  children,
-  icon,
-  category,
-  disabled,
-  style,
-}) => {
+export const ListItem = ({ children, icon, category, disabled, style }) => {
   return (
     <li style={style} className={cx(styles.item, { [styles.disabled]: disabled })}>
       {children}
       {do {
         if (icon) {
-          <Icon name={icon} category={category === Category.PRIMARY ? null : category} bold />
-        }
-        else {
+          <Icon name={icon} category={category === Category.PRIMARY ? null : category} bold />;
+        } else {
           <div data-element="dot">
             <Dot category={disabled ? null : category} />
-          </div>
+          </div>;
         }
       }}
     </li>
   );
 };
-
 
 ListItem.propTypes = {
   /** Content of the list item */
@@ -112,7 +104,6 @@ ListItem.defaultProps = {
   category: Category.PRIMARY,
 };
 
-
 const List = ({ children, ordered, style }) => {
   if (ordered) {
     return (
@@ -128,7 +119,6 @@ const List = ({ children, ordered, style }) => {
   );
 };
 
-
 List.propTypes = {
   /** Items to display in the list */
   children: PropTypes.node.isRequired,
@@ -139,10 +129,8 @@ List.propTypes = {
   style: PropTypes.object,
 };
 
-
 List.defaultProps = {
   ordered: false,
 };
-
 
 export default List;

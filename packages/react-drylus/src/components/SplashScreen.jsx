@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
-import { css } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
 import anime from 'animejs';
-import { CSSTransition } from 'react-transition-group';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { CSSTransition } from 'react-transition-group';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { CustomPropTypes } from '../utils';
-
 
 const styles = {
   root: css`
@@ -49,12 +48,8 @@ const styles = {
   `,
 };
 
-
-const SplashScreen = ({
-  text,
-  visible,
-}) => {
-  const [ outletElement, setOutletElement ] = useState(null);
+const SplashScreen = ({ text, visible }) => {
+  const [outletElement, setOutletElement] = useState(null);
 
   const handleEnter = () => {
     const timeline = anime.timeline({
@@ -66,15 +61,21 @@ const SplashScreen = ({
       targets: '.first',
       strokeDashoffset: [anime.setDashoffset, 0],
     });
-    timeline.add({
-      targets: '.second',
-      strokeDashoffset: [anime.setDashoffset, 0],
-    }, 600);
-    timeline.add({
-      targets: '.third',
-      duration: 500,
-      strokeDashoffset: [anime.setDashoffset, 0],
-    }, 1300);
+    timeline.add(
+      {
+        targets: '.second',
+        strokeDashoffset: [anime.setDashoffset, 0],
+      },
+      600,
+    );
+    timeline.add(
+      {
+        targets: '.third',
+        duration: 500,
+        strokeDashoffset: [anime.setDashoffset, 0],
+      },
+      1300,
+    );
     timeline.add({
       targets: `.${styles.animation}`,
       opacity: 0,
@@ -84,13 +85,12 @@ const SplashScreen = ({
   };
 
   useEffect(() => {
-    if ( ! document.getElementById('splash-outlet')) {
+    if (!document.getElementById('splash-outlet')) {
       const splashOutlet = document.createElement('div');
       splashOutlet.id = 'splash-outlet';
       document.body.appendChild(splashOutlet);
       setOutletElement(splashOutlet);
-    }
-    else {
+    } else {
       setOutletElement(document.getElementById('splash-outlet'));
     }
 
@@ -101,7 +101,7 @@ const SplashScreen = ({
     };
   }, []);
 
-  if (! outletElement) return null;
+  if (!outletElement) return null;
 
   return ReactDOM.createPortal(
     <div className={themeStyles.root}>
@@ -120,21 +120,43 @@ const SplashScreen = ({
           <div className={styles.animation}>
             <svg height="100%" width="100%" viewBox="0 0 300 300">
               <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
+                <linearGradient
+                  id="gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="0%"
+                  y2="100%"
+                  gradientUnits="userSpaceOnUse">
                   <stop offset="0%" style={{ stopColor: sv.brand, stopOpacity: 1 }} />
                   <stop offset="100%" style={{ stopColor: sv.brandDark, stopOpacity: 1 }} />
                 </linearGradient>
               </defs>
-              <polygon className="first" id="1" stroke="url('#gradient')" fill="none" points="5,228 195,5 295,280" />
-              <polyline className="second" id="2" stroke="url('#gradient')" fill="none" points="5,228 132,188 295,280" />
-              <polyline className="third" id="3" stroke="url('#gradient')" fill="none" points="132,188 195,5" />
+              <polygon
+                className="first"
+                id="1"
+                stroke="url('#gradient')"
+                fill="none"
+                points="5,228 195,5 295,280"
+              />
+              <polyline
+                className="second"
+                id="2"
+                stroke="url('#gradient')"
+                fill="none"
+                points="5,228 132,188 295,280"
+              />
+              <polyline
+                className="third"
+                id="3"
+                stroke="url('#gradient')"
+                fill="none"
+                points="132,188 195,5"
+              />
             </svg>
           </div>
           {do {
             if (text != null) {
-              <div className={styles.text}>
-                {text}
-              </div>
+              <div className={styles.text}>{text}</div>;
             }
           }}
         </div>
@@ -143,9 +165,8 @@ const SplashScreen = ({
     document.getElementById('splash-outlet'),
   );
   // eslint-disable-next-line no-unreachable
-  return <div></div>;  // NOTE: proptypes fail if no "concrete" element is returned
+  return <div></div>; // NOTE: proptypes fail if no "concrete" element is returned
 };
-
 
 SplashScreen.propTypes = {
   /** DEPRECATED */
@@ -154,6 +175,5 @@ SplashScreen.propTypes = {
   /** Displayed under the animated logo */
   text: PropTypes.string,
 };
-
 
 export default SplashScreen;

@@ -1,35 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Text matches snapshot when it has a size and category 1`] = `
-.css-12yj60s-Text__root-Text__primary-Text__large {
+.emotion-0 {
   display: inline;
   color: #172b4e;
   font-size: 1.1rem;
 }
 
 <span
-  className="undefined css-12yj60s-Text__root-Text__primary-Text__large"
+  className="undefined emotion-0"
 >
   Text content
 </span>
 `;
 
 exports[`Text matches snapshot when it has children 1`] = `
-.css-1y3lkgh-Text__root-Text__primary-Text__default {
+.emotion-0 {
   display: inline;
   color: #172b4e;
   font-size: 1rem;
 }
 
 <span
-  className="css-1y3lkgh-Text__root-Text__primary-Text__default"
+  className="emotion-0"
 >
   Text content
 </span>
 `;
 
 exports[`Text matches snapshot when it is bold 1`] = `
-.css-1agyjwc-Text__root-Text__bold-Text__primary-Text__default {
+.emotion-0 {
   display: inline;
   font-weight: 500;
   -webkit-letter-spacing: 0.01rem;
@@ -41,14 +41,14 @@ exports[`Text matches snapshot when it is bold 1`] = `
 }
 
 <span
-  className="css-1agyjwc-Text__root-Text__bold-Text__primary-Text__default"
+  className="emotion-0"
 >
   Text content
 </span>
 `;
 
 exports[`Text matches snapshot when it is light and inversed 1`] = `
-.css-1rpdnon-Text__root-Text__light-Text__primaryInversed-Text__default {
+.emotion-0 {
   display: inline;
   font-weight: 300;
   -webkit-letter-spacing: 0.06rem;
@@ -60,7 +60,7 @@ exports[`Text matches snapshot when it is light and inversed 1`] = `
 }
 
 <span
-  className="css-1rpdnon-Text__root-Text__light-Text__primaryInversed-Text__default"
+  className="emotion-0"
 >
   Text content
 </span>

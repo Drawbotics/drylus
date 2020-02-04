@@ -14,5 +14,4 @@ const alerts = () => {
   });
 };
 
-
 export default () => document._ready(alerts);

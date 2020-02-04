@@ -1,6 +1,5 @@
 const { mapping } = require('@drawbotics/icons/dist/drycons');
 
-
 const filter = `
 export interface BaseFilterProps {
   clearLabel?: string;
@@ -47,7 +46,6 @@ export interface CheckboxFilterProps {
 export declare const CheckboxFilter: React.FunctionComponent<CheckboxFilterProps>;
 `;
 
-
 const icon = `
 export interface IconProps {
   name: IconName;
@@ -65,13 +63,13 @@ export interface IconProps {
 export declare const Icon: React.FunctionComponent<IconProps>;
 `;
 
-
-const generatedIconType = Object.values(mapping).map((v) => `'${v}'`).join(' | ');
+const generatedIconType = Object.values(mapping)
+  .map((v) => `'${v}'`)
+  .join(' | ');
 
 const icons = `
 type IconName = ${generatedIconType};
 `;
-
 
 module.exports = {
   filter,

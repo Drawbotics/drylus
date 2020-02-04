@@ -1,16 +1,15 @@
-import React from 'react';
+import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv, { fade } from '@drawbotics/drylus-style-vars';
+import React from 'react';
 
 import { Category, Size } from '../enums';
-import Icon from './Icon';
-import Flex, { FlexItem, FlexAlign, FlexJustify } from '../layout/Flex';
+import Flex, { FlexAlign, FlexItem, FlexJustify } from '../layout/Flex';
 import Margin from '../layout/Margin';
-import Button from './Button';
 import { getEnumAsClass, getIconForCategory } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
-
+import Button from './Button';
+import Icon from './Icon';
 
 const styles = {
   root: css`
@@ -39,18 +38,8 @@ const styles = {
   `,
 };
 
-
-const Banner = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    children,
-    category,
-    title,
-    style,
-    trailing,
-  } = useResponsiveProps(rest, responsive);
+const Banner = ({ responsive, ...rest }) => {
+  const { children, category, title, style, trailing } = useResponsiveProps(rest, responsive);
 
   if (trailing != null && trailing?.type !== Button) {
     console.warn('`trailing` type should only be Button');
@@ -58,7 +47,9 @@ const Banner = ({
   const icon = getIconForCategory(category);
 
   return (
-    <div style={style} className={cx(styles.root, { [styles[getEnumAsClass(category)]]: category })}>
+    <div
+      style={style}
+      className={cx(styles.root, { [styles[getEnumAsClass(category)]]: category })}>
       <Flex justify={FlexJustify.SPACE_BETWEEN}>
         <FlexItem>
           <Flex align={FlexAlign.START} justify={FlexJustify.START}>
@@ -70,14 +61,10 @@ const Banner = ({
             <FlexItem>
               {do {
                 if (title != null) {
-                  <div className={styles.title}>
-                    {title}
-                  </div>
+                  <div className={styles.title}>{title}</div>;
                 }
               }}
-              <div className={styles.message}>
-                {children}
-              </div>
+              <div className={styles.message}>{children}</div>
             </FlexItem>
           </Flex>
         </FlexItem>
@@ -94,14 +81,13 @@ const Banner = ({
                   },
                 })}
               </Margin>
-            </FlexItem>
+            </FlexItem>;
           }
         }}
       </Flex>
     </div>
   );
 };
-
 
 Banner.propTypes = {
   /** Message shown in the banner */
@@ -110,12 +96,8 @@ Banner.propTypes = {
   /** Larger text shown beside the icon */
   title: PropTypes.string,
 
-  category: PropTypes.oneOf([
-    Category.DANGER,
-    Category.SUCCESS,
-    Category.INFO,
-    Category.WARNING,
-  ]).isRequired,
+  category: PropTypes.oneOf([Category.DANGER, Category.SUCCESS, Category.INFO, Category.WARNING])
+    .isRequired,
 
   /** Used for style overrides */
   style: PropTypes.object,
@@ -133,6 +115,5 @@ Banner.propTypes = {
     HUGE: PropTypes.object,
   }),
 };
-
 
 export default Banner;

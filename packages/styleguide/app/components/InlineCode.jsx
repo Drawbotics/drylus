@@ -1,7 +1,6 @@
-import React from 'react';
-import { css } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
-
+import { css } from 'emotion';
+import React from 'react';
 
 const styles = {
   code: css`
@@ -14,14 +13,8 @@ const styles = {
   `,
 };
 
-
 const InlineCode = ({ children }) => {
-  return (
-    <span className={styles.code}>
-      {children}
-    </span>
-  );
-}
-
+  return <span className={styles.code}>{children}</span>;
+};
 
 export default InlineCode;

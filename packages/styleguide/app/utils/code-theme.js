@@ -1,6 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
 
-
 export default {
   plain: {
     color: sv.colorSecondaryInverse,
@@ -8,59 +7,59 @@ export default {
   },
   styles: [
     {
-      types: ["prolog", "constant", "builtin"],
+      types: ['prolog', 'constant', 'builtin'],
       style: {
         color: sv.blue,
-      }
+      },
     },
     {
-      types: ["inserted", "function"],
+      types: ['inserted', 'function'],
       style: {
         color: sv.green,
-      }
+      },
     },
     {
-      types: ["deleted"],
+      types: ['deleted'],
       style: {
         color: sv.red,
-      }
+      },
     },
     {
-      types: ["changed"],
+      types: ['changed'],
       style: {
         color: sv.orange,
-      }
+      },
     },
     {
-      types: ["punctuation", "symbol"],
+      types: ['punctuation', 'symbol'],
       style: {
         color: sv.brand,
-      }
+      },
     },
     {
-      types: ["string", "char", "tag", "selector"],
+      types: ['string', 'char', 'tag', 'selector'],
       style: {
         color: sv.green,
-      }
+      },
     },
     {
-      types: ["keyword", "variable"],
+      types: ['keyword', 'variable'],
       style: {
         color: sv.blue,
-        fontStyle: "italic"
-      }
+        fontStyle: 'italic',
+      },
     },
     {
-      types: ["comment"],
+      types: ['comment'],
       style: {
         color: sv.colorTertiaryInverse,
-      }
+      },
     },
     {
-      types: ["attr-name"],
+      types: ['attr-name'],
       style: {
         color: sv.orange,
-      }
-    }
-  ]
+      },
+    },
+  ],
 };

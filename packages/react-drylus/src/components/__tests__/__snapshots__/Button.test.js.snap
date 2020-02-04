@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button matches snapshot when has a category 1`] = `
-.css-qq01sn-Button__root {
+.emotion-0 {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
@@ -24,16 +24,16 @@ exports[`Button matches snapshot when has a category 1`] = `
   justify-content: center;
 }
 
-.css-qq01sn-Button__root:hover {
+.emotion-0:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-qq01sn-Button__root:active {
+.emotion-0:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-qq01sn-Button__root:disabled {
+.emotion-0:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
@@ -41,14 +41,14 @@ exports[`Button matches snapshot when has a category 1`] = `
 }
 
 <button
-  className="css-qq01sn-Button__root"
+  className="emotion-0"
 >
   Some content
 </button>
 `;
 
 exports[`Button matches snapshot when has a leading component 1`] = `
-.css-qq01sn-Button__root {
+.emotion-2 {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
@@ -71,23 +71,23 @@ exports[`Button matches snapshot when has a leading component 1`] = `
   justify-content: center;
 }
 
-.css-qq01sn-Button__root:hover {
+.emotion-2:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-qq01sn-Button__root:active {
+.emotion-2:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-qq01sn-Button__root:disabled {
+.emotion-2:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
   box-shadow: none;
 }
 
-.css-r3psvc-Button__leading {
+.emotion-1 {
   margin-right: 8px;
   height: 0;
   display: -webkit-box;
@@ -100,18 +100,18 @@ exports[`Button matches snapshot when has a leading component 1`] = `
   align-items: center;
 }
 
-.css-z8uzdf-Icon__root {
+.emotion-0 {
   color: inherit;
 }
 
 <button
-  className="css-qq01sn-Button__root"
+  className="emotion-2"
 >
   <div
-    className="css-r3psvc-Button__leading"
+    className="emotion-1"
   >
     <i
-      className="css-z8uzdf-Icon__root Drycon Drycon-check"
+      className="emotion-0 Drycon Drycon-check"
     />
   </div>
   Some content
@@ -119,7 +119,7 @@ exports[`Button matches snapshot when has a leading component 1`] = `
 `;
 
 exports[`Button matches snapshot when has a tier 1`] = `
-.css-qq01sn-Button__root {
+.emotion-0 {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
@@ -142,16 +142,16 @@ exports[`Button matches snapshot when has a tier 1`] = `
   justify-content: center;
 }
 
-.css-qq01sn-Button__root:hover {
+.emotion-0:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-qq01sn-Button__root:active {
+.emotion-0:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-qq01sn-Button__root:disabled {
+.emotion-0:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
@@ -159,14 +159,14 @@ exports[`Button matches snapshot when has a tier 1`] = `
 }
 
 <button
-  className="css-qq01sn-Button__root"
+  className="emotion-0"
 >
   Some content
 </button>
 `;
 
 exports[`Button matches snapshot when has a trailing component 1`] = `
-.css-qq01sn-Button__root {
+.emotion-2 {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
@@ -189,23 +189,23 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
   justify-content: center;
 }
 
-.css-qq01sn-Button__root:hover {
+.emotion-2:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-qq01sn-Button__root:active {
+.emotion-2:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-qq01sn-Button__root:disabled {
+.emotion-2:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
   box-shadow: none;
 }
 
-.css-1qvurjj-Button__trailing {
+.emotion-1 {
   margin-left: 8px;
   height: 0;
   display: -webkit-box;
@@ -218,26 +218,26 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
   align-items: center;
 }
 
-.css-z8uzdf-Icon__root {
+.emotion-0 {
   color: inherit;
 }
 
 <button
-  className="css-qq01sn-Button__root"
+  className="emotion-2"
 >
   Some content
   <div
-    className="css-1qvurjj-Button__trailing"
+    className="emotion-1"
   >
     <i
-      className="css-z8uzdf-Icon__root Drycon Drycon-check"
+      className="emotion-0 Drycon Drycon-check"
     />
   </div>
 </button>
 `;
 
 exports[`Button matches snapshot when is basic 1`] = `
-.css-qq01sn-Button__root {
+.emotion-0 {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
@@ -260,16 +260,16 @@ exports[`Button matches snapshot when is basic 1`] = `
   justify-content: center;
 }
 
-.css-qq01sn-Button__root:hover {
+.emotion-0:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-qq01sn-Button__root:active {
+.emotion-0:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-qq01sn-Button__root:disabled {
+.emotion-0:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
@@ -277,14 +277,14 @@ exports[`Button matches snapshot when is basic 1`] = `
 }
 
 <button
-  className="css-qq01sn-Button__root"
+  className="emotion-0"
 >
   Some content
 </button>
 `;
 
 exports[`Button matches snapshot when is small 1`] = `
-.css-qq01sn-Button__root {
+.emotion-0 {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 5px;
@@ -307,16 +307,16 @@ exports[`Button matches snapshot when is small 1`] = `
   justify-content: center;
 }
 
-.css-qq01sn-Button__root:hover {
+.emotion-0:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.css-qq01sn-Button__root:active {
+.emotion-0:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.css-qq01sn-Button__root:disabled {
+.emotion-0:disabled {
   cursor: not-allowed;
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
@@ -324,7 +324,7 @@ exports[`Button matches snapshot when is small 1`] = `
 }
 
 <button
-  className="css-qq01sn-Button__root"
+  className="emotion-0"
 >
   Some content
 </button>

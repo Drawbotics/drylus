@@ -11,7 +11,7 @@ const dropdown = () => {
   };
 
   const handleClickDocument = (e) => {
-    if (! Array.from(roots).some((root) => root.contains(e.target))) {
+    if (!Array.from(roots).some((root) => root.contains(e.target))) {
       Array.from(roots).forEach((root) => {
         const dropdown = root.getElementsByClassName('Drylus-Dropdown__root')[0];
         dropdown.classList.remove('Drylus-Dropdown__visible');
@@ -29,7 +29,5 @@ const dropdown = () => {
 
   document.addEventListener('click', handleClickDocument);
 };
-
-
 
 export default () => document._ready(dropdown);

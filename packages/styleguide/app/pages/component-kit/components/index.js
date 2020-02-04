@@ -1,48 +1,47 @@
+import alerts from './alerts';
+import avatar from './avatar';
+import badge from './badge';
+import banner from './banner';
+import bigCheckbox from './big-checkbox';
+import bigRadio from './big-radio';
+import breadcrumbs from './breadcrumbs';
 import button from './button';
-import title from './title';
+import buttonLink from './button-link';
+import callout from './callout';
+import circularProgress from './circular-progress';
+import collapsible from './collapsible';
+import dot from './dot';
+import drawer from './drawer';
+import dropdown from './dropdown';
+import emptyState from './empty-state';
+import filter from './filter';
+import filterGroup from './filter-group';
+import icon from './icon';
+import label from './label';
+import list from './list';
+import listTile from './list-tile';
+import loadingPlaceholder from './loading-placeholder';
+import map from './map';
+import modal from './modal';
+import pagination from './pagination';
+import panel from './panel';
+import paragraph from './paragraph';
+import popover from './popover';
+import progressBar from './progress-bar';
 import roundIcon from './round-icon';
 import segmentedControl from './segmented-control';
-import table from './table';
-import label from './label';
-import panel from './panel';
-import pagination from './pagination';
-import badge from './badge';
-import drawer from './drawer';
-import filter from './filter';
-import icon from './icon';
-import tabNavigation from './tab-navigation';
-import listTile from './list-tile';
-import avatar from './avatar';
-import text from './text';
-import dot from './dot';
-import tooltip from './tooltip';
-import collapsible from './collapsible';
-import textLink from './text-link';
-import modal from './modal';
-import tag from './tag';
-import spinner from './spinner';
-import bigRadio from './big-radio';
-import bigCheckbox from './big-checkbox';
-import toggle from './toggle';
 import separator from './separator';
-import circularProgress from './circular-progress';
-import emptyState from './empty-state';
-import banner from './banner';
-import callout from './callout';
-import buttonLink from './button-link';
-import alerts from './alerts';
+import spinner from './spinner';
 import splashScreen from './splash-screen';
-import breadcrumbs from './breadcrumbs';
-import dropdown from './dropdown';
-import list from './list';
-import paragraph from './paragraph';
-import map from './map';
-import filterGroup from './filter-group';
-import popover from './popover';
+import tabNavigation from './tab-navigation';
+import table from './table';
+import tag from './tag';
+import text from './text';
+import textLink from './text-link';
 import tile from './tile';
-import progressBar from './progress-bar';
-import loadingPlaceholder from './loading-placeholder';
-
+import title from './title';
+import toggle from './toggle';
+import tooltip from './tooltip';
 
 const components = {
   button,
@@ -90,7 +89,6 @@ const components = {
   progressBar,
   loadingPlaceholder,
 };
-
 
 export default Object.keys(components)
   .sort()

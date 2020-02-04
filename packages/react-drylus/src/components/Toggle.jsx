@@ -1,17 +1,15 @@
-import React from 'react';
-import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
+import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import Size from '../enums/Size';
 import { useResponsiveProps } from '../utils/hooks';
-
 
 const TRIGGER_DIMENSIONS = '21px';
 const TRIGGER_DIMENSIONS_SMALL = '16px';
 const TOGGLE_PADDING = '3px';
 const TRIGGER_OFFSET = '10px';
-
 
 const styles = {
   root: css`
@@ -30,7 +28,7 @@ const styles = {
   active: css`
     background: ${sv.green} !important;
 
-    & > [data-element="trigger"] {
+    & > [data-element='trigger'] {
       transform: translateX(calc(100% + ${TRIGGER_OFFSET} - ${TOGGLE_PADDING} * 2)) !important;
     }
   `,
@@ -57,7 +55,7 @@ const styles = {
   small: css`
     width: calc(${TRIGGER_DIMENSIONS_SMALL} * 2 + ${TRIGGER_OFFSET});
 
-    & > [data-element="trigger"] {
+    & > [data-element='trigger'] {
       height: ${TRIGGER_DIMENSIONS_SMALL};
       width: ${TRIGGER_DIMENSIONS_SMALL};
 
@@ -77,18 +75,8 @@ const styles = {
   `,
 };
 
-
-const Toggle = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    onChange,
-    disabled,
-    value,
-    size,
-    style,
-  } = useResponsiveProps(rest, responsive);
+const Toggle = ({ responsive, ...rest }) => {
+  const { onChange, disabled, value, size, style } = useResponsiveProps(rest, responsive);
   return (
     <div
       style={style}
@@ -97,12 +85,11 @@ const Toggle = ({
         [styles.small]: size === Size.SMALL,
         [styles.disabled]: disabled,
       })}
-      onClick={() => disabled ? null : onChange(! value)}>
+      onClick={() => (disabled ? null : onChange(!value))}>
       <div className={styles.trigger} data-element="trigger" />
     </div>
   );
 };
-
 
 Toggle.propTypes = {
   /** Triggered when toggle value is changed */
@@ -114,7 +101,7 @@ Toggle.propTypes = {
   /** Determines if toggle is active */
   value: PropTypes.bool.isRequired,
 
-  size: PropTypes.oneOf([ Size.SMALL, Size.DEFAULT ]),
+  size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT]),
 
   /** Used for style overrides */
   style: PropTypes.object,
@@ -129,6 +116,5 @@ Toggle.propTypes = {
     HUGE: PropTypes.object,
   }),
 };
-
 
 export default Toggle;

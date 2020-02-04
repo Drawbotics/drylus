@@ -1,8 +1,7 @@
-import React from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
-
+import React from 'react';
 
 const styles = {
   root: css`
@@ -30,31 +29,22 @@ const styles = {
   `,
 };
 
-
-const Tile = ({
-  style,
-  title,
-  children,
-  noPadding,
-}) => {
+const Tile = ({ style, title, children, noPadding }) => {
   return (
     <div
       style={style}
       className={cx(styles.root, {
         [styles.noPadding]: noPadding,
       })}>
-      {do{
+      {do {
         if (title != null) {
-          <div className={styles.title}>
-            {title}
-          </div>
+          <div className={styles.title}>{title}</div>;
         }
       }}
       {children}
     </div>
   );
 };
-
 
 Tile.propTypes = {
   /** Displayed at the top of the tile, looks like a label */
@@ -69,6 +59,5 @@ Tile.propTypes = {
   /** Removes the space between the content and the borders (good for full size images in the tile) */
   noPadding: PropTypes.bool,
 };
-
 
 export default Tile;

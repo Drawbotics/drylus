@@ -15,7 +15,7 @@ exports[`ProgressBar matches snapshot when has a category 1`] = `
   }
 }
 
-.css-1l7orhi-ProgressBar__root {
+.emotion-1 {
   height: 8px;
   width: 100%;
   position: relative;
@@ -24,11 +24,11 @@ exports[`ProgressBar matches snapshot when has a category 1`] = `
   background: #eaeff4;
 }
 
-.css-1l7orhi-ProgressBar__root [data-element="bar"] {
+.emotion-1 [data-element='bar'] {
   border-radius: 8px;
 }
 
-.css-f49gsh-ProgressBar__bar-ProgressBar__indeterminate {
+.emotion-0 {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -45,10 +45,10 @@ exports[`ProgressBar matches snapshot when has a category 1`] = `
 }
 
 <div
-  className="css-1l7orhi-ProgressBar__root undefined"
+  className="emotion-1 undefined"
 >
   <div
-    className="undefined css-f49gsh-ProgressBar__bar-ProgressBar__indeterminate"
+    className="undefined emotion-0"
     data-element="bar"
     style={
       Object {
@@ -74,7 +74,7 @@ exports[`ProgressBar matches snapshot when has a value 1`] = `
   }
 }
 
-.css-1l7orhi-ProgressBar__root {
+.emotion-1 {
   height: 8px;
   width: 100%;
   position: relative;
@@ -83,11 +83,11 @@ exports[`ProgressBar matches snapshot when has a value 1`] = `
   background: #eaeff4;
 }
 
-.css-1l7orhi-ProgressBar__root [data-element="bar"] {
+.emotion-1 [data-element='bar'] {
   border-radius: 8px;
 }
 
-.css-f49gsh-ProgressBar__bar-ProgressBar__indeterminate {
+.emotion-0 {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -104,10 +104,10 @@ exports[`ProgressBar matches snapshot when has a value 1`] = `
 }
 
 <div
-  className="css-1l7orhi-ProgressBar__root undefined"
+  className="emotion-1 undefined"
 >
   <div
-    className="css-f49gsh-ProgressBar__bar-ProgressBar__indeterminate"
+    className="emotion-0"
     data-element="bar"
     style={
       Object {
@@ -133,7 +133,7 @@ exports[`ProgressBar matches snapshot when is small 1`] = `
   }
 }
 
-.css-1l7orhi-ProgressBar__root {
+.emotion-1 {
   height: 8px;
   width: 100%;
   position: relative;
@@ -142,11 +142,11 @@ exports[`ProgressBar matches snapshot when is small 1`] = `
   background: #eaeff4;
 }
 
-.css-1l7orhi-ProgressBar__root [data-element="bar"] {
+.emotion-1 [data-element='bar'] {
   border-radius: 8px;
 }
 
-.css-f49gsh-ProgressBar__bar-ProgressBar__indeterminate {
+.emotion-0 {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -163,10 +163,10 @@ exports[`ProgressBar matches snapshot when is small 1`] = `
 }
 
 <div
-  className="css-1l7orhi-ProgressBar__root undefined"
+  className="emotion-1 undefined"
 >
   <div
-    className="css-f49gsh-ProgressBar__bar-ProgressBar__indeterminate"
+    className="emotion-0"
     data-element="bar"
     style={
       Object {

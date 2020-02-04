@@ -1,0 +1,12 @@
+*.test.js
+__tests__
+__mocks__
+*.config.js
+*.setup.js
+lib
+docs
+dist
+*rc.js
+node_modules
+build.js
+.snap

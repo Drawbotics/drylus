@@ -1,22 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SplashScreen matches snapshot when is visible with some text 1`] = `
-.css-zaxdq7-ThemeProvider__root * {
+.emotion-3 * {
   font-family: "Rubik",sans-serif;
 }
 
-.css-zaxdq7-ThemeProvider__root a {
+.emotion-3 a {
   -webkit-text-decoration: none;
   text-decoration: none;
   color: inherit;
 }
 
-.css-zaxdq7-ThemeProvider__root b,
-.css-zaxdq7-ThemeProvider__root strong {
+.emotion-3 b,
+.emotion-3 strong {
   font-weight: 500;
 }
 
-.css-1p711fp-SplashScreen__root {
+.emotion-2 {
   position: fixed;
   top: 0;
   left: 0;
@@ -41,33 +41,33 @@ exports[`SplashScreen matches snapshot when is visible with some text 1`] = `
   justify-content: center;
 }
 
-.css-1u31k88-SplashScreen__animation {
+.emotion-0 {
   width: 130px;
   height: 130px;
   position: relative;
 }
 
-.css-1u31k88-SplashScreen__animation > svg {
+.emotion-0 > svg {
   stroke-width: 7;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke: black;
 }
 
-.css-1snvs7w-SplashScreen__text {
+.emotion-1 {
   margin-top: 32px;
   color: rgba(135,155,166,0.7);
 }
 
 <div
-  className="css-zaxdq7-ThemeProvider__root"
+  className="emotion-3"
 >
   <div>
     <div
-      className="css-1p711fp-SplashScreen__root"
+      className="emotion-2"
     >
       <div
-        className="css-1u31k88-SplashScreen__animation"
+        className="emotion-0"
       >
         <svg
           height="100%"
@@ -127,7 +127,7 @@ exports[`SplashScreen matches snapshot when is visible with some text 1`] = `
         </svg>
       </div>
       <div
-        className="css-1snvs7w-SplashScreen__text"
+        className="emotion-1"
       >
         Loading...
       </div>

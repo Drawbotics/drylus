@@ -1,17 +1,16 @@
-import React from 'react';
-import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
+import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-import RoundIcon from '../components/RoundIcon';
 import Icon from '../components/Icon';
+import RoundIcon from '../components/RoundIcon';
 import Spinner from '../components/Spinner';
-import Size from '../enums/Size';
 import Category from '../enums/Category';
-import Hint from './Hint';
+import Size from '../enums/Size';
 import { CustomPropTypes } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
-
+import Hint from './Hint';
 
 const styles = {
   root: css`
@@ -72,7 +71,7 @@ const styles = {
       content: none;
     }
 
-    [data-element="icon"] {
+    [data-element='icon'] {
       right: ${sv.marginSmall};
     }
   `,
@@ -100,14 +99,10 @@ const styles = {
   `,
 };
 
-
-const Select = ({
-  responsive,
-  ...rest
-}) => {
+const Select = ({ responsive, ...rest }) => {
   const {
     value,
-    options=[],
+    options = [],
     onChange,
     valueKey,
     labelKey,
@@ -126,32 +121,29 @@ const Select = ({
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.noValue]: ! value,
-        [styles.readOnly]: ! onChange,
+        [styles.noValue]: !value,
+        [styles.readOnly]: !onChange,
         [styles.disabled]: disabled,
         [styles.valid]: Boolean(value) && valid,
         [styles.error]: error,
       })}>
-      {do{
+      {do {
         if (loading) {
           <div className={styles.icon}>
             <Spinner size={Size.SMALL} />
-          </div>
-        }
-        else if (onChange == null) {
+          </div>;
+        } else if (onChange == null) {
           <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
             <Icon name="lock" />
-          </div>
-        }
-        else if (error) {
+          </div>;
+        } else if (error) {
           <div className={styles.icon}>
             <RoundIcon name="x" size={Size.SMALL} category={Category.DANGER} />
-          </div>
-        }
-        else if (value && valid) {
+          </div>;
+        } else if (value && valid) {
           <div className={styles.icon}>
             <RoundIcon name="check" size={Size.SMALL} category={Category.SUCCESS} />
-          </div>
+          </div>;
         }
       }}
       <select
@@ -162,8 +154,8 @@ const Select = ({
         readOnly={onChange == null}
         {...props}>
         {do {
-          if (! value) {
-            <option key={options.length}>{placeholder}</option>
+          if (!value) {
+            <option key={options.length}>{placeholder}</option>;
           }
         }}
         {options.map((option) => (
@@ -176,18 +168,16 @@ const Select = ({
           </option>
         ))}
       </select>
-      {do{
+      {do {
         if (error && typeof error === 'string') {
-          <Hint category={Category.DANGER}>{error}</Hint>
-        }
-        else if (hint) {
-          <Hint>{hint}</Hint>
+          <Hint category={Category.DANGER}>{error}</Hint>;
+        } else if (hint) {
+          <Hint>{hint}</Hint>;
         }
       }}
     </div>
   );
 };
-
 
 Select.propTypes = {
   /** The options to show in the list of options */
@@ -242,12 +232,10 @@ Select.propTypes = {
   }),
 };
 
-
 Select.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
   placeholder: ' -- ',
 };
-
 
 export default Select;

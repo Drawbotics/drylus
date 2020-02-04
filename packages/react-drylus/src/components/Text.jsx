@@ -1,19 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
-import isObject from 'lodash/isObject';
+import { css, cx } from 'emotion';
 import isArray from 'lodash/isArray';
+import isObject from 'lodash/isObject';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { Tier, Size, Category } from '../enums';
+import { Category, Size, Tier } from '../enums';
 import { getEnumAsClass } from '../utils';
+import { ShowDateTime, generateDisplayedDate } from '../utils/date';
 import { useResponsiveProps } from '../utils/hooks';
-import { generateDisplayedDate, ShowDateTime } from '../utils/date';
 import { generateDisplayedPrice } from '../utils/price';
 
 export { generateDisplayedPrice as formatPrice } from '../utils/price';
 export { ShowDateTime, generateDisplayedDate as formatDate } from '../utils/date';
-
 
 const styles = {
   root: css`
@@ -40,7 +39,7 @@ const styles = {
     color: ${sv.colorDisabled};
   `,
   primaryInversed: css`
-  color: ${sv.colorPrimaryInverse};
+    color: ${sv.colorPrimaryInverse};
   `,
   secondaryInversed: css`
     color: ${sv.colorSecondaryInverse};
@@ -77,7 +76,6 @@ const styles = {
   `,
 };
 
-
 function _processChild(child, { dateOptions, locale, priceOptions }) {
   if (isObject(child)) {
     if (child instanceof Date) {
@@ -86,15 +84,13 @@ function _processChild(child, { dateOptions, locale, priceOptions }) {
         options: dateOptions,
         locale,
       });
-    }
-    else if (child.value != null) {
+    } else if (child.value != null) {
       return generateDisplayedPrice({
         price: child,
         options: priceOptions,
         locale,
       });
-    }
-    else {
+    } else {
       console.warn('Unsupported Text child type. Please provde text, Date or Currency');
       return '';
     }
@@ -102,11 +98,7 @@ function _processChild(child, { dateOptions, locale, priceOptions }) {
   return child;
 }
 
-
-const Text = ({
-  responsive,
-  ...rest
-}) => {
+const Text = ({ responsive, ...rest }) => {
   const {
     inversed,
     bold,
@@ -123,35 +115,40 @@ const Text = ({
   } = useResponsiveProps(rest, responsive);
 
   const transformedChildren = isArray(children)
-    ? [...children].map((child) => _processChild(child, {
-      dateOptions,
-      locale,
-      priceOptions,
-    })).join('')
+    ? [...children]
+        .map((child) =>
+          _processChild(child, {
+            dateOptions,
+            locale,
+            priceOptions,
+          }),
+        )
+        .join('')
     : _processChild(children, { dateOptions, locale, priceOptions });
 
   return (
-    <span className={cx(styles.root, {
-      [styles.bold]: bold,
-      [styles.light]: light,
-      [styles.primary]: tier === Tier.PRIMARY && ! disabled && ! inversed,
-      [styles.secondary]: tier === Tier.SECONDARY && ! disabled && ! inversed,
-      [styles.tertiary]: tier === Tier.TERTIARY && ! disabled && ! inversed,
-      [styles.disabled]: disabled && ! inversed,
-      [styles.primaryInversed]: tier === Tier.PRIMARY && ! disabled && inversed,
-      [styles.secondaryInversed]: tier === Tier.SECONDARY && ! disabled && inversed,
-      [styles.tertiaryInversed]: tier === Tier.TERTIARY && ! disabled && inversed,
-      [styles.disabledInversed]: disabled && inversed,
-      [styles.small]: size === Size.SMALL,
-      [styles.default]: size === Size.DEFAULT,
-      [styles.large]: size === Size.LARGE,
-      [styles[getEnumAsClass(category)]]: category && ! disabled && ! inversed,
-    })} style={style}>
+    <span
+      className={cx(styles.root, {
+        [styles.bold]: bold,
+        [styles.light]: light,
+        [styles.primary]: tier === Tier.PRIMARY && !disabled && !inversed,
+        [styles.secondary]: tier === Tier.SECONDARY && !disabled && !inversed,
+        [styles.tertiary]: tier === Tier.TERTIARY && !disabled && !inversed,
+        [styles.disabled]: disabled && !inversed,
+        [styles.primaryInversed]: tier === Tier.PRIMARY && !disabled && inversed,
+        [styles.secondaryInversed]: tier === Tier.SECONDARY && !disabled && inversed,
+        [styles.tertiaryInversed]: tier === Tier.TERTIARY && !disabled && inversed,
+        [styles.disabledInversed]: disabled && inversed,
+        [styles.small]: size === Size.SMALL,
+        [styles.default]: size === Size.DEFAULT,
+        [styles.large]: size === Size.LARGE,
+        [styles[getEnumAsClass(category)]]: category && !disabled && !inversed,
+      })}
+      style={style}>
       {transformedChildren}
     </span>
   );
 };
-
 
 Text.propTypes = {
   /** Makes the text visible on dark backgrounds */
@@ -186,7 +183,7 @@ Text.propTypes = {
           value: PropTypes.number.isRequired,
         }),
         PropTypes.instanceOf(Date),
-      ])
+      ]),
     ),
   ]).isRequired,
 
@@ -210,25 +207,20 @@ Text.propTypes = {
     XL: PropTypes.object,
     HUGE: PropTypes.object,
   }),
-  
+
   /** Options to change the way the date is displayed, if provided. showTime toggles display of hour/minutes, format for dayjs overrides */
   dateOptions: PropTypes.shape({
-    showTime: PropTypes.oneOf([
-      ShowDateTime.DEFAULT,
-      ShowDateTime.NEVER,
-      ShowDateTime.ALWAYS,
-    ]),
+    showTime: PropTypes.oneOf([ShowDateTime.DEFAULT, ShowDateTime.NEVER, ShowDateTime.ALWAYS]),
     asArchive: PropTypes.bool,
     format: PropTypes.any,
   }),
-  
+
   /** Formatting options for the .toLocaleString method used internally when formatting numbers */
   priceOptions: PropTypes.any,
 
   /** Used to override the current locale if necessary (e.g. if the browser locale is not explicitely defined) */
   locale: PropTypes.string,
 };
-
 
 Text.defaultProps = {
   inversed: false,
@@ -239,6 +231,5 @@ Text.defaultProps = {
   disabled: false,
   locale: 'en',
 };
-
 
 export default Text;

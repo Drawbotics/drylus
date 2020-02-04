@@ -1,12 +1,11 @@
-import React from 'react';
+import Enum from '@drawbotics/enums';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import Enum from '@drawbotics/enums';
+import React from 'react';
 
-import { getEnumAsClass, deprecateProperty } from '../utils';
-import { useResponsiveProps } from '../utils/hooks';
 import { Position } from '../enums';
-
+import { deprecateProperty, getEnumAsClass } from '../utils';
+import { useResponsiveProps } from '../utils/hooks';
 
 const styles = {
   layout: css`
@@ -17,11 +16,11 @@ const styles = {
   top: css`
     grid-template-rows: max-content minmax(0, 1fr);
 
-    > [data-element="layout-bar"] {
+    > [data-element='layout-bar'] {
       grid-column: 1;
       grid-row: 1;
     }
-    > [data-element="layout-content"] {
+    > [data-element='layout-content'] {
       grid-column: 1;
       grid-row: 2;
     }
@@ -29,11 +28,11 @@ const styles = {
   bottom: css`
     grid-template-rows: minmax(0, 1fr) max-content;
 
-    > [data-element="layout-bar"] {
+    > [data-element='layout-bar'] {
       grid-column: 1;
       grid-row: 2;
     }
-    > [data-element="layout-content"] {
+    > [data-element='layout-content'] {
       grid-column: 1;
       grid-row: 1;
     }
@@ -41,11 +40,11 @@ const styles = {
   right: css`
     grid-template-columns: minmax(0, 1fr) max-content;
 
-    > [data-element="layout-bar"] {
+    > [data-element='layout-bar'] {
       grid-column: 2;
       grid-row: 1;
     }
-    > [data-element="layout-content"] {
+    > [data-element='layout-content'] {
       grid-column: 1;
       grid-row: 1;
     }
@@ -53,11 +52,11 @@ const styles = {
   left: css`
     grid-template-columns: max-content minmax(0, 1fr);
 
-    > [data-element="layout-bar"] {
+    > [data-element='layout-bar'] {
       grid-column: 1;
       grid-row: 1;
     }
-    > [data-element="layout-content"] {
+    > [data-element='layout-content'] {
       grid-column: 2;
       grid-row: 1;
     }
@@ -70,7 +69,7 @@ const styles = {
     display: flex;
     flex-direction: column;
 
-    > [data-element="layout"] {
+    > [data-element='layout'] {
       flex: 1;
       height: auto !important;
     }
@@ -80,31 +79,21 @@ const styles = {
   `,
 };
 
-
 /**
  * @deprecated and will be removed in version 6.0
  */
-export const LayoutPositions = deprecateProperty(new Enum(
-  'LEFT',
-  'RIGHT',
-  'BOTTOM',
-  'TOP',
-), 'LayoutPositions', 'Position');
+export const LayoutPositions = deprecateProperty(
+  new Enum('LEFT', 'RIGHT', 'BOTTOM', 'TOP'),
+  'LayoutPositions',
+  'Position',
+);
 
+const Layout = ({ responsive, ...rest }) => {
+  const { children, position, bar, fixed, barScrollable, style } = useResponsiveProps(
+    rest,
+    responsive,
+  );
 
-const Layout = ({
-  responsive,
-  ...rest
-}) => {
-  const {
-    children,
-    position,
-    bar,
-    fixed,
-    barScrollable,
-    style,
-  } = useResponsiveProps(rest, responsive);
-  
   return (
     <div
       style={style}
@@ -112,12 +101,19 @@ const Layout = ({
       className={cx(styles.layout, {
         [styles[getEnumAsClass(position)]]: position,
       })}>
-      <div className={cx(styles.bar, { [styles.scrollable]: barScrollable })} data-element="layout-bar">{bar}</div>
-      <div className={cx(styles.content, { [styles.scrollable]: fixed })} data-element="layout-content">{children}</div>
+      <div
+        className={cx(styles.bar, { [styles.scrollable]: barScrollable })}
+        data-element="layout-bar">
+        {bar}
+      </div>
+      <div
+        className={cx(styles.content, { [styles.scrollable]: fixed })}
+        data-element="layout-content">
+        {children}
+      </div>
     </div>
   );
 };
-
 
 Layout.propTypes = {
   /** Children can be of any type. You can pass another Layout if needed as well */
@@ -127,12 +123,8 @@ Layout.propTypes = {
   bar: PropTypes.node.isRequired,
 
   /** Determines on which side of the layout the bar component will be shown */
-  position: PropTypes.oneOf([
-    Position.LEFT,
-    Position.RIGHT,
-    Position.TOP,
-    Position.BOTTOM,
-  ]).isRequired,
+  position: PropTypes.oneOf([Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM])
+    .isRequired,
 
   /** If true the component will be fixed in place, and the children will scroll independently */
   fixed: PropTypes.bool,
@@ -154,10 +146,8 @@ Layout.propTypes = {
   }),
 };
 
-
 Layout.defaultProps = {
   barScrollable: true,
 };
-
 
 export default Layout;

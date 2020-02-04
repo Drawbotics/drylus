@@ -1,13 +1,12 @@
-import React from 'react';
-import { css, cx } from 'emotion';
 import sv from '@drawbotics/drylus-style-vars';
+import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import { Category, Size } from '../enums';
+import { CustomPropTypes } from '../utils';
 import Badge from './Badge';
 import Spinner from './Spinner';
-import { CustomPropTypes } from '../utils';
-
 
 const styles = {
   root: css`
@@ -71,7 +70,7 @@ const styles = {
       background: none !important;
     }
 
-    & > [data-element="extra"] {
+    & > [data-element='extra'] {
       opacity: 0.5;
     }
   `,
@@ -81,15 +80,7 @@ const styles = {
   `,
 };
 
-
-const SegmentedControl = ({
-  value,
-  onChange,
-  options,
-  valueKey,
-  labelKey,
-  style,
-}) => {
+const SegmentedControl = ({ value, onChange, options, valueKey, labelKey, style }) => {
   return (
     <div style={style} className={styles.root}>
       {options.map((option) => (
@@ -99,18 +90,17 @@ const SegmentedControl = ({
             [styles.active]: value === option[valueKey],
             [styles.disabled]: option.disabled,
           })}
-          onClick={! option.disabled ? () => onChange(option[valueKey]) : null}>
+          onClick={!option.disabled ? () => onChange(option[valueKey]) : null}>
           <span>{option[labelKey]}</span>
-          {do{
+          {do {
             if (option.loading === true) {
               <div data-element="extra" className={styles.extra}>
                 <Spinner size={Size.SMALL} category={Category.BRAND} />
-              </div>
-            }
-            else if (option.bullet != null) {
+              </div>;
+            } else if (option.bullet != null) {
               <div data-element="extra" className={styles.extra}>
                 <Badge category={Category.BRAND} value={option.bullet} max={99} />
-              </div>
+              </div>;
             }
           }}
         </div>
@@ -118,7 +108,6 @@ const SegmentedControl = ({
     </div>
   );
 };
-
 
 SegmentedControl.propTypes = {
   /** Determines the controls which will be rendered */
@@ -144,12 +133,10 @@ SegmentedControl.propTypes = {
   style: PropTypes.object,
 };
 
-
 SegmentedControl.defaultProps = {
   valueKey: 'value',
   labelKey: 'label',
-  onChange: x => x,
+  onChange: (x) => x,
 };
-
 
 export default SegmentedControl;

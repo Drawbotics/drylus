@@ -10,7 +10,6 @@ import strings from './strings';
 import valueOrReference from './value-or-reference';
 import variables from './variables';
 
-
 export default {
   valueOrReference,
   casting,

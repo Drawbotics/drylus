@@ -1,8 +1,7 @@
-import React, { Fragment } from 'react';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import sv from '@drawbotics/drylus-style-vars';
-
+import React, { Fragment } from 'react';
 
 const styles = {
   root: css`
@@ -42,7 +41,6 @@ const styles = {
   `,
 };
 
-
 const Breadcrumbs = ({ crumbs, linkComponent: Link, style }) => {
   const renderCrumb = (crumb) => (
     <div
@@ -59,14 +57,12 @@ const Breadcrumbs = ({ crumbs, linkComponent: Link, style }) => {
         <Fragment key={i}>
           {do {
             if (i > 0) {
-              <div className={styles.divisor}>
-                /
-              </div>
+              <div className={styles.divisor}>/</div>;
             }
           }}
-          {Link ?
-            React.createElement(Link, { href: crumb.url },renderCrumb(crumb)) :
-            renderCrumb(crumb)}
+          {Link
+            ? React.createElement(Link, { href: crumb.url }, renderCrumb(crumb))
+            : renderCrumb(crumb)}
         </Fragment>
       ))}
     </div>
@@ -89,6 +85,5 @@ Breadcrumbs.propTypes = {
   /** Used for style overrides */
   style: PropTypes.object,
 };
-
 
 export default Breadcrumbs;

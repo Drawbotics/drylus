@@ -456,17 +456,6 @@ export interface CollapsibleProps {
 
 export declare const Collapsible: React.FunctionComponent<CollapsibleProps>;
 
-export interface DateFormatProps {
-  value?: any;
-  locale?: string;
-  showHour?:
-    | DateFormatShowTime.DEFAULT
-    | DateFormatShowTime.ALWAYS
-    | DateFormatShowTime.NEVER;
-}
-
-export declare const DateFormat: React.FunctionComponent<DateFormatProps>;
-
 export interface DotProps {
   category?:
     | Category.BRAND
