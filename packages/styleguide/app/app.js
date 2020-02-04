@@ -4,7 +4,7 @@ import { DrylusProvider, Layout, Page, Position } from '@drawbotics/react-drylus
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import drylus from '@drawbotics/vanilla-drylus/dist/drylus.js';
 import React from 'react';
-// import { hot } from 'react-hot-loader';
+import { hot } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 
 import MobileSidebar from './components/MobileSidebar';
@@ -15,7 +15,7 @@ window._drylus = drylus;
 
 const App = () => {
   const { screenSize, ScreenSizes } = useScreenSize();
-  // console.log('rendering');
+  console.log('rendersdf');
   return (
     <BrowserRouter basename="drylus">
       <DrylusProvider>
@@ -45,5 +45,4 @@ const App = () => {
   );
 };
 
-// export default hot(module)(App);
-export default App;
+export default hot(module)(App);
