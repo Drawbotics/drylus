@@ -9,6 +9,7 @@ import { useResponsiveProps } from '../utils/hooks';
 
 const styles = {
   root: css`
+    display: flex;
     height: ${sv.marginExtraSmall};
     width: 100%;
     position: relative;
@@ -39,6 +40,21 @@ const styles = {
       border-radius: calc(${sv.marginExtraSmall} / 2);
     }
   `,
+  step: css`
+    flex: 1;
+    position: relative;
+  `,
+  bar: css`
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: ${sv.neutralDark};
+    transition: ${sv.transitionShort};
+    overflow: hidden;
+  `,
 };
 
 const SteppedProgressBar = ({ responsive, ...rest }) => {
@@ -52,15 +68,17 @@ const SteppedProgressBar = ({ responsive, ...rest }) => {
   return (
     <div style={style} className={cx(styles.root, { [styles[getEnumAsClass(size)]]: size })}>
       {[...Array(steps).keys()].map((id) => (
-        <div
-          style={{ width: `${percentage * 100}%` }}
-          className={cx(styles.step, {
-            [styles.active]: id === activeStep,
-            [styles.indeterminate]: indeterminate,
-            [styles[getEnumAsClass(category)]]: category,
-          })}
-          key={id}
-        />
+        <div className={styles.step} key={id}>
+          <div
+            className={cx(styles.stepChild, {
+              [styles.active]: id === activeStep,
+              [styles.indeterminate]: indeterminate,
+              [styles[getEnumAsClass(category)]]: category,
+            })}
+            style={{ width: `${percentage * 100}%` }}
+            data-element="bar"
+          />
+        </div>
       ))}
     </div>
   );

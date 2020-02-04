@@ -161,6 +161,7 @@ const LinksNavigation = ({ title, routes, location, base, onClickLink }) => {
     const current = last(location.pathname.split('/'));
     document.title = `Drawbotics Styleguide - ${startCase(current)}`;
   }, [location.pathname]);
+
   return (
     <div className={styles.linksNavigation}>
       <div className={styles.navigationTitle}>
