@@ -1,7 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { Category, Size } from '../enums';
 import { getEnumAsClass } from '../utils';
@@ -17,16 +17,36 @@ const styles = {
     overflow: hidden;
     background: ${sv.neutralLight};
 
-    [data-element='bar'] {
-      border-radius: ${sv.marginExtraSmall};
+    [data-element='step']:first-child {
+      [data-element='bar'] {
+        border-top-left-radius: ${sv.marginExtraSmall};
+        border-bottom-left-radius: ${sv.marginExtraSmall};
+      }
+    }
+
+    [data-element='step']:last-child {
+      [data-element='bar'] {
+        border-top-right-radius: ${sv.marginExtraSmall};
+        border-bottom-right-radius: ${sv.marginExtraSmall};
+      }
     }
   `,
   large: css`
     height: ${sv.marginSmall};
     border-radius: ${sv.marginSmall};
 
-    [data-element='bar'] {
-      border-radius: ${sv.marginSmall};
+    [data-element='step']:first-child {
+      [data-element='bar'] {
+        border-top-left-radius: ${sv.marginSmall};
+        border-bottom-left-radius: ${sv.marginSmall};
+      }
+    }
+
+    [data-element='step']:last-child {
+      [data-element='bar'] {
+        border-top-right-radius: ${sv.marginSmall};
+        border-bottom-right-radius: ${sv.marginSmall};
+      }
     }
   `,
   extraLarge: css`
@@ -36,8 +56,18 @@ const styles = {
     height: calc(${sv.marginExtraSmall} / 2);
     border-radius: calc(${sv.marginExtraSmall} / 2);
 
-    [data-element='bar'] {
-      border-radius: calc(${sv.marginExtraSmall} / 2);
+    [data-element='step']:first-child {
+      [data-element='bar'] {
+        border-top-left-radius: calc(${sv.marginExtraSmall} / 2);
+        border-bottom-left-radius: calc(${sv.marginExtraSmall} / 2);
+      }
+    }
+
+    [data-element='step']:last-child {
+      [data-element='bar'] {
+        border-top-right-radius: calc(${sv.marginExtraSmall} / 2);
+        border-bottom-right-radius: calc(${sv.marginExtraSmall} / 2);
+      }
     }
   `,
   step: css`
@@ -55,6 +85,29 @@ const styles = {
     transition: ${sv.transitionShort};
     overflow: hidden;
   `,
+  separator: css`
+    height: 100%;
+    width: 1px;
+    background: ${sv.white};
+  `,
+  brand: css`
+    background: ${sv.brand};
+  `,
+  danger: css`
+    background: ${sv.red};
+  `,
+  info: css`
+    background: ${sv.blue};
+  `,
+  warning: css`
+    background: ${sv.orange};
+  `,
+  success: css`
+    background: ${sv.green};
+  `,
+  active: css`
+    border-radius: 0 !important;
+  `,
 };
 
 const SteppedProgressBar = ({ responsive, ...rest }) => {
@@ -67,18 +120,35 @@ const SteppedProgressBar = ({ responsive, ...rest }) => {
 
   return (
     <div style={style} className={cx(styles.root, { [styles[getEnumAsClass(size)]]: size })}>
-      {[...Array(steps).keys()].map((id) => (
-        <div className={styles.step} key={id}>
-          <div
-            className={cx(styles.bar, {
-              [styles.active]: id === activeStep,
-              [styles.indeterminate]: indeterminate,
-              [styles[getEnumAsClass(category)]]: category,
-            })}
-            style={{ width: `${percentage * 100}%` }}
-            data-element="bar"
-          />
-        </div>
+      {[...Array(steps).keys()].map((id, i) => (
+        <Fragment key={id}>
+          <div data-element="step" className={styles.step}>
+            <div
+              className={cx(styles.bar, {
+                [styles.active]: id === activeStep && percentage !== 1,
+                [styles.indeterminate]: indeterminate,
+                [styles[getEnumAsClass(category)]]: category,
+              })}
+              style={{
+                width: do {
+                  if (id < activeStep) {
+                    ('100%');
+                  } else if (id == activeStep) {
+                    `${percentage * 100}%`;
+                  } else {
+                    ('0');
+                  }
+                },
+              }}
+              data-element="bar"
+            />
+          </div>
+          {do {
+            if (i !== steps - 1) {
+              <div className={styles.separator} />;
+            }
+          }}
+        </Fragment>
       ))}
     </div>
   );
@@ -86,13 +156,13 @@ const SteppedProgressBar = ({ responsive, ...rest }) => {
 
 SteppedProgressBar.propTypes = {
   /** Determines how many steps there are in the bar */
-  steps: PropTypes.number.required,
+  steps: PropTypes.number.isRequired,
 
   /** The index of the currenctly active step */
-  activeStep: PropTypes.number.required,
+  activeStep: PropTypes.number.isRequired,
 
   /** If specified the currently active bar has a precise width, should be between 0-1 */
-  progress: PropTypes.number,
+  percentage: PropTypes.number,
 
   category: PropTypes.oneOf([
     Category.BRAND,
