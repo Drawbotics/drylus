@@ -1,3 +1,16 @@
+# v5.5.2 (Tue Feb 04 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix tooltip and popover Wrapper component  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.5.1 (Mon Feb 03 2020)
 
 #### ⚠️  Pushed to master

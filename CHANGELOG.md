@@ -1,3 +1,21 @@
+# v5.5.2 (Tue Feb 04 2020)
+
+#### 🏠  Internal
+
+- `@drawbotics/drylus-style-vars`, `@drawbotics/extract-emotion`, `@drawbotics/icons`, `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - Feature/prettier [#108](https://github.com/Drawbotics/drylus/pull/108) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix tooltip and popover Wrapper component  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.5.1 (Mon Feb 03 2020)
 
 #### ⚠️  Pushed to master
