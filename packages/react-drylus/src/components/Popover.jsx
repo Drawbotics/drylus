@@ -7,8 +7,7 @@ import ReactDOM from 'react-dom';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { Position } from '../enums';
-import { CustomPropTypes, deprecateProperty, getStyleForSide } from '../utils';
-import { useRect } from '../utils/hooks';
+import { CustomPropTypes, WrapperRef, deprecateProperty, getStyleForSide } from '../utils';
 
 const styles = {
   root: css`
@@ -99,7 +98,6 @@ const Popover = ({ children, message, content: _content, side, style, exitOnClic
   const [outletElement, setOutletElement] = useState(null);
   const childrenRef = useRef();
   const popoverRef = useRef();
-  const { rect, setRect } = useRect();
   const popoverRect = popoverRef.current?.getBoundingClientRect();
 
   const content = _content != null ? _content : message;
@@ -140,6 +138,7 @@ const Popover = ({ children, message, content: _content, side, style, exitOnClic
     const handleMouseLeave = () => setVisible(false);
 
     if (childrenRef.current != null) {
+      childrenRef.current.style.cursor = 'pointer';
       childrenRef.current.addEventListener('click', handleMouseClick);
       window.addEventListener('click', handleWindowClick, true);
       window.addEventListener('scroll', handleMouseLeave, true);
@@ -154,30 +153,16 @@ const Popover = ({ children, message, content: _content, side, style, exitOnClic
 
   if (outletElement == null) return '';
 
-  class Wrapper extends React.Component {
-    componentDidMount() {
-      // eslint-disable-next-line react/no-find-dom-node
-      const node = ReactDOM.findDOMNode(this);
-      node.style.cursor = 'pointer';
-      childrenRef.current = node;
-      setRect(node.getBoundingClientRect());
-    }
-
-    render() {
-      return children;
-    }
-  }
-
   const popoverStyle = getStyleForSide({
     side,
-    rect,
+    rect: childrenRef.current?.getBoundingClientRect(),
     rectComponent: popoverRect,
     sides: Position,
   });
 
   return (
     <Fragment>
-      <Wrapper />
+      <WrapperRef setChildrenRef={(node) => (childrenRef.current = node)}>{children}</WrapperRef>
       {ReactDOM.createPortal(
         <div className={themeStyles.root}>
           <div

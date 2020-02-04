@@ -1,6 +1,8 @@
 import Dayjs from 'dayjs';
 import camelCase from 'lodash/camelCase';
 import PropTypes from 'prop-types';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import Category from '../enums/Category';
 
@@ -166,4 +168,18 @@ export function getTimeDifferenceFromToday(_date) {
     isYesterday,
     isSameYear,
   };
+}
+
+export class WrapperRef extends React.Component {
+  componentDidMount() {
+    const { setChildrenRef } = this.props;
+    // eslint-disable-next-line react/no-find-dom-node
+    const node = ReactDOM.findDOMNode(this);
+    setChildrenRef(node);
+  }
+
+  render() {
+    const { children } = this.props;
+    return children;
+  }
 }

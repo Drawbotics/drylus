@@ -25,26 +25,26 @@ import { Popover } from '@drawbotics/react-drylus';
 
 __Example__
 <Playground component={Popover}>
-<Flex>
-  <FlexItem>
-    <Margin size={{ right: Size.LARGE }}>
-      <Popover content="I am a popover">
-        <Button category={Category.BRAND}>Click me</Button>
+  <Flex>
+    <FlexItem>
+      <Margin size={{ right: Size.LARGE }}>
+        <Popover content="I am a popover">
+          <Button category={Category.BRAND}>Click me</Button>
+        </Popover>
+      </Margin>
+    </FlexItem>
+    <FlexItem>
+      <Popover
+        content={
+          <div style={{ textAlign: 'left' }}>
+            <Margin size={{ bottom: Size.EXTRA_SMALL }}>
+              <ListTile leading={<Icon name="alert-triangle" category={Category.DANGER} />} title={<Text size={Size.SMALL}>I'm custom content</Text>} />
+            </Margin>
+            <ListTile leading={<Icon name="check-circle" category={Category.SUCCESS} />} title={<Text size={Size.SMALL}>So am I</Text>} />
+          </div>
+        }>
+        <Avatar category={Category.SUCCESS} text="PO" />
       </Popover>
-    </Margin>
-  </FlexItem>
-  <FlexItem>
-    <Popover
-      content={
-        <div style={{ textAlign: 'left' }}>
-          <Margin size={{ bottom: Size.EXTRA_SMALL }}>
-            <ListTile leading={<Icon name="alert-triangle" category={Category.DANGER} />} title={<Text size={Size.SMALL}>I'm custom content</Text>} />
-          </Margin>
-          <ListTile leading={<Icon name="check-circle" category={Category.SUCCESS} />} title={<Text size={Size.SMALL}>So am I</Text>} />
-        </div>
-      }>
-      <Avatar category={Category.SUCCESS} text="PO" />
-    </Popover>
-  </FlexItem>
-</Flex>
+    </FlexItem>
+  </Flex>
 </Playground>
