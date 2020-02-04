@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/react-drylus",
-  "version": "5.5.0",
+  "version": "5.5.2",
   "description": "React components for the Drawbotics' ecosystem",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "license": "ISC",
@@ -8,7 +8,7 @@
   "types": "index.d.ts",
   "scripts": {
     "clean": "rimraf lib/",
-    "build:commonjs": "babel --out-dir lib/ --ignore '**/*.test.js' --root-mode upward src/ --verbose",
+    "build:commonjs": "babel --ignore '**/__tests__/' --root-mode upward src/ --out-dir lib/",
     "watch": "npm run clean && NODE_ENV=development npm run build:commonjs -- --watch",
     "build:types": "node scripts/build-types.js",
     "build": "npm run clean && NODE_ENV=production npm run build:commonjs && npm run build:types",

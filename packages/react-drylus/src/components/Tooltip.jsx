@@ -7,8 +7,7 @@ import ReactDOM from 'react-dom';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { Position } from '../enums';
-import { CustomPropTypes, deprecateProperty, getStyleForSide } from '../utils';
-import { useRect } from '../utils/hooks';
+import { CustomPropTypes, WrapperRef, deprecateProperty, getStyleForSide } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 
 export const styles = {
@@ -103,7 +102,6 @@ const Tooltip = ({ responsive, ...rest }) => {
   const [outletElement, setOutletElement] = useState(null);
   const childrenRef = useRef();
   const tooltipRef = useRef();
-  const { rect, setRect } = useRect();
   const tooltipRect = tooltipRef.current?.getBoundingClientRect();
 
   const content = _content != null ? _content : message;
@@ -154,29 +152,16 @@ const Tooltip = ({ responsive, ...rest }) => {
 
   if (outletElement == null) return '';
 
-  class Wrapper extends React.PureComponent {
-    componentDidMount() {
-      // eslint-disable-next-line react/no-find-dom-node
-      const node = ReactDOM.findDOMNode(this);
-      childrenRef.current = node;
-      setRect(node.getBoundingClientRect());
-    }
-
-    render() {
-      return children;
-    }
-  }
-
   const tooltipStyle = getStyleForSide({
     side,
-    rect,
+    rect: childrenRef.current?.getBoundingClientRect(),
     rectComponent: tooltipRect,
     sides: Position,
   });
 
   return (
     <Fragment>
-      <Wrapper />
+      <WrapperRef setChildrenRef={(node) => (childrenRef.current = node)}>{children}</WrapperRef>
       {ReactDOM.createPortal(
         <div className={themeStyles.root}>
           <div

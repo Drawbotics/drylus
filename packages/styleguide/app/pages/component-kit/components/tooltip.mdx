@@ -25,26 +25,26 @@ import { Tooltip } from '@drawbotics/react-drylus';
 
 __Example__
 <Playground component={Tooltip}>
-<Flex>
-  <FlexItem>
-    <Margin size={{ right: Size.LARGE }}>
-      <Tooltip content="I am a tooltip">
-        <Button category={Category.BRAND}>Hover me</Button>
+  <Flex>
+    <FlexItem>
+      <Margin size={{ right: Size.LARGE }}>
+        <Tooltip content="I am a tooltip">
+          <Button category={Category.BRAND}>Hover me</Button>
+        </Tooltip>
+      </Margin>
+    </FlexItem>
+    <FlexItem>
+      <Tooltip
+        content={
+          <div style={{ textAlign: 'left' }}>
+            <Margin size={{ bottom: Size.EXTRA_SMALL }}>
+              <ListTile leading={<Icon name="alert-triangle" category={Category.DANGER} />} title={<Text inversed size={Size.SMALL}>I'm custom content</Text>} />
+            </Margin>
+            <ListTile leading={<Icon name="check-circle" category={Category.SUCCESS} />} title={<Text inversed size={Size.SMALL}>So am I</Text>} />
+          </div>
+        }>
+        <Dot category={Category.SUCCESS} />
       </Tooltip>
-    </Margin>
-  </FlexItem>
-  <FlexItem>
-    <Tooltip
-      content={
-        <div style={{ textAlign: 'left' }}>
-          <Margin size={{ bottom: Size.EXTRA_SMALL }}>
-            <ListTile leading={<Icon name="alert-triangle" category={Category.DANGER} />} title={<Text inversed size={Size.SMALL}>I'm custom content</Text>} />
-          </Margin>
-          <ListTile leading={<Icon name="check-circle" category={Category.SUCCESS} />} title={<Text inversed size={Size.SMALL}>So am I</Text>} />
-        </div>
-      }>
-      <Dot category={Category.SUCCESS} />
-    </Tooltip>
-  </FlexItem>
-</Flex>
+    </FlexItem>
+  </Flex>
 </Playground>

@@ -52,19 +52,19 @@ function transformMdxToReact(mdxElement, target, props) {
       omit(mdxElement.props, ['mdxType', 'originalType']),
       Object.assign({}, props),
     );
-    return React.createElement(target, newProps);
+    return React.createElement(target, { ...newProps, key: mdxElement.key });
   }
-  return React.createElement(
-    mdxElement.props.originalType || mdxElement.type,
-    omit(mdxElement.props, ['mdxType', 'originalType']),
-  );
+  return React.createElement(mdxElement.props.originalType || mdxElement.type, {
+    ...omit(mdxElement.props, ['mdxType', 'originalType']),
+    key: mdxElement.key,
+  });
 }
 
 export function recursiveMdxTransform(tree, target) {
   const { component, props } = target;
   const targetComponent = component || null;
 
-  function mdxTransform(_tree) {
+  function mdxTransform(_tree, key) {
     if (Array.isArray(_tree)) {
       return React.createElement(React.Fragment, {}, ...React.Children.map(_tree, mdxTransform));
     }
@@ -75,7 +75,9 @@ export function recursiveMdxTransform(tree, target) {
           const propValue = _tree.props[propKey];
 
           if (propKey === 'children' && Array.isArray(propValue)) {
-            newProp = propValue.map((child) => (child.$$typeof ? mdxTransform(child) : child));
+            newProp = propValue.map((child, i) =>
+              child.$$typeof ? mdxTransform(child, `${propKey}${i}`) : child,
+            );
           } else {
             if (Array.isArray(propValue)) {
               newProp = propValue.map((p) => (p.$$typeof ? mdxTransform(p) : p));
@@ -83,7 +85,7 @@ export function recursiveMdxTransform(tree, target) {
               newProp = propValue?.$$typeof ? mdxTransform(propValue) : propValue;
             }
           }
-          return { ...currentProps, [propKey]: newProp };
+          return { ...currentProps, [propKey]: newProp, key };
         }, {}),
       });
       return transformMdxToReact(newTree, targetComponent, props);
