@@ -50,7 +50,7 @@ const styles = {
     top: 0;
     left: 0;
     height: 100%;
-    width: 0;
+    width: 100%;
     background: ${sv.neutralDark};
     transition: ${sv.transitionShort};
     overflow: hidden;
@@ -70,7 +70,7 @@ const SteppedProgressBar = ({ responsive, ...rest }) => {
       {[...Array(steps).keys()].map((id) => (
         <div className={styles.step} key={id}>
           <div
-            className={cx(styles.stepChild, {
+            className={cx(styles.bar, {
               [styles.active]: id === activeStep,
               [styles.indeterminate]: indeterminate,
               [styles[getEnumAsClass(category)]]: category,

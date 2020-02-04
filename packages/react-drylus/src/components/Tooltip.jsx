@@ -154,7 +154,7 @@ const Tooltip = ({ responsive, ...rest }) => {
 
   if (outletElement == null) return '';
 
-  class Wrapper extends React.Component {
+  class Wrapper extends React.PureComponent {
     componentDidMount() {
       // eslint-disable-next-line react/no-find-dom-node
       const node = ReactDOM.findDOMNode(this);

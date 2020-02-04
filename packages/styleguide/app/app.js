@@ -13,9 +13,10 @@ import Root from './routes/Root';
 
 window._drylus = drylus;
 
-const App = () => {
+const App = React.memo(() => {
   const { screenSize, ScreenSizes } = useScreenSize();
-  console.log('rendersdf');
+  console.log('rendersdf2');
+
   return (
     <BrowserRouter basename="drylus">
       <DrylusProvider>
@@ -43,6 +44,9 @@ const App = () => {
       </DrylusProvider>
     </BrowserRouter>
   );
-};
+});
+
+App.whyDidYouRender = true;
 
 export default hot(module)(App);
+// export default App;
