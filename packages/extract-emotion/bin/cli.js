@@ -18,7 +18,8 @@ function normalizePath(dirPath, cwd) {
   }
 }
 
-async function run(inputFile, program) {
+async function run(program, args) {
+  const inputFile = args[0];
   if (!inputFile) {
     console.error(chalk.red('No input file specified'));
     program.help();
@@ -42,17 +43,21 @@ async function run(inputFile, program) {
   });
 }
 
-program
-  .version(packageJson.version)
-  .usage('<srcFile> --filename <[name].css> --output <outputDir>')
-  .option(
-    '-f, --filename <[name].css>',
-    'Set the filename of the output file, with the .css extension included. Defaults to styles.css',
-  )
-  .option(
-    '-p, --prefix <prefix>',
-    'Set the prefix to all the CSS classes to isolate them, since emotion hashes are removed by default',
-  )
-  .option('-o, --output <outputDir>', 'output folder')
-  .action((srcFile) => run(srcFile, program))
-  .parse(process.argv);
+async function main() {
+  program
+    .version(packageJson.version)
+    .option(
+      '-f, --filename <[name].css>',
+      'Set the filename of the output file, with the .css extension included. Defaults to styles.css',
+    )
+    .option(
+      '-p, --prefix <prefix>',
+      'Set the prefix to all the CSS classes to isolate them, since emotion hashes are removed by default',
+    )
+    .option('-o, --output <outputDir>', 'output folder')
+    .usage('<srcFile> --filename <[name].css> --output <outputDir> --prefix <prefix>')
+    .action(run);
+  await program.parseAsync(process.argv);
+}
+
+main();
