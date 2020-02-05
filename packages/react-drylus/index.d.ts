@@ -842,6 +842,32 @@ export interface SplashScreenProps {
 
 export declare const SplashScreen: React.FunctionComponent<SplashScreenProps>;
 
+declare interface Responsive {
+  XS?: object;
+  S?: object;
+  M?: object;
+  L?: object;
+  XL?: object;
+  HUGE?: object;
+}
+
+export interface SteppedProgressBarProps {
+  steps: number;
+  activeStep: number;
+  percentage?: number;
+  category?:
+    | Category.BRAND
+    | Category.DANGER
+    | Category.SUCCESS
+    | Category.INFO
+    | Category.WARNING;
+  size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
+  style?: React.CSSProperties;
+  responsive?: Responsive;
+}
+
+export declare const SteppedProgressBar: React.FunctionComponent<SteppedProgressBarProps>;
+
 export interface TabNavigationProps {
   options?: any;
   valueKey?: string;

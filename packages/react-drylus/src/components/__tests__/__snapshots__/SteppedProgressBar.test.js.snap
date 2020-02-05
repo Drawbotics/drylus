@@ -1,0 +1,676 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SteppedProgressBar matches snapshot when has 4 steps 1`] = `
+@keyframes animation-0 {
+  0% {
+    background-position: -1200px 0;
+  }
+
+  100% {
+    background-position: 1200px 0;
+  }
+}
+
+.emotion-11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 8px;
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eaeff4;
+}
+
+.emotion-11 [data-element='step']:first-child [data-element='bar'] {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.emotion-11 [data-element='step']:last-child [data-element='bar'] {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.emotion-1 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  position: relative;
+}
+
+.emotion-3 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+}
+
+.emotion-3::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right,#879ba6 8%,#d3dce6 18%,#879ba6 33% ) !important;
+}
+
+.emotion-2 {
+  height: 100%;
+  width: 1px;
+  background: #fff;
+}
+
+.emotion-0 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+  border-radius: 0 !important;
+  position: relative;
+  pointer-events: none;
+}
+
+.emotion-0::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right,#879ba6 8%,#d3dce6 18%,#879ba6 33% ) !important;
+}
+
+.emotion-0::after {
+  content: ' ';
+  position: absolute;
+  z-index: 9;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #d3dce6;
+  border-radius: 5px;
+  overflow: hidden;
+  background-image: linear-gradient( to right,#d3dce6 8%,#eaeff4 18%,#d3dce6 33% );
+  background-size: 1200px 100%;
+  -webkit-animation: animation-0 2s forwards infinite linear;
+  animation: animation-0 2s forwards infinite linear;
+}
+
+<div
+  className="emotion-11 undefined"
+>
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-0"
+      data-element="bar"
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    />
+  </div>
+  <div
+    className="emotion-2"
+  />
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-3"
+      data-element="bar"
+      style={
+        Object {
+          "width": "0",
+        }
+      }
+    />
+  </div>
+  <div
+    className="emotion-2"
+  />
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-3"
+      data-element="bar"
+      style={
+        Object {
+          "width": "0",
+        }
+      }
+    />
+  </div>
+  <div
+    className="emotion-2"
+  />
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-3"
+      data-element="bar"
+      style={
+        Object {
+          "width": "0",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`SteppedProgressBar matches snapshot when has a category 1`] = `
+@keyframes animation-0 {
+  0% {
+    background-position: -1200px 0;
+  }
+
+  100% {
+    background-position: 1200px 0;
+  }
+}
+
+.emotion-11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 8px;
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eaeff4;
+}
+
+.emotion-11 [data-element='step']:first-child [data-element='bar'] {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.emotion-11 [data-element='step']:last-child [data-element='bar'] {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.emotion-1 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  position: relative;
+}
+
+.emotion-3 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+}
+
+.emotion-3::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right,#879ba6 8%,#d3dce6 18%,#879ba6 33% ) !important;
+}
+
+.emotion-2 {
+  height: 100%;
+  width: 1px;
+  background: #fff;
+}
+
+.emotion-0 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+  border-radius: 0 !important;
+  position: relative;
+  pointer-events: none;
+}
+
+.emotion-0::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right,#879ba6 8%,#d3dce6 18%,#879ba6 33% ) !important;
+}
+
+.emotion-0::after {
+  content: ' ';
+  position: absolute;
+  z-index: 9;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #d3dce6;
+  border-radius: 5px;
+  overflow: hidden;
+  background-image: linear-gradient( to right,#d3dce6 8%,#eaeff4 18%,#d3dce6 33% );
+  background-size: 1200px 100%;
+  -webkit-animation: animation-0 2s forwards infinite linear;
+  animation: animation-0 2s forwards infinite linear;
+}
+
+<div
+  className="emotion-11 undefined"
+>
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="undefined emotion-0"
+      data-element="bar"
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    />
+  </div>
+  <div
+    className="emotion-2"
+  />
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-3 undefined"
+      data-element="bar"
+      style={
+        Object {
+          "width": "0",
+        }
+      }
+    />
+  </div>
+  <div
+    className="emotion-2"
+  />
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-3 undefined"
+      data-element="bar"
+      style={
+        Object {
+          "width": "0",
+        }
+      }
+    />
+  </div>
+  <div
+    className="emotion-2"
+  />
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-3 undefined"
+      data-element="bar"
+      style={
+        Object {
+          "width": "0",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`SteppedProgressBar matches snapshot when has a percentage 1`] = `
+.emotion-11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 8px;
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eaeff4;
+}
+
+.emotion-11 [data-element='step']:first-child [data-element='bar'] {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.emotion-11 [data-element='step']:last-child [data-element='bar'] {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.emotion-1 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  position: relative;
+}
+
+.emotion-3 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+}
+
+.emotion-3::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right,#879ba6 8%,#d3dce6 18%,#879ba6 33% ) !important;
+}
+
+.emotion-2 {
+  height: 100%;
+  width: 1px;
+  background: #fff;
+}
+
+.emotion-0 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+  border-radius: 0 !important;
+}
+
+.emotion-0::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right,#879ba6 8%,#d3dce6 18%,#879ba6 33% ) !important;
+}
+
+<div
+  className="emotion-11 undefined"
+>
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-0"
+      data-element="bar"
+      style={
+        Object {
+          "width": "40%",
+        }
+      }
+    />
+  </div>
+  <div
+    className="emotion-2"
+  />
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-3"
+      data-element="bar"
+      style={
+        Object {
+          "width": "0",
+        }
+      }
+    />
+  </div>
+  <div
+    className="emotion-2"
+  />
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-3"
+      data-element="bar"
+      style={
+        Object {
+          "width": "0",
+        }
+      }
+    />
+  </div>
+  <div
+    className="emotion-2"
+  />
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-3"
+      data-element="bar"
+      style={
+        Object {
+          "width": "0",
+        }
+      }
+    />
+  </div>
+</div>
+`;
+
+exports[`SteppedProgressBar matches snapshot when is small 1`] = `
+@keyframes animation-0 {
+  0% {
+    background-position: -1200px 0;
+  }
+
+  100% {
+    background-position: 1200px 0;
+  }
+}
+
+.emotion-11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 8px;
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eaeff4;
+}
+
+.emotion-11 [data-element='step']:first-child [data-element='bar'] {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.emotion-11 [data-element='step']:last-child [data-element='bar'] {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.emotion-1 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  position: relative;
+}
+
+.emotion-3 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+}
+
+.emotion-3::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right,#879ba6 8%,#d3dce6 18%,#879ba6 33% ) !important;
+}
+
+.emotion-2 {
+  height: 100%;
+  width: 1px;
+  background: #fff;
+}
+
+.emotion-0 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+  border-radius: 0 !important;
+  position: relative;
+  pointer-events: none;
+}
+
+.emotion-0::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right,#879ba6 8%,#d3dce6 18%,#879ba6 33% ) !important;
+}
+
+.emotion-0::after {
+  content: ' ';
+  position: absolute;
+  z-index: 9;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #d3dce6;
+  border-radius: 5px;
+  overflow: hidden;
+  background-image: linear-gradient( to right,#d3dce6 8%,#eaeff4 18%,#d3dce6 33% );
+  background-size: 1200px 100%;
+  -webkit-animation: animation-0 2s forwards infinite linear;
+  animation: animation-0 2s forwards infinite linear;
+}
+
+<div
+  className="emotion-11 undefined"
+>
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-0"
+      data-element="bar"
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    />
+  </div>
+  <div
+    className="emotion-2"
+  />
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-3"
+      data-element="bar"
+      style={
+        Object {
+          "width": "0",
+        }
+      }
+    />
+  </div>
+  <div
+    className="emotion-2"
+  />
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-3"
+      data-element="bar"
+      style={
+        Object {
+          "width": "0",
+        }
+      }
+    />
+  </div>
+  <div
+    className="emotion-2"
+  />
+  <div
+    className="emotion-1"
+    data-element="step"
+  >
+    <div
+      className="emotion-3"
+      data-element="bar"
+      style={
+        Object {
+          "width": "0",
+        }
+      }
+    />
+  </div>
+</div>
+`;
