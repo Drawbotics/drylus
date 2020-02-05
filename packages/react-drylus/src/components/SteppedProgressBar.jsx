@@ -117,15 +117,55 @@ const styles = {
   `,
   danger: css`
     background: ${sv.red};
+
+    &::after {
+      background: ${sv.red};
+      background-image: linear-gradient(
+        to right,
+        ${sv.red} 8%,
+        ${sv.redLight} 18%,
+        ${sv.red} 33%
+      ) !important;
+    }
   `,
   info: css`
     background: ${sv.blue};
+
+    &::after {
+      background: ${sv.blue};
+      background-image: linear-gradient(
+        to right,
+        ${sv.blue} 8%,
+        ${sv.blueLight} 18%,
+        ${sv.blue} 33%
+      ) !important;
+    }
   `,
   warning: css`
     background: ${sv.orange};
+
+    &::after {
+      background: ${sv.orange};
+      background-image: linear-gradient(
+        to right,
+        ${sv.orange} 8%,
+        ${sv.orangeLight} 18%,
+        ${sv.orange} 33%
+      ) !important;
+    }
   `,
   success: css`
     background: ${sv.green};
+
+    &::after {
+      background: ${sv.green};
+      background-image: linear-gradient(
+        to right,
+        ${sv.green} 8%,
+        ${sv.greenLight} 18%,
+        ${sv.green} 33%
+      ) !important;
+    }
   `,
   active: css`
     border-radius: 0 !important;
