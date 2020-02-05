@@ -6,6 +6,7 @@ import React, { Fragment } from 'react';
 import { Category, Size } from '../enums';
 import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
+import { styles as shimmerStyles } from './LoadingPlaceholder';
 
 const styles = {
   root: css`
@@ -84,6 +85,17 @@ const styles = {
     background: ${sv.neutralDark};
     transition: ${sv.transitionShort};
     overflow: hidden;
+
+    &::after {
+      background: ${sv.neutralDark};
+      border-radius: 0 !important;
+      background-image: linear-gradient(
+        to right,
+        ${sv.neutralDark} 8%,
+        ${sv.neutral} 18%,
+        ${sv.neutralDark} 33%
+      ) !important;
+    }
   `,
   separator: css`
     height: 100%;
@@ -92,6 +104,16 @@ const styles = {
   `,
   brand: css`
     background: ${sv.brand};
+
+    &::after {
+      background: ${sv.brand};
+      background-image: linear-gradient(
+        to right,
+        ${sv.brand} 8%,
+        ${sv.brandLight} 18%,
+        ${sv.brand} 33%
+      ) !important;
+    }
   `,
   danger: css`
     background: ${sv.red};
@@ -125,13 +147,13 @@ const SteppedProgressBar = ({ responsive, ...rest }) => {
           <div data-element="step" className={styles.step}>
             <div
               className={cx(styles.bar, {
-                [styles.active]: id === activeStep && percentage !== 1,
-                [styles.indeterminate]: indeterminate,
+                [styles.active]: id == activeStep && percentage !== 1,
                 [styles[getEnumAsClass(category)]]: category,
+                [shimmerStyles.shimmer]: id == activeStep && indeterminate,
               })}
               style={{
                 width: do {
-                  if (id < activeStep) {
+                  if (id < activeStep || (id == activeStep && indeterminate)) {
                     ('100%');
                   } else if (id == activeStep) {
                     `${percentage * 100}%`;
