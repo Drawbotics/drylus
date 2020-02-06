@@ -1,3 +1,20 @@
+# v5.5.3 (Thu Feb 06 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/stepped progress [#109](https://github.com/Drawbotics/drylus/pull/109) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- fix lost key in Playground  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.5.2 (Tue Feb 04 2020)
 
 #### 🏠  Internal
