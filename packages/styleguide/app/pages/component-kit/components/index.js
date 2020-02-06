@@ -19,7 +19,6 @@ import filterGroup from './filter-group';
 import icon from './icon';
 import label from './label';
 import list from './list';
-import listTile from './list-tile';
 import loadingPlaceholder from './loading-placeholder';
 import map from './map';
 import modal from './modal';
@@ -58,7 +57,6 @@ const components = {
   filter,
   icon,
   tabNavigation,
-  listTile,
   avatar,
   text,
   dot,
