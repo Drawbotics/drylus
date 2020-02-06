@@ -15,6 +15,7 @@ window._drylus = drylus;
 
 const App = () => {
   const { screenSize, ScreenSizes } = useScreenSize();
+
   return (
     <BrowserRouter basename="drylus">
       <DrylusProvider>

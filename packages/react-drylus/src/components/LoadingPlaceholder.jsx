@@ -30,7 +30,7 @@ export const styles = {
       background: ${sv.neutral};
       border-radius: ${sv.defaultBorderRadius};
       overflow: hidden;
-      background: linear-gradient(
+      background-image: linear-gradient(
         to right,
         ${sv.neutral} 8%,
         ${sv.neutralLight} 18%,

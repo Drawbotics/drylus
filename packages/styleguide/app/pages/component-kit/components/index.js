@@ -33,6 +33,7 @@ import segmentedControl from './segmented-control';
 import separator from './separator';
 import spinner from './spinner';
 import splashScreen from './splash-screen';
+import steppedProgressBar from './stepped-progress-bar';
 import tabNavigation from './tab-navigation';
 import table from './table';
 import tag from './tag';
@@ -88,6 +89,7 @@ const components = {
   tile,
   progressBar,
   loadingPlaceholder,
+  steppedProgressBar,
 };
 
 export default Object.keys(components)

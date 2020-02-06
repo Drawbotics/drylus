@@ -1,0 +1,16 @@
+import { SteppedProgressBar } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Stepped Progress Bar
+Used to display loading of uploads, or other elements that require the user to know the amount ot loading left. The component takes the full width of the parent container.
+
+```jsx
+import { SteppedProgressBar } from '@drawbotics/react-drylus';
+```
+__Example__
+
+<Playground component={SteppedProgressBar}>
+  <SteppedProgressBar steps={4} activeStep={0} />
+</Playground>

@@ -52,11 +52,11 @@ function transformMdxToReact(mdxElement, target, props) {
       omit(mdxElement.props, ['mdxType', 'originalType']),
       Object.assign({}, props),
     );
-    return React.createElement(target, { ...newProps, key: mdxElement.key });
+    return React.createElement(target, { ...newProps, key: mdxElement.key ?? undefined });
   }
   return React.createElement(mdxElement.props.originalType || mdxElement.type, {
     ...omit(mdxElement.props, ['mdxType', 'originalType']),
-    key: mdxElement.key,
+    key: mdxElement.key ?? undefined,
   });
 }
 
