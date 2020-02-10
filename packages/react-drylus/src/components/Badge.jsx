@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Category, Color } from '../enums';
-import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
+import { categoryEnumToColor, getEnumAsClass } from '../utils';
 
 const styles = {
   root: css`
@@ -61,16 +61,13 @@ Badge.propTypes = {
   /** If the value is higher than the max, then a + is displayed with the max */
   max: PropTypes.number,
 
-  /** DEPRECATED */
-  category: CustomPropTypes.deprecated(
-    PropTypes.oneOf([
-      Category.BRAND,
-      Category.SUCCESS,
-      Category.INFO,
-      Category.WARNING,
-      Category.DANGER,
-    ]),
-  ),
+  category: PropTypes.oneOf([
+    Category.BRAND,
+    Category.SUCCESS,
+    Category.INFO,
+    Category.WARNING,
+    Category.DANGER,
+  ]),
 
   color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
 
