@@ -4,7 +4,7 @@ import camelCase from 'lodash/camelCase';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { deprecateProperty, getEnumAsClass } from '../utils';
+import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 
 const styles = {
@@ -56,15 +56,6 @@ const styles = {
     flex: 1;
   `,
 };
-
-/**
- * @deprecated and will be removed in version 6.0
- */
-export const FlexDirections = deprecateProperty(
-  new Enum('HORIZONTAL', 'VERTICAL'),
-  'FlexDirections',
-  'FlexDirection',
-);
 
 export const FlexDirection = new Enum('HORIZONTAL', 'VERTICAL');
 

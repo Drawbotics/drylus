@@ -1,5 +1,4 @@
 import sv from '@drawbotics/drylus-style-vars';
-import Enum from '@drawbotics/enums';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
@@ -7,7 +6,7 @@ import ReactDOM from 'react-dom';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { Position } from '../enums';
-import { CustomPropTypes, WrapperRef, deprecateProperty, getStyleForSide } from '../utils';
+import { CustomPropTypes, WrapperRef, getStyleForSide } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 
 export const styles = {
@@ -82,15 +81,6 @@ export const styles = {
     transform: translate(0, 0);
   `,
 };
-
-/**
- * @deprecated and will be removed in version 6.0
- */
-export const TooltipSides = deprecateProperty(
-  new Enum('TOP', 'LEFT', 'BOTTOM', 'RIGHT'),
-  'TooltipSides',
-  'Position',
-);
 
 const Tooltip = ({ responsive, ...rest }) => {
   const { children, message, content: _content, side, style } = useResponsiveProps(

@@ -1,5 +1,4 @@
 import sv from '@drawbotics/drylus-style-vars';
-import Enum from '@drawbotics/enums';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
@@ -7,7 +6,7 @@ import ReactDOM from 'react-dom';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { Position } from '../enums';
-import { CustomPropTypes, WrapperRef, deprecateProperty, getStyleForSide } from '../utils';
+import { CustomPropTypes, WrapperRef, getStyleForSide } from '../utils';
 
 const styles = {
   root: css`
@@ -83,15 +82,6 @@ const styles = {
     pointer-events: auto;
   `,
 };
-
-/**
- * @deprecated and will be removed in version 6.0
- */
-export const PopoverSides = deprecateProperty(
-  new Enum('TOP', 'LEFT', 'BOTTOM', 'RIGHT'),
-  'PopoverSides',
-  'Position',
-);
 
 const Popover = ({ children, message, content: _content, side, style, exitOnClick }) => {
   const [visible, setVisible] = useState(false);

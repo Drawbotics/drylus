@@ -7,7 +7,7 @@ import React from 'react';
 import { Size, Tier } from '../enums';
 import Flex, { FlexDirection, FlexItem } from '../layout/Flex';
 import Margin from '../layout/Margin';
-import { CustomPropTypes, deprecateProperty } from '../utils';
+import { CustomPropTypes } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 import { Empty, Failed, NotAllowed, NotFound, Processing } from '../utils/illustrations';
 import Paragraph from './Paragraph';
@@ -30,15 +30,6 @@ const styles = {
     text-align: center;
   `,
 };
-
-/**
- * @deprecated and will be removed in version 6.0
- */
-export const EmptyStateVariations = deprecateProperty(
-  new Enum('DEFAULT', 'PROCESSING', 'NOT_FOUND', 'NOT_ALLOWED', 'FAILED'),
-  'EmptyStateVariations',
-  'EmptyStateVariation',
-);
 
 export const EmptyStateVariation = new Enum(
   'DEFAULT',

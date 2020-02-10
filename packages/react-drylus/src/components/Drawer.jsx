@@ -1,5 +1,4 @@
 import sv from '@drawbotics/drylus-style-vars';
-import Enum from '@drawbotics/enums';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
@@ -9,7 +8,6 @@ import { CSSTransition } from 'react-transition-group';
 
 import { styles as themeStyles } from '../base/ThemeProvider';
 import { Position, Size, Tier } from '../enums';
-import { deprecateProperty } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 import Button from './Button';
 import Icon from './Icon';
@@ -170,11 +168,6 @@ const styles = {
     }
   `,
 };
-
-/**
- * @deprecated and will be removed in version 6.0
- */
-export const DrawerSides = deprecateProperty(new Enum('RIGHT', 'LEFT'), 'DrawerSides', 'Position');
 
 const BaseDrawer = ({ children, onClickClose, footer, title, style }) => {
   const { screenSize, ScreenSizes } = useScreenSize();

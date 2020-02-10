@@ -1,11 +1,9 @@
 import sv from '@drawbotics/drylus-style-vars';
-import Enum from '@drawbotics/enums';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Align } from '../enums';
-import { deprecateProperty } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 
 const styles = {
@@ -20,15 +18,6 @@ const styles = {
     text-align: center;
   `,
 };
-
-/**
- * @deprecated and will be removed in version 6.0
- */
-export const ParagraphAlign = deprecateProperty(
-  new Enum('CENTER', 'LEFT', 'RIGHT'),
-  'ParagraphAlign',
-  'Align',
-);
 
 const Paragraph = ({ responsive, ...rest }) => {
   const { children, style, align } = useResponsiveProps(rest, responsive);
