@@ -87,7 +87,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                     if (props[key].description) {
                       const val = props[key].description;
                       val === 'DEPRECATED' ? (
-                        <Tag category={Category.WARNING} inversed>
+                        <Tag color={Color.ORANGE} inversed>
                           {val}
                         </Tag>
                       ) : (

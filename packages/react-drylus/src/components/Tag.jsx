@@ -3,8 +3,8 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Category from '../enums/Category';
-import { getEnumAsClass } from '../utils';
+import { Category, Color } from '../enums';
+import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
 import Icon from './Icon';
 
 const styles = {
@@ -32,19 +32,19 @@ const styles = {
     background: ${sv.brandLight};
     color: ${sv.brandDark};
   `,
-  danger: css`
+  red: css`
     background: ${sv.redLight};
     color: ${sv.redDark};
   `,
-  success: css`
+  green: css`
     background: ${sv.greenLight};
     color: ${sv.greenDark};
   `,
-  warning: css`
+  orange: css`
     background: ${sv.orangeLight};
     color: ${sv.orangeDark};
   `,
-  info: css`
+  blue: css`
     background: ${sv.blueLight};
     color: ${sv.blueDark};
   `,
@@ -55,28 +55,29 @@ const styles = {
   brandInversed: css`
     background: ${sv.brand};
   `,
-  dangerInversed: css`
+  redInversed: css`
     background: ${sv.red};
   `,
-  successInversed: css`
+  greenInversed: css`
     background: ${sv.green};
   `,
-  warningInversed: css`
+  orangeInversed: css`
     background: ${sv.orange};
   `,
-  infoInversed: css`
+  blueInversed: css`
     background: ${sv.blue};
   `,
 };
 
-const Tag = ({ children, category, onClickRemove, inversed, style }) => {
-  const className = inversed ? `${getEnumAsClass(category)}Inversed` : getEnumAsClass(category);
+const Tag = ({ children, category, onClickRemove, inversed, style, color: _color }) => {
+  const color = category ? categoryEnumToColor(category) : _color;
+  const className = inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
   return (
     <div
       style={style}
       className={cx(styles.root, {
         [styles.inversed]: inversed,
-        [styles[className]]: category,
+        [styles[className]]: color,
       })}>
       {children}
       {do {
@@ -91,13 +92,18 @@ const Tag = ({ children, category, onClickRemove, inversed, style }) => {
 Tag.propTypes = {
   children: PropTypes.string.isRequired,
 
-  category: PropTypes.oneOf([
-    Category.BRAND,
-    Category.DANGER,
-    Category.SUCCESS,
-    Category.INFO,
-    Category.WARNING,
-  ]),
+  /** DEPRECATED */
+  category: CustomPropTypes.deprecated(
+    PropTypes.oneOf([
+      Category.BRAND,
+      Category.DANGER,
+      Category.SUCCESS,
+      Category.INFO,
+      Category.WARNING,
+    ]),
+  ),
+
+  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
 
   /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */
   onClickRemove: PropTypes.func,
@@ -107,10 +113,6 @@ Tag.propTypes = {
 
   /** Used for style overrides */
   style: PropTypes.object,
-};
-
-Tag.defaultProps = {
-  category: Category.DEFAULT,
 };
 
 export default Tag;
