@@ -24,6 +24,20 @@ export function colorEnumToCategory(enumVal) {
   return enumVal;
 }
 
+export function categoryEnumToColor(enumVal) {
+  switch (enumVal) {
+    case Category.DANGER:
+      return Color.RED;
+    case Category.SUCCESS:
+      return Color.GREEN;
+    case Category.WARNING:
+      return Color.ORANGE;
+    case Category.INFO:
+      return Color.BLUE;
+  }
+  return enumVal;
+}
+
 export function getIconForCategory(category) {
   switch (category) {
     case Category.DANGER:
