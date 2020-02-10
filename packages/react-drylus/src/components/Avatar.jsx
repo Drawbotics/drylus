@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Tooltip from '../components/Tooltip';
-import { Category, Size } from '../enums';
-import { getEnumAsClass } from '../utils';
+import { Category, Color, Size } from '../enums';
+import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 
 const styles = {
@@ -40,19 +40,19 @@ const styles = {
     font-size: 1.1rem;
     padding-top: 0;
   `,
-  danger: css`
+  red: css`
     color: ${sv.white};
     background: ${sv.red};
   `,
-  info: css`
+  blue: css`
     color: ${sv.white};
     background: ${sv.blue};
   `,
-  success: css`
+  green: css`
     color: ${sv.white};
     background: ${sv.green};
   `,
-  warning: css`
+  orange: css`
     color: ${sv.white};
     background: ${sv.orange};
   `,
@@ -66,16 +66,24 @@ const styles = {
 };
 
 const Avatar = ({ responsive, ...rest }) => {
-  const { image, text, size, category, backgroundColor, hint, style } = useResponsiveProps(
-    rest,
-    responsive,
-  );
+  const {
+    image,
+    text,
+    size,
+    category,
+    backgroundColor,
+    hint,
+    style,
+    color: _color,
+  } = useResponsiveProps(rest, responsive);
 
   const customSize = typeof size === 'number';
+  const color = category ? categoryEnumToColor(category) : _color;
+
   const avatar = (
     <div
       className={cx(styles.root, {
-        [styles[getEnumAsClass(category)]]: category,
+        [styles[getEnumAsClass(color)]]: color,
         [styles[!customSize && getEnumAsClass(size)]]: size,
         [styles.customBackground]: backgroundColor,
       })}
@@ -118,14 +126,18 @@ Avatar.propTypes = {
     PropTypes.number,
   ]),
 
-  /** Category of the avatar */
-  category: PropTypes.oneOf([
-    Category.DANGER,
-    Category.INFO,
-    Category.SUCCESS,
-    Category.WARNING,
-    Category.BRAND,
-  ]),
+  /** DEPRECATED */
+  category: CustomPropTypes.deprecated(
+    PropTypes.oneOf([
+      Category.DANGER,
+      Category.INFO,
+      Category.SUCCESS,
+      Category.WARNING,
+      Category.BRAND,
+    ]),
+  ),
+
+  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
 
   /** Custom override for the background color, useful for profiles */
   backgroundColor: PropTypes.string,
