@@ -194,7 +194,7 @@ export interface MarginProps {
 export declare const Margin: React.FunctionComponent<MarginProps>;
 
 
-function showAlert(args: { text: string; id?: string; category?: Categories }): void;
+function showAlert(args: { text: string; id?: string; category?: Category }): void;
 
 function hideAlert(args: { id: string }): void;
 
@@ -264,12 +264,8 @@ export interface AvatarProps {
   text?: string;
   hint?: string;
   size?: any;
-  category?:
-    | Category.DANGER
-    | Category.INFO
-    | Category.SUCCESS
-    | Category.WARNING
-    | Category.BRAND;
+  category?: any;
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
   backgroundColor?: string;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -286,6 +282,7 @@ export interface BadgeProps {
     | Category.INFO
     | Category.WARNING
     | Category.DANGER;
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
   style?: React.CSSProperties;
 }
 
@@ -368,6 +365,7 @@ export interface ButtonProps {
     | Category.INFO
     | Category.WARNING
     | Category.PRIMARY;
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
   tier?: Tier.PRIMARY | Tier.SECONDARY | Tier.TERTIARY;
   leading?: React.ReactNode;
@@ -398,6 +396,7 @@ export interface ButtonLinkProps {
     | Category.SUCCESS
     | Category.INFO
     | Category.WARNING;
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
   tier?: Tier.PRIMARY | Tier.SECONDARY | Tier.TERTIARY;
   leading?: React.ReactNode;
@@ -433,12 +432,8 @@ declare interface Responsive {
 export interface CircularProgressProps {
   percentage?: number;
   text?: string;
-  category?:
-    | Category.BRAND
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING;
+  category?: any;
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -457,13 +452,14 @@ export interface CollapsibleProps {
 export declare const Collapsible: React.FunctionComponent<CollapsibleProps>;
 
 export interface DotProps {
-  category?:
-    | Category.BRAND
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING
-    | Category.DANGER
-    | Category.PRIMARY;
+  category?: any;
+  color?:
+    | Color.BRAND
+    | Color.RED
+    | Color.BLUE
+    | Color.GREEN
+    | Color.ORANGE
+    | Color.PRIMARY;
   style?: React.CSSProperties;
 }
 
@@ -594,13 +590,14 @@ export declare const Label: React.FunctionComponent<LabelProps>;
 
 export interface ListItemProps {
   children: React.ReactNode;
-  category?:
-    | Category.BRAND
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING
-    | Category.PRIMARY;
+  category?: any;
+  color?:
+    | Color.BRAND
+    | Color.RED
+    | Color.BLUE
+    | Color.GREEN
+    | Color.ORANGE
+    | Color.PRIMARY;
   icon?: IconName;
   disabled?: boolean;
   style?: React.CSSProperties;
@@ -759,12 +756,8 @@ declare interface Responsive {
 
 export interface ProgressBarProps {
   percentage?: number;
-  category?:
-    | Category.BRAND
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING;
+  category?: any;
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -785,12 +778,8 @@ export interface RoundIconProps {
   name: string;
   size?: any;
   bold?: boolean;
-  category?:
-    | Category.DANGER
-    | Category.INFO
-    | Category.SUCCESS
-    | Category.WARNING
-    | Category.BRAND;
+  category?: any;
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
   style?: React.CSSProperties;
   responsive?: Responsive;
 }
@@ -826,7 +815,8 @@ declare interface Responsive {
 
 export interface SpinnerProps {
   size?: Size.DEFAULT | Size.SMALL | Size.LARGE;
-  category?: Category.BRAND | Category.INFO;
+  category?: any;
+  color?: Color.BRAND | Color.BLUE;
   inversed?: boolean;
   fullSize?: boolean;
   style?: React.CSSProperties;
@@ -855,12 +845,8 @@ export interface SteppedProgressBarProps {
   steps: number;
   activeStep: number;
   percentage?: number;
-  category?:
-    | Category.BRAND
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING;
+  category?: any;
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
   style?: React.CSSProperties;
   responsive?: Responsive;
@@ -927,12 +913,8 @@ export declare const Table: React.FunctionComponent<TableProps>;
 
 export interface TagProps {
   children: string;
-  category?:
-    | Category.BRAND
-    | Category.DANGER
-    | Category.SUCCESS
-    | Category.INFO
-    | Category.WARNING;
+  category?: any;
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
   onClickRemove?: OnClickCallback;
   inversed?: boolean;
   style?: React.CSSProperties;
@@ -966,6 +948,7 @@ export interface TextProps {
   light?: boolean;
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
   tier?: Tier.PRIMARY | Tier.SECONDARY | Tier.TERTIARY;
+  shade?: Shade.DARK | Shade.MEDIUM | Shade.LIGHT;
   disabled?: boolean;
   children: any;
   category?:
@@ -991,6 +974,7 @@ export interface TextLinkProps {
     | Category.SUCCESS
     | Category.INFO
     | Category.WARNING;
+  shade?: Shade.DARK | Shade.MEDIUM | Shade.LIGHT;
   underlined?: LinkUnderlined.ALWAYS | LinkUnderlined.HOVER;
   style?: React.CSSProperties;
 }
@@ -1548,7 +1532,7 @@ export interface ListTileProps {
 export declare const ListTile: React.FunctionComponent<ListTileProps>;
 
 
-function showAlert(args: { text: string; id?: string; category?: Categories }): void;
+function showAlert(args: { text: string; id?: string; category?: Category }): void;
 
 function hideAlert(args: { id: string }): void;
 
