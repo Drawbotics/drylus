@@ -5,8 +5,8 @@ import { css, cx, injectGlobal } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Category } from '../enums';
-import { getEnumAsClass } from '../utils';
+import { Category, Color } from '../enums';
+import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
 import env from '../utils/get-static-env';
 
 injectGlobal`
@@ -20,20 +20,23 @@ const styles = {
   bold: css`
     font-weight: bold !important;
   `,
-  danger: css`
+  red: css`
     color: ${sv.red};
   `,
-  info: css`
+  blue: css`
     color: ${sv.blue};
   `,
-  success: css`
+  green: css`
     color: ${sv.green};
   `,
-  warning: css`
+  orange: css`
     color: ${sv.orange};
   `,
   brand: css`
     color: ${sv.brand};
+  `,
+  primary: css`
+    color: ${sv.colorPrimary};
   `,
   clickable: css`
     &:hover {
@@ -44,13 +47,14 @@ const styles = {
 
 export const Icons = mapping;
 
-const Icon = ({ name, bold, onClick, category, style }) => {
+const Icon = ({ name, bold, onClick, category, style, color: _color }) => {
+  const color = category ? categoryEnumToColor(category) : _color;
   return (
     <i
       style={style}
       className={cx(styles.root, `Drycon Drycon-${name}`, {
         [styles.bold]: bold,
-        [styles[getEnumAsClass(category)]]: category,
+        [styles[getEnumAsClass(color)]]: color,
         [styles.clickable]: onClick,
       })}
       onClick={onClick}
@@ -68,13 +72,24 @@ Icon.propTypes = {
   /** Triggered when the icon is clicked */
   onClick: PropTypes.func,
 
-  /** Category of the icon */
-  category: PropTypes.oneOf([
-    Category.DANGER,
-    Category.INFO,
-    Category.SUCCESS,
-    Category.WARNING,
-    Category.BRAND,
+  /** DEPRECATED */
+  category: CustomPropTypes.deprecated(
+    PropTypes.oneOf([
+      Category.DANGER,
+      Category.INFO,
+      Category.SUCCESS,
+      Category.WARNING,
+      Category.BRAND,
+    ]),
+  ),
+
+  color: PropTypes.oneOf([
+    Color.BRAND,
+    Color.RED,
+    Color.BLUE,
+    Color.GREEN,
+    Color.ORANGE,
+    Color.PRIMARY,
   ]),
 
   /** Used for style overrides */

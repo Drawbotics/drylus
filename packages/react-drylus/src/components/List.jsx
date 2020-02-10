@@ -3,7 +3,8 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Category } from '../enums';
+import { Category, Color } from '../enums';
+import { CustomPropTypes, categoryEnumToColor } from '../utils';
 import Dot from './Dot';
 import Icon from './Icon';
 
@@ -60,16 +61,17 @@ const styles = {
   `,
 };
 
-export const ListItem = ({ children, icon, category, disabled, style }) => {
+export const ListItem = ({ children, icon, category, disabled, style, color: _color }) => {
+  const color = category ? categoryEnumToColor(category) : _color;
   return (
     <li style={style} className={cx(styles.item, { [styles.disabled]: disabled })}>
       {children}
       {do {
         if (icon) {
-          <Icon name={icon} category={category === Category.PRIMARY ? null : category} bold />;
+          <Icon name={icon} color={color === Color.PRIMARY ? null : color} bold />;
         } else {
           <div data-element="dot">
-            <Dot category={disabled ? null : category} />
+            <Dot color={disabled ? null : color} />
           </div>;
         }
       }}
@@ -81,13 +83,25 @@ ListItem.propTypes = {
   /** Content of the list item */
   children: PropTypes.node.isRequired,
 
-  category: PropTypes.oneOf([
-    Category.BRAND,
-    Category.DANGER,
-    Category.SUCCESS,
-    Category.INFO,
-    Category.WARNING,
-    Category.PRIMARY,
+  /** DEPRECATED */
+  category: CustomPropTypes.deprecated(
+    PropTypes.oneOf([
+      Category.BRAND,
+      Category.DANGER,
+      Category.SUCCESS,
+      Category.INFO,
+      Category.WARNING,
+      Category.PRIMARY,
+    ]),
+  ),
+
+  color: PropTypes.oneOf([
+    Color.BRAND,
+    Color.RED,
+    Color.BLUE,
+    Color.GREEN,
+    Color.ORANGE,
+    Color.PRIMARY,
   ]),
 
   /** If passed, the specified icon will be displayed instead of the bullet */
@@ -101,7 +115,7 @@ ListItem.propTypes = {
 };
 
 ListItem.defaultProps = {
-  category: Category.PRIMARY,
+  color: Color.PRIMARY,
 };
 
 const List = ({ children, ordered, style }) => {
