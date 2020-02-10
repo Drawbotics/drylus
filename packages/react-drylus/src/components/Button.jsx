@@ -3,8 +3,8 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Category, Size, Tier } from '../enums';
-import { getEnumAsClass } from '../utils';
+import { Category, Color, Size, Tier } from '../enums';
+import { colorEnumToCategory, getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 
 export const styles = {
@@ -273,13 +273,14 @@ const Button = ({ responsive, ...rest }) => {
     children,
     disabled,
     onClick,
-    category,
+    category: _category,
     size,
     tier,
     leading,
     trailing,
     fullWidth,
     style,
+    color,
   } = useResponsiveProps(rest, responsive);
 
   if (!children && trailing && leading) {
@@ -287,6 +288,8 @@ const Button = ({ responsive, ...rest }) => {
   }
 
   const round = !children && (trailing || leading);
+
+  const category = color ? colorEnumToCategory(color) : _category;
 
   return (
     <button
@@ -335,6 +338,8 @@ Button.propTypes = {
     Category.WARNING,
     Category.PRIMARY,
   ]),
+
+  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
 
   size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
 

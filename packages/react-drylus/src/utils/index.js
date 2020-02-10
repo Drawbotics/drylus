@@ -4,10 +4,24 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Category from '../enums/Category';
+import { Category, Color } from '../enums';
 
 export function getEnumAsClass(enumVal) {
   return camelCase(enumVal?.description?.toLowerCase());
+}
+
+export function colorEnumToCategory(enumVal) {
+  switch (enumVal) {
+    case Color.RED:
+      return Category.DANGER;
+    case Color.GREEN:
+      return Category.SUCCESS;
+    case Color.ORANGE:
+      return Category.WARNING;
+    case Color.BLUE:
+      return Category.INFO;
+  }
+  return enumVal;
 }
 
 export function getIconForCategory(category) {

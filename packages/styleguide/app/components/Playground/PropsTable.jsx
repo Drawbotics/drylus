@@ -2,12 +2,14 @@ import sv from '@drawbotics/drylus-style-vars';
 import {
   Align,
   Category,
+  Color,
   Flex,
   FlexItem,
   FlexJustify,
   Icon,
   Margin,
   Position,
+  Shade,
   Size,
   TBody,
   TCell,
@@ -108,6 +110,8 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                           Tier,
                           Align,
                           Position,
+                          Color,
+                          Shade,
                         }}
                         name={key}
                         prop={props[key]}
