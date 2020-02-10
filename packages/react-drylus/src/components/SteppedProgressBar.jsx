@@ -3,8 +3,8 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
-import { Category, Size } from '../enums';
-import { getEnumAsClass } from '../utils';
+import { Category, Color, Size } from '../enums';
+import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 import { styles as shimmerStyles } from './LoadingPlaceholder';
 
@@ -115,7 +115,7 @@ const styles = {
       ) !important;
     }
   `,
-  danger: css`
+  red: css`
     background: ${sv.red};
 
     &::after {
@@ -128,7 +128,7 @@ const styles = {
       ) !important;
     }
   `,
-  info: css`
+  blue: css`
     background: ${sv.blue};
 
     &::after {
@@ -141,7 +141,7 @@ const styles = {
       ) !important;
     }
   `,
-  warning: css`
+  orange: css`
     background: ${sv.orange};
 
     &::after {
@@ -154,7 +154,7 @@ const styles = {
       ) !important;
     }
   `,
-  success: css`
+  green: css`
     background: ${sv.green};
 
     &::after {
@@ -173,12 +173,18 @@ const styles = {
 };
 
 const SteppedProgressBar = ({ responsive, ...rest }) => {
-  const { percentage, category, size, style, steps, activeStep } = useResponsiveProps(
-    rest,
-    responsive,
-  );
+  const {
+    percentage,
+    category,
+    size,
+    style,
+    steps,
+    activeStep,
+    color: _color,
+  } = useResponsiveProps(rest, responsive);
 
   const indeterminate = percentage == null;
+  const color = category ? categoryEnumToColor(category) : _color;
 
   return (
     <div style={style} className={cx(styles.root, { [styles[getEnumAsClass(size)]]: size })}>
@@ -188,7 +194,7 @@ const SteppedProgressBar = ({ responsive, ...rest }) => {
             <div
               className={cx(styles.bar, {
                 [styles.active]: id == activeStep && percentage !== 1,
-                [styles[getEnumAsClass(category)]]: category,
+                [styles[getEnumAsClass(color)]]: color,
                 [shimmerStyles.shimmer]: id == activeStep && indeterminate,
               })}
               style={{
@@ -226,13 +232,18 @@ SteppedProgressBar.propTypes = {
   /** If specified the currently active bar has a precise width, should be between 0-1 */
   percentage: PropTypes.number,
 
-  category: PropTypes.oneOf([
-    Category.BRAND,
-    Category.DANGER,
-    Category.SUCCESS,
-    Category.INFO,
-    Category.WARNING,
-  ]),
+  /** DEPRECATED */
+  category: CustomPropTypes.deprecated(
+    PropTypes.oneOf([
+      Category.BRAND,
+      Category.DANGER,
+      Category.SUCCESS,
+      Category.INFO,
+      Category.WARNING,
+    ]),
+  ),
+
+  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
 
   size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
 
