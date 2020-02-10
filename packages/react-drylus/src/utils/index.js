@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Category, Color } from '../enums';
+import { Category, Color, Shade, Tier } from '../enums';
 
 export function getEnumAsClass(enumVal) {
   return camelCase(enumVal?.description?.toLowerCase());
@@ -34,6 +34,18 @@ export function categoryEnumToColor(enumVal) {
       return Color.ORANGE;
     case Category.INFO:
       return Color.BLUE;
+  }
+  return enumVal;
+}
+
+export function shadeEnumToTier(enumVal) {
+  switch (enumVal) {
+    case Shade.DARK:
+      return Tier.PRIMARY;
+    case Shade.MEDIUM:
+      return Tier.SECONDARY;
+    case Shade.LIGHT:
+      return Tier.TERTIARY;
   }
   return enumVal;
 }
