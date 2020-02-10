@@ -1,9 +1,8 @@
 import React from 'react';
 import { create } from 'react-test-renderer';
 
+import { Color, Size } from '../../enums';
 import ProgressBar from '../ProgressBar';
-import { Category, Size } from '../../enums';
-
 
 describe('ProgressBar', () => {
   describe('matches snapshot when', () => {
@@ -14,9 +13,9 @@ describe('ProgressBar', () => {
       expect(tree).toMatchSnapshot();
     });
 
-    it('has a category', () => {
+    it('has a color', () => {
       const tree = create(
-        <ProgressBar progress={0.4} category={Category.BRAND} />
+        <ProgressBar progress={0.4} color={Color.BRAND} />
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
