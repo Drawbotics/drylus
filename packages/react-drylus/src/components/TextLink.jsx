@@ -1,10 +1,10 @@
-import sv from '@drawbotics/drylus-style-vars';
+import sv, { darken } from '@drawbotics/drylus-style-vars';
 import Enum from '@drawbotics/enums';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Category } from '../enums';
+import { Category, Shade } from '../enums';
 import { getEnumAsClass } from '../utils';
 
 const styles = {
@@ -60,16 +60,38 @@ const styles = {
   underlinedAlways: css`
     text-decoration: underline !important;
   `,
+  dark: css`
+    color: ${sv.colorPrimary};
+
+    &:hover {
+      color: ${darken(sv.colorPrimary, 50)};
+    }
+  `,
+  medium: css`
+    color: ${sv.colorSecondary};
+
+    &:hover {
+      color: ${sv.colorPrimary};
+    }
+  `,
+  light: css`
+    color: ${sv.colorTertiary};
+
+    &:hover {
+      color: ${sv.colorSecondary};
+    }
+  `,
 };
 
 export const LinkUnderlined = new Enum('ALWAYS', 'HOVER');
 
-const TextLink = ({ children, category, underlined, style, ...rest }) => {
+const TextLink = ({ children, category, underlined, style, shade, ...rest }) => {
   return (
     <span
       style={style}
       className={cx(styles.root, {
         [styles[getEnumAsClass(category)]]: category,
+        [styles[getEnumAsClass(shade)]]: shade,
         [styles.underlinedHover]: underlined === LinkUnderlined.HOVER,
         [styles.underlinedAlways]: underlined === LinkUnderlined.ALWAYS,
       })}
@@ -90,6 +112,8 @@ TextLink.propTypes = {
     Category.INFO,
     Category.WARNING,
   ]),
+
+  shade: PropTypes.oneOf([Shade.DARK, Shade.MEDIUM, Shade.LIGHT]),
 
   underlined: PropTypes.oneOf([LinkUnderlined.ALWAYS, LinkUnderlined.HOVER]),
 
