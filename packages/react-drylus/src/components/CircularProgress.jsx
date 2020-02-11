@@ -3,8 +3,8 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Category, Size } from '../enums';
-import { getEnumAsClass } from '../utils';
+import { Category, Color, Size } from '../enums';
+import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 
 const styles = {
@@ -59,22 +59,22 @@ const styles = {
       stroke: ${sv.brand};
     }
   `,
-  danger: css`
+  red: css`
     & [data-element='circle'] {
       stroke: ${sv.red};
     }
   `,
-  info: css`
+  blue: css`
     & [data-element='circle'] {
       stroke: ${sv.blue};
     }
   `,
-  warning: css`
+  orange: css`
     & [data-element='circle'] {
       stroke: ${sv.orange};
     }
   `,
-  success: css`
+  green: css`
     & [data-element='circle'] {
       stroke: ${sv.green};
     }
@@ -82,17 +82,22 @@ const styles = {
 };
 
 const CircularProgress = ({ responsive, ...rest }) => {
-  const { percentage, category, size, text, style } = useResponsiveProps(rest, responsive);
+  const { percentage, category, size, text, style, color: _color } = useResponsiveProps(
+    rest,
+    responsive,
+  );
 
   const circumference = 84 * Math.PI;
   const offset = percentage * circumference;
+
+  const color = category ? categoryEnumToColor(category) : _color;
 
   return (
     <div
       style={style}
       className={cx(styles.root, {
         [styles[getEnumAsClass(size)]]: size,
-        [styles[getEnumAsClass(category)]]: category,
+        [styles[getEnumAsClass(color)]]: color,
       })}>
       {do {
         if (text && size !== Size.SMALL) {
@@ -121,13 +126,18 @@ CircularProgress.propTypes = {
   /** Text shown within the circular progress. Not shown when size is smaller than DEFAULT */
   text: PropTypes.string,
 
-  category: PropTypes.oneOf([
-    Category.BRAND,
-    Category.DANGER,
-    Category.SUCCESS,
-    Category.INFO,
-    Category.WARNING,
-  ]),
+  /** DEPRECATED */
+  category: CustomPropTypes.deprecated(
+    PropTypes.oneOf([
+      Category.BRAND,
+      Category.DANGER,
+      Category.SUCCESS,
+      Category.INFO,
+      Category.WARNING,
+    ]),
+  ),
+
+  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
 
   size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE, Size.EXTRA_LARGE]),
 

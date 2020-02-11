@@ -10,6 +10,8 @@ import {
   Size,
   Align,
   Position,
+  Color,
+  Shade,
 } from '@drawbotics/react-drylus';
 ```
 
@@ -17,6 +19,8 @@ import {
 | ---- | ----- | ------ |
 | Size | To define a size, margin or padding | `EXTRA_SMALL`, `SMALL`, `DEFAULT`, `LARGE`, `EXTRA_LARGE`, `HUGE`, `EXTRA_HUGE`, `MASSIVE` |
 | Category | Used with any component where the color determines a particular kind of action, to differentiate its usage (e.g. buttons or banners) | `BRAND`, `SUCCESS`, `INFO`, `WARNING`, `DANGER` |
+| Color | Similar to Category except it is tightly linked to the displayed color | `RED`, `BLUE`, `ORANGE`, `GREEN`, `BRAND` |
 | Tier | Used whenever the hierarchy is needed to determine the usage of a component (e.g. buttons) | `PRIMARY`, `SECONDARY`, `TERTIARY` |
 | Position | Used to position elements, usually in regards to a parent element | `TOP`, `BOTTOM`, `LEFT`, `RIGHT` |
 | Align | Often used with text components. Layouts have their own align constants  | `LEFT`, `CENTER`, `RIGHT` |
+| Shade | Used to determine the lightness/darkness of color e.g. in Text | `DARK`, `MEDIUM`, `LIGHT` |

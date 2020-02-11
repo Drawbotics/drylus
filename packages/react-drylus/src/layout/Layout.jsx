@@ -1,10 +1,9 @@
-import Enum from '@drawbotics/enums';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Position } from '../enums';
-import { deprecateProperty, getEnumAsClass } from '../utils';
+import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 
 const styles = {
@@ -78,15 +77,6 @@ const styles = {
     overflow: scroll;
   `,
 };
-
-/**
- * @deprecated and will be removed in version 6.0
- */
-export const LayoutPositions = deprecateProperty(
-  new Enum('LEFT', 'RIGHT', 'BOTTOM', 'TOP'),
-  'LayoutPositions',
-  'Position',
-);
 
 const Layout = ({ responsive, ...rest }) => {
   const { children, position, bar, fixed, barScrollable, style } = useResponsiveProps(

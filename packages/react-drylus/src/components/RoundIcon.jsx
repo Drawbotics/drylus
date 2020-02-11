@@ -3,8 +3,8 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Category, Size } from '../enums';
-import { getEnumAsClass } from '../utils';
+import { Category, Color, Size } from '../enums';
+import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 import Icon from './Icon';
 
@@ -47,19 +47,19 @@ const styles = {
       font-size: inherit;
     }
   `,
-  danger: css`
+  red: css`
     color: ${sv.white};
     background: ${sv.red};
   `,
-  info: css`
+  blue: css`
     color: ${sv.white};
     background: ${sv.blue};
   `,
-  success: css`
+  green: css`
     color: ${sv.white};
     background: ${sv.green};
   `,
-  warning: css`
+  orange: css`
     color: ${sv.white};
     background: ${sv.orange};
   `,
@@ -70,13 +70,14 @@ const styles = {
 };
 
 const RoundIcon = ({ responsive, ...rest }) => {
-  const { name, size, category, bold, style } = useResponsiveProps(rest, responsive);
+  const { name, size, category, bold, style, color: _color } = useResponsiveProps(rest, responsive);
 
   const customSize = typeof size === 'number';
+  const color = category ? categoryEnumToColor(category) : _color;
   return (
     <div
       className={cx(styles.root, {
-        [styles[getEnumAsClass(category)]]: category,
+        [styles[getEnumAsClass(color)]]: color,
         [styles[!customSize && getEnumAsClass(size)]]: size,
         [styles.iconInherit]: customSize,
       })}
@@ -99,14 +100,18 @@ RoundIcon.propTypes = {
   /** Makes the icon bold */
   bold: PropTypes.bool,
 
-  /** Category of the icon */
-  category: PropTypes.oneOf([
-    Category.DANGER,
-    Category.INFO,
-    Category.SUCCESS,
-    Category.WARNING,
-    Category.BRAND,
-  ]),
+  /** DEPRECATED */
+  category: CustomPropTypes.deprecated(
+    PropTypes.oneOf([
+      Category.DANGER,
+      Category.INFO,
+      Category.SUCCESS,
+      Category.WARNING,
+      Category.BRAND,
+    ]),
+  ),
+
+  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
 
   /** Used for style overrides */
   style: PropTypes.object,

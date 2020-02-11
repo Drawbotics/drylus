@@ -1,11 +1,11 @@
-import { Flex, FlexItem, FlexAlign, FlexDirections, FlexJustify } from '@drawbotics/react-drylus';
+import { Flex, FlexItem, FlexAlign, FlexDirection, FlexJustify } from '@drawbotics/react-drylus';
 
 import Playground, { PropsTable } from '~/components/Playground';
 
 # Flex
 For more in depth examples about how flexbox works, please refer to https://css-tricks.com/snippets/css/a-guide-to-flexbox/. If you need to create complex layouts, refer to [] grid.
 ```jsx
-import { Flex, FlexItem, FlexAlign, FlexJustify, FlexDirections } from '@drawbotics/react-drylus';
+import { Flex, FlexItem, FlexAlign, FlexJustify, FlexDirection } from '@drawbotics/react-drylus';
 ```
 
 ### The Flex container
@@ -18,7 +18,7 @@ export const Component = () => {
 };
 
 
-<Playground component={Flex} enums={{ FlexAlign, FlexDirections, FlexJustify }}>
+<Playground component={Flex} enums={{ FlexAlign, FlexDirection, FlexJustify }}>
   <div style={{ border: '2px solid black' }}>
     <Flex>
       <FlexItem>

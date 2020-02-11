@@ -9,6 +9,7 @@ import {
   FlexItem,
   FlexJustify,
   Margin,
+  Color,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -36,7 +37,7 @@ You can also have buttons with just the icon, or just the spinner; for this don'
     </FlexItem>
     <FlexItem>
       <Margin size={{ right: Size.SMALL }}>
-        <Button tier={Tier.TERTIARY} leading={<Spinner category={Category.INFO} size={Size.SMALL} />} />
+        <Button tier={Tier.TERTIARY} leading={<Spinner color={Color.BLUE} size={Size.SMALL} />} />
       </Margin>
     </FlexItem>
     <FlexItem>
@@ -60,7 +61,7 @@ You can also have buttons with just the icon, or just the spinner; for this don'
       </Margin>
     </FlexItem>
     <FlexItem>
-      <Button trailing={<Spinner size={Size.SMALL} inversed />} category={Category.SUCCESS}>Text with spinner</Button>
+      <Button trailing={<Spinner size={Size.SMALL} inversed />} color={Color.GREEN}>Text with spinner</Button>
     </FlexItem>
   </Flex>
 </Playground>

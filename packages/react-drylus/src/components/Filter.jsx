@@ -1,5 +1,4 @@
 import sv from '@drawbotics/drylus-style-vars';
-import Enum from '@drawbotics/enums';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
@@ -7,7 +6,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Align } from '../enums';
 import Checkbox from '../forms/Checkbox';
 import ListTile from '../layout/ListTile';
-import { CustomPropTypes, deprecateProperty } from '../utils';
+import { CustomPropTypes } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 import Icon from './Icon';
 
@@ -113,11 +112,6 @@ const styles = {
     }
   `,
 };
-
-/**
- * @deprecated and will be removed in version 6.0
- */
-export const FilterAlign = deprecateProperty(new Enum('RIGHT', 'LEFT'), 'FilterAlign', 'Align');
 
 const BaseFilter = ({ responsive, ...rest }) => {
   const {

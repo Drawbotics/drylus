@@ -1,11 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
-import Enum from '@drawbotics/enums';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Category, Position } from '../enums';
-import { deprecateProperty, getEnumAsClass } from '../utils';
+import { getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 import Icon from './Icon';
 
@@ -123,15 +122,6 @@ const styles = {
     text-transform: uppercase;
   `,
 };
-
-/**
- * @deprecated and will be removed in version 6.0
- */
-export const DropdownSides = deprecateProperty(
-  new Enum('TOP', 'LEFT', 'BOTTOM', 'RIGHT'),
-  'DropdownSides',
-  'Position',
-);
 
 export const DropdownOption = ({ responsive, ...rest }) => {
   const { text, category, disabled, onClick, onClickClose, icon, style } = useResponsiveProps(

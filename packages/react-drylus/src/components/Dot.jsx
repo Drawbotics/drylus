@@ -3,8 +3,8 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Category from '../enums/Category';
-import { getEnumAsClass } from '../utils';
+import { Category, Color } from '../enums';
+import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
 
 const styles = {
   root: css`
@@ -17,16 +17,16 @@ const styles = {
   brand: css`
     background: ${sv.brand};
   `,
-  success: css`
+  green: css`
     background: ${sv.green};
   `,
-  danger: css`
+  red: css`
     background: ${sv.red};
   `,
-  warning: css`
+  orange: css`
     background: ${sv.orange};
   `,
-  info: css`
+  blue: css`
     background: ${sv.blue};
   `,
   primary: css`
@@ -34,26 +34,38 @@ const styles = {
   `,
 };
 
-const Dot = ({ category, style }) => {
+const Dot = ({ category, style, color: _color }) => {
+  const color = category ? categoryEnumToColor(category) : _color;
   return (
     <div
       style={style}
       className={cx(styles.root, {
-        [styles[getEnumAsClass(category)]]: category,
+        [styles[getEnumAsClass(color)]]: color,
       })}
     />
   );
 };
 
 Dot.propTypes = {
-  /** Determines the background color of the badge */
-  category: PropTypes.oneOf([
-    Category.BRAND,
-    Category.SUCCESS,
-    Category.INFO,
-    Category.WARNING,
-    Category.DANGER,
-    Category.PRIMARY,
+  /** DEPRECATED */
+  category: CustomPropTypes.deprecated(
+    PropTypes.oneOf([
+      Category.BRAND,
+      Category.SUCCESS,
+      Category.INFO,
+      Category.WARNING,
+      Category.DANGER,
+      Category.PRIMARY,
+    ]),
+  ),
+
+  color: PropTypes.oneOf([
+    Color.BRAND,
+    Color.RED,
+    Color.BLUE,
+    Color.GREEN,
+    Color.ORANGE,
+    Color.PRIMARY,
   ]),
 
   /** Used for style overrides */

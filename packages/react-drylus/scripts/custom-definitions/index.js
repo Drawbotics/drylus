@@ -10,7 +10,7 @@ type OnChangeCallback = (value: any, name?: string) => void;
 `;
 
 const customAdditionalDefinitions = `
-function showAlert(args: { text: string; id?: string; category?: Categories }): void;
+function showAlert(args: { text: string; id?: string; category?: Category }): void;
 
 function hideAlert(args: { id: string }): void;
 

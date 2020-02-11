@@ -3,8 +3,8 @@ import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Category from '../enums/Category';
-import { getEnumAsClass } from '../utils';
+import { Category, Color } from '../enums';
+import { categoryEnumToColor, getEnumAsClass } from '../utils';
 
 const styles = {
   root: css`
@@ -23,30 +23,31 @@ const styles = {
     background: ${sv.brand};
     color: ${sv.white};
   `,
-  success: css`
+  green: css`
     background: ${sv.green};
     color: ${sv.white};
   `,
-  danger: css`
+  red: css`
     background: ${sv.red};
     color: ${sv.white};
   `,
-  warning: css`
+  orange: css`
     background: ${sv.orange};
     color: ${sv.white};
   `,
-  info: css`
+  blue: css`
     background: ${sv.blue};
     color: ${sv.white};
   `,
 };
 
-const Badge = ({ value, max, category, style }) => {
+const Badge = ({ value, max, category, style, color: _color }) => {
+  const color = category ? categoryEnumToColor(category) : _color;
   return (
     <div
       style={style}
       className={cx(styles.root, {
-        [styles[getEnumAsClass(category)]]: category,
+        [styles[getEnumAsClass(color)]]: color,
       })}>
       {value > max ? `${max}+` : value}
     </div>
@@ -60,7 +61,6 @@ Badge.propTypes = {
   /** If the value is higher than the max, then a + is displayed with the max */
   max: PropTypes.number,
 
-  /** Determines the background color of the badge */
   category: PropTypes.oneOf([
     Category.BRAND,
     Category.SUCCESS,
@@ -68,6 +68,8 @@ Badge.propTypes = {
     Category.WARNING,
     Category.DANGER,
   ]),
+
+  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
 
   /** Used for style overrides */
   style: PropTypes.object,

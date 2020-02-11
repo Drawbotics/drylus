@@ -1,27 +1,9 @@
 import Dayjs from 'dayjs';
-import camelCase from 'lodash/camelCase';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Category from '../enums/Category';
-
-export function getEnumAsClass(enumVal) {
-  return camelCase(enumVal?.description?.toLowerCase());
-}
-
-export function getIconForCategory(category) {
-  switch (category) {
-    case Category.DANGER:
-      return 'alert-circle';
-    case Category.SUCCESS:
-      return 'check-circle';
-    case Category.WARNING:
-      return 'alert-triangle';
-    default:
-      return 'info';
-  }
-}
+export * from './enums';
 
 function _verifyOptions(props, propName, componentName) {
   const options = props[propName];

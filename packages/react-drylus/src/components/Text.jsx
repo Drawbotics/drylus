@@ -5,8 +5,8 @@ import isObject from 'lodash/isObject';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Category, Size, Tier } from '../enums';
-import { getEnumAsClass } from '../utils';
+import { Category, Shade, Size, Tier } from '../enums';
+import { getEnumAsClass, shadeEnumToTier } from '../utils';
 import { ShowDateTime, generateDisplayedDate } from '../utils/date';
 import { useResponsiveProps } from '../utils/hooks';
 import { generateDisplayedPrice } from '../utils/price';
@@ -103,16 +103,19 @@ const Text = ({ responsive, ...rest }) => {
     inversed,
     bold,
     size,
-    tier,
+    tier: _tier,
     disabled,
     children,
     category,
+    shade,
     style,
     light,
     dateOptions,
     priceOptions,
     locale,
   } = useResponsiveProps(rest, responsive);
+
+  const tier = _tier ?? shadeEnumToTier(shade);
 
   const transformedChildren = isArray(children)
     ? [...children]
@@ -162,6 +165,8 @@ Text.propTypes = {
   size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
 
   tier: PropTypes.oneOf([Tier.PRIMARY, Tier.SECONDARY, Tier.TERTIARY]),
+
+  shade: PropTypes.oneOf([Shade.DARK, Shade.MEDIUM, Shade.LIGHT]),
 
   /** Makes the text appear disabled, but still selectable */
   disabled: PropTypes.bool,
@@ -227,7 +232,7 @@ Text.defaultProps = {
   bold: false,
   light: false,
   size: Size.DEFAULT,
-  tier: Tier.PRIMARY,
+  shade: Shade.DARK,
   disabled: false,
   locale: 'en',
 };

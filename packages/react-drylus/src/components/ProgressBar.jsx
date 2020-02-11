@@ -3,8 +3,8 @@ import { css, cx, keyframes } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Category, Size } from '../enums';
-import { getEnumAsClass } from '../utils';
+import { Category, Color, Size } from '../enums';
+import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 
 const translateX = keyframes`
@@ -66,24 +66,25 @@ const styles = {
   brand: css`
     background: ${sv.brand};
   `,
-  danger: css`
+  red: css`
     background: ${sv.red};
   `,
-  info: css`
+  blue: css`
     background: ${sv.blue};
   `,
-  warning: css`
+  orange: css`
     background: ${sv.orange};
   `,
-  success: css`
+  green: css`
     background: ${sv.green};
   `,
 };
 
 const ProgressBar = ({ responsive, ...rest }) => {
-  const { percentage, category, size, style } = useResponsiveProps(rest, responsive);
+  const { percentage, category, size, style, color: _color } = useResponsiveProps(rest, responsive);
 
   const indeterminate = percentage == null;
+  const color = category ? categoryEnumToColor(category) : _color;
 
   return (
     <div
@@ -94,7 +95,7 @@ const ProgressBar = ({ responsive, ...rest }) => {
       <div
         data-element="bar"
         className={cx(styles.bar, {
-          [styles[getEnumAsClass(category)]]: category,
+          [styles[getEnumAsClass(color)]]: color,
           [styles.indeterminate]: indeterminate,
         })}
         style={{ width: `${percentage * 100}%` }}
@@ -107,13 +108,18 @@ ProgressBar.propTypes = {
   /** Determines the amount of the bar which is completed, between 0 and 1. If not given the bar is indeterminate */
   percentage: PropTypes.number,
 
-  category: PropTypes.oneOf([
-    Category.BRAND,
-    Category.DANGER,
-    Category.SUCCESS,
-    Category.INFO,
-    Category.WARNING,
-  ]),
+  /** DEPRECATED */
+  category: CustomPropTypes.deprecated(
+    PropTypes.oneOf([
+      Category.BRAND,
+      Category.DANGER,
+      Category.SUCCESS,
+      Category.INFO,
+      Category.WARNING,
+    ]),
+  ),
+
+  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
 
   size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
 

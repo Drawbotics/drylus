@@ -2,12 +2,14 @@ import sv from '@drawbotics/drylus-style-vars';
 import {
   Align,
   Category,
+  Color,
   Flex,
   FlexItem,
   FlexJustify,
   Icon,
   Margin,
   Position,
+  Shade,
   Size,
   TBody,
   TCell,
@@ -85,7 +87,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                     if (props[key].description) {
                       const val = props[key].description;
                       val === 'DEPRECATED' ? (
-                        <Tag category={Category.WARNING} inversed>
+                        <Tag color={Color.ORANGE} inversed>
                           {val}
                         </Tag>
                       ) : (
@@ -108,6 +110,8 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                           Tier,
                           Align,
                           Position,
+                          Color,
+                          Shade,
                         }}
                         name={key}
                         prop={props[key]}

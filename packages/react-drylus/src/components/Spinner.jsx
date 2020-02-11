@@ -3,7 +3,8 @@ import { css, cx, keyframes } from 'emotion';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Category, Size } from '../enums';
+import { Category, Color, Size } from '../enums';
+import { CustomPropTypes, categoryEnumToColor } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 
 const rotate = keyframes`
@@ -71,7 +72,7 @@ const styles = {
   brand: css`
     stroke: ${sv.brand};
   `,
-  info: css`
+  blue: css`
     stroke: ${sv.blue};
   `,
   white: css`
@@ -88,7 +89,11 @@ const styles = {
 };
 
 const Spinner = ({ responsive, ...rest }) => {
-  const { size, category, inversed, fullSize, style } = useResponsiveProps(rest, responsive);
+  const { size, category, inversed, fullSize, style, color: _color } = useResponsiveProps(
+    rest,
+    responsive,
+  );
+  const color = category ? categoryEnumToColor(category) : _color;
   return (
     <div
       style={style}
@@ -103,8 +108,8 @@ const Spinner = ({ responsive, ...rest }) => {
         <svg className={styles.circle} viewBox="25 25 50 50">
           <circle
             className={cx(styles.path, {
-              [styles.brand]: category === Category.BRAND,
-              [styles.info]: category === Category.INFO,
+              [styles.brand]: color === Color.BRAND,
+              [styles.blue]: color === Color.BLUE,
               [styles.white]: inversed,
             })}
             cx="50"
@@ -121,8 +126,10 @@ const Spinner = ({ responsive, ...rest }) => {
 Spinner.propTypes = {
   size: PropTypes.oneOf([Size.DEFAULT, Size.SMALL, Size.LARGE]),
 
-  /** For now limited to BRAND and INFO only, could have more in the future */
-  category: PropTypes.oneOf([Category.BRAND, Category.INFO]),
+  /** DEPRECATED */
+  category: CustomPropTypes.deprecated(PropTypes.oneOf([Category.BRAND, Category.INFO])),
+
+  color: PropTypes.oneOf([Color.BRAND, Color.BLUE]),
 
   /** If true, sets the color of the spinner to white (to be used against colored backgrounds) */
   inversed: PropTypes.bool,
