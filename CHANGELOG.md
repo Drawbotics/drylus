@@ -1,3 +1,20 @@
+# v6.0.0 (Tue Feb 11 2020)
+
+#### 💥 Breaking - Major release
+
+- `@drawbotics/react-drylus`
+  - Feature/semantic enums [#110](https://github.com/Drawbotics/drylus/pull/110) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- move listtile to layout in docs  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.5.3 (Thu Feb 06 2020)
 
 #### 🐛 Bug fix - Patch
