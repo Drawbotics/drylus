@@ -15,7 +15,28 @@ export const globalStyles = `
   }
 `;
 
+export const root = `
+  * {
+    font-family: ${sv.defaultFontFamily};
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  b,
+  strong {
+    font-weight: 500;
+  }
+`;
+
 export function injectGlobalStyles() {
   injectGlobal(globalStyles);
   injectGlobal(normalize);
+  injectGlobal(`
+    .Drylus-ThemeProvider__root {
+      ${root}
+    }
+  `);
 }

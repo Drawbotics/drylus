@@ -13,7 +13,7 @@
     "watch:react": "node ./scripts/watch-react.js",
     "watch": "npm run watch:react & npm run watch:lib",
     "build:lib": "NODE_ENV=production webpack --config webpack.config.js",
-    "extract-css": "extract-emotion ./src/styles/react-components.js --output ./src/styles/ --prefix Drylus --filename react-styles.css",
+    "extract-css": "extract-emotion ./src/styles/react-components.js --output ./src/styles/ --prefix Drylus --filename  react-styles.css",
     "build": "npm run clean && npm run extract-css && npm run build:lib",
     "build:dev": "npm run build && NODE_ENV=development npm run sync",
     "prepublishOnly": "npm run build && NODE_ENV=production npm run sync"
