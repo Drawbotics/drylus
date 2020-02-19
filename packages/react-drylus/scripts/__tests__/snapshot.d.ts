@@ -43,6 +43,21 @@ export enum Position {
   RIGHT = 'RIGHT',
 }
 
+export enum Color {
+  BRAND = 'BRAND',
+  RED = 'RED',
+  BLUE = 'BLUE',
+  GREEN = 'GREEN',
+  ORANGE = 'ORANGE',
+  PRIMARY = 'PRIMARY',
+}
+
+export enum Shade {
+  DARK = 'DARK',
+  MEDIUM = 'MEDIUM',
+  LIGHT = 'LIGHT',
+}
+
 // components/EmptyState
 export enum EmptyStateVariation {
   DEFAULT = 'DEFAULT',
