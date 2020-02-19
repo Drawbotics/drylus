@@ -16,7 +16,7 @@ import Icon from './Icon';
 const styles = {
   provider: css`
     position: fixed;
-    z-index: 9999;
+    z-index: 99999;
     bottom: ${sv.defaultMargin};
     left: ${sv.defaultMargin};
     display: inline-flex;
