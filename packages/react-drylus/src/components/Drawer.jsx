@@ -28,7 +28,7 @@ const styles = {
     background: ${sv.darkOverlay};
     display: flex;
     justify-content: flex-end;
-    z-index: 99999;
+    z-index: 9999;
     pointer-events: auto;
     overscroll-behavior: none;
 
