@@ -210,9 +210,9 @@ export declare const Margin: React.FunctionComponent<MarginProps>;
 
 
 // components/AlertsProvider
-function showAlert(args: { text: string; id?: string; category?: Category }): void;
+export function showAlert(args: { text: string; id?: string; category?: Category }): void;
 
-function hideAlert(args: { id: string }): void;
+export function hideAlert(args: { id: string }): void;
 
 export function useAlert(): { showAlert: typeof showAlert; hideAlert: typeof hideAlert };
 
