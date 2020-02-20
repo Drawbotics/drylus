@@ -49,5 +49,4 @@ function generateCustomDefinitions() {
 
 module.exports = {
   generateCustomDefinitions,
-  customAdditionalDefinitions,
 };

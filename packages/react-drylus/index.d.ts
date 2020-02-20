@@ -1556,21 +1556,3 @@ export interface ListTileProps {
 }
 
 export declare const ListTile: React.FunctionComponent<ListTileProps>;
-
-
-// components/AlertsProvider
-function showAlert(args: { text: string; id?: string; category?: Category }): void;
-
-function hideAlert(args: { id: string }): void;
-
-export function useAlert(): { showAlert: typeof showAlert; hideAlert: typeof hideAlert };
-
-// components/Text - Date/Price formatting
-export function formatDate(args: { date: Date, options?: any, locale?: string }): string;
-
-interface Price {
-  value: number;
-  currency: string;
-}
-
-export function formatPrice(args: { price: Price, locale?: string, options?: any }): string;
