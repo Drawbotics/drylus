@@ -4,6 +4,7 @@ const modal = () => {
   if (!outlet) {
     const outletElement = document.createElement('div');
     outletElement.setAttribute('id', 'vanilla-modals-outlet');
+    outletElement.setAttribute('class', 'Drylus-ThemeProvider__root');
     document.body.appendChild(outletElement);
     outlet = outletElement;
   }
