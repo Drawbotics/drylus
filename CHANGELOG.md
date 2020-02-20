@@ -1,3 +1,23 @@
+# v6.0.1 (Thu Feb 20 2020)
+
+#### 🐛 Bug fix - Patch
+
+- fix vanilla modal [#113](https://github.com/Drawbotics/drylus/pull/113) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Fix/missing types [#111](https://github.com/Drawbotics/drylus/pull/111) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Fix/alerts visibility [#112](https://github.com/Drawbotics/drylus/pull/112) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- add PR template  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.0.0 (Tue Feb 11 2020)
 
 #### 💥 Breaking - Major release
