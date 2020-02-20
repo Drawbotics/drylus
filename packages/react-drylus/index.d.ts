@@ -43,6 +43,21 @@ export enum Position {
   RIGHT = 'RIGHT',
 }
 
+export enum Color {
+  BRAND = 'BRAND',
+  RED = 'RED',
+  BLUE = 'BLUE',
+  GREEN = 'GREEN',
+  ORANGE = 'ORANGE',
+  PRIMARY = 'PRIMARY',
+}
+
+export enum Shade {
+  DARK = 'DARK',
+  MEDIUM = 'MEDIUM',
+  LIGHT = 'LIGHT',
+}
+
 // components/EmptyState
 export enum EmptyStateVariation {
   DEFAULT = 'DEFAULT',
@@ -194,11 +209,22 @@ export interface MarginProps {
 export declare const Margin: React.FunctionComponent<MarginProps>;
 
 
-function showAlert(args: { text: string; id?: string; category?: Category }): void;
+// components/AlertsProvider
+export function showAlert(args: { text: string; id?: string; category?: Category }): void;
 
-function hideAlert(args: { id: string }): void;
+export function hideAlert(args: { id: string }): void;
 
 export function useAlert(): { showAlert: typeof showAlert; hideAlert: typeof hideAlert };
+
+// components/Text - Date/Price formatting
+export function formatDate(args: { date: Date, options?: any, locale?: string }): string;
+
+interface Price {
+  value: number;
+  currency: string;
+}
+
+export function formatPrice(args: { price: Price, locale?: string, options?: any }): string;
 
 export interface ContentProps {
   children: React.ReactNode;
@@ -1530,10 +1556,3 @@ export interface ListTileProps {
 }
 
 export declare const ListTile: React.FunctionComponent<ListTileProps>;
-
-
-function showAlert(args: { text: string; id?: string; category?: Category }): void;
-
-function hideAlert(args: { id: string }): void;
-
-export function useAlert(): { showAlert: typeof showAlert; hideAlert: typeof hideAlert };

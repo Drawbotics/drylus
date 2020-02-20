@@ -62,4 +62,16 @@ And will render the price/value depending on the currency and current locale.
   <Text locale="en">The number {{ value: 10000 }} is just a number</Text>
 </Playground>
 
+The internal function used for this is exposed as `formatPrice`.
+```jsx
+import { formatPrice } from '@drawbotics/react-drylus';
+
+// Usage
+formatPrice({
+  price,        // { currency: string, value: number }
+  options,      // toLocaleString options
+  locale,       // To override the automatically recognised locale
+});
+```
+
 

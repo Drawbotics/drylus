@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const { generate } = require('./generate');
-const { generateCustomDefinitions, customAdditionalDefinitions } = require('./custom-definitions');
+const { generateCustomDefinitions } = require('./custom-definitions');
 
 const folders = [
   path.resolve(__dirname, '../src/base'),
@@ -82,8 +82,6 @@ function generateTypes(targetFile) {
       }
     }
   }
-
-  types.push(customAdditionalDefinitions);
 
   const text = types.join('\n');
 
