@@ -22,7 +22,7 @@ const styles = {
     width: 100vw;
     background: ${sv.darkOverlay};
     display: flex;
-    z-index: 99999;
+    z-index: 9999;
     pointer-events: auto;
     overscroll-behavior: none;
   `,
