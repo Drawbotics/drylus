@@ -126,15 +126,22 @@ const Tooltip = ({ responsive, ...rest }) => {
     };
 
     if (childrenRef.current != null) {
-      childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
-      childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
+      if (childrenRef.current.disabled) {
+        childrenRef.current.addEventListener('pointerenter', handleMouseEnter);
+        childrenRef.current.addEventListener('pointerleave', handleMouseLeave);
+      } else {
+        childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
+        childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
+      }
 
       window.addEventListener('scroll', handleMouseLeave, true);
     }
 
     return () => {
       childrenRef.current?.removeEventListener('mouseenter', handleMouseEnter);
+      childrenRef.current?.removeEventListener('pointerenter', handleMouseEnter);
       childrenRef.current?.removeEventListener('mouseleave', handleMouseLeave);
+      childrenRef.current?.removeEventListener('pointerleave', handleMouseLeave);
 
       window.removeEventListener('scroll', handleMouseLeave);
     };

@@ -11,6 +11,7 @@ import {
   Icon,
   ListTile,
   Text,
+  Color,
 } from '@drawbotics/react-drylus';
 import sv from '@drawbotics/drylus-style-vars';
 
@@ -38,12 +39,12 @@ __Example__
         content={
           <div style={{ textAlign: 'left' }}>
             <Margin size={{ bottom: Size.EXTRA_SMALL }}>
-              <ListTile leading={<Icon name="alert-triangle" category={Category.DANGER} />} title={<Text inversed size={Size.SMALL}>I'm custom content</Text>} />
+              <ListTile leading={<Icon name="alert-triangle" color={Color.RED} />} title={<Text inversed size={Size.SMALL}>I'm custom content</Text>} />
             </Margin>
-            <ListTile leading={<Icon name="check-circle" category={Category.SUCCESS} />} title={<Text inversed size={Size.SMALL}>So am I</Text>} />
+            <ListTile leading={<Icon name="check-circle" color={Color.GREEN} />} title={<Text inversed size={Size.SMALL}>So am I</Text>} />
           </div>
         }>
-        <Dot category={Category.SUCCESS} />
+        <Dot color={Color.GREEN} />
       </Tooltip>
     </FlexItem>
   </Flex>
