@@ -7,6 +7,7 @@ import Button from '../components/Button';
 import Icon from '../components/Icon';
 import Spinner from '../components/Spinner';
 import Size from '../enums/Size';
+import { CustomPropTypes } from '../utils';
 import { useResponsiveProps } from '../utils/hooks';
 import { InputWithRef } from './Input';
 
@@ -59,8 +60,10 @@ const SearchInput = ({ responsive, ...rest }) => {
     isLoading,
     name,
     style,
+    valueKey,
+    labelKey,
+    onClickResult,
   } = useResponsiveProps(rest, responsive);
-
   const [isFocused, setFocused] = useState(false);
   const inputRef = useRef(null);
 
@@ -95,8 +98,11 @@ const SearchInput = ({ responsive, ...rest }) => {
                 <div className={cx(styles.item, styles.noResult)}>{noResultLabel}</div>;
               } else {
                 options.map((option) => (
-                  <div key={option} className={styles.item} onClick={() => onChange(option)}>
-                    {option}
+                  <div
+                    key={option[valueKey]}
+                    className={styles.item}
+                    onClick={() => onClickResult(option[valueKey])}>
+                    {option[labelKey]}
                   </div>
                 ));
               }
@@ -109,8 +115,8 @@ const SearchInput = ({ responsive, ...rest }) => {
 };
 
 SearchInput.propTypes = {
-  /** The list of items displayed under the input */
-  options: PropTypes.arrayOf(PropTypes.string),
+  /** The list of items displayed under the input ('value, key' pairs) its completely up to you to generate this list */
+  options: CustomPropTypes.options,
 
   /** The text passed to the input */
   value: PropTypes.string.isRequired,
@@ -120,6 +126,9 @@ SearchInput.propTypes = {
 
   /** Triggered when the text is changed, and when the search button is pressed */
   onChange: PropTypes.func.isRequired,
+
+  /** Triggered when one of the results is clicked, returns the corresponding option value */
+  onClickResult: PropTypes.func,
 
   /** Displayed when no results match the search */
   noResultLabel: PropTypes.string,
@@ -141,10 +150,18 @@ SearchInput.propTypes = {
     XL: PropTypes.object,
     HUGE: PropTypes.object,
   }),
+
+  /** Used to pick each value in the options array */
+  valueKey: PropTypes.string,
+
+  /** Used to pick each label in the options array */
+  labelKey: PropTypes.string,
 };
 
 SearchInput.defaultProps = {
   noResultLabel: 'No results',
+  valueKey: 'value',
+  labelKey: 'label',
 };
 
 export default SearchInput;
