@@ -1,4 +1,14 @@
 # PR Template
+You can delete this markup if it doesn't apply to this PR
+
+### How to choose a release version?
+From [semver](https://devhints.io/semver)
+_Given a version number MAJOR.MINOR.PATCH:_
+| Version | Changes |
+| ------------- | ---------- |
+| MAJOR |	incompatible API changes |
+| MINOR |	add functionality (backwards-compatible) |
+| PATCH |	bug fixes (backwards-compatible) |
 
 If this PR is **not** for a _major_ version change / does not introduce breaking changes, you can discard this template.
 You can remove any unapplicable section if it doesn't apply to your introduced changes.
