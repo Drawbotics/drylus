@@ -1,7 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import Button from '../components/Button';
 import Icon from '../components/Icon';
@@ -65,11 +65,28 @@ const SearchInput = ({ responsive, ...rest }) => {
     onClickResult,
   } = useResponsiveProps(rest, responsive);
   const [isFocused, setFocused] = useState(false);
+  const [canBlur, setCanBlur] = useState(true);
   const inputRef = useRef(null);
+  const rootRef = useRef();
 
   const shouldDisplayResults = value !== '' && isFocused;
+
+  const handleDocumentClick = (e) =>
+    !rootRef.current.contains(e.target) ? setFocused(false) : null;
+
+  useEffect(() => {
+    rootRef.current.addEventListener('mousedown', () => setCanBlur(false));
+    rootRef.current.addEventListener('mouseup', () => setCanBlur(true));
+    document.addEventListener('mousedown', handleDocumentClick);
+
+    return () => {
+      rootRef.current.removeEventListener('mousedown', () => setCanBlur(false));
+      rootRef.current.removeEventListener('mouseup', () => setCanBlur(true));
+      document.removeEventListener('mousedown', handleDocumentClick);
+    };
+  });
   return (
-    <div style={style} className={styles.root}>
+    <div style={style} className={styles.root} ref={rootRef}>
       <InputWithRef
         prefix={
           <Button
@@ -82,7 +99,7 @@ const SearchInput = ({ responsive, ...rest }) => {
         name={name}
         ref={inputRef}
         onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
+        onBlur={() => (canBlur ? setFocused(false) : null)}
         placeholder={placeholder}
       />
       {do {
@@ -101,7 +118,10 @@ const SearchInput = ({ responsive, ...rest }) => {
                   <div
                     key={option[valueKey]}
                     className={styles.item}
-                    onClick={() => onClickResult(option[valueKey])}>
+                    onClick={() => {
+                      onClickResult(option[valueKey]);
+                      setFocused(false);
+                    }}>
                     {option[labelKey]}
                   </div>
                 ));
