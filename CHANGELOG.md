@@ -1,3 +1,18 @@
+# v6.1.0 (Wed Feb 26 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature/expose CSSTransition callbacks [#117](https://github.com/Drawbotics/drylus/pull/117) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/improve search input api [#116](https://github.com/Drawbotics/drylus/pull/116) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.0.3 (Wed Feb 26 2020)
 
 #### 🐛 Bug fix - Patch
