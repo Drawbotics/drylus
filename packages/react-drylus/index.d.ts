@@ -1361,15 +1361,18 @@ declare interface Responsive {
 }
 
 export interface SearchInputProps {
-  options?: string[];
+  options?: any;
   value: string;
   name?: string;
   onChange: OnChangeCallback;
+  onClickResult?(...args: Array<any>): void;
   noResultLabel?: string;
   placeholder?: string;
   isLoading?: boolean;
   style?: React.CSSProperties;
   responsive?: Responsive;
+  valueKey?: string;
+  labelKey?: string;
 }
 
 export declare const SearchInput: React.FunctionComponent<SearchInputProps>;

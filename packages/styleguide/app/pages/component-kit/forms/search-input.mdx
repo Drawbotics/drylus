@@ -1,7 +1,19 @@
-import { SearchInput } from '@drawbotics/react-drylus';
+import {
+  SearchInput,
+  Margin,
+  Title,
+  Size,
+  Paragraph,
+  Text,
+  Flex,
+  FlexItem,
+  FlexAlign,
+} from '@drawbotics/react-drylus';
+import sv from '@drawbotics/drylus-style-vars';
+import { useState, useEffect } from 'react';
 
-import Playground from '~/components/Playground';
-import { ControlledField } from '../utils';
+import Playground, { Preview, CodeBox } from '~/components/Playground';
+import { ControlledField, useDebounce } from '../utils';
 
 
 # Search Input
@@ -15,10 +27,10 @@ __Example__
 <Playground component={SearchInput}>
   <div style={{ maxWidth: 300, height: 300 }}>
     <ControlledField component={
-      <SearchInput value="" placeholder="Search..." onChange={x=>x} options={[
-        'Result 1',
-        'Result 2',
-        'Result 3',
+      <SearchInput onClickResult={() => {}} value="" placeholder="Search..." onChange={x=>x} options={[
+        { label: 'Result 1', value: 1 },
+        { label: 'Result 2', value: 2 },
+        { label: 'Result 3', value: 3 },
       ]} />
     } />
   </div>
@@ -34,3 +46,142 @@ If there are no results, the search displays a `noResultLabel` which can be modi
     } />
   </div>
 </Playground>
+
+## Example usage
+Here is an example usage with an external service. The `onChange` functions triggers a new search, from which we get new matching results which are displayed in the dropdown. Selecting a result displays it on the page.
+
+export function searchCharacters(search) {
+  const apiKey = '285962f014e9da78f66a9b1e41a82dcf';
+  const queryString = `apikey=${apiKey}&titleStartsWith=${search}`;
+  return fetch(`https://gateway.marvel.com/v1/public/comics?${queryString}&limit=10`, {
+    method: 'GET',
+  })
+  .then(r => r.json())
+  .then(r => r.data.results)
+  .catch(error => {
+    console.error(error);
+    return [];
+  });
+}
+
+export const Example = () => {
+  const [comic, setComic] = useState();
+  const [keywords, setKeywords] = useState('');
+  const [results, setResults] = useState();
+  const [isSearching, setIsSearching] = useState(false);
+  const debouncedSearchTerm = useDebounce(keywords, 500);
+  useEffect(() => {
+    if (debouncedSearchTerm !== '') {
+      setIsSearching(true);
+      searchCharacters(debouncedSearchTerm).then((results) => {
+        setIsSearching(false);
+        setResults(results);
+      });
+    } else {
+      setResults(null);
+    }
+  }, [debouncedSearchTerm]);
+  return (
+    <div>
+      <Margin size={{ vertical: Size.DEFAULT }}>
+        <SearchInput
+          style={{ maxWidth: 300 }}
+          isLoading={isSearching}
+          placeholder="Search for marvel comic..."
+          value={keywords}
+          onChange={setKeywords}
+          options={results?.map((res) => ({
+            value: res.id,
+            label: res.title,
+          }))}
+          onClickResult={(id) => {
+            setComic(results.find((res) => res.id === id))
+          }} />
+      </Margin>
+      <Text>
+        Selected comic:
+      </Text>
+      <div>
+        {comic != null ? (
+          <Flex align={FlexAlign.START}>
+            <FlexItem>
+              <Margin>
+                <img style={{ maxWidth: 200, height: 200 }} src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} />
+              </Margin>
+            </FlexItem>
+            <FlexItem flex>
+              <Title size={4}>
+                {comic.title}
+              </Title>
+              <Paragraph style={{ color: sv.secondary }}>{comic.description ?? 'Description not available'}</Paragraph>
+            </FlexItem>
+          </Flex>
+        ) : null}
+      </div>
+    </div>
+  );
+};
+
+<Preview>
+  <Example />
+</Preview>
+
+<CodeBox type="mdx">
+{`
+  const [comic, setComic] = useState();
+  const [keywords, setKeywords] = useState('');
+  const [results, setResults] = useState();
+  const [isSearching, setIsSearching] = useState(false);
+  const debouncedSearchTerm = useDebounce(keywords, 500);
+  useEffect(() => {
+    if (debouncedSearchTerm !== '') {
+      setIsSearching(true);
+      searchCharacters(debouncedSearchTerm).then((results) => {
+        setIsSearching(false);
+        setResults(results);
+      });
+    } else {
+      setResults(null);
+    }
+  }, [debouncedSearchTerm]);
+  return (
+    <div>
+      <Margin size={{ vertical: Size.DEFAULT }}>
+        <SearchInput
+          style={{ maxWidth: 300 }}
+          isLoading={isSearching}
+          placeholder="Search for marvel comic..."
+          value={keywords}
+          onChange={setKeywords}
+          options={results?.map((res) => ({
+            value: res.id,
+            label: res.title,
+          }))}
+          onClickResult={(id) => {
+            setComic(results.find((res) => res.id === id))
+          }} />
+      </Margin>
+      <Text>
+        Selected comic:
+      </Text>
+      <div style={{ height: 300 }}>
+        {comic != null ? (
+          <Flex align={FlexAlign.START}>
+            <FlexItem>
+              <Margin>
+                <img style={{ maxWidth: 200 }} src={comic.thumbnail} />
+              </Margin>
+            </FlexItem>
+            <FlexItem flex>
+              <Title size={4}>
+                {comic.title}
+              </Title>
+              <Paragraph style={{ color: sv.secondary }}>{comic.description ?? 'Description not available'}</Paragraph>
+            </FlexItem>
+          </Flex>
+        ) : null}
+      </div>
+    </div>
+  );
+`}
+</CodeBox>

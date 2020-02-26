@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export const ControlledField = ({ component: Component, style, initialValue = '' }) => {
   const [value, setValue] = useState(initialValue);
@@ -30,3 +30,18 @@ export const ControlledMultiField = ({ component: Component, style }) => {
     </div>
   );
 };
+
+export function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value]);
+
+  return debouncedValue;
+}

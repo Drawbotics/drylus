@@ -14,7 +14,7 @@ const folders = [
 function generateTypes(targetFile) {
   const skippedComponents = ['Filter', 'Padding', 'Margin', 'Icon'];
 
-  const onClickExceptions = ['onClickHeader', 'onClickRow'];
+  const onClickExceptions = ['onClickHeader', 'onClickRow', 'onClickResult'];
 
   let types = [generateCustomDefinitions()];
 
