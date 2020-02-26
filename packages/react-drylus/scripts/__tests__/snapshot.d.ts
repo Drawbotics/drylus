@@ -1365,7 +1365,7 @@ export interface SearchInputProps {
   value: string;
   name?: string;
   onChange: OnChangeCallback;
-  onClickResult?: OnClickCallback;
+  onClickResult?(...args: Array<any>): void;
   noResultLabel?: string;
   placeholder?: string;
   isLoading?: boolean;
