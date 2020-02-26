@@ -1,3 +1,20 @@
+# v6.0.3 (Wed Feb 26 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Fix/change Table onClickRow type to generic function callback [#115](https://github.com/Drawbotics/drylus/pull/115) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- Update pull_request_template.md  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.0.2 (Tue Feb 25 2020)
 
 #### 🐛 Bug fix - Patch

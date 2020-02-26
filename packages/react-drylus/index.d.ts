@@ -929,7 +929,7 @@ export interface TableProps {
   highlighted?: boolean;
   clickable?: boolean;
   isLoading?: boolean;
-  onClickRow?: OnClickCallback;
+  onClickRow?(...args: Array<any>): void;
   activeRow?: any;
   emptyContent?: React.ReactNode;
   style?: object;
