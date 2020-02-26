@@ -194,10 +194,17 @@ const BaseModal = React.forwardRef(
 BaseModal.displayName = 'BaseModal';
 
 const Modal = ({ responsive, ...rest }) => {
-  const { children, footer, visible, onClickClose, size, raw, title, style } = useResponsiveProps(
-    rest,
-    responsive,
-  );
+  const {
+    children,
+    footer,
+    visible,
+    onClickClose,
+    size,
+    raw,
+    title,
+    style,
+    cssTransitionCallbacks,
+  } = useResponsiveProps(rest, responsive);
 
   const [outletElement, setOutletElement] = useState(null);
   const [overflowing, setOverflowing] = useState(false);
@@ -284,6 +291,7 @@ const Modal = ({ responsive, ...rest }) => {
   return ReactDOM.createPortal(
     <div className={themeStyles.root}>
       <CSSTransition
+        {...cssTransitionCallbacks}
         in={visible}
         timeout={300}
         mountOnEnter
@@ -359,11 +367,22 @@ Modal.propTypes = {
     XL: PropTypes.object,
     HUGE: PropTypes.object,
   }),
+
+  /** Passed to the CSSTransition component to fire events at different points of the animation. See reactcommunity.org/react-transition-group docs */
+  cssTransitionCallbacks: PropTypes.shape({
+    onEnter: PropTypes.func,
+    onEntering: PropTypes.func,
+    onEntered: PropTypes.func,
+    onExit: PropTypes.func,
+    onExiting: PropTypes.func,
+    onExited: PropTypes.func,
+  }),
 };
 
 Modal.defaultProps = {
   size: Size.DEFAULT,
   raw: false,
+  cssTransitionCallbacks: {},
 };
 
 export default Modal;

@@ -214,6 +214,7 @@ const Drawer = ({ responsive, ...rest }) => {
     raw,
     title,
     side,
+    cssTransitionCallbacks,
   } = useResponsiveProps(rest, responsive);
 
   const [outletElement, setOutletElement] = useState(null);
@@ -280,6 +281,7 @@ const Drawer = ({ responsive, ...rest }) => {
     return ReactDOM.createPortal(
       <div className={themeStyles.root}>
         <CSSTransition
+          {...cssTransitionCallbacks}
           in={visible}
           timeout={300}
           mountOnEnter
@@ -311,6 +313,7 @@ const Drawer = ({ responsive, ...rest }) => {
 
   return (
     <CSSTransition
+      {...cssTransitionCallbacks}
       in={visible}
       timeout={300}
       mountOnEnter
@@ -373,6 +376,16 @@ Drawer.propTypes = {
 
   /** Only applies when the drawer is used with "asOverlay" */
   side: PropTypes.oneOf([Position.LEFT, Position.RIGHT]),
+
+  /** Passed to the CSSTransition component to fire events at different points of the animation. See reactcommunity.org/react-transition-group docs */
+  cssTransitionCallbacks: PropTypes.shape({
+    onEnter: PropTypes.func,
+    onEntering: PropTypes.func,
+    onEntered: PropTypes.func,
+    onExit: PropTypes.func,
+    onExiting: PropTypes.func,
+    onExited: PropTypes.func,
+  }),
 };
 
 Drawer.defaultProps = {
@@ -382,6 +395,7 @@ Drawer.defaultProps = {
   onClickClose: (x) => x,
   onClickOverlay: (x) => x,
   side: Position.RIGHT,
+  cssTransitionCallbacks: {},
 };
 
 export default Drawer;

@@ -500,6 +500,15 @@ declare interface Responsive {
   HUGE?: object;
 }
 
+declare interface CssTransitionCallbacks {
+  onEnter?: any;
+  onEntering?: any;
+  onEntered?: any;
+  onExit?: any;
+  onExiting?: any;
+  onExited?: any;
+}
+
 export interface DrawerProps {
   children: React.ReactNode;
   footer?: React.ReactNode;
@@ -513,6 +522,7 @@ export interface DrawerProps {
   style?: React.CSSProperties;
   responsive?: Responsive;
   side?: Position.LEFT | Position.RIGHT;
+  cssTransitionCallbacks?: CssTransitionCallbacks;
 }
 
 export declare const Drawer: React.FunctionComponent<DrawerProps>;
@@ -676,6 +686,15 @@ declare interface Responsive {
   HUGE?: object;
 }
 
+declare interface CssTransitionCallbacks {
+  onEnter?: any;
+  onEntering?: any;
+  onEntered?: any;
+  onExit?: any;
+  onExiting?: any;
+  onExited?: any;
+}
+
 export interface ModalProps {
   children: React.ReactNode;
   footer?: React.ReactNode;
@@ -686,6 +705,7 @@ export interface ModalProps {
   title?: string;
   style?: React.CSSProperties;
   responsive?: Responsive;
+  cssTransitionCallbacks?: CssTransitionCallbacks;
 }
 
 export declare const Modal: React.FunctionComponent<ModalProps>;
