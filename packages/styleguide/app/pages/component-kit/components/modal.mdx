@@ -65,7 +65,13 @@ Basic modal example:
 
 <Playground component={Modal}>
   <ModalController component={
-    <Modal visible={false}>
+    <Modal
+      cssTransitionCallbacks={{
+        onEntered: () => console.log('entered'),
+        onEnter: () => console.log('going to enter'),
+        onExited: () => console.log('exited'),
+      }}
+      visible={false}>
       <Title size={4}>Im some content</Title>
       <div style={{ height: 500, background: 'linear-gradient(red, blue)' }} />
     </Modal>
@@ -77,18 +83,21 @@ As you can see when the window height is smaller than the content, the modal is 
 #### Complex example
 <Playground>
   <ModalController component={
-    <Modal visible={false} title="Modal title" footer={
-      <Flex justify={FlexJustify.END}>
-        <FlexItem>
-          <Margin size={{ right: Size.EXTRA_SMALL }}>
-            <Button tier={Tier.TERTIARY}>Secondary action</Button>
-          </Margin>
-        </FlexItem>
-        <FlexItem>
-          <Button category={Category.BRAND}>Main action</Button>
-        </FlexItem>
-      </Flex>
-    }>
+    <Modal
+      visible={false}
+      title="Modal title"
+      footer={
+        <Flex justify={FlexJustify.END}>
+          <FlexItem>
+            <Margin size={{ right: Size.EXTRA_SMALL }}>
+              <Button tier={Tier.TERTIARY}>Secondary action</Button>
+            </Margin>
+          </FlexItem>
+          <FlexItem>
+            <Button category={Category.BRAND}>Main action</Button>
+          </FlexItem>
+        </Flex>
+      }>
       <Paragraph>Im some content</Paragraph>
       <div style={{ height: 500, background: 'linear-gradient(red, blue)' }} />
     </Modal>
