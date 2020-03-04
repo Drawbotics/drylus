@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./lib",
+    "incremental": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "strict": true,
+    "baseUrl": "./",
+    
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": [
+    "./src"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/__tests__/",
+    "./lib"
+  ]
+}

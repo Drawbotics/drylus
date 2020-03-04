@@ -8,10 +8,10 @@
   "types": "index.d.ts",
   "scripts": {
     "clean": "rimraf lib/",
-    "build:commonjs": "babel --ignore '**/__tests__/' --root-mode upward src/ --out-dir lib/",
+    "build:commonjs": "tsc",
     "watch": "npm run clean && NODE_ENV=development npm run build:commonjs -- --watch",
     "build:types": "node scripts/build-types.js",
-    "build": "npm run clean && NODE_ENV=production npm run build:commonjs && npm run build:types",
+    "build": "npm run clean && NODE_ENV=production npm run build:commonjs",
     "test": "NODE_ICU_DATA=../../node_modules/full-icu jest",
     "test:watch": "NODE_ICU_DATA=../../node_modules/full-icu jest --watchAll",
     "prepublishOnly": "npm run build"
