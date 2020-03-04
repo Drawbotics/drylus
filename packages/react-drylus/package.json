@@ -5,6 +5,7 @@
   "author": "nicmosc <nmoscholios@gmail.com>",
   "license": "ISC",
   "main": "index.js",
+  "typings": "./lib/index.d.ts",
   "scripts": {
     "clean": "rimraf lib/",
     "build:commonjs": "tsc",
