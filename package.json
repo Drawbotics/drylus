@@ -37,7 +37,8 @@
   },
   "lint-staged": {
     "linters": {
-      "!(bundle*).{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0"
+      "!(bundle*).{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0",
+      "!(bundle*).{ts,tsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0 --config .eslintrc.ts.js"
     }
   },
   "author": "nicmosc <nick@drawbotics.com>",
@@ -67,6 +68,8 @@
     "@mdx-js/react": "^1.0.0-rc.5",
     "@types/lodash": "^4.14.149",
     "@types/react": "^16.9.23",
+    "@typescript-eslint/eslint-plugin": "^2.22.0",
+    "@typescript-eslint/parser": "^2.22.0",
     "@typescript-eslint/typescript-estree": "^2.19.0",
     "auto": "^7.6.2",
     "babel-eslint": "^10.0.1",
