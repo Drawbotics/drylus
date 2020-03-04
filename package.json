@@ -28,7 +28,8 @@
     "lint": "eslint --ext js,jsx --format node_modules/eslint-formatter-pretty packages/",
     "build-libs": "npm run build:vars && npm run build:icons && npm run build:extract-emotion",
     "test": "npm run build-libs && lerna run test --stream",
-    "release": "./release.sh"
+    "release": "./release.sh",
+    "pre-release": "./pre-release.sh"
   },
   "husky": {
     "hooks": {
