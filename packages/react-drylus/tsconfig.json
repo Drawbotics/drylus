@@ -14,16 +14,7 @@
     "noUnusedParameters": true,
     "strict": true,
     "baseUrl": "./",
-    
     "declaration": true,
     "declarationMap": true
-  },
-  "include": [
-    "./src"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/__tests__/",
-    "./lib"
-  ]
+  }
 }
