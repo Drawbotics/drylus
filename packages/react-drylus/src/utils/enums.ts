@@ -2,11 +2,13 @@ import camelCase from 'lodash/camelCase';
 
 import { Category, Color, Shade, Tier } from '../enums';
 
-export function getEnumAsClass(enumVal) {
-  return camelCase(enumVal?.description?.toLowerCase());
+type Enum = Category | Color | Shade | Tier;
+
+export function getEnumAsClass<T extends Record<string, string>>(enumVal: Enum): keyof T {
+  return camelCase(enumVal?.toLowerCase());
 }
 
-export function colorEnumToCategory(enumVal) {
+export function colorEnumToCategory(enumVal: Color): Category | Color {
   switch (enumVal) {
     case Color.RED:
       return Category.DANGER;
@@ -20,7 +22,7 @@ export function colorEnumToCategory(enumVal) {
   return enumVal;
 }
 
-export function categoryEnumToColor(enumVal) {
+export function categoryEnumToColor(enumVal: Category): Color | Category {
   switch (enumVal) {
     case Category.DANGER:
       return Color.RED;
@@ -34,7 +36,7 @@ export function categoryEnumToColor(enumVal) {
   return enumVal;
 }
 
-export function shadeEnumToTier(enumVal) {
+export function shadeEnumToTier(enumVal: Shade): Tier | Shade {
   switch (enumVal) {
     case Shade.DARK:
       return Tier.PRIMARY;
@@ -46,7 +48,7 @@ export function shadeEnumToTier(enumVal) {
   return enumVal;
 }
 
-export function getIconForCategory(category) {
+export function getIconForCategory(category: Category): string {
   switch (category) {
     case Category.DANGER:
       return 'alert-circle';

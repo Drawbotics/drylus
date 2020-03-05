@@ -1,24 +1,25 @@
 import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
-import { DrylusProvider, Layout, Page, Position } from '@drawbotics/react-drylus';
-import { useScreenSize } from '@drawbotics/use-screen-size';
+// import { DrylusProvider, Layout, Page, Position } from '@drawbotics/react-drylus';
+import { Dot } from '@drawbotics/react-drylus';
+// import { useScreenSize } from '@drawbotics/use-screen-size';
 import drylus from '@drawbotics/vanilla-drylus/dist/drylus.js';
 import React from 'react';
 import { hot } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 
-import MobileSidebar from './components/MobileSidebar';
-import Sidebar from './components/Sidebar';
-import Root from './routes/Root';
+// import MobileSidebar from './components/MobileSidebar';
+// import Sidebar from './components/Sidebar';
+// import Root from './routes/Root';
 
 window._drylus = drylus;
 
 const App = () => {
-  const { screenSize, ScreenSizes } = useScreenSize();
+  // const { screenSize, ScreenSizes } = useScreenSize();
 
   return (
     <BrowserRouter basename="drylus">
-      <DrylusProvider>
+      {/* <DrylusProvider>
         <Page>
           <Layout
             bar={<Sidebar />}
@@ -40,7 +41,8 @@ const App = () => {
             </div>
           </Layout>
         </Page>
-      </DrylusProvider>
+      </DrylusProvider> */}
+      <Dot />
     </BrowserRouter>
   );
 };
