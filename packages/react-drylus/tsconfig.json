@@ -18,5 +18,8 @@
     "declarationMap": true,
     "inlineSourceMap": true,
     "inlineSources": true
-  }
+  },
+  "include": [
+    "./src"
+  ]
 }
