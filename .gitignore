@@ -5,6 +5,7 @@ output
 dist
 .env
 docs
+tmp
 
 .DS_Store
 **/.DS_Store

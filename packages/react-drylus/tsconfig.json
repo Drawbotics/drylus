@@ -1,20 +1,31 @@
 {
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "preserve",
     "moduleResolution": "node",
-    "module": "commonjs",
+    "module": "esnext",
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2017",
+    "target": "esnext",
     "sourceMap": true,
-    "outDir": "./lib",
+    "outDir": "./tmp/",
     "incremental": true,
     "noUnusedLocals": false,
     "noUnusedParameters": true,
     "strict": true,
     "baseUrl": "./",
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "plugins": [
+      {
+        "transform": "emotion-ts-plugin",
+        "import": "createEmotionPlugin",
+        "type": "program",
+        "after": false,
+        "sourceMap": true,
+        "autoLabel": true,
+        "labelFormat": "[filename]__[local]"
+      }
+    ]
   }
 }
