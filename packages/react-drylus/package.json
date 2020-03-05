@@ -4,7 +4,7 @@
   "description": "React components for the Drawbotics' ecosystem",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "license": "ISC",
-  "main": "./lib/bundle.js",
+  "main": "index.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
     "clean": "rimraf lib/ tmp/",
