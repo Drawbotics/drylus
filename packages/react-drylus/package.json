@@ -8,7 +8,7 @@
   "typings": "./lib/index.d.ts",
   "scripts": {
     "clean": "rimraf lib/ tmp/",
-    "build:bundle": "tsc && babel --copy-files --ignore '**/__tests__/' --root-mode upward tmp/ --out-dir lib/",
+    "build:bundle": "tsc && babel --source-maps inline --copy-files --ignore '**/__tests__/' --root-mode upward tmp/ --out-dir lib/",
     "watch": "npm run clean && NODE_ENV=development npm run build:bundle",
     "build": "npm run clean && NODE_ENV=production npm run build:bundle",
     "build:types": "node scripts/build-types.js",

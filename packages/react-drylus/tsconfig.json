@@ -7,7 +7,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "esnext",
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "./tmp/",
     "incremental": true,
     "noUnusedLocals": false,
@@ -16,16 +16,7 @@
     "baseUrl": "./",
     "declaration": true,
     "declarationMap": true,
-    "plugins": [
-      {
-        "transform": "emotion-ts-plugin",
-        "import": "createEmotionPlugin",
-        "type": "program",
-        "after": false,
-        "sourceMap": true,
-        "autoLabel": true,
-        "labelFormat": "[filename]__[local]"
-      }
-    ]
+    "inlineSourceMap": true,
+    "inlineSources": true
   }
 }
