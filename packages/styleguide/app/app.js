@@ -1,7 +1,7 @@
 import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
 // import { DrylusProvider, Layout, Page, Position } from '@drawbotics/react-drylus';
-import { Dot } from '@drawbotics/react-drylus';
+import { Category, Dot } from '@drawbotics/react-drylus';
 // import { useScreenSize } from '@drawbotics/use-screen-size';
 import drylus from '@drawbotics/vanilla-drylus/dist/drylus.js';
 import React from 'react';
@@ -42,7 +42,7 @@ const App = () => {
           </Layout>
         </Page>
       </DrylusProvider> */}
-      <Dot />
+      <Dot category={Category.BRAND} />
     </BrowserRouter>
   );
 };
