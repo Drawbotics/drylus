@@ -1,4 +1,4 @@
-export default `
+export const normalize = `
   html {
     box-sizing: border-box;
   }

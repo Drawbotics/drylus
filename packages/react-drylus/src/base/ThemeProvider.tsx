@@ -1,10 +1,9 @@
 import { Global, css as globalCSS } from '@emotion/core';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
-import { globalStyles, root } from '../utils/inject-global-styles';
-import normalize from '../utils/normalize';
+import { Style } from '../types';
+import { globalStyles, normalize, root } from '../utils';
 
 export const styles = {
   global: globalCSS(globalStyles),
@@ -17,7 +16,14 @@ export const styles = {
   `,
 };
 
-const ThemeProvider = ({ children, style }) => {
+interface ThemeProviderProps {
+  children: React.ReactNode;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const ThemeProvider = ({ children, style }: ThemeProviderProps) => {
   return (
     <Fragment>
       <Global styles={[styles.global, styles.normalize]} />
@@ -27,12 +33,3 @@ const ThemeProvider = ({ children, style }) => {
     </Fragment>
   );
 };
-
-ThemeProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
-export default ThemeProvider;

@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 
 export * from './enums';
+export * from './inject-global-styles';
+export * from './normalize';
 
 export const Deprecated = (() => {
   return (props: any, propName: string, componentName: string) => {

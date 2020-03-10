@@ -1,7 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { injectGlobal } from 'emotion';
 
-import normalize from './normalize';
+import { normalize } from './normalize';
 
 export const globalStyles = `
   @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
@@ -31,7 +31,7 @@ export const root = `
   }
 `;
 
-export function injectGlobalStyles() {
+export function injectGlobalStyles(): void {
   injectGlobal(globalStyles);
   injectGlobal(normalize);
   injectGlobal(`
