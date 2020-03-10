@@ -1,8 +1,8 @@
 import camelCase from 'lodash/camelCase';
 
-import { Category, Color, Shade, Size, Tier } from '../enums';
+import { Category, Color, Position, Shade, Size, Tier } from '../enums';
 
-type Enum = Category | Color | Shade | Tier | Size;
+type Enum = Category | Color | Shade | Tier | Size | Position;
 
 export function getEnumAsClass<T extends Record<string, string>>(enumVal?: Enum): keyof T {
   return camelCase(enumVal?.toLowerCase());

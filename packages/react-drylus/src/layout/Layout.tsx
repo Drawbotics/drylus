@@ -1,6 +1,6 @@
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
+import { Responsive, Style } from 'src/types';
 
 import { Position } from '../enums';
 import { getEnumAsClass } from '../utils';
@@ -78,8 +78,31 @@ const styles = {
   `,
 };
 
-const Layout = ({ responsive, ...rest }) => {
-  const { children, position, bar, fixed, barScrollable, style } = useResponsiveProps(
+interface LayoutProps {
+  /** Children can be of any type. You can pass another Layout if needed as well */
+  children: React.ReactNode;
+
+  /** Component that will be displayed in addition to the children */
+  bar: React.ReactNode;
+
+  /** Determines on which side of the layout the bar component will be shown */
+  position: Position;
+
+  /** If true the component will be fixed in place, and the children will scroll independently */
+  fixed?: boolean;
+
+  /** If false the sidebar container is not made scrollable */
+  barScrollable?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive;
+}
+
+export const Layout = ({ responsive, ...rest }: LayoutProps) => {
+  const { children, position, bar, fixed, barScrollable, style } = useResponsiveProps<LayoutProps>(
     rest,
     responsive,
   );
@@ -89,7 +112,7 @@ const Layout = ({ responsive, ...rest }) => {
       style={style}
       data-element="layout"
       className={cx(styles.layout, {
-        [styles[getEnumAsClass(position)]]: position,
+        [styles[getEnumAsClass<typeof styles>(position)]]: position != null,
       })}>
       <div
         className={cx(styles.bar, { [styles.scrollable]: barScrollable })}
@@ -105,39 +128,6 @@ const Layout = ({ responsive, ...rest }) => {
   );
 };
 
-Layout.propTypes = {
-  /** Children can be of any type. You can pass another Layout if needed as well */
-  children: PropTypes.node.isRequired,
-
-  /** Component that will be displayed in addition to the children */
-  bar: PropTypes.node.isRequired,
-
-  /** Determines on which side of the layout the bar component will be shown */
-  position: PropTypes.oneOf([Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM])
-    .isRequired,
-
-  /** If true the component will be fixed in place, and the children will scroll independently */
-  fixed: PropTypes.bool,
-
-  /** If false the sidebar container is not made scrollable */
-  barScrollable: PropTypes.bool,
-
-  /** For custom overrides */
-  style: PropTypes.object,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-};
-
 Layout.defaultProps = {
   barScrollable: true,
 };
-
-export default Layout;

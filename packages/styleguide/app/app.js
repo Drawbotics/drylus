@@ -1,8 +1,7 @@
 import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
-// import { DrylusProvider, Layout, Page, Position } from '@drawbotics/react-drylus';
-import { DrylusProvider, Page } from '@drawbotics/react-drylus';
-// import { useScreenSize } from '@drawbotics/use-screen-size';
+import { DrylusProvider, Layout, Page, Position } from '@drawbotics/react-drylus';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 import drylus from '@drawbotics/vanilla-drylus/dist/drylus.js';
 import React from 'react';
 import { hot } from 'react-hot-loader';
@@ -10,23 +9,26 @@ import { BrowserRouter } from 'react-router-dom';
 
 // import MobileSidebar from './components/MobileSidebar';
 // import Sidebar from './components/Sidebar';
+
 // import Root from './routes/Root';
 
 window._drylus = drylus;
 
 const App = () => {
-  // const { screenSize, ScreenSizes } = useScreenSize();
+  const { screenSize, ScreenSizes } = useScreenSize();
   return (
     <BrowserRouter basename="drylus">
       <DrylusProvider>
         <Page>
-          {/* <Layout
-            bar={<Sidebar />}
+          <Layout
+            // bar={<Sidebar />}
+            bar={<div></div>}
             position={Position.LEFT}
             fixed
             responsive={{
               L: {
-                bar: <MobileSidebar />,
+                // bar: <MobileSidebar />,
+                bar: <div></div>,
                 position: Position.TOP,
                 fixed: false,
               },
@@ -36,9 +38,10 @@ const App = () => {
                 height: '100%',
                 width: screenSize <= ScreenSizes.L ? '100vw' : null,
               }}>
-              <Root />
+              {/* <Root /> */}
+              <div></div>
             </div>
-          </Layout> */}
+          </Layout>
         </Page>
       </DrylusProvider>
     </BrowserRouter>

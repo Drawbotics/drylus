@@ -313,7 +313,7 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
     fullWidth,
     style,
     color,
-  } = useResponsiveProps(rest, responsive);
+  } = useResponsiveProps<ButtonProps>(rest, responsive);
 
   if (!children && trailing && leading) {
     throw new Error('If no children are given, only pass trailing or leading, but not both');
