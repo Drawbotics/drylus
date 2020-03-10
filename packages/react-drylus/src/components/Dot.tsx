@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Category, Color } from '../enums';
-import { categoryEnumToColor, getEnumAsClass } from '../utils';
+import { Deprecated, categoryEnumToColor, getEnumAsClass } from '../utils';
 
 const styles = {
   root: css`
@@ -34,9 +34,18 @@ const styles = {
 };
 
 interface DotProps {
-  category: Category;
-  style: Record<string, any>;
-  color: Color;
+  /**
+   * @deprecated use color instead
+   */
+  category?: Category;
+
+  /**
+   * Used for style overrides
+   * @default {}
+   */
+  style?: Record<string, any>;
+
+  color?: Color;
 }
 
 export const Dot = ({ category, style, color: _color }: DotProps) => {
@@ -51,28 +60,6 @@ export const Dot = ({ category, style, color: _color }: DotProps) => {
   );
 };
 
-// Dot.propTypes = {
-//   /** DEPRECATED */
-//   category: CustomPropTypes.deprecated(
-//     PropTypes.oneOf([
-//       Category.BRAND,
-//       Category.SUCCESS,
-//       Category.INFO,
-//       Category.WARNING,
-//       Category.DANGER,
-//       Category.PRIMARY,
-//     ]),
-//   ),
-
-//   color: PropTypes.oneOf([
-//     Color.BRAND,
-//     Color.RED,
-//     Color.BLUE,
-//     Color.GREEN,
-//     Color.ORANGE,
-//     Color.PRIMARY,
-//   ]),
-
-//   /** Used for style overrides */
-//   style: PropTypes.object,
-// };
+Dot.propTypes = {
+  category: Deprecated,
+};

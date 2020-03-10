@@ -1,7 +1,7 @@
 import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
 // import { DrylusProvider, Layout, Page, Position } from '@drawbotics/react-drylus';
-import { Dot } from '@drawbotics/react-drylus';
+import { Color, Dot } from '@drawbotics/react-drylus';
 // import { useScreenSize } from '@drawbotics/use-screen-size';
 import drylus from '@drawbotics/vanilla-drylus/dist/drylus.js';
 import React from 'react';
@@ -16,7 +16,6 @@ window._drylus = drylus;
 
 const App = () => {
   // const { screenSize, ScreenSizes } = useScreenSize();
-
   return (
     <BrowserRouter basename="drylus">
       {/* <DrylusProvider>
@@ -42,7 +41,7 @@ const App = () => {
           </Layout>
         </Page>
       </DrylusProvider> */}
-      <Dot />
+      <Dot color={Color.BLUE} />
     </BrowserRouter>
   );
 };
