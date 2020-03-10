@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Category, Color } from '../enums';
-import { categoryEnumToColor, getEnumAsClass } from '../utils';
+import { Deprecated, categoryEnumToColor, getEnumAsClass } from '../utils';
 
 const styles = {
   root: css`
@@ -58,4 +58,8 @@ export const Dot = ({ category, style, color: _color }: DotProps) => {
       })}
     />
   );
+};
+
+Dot.propTypes = {
+  category: Deprecated,
 };
