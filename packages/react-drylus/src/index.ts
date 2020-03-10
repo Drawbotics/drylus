@@ -1,4 +1,4 @@
-// export * from './base/index';
+export * from './base';
 // export * from './layout/index';
 export * from './components';
 // export * from './forms/index';

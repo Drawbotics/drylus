@@ -2,7 +2,9 @@ import { useScreenSize } from '@drawbotics/use-screen-size';
 import assign from 'lodash/assign';
 import { useState } from 'react';
 
-function _getPropsForSize(responsive, sizes) {
+import { Responsive } from '../types';
+
+function _getPropsForSize(responsive: Responsive) {
   const { screenSize, ScreenSizes } = useScreenSize();
 
   if (screenSize <= ScreenSizes.XS && responsive.XS != null) {
@@ -23,6 +25,18 @@ function _getPropsForSize(responsive, sizes) {
   }
 }
 
+export function useResponsiveProps<T>(original: T, responsive?: Responsive) {
+  if (!responsive) {
+    return original;
+  }
+
+  const responsiveProps = _getPropsForSize(responsive);
+
+  const props = assign({}, original, responsiveProps);
+
+  return props;
+}
+
 // We use this instead of useState to get correct object equality
 // otherwise the hook will cause a re-render all the time when using
 // the rect object directly
@@ -33,7 +47,17 @@ export function useRect() {
   const [width, setWidth] = useState(0);
 
   const rect = { top, left, height, width };
-  const setRect = ({ top, left, height, width }) => {
+  const setRect = ({
+    top,
+    left,
+    height,
+    width,
+  }: {
+    top: number;
+    left: number;
+    height: number;
+    width: number;
+  }) => {
     setTop(top);
     setLeft(left);
     setHeight(height);
@@ -43,16 +67,4 @@ export function useRect() {
     rect,
     setRect,
   };
-}
-
-export function useResponsiveProps(original, responsive) {
-  if (!responsive) {
-    return original;
-  }
-
-  const responsiveProps = _getPropsForSize(responsive);
-
-  const props = assign({}, original, responsiveProps);
-
-  return props;
 }

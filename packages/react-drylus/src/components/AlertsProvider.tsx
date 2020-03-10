@@ -1,17 +1,16 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { useEffect, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import v4 from 'uuid/v4';
+import { v4 } from 'uuid';
 
-import { styles as themeStyles } from '../base/ThemeProvider';
+import { themeStyles } from '../base/ThemeProvider';
 import { Category, Size, Tier } from '../enums';
-import { Flex, FlexAlign, FlexItem, FlexJustify, Margin } from '../layout';
+// import { Flex, FlexAlign, FlexItem, FlexJustify, Margin } from '../layout';
 import { getEnumAsClass } from '../utils';
-import Button from './Button';
-import Icon from './Icon';
+import { Button } from './Button';
+import { Icon } from './Icon';
 
 const styles = {
   provider: css`
@@ -110,7 +109,7 @@ const styles = {
   `,
 };
 
-function _getIconForCategory(category) {
+function _getIconForCategory(category: Category): string {
   switch (category) {
     case Category.DANGER:
       return 'alert-circle';
@@ -123,7 +122,23 @@ function _getIconForCategory(category) {
   }
 }
 
-export const Alert = ({ id, text, category, onClickDismiss, hideDelay }) => {
+interface AlertProps {
+  /** Text shown within the alert */
+  text: string;
+
+  category: Exclude<Category, Category.PRIMARY>;
+
+  /** Triggered when the dismiss button is clicked */
+  onClickDismiss: (id: string) => void;
+
+  /** If you need to manually hide the alert, you can pass your own ID to call hide */
+  id: string;
+
+  /** Amount of milliseconds before the alert is dismissed (except for danger) */
+  hideDelay?: number;
+}
+
+export const Alert = ({ id, text, category, onClickDismiss, hideDelay }: AlertProps) => {
   const icon = _getIconForCategory(category);
 
   useEffect(() => {
@@ -135,62 +150,72 @@ export const Alert = ({ id, text, category, onClickDismiss, hideDelay }) => {
   return (
     <div
       className={cx(styles.root, {
-        [styles[getEnumAsClass(category)]]: category,
+        [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
       })}>
-      <Flex justify={FlexJustify.START} align={FlexAlign.START}>
+      {/* <Flex justify={FlexJustify.START} align={FlexAlign.START}>
         <FlexItem>
-          <Margin size={{ right: Size.SMALL, top: Size.EXTRA_SMALL }}>
-            <div data-element="icon">
-              <Icon name={icon} />
-            </div>
-          </Margin>
+          <Margin size={{ right: Size.SMALL, top: Size.EXTRA_SMALL }}> */}
+      <div data-element="icon">
+        <Icon name={icon} />
+      </div>
+      {/* </Margin>
         </FlexItem>
         <FlexItem flex>
-          <Margin size={{ top: Size.EXTRA_SMALL, bottom: Size.EXTRA_SMALL }}>
-            <span data-element="text">{text}</span>
-          </Margin>
+          <Margin size={{ top: Size.EXTRA_SMALL, bottom: Size.EXTRA_SMALL }}> */}
+      <span data-element="text">{text}</span>
+      {/* </Margin>
         </FlexItem>
         <FlexItem>
-          <Margin size={{ left: Size.DEFAULT }}>
-            <Button
-              size={Size.SMALL}
-              onClick={() => onClickDismiss(id)}
-              tier={Tier.TERTIARY}
-              leading={<Icon name="x" />}
-            />
-          </Margin>
+          <Margin size={{ left: Size.DEFAULT }}> */}
+      <Button
+        size={Size.SMALL}
+        onClick={() => onClickDismiss(id)}
+        tier={Tier.TERTIARY}
+        leading={<Icon name="x" />}
+      />
+      {/* </Margin>
         </FlexItem>
-      </Flex>
+      </Flex> */}
     </div>
   );
 };
 
-Alert.propTypes = {
-  /** Text shown within the alert */
-  text: PropTypes.string.isRequired,
+// Alert.propTypes = {
+//   /** Text shown within the alert */
+//   text: PropTypes.string.isRequired,
 
-  category: PropTypes.oneOf([Category.DANGER, Category.SUCCESS, Category.INFO, Category.WARNING])
-    .isRequired,
+//   category: PropTypes.oneOf([Category.DANGER, Category.SUCCESS, Category.INFO, Category.WARNING])
+//     .isRequired,
 
-  /** Triggered when the dismiss button is clicked */
-  onClickDismiss: PropTypes.func,
+//   /** Triggered when the dismiss button is clicked */
+//   onClickDismiss: PropTypes.func,
 
-  /** If you need to manually hide the alert, you can pass your own ID to call hide */
-  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+//   /** If you need to manually hide the alert, you can pass your own ID to call hide */
+//   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
-  /** Amount of milliseconds before the alert is dismissed (except for danger) */
-  hideDelay: PropTypes.number,
-};
+//   /** Amount of milliseconds before the alert is dismissed (except for danger) */
+//   hideDelay: PropTypes.number,
+// };
 
 Alert.defaultProps = {
   hideDelay: 4000,
 };
 
-const Context = React.createContext();
+interface AlertsContext {
+  showAlert: (props: AlertProps) => void;
+  hideAlert: (id: string) => void;
+}
 
-function reducer(alerts, action) {
+interface Action {
+  type: 'showAlert' | 'hideAlert';
+  payload: { alert?: AlertProps; id?: string };
+}
+
+const Context = React.createContext<AlertsContext>({} as AlertsContext);
+
+function reducer(alerts: Array<AlertProps>, action: Action): Array<AlertProps> {
   const { type, payload } = action;
-  if (type === 'showAlert') {
+  if (type === 'showAlert' && payload.alert != null) {
     return [...alerts, payload.alert];
   } else if (type === 'hideAlert') {
     return alerts.filter((a) => payload.id !== a.id);
@@ -199,28 +224,33 @@ function reducer(alerts, action) {
   }
 }
 
-const AlertsProvider = ({ children }) => {
-  const [outletElement, setOutletElement] = useState(null);
+interface AlertsProviderProps {
+  children: React.ReactNode;
+}
+
+export const AlertsProvider = ({ children }: AlertsProviderProps) => {
+  const [outletElement, setOutletElement] = useState<HTMLElement>();
   const [alerts, dispatch] = useReducer(reducer, []);
 
-  const hideAlert = (id) => {
+  const hideAlert = (id: string) => {
     dispatch({ type: 'hideAlert', payload: { id } });
   };
 
-  const showAlert = (alertProps) => {
+  const showAlert = (alertProps: AlertProps) => {
     const id = v4();
     const alert = { id, ...alertProps };
     dispatch({ type: 'showAlert', payload: { alert } });
   };
 
   useEffect(() => {
-    if (!document.getElementById('alerts-outlet')) {
+    const outlet = document.getElementById('alerts-outlet');
+    if (outlet == null) {
       const alertsOutlet = document.createElement('div');
       alertsOutlet.id = 'alerts-outlet';
       document.body.appendChild(alertsOutlet);
       setOutletElement(alertsOutlet);
     } else {
-      setOutletElement(document.getElementById('alerts-outlet'));
+      setOutletElement(outlet);
     }
 
     return () => {
@@ -238,7 +268,7 @@ const AlertsProvider = ({ children }) => {
       {ReactDOM.createPortal(
         <div className={themeStyles.root}>
           <TransitionGroup className={styles.provider}>
-            {alerts.map((alert) => (
+            {alerts.map((alert: AlertProps) => (
               <CSSTransition
                 key={alert.id}
                 timeout={{
@@ -251,24 +281,18 @@ const AlertsProvider = ({ children }) => {
                   exit: styles.alertExit,
                   exitActive: styles.alertExitActive,
                 }}>
-                <Margin size={{ top: Size.SMALL }}>
-                  <Alert onClickDismiss={(id) => hideAlert(id, alerts)} {...alert} />
-                </Margin>
+                {/* <Margin size={{ top: Size.SMALL }}> */}
+                <Alert onClickDismiss={(id) => hideAlert(id)} {...alert} />
+                {/* </Margin> */}
               </CSSTransition>
             ))}
           </TransitionGroup>
         </div>,
-        document.getElementById('alerts-outlet'),
+        document.getElementById('alerts-outlet') as Element,
       )}
     </Context.Provider>
   );
 };
-
-AlertsProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-export default AlertsProvider;
 
 export function useAlert() {
   return React.useContext(Context);

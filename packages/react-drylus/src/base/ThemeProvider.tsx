@@ -5,7 +5,7 @@ import React, { Fragment } from 'react';
 import { Style } from '../types';
 import { globalStyles, normalize, root } from '../utils';
 
-export const styles = {
+const styles = {
   global: globalCSS(globalStyles),
   normalize: globalCSS(normalize),
   root: css(root),
@@ -15,6 +15,8 @@ export const styles = {
     align-items: stretch;
   `,
 };
+
+export const themeStyles = styles;
 
 interface ThemeProviderProps {
   children: React.ReactNode;

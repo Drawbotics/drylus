@@ -1,7 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
+import { Style } from 'src/types';
 
 const styles = {
   root: css`
@@ -20,7 +20,20 @@ const styles = {
   `,
 };
 
-const Content = ({ children, fullHeight, fullWidth, style }) => {
+interface ContentProps {
+  children: React.ReactNode;
+
+  /** If true, the content will take all the height available */
+  fullHeight?: boolean;
+
+  /** If true, the content will not be limited to 1200px */
+  fullWidth?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const Content = ({ children, fullHeight, fullWidth, style }: ContentProps) => {
   return (
     <div
       style={style}
@@ -31,18 +44,3 @@ const Content = ({ children, fullHeight, fullWidth, style }) => {
     </div>
   );
 };
-
-Content.propTypes = {
-  children: PropTypes.node.isRequired,
-
-  /** If true, the content will take all the height available */
-  fullHeight: PropTypes.bool,
-
-  /** If true, the content will not be limited to 1200px */
-  fullWidth: PropTypes.bool,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
-export default Content;

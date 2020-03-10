@@ -1,5 +1,5 @@
-// export Button from './Button';
-// export Icon, { Icons } from './Icon';
+export * from './Button';
+export * from './Icon';
 // export Title from './Title';
 // export RoundIcon from './RoundIcon';
 // export Paragraph from './Paragraph';
@@ -14,7 +14,7 @@
 // export TabNavigation from './TabNavigation';
 // export Avatar from './Avatar';
 // export Text, { ShowDateTime, formatDate, formatPrice } from './Text';
-export { Dot } from './Dot';
+export * from './Dot';
 // export Tooltip from './Tooltip';
 // export Collapsible from './Collapsible';
 // export TextLink, { LinkUnderlined } from './TextLink';
@@ -30,7 +30,7 @@ export { Dot } from './Dot';
 // export Banner from './Banner';
 // export Callout from './Callout';
 // export ButtonLink from './ButtonLink';
-// export AlertsProvider, { Alert, useAlert } from './AlertsProvider';
+export * from './AlertsProvider';
 // export SplashScreen from './SplashScreen';
 // export Breadcrumbs from './Breadcrumbs';
 // export Dropdown, { DropdownOption, DropdownTitle, DropdownSeparator } from './Dropdown';

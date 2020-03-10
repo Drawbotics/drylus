@@ -1,11 +1,10 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
+import { Responsive, Style } from 'src/types';
 
 import { Category, Color, Size, Tier } from '../enums';
-import { colorEnumToCategory, getEnumAsClass } from '../utils';
-import { useResponsiveProps } from '../utils/hooks';
+import { colorEnumToCategory, getEnumAsClass, run, useResponsiveProps } from '../utils';
 
 export const styles = {
   root: css`
@@ -268,7 +267,40 @@ export const styles = {
   `,
 };
 
-const Button = ({ responsive, ...rest }) => {
+interface ButtonProps {
+  children?: React.ReactNode;
+
+  /** Disables the button click */
+  disabled?: boolean;
+
+  /** Triggered after the button is clicked */
+  onClick?: () => void;
+
+  category?: Exclude<Category, Category.PRIMARY>;
+
+  color?: Exclude<Color, Color.PRIMARY>;
+
+  size?: Extract<Size, Size.SMALL | Size.DEFAULT | Size.LARGE>;
+
+  tier?: Tier;
+
+  /** Shown in front of the button text, can be a Spinner or Icon */
+  leading?: React.ReactNode;
+
+  /** Shown after the button text, can be a Spinner or Icon */
+  trailing?: React.ReactNode;
+
+  /** Makes button take the full width of the container */
+  fullWidth?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive;
+}
+
+export const Button = ({ responsive, ...rest }: ButtonProps) => {
   const {
     children,
     disabled,
@@ -296,81 +328,81 @@ const Button = ({ responsive, ...rest }) => {
       style={style}
       onClick={onClick}
       className={cx(styles.root, {
-        [styles[getEnumAsClass(size)]]: size,
-        [styles.round]: round,
-        [styles.roundSmall]: round && size === Size.SMALL,
-        [styles[getEnumAsClass(category)]]: category && tier === Tier.PRIMARY,
-        [styles[getEnumAsClass(tier)]]: tier,
-        [styles[`${category?.description?.toLowerCase()}Alt`]]: category && tier !== Tier.PRIMARY,
-        [styles.fullWidth]: fullWidth,
+        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+        [styles.round]: round !== true,
+        [styles.roundSmall]: round !== true && size === Size.SMALL,
+        [styles[getEnumAsClass<typeof styles>(category)]]:
+          category != null && tier === Tier.PRIMARY,
+        [styles[getEnumAsClass<typeof styles>(tier)]]: tier != null,
+        [styles[`${category?.toLowerCase() ?? ''}Alt` as keyof typeof styles]]:
+          category != null && tier !== Tier.PRIMARY,
+        [styles.fullWidth]: fullWidth === true,
       })}
       disabled={disabled}>
-      {do {
+      {run(() => {
         if (leading) {
-          <div className={cx({ [styles.leading]: !round })}>{leading}</div>;
+          return <div className={cx({ [styles.leading]: !round })}>{leading}</div>;
         }
-      }}
+      })}
       {children}
-      {do {
+      {run(() => {
         if (trailing) {
-          <div className={cx({ [styles.trailing]: !round })}>{trailing}</div>;
+          return <div className={cx({ [styles.trailing]: !round })}>{trailing}</div>;
         }
-      }}
+      })}
     </button>
   );
 };
 
-Button.propTypes = {
-  /** Just text for the button */
-  children: PropTypes.string,
+// Button.propTypes = {
+//   /** Just text for the button */
+//   children: PropTypes.string,
 
-  /** Disables the button click */
-  disabled: PropTypes.bool,
+//   /** Disables the button click */
+//   disabled: PropTypes.bool,
 
-  /** Triggered after the button is clicked */
-  onClick: PropTypes.func,
+//   /** Triggered after the button is clicked */
+//   onClick: PropTypes.func,
 
-  category: PropTypes.oneOf([
-    Category.BRAND,
-    Category.DANGER,
-    Category.SUCCESS,
-    Category.INFO,
-    Category.WARNING,
-    Category.PRIMARY,
-  ]),
+//   category: PropTypes.oneOf([
+//     Category.BRAND,
+//     Category.DANGER,
+//     Category.SUCCESS,
+//     Category.INFO,
+//     Category.WARNING,
+//     Category.PRIMARY,
+//   ]),
 
-  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
+//   color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
 
-  size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
+//   size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
 
-  tier: PropTypes.oneOf([Tier.PRIMARY, Tier.SECONDARY, Tier.TERTIARY]),
+//   tier: PropTypes.oneOf([Tier.PRIMARY, Tier.SECONDARY, Tier.TERTIARY]),
 
-  /** Shown in front of the button text, can be a Spinner or Icon */
-  leading: PropTypes.node,
+//   /** Shown in front of the button text, can be a Spinner or Icon */
+//   leading: PropTypes.node,
 
-  /** Shown after the button text, can be a Spinner or Icon */
-  trailing: PropTypes.node,
+//   /** Shown after the button text, can be a Spinner or Icon */
+//   trailing: PropTypes.node,
 
-  /** Makes button take the full width of the container */
-  fullWidth: PropTypes.bool,
+//   /** Makes button take the full width of the container */
+//   fullWidth: PropTypes.bool,
 
-  /** Used for style overrides */
-  style: PropTypes.object,
+//   /** Used for style overrides */
+//   style: PropTypes.object,
 
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-};
+//   /** Reponsive prop overrides */
+//   responsive: PropTypes.shape({
+//     XS: PropTypes.object,
+//     S: PropTypes.object,
+//     M: PropTypes.object,
+//     L: PropTypes.object,
+//     XL: PropTypes.object,
+//     HUGE: PropTypes.object,
+//   }),
+// };
 
 Button.defaultProps = {
   size: Size.DEFAULT,
   tier: Tier.PRIMARY,
 };
-
-export default Button;
