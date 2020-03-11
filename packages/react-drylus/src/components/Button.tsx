@@ -1,9 +1,9 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
-import { Responsive, Style } from 'src/types';
 
 import { Category, Color, Size, Tier } from '../enums';
+import { Responsive, Style } from '../types';
 import { colorEnumToCategory, getEnumAsClass, run, useResponsiveProps } from '../utils';
 
 export const styles = {
@@ -353,54 +353,6 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
     </button>
   );
 };
-
-// Button.propTypes = {
-//   /** Just text for the button */
-//   children: PropTypes.string,
-
-//   /** Disables the button click */
-//   disabled: PropTypes.bool,
-
-//   /** Triggered after the button is clicked */
-//   onClick: PropTypes.func,
-
-//   category: PropTypes.oneOf([
-//     Category.BRAND,
-//     Category.DANGER,
-//     Category.SUCCESS,
-//     Category.INFO,
-//     Category.WARNING,
-//     Category.PRIMARY,
-//   ]),
-
-//   color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
-
-//   size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
-
-//   tier: PropTypes.oneOf([Tier.PRIMARY, Tier.SECONDARY, Tier.TERTIARY]),
-
-//   /** Shown in front of the button text, can be a Spinner or Icon */
-//   leading: PropTypes.node,
-
-//   /** Shown after the button text, can be a Spinner or Icon */
-//   trailing: PropTypes.node,
-
-//   /** Makes button take the full width of the container */
-//   fullWidth: PropTypes.bool,
-
-//   /** Used for style overrides */
-//   style: PropTypes.object,
-
-//   /** Reponsive prop overrides */
-//   responsive: PropTypes.shape({
-//     XS: PropTypes.object,
-//     S: PropTypes.object,
-//     M: PropTypes.object,
-//     L: PropTypes.object,
-//     XL: PropTypes.object,
-//     HUGE: PropTypes.object,
-//   }),
-// };
 
 Button.defaultProps = {
   size: Size.DEFAULT,

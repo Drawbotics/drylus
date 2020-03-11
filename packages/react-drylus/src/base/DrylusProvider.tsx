@@ -1,7 +1,7 @@
 import React from 'react';
-import { Style } from 'src/types';
 
 import { AlertsProvider } from '../components';
+import { Style } from '../types';
 import { ThemeProvider } from './ThemeProvider';
 
 interface DrylusProviderProps {

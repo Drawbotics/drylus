@@ -1,15 +1,14 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { styles as themeStyles } from '../base/ThemeProvider';
+import { themeStyles } from '../base';
 import { Position } from '../enums';
-import { CustomPropTypes, WrapperRef, getStyleForSide } from '../utils';
-import { useResponsiveProps } from '../utils/hooks';
+import { Responsive, Style } from '../types';
+import { Deprecated, WrapperRef, getStyleForSide, useResponsiveProps } from '../utils';
 
-export const styles = {
+const styles = {
   root: css`
     position: fixed;
     padding: ${sv.paddingExtraSmall} ${sv.defaultPadding};
@@ -82,28 +81,54 @@ export const styles = {
   `,
 };
 
-const Tooltip = ({ responsive, ...rest }) => {
-  const { children, message, content: _content, side, style } = useResponsiveProps(
+export const tooltipStyles = styles;
+
+interface TooltipProps {
+  /** @deprecated use 'content' instead */
+  message?: React.ReactNode;
+
+  /** Content shown when the tooltip is visible */
+  content: React.ReactNode;
+
+  /** Component wrapped by the tooltip */
+  children: React.ReactNode;
+
+  side?: Position;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive;
+}
+
+interface HTMLElementWithDisabled extends HTMLElement {
+  disabled?: boolean;
+}
+
+export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
+  const { children, message, content: _content, side, style } = useResponsiveProps<TooltipProps>(
     rest,
     responsive,
   );
 
   const [visible, setVisible] = useState(false);
-  const [outletElement, setOutletElement] = useState(null);
-  const childrenRef = useRef();
-  const tooltipRef = useRef();
+  const [outletElement, setOutletElement] = useState<HTMLElement>();
+  const childrenRef = useRef<HTMLElementWithDisabled>();
+  const tooltipRef = useRef<HTMLDivElement>(null);
   const tooltipRect = tooltipRef.current?.getBoundingClientRect();
 
   const content = _content != null ? _content : message;
 
   useEffect(() => {
-    if (!document.getElementById('tooltips-outlet')) {
+    const outlet = document.getElementById('tooltips-outlet');
+    if (outlet == null) {
       const tooltipsOutlet = document.createElement('div');
       tooltipsOutlet.id = 'tooltips-outlet';
       document.body.appendChild(tooltipsOutlet);
       setOutletElement(tooltipsOutlet);
     } else {
-      setOutletElement(document.getElementById('tooltips-outlet'));
+      setOutletElement(outlet);
     }
 
     return () => {
@@ -114,7 +139,7 @@ const Tooltip = ({ responsive, ...rest }) => {
   }, []);
 
   useEffect(() => {
-    let timeout = null;
+    let timeout: ReturnType<typeof setTimeout>;
 
     const handleMouseEnter = () => {
       timeout = setTimeout(() => setVisible(true), 200);
@@ -153,7 +178,6 @@ const Tooltip = ({ responsive, ...rest }) => {
     side,
     rect: childrenRef.current?.getBoundingClientRect(),
     rectComponent: tooltipRect,
-    sides: Position,
   });
 
   return (
@@ -173,48 +197,17 @@ const Tooltip = ({ responsive, ...rest }) => {
             {content}
           </div>
         </div>,
-        document.getElementById('tooltips-outlet'),
+        document.getElementById('tooltips-outlet') as Element,
       )}
     </Fragment>
   );
 };
 
-Tooltip.propTypes = {
-  /** DEPRECATED */
-  message: CustomPropTypes.mutuallyExclusive('content', {
-    type: PropTypes.node,
-    deprecated: true,
-  }),
-
-  /** Content shown when the tooltip is visible */
-  content: CustomPropTypes.mutuallyExclusive('message', {
-    type: PropTypes.node,
-    required: true,
-  }),
-
-  /** Component wrapped by the tooltip */
-  children: PropTypes.node.isRequired,
-
-  side: PropTypes.oneOf([Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM]),
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-};
-
 Tooltip.defaultProps = {
   side: Position.TOP,
-
   style: {},
 };
 
-export default Tooltip;
+Tooltip.propTypes = {
+  category: Deprecated,
+};

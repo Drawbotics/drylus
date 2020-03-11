@@ -1,10 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Align } from '../enums';
-import { useResponsiveProps } from '../utils/hooks';
+import { Responsive, Style } from '../types';
+import { useResponsiveProps } from '../utils';
 
 const styles = {
   root: css`
@@ -52,8 +52,30 @@ const styles = {
   `,
 };
 
-const Title = ({ responsive, ...rest }) => {
-  const { children, size, noMargin, style, align } = useResponsiveProps(rest, responsive);
+interface TitleProps {
+  /** Text displayed by the title */
+  children: React.ReactNode;
+
+  /** Each number is equivalent to the h[n] in html, smaller value equals larger title */
+  size?: 1 | 2 | 3 | 4;
+
+  /** Use this if you dont want the component to set margin. By default it has some top and bottom margin since it is a textual component */
+  noMargin?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  align?: Align;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive;
+}
+
+export const Title = ({ responsive, ...rest }: TitleProps) => {
+  const { children, size, noMargin, style, align } = useResponsiveProps<TitleProps>(
+    rest,
+    responsive,
+  );
 
   if (size === 1) {
     return (
@@ -105,39 +127,11 @@ const Title = ({ responsive, ...rest }) => {
     );
   } else {
     console.warn('Unsupported title size');
-    return '';
+    return null;
   }
-};
-
-Title.propTypes = {
-  /** Text displayed by the title */
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
-
-  /** Each number is equivalent to the h[n] in html, smaller value equals larger title */
-  size: PropTypes.oneOf([1, 2, 3, 4]),
-
-  /** Use this if you dont want the component to set margin. By default it has some top and bottom margin since it is a textual component */
-  noMargin: PropTypes.bool,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  align: PropTypes.oneOf([Align.CENTER, Align.LEFT, Align.RIGHT]),
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
 };
 
 Title.defaultProps = {
   size: 1,
   align: Align.LEFT,
 };
-
-export default Title;

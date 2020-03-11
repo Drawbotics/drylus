@@ -1,11 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx, keyframes } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Category, Color, Size } from '../enums';
-import { CustomPropTypes, categoryEnumToColor } from '../utils';
-import { useResponsiveProps } from '../utils/hooks';
+import { Responsive, Style } from '../types';
+import { Deprecated, categoryEnumToColor, useResponsiveProps } from '../utils';
 
 const rotate = keyframes`
   100% {
@@ -88,11 +87,31 @@ const styles = {
   `,
 };
 
-const Spinner = ({ responsive, ...rest }) => {
-  const { size, category, inversed, fullSize, style, color: _color } = useResponsiveProps(
-    rest,
-    responsive,
-  );
+interface SpinnerProps {
+  size?: Size.DEFAULT | Size.SMALL | Size.LARGE;
+
+  /** @deprecated use color instead */
+  category?: Category.BRAND | Category.INFO;
+
+  color?: Color.BRAND | Color.BLUE;
+
+  /** If true, sets the color of the spinner to white (to be used against colored backgrounds) */
+  inversed?: boolean;
+
+  /** If true the spinner will be placed in the center of the parent container */
+  fullSize?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive;
+}
+
+export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
+  const { size, category, inversed, fullSize, style, color: _color } = useResponsiveProps<
+    SpinnerProps
+  >(rest, responsive);
   const color = category ? categoryEnumToColor(category) : _color;
   return (
     <div
@@ -123,36 +142,10 @@ const Spinner = ({ responsive, ...rest }) => {
   );
 };
 
-Spinner.propTypes = {
-  size: PropTypes.oneOf([Size.DEFAULT, Size.SMALL, Size.LARGE]),
-
-  /** DEPRECATED */
-  category: CustomPropTypes.deprecated(PropTypes.oneOf([Category.BRAND, Category.INFO])),
-
-  color: PropTypes.oneOf([Color.BRAND, Color.BLUE]),
-
-  /** If true, sets the color of the spinner to white (to be used against colored backgrounds) */
-  inversed: PropTypes.bool,
-
-  /** If true the spinner will be placed in the center of the parent container */
-  fullSize: PropTypes.bool,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-};
-
 Spinner.defaultProps = {
   size: Size.DEFAULT,
 };
 
-export default Spinner;
+Spinner.propTypes = {
+  category: Deprecated,
+};

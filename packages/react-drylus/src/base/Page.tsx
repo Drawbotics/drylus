@@ -1,6 +1,7 @@
 import { css } from 'emotion';
 import React from 'react';
-import { Style } from 'src/types';
+
+import { Style } from '../types';
 
 const styles = {
   root: css`

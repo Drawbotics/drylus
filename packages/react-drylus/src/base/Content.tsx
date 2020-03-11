@@ -1,7 +1,8 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
-import { Style } from 'src/types';
+
+import { Style } from '../types';
 
 const styles = {
   root: css`

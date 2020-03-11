@@ -1,12 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
+import { Responsive, Style } from 'src/types';
 
 import { Category, Color, Size } from '../enums';
-import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
-import { useResponsiveProps } from '../utils/hooks';
-import Icon from './Icon';
+import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
+import { Icon, Icons } from './Icon';
 
 const styles = {
   root: css`
@@ -69,62 +68,51 @@ const styles = {
   `,
 };
 
-const RoundIcon = ({ responsive, ...rest }) => {
-  const { name, size, category, bold, style, color: _color } = useResponsiveProps(rest, responsive);
+interface RoundIconProps {
+  /** Name of the icon */
+  name: keyof typeof Icons;
+
+  /** Size of the icon */
+  size?: Size.SMALL | Size.DEFAULT | Size.LARGE | number;
+
+  /** Makes the icon bold */
+  bold?: boolean;
+
+  /** @deprecated use color instead */
+  category?: Exclude<Category, Category.PRIMARY>;
+
+  color?: Exclude<Color, Color.PRIMARY>;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive;
+}
+
+export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
+  const { name, size, category, bold, style, color: _color } = useResponsiveProps<RoundIconProps>(
+    rest,
+    responsive,
+  );
 
   const customSize = typeof size === 'number';
   const color = category ? categoryEnumToColor(category) : _color;
   return (
     <div
       className={cx(styles.root, {
-        [styles[getEnumAsClass(color)]]: color,
-        [styles[!customSize && getEnumAsClass(size)]]: size,
+        [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
+        [styles[getEnumAsClass<typeof styles>(size as Size)]]: size != null && !customSize,
         [styles.iconInherit]: customSize,
       })}
-      style={customSize ? { height: size, width: size, fontSize: size * 0.5, ...style } : style}>
+      style={
+        customSize
+          ? { height: size, width: size, fontSize: (size as number) * 0.5, ...style }
+          : style
+      }>
       <Icon name={name} bold={bold} />
     </div>
   );
-};
-
-RoundIcon.propTypes = {
-  /** Name of the icon */
-  name: PropTypes.string.isRequired,
-
-  /** Size of the icon */
-  size: PropTypes.oneOfType([
-    PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
-    PropTypes.number,
-  ]),
-
-  /** Makes the icon bold */
-  bold: PropTypes.bool,
-
-  /** DEPRECATED */
-  category: CustomPropTypes.deprecated(
-    PropTypes.oneOf([
-      Category.DANGER,
-      Category.INFO,
-      Category.SUCCESS,
-      Category.WARNING,
-      Category.BRAND,
-    ]),
-  ),
-
-  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
 };
 
 RoundIcon.defaultProps = {
@@ -133,4 +121,6 @@ RoundIcon.defaultProps = {
   style: {},
 };
 
-export default RoundIcon;
+RoundIcon.propTypes = {
+  category: Deprecated,
+};

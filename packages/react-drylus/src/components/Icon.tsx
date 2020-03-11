@@ -3,11 +3,10 @@ import { generateIconStyles, mapping } from '@drawbotics/icons/dist/drycons.js';
 import packageJson from '@drawbotics/icons/package.json';
 import { css, cx, injectGlobal } from 'emotion';
 import React from 'react';
-import { Style } from 'src/types';
 
 import { Category, Color } from '../enums';
+import { Style } from '../types';
 import { Deprecated, categoryEnumToColor, env, getEnumAsClass } from '../utils';
-
 injectGlobal`
   ${generateIconStyles(env === "'development'" ? 'dev' : packageJson.version)}
 `;

@@ -1,8 +1,8 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, keyframes } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
+import { Responsive } from '../types';
 import { useResponsiveProps } from '../utils/hooks';
 
 const shimmer = keyframes`
@@ -14,7 +14,7 @@ const shimmer = keyframes`
   }
 `;
 
-export const styles = {
+const styles = {
   shimmer: css`
     position: relative;
     pointer-events: none;
@@ -42,33 +42,26 @@ export const styles = {
   `,
 };
 
-const LoadingPlaceholder = ({ responsive, ...rest }) => {
-  const { height, width } = useResponsiveProps(rest, responsive);
+export const placeholderStyles = styles;
 
-  return <div className={styles.shimmer} style={{ height, width }} />;
-};
-
-LoadingPlaceholder.propTypes = {
+interface LoadingPlaceholderProps {
   /** Determines the height of the placeholder */
-  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  height: number | string;
 
   /** Determines the height of the placeholder */
-  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  width: number | string;
 
   /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
+  responsive?: Responsive;
+}
+
+export const LoadingPlaceholder = ({ responsive, ...rest }: LoadingPlaceholderProps) => {
+  const { height, width } = useResponsiveProps<LoadingPlaceholderProps>(rest, responsive);
+
+  return <div className={styles.shimmer} style={{ height, width }} />;
 };
 
 LoadingPlaceholder.defaultProps = {
   height: sv.defaultMargin,
   width: 200,
 };
-
-export default LoadingPlaceholder;

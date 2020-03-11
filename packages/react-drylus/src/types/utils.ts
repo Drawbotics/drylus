@@ -8,3 +8,8 @@ export interface Responsive {
   XL?: object;
   HUGE?: object;
 }
+
+export interface Option {
+  value: number | string;
+  label: string;
+}

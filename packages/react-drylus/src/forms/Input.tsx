@@ -1,18 +1,13 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { forwardRef, useState } from 'react';
 
-import Button from '../components/Button';
-import Icon from '../components/Icon';
-import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
-import RoundIcon from '../components/RoundIcon';
-import Spinner from '../components/Spinner';
-import Category from '../enums/Category';
-import Size from '../enums/Size';
-import { useResponsiveProps } from '../utils/hooks';
-import Hint from './Hint';
-import Select from './Select';
+import { Button, Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
+import { Category, Size } from '../enums';
+import { Responsive, Style } from '../types';
+import { run, useResponsiveProps } from '../utils';
+import { Hint } from './Hint';
+import { Select } from './Select';
 
 const styles = {
   root: css`
@@ -164,7 +159,61 @@ const styles = {
   `,
 };
 
-const RawInput = ({ responsive, ...rest }) => {
+interface InputProps {
+  /** Value displayed in the field */
+  value: number | string;
+
+  /** Name of the form element (target.name) */
+  name?: string;
+
+  /** Disables the input */
+  disabled?: boolean;
+
+  /** Text shown when no value is active */
+  placeholder?: string;
+
+  /** Triggered when the value is changed (typing). If not given, the field is read-only */
+  onChange?: (value: string | number, name?: string) => void;
+
+  /** Small text shown below the box, replaced by error if present */
+  hint?: string;
+
+  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: boolean | string;
+
+  /** If true the element displays a check icon and a green outline, overridden by "error" */
+  valid?: boolean;
+
+  /** Node to be rendered in front of the input field, for now limited to text, Button and Select */
+  prefix?: React.ReactElement<typeof Button> | React.ReactElement<typeof Select>;
+
+  /** Node to be rendered at the end of the input field, for now limited to text, Button and Select */
+  suffix?: React.ReactElement<typeof Button> | React.ReactElement<typeof Select>;
+
+  /** Additional class name to override styles */
+  className?: string;
+
+  type?: 'text' | 'password' | 'email' | 'tel' | 'url';
+
+  /** If true, a spinner is shown in the right corner, like with error and valid */
+  loading?: boolean;
+
+  /** If true, a loading overlay is displayed on top of the component */
+  isPlaceholder?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive;
+}
+
+interface RawInputProps extends InputProps {
+  inputRef?: React.Ref<HTMLInputElement>;
+  extraLeftPadding?: number;
+}
+
+const RawInput = ({ responsive, ...rest }: RawInputProps) => {
   const {
     value,
     onChange,
@@ -181,11 +230,15 @@ const RawInput = ({ responsive, ...rest }) => {
     isPlaceholder,
     extraLeftPadding,
     ...props
-  } = useResponsiveProps(rest, responsive);
+  } = useResponsiveProps<RawInputProps>(rest, responsive);
 
   const [isFocused, setFocused] = useState(false);
 
-  const handleOnChange = (e) => (onChange != null ? onChange(e.target.value, e.target.name) : null);
+  const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
+    if (onChange != null) {
+      onChange((e.target as HTMLInputElement).value, (e.target as HTMLInputElement).name);
+    }
+  };
 
   const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
   const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
@@ -194,43 +247,60 @@ const RawInput = ({ responsive, ...rest }) => {
       style={style}
       className={cx(styles.root, {
         [styles.valid]: Boolean(value) && valid,
-        [styles.error]: error,
-        [className]: Boolean(className),
+        [styles.error]: error != null,
+        [className as string]: className != null,
         [placeholderStyles.shimmer]: isPlaceholder,
       })}>
       <div className={styles.outerWrapper}>
-        {do {
+        {run(() => {
           if (prefix) {
-            <div
-              data-element="prefix"
-              className={cx(styles.fix, styles.prefix, {
-                [styles.prefixComponent]: isPrefixComponent,
-                [styles.transparentButton]: !prefix?.props?.category,
-              })}>
-              {prefix}
-            </div>;
+            return (
+              <div
+                data-element="prefix"
+                className={cx(styles.fix, styles.prefix, {
+                  [styles.prefixComponent]: isPrefixComponent,
+                  [styles.transparentButton]: (prefix?.props as any)?.category == null, // TODO find better
+                })}>
+                {prefix}
+              </div>
+            );
           }
-        }}
+        })}
         <div className={styles.innerWrapper}>
-          {do {
+          {run(() => {
             if (loading) {
-              <div className={styles.icon} data-element="icon">
-                <Spinner size={Size.SMALL} />
-              </div>;
+              return (
+                <div className={styles.icon} data-element="icon">
+                  <Spinner size={Size.SMALL} />
+                </div>
+              );
             } else if (onChange == null) {
-              <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
-                <Icon name="lock" />
-              </div>;
+              return (
+                <div
+                  className={styles.icon}
+                  data-element="icon"
+                  style={{ color: sv.colorSecondary }}>
+                  <Icon name="lock" />
+                </div>
+              );
             } else if (error) {
-              <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
-                <RoundIcon name="x" size={Size.SMALL} category={Category.DANGER} />
-              </div>;
+              return (
+                <div
+                  className={cx(styles.icon, { [styles.hidden]: isFocused })}
+                  data-element="icon">
+                  <RoundIcon name="x" size={Size.SMALL} category={Category.DANGER} />
+                </div>
+              );
             } else if (Boolean(value) && valid) {
-              <div className={cx(styles.icon, { [styles.hidden]: isFocused })} data-element="icon">
-                <RoundIcon name="check" size={Size.SMALL} category={Category.SUCCESS} />
-              </div>;
+              return (
+                <div
+                  className={cx(styles.icon, { [styles.hidden]: isFocused })}
+                  data-element="icon">
+                  <RoundIcon name="check" size={Size.SMALL} category={Category.SUCCESS} />
+                </div>
+              );
             }
-          }}
+          })}
           <input
             disabled={disabled}
             onFocus={() => setFocused(true)}
@@ -238,8 +308,8 @@ const RawInput = ({ responsive, ...rest }) => {
             onChange={handleOnChange}
             readOnly={onChange == null}
             className={cx(styles.input, {
-              [styles.straightLeft]: prefix,
-              [styles.straightRight]: suffix,
+              [styles.straightLeft]: prefix != null,
+              [styles.straightRight]: suffix != null,
             })}
             value={value}
             ref={inputRef}
@@ -247,31 +317,33 @@ const RawInput = ({ responsive, ...rest }) => {
               paddingLeft:
                 extraLeftPadding != null
                   ? `calc(${sv.paddingSmall} + ${extraLeftPadding}px)`
-                  : null,
+                  : undefined,
             }}
             {...props}
           />
         </div>
-        {do {
+        {run(() => {
           if (suffix) {
-            <div
-              data-element="suffix"
-              className={cx(styles.fix, styles.suffix, {
-                [styles.suffixComponent]: isSuffixComponent,
-                [styles.transparentButton]: !suffix?.props?.category,
-              })}>
-              {suffix}
-            </div>;
+            return (
+              <div
+                data-element="suffix"
+                className={cx(styles.fix, styles.suffix, {
+                  [styles.suffixComponent]: isSuffixComponent,
+                  [styles.transparentButton]: (suffix?.props as any)?.category == null,
+                })}>
+                {suffix}
+              </div>
+            );
           }
-        }}
+        })}
       </div>
-      {do {
+      {run(() => {
         if (error && typeof error === 'string') {
-          <Hint category={Category.DANGER}>{error}</Hint>;
+          return <Hint category={Category.DANGER}>{error}</Hint>;
         } else if (hint) {
-          <Hint>{hint}</Hint>;
+          return <Hint>{hint}</Hint>;
         }
-      }}
+      })}
     </div>
   );
 };
@@ -279,74 +351,16 @@ const RawInput = ({ responsive, ...rest }) => {
 /**
  * forward-ref
  */
-export const InputWithRef = forwardRef((props, ref) => {
+export const InputWithRef = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return <RawInput {...props} inputRef={ref} />;
 });
 
 InputWithRef.displayName = 'Input';
 
-const Input = (props) => {
+export const Input = (props: InputProps) => {
   return <RawInput {...props} />;
-};
-
-Input.propTypes = {
-  /** Value displayed in the field */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-
-  /** Name of the form element (target.name) */
-  name: PropTypes.string,
-
-  /** Disables the input */
-  disabled: PropTypes.bool,
-
-  /** Text shown when no value is active */
-  placeholder: PropTypes.string,
-
-  /** Triggered when the value is changed (typing). If not given, the field is read-only */
-  onChange: PropTypes.func,
-
-  /** Small text shown below the box, replaced by error if present */
-  hint: PropTypes.string,
-
-  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-
-  /** If true the element displays a check icon and a green outline, overridden by "error" */
-  valid: PropTypes.bool,
-
-  /** Node to be rendered in front of the input field, for now limited to text, Button and Select */
-  prefix: PropTypes.node,
-
-  /** Node to be rendered at the end of the input field, for now limited to text, Button and Select */
-  suffix: PropTypes.node,
-
-  /** Additional class name to override styles */
-  className: PropTypes.string,
-
-  type: PropTypes.oneOf(['text', 'password', 'email', 'tel', 'url']),
-
-  /** If true, a spinner is shown in the right corner, like with error and valid */
-  loading: PropTypes.bool,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** If true, a loading overlay is displayed on top of the component */
-  isPlaceholder: PropTypes.bool,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
 };
 
 Input.defaultProps = {
   type: 'text',
 };
-
-export default Input;

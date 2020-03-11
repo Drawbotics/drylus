@@ -1,17 +1,17 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 
-import { styles as themeStyles } from '../base/ThemeProvider';
+import { themeStyles } from '../base';
 import { Size, Tier } from '../enums';
-import { useResponsiveProps } from '../utils/hooks';
-import Button from './Button';
-import Icon from './Icon';
-import Title from './Title';
+import { Responsive, Style } from '../types';
+import { run, useResponsiveProps } from '../utils';
+import { Button } from './Button';
+import { Icon } from './Icon';
+import { Title } from './Title';
 
 const styles = {
   overlay: css`
@@ -158,8 +158,28 @@ const styles = {
   `,
 };
 
-const BaseModal = React.forwardRef(
-  ({ children, onClickClose, footer, size, title, style }, ref) => (
+interface BaseModalProps {
+  /** Content rendered within the modal */
+  children: React.ReactNode;
+
+  /** Triggered when the "close" button is clicked, or when the overlay is clicked */
+  onClickClose?: () => void;
+
+  /** Fixed content at the bottom of the modal, not shown if raw is true */
+  footer?: React.ReactNode;
+
+  /** Determines the minimum width of the modal */
+  size?: Size.DEFAULT | Size.LARGE;
+
+  /** Displayed at the top left of the modal window, not shown if raw is true */
+  title?: string;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+const BaseModal = React.forwardRef<HTMLDivElement, BaseModalProps>(
+  ({ children, onClickClose, footer, size, title, style }: BaseModalProps, ref) => (
     <div
       style={style}
       className={cx(styles.root, { [styles.large]: size === Size.LARGE })}
@@ -172,28 +192,51 @@ const BaseModal = React.forwardRef(
           leading={<Icon name="x" />}
         />
       </div>
-      {do {
-        if (title) {
-          <div className={styles.title}>
-            <Title size={4} noMargin>
-              {title}
-            </Title>
-          </div>;
+      {run(() => {
+        if (title != null) {
+          return (
+            <div className={styles.title}>
+              <Title size={4} noMargin>
+                {title}
+              </Title>
+            </div>
+          );
         }
-      }}
+      })}
       <div className={styles.content}>{children}</div>
-      {do {
-        if (footer) {
-          <div className={styles.footer}>{footer}</div>;
+      {run(() => {
+        if (footer != null) {
+          return <div className={styles.footer}>{footer}</div>;
         }
-      }}
+      })}
     </div>
   ),
 );
 
 BaseModal.displayName = 'BaseModal';
 
-const Modal = ({ responsive, ...rest }) => {
+interface ModalProps extends BaseModalProps {
+  /** If true, the children are rendered without decoration, you have to style your own modal */
+  raw?: boolean;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive;
+
+  /** Determines if the modal is visible or not */
+  visible: boolean;
+
+  /** Passed to the CSSTransition component to fire events at different points of the animation. See reactcommunity.org/react-transition-group docs */
+  cssTransitionCallbacks: {
+    onEnter: () => void;
+    onEntering: () => void;
+    onEntered: () => void;
+    onExit: () => void;
+    onExiting: () => void;
+    onExited: () => void;
+  };
+}
+
+export const Modal = ({ responsive, ...rest }: ModalProps) => {
   const {
     children,
     footer,
@@ -204,15 +247,15 @@ const Modal = ({ responsive, ...rest }) => {
     title,
     style,
     cssTransitionCallbacks,
-  } = useResponsiveProps(rest, responsive);
+  } = useResponsiveProps<ModalProps>(rest, responsive);
 
-  const [outletElement, setOutletElement] = useState(null);
+  const [outletElement, setOutletElement] = useState<HTMLElement>();
   const [overflowing, setOverflowing] = useState(false);
-  const [previousTouchY, setTouchY] = useState(null);
+  const [previousTouchY, setTouchY] = useState<number>();
   const { screenSize, ScreenSizes } = useScreenSize();
-  const overlayElement = useRef();
-  const modalElement = useRef();
-  const containerElement = useRef();
+  const overlayElement = useRef<HTMLDivElement>(null);
+  const modalElement = useRef<HTMLDivElement>(null);
+  const containerElement = useRef<HTMLDivElement>(null);
 
   const handleWindowResize = () => {
     if (modalElement.current) {
@@ -222,31 +265,36 @@ const Modal = ({ responsive, ...rest }) => {
     }
   };
 
-  const handleTouchStart = (e) => {
+  const handleTouchStart = (e: TouchEvent) => {
     setTouchY(e.touches[0]?.clientY);
   };
 
-  const handleTouchMove = (e) => {
-    if (modalElement?.current?.contains(e.target)) {
+  const handleTouchMove = (e: TouchEvent) => {
+    if (modalElement?.current?.contains(e.target as Node)) {
       const touchY = e.changedTouches[0]?.clientY;
-      const touchDelta = Math.abs(touchY - previousTouchY);
-      if (touchY > previousTouchY && touchDelta < 50) {
-        containerElement.current.scrollTop -= touchDelta;
-      } else if (touchY < previousTouchY && touchDelta < 50) {
-        containerElement.current.scrollTop += touchDelta;
+      if (previousTouchY != null && containerElement.current != null) {
+        const touchDelta = Math.abs(touchY - previousTouchY);
+        if (touchY > previousTouchY && touchDelta < 50) {
+          containerElement.current.scrollTop -= touchDelta;
+        } else if (touchY < previousTouchY && touchDelta < 50) {
+          containerElement.current.scrollTop += touchDelta;
+        }
       }
-      touchY >= 0 && setTouchY(touchY);
+      if (touchY >= 0) {
+        setTouchY(touchY);
+      }
     }
   };
 
   useEffect(() => {
-    if (!document.getElementById('modals-outlet')) {
+    const outlet = document.getElementById('modals-outlet');
+    if (outlet == null) {
       const modalsOutlet = document.createElement('div');
       modalsOutlet.id = 'modals-outlet';
       document.body.appendChild(modalsOutlet);
       setOutletElement(modalsOutlet);
     } else {
-      setOutletElement(document.getElementById('modals-outlet'));
+      setOutletElement(outlet);
     }
 
     return () => {
@@ -261,12 +309,16 @@ const Modal = ({ responsive, ...rest }) => {
       document.body.style.overflow = 'hidden';
       if (screenSize <= ScreenSizes.L) {
         document.body.style.pointerEvents = 'none';
-        document.body.parentElement.style.position = 'fixed';
+        if (document.body.parentElement) {
+          document.body.parentElement.style.position = 'fixed';
+        }
       }
     } else {
       document.body.style.overflow = 'initial';
       document.body.style.pointerEvents = 'auto';
-      document.body.parentElement.style.position = '';
+      if (document.body.parentElement) {
+        document.body.parentElement.style.position = '';
+      }
     }
   }, [visible]);
 
@@ -286,7 +338,11 @@ const Modal = ({ responsive, ...rest }) => {
 
   if (!outletElement) return '';
 
-  const handleClickOverlay = (e) => (e.target === overlayElement?.current ? onClickClose() : null);
+  const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === overlayElement?.current && onClickClose != null) {
+      onClickClose();
+    }
+  };
 
   return ReactDOM.createPortal(
     <div className={themeStyles.root}>
@@ -308,75 +364,29 @@ const Modal = ({ responsive, ...rest }) => {
             ref={containerElement}
             className={cx(styles.container, { [styles.alignTop]: overflowing })}
             data-element="container">
-            {do {
+            {run(() => {
               if (raw) {
-                children;
+                return children;
               } else {
-                <BaseModal
-                  size={size}
-                  ref={modalElement}
-                  onClickClose={onClickClose}
-                  footer={footer}
-                  style={style}
-                  title={title}>
-                  {children}
-                </BaseModal>;
+                return (
+                  <BaseModal
+                    size={size}
+                    ref={modalElement}
+                    onClickClose={onClickClose}
+                    footer={footer}
+                    style={style}
+                    title={title}>
+                    {children}
+                  </BaseModal>
+                );
               }
-            }}
+            })}
           </div>
         </div>
       </CSSTransition>
     </div>,
-    document.getElementById('modals-outlet'),
+    document.getElementById('modals-outlet') as Element,
   );
-  // eslint-disable-next-line no-unreachable
-  return <div></div>; // NOTE: proptypes fail if no "concrete" element is returned
-};
-
-Modal.propTypes = {
-  /** Content rendered within the modal */
-  children: PropTypes.node.isRequired,
-
-  /** Fixed content at the bottom of the modal, not shown if raw is true */
-  footer: PropTypes.node,
-
-  /** Determines if the modal is visible or not */
-  visible: PropTypes.bool.isRequired,
-
-  /** Triggered when the "close" button is clicked, or when the overlay is clicked */
-  onClickClose: PropTypes.func,
-
-  /** Determines the minimum width of the modal */
-  size: PropTypes.oneOf([Size.DEFAULT, Size.LARGE]),
-
-  /** If true, the children are rendered without decoration, you have to style your own modal */
-  raw: PropTypes.bool,
-
-  /** Displayed at the top left of the modal window, not shown if raw is true */
-  title: PropTypes.string,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-
-  /** Passed to the CSSTransition component to fire events at different points of the animation. See reactcommunity.org/react-transition-group docs */
-  cssTransitionCallbacks: PropTypes.shape({
-    onEnter: PropTypes.func,
-    onEntering: PropTypes.func,
-    onEntered: PropTypes.func,
-    onExit: PropTypes.func,
-    onExiting: PropTypes.func,
-    onExited: PropTypes.func,
-  }),
 };
 
 Modal.defaultProps = {
@@ -384,5 +394,3 @@ Modal.defaultProps = {
   raw: false,
   cssTransitionCallbacks: {},
 };
-
-export default Modal;

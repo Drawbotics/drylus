@@ -1,10 +1,9 @@
 import { css, cx } from 'emotion';
 import React from 'react';
-import { Responsive, Style } from 'src/types';
 
 import { Position } from '../enums';
-import { getEnumAsClass } from '../utils';
-import { useResponsiveProps } from '../utils/hooks';
+import { Responsive, Style } from '../types';
+import { getEnumAsClass, useResponsiveProps } from '../utils';
 
 const styles = {
   layout: css`

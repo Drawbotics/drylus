@@ -8,7 +8,7 @@ import { hot } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 
 // import MobileSidebar from './components/MobileSidebar';
-// import Sidebar from './components/Sidebar';
+import Sidebar from './components/Sidebar';
 
 // import Root from './routes/Root';
 
@@ -21,8 +21,7 @@ const App = () => {
       <DrylusProvider>
         <Page>
           <Layout
-            // bar={<Sidebar />}
-            bar={<div></div>}
+            bar={<Sidebar />}
             position={Position.LEFT}
             fixed
             responsive={{

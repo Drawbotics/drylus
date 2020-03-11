@@ -1,11 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import camelCase from 'lodash/camelCase';
-import PropTypes from 'prop-types';
 import React from 'react';
 
-import Size from '../enums/Size';
-import { useResponsiveProps } from '../utils/hooks';
+import { Size } from '../enums';
+import { Responsive, Style } from '../types';
+import { useResponsiveProps } from '../utils';
 
 const styles = {
   root: css`
@@ -297,8 +297,20 @@ const styles = {
   `,
 };
 
-function _computeSize(sizeDescription) {
-  let size = {};
+interface Rectangular {
+  vertical?: Size;
+  horizontal?: Size;
+}
+
+interface Variable {
+  left?: Size;
+  top?: Size;
+  right?: Size;
+  bottom?: Size;
+}
+
+function _computeSize(sizeDescription: Rectangular) {
+  let size: Variable = {};
 
   if (sizeDescription.horizontal) {
     size.left = sizeDescription.horizontal;
@@ -312,124 +324,47 @@ function _computeSize(sizeDescription) {
   return size;
 }
 
-const Margin = ({ responsive, ...rest }) => {
-  const { children, size: rawSize, style } = useResponsiveProps(rest, responsive);
+function _isRectangular(size: any): size is Rectangular {
+  return size.vertical || size.horizontal;
+}
+
+interface MarginProps {
+  /** Determines the amount of margin given to the component. If a single value, the margin is applied equally to each side */
+  size?: Size | Rectangular | Variable;
+
+  /** The content of the margin wrapper */
+  children?: React.ReactNode;
+
+  /** Prop to override any style if necessary, use sparingly */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive;
+}
+
+export const Margin = ({ responsive, ...rest }: MarginProps) => {
+  const { children, size: rawSize, style } = useResponsiveProps<MarginProps>(rest, responsive);
 
   const isUniform = typeof rawSize !== 'object';
 
-  const size =
-    !isUniform && (rawSize.vertical || rawSize.horizontal) ? _computeSize(rawSize) : rawSize;
+  const size = !isUniform && _isRectangular(rawSize) ? _computeSize(rawSize) : rawSize;
 
   return (
     <div
       className={cx(styles.root, {
-        [styles[camelCase(size?.description)]]: isUniform && size,
+        [styles[camelCase(size as Size) as keyof typeof styles]]: isUniform && size != null,
         [styles.resetMargin]: !isUniform,
-        [styles[camelCase(`${size?.left?.description}_LEFT`)]]: !isUniform && size?.left,
-        [styles[camelCase(`${size?.right?.description}_RIGHT`)]]: !isUniform && size?.right,
-        [styles[camelCase(`${size?.top?.description}_TOP`)]]: !isUniform && size?.top,
-        [styles[camelCase(`${size?.bottom?.description}_BOTTOM`)]]: !isUniform && size?.bottom,
+        [styles[camelCase(`${(size as Variable)?.left}_LEFT`) as keyof typeof styles]]:
+          !isUniform && (size as Variable)?.left != null,
+        [styles[camelCase(`${(size as Variable)?.right}_RIGHT`) as keyof typeof styles]]:
+          !isUniform && (size as Variable)?.right != null,
+        [styles[camelCase(`${(size as Variable)?.top}_TOP`) as keyof typeof styles]]:
+          !isUniform && (size as Variable)?.top != null,
+        [styles[camelCase(`${(size as Variable)?.bottom}_BOTTOM`) as keyof typeof styles]]:
+          !isUniform && (size as Variable)?.bottom != null,
       })}
       style={style}>
       {children}
     </div>
   );
 };
-
-Margin.propTypes = {
-  /** Determines the amount of margin given to the component. If a single value, the margin is applied equally to each side */
-  size: PropTypes.oneOfType([
-    PropTypes.oneOf([
-      Size.DEFAULT,
-      Size.SMALL,
-      Size.EXTRA_SMALL,
-      Size.LARGE,
-      Size.EXTRA_LARGE,
-      Size.HUGE,
-      Size.EXTRA_HUGE,
-      Size.MASSIVE,
-    ]),
-    PropTypes.shape({
-      vertical: PropTypes.oneOf([
-        Size.DEFAULT,
-        Size.SMALL,
-        Size.EXTRA_SMALL,
-        Size.LARGE,
-        Size.EXTRA_LARGE,
-        Size.HUGE,
-        Size.EXTRA_HUGE,
-        Size.MASSIVE,
-      ]),
-      horizontal: PropTypes.oneOf([
-        Size.DEFAULT,
-        Size.SMALL,
-        Size.EXTRA_SMALL,
-        Size.LARGE,
-        Size.EXTRA_LARGE,
-        Size.HUGE,
-        Size.EXTRA_HUGE,
-        Size.MASSIVE,
-      ]),
-    }),
-    PropTypes.shape({
-      left: PropTypes.oneOf([
-        Size.DEFAULT,
-        Size.SMALL,
-        Size.EXTRA_SMALL,
-        Size.LARGE,
-        Size.EXTRA_LARGE,
-        Size.HUGE,
-        Size.EXTRA_HUGE,
-        Size.MASSIVE,
-      ]),
-      right: PropTypes.oneOf([
-        Size.DEFAULT,
-        Size.SMALL,
-        Size.EXTRA_SMALL,
-        Size.LARGE,
-        Size.EXTRA_LARGE,
-        Size.HUGE,
-        Size.EXTRA_HUGE,
-        Size.MASSIVE,
-      ]),
-      bottom: PropTypes.oneOf([
-        Size.DEFAULT,
-        Size.SMALL,
-        Size.EXTRA_SMALL,
-        Size.LARGE,
-        Size.EXTRA_LARGE,
-        Size.HUGE,
-        Size.EXTRA_HUGE,
-        Size.MASSIVE,
-      ]),
-      top: PropTypes.oneOf([
-        Size.DEFAULT,
-        Size.SMALL,
-        Size.EXTRA_SMALL,
-        Size.LARGE,
-        Size.EXTRA_LARGE,
-        Size.HUGE,
-        Size.EXTRA_HUGE,
-        Size.MASSIVE,
-      ]),
-    }),
-  ]),
-
-  /** The content of the margin wrapper */
-  children: PropTypes.node,
-
-  /** Prop to override any style if necessary, use sparingly */
-  style: PropTypes.object,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-};
-
-export default Margin;
