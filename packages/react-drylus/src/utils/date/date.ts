@@ -1,4 +1,3 @@
-import Enum from '@drawbotics/enums';
 import Dayjs from 'dayjs';
 import calendar from 'dayjs/plugin/calendar';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -19,11 +18,23 @@ const TimePeriod = {
   NOW: 0,
 };
 
-export const ShowDateTime = new Enum('DEFAULT', 'ALWAYS', 'NEVER');
+export enum ShowDateTime {
+  DEFAULT = 'DEFAULT',
+  ALWAYS = 'ALWAYS',
+  NEVER = 'NEVER',
+}
 
 Dayjs.extend(calendar);
 
-export function generateDisplayedDate({ date, options, locale = getCurrentLocale() }) {
+export function generateDisplayedDate({
+  date,
+  options,
+  locale = getCurrentLocale(),
+}: {
+  date: Date;
+  options: any;
+  locale?: string;
+}): string {
   const {
     hoursDifference,
     daysDifference,
@@ -36,7 +47,7 @@ export function generateDisplayedDate({ date, options, locale = getCurrentLocale
   const localeRoot = locale.split('-')[0];
 
   let dateFormat = '';
-  let timeFormat = null;
+  let timeFormat = undefined;
 
   // Time in the future
   if (daysDifference >= TimePeriod.IN_A_YEAR) {
@@ -60,11 +71,14 @@ export function generateDisplayedDate({ date, options, locale = getCurrentLocale
 
     Dayjs.extend(relativeTime);
 
-    if (extendedLocales[localeRoot]) {
+    if (extendedLocales[localeRoot as keyof typeof extendedLocales]) {
       Dayjs.extend(updateLocale);
       Dayjs.updateLocale(
         localeRoot,
-        extendedLocales[localeRoot].relative({ relativeMinutesDiff, hoursDifference }),
+        extendedLocales[localeRoot as keyof typeof extendedLocales].relative({
+          relativeMinutesDiff,
+          hoursDifference,
+        }),
       );
     }
 
@@ -88,12 +102,12 @@ export function generateDisplayedDate({ date, options, locale = getCurrentLocale
   if (options?.showTime === ShowDateTime.ALWAYS) {
     timeFormat = 'HH:mm';
   } else if (options?.showTime === ShowDateTime.NEVER) {
-    timeFormat = null;
+    timeFormat = undefined;
   }
 
   // If french or dutch, we don't show AM/PM
   if (!localeRoot.includes('fr') && !localeRoot.includes('nl')) {
-    timeFormat = timeFormat ? timeFormat.replace(/HH/g, 'h') + ' A' : null;
+    timeFormat = timeFormat ? timeFormat.replace(/HH/g, 'h') + ' A' : undefined;
   }
 
   if (options?.asArchive) {
@@ -104,8 +118,13 @@ export function generateDisplayedDate({ date, options, locale = getCurrentLocale
 
   const withLocale = Dayjs(date).locale(localeRoot);
 
-  const result = extendedLocales[localeRoot]
-    ? withLocale.calendar(null, extendedLocales[localeRoot].calendar({ format: outputFormat }))
+  const result = extendedLocales[localeRoot as keyof typeof extendedLocales]
+    ? withLocale.calendar(
+        undefined,
+        extendedLocales[localeRoot as keyof typeof extendedLocales].calendar({
+          format: outputFormat,
+        }),
+      )
     : withLocale.format(outputFormat);
 
   if (localeRoot.includes('fr')) {

@@ -7,7 +7,15 @@ Number.isInteger =
     return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
   };
 
-export function generateDisplayedPrice({ price, locale = getCurrentLocale(), options = {} }) {
+export function generateDisplayedPrice({
+  price,
+  locale = getCurrentLocale(),
+  options = {},
+}: {
+  price: { value: number; currency?: string };
+  locale?: string;
+  options: any;
+}) {
   const { value, currency } = price;
 
   const localeRoot = locale.split('-')[0];

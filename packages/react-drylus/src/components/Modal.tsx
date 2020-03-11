@@ -168,7 +168,10 @@ interface BaseModalProps {
   /** Fixed content at the bottom of the modal, not shown if raw is true */
   footer?: React.ReactNode;
 
-  /** Determines the minimum width of the modal */
+  /**
+   * Determines the minimum width of the modal
+   * @default Size.DEFAULT
+   */
   size?: Size.DEFAULT | Size.LARGE;
 
   /** Displayed at the top left of the modal window, not shown if raw is true */
@@ -179,7 +182,7 @@ interface BaseModalProps {
 }
 
 const BaseModal = React.forwardRef<HTMLDivElement, BaseModalProps>(
-  ({ children, onClickClose, footer, size, title, style }: BaseModalProps, ref) => (
+  ({ children, onClickClose, footer, size = Size.DEFAULT, title, style }: BaseModalProps, ref) => (
     <div
       style={style}
       className={cx(styles.root, { [styles.large]: size === Size.LARGE })}
@@ -216,7 +219,10 @@ const BaseModal = React.forwardRef<HTMLDivElement, BaseModalProps>(
 BaseModal.displayName = 'BaseModal';
 
 interface ModalProps extends BaseModalProps {
-  /** If true, the children are rendered without decoration, you have to style your own modal */
+  /**
+   * If true, the children are rendered without decoration, you have to style your own modal
+   * @default false
+   */
   raw?: boolean;
 
   /** Reponsive prop overrides */
@@ -225,7 +231,10 @@ interface ModalProps extends BaseModalProps {
   /** Determines if the modal is visible or not */
   visible: boolean;
 
-  /** Passed to the CSSTransition component to fire events at different points of the animation. See reactcommunity.org/react-transition-group docs */
+  /**
+   * Passed to the CSSTransition component to fire events at different points of the animation. See reactcommunity.org/react-transition-group docs
+   * @default {}
+   */
   cssTransitionCallbacks: {
     onEnter: () => void;
     onEntering: () => void;
@@ -242,11 +251,11 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     footer,
     visible,
     onClickClose,
-    size,
-    raw,
+    size = Size.DEFAULT,
+    raw = false,
     title,
     style,
-    cssTransitionCallbacks,
+    cssTransitionCallbacks = {},
   } = useResponsiveProps<ModalProps>(rest, responsive);
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
@@ -387,10 +396,4 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     </div>,
     document.getElementById('modals-outlet') as Element,
   );
-};
-
-Modal.defaultProps = {
-  size: Size.DEFAULT,
-  raw: false,
-  cssTransitionCallbacks: {},
 };

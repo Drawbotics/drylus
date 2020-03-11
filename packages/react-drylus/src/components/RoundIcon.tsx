@@ -72,7 +72,7 @@ interface RoundIconProps {
   /** Name of the icon */
   name: keyof typeof Icons;
 
-  /** Size of the icon */
+  /** @default Size.DEFAULT */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE | number;
 
   /** Makes the icon bold */
@@ -91,10 +91,14 @@ interface RoundIconProps {
 }
 
 export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
-  const { name, size, category, bold, style, color: _color } = useResponsiveProps<RoundIconProps>(
-    rest,
-    responsive,
-  );
+  const {
+    name,
+    size = Size.DEFAULT,
+    category,
+    bold,
+    style = {},
+    color: _color,
+  } = useResponsiveProps<RoundIconProps>(rest, responsive);
 
   const customSize = typeof size === 'number';
   const color = category ? categoryEnumToColor(category) : _color;
@@ -113,12 +117,6 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
       <Icon name={name} bold={bold} />
     </div>
   );
-};
-
-RoundIcon.defaultProps = {
-  size: Size.DEFAULT,
-
-  style: {},
 };
 
 RoundIcon.propTypes = {

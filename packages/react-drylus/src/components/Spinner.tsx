@@ -88,6 +88,7 @@ const styles = {
 };
 
 interface SpinnerProps {
+  /** @default Size.DEFAULT */
   size?: Size.DEFAULT | Size.SMALL | Size.LARGE;
 
   /** @deprecated use color instead */
@@ -109,9 +110,14 @@ interface SpinnerProps {
 }
 
 export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
-  const { size, category, inversed, fullSize, style, color: _color } = useResponsiveProps<
-    SpinnerProps
-  >(rest, responsive);
+  const {
+    size = Size.DEFAULT,
+    category,
+    inversed,
+    fullSize,
+    style,
+    color: _color,
+  } = useResponsiveProps<SpinnerProps>(rest, responsive);
   const color = category ? categoryEnumToColor(category) : _color;
   return (
     <div
@@ -140,10 +146,6 @@ export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
       </div>
     </div>
   );
-};
-
-Spinner.defaultProps = {
-  size: Size.DEFAULT,
 };
 
 Spinner.propTypes = {

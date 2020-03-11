@@ -45,10 +45,16 @@ const styles = {
 export const placeholderStyles = styles;
 
 interface LoadingPlaceholderProps {
-  /** Determines the height of the placeholder */
+  /**
+   * Determines the height of the placeholder
+   * @default sv.defaultMargin
+   */
   height: number | string;
 
-  /** Determines the height of the placeholder */
+  /**
+   * Determines the height of the placeholder
+   * @default 200
+   */
   width: number | string;
 
   /** Reponsive prop overrides */
@@ -56,12 +62,10 @@ interface LoadingPlaceholderProps {
 }
 
 export const LoadingPlaceholder = ({ responsive, ...rest }: LoadingPlaceholderProps) => {
-  const { height, width } = useResponsiveProps<LoadingPlaceholderProps>(rest, responsive);
+  const { height = sv.defaultMargin, width = 200 } = useResponsiveProps<LoadingPlaceholderProps>(
+    rest,
+    responsive,
+  );
 
   return <div className={styles.shimmer} style={{ height, width }} />;
-};
-
-LoadingPlaceholder.defaultProps = {
-  height: sv.defaultMargin,
-  width: 200,
 };

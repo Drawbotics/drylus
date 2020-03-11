@@ -2,7 +2,7 @@ export * from './Button';
 export * from './Icon';
 export * from './Title';
 export * from './RoundIcon';
-// export Paragraph from './Paragraph';
+export * from './Paragraph';
 // export SegmentedControl from './SegmentedControl';
 // export Table, { TCell, TBody, TRow, THead } from './Table';
 // export Label from './Label';

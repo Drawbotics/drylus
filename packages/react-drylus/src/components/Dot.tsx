@@ -34,15 +34,10 @@ const styles = {
 };
 
 interface DotProps {
-  /**
-   * @deprecated use color instead
-   */
+  /** @deprecated use color instead */
   category?: Category;
 
-  /**
-   * Used for style overrides
-   * @default {}
-   */
+  /** Used for style overrides */
   style?: Record<string, any>;
 
   color?: Color;

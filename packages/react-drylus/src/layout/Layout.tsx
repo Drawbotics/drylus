@@ -90,7 +90,10 @@ interface LayoutProps {
   /** If true the component will be fixed in place, and the children will scroll independently */
   fixed?: boolean;
 
-  /** If false the sidebar container is not made scrollable */
+  /**
+   * If false the sidebar container is not made scrollable
+   * @default true
+   */
   barScrollable?: boolean;
 
   /** Used for style overrides */
@@ -101,10 +104,9 @@ interface LayoutProps {
 }
 
 export const Layout = ({ responsive, ...rest }: LayoutProps) => {
-  const { children, position, bar, fixed, barScrollable, style } = useResponsiveProps<LayoutProps>(
-    rest,
-    responsive,
-  );
+  const { children, position, bar, fixed, barScrollable = true, style } = useResponsiveProps<
+    LayoutProps
+  >(rest, responsive);
 
   return (
     <div
@@ -125,8 +127,4 @@ export const Layout = ({ responsive, ...rest }: LayoutProps) => {
       </div>
     </div>
   );
-};
-
-Layout.defaultProps = {
-  barScrollable: true,
 };

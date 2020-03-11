@@ -1,3 +1,4 @@
+import Dayjs from 'dayjs';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -57,4 +58,40 @@ export function getStyleForSide({
     console.warn(`${String(side)} side value provided not supported`);
     return null;
   }
+}
+
+interface ExtendedNavigator extends Navigator {
+  userLanguage?: string;
+  browserLanguage?: string;
+}
+
+export function getCurrentLocale(): string {
+  const navigator = window.navigator as ExtendedNavigator;
+  if (navigator.languages != null && navigator.languages.length != null) {
+    return navigator.languages[0];
+  } else {
+    return navigator.userLanguage || navigator.language || navigator.browserLanguage || 'en-GB';
+  }
+}
+
+export function getTimeDifferenceFromToday(_date: Date) {
+  const date = Dayjs(_date);
+  const today = Dayjs(new Date());
+  const minutesDifference = date.diff(today, 'minute');
+  const hoursDifference = date.diff(today, 'hour');
+  const daysDifference = date.diff(today, 'day');
+  const isTomorrow = date.isAfter(today, 'day');
+  const isYesterday = date.isBefore(today, 'day');
+  const isToday = date.isSame(today, 'day');
+  const isSameYear = date.year() == today.year();
+
+  return {
+    minutesDifference,
+    hoursDifference,
+    daysDifference,
+    isToday,
+    isTomorrow,
+    isYesterday,
+    isSameYear,
+  };
 }

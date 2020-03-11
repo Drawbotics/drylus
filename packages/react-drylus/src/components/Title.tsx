@@ -56,7 +56,10 @@ interface TitleProps {
   /** Text displayed by the title */
   children: React.ReactNode;
 
-  /** Each number is equivalent to the h[n] in html, smaller value equals larger title */
+  /**
+   * Each number is equivalent to the h[n] in html, smaller value equals larger title
+   * @default 1
+   */
   size?: 1 | 2 | 3 | 4;
 
   /** Use this if you dont want the component to set margin. By default it has some top and bottom margin since it is a textual component */
@@ -65,6 +68,7 @@ interface TitleProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** @default Align.LEFT */
   align?: Align;
 
   /** Reponsive prop overrides */
@@ -72,10 +76,9 @@ interface TitleProps {
 }
 
 export const Title = ({ responsive, ...rest }: TitleProps) => {
-  const { children, size, noMargin, style, align } = useResponsiveProps<TitleProps>(
-    rest,
-    responsive,
-  );
+  const { children, size = 1, noMargin, style, align = Align.LEFT } = useResponsiveProps<
+    TitleProps
+  >(rest, responsive);
 
   if (size === 1) {
     return (
@@ -129,9 +132,4 @@ export const Title = ({ responsive, ...rest }: TitleProps) => {
     console.warn('Unsupported title size');
     return null;
   }
-};
-
-Title.defaultProps = {
-  size: 1,
-  align: Align.LEFT,
 };

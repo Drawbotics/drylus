@@ -6,7 +6,13 @@ import last from 'lodash/last';
 import tail from 'lodash/tail';
 
 const en = {
-  relative: ({ hoursDifference, relativeMinutesDiff }) => ({
+  relative: ({
+    hoursDifference,
+    relativeMinutesDiff,
+  }: {
+    hoursDifference: number;
+    relativeMinutesDiff: number;
+  }) => ({
     relativeTime: {
       future: 'in %s',
       past: hoursDifference > 0 ? '%s ago' : `${hoursDifference * -1}h${relativeMinutesDiff} ago`,
@@ -23,7 +29,7 @@ const en = {
       yy: '%d years',
     },
   }),
-  calendar: ({ format }) => ({
+  calendar: ({ format }: { format: string }) => ({
     sameElse: format,
     nextWeek: format,
     lastDay: `[yesterday at] h:mm A`,
@@ -34,7 +40,13 @@ const en = {
 };
 
 const fr = {
-  relative: ({ hoursDifference, relativeMinutesDiff }) => ({
+  relative: ({
+    hoursDifference,
+    relativeMinutesDiff,
+  }: {
+    hoursDifference: number;
+    relativeMinutesDiff: number;
+  }) => ({
     relativeTime: {
       future: 'dans %s',
       past:
@@ -52,7 +64,7 @@ const fr = {
       yy: '%d ans',
     },
   }),
-  calendar: ({ format }) => ({
+  calendar: ({ format }: { format: string }) => ({
     sameElse: format,
     nextWeek: format,
     lastWeek: `${format.split(',')[0]} [passé],${tail(format.split(','))}`,
@@ -62,7 +74,13 @@ const fr = {
 };
 
 const nl = {
-  relative: ({ hoursDifference, relativeMinutesDiff }) => ({
+  relative: ({
+    hoursDifference,
+    relativeMinutesDiff,
+  }: {
+    hoursDifference: number;
+    relativeMinutesDiff: number;
+  }) => ({
     relativeTime: {
       future: 'over %s',
       past:
@@ -82,7 +100,7 @@ const nl = {
       yy: '%d jaar',
     },
   }),
-  calendar: ({ format }) => ({
+  calendar: ({ format }: { format: string }) => ({
     sameElse: format,
     nextWeek: format,
     lastWeek: `[vorige] ${format}`,

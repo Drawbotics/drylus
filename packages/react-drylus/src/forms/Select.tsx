@@ -112,13 +112,22 @@ interface SelectProps {
   /** Disables the select */
   disabled?: boolean;
 
-  /** Used to pick each value in the options array */
+  /**
+   * Used to pick each value in the options array
+   * @default 'value'
+   */
   valueKey?: string;
 
-  /** Used to pick each label in the options array */
+  /**
+   * Used to pick each label in the options array
+   * @default 'label'
+   */
   labelKey?: string;
 
-  /** Text shown when no value is selected */
+  /**
+   * Text shown when no value is selected
+   * @default ' -- ''
+   */
   placeholder?: string;
 
   /** Triggered when a new value is chosen, returns a value, key (label, value) pair. If not given, the field is read-only */
@@ -148,9 +157,9 @@ export const Select = ({ responsive, ...rest }: SelectProps) => {
     value,
     options = [],
     onChange,
-    valueKey,
-    labelKey,
-    placeholder,
+    valueKey = 'value',
+    labelKey = 'label',
+    placeholder = ' -- ',
     disabled,
     hint,
     error,
@@ -231,10 +240,4 @@ export const Select = ({ responsive, ...rest }: SelectProps) => {
       })}
     </div>
   );
-};
-
-Select.defaultProps = {
-  valueKey: 'value',
-  labelKey: 'label',
-  placeholder: ' -- ',
 };

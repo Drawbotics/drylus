@@ -99,7 +99,7 @@ interface FlexItemProps {
 }
 
 export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
-  const { children, flex, style } = useResponsiveProps(rest, responsive);
+  const { children, flex, style = {} } = useResponsiveProps(rest, responsive);
   const equalSpan = flex === true;
   return (
     <div
@@ -110,23 +110,31 @@ export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
   );
 };
 
-FlexItem.defaultProps = {
-  style: {},
-};
-
 interface FlexProps {
-  children: React.ReactElement<typeof FlexItem>;
+  children: React.ReactElement<typeof FlexItem> | Array<React.ReactElement<typeof FlexItem>>;
 
-  /** Determines which way the flex layout should be */
+  /**
+   * Determines which way the flex layout should be
+   * @default FlexDirection.HORIZONTAL
+   */
   direction?: FlexDirection;
 
-  /** See flexbox justify-content */
+  /**
+   * See flexbox justify-content
+   * @default FlexJustify.CENTER
+   */
   justify?: FlexJustify;
 
-  /** See flexbox align-items */
+  /**
+   * See flexbox align-items
+   * @default FlexAlign.CENTER
+   */
   align?: FlexAlign;
 
-  /** See flexbox flex-wrap. If true, sets to `wrap` */
+  /**
+   * See flexbox flex-wrap. If true, sets to `wrap`
+   * @default false
+   */
   wrap?: boolean;
 
   /** To override simple styles on the flex element, use only for properties that do not require prefixing */
@@ -140,9 +148,15 @@ interface FlexProps {
 }
 
 export const Flex = ({ responsive, ...rest }: FlexProps) => {
-  const { children, direction, justify, align, wrap, className, style } = useResponsiveProps<
-    FlexProps
-  >(rest, responsive);
+  const {
+    children,
+    direction = FlexDirection.HORIZONTAL,
+    justify = FlexJustify.CENTER,
+    align = FlexAlign.CENTER,
+    wrap = false,
+    className,
+    style,
+  } = useResponsiveProps<FlexProps>(rest, responsive);
 
   const invalidChildren = React.Children.map(children, (x) => x).some(
     (child) => child != null && child.type !== FlexItem,
@@ -166,11 +180,4 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
       {children}
     </div>
   );
-};
-
-Flex.defaultProps = {
-  direction: FlexDirection.HORIZONTAL,
-  justify: FlexJustify.CENTER,
-  align: FlexAlign.CENTER,
-  wrap: false,
 };

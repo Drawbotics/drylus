@@ -7,7 +7,7 @@ import { v4 } from 'uuid';
 
 import { themeStyles } from '../base/ThemeProvider';
 import { Category, Size, Tier } from '../enums';
-// import { Flex, FlexAlign, FlexItem, FlexJustify, Margin } from '../layout';
+import { Flex, FlexAlign, FlexItem, FlexJustify, Margin } from '../layout';
 import { getEnumAsClass } from '../utils';
 import { Button } from './Button';
 import { Icon } from './Icon';
@@ -134,11 +134,14 @@ interface AlertProps {
   /** If you need to manually hide the alert, you can pass your own ID to call hide */
   id: string;
 
-  /** Amount of milliseconds before the alert is dismissed (except for danger) */
+  /**
+   * Amount of milliseconds before the alert is dismissed (except for danger)
+   * @default 4000
+   */
   hideDelay?: number;
 }
 
-export const Alert = ({ id, text, category, onClickDismiss, hideDelay }: AlertProps) => {
+export const Alert = ({ id, text, category, onClickDismiss, hideDelay = 4000 }: AlertProps) => {
   const icon = _getIconForCategory(category);
 
   useEffect(() => {
@@ -152,53 +155,32 @@ export const Alert = ({ id, text, category, onClickDismiss, hideDelay }: AlertPr
       className={cx(styles.root, {
         [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
       })}>
-      {/* <Flex justify={FlexJustify.START} align={FlexAlign.START}>
+      <Flex justify={FlexJustify.START} align={FlexAlign.START}>
         <FlexItem>
-          <Margin size={{ right: Size.SMALL, top: Size.EXTRA_SMALL }}> */}
-      <div data-element="icon">
-        <Icon name={icon} />
-      </div>
-      {/* </Margin>
+          <Margin size={{ right: Size.SMALL, top: Size.EXTRA_SMALL }}>
+            <div data-element="icon">
+              <Icon name={icon} />
+            </div>
+          </Margin>
         </FlexItem>
         <FlexItem flex>
-          <Margin size={{ top: Size.EXTRA_SMALL, bottom: Size.EXTRA_SMALL }}> */}
-      <span data-element="text">{text}</span>
-      {/* </Margin>
+          <Margin size={{ top: Size.EXTRA_SMALL, bottom: Size.EXTRA_SMALL }}>
+            <span data-element="text">{text}</span>
+          </Margin>
         </FlexItem>
         <FlexItem>
-          <Margin size={{ left: Size.DEFAULT }}> */}
-      <Button
-        size={Size.SMALL}
-        onClick={() => onClickDismiss(id)}
-        tier={Tier.TERTIARY}
-        leading={<Icon name="x" />}
-      />
-      {/* </Margin>
+          <Margin size={{ left: Size.DEFAULT }}>
+            <Button
+              size={Size.SMALL}
+              onClick={() => onClickDismiss(id)}
+              tier={Tier.TERTIARY}
+              leading={<Icon name="x" />}
+            />
+          </Margin>
         </FlexItem>
-      </Flex> */}
+      </Flex>
     </div>
   );
-};
-
-// Alert.propTypes = {
-//   /** Text shown within the alert */
-//   text: PropTypes.string.isRequired,
-
-//   category: PropTypes.oneOf([Category.DANGER, Category.SUCCESS, Category.INFO, Category.WARNING])
-//     .isRequired,
-
-//   /** Triggered when the dismiss button is clicked */
-//   onClickDismiss: PropTypes.func,
-
-//   /** If you need to manually hide the alert, you can pass your own ID to call hide */
-//   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-
-//   /** Amount of milliseconds before the alert is dismissed (except for danger) */
-//   hideDelay: PropTypes.number,
-// };
-
-Alert.defaultProps = {
-  hideDelay: 4000,
 };
 
 interface AlertsContext {

@@ -193,6 +193,7 @@ interface InputProps {
   /** Additional class name to override styles */
   className?: string;
 
+  /** @default 'text' */
   type?: 'text' | 'password' | 'email' | 'tel' | 'url';
 
   /** If true, a spinner is shown in the right corner, like with error and valid */
@@ -229,6 +230,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
     style,
     isPlaceholder,
     extraLeftPadding,
+    type = 'text',
     ...props
   } = useResponsiveProps<RawInputProps>(rest, responsive);
 
@@ -311,6 +313,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
               [styles.straightLeft]: prefix != null,
               [styles.straightRight]: suffix != null,
             })}
+            type={type}
             value={value}
             ref={inputRef}
             style={{
@@ -359,8 +362,4 @@ InputWithRef.displayName = 'Input';
 
 export const Input = (props: InputProps) => {
   return <RawInput {...props} />;
-};
-
-Input.defaultProps = {
-  type: 'text',
 };

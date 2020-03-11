@@ -93,6 +93,7 @@ interface TooltipProps {
   /** Component wrapped by the tooltip */
   children: React.ReactNode;
 
+  /** @default Position.TOP */
   side?: Position;
 
   /** Used for style overrides */
@@ -107,10 +108,13 @@ interface HTMLElementWithDisabled extends HTMLElement {
 }
 
 export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
-  const { children, message, content: _content, side, style } = useResponsiveProps<TooltipProps>(
-    rest,
-    responsive,
-  );
+  const {
+    children,
+    message,
+    content: _content,
+    side = Position.TOP,
+    style = {},
+  } = useResponsiveProps<TooltipProps>(rest, responsive);
 
   const [visible, setVisible] = useState(false);
   const [outletElement, setOutletElement] = useState<HTMLElement>();
@@ -201,11 +205,6 @@ export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
       )}
     </Fragment>
   );
-};
-
-Tooltip.defaultProps = {
-  side: Position.TOP,
-  style: {},
 };
 
 Tooltip.propTypes = {

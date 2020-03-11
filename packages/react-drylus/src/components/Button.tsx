@@ -280,8 +280,10 @@ interface ButtonProps {
 
   color?: Exclude<Color, Color.PRIMARY>;
 
+  /** @default Size.DEFAULT */
   size?: Extract<Size, Size.SMALL | Size.DEFAULT | Size.LARGE>;
 
+  /** @default Tier.PRIMARY */
   tier?: Tier;
 
   /** Shown in front of the button text, can be a Spinner or Icon */
@@ -306,8 +308,8 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
     disabled,
     onClick,
     category: _category,
-    size,
-    tier,
+    size = Size.DEFAULT,
+    tier = Tier.PRIMARY,
     leading,
     trailing,
     fullWidth,
@@ -352,9 +354,4 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
       })}
     </button>
   );
-};
-
-Button.defaultProps = {
-  size: Size.DEFAULT,
-  tier: Tier.PRIMARY,
 };
