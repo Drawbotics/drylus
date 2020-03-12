@@ -82,7 +82,7 @@ interface EmptyStateProps {
   responsive?: Responsive;
 }
 
-const EmptyState = ({ responsive, ...rest }: EmptyStateProps) => {
+export const EmptyState = ({ responsive, ...rest }: EmptyStateProps) => {
   const {
     description,
     title,

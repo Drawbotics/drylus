@@ -8,11 +8,17 @@ import { Responsive, Style } from 'src/types';
 import { Category, Shade, Size, Tier } from '../enums';
 import {
   ShowDateTime,
-  generateDisplayedDate as formatDate,
-  generateDisplayedPrice as formatPrice,
+  generateDisplayedDate,
+  generateDisplayedPrice,
   getEnumAsClass,
   shadeEnumToTier,
   useResponsiveProps,
+} from '../utils';
+
+export {
+  generateDisplayedPrice as formatPrice,
+  ShowDateTime,
+  generateDisplayedDate as formatDate,
 } from '../utils';
 
 const styles = {
@@ -157,13 +163,13 @@ function _processChild(
 ) {
   if (isObject(child)) {
     if (child instanceof Date) {
-      return formatDate({
+      return generateDisplayedDate({
         date: child,
         options: dateOptions,
         locale,
       });
     } else if (child.value != null) {
-      return formatPrice({
+      return generateDisplayedPrice({
         price: child,
         options: priceOptions,
         locale,
