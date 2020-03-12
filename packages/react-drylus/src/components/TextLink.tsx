@@ -1,8 +1,7 @@
 import sv, { darken } from '@drawbotics/drylus-style-vars';
-import Enum from '@drawbotics/enums';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
+import { Style } from 'src/types';
 
 import { Category, Shade } from '../enums';
 import { getEnumAsClass } from '../utils';
@@ -83,15 +82,41 @@ const styles = {
   `,
 };
 
-export const LinkUnderlined = new Enum('ALWAYS', 'HOVER');
+export enum LinkUnderlined {
+  ALWAYS = 'ALWAYS',
+  HOVER = 'HOVER',
+}
 
-const TextLink = ({ children, category, underlined, style, shade, ...rest }) => {
+interface TextLinkProps {
+  /** Text of the link */
+  children?: React.ReactNode;
+
+  /** @default Category.INFO */
+  category?: Exclude<Category, Category.PRIMARY>;
+
+  shade?: Shade;
+
+  /** @default LinkUnderlined.HOVER */
+  underlined?: LinkUnderlined;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const TextLink = ({
+  children,
+  category = Category.INFO,
+  underlined = LinkUnderlined.HOVER,
+  style,
+  shade,
+  ...rest
+}: TextLinkProps) => {
   return (
     <span
       style={style}
       className={cx(styles.root, {
-        [styles[getEnumAsClass(category)]]: category,
-        [styles[getEnumAsClass(shade)]]: shade,
+        [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
+        [styles[getEnumAsClass<typeof styles>(shade)]]: shade != null,
         [styles.underlinedHover]: underlined === LinkUnderlined.HOVER,
         [styles.underlinedAlways]: underlined === LinkUnderlined.ALWAYS,
       })}
@@ -100,30 +125,3 @@ const TextLink = ({ children, category, underlined, style, shade, ...rest }) => 
     </span>
   );
 };
-
-TextLink.propTypes = {
-  /** Text of the link */
-  children: PropTypes.string,
-
-  category: PropTypes.oneOf([
-    Category.BRAND,
-    Category.DANGER,
-    Category.SUCCESS,
-    Category.INFO,
-    Category.WARNING,
-  ]),
-
-  shade: PropTypes.oneOf([Shade.DARK, Shade.MEDIUM, Shade.LIGHT]),
-
-  underlined: PropTypes.oneOf([LinkUnderlined.ALWAYS, LinkUnderlined.HOVER]),
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
-TextLink.defaultProps = {
-  underlined: LinkUnderlined.HOVER,
-  category: Category.INFO,
-};
-
-export default TextLink;

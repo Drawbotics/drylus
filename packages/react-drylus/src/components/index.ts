@@ -17,7 +17,7 @@ export * from './Text';
 export * from './Dot';
 export * from './Tooltip';
 // export Collapsible from './Collapsible';
-// export TextLink, { LinkUnderlined } from './TextLink';
+export * from './TextLink';
 export * from './Modal';
 // export Tag from './Tag';
 export * from './Spinner';

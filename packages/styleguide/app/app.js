@@ -9,8 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import MobileSidebar from './components/MobileSidebar';
 import Sidebar from './components/Sidebar';
-
-// import Root from './routes/Root';
+import Root from './routes/Root';
 
 window._drylus = drylus;
 
@@ -36,8 +35,7 @@ const App = () => {
                 height: '100%',
                 width: screenSize <= ScreenSizes.L ? '100vw' : null,
               }}>
-              {/* <Root /> */}
-              <div></div>
+              <Root />
             </div>
           </Layout>
         </Page>
