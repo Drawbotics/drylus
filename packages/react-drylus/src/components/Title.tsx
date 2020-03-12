@@ -72,7 +72,7 @@ interface TitleProps {
   align?: Align;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 export const Title = ({ responsive, ...rest }: TitleProps) => {

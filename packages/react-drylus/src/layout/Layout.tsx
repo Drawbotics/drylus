@@ -100,7 +100,7 @@ interface LayoutProps {
   style?: Style;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 export const Layout = ({ responsive, ...rest }: LayoutProps) => {

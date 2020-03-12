@@ -95,7 +95,7 @@ interface FlexItemProps {
   style?: Style;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
@@ -144,7 +144,7 @@ interface FlexProps {
   className?: string;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 export const Flex = ({ responsive, ...rest }: FlexProps) => {

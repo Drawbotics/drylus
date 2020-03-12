@@ -87,7 +87,7 @@ interface RoundIconProps {
   style?: Style;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {

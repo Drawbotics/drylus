@@ -27,7 +27,7 @@ interface HintProps {
   style?: Style;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 export const Hint = ({ responsive, ...rest }: HintProps) => {

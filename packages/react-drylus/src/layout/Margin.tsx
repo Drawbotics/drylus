@@ -339,7 +339,7 @@ interface MarginProps {
   style?: Style;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 export const Margin = ({ responsive, ...rest }: MarginProps) => {

@@ -149,7 +149,7 @@ interface SelectProps {
   style?: Style;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 export const Select = ({ responsive, ...rest }: SelectProps) => {

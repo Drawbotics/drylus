@@ -7,7 +7,7 @@ import React from 'react';
 import { hot } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 
-// import MobileSidebar from './components/MobileSidebar';
+import MobileSidebar from './components/MobileSidebar';
 import Sidebar from './components/Sidebar';
 
 // import Root from './routes/Root';
@@ -26,8 +26,7 @@ const App = () => {
             fixed
             responsive={{
               L: {
-                // bar: <MobileSidebar />,
-                bar: <div></div>,
+                bar: <MobileSidebar />,
                 position: Position.TOP,
                 fixed: false,
               },

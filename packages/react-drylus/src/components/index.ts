@@ -9,7 +9,7 @@ export * from './Paragraph';
 // export Panel, { PanelHeader, PanelBody, PanelFooter, PanelSection } from './Panel';
 // export Pagination from './Pagination';
 // export Badge from './Badge';
-// export Drawer from './Drawer';
+export * from './Drawer';
 // export BaseFilter, { SelectFilter, CheckboxFilter } from './Filter';
 // export TabNavigation from './TabNavigation';
 // export Avatar from './Avatar';

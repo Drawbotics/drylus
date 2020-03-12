@@ -79,7 +79,7 @@ interface EmptyStateProps {
   style?: Style;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 export const EmptyState = ({ responsive, ...rest }: EmptyStateProps) => {

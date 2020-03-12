@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { Responsive } from '../types';
 
-function _getPropsForSize(responsive: Responsive) {
+function _getPropsForSize<T>(responsive: Responsive<T>) {
   const { screenSize, ScreenSizes } = useScreenSize();
 
   if (screenSize <= ScreenSizes.XS && responsive.XS != null) {
@@ -25,12 +25,12 @@ function _getPropsForSize(responsive: Responsive) {
   }
 }
 
-export function useResponsiveProps<T>(original: T, responsive?: Responsive) {
+export function useResponsiveProps<T>(original: T, responsive?: Responsive<T>) {
   if (!responsive) {
     return original;
   }
 
-  const responsiveProps = _getPropsForSize(responsive);
+  const responsiveProps = _getPropsForSize<T>(responsive);
 
   const props = assign({}, original, responsiveProps);
 

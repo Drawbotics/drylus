@@ -100,7 +100,7 @@ interface TooltipProps {
   style?: Style;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 interface HTMLElementWithDisabled extends HTMLElement {

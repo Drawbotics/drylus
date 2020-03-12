@@ -181,7 +181,7 @@ interface BaseModalProps {
   style?: Style;
 }
 
-const BaseModal = React.forwardRef<HTMLDivElement, BaseModalProps>(
+export const BaseModal = React.forwardRef<HTMLDivElement, BaseModalProps>(
   ({ children, onClickClose, footer, size = Size.DEFAULT, title, style }: BaseModalProps, ref) => (
     <div
       style={style}
@@ -226,7 +226,7 @@ interface ModalProps extends BaseModalProps {
   raw?: boolean;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 
   /** Determines if the modal is visible or not */
   visible: boolean;
@@ -318,14 +318,14 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
       document.body.style.overflow = 'hidden';
       if (screenSize <= ScreenSizes.L) {
         document.body.style.pointerEvents = 'none';
-        if (document.body.parentElement) {
+        if (document.body.parentElement != null) {
           document.body.parentElement.style.position = 'fixed';
         }
       }
     } else {
       document.body.style.overflow = 'initial';
       document.body.style.pointerEvents = 'auto';
-      if (document.body.parentElement) {
+      if (document.body.parentElement != null) {
         document.body.parentElement.style.position = '';
       }
     }
@@ -345,7 +345,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     };
   });
 
-  if (!outletElement) return '';
+  if (outletElement == null) return '';
 
   const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === overlayElement?.current && onClickClose != null) {

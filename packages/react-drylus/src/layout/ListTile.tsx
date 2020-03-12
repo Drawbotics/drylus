@@ -58,7 +58,7 @@ interface ListTileProps {
   style?: Style;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 export const ListTile = ({ responsive, ...rest }: ListTileProps) => {

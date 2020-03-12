@@ -58,7 +58,7 @@ interface LoadingPlaceholderProps {
   width: number | string;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 export const LoadingPlaceholder = ({ responsive, ...rest }: LoadingPlaceholderProps) => {

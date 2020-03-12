@@ -206,7 +206,7 @@ interface InputProps {
   style?: Style;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 interface RawInputProps extends InputProps {

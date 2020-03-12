@@ -339,7 +339,7 @@ interface PaddingProps {
   style?: Style;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 export const Padding = ({ responsive, ...rest }: PaddingProps) => {

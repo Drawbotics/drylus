@@ -146,7 +146,7 @@ interface TextProps {
   style?: Style;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 function _processChild(

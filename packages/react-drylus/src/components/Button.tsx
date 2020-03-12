@@ -299,7 +299,7 @@ interface ButtonProps {
   style?: Style;
 
   /** Reponsive prop overrides */
-  responsive?: Responsive;
+  responsive?: Responsive<this>;
 }
 
 export const Button = ({ responsive, ...rest }: ButtonProps) => {
