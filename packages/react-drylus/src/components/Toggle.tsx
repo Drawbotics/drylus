@@ -1,10 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
-import Size from '../enums/Size';
-import { useResponsiveProps } from '../utils/hooks';
+import { Size } from '../enums';
+import { Responsive, Style } from '../types';
+import { useResponsiveProps } from '../utils';
 
 const TRIGGER_DIMENSIONS = '21px';
 const TRIGGER_DIMENSIONS_SMALL = '16px';
@@ -75,7 +75,26 @@ const styles = {
   `,
 };
 
-const Toggle = ({ responsive, ...rest }) => {
+interface ToggleProps {
+  /** Triggered when toggle value is changed */
+  onChange: (value: boolean) => void;
+
+  /** If true, toggle is not clickable */
+  disabled?: boolean;
+
+  /** Determines if toggle is active */
+  value: boolean;
+
+  size: Size.SMALL | Size.DEFAULT;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+}
+
+export const Toggle = ({ responsive, ...rest }: ToggleProps) => {
   const { onChange, disabled, value, size, style } = useResponsiveProps(rest, responsive);
   return (
     <div
@@ -90,31 +109,3 @@ const Toggle = ({ responsive, ...rest }) => {
     </div>
   );
 };
-
-Toggle.propTypes = {
-  /** Triggered when toggle value is changed */
-  onChange: PropTypes.func.isRequired,
-
-  /** If true, toggle is not clickable */
-  disabled: PropTypes.bool,
-
-  /** Determines if toggle is active */
-  value: PropTypes.bool.isRequired,
-
-  size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT]),
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-};
-
-export default Toggle;

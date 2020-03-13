@@ -1,11 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Category, Color } from '../enums';
-import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
-import Icon from './Icon';
+import { Style } from '../types';
+import { Deprecated, categoryEnumToColor, getEnumAsClass, run } from '../utils';
+import { Icon } from './Icon';
 
 const styles = {
   root: css`
@@ -69,7 +69,25 @@ const styles = {
   `,
 };
 
-const Tag = ({ children, category, onClickRemove, inversed, style, color: _color }) => {
+interface TagProps {
+  children: string;
+
+  /** @deprecated use color instead */
+  category?: Exclude<Category, Category.PRIMARY>;
+
+  color?: Exclude<Color, Color.PRIMARY>;
+
+  /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */
+  onClickRemove?: () => void;
+
+  /** Modifies the way the category is shown */
+  inversed?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+const Tag = ({ children, category, onClickRemove, inversed, style, color: _color }: TagProps) => {
   const color = category ? categoryEnumToColor(category) : _color;
   const className = inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
   return (
@@ -77,42 +95,18 @@ const Tag = ({ children, category, onClickRemove, inversed, style, color: _color
       style={style}
       className={cx(styles.root, {
         [styles.inversed]: inversed,
-        [styles[className]]: color,
+        [styles[className as keyof typeof styles]]: color != null,
       })}>
       {children}
-      {do {
-        if (onClickRemove) {
-          <Icon name="x" onClick={onClickRemove} />;
+      {run(() => {
+        if (onClickRemove != null) {
+          return <Icon name="x" onClick={onClickRemove} />;
         }
-      }}
+      })}
     </div>
   );
 };
 
 Tag.propTypes = {
-  children: PropTypes.string.isRequired,
-
-  /** DEPRECATED */
-  category: CustomPropTypes.deprecated(
-    PropTypes.oneOf([
-      Category.BRAND,
-      Category.DANGER,
-      Category.SUCCESS,
-      Category.INFO,
-      Category.WARNING,
-    ]),
-  ),
-
-  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
-
-  /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */
-  onClickRemove: PropTypes.func,
-
-  /** Modifies the way the category is shown */
-  inversed: PropTypes.bool,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
+  category: Deprecated,
 };
-
-export default Tag;

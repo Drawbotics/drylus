@@ -1,12 +1,12 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Category, Size } from '../enums';
-import { CustomPropTypes } from '../utils';
-import Badge from './Badge';
-import Spinner from './Spinner';
+import { Option, Style } from '../types';
+import { run } from '../utils';
+import { Badge } from './Badge';
+import { Spinner } from './Spinner';
 
 const styles = {
   root: css`
@@ -80,63 +80,83 @@ const styles = {
   `,
 };
 
-const SegmentedControl = ({ value, onChange, options, valueKey, labelKey, style }) => {
+interface SegmentedControlOption extends Option {
+  /** If given, the control shows a value in a Badge */
+  bullet?: number;
+
+  /** If true, the control is disabled */
+  disabled?: boolean;
+
+  /** If true, the control will show a spinner */
+  loading?: boolean;
+}
+
+interface SegmentedControlProps {
+  /** Determines the controls which will be rendered */
+  options: Array<SegmentedControlOption>;
+
+  /**
+   * Used to pick each value in the options array
+   * @default 'value'
+   */
+  valueKey?: string;
+
+  /**
+   * Used to pick each label in the options array
+   * @default 'label'
+   */
+  labelKey?: string;
+
+  /** Determines which value is currently active */
+  value: string | number;
+
+  /** Triggered when a control is clicked */
+  onChange?: (value: string | number) => void;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const SegmentedControl = ({
+  value,
+  onChange,
+  options,
+  valueKey = 'value',
+  labelKey = 'label',
+  style,
+}: SegmentedControlProps) => {
   return (
     <div style={style} className={styles.root}>
       {options.map((option) => (
         <div
-          key={option[valueKey]}
+          key={option[valueKey as keyof typeof Option]}
           className={cx(styles.control, {
-            [styles.active]: value === option[valueKey],
+            [styles.active]: value === option[valueKey as keyof typeof Option],
             [styles.disabled]: option.disabled,
           })}
-          onClick={!option.disabled ? () => onChange(option[valueKey]) : null}>
-          <span>{option[labelKey]}</span>
-          {do {
+          onClick={
+            !option.disabled && onChange != null
+              ? () => onChange(option[valueKey as keyof typeof Option])
+              : undefined
+          }>
+          <span>{option[labelKey as keyof typeof Option]}</span>
+          {run(() => {
             if (option.loading === true) {
-              <div data-element="extra" className={styles.extra}>
-                <Spinner size={Size.SMALL} category={Category.BRAND} />
-              </div>;
+              return (
+                <div data-element="extra" className={styles.extra}>
+                  <Spinner size={Size.SMALL} category={Category.BRAND} />
+                </div>
+              );
             } else if (option.bullet != null) {
-              <div data-element="extra" className={styles.extra}>
-                <Badge category={Category.BRAND} value={option.bullet} max={99} />
-              </div>;
+              return (
+                <div data-element="extra" className={styles.extra}>
+                  <Badge category={Category.BRAND} value={option.bullet} max={99} />
+                </div>
+              );
             }
-          }}
+          })}
         </div>
       ))}
     </div>
   );
 };
-
-SegmentedControl.propTypes = {
-  /** Determines the controls which will be rendered */
-  options: CustomPropTypes.optionsWith({
-    bullet: PropTypes.number,
-    disabled: PropTypes.bool,
-    loading: PropTypes.bool,
-  }),
-
-  /** Used to pick each value in the options array */
-  valueKey: PropTypes.string,
-
-  /** Used to pick each label in the options array */
-  labelKey: PropTypes.string,
-
-  /** Determines which value is currently active */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /** Triggered when a control is clicked */
-  onChange: PropTypes.func,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
-SegmentedControl.defaultProps = {
-  valueKey: 'value',
-  labelKey: 'label',
-  onChange: (x) => x,
-};
-
-export default SegmentedControl;

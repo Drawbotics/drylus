@@ -1,9 +1,9 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Category, Color } from '../enums';
+import { Style } from '../types';
 import { categoryEnumToColor, getEnumAsClass } from '../utils';
 
 const styles = {
@@ -41,38 +41,30 @@ const styles = {
   `,
 };
 
-const Badge = ({ value, max, category, style, color: _color }) => {
+interface BadgeProps {
+  /** Value displayed by the badge */
+  value: number;
+
+  /** If the value is higher than the max, then a + is displayed with the max */
+  max?: number;
+
+  category?: Exclude<Category, Category.PRIMARY>;
+
+  color?: Exclude<Color, Color.PRIMARY>;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const Badge = ({ value, max, category, style, color: _color }: BadgeProps) => {
   const color = category ? categoryEnumToColor(category) : _color;
   return (
     <div
       style={style}
       className={cx(styles.root, {
-        [styles[getEnumAsClass(color)]]: color,
+        [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
       })}>
-      {value > max ? `${max}+` : value}
+      {max != null && value > max ? `${max}+` : value}
     </div>
   );
 };
-
-Badge.propTypes = {
-  /** Value displayed by the badge */
-  value: PropTypes.number.isRequired,
-
-  /** If the value is higher than the max, then a + is displayed with the max */
-  max: PropTypes.number,
-
-  category: PropTypes.oneOf([
-    Category.BRAND,
-    Category.SUCCESS,
-    Category.INFO,
-    Category.WARNING,
-    Category.DANGER,
-  ]),
-
-  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
-export default Badge;

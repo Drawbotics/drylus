@@ -321,7 +321,7 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
     throw new Error('If no children are given, only pass trailing or leading, but not both');
   }
 
-  const round = !children && (trailing || leading);
+  const round = children == null && (trailing != null || leading != null);
 
   const category = color ? colorEnumToCategory(color) : _category;
 
@@ -331,8 +331,8 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
       onClick={onClick}
       className={cx(styles.root, {
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
-        [styles.round]: round !== true,
-        [styles.roundSmall]: round !== true && size === Size.SMALL,
+        [styles.round]: round === true,
+        [styles.roundSmall]: round === true && size === Size.SMALL,
         [styles[getEnumAsClass<typeof styles>(category)]]:
           category != null && tier === Tier.PRIMARY,
         [styles[getEnumAsClass<typeof styles>(tier)]]: tier != null,
