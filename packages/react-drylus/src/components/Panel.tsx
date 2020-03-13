@@ -1,7 +1,9 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
+
+import { Style } from '../types';
+import { run } from '../utils';
 
 const styles = {
   root: css`
@@ -93,7 +95,15 @@ const styles = {
   `,
 };
 
-export const PanelHeader = ({ children, noPadding }) => {
+interface PanelHeaderProps {
+  /** Content of the header */
+  children: React.ReactNode;
+
+  /** If true there is no space between the content and the border of the panel */
+  noPadding?: boolean;
+}
+
+export const PanelHeader = ({ children, noPadding }: PanelHeaderProps) => {
   return (
     <div
       className={cx(styles.header, {
@@ -104,15 +114,18 @@ export const PanelHeader = ({ children, noPadding }) => {
   );
 };
 
-PanelHeader.propTypes = {
-  /** Content of the header */
-  children: PropTypes.node.isRequired,
+interface PanelBodyProps {
+  /** Content of the body */
+  children: React.ReactNode;
 
-  /** If true there is no space between the content and the border of the panel */
-  noPadding: PropTypes.bool,
-};
+  /** If true there is no (minimal) space between the content and the border of the panel */
+  noPadding?: boolean;
 
-export const PanelBody = ({ children, noPadding, style }) => {
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const PanelBody = ({ children, noPadding, style }: PanelBodyProps) => {
   return (
     <div style={style} className={cx(styles.body, { [styles.noSpacing]: noPadding })}>
       {children}
@@ -120,42 +133,42 @@ export const PanelBody = ({ children, noPadding, style }) => {
   );
 };
 
-PanelBody.propTypes = {
-  /** Content of the body */
-  children: PropTypes.node.isRequired,
+interface PanelSectionProps {
+  /** Content of the section */
+  children: React.ReactNode;
 
-  /** If true there is no (minimal) space between the content and the border of the panel */
-  noPadding: PropTypes.bool,
+  /** Displays a title on the top left of the section */
+  title?: string;
 
   /** Used for style overrides */
-  style: PropTypes.object,
-};
+  style?: Style;
+}
 
-export const PanelSection = ({ children, title, style }) => {
+export const PanelSection = ({ children, title, style }: PanelSectionProps) => {
   return (
     <div style={style} className={styles.section}>
-      {do {
+      {run(() => {
         if (title) {
-          <div className={styles.sectionTitle}>{title}</div>;
+          return <div className={styles.sectionTitle}>{title}</div>;
         }
-      }}
+      })}
       {children}
     </div>
   );
 };
 
-PanelSection.propTypes = {
-  /** Content of the section */
-  children: PropTypes.node.isRequired,
+interface PanelFooterProps {
+  /** Content of the footer */
+  children: React.ReactNode;
 
-  /** Displays a title on the top left of the section */
-  title: PropTypes.string,
+  /** If true there is no space between the content and the border of the panel */
+  noPadding?: boolean;
 
   /** Used for style overrides */
-  style: PropTypes.object,
-};
+  style?: Style;
+}
 
-export const PanelFooter = ({ children, noPadding, style }) => {
+export const PanelFooter = ({ children, noPadding, style }: PanelFooterProps) => {
   return (
     <div
       style={style}
@@ -167,24 +180,27 @@ export const PanelFooter = ({ children, noPadding, style }) => {
   );
 };
 
-PanelFooter.propTypes = {
-  /** Content of the footer */
-  children: PropTypes.node.isRequired,
+interface PanelProps {
+  /** Component: PanelHeader, will render as the header of the panel */
+  header?: React.ReactElement<typeof PanelHeader>;
 
-  /** If true there is no space between the content and the border of the panel */
-  noPadding: PropTypes.bool,
+  /** Component: PanelBody, will render as the body of the panel. Takes PanelSection as children */
+  body: React.ReactElement<typeof PanelBody>;
+
+  /** Component: PanelFooter, will render as the footer of the panel */
+  footer?: React.ReactElement<typeof PanelFooter>;
 
   /** Used for style overrides */
-  style: PropTypes.object,
-};
+  style?: Style;
+}
 
-const Panel = ({ header, body, footer, style }) => {
+export const Panel = ({ header, body, footer, style }: PanelProps) => {
   return (
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.doubleTopPadding]: !header && !body.props.noPadding,
-        [styles.doubleBottomPadding]: !footer && !body.props.noPadding,
+        [styles.doubleTopPadding]: !header && (body?.props as any).noPadding == null, // TODO find better
+        [styles.doubleBottomPadding]: !footer && (body?.props as any).noPadding == null,
       })}>
       {header}
       {body}
@@ -192,19 +208,3 @@ const Panel = ({ header, body, footer, style }) => {
     </div>
   );
 };
-
-Panel.propTypes = {
-  /** Component: PanelHeader, will render as the header of the panel */
-  header: PropTypes.node,
-
-  /** Component: PanelBody, will render as the body of the panel. Takes PanelSection as children */
-  body: PropTypes.node.isRequired,
-
-  /** Component: PanelFooter, will render as the footer of the panel */
-  footer: PropTypes.node,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
-export default Panel;

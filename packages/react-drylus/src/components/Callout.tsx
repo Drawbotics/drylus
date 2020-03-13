@@ -1,13 +1,12 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Category, Size } from '../enums';
-import Flex, { FlexAlign, FlexItem, FlexJustify } from '../layout/Flex';
-import Margin from '../layout/Margin';
+import { Flex, FlexAlign, FlexItem, FlexJustify, Margin } from '../layout';
+import { Style } from '../types';
 import { getEnumAsClass, getIconForCategory } from '../utils';
-import Icon from './Icon';
+import { Icon } from './Icon';
 
 const styles = {
   root: css`
@@ -48,12 +47,24 @@ const styles = {
   `,
 };
 
-const Callout = ({ children, category, style }) => {
+interface CalloutProps {
+  /** Message shown in the callout */
+  children: React.ReactNode;
+
+  category: Category.DANGER | Category.SUCCESS | Category.INFO | Category.WARNING;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const Callout = ({ children, category, style }: CalloutProps) => {
   const icon = getIconForCategory(category);
   return (
     <div
       style={style}
-      className={cx(styles.root, { [styles[getEnumAsClass(category)]]: category })}>
+      className={cx(styles.root, {
+        [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
+      })}>
       <Flex align={FlexAlign.START} justify={FlexJustify.START}>
         <FlexItem>
           <Margin size={{ right: Size.SMALL }}>
@@ -67,16 +78,3 @@ const Callout = ({ children, category, style }) => {
     </div>
   );
 };
-
-Callout.propTypes = {
-  /** Message shown in the callout */
-  children: PropTypes.node.isRequired,
-
-  category: PropTypes.oneOf([Category.DANGER, Category.SUCCESS, Category.INFO, Category.WARNING])
-    .isRequired,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
-export default Callout;

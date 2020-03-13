@@ -1,9 +1,9 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
-import { styles as placeholderStyles } from './LoadingPlaceholder';
+import { Style } from '../types';
+import { placeholderStyles } from './LoadingPlaceholder';
 
 const styles = {
   root: css`
@@ -23,7 +23,21 @@ const styles = {
   `,
 };
 
-const Label = ({ children, ellipsized, style, isPlaceholder }) => {
+interface LabelProps {
+  /** Just text for the label */
+  children?: string | React.ReactNode;
+
+  /** Cuts the text to stop at the max size of the container */
+  ellipsized?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** If true, a loading overlay is displayed on top of the component */
+  isPlaceholder?: boolean;
+}
+
+export const Label = ({ children, ellipsized, style, isPlaceholder }: LabelProps) => {
   return (
     <div
       style={style}
@@ -35,19 +49,3 @@ const Label = ({ children, ellipsized, style, isPlaceholder }) => {
     </div>
   );
 };
-
-Label.propTypes = {
-  /** Just text for the label */
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-
-  /** Cuts the text to stop at the max size of the container */
-  ellipsized: PropTypes.bool,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** If true, a loading overlay is displayed on top of the component */
-  isPlaceholder: PropTypes.bool,
-};
-
-export default Label;

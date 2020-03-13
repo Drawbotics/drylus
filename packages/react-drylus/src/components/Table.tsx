@@ -3,16 +3,19 @@ import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
 import get from 'lodash/get';
 import omit from 'lodash/omit';
-import PropTypes from 'prop-types';
 import React, { Fragment, createContext, useContext, useState } from 'react';
 
-import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
-import Size from '../enums/Size';
-import Margin from '../layout/Margin';
-import Icon from './Icon';
-import Label from './Label';
+import { placeholderStyles } from '../components';
+import { Size } from '../enums';
+import { Margin } from '../layout';
+import { Style } from '../types';
+import { run } from '../utils';
+import { Icon } from './Icon';
+import { Label } from './Label';
 
-const RowsContext = createContext([{}, () => {}]);
+const RowsContext = createContext<
+  [Record<string, boolean>, (val: Record<string, boolean>) => void]
+>([{}, () => {}]);
 
 const styles = {
   root: css`
@@ -288,6 +291,15 @@ const styles = {
   `,
 };
 
+interface TCellProps extends React.TdHTMLAttributes<HTMLElement> {
+  children: React.ReactNode;
+  head?: boolean;
+  asContainer?: boolean;
+  withChildToggle?: boolean;
+  onClickArrow?: () => void;
+  active?: boolean;
+}
+
 export const TCell = ({
   children,
   head,
@@ -296,7 +308,7 @@ export const TCell = ({
   onClickArrow,
   active,
   ...props
-}) => {
+}: TCellProps) => {
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const className = cx(styles.cell, {
@@ -310,20 +322,34 @@ export const TCell = ({
     );
   }
   return (
-    <td className={className} colSpan={asContainer ? '100' : null} {...props}>
-      {do {
+    <td className={className} colSpan={asContainer ? 100 : undefined} {...props}>
+      {run(() => {
         if (withChildToggle) {
-          <div className={styles.withToggle}>
-            <Icon onClick={onClickArrow} name={active ? 'chevron-up' : 'chevron-down'} />
-            {children}
-          </div>;
+          return (
+            <div className={styles.withToggle}>
+              <Icon onClick={onClickArrow} name={active ? 'chevron-up' : 'chevron-down'} />
+              {children}
+            </div>
+          );
         } else {
-          screenSize <= ScreenSizes.L ? <div>{children}</div> : children;
+          return screenSize <= ScreenSizes.L ? <div>{children}</div> : children;
         }
-      }}
+      })}
     </td>
   );
 };
+
+interface TRowProps {
+  children: React.ReactElement<typeof TCell> | Array<React.ReactElement<typeof TCell>>;
+  nested?: string;
+  parent?: string;
+  highlighted?: boolean;
+  alt?: boolean;
+  lastParentRow?: boolean;
+  onClick?: () => void;
+  clickable?: boolean;
+  style?: Style;
+}
 
 export const TRow = ({
   children,
@@ -335,9 +361,9 @@ export const TRow = ({
   onClick,
   clickable,
   style,
-}) => {
+}: TRowProps) => {
   const [rowsStates, handleSetRowState] = useContext(RowsContext);
-  const collapsed = nested && !rowsStates[nested];
+  const collapsed = nested != null && rowsStates[nested] != null;
   return (
     <tr
       style={style}
@@ -347,80 +373,86 @@ export const TRow = ({
         [styles.white]: alt,
         [styles.pointer]: clickable && onClick != null,
         [styles.highlightedRow]: highlighted,
-        [styles.noBorderBottom]: !!parent && !rowsStates[parent] && lastParentRow,
+        [styles.noBorderBottom]: parent != null && rowsStates[parent] == null && lastParentRow,
       })}
       onClick={onClick}
-      data-nested={nested || undefined}
-      data-parent={parent || undefined}>
+      data-nested={nested ?? undefined}
+      data-parent={parent ?? undefined}>
       {React.Children.toArray(children)
         .filter((c) => Boolean(c))
         .map((child, key) =>
-          React.cloneElement(child, {
-            ...child.props,
-            key,
-            asContainer: !!nested,
-            withChildToggle: !!parent && key === 0,
-            active: !!parent && rowsStates[parent],
-            onClickArrow: parent
-              ? () => handleSetRowState({ [parent]: !rowsStates[parent] })
-              : null,
-          }),
+          React.cloneElement(
+            child as React.ReactElement<typeof TCell>,
+            {
+              ...(child as React.ReactElement<typeof TCell>).props,
+              key,
+              asContainer: nested != null,
+              withChildToggle: parent != null && key === 0,
+              active: parent != null && rowsStates[parent],
+              onClickArrow: parent
+                ? () => handleSetRowState({ [parent]: rowsStates[parent] == null })
+                : null,
+            } as Partial<TCellProps>,
+          ),
         )}
     </tr>
   );
 };
 
-TRow.propTypes = {
-  /** Should be of type TCell */
-  children: PropTypes.node.isRequired,
+interface THeadProps {
+  children: React.ReactElement<typeof TCell> | Array<React.ReactElement<typeof TCell>>;
+}
 
-  /** If true sets the background to neutral */
-  highlighted: PropTypes.bool,
-
-  /** Triggered when any part of the row is clicked */
-  onClick: PropTypes.func,
-
-  /** If true and `onClick` is provided, shows a pointer when hovering the row */
-  clickable: PropTypes.bool,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
-export const THead = ({ children }) => {
+export const THead = ({ children }: THeadProps) => {
   return (
     <thead className={styles.header}>
       <TRow>
         {React.Children.toArray(children)
           .filter((c) => Boolean(c))
           .map((child, key) =>
-            React.cloneElement(child, {
-              ...child.props,
-              key,
-              head: true,
-            }),
+            React.cloneElement(
+              child as React.ReactElement<typeof TCell>,
+              {
+                ...(child as React.ReactElement<typeof TCell>).props,
+                key,
+                head: true,
+              } as Partial<TCellProps>,
+            ),
           )}
       </TRow>
     </thead>
   );
 };
 
-export const TBody = ({ children }) => {
+interface TBodyProps {
+  children: React.ReactElement<typeof TRow> | Array<React.ReactElement<typeof TRow>>;
+}
+
+export const TBody = ({ children }: TBodyProps) => {
   let light = true;
   let i = 0;
   const childrenCount = React.Children.count(children);
   return (
     <tbody className={styles.body}>
-      {React.Children.map(children, (child) => {
-        light = child.props.nested ? light : !light;
+      {React.Children.map(children, (child: React.ReactElement<typeof TRow>) => {
+        light = (child.props as any).nested ? light : !light; // TODO find better
         i = i + 1;
-        return React.cloneElement(child, { alt: light, lastParentRow: i === childrenCount - 1 });
+        return React.cloneElement(child, {
+          alt: light,
+          lastParentRow: i === childrenCount - 1,
+        } as Partial<TRowProps>);
       })}
     </tbody>
   );
 };
 
-const FakeTable = ({ columns }) => {
+type HeaderData = Array<string | { label: React.ReactNode; value: string }>;
+
+interface LoadingTableProps {
+  columns: HeaderData;
+}
+
+const FakeTable = ({ columns }: LoadingTableProps) => {
   return (
     <Fragment>
       <THead>
@@ -445,7 +477,12 @@ const FakeTable = ({ columns }) => {
   );
 };
 
-const EmptyTable = ({ columns, emptyContent }) => {
+interface EmptyTableProps {
+  columns: HeaderData;
+  emptyContent: React.ReactNode;
+}
+
+const EmptyTable = ({ columns, emptyContent }: EmptyTableProps) => {
   const { screenSize, ScreenSizes } = useScreenSize();
   if (screenSize <= ScreenSizes.L) {
     return (
@@ -455,7 +492,7 @@ const EmptyTable = ({ columns, emptyContent }) => {
             <div className={styles.emptyTableCell}>
               <div className={styles.emptyTableHeader}>
                 {columns.map((column, i) => (
-                  <Margin key={i} size={{ top: i === 0 ? null : Size.DEFAULT }}>
+                  <Margin key={i} size={{ top: i === 0 ? undefined : Size.DEFAULT }}>
                     <Label ellipsized>{typeof column === 'string' ? column : column.label}</Label>
                   </Margin>
                 ))}
@@ -476,7 +513,7 @@ const EmptyTable = ({ columns, emptyContent }) => {
       </THead>
       <TBody>
         <TRow>
-          <TCell colSpan="100">
+          <TCell colSpan={100}>
             <div className={styles.emptyTableCell}>{emptyContent}</div>
           </TCell>
         </TRow>
@@ -485,22 +522,30 @@ const EmptyTable = ({ columns, emptyContent }) => {
   );
 };
 
-function _addAttributesToCells(children = []) {
+function _addAttributesToCells(
+  children: [React.ReactElement<typeof THead>, React.ReactElement<typeof TBody>],
+): React.ReactNode {
   if (children[0]?.type === THead && children[1]?.type === TBody) {
-    const headerValues = children[0].props.children.map((child) => child.props.children);
-    const transformedRows = React.Children.map(children[1].props.children, (row, index) => {
-      return React.cloneElement(row, {
-        children: React.Children.map(row.props.children, (cell, index) =>
-          React.cloneElement(cell, {
-            'data-th': headerValues[index],
-          }),
-        ),
-      });
-    });
+    // TODO fix .props as any
+    const headerValues = (children[0].props as any).children.map(
+      (child: React.ReactElement<typeof TCell>) => (child.props as any).children,
+    );
+    const transformedRows: typeof children[1] = React.Children.map(
+      (children[1].props as any).children,
+      (row) => {
+        return React.cloneElement(row, {
+          children: React.Children.map(row.props.children, (cell, index) =>
+            React.cloneElement(cell, {
+              'data-th': headerValues[index],
+            }),
+          ),
+        });
+      },
+    );
     return (
       <Fragment>
         {children[0]}
-        {React.cloneElement(children[1], { children: transformedRows })}
+        {React.cloneElement(children[1], { children: transformedRows } as Partial<typeof TBody>)}
       </Fragment>
     );
   } else {
@@ -508,52 +553,64 @@ function _addAttributesToCells(children = []) {
   }
 }
 
+interface TableEntry extends Record<string, React.ReactNode> {
+  id?: number | string;
+  data?: Array<TableEntry>;
+}
+
 function _generateTable({
   data,
   header,
   renderCell,
-  renderChildCell,
-  i = 0,
+  renderChildCell = () => null,
   childHeader,
-  onClickRow = (x) => x,
+  onClickRow = () => {},
   clickable,
   activeRow,
-}) {
+}: {
+  data: Array<TableEntry> | TableEntry;
+  header?: HeaderData;
+  renderCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
+  renderChildCell: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
+  childHeader?: Array<string>;
+  onClickRow?: (row: TableEntry) => void;
+  clickable?: boolean;
+  activeRow?: string | number;
+}): React.ReactElement<typeof TBody> | Array<React.ReactElement<typeof TRow>> {
   if (Array.isArray(data)) {
     return (
       <TBody key="body">
         {data
-          .map((rows, i) =>
+          .map((rows) =>
             _generateTable({
               data: rows,
               header,
               renderCell,
               renderChildCell,
-              i,
               childHeader,
               onClickRow,
               clickable,
               activeRow,
             }),
           )
-          .reduce((memo, rows) => [...memo, ...rows], [])}
+          .flat()}
       </TBody>
     );
   } else {
-    const hasData = !!data.data;
+    const hasData = data.data != null;
     const row = hasData ? omit(data, 'data') : data;
-    const uniqId = Object.values(row).reduce((memo, v) => `${memo}-${v}`, '');
-    const renderData = renderCell || renderChildCell;
+    const uniqId = Object.values(row).reduce<string>((memo, v) => `${memo}-${v}`, '');
+    const renderData = renderCell ?? renderChildCell;
     const parentRow = (
       <TRow
         key={uniqId}
         parent={hasData ? uniqId : undefined}
         onClick={() => onClickRow(row)}
         clickable={clickable}
-        highlighted={activeRow && row.id && activeRow === row.id}>
-        {do {
-          if (header) {
-            header.map((item, i) => {
+        highlighted={activeRow != null && row.id != null && activeRow === row.id}>
+        {run(() => {
+          if (header != null) {
+            return header.map((item, i) => {
               const path = typeof item === 'string' ? item : item.value;
               return (
                 <TCell key={`${i}-${get(row, path)}`}>
@@ -562,11 +619,11 @@ function _generateTable({
               );
             });
           } else {
-            Object.values(row).map((value, i, arr) => (
+            return Object.values(row).map((value, i, arr) => (
               <TCell key={`${i}-${value}`}>{renderData(value, i, arr.length)}</TCell>
             ));
           }
-        }}
+        })}
       </TRow>
     );
 
@@ -580,13 +637,15 @@ function _generateTable({
           clickable={clickable}>
           <TCell>
             <Table>
-              {_generateTable({
-                data: data.data,
-                header: childHeader,
-                renderCell: null,
-                renderChildCell,
-                clickable,
-              })}
+              {
+                _generateTable({
+                  data: data.data ?? [],
+                  header: childHeader,
+                  renderCell: undefined,
+                  renderChildCell,
+                  clickable,
+                }) as React.ReactElement<typeof TBody>
+              }
             </Table>
           </TCell>
         </TRow>,
@@ -597,14 +656,83 @@ function _generateTable({
   }
 }
 
-const Table = ({
+type TableData = Array<TableEntry>;
+
+interface TableProps {
+  /** Will be THead and TBody, optional if using the auto generated table */
+  children?:
+    | [React.ReactElement<typeof THead>, React.ReactElement<typeof TBody>]
+    | React.ReactElement<typeof TBody>;
+
+  /**
+   * If true, the table takes the full width of the container, defaults to true
+   * @default false
+   */
+  fullWidth?: boolean;
+
+  /** If true, the table is given some padding on the left to accomodate for nesting controls. This prop is automatically added when using `data` with multiple levels */
+  withNesting?: boolean;
+
+  /** If passed, the table will be generated from this, and children will be ignored */
+  data?: TableData;
+
+  /** Returns the child given to each row cell. Params (value, index, columns) */
+  renderCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
+
+  /** Same as renderCell but applies to the children cells (nested) */
+  renderChildCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
+
+  /** Array of strings to generate the header of the table (each string is a label). data prop keys will be filtered by these */
+  header?: HeaderData;
+
+  /** Array of strings to generate the order of the children of the table (each string is a key). data prop keys will be filtered by these */
+  childHeader?: Array<string>;
+
+  /** Pass the keys of the attributes in the table which can be sorted. To be used with `data`. */
+  sortableBy?: Array<string>;
+
+  /** Sets the currently sorted column. Object with 1 key corresponding to the current header, and a value of "asc" or "desc" for the sorting */
+  activeHeader?: {
+    key: string;
+    direction: 'asc' | 'desc';
+  };
+
+  /** Called when a sortable column header is clicked, returns the key of the clicked header */
+  onClickHeader?: (key: string) => void;
+
+  /** Highlights the rows when hovered. Does not work on tables with nested data */
+  highlighted?: boolean;
+
+  /**
+   * Displays a cursor when hovering a row if `onClickRow` is a function
+   * @default false
+   */
+  clickable?: boolean;
+
+  /** If true the content of the table will be overridden by a "fake" table with animated cells to show loading. You MUST pass header to render this */
+  isLoading?: boolean;
+
+  /** Triggered when a row is clicked, returns the given data object for that row. If used with nested tables, it will only return the root row object value */
+  onClickRow?: () => TableEntry;
+
+  /** Will set the row with the same `id` property to "highlighted", useful when working with data generated tables */
+  activeRow?: number | string;
+
+  /** If present, all the content of the table is replaced with this, used to show info when there is no data in the table */
+  emptyContent?: React.ReactNode;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const Table = ({
   children,
-  fullWidth,
+  fullWidth = true,
   withNesting,
   data,
   renderCell,
-  renderChildCell,
-  header,
+  renderChildCell = () => null,
+  header = [],
   childHeader,
   sortableBy,
   activeHeader,
@@ -612,45 +740,50 @@ const Table = ({
   highlighted,
   isLoading,
   onClickRow,
-  clickable,
+  clickable = false,
   activeRow,
   emptyContent,
   style,
-}) => {
-  const [rowsStates, setRowState] = useState({});
+}: TableProps) => {
+  const [rowsStates, setRowState] = useState<Record<string | number, boolean>>({});
   const { screenSize, ScreenSizes } = useScreenSize();
 
-  const handleSetRowState = (state) => setRowState({ ...rowsStates, ...state });
+  const handleSetRowState = (state: Record<string | number, boolean>) =>
+    setRowState({ ...rowsStates, ...state });
 
-  const hasNestedData = data && data.some((d) => d.data);
+  const hasNestedData = data != null ? data.some((d) => d.data) : false;
 
   const tableContents =
-    data && !isLoading && !emptyContent
+    data != null && !isLoading && !emptyContent
       ? [
           <THead key="head">
             {header.map((hItem) => {
               const v = typeof hItem === 'string' ? hItem : hItem.value;
               return (
                 <TCell key={v}>
-                  {do {
+                  {run(() => {
                     if (sortableBy?.includes(v) && screenSize > ScreenSizes.L) {
-                      <span className={styles.headerWithArrows} onClick={() => onClickHeader(v)}>
+                      return (
                         <span
-                          className={cx(styles.sortableIcons, {
-                            [styles.up]:
-                              activeHeader?.key === v && activeHeader?.direction === 'asc',
-                            [styles.down]:
-                              activeHeader?.key === v && activeHeader?.direction === 'desc',
-                          })}>
-                          <Icon name="chevron-up" />
-                          <Icon name="chevron-down" />
+                          className={styles.headerWithArrows}
+                          onClick={() => (onClickHeader != null ? onClickHeader(v) : null)}>
+                          <span
+                            className={cx(styles.sortableIcons, {
+                              [styles.up]:
+                                activeHeader?.key === v && activeHeader?.direction === 'asc',
+                              [styles.down]:
+                                activeHeader?.key === v && activeHeader?.direction === 'desc',
+                            })}>
+                            <Icon name="chevron-up" />
+                            <Icon name="chevron-down" />
+                          </span>
+                          {typeof hItem === 'string' ? hItem : hItem.label}
                         </span>
-                        {typeof hItem === 'string' ? hItem : hItem.label}
-                      </span>;
+                      );
                     } else {
-                      typeof hItem === 'string' ? hItem : hItem.label;
+                      return typeof hItem === 'string' ? hItem : hItem.label;
                     }
-                  }}
+                  })}
                 </TCell>
               );
             })}
@@ -660,7 +793,6 @@ const Table = ({
             header,
             renderCell,
             renderChildCell,
-            index: 0,
             childHeader,
             onClickRow,
             clickable,
@@ -670,7 +802,7 @@ const Table = ({
       : children;
 
   const transformedChildren =
-    screenSize <= ScreenSizes.L ? _addAttributesToCells(tableContents) : tableContents;
+    screenSize <= ScreenSizes.L ? _addAttributesToCells(tableContents as any) : tableContents;
 
   if (data && (!header || header.length === 0)) {
     console.warn('`data` was passed as prop but no/empty header, cannot render');
@@ -686,96 +818,16 @@ const Table = ({
         [styles.highlighted]: highlighted && !(hasNestedData || withNesting),
       })}>
       <RowsContext.Provider value={[rowsStates, handleSetRowState]}>
-        {do {
+        {run(() => {
           if (header && isLoading) {
-            <FakeTable columns={header} />;
+            return <FakeTable columns={header} />;
           } else if (header && emptyContent) {
-            <EmptyTable columns={header} emptyContent={emptyContent} />;
+            return <EmptyTable columns={header} emptyContent={emptyContent} />;
           } else {
-            transformedChildren;
+            return transformedChildren;
           }
-        }}
+        })}
       </RowsContext.Provider>
     </table>
   );
 };
-
-Table.propTypes = {
-  /** Will be THead and TBody */
-  children: PropTypes.node,
-
-  /** If true, the table takes the full width of the container, defaults to true */
-  fullWidth: PropTypes.bool,
-
-  /** If true, the table is given some padding on the left to accomodate for nesting controls. This prop is automatically added when using `data` with multiple levels */
-  withNesting: PropTypes.bool,
-
-  /** If passed, the table will be generated from this, and children will be ignored */
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      data: PropTypes.arrayOf(PropTypes.object),
-    }),
-  ),
-
-  /** Returns the child given to each row cell. Params (value, index, columns) */
-  renderCell: PropTypes.func,
-
-  /** Same as renderCell but applies to the children cells (nested) */
-  renderChildCell: PropTypes.func,
-
-  /** Array of strings to generate the header of the table (each string is a label). data prop keys will be filtered by these */
-  header: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.arrayOf(
-      PropTypes.shape({
-        label: PropTypes.string,
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      }),
-    ),
-  ]),
-
-  /** Array of strings to generate the order of the children of the table (each string is a key). data prop keys will be filtered by these */
-  childHeader: PropTypes.arrayOf(PropTypes.string),
-
-  /** Pass the keys of the attributes in the table which can be sorted. To be used with `data`. */
-  sortableBy: PropTypes.arrayOf(PropTypes.string),
-
-  /** Sets the currently sorted column. Object with 1 key corresponding to the current header, and a value of "asc" or "desc" for the sorting */
-  activeHeader: PropTypes.shape({
-    key: PropTypes.string,
-    direction: PropTypes.oneOf(['asc', 'desc']),
-  }),
-
-  /** Called when a sortable column header is clicked, returns the key of the clicked header */
-  onClickHeader: PropTypes.func,
-
-  /** Highlights the rows when hovered. Does not work on tables with nested data */
-  highlighted: PropTypes.bool,
-
-  /** Displays a cursor when hovering a row if `onClickRow` is a function */
-  clickable: PropTypes.bool,
-
-  /** If true the content of the table will be overridden by a "fake" table with animated cells to show loading. You MUST pass header to render this */
-  isLoading: PropTypes.bool,
-
-  /** Triggered when a row is clicked, returns the given data object for that row. If used with nested tables, it will only return the root row object value */
-  onClickRow: PropTypes.func,
-
-  /** Will set the row with the same `id` property to "highlighted", useful when working with data generated tables */
-  activeRow: PropTypes.any,
-
-  /** If present, all the content of the table is replaced with this, used to show info when there is no data in the table */
-  emptyContent: PropTypes.node,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
-Table.defaultProps = {
-  fullWidth: true,
-  renderCell: (x) => x,
-  renderChildCell: (x) => x,
-  clickable: false,
-};
-
-export default Table;
