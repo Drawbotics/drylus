@@ -1,7 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
 import {
-  Align,
-  Category,
   Color,
   Flex,
   FlexItem,
@@ -9,7 +7,6 @@ import {
   Icon,
   Margin,
   Position,
-  Shade,
   Size,
   TBody,
   TCell,
@@ -17,14 +14,15 @@ import {
   TRow,
   Table,
   Tag,
-  Tier,
   Tooltip,
 } from '@drawbotics/react-drylus';
+import docs from '@drawbotics/react-drylus/docs.json';
 import { css } from 'emotion';
 import React from 'react';
 
-import Prop from './Prop';
+// import Prop from './Prop';
 import PropsInfo from './PropsInfo';
+import { generateDocs } from './utils';
 
 const styles = {
   table: css`
@@ -33,14 +31,13 @@ const styles = {
   `,
 };
 
-function getProps(Component) {
-  const { __docgenInfo: docgenInfo } = Component;
-  const { props } = docgenInfo;
-  return props || {};
+function _getProps(Component) {
+  const description = generateDocs(Component.name, docs);
+  return description ?? {};
 }
 
 const PropsTable = ({ component, onChange, activeProps, enums }) => {
-  const props = getProps(component);
+  const props = _getProps(component);
   return (
     <div className={styles.table}>
       <Table>
@@ -80,7 +77,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                     }
                   }}
                 </TCell>
-                <TCell>{props[key].defaultValue?.value.replace(/'/g, '') || null}</TCell>
+                <TCell>{/* {props[key].defaultValue?.value.replace(/'/g, '') || null} */}</TCell>
                 <TCell>{String(props[key].required)}</TCell>
                 <TCell>
                   {do {
@@ -100,7 +97,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                   }}
                 </TCell>
                 <TCell>
-                  {do {
+                  {/* {do {
                     if (activeProps) {
                       <Prop
                         enums={{
@@ -119,7 +116,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                         onChange={onChange}
                       />;
                     }
-                  }}
+                  }} */}
                 </TCell>
               </TRow>
             ))}
