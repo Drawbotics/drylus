@@ -281,7 +281,7 @@ interface ButtonProps {
   color?: Exclude<Color, Color.PRIMARY>;
 
   /** @default Size.DEFAULT */
-  size?: Extract<Size, Size.SMALL | Size.DEFAULT | Size.LARGE>;
+  size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
   /** @default Tier.PRIMARY */
   tier?: Tier;

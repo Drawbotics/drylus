@@ -16,6 +16,11 @@ import {
   Tag,
   Tooltip,
 } from '@drawbotics/react-drylus';
+// Align,
+// Category,
+// Shade,
+// Tier,
+// Removed from above import
 import docs from '@drawbotics/react-drylus/docs.json';
 import { css } from 'emotion';
 import React from 'react';
@@ -33,6 +38,7 @@ const styles = {
 
 function _getProps(Component) {
   const description = generateDocs(Component.name, docs);
+  // console.log(docs);
   return description ?? {};
 }
 
