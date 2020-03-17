@@ -7,7 +7,7 @@ export * from './SegmentedControl';
 export * from './Table';
 export * from './Label';
 export * from './Panel';
-// export Pagination from './Pagination';
+export * from './Pagination';
 export * from './Badge';
 export * from './Drawer';
 // export BaseFilter, { SelectFilter, CheckboxFilter } from './Filter';
