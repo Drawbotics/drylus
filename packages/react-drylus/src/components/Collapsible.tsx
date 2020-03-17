@@ -1,10 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
-import Icon from './Icon';
-import Label from './Label';
+import { Style } from '../types';
+import { run } from '../utils';
+import { Icon } from './Icon';
+import { Label } from './Label';
 
 const styles = {
   root: css``,
@@ -34,47 +35,45 @@ const styles = {
   `,
 };
 
-const Collapsible = ({ title, isOpen, children, onClick, style }) => {
+interface CollapsibleProps {
+  /** Shown on the left side as a label */
+  title: React.ReactNode;
+
+  /** Determines whether the content of the collapsible is visible */
+  isOpen?: boolean;
+
+  /** The togglable content */
+  children: React.ReactNode;
+
+  /** Triggered when the arrow is clicked */
+  onClick?: () => void;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const Collapsible = ({ title, isOpen, children, onClick, style }: CollapsibleProps) => {
   return (
     <div style={style} className={styles.root}>
       <div className={styles.header} onClick={onClick}>
         <div data-element="title">
-          {do {
+          {run(() => {
             if (typeof title === 'string') {
-              <Label ellipsized>{title}</Label>;
+              return <Label ellipsized>{title}</Label>;
             } else {
-              title;
+              return title;
             }
-          }}
+          })}
         </div>
         <div className={styles.icon}>
           <Icon name={isOpen ? 'chevron-up' : 'chevron-down'} />
         </div>
       </div>
-      {do {
+      {run(() => {
         if (isOpen) {
-          <div className={styles.content}>{children}</div>;
+          return <div className={styles.content}>{children}</div>;
         }
-      }}
+      })}
     </div>
   );
 };
-
-Collapsible.propTypes = {
-  /** Shown on the left side as a label */
-  title: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
-
-  /** Determines whether the content of the collapsible is visible */
-  isOpen: PropTypes.bool,
-
-  /** The togglable content */
-  children: PropTypes.node.isRequired,
-
-  /** Triggered when the arrow is clicked */
-  onClick: PropTypes.func,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
-export default Collapsible;

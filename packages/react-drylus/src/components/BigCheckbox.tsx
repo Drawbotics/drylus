@@ -1,11 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Category } from '../enums';
-import Label from './Label';
-import RoundIcon from './RoundIcon';
+import { Style } from '../types';
+import { Label } from './Label';
+import { RoundIcon } from './RoundIcon';
 
 const styles = {
   root: css`
@@ -64,7 +64,38 @@ const styles = {
   `,
 };
 
-const BigCheckbox = ({ value, onChange, disabled, children, name, label, style }) => {
+interface BigCheckboxProps {
+  /** Triggered when big checkbox is clicked */
+  onChange: (value: boolean, name?: string) => void;
+
+  /** Determines if checkbox is checked */
+  value: boolean;
+
+  /** Content displayed in the BigRadio */
+  children?: React.ReactNode;
+
+  /** Determines the title of the BigCheckbox */
+  label: string;
+
+  /** To mimic e.target.name */
+  name?: string;
+
+  /** If true, checkbox is not clickable */
+  disabled?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const BigCheckbox = ({
+  value,
+  onChange,
+  disabled,
+  children,
+  name,
+  label,
+  style,
+}: BigCheckboxProps) => {
   const isChecked = Boolean(value);
   const handleOnChange = () => (!disabled ? onChange(!isChecked, name) : null);
   return (
@@ -85,28 +116,3 @@ const BigCheckbox = ({ value, onChange, disabled, children, name, label, style }
     </div>
   );
 };
-
-BigCheckbox.propTypes = {
-  /** Triggered when big checkbox is clicked */
-  onChange: PropTypes.func.isRequired,
-
-  /** Determines if checkbox is checked */
-  value: PropTypes.bool.isRequired,
-
-  /** Content displayed in the BigRadio */
-  children: PropTypes.node,
-
-  /** Determines the title of the BigCheckbox */
-  label: PropTypes.string.isRequired,
-
-  /** To mimic e.target.name */
-  name: PropTypes.string,
-
-  /** If true, checkbox is not clickable */
-  disabled: PropTypes.bool,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
-export default BigCheckbox;

@@ -1,15 +1,14 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
-import v4 from 'uuid/v4';
+import { v4 } from 'uuid';
 
-import Icon from '../components/Icon';
-import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
+import { Icon } from '../components';
+import { placeholderStyles } from '../components';
 import { Category, Size } from '../enums';
-import { getEnumAsClass } from '../utils';
-import { useResponsiveProps } from '../utils/hooks';
-import Hint from './Hint';
+import { Responsive, Style } from '../types';
+import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { Hint } from './Hint';
 
 const styles = {
   root: css`
@@ -152,7 +151,45 @@ const styles = {
   `,
 };
 
-const Checkbox = ({ responsive, ...rest }) => {
+interface CheckboxProps {
+  /** The dom property */
+  id?: string;
+
+  /** If passed, the text will be the label of the checkbox */
+  children?: string;
+
+  /** Triggered when checkbox value is changed */
+  onChange?: (value: boolean, name?: string) => void;
+
+  /** If true, checkbox is not clickable */
+  disabled?: boolean;
+
+  /** Determines if checkbox is checked */
+  value?: boolean;
+
+  /** Name of the form element (target.name) */
+  name?: string;
+
+  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: string | boolean;
+
+  /**
+   * Size of the checkbox. Can be large or default
+   * @default Size.DEFAULT
+   */
+  size?: Size.LARGE | Size.DEFAULT;
+
+  /** If true, a loading overlay is displayed on top of the component */
+  isPlaceholder?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+}
+
+export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
   const {
     onChange,
     value,
@@ -160,17 +197,17 @@ const Checkbox = ({ responsive, ...rest }) => {
     children,
     disabled,
     error,
-    size,
+    size = Size.DEFAULT,
     style,
     isPlaceholder,
     ...props
-  } = useResponsiveProps(rest, responsive);
+  } = useResponsiveProps<CheckboxProps>(rest, responsive);
 
-  const isChecked = !!value;
+  const isChecked = value != null;
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.stopPropagation();
-    onChange ? onChange(!isChecked, e.target.name) : null;
+    onChange ? onChange(!isChecked, (e.target as HTMLInputElement).name) : null;
   };
 
   const uniqId = id ? id : v4();
@@ -179,9 +216,9 @@ const Checkbox = ({ responsive, ...rest }) => {
     <div style={style} className={styles.root}>
       <label
         className={cx(styles.wrapper, {
-          [styles[getEnumAsClass(size)]]: size,
-          [styles.disabled]: disabled,
-          [styles.error]: error,
+          [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+          [styles.disabled]: disabled === true,
+          [styles.error]: error != null,
           [styles.readOnly]: readOnly,
           [placeholderStyles.shimmer]: isPlaceholder,
         })}
@@ -198,77 +235,38 @@ const Checkbox = ({ responsive, ...rest }) => {
             {...props}
           />
           <div data-element="sprite" className={styles.sprite}>
-            {do {
+            {run(() => {
               if (readOnly) {
-                <label data-element="locked-icon" className={styles.iconLabel}>
-                  <Icon name="lock" />
-                </label>;
+                return (
+                  <label data-element="locked-icon" className={styles.iconLabel}>
+                    <Icon name="lock" />
+                  </label>
+                );
               } else {
-                <label data-element="icon" className={styles.iconLabel} htmlFor={uniqId}>
-                  <Icon bold name="check" />
-                </label>;
+                return (
+                  <label data-element="icon" className={styles.iconLabel} htmlFor={uniqId}>
+                    <Icon bold name="check" />
+                  </label>
+                );
               }
-            }}
+            })}
           </div>
         </div>
-        {do {
+        {run(() => {
           if (children) {
-            <label data-element="label" className={styles.label} htmlFor={uniqId}>
-              {children}
-            </label>;
+            return (
+              <label data-element="label" className={styles.label} htmlFor={uniqId}>
+                {children}
+              </label>
+            );
           }
-        }}
+        })}
       </label>
-      {do {
+      {run(() => {
         if (error && typeof error === 'string') {
-          <Hint category={Category.DANGER}>{error}</Hint>;
+          return <Hint category={Category.DANGER}>{error}</Hint>;
         }
-      }}
+      })}
     </div>
   );
 };
-
-Checkbox.propTypes = {
-  /** If passed, the text will be the label of the checkbox */
-  children: PropTypes.string,
-
-  /** Triggered when checkbox value is changed */
-  onChange: PropTypes.func,
-
-  /** If true, checkbox is not clickable */
-  disabled: PropTypes.bool,
-
-  /** Determines if checkbox is checked */
-  value: PropTypes.bool,
-
-  /** Name of the form element (target.name) */
-  name: PropTypes.string,
-
-  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-
-  /** Size of the checkbox. Can be large or default */
-  size: PropTypes.oneOf([Size.LARGE, Size.DEFAULT]),
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** If true, a loading overlay is displayed on top of the component */
-  isPlaceholder: PropTypes.bool,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-};
-
-Checkbox.defaultProps = {
-  size: Size.DEFAULT,
-};
-
-export default Checkbox;
