@@ -9,9 +9,9 @@
   "scripts": {
     "clean": "rimraf lib/ tmp/",
     "build:ts": "tsc",
-    "build:js": "babel --source-maps inline --copy-files --ignore '**/__tests__/' --root-mode upward tmp/ --out-dir lib/",
-    "build:typedoc": "node_modules/.bin/typedoc --json ./lib/docs.json --mode modules ./src",
-    "watch:typedoc": "npm run build:typedoc && chokidar './lib/**/*.d.ts' -c 'npm run build:typedoc'",
+    "build:js": "babel --source-maps inline --copy-files --ignore  '**/__tests__/' --root-mode upward tmp/ --out-dir lib/",
+    "build:typedoc": "node_modules/.bin/typedoc --json docs.json --mode modules ./src",
+    "watch:typedoc": "npm run build:typedoc && chokidar './tmp/**/*.d.ts' -c 'npm run build:typedoc'",
     "build:commonjs": "npm run build:ts && npm run build:js && npm run build:typedoc",
     "watch:commonjs": "npm run build:ts -- --watch & npm run build:js -- --watch & npm run watch:typedoc",
     "watch": "npm run clean && NODE_ENV=development && npm run build:ts && npm run watch:commonjs",
