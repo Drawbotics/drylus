@@ -102,7 +102,7 @@ const Avatar = ({ responsive, ...rest }: AvatarProps) => {
     hint,
     style = {},
     color: _color,
-  } = useResponsiveProps(rest, responsive);
+  } = useResponsiveProps<AvatarProps>(rest, responsive);
 
   const customSize = typeof size === 'number';
   const color = category ? categoryEnumToColor(category) : _color;

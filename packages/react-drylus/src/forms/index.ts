@@ -1,6 +1,6 @@
 export * from './Select';
 export * from './Input';
-// export Checkbox from './Checkbox';
+export * from './Checkbox';
 // export RadioGroup from './RadioGroup';
 // export SearchInput from './SearchInput';
 // export MultiSelect from './MultiSelect';

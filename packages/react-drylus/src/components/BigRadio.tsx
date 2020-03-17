@@ -1,11 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Category } from '../enums';
-import Label from './Label';
-import RoundIcon from './RoundIcon';
+import { Style } from '../types';
+import { Label } from './Label';
+import { RoundIcon } from './RoundIcon';
 
 const styles = {
   root: css`
@@ -60,7 +60,42 @@ const styles = {
   `,
 };
 
-const BigRadio = ({ value, onChange, disabled, checked, children, name, label, style }) => {
+interface BigRadioProps {
+  /** Determines if the radio is checked */
+  checked?: boolean;
+
+  /** Triggered when big radio is clicked */
+  onChange: (value: string | number, name?: string) => void;
+
+  /** Determines the value of the radio */
+  value: string | number;
+
+  /** Content displayed in the BigRadio */
+  children?: React.ReactNode;
+
+  /** Determines the title of the BigRadio */
+  label: string;
+
+  /** To mimic e.target.name */
+  name?: string;
+
+  /** If true, radio is not clickable */
+  disabled?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const BigRadio = ({
+  value,
+  onChange,
+  disabled,
+  checked,
+  children,
+  name,
+  label,
+  style,
+}: BigRadioProps) => {
   const handleOnChange = () => (!disabled ? onChange(value, name) : null);
   return (
     <div
@@ -80,31 +115,3 @@ const BigRadio = ({ value, onChange, disabled, checked, children, name, label, s
     </div>
   );
 };
-
-BigRadio.propTypes = {
-  /** Determines if the radio is checked */
-  checked: PropTypes.bool,
-
-  /** Triggered when big radio is clicked */
-  onChange: PropTypes.func.isRequired,
-
-  /** Determines the value of the radio */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-
-  /** Content displayed in the BigRadio */
-  children: PropTypes.node,
-
-  /** Determines the title of the BigRadio */
-  label: PropTypes.string.isRequired,
-
-  /** To mimic e.target.name */
-  name: PropTypes.string,
-
-  /** If true, radio is not clickable */
-  disabled: PropTypes.bool,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
-export default BigRadio;

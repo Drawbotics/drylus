@@ -7,6 +7,7 @@ import React from 'react';
 import { Category, Color } from '../enums';
 import { Style } from '../types';
 import { Deprecated, categoryEnumToColor, env, getEnumAsClass } from '../utils';
+
 injectGlobal`
   ${generateIconStyles(env === "'development'" ? 'dev' : packageJson.version)}
 `;
@@ -53,7 +54,7 @@ interface IconProps {
   bold?: boolean;
 
   /** Triggered when the icon is clicked */
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 
   /** @deprecated use color instead */
   category?: Category;

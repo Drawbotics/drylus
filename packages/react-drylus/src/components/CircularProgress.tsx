@@ -1,11 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Category, Color, Size } from '../enums';
-import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
-import { useResponsiveProps } from '../utils/hooks';
+import { Responsive, Style } from '../types';
+import { Deprecated, categoryEnumToColor, getEnumAsClass, run, useResponsiveProps } from '../utils';
 
 const styles = {
   root: css`
@@ -81,11 +80,40 @@ const styles = {
   `,
 };
 
-const CircularProgress = ({ responsive, ...rest }) => {
-  const { percentage, category, size, text, style, color: _color } = useResponsiveProps(
-    rest,
-    responsive,
-  );
+interface CircularProgressProps {
+  /**
+   * Determines the amount of the circle which is completed, between 0 and 1
+   * @default 0
+   */
+  percentage: number;
+
+  /** Text shown within the circular progress. Not shown when size is smaller than DEFAULT */
+  text?: string;
+
+  /** DEPRECATED */
+  category?: Exclude<Category, Category.PRIMARY>;
+
+  color?: Exclude<Color, Color.PRIMARY>;
+
+  /** @default Size.DEFAULT */
+  size?: Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+}
+
+export const CircularProgress = ({ responsive, ...rest }: CircularProgressProps) => {
+  const {
+    percentage = 0,
+    category,
+    size = Size.DEFAULT,
+    text,
+    style,
+    color: _color,
+  } = useResponsiveProps(rest, responsive);
 
   const circumference = 84 * Math.PI;
   const offset = percentage * circumference;
@@ -96,14 +124,14 @@ const CircularProgress = ({ responsive, ...rest }) => {
     <div
       style={style}
       className={cx(styles.root, {
-        [styles[getEnumAsClass(size)]]: size,
-        [styles[getEnumAsClass(color)]]: color,
+        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+        [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
       })}>
-      {do {
+      {run(() => {
         if (text && size !== Size.SMALL) {
-          <div className={styles.text}>{text}</div>;
+          return <div className={styles.text}>{text}</div>;
         }
-      }}
+      })}
       <svg viewBox="0 0 100 100">
         <circle cx="50" cy="50" r="42" className={cx(styles.circle, styles.background)} />
         <circle
@@ -120,44 +148,5 @@ const CircularProgress = ({ responsive, ...rest }) => {
 };
 
 CircularProgress.propTypes = {
-  /** Determines the amount of the circle which is completed, between 0 and 1 */
-  percentage: PropTypes.number.isRequired,
-
-  /** Text shown within the circular progress. Not shown when size is smaller than DEFAULT */
-  text: PropTypes.string,
-
-  /** DEPRECATED */
-  category: CustomPropTypes.deprecated(
-    PropTypes.oneOf([
-      Category.BRAND,
-      Category.DANGER,
-      Category.SUCCESS,
-      Category.INFO,
-      Category.WARNING,
-    ]),
-  ),
-
-  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
-
-  size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE, Size.EXTRA_LARGE]),
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
+  category: Deprecated,
 };
-
-CircularProgress.defaultProps = {
-  percentage: 0,
-  size: Size.DEFAULT,
-};
-
-export default CircularProgress;
