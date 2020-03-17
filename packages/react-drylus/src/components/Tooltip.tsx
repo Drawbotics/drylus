@@ -176,7 +176,7 @@ export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
     };
   });
 
-  if (outletElement == null) return '';
+  if (outletElement == null) return null;
 
   const tooltipStyle = getStyleForSide({
     side,

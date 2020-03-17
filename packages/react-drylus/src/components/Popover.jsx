@@ -141,7 +141,7 @@ const Popover = ({ children, message, content: _content, side, style, exitOnClic
     };
   });
 
-  if (outletElement == null) return '';
+  if (outletElement == null) return null;
 
   const popoverStyle = getStyleForSide({
     side,
