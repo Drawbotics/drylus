@@ -343,7 +343,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
   );
 
   if (asOverlay) {
-    if (outletElement == null) return '';
+    if (outletElement == null) return null;
     const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === overlayElement?.current && onClickOverlay != null) {
         onClickOverlay();

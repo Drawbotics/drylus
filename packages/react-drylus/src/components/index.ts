@@ -12,7 +12,7 @@ export * from './Badge';
 export * from './Drawer';
 // export BaseFilter, { SelectFilter, CheckboxFilter } from './Filter';
 // export TabNavigation from './TabNavigation';
-// export Avatar from './Avatar';
+export * from './Avatar';
 export * from './Text';
 export * from './Dot';
 export * from './Tooltip';

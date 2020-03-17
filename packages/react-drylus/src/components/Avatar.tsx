@@ -1,12 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
-import Tooltip from '../components/Tooltip';
 import { Category, Color, Size } from '../enums';
-import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
-import { useResponsiveProps } from '../utils/hooks';
+import { Responsive, Style } from '../types';
+import { Deprecated, categoryEnumToColor, getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { Tooltip } from './Tooltip';
 
 const styles = {
   root: css`
@@ -65,7 +64,35 @@ const styles = {
   `,
 };
 
-const Avatar = ({ responsive, ...rest }) => {
+interface AvatarProps {
+  /** Image url. Takes the full background of the avatar if given, will be fit to cover surface. Takes precedence over text */
+  image?: string;
+
+  /** Text to be displayed within the avatar. It scales with the size, and will be limited to 2 characters max. */
+  text?: string;
+
+  /** Text shown when the avatar is hovered */
+  hint?: string;
+
+  /** Size of the avatar */
+  size?: number | Size.SMALL | Size.DEFAULT | Size.LARGE;
+
+  /** @deprecated */
+  category?: Exclude<Category, Category.PRIMARY>;
+
+  color?: Exclude<Color, Color.PRIMARY>;
+
+  /** Custom override for the background color, useful for profiles */
+  backgroundColor?: string;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+}
+
+const Avatar = ({ responsive, ...rest }: AvatarProps) => {
   const {
     image,
     text,
@@ -73,7 +100,7 @@ const Avatar = ({ responsive, ...rest }) => {
     category,
     backgroundColor,
     hint,
-    style,
+    style = {},
     color: _color,
   } = useResponsiveProps(rest, responsive);
 
@@ -83,27 +110,27 @@ const Avatar = ({ responsive, ...rest }) => {
   const avatar = (
     <div
       className={cx(styles.root, {
-        [styles[getEnumAsClass(color)]]: color,
-        [styles[!customSize && getEnumAsClass(size)]]: size,
-        [styles.customBackground]: backgroundColor,
+        [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
+        [styles[getEnumAsClass<typeof styles>(size as Size)]]: size != null && !customSize,
+        [styles.customBackground]: backgroundColor != null,
       })}
       style={{
         backgroundColor,
         height: customSize ? size : undefined,
         width: customSize ? size : undefined,
-        fontSize: customSize ? size * 0.5 : undefined,
+        fontSize: customSize ? (size as number) * 0.5 : undefined,
         ...style,
       }}>
-      {do {
+      {run(() => {
         if (image) {
-          <img src={image} />;
+          return <img src={image} />;
         } else if (text) {
-          text.substring(0, 2);
+          return text.substring(0, 2);
         }
-      }}
+      })}
     </div>
   );
-  if (hint) {
+  if (hint != null) {
     return <Tooltip content={hint}>{avatar}</Tooltip>;
   } else {
     return avatar;
@@ -111,53 +138,5 @@ const Avatar = ({ responsive, ...rest }) => {
 };
 
 Avatar.propTypes = {
-  /** Image url. Takes the full background of the avatar if given, will be fit to cover surface. Takes precedence over text */
-  image: PropTypes.string,
-
-  /** Text to be displayed within the avatar. It scales with the size, and will be limited to 2 characters max. */
-  text: PropTypes.string,
-
-  /** Text shown when the avatar is hovered */
-  hint: PropTypes.string,
-
-  /** Size of the avatar */
-  size: PropTypes.oneOfType([
-    PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
-    PropTypes.number,
-  ]),
-
-  /** DEPRECATED */
-  category: CustomPropTypes.deprecated(
-    PropTypes.oneOf([
-      Category.DANGER,
-      Category.INFO,
-      Category.SUCCESS,
-      Category.WARNING,
-      Category.BRAND,
-    ]),
-  ),
-
-  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
-
-  /** Custom override for the background color, useful for profiles */
-  backgroundColor: PropTypes.string,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
+  category: Deprecated,
 };
-
-Avatar.defaultProps = {
-  style: {},
-};
-
-export default Avatar;

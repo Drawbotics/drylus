@@ -345,7 +345,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     };
   });
 
-  if (outletElement == null) return '';
+  if (outletElement == null) return null;
 
   const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === overlayElement?.current && onClickClose != null) {
