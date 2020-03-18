@@ -182,7 +182,7 @@ export const Select = ({ responsive, ...rest }: SelectProps) => {
         [styles.readOnly]: onChange == null,
         [styles.disabled]: disabled,
         [styles.valid]: Boolean(value) && valid,
-        [styles.error]: error != null,
+        [styles.error]: error != null && error !== false,
       })}>
       {run(() => {
         if (loading) {

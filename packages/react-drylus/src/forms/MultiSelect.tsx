@@ -8,6 +8,7 @@ import { Category, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
+
 const styles = {
   root: css`
     display: inline-block;
@@ -288,7 +289,7 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
         [styles.disabled]: disabled,
         [styles.readOnly]: onChange == null,
         [styles.valid]: values?.length > 0 && valid,
-        [styles.error]: error != null,
+        [styles.error]: error != null && error !== false,
       })}
       ref={rootRef}>
       {run(() => {

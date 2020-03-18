@@ -331,7 +331,15 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     }
   }, [visible]);
 
-  useEffect(() => (visible ? handleWindowResize() : undefined), [visible]);
+  useEffect(
+    () =>
+      visible
+        ? () => {
+            setTimeout(handleWindowResize, 300);
+          }
+        : undefined,
+    [visible],
+  );
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowResize);

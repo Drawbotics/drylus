@@ -1,7 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
 import { LngLat, LngLatBounds } from 'mapbox-gl';
-import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import MapboxMap, { Marker as MapboxMarker } from 'react-mapbox-wrapper';
 
@@ -196,41 +195,3 @@ export const Map = ({
     </div>
   );
 };
-
-Map.propTypes = {
-  /** Determines the height of the map in pixels */
-  height: PropTypes.number,
-
-  /** If true, the user can interact with the map through panning and zooming */
-  interactive: PropTypes.bool,
-
-  /** Level of zoom by default */
-  zoom: PropTypes.number,
-
-  /** Access token to use the mapbox API, ask an admin for this if you dont have it */
-  accessToken: PropTypes.string.isRequired,
-
-  /** Elements you want to see on the map. To customize the Marker object, you can use the options field */
-  markers: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.node,
-      title: PropTypes.string,
-      subtitle: PropTypes.string,
-      coordinates: PropTypes.shape({
-        lng: PropTypes.number.isRequired,
-        lat: PropTypes.number.isRequired,
-      }).isRequired,
-      options: PropTypes.object,
-    }),
-  ).isRequired,
-
-  /** Used for style overrides, applied to Map */
-  style: PropTypes.object,
-};
-
-Map.defaultProps = {
-  interactive: false,
-  height: 300,
-};
-
-export default Map;

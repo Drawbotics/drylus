@@ -203,7 +203,7 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
     ...props
   } = useResponsiveProps<CheckboxProps>(rest, responsive);
 
-  const isChecked = value != null;
+  const isChecked = value === true;
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.stopPropagation();
@@ -218,7 +218,7 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
         className={cx(styles.wrapper, {
           [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
           [styles.disabled]: disabled === true,
-          [styles.error]: error != null,
+          [styles.error]: error != null && error !== false,
           [styles.readOnly]: readOnly,
           [placeholderStyles.shimmer]: isPlaceholder,
         })}
