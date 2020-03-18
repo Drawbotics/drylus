@@ -1,11 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx, keyframes } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Category, Color, Size } from '../enums';
-import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
-import { useResponsiveProps } from '../utils/hooks';
+import { Responsive, Style } from '../types';
+import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
 
 const translateX = keyframes`
   0% {
@@ -80,8 +79,33 @@ const styles = {
   `,
 };
 
-const ProgressBar = ({ responsive, ...rest }) => {
-  const { percentage, category, size, style, color: _color } = useResponsiveProps(rest, responsive);
+interface ProgressBarProps {
+  /** Determines the amount of the bar which is completed, between 0 and 1. If not given the bar is indeterminate */
+  percentage?: number;
+
+  /** @deprecated use color instead */
+  category?: Exclude<Category, Category.PRIMARY>;
+
+  color?: Exclude<Color, Color.PRIMARY>;
+
+  /** @default Size.DEFAULT */
+  size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+}
+
+export const ProgressBar = ({ responsive, ...rest }: ProgressBarProps) => {
+  const {
+    percentage = 0,
+    category,
+    size = Size.DEFAULT,
+    style,
+    color: _color,
+  } = useResponsiveProps<ProgressBarProps>(rest, responsive);
 
   const indeterminate = percentage == null;
   const color = category ? categoryEnumToColor(category) : _color;
@@ -90,12 +114,12 @@ const ProgressBar = ({ responsive, ...rest }) => {
     <div
       style={style}
       className={cx(styles.root, {
-        [styles[getEnumAsClass(size)]]: size,
+        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
       })}>
       <div
         data-element="bar"
         className={cx(styles.bar, {
-          [styles[getEnumAsClass(color)]]: color,
+          [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
           [styles.indeterminate]: indeterminate,
         })}
         style={{ width: `${percentage * 100}%` }}
@@ -105,40 +129,5 @@ const ProgressBar = ({ responsive, ...rest }) => {
 };
 
 ProgressBar.propTypes = {
-  /** Determines the amount of the bar which is completed, between 0 and 1. If not given the bar is indeterminate */
-  percentage: PropTypes.number,
-
-  /** DEPRECATED */
-  category: CustomPropTypes.deprecated(
-    PropTypes.oneOf([
-      Category.BRAND,
-      Category.DANGER,
-      Category.SUCCESS,
-      Category.INFO,
-      Category.WARNING,
-    ]),
-  ),
-
-  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
-
-  size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
+  category: Deprecated,
 };
-
-ProgressBar.defaultProps = {
-  size: Size.DEFAULT,
-};
-
-export default ProgressBar;

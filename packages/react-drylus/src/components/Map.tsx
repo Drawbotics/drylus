@@ -1,15 +1,16 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
-import { LngLatBounds } from 'mapbox-gl';
+import { LngLat, LngLatBounds } from 'mapbox-gl';
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import MapboxMap, { Marker as MapboxMarker } from 'react-mapbox-wrapper';
 
 import { Size, Tier } from '../enums';
-import Flex, { FlexDirection, FlexItem } from '../layout/Flex';
-import Margin from '../layout/Margin';
-import Popover from './Popover';
-import Text from './Text';
+import { Flex, FlexDirection, FlexItem, Margin } from '../layout';
+import { Style } from '../types';
+import { run } from '../utils';
+import { Popover } from './Popover';
+import { Text } from './Text';
 
 const styles = {
   root: css`
@@ -50,49 +51,100 @@ const styles = {
   `,
 };
 
-const PopoverContent = ({ title, subtitle }) => {
+interface PopoverContentProps {
+  title: string;
+  subtitle?: string;
+}
+
+const PopoverContent = ({ title, subtitle }: PopoverContentProps) => {
   return (
     <Flex direction={FlexDirection.VERTICAL}>
       <FlexItem>
         <Text>{title}</Text>
       </FlexItem>
-      {do {
+      {run(() => {
         if (subtitle) {
-          <FlexItem>
-            <Margin size={{ top: Size.EXTRA_SMALL }}>
-              <Text size={Size.SMALL} tier={Tier.SECONDARY}>
-                {subtitle}
-              </Text>
-            </Margin>
-          </FlexItem>;
+          return (
+            <FlexItem>
+              <Margin size={{ top: Size.EXTRA_SMALL }}>
+                <Text size={Size.SMALL} tier={Tier.SECONDARY}>
+                  {subtitle}
+                </Text>
+              </Margin>
+            </FlexItem>
+          );
         }
-      }}
+      })}
     </Flex>
   );
 };
 
-const Map = ({ accessToken, markers, height, style, ...props }) => {
+interface Marker {
+  label?: React.ReactNode;
+  title?: string;
+  subtitle?: string;
+  coordinates: {
+    lng: number;
+    lat: number;
+  };
+  options?: any;
+}
+
+interface MapProps {
+  /**
+   * Determines the height of the map in pixels
+   * @default 300
+   */
+  height?: number;
+
+  /**
+   * If true, the user can interact with the map through panning and zooming
+   * @default false
+   */
+  interactive?: boolean;
+
+  /** Level of zoom by default */
+  zoom?: number;
+
+  /** Access token to use the mapbox API, ask an admin for this if you dont have it */
+  accessToken: string;
+
+  /** Elements you want to see on the map. To customize the Marker object, you can use the options field */
+  markers: Array<Marker>;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+const Map = ({
+  accessToken,
+  markers,
+  height = 300,
+  style,
+  interactive = false,
+  ...props
+}: MapProps) => {
   const ref = useRef();
 
   const [mapRef, setMapRef] = useState(ref.current);
 
-  const handleFitMarkers = (map) => {
+  const handleFitMarkers = (map: typeof MapboxMap) => {
     const coordinatesToFit = markers.reduce((coords, marker) => {
       const { coordinates } = marker;
-      return coords.extend([coordinates.lng, coordinates.lat]);
+      return coords.extend(new LngLat(coordinates.lng, coordinates.lat));
     }, new LngLatBounds());
     map.fitBounds(coordinatesToFit, { padding: { top: 60, bottom: 60, left: 60, right: 60 } });
     setMapRef(map);
   };
 
-  const renderMarker = (marker) => {
+  const renderMarker = (marker: Marker) => {
     return (
       <div className={styles.marker}>
-        {do {
+        {run(() => {
           if (marker.label != null) {
-            <div className={styles.label}>{marker.label}</div>;
+            return <div className={styles.label}>{marker.label}</div>;
           }
-        }}
+        })}
         <div className={styles.dropContainer}>
           <div className={styles.drop} />
         </div>
@@ -103,6 +155,7 @@ const Map = ({ accessToken, markers, height, style, ...props }) => {
   return (
     <div className={styles.root} style={{ height, ...style }}>
       <MapboxMap
+        interactive={interactive}
         onLoad={handleFitMarkers}
         className={styles.map}
         accessToken={accessToken}
@@ -110,28 +163,32 @@ const Map = ({ accessToken, markers, height, style, ...props }) => {
         style="mapbox://styles/mapbox/light-v9"
         coordinates={markers[0]?.coordinates}
         {...props}>
-        {do {
+        {run(() => {
           if (mapRef) {
-            markers.map((marker, i) => (
+            return markers.map((marker, i) => (
               <MapboxMarker
                 key={i}
                 coordinates={marker.coordinates}
                 map={mapRef}
                 {...marker.options}>
-                {do {
+                {run(() => {
                   if (marker.title) {
-                    <Popover
-                      content={<PopoverContent title={marker.title} subtitle={marker.subtitle} />}>
-                      {renderMarker(marker)}
-                    </Popover>;
+                    return (
+                      <Popover
+                        content={
+                          <PopoverContent title={marker.title} subtitle={marker.subtitle} />
+                        }>
+                        {renderMarker(marker)}
+                      </Popover>
+                    );
                   } else {
-                    renderMarker(marker);
+                    return renderMarker(marker);
                   }
-                }}
+                })}
               </MapboxMarker>
             ));
           }
-        }}
+        })}
       </MapboxMap>
     </div>
   );

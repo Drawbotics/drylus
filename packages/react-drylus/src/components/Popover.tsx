@@ -1,12 +1,12 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { styles as themeStyles } from '../base/ThemeProvider';
+import { themeStyles } from '../base';
 import { Position } from '../enums';
-import { CustomPropTypes, WrapperRef, getStyleForSide } from '../utils';
+import { Style } from '../types';
+import { Deprecated, WrapperRef, getStyleForSide } from '../utils';
 
 const styles = {
   root: css`
@@ -83,23 +83,54 @@ const styles = {
   `,
 };
 
-const Popover = ({ children, message, content: _content, side, style, exitOnClick }) => {
+interface PopoverProps {
+  /** @deprecated use content instead */
+  message?: React.ReactNode;
+
+  /** Content shown when the tooltip is visible */
+  content: React.ReactNode;
+
+  /** Component wrapped by the Popover */
+  children: React.ReactNode;
+
+  /** @default Position.TOP */
+  side?: Position;
+
+  /**
+   * If true, the popover will close when clicked
+   * @default false
+   */
+  exitOnClick?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const Popover = ({
+  children,
+  message,
+  content: _content,
+  side = Position.TOP,
+  style = {},
+  exitOnClick = false,
+}: PopoverProps) => {
   const [visible, setVisible] = useState(false);
-  const [outletElement, setOutletElement] = useState(null);
-  const childrenRef = useRef();
-  const popoverRef = useRef();
+  const [outletElement, setOutletElement] = useState<HTMLElement>();
+  const childrenRef = useRef<HTMLElement>();
+  const popoverRef = useRef<HTMLDivElement>(null);
   const popoverRect = popoverRef.current?.getBoundingClientRect();
 
   const content = _content != null ? _content : message;
 
   useEffect(() => {
-    if (!document.getElementById('popovers-outlet')) {
+    const outlet = document.getElementById('popovers-outlet');
+    if (outlet == null) {
       const popoversOutlet = document.createElement('div');
       popoversOutlet.id = 'popovers-outlet';
       document.body.appendChild(popoversOutlet);
       setOutletElement(popoversOutlet);
     } else {
-      setOutletElement(document.getElementById('popovers-outlet'));
+      setOutletElement(outlet);
     }
 
     return () => {
@@ -110,20 +141,20 @@ const Popover = ({ children, message, content: _content, side, style, exitOnClic
   }, []);
 
   useEffect(() => {
-    const handleWindowClick = (e) => {
+    const handleWindowClick = (e: Event) => {
       if (
         (visible &&
           e.target !== childrenRef.current &&
-          !childrenRef.current?.contains(e.target) &&
+          !childrenRef.current?.contains(e.target as Node) &&
           e.target !== popoverRef.current &&
-          !popoverRef.current?.contains(e.target)) ||
+          !popoverRef.current?.contains(e.target as Node)) ||
         exitOnClick
       ) {
         setVisible(false);
       }
     };
 
-    const handleMouseClick = (e) => setVisible(true);
+    const handleMouseClick = () => setVisible(true);
 
     const handleMouseLeave = () => setVisible(false);
 
@@ -135,7 +166,7 @@ const Popover = ({ children, message, content: _content, side, style, exitOnClic
     }
 
     return () => {
-      childrenRef.current.removeEventListener('click', handleMouseClick);
+      childrenRef.current?.removeEventListener('click', handleMouseClick);
       window.removeEventListener('click', handleWindowClick);
       window.removeEventListener('scroll', handleMouseLeave);
     };
@@ -147,7 +178,6 @@ const Popover = ({ children, message, content: _content, side, style, exitOnClic
     side,
     rect: childrenRef.current?.getBoundingClientRect(),
     rectComponent: popoverRect,
-    sides: Position,
   });
 
   return (
@@ -167,41 +197,12 @@ const Popover = ({ children, message, content: _content, side, style, exitOnClic
             {content}
           </div>
         </div>,
-        document.getElementById('popovers-outlet'),
+        document.getElementById('popovers-outlet') as Element,
       )}
     </Fragment>
   );
 };
 
 Popover.propTypes = {
-  /** DEPRECATED */
-  message: CustomPropTypes.mutuallyExclusive('content', {
-    type: PropTypes.node,
-    deprecated: true,
-  }),
-
-  /** Content shown when the tooltip is visible */
-  content: CustomPropTypes.mutuallyExclusive('message', {
-    type: PropTypes.node,
-    required: true,
-  }),
-
-  /** Component wrapped by the Popover */
-  children: PropTypes.node.isRequired,
-
-  side: PropTypes.oneOf([Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM]),
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** If true, the popover will close when clicked */
-  exitOnClick: PropTypes.bool,
+  message: Deprecated,
 };
-
-Popover.defaultProps = {
-  side: Position.TOP,
-  style: {},
-  exitOnClick: false,
-};
-
-export default Popover;

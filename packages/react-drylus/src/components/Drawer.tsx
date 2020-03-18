@@ -256,7 +256,7 @@ interface DrawerProps extends BaseDrawerProps {
    * Passed to the CSSTransition component to fire events at different points of the animation. See reactcommunity.org/react-transition-group docs
    * @default {}
    */
-  cssTransitionCallbacks: {
+  cssTransitionCallbacks?: {
     onEnter: () => void;
     onEntering: () => void;
     onEntered: () => void;

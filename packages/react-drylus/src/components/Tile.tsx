@@ -1,7 +1,9 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
+
+import { Style } from '../types';
+import { run } from '../utils';
 
 const styles = {
   root: css`
@@ -29,35 +31,33 @@ const styles = {
   `,
 };
 
-const Tile = ({ style, title, children, noPadding }) => {
+interface TileProps {
+  /** Displayed at the top of the tile, looks like a label */
+  title?: string;
+
+  /** Content displayed within the tile */
+  children: React.ReactNode;
+
+  /** Removes the space between the content and the borders (good for full size images in the tile) */
+  noPadding?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const Tile = ({ style, title, children, noPadding }: TileProps) => {
   return (
     <div
       style={style}
       className={cx(styles.root, {
         [styles.noPadding]: noPadding,
       })}>
-      {do {
+      {run(() => {
         if (title != null) {
-          <div className={styles.title}>{title}</div>;
+          return <div className={styles.title}>{title}</div>;
         }
-      }}
+      })}
       {children}
     </div>
   );
 };
-
-Tile.propTypes = {
-  /** Displayed at the top of the tile, looks like a label */
-  title: PropTypes.string,
-
-  /** Content displayed within the tile */
-  children: PropTypes.node.isRequired,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** Removes the space between the content and the borders (good for full size images in the tile) */
-  noPadding: PropTypes.bool,
-};
-
-export default Tile;
