@@ -1,12 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Category, Position } from '../enums';
-import { getEnumAsClass } from '../utils';
-import { useResponsiveProps } from '../utils/hooks';
-import Icon from './Icon';
+import { Responsive, Style } from '../types';
+import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { Icon, Icons } from './Icon';
 
 const styles = {
   wrapper: css`
@@ -123,71 +122,70 @@ const styles = {
   `,
 };
 
-export const DropdownOption = ({ responsive, ...rest }) => {
-  const { text, category, disabled, onClick, onClickClose, icon, style } = useResponsiveProps(
-    rest,
-    responsive,
-  );
+interface DropdownOptionProps {
+  /** Text displayed in the option */
+  text: string;
+
+  /** If true, the option is not clickable */
+  disabled?: boolean;
+
+  /** Triggered when the option is clicked */
+  onClick?: () => void;
+
+  /** Name of the icon to be shown on the left side */
+  icon?: keyof typeof Icons;
+
+  category?: Category.DANGER | Category.SUCCESS | Category.WARNING;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+
+  /** @private */
+  onClickClose?: () => void;
+}
+
+export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => {
+  const { text, category, disabled, onClick, onClickClose, icon, style } = useResponsiveProps<
+    DropdownOptionProps
+  >(rest, responsive);
 
   return (
     <div
       style={style}
       className={cx(styles.option, {
-        [styles[getEnumAsClass(category)]]: category,
+        [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
         [styles.disabled]: disabled,
       })}
       onClick={
         disabled
-          ? null
+          ? undefined
           : () => {
-              onClickClose();
-              onClick();
+              onClickClose != null ? onClickClose() : null;
+              onClick != null ? onClick() : null;
             }
       }>
-      {do {
+      {run(() => {
         if (icon) {
-          <Icon name={icon} />;
+          return <Icon name={icon} />;
         }
-      }}
+      })}
       {text}
     </div>
   );
 };
 
-DropdownOption.propTypes = {
-  /** Text displayed in the option */
-  text: PropTypes.string.isRequired,
-
-  /** If true, the option is not clickable */
-  disabled: PropTypes.bool,
-
-  /** Triggered when the option is clicked */
-  onClick: PropTypes.func,
-
-  /** Name of the icon to be shown on the left side */
-  icon: PropTypes.string,
-
-  category: PropTypes.oneOf([Category.DANGER, Category.SUCCESS, Category.WARNING]),
+interface DropdownTitleProps {
+  /** Value of the title */
+  text: string;
 
   /** Used for style overrides */
-  style: PropTypes.object,
+  style?: Style;
+}
 
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-};
-
-DropdownOption.defaultProps = {
-  onClick: (x) => x,
-};
-
-export const DropdownTitle = ({ text, style }) => {
+export const DropdownTitle = ({ text, style }: DropdownTitleProps) => {
   return (
     <div style={style} className={styles.title}>
       {text}
@@ -195,37 +193,59 @@ export const DropdownTitle = ({ text, style }) => {
   );
 };
 
-DropdownTitle.propTypes = {
-  /** Value of the title */
-  text: PropTypes.string.isRequired,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
 export const DropdownSeparator = () => {
   return <div className={styles.separator} />;
 };
 
-const Dropdown = ({ responsive, ...rest }) => {
-  const { children, trigger, side, style } = useResponsiveProps(rest, responsive);
+type DropdownChild =
+  | React.ReactElement<typeof DropdownOption>
+  | React.ReactElement<typeof DropdownTitle>
+  | React.ReactElement<typeof DropdownSeparator>;
+
+interface DropdownProps {
+  /** This will be the trigger of the dropdown, and relative to which the menu will be positioned */
+  trigger?: React.ReactNode;
+
+  /** This is the content of the dropdown menu */
+  children: DropdownChild | Array<DropdownChild>;
+
+  /** @default Position.BOTTOM */
+  side?: Position;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+}
+
+export const Dropdown = ({ responsive, ...rest }: DropdownProps) => {
+  const { children, trigger, side = Position.BOTTOM, style } = useResponsiveProps<DropdownProps>(
+    rest,
+    responsive,
+  );
 
   if (!React.isValidElement(trigger)) {
     console.warn('Dropdown only accepts a single child as trigger');
     return null;
   }
 
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setDropdowOpen] = useState(false);
 
-  const handleDocumentClick = (e) =>
-    !ref.current.contains(e.target) ? setDropdowOpen(false) : null;
+  const handleDocumentClick = (e: Event) => {
+    // Needs Event because React.MouseEvent<HTMLDivElement> does not match addEventListener signature
+    if (!ref.current?.contains(e.target as Node)) {
+      setDropdowOpen(false);
+    }
+  };
   useEffect(() => {
     document.addEventListener('mousedown', handleDocumentClick);
     return () => {
       document.removeEventListener('mousedown', handleDocumentClick);
     };
   }, []);
+
   return (
     <div style={style} className={styles.wrapper}>
       <div onClick={() => setDropdowOpen(true)} className={styles.trigger}>
@@ -235,43 +255,19 @@ const Dropdown = ({ responsive, ...rest }) => {
         ref={ref}
         className={cx(styles.root, {
           [styles.visible]: isOpen,
-          [styles[getEnumAsClass(side)]]: side,
+          [styles[getEnumAsClass<typeof styles>(side)]]: side != null,
         })}>
         {React.Children.map(children, (child) =>
-          React.cloneElement(child, {
-            onClickClose: () => setDropdowOpen(false),
-          }),
+          React.cloneElement(
+            child as DropdownChild,
+            child.type === DropdownOption
+              ? ({
+                  onClickClose: () => setDropdowOpen(false),
+                } as Partial<typeof DropdownOption>)
+              : undefined,
+          ),
         )}
       </div>
     </div>
   );
 };
-
-Dropdown.propTypes = {
-  /** This will be the trigger of the dropdown, and relative to which the menu will be positioned */
-  trigger: PropTypes.node,
-
-  /** This is the content of the dropdown menu */
-  children: PropTypes.node,
-
-  side: PropTypes.oneOf([Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM]),
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-};
-
-Dropdown.defaultProps = {
-  side: Position.BOTTOM,
-};
-
-export default Dropdown;

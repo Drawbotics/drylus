@@ -1,12 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
 import { Category, Color, Size } from '../enums';
-import { CustomPropTypes, categoryEnumToColor, getEnumAsClass } from '../utils';
-import { useResponsiveProps } from '../utils/hooks';
-import { styles as shimmerStyles } from './LoadingPlaceholder';
+import { Responsive, Style } from '../types';
+import { Deprecated, categoryEnumToColor, getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { placeholderStyles as shimmerStyles } from './LoadingPlaceholder';
 
 const styles = {
   root: css`
@@ -172,50 +171,77 @@ const styles = {
   `,
 };
 
-const SteppedProgressBar = ({ responsive, ...rest }) => {
+interface SteppedProgressBarProps {
+  /** Determines how many steps there are in the bar */
+  steps: number;
+
+  /** The index of the currenctly active step */
+  activeStep: number;
+
+  /** If specified the currently active bar has a precise width, should be between 0-1 */
+  percentage?: number;
+
+  /** @deprecated use color instead */
+  category?: Exclude<Category, Category.PRIMARY>;
+
+  color?: Exclude<Color, Color.PRIMARY>;
+
+  /** @default Size.DEFAULT */
+  size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+}
+
+export const SteppedProgressBar = ({ responsive, ...rest }: SteppedProgressBarProps) => {
   const {
-    percentage,
+    percentage = 0,
     category,
-    size,
+    size = Size.DEFAULT,
     style,
     steps,
     activeStep,
     color: _color,
-  } = useResponsiveProps(rest, responsive);
+  } = useResponsiveProps<SteppedProgressBarProps>(rest, responsive);
 
   const indeterminate = percentage == null;
   const color = category ? categoryEnumToColor(category) : _color;
 
   return (
-    <div style={style} className={cx(styles.root, { [styles[getEnumAsClass(size)]]: size })}>
+    <div
+      style={style}
+      className={cx(styles.root, { [styles[getEnumAsClass<typeof styles>(size)]]: size != null })}>
       {[...Array(steps).keys()].map((id, i) => (
         <Fragment key={id}>
           <div data-element="step" className={styles.step}>
             <div
               className={cx(styles.bar, {
                 [styles.active]: id == activeStep && percentage !== 1,
-                [styles[getEnumAsClass(color)]]: color,
+                [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
                 [shimmerStyles.shimmer]: id == activeStep && indeterminate,
               })}
               style={{
-                width: do {
+                width: run(() => {
                   if (id < activeStep || (id == activeStep && indeterminate)) {
-                    ('100%');
+                    return '100%';
                   } else if (id == activeStep) {
-                    `${percentage * 100}%`;
+                    return `${percentage * 100}%`;
                   } else {
-                    ('0');
+                    return '0';
                   }
-                },
+                }),
               }}
               data-element="bar"
             />
           </div>
-          {do {
+          {run(() => {
             if (i !== steps - 1) {
-              <div className={styles.separator} />;
+              return <div className={styles.separator} />;
             }
-          }}
+          })}
         </Fragment>
       ))}
     </div>
@@ -223,46 +249,5 @@ const SteppedProgressBar = ({ responsive, ...rest }) => {
 };
 
 SteppedProgressBar.propTypes = {
-  /** Determines how many steps there are in the bar */
-  steps: PropTypes.number.isRequired,
-
-  /** The index of the currenctly active step */
-  activeStep: PropTypes.number.isRequired,
-
-  /** If specified the currently active bar has a precise width, should be between 0-1 */
-  percentage: PropTypes.number,
-
-  /** DEPRECATED */
-  category: CustomPropTypes.deprecated(
-    PropTypes.oneOf([
-      Category.BRAND,
-      Category.DANGER,
-      Category.SUCCESS,
-      Category.INFO,
-      Category.WARNING,
-    ]),
-  ),
-
-  color: PropTypes.oneOf([Color.BRAND, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE]),
-
-  size: PropTypes.oneOf([Size.SMALL, Size.DEFAULT, Size.LARGE]),
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
+  category: Deprecated,
 };
-
-SteppedProgressBar.defaultProps = {
-  size: Size.DEFAULT,
-};
-
-export default SteppedProgressBar;

@@ -8,7 +8,7 @@ export function getEnumAsClass<T extends Record<string, string>>(enumVal?: Enum)
   return camelCase(enumVal?.toLowerCase());
 }
 
-export function colorEnumToCategory(enumVal: Color): Category | Color {
+export function colorEnumToCategory(enumVal: Color): Category | undefined {
   switch (enumVal) {
     case Color.RED:
       return Category.DANGER;
@@ -19,10 +19,9 @@ export function colorEnumToCategory(enumVal: Color): Category | Color {
     case Color.BLUE:
       return Category.INFO;
   }
-  return enumVal;
 }
 
-export function categoryEnumToColor(enumVal: Category): Color | Category {
+export function categoryEnumToColor(enumVal: Category): Color | undefined {
   switch (enumVal) {
     case Category.DANGER:
       return Color.RED;
@@ -33,10 +32,9 @@ export function categoryEnumToColor(enumVal: Category): Color | Category {
     case Category.INFO:
       return Color.BLUE;
   }
-  return enumVal;
 }
 
-export function shadeEnumToTier(enumVal: Shade): Tier | Shade {
+export function shadeEnumToTier(enumVal: Shade): Tier | undefined {
   switch (enumVal) {
     case Shade.DARK:
       return Tier.PRIMARY;
@@ -45,7 +43,6 @@ export function shadeEnumToTier(enumVal: Shade): Tier | Shade {
     case Shade.LIGHT:
       return Tier.TERTIARY;
   }
-  return enumVal;
 }
 
 export function getIconForCategory(category: Category): string {

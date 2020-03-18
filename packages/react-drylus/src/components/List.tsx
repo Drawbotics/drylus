@@ -1,12 +1,12 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import { Category, Color } from '../enums';
-import { CustomPropTypes, categoryEnumToColor } from '../utils';
-import Dot from './Dot';
-import Icon from './Icon';
+import { Style } from '../types';
+import { Deprecated, categoryEnumToColor, run } from '../utils';
+import { Dot } from './Dot';
+import { Icon, Icons } from './Icon';
 
 const styles = {
   root: css`
@@ -61,64 +61,72 @@ const styles = {
   `,
 };
 
-export const ListItem = ({ children, icon, category, disabled, style, color: _color }) => {
+interface ListItemProps {
+  /** Content of the list item */
+  children: React.ReactNode;
+
+  /** @deprecated use color instead */
+  category?: Category;
+
+  /** @default Color.PRIMARY */
+  color?: Color;
+
+  /** If passed, the specified icon will be displayed instead of the bullet */
+  icon?: keyof typeof Icons;
+
+  /** If true the item is less visible */
+  disabled?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+}
+
+export const ListItem = ({
+  children,
+  icon,
+  category,
+  disabled,
+  style,
+  color: _color = Color.PRIMARY,
+}: ListItemProps) => {
   const color = category ? categoryEnumToColor(category) : _color;
   return (
     <li style={style} className={cx(styles.item, { [styles.disabled]: disabled })}>
       {children}
-      {do {
-        if (icon) {
-          <Icon name={icon} color={color === Color.PRIMARY ? null : color} bold />;
+      {run(() => {
+        if (icon != null) {
+          return <Icon name={icon} color={color === Color.PRIMARY ? undefined : color} bold />;
         } else {
-          <div data-element="dot">
-            <Dot color={disabled ? null : color} />
-          </div>;
+          return (
+            <div data-element="dot">
+              <Dot color={disabled ? undefined : color} />
+            </div>
+          );
         }
-      }}
+      })}
     </li>
   );
 };
 
 ListItem.propTypes = {
-  /** Content of the list item */
-  children: PropTypes.node.isRequired,
+  category: Deprecated,
+};
 
-  /** DEPRECATED */
-  category: CustomPropTypes.deprecated(
-    PropTypes.oneOf([
-      Category.BRAND,
-      Category.DANGER,
-      Category.SUCCESS,
-      Category.INFO,
-      Category.WARNING,
-      Category.PRIMARY,
-    ]),
-  ),
+interface ListProps {
+  /** Items to display in the list */
+  children: React.ReactElement<typeof ListItem> | Array<React.ReactElement<typeof ListItem>>;
 
-  color: PropTypes.oneOf([
-    Color.BRAND,
-    Color.RED,
-    Color.BLUE,
-    Color.GREEN,
-    Color.ORANGE,
-    Color.PRIMARY,
-  ]),
-
-  /** If passed, the specified icon will be displayed instead of the bullet */
-  icon: PropTypes.string,
-
-  /** If true the item is less visible */
-  disabled: PropTypes.bool,
+  /**
+   * If true, list becomes an ordered list
+   * @default false
+   */
+  ordered?: boolean;
 
   /** Used for style overrides */
-  style: PropTypes.object,
-};
+  style?: Style;
+}
 
-ListItem.defaultProps = {
-  color: Color.PRIMARY,
-};
-
-const List = ({ children, ordered, style }) => {
+export const List = ({ children, ordered = false, style }: ListProps) => {
   if (ordered) {
     return (
       <ol style={style} className={cx(styles.root, styles.ordered)}>
@@ -132,19 +140,3 @@ const List = ({ children, ordered, style }) => {
     </ul>
   );
 };
-
-List.propTypes = {
-  /** Items to display in the list */
-  children: PropTypes.node.isRequired,
-
-  ordered: PropTypes.bool,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-};
-
-List.defaultProps = {
-  ordered: false,
-};
-
-export default List;

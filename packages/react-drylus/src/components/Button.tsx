@@ -6,7 +6,7 @@ import { Category, Color, Size, Tier } from '../enums';
 import { Responsive, Style } from '../types';
 import { colorEnumToCategory, getEnumAsClass, run, useResponsiveProps } from '../utils';
 
-export const styles = {
+const styles = {
   root: css`
     background: ${sv.neutralLight};
     color: ${sv.colorPrimary};
@@ -267,7 +267,9 @@ export const styles = {
   `,
 };
 
-interface ButtonProps {
+export const buttonStyles = styles;
+
+export interface ButtonProps {
   children?: React.ReactNode;
 
   /** Disables the button click */

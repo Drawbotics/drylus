@@ -381,7 +381,7 @@ export const CheckboxFilter = ({
           className={cx(styles.option, styles.defaultCursor)}>
           <Checkbox
             id={String(option.value)}
-            onChange={(checked) => {
+            onChange={(checked: boolean) => {
               checked
                 ? onChange([...values, option[valueKey as keyof Option]])
                 : onChange(
