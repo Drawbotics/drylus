@@ -348,7 +348,6 @@ export const Margin = ({ responsive, ...rest }: MarginProps) => {
   const isUniform = typeof rawSize !== 'object';
 
   const size = !isUniform && _isRectangular(rawSize) ? _computeSize(rawSize) : rawSize;
-
   return (
     <div
       className={cx(styles.root, {

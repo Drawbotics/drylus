@@ -1,5 +1,5 @@
 export enum Size {
-  EXTRA_SMALL = 'BEXTRA_SMALLRAND',
+  EXTRA_SMALL = 'EXTRA_SMALL',
   SMALL = 'SMALL',
   DEFAULT = 'DEFAULT',
   LARGE = 'LARGE',
