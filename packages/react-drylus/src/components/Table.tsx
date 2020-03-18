@@ -760,7 +760,7 @@ export const Table = ({
   fullWidth = true,
   withNesting,
   data,
-  renderCell,
+  renderCell = (x) => x,
   renderChildCell = () => null,
   header = [],
   childHeader,

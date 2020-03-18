@@ -119,7 +119,7 @@ interface MapProps {
   [x: string]: any;
 }
 
-const Map = ({
+export const Map = ({
   accessToken,
   markers,
   height = 300,

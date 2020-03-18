@@ -92,7 +92,7 @@ interface AvatarProps {
   responsive?: Responsive<this>;
 }
 
-const Avatar = ({ responsive, ...rest }: AvatarProps) => {
+export const Avatar = ({ responsive, ...rest }: AvatarProps) => {
   const {
     image,
     text,
