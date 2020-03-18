@@ -129,17 +129,17 @@ export const SegmentedControl = ({
     <div style={style} className={styles.root}>
       {options.map((option) => (
         <div
-          key={option[valueKey as keyof typeof Option]}
+          key={option[valueKey as keyof Option]}
           className={cx(styles.control, {
-            [styles.active]: value === option[valueKey as keyof typeof Option],
+            [styles.active]: value === option[valueKey as keyof Option],
             [styles.disabled]: option.disabled,
           })}
           onClick={
             !option.disabled && onChange != null
-              ? () => onChange(option[valueKey as keyof typeof Option])
+              ? () => onChange(option[valueKey as keyof Option])
               : undefined
           }>
-          <span>{option[labelKey as keyof typeof Option]}</span>
+          <span>{option[labelKey as keyof Option]}</span>
           {run(() => {
             if (option.loading === true) {
               return (

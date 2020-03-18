@@ -224,10 +224,10 @@ export const Select = ({ responsive, ...rest }: SelectProps) => {
         })}
         {options.map((option) => (
           <option
-            key={option[valueKey as keyof typeof Option]}
-            value={option[valueKey as keyof typeof Option]}
+            key={option[valueKey as keyof Option]}
+            value={option[valueKey as keyof Option]}
             disabled={option.disabled}>
-            {option[labelKey as keyof typeof Option]}
+            {option[labelKey as keyof Option]}
           </option>
         ))}
       </select>

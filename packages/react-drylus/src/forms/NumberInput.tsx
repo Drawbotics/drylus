@@ -1,10 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 
-import Icon from '../components/Icon';
-import { useResponsiveProps } from '../utils/hooks';
+import { Icon } from '../components';
+import { Responsive, Style } from '../types';
+import { run, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
 const styles = {
@@ -97,7 +97,69 @@ const styles = {
   `,
 };
 
-const NumberInput = ({ responsive, ...rest }) => {
+interface NumberInputProps {
+  /** Value displayed in the field */
+  value: number | '-' | '';
+
+  /** Name of the form element (target.name) */
+  name?: string;
+
+  /** Disables the countbox */
+  disabled?: boolean;
+
+  /** Text shown when no value is active */
+  placeholder?: string;
+
+  /** Triggered when the value is changed (typing or clicking +/-). If not given, the field is read-only */
+  onChange?: (v: number | string, name?: string) => void;
+
+  /** Small text shown below the box, replaced by error if present */
+  hint?: string;
+
+  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: string | boolean;
+
+  /** If true the element displays a check icon and a green outline, overridden by "error" */
+  valid?: boolean;
+
+  /** Use if you want to modify the way you display the value (string operations only) */
+  renderValue?: (v: number | string) => string;
+
+  /**
+   * Limits the max value
+   * @default Infinity
+   */
+  max?: number;
+
+  /**
+   * Limits the min value
+   * @default -Infinity
+   */
+  min?: number;
+
+  /**
+   * If true, the counter arrows to increase/decrease are shown
+   * @default true
+   */
+  withCounter?: boolean;
+
+  /** If true, a spinner is shown on the right corner, like with error and valid */
+  loading?: boolean;
+
+  /**
+   * The amount by which the value is increased or decresed
+   * @default 1
+   */
+  step?: number;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+}
+
+export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
   const {
     value: rawValue,
     placeholder,
@@ -107,26 +169,28 @@ const NumberInput = ({ responsive, ...rest }) => {
     error,
     valid,
     renderValue,
-    max,
-    min,
+    max = Infinity,
+    min = -Infinity,
     name,
-    withCounter,
+    withCounter = true,
     loading,
     style,
-    step,
+    step = 1,
   } = useResponsiveProps(rest, responsive);
-  const inputRef = useRef(null);
-  const leftSpanRef = useRef(null);
-  const [extraLeftPadding, setExtraLeftPadding] = useState(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const leftSpanRef = useRef<HTMLSpanElement>(null);
+  const [extraLeftPadding, setExtraLeftPadding] = useState<number>();
 
-  const handleInputOnChange = (v) => {
+  const handleInputOnChange = (v: number | string) => {
     const numericalValue = Number(v);
 
-    if (v === '-' || v === '') {
-      onChange(v, name);
-    } else if (numericalValue === 0 || numericalValue) {
-      const finalValue = numericalValue > max ? max : numericalValue < min ? min : numericalValue;
-      onChange(finalValue, name);
+    if (onChange != null) {
+      if (v === '-' || v === '') {
+        onChange(v, name);
+      } else if (numericalValue === 0 || numericalValue) {
+        const finalValue = numericalValue > max ? max : numericalValue < min ? min : numericalValue;
+        onChange(finalValue, name);
+      }
     }
   };
 
@@ -140,7 +204,7 @@ const NumberInput = ({ responsive, ...rest }) => {
     if (value === 0 || value) {
       setExtraLeftPadding(leftSpanRef.current?.getBoundingClientRect()?.width);
     } else if (value === '' || value == null) {
-      setExtraLeftPadding(null);
+      setExtraLeftPadding(undefined);
     }
   }, [rawValue]);
 
@@ -148,9 +212,9 @@ const NumberInput = ({ responsive, ...rest }) => {
 
   return (
     <div style={style} className={styles.root}>
-      {do {
+      {run(() => {
         if (renderValue != null && (value === 0 || value)) {
-          const sections = renderValue(value).split(value);
+          const sections = renderValue(value).split(String(value));
           return (
             <span className={styles.renderedValue}>
               <span ref={leftSpanRef}>{sections[0]}</span>
@@ -159,7 +223,7 @@ const NumberInput = ({ responsive, ...rest }) => {
             </span>
           );
         }
-      }}
+      })}
       <InputWithRef
         ref={inputRef}
         error={error}
@@ -184,7 +248,7 @@ const NumberInput = ({ responsive, ...rest }) => {
               <button
                 className={styles.button}
                 onClick={() => {
-                  const res = (value || 0) + step;
+                  const res = (Number(value) ?? 0) + step;
                   if (!disabled && value < max) {
                     onChange(Number.isInteger(res) ? res : res.toFixed(decimalPlaces), name);
                   }
@@ -194,7 +258,7 @@ const NumberInput = ({ responsive, ...rest }) => {
               <button
                 className={styles.button}
                 onClick={() => {
-                  const res = (value || 0) - step;
+                  const res = (Number(value) ?? 0) - step;
                   if (!disabled && value > min) {
                     onChange(Number.isInteger(res) ? res : res.toFixed(decimalPlaces), name);
                   }
@@ -208,69 +272,3 @@ const NumberInput = ({ responsive, ...rest }) => {
     </div>
   );
 };
-
-NumberInput.propTypes = {
-  /** Value displayed in the field */
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf(['-', ''])]).isRequired,
-
-  /** Name of the form element (target.name) */
-  name: PropTypes.string,
-
-  /** Disables the countbox */
-  disabled: PropTypes.bool,
-
-  /** Text shown when no value is active */
-  placeholder: PropTypes.string,
-
-  /** Triggered when the value is changed (typing or clicking +/-). If not given, the field is read-only */
-  onChange: PropTypes.func,
-
-  /** Small text shown below the box, replaced by error if present */
-  hint: PropTypes.string,
-
-  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-
-  /** If true the element displays a check icon and a green outline, overridden by "error" */
-  valid: PropTypes.bool,
-
-  /** Use if you want to modify the way you display the value (string operations only) */
-  renderValue: PropTypes.func,
-
-  /** Limits the max value */
-  max: PropTypes.number,
-
-  /** Limits the min value */
-  min: PropTypes.number,
-
-  /** If true, the counter arrows to increase/decrease are shown */
-  withCounter: PropTypes.bool,
-
-  /** If true, a spinner is shown on the right corner, like with error and valid */
-  loading: PropTypes.bool,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** The amount by which the value is increased or decresed */
-  step: PropTypes.number,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-};
-
-NumberInput.defaultProps = {
-  min: -Infinity,
-  max: Infinity,
-  withCounter: true,
-  step: 1,
-};
-
-export default NumberInput;

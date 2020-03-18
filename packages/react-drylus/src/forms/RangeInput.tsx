@@ -1,13 +1,12 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { Handles, Rail, Slider, Tracks } from 'react-compound-slider';
+import { GetTrackProps, Handles, Rail, Slider, SliderItem, Tracks } from 'react-compound-slider';
 
-import Text from '../components/Text';
-import { styles as tooltipStyles } from '../components/Tooltip';
+import { Text, tooltipStyles } from '../components';
 import { Size } from '../enums';
-import { useResponsiveProps } from '../utils/hooks';
+import { Responsive } from '../types';
+import { useResponsiveProps } from '../utils';
 
 const styles = {
   root: css`
@@ -76,7 +75,13 @@ const styles = {
   `,
 };
 
-const Tooltip = ({ value, visible }) => {
+interface RangeTooltipProps {
+  value: React.ReactNode;
+
+  visible: boolean;
+}
+
+const RangeTooltip = ({ value, visible }: RangeTooltipProps) => {
   return (
     <div
       data-element="tooltip"
@@ -88,7 +93,14 @@ const Tooltip = ({ value, visible }) => {
   );
 };
 
-const Handle = ({ handle, getHandleProps, renderValue, disabled }) => {
+interface HandleProps {
+  handle: SliderItem;
+  getHandleProps: (id: string, options: any) => any; // Broken at lib level
+  renderValue?: <T>(value: number) => T;
+  disabled?: boolean;
+}
+
+const Handle = ({ handle, getHandleProps, renderValue, disabled }: HandleProps) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const { id, value, percent } = handle;
 
@@ -116,12 +128,22 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled }) => {
               onTouchEnd: handleHideTooltip,
             },
       )}>
-      <Tooltip visible={tooltipVisible} value={renderValue(value)} />
+      <RangeTooltip
+        visible={tooltipVisible}
+        value={renderValue != null ? renderValue(value) : value}
+      />
     </div>
   );
 };
 
-const Track = ({ source, target, getTrackProps, disabled }) => {
+interface TrackProps {
+  source: SliderItem;
+  target: SliderItem;
+  getTrackProps: GetTrackProps;
+  disabled?: boolean;
+}
+
+const Track = ({ source, target, getTrackProps, disabled }: TrackProps) => {
   return (
     <div
       style={{
@@ -134,20 +156,52 @@ const Track = ({ source, target, getTrackProps, disabled }) => {
   );
 };
 
-const RangeInput = ({ responsive, ...rest }) => {
-  const { min, max, value, step, onChange, onUpdate, disabled, renderValue } = useResponsiveProps(
-    rest,
-    responsive,
-  );
+interface RangeInputProps {
+  /** The minimum value displayed on the input, and the minimum selectable value */
+  min: number;
 
-  const isMultiHandle = value.length > 1;
-  const values = isMultiHandle ? value : [value];
+  /** The maximum value displayed on the input, and the maximum selectable value */
+  max: number;
+
+  /** If value is an array of numbers, then we display n handles, otherwise only 1 value shows 1 handle. If the value is larger than max, or smaller than min, the max or min will be used */
+  value: number | Array<number>;
+
+  /** Determines the range between each value, can be float or int */
+  step?: number;
+
+  /** Returns the value at the end of the slide (mouse up/touch end). For continuous updates while sliding use onUpdate */
+  onChange: (value: number | Array<number>) => void;
+
+  /** Returns value but on every step changed by the handle: render intensive */
+  onUpdate?: (value: number | Array<number>) => void;
+
+  /** Disables the slider */
+  disabled?: boolean;
+
+  /** Function to custom display the given value(s): (v) => {} */
+  renderValue?: <T>(value: number) => T;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+}
+
+export const RangeInput = ({ responsive, ...rest }: RangeInputProps) => {
+  const { min, max, value, step, onChange, onUpdate, disabled, renderValue } = useResponsiveProps<
+    RangeInputProps
+  >(rest, responsive);
+
+  const isMultiHandle = typeof value !== 'number' && value.length > 1;
+  const values: Array<number> = isMultiHandle ? (value as Array<number>) : [value as number];
 
   return (
     <Slider
       disabled={disabled}
-      onUpdate={(values) => onUpdate(isMultiHandle ? values : values[0])}
-      onChange={(values) => onChange(isMultiHandle ? values : values[0])}
+      onUpdate={(values) =>
+        onUpdate != null
+          ? onUpdate(isMultiHandle ? (values as Array<number>) : values[0])
+          : undefined
+      }
+      onChange={(values) => onChange(isMultiHandle ? (values as Array<number>) : values[0])}
       mode={3}
       step={step}
       className={cx(styles.root, { [styles.disabled]: disabled })}
@@ -192,56 +246,13 @@ const RangeInput = ({ responsive, ...rest }) => {
         )}
       </Tracks>
       <div className={cx(styles.labels)}>
-        <div className={styles.min}>
-          <Text size={Size.SMALL}>{renderValue(min)}</Text>
+        <div>
+          <Text size={Size.SMALL}>{renderValue != null ? renderValue(min) : min}</Text>
         </div>
-        <div className={styles.max}>
-          <Text size={Size.SMALL}>{renderValue(max)}</Text>
+        <div>
+          <Text size={Size.SMALL}>{renderValue != null ? renderValue(max) : max}</Text>
         </div>
       </div>
     </Slider>
   );
 };
-
-RangeInput.propTypes = {
-  /** The minimum value displayed on the input, and the minimum selectable value */
-  min: PropTypes.number.isRequired,
-
-  /** The maximum value displayed on the input, and the maximum selectable value */
-  max: PropTypes.number.isRequired,
-
-  /** If value is an array of numbers, then we display n handles, otherwise only 1 value shows 1 handle. If the value is larger than max, or smaller than min, the max or min will be used */
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]).isRequired,
-
-  /** Determines the range between each value, can be float or int */
-  step: PropTypes.number,
-
-  /** Returns the value at the end of the slide (mouse up/touch end). For continuous updates while sliding use onUpdate */
-  onChange: PropTypes.func.isRequired,
-
-  /** Returns value but on every step changed by the handle: render intensive */
-  onUpdate: PropTypes.func,
-
-  /** Disables the slider */
-  disabled: PropTypes.bool,
-
-  /** Function to custom display the given value(s): (v) => {} */
-  renderValue: PropTypes.func,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-};
-
-RangeInput.defaultProps = {
-  renderValue: (x) => x,
-  onUpdate: (x) => x,
-};
-
-export default RangeInput;
