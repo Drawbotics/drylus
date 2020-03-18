@@ -274,7 +274,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
     visible,
     onClickClose,
     onClickOverlay,
-    width: rawWidth,
+    width: rawWidth = 400,
     raw = false,
     title,
     side = Position.RIGHT,

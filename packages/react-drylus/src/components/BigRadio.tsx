@@ -2,7 +2,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Category } from '../enums';
+import { Color } from '../enums';
 import { Style } from '../types';
 import { Label } from './Label';
 import { RoundIcon } from './RoundIcon';
@@ -108,7 +108,7 @@ export const BigRadio = ({
       <div data-element="header" className={styles.header}>
         <Label>{label}</Label>
         <div data-element="icon">
-          <RoundIcon name="check" category={Category.SUCCESS} />
+          <RoundIcon name="check" color={Color.GREEN} />
         </div>
       </div>
       {children}
