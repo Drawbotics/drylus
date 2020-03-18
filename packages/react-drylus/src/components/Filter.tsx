@@ -223,7 +223,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
           [styles.visible]: panelOpen,
           [styles.rightAlign]: align === Align.RIGHT,
         })}
-        onClick={closeOnClick != null ? () => setPanelOpen(false) : undefined}>
+        onClick={closeOnClick === true ? () => setPanelOpen(false) : undefined}>
         <div>{children}</div>
         <div className={styles.clear} onClick={handleClickClear}>
           {clearLabel}

@@ -252,7 +252,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
       style={style}
       className={cx(styles.root, {
         [styles.valid]: Boolean(value) && valid,
-        [styles.error]: error != null,
+        [styles.error]: error != null && error !== false,
         [className as string]: className != null,
         [placeholderStyles.shimmer]: isPlaceholder,
       })}>
