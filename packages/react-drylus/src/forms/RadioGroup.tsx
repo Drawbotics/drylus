@@ -1,15 +1,13 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React from 'react';
-import v4 from 'uuid/v4';
+import { v4 } from 'uuid';
 
-import Icon from '../components/Icon';
-import { styles as placeholderStyles } from '../components/LoadingPlaceholder';
+import { Icon, placeholderStyles } from '../components';
 import { Category } from '../enums';
-import { CustomPropTypes } from '../utils';
-import { useResponsiveProps } from '../utils/hooks';
-import Hint from './Hint';
+import { Option, Responsive, Style } from '../types';
+import { run, useResponsiveProps } from '../utils';
+import { Hint } from './Hint';
 
 const styles = {
   radioGroup: css`
@@ -140,11 +138,20 @@ const styles = {
   `,
 };
 
+interface RadioProps {
+  value: string | number;
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
+  error: boolean;
+  checked: boolean;
+  children?: string;
+  isPlaceholder?: boolean;
+  readOnly: boolean;
+}
+
 const Radio = ({
   value,
   onChange,
-  valueKey = 'value',
-  labelKey = 'label',
   disabled,
   error,
   checked,
@@ -152,7 +159,7 @@ const Radio = ({
   isPlaceholder,
   readOnly,
   ...rest
-}) => {
+}: RadioProps) => {
   const id = v4();
   return (
     <div className={styles.root}>
@@ -176,32 +183,87 @@ const Radio = ({
             {...rest}
           />
           <div data-element="sprite" className={styles.sprite}>
-            {do {
+            {run(() => {
               if (readOnly) {
-                <label data-element="locked-icon" className={styles.iconLabel}>
-                  <Icon name="lock" />
-                </label>;
+                return (
+                  <label data-element="locked-icon" className={styles.iconLabel}>
+                    <Icon name="lock" />
+                  </label>
+                );
               } else {
                 <label data-element="icon" className={styles.iconLabel} htmlFor={id}>
                   <Icon bold name="check" />
                 </label>;
               }
-            }}
+            })}
           </div>
         </div>
-        {do {
+        {run(() => {
           if (children) {
-            <label data-element="label" className={styles.label} htmlFor={id}>
-              {children}
-            </label>;
+            return (
+              <label data-element="label" className={styles.label} htmlFor={id}>
+                {children}
+              </label>
+            );
           }
-        }}
+        })}
       </label>
     </div>
   );
 };
 
-const RadioGroup = ({ responsive, ...rest }) => {
+interface RadioGroupOption extends Option {
+  disabled?: boolean;
+}
+
+interface RadioGroupProps {
+  /** Determines the radio components which will be rendered */
+  options: Array<RadioGroupOption>;
+
+  /** Name of the form element (target.name) */
+  name?: string;
+
+  /**
+   * Used to pick each value in the options array
+   * @default 'value'
+   */
+  valueKey?: string;
+
+  /**
+   * Used to pick each label in the options array
+   * @default 'label'
+   */
+  labelKey?: string;
+
+  /** Triggered when radio value is changed */
+  onChange?: (value: string | number, name?: string) => void;
+
+  /** If true, none of the checkboxes are clickable */
+  disabled?: boolean;
+
+  /** Determines which value is currently active */
+  value?: string | number;
+
+  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: string | number;
+
+  /** Passed to the wrapper component, to override any styles */
+  className?: string;
+
+  /** Small text shown below the group, replaced by error if present */
+  hint?: string;
+
+  /** If true, a loading overlay is displayed on top of the component */
+  isPlaceholder?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+}
+
+export const RadioGroup = ({ responsive, ...rest }: RadioGroupProps) => {
   const {
     value,
     onChange,
@@ -213,97 +275,42 @@ const RadioGroup = ({ responsive, ...rest }) => {
     hint,
     style,
     ...props
-  } = useResponsiveProps(rest, responsive);
+  } = useResponsiveProps<RadioGroupProps>(rest, responsive);
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.stopPropagation();
-    onChange ? onChange(e.target.value, e.target.name) : null;
+    if (onChange != null) {
+      onChange((e.target as HTMLInputElement).value, (e.target as HTMLInputElement).name);
+    }
   };
 
   const readOnly = onChange == null;
 
   return (
     <div style={style} className={cx(styles.radioGroup, className)}>
-      <div className={styles.radios}>
+      <div>
         {options.map((option) => (
-          <div key={option[valueKey]} className={styles.radioWrapper}>
+          <div key={option[valueKey as keyof typeof Option]} className={styles.radioWrapper}>
             <Radio
               readOnly={readOnly}
               error={!!error}
               onChange={handleOnChange}
-              checked={value === option[valueKey]}
-              value={option[valueKey]}
+              checked={value === option[valueKey as keyof typeof Option]}
+              value={option[valueKey as keyof typeof Option]}
               disabled={option.disabled}
               {...props}>
-              {option[labelKey]}
+              {option[labelKey as keyof typeof Option]}
             </Radio>
           </div>
         ))}
       </div>
-      {do {
+      {run(() => {
         if (error && typeof error === 'string') {
-          <Hint category={Category.DANGER}>{error}</Hint>;
-        } else if (hint) {
-          <Hint>{hint}</Hint>;
+          return <Hint category={Category.DANGER}>{error}</Hint>;
+        } else if (hint != null) {
+          return <Hint>{hint}</Hint>;
         }
-      }}
+      })}
     </div>
   );
 };
-
-RadioGroup.propTypes = {
-  /** Determines the radio components which will be rendered */
-  options: CustomPropTypes.optionsWith({
-    disabled: PropTypes.bool,
-  }),
-
-  /** Name of the form element (target.name) */
-  name: PropTypes.string,
-
-  /** Used to pick each value in the options array */
-  valueKey: PropTypes.string,
-
-  /** Used to pick each label in the options array */
-  labelKey: PropTypes.string,
-
-  /** Triggered when radio value is changed */
-  onChange: PropTypes.func,
-
-  /** If true, none of the checkboxes are clickable */
-  disabled: PropTypes.bool,
-
-  /** Determines which value is currently active */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-
-  /** Passed to the wrapper component, to override any styles */
-  className: PropTypes.string,
-
-  /** Small text shown below the group, replaced by error if present */
-  hint: PropTypes.string,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** If true, a loading overlay is displayed on top of the component */
-  isPlaceholder: PropTypes.bool,
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-};
-
-RadioGroup.defaultProps = {
-  valueKey: 'value',
-  labelKey: 'label',
-};
-
-export default RadioGroup;

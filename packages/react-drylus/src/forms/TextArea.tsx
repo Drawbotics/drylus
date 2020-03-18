@@ -1,13 +1,12 @@
-import sv, { fade } from '@drawbotics/drylus-style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React, { forwardRef, useState } from 'react';
 
-import { Button, Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
+import { Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Size } from '../enums';
 import { Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
-import { Select } from './Select';
 
 const styles = {
   root: css`
@@ -24,7 +23,7 @@ const styles = {
     flex: 1;
     z-index: 1;
   `,
-  input: css`
+  textarea: css`
     background-color: ${sv.azureLight};
     color: ${sv.colorPrimary};
     padding: calc(${sv.paddingExtraSmall} * 1.5) ${sv.paddingSmall};
@@ -61,21 +60,9 @@ const styles = {
       box-shadow: none !important;
       pointer-events: none;
     }
-
-    @media ${sv.screenL} {
-      height: ${sv.marginExtraLarge};
-    }
-  `,
-  straightLeft: css`
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  `,
-  straightRight: css`
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
   `,
   valid: css`
-    input {
+    textarea {
       box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
     }
   `,
@@ -88,7 +75,7 @@ const styles = {
     transition: all ${sv.transitionTimeShort} ${sv.bouncyTransitionCurve};
   `,
   error: css`
-    input {
+    textarea {
       box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
     }
   `,
@@ -96,72 +83,11 @@ const styles = {
     opacity: 0;
     transform: scale(0);
   `,
-  fix: css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: ${fade(sv.azure, 30)};
-    box-shadow: inset 0px 0px 0px 1px ${sv.azure};
-    border-radius: ${sv.defaultBorderRadius};
-    padding: calc(${sv.paddingExtraSmall} * 1.5);
-    color: ${sv.colorPrimary};
-  `,
-  prefix: css`
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    margin-right: -1px;
-
-    i {
-      font-size: 1.2rem;
-    }
-  `,
-  prefixComponent: css`
-    padding: 0;
-
-    select,
-    button {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      border-top-left-radius: ${sv.defaultBorderRadius};
-      border-bottom-left-radius: ${sv.defaultBorderRadius};
-    }
-    select {
-      background-color: transparent;
-    }
-  `,
-  suffix: css`
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    margin-left: -1px;
-
-    i {
-      font-size: 1.2rem;
-    }
-  `,
-  suffixComponent: css`
-    padding: 0;
-
-    select,
-    button {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      border-top-right-radius: ${sv.defaultBorderRadius};
-      border-bottom-right-radius: ${sv.defaultBorderRadius};
-    }
-    select {
-      background-color: transparent;
-    }
-  `,
-  transparentButton: css`
-    button {
-      background-color: transparent;
-    }
-  `,
 };
 
-interface InputProps {
+interface TextAreaProps {
   /** Value displayed in the field */
-  value: number | string;
+  value: string | number;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -179,24 +105,15 @@ interface InputProps {
   hint?: string;
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: boolean | string;
+  error?: string | boolean;
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;
 
-  /** Node to be rendered in front of the input field, for now limited to text, Button and Select */
-  prefix?: React.ReactElement<typeof Button> | React.ReactElement<typeof Select>;
-
-  /** Node to be rendered at the end of the input field, for now limited to text, Button and Select */
-  suffix?: React.ReactElement<typeof Button> | React.ReactElement<typeof Select>;
-
   /** Additional class name to override styles */
   className?: string;
 
-  /** @default 'text' */
-  type?: 'text' | 'password' | 'email' | 'tel' | 'url';
-
-  /** If true, a spinner is shown in the right corner, like with error and valid */
+  /** If true, a spinner is shown on the right top corner, like with error and valid */
   loading?: boolean;
 
   /** If true, a loading overlay is displayed on top of the component */
@@ -212,41 +129,34 @@ interface InputProps {
   [x: string]: any;
 }
 
-interface RawInputProps extends InputProps {
-  inputRef?: React.Ref<HTMLInputElement>;
-  extraLeftPadding?: number;
+interface RawTextAreaProps extends TextAreaProps {
+  inputRef?: React.Ref<HTMLTextAreaElement>;
 }
 
-const RawInput = ({ responsive, ...rest }: RawInputProps) => {
+const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
   const {
     value,
     onChange,
     error,
     valid,
     hint,
-    prefix,
-    suffix,
     disabled,
     inputRef,
     className,
     loading,
     style,
     isPlaceholder,
-    extraLeftPadding,
-    type = 'text',
     ...props
-  } = useResponsiveProps<RawInputProps>(rest, responsive);
+  } = useResponsiveProps<RawTextAreaProps>(rest, responsive);
 
   const [isFocused, setFocused] = useState(false);
 
-  const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleOnChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
     if (onChange != null) {
-      onChange((e.target as HTMLInputElement).value, (e.target as HTMLInputElement).name);
+      onChange((e.target as HTMLTextAreaElement).value, (e.target as HTMLTextAreaElement).name);
     }
   };
 
-  const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
-  const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
   return (
     <div
       style={style}
@@ -257,20 +167,6 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
         [placeholderStyles.shimmer]: isPlaceholder,
       })}>
       <div className={styles.outerWrapper}>
-        {run(() => {
-          if (prefix) {
-            return (
-              <div
-                data-element="prefix"
-                className={cx(styles.fix, styles.prefix, {
-                  [styles.prefixComponent]: isPrefixComponent,
-                  [styles.transparentButton]: (prefix?.props as any)?.category == null, // TODO find better
-                })}>
-                {prefix}
-              </div>
-            );
-          }
-        })}
         <div className={styles.innerWrapper}>
           {run(() => {
             if (loading) {
@@ -306,42 +202,18 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
               );
             }
           })}
-          <input
+          <textarea
             disabled={disabled}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             onChange={handleOnChange}
             readOnly={onChange == null}
-            className={cx(styles.input, {
-              [styles.straightLeft]: prefix != null,
-              [styles.straightRight]: suffix != null,
-            })}
-            type={type}
+            className={styles.textarea}
             value={value}
             ref={inputRef}
-            style={{
-              paddingLeft:
-                extraLeftPadding != null
-                  ? `calc(${sv.paddingSmall} + ${extraLeftPadding}px)`
-                  : undefined,
-            }}
             {...props}
           />
         </div>
-        {run(() => {
-          if (suffix) {
-            return (
-              <div
-                data-element="suffix"
-                className={cx(styles.fix, styles.suffix, {
-                  [styles.suffixComponent]: isSuffixComponent,
-                  [styles.transparentButton]: (suffix?.props as any)?.category == null,
-                })}>
-                {suffix}
-              </div>
-            );
-          }
-        })}
       </div>
       {run(() => {
         if (error && typeof error === 'string') {
@@ -357,12 +229,12 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
 /**
  * forward-ref
  */
-export const InputWithRef = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  return <RawInput {...props} inputRef={ref} />;
+export const TextAreaWithRef = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
+  return <RawTextArea {...props} inputRef={ref} />;
 });
 
-InputWithRef.displayName = 'Input';
+TextAreaWithRef.displayName = 'TextArea';
 
-export const Input = (props: InputProps) => {
-  return <RawInput {...props} />;
+export const TextArea = (props: TextAreaProps) => {
+  return <RawTextArea {...props} />;
 };

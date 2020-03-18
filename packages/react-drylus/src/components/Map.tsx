@@ -114,6 +114,9 @@ interface MapProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** @private */
+  [x: string]: any;
 }
 
 const Map = ({

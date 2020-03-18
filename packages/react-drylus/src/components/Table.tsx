@@ -293,11 +293,24 @@ const styles = {
 
 interface TCellProps extends React.TdHTMLAttributes<HTMLElement> {
   children: React.ReactNode;
+
+  /** @private */
   head?: boolean;
+
+  /** @private */
   asContainer?: boolean;
+
+  /** @private */
   withChildToggle?: boolean;
+
+  /** @private */
   onClickArrow?: () => void;
+
+  /** @private */
   active?: boolean;
+
+  /** @private */
+  [x: string]: any;
 }
 
 export const TCell = ({
@@ -340,15 +353,32 @@ export const TCell = ({
 };
 
 interface TRowProps {
+  /** Should be of type TCell */
   children: React.ReactElement<typeof TCell> | Array<React.ReactElement<typeof TCell>>;
-  nested?: string;
-  parent?: string;
+
+  /** If true sets the background to neutral */
   highlighted?: boolean;
-  alt?: boolean;
-  lastParentRow?: boolean;
+
+  /** Triggered when any part of the row is clicked */
   onClick?: () => void;
+
+  /** If true and `onClick` is provided, shows a pointer when hovering the row	 */
   clickable?: boolean;
+
+  /** Used for style overrides */
   style?: Style;
+
+  /** @private */
+  nested?: string;
+
+  /** @private */
+  parent?: string;
+
+  /** @private */
+  alt?: boolean;
+
+  /** @private */
+  lastParentRow?: boolean;
 }
 
 export const TRow = ({

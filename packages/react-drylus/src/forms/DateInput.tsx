@@ -1,16 +1,16 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
-import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
+import { CalendarProps } from 'react-calendar';
 import Calendar from 'react-calendar/dist/entry.nostyle';
 import { createPortal } from 'react-dom';
 
-import { styles as themeStyles } from '../base/ThemeProvider';
-import Button from '../components/Button';
-import Icon from '../components/Icon';
+import { themeStyles } from '../base';
+import { Button, Icon } from '../components';
 import { Align } from '../enums';
-import { useResponsiveProps } from '../utils/hooks';
+import { Responsive, Style } from '../types';
+import { useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
 const styles = {
@@ -160,11 +160,17 @@ const DEFAULT_OPTIONS = {
   day: 'numeric',
 };
 
-function _objectToDate(object) {
+interface DateObject {
+  day: number;
+  month: number;
+  year: number;
+}
+
+function _objectToDate(object: DateObject) {
   return new Date(object.year, object.month - 1, object.day);
 }
 
-function _dateToObject(date) {
+function _dateToObject(date: Date) {
   return {
     day: date.getDate(),
     month: date.getMonth() + 1,
@@ -172,7 +178,7 @@ function _dateToObject(date) {
   };
 }
 
-function _stringToDateObject(string) {
+function _stringToDateObject(string: string) {
   const [year, month, day] = string.split('-');
   return {
     year: Number(year),
@@ -181,25 +187,87 @@ function _stringToDateObject(string) {
   };
 }
 
-function _objectToDateString(object) {
+function _objectToDateString(object: DateObject) {
   return `${object.year}-${String(object.month).padStart(2, '0')}-${String(object.day).padStart(
     2,
     '0',
   )}`;
 }
 
-function _getShouldRenderTop(box) {
+function _getShouldRenderTop(box: DOMRect) {
   if (box?.bottom > window.innerHeight) {
     return true;
   }
   return false;
 }
 
-const DateInput = ({ responsive, ...rest }) => {
+interface DateInputProps {
+  /** Can be empty string, or object containing day, month, year as numbers */
+  value: DateObject | '';
+
+  /** Triggered when the date is chosen from the calendar. If not given, the field is read-only */
+  onChange?: (value: DateObject, name?: string) => void;
+
+  /** Name of the form element (target.name) */
+  name?: string;
+
+  /**
+   * Used to render the name of months in the calendar
+   * @default 'en'
+   */
+  locale?: string;
+
+  /** Disables the datepicker */
+  disabled?: boolean;
+
+  /** Text shown when no value is active */
+  placeholder?: boolean;
+
+  /** Small text shown below the box, replaced by error if present */
+  hint?: string;
+
+  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: string | boolean;
+
+  /** If true the element displays a check icon and a green outline, overridden by "error" */
+  valid?: boolean;
+
+  /** See toLocaleDateString documentation */
+  displayOptions?: Intl.DateTimeFormatOptions;
+
+  /** See react-calendar documentation for extra options */
+  calendarOptions?: CalendarProps;
+
+  /** Follows format of value */
+  maxDate?: DateObject;
+
+  /** Follows format of value */
+  minDate?: DateObject;
+
+  /** Determines the date where the calendar should open by default. Follows format of value */
+  activeStartDate?: DateObject;
+
+  /** If true, a spinner is shown in the right corner, like with error and valid */
+  loading?: boolean;
+
+  /**
+   * Determines on which side the picker is aligned
+   * @default Align.LEFT
+   */
+  align?: Align.LEFT | Align.RIGHT;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+}
+
+export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
   const {
     value,
     onChange,
-    locale,
+    locale = 'en',
     disabled,
     placeholder,
     displayOptions,
@@ -213,22 +281,22 @@ const DateInput = ({ responsive, ...rest }) => {
     activeStartDate,
     loading,
     style,
-    align,
-  } = useResponsiveProps(rest, responsive);
+    align = Align.LEFT,
+  } = useResponsiveProps<DateInputProps>(rest, responsive);
 
-  const [outletElement, setOutletElement] = useState(null);
+  const [outletElement, setOutletElement] = useState<HTMLElement>();
   const [isFocused, setFocused] = useState(false);
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const isDesktop = screenSize > ScreenSizes.XL;
 
-  const inputRef = useRef(null);
-  const rootRef = useRef(null);
-  const pickerElement = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const pickerElement = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleDocumentClick = (e) =>
-      !pickerElement.current?.contains(e.target) ? setFocused(false) : null;
+    const handleDocumentClick = (e: Event) =>
+      !pickerElement.current?.contains(e.target as Node) ? setFocused(false) : null;
     const handleWindowScroll = () => {
       if (isDesktop) {
         setFocused(false);
@@ -246,13 +314,14 @@ const DateInput = ({ responsive, ...rest }) => {
   }, []);
 
   useEffect(() => {
-    if (!document.getElementById('picker-outlet')) {
+    const outlet = document.getElementById('picker-outlet');
+    if (outlet == null) {
       const pickerOutlet = document.createElement('div');
       pickerOutlet.id = 'picker-outlet';
       document.body.appendChild(pickerOutlet);
       setOutletElement(pickerOutlet);
     } else {
-      setOutletElement(document.getElementById('picker-outlet'));
+      setOutletElement(outlet);
     }
 
     return () => {
@@ -276,11 +345,11 @@ const DateInput = ({ responsive, ...rest }) => {
   const rootBox = rootRef.current?.getBoundingClientRect();
   const topRender = pickerBox ? _getShouldRenderTop(pickerBox) : false;
 
-  const handleOnChange = (v) => {
+  const handleOnChange = (v: string) => {
     if (isDesktop) {
       return v;
-    } else {
-      return Boolean(v) && onChange(_stringToDateObject(v), name);
+    } else if (onChange && Boolean(v)) {
+      return onChange(_stringToDateObject(v), name);
     }
   };
 
@@ -292,7 +361,7 @@ const DateInput = ({ responsive, ...rest }) => {
             <Button
               disabled={disabled}
               leading={<Icon name="calendar" />}
-              onClick={() => inputRef.current.focus()}
+              onClick={() => inputRef.current?.focus()}
             />
           ) : null
         }
@@ -320,7 +389,8 @@ const DateInput = ({ responsive, ...rest }) => {
                 left:
                   align === Align.LEFT
                     ? rootBox?.left
-                    : rootBox?.left - Math.abs(rootBox?.width - pickerBox?.width) || null,
+                    : (rootBox?.left ?? 0) -
+                        Math.abs((rootBox?.width ?? 0) - (pickerBox?.width ?? 0)) ?? undefined,
               }}
               ref={pickerElement}
               className={cx(styles.calendarContainer, {
@@ -336,102 +406,15 @@ const DateInput = ({ responsive, ...rest }) => {
                 tileClassName={styles.tile}
                 locale={locale}
                 activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
-                onChange={onChange != null ? (v) => onChange(_dateToObject(v), name) : null}
-                value={value === '' ? null : _objectToDate(value)}
+                onChange={
+                  onChange != null ? (v) => onChange(_dateToObject(v as Date), name) : undefined
+                }
+                value={value === '' ? undefined : _objectToDate(value)}
               />
             </div>
           </div>,
-          document.getElementById('picker-outlet'),
+          document.getElementById('picker-outlet') as Element,
         )}
     </div>
   );
 };
-
-DateInput.propTypes = {
-  /** Can be empty string, or object containing day, month, year as numbers */
-  value: PropTypes.oneOfType([
-    PropTypes.shape({
-      day: PropTypes.number.isRequired,
-      month: PropTypes.number.isRequired,
-      year: PropTypes.number.isRequired,
-    }),
-    PropTypes.oneOf(['']),
-  ]).isRequired,
-
-  /** Triggered when the date is chosen from the calendar. If not given, the field is read-only */
-  onChange: PropTypes.func,
-
-  /** Name of the form element (target.name) */
-  name: PropTypes.string,
-
-  /** Used to render the name of months in the calendar */
-  locale: PropTypes.string,
-
-  /** Disables the datepicker */
-  disabled: PropTypes.bool,
-
-  /** Text shown when no value is active */
-  placeholder: PropTypes.string,
-
-  /** Small text shown below the box, replaced by error if present */
-  hint: PropTypes.string,
-
-  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-
-  /** If true the element displays a check icon and a green outline, overridden by "error" */
-  valid: PropTypes.bool,
-
-  /** See toLocaleDateString documentation */
-  displayOptions: PropTypes.object,
-
-  /** See react-calendar documentation for extra options */
-  calendarOptions: PropTypes.object,
-
-  /** Follows format of value */
-  maxDate: PropTypes.shape({
-    day: PropTypes.number.isRequired,
-    month: PropTypes.number.isRequired,
-    year: PropTypes.number.isRequired,
-  }),
-
-  /** Follows format of value */
-  minDate: PropTypes.shape({
-    day: PropTypes.number.isRequired,
-    month: PropTypes.number.isRequired,
-    year: PropTypes.number.isRequired,
-  }),
-
-  /** Determines the date where the calendar should open by default. Follows format of value */
-  activeStartDate: PropTypes.shape({
-    day: PropTypes.number.isRequired,
-    month: PropTypes.number.isRequired,
-    year: PropTypes.number.isRequired,
-  }),
-
-  /** If true, a spinner is shown in the right corner, like with error and valid */
-  loading: PropTypes.bool,
-
-  /** Used for style overrides */
-  style: PropTypes.object,
-
-  /** Determines on which side the picker is aligned */
-  align: PropTypes.oneOf([Align.LEFT, Align.RIGHT]),
-
-  /** Reponsive prop overrides */
-  responsive: PropTypes.shape({
-    XS: PropTypes.object,
-    S: PropTypes.object,
-    M: PropTypes.object,
-    L: PropTypes.object,
-    XL: PropTypes.object,
-    HUGE: PropTypes.object,
-  }),
-};
-
-DateInput.defaultProps = {
-  locale: 'en',
-  align: Align.LEFT,
-};
-
-export default DateInput;
