@@ -6,7 +6,9 @@ import React from 'react';
 
 import { Category, Color } from '../enums';
 import { Style } from '../types';
-import { Deprecated, categoryEnumToColor, env, getEnumAsClass } from '../utils';
+import { Deprecated, categoryEnumToColor, getEnumAsClass } from '../utils';
+
+const env = require('../utils/get-static-env');
 
 injectGlobal`
   ${generateIconStyles(env === "'development'" ? 'dev' : packageJson.version)}
