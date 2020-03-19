@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import React, { forwardRef, useState } from 'react';
 
 import { Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
-import { Category, Size } from '../enums';
+import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
@@ -189,7 +189,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon name="x" size={Size.SMALL} category={Category.DANGER} />
+                  <RoundIcon name="x" size={Size.SMALL} color={Color.RED} />
                 </div>
               );
             } else if (Boolean(value) && valid) {
@@ -197,7 +197,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon name="check" size={Size.SMALL} category={Category.SUCCESS} />
+                  <RoundIcon name="check" size={Size.SMALL} color={Color.GREEN} />
                 </div>
               );
             }

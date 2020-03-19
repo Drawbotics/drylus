@@ -187,6 +187,9 @@ interface CheckboxProps {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** @private */
+  [x: string]: any;
 }
 
 export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {

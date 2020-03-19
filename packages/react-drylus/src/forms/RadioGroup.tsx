@@ -147,6 +147,8 @@ interface RadioProps {
   children?: string;
   isPlaceholder?: boolean;
   readOnly: boolean;
+  /** @private */
+  [x: string]: any;
 }
 
 const Radio = ({
@@ -191,9 +193,11 @@ const Radio = ({
                   </label>
                 );
               } else {
-                <label data-element="icon" className={styles.iconLabel} htmlFor={id}>
-                  <Icon bold name="check" />
-                </label>;
+                return (
+                  <label data-element="icon" className={styles.iconLabel} htmlFor={id}>
+                    <Icon bold name="check" />
+                  </label>
+                );
               }
             })}
           </div>
@@ -261,6 +265,9 @@ interface RadioGroupProps {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** @private */
+  [x: string]: any;
 }
 
 export const RadioGroup = ({ responsive, ...rest }: RadioGroupProps) => {
@@ -295,7 +302,7 @@ export const RadioGroup = ({ responsive, ...rest }: RadioGroupProps) => {
               readOnly={readOnly}
               error={!!error}
               onChange={handleOnChange}
-              checked={value === option[valueKey as keyof typeof Option]}
+              checked={value == option[valueKey as keyof typeof Option]}
               value={option[valueKey as keyof typeof Option]}
               disabled={option.disabled}
               {...props}>

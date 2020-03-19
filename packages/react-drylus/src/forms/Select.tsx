@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Icon, RoundIcon, Spinner } from '../components';
-import { Category, Size } from '../enums';
+import { Category, Color, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
@@ -150,6 +150,9 @@ interface SelectProps {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** @private */
+  [x: string]: any;
 }
 
 export const Select = ({ responsive, ...rest }: SelectProps) => {
@@ -200,13 +203,13 @@ export const Select = ({ responsive, ...rest }: SelectProps) => {
         } else if (error) {
           return (
             <div className={styles.icon}>
-              <RoundIcon name="x" size={Size.SMALL} category={Category.DANGER} />
+              <RoundIcon name="x" size={Size.SMALL} color={Color.RED} />
             </div>
           );
         } else if (value && valid) {
           return (
             <div className={styles.icon}>
-              <RoundIcon name="check" size={Size.SMALL} category={Category.SUCCESS} />
+              <RoundIcon name="check" size={Size.SMALL} color={Color.GREEN} />
             </div>
           );
         }
