@@ -2,7 +2,7 @@ import {
   Popover,
   Position,
   Button,
-  Category,
+  Color,
   Flex,
   FlexItem,
   Size,
@@ -38,12 +38,12 @@ __Example__
         content={
           <div style={{ textAlign: 'left' }}>
             <Margin size={{ bottom: Size.EXTRA_SMALL }}>
-              <ListTile leading={<Icon name="alert-triangle" category={Category.DANGER} />} title={<Text size={Size.SMALL}>I'm custom content</Text>} />
+              <ListTile leading={<Icon name="alert-triangle" color={Color.RED} />} title={<Text size={Size.SMALL}>I'm custom content</Text>} />
             </Margin>
-            <ListTile leading={<Icon name="check-circle" category={Category.SUCCESS} />} title={<Text size={Size.SMALL}>So am I</Text>} />
+            <ListTile leading={<Icon name="check-circle" color={Color.GREEN} />} title={<Text size={Size.SMALL}>So am I</Text>} />
           </div>
         }>
-        <Avatar category={Category.SUCCESS} text="PO" />
+        <Avatar color={Color.GREEN} text="PO" />
       </Popover>
     </FlexItem>
   </Flex>

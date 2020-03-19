@@ -393,17 +393,17 @@ export const TRow = ({
   style,
 }: TRowProps) => {
   const [rowsStates, handleSetRowState] = useContext(RowsContext);
-  const collapsed = nested != null && rowsStates[nested] != null;
+  const collapsed = nested && !rowsStates[nested];
   return (
     <tr
       style={style}
       className={cx(styles.row, {
-        [styles.collapsed]: collapsed,
+        [styles.collapsed]: !!collapsed,
         [styles.light]: !alt,
         [styles.white]: alt,
         [styles.pointer]: clickable && onClick != null,
         [styles.highlightedRow]: highlighted,
-        [styles.noBorderBottom]: parent != null && rowsStates[parent] == null && lastParentRow,
+        [styles.noBorderBottom]: !!parent && !rowsStates[parent] && lastParentRow,
       })}
       onClick={onClick}
       data-nested={nested ?? undefined}
@@ -416,11 +416,11 @@ export const TRow = ({
             {
               ...(child as React.ReactElement<typeof TCell>).props,
               key,
-              asContainer: nested != null,
-              withChildToggle: parent != null && key === 0,
-              active: parent != null && rowsStates[parent],
+              asContainer: !!nested,
+              withChildToggle: !!parent && key === 0,
+              active: !!parent && rowsStates[parent],
               onClickArrow: parent
-                ? () => handleSetRowState({ [parent]: rowsStates[parent] == null })
+                ? () => handleSetRowState({ [parent]: !rowsStates[parent] })
                 : null,
             } as Partial<TCellProps>,
           ),
@@ -592,7 +592,7 @@ function _generateTable({
   data,
   header,
   renderCell,
-  renderChildCell = () => null,
+  renderChildCell = (x) => x,
   childHeader,
   onClickRow = () => {},
   clickable,
@@ -761,7 +761,7 @@ export const Table = ({
   withNesting,
   data,
   renderCell = (x) => x,
-  renderChildCell = () => null,
+  renderChildCell = (x) => x,
   header = [],
   childHeader,
   sortableBy,

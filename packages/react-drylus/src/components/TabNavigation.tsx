@@ -2,7 +2,7 @@ import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Category, Size } from '../enums';
+import { Color, Size } from '../enums';
 import { Option, Style } from '../types';
 import { run } from '../utils';
 import { Badge } from './Badge';
@@ -197,7 +197,7 @@ export const TabNavigation = ({
         if (option.loading) {
           return (
             <div className={styles.trailing} data-element="trailing">
-              <Spinner category={vertical ? undefined : Category.BRAND} size={Size.SMALL} />
+              <Spinner color={vertical ? undefined : Color.BRAND} size={Size.SMALL} />
             </div>
           );
         } else if (option.bullet != null) {
@@ -207,9 +207,7 @@ export const TabNavigation = ({
                 if (vertical) {
                   return option.bullet;
                 } else {
-                  return (
-                    <Badge category={Category.BRAND} value={option.bullet as number} max={99} />
-                  );
+                  return <Badge color={Color.BRAND} value={option.bullet as number} max={99} />;
                 }
               })}
             </div>

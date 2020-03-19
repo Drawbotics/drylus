@@ -18,6 +18,10 @@ export function colorEnumToCategory(enumVal: Color): Category | undefined {
       return Category.WARNING;
     case Color.BLUE:
       return Category.INFO;
+    case Color.BRAND:
+      return Category.BRAND;
+    case Color.PRIMARY:
+      return Category.PRIMARY;
   }
 }
 
@@ -31,6 +35,10 @@ export function categoryEnumToColor(enumVal: Category): Color | undefined {
       return Color.ORANGE;
     case Category.INFO:
       return Color.BLUE;
+    case Category.BRAND:
+      return Color.BRAND;
+    case Category.PRIMARY:
+      return Color.PRIMARY;
   }
 }
 
