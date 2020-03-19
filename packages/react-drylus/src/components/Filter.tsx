@@ -246,19 +246,7 @@ interface SelectFilterProps extends BaseFilterProps {
   options: Array<SelectFilterOption>;
 
   /** Determines which value is currently active */
-  value?: string | number;
-
-  /**
-   * Used to pick each value in the options array
-   * @default 'value'
-   */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey?: string;
+  value?: SelectFilterOption['value'];
 
   /** Triggered when an option is clicked */
   onChange: (value: string | number) => void;
@@ -267,21 +255,9 @@ interface SelectFilterProps extends BaseFilterProps {
   style?: Style;
 }
 
-export const SelectFilter = ({
-  options,
-  value,
-  valueKey = 'value',
-  labelKey = 'label',
-  onChange,
-  label,
-  ...rest
-}: SelectFilterProps) => {
+export const SelectFilter = ({ options, value, onChange, label, ...rest }: SelectFilterProps) => {
   const currentLabel =
-    value != null
-      ? (options.find(
-          (option) => String(option[valueKey as keyof SelectFilterOption]) === String(value),
-        )?.[labelKey as keyof SelectFilterOption] as string | number)
-      : label;
+    value != null ? options.find((option) => String(option.value) === String(value))?.label : label;
   return (
     <BaseFilter
       {...rest}
@@ -290,17 +266,13 @@ export const SelectFilter = ({
       active={currentLabel != null && value != null}>
       {options.map((option) => (
         <div
-          key={option[valueKey as keyof SelectFilterOption] as string | number}
+          key={option.value}
           className={cx(styles.option, styles.smallPadding, {
-            [styles.activeOption]:
-              String(value) === String(option[valueKey as keyof SelectFilterOption]),
+            [styles.activeOption]: String(value) === String(option.value),
           })}
-          onClick={() => onChange(option[valueKey as keyof SelectFilterOption] as string | number)}>
+          onClick={() => onChange(option.value)}>
           <div className={styles.label}>
-            <ListTile
-              title={option[labelKey as keyof SelectFilterOption]}
-              leading={option.leading}
-            />
+            <ListTile title={option.label} leading={option.leading} />
           </div>
           {run(() => {
             if (option.trailing != null) {
@@ -316,16 +288,12 @@ export const SelectFilter = ({
 function getLabelForCheckboxFilter(
   label: string,
   options: Array<Option>,
-  values: Array<string | number>,
-  valueKey: string,
-  labelKey: string,
+  values: Array<Option['value']>,
 ) {
   if (values == null) {
     return label;
   } else if (values.length === 1) {
-    return options.find(
-      (option) => String(option[valueKey as keyof Option]) === String(values[0]),
-    )?.[labelKey as keyof Option];
+    return options.find((option) => String(option.value) === String(values[0]))?.label;
   } else if (values.length > 1) {
     return `${label} (${values.length})`;
   } else {
@@ -338,19 +306,7 @@ interface CheckboxFilterProps extends BaseFilterProps {
   options: Array<Option>;
 
   /** Determines which values are currently active */
-  values?: Array<string | number>;
-
-  /**
-   * Used to pick each value in the options array
-   * @default 'value'
-   */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey?: string;
+  values?: Array<Option['value']>;
 
   /** Triggered when an option is clicked. Returns the list of currently selected elements */
   onChange: (values: Array<number | string>) => void;
@@ -362,13 +318,11 @@ interface CheckboxFilterProps extends BaseFilterProps {
 export const CheckboxFilter = ({
   options,
   values = [],
-  valueKey = 'value',
-  labelKey = 'label',
   onChange,
   label,
   ...rest
 }: CheckboxFilterProps) => {
-  const currentLabel = getLabelForCheckboxFilter(label, options, values, valueKey, labelKey);
+  const currentLabel = getLabelForCheckboxFilter(label, options, values);
   return (
     <BaseFilter
       {...rest}
@@ -377,19 +331,17 @@ export const CheckboxFilter = ({
       {options.map((option) => (
         <label
           htmlFor={String(option.value)}
-          key={option[valueKey as keyof Option]}
+          key={option.value}
           className={cx(styles.option, styles.defaultCursor)}>
           <Checkbox
             id={String(option.value)}
             onChange={(checked: boolean) => {
               checked
-                ? onChange([...values, option[valueKey as keyof Option]])
-                : onChange(
-                    values.filter((v) => String(v) !== String(option[valueKey as keyof Option])),
-                  );
+                ? onChange([...values, option.value])
+                : onChange(values.filter((v) => String(v) !== String(option.value)));
             }}
-            value={values.includes(option[valueKey as keyof Option])}>
-            {String(option[labelKey as keyof Option])}
+            value={values.includes(option.value)}>
+            {String(option.label)}
           </Checkbox>
         </label>
       ))}

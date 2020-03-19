@@ -104,25 +104,13 @@ interface SelectProps {
   options: Array<SelectOption>;
 
   /** Determines which value is currently active */
-  value?: number | string;
+  value?: SelectOption['value'];
 
   /** Name of the form element (target.name) */
   name?: string;
 
   /** Disables the select */
   disabled?: boolean;
-
-  /**
-   * Used to pick each value in the options array
-   * @default 'value'
-   */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey?: string;
 
   /**
    * Text shown when no value is selected
@@ -160,8 +148,6 @@ export const Select = ({ responsive, ...rest }: SelectProps) => {
     value,
     options = [],
     onChange,
-    valueKey = 'value',
-    labelKey = 'label',
     placeholder = ' -- ',
     disabled,
     hint,
@@ -226,11 +212,8 @@ export const Select = ({ responsive, ...rest }: SelectProps) => {
           }
         })}
         {options.map((option) => (
-          <option
-            key={option[valueKey as keyof Option]}
-            value={option[valueKey as keyof Option]}
-            disabled={option.disabled}>
-            {option[labelKey as keyof Option]}
+          <option key={option.value} value={option.value} disabled={option.disabled}>
+            {option.label}
           </option>
         ))}
       </select>

@@ -227,26 +227,14 @@ interface RadioGroupProps {
   /** Name of the form element (target.name) */
   name?: string;
 
-  /**
-   * Used to pick each value in the options array
-   * @default 'value'
-   */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey?: string;
-
   /** Triggered when radio value is changed */
-  onChange?: (value: string | number, name?: string) => void;
+  onChange?: (value: RadioGroupOption['value'], name?: string) => void;
 
   /** If true, none of the checkboxes are clickable */
   disabled?: boolean;
 
   /** Determines which value is currently active */
-  value?: string | number;
+  value?: RadioGroupOption['value'];
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error?: string | number;
@@ -275,8 +263,6 @@ export const RadioGroup = ({ responsive, ...rest }: RadioGroupProps) => {
     value,
     onChange,
     options = [],
-    valueKey = 'value',
-    labelKey = 'label',
     error,
     className,
     hint,
@@ -297,16 +283,16 @@ export const RadioGroup = ({ responsive, ...rest }: RadioGroupProps) => {
     <div style={style} className={cx(styles.radioGroup, className)}>
       <div>
         {options.map((option) => (
-          <div key={option[valueKey as keyof typeof Option]} className={styles.radioWrapper}>
+          <div key={option.value} className={styles.radioWrapper}>
             <Radio
               readOnly={readOnly}
               error={!!error}
               onChange={handleOnChange}
-              checked={value == option[valueKey as keyof typeof Option]}
-              value={option[valueKey as keyof typeof Option]}
+              checked={value == option.value}
+              value={option.value}
               disabled={option.disabled}
               {...props}>
-              {option[labelKey as keyof typeof Option]}
+              {option.label}
             </Radio>
           </div>
         ))}

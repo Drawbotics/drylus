@@ -7,7 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import { themeStyles } from '../base';
 import { Position, Size, Tier } from '../enums';
-import { Responsive, Style } from '../types';
+import { OnClickCallback, Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { Button } from './Button';
 import { Icon } from './Icon';
@@ -177,7 +177,7 @@ interface BaseDrawerProps {
   footer?: React.ReactNode;
 
   /** Triggered when the "close" button is clicked */
-  onClickClose?: () => void;
+  onClickClose?: OnClickCallback<HTMLElement>;
 
   /** Shown at the top left of the drawer, not rendered if raw is true */
   title?: string;

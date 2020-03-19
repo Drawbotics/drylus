@@ -13,3 +13,5 @@ export interface Option {
   value: number | string;
   label: string;
 }
+
+export type OnClickCallback<T> = (event: React.MouseEvent<T, MouseEvent>) => void;

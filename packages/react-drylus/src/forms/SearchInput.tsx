@@ -58,7 +58,7 @@ interface SearchInputProps {
   name?: string;
 
   /** Triggered when the text is changed, and when the search button is pressed */
-  onChange: () => void;
+  onChange: (value: string, name?: string) => void;
 
   /** Triggered when one of the results is clicked, returns the corresponding option value */
   onClickResult?: (value: Option['value']) => void;
@@ -73,18 +73,6 @@ interface SearchInputProps {
 
   /** If true, the search button will display a spinner */
   isLoading?: boolean;
-
-  /**
-   * Used to pick each value in the options array
-   * @default 'value'
-   */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey: string;
 
   /** Used for style overrides */
   style?: Style;
@@ -103,8 +91,6 @@ export const SearchInput = ({ responsive, ...rest }: SearchInputProps) => {
     isLoading,
     name,
     style,
-    valueKey = 'value',
-    labelKey = 'label',
     onClickResult,
   } = useResponsiveProps<SearchInputProps>(rest, responsive);
   const [isFocused, setFocused] = useState(false);
@@ -160,15 +146,15 @@ export const SearchInput = ({ responsive, ...rest }: SearchInputProps) => {
                 } else {
                   return options.map((option) => (
                     <div
-                      key={option[valueKey as keyof Option]}
+                      key={option.value}
                       className={styles.item}
                       onClick={() => {
                         if (onClickResult != null) {
-                          onClickResult(option[valueKey as keyof Option]);
+                          onClickResult(option.value);
                         }
                         setFocused(false);
                       }}>
-                      {option[labelKey as keyof Option]}
+                      {option.label}
                     </div>
                   ));
                 }

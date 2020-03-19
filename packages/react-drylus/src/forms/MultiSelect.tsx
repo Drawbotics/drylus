@@ -163,7 +163,7 @@ interface MultiSelectProps {
   options: Array<MultiSelectOption>;
 
   /** Determines which values are currently active */
-  values: Array<string | number>;
+  values: Array<MultiSelectOption['value']>;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -172,25 +172,13 @@ interface MultiSelectProps {
   disabled?: boolean;
 
   /**
-   * Used to pick each value in the options array
-   * @default 'value'
-   */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey?: string;
-
-  /**
    * Text shown when no value is selected
    * @default ' -- ''
    */
   placeholder?: string;
 
   /** Triggered when a new value is chosen, returns the array of selected values. If not given, the field is read-only */
-  onChange?: (value: Array<string | number>, name?: string) => void;
+  onChange?: (value: Array<MultiSelectOption['value']>, name?: string) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -219,8 +207,6 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
     values,
     options = [],
     onChange,
-    valueKey = 'value',
-    labelKey = 'label',
     placeholder = ' -- ',
     disabled,
     hint,
@@ -343,10 +329,7 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
                           ? (e: React.MouseEvent<HTMLElement>) => handleClickRemove(e, value)
                           : undefined
                       }>
-                      {String(
-                        (options.find((option) => option[valueKey as keyof Option] === value) ??
-                          {})[labelKey as keyof Option],
-                      )}
+                      {String((options.find((option) => option.value === value) ?? {}).label)}
                     </Tag>
                   </div>
                 ))}
@@ -365,16 +348,11 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
               {options.map((option) => (
                 <div
                   className={cx(styles.option, {
-                    [styles.disabledOption]:
-                      option.disabled || values.includes(option[valueKey as keyof Option]),
+                    [styles.disabledOption]: option.disabled || values.includes(option.value),
                   })}
-                  key={option[valueKey as keyof Option]}
-                  onClick={
-                    onChange != null
-                      ? () => handleOnChange(option[valueKey as keyof Option])
-                      : undefined
-                  }>
-                  {option[labelKey as keyof Option]}
+                  key={option.value}
+                  onClick={onChange != null ? () => handleOnChange(option.value) : undefined}>
+                  {option.value}
                 </div>
               ))}
             </div>
@@ -394,17 +372,11 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
         onChange={onChange != null ? (e) => handleSelectChange(e.target.options) : undefined}
         onFocus={() => setFocused(true)}
         onBlur={() => (canBlur ? setFocused(false) : null)}
-        // values={values}
-        // readOnly={onChange == null}
         multiple
         {...props}>
         {options.map((option) => (
-          <option
-            key={option[valueKey as keyof Option]}
-            // name={option[labelKey as keyof Option]}
-            value={option[valueKey as keyof Option]}
-            disabled={option.disabled}>
-            {option[labelKey as keyof Option]}
+          <option key={option.value} value={option.value} disabled={option.disabled}>
+            {option.label}
           </option>
         ))}
       </select>

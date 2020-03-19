@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Text } from '../components';
-import { Responsive, Style } from '../types';
+import { OnClickCallback, Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { Flex, FlexItem } from './Flex';
 
@@ -52,7 +52,7 @@ interface ListTileProps {
   trailing?: React.ReactNode;
 
   /** Triggered when the component is clicked */
-  onClick?: () => void;
+  onClick?: OnClickCallback<HTMLDivElement>;
 
   /** Used for style overrides */
   style?: Style;

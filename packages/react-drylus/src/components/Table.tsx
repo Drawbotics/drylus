@@ -8,7 +8,7 @@ import React, { Fragment, createContext, useContext, useState } from 'react';
 import { placeholderStyles } from '../components';
 import { Size } from '../enums';
 import { Margin } from '../layout';
-import { Style } from '../types';
+import { OnClickCallback, Style } from '../types';
 import { run } from '../utils';
 import { Icon } from './Icon';
 import { Label } from './Label';
@@ -360,7 +360,7 @@ interface TRowProps {
   highlighted?: boolean;
 
   /** Triggered when any part of the row is clicked */
-  onClick?: () => void;
+  onClick?: OnClickCallback<HTMLTableRowElement>;
 
   /** If true and `onClick` is provided, shows a pointer when hovering the row	 */
   clickable?: boolean;

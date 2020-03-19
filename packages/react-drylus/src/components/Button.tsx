@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Category, Color, Size, Tier } from '../enums';
-import { Responsive, Style } from '../types';
+import { OnClickCallback, Responsive, Style } from '../types';
 import { colorEnumToCategory, getEnumAsClass, run, useResponsiveProps } from '../utils';
 
 const styles = {
@@ -276,7 +276,7 @@ export interface ButtonProps {
   disabled?: boolean;
 
   /** Triggered after the button is clicked */
-  onClick?: () => void;
+  onClick?: OnClickCallback<HTMLElement>;
 
   category?: Exclude<Category, Category.PRIMARY>;
 

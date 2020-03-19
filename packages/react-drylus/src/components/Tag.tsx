@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Category, Color } from '../enums';
-import { Style } from '../types';
+import { OnClickCallback, Style } from '../types';
 import { Deprecated, categoryEnumToColor, getEnumAsClass, run } from '../utils';
 import { Icon } from './Icon';
 
@@ -78,7 +78,7 @@ interface TagProps {
   color?: Exclude<Color, Color.PRIMARY>;
 
   /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */
-  onClickRemove?: (e: React.MouseEvent<HTMLElement>) => void;
+  onClickRemove?: OnClickCallback<HTMLElement>;
 
   /** Modifies the way the category is shown */
   inversed?: boolean;

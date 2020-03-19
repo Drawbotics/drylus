@@ -5,7 +5,7 @@ import { css, cx, injectGlobal } from 'emotion';
 import React from 'react';
 
 import { Category, Color } from '../enums';
-import { Style } from '../types';
+import { OnClickCallback, Style } from '../types';
 import { Deprecated, categoryEnumToColor, getEnumAsClass } from '../utils';
 
 const env = require('../utils/get-static-env');
@@ -56,7 +56,7 @@ interface IconProps {
   bold?: boolean;
 
   /** Triggered when the icon is clicked */
-  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  onClick?: OnClickCallback<HTMLElement>;
 
   /** @deprecated use color instead */
   category?: Category;

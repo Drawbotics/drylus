@@ -95,51 +95,28 @@ interface SegmentedControlProps {
   /** Determines the controls which will be rendered */
   options: Array<SegmentedControlOption>;
 
-  /**
-   * Used to pick each value in the options array
-   * @default 'value'
-   */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey?: string;
-
   /** Determines which value is currently active */
-  value: string | number;
+  value: SegmentedControlOption['value'];
 
   /** Triggered when a control is clicked */
-  onChange?: (value: string | number) => void;
+  onChange?: (value: SegmentedControlOption['value']) => void;
 
   /** Used for style overrides */
   style?: Style;
 }
 
-export const SegmentedControl = ({
-  value,
-  onChange,
-  options,
-  valueKey = 'value',
-  labelKey = 'label',
-  style,
-}: SegmentedControlProps) => {
+export const SegmentedControl = ({ value, onChange, options, style }: SegmentedControlProps) => {
   return (
     <div style={style} className={styles.root}>
       {options.map((option) => (
         <div
-          key={option[valueKey as keyof Option]}
+          key={option.value}
           className={cx(styles.control, {
-            [styles.active]: value === option[valueKey as keyof Option],
+            [styles.active]: value === option.value,
             [styles.disabled]: option.disabled,
           })}
-          onClick={
-            !option.disabled && onChange != null
-              ? () => onChange(option[valueKey as keyof Option])
-              : undefined
-          }>
-          <span>{option[labelKey as keyof Option]}</span>
+          onClick={!option.disabled && onChange != null ? () => onChange(option.value) : undefined}>
+          <span>{option.label}</span>
           {run(() => {
             if (option.loading === true) {
               return (
