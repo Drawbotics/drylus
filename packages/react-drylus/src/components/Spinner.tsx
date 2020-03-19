@@ -118,7 +118,7 @@ export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
     style,
     color: _color,
   } = useResponsiveProps<SpinnerProps>(rest, responsive);
-  const color = category ? categoryEnumToColor(category) : _color;
+  const color = category != null ? categoryEnumToColor(category) : _color;
   return (
     <div
       style={style}
