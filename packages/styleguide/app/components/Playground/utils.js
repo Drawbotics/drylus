@@ -98,11 +98,13 @@ export function recursiveMdxTransform(tree, target) {
 
 function _getValuesForEnum(enumName, docs) {
   const moduleName = `"react-drylus/src/enums/${enumName}"`;
+  console.log('Module name: ', moduleName)
   const doc = docs.children.find((module) => module.name === moduleName);
   return doc.children[0].children.map((v) => `${enumName}.${v.name}`);
 }
 
 function _getType(type, docs) {
+  console.log(type)
   if (type.type === 'reference' && !type.typeArguments && type.name !== 'Record') {
     return {
       type: 'enum',
@@ -110,7 +112,19 @@ function _getType(type, docs) {
       values: _getValuesForEnum(type.name, docs),
     }
   }
-  else return { name: type.name};
+  else if (type.type === 'union') {
+    const potentialTypes = type?.types?.map((t) => t.name);
+    if (potentialTypes.includes('true') && potentialTypes.includes('false')) {
+      return {
+        type: 'boolean',
+        name: 'bool',
+      }
+    }
+  }
+  else {
+    console.log('final else')
+    return { name: type.name};
+  }
 }
 
 export function generateDocs(componentName, docs) {
@@ -129,9 +143,10 @@ export function generateDocs(componentName, docs) {
     return null;
   }
 
-  // if (componentName === 'Dot') { console.log(interfaceDescription);}
 
-  const res = interfaceDescription.children.reduce((props, prop) => {
+  const res = interfaceDescription.children.slice(0, 1).reduce((props, prop) => {
+    console.log('Parsing a new prop');
+    console.log(prop);
     return {
       ...props,
       [prop.name]: {
