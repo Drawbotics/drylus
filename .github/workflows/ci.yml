@@ -27,8 +27,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - run: echo 'Current ref = ${{ github.ref }}'
-    - run: echo 'Base ref = ${{ github.base_ref }}'
+    - run: echo 'Current ref = ${{ github.ref }}, ${{ github.base_ref }}, ${{ github.head_ref }}'
     - name: Install dependencies and run tests
       run: |
         npm install
