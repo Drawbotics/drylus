@@ -31,7 +31,7 @@ jobs:
 
     - name: Extract branch name if beta
       shell: bash
-      if: contains(github.base_ref, 'beta')
+      if: contains(github.head_ref, 'beta')
       run: echo "::set-env name=BRANCH_NAME::'beta'"
 
     - name: Extract branch name if master
