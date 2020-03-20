@@ -7,7 +7,6 @@
   "scripts": {
     "watch:react": "cd packages/react-drylus && npm run watch",
     "build:react": "cd packages/react-drylus && npm run build",
-    "build:types": "cd packages/react-drylus && npm run build:types",
     "test:react": "cd packages/react-drylus && npm run test",
     "test:react:watch": "cd packages/react-drylus && npm run test:watch",
     "build:vanilla": "cd packages/vanilla-drylus && npm run build",
@@ -119,7 +118,6 @@
     "react": "^16.10.2",
     "react-docgen": "^4.1.0",
     "react-dom": "^16.10.2",
-    "react-dts-generator": "0.1.3",
     "react-element-to-jsx-string": "^14.0.2",
     "react-hot-loader": "^4.12.19",
     "react-test-renderer": "^16.10.1",
