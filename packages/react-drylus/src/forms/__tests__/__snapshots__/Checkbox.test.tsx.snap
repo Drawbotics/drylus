@@ -69,6 +69,25 @@ exports[`Checkbox matches snapshot when has a label 1`] = `
   cursor: pointer;
 }
 
+.emotion-2 {
+  cursor: inherit;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background: #3FBC9B;
+  line-height: 24px;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  border-radius: 100px;
+}
+
+.emotion-2 > i {
+  font-size: 0.8rem;
+}
+
 .emotion-3 {
   position: absolute;
   top: 0;
@@ -94,25 +113,6 @@ exports[`Checkbox matches snapshot when has a label 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
-}
-
-.emotion-2 {
-  cursor: inherit;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  background: #3FBC9B;
-  line-height: 24px;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  border-radius: 100px;
-}
-
-.emotion-2 > i {
-  font-size: 0.8rem;
 }
 
 .emotion-1 {
@@ -222,6 +222,25 @@ exports[`Checkbox matches snapshot when is checked 1`] = `
   opacity: 0.7;
 }
 
+.emotion-2 {
+  cursor: inherit;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background: #3FBC9B;
+  line-height: 24px;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  border-radius: 100px;
+}
+
+.emotion-2 > i {
+  font-size: 0.8rem;
+}
+
 .emotion-3 {
   position: absolute;
   top: 0;
@@ -247,25 +266,6 @@ exports[`Checkbox matches snapshot when is checked 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
-}
-
-.emotion-2 {
-  cursor: inherit;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  background: #3FBC9B;
-  line-height: 24px;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  border-radius: 100px;
-}
-
-.emotion-2 > i {
-  font-size: 0.8rem;
 }
 
 .emotion-1 {
@@ -316,26 +316,6 @@ exports[`Checkbox matches snapshot when is large 1`] = `
   display: inline-block;
 }
 
-.emotion-5 {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  cursor: pointer;
-}
-
-.emotion-5:hover [data-element='sprite'] {
-  background: #879ba6;
-}
-
 .emotion-4 {
   height: calc(24px - 4px);
   width: calc(24px - 4px);
@@ -368,6 +348,25 @@ exports[`Checkbox matches snapshot when is large 1`] = `
   opacity: 0.7;
 }
 
+.emotion-2 {
+  cursor: inherit;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background: #3FBC9B;
+  line-height: 24px;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  border-radius: 100px;
+}
+
+.emotion-2 > i {
+  font-size: 0.8rem;
+}
+
 .emotion-3 {
   position: absolute;
   top: 0;
@@ -395,35 +394,57 @@ exports[`Checkbox matches snapshot when is large 1`] = `
   overflow: hidden;
 }
 
-.emotion-2 {
-  cursor: inherit;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  background: #3FBC9B;
-  line-height: 24px;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  border-radius: 100px;
-}
-
-.emotion-2 > i {
-  font-size: 0.8rem;
-}
-
 .emotion-1 {
   color: inherit;
   font-weight: bold !important;
+}
+
+.emotion-5 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.emotion-5:hover [data-element='sprite'] {
+  background: #879ba6;
+}
+
+.emotion-5 > div {
+  height: 32px;
+  width: 32px;
+}
+
+.emotion-5 [data-element='label'] {
+  font-size: 1.1rem;
+  margin-left: 16px;
+  top: 0;
+}
+
+.emotion-5 [data-element='icon'],
+.emotion-5 [data-element='locked-icon'] {
+  line-height: calc(32px + 5px);
+}
+
+.emotion-5 [data-element='icon'] > i,
+.emotion-5 [data-element='locked-icon'] > i {
+  font-size: 1.2rem !important;
 }
 
 <div
   className="emotion-6"
 >
   <label
-    className="emotion-5 undefined"
+    className="emotion-5"
     htmlFor={1}
   >
     <div
@@ -514,6 +535,25 @@ exports[`Checkbox matches snapshot when is not checked 1`] = `
   opacity: 0.7;
 }
 
+.emotion-2 {
+  cursor: inherit;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background: #3FBC9B;
+  line-height: 24px;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  border-radius: 100px;
+}
+
+.emotion-2 > i {
+  font-size: 0.8rem;
+}
+
 .emotion-3 {
   position: absolute;
   top: 0;
@@ -539,25 +579,6 @@ exports[`Checkbox matches snapshot when is not checked 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
-}
-
-.emotion-2 {
-  cursor: inherit;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  background: #3FBC9B;
-  line-height: 24px;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  border-radius: 100px;
-}
-
-.emotion-2 > i {
-  font-size: 0.8rem;
 }
 
 .emotion-1 {
@@ -644,6 +665,25 @@ exports[`Checkbox matches snapshot when is read only 1`] = `
   opacity: 0.7;
 }
 
+.emotion-2 {
+  cursor: inherit;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background: #3FBC9B;
+  line-height: 24px;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  border-radius: 100px;
+}
+
+.emotion-2 > i {
+  font-size: 0.8rem;
+}
+
 .emotion-3 {
   position: absolute;
   top: 0;
@@ -669,25 +709,6 @@ exports[`Checkbox matches snapshot when is read only 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
-}
-
-.emotion-2 {
-  cursor: inherit;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  background: #3FBC9B;
-  line-height: 24px;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  border-radius: 100px;
-}
-
-.emotion-2 > i {
-  font-size: 0.8rem;
 }
 
 .emotion-5 {

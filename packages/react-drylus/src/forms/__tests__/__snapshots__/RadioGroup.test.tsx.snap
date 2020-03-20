@@ -5,10 +5,6 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
   display: inline-block;
 }
 
-.emotion-8 {
-  margin-bottom: 8px;
-}
-
 .emotion-7 {
   position: relative;
   display: inline-block;
@@ -77,6 +73,29 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
   cursor: pointer;
 }
 
+.emotion-2 {
+  cursor: inherit;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background: #3FBC9B;
+  line-height: 24px;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  border-radius: 100px;
+}
+
+.emotion-2 > i {
+  font-size: 0.8rem;
+}
+
+.emotion-8 {
+  margin-bottom: 8px;
+}
+
 .emotion-3 {
   position: absolute;
   top: 0;
@@ -102,25 +121,6 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
-}
-
-.emotion-2 {
-  cursor: inherit;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  background: #3FBC9B;
-  line-height: 24px;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  border-radius: 100px;
-}
-
-.emotion-2 > i {
-  font-size: 0.8rem;
 }
 
 .emotion-1 {
@@ -233,10 +233,6 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
   display: inline-block;
 }
 
-.emotion-8 {
-  margin-bottom: 8px;
-}
-
 .emotion-7 {
   position: relative;
   display: inline-block;
@@ -305,6 +301,29 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
   cursor: pointer;
 }
 
+.emotion-2 {
+  cursor: inherit;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background: #3FBC9B;
+  line-height: 24px;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  border-radius: 100px;
+}
+
+.emotion-2 > i {
+  font-size: 0.8rem;
+}
+
+.emotion-8 {
+  margin-bottom: 8px;
+}
+
 .emotion-3 {
   position: absolute;
   top: 0;
@@ -330,25 +349,6 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
-}
-
-.emotion-2 {
-  cursor: inherit;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  background: #3FBC9B;
-  line-height: 24px;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  border-radius: 100px;
-}
-
-.emotion-2 > i {
-  font-size: 0.8rem;
 }
 
 .emotion-1 {
@@ -465,10 +465,6 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
   display: inline-block;
 }
 
-.emotion-8 {
-  margin-bottom: 8px;
-}
-
 .emotion-7 {
   position: relative;
   display: inline-block;
@@ -517,6 +513,29 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
   cursor: pointer;
 }
 
+.emotion-2 {
+  cursor: inherit;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background: #3FBC9B;
+  line-height: 24px;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  border-radius: 100px;
+}
+
+.emotion-2 > i {
+  font-size: 0.8rem;
+}
+
+.emotion-8 {
+  margin-bottom: 8px;
+}
+
 .emotion-3 {
   position: absolute;
   top: 0;
@@ -542,25 +561,6 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
-}
-
-.emotion-2 {
-  cursor: inherit;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  background: #3FBC9B;
-  line-height: 24px;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  border-radius: 100px;
-}
-
-.emotion-2 > i {
-  font-size: 0.8rem;
 }
 
 .emotion-6 {
