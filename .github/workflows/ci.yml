@@ -60,7 +60,7 @@ jobs:
       run: echo "::set-env name=BRANCH_NAME::'master'"
 
     - name: Current branch
-      run: echo ${{ BRANCH_NAME }}
+      run: echo "${BRANCH_NAME}"
     
     - name: Prepare repository
       env:
@@ -70,7 +70,7 @@ jobs:
         git remote rm origin
         git remote add origin "https://$GH_TOKEN@github.com/drawbotics/drylus.git"
         git fetch origin
-        git branch --set-upstream-to origin/${{BRANCH_NAME}}
+        git branch --set-upstream-to origin/${BRANCH_NAME}
         
     - name: Publish
       env:
