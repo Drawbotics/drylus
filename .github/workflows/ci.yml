@@ -4,6 +4,7 @@ on:
   push:
     branches:
         - master
+        - beta
     paths:
       - 'packages/react-drylus/**'
       - 'packages/extract-emotion/**'
@@ -12,7 +13,7 @@ on:
       - 'packages/icons/**'
   pull_request:
     branches:
-      - '*'
+      - '!beta'
     paths:
       - 'packages/react-drylus/**'
       - 'packages/extract-emotion/**'
