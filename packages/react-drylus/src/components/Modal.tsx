@@ -158,7 +158,7 @@ const styles = {
   `,
 };
 
-interface BaseModalProps {
+export interface BaseModalProps {
   /** Content rendered within the modal */
   children: React.ReactNode;
 
@@ -218,7 +218,7 @@ export const BaseModal = React.forwardRef<HTMLDivElement, BaseModalProps>(
 
 BaseModal.displayName = 'BaseModal';
 
-interface ModalProps extends BaseModalProps {
+export interface ModalProps extends BaseModalProps {
   /**
    * If true, the children are rendered without decoration, you have to style your own modal
    * @default false

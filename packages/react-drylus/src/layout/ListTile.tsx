@@ -38,7 +38,7 @@ const styles = {
   `,
 };
 
-interface ListTileProps {
+export interface ListTileProps {
   /** Main text to be displayed */
   title: React.ReactNode;
 

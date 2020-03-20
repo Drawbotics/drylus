@@ -79,7 +79,7 @@ const styles = {
   `,
 };
 
-interface ProgressBarProps {
+export interface ProgressBarProps {
   /** Determines the amount of the bar which is completed, between 0 and 1. If not given the bar is indeterminate */
   percentage?: number;
 

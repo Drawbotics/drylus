@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import { Position } from '../enums';
 
-interface WrapperRefProps {
+export interface WrapperRefProps {
   setChildrenRef: (node: any) => void;
 }
 
@@ -60,7 +60,7 @@ export function getStyleForSide({
   }
 }
 
-interface ExtendedNavigator extends Navigator {
+export interface ExtendedNavigator extends Navigator {
   userLanguage?: string;
   browserLanguage?: string;
 }

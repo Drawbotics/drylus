@@ -121,7 +121,7 @@ const styles = {
   `,
 };
 
-interface TabNavigationOption<T> extends Option<T> {
+export interface TabNavigationOption<T> extends Option<T> {
   /** Shows a small number beside the tab */
   bullet?: number;
 
@@ -132,7 +132,7 @@ interface TabNavigationOption<T> extends Option<T> {
   loading?: boolean;
 }
 
-interface TabNavigationProps<T> {
+export interface TabNavigationProps<T> {
   /** Determines the tabs which will be rendered */
   options: Array<TabNavigationOption<T>>;
 

@@ -75,7 +75,7 @@ const styles = {
   `,
 };
 
-interface RangeTooltipProps {
+export interface RangeTooltipProps {
   value: React.ReactNode;
 
   visible: boolean;
@@ -93,7 +93,7 @@ const RangeTooltip = ({ value, visible }: RangeTooltipProps) => {
   );
 };
 
-interface HandleProps {
+export interface HandleProps {
   handle: SliderItem;
   getHandleProps: (id: string, options: any) => any; // Broken at lib level
   renderValue?: <T>(value: number) => T;
@@ -136,7 +136,7 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled }: HandleProps) 
   );
 };
 
-interface TrackProps {
+export interface TrackProps {
   source: SliderItem;
   target: SliderItem;
   getTrackProps: GetTrackProps;
@@ -156,7 +156,7 @@ const Track = ({ source, target, getTrackProps, disabled }: TrackProps) => {
   );
 };
 
-interface RangeInputProps {
+export interface RangeInputProps {
   /** The minimum value displayed on the input, and the minimum selectable value */
   min: number;
 

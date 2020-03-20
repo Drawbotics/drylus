@@ -52,7 +52,7 @@ const styles = {
 
 const staticStyles = omit(styles, ['root', 'withSpan']);
 
-interface GridItemProps {
+export interface GridItemProps {
   /** Content of the item */
   children: React.ReactNode;
 
@@ -81,7 +81,7 @@ export const GridItem = ({ children, style, span = 1, columns = 1 }: GridItemPro
   );
 };
 
-interface GridProps {
+export interface GridProps {
   /** Should all be of type GridItem */
   children: React.ReactElement<typeof GridItem> | Array<React.ReactElement<typeof GridItem>>;
 

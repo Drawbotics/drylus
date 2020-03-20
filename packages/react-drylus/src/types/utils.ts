@@ -1,3 +1,5 @@
+import { Size } from '../enums';
+
 export type Style = Record<string, any>;
 
 export interface Responsive<T> {
@@ -15,6 +17,18 @@ export interface Option<T> {
 }
 
 export type OnClickCallback<T> = (event: React.MouseEvent<T, MouseEvent>) => void;
+
+export interface Rectangular {
+  vertical?: Size;
+  horizontal?: Size;
+}
+
+export interface Variable {
+  left?: Size;
+  top?: Size;
+  right?: Size;
+  bottom?: Size;
+}
 
 // TODO
 // export all the interface props

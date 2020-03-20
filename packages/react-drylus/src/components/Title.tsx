@@ -52,7 +52,7 @@ const styles = {
   `,
 };
 
-interface TitleProps {
+export interface TitleProps {
   /** Text displayed by the title */
   children: React.ReactNode;
 

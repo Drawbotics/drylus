@@ -80,7 +80,7 @@ const styles = {
   `,
 };
 
-interface CircularProgressProps {
+export interface CircularProgressProps {
   /**
    * Determines the amount of the circle which is completed, between 0 and 1
    * @default 0

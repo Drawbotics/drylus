@@ -122,7 +122,7 @@ const styles = {
   `,
 };
 
-interface DropdownOptionProps {
+export interface DropdownOptionProps {
   /** Text displayed in the option */
   text: string;
 
@@ -177,7 +177,7 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
   );
 };
 
-interface DropdownTitleProps {
+export interface DropdownTitleProps {
   /** Value of the title */
   text: string;
 
@@ -202,7 +202,7 @@ type DropdownChild =
   | React.ReactElement<typeof DropdownTitle>
   | React.ReactElement<typeof DropdownSeparator>;
 
-interface DropdownProps {
+export interface DropdownProps {
   /** This will be the trigger of the dropdown, and relative to which the menu will be positioned */
   trigger?: React.ReactNode;
 

@@ -291,7 +291,7 @@ const styles = {
   `,
 };
 
-interface TCellProps extends React.TdHTMLAttributes<HTMLElement> {
+export interface TCellProps extends React.TdHTMLAttributes<HTMLElement> {
   children: React.ReactNode;
 
   /** @private */
@@ -352,7 +352,7 @@ export const TCell = ({
   );
 };
 
-interface TRowProps {
+export interface TRowProps {
   /** Should be of type TCell */
   children: React.ReactElement<typeof TCell> | Array<React.ReactElement<typeof TCell>>;
 
@@ -429,7 +429,7 @@ export const TRow = ({
   );
 };
 
-interface THeadProps {
+export interface THeadProps {
   children: React.ReactElement<typeof TCell> | Array<React.ReactElement<typeof TCell>>;
 }
 
@@ -454,7 +454,7 @@ export const THead = ({ children }: THeadProps) => {
   );
 };
 
-interface TBodyProps {
+export interface TBodyProps {
   children: React.ReactElement<typeof TRow> | Array<React.ReactElement<typeof TRow>>;
 }
 
@@ -478,7 +478,7 @@ export const TBody = ({ children }: TBodyProps) => {
 
 type HeaderData = Array<string | { label: React.ReactNode; value: string }>;
 
-interface LoadingTableProps {
+export interface LoadingTableProps {
   columns: HeaderData;
 }
 
@@ -507,7 +507,7 @@ const FakeTable = ({ columns }: LoadingTableProps) => {
   );
 };
 
-interface EmptyTableProps {
+export interface EmptyTableProps {
   columns: HeaderData;
   emptyContent: React.ReactNode;
 }
@@ -583,7 +583,7 @@ function _addAttributesToCells(
   }
 }
 
-interface TableEntry extends Record<string, React.ReactNode> {
+export interface TableEntry extends Record<string, React.ReactNode> {
   id?: number | string;
   data?: Array<TableEntry>;
 }
@@ -688,7 +688,7 @@ function _generateTable({
 
 type TableData = Array<TableEntry>;
 
-interface TableProps {
+export interface TableProps {
   /** Will be THead and TBody, optional if using the auto generated table */
   children?:
     | [React.ReactElement<typeof THead>, React.ReactElement<typeof TBody>]

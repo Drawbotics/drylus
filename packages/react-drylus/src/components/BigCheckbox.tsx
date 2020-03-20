@@ -64,7 +64,7 @@ const styles = {
   `,
 };
 
-interface BigCheckboxProps {
+export interface BigCheckboxProps {
   /** Triggered when big checkbox is clicked */
   onChange: (value: boolean, name?: string) => void;
 

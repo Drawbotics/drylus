@@ -47,7 +47,7 @@ const styles = {
   `,
 };
 
-interface SearchInputProps<T> {
+export interface SearchInputProps<T> {
   /** The list of items displayed under the input ('value, key' pairs) its completely up to you to generate this list */
   options?: Array<Option<T>>;
 

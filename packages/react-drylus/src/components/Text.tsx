@@ -92,7 +92,7 @@ type TextChildren =
     }
   | Date;
 
-interface TextProps {
+export interface TextProps {
   /**
    * Makes the text visible on dark backgrounds
    * @default false

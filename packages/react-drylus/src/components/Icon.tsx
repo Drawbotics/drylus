@@ -48,7 +48,7 @@ const styles = {
 
 export const Icons: Record<string, string> = mapping;
 
-interface IconProps {
+export interface IconProps {
   /** Name of the icon */
   name: keyof typeof Icons;
 

@@ -138,7 +138,7 @@ const styles = {
   `,
 };
 
-interface RadioProps {
+export interface RadioProps {
   value: string | number;
   onChange: (e: React.FormEvent<HTMLInputElement>) => void;
   disabled?: boolean;
@@ -216,11 +216,11 @@ const Radio = ({
   );
 };
 
-interface RadioGroupOption<T> extends Option<T> {
+export interface RadioGroupOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
-interface RadioGroupProps<T> {
+export interface RadioGroupProps<T> {
   /** Determines the radio components which will be rendered */
   options: Array<RadioGroupOption<T>>;
 

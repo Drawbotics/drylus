@@ -95,11 +95,11 @@ const styles = {
   `,
 };
 
-interface SelectOption<T> extends Option<T> {
+export interface SelectOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
-interface SelectProps<T> {
+export interface SelectProps<T> {
   /** The options to show in the list of options */
   options: Array<SelectOption<T>>;
 

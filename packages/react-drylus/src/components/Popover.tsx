@@ -83,7 +83,7 @@ const styles = {
   `,
 };
 
-interface PopoverProps {
+export interface PopoverProps {
   /** @deprecated use content instead */
   message?: React.ReactNode;
 

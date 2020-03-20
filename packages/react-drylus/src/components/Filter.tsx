@@ -112,7 +112,7 @@ const styles = {
   `,
 };
 
-interface BaseFilterProps {
+export interface BaseFilterProps {
   /**
    * Text shown in the last row of the panel
    * @default 'Clear'
@@ -233,7 +233,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
   );
 };
 
-interface SelectFilterOption<T> extends Option<T> {
+export interface SelectFilterOption<T> extends Option<T> {
   /** Shown at the end of the option */
   trailing?: React.ReactNode;
 
@@ -241,7 +241,7 @@ interface SelectFilterOption<T> extends Option<T> {
   leading?: React.ReactNode;
 }
 
-interface SelectFilterProps<T> extends BaseFilterProps {
+export interface SelectFilterProps<T> extends BaseFilterProps {
   /** The items to show in the filter panel: value(string, number), label(string), leading(node), trailing(node) */
   options: Array<SelectFilterOption<T>>;
 
@@ -307,7 +307,7 @@ function getLabelForCheckboxFilter<T>(
   }
 }
 
-interface CheckboxFilterProps<T> extends BaseFilterProps {
+export interface CheckboxFilterProps<T> extends BaseFilterProps {
   /** The items to show in the filter panel: value(string, number), label(string) */
   options: Array<Option<T>>;
 

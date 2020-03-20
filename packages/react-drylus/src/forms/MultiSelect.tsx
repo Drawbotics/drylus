@@ -154,11 +154,11 @@ const styles = {
   `,
 };
 
-interface MultiSelectOption<T> extends Option<T> {
+export interface MultiSelectOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
-interface MultiSelectProps<T> {
+export interface MultiSelectProps<T> {
   /** The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey */
   options: Array<MultiSelectOption<T>>;
 

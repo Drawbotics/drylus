@@ -4,7 +4,7 @@ import camelCase from 'lodash/camelCase';
 import React from 'react';
 
 import { Size } from '../enums';
-import { Responsive, Style } from '../types';
+import { Rectangular, Responsive, Style, Variable } from '../types';
 import { useResponsiveProps } from '../utils';
 
 const styles = {
@@ -297,18 +297,6 @@ const styles = {
   `,
 };
 
-interface Rectangular {
-  vertical?: Size;
-  horizontal?: Size;
-}
-
-interface Variable {
-  left?: Size;
-  top?: Size;
-  right?: Size;
-  bottom?: Size;
-}
-
 function _computeSize(sizeDescription: Rectangular) {
   let size: Variable = {};
 
@@ -328,7 +316,7 @@ function _isRectangular(size: any): size is Rectangular {
   return size.vertical || size.horizontal;
 }
 
-interface MarginProps {
+export interface MarginProps {
   /** Determines the amount of margin given to the component. If a single value, the margin is applied equally to each side */
   size?: Size | Rectangular | Variable;
 

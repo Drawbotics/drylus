@@ -80,7 +80,7 @@ const styles = {
   `,
 };
 
-interface SegmentedControlOption<T> extends Option<T> {
+export interface SegmentedControlOption<T> extends Option<T> {
   /** If given, the control shows a value in a Badge */
   bullet?: number;
 
@@ -91,7 +91,7 @@ interface SegmentedControlOption<T> extends Option<T> {
   loading?: boolean;
 }
 
-interface SegmentedControlProps<T> {
+export interface SegmentedControlProps<T> {
   /** Determines the controls which will be rendered */
   options: Array<SegmentedControlOption<T>>;
 

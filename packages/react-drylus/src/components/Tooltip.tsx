@@ -83,7 +83,7 @@ const styles = {
 
 export const tooltipStyles = styles;
 
-interface TooltipProps {
+export interface TooltipProps {
   /** @deprecated use 'content' instead */
   message?: React.ReactNode;
 
@@ -103,7 +103,7 @@ interface TooltipProps {
   responsive?: Responsive<this>;
 }
 
-interface HTMLElementWithDisabled extends HTMLElement {
+export interface HTMLElementWithDisabled extends HTMLElement {
   disabled?: boolean;
 }
 

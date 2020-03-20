@@ -19,7 +19,7 @@ const styles = {
   `,
 };
 
-interface ParagraphProps {
+export interface ParagraphProps {
   /** Text displayed by the paragraph */
   children: React.ReactNode;
 

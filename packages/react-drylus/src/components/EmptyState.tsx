@@ -59,7 +59,7 @@ function _getImageForVariation(variation: EmptyStateVariation) {
   }
 }
 
-interface EmptyStateProps {
+export interface EmptyStateProps {
   /** Main title to explain the situation */
   title?: string;
 
