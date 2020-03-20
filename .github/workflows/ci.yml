@@ -30,13 +30,14 @@ jobs:
     - run: echo 'Current ref = ${{ github.ref }}'
     - name: Install dependencies and run tests
       run: |
+        echo ${github.ref}
         npm install
         npx lerna link convert
         npm run test
   
   release:
     needs: test
-    if: contains(github.ref, 'master')
+    if: contains(github.ref, 'master') || contains(github.ref, 'beta')
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
