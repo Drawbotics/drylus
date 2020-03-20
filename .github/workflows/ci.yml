@@ -52,16 +52,16 @@ jobs:
     - name: Extract branch name if beta
       shell: bash
       if: contains(github.head_ref, 'beta')
-      run: echo "::set-env name=BRANCH_NAME::'beta'"
+      run: echo "::set-env name=BRANCH_NAME::beta"
 
     - name: Extract branch name if master
       shell: bash
       if: contains(github.ref, 'master')
-      run: echo "::set-env name=BRANCH_NAME::'master'"
+      run: echo "::set-env name=BRANCH_NAME::master"
 
     - name: Currenty branch is...
       run: echo Current branch = ${BRANCH_NAME}
-      
+
     - name: Prepare repository
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
