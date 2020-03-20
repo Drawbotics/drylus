@@ -66,10 +66,10 @@ interface GridItemProps {
   style?: Style;
 
   /** @private */
-  columns: number;
+  columns?: number;
 }
 
-export const GridItem = ({ children, style, span = 1, columns }: GridItemProps) => {
+export const GridItem = ({ children, style, span = 1, columns = 1 }: GridItemProps) => {
   if (span > columns) {
     console.warn(`Warning: GridItem span cannot be more than number of columns`);
   }

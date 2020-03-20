@@ -216,25 +216,25 @@ const Radio = ({
   );
 };
 
-interface RadioGroupOption extends Option {
+interface RadioGroupOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
-interface RadioGroupProps {
+interface RadioGroupProps<T> {
   /** Determines the radio components which will be rendered */
-  options: Array<RadioGroupOption>;
+  options: Array<RadioGroupOption<T>>;
 
   /** Name of the form element (target.name) */
   name?: string;
 
   /** Triggered when radio value is changed */
-  onChange?: (value: RadioGroupOption['value'], name?: string) => void;
+  onChange?: (value: RadioGroupOption<T>['value'], name?: string) => void;
 
   /** If true, none of the checkboxes are clickable */
   disabled?: boolean;
 
   /** Determines which value is currently active */
-  value?: RadioGroupOption['value'];
+  value?: RadioGroupOption<T>['value'];
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error?: string | number;
@@ -258,7 +258,7 @@ interface RadioGroupProps {
   [x: string]: any;
 }
 
-export const RadioGroup = ({ responsive, ...rest }: RadioGroupProps) => {
+export const RadioGroup = <T extends any>({ responsive, ...rest }: RadioGroupProps<T>) => {
   const {
     value,
     onChange,
@@ -268,12 +268,12 @@ export const RadioGroup = ({ responsive, ...rest }: RadioGroupProps) => {
     hint,
     style,
     ...props
-  } = useResponsiveProps<RadioGroupProps>(rest, responsive);
+  } = useResponsiveProps<RadioGroupProps<T>>(rest, responsive);
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.stopPropagation();
     if (onChange != null) {
-      onChange((e.target as HTMLInputElement).value, (e.target as HTMLInputElement).name);
+      onChange((e.target as HTMLInputElement).value as any, (e.target as HTMLInputElement).name);
     }
   };
 

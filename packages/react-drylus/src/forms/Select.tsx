@@ -95,16 +95,16 @@ const styles = {
   `,
 };
 
-interface SelectOption extends Option {
+interface SelectOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
-interface SelectProps {
+interface SelectProps<T> {
   /** The options to show in the list of options */
-  options: Array<SelectOption>;
+  options: Array<SelectOption<T>>;
 
   /** Determines which value is currently active */
-  value?: SelectOption['value'];
+  value?: SelectOption<T>['value'];
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -119,7 +119,7 @@ interface SelectProps {
   placeholder?: string;
 
   /** Triggered when a new value is chosen, returns a value, key (label, value) pair. If not given, the field is read-only */
-  onChange?: (value: string | number, name?: string) => void;
+  onChange?: (value: SelectOption<T>['value'], name?: string) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -143,7 +143,7 @@ interface SelectProps {
   [x: string]: any;
 }
 
-export const Select = ({ responsive, ...rest }: SelectProps) => {
+export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) => {
   const {
     value,
     options = [],
@@ -156,11 +156,11 @@ export const Select = ({ responsive, ...rest }: SelectProps) => {
     loading,
     style,
     ...props
-  } = useResponsiveProps<SelectProps>(rest, responsive);
+  } = useResponsiveProps<SelectProps<T>>(rest, responsive);
 
   const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     if (onChange != null) {
-      onChange((e.target as HTMLSelectElement).value, (e.target as HTMLSelectElement).name);
+      onChange((e.target as HTMLSelectElement).value as any, (e.target as HTMLSelectElement).name);
     }
   };
   return (
