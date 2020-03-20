@@ -39,7 +39,7 @@ jobs:
       if: contains(github.ref, 'master')
       run: echo "::set-env name=BRANCH_NAME::'master'"
 
-    - run: echo 'Current branch = ${{ env.BRANCH_NAME }}'
+    - run: echo Current branch = ${BRANCH_NAME}
 
     - name: Install dependencies and run tests
       run: |
