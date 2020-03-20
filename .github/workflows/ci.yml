@@ -36,7 +36,7 @@ jobs:
   
   release:
     needs: test
-    if: contains(github.ref, 'master') || contains(github.base_ref, 'master') || contains(github.head_ref, 'beta')
+    if: contains(github.ref, 'master') || contains(github.head_ref, 'beta')
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -48,16 +48,29 @@ jobs:
         npm install
         npx lerna link convert
         npm run build-libs
+
+    - name: Extract branch name if beta
+      shell: bash
+      if: contains(github.base_ref, 'beta')
+      run: echo "::set-env name=BRANCH_NAME::'beta'"
+
+    - name: Extract branch name if master
+      shell: bash
+      if: contains(github.ref, 'master')
+      run: echo "::set-env name=BRANCH_NAME::'master'"
+
+    - name: Current branch
+      run: echo ${{ BRANCH_NAME }}
     
     - name: Prepare repository
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
-        git checkout "${GITHUB_REF:11}"
+        git checkout "${BRANCH_NAME}"
         git remote rm origin
         git remote add origin "https://$GH_TOKEN@github.com/drawbotics/drylus.git"
         git fetch origin
-        git branch --set-upstream-to origin/${{github.head_ref || 'master'}}
+        git branch --set-upstream-to origin/${{BRANCH_NAME}}
         
     - name: Publish
       env:
