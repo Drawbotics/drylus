@@ -36,7 +36,7 @@ jobs:
   
   release:
     needs: test
-    if: contains(github.ref, 'master') || contains(github.ref, 'beta')
+    if: contains(github.ref, 'master') || contains(github.base_ref, 'master') || contains(github.head_ref, 'beta')
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -57,7 +57,7 @@ jobs:
         git remote rm origin
         git remote add origin "https://$GH_TOKEN@github.com/drawbotics/drylus.git"
         git fetch origin
-        git branch --set-upstream-to origin/master
+        git branch --set-upstream-to origin/${{github.head_ref || 'master'}}
         
     - name: Publish
       env:
