@@ -29,7 +29,3 @@ export interface Variable {
   right?: Size;
   bottom?: Size;
 }
-
-// TODO
-// Table: dont extend record, add any key value, expose TableEntry + limit to keys in data
-// Fix number input
