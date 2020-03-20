@@ -72,13 +72,28 @@ jobs:
         git fetch origin
         git branch --set-upstream-to origin/${BRANCH_NAME}
         
-    - name: Publish
+    - name: Publish (prerelease)
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
         AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
         MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      if: contains(github.head_ref, 'beta')
+      run: |
+        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+        git remote -v
+        git checkout -- .
+        npm run pre-release
+
+    - name: Publish (release)
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      if: contains(github.ref, 'master')
       run: |
         echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
         git remote -v

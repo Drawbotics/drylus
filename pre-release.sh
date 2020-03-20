@@ -2,10 +2,9 @@
 
 export PATH=$(npm bin):$PATH
 
-npx lerna version prerelease --no-commit-hooks --no-changelog --no-git-tag-version --no-push
+VERSION=`npx auto version`
 
-git add .
-
-git commit -m "bump pre-release version"
-
-npx lerna publish from-package --ignore-prepublish --no-git-reset --pre-dist-tag alpha
+if [ ! -z "$VERSION" ]; then
+  npx auto changelog
+  npx lerna publish --yes --no-verify-access pre$VERSION --preid beta -m '%v [skip ci]'
+fi
