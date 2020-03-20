@@ -14,7 +14,7 @@ export function generateDisplayedPrice({
 }: {
   price: { value: number; currency?: string };
   locale?: string;
-  options: any;
+  options?: any;
 }) {
   const { value, currency } = price;
 

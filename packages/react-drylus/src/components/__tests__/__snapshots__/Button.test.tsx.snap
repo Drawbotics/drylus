@@ -22,6 +22,8 @@ exports[`Button matches snapshot when has a category 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  background: #f8a00f;
+  color: #fff !important;
 }
 
 .emotion-0:hover {
@@ -40,8 +42,20 @@ exports[`Button matches snapshot when has a category 1`] = `
   box-shadow: none;
 }
 
+.emotion-0:hover {
+  background: #a16d22;
+}
+
+.emotion-0:active {
+  box-shadow: 0 1px 6px #172b4e inset;
+}
+
+.emotion-0:disabled {
+  background: rgba(248,160,15,0.4);
+}
+
 <button
-  className="emotion-0"
+  className="undefined emotion-0"
 >
   Some content
 </button>
@@ -140,6 +154,9 @@ exports[`Button matches snapshot when has a tier 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  background: transparent;
+  color: #172b4e;
+  box-shadow: 0 0 0 1px #d3dce6 inset;
 }
 
 .emotion-0:hover {
@@ -156,6 +173,19 @@ exports[`Button matches snapshot when has a tier 1`] = `
   background: #eaeff4;
   color: rgba(135,155,166,0.5);
   box-shadow: none;
+}
+
+.emotion-0:hover {
+  background: #eaeff4;
+}
+
+.emotion-0:active {
+  box-shadow: 0 0 0 1px #d3dce6 inset,0 1px 6px #d3dce6 inset;
+}
+
+.emotion-0:disabled {
+  box-shadow: 0 0 0 1px #eaeff4 inset;
+  background: none;
 }
 
 <button
@@ -305,6 +335,8 @@ exports[`Button matches snapshot when is small 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+  padding: 8px 8px;
+  font-size: 0.9rem;
 }
 
 .emotion-0:hover {

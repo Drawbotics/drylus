@@ -28,11 +28,11 @@ Dayjs.extend(calendar);
 
 export function generateDisplayedDate({
   date,
-  options,
+  options = {},
   locale = getCurrentLocale(),
 }: {
   date: Date;
-  options: any;
+  options?: any;
   locale?: string;
 }): string {
   const {

@@ -49,13 +49,13 @@ interface LoadingPlaceholderProps {
    * Determines the height of the placeholder
    * @default sv.defaultMargin
    */
-  height: number | string;
+  height?: number | string;
 
   /**
    * Determines the height of the placeholder
    * @default 200
    */
-  width: number | string;
+  width?: number | string;
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;

@@ -5,10 +5,11 @@ exports[`Text matches snapshot when it has a size and category 1`] = `
   display: inline;
   color: #172b4e;
   font-size: 1.1rem;
+  color: #3DB5D0;
 }
 
 <span
-  className="undefined emotion-0"
+  className="emotion-0"
 >
   Text content
 </span>
