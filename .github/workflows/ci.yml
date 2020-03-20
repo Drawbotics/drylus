@@ -13,6 +13,12 @@ on:
   pull_request:
     branches:
       - '*'
+    paths:
+      - 'packages/react-drylus/**'
+      - 'packages/extract-emotion/**'
+      - 'packages/vanilla-drylus/**'
+      - 'packages/drylus-style-vars/**'
+      - 'packages/icons/**'
 
 jobs:
   test:
