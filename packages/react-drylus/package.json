@@ -5,13 +5,17 @@
   "author": "nicmosc <nmoscholios@gmail.com>",
   "license": "ISC",
   "main": "index.js",
-  "types": "index.d.ts",
+  "types": "./lib/index.d.ts",
   "scripts": {
-    "clean": "rimraf lib/",
-    "build:commonjs": "babel --ignore '**/__tests__/' --root-mode upward src/ --out-dir lib/",
-    "watch": "npm run clean && NODE_ENV=development npm run build:commonjs -- --watch",
-    "build:types": "node scripts/build-types.js",
-    "build": "npm run clean && NODE_ENV=production npm run build:commonjs && npm run build:types",
+    "clean": "rimraf lib/ tmp/",
+    "build:ts": "tsc",
+    "build:js": "babel --source-maps inline --copy-files --ignore  '**/__tests__/' --root-mode upward tmp/ --out-dir lib/",
+    "build:typedoc": "node_modules/.bin/typedoc --json docs.json --mode modules ./src",
+    "watch:typedoc": "npm run build:typedoc && chokidar './tmp/**/*.d.ts' -c 'npm run build:typedoc'",
+    "build:commonjs": "npm run build:ts && npm run build:js && npm run build:typedoc",
+    "watch:commonjs": "npm run build:ts -- --watch & npm run build:js -- --watch & npm run watch:typedoc",
+    "watch": "npm run clean && NODE_ENV=development && npm run build:ts && npm run watch:commonjs",
+    "build": "npm run clean && NODE_ENV=production npm run build:commonjs",
     "test": "NODE_ICU_DATA=../../node_modules/full-icu jest",
     "test:watch": "NODE_ICU_DATA=../../node_modules/full-icu jest --watchAll",
     "prepublishOnly": "npm run build"
@@ -41,5 +45,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "2132c65dc070c386b7736959b4b6022145038bf7"
+  "gitHead": "99f6de1783059e9d24e6582f69fa2982d41a1af2"
 }

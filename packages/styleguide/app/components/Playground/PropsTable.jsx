@@ -34,9 +34,10 @@ const styles = {
 };
 
 function getProps(Component) {
-  const { __docgenInfo: docgenInfo } = Component;
-  const { props } = docgenInfo;
-  return props || {};
+  // const { __docgenInfo: docgenInfo } = Component;
+  // const { props } = docgenInfo;
+  return {};
+  // return props || {};
 }
 
 const PropsTable = ({ component, onChange, activeProps, enums }) => {
