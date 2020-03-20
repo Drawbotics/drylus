@@ -73,7 +73,7 @@ const Avatar = ({ responsive, ...rest }) => {
     category,
     backgroundColor,
     hint,
-    style,
+    style = {},
     color: _color,
   } = useResponsiveProps(rest, responsive);
 
@@ -154,10 +154,6 @@ Avatar.propTypes = {
     XL: PropTypes.object,
     HUGE: PropTypes.object,
   }),
-};
-
-Avatar.defaultProps = {
-  style: {},
 };
 
 export default Avatar;
