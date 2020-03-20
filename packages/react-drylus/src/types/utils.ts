@@ -31,7 +31,5 @@ export interface Variable {
 }
 
 // TODO
-// export all the interface props
 // Table: dont extend record, add any key value, expose TableEntry + limit to keys in data
-// Alert: dont make onClickDismissed required
 // Fix number input
