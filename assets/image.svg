@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icon/Feather/image</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M20,12.5857864 L20,5 C20,4.44771525 19.5522847,4 19,4 L5,4 C4.44771525,4 4,4.44771525 4,5 L4,19 C4,19.4288091 4.26990055,19.7945795 4.64908837,19.9366981 L15.2928932,9.29289322 C15.6834175,8.90236893 16.3165825,8.90236893 16.7071068,9.29289322 L20,12.5857864 Z M20,15.4142136 L16,11.4142136 L7.41421356,20 L19,20 C19.5522847,20 20,19.5522847 20,19 L20,15.4142136 Z M5,2 L19,2 C20.6568542,2 22,3.34314575 22,5 L22,19 C22,20.6568542 20.6568542,22 19,22 L5,22 C3.34314575,22 2,20.6568542 2,19 L2,5 C2,3.34314575 3.34314575,2 5,2 Z M8.5,11 C7.11928813,11 6,9.88071187 6,8.5 C6,7.11928813 7.11928813,6 8.5,6 C9.88071187,6 11,7.11928813 11,8.5 C11,9.88071187 9.88071187,11 8.5,11 Z M8.5,9 C8.77614237,9 9,8.77614237 9,8.5 C9,8.22385763 8.77614237,8 8.5,8 C8.22385763,8 8,8.22385763 8,8.5 C8,8.77614237 8.22385763,9 8.5,9 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Feather/image" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

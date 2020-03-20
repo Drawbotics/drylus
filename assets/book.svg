@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icon/Feather/book</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M19,16 L19,3 L6.5,3 C5.67157288,3 5,3.67157288 5,4.5 L5,16.3368156 C5.45462769,16.1208455 5.96320135,16 6.5,16 L19,16 Z M19,18 L6.5,18 C5.67157288,18 5,18.6715729 5,19.5 C5,20.3284271 5.67157288,21 6.5,21 L19,21 L19,18 Z M6.5,1 L20,1 C20.5522847,1 21,1.44771525 21,2 L21,22 C21,22.5522847 20.5522847,23 20,23 L6.5,23 C4.56700338,23 3,21.4329966 3,19.5 L3,4.5 C3,2.56700338 4.56700338,1 6.5,1 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Feather/book" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

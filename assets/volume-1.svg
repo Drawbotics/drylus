@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icon/Feather/volume-1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M7.64921894,8 L12.375305,4.21913119 C13.0300683,3.69532051 14,4.16149379 14,5 L14,19 C14,19.8385062 13.0300683,20.3046795 12.375305,19.7808688 L7.64921894,16 L4,16 C3.44771525,16 3,15.5522847 3,15 L3,9 C3,8.44771525 3.44771525,8 4,8 L7.64921894,8 Z M16.8327865,9.167 C16.4423211,8.77641674 16.4424167,8.14325177 16.833,7.75278645 C17.2235833,7.36232114 17.8567482,7.36241674 18.2472135,7.753 C20.5895052,10.0959991 20.5895052,13.8940009 18.2472135,16.237 C17.8567482,16.6275833 17.2235833,16.6276789 16.833,16.2372135 C16.4424167,15.8467482 16.4423211,15.2135833 16.8327865,14.823 C18.3943142,13.2610006 18.3943142,10.7289994 16.8327865,9.167 Z M8.62469505,9.78086881 C8.447382,9.92271925 8.2270715,10 8,10 L5,10 L5,14 L8,14 C8.2270715,14 8.447382,14.0772808 8.62469505,14.2191312 L12,16.9193752 L12,7.08062485 L8.62469505,9.78086881 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Feather/volume-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

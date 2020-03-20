@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Icon/Feather/filter</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M9.00192227,12.8261466 L1.23835232,3.64572512 C0.68869301,2.99575299 1.15069426,2 2.00192227,2 L22.0019223,2 C22.8531503,2 23.3151515,2.99575299 22.7654922,3.64572512 L15.0019223,12.8261466 L15.0019223,21 C15.0019223,21.743382 14.2196098,22.2268777 13.5547087,21.8944272 L9.55470867,19.8944272 C9.21592465,19.7250352 9.00192227,19.3787721 9.00192227,19 L9.00192227,12.8261466 Z M19.8466186,4 L4.15722594,4 L10.7654922,11.8142749 C10.9181565,11.9948003 11.0019223,12.223577 11.0019223,12.46 L11.0019223,18.381966 L13.0019223,19.381966 L13.0019223,12.46 C13.0019223,12.223577 13.0856881,11.9948003 13.2383523,11.8142749 L19.8466186,4 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Feather/filter" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
+            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>
