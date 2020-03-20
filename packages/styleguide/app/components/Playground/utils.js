@@ -96,39 +96,53 @@ export function recursiveMdxTransform(tree, target) {
   return mdxTransform(tree);
 }
 
-function _getComplexType() {}
+function _getValuesForEnum(enumName, docs) {
+  const moduleName = `"react-drylus/src/enums/${enumName}"`;
+  const doc = docs.children.find((module) => module.name === moduleName);
+  return doc.children[0].children.map((v) => `${enumName}.${v.name}`);
+}
 
-function _getType(type) {
-  return {
-    name: type.name,
-    value: type.type === 'intrinsic' ? null : _getComplexType(type),
-  };
+function _getType(type, docs) {
+  if (type.type === 'reference' && !type.typeArguments && type.name !== 'Record') {
+    return {
+      type: 'enum',
+      name: type.name,
+      values: _getValuesForEnum(type.name, docs),
+    }
+  }
+  else return type.name;
 }
 
 export function generateDocs(componentName, docs) {
   const { children } = docs;
+
   const componentDescription = children.find(
     (child) => last(child.name.replace(/"/g, '').split('/')) === componentName,
   );
+
   const propsInterfaceName = `${componentName}Props`;
   const interfaceDescription = componentDescription.children.find(
     (child) => child.name === propsInterfaceName,
   );
+
   if (interfaceDescription == null) {
     return null;
   }
+
+  // if (componentName === 'Dot') { console.log(interfaceDescription);}
+
   const res = interfaceDescription.children.reduce((props, prop) => {
-    const type = _getType(prop.type);
     return {
       ...props,
       [prop.name]: {
         required: !prop.flags?.isOptional,
-        type,
-        description: prop.comment?.shortText,
+        type: _getType(prop.type, docs),
+        description: {
+          tag: prop?.comment?.tags?.[0]?.tag,
+          text: prop?.comment?.tags?.[0]?.text || prop.comment?.shortText || '',
+        },
       },
     };
   }, {});
-  // console.log(interfaceDescription.children);
-  // console.log(res);
   return res;
 }
