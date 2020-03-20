@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Margin matches snapshot when has a different size on each side 1`] = `
+.emotion-0 {
+  margin: 24px;
+  margin: 0;
+  margin-left: 32px;
+  margin-right: 8px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin-left: 24px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin-right: calc(8px / 2);
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin-top: 8px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin-bottom: 16px;
+  }
+}
+
+<div
+  className="emotion-0"
+>
+  Content
+</div>
+`;
+
+exports[`Margin matches snapshot when has a size only on 1 side 1`] = `
+.emotion-0 {
+  margin: 24px;
+  margin: 0;
+  margin-left: 32px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin-left: 24px;
+  }
+}
+
+<div
+  className="emotion-0"
+>
+  Content
+</div>
+`;
+
+exports[`Margin matches snapshot when has a uniform size 1`] = `
+.emotion-0 {
+  margin: 24px;
+  margin: 32px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin: 24px;
+  }
+}
+
+<div
+  className="emotion-0"
+>
+  Content
+</div>
+`;
+
+exports[`Margin matches snapshot when has vertical and horizontal sizes 1`] = `
+.emotion-0 {
+  margin: 24px;
+  margin: 0;
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin-left: 8px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin-right: 8px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin-top: 24px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    margin-bottom: 24px;
+  }
+}
+
+<div
+  className="emotion-0"
+>
+  Content
+</div>
+`;

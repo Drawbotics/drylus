@@ -1,33 +1,24 @@
 import React from 'react';
 import { create } from 'react-test-renderer';
 
-import Padding from '../Padding';
 import { Size } from '../../enums';
+import { Margin } from '../Margin';
 
-
-describe('Padding', () => {
+describe('Margin', () => {
   describe('matches snapshot when', () => {
     it('has a uniform size', () => {
-      const tree = create(
-        <Padding size={Size.LARGE}>
-          Content
-        </Padding>
-      ).toJSON();
+      const tree = create(<Margin size={Size.LARGE}>Content</Margin>).toJSON();
       expect(tree).toMatchSnapshot();
     });
 
     it('has a size only on 1 side', () => {
-      const tree = create(
-        <Padding size={{ left: Size.LARGE }}>
-          Content
-        </Padding>
-      ).toJSON();
+      const tree = create(<Margin size={{ left: Size.LARGE }}>Content</Margin>).toJSON();
       expect(tree).toMatchSnapshot();
     });
 
     it('has a different size on each side', () => {
       const tree = create(
-        <Padding
+        <Margin
           size={{
             left: Size.LARGE,
             top: Size.SMALL,
@@ -35,20 +26,20 @@ describe('Padding', () => {
             right: Size.EXTRA_SMALL,
           }}>
           Content
-        </Padding>
+        </Margin>,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
 
     it('has vertical and horizontal sizes', () => {
       const tree = create(
-        <Padding
+        <Margin
           size={{
             vertical: Size.LARGE,
             horizontal: Size.SMALL,
           }}>
           Content
-        </Padding>
+        </Margin>,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
