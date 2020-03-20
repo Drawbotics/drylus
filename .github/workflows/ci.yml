@@ -28,9 +28,9 @@ jobs:
       with:
         node-version: '10.x'
     - run: echo 'Current ref = ${{ github.ref }}'
+    - run: echo 'Base ref = ${{ github.base_ref }}'
     - name: Install dependencies and run tests
       run: |
-        echo ${github.ref}
         npm install
         npx lerna link convert
         npm run test
