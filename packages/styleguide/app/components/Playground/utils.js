@@ -110,7 +110,7 @@ function _getType(type, docs) {
       values: _getValuesForEnum(type.name, docs),
     }
   }
-  else return type.name;
+  else return { name: type.name};
 }
 
 export function generateDocs(componentName, docs) {
