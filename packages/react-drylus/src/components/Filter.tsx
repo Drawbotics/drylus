@@ -132,7 +132,7 @@ interface BaseFilterProps {
    * Determines on which side the panel is aligned
    * @default Align.RIGHT
    */
-  align?: Align.LEFT | Align.RIGHT;
+  align?: Exclude<Align, Align.CENTER>;
 
   /** If true, the filter trigger is dark, and the close icon is shown to clear it when clicked */
   active?: boolean;
