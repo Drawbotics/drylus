@@ -24,7 +24,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - run: echo 'Current ref = ${{ github.ref }}, ${{ github.base_ref }}, ${{ github.head_ref }}'
+    - run: echo 'Current ref = ${{ github.ref }}'
     - name: Install dependencies and run tests
       run: |
         npm install
@@ -33,7 +33,7 @@ jobs:
   
   release:
     needs: test
-    if: contains(github.ref, 'master') || contains(github.head_ref, 'beta')
+    if: contains(github.ref, 'master')
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -46,28 +46,15 @@ jobs:
         npx lerna link convert
         npm run build-libs
     
-    - name: Extract branch name if beta
-      shell: bash
-      if: contains(github.head_ref, 'beta')
-      run: echo "::set-env name=BRANCH_NAME::beta"
-
-    - name: Extract branch name if master
-      shell: bash
-      if: contains(github.ref, 'master')
-      run: echo "::set-env name=BRANCH_NAME::master"
-
-    - name: Currenty branch is...
-      run: echo Current branch = ${BRANCH_NAME}
-
     - name: Prepare repository
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
-        git checkout ${BRANCH_NAME}
+        git checkout "${GITHUB_REF:11}"
         git remote rm origin
         git remote add origin "https://$GH_TOKEN@github.com/drawbotics/drylus.git"
         git fetch origin
-        git branch --set-upstream-to origin/${BRANCH_NAME}
+        git branch --set-upstream-to origin/master
         
     - name: Publish
       env:
