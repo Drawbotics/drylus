@@ -228,7 +228,9 @@ interface DrawerProps extends BaseDrawerProps {
   /** If the drawer is in "asOverlay" mode, triggered when the overlay is clicked */
   onClickOverlay?: () => void;
 
-  /** If true, the whole page is hidden with an overlay and the content of the drawer is rendered most visible */
+  /** If true, the whole page is hidden with an overlay and the content of the drawer is rendered most visible
+   * @default false
+   */
   asOverlay?: boolean;
 
   /**
@@ -250,7 +252,7 @@ interface DrawerProps extends BaseDrawerProps {
    * Only applies when the drawer is used with "asOverlay"
    * @default Position.RIGHT
    */
-  side?: Position.LEFT | Position.RIGHT;
+  side?: Exclude<Position, Position.TOP | Position.BOTTOM>;
 
   /**
    * Passed to the CSSTransition component to fire events at different points of the animation. See reactcommunity.org/react-transition-group docs
