@@ -98,13 +98,11 @@ export function recursiveMdxTransform(tree, target) {
 
 function _getDefault(prop) {
   const def = prop.comment?.tags?.find((t) => t.tag === 'default');
-
   return def ? def.text : null;
 }
 
 function _getDeprecation(prop) {
   const deprecation = prop.comment?.tags?.find((t) => t.tag === 'deprecated');
-
   return deprecation ? deprecation.text : null;
 }
 
@@ -179,7 +177,7 @@ function _getType(type, docs) {
     if (potentialTypes.includes('true') && potentialTypes.includes('false')) {
       return {
         type: 'boolean',
-        name: 'bool',
+        name: 'boolean',
       };
     }
     if (type?.types.map((t) => t.type).includes('reflection')) {
@@ -192,7 +190,7 @@ function _getType(type, docs) {
     if (potentialTypes.length === 1) {
       return {
         type: potentialTypes[0],
-        name: potentialTypes[0], //TODO  make recursive
+        name: potentialTypes[0], // TODO  make recursive
       };
     }
     return {
@@ -215,6 +213,7 @@ function _getType(type, docs) {
 
 export function generateDocs(componentName, docs) {
   const { children } = docs;
+  console.log(children);
 
   const componentDescription = children.find(
     (child) => last(child.name.replace(/"/g, '').split('/')) === componentName,
