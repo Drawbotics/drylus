@@ -103,23 +103,76 @@ function _getValuesForEnum(enumName, docs) {
   return doc.children[0].children.map((v) => `${enumName}.${v.name}`);
 }
 
+function _computeExclude(type, docs) {
+  const enumName = type.typeArguments[0].name;
+  const enumValues = _getValuesForEnum(enumName, docs);
+
+  const valuesToRemove = type.typeArguments[1].types.map((arg) => `${enumName}.${arg.name}`);
+  const withValuesRemoved = enumValues.filter((v) => !valuesToRemove.includes(v));
+
+  return {
+    type: 'enum',
+    name: `Subset of ${enumName}`,
+    values: withValuesRemoved,
+  };
+}
+
 function _getType(type, docs) {
   console.log(type)
+  if (type.type === 'instrinsic') {
+    return {
+      type: type.name,
+    };
+  }
+  if (type.type === 'reference' && type.name === 'Style') {
+    return {
+      type: 'shape',
+      name: 'Style',
+      // TODO: add the shape and display it in a tooltip
+    }
+  }
+  if (type.name === 'Exclude') {
+    return _computeExclude(type, docs);
+  }
   if (type.type === 'reference' && !type.typeArguments && type.name !== 'Record') {
     return {
       type: 'enum',
       name: type.name,
       values: _getValuesForEnum(type.name, docs),
-    }
+    };
   }
   else if (type.type === 'union') {
-    const potentialTypes = type?.types?.map((t) => t.name);
+    const potentialTypes = type?.types?.map((t) => t.name).filter((t) => t.name !== null);
     if (potentialTypes.includes('true') && potentialTypes.includes('false')) {
       return {
         type: 'boolean',
         name: 'bool',
+      };
+    }
+    if (type?.types.map((t) => t.type).includes('reflection')) {
+      return {
+        type: 'function',
+        name: 'func',
+        signature: `() => void`, // TODO infer function signature
       }
     }
+    if (type?.types?.length === 1) {
+      return {
+        type: type.types[0].name,
+        name: type.types[0].name,
+      };
+    }
+    return {
+      type: 'union',
+      name: 'union',
+      values: type.types.map((t) => _getType(t, docs))
+    }
+  }
+  else if (type?.operator === 'keyof') {
+    return {
+      type: 'string',
+      name: 'string',
+    };
   }
   else {
     console.log('final else')
@@ -129,10 +182,13 @@ function _getType(type, docs) {
 
 export function generateDocs(componentName, docs) {
   const { children } = docs;
+  console.log(children)
 
   const componentDescription = children.find(
     (child) => last(child.name.replace(/"/g, '').split('/')) === componentName,
   );
+
+  console.log(componentName);
 
   const propsInterfaceName = `${componentName}Props`;
   const interfaceDescription = componentDescription.children.find(
