@@ -85,7 +85,10 @@ interface ToggleProps {
   /** Determines if toggle is active */
   value: boolean;
 
-  size: Size.SMALL | Size.DEFAULT;
+  size: Exclude<
+    Size,
+    Size.EXTRA_SMALL | Size.EXTRA_LARGE | Size.EXTRA_HUGE | Size.MASSIVE | Size.HUGE | Size.LARGE
+  >;
 
   /** Used for style overrides */
   style?: Style;

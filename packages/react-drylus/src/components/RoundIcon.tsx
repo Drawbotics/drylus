@@ -73,7 +73,12 @@ interface RoundIconProps {
   name: keyof typeof Icons;
 
   /** @default Size.DEFAULT */
-  size?: Size.SMALL | Size.DEFAULT | Size.LARGE | number;
+  size?:
+    | number
+    | Exclude<
+        Size,
+        Size.EXTRA_SMALL | Size.EXTRA_LARGE | Size.EXTRA_HUGE | Size.MASSIVE | Size.HUGE
+      >;
 
   /** Makes the icon bold */
   bold?: boolean;

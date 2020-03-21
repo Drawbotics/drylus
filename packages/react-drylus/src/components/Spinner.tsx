@@ -89,7 +89,10 @@ const styles = {
 
 interface SpinnerProps {
   /** @default Size.DEFAULT */
-  size?: Size.DEFAULT | Size.SMALL | Size.LARGE;
+  size?: Exclude<
+    Size,
+    Size.EXTRA_SMALL | Size.EXTRA_LARGE | Size.EXTRA_HUGE | Size.MASSIVE | Size.HUGE
+  >;
 
   /** @deprecated use color instead */
   category?: Category.BRAND | Category.INFO;

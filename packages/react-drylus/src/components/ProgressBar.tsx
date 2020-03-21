@@ -89,7 +89,10 @@ interface ProgressBarProps {
   color?: Exclude<Color, Color.PRIMARY>;
 
   /** @default Size.DEFAULT */
-  size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
+  size?: Exclude<
+    Size,
+    Size.EXTRA_SMALL | Size.EXTRA_LARGE | Size.EXTRA_HUGE | Size.MASSIVE | Size.HUGE
+  >;
 
   /** Used for style overrides */
   style?: Style;
