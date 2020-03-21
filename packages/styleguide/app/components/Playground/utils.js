@@ -107,8 +107,13 @@ function _computeExclude(type, docs) {
   const enumName = type.typeArguments[0].name;
   const enumValues = _getValuesForEnum(enumName, docs);
 
-  const valuesToRemove = type.typeArguments[1].types.map((arg) => `${enumName}.${arg.name}`);
+  const valuesToRemove = type.typeArguments[1].name != null
+    ? [`${enumName}.${type.typeArguments[1].name}`]
+    : type.typeArguments[1].types.map((arg) => `${enumName}.${arg.name}`);
+    console.log(valuesToRemove)
+
   const withValuesRemoved = enumValues.filter((v) => !valuesToRemove.includes(v));
+  console.log(withValuesRemoved);
 
   return {
     type: 'enum',
@@ -118,19 +123,28 @@ function _computeExclude(type, docs) {
 }
 
 function _getType(type, docs) {
-  console.log(type)
+  console.log('Type: ', type)
   if (type.type === 'instrinsic') {
     return {
       type: type.name,
     };
   }
-  if (type.type === 'reference' && type.name === 'Style') {
-    return {
-      type: 'shape',
-      name: 'Style',
-      // TODO: add the shape and display it in a tooltip
+  if (type.type === 'reference') {
+    if (type.name === 'Style') {
+      return {
+        type: 'shape',
+        name: 'Style',
+        // TODO: add the shape and display it in a tooltip
+      };
+    }
+    if (type.name === 'React.ReactNode') {
+      return {
+        type: 'React node',
+        name: 'React node',
+      };
     }
   }
+
   if (type.name === 'Exclude') {
     return _computeExclude(type, docs);
   }
@@ -142,7 +156,8 @@ function _getType(type, docs) {
     };
   }
   else if (type.type === 'union') {
-    const potentialTypes = type?.types?.map((t) => t.name).filter((t) => t.name !== null);
+    const potentialTypes = type?.types?.filter((t) => t.name !== 'undefined').map((t) => t.name);
+    console.log('---', potentialTypes);
     if (potentialTypes.includes('true') && potentialTypes.includes('false')) {
       return {
         type: 'boolean',
@@ -156,10 +171,10 @@ function _getType(type, docs) {
         signature: `() => void`, // TODO infer function signature
       }
     }
-    if (type?.types?.length === 1) {
+    if (potentialTypes.length === 1) {
       return {
-        type: type.types[0].name,
-        name: type.types[0].name,
+        type: potentialTypes[0],
+        name: potentialTypes[0],
       };
     }
     return {
@@ -182,13 +197,10 @@ function _getType(type, docs) {
 
 export function generateDocs(componentName, docs) {
   const { children } = docs;
-  console.log(children)
 
   const componentDescription = children.find(
     (child) => last(child.name.replace(/"/g, '').split('/')) === componentName,
   );
-
-  console.log(componentName);
 
   const propsInterfaceName = `${componentName}Props`;
   const interfaceDescription = componentDescription.children.find(
@@ -200,8 +212,7 @@ export function generateDocs(componentName, docs) {
   }
 
 
-  const res = interfaceDescription.children.slice(0, 1).reduce((props, prop) => {
-    console.log('Parsing a new prop');
+  const res = interfaceDescription.children.slice(0, 7).reduce((props, prop) => {
     console.log(prop);
     return {
       ...props,
