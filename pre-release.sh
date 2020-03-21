@@ -8,4 +8,4 @@ git add .
 
 git commit -m "bump pre-release version"
 
-npx lerna publish from-package --ignore-prepublish --no-git-reset --pre-dist-tag alpha
+npx lerna publish from-package --ignore-prepublish --no-git-reset --pre-dist-tag beta
