@@ -75,9 +75,14 @@ interface AvatarProps {
   hint?: string;
 
   /** Size of the avatar */
-  size?: number | Size.SMALL | Size.DEFAULT | Size.LARGE;
+  size?:
+    | number
+    | Exclude<
+        Size,
+        Size.EXTRA_SMALL | Size.EXTRA_LARGE | Size.EXTRA_HUGE | Size.MASSIVE | Size.HUGE
+      >;
 
-  /** @deprecated */
+  /** @deprecated Use color instead*/
   category?: Exclude<Category, Category.PRIMARY>;
 
   color?: Exclude<Color, Color.PRIMARY>;
