@@ -36,9 +36,10 @@ function _getProps(Component) {
   return description ?? {};
 }
 
-function _hasDescription(prop) {
-  return prop?.description?.text !== '' || prop?.description?.tag != null;
+function _hasDeprecation(prop) {
+  return prop.deprecation != null;
 }
+
 
 function _isEnum(prop) {
   return prop?.type?.type === 'enum';
@@ -72,7 +73,8 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
             .sort()
             .map((key) => {
               const prop = props[key];
-              
+              console.log(prop);
+
               return (
                 <TRow key={key}>
                   {/* Name */}
@@ -101,31 +103,30 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                     }}
                   </TCell>
                   {/* Default */}
-                  <TCell>{/* {prop.defaultValue?.value.replace(/'/g, '') || null} */}</TCell>
+                  <TCell>{prop.defaultValue}</TCell>
                   {/* Required */}
                   <TCell>{String(prop.required)}</TCell>
                   {/* Description */}
                   <TCell>
                     {do {
-                      if (_hasDescription(prop)) {
-                        const { description } = prop;
-                        if (description.tag === 'deprecated') {
-                          return (
-                            <React.Fragment>
-                              <Margin size={{ right: Size.EXTRA_SMALL }} style={{ display: 'inline-block'}} >
-                                <Tag color={Color.ORANGE} inversed>
-                                  DEPRECATED
-                                </Tag>
-                              </Margin>
-                              {capitalizeFirst(description.text)}
-                            </React.Fragment>
-                          );
-                        } else {
-                          capitalizeFirst(description.text);
-                        }
-                      } else if (_isEnum(prop)) {
+                      if (_hasDeprecation(prop)) {
+                        return (
+                          <React.Fragment>
+                            <Margin size={{ right: Size.EXTRA_SMALL }} style={{ display: 'inline-block'}} >
+                              <Tag color={Color.ORANGE} inversed>
+                                DEPRECATED
+                              </Tag>
+                            </Margin>
+                            {capitalizeFirst(prop.deprecation)}
+                          </React.Fragment>
+                        );
+                      }
+                      else if (_isEnum(prop)) {
                         const { values } = prop.type;
                         `One of: ${values.join(', ')}`;
+                      }
+                      else {
+                        capitalizeFirst(prop.description);
                       }
                     }}
                   </TCell>

@@ -96,9 +96,20 @@ export function recursiveMdxTransform(tree, target) {
   return mdxTransform(tree);
 }
 
+function _getDefault(prop) {
+  const def = prop.comment?.tags?.find((t) => t.tag === 'default');
+
+  return def ? def.text : null;
+}
+
+function _getDeprecation(prop) {
+  const deprecation = prop.comment?.tags?.find((t) => t.tag === 'deprecated');
+
+  return deprecation ? deprecation.text : null;
+}
+
 function _getValuesForEnum(enumName, docs) {
   const moduleName = `"react-drylus/src/enums/${enumName}"`;
-  console.log('Module name: ', moduleName)
   const doc = docs.children.find((module) => module.name === moduleName);
   return doc.children[0].children.map((v) => `${enumName}.${v.name}`);
 }
@@ -110,10 +121,8 @@ function _computeExclude(type, docs) {
   const valuesToRemove = type.typeArguments[1].name != null
     ? [`${enumName}.${type.typeArguments[1].name}`]
     : type.typeArguments[1].types.map((arg) => `${enumName}.${arg.name}`);
-    console.log(valuesToRemove)
 
   const withValuesRemoved = enumValues.filter((v) => !valuesToRemove.includes(v));
-  console.log(withValuesRemoved);
 
   return {
     type: 'enum',
@@ -129,6 +138,7 @@ function _getType(type, docs) {
       type: type.name,
     };
   }
+
   if (type.type === 'reference') {
     if (type.name === 'Style') {
       return {
@@ -137,11 +147,20 @@ function _getType(type, docs) {
         // TODO: add the shape and display it in a tooltip
       };
     }
+
     if (type.name === 'React.ReactNode') {
       return {
         type: 'React node',
         name: 'React node',
       };
+    }
+  }
+
+  if (type.type === 'reflection') {
+    return {
+      type: 'function',
+      name: 'func',
+      signature: `() => void`, // TODO infer function signature
     }
   }
 
@@ -157,7 +176,6 @@ function _getType(type, docs) {
   }
   else if (type.type === 'union') {
     const potentialTypes = type?.types?.filter((t) => t.name !== 'undefined').map((t) => t.name);
-    console.log('---', potentialTypes);
     if (potentialTypes.includes('true') && potentialTypes.includes('false')) {
       return {
         type: 'boolean',
@@ -174,7 +192,7 @@ function _getType(type, docs) {
     if (potentialTypes.length === 1) {
       return {
         type: potentialTypes[0],
-        name: potentialTypes[0],
+        name: potentialTypes[0], //TODO  make recursive
       };
     }
     return {
@@ -212,17 +230,16 @@ export function generateDocs(componentName, docs) {
   }
 
 
-  const res = interfaceDescription.children.slice(0, 7).reduce((props, prop) => {
+  const res = interfaceDescription.children.reduce((props, prop) => {
     console.log(prop);
     return {
       ...props,
       [prop.name]: {
         required: !prop.flags?.isOptional,
         type: _getType(prop.type, docs),
-        description: {
-          tag: prop?.comment?.tags?.[0]?.tag,
-          text: prop?.comment?.tags?.[0]?.text || prop.comment?.shortText || '',
-        },
+        deprecation: _getDeprecation(prop),
+        defaultValue: _getDefault(prop),
+        description:  prop.comment?.shortText || '',
       },
     };
   }, {});

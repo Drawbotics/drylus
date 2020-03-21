@@ -90,16 +90,13 @@ interface CircularProgressProps {
   /** Text shown within the circular progress. Not shown when size is smaller than DEFAULT */
   text?: string;
 
-  /** DEPRECATED */
+  /** @deprecated Use color instead */
   category?: Exclude<Category, Category.PRIMARY>;
 
   color?: Exclude<Color, Color.PRIMARY>;
 
   /** @default Size.DEFAULT */
-  size?: Exclude<
-    Size,
-    Size.EXTRA_SMALL | Size.EXTRA_LARGE | Size.EXTRA_HUGE | Size.MASSIVE | Size.HUGE
-  >;
+  size?: Exclude<Size, Size.EXTRA_SMALL | Size.HUGE | Size.EXTRA_HUGE | Size.MASSIVE>;
 
   /** Used for style overrides */
   style?: Style;

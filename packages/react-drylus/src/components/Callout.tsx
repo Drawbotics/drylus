@@ -51,7 +51,7 @@ interface CalloutProps {
   /** Message shown in the callout */
   children: React.ReactNode;
 
-  category: Category.DANGER | Category.SUCCESS | Category.INFO | Category.WARNING;
+  category: Exclude<Category, Category.BRAND | Category.PRIMARY>;
 
   /** Used for style overrides */
   style?: Style;
