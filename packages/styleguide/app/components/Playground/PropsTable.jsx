@@ -44,6 +44,10 @@ function _isEnum(prop) {
   return prop?.type?.type === 'enum';
 }
 
+function _isUnion(prop) {
+  return prop?.type?.type === 'union';
+}
+
 function capitalizeFirst(text) {
   if (typeof text !== 'string' || text === '') return text;
   return text[0].toUpperCase() + text.slice(1);
@@ -76,7 +80,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                   {/* Type */}
                   <TCell>
                     {do {
-                      if (_isEnum(prop)) {
+                      if (_isEnum(prop) || _isUnion(prop)) {
                         <Tooltip
                           content={<PropsInfo props={prop.type.values} />}
                           side={Position.RIGHT}>
