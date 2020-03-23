@@ -83,7 +83,7 @@ const styles = {
   `,
 };
 
-type TextChildren =
+export type TextChildren =
   | string
   | number
   | {

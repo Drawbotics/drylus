@@ -17,7 +17,7 @@ import {
 } from './';
 import { Hint } from './Hint';
 
-type InputGroupChild =
+export type InputGroupChild =
   | React.ReactElement<typeof MultiSelect>
   | React.ReactElement<typeof RangeInput>
   | React.ReactElement<typeof NumberInput>

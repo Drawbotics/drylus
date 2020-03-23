@@ -197,7 +197,7 @@ export const DropdownSeparator = () => {
   return <div className={styles.separator} />;
 };
 
-type DropdownChild =
+export type DropdownChild =
   | React.ReactElement<typeof DropdownOption>
   | React.ReactElement<typeof DropdownTitle>
   | React.ReactElement<typeof DropdownSeparator>;

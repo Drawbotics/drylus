@@ -482,11 +482,11 @@ export interface TableEntry {
   [key: string]: React.ReactNode;
 }
 
-type TableData = Array<TableEntry>;
+export type TableData = Array<TableEntry>;
 
-type DataEntry = keyof Exclude<TableEntry, 'id' | 'data'>;
+export type DataEntry = keyof Exclude<TableEntry, 'id' | 'data'>;
 
-type HeaderData = Array<DataEntry | { label: React.ReactNode; value: DataEntry }>;
+export type HeaderData = Array<DataEntry | { label: React.ReactNode; value: DataEntry }>;
 
 export interface LoadingTableProps {
   columns: HeaderData;
