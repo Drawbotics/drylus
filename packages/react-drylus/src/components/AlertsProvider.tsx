@@ -8,7 +8,7 @@ import { v4 } from 'uuid';
 import { themeStyles } from '../base/ThemeProvider';
 import { Category, Size, Tier } from '../enums';
 import { Flex, FlexAlign, FlexItem, FlexJustify, Margin } from '../layout';
-import { getEnumAsClass } from '../utils';
+import { getEnumAsClass, getIconForCategory } from '../utils';
 import { Button } from './Button';
 import { Icon } from './Icon';
 
@@ -109,19 +109,6 @@ const styles = {
   `,
 };
 
-function _getIconForCategory(category: Category): string {
-  switch (category) {
-    case Category.DANGER:
-      return 'alert-circle';
-    case Category.SUCCESS:
-      return 'check-circle';
-    case Category.WARNING:
-      return 'alert-triangle';
-    default:
-      return 'info';
-  }
-}
-
 export interface AlertProps {
   /** Text shown within the alert */
   text: string;
@@ -142,7 +129,7 @@ export interface AlertProps {
 }
 
 export const Alert = ({ id, text, category, onClickDismiss, hideDelay = 4000 }: AlertProps) => {
-  const icon = _getIconForCategory(category);
+  const icon = getIconForCategory(category);
 
   useEffect(() => {
     if (category !== Category.DANGER && onClickDismiss != null) {

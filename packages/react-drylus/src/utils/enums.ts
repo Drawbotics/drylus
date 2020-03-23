@@ -1,5 +1,6 @@
 import camelCase from 'lodash/camelCase';
 
+import { IconType } from '../components';
 import { Category, Color, Position, Shade, Size, Tier } from '../enums';
 
 type Enum = Category | Color | Shade | Tier | Size | Position;
@@ -53,7 +54,7 @@ export function shadeEnumToTier(enumVal: Shade): Tier | undefined {
   }
 }
 
-export function getIconForCategory(category: Category): string {
+export function getIconForCategory(category: Category): IconType {
   switch (category) {
     case Category.DANGER:
       return 'alert-circle';

@@ -6,7 +6,7 @@ import { Category, Color } from '../enums';
 import { Style } from '../types';
 import { Deprecated, categoryEnumToColor, run } from '../utils';
 import { Dot } from './Dot';
-import { Icon, Icons } from './Icon';
+import { Icon, IconType } from './Icon';
 
 const styles = {
   root: css`
@@ -72,7 +72,7 @@ export interface ListItemProps {
   color?: Color;
 
   /** If passed, the specified icon will be displayed instead of the bullet */
-  icon?: keyof typeof Icons;
+  icon?: IconType;
 
   /** If true the item is less visible */
   disabled?: boolean;

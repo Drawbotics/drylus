@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Category, Position } from '../enums';
 import { Responsive, Style } from '../types';
 import { getEnumAsClass, run, useResponsiveProps } from '../utils';
-import { Icon, Icons } from './Icon';
+import { Icon, IconType } from './Icon';
 
 const styles = {
   wrapper: css`
@@ -133,7 +133,7 @@ export interface DropdownOptionProps {
   onClick?: () => void;
 
   /** Name of the icon to be shown on the left side */
-  icon?: keyof typeof Icons;
+  icon?: IconType;
 
   category?: Category.DANGER | Category.SUCCESS | Category.WARNING;
 

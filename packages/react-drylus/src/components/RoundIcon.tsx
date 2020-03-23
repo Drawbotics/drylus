@@ -5,7 +5,7 @@ import { Responsive, Style } from 'src/types';
 
 import { Category, Color, Size } from '../enums';
 import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
-import { Icon, Icons } from './Icon';
+import { Icon, IconType } from './Icon';
 
 const styles = {
   root: css`
@@ -70,7 +70,7 @@ const styles = {
 
 export interface RoundIconProps {
   /** Name of the icon */
-  name: keyof typeof Icons;
+  name: IconType;
 
   /** @default Size.DEFAULT */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE | number;
