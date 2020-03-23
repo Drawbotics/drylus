@@ -95,9 +95,12 @@ interface SpinnerProps {
   >;
 
   /** @deprecated use color instead */
-  category?: Category.BRAND | Category.INFO;
+  category?: Exclude<
+    Category,
+    Category.SUCCESS | Category.WARNING | Category.DANGER | Category.PRIMARY
+  >;
 
-  color?: Color.BRAND | Color.BLUE;
+  color?: Exclude<Color, Color.RED | Color.GREEN | Color.ORANGE | Color.PRIMARY>;
 
   /** If true, sets the color of the spinner to white (to be used against colored backgrounds) */
   inversed?: boolean;
