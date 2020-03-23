@@ -156,7 +156,7 @@ const Track = ({ source, target, getTrackProps, disabled }: TrackProps) => {
   );
 };
 
-export interface RangeInputProps {
+export interface RangeInputProps<T> {
   /** The minimum value displayed on the input, and the minimum selectable value */
   min: number;
 
@@ -164,16 +164,16 @@ export interface RangeInputProps {
   max: number;
 
   /** If value is an array of numbers, then we display n handles, otherwise only 1 value shows 1 handle. If the value is larger than max, or smaller than min, the max or min will be used */
-  value: number | Array<number>;
+  value: T;
 
   /** Determines the range between each value, can be float or int */
   step?: number;
 
   /** Returns the value at the end of the slide (mouse up/touch end). For continuous updates while sliding use onUpdate */
-  onChange: (value: number | Array<number>) => void;
+  onChange: (value: T) => void;
 
   /** Returns value but on every step changed by the handle: render intensive */
-  onUpdate?: (value: number | Array<number>) => void;
+  onUpdate?: (value: T) => void;
 
   /** Disables the slider */
   disabled?: boolean;
@@ -185,23 +185,24 @@ export interface RangeInputProps {
   responsive?: Responsive<this>;
 }
 
-export const RangeInput = ({ responsive, ...rest }: RangeInputProps) => {
+export const RangeInput = <T extends number | Array<number>>({
+  responsive,
+  ...rest
+}: RangeInputProps<T>) => {
   const { min, max, value, step, onChange, onUpdate, disabled, renderValue } = useResponsiveProps<
-    RangeInputProps
+    RangeInputProps<T>
   >(rest, responsive);
 
-  const isMultiHandle = typeof value !== 'number' && value.length > 1;
+  const isMultiHandle = typeof value !== 'number' && (value as Array<number>).length > 1;
   const values: Array<number> = isMultiHandle ? (value as Array<number>) : [value as number];
 
   return (
     <Slider
       disabled={disabled}
       onUpdate={(values) =>
-        onUpdate != null
-          ? onUpdate(isMultiHandle ? (values as Array<number>) : values[0])
-          : undefined
+        onUpdate != null ? onUpdate(isMultiHandle ? (values as any) : values[0]) : undefined
       }
-      onChange={(values) => onChange(isMultiHandle ? (values as Array<number>) : values[0])}
+      onChange={(values) => onChange(isMultiHandle ? (values as any) : values[0])}
       mode={3}
       step={step}
       className={cx(styles.root, { [styles.disabled]: disabled })}
