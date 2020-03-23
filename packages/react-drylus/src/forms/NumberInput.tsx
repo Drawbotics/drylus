@@ -111,7 +111,7 @@ export interface NumberInputProps {
   placeholder?: string;
 
   /** Triggered when the value is changed (typing or clicking +/-). If not given, the field is read-only */
-  onChange?: (v: number | string, name?: string) => void;
+  onChange?: (v: NumberInputProps['value'], name?: string) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -123,7 +123,7 @@ export interface NumberInputProps {
   valid?: boolean;
 
   /** Use if you want to modify the way you display the value (string operations only) */
-  renderValue?: (v: number | string) => string;
+  renderValue?: (v: NumberInputProps['value']) => string;
 
   /**
    * Limits the max value
@@ -181,7 +181,7 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
   const leftSpanRef = useRef<HTMLSpanElement>(null);
   const [extraLeftPadding, setExtraLeftPadding] = useState<number>();
 
-  const handleInputOnChange = (v: number | string) => {
+  const handleInputOnChange = (v: NumberInputProps['value']) => {
     const numericalValue = Number(v);
 
     if (onChange != null) {
@@ -250,7 +250,10 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
                 onClick={() => {
                   const res = (Number(value) ?? 0) + step;
                   if (!disabled && value < max) {
-                    onChange(Number.isInteger(res) ? res : res.toFixed(decimalPlaces), name);
+                    onChange(
+                      Number.isInteger(res) ? res : Number(res.toFixed(decimalPlaces)),
+                      name,
+                    );
                   }
                 }}>
                 <Icon name="plus" bold />
@@ -260,7 +263,10 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
                 onClick={() => {
                   const res = (Number(value) ?? 0) - step;
                   if (!disabled && value > min) {
-                    onChange(Number.isInteger(res) ? res : res.toFixed(decimalPlaces), name);
+                    onChange(
+                      Number.isInteger(res) ? res : Number(res.toFixed(decimalPlaces)),
+                      name,
+                    );
                   }
                 }}>
                 <Icon name="minus" bold />

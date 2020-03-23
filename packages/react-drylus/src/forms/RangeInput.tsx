@@ -96,7 +96,7 @@ const RangeTooltip = ({ value, visible }: RangeTooltipProps) => {
 export interface HandleProps {
   handle: SliderItem;
   getHandleProps: (id: string, options: any) => any; // Broken at lib level
-  renderValue?: <T>(value: number) => T;
+  renderValue?: (value: number) => string;
   disabled?: boolean;
 }
 
@@ -179,7 +179,7 @@ export interface RangeInputProps<T> {
   disabled?: boolean;
 
   /** Function to custom display the given value(s): (v) => {} */
-  renderValue?: <T>(value: number) => T;
+  renderValue?: (value: number) => string;
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
@@ -222,7 +222,7 @@ export const RangeInput = <T extends number | Array<number>>({
             {handles.map((handle) => (
               <Handle
                 disabled={disabled}
-                renderValue={renderValue}
+                renderValue={renderValue != null ? (v) => renderValue(v) : undefined}
                 key={handle.id}
                 handle={handle}
                 getHandleProps={getHandleProps}

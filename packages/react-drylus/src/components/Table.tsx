@@ -479,12 +479,12 @@ export const TBody = ({ children }: TBodyProps) => {
 export interface TableEntry {
   id?: number | string;
   data?: Array<TableEntry>;
-  [key: string]: React.ReactNode;
+  [key: string]: NonNullable<any>;
 }
 
 export type TableData = Array<TableEntry>;
 
-export type DataEntry = keyof Exclude<TableEntry, 'id' | 'data'>;
+export type DataEntry = keyof Exclude<TableEntry, 'id' | 'data'> & string;
 
 export type HeaderData = Array<DataEntry | { label: React.ReactNode; value: DataEntry }>;
 
