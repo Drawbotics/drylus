@@ -61,7 +61,7 @@ const styles = {
   `,
 };
 
-interface ListItemProps {
+export interface ListItemProps {
   /** Content of the list item */
   children: React.ReactNode;
 
@@ -112,7 +112,7 @@ ListItem.propTypes = {
   category: Deprecated,
 };
 
-interface ListProps {
+export interface ListProps {
   /** Items to display in the list */
   children: React.ReactElement<typeof ListItem> | Array<React.ReactElement<typeof ListItem>>;
 

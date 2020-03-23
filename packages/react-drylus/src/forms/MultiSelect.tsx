@@ -154,16 +154,16 @@ const styles = {
   `,
 };
 
-interface MultiSelectOption extends Option {
+export interface MultiSelectOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
-interface MultiSelectProps {
+export interface MultiSelectProps<T> {
   /** The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey */
-  options: Array<MultiSelectOption>;
+  options: Array<MultiSelectOption<T>>;
 
   /** Determines which values are currently active */
-  values: Array<MultiSelectOption['value']>;
+  values: Array<MultiSelectOption<T>['value']>;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -178,7 +178,7 @@ interface MultiSelectProps {
   placeholder?: string;
 
   /** Triggered when a new value is chosen, returns the array of selected values. If not given, the field is read-only */
-  onChange?: (value: Array<MultiSelectOption['value']>, name?: string) => void;
+  onChange?: (value: Array<MultiSelectOption<T>['value']>, name?: string) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -202,7 +202,7 @@ interface MultiSelectProps {
   [x: string]: any;
 }
 
-export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
+export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectProps<T>) => {
   const {
     values,
     options = [],
@@ -216,7 +216,7 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
     loading,
     style,
     ...props
-  } = useResponsiveProps<MultiSelectProps>(rest, responsive);
+  } = useResponsiveProps<MultiSelectProps<T>>(rest, responsive);
 
   const selectRef = useRef<HTMLSelectElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -239,7 +239,7 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
     };
   });
 
-  const handleOnChange = (value: number | string) => {
+  const handleOnChange = (value: MultiSelectProps<T>['value']) => {
     if (onChange != null) {
       values.includes(value)
         ? onChange(

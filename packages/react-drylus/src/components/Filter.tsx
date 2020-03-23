@@ -112,7 +112,7 @@ const styles = {
   `,
 };
 
-interface BaseFilterProps {
+export interface BaseFilterProps {
   /**
    * Text shown in the last row of the panel
    * @default 'Clear'
@@ -233,7 +233,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
   );
 };
 
-interface SelectFilterOption extends Option {
+export interface SelectFilterOption<T> extends Option<T> {
   /** Shown at the end of the option */
   trailing?: React.ReactNode;
 
@@ -241,21 +241,27 @@ interface SelectFilterOption extends Option {
   leading?: React.ReactNode;
 }
 
-interface SelectFilterProps extends BaseFilterProps {
+export interface SelectFilterProps<T> extends BaseFilterProps {
   /** The items to show in the filter panel: value(string, number), label(string), leading(node), trailing(node) */
-  options: Array<SelectFilterOption>;
+  options: Array<SelectFilterOption<T>>;
 
   /** Determines which value is currently active */
-  value?: SelectFilterOption['value'];
+  value?: SelectFilterOption<T>['value'];
 
   /** Triggered when an option is clicked */
-  onChange: (value: string | number) => void;
+  onChange: (value: SelectFilterOption<T>['value']) => void;
 
   /** Used for style overrides */
   style?: Style;
 }
 
-export const SelectFilter = ({ options, value, onChange, label, ...rest }: SelectFilterProps) => {
+export const SelectFilter = <T extends any>({
+  options,
+  value,
+  onChange,
+  label,
+  ...rest
+}: SelectFilterProps<T>) => {
   const currentLabel =
     value != null ? options.find((option) => String(option.value) === String(value))?.label : label;
   return (
@@ -285,10 +291,10 @@ export const SelectFilter = ({ options, value, onChange, label, ...rest }: Selec
   );
 };
 
-function getLabelForCheckboxFilter(
+function getLabelForCheckboxFilter<T>(
   label: string,
-  options: Array<Option>,
-  values: Array<Option['value']>,
+  options: Array<Option<T>>,
+  values: Array<Option<T>['value']>,
 ) {
   if (values == null) {
     return label;
@@ -301,27 +307,27 @@ function getLabelForCheckboxFilter(
   }
 }
 
-interface CheckboxFilterProps extends BaseFilterProps {
+export interface CheckboxFilterProps<T> extends BaseFilterProps {
   /** The items to show in the filter panel: value(string, number), label(string) */
-  options: Array<Option>;
+  options: Array<Option<T>>;
 
   /** Determines which values are currently active */
-  values?: Array<Option['value']>;
+  values?: Array<Option<T>['value']>;
 
   /** Triggered when an option is clicked. Returns the list of currently selected elements */
-  onChange: (values: Array<number | string>) => void;
+  onChange: (values: Array<Option<T>['value']>) => void;
 
   /** Used for style overrides */
   style?: Style;
 }
 
-export const CheckboxFilter = ({
+export const CheckboxFilter = <T extends any>({
   options,
   values = [],
   onChange,
   label,
   ...rest
-}: CheckboxFilterProps) => {
+}: CheckboxFilterProps<T>) => {
   const currentLabel = getLabelForCheckboxFilter(label, options, values);
   return (
     <BaseFilter

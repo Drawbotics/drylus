@@ -160,7 +160,7 @@ const DEFAULT_OPTIONS = {
   day: 'numeric',
 };
 
-interface DateObject {
+export interface DateObject {
   day: number;
   month: number;
   year: number;
@@ -201,7 +201,7 @@ function _getShouldRenderTop(box: DOMRect) {
   return false;
 }
 
-interface DateInputProps {
+export interface DateInputProps {
   /** Can be empty string, or object containing day, month, year as numbers */
   value: DateObject | '';
 

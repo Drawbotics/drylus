@@ -87,7 +87,7 @@ const styles = {
   `,
 };
 
-interface SpinnerProps {
+export interface SpinnerProps {
   /** @default Size.DEFAULT */
   size?: Size.DEFAULT | Size.SMALL | Size.LARGE;
 

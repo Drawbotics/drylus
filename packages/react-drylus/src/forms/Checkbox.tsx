@@ -151,7 +151,7 @@ const styles = {
   `,
 };
 
-interface CheckboxProps {
+export interface CheckboxProps {
   /** The dom property */
   id?: string;
 

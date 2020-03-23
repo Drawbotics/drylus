@@ -44,7 +44,7 @@ const styles = {
 
 export const placeholderStyles = styles;
 
-interface LoadingPlaceholderProps {
+export interface LoadingPlaceholderProps {
   /**
    * Determines the height of the placeholder
    * @default sv.defaultMargin

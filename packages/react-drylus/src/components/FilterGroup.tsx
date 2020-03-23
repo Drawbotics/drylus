@@ -18,7 +18,7 @@ const styles = {
   `,
 };
 
-interface FilterGroupProps {
+export interface FilterGroupProps {
   /** Title which appears on top of the modal */
   label: string;
 

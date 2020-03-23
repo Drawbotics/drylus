@@ -68,7 +68,7 @@ const styles = {
   `,
 };
 
-interface RoundIconProps {
+export interface RoundIconProps {
   /** Name of the icon */
   name: keyof typeof Icons;
 

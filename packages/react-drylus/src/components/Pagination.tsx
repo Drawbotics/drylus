@@ -63,7 +63,7 @@ function _getLabels(value: number, pages: number, maxVisiblePages: number): Arra
   }
 }
 
-interface PaginationProps {
+export interface PaginationProps {
   /** A number representing the amount of available pages */
   pages: number;
 

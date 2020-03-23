@@ -33,7 +33,7 @@ const styles = {
   `,
 };
 
-interface DotProps {
+export interface DotProps {
   /** @deprecated use color instead */
   category?: Category;
 

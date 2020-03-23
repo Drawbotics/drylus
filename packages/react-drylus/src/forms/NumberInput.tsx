@@ -97,7 +97,7 @@ const styles = {
   `,
 };
 
-interface NumberInputProps {
+export interface NumberInputProps {
   /** Value displayed in the field */
   value: number | '-' | '';
 

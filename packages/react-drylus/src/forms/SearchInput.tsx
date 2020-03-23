@@ -47,9 +47,9 @@ const styles = {
   `,
 };
 
-interface SearchInputProps {
+export interface SearchInputProps<T> {
   /** The list of items displayed under the input ('value, key' pairs) its completely up to you to generate this list */
-  options?: Array<Option>;
+  options?: Array<Option<T>>;
 
   /** The text passed to the input */
   value: string;
@@ -58,10 +58,10 @@ interface SearchInputProps {
   name?: string;
 
   /** Triggered when the text is changed, and when the search button is pressed */
-  onChange: (value: string, name?: string) => void;
+  onChange: (value: Option<T>['value'], name?: string) => void;
 
   /** Triggered when one of the results is clicked, returns the corresponding option value */
-  onClickResult?: (value: Option['value']) => void;
+  onClickResult?: (value: Option<T>['value']) => void;
 
   /**
    * Displayed when no results match the search
@@ -81,7 +81,7 @@ interface SearchInputProps {
   responsive?: Responsive<this>;
 }
 
-export const SearchInput = ({ responsive, ...rest }: SearchInputProps) => {
+export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputProps<T>) => {
   const {
     options,
     value,
@@ -92,7 +92,7 @@ export const SearchInput = ({ responsive, ...rest }: SearchInputProps) => {
     name,
     style,
     onClickResult,
-  } = useResponsiveProps<SearchInputProps>(rest, responsive);
+  } = useResponsiveProps<SearchInputProps<T>>(rest, responsive);
   const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);

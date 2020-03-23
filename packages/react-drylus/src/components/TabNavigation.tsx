@@ -121,7 +121,7 @@ const styles = {
   `,
 };
 
-interface TabNavigationOption extends Option {
+export interface TabNavigationOption<T> extends Option<T> {
   /** Shows a small number beside the tab */
   bullet?: number;
 
@@ -132,15 +132,15 @@ interface TabNavigationOption extends Option {
   loading?: boolean;
 }
 
-interface TabNavigationProps {
+export interface TabNavigationProps<T> {
   /** Determines the tabs which will be rendered */
-  options: Array<TabNavigationOption>;
+  options: Array<TabNavigationOption<T>>;
 
   /** Determines which value is currently active */
-  value?: TabNavigationOption['value'];
+  value?: TabNavigationOption<T>['value'];
 
   /** Triggered when a control is clicked */
-  onChange?: (value: TabNavigationOption['value']) => void;
+  onChange?: (value: TabNavigationOption<T>['value']) => void;
 
   /**
    * If true, the tabs are rendered in a vertical fashion, by default they take the full width of the container
@@ -155,15 +155,15 @@ interface TabNavigationProps {
   style?: Style;
 }
 
-export const TabNavigation = ({
+export const TabNavigation = <T extends any>({
   value,
   onChange,
   options,
   vertical = false,
   linkComponent: Link,
   style,
-}: TabNavigationProps) => {
-  const renderOption = (option: TabNavigationOption) => (
+}: TabNavigationProps<T>) => {
+  const renderOption = (option: TabNavigationOption<T>) => (
     <div
       style={style}
       key={String(option.value)}

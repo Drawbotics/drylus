@@ -80,7 +80,7 @@ const styles = {
   `,
 };
 
-interface SegmentedControlOption extends Option {
+export interface SegmentedControlOption<T> extends Option<T> {
   /** If given, the control shows a value in a Badge */
   bullet?: number;
 
@@ -91,21 +91,26 @@ interface SegmentedControlOption extends Option {
   loading?: boolean;
 }
 
-interface SegmentedControlProps {
+export interface SegmentedControlProps<T> {
   /** Determines the controls which will be rendered */
-  options: Array<SegmentedControlOption>;
+  options: Array<SegmentedControlOption<T>>;
 
   /** Determines which value is currently active */
-  value: SegmentedControlOption['value'];
+  value: SegmentedControlOption<T>['value'];
 
   /** Triggered when a control is clicked */
-  onChange?: (value: SegmentedControlOption['value']) => void;
+  onChange?: (value: SegmentedControlOption<T>['value']) => void;
 
   /** Used for style overrides */
   style?: Style;
 }
 
-export const SegmentedControl = ({ value, onChange, options, style }: SegmentedControlProps) => {
+export const SegmentedControl = <T extends any>({
+  value,
+  onChange,
+  options,
+  style,
+}: SegmentedControlProps<T>) => {
   return (
     <div style={style} className={styles.root}>
       {options.map((option) => (

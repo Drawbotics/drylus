@@ -159,7 +159,7 @@ const styles = {
   `,
 };
 
-interface InputProps {
+export interface InputProps {
   /** Value displayed in the field */
   value: number | string;
 
@@ -212,7 +212,7 @@ interface InputProps {
   [x: string]: any;
 }
 
-interface RawInputProps extends InputProps {
+export interface RawInputProps extends InputProps {
   inputRef?: React.Ref<HTMLInputElement>;
   extraLeftPadding?: number;
 }

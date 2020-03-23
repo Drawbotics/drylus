@@ -43,13 +43,13 @@ const styles = {
   `,
 };
 
-interface Crumb {
+export interface Crumb {
   label: string;
   url?: string;
   active?: boolean;
 }
 
-interface BreadcrumbsProps {
+export interface BreadcrumbsProps {
   /** Array of objects with properties: label (text), url (link to page), active (if crumb is current page) */
   crumbs: Array<Crumb>;
 

@@ -69,7 +69,7 @@ const styles = {
   `,
 };
 
-interface TagProps {
+export interface TagProps {
   children: string;
 
   /** @deprecated use color instead */

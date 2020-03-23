@@ -85,7 +85,7 @@ const styles = {
   `,
 };
 
-interface TextAreaProps {
+export interface TextAreaProps {
   /** Value displayed in the field */
   value: string | number;
 
@@ -129,7 +129,7 @@ interface TextAreaProps {
   [x: string]: any;
 }
 
-interface RawTextAreaProps extends TextAreaProps {
+export interface RawTextAreaProps extends TextAreaProps {
   inputRef?: React.Ref<HTMLTextAreaElement>;
 }
 

@@ -77,7 +77,7 @@ const styles = {
   `,
 };
 
-interface LayoutProps {
+export interface LayoutProps {
   /** Children can be of any type. You can pass another Layout if needed as well */
   children: React.ReactNode;
 

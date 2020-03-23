@@ -50,7 +50,7 @@ const styles = {
   `,
 };
 
-interface PopoverContentProps {
+export interface PopoverContentProps {
   title: string;
   subtitle?: string;
 }
@@ -78,7 +78,7 @@ const PopoverContent = ({ title, subtitle }: PopoverContentProps) => {
   );
 };
 
-interface Marker {
+export interface Marker {
   label?: React.ReactNode;
   title?: string;
   subtitle?: string;
@@ -89,7 +89,7 @@ interface Marker {
   options?: any;
 }
 
-interface MapProps {
+export interface MapProps {
   /**
    * Determines the height of the map in pixels
    * @default 300

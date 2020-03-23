@@ -14,7 +14,7 @@ const styles = {
   `,
 };
 
-interface ButtonLinkProps extends ButtonProps {}
+export interface ButtonLinkProps extends ButtonProps {}
 
 export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
   const {

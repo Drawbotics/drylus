@@ -35,7 +35,7 @@ const styles = {
   `,
 };
 
-interface CollapsibleProps {
+export interface CollapsibleProps {
   /** Shown on the left side as a label */
   title: React.ReactNode;
 

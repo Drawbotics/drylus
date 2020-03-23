@@ -169,7 +169,7 @@ const styles = {
   `,
 };
 
-interface BaseDrawerProps {
+export interface BaseDrawerProps {
   /** Content rendered within the drawer */
   children: React.ReactNode;
 
@@ -221,7 +221,7 @@ export const BaseDrawer = ({ children, onClickClose, footer, title, style }: Bas
   );
 };
 
-interface DrawerProps extends BaseDrawerProps {
+export interface DrawerProps extends BaseDrawerProps {
   /** Determines if the drawer is visible or not */
   visible: boolean;
 
