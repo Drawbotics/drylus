@@ -177,7 +177,10 @@ interface CheckboxProps {
    * Size of the checkbox. Can be large or default
    * @default Size.DEFAULT
    */
-  size?: Size.LARGE | Size.DEFAULT;
+  size?: Exclude<
+    Size,
+    Size.EXTRA_SMALL | Size.SMALL | Size.EXTRA_LARGE | Size.HUGE | Size.EXTRA_HUGE | Size.MASSIVE
+  >;
 
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder?: boolean;
