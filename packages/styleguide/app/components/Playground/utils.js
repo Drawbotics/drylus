@@ -1,5 +1,4 @@
 import flow from 'lodash/flow';
-import last from 'lodash/last';
 import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import React from 'react';
@@ -96,6 +95,18 @@ export function recursiveMdxTransform(tree, target) {
   return mdxTransform(tree);
 }
 
+function  _getInterfaceDescription(name, docs) {
+
+  const flattenedProps = docs.children.reduce((memo, child) => {
+    const propDescriptions = child?.children?.filter((c) => c.name.endsWith('Props')) ?? [];
+    return [...memo, ...propDescriptions];
+  }, []);
+
+  const propsInterfaceName = `${name}Props`;
+  return flattenedProps.find((child) => child.name === propsInterfaceName);
+}
+
+
 function _getDefault(prop) {
   const def = prop.comment?.tags?.find((t) => t.tag === 'default');
   return def ? def.text : null;
@@ -106,10 +117,19 @@ function _getDeprecation(prop) {
   return deprecation ? deprecation.text : null;
 }
 
-function _getValuesForEnum(enumName, docs) {
+function _getValuesForEnum(enumName, docs, parentComponentName) {
   const moduleName = `"react-drylus/src/enums/${enumName}"`;
-  const doc = docs.children.find((module) => module.name === moduleName);
-  return doc.children[0].children.map((v) => `${enumName}.${v.name}`);
+  let doc;
+  doc = docs.children.find((module) => module.name === moduleName);
+
+  if (doc == null) {
+    const parentModule = docs.children.find((module) => module.name.includes(parentComponentName));
+    const doc = parentModule.children.find((c) => c.name.includes(enumName));
+    return doc.children.map((v) => `${enumName}.${v.name}`);
+  }
+  else {
+    return doc.children[0].children.map((v) => `${enumName}.${v.name}`);
+  }
 }
 
 function _computeExclude(type, docs) {
@@ -129,7 +149,7 @@ function _computeExclude(type, docs) {
   };
 }
 
-function _getType(type, docs) {
+function _getType(type, docs, componentName) {
   console.log('Type: ', type)
   if (type.type === 'instrinsic') {
     return {
@@ -154,7 +174,7 @@ function _getType(type, docs) {
     }
   }
 
-  if (type.type === 'reflection') {
+  if (type.type === 'reflection') { // TODO: Differentiate objects and functions
     return {
       type: 'function',
       name: 'func',
@@ -169,7 +189,7 @@ function _getType(type, docs) {
     return {
       type: 'enum',
       name: type.name,
-      values: _getValuesForEnum(type.name, docs),
+      values: _getValuesForEnum(type.name, docs, componentName),
     };
   }
   else if (type.type === 'union') {
@@ -188,10 +208,7 @@ function _getType(type, docs) {
       }
     }
     if (potentialTypes.length === 1) {
-      return {
-        type: potentialTypes[0],
-        name: potentialTypes[0], // TODO  make recursive
-      };
+      return _getType(potentialTypes[0])
     }
     return {
       type: 'union',
@@ -206,36 +223,24 @@ function _getType(type, docs) {
     };
   }
   else {
-    console.log('final else')
     return { name: type.name};
   }
 }
 
 export function generateDocs(componentName, docs) {
-  const { children } = docs;
-  console.log(children);
-
-  const componentDescription = children.find(
-    (child) => last(child.name.replace(/"/g, '').split('/')) === componentName,
-  );
-
-  const propsInterfaceName = `${componentName}Props`;
-  const interfaceDescription = componentDescription.children.find(
-    (child) => child.name === propsInterfaceName,
-  );
+  const interfaceDescription = _getInterfaceDescription(componentName, docs);
 
   if (interfaceDescription == null) {
     return null;
   }
+  console.log(interfaceDescription)
 
-
-  const res = interfaceDescription.children.reduce((props, prop) => {
-    console.log(prop);
+  const res = interfaceDescription.children.slice(0, 5).reduce((props, prop) => {
     return {
       ...props,
       [prop.name]: {
         required: !prop.flags?.isOptional,
-        type: _getType(prop.type, docs),
+        type: _getType(prop.type, docs, componentName),
         deprecation: _getDeprecation(prop),
         defaultValue: _getDefault(prop),
         description:  prop.comment?.shortText || '',
