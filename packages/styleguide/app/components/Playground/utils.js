@@ -154,6 +154,7 @@ function _getType(type, docs, componentName) {
   if (type.type === 'instrinsic') {
     return {
       type: type.name,
+      name: type.name,
     };
   }
 
@@ -208,7 +209,7 @@ function _getType(type, docs, componentName) {
       }
     }
     if (potentialTypes.length === 1) {
-      return _getType(potentialTypes[0])
+      return _getType(type.types.find((t) => t.name === potentialTypes[0]));
     }
     return {
       type: 'union',
@@ -235,7 +236,7 @@ export function generateDocs(componentName, docs) {
   }
   console.log(interfaceDescription)
 
-  const res = interfaceDescription.children.slice(0, 5).reduce((props, prop) => {
+  const res = interfaceDescription.children.slice(3, 4).reduce((props, prop) => {
     return {
       ...props,
       [prop.name]: {
