@@ -764,7 +764,7 @@ export interface TableProps {
   isLoading?: boolean;
 
   /** Triggered when a row is clicked, returns the given data object for that row. If used with nested tables, it will only return the root row object value */
-  onClickRow?: () => TableEntry;
+  onClickRow?: (row: TableEntry) => void;
 
   /** Will set the row with the same `id` property to "highlighted", useful when working with data generated tables */
   activeRow?: TableEntry['id'];
