@@ -48,8 +48,23 @@ function generateJSFunction(file) {
   fs.writeFileSync(file.replace('.css', '.js'), escapedContent);
 }
 
+function generateTSType(targetFile, iconsFolder) {
+  const icons = fs.readdirSync(iconsFolder);
+  const iconNames = icons.map((fileName) => fileName.replace('.svg', ''));
+  const list = iconNames.map((name) => `"${name}"`).join(' | ');
+  const types = iconNames.map((name) => `"${camelCase(name)}"`).join(' | ');
+
+  const finalContent = `
+    export type Icons = ${list};
+    export type IconKeys = ${types};
+  `;
+
+  fs.writeFileSync(targetFile, finalContent, { flag: 'a' });
+}
+
 module.exports = {
   setFontSize,
   generateJSFunction,
   generateObjectMappings,
+  generateTSType,
 };

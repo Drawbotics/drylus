@@ -1,4 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
+import { IconKeys, Icons as IconTypes } from '@drawbotics/icons/dist/drycons';
 import { generateIconStyles, mapping } from '@drawbotics/icons/dist/drycons.js';
 import packageJson from '@drawbotics/icons/package.json';
 import { css, cx, injectGlobal } from 'emotion';
@@ -46,11 +47,11 @@ const styles = {
   `,
 };
 
-export const Icons: Record<string, string> = mapping;
+export const Icons: Record<IconKeys, IconTypes> = mapping;
 
 export interface IconProps {
   /** Name of the icon */
-  name: keyof typeof Icons;
+  name: IconTypes;
 
   /** Makes icon T H I C C */
   bold?: boolean;
