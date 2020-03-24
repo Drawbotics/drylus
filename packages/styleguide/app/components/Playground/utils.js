@@ -149,6 +149,15 @@ function _computeExclude(type, docs) {
   };
 }
 
+function _computeObject(properties) {
+  return properties.reduce((memo, property) => {
+    return {
+      ...memo,
+      [property.name]: _getType(property.type),
+    }
+  }, {});
+}
+
 function _getType(type, docs, componentName) {
   console.log('Type: ', type)
   if (type.type === 'instrinsic') {
@@ -157,8 +166,11 @@ function _getType(type, docs, componentName) {
       name: type.name,
     };
   }
+  if (type.type === 'stringLiteral') {
+    return type.value;
+  }
 
-  if (type.type === 'reference') {
+  if (type.type === 'reference') { // TODO: Differentiate Enums, internal objects, and objects imported from 3rd party libraries
     if (type.name === 'Style') {
       return {
         type: 'shape',
@@ -176,10 +188,21 @@ function _getType(type, docs, componentName) {
   }
 
   if (type.type === 'reflection') { // TODO: Differentiate objects and functions
-    return {
-      type: 'function',
-      name: 'func',
-      signature: `() => void`, // TODO infer function signature
+    if (type.declaration.signatures != null) {
+      console.log("Entered with: ", type.declaration.signatures)
+      return {
+        type: 'function',
+        name: 'func',
+        signature: `() => void`, // TODO infer function signature
+      }
+    }
+    else {
+      console.log("Entered with shape: ")
+      return {
+        type: 'object',
+        name: 'shape',
+        values: _computeObject(type.declaration.children),
+      };
     }
   }
 
@@ -201,19 +224,11 @@ function _getType(type, docs, componentName) {
         name: 'boolean',
       };
     }
-    if (type?.types.map((t) => t.type).includes('reflection')) {
-      return {
-        type: 'function',
-        name: 'func',
-        signature: `() => void`, // TODO infer function signature
-      }
-    }
     if (potentialTypes.length === 1) {
       return _getType(type.types.find((t) => t.name === potentialTypes[0]));
     }
     return {
       type: 'union',
-      name: 'union',
       values: type.types.map((t) => _getType(t, docs))
     }
   }
@@ -224,6 +239,7 @@ function _getType(type, docs, componentName) {
     };
   }
   else {
+    console.log("Final else");
     return { name: type.name};
   }
 }
@@ -236,7 +252,7 @@ export function generateDocs(componentName, docs) {
   }
   console.log(interfaceDescription)
 
-  const res = interfaceDescription.children.slice(3, 4).reduce((props, prop) => {
+  const res = interfaceDescription.children.slice(0, 1).reduce((props, prop) => {
     return {
       ...props,
       [prop.name]: {
