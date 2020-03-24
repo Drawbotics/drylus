@@ -174,13 +174,16 @@ let parsingStack = [];
 function _getType(type, docs, componentName) {
   console.log(parsingStack)
   if (type.name !== 'Array' && parsingStack.includes(type.name)) {
-    console.log('Found duplicate: ', type.name)
     return type.name;
   }
   else {
-    parsingStack.push(type.name);
-    const res = __getType(type, docs, componentName)
-    parsingStack.pop();
+    let mustPop = false
+    if (type.name != null) {
+      mustPop = true;
+      parsingStack.push(type.name);
+    }
+    const res = __getType(type, docs, componentName);
+    if (mustPop) parsingStack.pop();
     return res;
   }
 }
@@ -204,7 +207,7 @@ function __getType(type, docs, componentName) {
     };
   }
 
-  if (type.type === 'reference') { // TODO: Differentiate Enums, internal objects, and objects imported from 3rd party libraries
+  if (type.type === 'reference') {
     if (type.name === 'Array') {
       return {
         type: 'array',
@@ -303,7 +306,7 @@ export function generateDocs(componentName, docs) {
   }
   // console.log(docs)
 
-  const res = interfaceDescription.children.slice(5, 6).reduce((props, prop) => {
+  const res = interfaceDescription.children.reduce((props, prop) => {
     return {
       ...props,
       [prop.name]: {
