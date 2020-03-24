@@ -1,4 +1,4 @@
-import sv from '@drawbotics/drylus-style-vars';
+import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 import { Responsive, Style } from 'src/types';
@@ -47,24 +47,24 @@ const styles = {
     }
   `,
   red: css`
-    color: ${sv.white};
-    background: ${sv.red};
+    background: ${sv.redLight};
+    color: ${sv.redDark};
   `,
   blue: css`
-    color: ${sv.white};
-    background: ${sv.blue};
+    background: ${sv.blueLight};
+    color: ${sv.blueDark};
   `,
   green: css`
-    color: ${sv.white};
-    background: ${sv.green};
+    background: ${sv.greenLight};
+    color: ${sv.greenDark};
   `,
   orange: css`
-    color: ${sv.white};
-    background: ${sv.orange};
+    background: ${sv.orangeLight};
+    color: ${sv.orangeDark};
   `,
   brand: css`
-    color: ${sv.white};
-    background: ${sv.brand};
+    background: ${sv.brandLight};
+    color: ${sv.brandDark};
   `,
 };
 
@@ -81,7 +81,7 @@ export interface RoundIconProps {
   /** @deprecated use color instead */
   category?: Exclude<Category, Category.PRIMARY>;
 
-  color?: Exclude<Color, Color.PRIMARY>;
+  color?: Exclude<Color, Color.PRIMARY> | string;
 
   /** Used for style overrides */
   style?: Style;
@@ -96,16 +96,25 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
     size = Size.DEFAULT,
     category,
     bold,
-    style = {},
+    style: _style = {},
     color: _color,
   } = useResponsiveProps<RoundIconProps>(rest, responsive);
 
   const customSize = typeof size === 'number';
   const color = category ? categoryEnumToColor(category) : _color;
+  const customColor = color != null && !Object.values(Color).includes(color as Color);
+  const style = customColor
+    ? {
+        ..._style,
+        color,
+        background: fade(color as string, 30),
+      }
+    : _style;
   return (
     <div
       className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
+        [styles[!customColor ? getEnumAsClass<typeof styles>(color as Color) : 'root']]:
+          color != null,
         [styles[customSize ? 'root' : getEnumAsClass<typeof styles>(size as Size)]]:
           size != null && !customSize,
         [styles.iconInherit]: customSize,
