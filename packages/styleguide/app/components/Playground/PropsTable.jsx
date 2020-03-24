@@ -82,12 +82,12 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                   {/* Type */}
                   <TCell>
                     {do {
-                      if (_isEnum(prop) || _isUnion(prop)) {
+                      if  (prop.type.values != null) {
                         <Tooltip
                           content={<PropsInfo props={prop.type.values} />}
                           side={Position.RIGHT}>
                           <Flex justify={FlexJustify.START}>
-                            <FlexItem>{prop.type.name}</FlexItem>
+                            <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
                             <FlexItem>
                               <Margin size={{ left: Size.EXTRA_SMALL }}>
                                 <span style={{ color: sv.colorSecondary }}>
@@ -98,7 +98,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                           </Flex>
                         </Tooltip>;
                       } else {
-                        prop.type.name;
+                        prop.type.name ?? prop.type.type;
                       }
                     }}
                   </TCell>
