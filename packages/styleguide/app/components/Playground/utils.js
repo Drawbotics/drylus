@@ -149,16 +149,43 @@ function _computeExclude(type, docs) {
   };
 }
 
-function _computeObject(properties) {
+function _computeObject(properties, docs, parentComponentName) {
   return properties.reduce((memo, property) => {
     return {
       ...memo,
-      [property.name]: _getType(property.type),
+      [property.name]: _getType(property.type, docs, parentComponentName),
     }
   }, {});
 }
 
+function _resolveReference(ref, docs, parentComponentName) {
+  const parentModule = docs.children.find((module) => module.name.includes(parentComponentName));
+  const doc = parentModule.children.find((c) => c.name.includes(ref.name));
+  console.log("Found doc: :", doc);
+
+  if (doc.type != null) {
+    return _getType(doc.type, docs, parentComponentName);
+  }
+  else return _computeObject(doc.children, docs, parentComponentName)
+}
+
+let parsingStack = [];
+
 function _getType(type, docs, componentName) {
+  console.log(parsingStack)
+  if (type.name !== 'Array' && parsingStack.includes(type.name)) {
+    console.log('Found duplicate: ', type.name)
+    return type.name;
+  }
+  else {
+    parsingStack.push(type.name);
+    const res = __getType(type, docs, componentName)
+    parsingStack.pop();
+    return res;
+  }
+}
+
+function __getType(type, docs, componentName) {
   console.log('Type: ', type)
   if (type.type === 'instrinsic') {
     return {
@@ -170,7 +197,20 @@ function _getType(type, docs, componentName) {
     return type.value;
   }
 
+  if (type.type ==='tuple') {
+    return {
+      type: 'tuple',
+      values: type.elements.map((e) => _getType(e, docs, componentName)),
+    };
+  }
+
   if (type.type === 'reference') { // TODO: Differentiate Enums, internal objects, and objects imported from 3rd party libraries
+    if (type.name === 'Array') {
+      return {
+        type: 'array',
+        values: type.typeArguments.map((v) => _getType(v, docs, componentName))
+      }
+    }
     if (type.name === 'Style') {
       return {
         type: 'shape',
@@ -178,12 +218,23 @@ function _getType(type, docs, componentName) {
         // TODO: add the shape and display it in a tooltip
       };
     }
-
+    if (type.name === 'ReactElement') {
+      let returnType = {
+        type: type.name,
+      }
+      if (type.typeArguments != null) {
+        returnType.query = type.typeArguments[0].queryType.name;
+      }
+      return returnType;
+    }
     if (type.name === 'React.ReactNode') {
       return {
         type: 'React node',
         name: 'React node',
       };
+    }
+    else {
+      return { ..._resolveReference(type, docs, componentName), name: type.name }
     }
   }
 
@@ -225,11 +276,11 @@ function _getType(type, docs, componentName) {
       };
     }
     if (potentialTypes.length === 1) {
-      return _getType(type.types.find((t) => t.name === potentialTypes[0]));
+      return _getType(type.types.find((t) => t.name === potentialTypes[0]), docs, componentName);
     }
     return {
       type: 'union',
-      values: type.types.map((t) => _getType(t, docs))
+      values: type.types.map((t) => _getType(t, docs, componentName))
     }
   }
   else if (type?.operator === 'keyof') {
@@ -250,9 +301,9 @@ export function generateDocs(componentName, docs) {
   if (interfaceDescription == null) {
     return null;
   }
-  console.log(interfaceDescription)
+  // console.log(docs)
 
-  const res = interfaceDescription.children.slice(0, 1).reduce((props, prop) => {
+  const res = interfaceDescription.children.slice(5, 6).reduce((props, prop) => {
     return {
       ...props,
       [prop.name]: {
