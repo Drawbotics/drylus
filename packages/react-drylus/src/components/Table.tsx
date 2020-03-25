@@ -870,7 +870,11 @@ export const Table = ({
       className={cx(styles.root, {
         [styles.fullWidth]: fullWidth,
         [styles.leftPadded]:
-          (hasNestedData || withNesting || sortableBy) && screenSize > ScreenSizes.L,
+          (hasNestedData ||
+            withNesting ||
+            (sortableBy &&
+              sortableBy.includes(typeof header[0] === 'string' ? header[0] : header[0].value))) &&
+          screenSize > ScreenSizes.L,
         [styles.highlighted]: highlighted && !(hasNestedData || withNesting),
       })}>
       <RowsContext.Provider value={[rowsStates, handleSetRowState]}>
