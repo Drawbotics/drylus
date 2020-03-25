@@ -95,7 +95,7 @@ export function recursiveMdxTransform(tree, target) {
   return mdxTransform(tree);
 }
 
-function  _getInterfaceDescription(name, docs) {
+function _getInterfaceDescription(name, docs) {
 
   const flattenedProps = docs.children.reduce((memo, child) => {
     const propDescriptions = child?.children?.filter((c) => c.name.endsWith('Props')) ?? [];
@@ -158,10 +158,22 @@ function _computeObject(properties, docs, parentComponentName) {
   }, {});
 }
 
+function _getFunctionSignature(type) {
+  const parameters = type.declaration.signatures[0]?.parameters.map((p) => {
+    return `${p.name}: ${p.type.name}`;
+  }).join(', ')
+  return `(${parameters}) => ${type.declaration.signatures[0].type.name}`
+}
+
 function _resolveReference(ref, docs, parentComponentName) {
   const parentModule = docs.children.find((module) => module.name.includes(parentComponentName));
-  const doc = parentModule.children.find((c) => c.name.includes(ref.name));
+  let doc = parentModule.children.find((c) => c.name.includes(ref.name));
   console.log("Found doc: :", doc);
+
+  if (doc == null) {
+    const flattened = docs.children.reduce((memo, module) => [...memo, ...(module?.children ?? [])], []);
+    doc = flattened.find((entity) => entity?.name === ref.name);
+  }
 
   if (doc.type != null) {
     return _getType(doc.type, docs, parentComponentName);
@@ -207,6 +219,7 @@ function __getType(type, docs, componentName) {
     };
   }
 
+  // Reference
   if (type.type === 'reference') {
     if (type.name === 'Exclude') {
       return _computeExclude(type, docs);
@@ -221,7 +234,9 @@ function __getType(type, docs, componentName) {
       return {
         type: 'shape',
         name: 'Style',
-        // TODO: add the shape and display it in a tooltip
+        values: {
+          'CssProperty': 'string',
+        },
       };
     }
     if (type.name === 'ReactElement') {
@@ -236,7 +251,6 @@ function __getType(type, docs, componentName) {
     if (type.name === 'React.ReactNode') {
       return {
         type: 'React node',
-        name: 'React node',
       };
     }
     else {
@@ -244,13 +258,14 @@ function __getType(type, docs, componentName) {
     }
   }
 
+  // Reflection
   if (type.type === 'reflection') { // TODO: Differentiate objects and functions
     if (type.declaration.signatures != null) {
       console.log("Entered with: ", type.declaration.signatures)
       return {
         type: 'function',
         name: 'func',
-        signature: `() => void`, // TODO infer function signature
+        values: _getFunctionSignature(type)
       }
     }
     else {
@@ -262,6 +277,8 @@ function __getType(type, docs, componentName) {
       };
     }
   }
+
+  // TODO: move me
   if (type.type === 'reference' && !type.typeArguments && type.name !== 'Record') {
     return {
       type: 'enum',
@@ -269,6 +286,8 @@ function __getType(type, docs, componentName) {
       values: _getValuesForEnum(type.name, docs, componentName),
     };
   }
+
+  // Union
   else if (type.type === 'union') {
     const potentialTypes = type?.types?.filter((t) => t.name !== 'undefined').map((t) => t.name);
     if (potentialTypes.includes('true') && potentialTypes.includes('false')) {
@@ -298,6 +317,7 @@ function __getType(type, docs, componentName) {
 }
 
 export function generateDocs(componentName, docs) {
+  // console.log(docs.children)
   const interfaceDescription = _getInterfaceDescription(componentName, docs);
 
   if (interfaceDescription == null) {
@@ -305,7 +325,7 @@ export function generateDocs(componentName, docs) {
   }
   // console.log(docs)
 
-  const res = interfaceDescription.children.slice(0, 1).reduce((props, prop) => {
+  const res = interfaceDescription.children.slice(3, 4).reduce((props, prop) => {
     return {
       ...props,
       [prop.name]: {
