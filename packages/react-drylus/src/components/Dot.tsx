@@ -1,6 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
+import { Style } from 'src/types';
 
 import { Category, Color } from '../enums';
 import { Deprecated, categoryEnumToColor, getEnumAsClass } from '../utils';
@@ -38,7 +39,7 @@ interface DotProps {
   category?: Category;
 
   /** Used for style overrides */
-  style?: Record<string, any>;
+  style?: Style;
 
   color?: Color;
 }
