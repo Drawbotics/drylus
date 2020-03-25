@@ -160,7 +160,7 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
 
   const invalidChildren = React.Children.map(children, (x) => x).some(
     (child) =>
-      child != null && (child.type !== FlexItem || !child.type.toString().includes('fragment')),
+      child != null && child.type !== FlexItem && !child.type.toString().includes('fragment'),
   );
   if (invalidChildren) {
     console.warn('Flex should only accept FlexItem as children');
