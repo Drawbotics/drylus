@@ -2,6 +2,7 @@ import flow from 'lodash/flow';
 import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import React from 'react';
+import { shape } from 'prop-types';
 
 function removeHash(string) {
   return string.replace(/(css-).*?(-)/gm, '');
@@ -159,16 +160,20 @@ function _computeObject(properties, docs, parentComponentName) {
 }
 
 function _getFunctionSignature(type) {
-  const parameters = type.declaration.signatures[0]?.parameters.map((p) => {
+  const parameters = type.declaration.signatures[0]?.parameters?.map((p) => {
     return `${p.name}: ${p.type.name}`;
   }).join(', ')
-  return `(${parameters}) => ${type.declaration.signatures[0].type.name}`
+  return `(${parameters || ''}) => ${type.declaration.signatures[0].type.name}`
+}
+
+function _getResponsiveDoc(docs) {
+  const flattened = docs.children.reduce((memo, module) => [...memo, ...(module?.children ?? [])], []);
+  return flattened.find((entity) => entity?.name === 'Responsive' && entity?.kindString === 'Interface');
 }
 
 function _resolveReference(ref, docs, parentComponentName) {
   const parentModule = docs.children.find((module) => module.name.includes(parentComponentName));
-  let doc = parentModule.children.find((c) => c.name.includes(ref.name));
-  console.log("Found doc: :", doc);
+  let doc = parentModule?.children.find((c) => c.name.includes(ref.name));
 
   if (doc == null) {
     const flattened = docs.children.reduce((memo, module) => [...memo, ...(module?.children ?? [])], []);
@@ -178,14 +183,21 @@ function _resolveReference(ref, docs, parentComponentName) {
   if (doc.type != null) {
     return _getType(doc.type, docs, parentComponentName);
   }
+  else if (doc?.kindString === 'Enumeration') {
+    return {
+      type: 'enum',
+      name: doc.name,
+      values: doc.children.map((v) => `${doc.name}.${v.name}`),
+    };
+  }
   else return _computeObject(doc.children, docs, parentComponentName)
 }
 
 let parsingStack = [];
 
 function _getType(type, docs, componentName) {
-  console.log(parsingStack)
-  if (type.name !== 'Array' && parsingStack.includes(type.name)) {
+  console.log('Type: ', type)
+  if (type.name !== 'Array' && type?.kindString !== 'Enumeration' && parsingStack.includes(type.name)) {
     return type.name;
   }
   else {
@@ -201,7 +213,6 @@ function _getType(type, docs, componentName) {
 }
 
 function __getType(type, docs, componentName) {
-  console.log('Type: ', type)
   if (type.type === 'instrinsic') {
     return {
       type: type.name,
@@ -230,7 +241,7 @@ function __getType(type, docs, componentName) {
         values: type.typeArguments.map((v) => _getType(v, docs, componentName))
       }
     }
-    if (type.name === 'Style') {
+    else if (type.name === 'Style') {
       return {
         type: 'shape',
         name: 'Style',
@@ -239,18 +250,27 @@ function __getType(type, docs, componentName) {
         },
       };
     }
-    if (type.name === 'ReactElement') {
+    else if (type.name.includes('ReactElement')) {
       let returnType = {
-        type: type.name,
+        type: 'ReactElement',
       }
       if (type.typeArguments != null) {
         returnType.query = type.typeArguments[0].queryType.name;
+        returnType.name = `ReactElement<${type.typeArguments[0].queryType.name}>`;
       }
       return returnType;
     }
-    if (type.name === 'React.ReactNode') {
+    else if (type.name === 'React.ReactNode') {
       return {
         type: 'React node',
+      };
+    }
+    else if (type.name === 'Responsive') {
+      const doc = _getResponsiveDoc(docs);
+      return {
+        type: shape,
+        name: 'Responsive',
+        values: doc.children.reduce((memo, property) => ({...memo, [property.name]: `Partial<${componentName}Props>`}), {}),
       };
     }
     else {
@@ -259,9 +279,8 @@ function __getType(type, docs, componentName) {
   }
 
   // Reflection
-  if (type.type === 'reflection') { // TODO: Differentiate objects and functions
+  if (type.type === 'reflection') {
     if (type.declaration.signatures != null) {
-      console.log("Entered with: ", type.declaration.signatures)
       return {
         type: 'function',
         name: 'func',
@@ -269,7 +288,6 @@ function __getType(type, docs, componentName) {
       }
     }
     else {
-      console.log("Entered with shape: ")
       return {
         type: 'object',
         name: 'shape',
@@ -317,6 +335,7 @@ function __getType(type, docs, componentName) {
 }
 
 export function generateDocs(componentName, docs) {
+  console.log('Starting to parse')
   // console.log(docs.children)
   const interfaceDescription = _getInterfaceDescription(componentName, docs);
 
@@ -325,7 +344,7 @@ export function generateDocs(componentName, docs) {
   }
   // console.log(docs)
 
-  const res = interfaceDescription.children.slice(3, 4).reduce((props, prop) => {
+  const res = interfaceDescription.children.slice(0).reduce((props, prop) => {
     return {
       ...props,
       [prop.name]: {
