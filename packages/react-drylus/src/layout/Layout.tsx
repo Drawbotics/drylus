@@ -73,7 +73,7 @@ const styles = {
     }
   `,
   scrollable: css`
-    overflow: scroll;
+    overflow: auto;
   `,
 };
 

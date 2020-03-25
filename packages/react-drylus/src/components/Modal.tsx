@@ -48,7 +48,7 @@ const styles = {
   `,
   alignTop: css`
     align-items: flex-start;
-    overflow: scroll;
+    overflow: auto;
   `,
   root: css`
     position: relative;
@@ -331,15 +331,11 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     }
   }, [visible]);
 
-  useEffect(
-    () =>
-      visible
-        ? () => {
-            setTimeout(handleWindowResize, 300);
-          }
-        : undefined,
-    [visible],
-  );
+  useEffect(() => {
+    if (visible) {
+      setTimeout(handleWindowResize, 300);
+    }
+  }, [visible]);
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowResize);
