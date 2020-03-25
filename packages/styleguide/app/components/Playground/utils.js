@@ -208,6 +208,9 @@ function __getType(type, docs, componentName) {
   }
 
   if (type.type === 'reference') {
+    if (type.name === 'Exclude') {
+      return _computeExclude(type, docs);
+    }
     if (type.name === 'Array') {
       return {
         type: 'array',
@@ -259,10 +262,6 @@ function __getType(type, docs, componentName) {
       };
     }
   }
-
-  if (type.name === 'Exclude') {
-    return _computeExclude(type, docs);
-  }
   if (type.type === 'reference' && !type.typeArguments && type.name !== 'Record') {
     return {
       type: 'enum',
@@ -306,7 +305,7 @@ export function generateDocs(componentName, docs) {
   }
   // console.log(docs)
 
-  const res = interfaceDescription.children.reduce((props, prop) => {
+  const res = interfaceDescription.children.slice(0, 1).reduce((props, prop) => {
     return {
       ...props,
       [prop.name]: {
