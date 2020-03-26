@@ -131,7 +131,7 @@ interface TextProps {
 
   /** Options to change the way the date is displayed, if provided. showTime toggles display of hour/minutes, format for dayjs overrides */
   dateOptions?: {
-    showTime?: ShowDateTime.DEFAULT | ShowDateTime.NEVER | ShowDateTime.ALWAYS;
+    showTime?: ShowDateTime;
     asArchive?: boolean;
     format?: any;
   };

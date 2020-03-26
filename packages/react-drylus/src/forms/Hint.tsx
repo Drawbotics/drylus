@@ -21,7 +21,10 @@ interface HintProps {
   /** Text displayed by the hint */
   children: React.ReactNode;
 
-  category?: Category.DANGER;
+  category?: Exclude<
+    Category,
+    Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.PRIMARY
+  >;
 
   /** Used for style overrides */
   style?: Style;
