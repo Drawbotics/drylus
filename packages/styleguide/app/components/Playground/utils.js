@@ -1,3 +1,5 @@
+/* eslint-disable no-use-before-define */
+
 import flow from 'lodash/flow';
 import merge from 'lodash/merge';
 import omit from 'lodash/omit';
@@ -107,7 +109,6 @@ function _getInterfaceDescription(name, docs) {
   return flattenedProps.find((child) => child.name === propsInterfaceName);
 }
 
-
 function _getDefault(prop) {
   const def = prop.comment?.tags?.find((t) => t.tag === 'default');
   return def ? def.text : null;
@@ -151,7 +152,7 @@ function _computeExclude(type, docs) {
 }
 
 function _computeObject(properties, docs, parentComponentName) {
-  return properties.reduce((memo, property) => {
+  return properties?.reduce((memo, property) => {
     return {
       ...memo,
       [property.name]: _getType(property.type, docs, parentComponentName),
@@ -161,7 +162,10 @@ function _computeObject(properties, docs, parentComponentName) {
 
 function _getFunctionSignature(type) {
   const parameters = type.declaration.signatures[0]?.parameters?.map((p) => {
-    return `${p.name}: ${p.type.name}`;
+    const displayType = p.type.type === 'union'
+      ? p.type.types.map((t) => t.name).join(' | ')
+      : p.type.name;
+    return `${p.name}: ${displayType}`;
   }).join(', ')
   return `(${parameters || ''}) => ${type.declaration.signatures[0].type.name}`
 }
@@ -172,17 +176,16 @@ function _getResponsiveDoc(docs) {
 }
 
 function _resolveReference(ref, docs, parentComponentName) {
-  const parentModule = docs.children.find((module) => module.name.includes(parentComponentName));
+  const parentModule = docs?.children.find((module) => module.name.includes(parentComponentName));
   let doc = parentModule?.children.find((c) => c.name.includes(ref.name));
 
   if (doc == null) {
-    const flattened = docs.children.reduce((memo, module) => [...memo, ...(module?.children ?? [])], []);
-    doc = flattened.find((entity) => entity?.name === ref.name);
+    const flattened = docs?.children.reduce((memo, module) => [...memo, ...(module?.children ?? [])], []);
+    doc = flattened?.find((entity) => entity?.name === ref.name);
   }
 
-  if (doc.type != null) {
-    return _getType(doc.type, docs, parentComponentName);
-  }
+  if (doc == null) return ref 
+  else if (doc?.type != null) return _getType(doc.type, docs, parentComponentName);
   else if (doc?.kindString === 'Enumeration') {
     return {
       type: 'enum',
@@ -190,13 +193,18 @@ function _resolveReference(ref, docs, parentComponentName) {
       values: doc.children.map((v) => `${doc.name}.${v.name}`),
     };
   }
-  else return _computeObject(doc.children, docs, parentComponentName)
+  else { 
+    return {
+      type: 'shape',
+      name: doc?.name,
+      values: _computeObject(doc.children, docs, parentComponentName),
+    };
+  }
 }
 
 let parsingStack = [];
 
 function _getType(type, docs, componentName) {
-  console.log('Type: ', type)
   if (type.name !== 'Array' && type?.kindString !== 'Enumeration' && parsingStack.includes(type.name)) {
     return type.name;
   }
@@ -274,7 +282,8 @@ function __getType(type, docs, componentName) {
       };
     }
     else {
-      return { ..._resolveReference(type, docs, componentName), name: type.name }
+      const resolved = _resolveReference(type, docs, componentName);
+      return resolved;
     }
   }
 
@@ -289,9 +298,8 @@ function __getType(type, docs, componentName) {
     }
     else {
       return {
-        type: 'object',
-        name: 'shape',
-        values: _computeObject(type.declaration.children),
+        type: 'shape',
+        values: _computeObject(type.declaration.children, docs, componentName),
       };
     }
   }
@@ -309,10 +317,7 @@ function __getType(type, docs, componentName) {
   else if (type.type === 'union') {
     const potentialTypes = type?.types?.filter((t) => t.name !== 'undefined').map((t) => t.name);
     if (potentialTypes.includes('true') && potentialTypes.includes('false')) {
-      return {
-        type: 'boolean',
-        name: 'boolean',
-      };
+      return 'boolean';
     }
     if (potentialTypes.length === 1) {
       return _getType(type.types.find((t) => t.name === potentialTypes[0]), docs, componentName);
@@ -329,20 +334,16 @@ function __getType(type, docs, componentName) {
     };
   }
   else {
-    console.log("Final else");
-    return { name: type.name};
+    return type.name;
   }
 }
 
 export function generateDocs(componentName, docs) {
-  console.log('Starting to parse')
-  // console.log(docs.children)
   const interfaceDescription = _getInterfaceDescription(componentName, docs);
 
   if (interfaceDescription == null) {
     return null;
   }
-  // console.log(docs)
 
   const res = interfaceDescription.children.slice(0).reduce((props, prop) => {
     return {

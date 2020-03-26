@@ -20,7 +20,6 @@ import docs from '@drawbotics/react-drylus/docs.json';
 import { css } from 'emotion';
 import React from 'react';
 
-// import Prop from './Prop';
 import PropsInfo from './PropsInfo';
 import { generateDocs } from './utils';
 
@@ -43,10 +42,6 @@ function _hasDeprecation(prop) {
 
 function _isEnum(prop) {
   return prop?.type?.type === 'enum';
-}
-
-function _isUnion(prop) {
-  return prop?.type?.type === 'union';
 }
 
 function capitalizeFirst(text) {
@@ -73,7 +68,6 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
             .sort()
             .map((key) => {
               const prop = props[key];
-              console.log(prop);
 
               return (
                 <TRow key={key}>
@@ -98,7 +92,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                           </Flex>
                         </Tooltip>;
                       } else {
-                        prop.type.name ?? prop.type.type;
+                        prop.type.name ?? prop.type.type ?? prop.type;
                       }
                     }}
                   </TCell>
