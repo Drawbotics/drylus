@@ -69,7 +69,7 @@ function _isFocussableComponent(component: React.ReactNode): boolean {
 }
 
 interface ActionButtonProps {
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   icon: IconType;
 }
 
@@ -93,7 +93,7 @@ export interface InlineEditProps {
 
   /**
    * If true, the component goes back to the initial state when clicking outside
-   * @default false
+   * @default true
    */
 
   exitOnClick?: boolean;
@@ -106,10 +106,11 @@ export const InlineEdit = ({
   children,
   edit,
   onClickConfirm,
-  exitOnClick = false,
+  exitOnClick = true,
   onCancel,
 }: InlineEditProps) => {
   const childrenRef = useRef<HTMLElement>();
+  const editRef = useRef<HTMLDivElement>(null);
   const childrenCSSClassCopy = useRef<DOMTokenList>();
   const childrenDisplayCopy = useRef<string>();
   const [editing, setIsEditing] = useState(false);
@@ -149,23 +150,33 @@ export const InlineEdit = ({
     }
   };
 
-  useEffect(() => {
-    const handleWindowClick = (e: Event) => {
-      if (
-        e.target !== childrenRef.current &&
-        !childrenRef.current?.contains(e.target as Node) &&
-        exitOnClick
-      ) {
-        onCancel();
-        handleExitEditing();
+  const handleWindowClick = (e: Event) => {
+    if (
+      e.target !== childrenRef.current &&
+      !childrenRef.current?.contains(e.target as Node) &&
+      e.target !== editRef.current &&
+      !editRef.current?.contains(e.target as Node) &&
+      exitOnClick
+    ) {
+      if (editing) {
+        onClickConfirm();
       }
-    };
+      handleExitEditing();
+    }
+  };
 
+  useEffect(() => {
     if (childrenRef.current != null) {
       childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
       childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
       childrenRef.current.addEventListener('click', handleMouseClick);
       window.addEventListener('click', handleWindowClick, true);
+
+      if (getComputedStyle(childrenRef.current).display !== 'none') {
+        childrenCSSClassCopy.current = Object.assign({}, childrenRef.current.classList);
+        childrenDisplayCopy.current = getComputedStyle(childrenRef.current).display;
+        childrenRef.current.classList.add(styles.inlineEditChild);
+      }
     }
 
     return () => {
@@ -174,20 +185,13 @@ export const InlineEdit = ({
       childrenRef.current?.removeEventListener('click', handleMouseClick);
       window.removeEventListener('click', handleWindowClick);
     };
-  }, []);
-
-  useEffect(() => {
-    if (childrenRef.current != null && getComputedStyle(childrenRef.current).display !== 'none') {
-      childrenCSSClassCopy.current = Object.assign({}, childrenRef.current.classList);
-      childrenDisplayCopy.current = getComputedStyle(childrenRef.current).display;
-      childrenRef.current.classList.add(styles.inlineEditChild);
-    }
   });
 
   return (
     <Fragment>
       {editing ? (
         <div
+          ref={editRef}
           style={{
             color: 'initial',
             position: 'relative',
