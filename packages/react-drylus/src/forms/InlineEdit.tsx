@@ -21,6 +21,9 @@ const styles = {
     box-shadow: 0px 0px 0px 4px ${fade(sv.neutral, 50)};
     background: ${fade(sv.neutral, 50)};
   `,
+  hidden: css`
+    display: none !important;
+  `,
   buttons: css`
     position: absolute;
     top: calc(100% + ${sv.marginExtraSmall});
@@ -56,6 +59,16 @@ function _isFocussableComponent(component: React.ReactNode): boolean {
     );
   }
   return false;
+}
+
+function _adaptDisplayValue(value?: string): React.CSSProperties {
+  if (value === 'inline') {
+    return {
+      display: 'inline-block',
+      width: '100%',
+    };
+  }
+  return {};
 }
 
 interface ActionButtonProps {
@@ -110,14 +123,14 @@ export const InlineEdit = ({
   const handleMouseClick = () => {
     if (childrenRef.current != null) {
       childrenRef.current.classList.remove(styles.hovered);
-      childrenRef.current.style.display = 'none';
+      childrenRef.current.classList.add(styles.hidden);
       setIsEditing(true);
     }
   };
 
   const handleExitEditing = () => {
     if (childrenRef.current != null) {
-      childrenRef.current.style.display = '';
+      childrenRef.current.classList.remove(styles.hidden);
       setIsEditing(false);
     }
   };
@@ -137,7 +150,7 @@ export const InlineEdit = ({
       childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
       childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
       childrenRef.current.addEventListener('click', handleMouseClick);
-      childrenCSSClassCopy.current = childrenRef.current.classList;
+      childrenCSSClassCopy.current = Object.assign({}, childrenRef.current.classList);
       childrenRef.current.classList.add(styles.inlineEditChild);
       window.addEventListener('click', handleWindowClick, true);
     }
@@ -154,7 +167,11 @@ export const InlineEdit = ({
     <Fragment>
       {editing ? (
         <div
-          style={{ color: 'initial', position: 'relative' }}
+          style={{
+            color: 'initial',
+            position: 'relative',
+            ..._adaptDisplayValue(childrenRef.current?.style.display),
+          }}
           className={childrenCSSClassCopy.current?.value}>
           {_isFocussableComponent(edit)
             ? React.cloneElement(edit as React.ReactElement, { autoFocus: true })
