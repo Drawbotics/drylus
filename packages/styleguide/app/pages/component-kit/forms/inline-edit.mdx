@@ -14,7 +14,7 @@ export const value = "Some text to edit"
 
 __Example__
 <Playground component={InlineEdit}>
-  <InlineEdit edit={<Input value={value} onChange={() => {}} />}>
+  <InlineEdit edit={<Input value={value} onChange={() => {}} autoFocus />}>
     <Text>{value}</Text>
   </InlineEdit>
 </Playground>

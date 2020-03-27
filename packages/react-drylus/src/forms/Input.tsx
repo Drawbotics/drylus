@@ -202,6 +202,9 @@ export interface InputProps {
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder?: boolean;
 
+  /** If true the input is focused automatically on mount */
+  autoFocus?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 

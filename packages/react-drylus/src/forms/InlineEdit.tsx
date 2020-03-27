@@ -2,6 +2,9 @@ import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 
+import { Icon, IconType } from '../components';
+import { Size } from '../enums';
+import { Flex, FlexItem, Margin } from '../layout';
 import { WrapperRef } from '../utils';
 
 const styles = {
@@ -17,6 +20,39 @@ const styles = {
     box-shadow: 0px 0px 0px 4px ${fade(sv.neutral, 50)};
     background: ${fade(sv.neutral, 50)};
   `,
+  buttons: css`
+    position: absolute;
+    top: calc(100% + ${sv.marginExtraSmall});
+    right: 0;
+    z-index: 999;
+  `,
+  button: css`
+    height: ${sv.marginLarge};
+    width: ${sv.marginLarge};
+    background: ${sv.neutralDarkest};
+    color: ${sv.colorPrimaryInverse};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1000px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  `,
+};
+
+interface ActionButtonProps {
+  onClick: () => void;
+  icon: IconType;
+}
+
+const ActionButton = ({ onClick, icon }: ActionButtonProps) => {
+  return (
+    <div className={styles.button} onClick={onClick}>
+      <Icon name={icon} />
+    </div>
+  );
 };
 
 export interface InlineEditProps {
@@ -30,7 +66,7 @@ export interface InlineEditProps {
   onClickConfirm: () => void;
 }
 
-export const InlineEdit = ({ children, edit }: InlineEditProps) => {
+export const InlineEdit = ({ children, edit, onClickConfirm }: InlineEditProps) => {
   const childrenRef = useRef<HTMLElement>();
   const childrenCSSClassCopy = useRef<DOMTokenList>();
   const [editing, setIsEditing] = useState(false);
@@ -49,6 +85,13 @@ export const InlineEdit = ({ children, edit }: InlineEditProps) => {
       childrenRef.current.classList.remove(styles.hovered);
       childrenRef.current.style.display = 'none';
       setIsEditing(true);
+    }
+  };
+
+  const handleClickActionButton = () => {
+    if (childrenRef.current != null) {
+      childrenRef.current.style.display = '';
+      setIsEditing(false);
     }
   };
 
@@ -71,8 +114,28 @@ export const InlineEdit = ({ children, edit }: InlineEditProps) => {
   return (
     <Fragment>
       {editing ? (
-        <div style={{ color: 'initial' }} className={childrenCSSClassCopy.current?.value}>
+        <div
+          style={{ color: 'initial', position: 'relative' }}
+          className={childrenCSSClassCopy.current?.value}>
           {edit}
+          <div className={styles.buttons}>
+            <Flex>
+              <FlexItem>
+                <Margin size={{ right: Size.EXTRA_SMALL }}>
+                  <ActionButton icon="x" onClick={handleClickActionButton} />
+                </Margin>
+              </FlexItem>
+              <FlexItem>
+                <ActionButton
+                  icon="check"
+                  onClick={() => {
+                    handleClickActionButton();
+                    onClickConfirm();
+                  }}
+                />
+              </FlexItem>
+            </Flex>
+          </div>
         </div>
       ) : null}
       <WrapperRef setChildrenRef={(node) => (childrenRef.current = node)}>{children}</WrapperRef>
