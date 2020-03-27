@@ -10,6 +10,7 @@ import {
   Margin,
   Size,
   MultiSelect,
+  TextArea,
 } from '@drawbotics/react-drylus';
 
 import Playground, { PropsTable } from '~/components/Playground';
@@ -84,7 +85,7 @@ Here are more examples with different form components and way to display the val
             edit={
               <MultiSelect
                 placeholder="Pick option..."
-                values={tempValue ?? ''}
+                values={tempValue ?? []}
                 onChange={onChange}
                 options={options}/>
               }>
@@ -98,4 +99,20 @@ Here are more examples with different form components and way to display the val
         )} />
       } />
   </Margin>
+  <FormGroup
+    label={<Label>With a textarea</Label>}
+    input={
+      <ControlledInlineEdit render={({ value, setValue, tempValue, onChange }) => (
+        <InlineEdit
+          onCancel={() => onChange(value)}
+          onClickConfirm={() => setValue(tempValue)}
+          edit={<TextArea placeholder="Start typing..." value={tempValue ?? ''} onChange={onChange} />}>
+          <Text
+            style={{ whiteSpace: 'pre-wrap' }}
+            shade={! value ? Shade.MEDIUM : undefined}>
+              {! value ? 'Click to edit...' : value}
+          </Text>
+        </InlineEdit>
+      )} />
+    } />
 </Playground>

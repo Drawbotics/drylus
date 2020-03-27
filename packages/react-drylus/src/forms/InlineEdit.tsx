@@ -68,16 +68,6 @@ function _isFocussableComponent(component: React.ReactNode): boolean {
   return false;
 }
 
-function _adaptDisplayValue(value?: string): React.CSSProperties {
-  if (value === 'inline') {
-    return {
-      display: 'inline-block',
-      width: '100%',
-    };
-  }
-  return {};
-}
-
 interface ActionButtonProps {
   onClick: () => void;
   icon: IconType;
@@ -121,14 +111,22 @@ export const InlineEdit = ({
 }: InlineEditProps) => {
   const childrenRef = useRef<HTMLElement>();
   const childrenCSSClassCopy = useRef<DOMTokenList>();
+  const childrenDisplayCopy = useRef<string>();
   const [editing, setIsEditing] = useState(false);
 
   const handleMouseLeave = () => {
-    childrenRef.current?.classList.remove(styles.hovered);
+    if (childrenRef.current != null) {
+      childrenRef.current.classList.remove(styles.hovered);
+      childrenRef.current.style.display = '';
+    }
   };
 
   const handleMouseEnter = () => {
-    childrenRef.current?.classList.add(styles.hovered);
+    if (childrenRef.current != null) {
+      childrenRef.current.classList.add(styles.hovered);
+      childrenRef.current.style.display =
+        childrenDisplayCopy.current === 'inline' ? 'inline-block' : '';
+    }
   };
 
   const handleMouseClick = () => {
@@ -174,8 +172,9 @@ export const InlineEdit = ({
   }, []);
 
   useEffect(() => {
-    if (childrenRef.current != null) {
+    if (childrenRef.current != null && getComputedStyle(childrenRef.current).display !== 'none') {
       childrenCSSClassCopy.current = Object.assign({}, childrenRef.current.classList);
+      childrenDisplayCopy.current = getComputedStyle(childrenRef.current).display;
       childrenRef.current.classList.add(styles.inlineEditChild);
     }
   });
@@ -187,9 +186,10 @@ export const InlineEdit = ({
           style={{
             color: 'initial',
             position: 'relative',
-            ..._adaptDisplayValue(childrenRef.current?.style.display),
+            width: '100%',
+            display: childrenDisplayCopy.current === 'inline' ? 'inline-block' : undefined,
           }}
-          className={childrenCSSClassCopy.current?.value}>
+          className={Object.values(childrenCSSClassCopy.current ?? {}).join(' ')}>
           {_isFocussableComponent(edit)
             ? React.cloneElement(edit as React.ReactElement, { autoFocus: true })
             : edit}
