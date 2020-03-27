@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import React from 'react';
+import React, { useRef } from 'react';
 import { v4 } from 'uuid';
 
 import { Icon } from '../components';
@@ -182,6 +182,9 @@ export interface CheckboxProps {
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder?: boolean;
 
+  /** If true, and if the component is checked, the checkmark is replaced by a line to display a "indeterminate" state */
+  indeterminate?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -203,9 +206,10 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
     size = Size.DEFAULT,
     style,
     isPlaceholder,
+    indeterminate,
     ...props
   } = useResponsiveProps<CheckboxProps>(rest, responsive);
-
+  const inputRef = useRef<HTMLInputElement>(null);
   const isChecked = value === true;
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -228,6 +232,7 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
         htmlFor={uniqId}>
         <div className={styles.checkbox}>
           <input
+            ref={inputRef}
             disabled={disabled}
             checked={isChecked}
             id={uniqId}
@@ -248,7 +253,7 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
               } else {
                 return (
                   <label data-element="icon" className={styles.iconLabel} htmlFor={uniqId}>
-                    <Icon bold name="check" />
+                    {<Icon bold name={indeterminate ? 'minus' : 'check'} />}
                   </label>
                 );
               }
