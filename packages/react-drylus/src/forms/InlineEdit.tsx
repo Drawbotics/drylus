@@ -117,7 +117,12 @@ export const InlineEdit = ({
   const handleMouseLeave = () => {
     if (childrenRef.current != null) {
       childrenRef.current.classList.remove(styles.hovered);
-      childrenRef.current.style.display = '';
+      // artefact appears if we don't wait for display to go back to original state
+      setTimeout(() => {
+        if (childrenRef.current != null) {
+          childrenRef.current.style.display = '';
+        }
+      }, 300);
     }
   };
 
