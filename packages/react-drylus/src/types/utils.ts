@@ -29,3 +29,7 @@ export interface Variable {
   right?: Size;
   bottom?: Size;
 }
+
+export interface HTMLElementWithDisabled extends HTMLElement {
+  disabled?: boolean;
+}

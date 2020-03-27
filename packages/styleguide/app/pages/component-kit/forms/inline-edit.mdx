@@ -1,0 +1,20 @@
+import { InlineEdit, Text, Input } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Inline Edit
+Used to edit information inline. Useful when the information displayed can be edited and a form appearance is not possible.
+```jsx
+import { InlineEdit } from '@drawbotics/react-drylus';
+```
+Note that this is a completely uncontrolled component. You are responsible for managing the state of edits and confirmation. This component simply provides a wrapper to combine a "view" and "edit" state for UI data.
+
+export const value = "Some text to edit"
+
+__Example__
+<Playground component={InlineEdit}>
+  <InlineEdit edit={<Input value={value} onChange={() => {}} />}>
+    <Text>{value}</Text>
+  </InlineEdit>
+</Playground>

@@ -11,3 +11,4 @@ export * from './InputGroup';
 export * from './Hint';
 export * from './TextArea';
 export * from './RangeInput';
+export * from './InlineEdit';

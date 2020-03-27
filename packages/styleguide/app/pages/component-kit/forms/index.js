@@ -3,6 +3,7 @@ import dateInput from './date-input';
 import formGroup from './form-group';
 import hint from './hint';
 import index from './index.mdx';
+import inlineEdit from './inline-edit';
 import input from './input';
 import inputGroup from './input-group';
 import multiSelect from './multi-select';
@@ -28,6 +29,7 @@ const components = {
   hint,
   textArea,
   rangeInput,
+  inlineEdit,
 };
 
 export default Object.keys(components)
