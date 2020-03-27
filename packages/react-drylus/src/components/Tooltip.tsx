@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 import { themeStyles } from '../base';
 import { Position } from '../enums';
-import { Responsive, Style } from '../types';
+import { HTMLElementWithDisabled, Responsive, Style } from '../types';
 import { Deprecated, WrapperRef, getStyleForSide, useResponsiveProps } from '../utils';
 
 const styles = {
@@ -101,10 +101,6 @@ export interface TooltipProps {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
-}
-
-export interface HTMLElementWithDisabled extends HTMLElement {
-  disabled?: boolean;
 }
 
 export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
