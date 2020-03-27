@@ -48,14 +48,21 @@ const styles = {
 
 function _isFocussableComponent(component: React.ReactNode): boolean {
   if (typeof component === 'object' && (component as React.ReactElement).type != null) {
-    const elementWithType = component as React.ReactElement;
+    const elementType = (component as React.ReactElement).type;
+    const originalType = (component as React.ReactElement).props.originalType;
     return (
-      elementWithType?.type === Input ||
-      elementWithType?.type === Select ||
-      elementWithType?.type === MultiSelect ||
-      elementWithType?.type === DateInput ||
-      elementWithType?.type === NumberInput ||
-      elementWithType?.type === TextArea
+      elementType === Input ||
+      originalType === Input ||
+      elementType === Select ||
+      originalType === Select ||
+      elementType === MultiSelect ||
+      originalType === MultiSelect ||
+      elementType === DateInput ||
+      originalType === DateInput ||
+      elementType === NumberInput ||
+      originalType === NumberInput ||
+      elementType === TextArea ||
+      originalType === TextArea
     );
   }
   return false;

@@ -1,7 +1,18 @@
 import { useState } from 'react';
-import { InlineEdit, Text, Input, Shade } from '@drawbotics/react-drylus';
+import {
+  InlineEdit,
+  Text,
+  Input,
+  Shade,
+  Select,
+  Label,
+  FormGroup,
+  Margin,
+  Size,
+  MultiSelect,
+} from '@drawbotics/react-drylus';
 
-import { Preview, CodeBox, PropsTable } from '~/components/Playground';
+import Playground, { PropsTable } from '~/components/Playground';
 
 
 # Inline Edit
@@ -13,31 +24,78 @@ Note that this is a completely uncontrolled component. You are responsible for m
 
 export const ControlledInlineEdit = ({ defaultValue, render }) => {
   const [value, setValue] = useState(defaultValue);
-  const [inputValue, onChange] = useState(value);
-  return render({ value, setValue, inputValue, onChange });
+  const [tempValue, onChange] = useState(value);
+  return render({ value, setValue, tempValue, onChange });
 }
 
 __Example__
-<Preview>
-  <ControlledInlineEdit render={({ value, setValue, inputValue, onChange }) => (
+<Playground mode="jsx">
+  <ControlledInlineEdit render={({ value, setValue, tempValue, onChange }) => (
     <InlineEdit
       onCancel={() => onChange(value)}
-      onClickConfirm={() => setValue(inputValue)}
-      edit={<Input placeholder="Start typing..." value={inputValue ?? ''} onChange={onChange} />}>
+      onClickConfirm={() => setValue(tempValue)}
+      edit={<Input placeholder="Start typing..." value={tempValue ?? ''} onChange={onChange} />}>
       <Text shade={! value ? Shade.MEDIUM : undefined}>{! value ? 'Click to edit...' : value}</Text>
     </InlineEdit>
   )} />
-</Preview>
+</Playground>
 
-<CodeBox>
-{`
-  <InlineEdit
-    onCancel={() => onChange(value)}
-    onClickConfirm={() => setValue(inputValue)}
-    edit={<Input placeholder="Start typing..." value={inputValue ?? ''} onChange={onChange} />}>
-    <Text shade={! value ? Shade.MEDIUM : undefined}>{! value ? 'Click to edit...' : value}</Text>
-  </InlineEdit>
-`}
-</CodeBox>
+<br />
 
 <PropsTable component={InlineEdit} />
+
+export const options = [
+  { value: 'belgium', label: 'Belgium' },
+  { value: 'italy', label: 'Italy' },
+];
+
+Here are more examples with different form components and way to display the values:
+<Playground mode="jsx">
+  <Margin size={{ bottom: Size.DEFAULT }}>
+    <FormGroup
+      label={<Label>With a select</Label>}
+      input={
+        <ControlledInlineEdit render={({ value, setValue, tempValue, onChange }) => (
+          <InlineEdit
+            onCancel={() => onChange(value)}
+            onClickConfirm={() => setValue(tempValue)}
+            edit={
+              <Select
+                placeholder="Pick option..."
+                value={tempValue ?? ''}
+                onChange={onChange}
+                options={options}/>
+              }>
+            <Text shade={! value ? Shade.MEDIUM : undefined}>
+              {! value ? 'Click to pick option...' : options.find((option) => option.value === value).label}
+            </Text>
+          </InlineEdit>
+        )} />
+      } />
+  </Margin>
+  <Margin size={{ bottom: Size.DEFAULT }}>
+    <FormGroup
+      label={<Label>With a multi select</Label>}
+      input={
+        <ControlledInlineEdit render={({ value, setValue, tempValue, onChange }) => (
+          <InlineEdit
+            onCancel={() => onChange(value)}
+            onClickConfirm={() => setValue(tempValue)}
+            edit={
+              <MultiSelect
+                placeholder="Pick option..."
+                values={tempValue ?? ''}
+                onChange={onChange}
+                options={options}/>
+              }>
+            <Text shade={! value ? Shade.MEDIUM : undefined}>
+              {! value
+                ? 'Click to pick options...'
+                : value?.map((v) => options.find((o) => o.value === v).label).join(', ')
+              }
+            </Text>
+          </InlineEdit>
+        )} />
+      } />
+  </Margin>
+</Playground>
