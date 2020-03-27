@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InlineEdit, Text, Input, Shade } from '@drawbotics/react-drylus';
 
-import Playground from '~/components/Playground';
+import { Preview, CodeBox, PropsTable } from '~/components/Playground';
 
 
 # Inline Edit
@@ -18,7 +18,7 @@ export const ControlledInlineEdit = ({ defaultValue, render }) => {
 }
 
 __Example__
-<Playground component={InlineEdit}>
+<Preview>
   <ControlledInlineEdit render={({ value, setValue, inputValue, onChange }) => (
     <InlineEdit
       onCancel={() => onChange(value)}
@@ -27,4 +27,17 @@ __Example__
       <Text shade={! value ? Shade.MEDIUM : undefined}>{! value ? 'Click to edit...' : value}</Text>
     </InlineEdit>
   )} />
-</Playground>
+</Preview>
+
+<CodeBox>
+{`
+  <InlineEdit
+    onCancel={() => onChange(value)}
+    onClickConfirm={() => setValue(inputValue)}
+    edit={<Input placeholder="Start typing..." value={inputValue ?? ''} onChange={onChange} />}>
+    <Text shade={! value ? Shade.MEDIUM : undefined}>{! value ? 'Click to edit...' : value}</Text>
+  </InlineEdit>
+`}
+</CodeBox>
+
+<PropsTable component={InlineEdit} />
