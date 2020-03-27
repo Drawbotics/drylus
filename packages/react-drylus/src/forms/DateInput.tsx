@@ -261,6 +261,9 @@ export interface DateInputProps {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** @private */
+  [x: string]: any;
 }
 
 export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
@@ -282,10 +285,12 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
     loading,
     style,
     align = Align.LEFT,
+    autoFocus,
+    ...props
   } = useResponsiveProps<DateInputProps>(rest, responsive);
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
-  const [isFocused, setFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const isDesktop = screenSize > ScreenSizes.XL;
@@ -296,16 +301,24 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
 
   useEffect(() => {
     const handleDocumentClick = (e: Event) =>
-      !pickerElement.current?.contains(e.target as Node) ? setFocused(false) : null;
+      !pickerElement.current?.contains(e.target as Node) ? setIsFocused(false) : null;
     const handleWindowScroll = () => {
       if (isDesktop) {
-        setFocused(false);
+        setIsFocused(false);
         inputRef?.current?.blur();
       }
     };
 
     document.addEventListener('mousedown', handleDocumentClick);
     window.addEventListener('scroll', handleWindowScroll, true);
+
+    if (autoFocus) {
+      setTimeout(() => {
+        if (pickerElement.current != null) {
+          inputRef.current?.focus();
+        }
+      });
+    }
 
     return () => {
       document.removeEventListener('mousedown', handleDocumentClick);
@@ -373,11 +386,12 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
         value={inputValue}
         onChange={onChange != null ? handleOnChange : null}
         ref={inputRef}
-        onFocus={onChange != null ? () => setFocused(true) : null}
+        onFocus={onChange != null ? () => setIsFocused(true) : null}
         placeholder={placeholder}
         type={isDesktop ? null : 'date'}
         max={!isDesktop && maxDate ? _objectToDateString(maxDate) : null}
         min={!isDesktop && minDate ? _objectToDateString(minDate) : null}
+        {...props}
       />
       {isDesktop &&
         outletElement &&

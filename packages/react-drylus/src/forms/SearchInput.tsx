@@ -79,6 +79,9 @@ export interface SearchInputProps<T> {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** @private */
+  [x: string]: any;
 }
 
 export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputProps<T>) => {
@@ -92,6 +95,7 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
     name,
     style,
     onClickResult,
+    ...props
   } = useResponsiveProps<SearchInputProps<T>>(rest, responsive);
   const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
@@ -130,6 +134,7 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
         onFocus={() => setFocused(true)}
         onBlur={() => (canBlur ? setFocused(false) : null)}
         placeholder={placeholder}
+        {...props}
       />
       {run(() => {
         if (options == null) {

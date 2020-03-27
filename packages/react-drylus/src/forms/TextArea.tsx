@@ -119,6 +119,9 @@ export interface TextAreaProps {
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder?: boolean;
 
+  /** If true the textarea is focused automatically on mount */
+  autoFocus?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 

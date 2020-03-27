@@ -133,6 +133,9 @@ export interface SelectProps<T> {
   /** If true, a spinner is shown in the right corner, like with error and valid */
   loading?: boolean;
 
+  /** If true the select is focused automatically on mount */
+  autoFocus?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -167,7 +170,7 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.noValue]: value == null,
+        [styles.noValue]: !value,
         [styles.readOnly]: onChange == null,
         [styles.disabled]: disabled,
         [styles.valid]: Boolean(value) && valid,
