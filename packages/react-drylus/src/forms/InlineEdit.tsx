@@ -80,9 +80,21 @@ export interface InlineEditProps {
 
   /** Triggered when the confirm button is clicked */
   onClickConfirm: () => void;
+
+  /**
+   * If true, the component goes back to the initial state when clicking outside
+   * @default false
+   */
+
+  exitOnClick?: boolean;
 }
 
-export const InlineEdit = ({ children, edit, onClickConfirm }: InlineEditProps) => {
+export const InlineEdit = ({
+  children,
+  edit,
+  onClickConfirm,
+  exitOnClick = false,
+}: InlineEditProps) => {
   const childrenRef = useRef<HTMLElement>();
   const childrenCSSClassCopy = useRef<DOMTokenList>();
   const [editing, setIsEditing] = useState(false);
@@ -103,7 +115,7 @@ export const InlineEdit = ({ children, edit, onClickConfirm }: InlineEditProps) 
     }
   };
 
-  const handleClickActionButton = () => {
+  const handleExitEditing = () => {
     if (childrenRef.current != null) {
       childrenRef.current.style.display = '';
       setIsEditing(false);
@@ -111,18 +123,30 @@ export const InlineEdit = ({ children, edit, onClickConfirm }: InlineEditProps) 
   };
 
   useEffect(() => {
+    const handleWindowClick = (e: Event) => {
+      if (
+        e.target !== childrenRef.current &&
+        !childrenRef.current?.contains(e.target as Node) &&
+        exitOnClick
+      ) {
+        handleExitEditing();
+      }
+    };
+
     if (childrenRef.current != null) {
       childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
       childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
       childrenRef.current.addEventListener('click', handleMouseClick);
       childrenCSSClassCopy.current = childrenRef.current.classList;
       childrenRef.current.classList.add(styles.inlineEditChild);
+      window.addEventListener('click', handleWindowClick, true);
     }
 
     return () => {
       childrenRef.current?.removeEventListener('mouseenter', handleMouseEnter);
       childrenRef.current?.removeEventListener('mouseleave', handleMouseLeave);
       childrenRef.current?.removeEventListener('click', handleMouseClick);
+      window.removeEventListener('click', handleWindowClick);
     };
   }, []);
 
@@ -139,14 +163,14 @@ export const InlineEdit = ({ children, edit, onClickConfirm }: InlineEditProps) 
             <Flex>
               <FlexItem>
                 <Margin size={{ right: Size.EXTRA_SMALL }}>
-                  <ActionButton icon="x" onClick={handleClickActionButton} />
+                  <ActionButton icon="x" onClick={handleExitEditing} />
                 </Margin>
               </FlexItem>
               <FlexItem>
                 <ActionButton
                   icon="check"
                   onClick={() => {
-                    handleClickActionButton();
+                    handleExitEditing();
                     onClickConfirm();
                   }}
                 />
