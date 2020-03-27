@@ -100,6 +100,9 @@ export interface InlineEditProps {
    */
 
   exitOnClick?: boolean;
+
+  /** Triggered when the cancel action is clicked or if the component is exited through exitOnClick. Used to reset the state on the edit component */
+  onCancel: () => void;
 }
 
 export const InlineEdit = ({
@@ -107,6 +110,7 @@ export const InlineEdit = ({
   edit,
   onClickConfirm,
   exitOnClick = false,
+  onCancel,
 }: InlineEditProps) => {
   const childrenRef = useRef<HTMLElement>();
   const childrenCSSClassCopy = useRef<DOMTokenList>();
@@ -142,6 +146,7 @@ export const InlineEdit = ({
         !childrenRef.current?.contains(e.target as Node) &&
         exitOnClick
       ) {
+        onCancel();
         handleExitEditing();
       }
     };
@@ -150,8 +155,6 @@ export const InlineEdit = ({
       childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
       childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
       childrenRef.current.addEventListener('click', handleMouseClick);
-      childrenCSSClassCopy.current = Object.assign({}, childrenRef.current.classList);
-      childrenRef.current.classList.add(styles.inlineEditChild);
       window.addEventListener('click', handleWindowClick, true);
     }
 
@@ -162,6 +165,13 @@ export const InlineEdit = ({
       window.removeEventListener('click', handleWindowClick);
     };
   }, []);
+
+  useEffect(() => {
+    if (childrenRef.current != null) {
+      childrenCSSClassCopy.current = Object.assign({}, childrenRef.current.classList);
+      childrenRef.current.classList.add(styles.inlineEditChild);
+    }
+  });
 
   return (
     <Fragment>
@@ -180,7 +190,13 @@ export const InlineEdit = ({
             <Flex>
               <FlexItem>
                 <Margin size={{ right: Size.EXTRA_SMALL }}>
-                  <ActionButton icon="x" onClick={handleExitEditing} />
+                  <ActionButton
+                    icon="x"
+                    onClick={() => {
+                      handleExitEditing();
+                      onCancel();
+                    }}
+                  />
                 </Margin>
               </FlexItem>
               <FlexItem>

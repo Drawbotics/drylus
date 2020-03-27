@@ -1,4 +1,5 @@
-import { InlineEdit, Text, Input } from '@drawbotics/react-drylus';
+import { useState } from 'react';
+import { InlineEdit, Text, Input, Shade } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -10,11 +11,20 @@ import { InlineEdit } from '@drawbotics/react-drylus';
 ```
 Note that this is a completely uncontrolled component. You are responsible for managing the state of edits and confirmation. This component simply provides a wrapper to combine a "view" and "edit" state for UI data.
 
-export const value = "Some text to edit"
+export const ControlledInlineEdit = ({ defaultValue, render }) => {
+  const [value, setValue] = useState(defaultValue);
+  const [inputValue, onChange] = useState(value);
+  return render({ value, setValue, inputValue, onChange });
+}
 
 __Example__
 <Playground component={InlineEdit}>
-  <InlineEdit onClickConfirm={() => {}} edit={<Input value={value} onChange={() => {}} />}>
-    <Text>{value}</Text>
-  </InlineEdit>
+  <ControlledInlineEdit render={({ value, setValue, inputValue, onChange }) => (
+    <InlineEdit
+      onCancel={() => onChange(value)}
+      onClickConfirm={() => setValue(inputValue)}
+      edit={<Input placeholder="Start typing..." value={inputValue ?? ''} onChange={onChange} />}>
+      <Text shade={! value ? Shade.MEDIUM : undefined}>{! value ? 'Click to edit...' : value}</Text>
+    </InlineEdit>
+  )} />
 </Playground>

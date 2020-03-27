@@ -44,7 +44,10 @@ export function adaptForVanilla(markup) {
 }
 
 function transformMdxToReact(mdxElement, target, props) {
-  if (typeof mdxElement.type === 'string' && mdxElement.type.includes('react.fragment')) {
+  if (
+    (typeof mdxElement.type === 'string' && mdxElement.type.includes('react.fragment')) ||
+    mdxElement.props == null
+  ) {
     return mdxElement;
   }
   if ((target && target === mdxElement.props.originalType) || target === mdxElement.type) {
