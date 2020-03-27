@@ -1,6 +1,6 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
-import React, { useEffect, useRef } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 
 import { WrapperRef } from '../utils';
 
@@ -30,8 +30,10 @@ export interface InlineEditProps {
   onClickConfirm: () => void;
 }
 
-export const InlineEdit = ({ children }: InlineEditProps) => {
+export const InlineEdit = ({ children, edit }: InlineEditProps) => {
   const childrenRef = useRef<HTMLElement>();
+  const childrenCSSClassCopy = useRef<DOMTokenList>();
+  const [editing, setIsEditing] = useState(false);
 
   const handleMouseLeave = () => {
     childrenRef.current?.classList.remove(styles.hovered);
@@ -42,20 +44,38 @@ export const InlineEdit = ({ children }: InlineEditProps) => {
     childrenRef.current?.classList.add(styles.hovered);
   };
 
+  const handleMouseClick = () => {
+    if (childrenRef.current != null) {
+      childrenRef.current.classList.remove(styles.hovered);
+      childrenRef.current.style.display = 'none';
+      setIsEditing(true);
+    }
+  };
+
   useEffect(() => {
     if (childrenRef.current != null) {
       childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
       childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
+      childrenRef.current.addEventListener('click', handleMouseClick);
+      childrenCSSClassCopy.current = childrenRef.current.classList;
       childrenRef.current.classList.add(styles.inlineEditChild);
     }
 
     return () => {
       childrenRef.current?.removeEventListener('mouseenter', handleMouseEnter);
       childrenRef.current?.removeEventListener('mouseleave', handleMouseLeave);
+      childrenRef.current?.removeEventListener('click', handleMouseClick);
     };
   }, []);
 
   return (
-    <WrapperRef setChildrenRef={(node) => (childrenRef.current = node)}>{children}</WrapperRef>
+    <Fragment>
+      {editing ? (
+        <div style={{ color: 'initial' }} className={childrenCSSClassCopy.current?.value}>
+          {edit}
+        </div>
+      ) : null}
+      <WrapperRef setChildrenRef={(node) => (childrenRef.current = node)}>{children}</WrapperRef>
+    </Fragment>
   );
 };
