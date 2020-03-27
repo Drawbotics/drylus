@@ -6,6 +6,7 @@ import { Icon, IconType } from '../components';
 import { Size } from '../enums';
 import { Flex, FlexItem, Margin } from '../layout';
 import { WrapperRef } from '../utils';
+import { DateInput, Input, MultiSelect, NumberInput, Select, TextArea } from './';
 
 const styles = {
   inlineEditChild: css`
@@ -42,6 +43,21 @@ const styles = {
   `,
 };
 
+function _isFocussableComponent(component: React.ReactNode): boolean {
+  if (typeof component === 'object' && (component as React.ReactElement).type != null) {
+    const elementWithType = component as React.ReactElement;
+    return (
+      elementWithType?.type === Input ||
+      elementWithType?.type === Select ||
+      elementWithType?.type === MultiSelect ||
+      elementWithType?.type === DateInput ||
+      elementWithType?.type === NumberInput ||
+      elementWithType?.type === TextArea
+    );
+  }
+  return false;
+}
+
 interface ActionButtonProps {
   onClick: () => void;
   icon: IconType;
@@ -76,7 +92,6 @@ export const InlineEdit = ({ children, edit, onClickConfirm }: InlineEditProps) 
   };
 
   const handleMouseEnter = () => {
-    // console.dir(childrenRef.current);
     childrenRef.current?.classList.add(styles.hovered);
   };
 
@@ -117,7 +132,9 @@ export const InlineEdit = ({ children, edit, onClickConfirm }: InlineEditProps) 
         <div
           style={{ color: 'initial', position: 'relative' }}
           className={childrenCSSClassCopy.current?.value}>
-          {edit}
+          {_isFocussableComponent(edit)
+            ? React.cloneElement(edit as React.ReactElement, { autoFocus: true })
+            : edit}
           <div className={styles.buttons}>
             <Flex>
               <FlexItem>
