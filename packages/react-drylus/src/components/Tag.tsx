@@ -80,7 +80,7 @@ export interface TagProps {
   /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */
   onClickRemove?: OnClickCallback<HTMLElement>;
 
-  /** Modifies the way the category is shown */
+  /** Modifies the way the color is shown */
   inversed?: boolean;
 
   /** Used for style overrides */

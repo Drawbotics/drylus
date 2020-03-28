@@ -75,6 +75,8 @@ export const Example = ({ children }) => {
 You can use the smaller size variant when space is scarce on the pace (this will be defined in the designs).
 <Playground>
   <Example>
+    <Input value="Locked" size={Size.SMALL} />
+    <Input valid onChange={() => {}} value="Some value" size={Size.SMALL} />
     <Flex justify={FlexJustify.START}>
       <FlexItem flex>
         <Margin size={{ right: Size.EXTRA_SMALL }}>

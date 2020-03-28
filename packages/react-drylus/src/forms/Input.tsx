@@ -168,6 +168,11 @@ const styles = {
     input {
       padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
     }
+
+    [data-element='icon'] {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      right: ${sv.marginExtraSmall};
+    }
   `,
 };
 
@@ -316,7 +321,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon name="x" size={Size.SMALL} color={Color.RED} />
+                  <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
                 </div>
               );
             } else if (Boolean(value) && valid) {
@@ -324,7 +329,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon name="check" size={Size.SMALL} color={Color.GREEN} />
+                  <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
                 </div>
               );
             }
