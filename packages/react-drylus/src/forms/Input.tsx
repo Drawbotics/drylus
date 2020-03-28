@@ -169,6 +169,10 @@ const styles = {
       padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
     }
 
+    button {
+      height: 30px;
+    }
+
     [data-element='icon'] {
       top: calc(${sv.marginExtraSmall} - 1px);
       right: ${sv.marginExtraSmall};

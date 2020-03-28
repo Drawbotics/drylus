@@ -189,7 +189,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon name="x" size={Size.SMALL} color={Color.RED} />
+                  <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
                 </div>
               );
             } else if (Boolean(value) && valid) {
@@ -197,7 +197,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon name="check" size={Size.SMALL} color={Color.GREEN} />
+                  <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
                 </div>
               );
             }

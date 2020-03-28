@@ -297,13 +297,13 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
         } else if (error) {
           return (
             <div className={styles.icon}>
-              <RoundIcon name="x" size={Size.SMALL} color={Color.RED} />
+              <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
             </div>
           );
         } else if (values?.length > 0 && valid) {
           return (
             <div className={styles.icon}>
-              <RoundIcon name="check" size={Size.SMALL} color={Color.GREEN} />
+              <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
             </div>
           );
         }
