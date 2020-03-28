@@ -1,4 +1,15 @@
-import { Input, Select, Button, Icon } from '@drawbotics/react-drylus';
+import {
+  Input,
+  Select,
+  Button,
+  Icon,
+  Flex,
+  FlexItem,
+  Margin,
+  Size,
+  FlexJustify,
+  Category,
+} from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 
 import Playground from '~/components/Playground';
@@ -33,7 +44,7 @@ export const style = {
     label: noreplace;
     width: 300px;
     > * {
-      margin-bottom: 20px;
+      margin-bottom: 20px !important;
     }
   `,
 };
@@ -55,6 +66,31 @@ export const Example = ({ children }) => {
       <Select value="option" options={[{ label: 'Option', value: 'option' }]} placeholder="Select..." onChange={x=>x} />
     } value="" onChange={x=>x} />
     <Input placeholder="Something else..." suffix={
+      <Button leading={<Icon name="copy" />}>Click me</Button>
+    } value="" onChange={x=>x} />
+  </Example>
+</Playground>
+
+
+You can use the smaller size variant when space is scarce on the pace (this will be defined in the designs).
+<Playground>
+  <Example>
+    <Flex justify={FlexJustify.START}>
+      <FlexItem flex>
+        <Margin size={{ right: Size.EXTRA_SMALL }}>
+          <Input onChange={() => {}} placeholder="Type something..." size={Size.SMALL} />
+        </Margin>
+      </FlexItem>
+      <FlexItem>
+        <Button category={Category.INFO} size={Size.SMALL}>Click me</Button>
+      </FlexItem>
+    </Flex>
+    <Input size={Size.SMALL} placeholder="Something..." prefix={<Icon name="command" />} value="" onChange={x=>x} />
+    <Input size={Size.SMALL} placeholder="Something..." suffix=".com" value="" onChange={x=>x} />
+    <Input size={Size.SMALL} placeholder="Something..." prefix={
+      <Select value="option" options={[{ label: 'Option', value: 'option' }]} placeholder="Select..." onChange={x=>x} />
+    } value="" onChange={x=>x} />
+    <Input size={Size.SMALL} placeholder="Something else..." suffix={
       <Button leading={<Icon name="copy" />}>Click me</Button>
     } value="" onChange={x=>x} />
   </Example>
