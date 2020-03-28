@@ -5,7 +5,7 @@ import React from 'react';
 import { Icon, RoundIcon, Spinner } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -93,6 +93,23 @@ const styles = {
       color: ${sv.colorSecondary};
     }
   `,
+  small: css`
+    select {
+      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+      padding-right: ${sv.paddingLarge};
+    }
+
+    &::after {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      font-size: 1.1em;
+      right: ${sv.marginExtraSmall};
+    }
+
+    [data-element='icon'] {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      right: ${sv.marginExtraSmall};
+    }
+  `,
 };
 
 export interface SelectOption<T> extends Option<T> {
@@ -133,6 +150,12 @@ export interface SelectProps<T> {
   /** If true, a spinner is shown in the right corner, like with error and valid */
   loading?: boolean;
 
+  /**
+   * Size of the select. Can be small or default
+   * @default Size.DEFAULT
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -155,6 +178,7 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
     valid,
     loading,
     style,
+    size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<SelectProps<T>>(rest, responsive);
 
@@ -172,6 +196,7 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
         [styles.disabled]: disabled,
         [styles.valid]: Boolean(value) && valid,
         [styles.error]: error != null && error !== false,
+        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
       })}>
       {run(() => {
         if (loading) {
@@ -189,13 +214,13 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
         } else if (error) {
           return (
             <div className={styles.icon}>
-              <RoundIcon name="x" size={Size.SMALL} color={Color.RED} />
+              <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
             </div>
           );
         } else if (value && valid) {
           return (
             <div className={styles.icon}>
-              <RoundIcon name="check" size={Size.SMALL} color={Color.GREEN} />
+              <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
             </div>
           );
         }

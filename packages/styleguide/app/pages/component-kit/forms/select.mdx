@@ -1,4 +1,4 @@
-import { Select } from '@drawbotics/react-drylus';
+import { Select, Size } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 import { ControlledField } from '../utils';
@@ -14,6 +14,7 @@ __Example__
 <Playground component={Select}>
   <ControlledField style={{ maxWidth: 250 }} component={
     <Select
+      size={Size.SMALL}
       placeholder="Select an option..."
       options={[{
         label: 'Belgium',

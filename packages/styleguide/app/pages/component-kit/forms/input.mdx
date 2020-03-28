@@ -88,12 +88,12 @@ You can use the smaller size variant when space is scarce on the pace (this will
       </FlexItem>
     </Flex>
     <Input size={Size.SMALL} placeholder="Something..." prefix={<Icon name="command" />} value="" onChange={x=>x} />
-    <Input size={Size.SMALL} placeholder="Something..." suffix=".com" value="" onChange={x=>x} />
+    <Input size={Size.SMALL} placeholder="Something..." suffix=".com" value="" onChange={() => {}} />
     <Input size={Size.SMALL} placeholder="Something..." prefix={
       <Select value="option" options={[{ label: 'Option', value: 'option' }]} placeholder="Select..." onChange={x=>x} />
-    } value="" onChange={x=>x} />
+    } value="" onChange={() => {}} />
     <Input size={Size.SMALL} placeholder="Something else..." suffix={
       <Button leading={<Icon name="copy" />}>Click me</Button>
-    } value="" onChange={x=>x} />
+    } value="" onChange={() => {}} />
   </Example>
 </Playground>

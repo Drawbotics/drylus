@@ -257,7 +257,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
     isPlaceholder,
     extraLeftPadding,
     type = 'text',
-    size,
+    size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<RawInputProps>(rest, responsive);
 
