@@ -74,6 +74,12 @@ export interface SearchInputProps<T> {
   /** If true, the search button will display a spinner */
   isLoading?: boolean;
 
+  /**
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -92,6 +98,7 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
     name,
     style,
     onClickResult,
+    size = Size.SMALL,
   } = useResponsiveProps<SearchInputProps<T>>(rest, responsive);
   const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
@@ -130,6 +137,7 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
         onFocus={() => setFocused(true)}
         onBlur={() => (canBlur ? setFocused(false) : null)}
         placeholder={placeholder}
+        size={size}
       />
       {run(() => {
         if (options == null) {
