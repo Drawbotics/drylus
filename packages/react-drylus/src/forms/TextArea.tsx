@@ -5,7 +5,7 @@ import React, { forwardRef, useState } from 'react';
 import { Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -83,6 +83,25 @@ const styles = {
     opacity: 0;
     transform: scale(0);
   `,
+  small: css`
+    textarea {
+      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+    }
+
+    [data-element='icon'] {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      right: ${sv.marginExtraSmall};
+    }
+
+    [data-element='lock-icon'] {
+      top: ${sv.marginExtraSmall};
+      right: ${sv.marginExtraSmall};
+
+      > i {
+        font-size: 0.95em;
+      }
+    }
+  `,
 };
 
 export interface TextAreaProps {
@@ -119,6 +138,12 @@ export interface TextAreaProps {
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder?: boolean;
 
+  /**
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -146,6 +171,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
     loading,
     style,
     isPlaceholder,
+    size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<RawTextAreaProps>(rest, responsive);
 
@@ -165,6 +191,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
         [styles.error]: error != null && error !== false,
         [className as string]: className != null,
         [placeholderStyles.shimmer]: isPlaceholder,
+        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
       })}>
       <div className={styles.outerWrapper}>
         <div className={styles.innerWrapper}>
@@ -179,7 +206,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
               return (
                 <div
                   className={styles.icon}
-                  data-element="icon"
+                  data-element="lock-icon"
                   style={{ color: sv.colorSecondary }}>
                   <Icon name="lock" />
                 </div>
