@@ -49,8 +49,8 @@ export const ControlledGroup = ({ children }) => {
           onChange={(value) => 
             setChecked(Object.keys(checked).reduce((memo, check) => ({ ...memo, [check]: value }), {}))
           }
-          value={Object.values(checked).some((c) => c === true)}
-          indeterminate={! Object.values(checked).every((c) => !! c)}>
+          value={Object.values(checked).some((c) => c)}
+          indeterminate={! Object.values(checked).every((c) => c)}>
           All
         </Checkbox>
         <Checkbox name="1" value={checked['1']} onChange={handleOnChange}>
