@@ -67,7 +67,7 @@ const styles = {
       content: none;
     }
 
-    [data-element='icon'] {
+    [data-element='lock-icon'] {
       right: ${sv.marginSmall};
     }
   `,
@@ -86,6 +86,7 @@ const styles = {
   error: css`
     > select {
       box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
+      padding-right: calc(${sv.paddingExtraLarge} + ${sv.defaultPadding});
     }
   `,
   noValue: css`
@@ -96,7 +97,7 @@ const styles = {
   small: css`
     select {
       padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
-      padding-right: ${sv.paddingLarge};
+      padding-right: ${sv.paddingHuge};
     }
 
     &::after {
@@ -107,7 +108,16 @@ const styles = {
 
     [data-element='icon'] {
       top: calc(${sv.marginExtraSmall} - 1px);
+      right: ${sv.marginLarge};
+    }
+
+    [data-element='lock-icon'] {
+      top: ${sv.marginExtraSmall};
       right: ${sv.marginExtraSmall};
+
+      > i {
+        font-size: 0.95em;
+      }
     }
   `,
 };
@@ -207,19 +217,22 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
           );
         } else if (onChange == null) {
           return (
-            <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
+            <div
+              className={styles.icon}
+              data-element="lock-icon"
+              style={{ color: sv.colorSecondary }}>
               <Icon name="lock" />
             </div>
           );
         } else if (error) {
           return (
-            <div className={styles.icon}>
+            <div className={styles.icon} data-element="icon">
               <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
             </div>
           );
         } else if (value && valid) {
           return (
-            <div className={styles.icon}>
+            <div className={styles.icon} data-element="icon">
               <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
             </div>
           );

@@ -173,6 +173,15 @@ const styles = {
       top: calc(${sv.marginExtraSmall} - 1px);
       right: ${sv.marginExtraSmall};
     }
+
+    [data-element='lock-icon'] {
+      top: ${sv.marginExtraSmall};
+      right: ${sv.marginExtraSmall};
+
+      > i {
+        font-size: 0.95em;
+      }
+    }
   `,
 };
 
@@ -311,7 +320,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
               return (
                 <div
                   className={styles.icon}
-                  data-element="icon"
+                  data-element="lock-icon"
                   style={{ color: sv.colorSecondary }}>
                   <Icon name="lock" />
                 </div>
