@@ -6,7 +6,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Icon, RoundIcon, Spinner, Tag } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -62,7 +62,7 @@ const styles = {
       content: none;
     }
 
-    [data-element='icon'] {
+    [data-element='lock-icon'] {
       right: ${sv.marginSmall};
     }
   `,
@@ -143,11 +143,46 @@ const styles = {
     margin-bottom: -12px;
     margin-left: -8px;
   `,
+  smallValues: css`
+    margin-left: -5px;
+    margin-bottom: -6px;
+
+    [data-element='value'] {
+      margin-right: 2px;
+      margin-bottom: 2px;
+    }
+  `,
   icon: css`
     pointer-events: none;
     position: absolute;
     top: calc(${sv.marginExtraSmall} * 1.5);
     right: calc(${sv.marginSmall} * 2 + ${sv.marginExtraSmall});
+  `,
+  small: css`
+    [data-element='select'] {
+      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+      padding-right: ${sv.paddingHuge};
+    }
+
+    &::after {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      font-size: 1.1em;
+      right: ${sv.marginExtraSmall};
+    }
+
+    [data-element='icon'] {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      right: ${sv.marginLarge};
+    }
+
+    [data-element='lock-icon'] {
+      top: ${sv.marginExtraSmall};
+      right: ${sv.marginExtraSmall};
+
+      > i {
+        font-size: 0.95em;
+      }
+    }
   `,
   placeholder: css`
     color: ${sv.colorSecondary};
@@ -192,6 +227,12 @@ export interface MultiSelectProps<T> {
   /** If true, a spinner is shown on the right corner, like with error and valid */
   loading?: boolean;
 
+  /**
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -215,6 +256,7 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
     name,
     loading,
     style,
+    size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<MultiSelectProps<T>>(rest, responsive);
 
@@ -279,6 +321,7 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
         [styles.readOnly]: onChange == null,
         [styles.valid]: values?.length > 0 && valid,
         [styles.error]: error != null && error !== false,
+        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
       })}
       ref={rootRef}>
       {run(() => {
@@ -290,19 +333,22 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
           );
         } else if (onChange == null) {
           return (
-            <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
+            <div
+              className={styles.icon}
+              data-element="lock-icon"
+              style={{ color: sv.colorSecondary }}>
               <Icon name="lock" />
             </div>
           );
         } else if (error) {
           return (
-            <div className={styles.icon}>
+            <div className={styles.icon} data-element="icon">
               <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
             </div>
           );
         } else if (values?.length > 0 && valid) {
           return (
-            <div className={styles.icon}>
+            <div className={styles.icon} data-element="icon">
               <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
             </div>
           );
@@ -319,9 +365,9 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
             return <div className={styles.placeholder}>{placeholder}</div>;
           } else {
             return (
-              <div className={styles.values}>
+              <div className={cx(styles.values, { [styles.smallValues]: size === Size.SMALL })}>
                 {values.map((value) => (
-                  <div key={value} className={styles.value}>
+                  <div key={value} className={styles.value} data-element="value">
                     <Tag
                       inversed
                       onClickRemove={
