@@ -91,8 +91,8 @@ function _getClassNameForColor(
   color: TagProps['color'],
   inversed: TagProps['inversed'],
 ): string | undefined {
-  if (color != null && Object.values(Color).includes(color as Color)) {
-    return inversed ? `${getEnumAsClass(color as Color)}Inversed` : getEnumAsClass(color as Color);
+  if (color != null && typeof color !== 'string' && color in Color) {
+    return inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
   }
   return color;
 }
