@@ -183,7 +183,6 @@ const styles = {
   `,
   small: css`
     padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
-    /* font-size: 0.9rem; */
   `,
   large: css`
     padding: ${sv.paddingSmall} ${sv.paddingHuge};
