@@ -147,8 +147,6 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
   return (
     <div
       className={cx(styles.root, {
-        // [styles[!customColor ? getEnumAsClass<typeof styles>(color as Color) : 'root']]:
-        //   color != null,
         [styles[customSize ? 'root' : getEnumAsClass<typeof styles>(size as Size)]]:
           size != null && !customSize,
         [styles.iconInherit]: customSize,
