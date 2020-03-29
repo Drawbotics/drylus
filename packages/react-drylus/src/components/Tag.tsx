@@ -87,14 +87,8 @@ export interface TagProps {
   style?: Style;
 }
 
-function _getClassNameForColor(
-  color: TagProps['color'],
-  inversed: TagProps['inversed'],
-): string | undefined {
-  if (color != null && typeof color !== 'string' && color in Color) {
-    return inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
-  }
-  return color;
+function _getClassNameForColor(color: Color, inversed?: boolean): string {
+  return inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
 }
 
 export const Tag = ({
@@ -106,9 +100,10 @@ export const Tag = ({
   color: _color,
 }: TagProps) => {
   const color = category ? categoryEnumToColor(category) : _color;
-  const className = _getClassNameForColor(color, inversed);
+  const enumColor = color != null && color in Color ? (color as Color) : null;
+  const className = enumColor != null ? _getClassNameForColor(enumColor, inversed) : null;
   const style =
-    color != null && !Object.values(Color).includes(color as Color)
+    color != null && enumColor == null
       ? {
           ..._style,
           color: inversed ? undefined : color,
@@ -120,7 +115,7 @@ export const Tag = ({
       style={style}
       className={cx(styles.root, {
         [styles.inversed]: inversed,
-        [styles[className as keyof typeof styles]]: color != null,
+        [styles[className as keyof typeof styles]]: enumColor != null,
       })}>
       {children}
       {run(() => {

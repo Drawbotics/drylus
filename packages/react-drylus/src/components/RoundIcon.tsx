@@ -112,14 +112,8 @@ export interface RoundIconProps {
   responsive?: Responsive<this>;
 }
 
-function _getClassNameForColor(
-  color: RoundIconProps['color'],
-  inversed: RoundIconProps['inversed'],
-): string | undefined {
-  if (color != null && typeof color !== 'string' && color in Color) {
-    return inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
-  }
-  return color;
+function _getClassNameForColor(color: Color, inversed?: boolean): string {
+  return inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
 }
 
 export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
@@ -135,9 +129,10 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
 
   const customSize = typeof size === 'number';
   const color = category ? categoryEnumToColor(category) : _color;
-  const className = _getClassNameForColor(color, inversed);
+  const enumColor = color != null && color in Color ? (color as Color) : null;
+  const className = enumColor != null ? _getClassNameForColor(enumColor, inversed) : null;
   const style =
-    color != null && !Object.values(Color).includes(color as Color)
+    color != null && enumColor == null
       ? {
           ..._style,
           color: inversed ? undefined : color,
@@ -151,7 +146,7 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
           size != null && !customSize,
         [styles.iconInherit]: customSize,
         [styles.inversed]: inversed,
-        [styles[className as keyof typeof styles]]: color != null,
+        [styles[className as keyof typeof styles]]: enumColor != null,
       })}
       style={
         customSize
