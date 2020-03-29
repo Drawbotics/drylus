@@ -18,10 +18,10 @@ import {
 } from '@drawbotics/react-drylus';
 import docs from '@drawbotics/react-drylus/docs.json';
 import { css } from 'emotion';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import PropsInfo from './PropsInfo';
-import { generateDocs } from './utils';
+import { generateDocs, capitalizeFirst } from './utils';
 
 const styles = {
   table: css`
@@ -39,14 +39,8 @@ function _hasDeprecation(prop) {
   return prop.deprecation != null;
 }
 
-
 function _isEnum(prop) {
   return prop?.type?.type === 'enum';
-}
-
-function capitalizeFirst(text) {
-  if (typeof text !== 'string' || text === '') return text;
-  return text[0].toUpperCase() + text.slice(1);
 }
 
 const PropsTable = ({ component, onChange, activeProps, enums }) => {
@@ -105,14 +99,14 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                     {do {
                       if (_hasDeprecation(prop)) {
                         return (
-                          <React.Fragment>
+                          <Fragment>
                             <Margin size={{ right: Size.EXTRA_SMALL }} style={{ display: 'inline-block'}} >
                               <Tag color={Color.ORANGE} inversed>
                                 DEPRECATED
                               </Tag>
                             </Margin>
                             {capitalizeFirst(prop.deprecation)}
-                          </React.Fragment>
+                          </Fragment>
                         );
                       }
                       else if (_isEnum(prop)) {
