@@ -335,8 +335,7 @@ exports[`Button matches snapshot when is small 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding: 8px 8px;
-  font-size: 0.9rem;
+  padding: calc(8px - 1px) 8px;
 }
 
 .emotion-0:hover {
