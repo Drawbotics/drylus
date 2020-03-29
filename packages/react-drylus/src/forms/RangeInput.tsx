@@ -181,6 +181,9 @@ export interface RangeInputProps<T> {
   /** Function to custom display the given value(s): (v) => {} */
   renderValue?: (value: number) => string;
 
+  /** If true, the min and max values are not rendered below the slider */
+  hideLabels?: boolean;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
@@ -189,9 +192,17 @@ export const RangeInput = <T extends number | Array<number>>({
   responsive,
   ...rest
 }: RangeInputProps<T>) => {
-  const { min, max, value, step, onChange, onUpdate, disabled, renderValue } = useResponsiveProps<
-    RangeInputProps<T>
-  >(rest, responsive);
+  const {
+    min,
+    max,
+    value,
+    step,
+    onChange,
+    onUpdate,
+    disabled,
+    renderValue,
+    hideLabels,
+  } = useResponsiveProps<RangeInputProps<T>>(rest, responsive);
 
   const isMultiHandle = typeof value !== 'number' && (value as Array<number>).length > 1;
   const values: Array<number> = isMultiHandle ? (value as Array<number>) : [value as number];
@@ -246,14 +257,16 @@ export const RangeInput = <T extends number | Array<number>>({
           </div>
         )}
       </Tracks>
-      <div className={cx(styles.labels)}>
-        <div>
-          <Text size={Size.SMALL}>{renderValue != null ? renderValue(min) : min}</Text>
+      {hideLabels !== true ? (
+        <div className={cx(styles.labels)}>
+          <div>
+            <Text size={Size.SMALL}>{renderValue != null ? renderValue(min) : min}</Text>
+          </div>
+          <div>
+            <Text size={Size.SMALL}>{renderValue != null ? renderValue(max) : max}</Text>
+          </div>
         </div>
-        <div>
-          <Text size={Size.SMALL}>{renderValue != null ? renderValue(max) : max}</Text>
-        </div>
-      </div>
+      ) : null}
     </Slider>
   );
 };
