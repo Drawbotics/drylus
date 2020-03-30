@@ -20,37 +20,6 @@ function _getDeprecation(prop) {
   return deprecation ? deprecation.text : null;
 }
 
-function _getValuesForEnum(enumName, docs, parentComponentName) {
-  const moduleName = `"react-drylus/src/enums/${enumName}"`;
-  let doc = docs.children.find((module) => module.name === moduleName);
-
-  if (doc == null) {
-    const parentModule = docs.children.find((module) => module.name.includes(parentComponentName));
-    const doc = parentModule.children.find((c) => c.name.includes(enumName));
-    return doc.children.map((v) => `${enumName}.${v.name}`);
-  }
-  else {
-    return doc.children[0].children.map((v) => `${enumName}.${v.name}`);
-  }
-}
-
-function _computeExclude(type, docs) {
-  const enumName = type.typeArguments[0].name;
-  const enumValues = _getValuesForEnum(enumName, docs);
-
-  const valuesToRemove = type.typeArguments[1].name != null
-    ? [`${enumName}.${type.typeArguments[1].name}`]
-    : type.typeArguments[1].types.map((arg) => `${enumName}.${arg.name}`);
-
-  const withValuesRemoved = enumValues.filter((v) => !valuesToRemove.includes(v));
-
-  return {
-    type: 'enum',
-    name: `Subset of ${enumName}`,
-    values: withValuesRemoved,
-  };
-}
-
 function _computeObject(properties, docs, parentComponentName) {
   return properties?.reduce((memo, property) => {
     return {
@@ -105,7 +74,7 @@ function _resolveReference(ref, docs, parentComponentName) {
 
 let parsingStack = [];
 
-function _getType(type, docs, componentName) {
+function _getType(type, docs, componentName, comment) {
   if (type.name !== 'Array' && type?.kindString !== 'Enumeration' && parsingStack.includes(type.name)) {
     return type.name;
   }
@@ -115,7 +84,7 @@ function _getType(type, docs, componentName) {
       mustPop = true;
       parsingStack.push(type.name);
     }
-    const res = __getType(type, docs, componentName);
+    const res = __getType(type, docs, componentName, comment);
     
     if (mustPop) parsingStack.pop();
     
@@ -123,18 +92,31 @@ function _getType(type, docs, componentName) {
   }
 }
 
-function __getType(type, docs, componentName) {
-  if (type.type === 'instrinsic') {
+function __getType(type, docs, componentName, comment) {
+  const enumTag = comment?.tags?.find((t) => t.tag === 'description');
+  if (enumTag != null) {
+    const match = enumTag.text.match('uses enum (?<name>[A-Z][a-z]+)');
+    const enumName = match.groups.name;
+
+    return {
+      type: 'enum',
+      name: enumName,
+      values: type.types.filter((t) => t.name !== 'undefined').map((t) => `${enumName}.${t.name}`),
+    };
+  }
+
+  else if (type.type === 'instrinsic') {
     return {
       type: type.name,
       name: type.name,
     };
   }
-  if (type.type === 'stringLiteral') {
+
+  else  if (type.type === 'stringLiteral') {
     return type.value;
   }
 
-  if (type.type ==='tuple') {
+  else if (type.type ==='tuple') {
     return {
       type: 'tuple',
       values: type.elements.map((e) => _getType(e, docs, componentName)),
@@ -142,10 +124,7 @@ function __getType(type, docs, componentName) {
   }
 
   // Reference
-  if (type.type === 'reference') {
-    if (type.name === 'Exclude') {
-      return _computeExclude(type, docs);
-    }
+  else if (type.type === 'reference') {
     if (type.name === 'Array') {
       return {
         type: 'array',
@@ -215,13 +194,15 @@ function __getType(type, docs, componentName) {
     if (potentialTypes.includes('true') && potentialTypes.includes('false')) {
       return 'boolean';
     }
-    if (potentialTypes.length === 1) {
-      // This means the only other member was undefined and we can treat this as a regular type
-      return _getType(type.types.find((t) => t.name === potentialTypes[0]), docs, componentName);
+    else if (potentialTypes.length === 1) {
+      // This means the only other member was undefined (optional) and we can treat this as a regular type
+      return _getType(type.types.find((t) => t.name === potentialTypes[0]), docs, componentName, comment);
     }
-    return {
-      type: 'union',
-      values: type.types.map((t) => _getType(t, docs, componentName))
+    else {
+      return {
+        type: 'union',
+        values: type.types.map((t) => _getType(t, docs, componentName))
+      };
     }
   }
   else if (type?.operator === 'keyof') {
@@ -247,7 +228,7 @@ export function generateDocs(componentName, docs) {
       ...props,
       [prop.name]: {
         required: !prop.flags?.isOptional,
-        type: _getType(prop.type, docs, componentName),
+        type: _getType(prop.type, docs, componentName, prop.comment),
         deprecation: _getDeprecation(prop),
         defaultValue: _getDefault(prop),
         description:  prop.comment?.shortText || '',
