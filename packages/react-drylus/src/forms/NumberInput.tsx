@@ -98,6 +98,9 @@ const styles = {
     color: ${sv.colorSecondary};
     pointer-events: none;
   `,
+  smallMax: css`
+    max-width: calc(100% - ${sv.marginSmall});
+  `,
   value: css`
     color: transparent;
   `,
@@ -229,7 +232,7 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
         if (renderValue != null && (value === 0 || value)) {
           const sections = renderValue(value).split(String(value));
           return (
-            <span className={styles.renderedValue}>
+            <span className={cx(styles.renderedValue, { [styles.smallMax]: !withCounter })}>
               <span ref={leftSpanRef}>{sections[0]}</span>
               <span className={styles.value}>{value}</span>
               <span>{sections[1]}</span>
