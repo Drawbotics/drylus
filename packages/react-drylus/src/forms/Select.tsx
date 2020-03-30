@@ -5,7 +5,7 @@ import React from 'react';
 import { Icon, RoundIcon, Spinner } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -67,7 +67,7 @@ const styles = {
       content: none;
     }
 
-    [data-element='icon'] {
+    [data-element='lock-icon'] {
       right: ${sv.marginSmall};
     }
   `,
@@ -86,11 +86,38 @@ const styles = {
   error: css`
     > select {
       box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
+      padding-right: calc(${sv.paddingExtraLarge} + ${sv.defaultPadding});
     }
   `,
   noValue: css`
     > select {
       color: ${sv.colorSecondary};
+    }
+  `,
+  small: css`
+    select {
+      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+      padding-right: ${sv.paddingHuge};
+    }
+
+    &::after {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      font-size: 1.1em;
+      right: ${sv.marginExtraSmall};
+    }
+
+    [data-element='icon'] {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      right: ${sv.marginLarge};
+    }
+
+    [data-element='lock-icon'] {
+      top: ${sv.marginExtraSmall};
+      right: ${sv.marginExtraSmall};
+
+      > i {
+        font-size: 0.95em;
+      }
     }
   `,
 };
@@ -133,6 +160,12 @@ export interface SelectProps<T> {
   /** If true, a spinner is shown in the right corner, like with error and valid */
   loading?: boolean;
 
+  /**
+   * Size of the select. Can be small or default
+   * @default Size.DEFAULT
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -155,6 +188,7 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
     valid,
     loading,
     style,
+    size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<SelectProps<T>>(rest, responsive);
 
@@ -172,6 +206,7 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
         [styles.disabled]: disabled,
         [styles.valid]: Boolean(value) && valid,
         [styles.error]: error != null && error !== false,
+        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
       })}>
       {run(() => {
         if (loading) {
@@ -182,20 +217,23 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
           );
         } else if (onChange == null) {
           return (
-            <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
+            <div
+              className={styles.icon}
+              data-element="lock-icon"
+              style={{ color: sv.colorSecondary }}>
               <Icon name="lock" />
             </div>
           );
         } else if (error) {
           return (
-            <div className={styles.icon}>
-              <RoundIcon name="x" size={Size.SMALL} color={Color.RED} />
+            <div className={styles.icon} data-element="icon">
+              <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
             </div>
           );
         } else if (value && valid) {
           return (
-            <div className={styles.icon}>
-              <RoundIcon name="check" size={Size.SMALL} color={Color.GREEN} />
+            <div className={styles.icon} data-element="icon">
+              <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
             </div>
           );
         }

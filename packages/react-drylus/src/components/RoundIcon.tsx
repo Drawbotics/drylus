@@ -66,6 +66,25 @@ const styles = {
     background: ${sv.brandLight};
     color: ${sv.brandDark};
   `,
+  inversed: css`
+    color: ${sv.white};
+    background: ${sv.neutralDarker};
+  `,
+  brandInversed: css`
+    background: ${sv.brand};
+  `,
+  redInversed: css`
+    background: ${sv.red};
+  `,
+  greenInversed: css`
+    background: ${sv.green};
+  `,
+  orangeInversed: css`
+    background: ${sv.orange};
+  `,
+  blueInversed: css`
+    background: ${sv.blue};
+  `,
 };
 
 export interface RoundIconProps {
@@ -83,11 +102,18 @@ export interface RoundIconProps {
 
   color?: Exclude<Color, Color.PRIMARY> | string;
 
+  /** Modifies the way the color is shown */
+  inversed?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+}
+
+function _getClassNameForColor(color: Color, inversed?: boolean): string {
+  return inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
 }
 
 export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
@@ -98,26 +124,29 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
     bold,
     style: _style = {},
     color: _color,
+    inversed,
   } = useResponsiveProps<RoundIconProps>(rest, responsive);
 
   const customSize = typeof size === 'number';
   const color = category ? categoryEnumToColor(category) : _color;
-  const customColor = color != null && !Object.values(Color).includes(color as Color);
-  const style = customColor
-    ? {
-        ..._style,
-        color,
-        background: fade(color as string, 30),
-      }
-    : _style;
+  const enumColor = color != null && color in Color ? (color as Color) : null;
+  const className = enumColor != null ? _getClassNameForColor(enumColor, inversed) : null;
+  const style =
+    color != null && enumColor == null
+      ? {
+          ..._style,
+          color: inversed ? undefined : color,
+          background: inversed ? color : fade(color, 30),
+        }
+      : _style;
   return (
     <div
       className={cx(styles.root, {
-        [styles[!customColor ? getEnumAsClass<typeof styles>(color as Color) : 'root']]:
-          color != null,
         [styles[customSize ? 'root' : getEnumAsClass<typeof styles>(size as Size)]]:
           size != null && !customSize,
         [styles.iconInherit]: customSize,
+        [styles.inversed]: inversed,
+        [styles[className as keyof typeof styles]]: enumColor != null,
       })}
       style={
         customSize

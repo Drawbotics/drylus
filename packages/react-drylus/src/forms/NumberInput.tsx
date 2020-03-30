@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Icon } from '../components';
+import { Size } from '../enums';
 import { Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
@@ -58,7 +59,12 @@ const styles = {
     }
 
     & > i {
-      font-size: 1rem;
+      font-size: 1em;
+    }
+  `,
+  small: css`
+    i {
+      font-size: 0.8em;
     }
   `,
   disabled: css`
@@ -152,6 +158,12 @@ export interface NumberInputProps {
    */
   step?: number;
 
+  /**
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -176,6 +188,7 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
     loading,
     style,
     step = 1,
+    size = Size.DEFAULT,
   } = useResponsiveProps(rest, responsive);
   const inputRef = useRef<HTMLInputElement>(null);
   const leftSpanRef = useRef<HTMLSpanElement>(null);
@@ -242,9 +255,14 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
         inputMode="numeric"
         className={styles.numberInput}
         extraLeftPadding={extraLeftPadding}
+        size={size}
         suffix={
           withCounter && onChange != null ? (
-            <div className={cx(styles.buttons, { [styles.disabled]: disabled })}>
+            <div
+              className={cx(styles.buttons, {
+                [styles.disabled]: disabled,
+                [styles.small]: size === Size.SMALL,
+              })}>
               <button
                 className={styles.button}
                 onClick={() => {

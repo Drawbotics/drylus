@@ -98,9 +98,10 @@ export interface HandleProps {
   getHandleProps: (id: string, options: any) => any; // Broken at lib level
   renderValue?: (value: number) => string;
   disabled?: boolean;
+  hideTooltip?: boolean;
 }
 
-const Handle = ({ handle, getHandleProps, renderValue, disabled }: HandleProps) => {
+const Handle = ({ handle, getHandleProps, renderValue, disabled, hideTooltip }: HandleProps) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const { id, value, percent } = handle;
 
@@ -119,7 +120,7 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled }: HandleProps) 
       className={cx(styles.handle, { [styles.disabledHandle]: disabled })}
       {...getHandleProps(
         id,
-        disabled
+        disabled || hideTooltip
           ? {}
           : {
               onMouseDown: handleShowTooltip,
@@ -128,10 +129,12 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled }: HandleProps) 
               onTouchEnd: handleHideTooltip,
             },
       )}>
-      <RangeTooltip
-        visible={tooltipVisible}
-        value={renderValue != null ? renderValue(value) : value}
-      />
+      {!hideTooltip ? (
+        <RangeTooltip
+          visible={tooltipVisible}
+          value={renderValue != null ? renderValue(value) : value}
+        />
+      ) : null}
     </div>
   );
 };
@@ -181,6 +184,12 @@ export interface RangeInputProps<T> {
   /** Function to custom display the given value(s): (v) => {} */
   renderValue?: (value: number) => string;
 
+  /** If true, the min and max values are not rendered below the slider */
+  hideLabels?: boolean;
+
+  /** If true, the min and max values are not shown in the slider when modified */
+  hideTooltips?: boolean;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
@@ -189,9 +198,18 @@ export const RangeInput = <T extends number | Array<number>>({
   responsive,
   ...rest
 }: RangeInputProps<T>) => {
-  const { min, max, value, step, onChange, onUpdate, disabled, renderValue } = useResponsiveProps<
-    RangeInputProps<T>
-  >(rest, responsive);
+  const {
+    min,
+    max,
+    value,
+    step,
+    onChange,
+    onUpdate,
+    disabled,
+    renderValue,
+    hideLabels,
+    hideTooltips,
+  } = useResponsiveProps<RangeInputProps<T>>(rest, responsive);
 
   const isMultiHandle = typeof value !== 'number' && (value as Array<number>).length > 1;
   const values: Array<number> = isMultiHandle ? (value as Array<number>) : [value as number];
@@ -221,6 +239,7 @@ export const RangeInput = <T extends number | Array<number>>({
           <div>
             {handles.map((handle) => (
               <Handle
+                hideTooltip={hideTooltips}
                 disabled={disabled}
                 renderValue={renderValue != null ? (v) => renderValue(v) : undefined}
                 key={handle.id}
@@ -246,14 +265,16 @@ export const RangeInput = <T extends number | Array<number>>({
           </div>
         )}
       </Tracks>
-      <div className={cx(styles.labels)}>
-        <div>
-          <Text size={Size.SMALL}>{renderValue != null ? renderValue(min) : min}</Text>
+      {hideLabels !== true ? (
+        <div className={cx(styles.labels)}>
+          <div>
+            <Text size={Size.SMALL}>{renderValue != null ? renderValue(min) : min}</Text>
+          </div>
+          <div>
+            <Text size={Size.SMALL}>{renderValue != null ? renderValue(max) : max}</Text>
+          </div>
         </div>
-        <div>
-          <Text size={Size.SMALL}>{renderValue != null ? renderValue(max) : max}</Text>
-        </div>
-      </div>
+      ) : null}
     </Slider>
   );
 };
