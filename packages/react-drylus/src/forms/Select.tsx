@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Icon, RoundIcon, Spinner } from '../components';
 import { Category, Color, Size } from '../enums';
-import { Option, Responsive, Style } from '../types';
+import { Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
@@ -102,16 +102,21 @@ const styles = {
   `,
 };
 
-export interface SelectOption<T> extends Option<T> {
+interface Option<T, K> {
+  value: T;
+  label: K;
+}
+
+export interface SelectOption<T, K> extends Option<T, K> {
   disabled?: boolean;
 }
 
-export interface SelectProps<T> {
+export interface SelectProps<T, K> {
   /** The options to show in the list of options */
-  options: Array<SelectOption<T>>;
+  options: Array<SelectOption<T, K>>;
 
   /** Determines which value is currently active */
-  value?: SelectOption<T>['value'];
+  value?: SelectOption<T, K>['value'];
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -126,7 +131,7 @@ export interface SelectProps<T> {
   placeholder?: string;
 
   /** Triggered when a new value is chosen, returns a value, key (label, value) pair. If not given, the field is read-only */
-  onChange?: (value: SelectOption<T>['value'], name?: string) => void;
+  onChange?: (value: SelectOption<T, K>['value'], name?: string) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -141,7 +146,7 @@ export interface SelectProps<T> {
   loading?: boolean;
 
   /** Used to render custom content within the select e.g. a Tag */
-  renderLabel?: (v: SelectOption<T>['label']) => T;
+  renderLabel?: (v: SelectOption<T, K>['label']) => T;
 
   /** Used for style overrides */
   style?: Style;
@@ -153,7 +158,12 @@ export interface SelectProps<T> {
   [x: string]: any;
 }
 
-export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) => {
+type OptionsRefObject = { [key: string]: React.RefObject<HTMLDivElement> } | undefined;
+
+export const Select = <T extends any, K extends any>({
+  responsive,
+  ...rest
+}: SelectProps<T, K>) => {
   const {
     value,
     options = [],
@@ -167,13 +177,24 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
     style,
     renderLabel,
     ...props
-  } = useResponsiveProps<SelectProps<T>>(rest, responsive);
+  } = useResponsiveProps<SelectProps<T, K>>(rest, responsive);
+  const customLabel = options.every((o) => typeof o.label !== 'string');
+
+  const optionsRefs: OptionsRefObject = customLabel
+    ? options.reduce(
+        (memo, o) => ({ ...memo, [o.value]: React.createRef() }),
+        {} as OptionsRefObject,
+      )
+    : undefined;
 
   const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     if (onChange != null) {
       onChange((e.target as HTMLSelectElement).value as any, (e.target as HTMLSelectElement).name);
     }
   };
+
+  console.log(optionsRefs);
+
   return (
     <div
       style={style}
@@ -211,9 +232,10 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
           );
         }
       })}
-      {value != null && renderLabel != null ? (
+      {value != null && customLabel ? (
         <div className={styles.customValue}>
-          {renderLabel(options.find((o) => o.value === value)?.label ?? '')}
+          {/* {renderLabel(options.find((o) => o.value === value)?.label ?? '')} */}
+          {options.find((o) => o.value === value)?.label}
         </div>
       ) : null}
       <select
@@ -221,15 +243,26 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
         className={styles.select}
         value={value}
         onChange={handleOnChange}
-        style={renderLabel && value != null ? { color: 'transparent' } : undefined}
+        style={customLabel && value != null ? { color: 'transparent' } : undefined}
         {...props}>
         {value == null ? <option key={options.length}>{placeholder}</option> : null}
         {options.map((option) => (
           <option key={option.value} value={option.value} disabled={option.disabled}>
-            {option.label}
+            {customLabel && optionsRefs != null
+              ? optionsRefs[option.value].current?.innerText
+              : option.label}
           </option>
         ))}
       </select>
+      {customLabel && optionsRefs != null ? (
+        <div style={{ display: 'none' }}>
+          {options.map((o) => (
+            <div key={o.value} ref={optionsRefs[o.value]}>
+              {o.label}
+            </div>
+          ))}
+        </div>
+      ) : null}
       {run(() => {
         if (error && typeof error === 'string') {
           return <Hint category={Category.DANGER}>{error}</Hint>;

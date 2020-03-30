@@ -33,16 +33,15 @@ If you're selecting between options currently represented elsewhere in the UI wi
 <Playground mode="jsx">
   <ControlledField initialValue="BE" style={{ maxWidth: 250 }} component={
     <Select
-      renderLabel={(label) => <Tag color={Color.BLUE}>{label}</Tag>}
       placeholder="Select an option..."
       options={[{
-        label: 'Belgium',
+        label: <Tag>Belgium</Tag>,
         value: 'BE',
       }, {
-        label: 'France',
+        label: <Tag>France</Tag>,
         value: 'FR',
       }, {
-        label: 'Italy',
+        label: <Tag>Italy</Tag>,
         value: 'IT',
       }]} />
     } />
