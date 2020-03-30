@@ -171,7 +171,7 @@ interface BaseModalProps {
   /**
    * Determines the minimum width of the modal
    * @default Size.DEFAULT
-   * @enum Size
+   * @description uses enum Size
    */
   size?: Size.DEFAULT | Size.LARGE;
 

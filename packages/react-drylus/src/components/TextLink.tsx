@@ -92,7 +92,7 @@ interface TextLinkProps {
   children?: React.ReactNode;
 
   /** @default Category.INFO */
-  /** @enum Category */
+  /** @description uses enum Category */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   shade?: Shade;

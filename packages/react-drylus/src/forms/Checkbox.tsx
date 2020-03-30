@@ -176,7 +176,7 @@ interface CheckboxProps {
   /**
    * Size of the checkbox. Can be large or default
    * @default Size.DEFAULT
-   * @enum Size
+   * @description uses enum Size
    */
   size?: Size.DEFAULT | Size.LARGE;
 

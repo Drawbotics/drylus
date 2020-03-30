@@ -126,7 +126,7 @@ interface AlertProps {
   /** Text shown within the alert */
   text: string;
 
-  /** @enum Category  */
+  /** @description uses enum Category  */
   category: Category.DANGER | Category.SUCCESS | Category.INFO | Category.WARNING;
 
   /** Triggered when the dismiss button is clicked */

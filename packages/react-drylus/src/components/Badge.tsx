@@ -48,10 +48,10 @@ interface BadgeProps {
   /** If the value is higher than the max, then a + is displayed with the max */
   max?: number;
 
-  /** @enum Category */
+  /** @description uses enum Category */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  /** @enum Color */
+  /** @description uses enum Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
   /** Used for style overrides */

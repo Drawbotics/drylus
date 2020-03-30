@@ -85,7 +85,7 @@ interface ToggleProps {
   /** Determines if toggle is active */
   value: boolean;
 
-  /** @enum Size */
+  /** @description uses enum Size */
   size: Size.SMALL | Size.DEFAULT;
 
   /** Used for style overrides */

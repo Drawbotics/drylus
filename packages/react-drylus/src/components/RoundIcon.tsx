@@ -79,10 +79,10 @@ interface RoundIconProps {
   bold?: boolean;
 
   /** @deprecated use color instead */
-  /** @enum Category */
+  /** @description uses enum Category */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  /** @enum Color */
+  /** @description uses enum Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
   /** Used for style overrides */

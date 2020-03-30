@@ -76,16 +76,16 @@ interface AvatarProps {
 
   /**
    * Size of the avatar
-   * @enum Size */
+   * @description uses enum Size */
   size?: number | Size.DEFAULT | Size.SMALL | Size.LARGE;
 
   /**
    * @deprecated Use color instead
-   * @enum Category
+   * @description uses enum Category
    */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  /** @enum Color */
+  /** @description uses enum Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
   /** Custom override for the background color, useful for profiles */

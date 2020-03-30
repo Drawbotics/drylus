@@ -90,17 +90,17 @@ const styles = {
 interface SpinnerProps {
   /**
    * @default Size.DEFAULT
-   * @enum Size
+   * @description uses enum Size
    * */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
   /**
    * @deprecated use color instead
-   * @enum Category
+   * @description uses enum Category
    * */
   category?: Category.BRAND | Category.INFO;
 
-  /** @enum Color */
+  /** @description uses enum Color */
   color?: Color.BRAND | Color.BLUE;
 
   /** If true, sets the color of the spinner to white (to be used against colored backgrounds) */

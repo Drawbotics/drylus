@@ -131,7 +131,7 @@ interface BaseFilterProps {
   /**
    * Determines on which side the panel is aligned
    * @default Align.RIGHT
-   * @enum Align
+   * @description uses enum Align
    */
   align?: Align.LEFT | Align.RIGHT;
 
