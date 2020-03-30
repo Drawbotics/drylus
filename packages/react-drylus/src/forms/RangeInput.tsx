@@ -21,7 +21,7 @@ const styles = {
     width: 100%;
     height: calc(${sv.marginExtraSmall} / 2);
     border-radius: calc(${sv.marginExtraSmall} / 2);
-    background-color: ${sv.neutralLight};
+    background-color: ${sv.neutral};
   `,
   disabledRail: css`
     background-color: ${sv.neutralLighter};
