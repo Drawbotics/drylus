@@ -88,19 +88,20 @@ const styles = {
 };
 
 interface SpinnerProps {
-  /** @default Size.DEFAULT */
-  size?: Exclude<
-    Size,
-    Size.EXTRA_SMALL | Size.EXTRA_LARGE | Size.EXTRA_HUGE | Size.MASSIVE | Size.HUGE
-  >;
+  /**
+   * @default Size.DEFAULT
+   * @enum Size
+   * */
+  size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
-  /** @deprecated use color instead */
-  category?: Exclude<
-    Category,
-    Category.SUCCESS | Category.WARNING | Category.DANGER | Category.PRIMARY
-  >;
+  /**
+   * @deprecated use color instead
+   * @enum Category
+   * */
+  category?: Category.BRAND | Category.INFO;
 
-  color?: Exclude<Color, Color.RED | Color.GREEN | Color.ORANGE | Color.PRIMARY>;
+  /** @enum Color */
+  color?: Color.BRAND | Color.BLUE;
 
   /** If true, sets the color of the spinner to white (to be used against colored backgrounds) */
   inversed?: boolean;

@@ -278,15 +278,17 @@ export interface ButtonProps {
   /** Triggered after the button is clicked */
   onClick?: () => void;
 
-  category?: Exclude<Category, Category.PRIMARY>;
+  /** @enum Category */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  color?: Exclude<Color, Color.PRIMARY>;
+  /** @enum Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
-  /** @default Size.DEFAULT */
-  size?: Exclude<
-    Size,
-    Size.EXTRA_SMALL | Size.EXTRA_LARGE | Size.EXTRA_HUGE | Size.MASSIVE | Size.HUGE
-  >;
+  /**
+   * @default Size.DEFAULT
+   * @enum size
+   */
+  size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
   /** @default Tier.PRIMARY */
   tier?: Tier;

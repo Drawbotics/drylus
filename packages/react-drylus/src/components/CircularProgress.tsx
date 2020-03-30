@@ -91,12 +91,17 @@ interface CircularProgressProps {
   text?: string;
 
   /** @deprecated Use color instead */
-  category?: Exclude<Category, Category.PRIMARY>;
+  /** @enum Category */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  color?: Exclude<Color, Color.PRIMARY>;
+  /** @enum Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
-  /** @default Size.DEFAULT */
-  size?: Exclude<Size, Size.EXTRA_SMALL | Size.HUGE | Size.EXTRA_HUGE | Size.MASSIVE>;
+  /**
+   * @default Size.DEFAULT
+   * @enum Size
+   * */
+  size?: Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
 
   /** Used for style overrides */
   style?: Style;

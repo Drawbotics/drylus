@@ -126,7 +126,8 @@ interface AlertProps {
   /** Text shown within the alert */
   text: string;
 
-  category: Exclude<Category, Category.PRIMARY>;
+  /** @enum Category  */
+  category: Category.DANGER | Category.SUCCESS | Category.INFO | Category.WARNING;
 
   /** Triggered when the dismiss button is clicked */
   onClickDismiss: (id: string) => void;

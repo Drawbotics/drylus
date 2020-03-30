@@ -108,11 +108,11 @@ interface TextProps {
    */
   light?: boolean;
 
-  /** @default Size.DEFAULT */
-  size?: Exclude<
-    Size,
-    Size.EXTRA_SMALL | Size.EXTRA_LARGE | Size.EXTRA_HUGE | Size.MASSIVE | Size.HUGE
-  >;
+  /**
+   * @default Size.DEFAULT
+   * @enum Size
+   * */
+  size?: Size.DEFAULT | Size.SMALL | Size.LARGE;
 
   tier?: Tier;
 
@@ -127,7 +127,8 @@ interface TextProps {
 
   children: TextChildren | Array<TextChildren>;
 
-  category?: Exclude<Category, Category.PRIMARY>;
+  /** @enum Category */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** Options to change the way the date is displayed, if provided. showTime toggles display of hour/minutes, format for dayjs overrides */
   dateOptions?: {

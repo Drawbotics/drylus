@@ -135,7 +135,8 @@ interface DropdownOptionProps {
   /** Name of the icon to be shown on the left side */
   icon?: keyof typeof Icons;
 
-  category?: Exclude<Category, Category.BRAND | Category.INFO | Category.PRIMARY>;
+  /** @enum Category */
+  category?: Category.SUCCESS | Category.WARNING | Category.DANGER;
 
   /** Used for style overrides */
   style?: Style;

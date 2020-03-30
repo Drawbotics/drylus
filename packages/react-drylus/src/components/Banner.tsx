@@ -43,7 +43,8 @@ interface BannerProps {
   /** Larger text shown beside the icon */
   title?: string;
 
-  category: Exclude<Category, Category.PRIMARY>;
+  /** @enum Category */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** Component to be displayed on the far right of the banner. Should only be of type Button */
   trailing?: React.ReactElement<typeof Button>;

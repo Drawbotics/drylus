@@ -73,20 +73,17 @@ interface RoundIconProps {
   name: keyof typeof Icons;
 
   /** @default Size.DEFAULT */
-  size?:
-    | number
-    | Exclude<
-        Size,
-        Size.EXTRA_SMALL | Size.EXTRA_LARGE | Size.EXTRA_HUGE | Size.MASSIVE | Size.HUGE
-      >;
+  size?: number | Size.SMALL | Size.DEFAULT | Size.LARGE;
 
   /** Makes the icon bold */
   bold?: boolean;
 
   /** @deprecated use color instead */
-  category?: Exclude<Category, Category.PRIMARY>;
+  /** @enum Category */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  color?: Exclude<Color, Color.PRIMARY>;
+  /** @enum Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
   /** Used for style overrides */
   style?: Style;

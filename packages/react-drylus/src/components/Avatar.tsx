@@ -74,18 +74,19 @@ interface AvatarProps {
   /** Text shown when the avatar is hovered */
   hint?: string;
 
-  /** Size of the avatar */
-  size?:
-    | number
-    | Exclude<
-        Size,
-        Size.EXTRA_SMALL | Size.EXTRA_LARGE | Size.EXTRA_HUGE | Size.MASSIVE | Size.HUGE
-      >;
+  /**
+   * Size of the avatar
+   * @enum Size */
+  size?: number | Size.DEFAULT | Size.SMALL | Size.LARGE;
 
-  /** @deprecated Use color instead*/
-  category?: Exclude<Category, Category.PRIMARY>;
+  /**
+   * @deprecated Use color instead
+   * @enum Category
+   */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  color?: Exclude<Color, Color.PRIMARY>;
+  /** @enum Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
   /** Custom override for the background color, useful for profiles */
   backgroundColor?: string;

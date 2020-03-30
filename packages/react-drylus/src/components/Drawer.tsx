@@ -251,8 +251,9 @@ interface DrawerProps extends BaseDrawerProps {
   /**
    * Only applies when the drawer is used with "asOverlay"
    * @default Position.RIGHT
+   * @enum Position
    */
-  side?: Exclude<Position, Position.TOP | Position.BOTTOM>;
+  side?: Position.LEFT | Position.RIGHT;
 
   /**
    * Passed to the CSSTransition component to fire events at different points of the animation. See reactcommunity.org/react-transition-group docs

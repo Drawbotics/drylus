@@ -171,11 +171,9 @@ interface BaseModalProps {
   /**
    * Determines the minimum width of the modal
    * @default Size.DEFAULT
+   * @enum Size
    */
-  size?: Exclude<
-    Size,
-    Size.EXTRA_SMALL | Size.SMALL | Size.EXTRA_LARGE | Size.HUGE | Size.EXTRA_HUGE | Size.MASSIVE
-  >;
+  size?: Size.DEFAULT | Size.LARGE;
 
   /** Displayed at the top left of the modal window, not shown if raw is true */
   title?: string;
