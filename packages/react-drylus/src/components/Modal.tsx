@@ -81,6 +81,7 @@ const styles = {
     margin-bottom: ${sv.defaultMargin};
     padding: ${sv.defaultPadding};
     padding-top: 0;
+    padding-right: ${sv.paddingExtraHuge};
 
     @media ${sv.screenL} {
       margin: 0 calc(${sv.marginSmall} * -1);
