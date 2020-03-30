@@ -21,7 +21,6 @@ interface HintProps {
   /** Text displayed by the hint */
   children: React.ReactNode;
 
-  /** @description uses enum Category */
   category?: Category.DANGER;
 
   /** Used for style overrides */

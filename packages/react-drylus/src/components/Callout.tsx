@@ -51,7 +51,7 @@ interface CalloutProps {
   /** Message shown in the callout */
   children: React.ReactNode;
 
-  /** @description uses enum: Category */
+  /** @description uses enum Category */
   category: Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** Used for style overrides */

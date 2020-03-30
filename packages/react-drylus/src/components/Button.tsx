@@ -286,7 +286,7 @@ export interface ButtonProps {
 
   /**
    * @default Size.DEFAULT
-   * @description uses enum size
+   * @description uses enum Size
    */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
