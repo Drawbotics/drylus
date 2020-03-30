@@ -93,6 +93,13 @@ const styles = {
       color: ${sv.colorSecondary};
     }
   `,
+  customValue: css`
+    position: absolute;
+    top: 50%;
+    left: ${sv.marginExtraSmall};
+    transform: translateY(-50%);
+    z-index: 999;
+  `,
 };
 
 export interface SelectOption<T> extends Option<T> {
@@ -133,6 +140,9 @@ export interface SelectProps<T> {
   /** If true, a spinner is shown in the right corner, like with error and valid */
   loading?: boolean;
 
+  /** Used to render custom content within the select e.g. a Tag */
+  renderLabel?: (v: SelectOption<T>['label']) => T;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -155,6 +165,7 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
     valid,
     loading,
     style,
+    renderLabel,
     ...props
   } = useResponsiveProps<SelectProps<T>>(rest, responsive);
 
@@ -200,17 +211,19 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
           );
         }
       })}
+      {value != null && renderLabel != null ? (
+        <div className={styles.customValue}>
+          {renderLabel(options.find((o) => o.value === value)?.label ?? '')}
+        </div>
+      ) : null}
       <select
         disabled={disabled}
         className={styles.select}
         value={value}
         onChange={handleOnChange}
+        style={renderLabel && value != null ? { color: 'transparent' } : undefined}
         {...props}>
-        {run(() => {
-          if (!value) {
-            return <option key={options.length}>{placeholder}</option>;
-          }
-        })}
+        {value == null ? <option key={options.length}>{placeholder}</option> : null}
         {options.map((option) => (
           <option key={option.value} value={option.value} disabled={option.disabled}>
             {option.label}

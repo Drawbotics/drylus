@@ -1,4 +1,4 @@
-import { Select } from '@drawbotics/react-drylus';
+import { Select, Tag, Color } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 import { ControlledField } from '../utils';
@@ -26,4 +26,24 @@ __Example__
         value: 'IT',
       }]} />
   } />
+</Playground>
+
+### Example with custom label
+If you're selecting between options currently represented elsewhere in the UI with another component, you can display that component on top of the `Select` if necessary. Please note that the custom value is overlayed absolutely on top, so it's your job to make sure it doesn't overflow.
+<Playground mode="jsx">
+  <ControlledField initialValue="BE" style={{ maxWidth: 250 }} component={
+    <Select
+      renderLabel={(label) => <Tag color={Color.BLUE}>{label}</Tag>}
+      placeholder="Select an option..."
+      options={[{
+        label: 'Belgium',
+        value: 'BE',
+      }, {
+        label: 'France',
+        value: 'FR',
+      }, {
+        label: 'Italy',
+        value: 'IT',
+      }]} />
+    } />
 </Playground>
