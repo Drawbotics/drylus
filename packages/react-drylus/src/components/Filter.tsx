@@ -167,11 +167,17 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
   } = useResponsiveProps<BaseFilterProps>(rest, responsive);
 
   const panelRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
   const [panelOpen, setPanelOpen] = useState(false);
 
   const handleDocumentClick = (e: Event) => {
     // Needs Event because React.MouseEvent<HTMLDivElement> does not match addEventListener signature
-    if (!panelRef.current?.contains(e.target as Node) && panelRef.current !== e.target) {
+    if (
+      !panelRef.current?.contains(e.target as Node) &&
+      panelRef.current !== e.target &&
+      !triggerRef.current?.contains(e.target as Node) &&
+      triggerRef.current !== e.target
+    ) {
       setPanelOpen(false);
     }
   };
@@ -185,9 +191,9 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleDocumentClick);
+    document.addEventListener('click', handleDocumentClick);
     return () => {
-      document.removeEventListener('mousedown', handleDocumentClick);
+      document.removeEventListener('click', handleDocumentClick);
     };
   }, []);
 
@@ -198,6 +204,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
         [styles.fullWidth]: fullWidth,
       })}>
       <div
+        ref={triggerRef}
         data-element="trigger"
         className={cx(styles.trigger, {
           [styles.active]: panelOpen || active,
