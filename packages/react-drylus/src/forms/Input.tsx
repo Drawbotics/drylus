@@ -375,7 +375,9 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
             style={{
               paddingLeft:
                 extraLeftPadding != null
-                  ? `calc(${sv.paddingSmall} + ${extraLeftPadding}px)`
+                  ? `calc(${
+                      size === Size.SMALL ? sv.paddingExtraSmall : sv.paddingSmall
+                    } + ${extraLeftPadding}px)`
                   : undefined,
             }}
             {...props}
