@@ -56,6 +56,7 @@ const styles = {
 
     [data-element='select'] {
       box-shadow: none !important;
+      padding-right: ${sv.paddingExtraLarge} !important;
     }
 
     &::after {
@@ -186,6 +187,11 @@ const styles = {
   `,
   placeholder: css`
     color: ${sv.colorSecondary};
+  `,
+  smallReadOnly: css`
+    [data-element='select'] {
+      padding-right: ${sv.defaultPadding} !important;
+    }
   `,
 };
 
@@ -322,6 +328,7 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
         [styles.valid]: values?.length > 0 && valid,
         [styles.error]: error != null && error !== false,
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+        [styles.smallReadOnly]: onChange == null && size === Size.SMALL,
       })}
       ref={rootRef}>
       {run(() => {

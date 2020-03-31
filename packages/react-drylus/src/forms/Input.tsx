@@ -25,6 +25,7 @@ const styles = {
     z-index: 1;
   `,
   input: css`
+    text-overflow: ellipsis;
     background-color: ${sv.azureLight};
     color: ${sv.colorPrimary};
     padding: calc(${sv.paddingExtraSmall} * 1.5) ${sv.paddingSmall};
@@ -60,6 +61,7 @@ const styles = {
     &:read-only {
       box-shadow: none !important;
       pointer-events: none;
+      padding-right: ${sv.paddingExtraLarge};
     }
 
     @media ${sv.screenL} {
@@ -77,6 +79,7 @@ const styles = {
   valid: css`
     input {
       box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
+      padding-right: ${sv.paddingExtraLarge};
     }
   `,
   icon: css`
@@ -90,6 +93,7 @@ const styles = {
   error: css`
     input {
       box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
+      padding-right: ${sv.paddingExtraLarge};
     }
   `,
   hidden: css`
@@ -185,6 +189,11 @@ const styles = {
       > i {
         font-size: 0.95em;
       }
+    }
+  `,
+  smallRightPadding: css`
+    input {
+      padding-right: ${sv.paddingLarge} !important;
     }
   `,
 };
@@ -293,6 +302,9 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
         [className as string]: className != null,
         [placeholderStyles.shimmer]: isPlaceholder,
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+        [styles.smallRightPadding]:
+          size === Size.SMALL &&
+          ((error != null && error !== false) || (Boolean(value) && valid) || onChange == null),
       })}>
       <div className={styles.outerWrapper}>
         {run(() => {

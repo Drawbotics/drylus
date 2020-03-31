@@ -63,6 +63,10 @@ const styles = {
     box-shadow: none !important;
     pointer-events: none;
 
+    > select {
+      padding-right: ${sv.paddingExtraLarge} !important;
+    }
+
     &::after {
       content: none;
     }
@@ -118,6 +122,11 @@ const styles = {
       > i {
         font-size: 0.95em;
       }
+    }
+  `,
+  smallReadOnly: css`
+    select {
+      padding-right: ${sv.defaultPadding} !important;
     }
   `,
 };
@@ -207,6 +216,7 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
         [styles.valid]: Boolean(value) && valid,
         [styles.error]: error != null && error !== false,
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+        [styles.smallReadOnly]: onChange == null && size === Size.SMALL,
       })}>
       {run(() => {
         if (loading) {
