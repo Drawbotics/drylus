@@ -4,11 +4,12 @@ import React from 'react';
 import { displayValue, normalizeValue } from '../utils';
 
 const SelectProp = ({ prop, value, onChange, enums }) => {
+  console.log('test', prop)
   const { key, type } = prop;
-  const { value: values } = type;
-  const isEnum = value?.description;
+  const { values } = type;
+  const isEnum = type.type === 'enum';
   const finalValue = isEnum
-    ? (values[0].value.split('.')[0] || '') + '.' + (value?.description || value)
+    ? (type?.name || '') + '.' + (value?.description || value)
     : normalizeValue(value);
   return (
     <div style={{ minWidth: 200 }}>
@@ -21,11 +22,11 @@ const SelectProp = ({ prop, value, onChange, enums }) => {
             value: '_empty',
           },
           ...values.map((v) => ({
-            label: isEnum ? `${displayValue(v.value)}` : `${normalizeValue(v.value)}`,
-            value: isEnum ? displayValue(v.value) : normalizeValue(v.value),
+            label: isEnum ? v : `${normalizeValue(v.value)}`,
+            value: isEnum ? v : normalizeValue(v.value),
           })),
         ]}
-        onChange={(v, k) => onChange(normalizeValue(v, enums), k)}
+        onChange={(v, k) => { console.log({v, k}); onChange(normalizeValue(v, enums), k.toLowerCase())}}
       />
     </div>
   );

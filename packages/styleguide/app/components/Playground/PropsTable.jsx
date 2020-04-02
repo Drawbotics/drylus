@@ -1,6 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
 import {
   Color,
+  Category,
+  Tier,
+  Align,
+  Shade,
   Flex,
   FlexItem,
   FlexJustify,
@@ -21,6 +25,7 @@ import { css } from 'emotion';
 import React, { Fragment } from 'react';
 
 import PropsInfo from './PropsInfo';
+import Prop from './Prop';
 import { generateDocs, capitalizeFirst } from './utils';
 
 const styles = {
@@ -43,7 +48,7 @@ function _isEnum(prop) {
   return prop?.type?.type === 'enum';
 }
 
-const PropsTable = ({ component, onChange, activeProps, enums }) => {
+const PropsTable = ({ component, onChange, activeProps }) => {
   const props = _getProps(component);
 
   return (
@@ -119,11 +124,10 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                     }}
                   </TCell>
                   <TCell>
-                    {/* {do {
+                    {do {
                       if (activeProps) {
                         <Prop
                           enums={{
-                            ...enums,
                             Category,
                             Size,
                             Tier,
@@ -132,13 +136,14 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                             Color,
                             Shade,
                           }}
+                          type={prop.type.type}
                           name={key}
                           prop={prop}
                           value={activeProps[key]}
                           onChange={onChange}
                         />;
                       }
-                    }} */}
+                    }}
                   </TCell>
                 </TRow>
               );

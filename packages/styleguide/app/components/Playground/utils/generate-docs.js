@@ -223,7 +223,7 @@ export function generateDocs(componentName, docs) {
     return null;
   }
 
-  const res = interfaceDescription.children.slice(0).reduce((props, prop) => {
+  const res = interfaceDescription.children.slice(0, 1).reduce((props, prop) => {
     return {
       ...props,
       [prop.name]: {
