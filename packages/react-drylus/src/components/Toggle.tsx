@@ -75,7 +75,7 @@ const styles = {
   `,
 };
 
-interface ToggleProps {
+export interface ToggleProps {
   /** Triggered when toggle value is changed */
   onChange: (value: boolean) => void;
 

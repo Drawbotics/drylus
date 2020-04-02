@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/react-drylus",
-  "version": "6.2.0-alpha.5",
+  "version": "6.2.1-beta.16",
   "description": "React components for the Drawbotics' ecosystem",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "license": "ISC",

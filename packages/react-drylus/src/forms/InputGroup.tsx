@@ -17,7 +17,7 @@ import {
 } from './';
 import { Hint } from './Hint';
 
-type InputGroupChild =
+export type InputGroupChild =
   | React.ReactElement<typeof MultiSelect>
   | React.ReactElement<typeof RangeInput>
   | React.ReactElement<typeof NumberInput>
@@ -28,7 +28,7 @@ type InputGroupChild =
   | React.ReactElement<typeof Input>
   | React.ReactElement<typeof Select>;
 
-interface InputGroupProps {
+export interface InputGroupProps {
   /** Form components that will be grouped together */
   children: Array<InputGroupChild>; // TODO only allow form components
 

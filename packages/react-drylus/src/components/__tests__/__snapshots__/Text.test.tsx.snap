@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text matches snapshot when it has a size and category 1`] = `
+.emotion-0 {
+  display: inline;
+  color: #172b4e;
+  font-size: 1.1rem;
+  color: #3DB5D0;
+}
+
+<span
+  className="emotion-0"
+>
+  Text content
+</span>
+`;
+
+exports[`Text matches snapshot when it has children 1`] = `
+.emotion-0 {
+  display: inline;
+  color: #172b4e;
+  font-size: 1rem;
+}
+
+<span
+  className="emotion-0"
+>
+  Text content
+</span>
+`;
+
+exports[`Text matches snapshot when it is bold 1`] = `
+.emotion-0 {
+  display: inline;
+  font-weight: 500;
+  -webkit-letter-spacing: 0.01rem;
+  -moz-letter-spacing: 0.01rem;
+  -ms-letter-spacing: 0.01rem;
+  letter-spacing: 0.01rem;
+  color: #172b4e;
+  font-size: 1rem;
+}
+
+<span
+  className="emotion-0"
+>
+  Text content
+</span>
+`;
+
+exports[`Text matches snapshot when it is light and inversed 1`] = `
+.emotion-0 {
+  display: inline;
+  font-weight: 300;
+  -webkit-letter-spacing: 0.06rem;
+  -moz-letter-spacing: 0.06rem;
+  -ms-letter-spacing: 0.06rem;
+  letter-spacing: 0.06rem;
+  color: #fff;
+  font-size: 1rem;
+}
+
+<span
+  className="emotion-0"
+>
+  Text content
+</span>
+`;

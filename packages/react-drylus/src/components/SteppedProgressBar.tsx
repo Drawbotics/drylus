@@ -171,7 +171,7 @@ const styles = {
   `,
 };
 
-interface SteppedProgressBarProps {
+export interface SteppedProgressBarProps {
   /** Determines how many steps there are in the bar */
   steps: number;
 

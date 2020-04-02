@@ -23,7 +23,7 @@ const styles = {
   `,
 };
 
-interface LabelProps {
+export interface LabelProps {
   /** Just text for the label */
   children?: string | React.ReactNode;
 

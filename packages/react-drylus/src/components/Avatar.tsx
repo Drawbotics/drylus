@@ -64,7 +64,7 @@ const styles = {
   `,
 };
 
-interface AvatarProps {
+export interface AvatarProps {
   /** Image url. Takes the full background of the avatar if given, will be fit to cover surface. Takes precedence over text */
   image?: string;
 

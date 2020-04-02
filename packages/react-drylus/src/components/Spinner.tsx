@@ -87,7 +87,7 @@ const styles = {
   `,
 };
 
-interface SpinnerProps {
+export interface SpinnerProps {
   /**
    * @default Size.DEFAULT
    * @description uses enum Size

@@ -47,7 +47,7 @@ const styles = {
   `,
 };
 
-interface SplashScreenProps {
+export interface SplashScreenProps {
   /** @deprecated use component rendering instead */
   visible?: boolean;
 

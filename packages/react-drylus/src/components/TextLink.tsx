@@ -87,7 +87,7 @@ export enum LinkUnderlined {
   HOVER = 'HOVER',
 }
 
-interface TextLinkProps {
+export interface TextLinkProps {
   /** Text of the link */
   children?: React.ReactNode;
 

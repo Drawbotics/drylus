@@ -36,7 +36,7 @@ const styles = {
   `,
 };
 
-interface BannerProps {
+export interface BannerProps {
   /** Message shown in the banner */
   children: React.ReactNode;
 

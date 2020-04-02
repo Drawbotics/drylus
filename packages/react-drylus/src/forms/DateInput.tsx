@@ -8,7 +8,7 @@ import { createPortal } from 'react-dom';
 
 import { themeStyles } from '../base';
 import { Button, Icon } from '../components';
-import { Align } from '../enums';
+import { Align, Size } from '../enums';
 import { Responsive, Style } from '../types';
 import { useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
@@ -19,7 +19,6 @@ const styles = {
 
     input {
       white-space: nowrap;
-      min-height: 40px;
     }
   `,
   calendarContainer: css`
@@ -160,7 +159,7 @@ const DEFAULT_OPTIONS = {
   day: 'numeric',
 };
 
-interface DateObject {
+export interface DateObject {
   day: number;
   month: number;
   year: number;
@@ -201,7 +200,7 @@ function _getShouldRenderTop(box: DOMRect) {
   return false;
 }
 
-interface DateInputProps {
+export interface DateInputProps {
   /** Can be empty string, or object containing day, month, year as numbers */
   value: DateObject | '';
 
@@ -257,6 +256,12 @@ interface DateInputProps {
    */
   align?: Align.LEFT | Align.RIGHT;
 
+  /**
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -283,6 +288,7 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
     loading,
     style,
     align = Align.LEFT,
+    size = Size.DEFAULT,
   } = useResponsiveProps<DateInputProps>(rest, responsive);
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
@@ -379,6 +385,7 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
         type={isDesktop ? null : 'date'}
         max={!isDesktop && maxDate ? _objectToDateString(maxDate) : null}
         min={!isDesktop && minDate ? _objectToDateString(minDate) : null}
+        size={size}
       />
       {isDesktop &&
         outletElement &&

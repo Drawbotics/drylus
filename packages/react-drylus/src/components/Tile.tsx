@@ -31,7 +31,7 @@ const styles = {
   `,
 };
 
-interface TileProps {
+export interface TileProps {
   /** Displayed at the top of the tile, looks like a label */
   title?: string;
 

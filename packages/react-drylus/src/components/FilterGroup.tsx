@@ -8,7 +8,7 @@ import { Flex, FlexItem, FlexJustify, Margin } from '../layout';
 import { Deprecated, run } from '../utils';
 import { Button } from './Button';
 import { Drawer } from './Drawer';
-import { Icon, Icons } from './Icon';
+import { Icon, IconType } from './Icon';
 
 const styles = {
   okButton: css`
@@ -18,12 +18,12 @@ const styles = {
   `,
 };
 
-interface FilterGroupProps {
+export interface FilterGroupProps {
   /** Title which appears on top of the modal */
   label: string;
 
   /** Icon rendered on the button that replaces the filters */
-  icon: keyof typeof Icons;
+  icon: IconType;
 
   /** @deprecated use children instead */
   filters?: Array<React.ReactNode>;
