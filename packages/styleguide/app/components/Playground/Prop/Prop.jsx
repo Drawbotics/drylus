@@ -13,6 +13,10 @@ const styles = {
   `,
 };
 
+function isIntrinsic(type) {
+  return typeof type === 'string' && ['boolean', 'number', 'string'].includes(type);
+}
+
 const Prop = ({ prop, name, value, onChange, enums }) => {
   const { type } = prop; 
   const propWithKey = { ...prop, key: name };
@@ -21,7 +25,7 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
     case 'boolean':
       return <ToggleProp prop={propWithKey} value={value} onChange={onChange} />;
     case 'enum':
-      return <SelectProp prop={propWithKey} value={value} onChange={onChange} enums={enums} />;
+      return <SelectProp prop={propWithKey} value={value} onChange={onChange} enums={enums} isEnum={true} />;
     case 'string':
       return <InputProp prop={propWithKey} value={value} onChange={onChange} />;
     case 'number':
@@ -33,6 +37,9 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
         />
       );
     case 'union':
+        if (type.values.every((v) => ! isIntrinsic(v))) {
+          return <SelectProp prop={propWithKey} value={value} onChange={onChange} enums={enums} isEnum={false} />;
+        }
       return (
         <div className={styles.union}>
           {prop.type.value.map((type, i) => (
