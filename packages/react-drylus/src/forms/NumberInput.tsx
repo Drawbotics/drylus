@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Icon } from '../components';
+import { Size } from '../enums';
 import { Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
@@ -58,7 +59,12 @@ const styles = {
     }
 
     & > i {
-      font-size: 1rem;
+      font-size: 1em;
+    }
+  `,
+  small: css`
+    i {
+      font-size: 0.8em;
     }
   `,
   disabled: css`
@@ -92,12 +98,19 @@ const styles = {
     color: ${sv.colorSecondary};
     pointer-events: none;
   `,
+  smallMax: css`
+    max-width: calc(100% - ${sv.marginSmall});
+  `,
+  smallRenderValue: css`
+    top: calc(${sv.marginExtraSmall} - 1px);
+    left: ${sv.marginExtraSmall};
+  `,
   value: css`
     color: transparent;
   `,
 };
 
-interface NumberInputProps {
+export interface NumberInputProps {
   /** Value displayed in the field */
   value: number | '-' | '';
 
@@ -111,7 +124,7 @@ interface NumberInputProps {
   placeholder?: string;
 
   /** Triggered when the value is changed (typing or clicking +/-). If not given, the field is read-only */
-  onChange?: (v: number | string, name?: string) => void;
+  onChange?: (v: NumberInputProps['value'], name?: string) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -123,7 +136,7 @@ interface NumberInputProps {
   valid?: boolean;
 
   /** Use if you want to modify the way you display the value (string operations only) */
-  renderValue?: (v: number | string) => string;
+  renderValue?: (v: NumberInputProps['value']) => string;
 
   /**
    * Limits the max value
@@ -152,6 +165,12 @@ interface NumberInputProps {
    */
   step?: number;
 
+  /**
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -176,12 +195,13 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
     loading,
     style,
     step = 1,
+    size = Size.DEFAULT,
   } = useResponsiveProps(rest, responsive);
   const inputRef = useRef<HTMLInputElement>(null);
   const leftSpanRef = useRef<HTMLSpanElement>(null);
   const [extraLeftPadding, setExtraLeftPadding] = useState<number>();
 
-  const handleInputOnChange = (v: number | string) => {
+  const handleInputOnChange = (v: NumberInputProps['value']) => {
     const numericalValue = Number(v);
 
     if (onChange != null) {
@@ -216,7 +236,11 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
         if (renderValue != null && (value === 0 || value)) {
           const sections = renderValue(value).split(String(value));
           return (
-            <span className={styles.renderedValue}>
+            <span
+              className={cx(styles.renderedValue, {
+                [styles.smallMax]: !withCounter,
+                [styles.smallRenderValue]: size === Size.SMALL,
+              })}>
               <span ref={leftSpanRef}>{sections[0]}</span>
               <span className={styles.value}>{value}</span>
               <span>{sections[1]}</span>
@@ -242,15 +266,23 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
         inputMode="numeric"
         className={styles.numberInput}
         extraLeftPadding={extraLeftPadding}
+        size={size}
         suffix={
           withCounter && onChange != null ? (
-            <div className={cx(styles.buttons, { [styles.disabled]: disabled })}>
+            <div
+              className={cx(styles.buttons, {
+                [styles.disabled]: disabled,
+                [styles.small]: size === Size.SMALL,
+              })}>
               <button
                 className={styles.button}
                 onClick={() => {
                   const res = (Number(value) ?? 0) + step;
                   if (!disabled && value < max) {
-                    onChange(Number.isInteger(res) ? res : res.toFixed(decimalPlaces), name);
+                    onChange(
+                      Number.isInteger(res) ? res : Number(res.toFixed(decimalPlaces)),
+                      name,
+                    );
                   }
                 }}>
                 <Icon name="plus" bold />
@@ -260,7 +292,10 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
                 onClick={() => {
                   const res = (Number(value) ?? 0) - step;
                   if (!disabled && value > min) {
-                    onChange(Number.isInteger(res) ? res : res.toFixed(decimalPlaces), name);
+                    onChange(
+                      Number.isInteger(res) ? res : Number(res.toFixed(decimalPlaces)),
+                      name,
+                    );
                   }
                 }}>
                 <Icon name="minus" bold />

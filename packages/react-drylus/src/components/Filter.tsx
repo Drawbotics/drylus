@@ -112,7 +112,7 @@ const styles = {
   `,
 };
 
-interface BaseFilterProps {
+export interface BaseFilterProps {
   /**
    * Text shown in the last row of the panel
    * @default 'Clear'
@@ -167,11 +167,17 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
   } = useResponsiveProps<BaseFilterProps>(rest, responsive);
 
   const panelRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
   const [panelOpen, setPanelOpen] = useState(false);
 
   const handleDocumentClick = (e: Event) => {
     // Needs Event because React.MouseEvent<HTMLDivElement> does not match addEventListener signature
-    if (!panelRef.current?.contains(e.target as Node) && panelRef.current !== e.target) {
+    if (
+      !panelRef.current?.contains(e.target as Node) &&
+      panelRef.current !== e.target &&
+      !triggerRef.current?.contains(e.target as Node) &&
+      triggerRef.current !== e.target
+    ) {
       setPanelOpen(false);
     }
   };
@@ -185,9 +191,9 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleDocumentClick);
+    document.addEventListener('click', handleDocumentClick);
     return () => {
-      document.removeEventListener('mousedown', handleDocumentClick);
+      document.removeEventListener('click', handleDocumentClick);
     };
   }, []);
 
@@ -198,6 +204,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
         [styles.fullWidth]: fullWidth,
       })}>
       <div
+        ref={triggerRef}
         data-element="trigger"
         className={cx(styles.trigger, {
           [styles.active]: panelOpen || active,
@@ -233,7 +240,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
   );
 };
 
-interface SelectFilterOption extends Option {
+export interface SelectFilterOption<T> extends Option<T> {
   /** Shown at the end of the option */
   trailing?: React.ReactNode;
 
@@ -241,47 +248,29 @@ interface SelectFilterOption extends Option {
   leading?: React.ReactNode;
 }
 
-interface SelectFilterProps extends BaseFilterProps {
+export interface SelectFilterProps<T> extends BaseFilterProps {
   /** The items to show in the filter panel: value(string, number), label(string), leading(node), trailing(node) */
-  options: Array<SelectFilterOption>;
+  options: Array<SelectFilterOption<T>>;
 
   /** Determines which value is currently active */
-  value?: string | number;
-
-  /**
-   * Used to pick each value in the options array
-   * @default 'value'
-   */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey?: string;
+  value?: SelectFilterOption<T>['value'];
 
   /** Triggered when an option is clicked */
-  onChange: (value: string | number) => void;
+  onChange: (value: SelectFilterOption<T>['value']) => void;
 
   /** Used for style overrides */
   style?: Style;
 }
 
-export const SelectFilter = ({
+export const SelectFilter = <T extends any>({
   options,
   value,
-  valueKey = 'value',
-  labelKey = 'label',
   onChange,
   label,
   ...rest
-}: SelectFilterProps) => {
+}: SelectFilterProps<T>) => {
   const currentLabel =
-    value != null
-      ? (options.find(
-          (option) => String(option[valueKey as keyof SelectFilterOption]) === String(value),
-        )?.[labelKey as keyof SelectFilterOption] as string | number)
-      : label;
+    value != null ? options.find((option) => String(option.value) === String(value))?.label : label;
   return (
     <BaseFilter
       {...rest}
@@ -290,17 +279,13 @@ export const SelectFilter = ({
       active={currentLabel != null && value != null}>
       {options.map((option) => (
         <div
-          key={option[valueKey as keyof SelectFilterOption] as string | number}
+          key={option.value}
           className={cx(styles.option, styles.smallPadding, {
-            [styles.activeOption]:
-              String(value) === String(option[valueKey as keyof SelectFilterOption]),
+            [styles.activeOption]: String(value) === String(option.value),
           })}
-          onClick={() => onChange(option[valueKey as keyof SelectFilterOption] as string | number)}>
+          onClick={() => onChange(option.value)}>
           <div className={styles.label}>
-            <ListTile
-              title={option[labelKey as keyof SelectFilterOption]}
-              leading={option.leading}
-            />
+            <ListTile title={option.label} leading={option.leading} />
           </div>
           {run(() => {
             if (option.trailing != null) {
@@ -313,19 +298,15 @@ export const SelectFilter = ({
   );
 };
 
-function getLabelForCheckboxFilter(
+function getLabelForCheckboxFilter<T>(
   label: string,
-  options: Array<Option>,
-  values: Array<string | number>,
-  valueKey: string,
-  labelKey: string,
+  options: Array<Option<T>>,
+  values: Array<Option<T>['value']>,
 ) {
   if (values == null) {
     return label;
   } else if (values.length === 1) {
-    return options.find(
-      (option) => String(option[valueKey as keyof Option]) === String(values[0]),
-    )?.[labelKey as keyof Option];
+    return options.find((option) => String(option.value) === String(values[0]))?.label;
   } else if (values.length > 1) {
     return `${label} (${values.length})`;
   } else {
@@ -333,42 +314,28 @@ function getLabelForCheckboxFilter(
   }
 }
 
-interface CheckboxFilterProps extends BaseFilterProps {
+export interface CheckboxFilterProps<T> extends BaseFilterProps {
   /** The items to show in the filter panel: value(string, number), label(string) */
-  options: Array<Option>;
+  options: Array<Option<T>>;
 
   /** Determines which values are currently active */
-  values?: Array<string | number>;
-
-  /**
-   * Used to pick each value in the options array
-   * @default 'value'
-   */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey?: string;
+  values?: Array<Option<T>['value']>;
 
   /** Triggered when an option is clicked. Returns the list of currently selected elements */
-  onChange: (values: Array<number | string>) => void;
+  onChange: (values: Array<Option<T>['value']>) => void;
 
   /** Used for style overrides */
   style?: Style;
 }
 
-export const CheckboxFilter = ({
+export const CheckboxFilter = <T extends any>({
   options,
   values = [],
-  valueKey = 'value',
-  labelKey = 'label',
   onChange,
   label,
   ...rest
-}: CheckboxFilterProps) => {
-  const currentLabel = getLabelForCheckboxFilter(label, options, values, valueKey, labelKey);
+}: CheckboxFilterProps<T>) => {
+  const currentLabel = getLabelForCheckboxFilter(label, options, values);
   return (
     <BaseFilter
       {...rest}
@@ -377,19 +344,17 @@ export const CheckboxFilter = ({
       {options.map((option) => (
         <label
           htmlFor={String(option.value)}
-          key={option[valueKey as keyof Option]}
+          key={option.value}
           className={cx(styles.option, styles.defaultCursor)}>
           <Checkbox
             id={String(option.value)}
             onChange={(checked: boolean) => {
               checked
-                ? onChange([...values, option[valueKey as keyof Option]])
-                : onChange(
-                    values.filter((v) => String(v) !== String(option[valueKey as keyof Option])),
-                  );
+                ? onChange([...values, option.value])
+                : onChange(values.filter((v) => String(v) !== String(option.value)));
             }}
-            value={values.includes(option[valueKey as keyof Option])}>
-            {String(option[labelKey as keyof Option])}
+            value={values.includes(option.value)}>
+            {String(option.label)}
           </Checkbox>
         </label>
       ))}

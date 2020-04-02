@@ -52,7 +52,7 @@ const styles = {
 
 const staticStyles = omit(styles, ['root', 'withSpan']);
 
-interface GridItemProps {
+export interface GridItemProps {
   /** Content of the item */
   children: React.ReactNode;
 
@@ -66,10 +66,10 @@ interface GridItemProps {
   style?: Style;
 
   /** @private */
-  columns: number;
+  columns?: number;
 }
 
-export const GridItem = ({ children, style, span = 1, columns }: GridItemProps) => {
+export const GridItem = ({ children, style, span = 1, columns = 1 }: GridItemProps) => {
   if (span > columns) {
     console.warn(`Warning: GridItem span cannot be more than number of columns`);
   }
@@ -81,7 +81,7 @@ export const GridItem = ({ children, style, span = 1, columns }: GridItemProps) 
   );
 };
 
-interface GridProps {
+export interface GridProps {
   /** Should all be of type GridItem */
   children: React.ReactElement<typeof GridItem> | Array<React.ReactElement<typeof GridItem>>;
 
@@ -108,7 +108,8 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
   );
 
   const invalidChildren = React.Children.map(children, (x) => x).some(
-    (child) => child != null && child.type !== GridItem,
+    (child) =>
+      child != null && (child.type !== GridItem || !child.type.toString().includes('fragment')),
   );
   if (invalidChildren) {
     console.warn('Grid should only accept GridItem as children');

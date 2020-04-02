@@ -8,7 +8,7 @@ import React, { Fragment, createContext, useContext, useState } from 'react';
 import { placeholderStyles } from '../components';
 import { Size } from '../enums';
 import { Margin } from '../layout';
-import { Style } from '../types';
+import { OnClickCallback, Style } from '../types';
 import { run } from '../utils';
 import { Icon } from './Icon';
 import { Label } from './Label';
@@ -291,7 +291,7 @@ const styles = {
   `,
 };
 
-interface TCellProps extends React.TdHTMLAttributes<HTMLElement> {
+export interface TCellProps extends React.TdHTMLAttributes<HTMLElement> {
   children: React.ReactNode;
 
   /** @private */
@@ -352,7 +352,7 @@ export const TCell = ({
   );
 };
 
-interface TRowProps {
+export interface TRowProps {
   /** Should be of type TCell */
   children: React.ReactElement<typeof TCell> | Array<React.ReactElement<typeof TCell>>;
 
@@ -360,7 +360,7 @@ interface TRowProps {
   highlighted?: boolean;
 
   /** Triggered when any part of the row is clicked */
-  onClick?: () => void;
+  onClick?: OnClickCallback<HTMLTableRowElement>;
 
   /** If true and `onClick` is provided, shows a pointer when hovering the row	 */
   clickable?: boolean;
@@ -429,7 +429,7 @@ export const TRow = ({
   );
 };
 
-interface THeadProps {
+export interface THeadProps {
   children: React.ReactElement<typeof TCell> | Array<React.ReactElement<typeof TCell>>;
 }
 
@@ -454,7 +454,7 @@ export const THead = ({ children }: THeadProps) => {
   );
 };
 
-interface TBodyProps {
+export interface TBodyProps {
   children: React.ReactElement<typeof TRow> | Array<React.ReactElement<typeof TRow>>;
 }
 
@@ -476,9 +476,19 @@ export const TBody = ({ children }: TBodyProps) => {
   );
 };
 
-type HeaderData = Array<string | { label: React.ReactNode; value: string }>;
+export interface TableEntry {
+  id?: number | string;
+  data?: Array<TableEntry>;
+  [key: string]: NonNullable<any>;
+}
 
-interface LoadingTableProps {
+export type TableData = Array<TableEntry>;
+
+export type DataEntry = keyof Exclude<TableEntry, 'id' | 'data'> & string;
+
+export type HeaderData = Array<DataEntry | { label: React.ReactNode; value: DataEntry }>;
+
+export interface LoadingTableProps {
   columns: HeaderData;
 }
 
@@ -487,7 +497,9 @@ const FakeTable = ({ columns }: LoadingTableProps) => {
     <Fragment>
       <THead>
         {columns.map((column, i) => (
-          <TCell key={i}>{typeof column === 'string' ? column : column.label}</TCell>
+          <TCell key={i}>
+            {typeof column === 'string' || typeof column === 'number' ? column : column.label}
+          </TCell>
         ))}
       </THead>
       <TBody>
@@ -496,7 +508,11 @@ const FakeTable = ({ columns }: LoadingTableProps) => {
           .map((...args) => (
             <TRow key={args[1]}>
               {columns.map((column, i) => (
-                <TCell key={i} data-th={typeof column === 'string' ? column : column.label}>
+                <TCell
+                  key={i}
+                  data-th={
+                    typeof column === 'string' || typeof column === 'number' ? column : column.label
+                  }>
                   <div className={cx(styles.loadingBodyCell, placeholderStyles.shimmer)} />
                 </TCell>
               ))}
@@ -507,7 +523,7 @@ const FakeTable = ({ columns }: LoadingTableProps) => {
   );
 };
 
-interface EmptyTableProps {
+export interface EmptyTableProps {
   columns: HeaderData;
   emptyContent: React.ReactNode;
 }
@@ -523,7 +539,11 @@ const EmptyTable = ({ columns, emptyContent }: EmptyTableProps) => {
               <div className={styles.emptyTableHeader}>
                 {columns.map((column, i) => (
                   <Margin key={i} size={{ top: i === 0 ? undefined : Size.DEFAULT }}>
-                    <Label ellipsized>{typeof column === 'string' ? column : column.label}</Label>
+                    <Label ellipsized>
+                      {typeof column === 'string' || typeof column === 'number'
+                        ? column
+                        : column.label}
+                    </Label>
                   </Margin>
                 ))}
               </div>
@@ -538,7 +558,9 @@ const EmptyTable = ({ columns, emptyContent }: EmptyTableProps) => {
     <Fragment>
       <THead>
         {columns.map((column, i) => (
-          <TCell key={i}>{typeof column === 'string' ? column : column.label}</TCell>
+          <TCell key={i}>
+            {typeof column === 'string' || typeof column === 'number' ? column : column.label}
+          </TCell>
         ))}
       </THead>
       <TBody>
@@ -583,11 +605,6 @@ function _addAttributesToCells(
   }
 }
 
-interface TableEntry extends Record<string, React.ReactNode> {
-  id?: number | string;
-  data?: Array<TableEntry>;
-}
-
 function _generateTable({
   data,
   header,
@@ -602,10 +619,10 @@ function _generateTable({
   header?: HeaderData;
   renderCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
   renderChildCell: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
-  childHeader?: Array<string>;
+  childHeader?: Array<DataEntry>;
   onClickRow?: (row: TableEntry) => void;
   clickable?: boolean;
-  activeRow?: string | number;
+  activeRow?: TableEntry['id'];
 }): React.ReactElement<typeof TBody> | Array<React.ReactElement<typeof TRow>> {
   if (Array.isArray(data)) {
     return (
@@ -641,7 +658,7 @@ function _generateTable({
         {run(() => {
           if (header != null) {
             return header.map((item, i) => {
-              const path = typeof item === 'string' ? item : item.value;
+              const path = typeof item === 'string' || typeof item === 'number' ? item : item.value;
               return (
                 <TCell key={`${i}-${get(row, path)}`}>
                   {renderData(get(row, path), i, header.length)}
@@ -686,9 +703,7 @@ function _generateTable({
   }
 }
 
-type TableData = Array<TableEntry>;
-
-interface TableProps {
+export interface TableProps {
   /** Will be THead and TBody, optional if using the auto generated table */
   children?:
     | [React.ReactElement<typeof THead>, React.ReactElement<typeof TBody>]
@@ -706,29 +721,35 @@ interface TableProps {
   /** If passed, the table will be generated from this, and children will be ignored */
   data?: TableData;
 
-  /** Returns the child given to each row cell. Params (value, index, columns) */
+  /**
+   * Returns the child given to each row cell. Params (value, index, columns)
+   * @deprecated use the data object directly instead
+   */
   renderCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
 
-  /** Same as renderCell but applies to the children cells (nested) */
+  /**
+   * Same as renderCell but applies to the children cells (nested)
+   * @deprecated use the data object directly instead
+   */
   renderChildCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
 
   /** Array of strings to generate the header of the table (each string is a label). data prop keys will be filtered by these */
   header?: HeaderData;
 
   /** Array of strings to generate the order of the children of the table (each string is a key). data prop keys will be filtered by these */
-  childHeader?: Array<string>;
+  childHeader?: Array<DataEntry>;
 
   /** Pass the keys of the attributes in the table which can be sorted. To be used with `data`. */
-  sortableBy?: Array<string>;
+  sortableBy?: Array<DataEntry>;
 
   /** Sets the currently sorted column. Object with 1 key corresponding to the current header, and a value of "asc" or "desc" for the sorting */
   activeHeader?: {
-    key: string;
+    key: DataEntry;
     direction: 'asc' | 'desc';
   };
 
   /** Called when a sortable column header is clicked, returns the key of the clicked header */
-  onClickHeader?: (key: string) => void;
+  onClickHeader?: (key: DataEntry) => void;
 
   /** Highlights the rows when hovered. Does not work on tables with nested data */
   highlighted?: boolean;
@@ -743,10 +764,10 @@ interface TableProps {
   isLoading?: boolean;
 
   /** Triggered when a row is clicked, returns the given data object for that row. If used with nested tables, it will only return the root row object value */
-  onClickRow?: () => TableEntry;
+  onClickRow?: (row: TableEntry) => void;
 
   /** Will set the row with the same `id` property to "highlighted", useful when working with data generated tables */
-  activeRow?: number | string;
+  activeRow?: TableEntry['id'];
 
   /** If present, all the content of the table is replaced with this, used to show info when there is no data in the table */
   emptyContent?: React.ReactNode;
@@ -788,7 +809,8 @@ export const Table = ({
       ? [
           <THead key="head">
             {header.map((hItem) => {
-              const v = typeof hItem === 'string' ? hItem : hItem.value;
+              const v =
+                typeof hItem === 'string' || typeof hItem === 'number' ? hItem : hItem.value;
               return (
                 <TCell key={v}>
                   {run(() => {
@@ -807,11 +829,15 @@ export const Table = ({
                             <Icon name="chevron-up" />
                             <Icon name="chevron-down" />
                           </span>
-                          {typeof hItem === 'string' ? hItem : hItem.label}
+                          {typeof hItem === 'string' || typeof hItem === 'number'
+                            ? hItem
+                            : hItem.label}
                         </span>
                       );
                     } else {
-                      return typeof hItem === 'string' ? hItem : hItem.label;
+                      return typeof hItem === 'string' || typeof hItem === 'number'
+                        ? hItem
+                        : hItem.label;
                     }
                   })}
                 </TCell>
@@ -844,7 +870,11 @@ export const Table = ({
       className={cx(styles.root, {
         [styles.fullWidth]: fullWidth,
         [styles.leftPadded]:
-          (hasNestedData || withNesting || sortableBy) && screenSize > ScreenSizes.L,
+          (hasNestedData ||
+            withNesting ||
+            (sortableBy &&
+              sortableBy.includes(typeof header[0] === 'string' ? header[0] : header[0].value))) &&
+          screenSize > ScreenSizes.L,
         [styles.highlighted]: highlighted && !(hasNestedData || withNesting),
       })}>
       <RowsContext.Provider value={[rowsStates, handleSetRowState]}>

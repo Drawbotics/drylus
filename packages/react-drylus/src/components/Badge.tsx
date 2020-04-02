@@ -41,7 +41,7 @@ const styles = {
   `,
 };
 
-interface BadgeProps {
+export interface BadgeProps {
   /** Value displayed by the badge */
   value: number;
 

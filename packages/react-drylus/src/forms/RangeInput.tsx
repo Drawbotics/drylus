@@ -21,7 +21,7 @@ const styles = {
     width: 100%;
     height: calc(${sv.marginExtraSmall} / 2);
     border-radius: calc(${sv.marginExtraSmall} / 2);
-    background-color: ${sv.neutralLight};
+    background-color: ${sv.neutral};
   `,
   disabledRail: css`
     background-color: ${sv.neutralLighter};
@@ -75,7 +75,7 @@ const styles = {
   `,
 };
 
-interface RangeTooltipProps {
+export interface RangeTooltipProps {
   value: React.ReactNode;
 
   visible: boolean;
@@ -93,14 +93,15 @@ const RangeTooltip = ({ value, visible }: RangeTooltipProps) => {
   );
 };
 
-interface HandleProps {
+export interface HandleProps {
   handle: SliderItem;
   getHandleProps: (id: string, options: any) => any; // Broken at lib level
-  renderValue?: <T>(value: number) => T;
+  renderValue?: (value: number) => string;
   disabled?: boolean;
+  hideTooltip?: boolean;
 }
 
-const Handle = ({ handle, getHandleProps, renderValue, disabled }: HandleProps) => {
+const Handle = ({ handle, getHandleProps, renderValue, disabled, hideTooltip }: HandleProps) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const { id, value, percent } = handle;
 
@@ -119,7 +120,7 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled }: HandleProps) 
       className={cx(styles.handle, { [styles.disabledHandle]: disabled })}
       {...getHandleProps(
         id,
-        disabled
+        disabled || hideTooltip
           ? {}
           : {
               onMouseDown: handleShowTooltip,
@@ -128,15 +129,17 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled }: HandleProps) 
               onTouchEnd: handleHideTooltip,
             },
       )}>
-      <RangeTooltip
-        visible={tooltipVisible}
-        value={renderValue != null ? renderValue(value) : value}
-      />
+      {!hideTooltip ? (
+        <RangeTooltip
+          visible={tooltipVisible}
+          value={renderValue != null ? renderValue(value) : value}
+        />
+      ) : null}
     </div>
   );
 };
 
-interface TrackProps {
+export interface TrackProps {
   source: SliderItem;
   target: SliderItem;
   getTrackProps: GetTrackProps;
@@ -156,7 +159,7 @@ const Track = ({ source, target, getTrackProps, disabled }: TrackProps) => {
   );
 };
 
-interface RangeInputProps {
+export interface RangeInputProps<T> {
   /** The minimum value displayed on the input, and the minimum selectable value */
   min: number;
 
@@ -164,44 +167,60 @@ interface RangeInputProps {
   max: number;
 
   /** If value is an array of numbers, then we display n handles, otherwise only 1 value shows 1 handle. If the value is larger than max, or smaller than min, the max or min will be used */
-  value: number | Array<number>;
+  value: T;
 
   /** Determines the range between each value, can be float or int */
   step?: number;
 
   /** Returns the value at the end of the slide (mouse up/touch end). For continuous updates while sliding use onUpdate */
-  onChange: (value: number | Array<number>) => void;
+  onChange: (value: T) => void;
 
   /** Returns value but on every step changed by the handle: render intensive */
-  onUpdate?: (value: number | Array<number>) => void;
+  onUpdate?: (value: T) => void;
 
   /** Disables the slider */
   disabled?: boolean;
 
   /** Function to custom display the given value(s): (v) => {} */
-  renderValue?: <T>(value: number) => T;
+  renderValue?: (value: number) => string;
+
+  /** If true, the min and max values are not rendered below the slider */
+  hideLabels?: boolean;
+
+  /** If true, the min and max values are not shown in the slider when modified */
+  hideTooltips?: boolean;
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
-export const RangeInput = ({ responsive, ...rest }: RangeInputProps) => {
-  const { min, max, value, step, onChange, onUpdate, disabled, renderValue } = useResponsiveProps<
-    RangeInputProps
-  >(rest, responsive);
+export const RangeInput = <T extends number | Array<number>>({
+  responsive,
+  ...rest
+}: RangeInputProps<T>) => {
+  const {
+    min,
+    max,
+    value,
+    step,
+    onChange,
+    onUpdate,
+    disabled,
+    renderValue,
+    hideLabels,
+    hideTooltips,
+  } = useResponsiveProps<RangeInputProps<T>>(rest, responsive);
 
-  const isMultiHandle = typeof value !== 'number' && value.length > 1;
+  const isMultiHandle = typeof value !== 'number' && (value as Array<number>).length > 1;
   const values: Array<number> = isMultiHandle ? (value as Array<number>) : [value as number];
 
   return (
     <Slider
       disabled={disabled}
       onUpdate={(values) =>
-        onUpdate != null
-          ? onUpdate(isMultiHandle ? (values as Array<number>) : values[0])
-          : undefined
+        onUpdate != null ? onUpdate(isMultiHandle ? (values as any) : values[0]) : undefined
       }
-      onChange={(values) => onChange(isMultiHandle ? (values as Array<number>) : values[0])}
+      onChange={(values) => onChange(isMultiHandle ? (values as any) : values[0])}
       mode={3}
       step={step}
       className={cx(styles.root, { [styles.disabled]: disabled })}
@@ -220,8 +239,9 @@ export const RangeInput = ({ responsive, ...rest }: RangeInputProps) => {
           <div>
             {handles.map((handle) => (
               <Handle
+                hideTooltip={hideTooltips}
                 disabled={disabled}
-                renderValue={renderValue}
+                renderValue={renderValue != null ? (v) => renderValue(v) : undefined}
                 key={handle.id}
                 handle={handle}
                 getHandleProps={getHandleProps}
@@ -245,14 +265,16 @@ export const RangeInput = ({ responsive, ...rest }: RangeInputProps) => {
           </div>
         )}
       </Tracks>
-      <div className={cx(styles.labels)}>
-        <div>
-          <Text size={Size.SMALL}>{renderValue != null ? renderValue(min) : min}</Text>
+      {hideLabels !== true ? (
+        <div className={cx(styles.labels)}>
+          <div>
+            <Text size={Size.SMALL}>{renderValue != null ? renderValue(min) : min}</Text>
+          </div>
+          <div>
+            <Text size={Size.SMALL}>{renderValue != null ? renderValue(max) : max}</Text>
+          </div>
         </div>
-        <div>
-          <Text size={Size.SMALL}>{renderValue != null ? renderValue(max) : max}</Text>
-        </div>
-      </div>
+      ) : null}
     </Slider>
   );
 };

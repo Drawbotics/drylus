@@ -95,4 +95,17 @@ We've started to use [Github Actions](https://github.com/features/actions) to en
 
 In order to enable automatic versioning we use [auto](https://github.com/intuit/auto) which uses the labels added to PRs to know what version to publish.
 
+### Key points
 Any push to master is automatically recognised as a bug fix (patch). You can look at the workflow configuration for more details.
+
+When you create a PR to master you should choose the next release version [`major`, `minor`, `patch`].
+
+We don't trigger auomatic releases on any other scenario other than pushing to master or PR to master. For pre-releases you should manually run the command
+```
+npm run pre-release
+```
+Which will automatically create a release for the next `beta` version i.e. MISSING - need to try with params
+
+## Issues
+Here are some issues you may ecounter when trying to develop/publish:
+- If you try to publish with node version >= 12, it will fail because of an old dependency of `s3`. For now use node version 10 or lower for that. A fix is coming.

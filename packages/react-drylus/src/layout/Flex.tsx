@@ -85,7 +85,7 @@ function prefixFlex(value: number) {
   };
 }
 
-interface FlexItemProps {
+export interface FlexItemProps {
   children: React.ReactNode;
 
   /** Determines how much space a flex item takes within the flex container. */
@@ -110,7 +110,7 @@ export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
   );
 };
 
-interface FlexProps {
+export interface FlexProps {
   children: React.ReactElement<typeof FlexItem> | Array<React.ReactElement<typeof FlexItem>>;
 
   /**
@@ -159,7 +159,8 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
   } = useResponsiveProps<FlexProps>(rest, responsive);
 
   const invalidChildren = React.Children.map(children, (x) => x).some(
-    (child) => child != null && child.type !== FlexItem,
+    (child) =>
+      child != null && child.type !== FlexItem && !child.type.toString().includes('fragment'),
   );
   if (invalidChildren) {
     console.warn('Flex should only accept FlexItem as children');

@@ -47,7 +47,7 @@ const styles = {
   `,
 };
 
-interface CalloutProps {
+export interface CalloutProps {
   /** Message shown in the callout */
   children: React.ReactNode;
 

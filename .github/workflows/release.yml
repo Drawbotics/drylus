@@ -17,15 +17,25 @@ jobs:
       run: npm install
 
     - name: Generate Changelog
+      if: "!contains(github.ref, 'beta')"
       run: |
         npx auto changelog --dry-run | grep -vE "lerna notice|lerna success|New Release Notes" > ${{ github.workflow }}-CHANGELOG.md
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
+    - name: Pre-release
+      uses: softprops/action-gh-release@v1
+      if: "contains(github.ref, '-')"
+      with:
+        prerelease: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Release
       uses: softprops/action-gh-release@v1
+      if: "!contains(github.ref, 'beta')"
       with:
         body_path: ${{ github.workflow }}-CHANGELOG.md
-        prerelease: ${{ contains(github.ref, '-') }}
+        prerelease: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

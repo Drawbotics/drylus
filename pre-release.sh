@@ -2,10 +2,8 @@
 
 export PATH=$(npm bin):$PATH
 
-npx lerna version prerelease --no-commit-hooks --no-changelog --no-git-tag-version --no-push
+npx lerna version prerelease --no-commit-hooks --no-changelog --yes
 
-git add .
+npx lerna publish from-package --ignore-prepublish --dist-tag beta --yes
 
-git commit -m "bump pre-release version"
-
-npx lerna publish from-package --ignore-prepublish --no-git-reset --pre-dist-tag alpha
+git stash

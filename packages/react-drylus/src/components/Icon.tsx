@@ -1,11 +1,12 @@
 import sv from '@drawbotics/drylus-style-vars';
+import { IconKeys, Icons as IconValues } from '@drawbotics/icons/dist/drycons';
 import { generateIconStyles, mapping } from '@drawbotics/icons/dist/drycons.js';
 import packageJson from '@drawbotics/icons/package.json';
 import { css, cx, injectGlobal } from 'emotion';
 import React from 'react';
 
 import { Category, Color } from '../enums';
-import { Style } from '../types';
+import { OnClickCallback, Style } from '../types';
 import { Deprecated, categoryEnumToColor, getEnumAsClass } from '../utils';
 
 const env = require('../utils/get-static-env');
@@ -46,17 +47,19 @@ const styles = {
   `,
 };
 
-export const Icons: Record<string, string> = mapping;
+export const Icons: Record<IconKeys, IconValues> = mapping;
 
-interface IconProps {
+export type IconType = IconValues;
+
+export interface IconProps {
   /** Name of the icon */
-  name: keyof typeof Icons;
+  name: IconType;
 
   /** Makes icon T H I C C */
   bold?: boolean;
 
   /** Triggered when the icon is clicked */
-  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  onClick?: OnClickCallback<HTMLElement>;
 
   /** @deprecated use color instead */
   category?: Category;

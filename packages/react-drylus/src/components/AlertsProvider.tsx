@@ -8,7 +8,7 @@ import { v4 } from 'uuid';
 import { themeStyles } from '../base/ThemeProvider';
 import { Category, Size, Tier } from '../enums';
 import { Flex, FlexAlign, FlexItem, FlexJustify, Margin } from '../layout';
-import { getEnumAsClass } from '../utils';
+import { getEnumAsClass, getIconForCategory } from '../utils';
 import { Button } from './Button';
 import { Icon } from './Icon';
 
@@ -109,30 +109,17 @@ const styles = {
   `,
 };
 
-function _getIconForCategory(category: Category): string {
-  switch (category) {
-    case Category.DANGER:
-      return 'alert-circle';
-    case Category.SUCCESS:
-      return 'check-circle';
-    case Category.WARNING:
-      return 'alert-triangle';
-    default:
-      return 'info';
-  }
-}
-
-interface AlertProps {
+export interface AlertProps {
   /** Text shown within the alert */
   text: string;
 
   category: Exclude<Category, Category.PRIMARY>;
 
   /** Triggered when the dismiss button is clicked */
-  onClickDismiss: (id: string) => void;
+  onClickDismiss?: (id?: string) => void;
 
   /** If you need to manually hide the alert, you can pass your own ID to call hide */
-  id: string;
+  id?: string;
 
   /**
    * Amount of milliseconds before the alert is dismissed (except for danger)
@@ -142,10 +129,10 @@ interface AlertProps {
 }
 
 export const Alert = ({ id, text, category, onClickDismiss, hideDelay = 4000 }: AlertProps) => {
-  const icon = _getIconForCategory(category);
+  const icon = getIconForCategory(category);
 
   useEffect(() => {
-    if (category !== Category.DANGER) {
+    if (category !== Category.DANGER && onClickDismiss != null) {
       setTimeout(() => onClickDismiss(id), hideDelay);
     }
   }, []);
@@ -172,7 +159,7 @@ export const Alert = ({ id, text, category, onClickDismiss, hideDelay = 4000 }: 
           <Margin size={{ left: Size.DEFAULT }}>
             <Button
               size={Size.SMALL}
-              onClick={() => onClickDismiss(id)}
+              onClick={onClickDismiss != null ? () => onClickDismiss(id) : undefined}
               tier={Tier.TERTIARY}
               leading={<Icon name="x" />}
             />
@@ -183,12 +170,12 @@ export const Alert = ({ id, text, category, onClickDismiss, hideDelay = 4000 }: 
   );
 };
 
-interface AlertsContext {
+export interface AlertsContext {
   showAlert: (props: AlertProps) => void;
-  hideAlert: (id: string) => void;
+  hideAlert: (id?: string) => void;
 }
 
-interface Action {
+export interface Action {
   type: 'showAlert' | 'hideAlert';
   payload: { alert?: AlertProps; id?: string };
 }
@@ -206,7 +193,7 @@ function reducer(alerts: Array<AlertProps>, action: Action): Array<AlertProps> {
   }
 }
 
-interface AlertsProviderProps {
+export interface AlertsProviderProps {
   children: React.ReactNode;
 }
 
@@ -214,7 +201,7 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
   const [outletElement, setOutletElement] = useState<HTMLElement>();
   const [alerts, dispatch] = useReducer(reducer, []);
 
-  const hideAlert = (id: string) => {
+  const hideAlert = (id?: string) => {
     dispatch({ type: 'hideAlert', payload: { id } });
   };
 

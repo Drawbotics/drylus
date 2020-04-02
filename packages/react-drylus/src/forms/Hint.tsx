@@ -17,7 +17,7 @@ const styles = {
   `,
 };
 
-interface HintProps {
+export interface HintProps {
   /** Text displayed by the hint */
   children: React.ReactNode;
 

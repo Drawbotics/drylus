@@ -4,6 +4,7 @@ on:
   push:
     branches:
         - master
+        - beta
     paths:
       - 'packages/react-drylus/**'
       - 'packages/extract-emotion/**'
@@ -13,17 +14,20 @@ on:
   pull_request:
     branches:
       - '*'
+    paths:
+      - 'packages/react-drylus/**'
+      - 'packages/extract-emotion/**'
+      - 'packages/vanilla-drylus/**'
+      - 'packages/drylus-style-vars/**'
+      - 'packages/icons/**'
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    - name: Skip CI
-      uses: veggiemonk/skip-commit@master
-      env:
-        COMMIT_FILTER: skip ci
     - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
@@ -59,13 +63,28 @@ jobs:
         git fetch origin
         git branch --set-upstream-to origin/master
         
-    - name: Publish
+    - name: Publish (prerelease)
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
         AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
         MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      if: contains(github.head_ref, 'beta')
+      run: |
+        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+        git remote -v
+        git checkout -- .
+        npm run pre-release
+
+    - name: Publish (release)
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+        MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      if: contains(github.ref, 'master')
       run: |
         echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
         git remote -v

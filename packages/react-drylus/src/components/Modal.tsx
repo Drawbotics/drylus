@@ -48,7 +48,7 @@ const styles = {
   `,
   alignTop: css`
     align-items: flex-start;
-    overflow: scroll;
+    overflow: auto;
   `,
   root: css`
     position: relative;
@@ -81,6 +81,7 @@ const styles = {
     margin-bottom: ${sv.defaultMargin};
     padding: ${sv.defaultPadding};
     padding-top: 0;
+    padding-right: ${sv.paddingExtraHuge};
 
     @media ${sv.screenL} {
       margin: 0 calc(${sv.marginSmall} * -1);
@@ -158,7 +159,7 @@ const styles = {
   `,
 };
 
-interface BaseModalProps {
+export interface BaseModalProps {
   /** Content rendered within the modal */
   children: React.ReactNode;
 
@@ -218,7 +219,7 @@ export const BaseModal = React.forwardRef<HTMLDivElement, BaseModalProps>(
 
 BaseModal.displayName = 'BaseModal';
 
-interface ModalProps extends BaseModalProps {
+export interface ModalProps extends BaseModalProps {
   /**
    * If true, the children are rendered without decoration, you have to style your own modal
    * @default false
@@ -331,15 +332,11 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     }
   }, [visible]);
 
-  useEffect(
-    () =>
-      visible
-        ? () => {
-            setTimeout(handleWindowResize, 300);
-          }
-        : undefined,
-    [visible],
-  );
+  useEffect(() => {
+    if (visible) {
+      setTimeout(handleWindowResize, 300);
+    }
+  }, [visible]);
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowResize);

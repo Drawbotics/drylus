@@ -6,7 +6,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Icon, RoundIcon, Spinner, Tag } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -56,13 +56,14 @@ const styles = {
 
     [data-element='select'] {
       box-shadow: none !important;
+      padding-right: ${sv.paddingExtraLarge} !important;
     }
 
     &::after {
       content: none;
     }
 
-    [data-element='icon'] {
+    [data-element='lock-icon'] {
       right: ${sv.marginSmall};
     }
   `,
@@ -143,27 +144,67 @@ const styles = {
     margin-bottom: -12px;
     margin-left: -8px;
   `,
+  smallValues: css`
+    margin-left: -5px;
+    margin-bottom: -6px;
+
+    [data-element='value'] {
+      margin-right: 2px;
+      margin-bottom: 2px;
+    }
+  `,
   icon: css`
     pointer-events: none;
     position: absolute;
     top: calc(${sv.marginExtraSmall} * 1.5);
     right: calc(${sv.marginSmall} * 2 + ${sv.marginExtraSmall});
   `,
+  small: css`
+    [data-element='select'] {
+      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+      padding-right: ${sv.paddingHuge};
+    }
+
+    &::after {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      font-size: 1.1em;
+      right: ${sv.marginExtraSmall};
+    }
+
+    [data-element='icon'] {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      right: ${sv.marginLarge};
+    }
+
+    [data-element='lock-icon'] {
+      top: ${sv.marginExtraSmall};
+      right: ${sv.marginExtraSmall};
+
+      > i {
+        font-size: 0.95em;
+      }
+    }
+  `,
   placeholder: css`
     color: ${sv.colorSecondary};
   `,
+  smallReadOnly: css`
+    [data-element='select'] {
+      padding-right: ${sv.defaultPadding} !important;
+    }
+  `,
 };
 
-interface MultiSelectOption extends Option {
+export interface MultiSelectOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
-interface MultiSelectProps {
+export interface MultiSelectProps<T> {
   /** The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey */
-  options: Array<MultiSelectOption>;
+  options: Array<MultiSelectOption<T>>;
 
   /** Determines which values are currently active */
-  values: Array<string | number>;
+  values: Array<MultiSelectOption<T>['value']>;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -172,25 +213,13 @@ interface MultiSelectProps {
   disabled?: boolean;
 
   /**
-   * Used to pick each value in the options array
-   * @default 'value'
-   */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey?: string;
-
-  /**
    * Text shown when no value is selected
    * @default ' -- ''
    */
   placeholder?: string;
 
   /** Triggered when a new value is chosen, returns the array of selected values. If not given, the field is read-only */
-  onChange?: (value: Array<string | number>, name?: string) => void;
+  onChange?: (value: Array<MultiSelectOption<T>['value']>, name?: string) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -204,6 +233,12 @@ interface MultiSelectProps {
   /** If true, a spinner is shown on the right corner, like with error and valid */
   loading?: boolean;
 
+  /**
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -214,13 +249,11 @@ interface MultiSelectProps {
   [x: string]: any;
 }
 
-export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
+export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectProps<T>) => {
   const {
     values,
     options = [],
     onChange,
-    valueKey = 'value',
-    labelKey = 'label',
     placeholder = ' -- ',
     disabled,
     hint,
@@ -229,8 +262,9 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
     name,
     loading,
     style,
+    size = Size.DEFAULT,
     ...props
-  } = useResponsiveProps<MultiSelectProps>(rest, responsive);
+  } = useResponsiveProps<MultiSelectProps<T>>(rest, responsive);
 
   const selectRef = useRef<HTMLSelectElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -253,7 +287,7 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
     };
   });
 
-  const handleOnChange = (value: number | string) => {
+  const handleOnChange = (value: MultiSelectProps<T>['value']) => {
     if (onChange != null) {
       values.includes(value)
         ? onChange(
@@ -293,6 +327,8 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
         [styles.readOnly]: onChange == null,
         [styles.valid]: values?.length > 0 && valid,
         [styles.error]: error != null && error !== false,
+        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+        [styles.smallReadOnly]: onChange == null && size === Size.SMALL,
       })}
       ref={rootRef}>
       {run(() => {
@@ -304,20 +340,23 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
           );
         } else if (onChange == null) {
           return (
-            <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
+            <div
+              className={styles.icon}
+              data-element="lock-icon"
+              style={{ color: sv.colorSecondary }}>
               <Icon name="lock" />
             </div>
           );
         } else if (error) {
           return (
-            <div className={styles.icon}>
-              <RoundIcon name="x" size={Size.SMALL} color={Color.RED} />
+            <div className={styles.icon} data-element="icon">
+              <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
             </div>
           );
         } else if (values?.length > 0 && valid) {
           return (
-            <div className={styles.icon}>
-              <RoundIcon name="check" size={Size.SMALL} color={Color.GREEN} />
+            <div className={styles.icon} data-element="icon">
+              <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
             </div>
           );
         }
@@ -333,9 +372,9 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
             return <div className={styles.placeholder}>{placeholder}</div>;
           } else {
             return (
-              <div className={styles.values}>
+              <div className={cx(styles.values, { [styles.smallValues]: size === Size.SMALL })}>
                 {values.map((value) => (
-                  <div key={value} className={styles.value}>
+                  <div key={value} className={styles.value} data-element="value">
                     <Tag
                       inversed
                       onClickRemove={
@@ -343,10 +382,7 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
                           ? (e: React.MouseEvent<HTMLElement>) => handleClickRemove(e, value)
                           : undefined
                       }>
-                      {String(
-                        (options.find((option) => option[valueKey as keyof Option] === value) ??
-                          {})[labelKey as keyof Option],
-                      )}
+                      {String((options.find((option) => option.value === value) ?? {}).label)}
                     </Tag>
                   </div>
                 ))}
@@ -365,16 +401,11 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
               {options.map((option) => (
                 <div
                   className={cx(styles.option, {
-                    [styles.disabledOption]:
-                      option.disabled || values.includes(option[valueKey as keyof Option]),
+                    [styles.disabledOption]: option.disabled || values.includes(option.value),
                   })}
-                  key={option[valueKey as keyof Option]}
-                  onClick={
-                    onChange != null
-                      ? () => handleOnChange(option[valueKey as keyof Option])
-                      : undefined
-                  }>
-                  {option[labelKey as keyof Option]}
+                  key={option.value}
+                  onClick={onChange != null ? () => handleOnChange(option.value) : undefined}>
+                  {option.value}
                 </div>
               ))}
             </div>
@@ -394,17 +425,11 @@ export const MultiSelect = ({ responsive, ...rest }: MultiSelectProps) => {
         onChange={onChange != null ? (e) => handleSelectChange(e.target.options) : undefined}
         onFocus={() => setFocused(true)}
         onBlur={() => (canBlur ? setFocused(false) : null)}
-        // values={values}
-        // readOnly={onChange == null}
         multiple
         {...props}>
         {options.map((option) => (
-          <option
-            key={option[valueKey as keyof Option]}
-            // name={option[labelKey as keyof Option]}
-            value={option[valueKey as keyof Option]}
-            disabled={option.disabled}>
-            {option[labelKey as keyof Option]}
+          <option key={option.value} value={option.value} disabled={option.disabled}>
+            {option.label}
           </option>
         ))}
       </select>

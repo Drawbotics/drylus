@@ -4,7 +4,7 @@ import { AlertsProvider } from '../components';
 import { Style } from '../types';
 import { ThemeProvider } from './ThemeProvider';
 
-interface DrylusProviderProps {
+export interface DrylusProviderProps {
   children: React.ReactNode;
 
   /** Used for style overrides */
