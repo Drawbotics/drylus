@@ -5,25 +5,26 @@ import ReactDOM from 'react-dom';
 
 import { themeStyles } from '../base';
 import { Position } from '../enums';
-import { Responsive, Style } from '../types';
-import { Deprecated, WrapperRef, getStyleForSide, useResponsiveProps } from '../utils';
+import { Style } from '../types';
+import { Deprecated, WrapperRef, getStyleForSide } from '../utils';
 
 const styles = {
   root: css`
     position: fixed;
     padding: ${sv.paddingExtraSmall} ${sv.defaultPadding};
-    background: ${sv.neutralDarkest};
-    color: ${sv.colorPrimaryInverse};
+    background: ${sv.white};
+    color: ${sv.colorPrimary};
     border-radius: ${sv.defaultBorderRadius};
     font-size: 0.9rem;
     opacity: 0;
-    pointer-events: none;
     z-index: 99999;
     max-width: 300px;
     text-align: center;
     transform: translate(0, -5px);
     transition: transform ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve},
       opacity ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    filter: drop-shadow(${sv.elevation2});
+    pointer-events: none;
 
     &::after {
       content: ' ';
@@ -35,7 +36,7 @@ const styles = {
       height: 0px;
       border-left: ${sv.marginExtraSmall} solid transparent;
       border-right: ${sv.marginExtraSmall} solid transparent;
-      border-top: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
+      border-top: ${sv.marginExtraSmall} solid ${sv.white};
     }
   `,
   bottom: css`
@@ -43,7 +44,7 @@ const styles = {
 
     &::after {
       top: calc(${sv.marginExtraSmall} * -1);
-      border-bottom: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
+      border-bottom: ${sv.marginExtraSmall} solid ${sv.white};
       border-left: ${sv.marginExtraSmall} solid transparent;
       border-right: ${sv.marginExtraSmall} solid transparent;
       border-top: 0;
@@ -56,7 +57,7 @@ const styles = {
       left: 100%;
       top: 50%;
       transform: translateY(-50%);
-      border-left: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
+      border-left: ${sv.marginExtraSmall} solid ${sv.white};
       border-bottom: ${sv.marginExtraSmall} solid transparent;
       border-top: ${sv.marginExtraSmall} solid transparent;
       border-right: 0;
@@ -69,7 +70,7 @@ const styles = {
       left: calc(${sv.marginExtraSmall} * -1);
       top: 50%;
       transform: translateY(-50%);
-      border-right: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
+      border-right: ${sv.marginExtraSmall} solid ${sv.white};
       border-bottom: ${sv.marginExtraSmall} solid transparent;
       border-top: ${sv.marginExtraSmall} solid transparent;
       border-left: 0;
@@ -78,59 +79,56 @@ const styles = {
   visible: css`
     opacity: 1;
     transform: translate(0, 0);
+    pointer-events: auto;
   `,
 };
 
-export const tooltipStyles = styles;
-
-interface TooltipProps {
-  /** @deprecated use 'content' instead */
+interface PopoverProps {
+  /** @deprecated use content instead */
   message?: React.ReactNode;
 
   /** Content shown when the tooltip is visible */
   content: React.ReactNode;
 
-  /** Component wrapped by the tooltip */
+  /** Component wrapped by the Popover */
   children: React.ReactNode;
 
   /** @default Position.TOP */
   side?: Position;
 
+  /**
+   * If true, the popover will close when clicked
+   * @default false
+   */
+  exitOnClick?: boolean;
+
   /** Used for style overrides */
   style?: Style;
-
-  /** Reponsive prop overrides */
-  responsive?: Responsive<this>;
 }
 
-interface HTMLElementWithDisabled extends HTMLElement {
-  disabled?: boolean;
-}
-
-export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
-  const {
-    children,
-    message,
-    content: _content,
-    side = Position.TOP,
-    style = {},
-  } = useResponsiveProps<TooltipProps>(rest, responsive);
-
+export const Popover = ({
+  children,
+  message,
+  content: _content,
+  side = Position.TOP,
+  style = {},
+  exitOnClick = false,
+}: PopoverProps) => {
   const [visible, setVisible] = useState(false);
   const [outletElement, setOutletElement] = useState<HTMLElement>();
-  const childrenRef = useRef<HTMLElementWithDisabled>();
-  const tooltipRef = useRef<HTMLDivElement>(null);
-  const tooltipRect = tooltipRef.current?.getBoundingClientRect();
+  const childrenRef = useRef<HTMLElement>();
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const popoverRect = popoverRef.current?.getBoundingClientRect();
 
   const content = _content != null ? _content : message;
 
   useEffect(() => {
-    const outlet = document.getElementById('tooltips-outlet');
+    const outlet = document.getElementById('popovers-outlet');
     if (outlet == null) {
-      const tooltipsOutlet = document.createElement('div');
-      tooltipsOutlet.id = 'tooltips-outlet';
-      document.body.appendChild(tooltipsOutlet);
-      setOutletElement(tooltipsOutlet);
+      const popoversOutlet = document.createElement('div');
+      popoversOutlet.id = 'popovers-outlet';
+      document.body.appendChild(popoversOutlet);
+      setOutletElement(popoversOutlet);
     } else {
       setOutletElement(outlet);
     }
@@ -143,45 +141,43 @@ export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
   }, []);
 
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-
-    const handleMouseEnter = () => {
-      timeout = setTimeout(() => setVisible(true), 200);
+    const handleWindowClick = (e: Event) => {
+      if (
+        (visible &&
+          e.target !== childrenRef.current &&
+          !childrenRef.current?.contains(e.target as Node) &&
+          e.target !== popoverRef.current &&
+          !popoverRef.current?.contains(e.target as Node)) ||
+        exitOnClick
+      ) {
+        setVisible(false);
+      }
     };
 
-    const handleMouseLeave = () => {
-      clearTimeout(timeout);
-      setVisible(false);
-    };
+    const handleMouseClick = () => setVisible(true);
+
+    const handleMouseLeave = () => setVisible(false);
 
     if (childrenRef.current != null) {
-      if (childrenRef.current.disabled) {
-        childrenRef.current.addEventListener('pointerenter', handleMouseEnter);
-        childrenRef.current.addEventListener('pointerleave', handleMouseLeave);
-      } else {
-        childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
-        childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
-      }
-
+      childrenRef.current.style.cursor = 'pointer';
+      childrenRef.current.addEventListener('click', handleMouseClick);
+      window.addEventListener('click', handleWindowClick, true);
       window.addEventListener('scroll', handleMouseLeave, true);
     }
 
     return () => {
-      childrenRef.current?.removeEventListener('mouseenter', handleMouseEnter);
-      childrenRef.current?.removeEventListener('pointerenter', handleMouseEnter);
-      childrenRef.current?.removeEventListener('mouseleave', handleMouseLeave);
-      childrenRef.current?.removeEventListener('pointerleave', handleMouseLeave);
-
+      childrenRef.current?.removeEventListener('click', handleMouseClick);
+      window.removeEventListener('click', handleWindowClick);
       window.removeEventListener('scroll', handleMouseLeave);
     };
   });
 
   if (outletElement == null) return null;
 
-  const tooltipStyle = getStyleForSide({
+  const popoverStyle = getStyleForSide({
     side,
     rect: childrenRef.current?.getBoundingClientRect(),
-    rectComponent: tooltipRect,
+    rectComponent: popoverRect,
   });
 
   return (
@@ -190,23 +186,23 @@ export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
       {ReactDOM.createPortal(
         <div className={themeStyles.root}>
           <div
-            ref={tooltipRef}
+            ref={popoverRef}
             className={cx(styles.root, {
               [styles.bottom]: side === Position.BOTTOM,
               [styles.left]: side === Position.LEFT,
               [styles.right]: side === Position.RIGHT,
               [styles.visible]: visible,
             })}
-            style={{ ...tooltipStyle, ...style }}>
+            style={{ ...popoverStyle, ...style }}>
             {content}
           </div>
         </div>,
-        document.getElementById('tooltips-outlet') as Element,
+        document.getElementById('popovers-outlet') as Element,
       )}
     </Fragment>
   );
 };
 
-Tooltip.propTypes = {
-  category: Deprecated,
+Popover.propTypes = {
+  message: Deprecated,
 };

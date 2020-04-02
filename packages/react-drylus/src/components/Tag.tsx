@@ -78,7 +78,7 @@ interface TagProps {
   color?: Exclude<Color, Color.PRIMARY>;
 
   /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */
-  onClickRemove?: () => void;
+  onClickRemove?: (e: React.MouseEvent<HTMLElement>) => void;
 
   /** Modifies the way the category is shown */
   inversed?: boolean;
@@ -87,7 +87,14 @@ interface TagProps {
   style?: Style;
 }
 
-const Tag = ({ children, category, onClickRemove, inversed, style, color: _color }: TagProps) => {
+export const Tag = ({
+  children,
+  category,
+  onClickRemove,
+  inversed,
+  style,
+  color: _color,
+}: TagProps) => {
   const color = category ? categoryEnumToColor(category) : _color;
   const className = inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
   return (

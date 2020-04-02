@@ -256,7 +256,7 @@ interface DrawerProps extends BaseDrawerProps {
    * Passed to the CSSTransition component to fire events at different points of the animation. See reactcommunity.org/react-transition-group docs
    * @default {}
    */
-  cssTransitionCallbacks: {
+  cssTransitionCallbacks?: {
     onEnter: () => void;
     onEntering: () => void;
     onEntered: () => void;
@@ -274,7 +274,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
     visible,
     onClickClose,
     onClickOverlay,
-    width: rawWidth,
+    width: rawWidth = 400,
     raw = false,
     title,
     side = Position.RIGHT,
@@ -343,7 +343,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
   );
 
   if (asOverlay) {
-    if (outletElement == null) return '';
+    if (outletElement == null) return null;
     const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === overlayElement?.current && onClickOverlay != null) {
         onClickOverlay();

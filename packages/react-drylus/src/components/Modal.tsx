@@ -235,7 +235,7 @@ interface ModalProps extends BaseModalProps {
    * Passed to the CSSTransition component to fire events at different points of the animation. See reactcommunity.org/react-transition-group docs
    * @default {}
    */
-  cssTransitionCallbacks: {
+  cssTransitionCallbacks?: {
     onEnter: () => void;
     onEntering: () => void;
     onEntered: () => void;
@@ -331,7 +331,15 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     }
   }, [visible]);
 
-  useEffect(() => (visible ? handleWindowResize() : undefined), [visible]);
+  useEffect(
+    () =>
+      visible
+        ? () => {
+            setTimeout(handleWindowResize, 300);
+          }
+        : undefined,
+    [visible],
+  );
 
   useEffect(() => {
     window.addEventListener('resize', handleWindowResize);
@@ -345,7 +353,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     };
   });
 
-  if (outletElement == null) return '';
+  if (outletElement == null) return null;
 
   const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === overlayElement?.current && onClickClose != null) {

@@ -293,11 +293,24 @@ const styles = {
 
 interface TCellProps extends React.TdHTMLAttributes<HTMLElement> {
   children: React.ReactNode;
+
+  /** @private */
   head?: boolean;
+
+  /** @private */
   asContainer?: boolean;
+
+  /** @private */
   withChildToggle?: boolean;
+
+  /** @private */
   onClickArrow?: () => void;
+
+  /** @private */
   active?: boolean;
+
+  /** @private */
+  [x: string]: any;
 }
 
 export const TCell = ({
@@ -340,15 +353,32 @@ export const TCell = ({
 };
 
 interface TRowProps {
+  /** Should be of type TCell */
   children: React.ReactElement<typeof TCell> | Array<React.ReactElement<typeof TCell>>;
-  nested?: string;
-  parent?: string;
+
+  /** If true sets the background to neutral */
   highlighted?: boolean;
-  alt?: boolean;
-  lastParentRow?: boolean;
+
+  /** Triggered when any part of the row is clicked */
   onClick?: () => void;
+
+  /** If true and `onClick` is provided, shows a pointer when hovering the row	 */
   clickable?: boolean;
+
+  /** Used for style overrides */
   style?: Style;
+
+  /** @private */
+  nested?: string;
+
+  /** @private */
+  parent?: string;
+
+  /** @private */
+  alt?: boolean;
+
+  /** @private */
+  lastParentRow?: boolean;
 }
 
 export const TRow = ({
@@ -363,17 +393,17 @@ export const TRow = ({
   style,
 }: TRowProps) => {
   const [rowsStates, handleSetRowState] = useContext(RowsContext);
-  const collapsed = nested != null && rowsStates[nested] != null;
+  const collapsed = nested && !rowsStates[nested];
   return (
     <tr
       style={style}
       className={cx(styles.row, {
-        [styles.collapsed]: collapsed,
+        [styles.collapsed]: !!collapsed,
         [styles.light]: !alt,
         [styles.white]: alt,
         [styles.pointer]: clickable && onClick != null,
         [styles.highlightedRow]: highlighted,
-        [styles.noBorderBottom]: parent != null && rowsStates[parent] == null && lastParentRow,
+        [styles.noBorderBottom]: !!parent && !rowsStates[parent] && lastParentRow,
       })}
       onClick={onClick}
       data-nested={nested ?? undefined}
@@ -386,11 +416,11 @@ export const TRow = ({
             {
               ...(child as React.ReactElement<typeof TCell>).props,
               key,
-              asContainer: nested != null,
-              withChildToggle: parent != null && key === 0,
-              active: parent != null && rowsStates[parent],
+              asContainer: !!nested,
+              withChildToggle: !!parent && key === 0,
+              active: !!parent && rowsStates[parent],
               onClickArrow: parent
-                ? () => handleSetRowState({ [parent]: rowsStates[parent] == null })
+                ? () => handleSetRowState({ [parent]: !rowsStates[parent] })
                 : null,
             } as Partial<TCellProps>,
           ),
@@ -562,7 +592,7 @@ function _generateTable({
   data,
   header,
   renderCell,
-  renderChildCell = () => null,
+  renderChildCell = (x) => x,
   childHeader,
   onClickRow = () => {},
   clickable,
@@ -730,8 +760,8 @@ export const Table = ({
   fullWidth = true,
   withNesting,
   data,
-  renderCell,
-  renderChildCell = () => null,
+  renderCell = (x) => x,
+  renderChildCell = (x) => x,
   header = [],
   childHeader,
   sortableBy,

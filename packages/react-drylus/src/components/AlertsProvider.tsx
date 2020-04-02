@@ -263,9 +263,9 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
                   exit: styles.alertExit,
                   exitActive: styles.alertExitActive,
                 }}>
-                {/* <Margin size={{ top: Size.SMALL }}> */}
-                <Alert onClickDismiss={(id) => hideAlert(id)} {...alert} />
-                {/* </Margin> */}
+                <Margin size={{ top: Size.SMALL }}>
+                  <Alert onClickDismiss={(id) => hideAlert(id)} {...alert} />
+                </Margin>
               </CSSTransition>
             ))}
           </TransitionGroup>

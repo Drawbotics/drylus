@@ -3,7 +3,7 @@
     "jsx": "preserve",
     "moduleResolution": "node",
     "module": "esnext",
-    "allowJs": false,
+    "allowJs": true,
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
