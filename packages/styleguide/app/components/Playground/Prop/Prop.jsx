@@ -13,15 +13,15 @@ const styles = {
   `,
 };
 
-const Prop = ({ prop, value, onChange, enums }) => {
+const Prop = ({ prop, name, value, onChange, enums }) => {
   console.log(prop)
   const { type } = prop; 
-  const propWithKey = { ...prop, key: type.name };
-  switch (type.type) {
+  const propWithKey = { ...prop, key: name };
+  const typeName = type?.type ?? type;
+  switch (typeName) {
     case 'bool':
       return <ToggleProp prop={propWithKey} value={value} onChange={onChange} />;
     case 'enum':
-      console.log(';we are here')
       return <SelectProp prop={propWithKey} value={value} onChange={onChange} enums={enums} />;
     case 'string':
       return <InputProp prop={propWithKey} value={value} onChange={onChange} />;
