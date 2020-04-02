@@ -14,12 +14,11 @@ const styles = {
 };
 
 const Prop = ({ prop, name, value, onChange, enums }) => {
-  console.log(prop)
   const { type } = prop; 
   const propWithKey = { ...prop, key: name };
   const typeName = type?.type ?? type;
   switch (typeName) {
-    case 'bool':
+    case 'boolean':
       return <ToggleProp prop={propWithKey} value={value} onChange={onChange} />;
     case 'enum':
       return <SelectProp prop={propWithKey} value={value} onChange={onChange} enums={enums} />;
@@ -49,7 +48,6 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
         </div>
       );
     default:
-      // console.warn('Unknown prop', prop);
       return null;
   }
 };
