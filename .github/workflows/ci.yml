@@ -30,12 +30,16 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
+        registry-url: https://npm.pkg.github.com/
+        scope: '@drawbotics'
     - run: echo 'Current ref = ${{ github.ref }}'
     - name: Install dependencies and run tests
       run: |
         npm install
         npx lerna link convert
         npm run test
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
   
   release:
     needs: test
