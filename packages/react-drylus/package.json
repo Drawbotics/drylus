@@ -23,7 +23,7 @@
   "dependencies": {
     "@drawbotics/drylus-style-vars": "file:../drylus-style-vars",
     "@drawbotics/icons": "file:../icons",
-    "@drawbotics/use-screen-size": "^2.0.0",
+    "@drawbotics/use-screen-size": "^2.0.1",
     "@emotion/core": "^10.0.21",
     "@turf/circle": "^6.0.1",
     "animejs": "^3.0.1",

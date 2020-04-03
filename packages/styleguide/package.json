@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@drawbotics/react-drylus": "file:../react-drylus",
-    "@drawbotics/use-screen-size": "^2.0.0",
+    "@drawbotics/use-screen-size": "^2.0.1",
     "@drawbotics/vanilla-drylus": "file:../vanilla-drylus",
     "core-js": "2",
     "fast-xml-parser": "^3.12.16",
