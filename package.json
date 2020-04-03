@@ -60,7 +60,7 @@
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
-    "@drawbotics/check-env": "^1.0.0",
+    "@drawbotics/check-env": "^2.0.0",
     "@drawbotics/s3sync": "^0.1.1",
     "@emotion/core": "^10.0.21",
     "@hot-loader/react-dom": "^16.8.6",
