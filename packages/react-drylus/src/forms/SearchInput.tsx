@@ -98,7 +98,7 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
     name,
     style,
     onClickResult,
-    size = Size.SMALL,
+    size = Size.DEFAULT,
   } = useResponsiveProps<SearchInputProps<T>>(rest, responsive);
   const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
