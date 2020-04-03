@@ -50,11 +50,15 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
+        registry-url: https://npm.pkg.github.com/
+        scope: '@drawbotics'
     - name: Install dependencies & build libs
       run: |
         npm install
         npx lerna link convert
         npm run build-libs
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
     
     - name: Prepare repository
       env:
