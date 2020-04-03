@@ -42,8 +42,14 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Drawbotics/drylus",
+    "directory": "packages/react-drylus"
+  },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
   },
   "gitHead": "99f6de1783059e9d24e6582f69fa2982d41a1af2"
 }

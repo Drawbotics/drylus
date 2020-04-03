@@ -21,8 +21,14 @@
   "dependencies": {
     "@drawbotics/react-drylus": "file:../react-drylus"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Drawbotics/drylus",
+    "directory": "packages/vanilla-drylus"
+  },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
   },
   "gitHead": "99f6de1783059e9d24e6582f69fa2982d41a1af2"
 }
