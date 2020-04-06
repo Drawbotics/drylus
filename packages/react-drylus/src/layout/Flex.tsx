@@ -222,7 +222,7 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
       )}
       style={style}>
       {React.Children.map(children, (child) => {
-        if (child.type === FlexSpacer) {
+        if (child?.type === FlexSpacer) {
           return React.cloneElement(
             child as React.ReactElement<typeof FlexSpacer>,
             { direction } as Partial<typeof FlexSpacer>,
