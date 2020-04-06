@@ -36,6 +36,7 @@ describe('Text', () => {
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
+
     it('has Text and TextLink as children', () => {
       const tree = create(
         <Text>
