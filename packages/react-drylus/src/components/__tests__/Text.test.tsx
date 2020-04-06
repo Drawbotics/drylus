@@ -4,6 +4,7 @@ import { create } from 'react-test-renderer';
 
 import { Category, Size } from '../../enums';
 import { Text } from '../Text';
+import { TextLink } from '../TextLink';
 
 // Mock constant date is 01/06/2020 at 12pm
 describe('Text', () => {
@@ -31,6 +32,14 @@ describe('Text', () => {
       const tree = create(
         <Text size={Size.LARGE} category={Category.BRAND}>
           Text content
+        </Text>,
+      ).toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+    it('has Text and TextLink as children', () => {
+      const tree = create(
+        <Text>
+          Text content <Text>nested</Text> with a <TextLink>link</TextLink>
         </Text>,
       ).toJSON();
       expect(tree).toMatchSnapshot();
