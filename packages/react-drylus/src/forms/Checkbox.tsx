@@ -156,7 +156,7 @@ export interface CheckboxProps {
   id?: string;
 
   /** If passed, the text will be the label of the checkbox */
-  children?: string;
+  children?: React.ReactNode;
 
   /** Triggered when checkbox value is changed */
   onChange?: (value: boolean, name?: string) => void;
