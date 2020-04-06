@@ -5,7 +5,7 @@ import React, { forwardRef, useState } from 'react';
 import { Button, Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { checkProps, getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 import { Select } from './Select';
 
@@ -224,10 +224,16 @@ export interface InputProps {
   valid?: boolean;
 
   /** Node to be rendered in front of the input field, for now limited to text, Button and Select */
-  prefix?: React.ReactElement<typeof Button> | React.ReactElement<typeof Select>;
+  prefix?:
+    | React.ReactElement<typeof Icon>
+    | React.ReactElement<typeof Button>
+    | React.ReactElement<typeof Select>;
 
   /** Node to be rendered at the end of the input field, for now limited to text, Button and Select */
-  suffix?: React.ReactElement<typeof Button> | React.ReactElement<typeof Select>;
+  suffix?:
+    | React.ReactElement<typeof Icon>
+    | React.ReactElement<typeof Button>
+    | React.ReactElement<typeof Select>;
 
   /** Additional class name to override styles */
   className?: string;
@@ -282,6 +288,11 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
     size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<RawInputProps>(rest, responsive);
+
+  checkProps(
+    { prefix, suffix },
+    { prefix: [Button, Select, Icon], suffix: [Button, Select, Icon] },
+  );
 
   const [isFocused, setFocused] = useState(false);
 
