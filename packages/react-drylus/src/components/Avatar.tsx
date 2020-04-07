@@ -113,13 +113,18 @@ export const Avatar = ({ responsive, ...rest }: AvatarProps) => {
   const customSize = typeof size === 'number';
   const color = category ? categoryEnumToColor(category) : _color;
 
+  let classes = {
+    [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
+    [styles.customBackground]: backgroundColor != null,
+  };
+
+  if (!customSize) {
+    classes[styles[getEnumAsClass<typeof styles>(size as Size)]] = size != null && !customSize;
+  }
+
   const avatar = (
     <div
-      className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
-        [styles[getEnumAsClass<typeof styles>(size as Size)]]: size != null && !customSize,
-        [styles.customBackground]: backgroundColor != null,
-      })}
+      className={cx(styles.root, classes)}
       style={{
         backgroundColor,
         height: customSize ? size : undefined,

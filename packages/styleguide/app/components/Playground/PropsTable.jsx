@@ -26,6 +26,7 @@ import React, { Fragment } from 'react';
 
 import PropsInfo from './PropsInfo';
 import Prop from './Prop';
+import { extractIntrinsics } from './Prop/utils'
 import { generateDocs, capitalizeFirst } from './utils';
 
 const styles = {
@@ -76,20 +77,36 @@ const PropsTable = ({ component, onChange, activeProps }) => {
                   <TCell>
                     {do {
                       if  (prop.type.values != null) {
-                        <Tooltip
-                          content={<PropsInfo props={prop.type.values} />}
-                          side={Position.RIGHT}>
-                          <Flex justify={FlexJustify.START}>
-                            <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
-                            <FlexItem>
-                              <Margin size={{ left: Size.EXTRA_SMALL }}>
-                                <span style={{ color: sv.colorSecondary }}>
-                                  <Icon name="info" />
-                                </span>
-                              </Margin>
-                            </FlexItem>
-                          </Flex>
-                        </Tooltip>;
+                        const tooltipValues = _isEnum(prop) ? extractIntrinsics(prop.type.values).variants : prop.type.values 
+                        let tooltip = (
+                          <Tooltip
+                            content={<PropsInfo props={tooltipValues} />}
+                            side={Position.RIGHT}>
+                            <Flex justify={FlexJustify.START}>
+                              <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
+                              <FlexItem>
+                                <Margin size={{ left: Size.EXTRA_SMALL }}>
+                                  <span style={{ color: sv.colorSecondary }}>
+                                    <Icon name="info" />
+                                  </span>
+                                </Margin>
+                              </FlexItem>
+                            </Flex>
+                          </Tooltip>
+                        );
+                        
+                        if (_isEnum(prop)) {
+                          const { nonVariants } = extractIntrinsics(prop.type.values);
+                          if (nonVariants.length !== 0) {
+                            return (
+                              <Fragment>
+                                {tooltip}
+                                <span> Or {nonVariants.join(' or ')}</span>
+                              </Fragment>
+                            );
+                          }
+                        }
+                        return tooltip;
                       } else {
                         prop.type.name ?? prop.type.type ?? prop.type;
                       }
@@ -115,8 +132,17 @@ const PropsTable = ({ component, onChange, activeProps }) => {
                         );
                       }
                       else if (_isEnum(prop)) {
-                        const { values } = prop.type;
-                        `One of: ${values.join(', ')}`;
+                        const { variants, nonVariants } = extractIntrinsics(prop.type.values);
+                        const variantsDesc = `One of: ${variants.join(', ')}`;
+                        if (nonVariants.length > 0) {
+                          return (
+                            <Fragment>
+                              {variantsDesc}
+                              <span> Or {nonVariants.join(' or ')}</span>
+                            </Fragment>
+                          );
+                        }
+                        return variantsDesc;
                       }
                       else {
                         capitalizeFirst(prop.description);
