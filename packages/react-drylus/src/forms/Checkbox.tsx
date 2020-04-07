@@ -165,7 +165,7 @@ export interface CheckboxProps {
   disabled?: boolean;
 
   /** Determines if checkbox is checked */
-  value?: boolean;
+  value?: ((name?: string) => boolean) | boolean;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -198,7 +198,7 @@ export interface CheckboxProps {
 export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
   const {
     onChange,
-    value,
+    value: _value,
     id,
     children,
     disabled,
@@ -210,6 +210,8 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
     ...props
   } = useResponsiveProps<CheckboxProps>(rest, responsive);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const value = typeof _value === 'function' ? _value(props.name) : _value;
   const isChecked = value === true;
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {

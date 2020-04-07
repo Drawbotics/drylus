@@ -200,7 +200,7 @@ const styles = {
 
 export interface InputProps {
   /** Value displayed in the field */
-  value: number | string;
+  value: ((name?: string) => number | string) | number | string;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -264,7 +264,7 @@ export interface RawInputProps extends InputProps {
 
 const RawInput = ({ responsive, ...rest }: RawInputProps) => {
   const {
-    value,
+    value: _value,
     onChange,
     error,
     valid,
@@ -285,6 +285,8 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
 
   const [isFocused, setFocused] = useState(false);
 
+  const value = typeof _value === 'function' ? _value(props.name) : _value;
+
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (onChange != null) {
       onChange((e.target as HTMLInputElement).value, (e.target as HTMLInputElement).name);
@@ -293,6 +295,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
 
   const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
   const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
+
   return (
     <div
       style={style}

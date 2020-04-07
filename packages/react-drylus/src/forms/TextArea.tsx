@@ -106,7 +106,7 @@ const styles = {
 
 export interface TextAreaProps {
   /** Value displayed in the field */
-  value: string | number;
+  value: ((name?: string) => string | number) | string | number;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -160,7 +160,7 @@ export interface RawTextAreaProps extends TextAreaProps {
 
 const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
   const {
-    value,
+    value: _value,
     onChange,
     error,
     valid,
@@ -176,6 +176,8 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
   } = useResponsiveProps<RawTextAreaProps>(rest, responsive);
 
   const [isFocused, setFocused] = useState(false);
+
+  const value = typeof _value === 'function' ? _value(props.name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
     if (onChange != null) {

@@ -204,7 +204,9 @@ export interface MultiSelectProps<T> {
   options: Array<MultiSelectOption<T>>;
 
   /** Determines which values are currently active */
-  values: Array<MultiSelectOption<T>['value']>;
+  values:
+    | ((name?: string) => Array<MultiSelectOption<T>['value']>)
+    | Array<MultiSelectOption<T>['value']>;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -251,7 +253,7 @@ export interface MultiSelectProps<T> {
 
 export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectProps<T>) => {
   const {
-    values,
+    values: _values,
     options = [],
     onChange,
     placeholder = ' -- ',
@@ -271,6 +273,8 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
   const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
   const { screenSize, ScreenSizes } = useScreenSize();
+
+  const values = typeof _values === 'function' ? _values(props.name) : _values;
 
   const handleDocumentClick = (e: Event) =>
     !rootRef.current?.contains(e.target as Node) ? setFocused(false) : null;

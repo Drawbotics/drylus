@@ -140,7 +140,7 @@ export interface SelectProps<T> {
   options: Array<SelectOption<T>>;
 
   /** Determines which value is currently active */
-  value?: SelectOption<T>['value'];
+  value?: ((name?: string) => SelectOption<T>['value']) | SelectOption<T>['value'];
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -187,7 +187,7 @@ export interface SelectProps<T> {
 
 export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) => {
   const {
-    value,
+    value: _value,
     options = [],
     onChange,
     placeholder = ' -- ',
@@ -200,6 +200,8 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
     size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<SelectProps<T>>(rest, responsive);
+
+  const value = typeof _value === 'function' ? _value(props.name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     if (onChange != null) {

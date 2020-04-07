@@ -167,10 +167,13 @@ export interface RangeInputProps<T> {
   max: number;
 
   /** If value is an array of numbers, then we display n handles, otherwise only 1 value shows 1 handle. If the value is larger than max, or smaller than min, the max or min will be used */
-  value: T;
+  value: ((name?: string) => T) | T;
 
   /** Determines the range between each value, can be float or int */
   step?: number;
+
+  /** Name of the form element (target.name) */
+  name?: string;
 
   /** Returns the value at the end of the slide (mouse up/touch end). For continuous updates while sliding use onUpdate */
   onChange: (value: T) => void;
@@ -201,7 +204,7 @@ export const RangeInput = <T extends number | Array<number>>({
   const {
     min,
     max,
-    value,
+    value: _value,
     step,
     onChange,
     onUpdate,
@@ -209,7 +212,10 @@ export const RangeInput = <T extends number | Array<number>>({
     renderValue,
     hideLabels,
     hideTooltips,
+    name,
   } = useResponsiveProps<RangeInputProps<T>>(rest, responsive);
+
+  const value = typeof _value === 'function' ? _value(name) : _value;
 
   const isMultiHandle = typeof value !== 'number' && (value as Array<number>).length > 1;
   const values: Array<number> = isMultiHandle ? (value as Array<number>) : [value as number];
