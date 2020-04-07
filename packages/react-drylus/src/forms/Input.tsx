@@ -5,7 +5,7 @@ import React, { forwardRef, useState } from 'react';
 import { Button, Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 import { Select } from './Select';
 
@@ -285,7 +285,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
 
   const [isFocused, setFocused] = useState(false);
 
-  const value = typeof _value === 'function' ? _value(props.name) : _value;
+  const value = isFunction(_value) ? _value(props.name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (onChange != null) {

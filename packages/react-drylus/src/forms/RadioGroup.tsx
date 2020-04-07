@@ -6,7 +6,7 @@ import { v4 } from 'uuid';
 import { Icon, placeholderStyles } from '../components';
 import { Category } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -270,7 +270,7 @@ export const RadioGroup = <T extends any>({ responsive, ...rest }: RadioGroupPro
     ...props
   } = useResponsiveProps<RadioGroupProps<T>>(rest, responsive);
 
-  const value = typeof _value === 'function' ? _value(props.name) : _value;
+  const value = isFunction(_value) ? _value(props.name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.stopPropagation();

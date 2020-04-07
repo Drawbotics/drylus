@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Icon } from '../components';
 import { Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { isFunction, run, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
 const styles = {
@@ -203,7 +203,7 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
   const leftSpanRef = useRef<HTMLSpanElement>(null);
   const [extraLeftPadding, setExtraLeftPadding] = useState<number>();
 
-  const rawValue = typeof _value === 'function' ? _value(name) : _value;
+  const rawValue = isFunction(_value) ? _value(name) : _value;
 
   const handleInputOnChange = (v: NumberInputValue) => {
     const numericalValue = Number(v);

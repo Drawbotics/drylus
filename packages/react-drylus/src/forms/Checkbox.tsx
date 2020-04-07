@@ -7,7 +7,7 @@ import { Icon } from '../components';
 import { placeholderStyles } from '../components';
 import { Category, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -211,7 +211,7 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
   } = useResponsiveProps<CheckboxProps>(rest, responsive);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const value = typeof _value === 'function' ? _value(props.name) : _value;
+  const value = isFunction(_value) ? _value(props.name) : _value;
   const isChecked = value === true;
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {

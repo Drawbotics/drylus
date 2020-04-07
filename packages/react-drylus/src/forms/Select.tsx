@@ -5,7 +5,7 @@ import React from 'react';
 import { Icon, RoundIcon, Spinner } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -201,7 +201,7 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
     ...props
   } = useResponsiveProps<SelectProps<T>>(rest, responsive);
 
-  const value = typeof _value === 'function' ? _value(props.name) : _value;
+  const value = isFunction(_value) ? _value(props.name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     if (onChange != null) {

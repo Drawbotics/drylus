@@ -6,7 +6,7 @@ import { GetTrackProps, Handles, Rail, Slider, SliderItem, Tracks } from 'react-
 import { Text, tooltipStyles } from '../components';
 import { Size } from '../enums';
 import { Responsive } from '../types';
-import { useResponsiveProps } from '../utils';
+import { isFunction, useResponsiveProps } from '../utils';
 
 const styles = {
   root: css`
@@ -215,7 +215,7 @@ export const RangeInput = <T extends number | Array<number>>({
     name,
   } = useResponsiveProps<RangeInputProps<T>>(rest, responsive);
 
-  const value = typeof _value === 'function' ? _value(name) : _value;
+  const value = isFunction(_value) ? _value(name) : _value;
 
   const isMultiHandle = typeof value !== 'number' && (value as Array<number>).length > 1;
   const values: Array<number> = isMultiHandle ? (value as Array<number>) : [value as number];

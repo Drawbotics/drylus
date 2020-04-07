@@ -10,7 +10,7 @@ import { themeStyles } from '../base';
 import { Button, Icon } from '../components';
 import { Align, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { useResponsiveProps } from '../utils';
+import { isFunction, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
 const styles = {
@@ -337,7 +337,7 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
     };
   }, []);
 
-  const value = typeof _value === 'function' ? _value(name) : _value;
+  const value = isFunction(_value) ? _value(name) : _value;
   const inputValue =
     value === ''
       ? value

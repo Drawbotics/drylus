@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button, Icon, Spinner } from '../components';
 import { Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { isFunction, run, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
 const styles = {
@@ -105,7 +105,7 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
   const inputRef = useRef<HTMLInputElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
-  const value = typeof _value === 'function' ? _value(name) : _value;
+  const value = isFunction(_value) ? _value(name) : _value;
   const shouldDisplayResults = value !== '' && isFocused;
 
   const handleDocumentClick = (e: Event) =>

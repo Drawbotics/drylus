@@ -6,7 +6,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Icon, RoundIcon, Spinner, Tag } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -274,7 +274,7 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
   const [canBlur, setCanBlur] = useState(true);
   const { screenSize, ScreenSizes } = useScreenSize();
 
-  const values = typeof _values === 'function' ? _values(props.name) : _values;
+  const values = isFunction(_values) ? _values(props.name) : _values;
 
   const handleDocumentClick = (e: Event) =>
     !rootRef.current?.contains(e.target as Node) ? setFocused(false) : null;

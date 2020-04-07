@@ -95,3 +95,7 @@ export function getTimeDifferenceFromToday(_date: Date) {
     isSameYear,
   };
 }
+
+export function isFunction(value: any): value is Function {
+  return value != null && typeof value === 'function';
+}
