@@ -10,7 +10,7 @@ import { themeStyles } from '../base';
 import { Button, Icon } from '../components';
 import { Align, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { useResponsiveProps } from '../utils';
+import { isFunction, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
 const styles = {
@@ -202,7 +202,7 @@ function _getShouldRenderTop(box: DOMRect) {
 
 export interface DateInputProps {
   /** Can be empty string, or object containing day, month, year as numbers */
-  value: DateObject | '';
+  value: ((name?: string) => DateObject | '') | DateObject | '';
 
   /** Triggered when the date is chosen from the calendar. If not given, the field is read-only */
   onChange?: (value: DateObject, name?: string) => void;
@@ -270,7 +270,7 @@ export interface DateInputProps {
 
 export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
   const {
-    value,
+    value: _value,
     onChange,
     locale = 'en',
     disabled,
@@ -337,6 +337,7 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
     };
   }, []);
 
+  const value = isFunction(_value) ? _value(name) : _value;
   const inputValue =
     value === ''
       ? value

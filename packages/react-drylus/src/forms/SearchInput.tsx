@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button, Icon, Spinner } from '../components';
 import { Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { isFunction, run, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
 const styles = {
@@ -52,7 +52,7 @@ export interface SearchInputProps<T> {
   options?: Array<Option<T>>;
 
   /** The text passed to the input */
-  value: string;
+  value: ((name?: string) => string) | string;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -90,7 +90,7 @@ export interface SearchInputProps<T> {
 export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputProps<T>) => {
   const {
     options,
-    value,
+    value: _value,
     onChange,
     noResultLabel = 'No results',
     placeholder,
@@ -105,6 +105,7 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
   const inputRef = useRef<HTMLInputElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
+  const value = isFunction(_value) ? _value(name) : _value;
   const shouldDisplayResults = value !== '' && isFocused;
 
   const handleDocumentClick = (e: Event) =>
