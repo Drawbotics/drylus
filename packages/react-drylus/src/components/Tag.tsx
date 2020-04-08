@@ -72,8 +72,9 @@ const styles = {
 export interface TagProps {
   children: string;
 
-  /** @deprecated use color instead */
-  /** @description uses enum Category */
+  /** @deprecated use color instead
+   * @description uses enum Category
+   */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** @description uses enum Color */

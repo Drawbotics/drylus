@@ -228,7 +228,8 @@ export interface DrawerProps extends BaseDrawerProps {
   /** If the drawer is in "asOverlay" mode, triggered when the overlay is clicked */
   onClickOverlay?: () => void;
 
-  /** If true, the whole page is hidden with an overlay and the content of the drawer is rendered most visible
+  /**
+   * If true, the whole page is hidden with an overlay and the content of the drawer is rendered most visible
    * @default false
    */
   asOverlay?: boolean;

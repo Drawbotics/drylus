@@ -90,8 +90,10 @@ export interface CircularProgressProps {
   /** Text shown within the circular progress. Not shown when size is smaller than DEFAULT */
   text?: string;
 
-  /** @deprecated Use color instead */
-  /** @description uses enum Category */
+  /**
+   * @deprecated Use color instead
+   * @description uses enum Category
+   */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** @description uses enum Color */

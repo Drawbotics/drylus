@@ -23,9 +23,7 @@ export interface ParagraphProps {
   /** Text displayed by the paragraph */
   children: React.ReactNode;
 
-  /**
-   * @default Align.LEFT
-   */
+  /** @default Align.LEFT */
   align?: Align;
 
   /** Used for style overrides */

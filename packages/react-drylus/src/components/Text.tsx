@@ -111,7 +111,7 @@ export interface TextProps {
   /**
    * @default Size.DEFAULT
    * @description uses enum Size
-   * */
+   */
   size?: Size.DEFAULT | Size.SMALL | Size.LARGE;
 
   tier?: Tier;

@@ -181,8 +181,10 @@ export interface SteppedProgressBarProps {
   /** If specified the currently active bar has a precise width, should be between 0-1 */
   percentage?: number;
 
-  /** @deprecated use color instead */
-  /** @description uses enum Category */
+  /**
+   * @deprecated use color instead
+   * @description uses enum Category
+   */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** @description uses enum Color */
@@ -191,7 +193,7 @@ export interface SteppedProgressBarProps {
   /**
    * @default Size.DEFAULT
    * @description uses enum Size
-   * */
+   */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
   /** Used for style overrides */

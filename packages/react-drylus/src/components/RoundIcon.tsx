@@ -97,8 +97,10 @@ export interface RoundIconProps {
   /** Makes the icon bold */
   bold?: boolean;
 
-  /** @deprecated use color instead */
-  /** @description uses enum Category */
+  /**
+   * @deprecated use color instead
+   * @description uses enum Category
+   */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** @description uses enum Color */

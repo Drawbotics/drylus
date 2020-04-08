@@ -83,8 +83,10 @@ export interface ProgressBarProps {
   /** Determines the amount of the bar which is completed, between 0 and 1. If not given the bar is indeterminate */
   percentage?: number;
 
-  /** @deprecated use color instead */
-  /** @description uses enum Category */
+  /**
+   * @deprecated use color instead
+   * @description uses enum Category
+   */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** @description uses enum Color */
@@ -93,7 +95,7 @@ export interface ProgressBarProps {
   /**
    * @default Size.DEFAULT
    * @description uses enum Size
-   * */
+   */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
   /** Used for style overrides */

@@ -91,8 +91,10 @@ export interface TextLinkProps {
   /** Text of the link */
   children?: React.ReactNode;
 
-  /** @default Category.INFO */
-  /** @description uses enum Category */
+  /**
+   * @default Category.INFO
+   * @description uses enum Category
+   * */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   shade?: Shade;
