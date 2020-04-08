@@ -6,7 +6,7 @@ import { v4 } from 'uuid';
 import { Icon, placeholderStyles } from '../components';
 import { Category } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -234,7 +234,7 @@ export interface RadioGroupProps<T> {
   disabled?: boolean;
 
   /** Determines which value is currently active */
-  value?: RadioGroupOption<T>['value'];
+  value?: ((name?: string) => RadioGroupOption<T>['value']) | RadioGroupOption<T>['value'];
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error?: string | number;
@@ -260,7 +260,7 @@ export interface RadioGroupProps<T> {
 
 export const RadioGroup = <T extends any>({ responsive, ...rest }: RadioGroupProps<T>) => {
   const {
-    value,
+    value: _value,
     onChange,
     options = [],
     error,
@@ -269,6 +269,8 @@ export const RadioGroup = <T extends any>({ responsive, ...rest }: RadioGroupPro
     style,
     ...props
   } = useResponsiveProps<RadioGroupProps<T>>(rest, responsive);
+
+  const value = isFunction(_value) ? _value(props.name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.stopPropagation();

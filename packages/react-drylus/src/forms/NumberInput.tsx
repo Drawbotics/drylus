@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Icon } from '../components';
 import { Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { isFunction, run, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
 const styles = {
@@ -110,9 +110,11 @@ const styles = {
   `,
 };
 
+type NumberInputValue = number | '-' | '';
+
 export interface NumberInputProps {
   /** Value displayed in the field */
-  value: number | '-' | '';
+  value: ((name?: string) => NumberInputValue) | NumberInputValue;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -124,7 +126,7 @@ export interface NumberInputProps {
   placeholder?: string;
 
   /** Triggered when the value is changed (typing or clicking +/-). If not given, the field is read-only */
-  onChange?: (v: NumberInputProps['value'], name?: string) => void;
+  onChange?: (v: NumberInputValue, name?: string) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -136,7 +138,7 @@ export interface NumberInputProps {
   valid?: boolean;
 
   /** Use if you want to modify the way you display the value (string operations only) */
-  renderValue?: (v: NumberInputProps['value']) => string;
+  renderValue?: (v: NumberInputValue) => string;
 
   /**
    * Limits the max value
@@ -180,7 +182,7 @@ export interface NumberInputProps {
 
 export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
   const {
-    value: rawValue,
+    value: _value,
     placeholder,
     disabled,
     onChange,
@@ -201,7 +203,9 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
   const leftSpanRef = useRef<HTMLSpanElement>(null);
   const [extraLeftPadding, setExtraLeftPadding] = useState<number>();
 
-  const handleInputOnChange = (v: NumberInputProps['value']) => {
+  const rawValue = isFunction(_value) ? _value(name) : _value;
+
+  const handleInputOnChange = (v: NumberInputValue) => {
     const numericalValue = Number(v);
 
     if (onChange != null) {
