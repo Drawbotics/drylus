@@ -84,7 +84,7 @@ function _getType(type, docs, componentName, comment) {
       mustPop = true;
       parsingStack.push(type.name);
     }
-    const res = __getType(type, docs, componentName, comment);
+    const res = parseType(type, docs, componentName, comment);
     
     if (mustPop) parsingStack.pop();
     
@@ -92,7 +92,7 @@ function _getType(type, docs, componentName, comment) {
   }
 }
 
-function __getType(type, docs, componentName, comment) {
+function parseType(type, docs, componentName, comment) {
   const enumTag = comment?.tags?.find((t) => t.tag === 'description');
   if (enumTag != null) {
     const match = enumTag.text.match('uses enum (?<name>[A-Z][a-z]+)');
