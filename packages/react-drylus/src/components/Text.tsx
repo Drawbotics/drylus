@@ -116,7 +116,7 @@ export interface TextProps {
 
   /**
    * @default Size.DEFAULT
-   * @description uses enum Size
+   * @kind Size
    */
   size?: Size.DEFAULT | Size.SMALL | Size.LARGE;
 
@@ -133,7 +133,7 @@ export interface TextProps {
 
   children: TextChildren | Array<TextChildren>;
 
-  /** @description uses enum Category */
+  /** @kind Category */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** Options to change the way the date is displayed, if provided. showTime toggles display of hour/minutes, format for dayjs overrides */

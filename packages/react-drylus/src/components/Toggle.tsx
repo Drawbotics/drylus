@@ -85,7 +85,7 @@ export interface ToggleProps {
   /** Determines if toggle is active */
   value: boolean;
 
-  /** @description uses enum Size */
+  /** @kind Size */
   size: Size.SMALL | Size.DEFAULT;
 
   /** Used for style overrides */

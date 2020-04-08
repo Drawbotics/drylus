@@ -92,16 +92,16 @@ export interface CircularProgressProps {
 
   /**
    * @deprecated Use color instead
-   * @description uses enum Category
+   * @kind Category
    */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  /** @description uses enum Color */
+  /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
   /**
    * @default Size.DEFAULT
-   * @description uses enum Size
+   * @kind Size
    * */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
 

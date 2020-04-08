@@ -9,7 +9,7 @@ function _getInterfaceDescription(name, docs) {
   }, []);
 
   const propsInterfaceName = `${name}Props`;
-  return flattenedProps.find((child) => child.name === propsInterfaceName);
+  return flattenedProps.find((child) => child.name === propsInterfaceName && child.kindString === 'Interface');
 }
 
 function _getDefault(prop) {
@@ -96,9 +96,9 @@ function _getType(type, docs, componentName, comment) {
 }
 
 function _parseType(type, docs, componentName, comment) {
-  const enumTag = comment?.tags?.find((t) => t.tag === 'description');
+  const enumTag = comment?.tags?.find((t) => t.tag === 'kind');
   if (enumTag != null) {
-    const match = enumTag.text.match('uses enum (?<name>[A-Z][a-z]+)');
+    const match = enumTag.text.match('(?<name>[A-Z][a-z]+)');
     const enumName = match.groups.name;
 
     return {
@@ -221,7 +221,6 @@ function _parseType(type, docs, componentName, comment) {
 
 export function generateDocs(componentName, docs) {
   const interfaceDescription = _getInterfaceDescription(componentName, docs);
-  console.log(interfaceDescription)
 
   if (interfaceDescription == null) {
     return null;

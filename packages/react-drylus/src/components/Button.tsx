@@ -277,15 +277,15 @@ export interface ButtonProps {
   /** Triggered after the button is clicked */
   onClick?: OnClickCallback<HTMLElement>;
 
-  /** @description uses enum Category */
+  /** @kind Category */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  /** @description uses enum Color */
+  /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
   /**
    * @default Size.DEFAULT
-   * @description uses enum Size
+   * @kind Size
    */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 

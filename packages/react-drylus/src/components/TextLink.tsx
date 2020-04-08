@@ -93,7 +93,7 @@ export interface TextLinkProps {
 
   /**
    * @default Category.INFO
-   * @description uses enum Category
+   * @kind Category
    * */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 

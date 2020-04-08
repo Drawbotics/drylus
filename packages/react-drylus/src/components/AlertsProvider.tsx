@@ -113,7 +113,7 @@ export interface AlertProps {
   /** Text shown within the alert */
   text: string;
 
-  /** @description uses enum Category  */
+  /** @kind Category  */
   category: Category.DANGER | Category.SUCCESS | Category.INFO | Category.WARNING | Category.BRAND;
 
   /** Triggered when the dismiss button is clicked */

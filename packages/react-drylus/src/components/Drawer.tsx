@@ -252,7 +252,7 @@ export interface DrawerProps extends BaseDrawerProps {
   /**
    * Only applies when the drawer is used with "asOverlay"
    * @default Position.RIGHT
-   * @description uses enum Position
+   * @kind Position
    */
   side?: Position.LEFT | Position.RIGHT;
 

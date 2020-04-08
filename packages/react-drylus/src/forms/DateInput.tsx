@@ -252,7 +252,7 @@ export interface DateInputProps {
   /**
    * Determines on which side the picker is aligned
    * @default Align.LEFT
-   * @description uses enum Align
+   * @kind Align
    */
   align?: Align.LEFT | Align.RIGHT;
 
