@@ -4,9 +4,9 @@ import { css, cx } from 'emotion';
 import isArray from 'lodash/isArray';
 import isObject from 'lodash/isObject';
 import React, { Fragment } from 'react';
-import { Responsive, Style } from 'src/types';
 
 import { Category, Shade, Size, Tier } from '../enums';
+import { Responsive, Style } from '../types';
 import {
   ShowDateTime,
   generateDisplayedDate,
@@ -96,7 +96,8 @@ export type TextChildren =
   | React.ReactElement<typeof TextLink>
   | number
   | Price
-  | Date;
+  | Date
+  | React.ReactNode;
 
 export interface TextProps {
   /**

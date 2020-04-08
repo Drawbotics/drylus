@@ -1,9 +1,9 @@
 import sv, { lighten } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
-import { Responsive, Style } from 'src/types';
 
 import { Category, Color, Size } from '../enums';
+import { Responsive, Style } from '../types';
 import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
 

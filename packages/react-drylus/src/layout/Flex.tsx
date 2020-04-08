@@ -1,8 +1,8 @@
 import { css, cx } from 'emotion';
 import camelCase from 'lodash/camelCase';
 import React from 'react';
-import { Size } from 'src/enums';
 
+import { Size } from '../enums';
 import { Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { Margin } from './Margin';
