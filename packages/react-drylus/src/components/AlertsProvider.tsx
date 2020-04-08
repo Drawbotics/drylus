@@ -114,7 +114,7 @@ export interface AlertProps {
   text: string;
 
   /** @description uses enum Category  */
-  category: Category.DANGER | Category.SUCCESS | Category.INFO | Category.WARNING;
+  category: Category.DANGER | Category.SUCCESS | Category.INFO | Category.WARNING | Category.BRAND;
 
   /** Triggered when the dismiss button is clicked */
   onClickDismiss?: (id?: string) => void;
