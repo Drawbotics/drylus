@@ -1,5 +1,7 @@
 /* eslint-disable no-use-before-define */
 
+import { useRef } from 'react';
+
 function _getInterfaceDescription(name, docs) {
   const flattenedProps = docs.children.reduce((memo, child) => {
     const propDescriptions = child?.children?.filter((c) => c.name.endsWith('Props')) ?? [];
@@ -72,27 +74,28 @@ function _resolveReference(ref, docs, parentComponentName) {
   }
 }
 
-let parsingStack = [];
 
 function _getType(type, docs, componentName, comment) {
-  if (type.name !== 'Array' && type?.kindString !== 'Enumeration' && parsingStack.includes(type.name)) {
+  const parsingStack = useRef([]);
+
+  if (type.name !== 'Array' && type?.kindString !== 'Enumeration' && parsingStack.current.includes(type.name)) {
     return type.name;
   }
   else {
     let mustPop = false
     if (type.name != null) {
       mustPop = true;
-      parsingStack.push(type.name);
+      parsingStack.current.push(type.name);
     }
-    const res = parseType(type, docs, componentName, comment);
+    const res = _parseType(type, docs, componentName, comment);
     
-    if (mustPop) parsingStack.pop();
+    if (mustPop) parsingStack.current.pop();
     
     return res;
   }
 }
 
-function parseType(type, docs, componentName, comment) {
+function _parseType(type, docs, componentName, comment) {
   const enumTag = comment?.tags?.find((t) => t.tag === 'description');
   if (enumTag != null) {
     const match = enumTag.text.match('uses enum (?<name>[A-Z][a-z]+)');
@@ -218,6 +221,7 @@ function parseType(type, docs, componentName, comment) {
 
 export function generateDocs(componentName, docs) {
   const interfaceDescription = _getInterfaceDescription(componentName, docs);
+  console.log(interfaceDescription)
 
   if (interfaceDescription == null) {
     return null;
