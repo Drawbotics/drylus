@@ -1,4 +1,4 @@
-import sv, { fade } from '@drawbotics/drylus-style-vars';
+import sv, { lighten } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
@@ -107,7 +107,7 @@ export const Tag = ({
       ? {
           ..._style,
           color: inversed ? undefined : color,
-          background: inversed ? color : fade(color, 30),
+          background: inversed ? color : lighten(color, 52),
         }
       : _style;
   return (
