@@ -92,7 +92,7 @@ export interface RoundIconProps {
   name: IconType;
 
   /** @default Size.DEFAULT */
-  size?: number | Size.SMALL | Size.DEFAULT | Size.LARGE;
+  size?: Size.SMALL | Size.DEFAULT | Size.LARGE | number;
 
   /** Makes the icon bold */
   bold?: boolean;

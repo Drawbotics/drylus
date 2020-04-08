@@ -178,7 +178,7 @@ export interface CheckboxProps {
    * @default Size.DEFAULT
    * @description uses enum Size
    */
-  size?: Size.DEFAULT | Size.LARGE;
+  size?: Size.LARGE | Size.DEFAULT;
 
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder?: boolean;
