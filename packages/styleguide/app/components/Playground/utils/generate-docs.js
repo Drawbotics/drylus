@@ -225,8 +225,11 @@ export function generateDocs(componentName, docs) {
   if (interfaceDescription == null) {
     return null;
   }
-
   const res = interfaceDescription.children.slice(0).reduce((props, prop) => {
+    if (prop?.flags?.isPrivate) {
+      return props;
+    }
+
     return {
       ...props,
       [prop.name]: {
