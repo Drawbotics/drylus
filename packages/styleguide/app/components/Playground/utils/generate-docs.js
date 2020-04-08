@@ -37,7 +37,7 @@ function _getFunctionSignature(type) {
     return `${p.name}: ${displayType}`;
   }).join(', ');
 
-  return `(${parameters || ''}) => ${type.declaration.signatures[0].type.name}`
+  return `(${parameters ?? ''}) => ${type.declaration.signatures[0].type.name}`
 }
 
 function _getResponsiveDoc(docs) {
