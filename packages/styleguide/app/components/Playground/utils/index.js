@@ -21,11 +21,6 @@ function prependString(string) {
   return `Drylus-${string}`;
 }
 
-export function capitalizeFirst(text) {
-  if (typeof text !== 'string' || text === '') return text;
-  return text[0].toUpperCase() + text.slice(1);
-}
-
 export function hideSecrets(string) {
   return string.replace(/accessToken="\S+"/gm, 'accessToken="*"');
 }
