@@ -263,7 +263,7 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
           </div>
         </div>
         {run(() => {
-          if (children) {
+          if (children != null) {
             return (
               <label data-element="label" className={styles.label} htmlFor={uniqId}>
                 {children}

@@ -12,7 +12,7 @@ const styles = {
     display: inline-flex;
     align-items: center;
     padding: 5px;
-    background: ${sv.neutralLight};
+    background: ${sv.neutral};
     color: ${sv.colorPrimary};
     border-radius: ${sv.defaultBorderRadius};
     font-size: 0.85rem;
