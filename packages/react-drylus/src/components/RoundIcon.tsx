@@ -1,4 +1,4 @@
-import sv, { lighten } from '@drawbotics/drylus-style-vars';
+import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
@@ -135,7 +135,7 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
       ? {
           ..._style,
           color: inversed ? undefined : color,
-          background: inversed ? color : lighten(color, 52),
+          background: inversed ? color : fade(color, 15),
         }
       : _style;
   return (
