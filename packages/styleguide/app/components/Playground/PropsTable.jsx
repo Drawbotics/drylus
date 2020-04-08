@@ -16,12 +16,13 @@ import {
   Tag,
   Tooltip,
 } from '@drawbotics/react-drylus';
+import upperFirst from 'lodash/upperfirst';
 import docs from '@drawbotics/react-drylus/docs.json';
 import { css } from 'emotion';
 import React, { Fragment } from 'react';
 
 import PropsInfo from './PropsInfo';
-import { generateDocs, capitalizeFirst } from './utils';
+import { generateDocs } from './utils';
 
 const styles = {
   table: css`
@@ -71,20 +72,21 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                   <TCell>
                     {do {
                       if  (prop.type.values != null) {
-                        <Tooltip
-                          content={<PropsInfo props={prop.type.values} />}
-                          side={Position.RIGHT}>
+                        
                           <Flex justify={FlexJustify.START}>
                             <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
                             <FlexItem>
                               <Margin size={{ left: Size.EXTRA_SMALL }}>
                                 <span style={{ color: sv.colorSecondary }}>
-                                  <Icon name="info" />
+                                  <Tooltip
+                                  content={<PropsInfo props={prop.type.values} />}
+                                  side={Position.RIGHT}>
+                                    <Icon name="info" />
+                                  </Tooltip>
                                 </span>
                               </Margin>
                             </FlexItem>
                           </Flex>
-                        </Tooltip>;
                       } else {
                         prop.type.name ?? prop.type.type ?? prop.type;
                       }
@@ -105,8 +107,8 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                                 DEPRECATED
                               </Tag>
                             </Margin>
-                            {capitalizeFirst(prop.deprecation)}
-                            {capitalizeFirst(prop.description)}
+                            {upperFirst(prop.deprecation)}
+                            {upperFirst(prop.description)}
                           </Fragment>
                         );
                       }
@@ -115,7 +117,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                         `One of: ${values.join(', ')}`;
                       }
                       else {
-                        capitalizeFirst(prop.description);
+                        upperFirst(prop.description);
                       }
                     }}
                   </TCell>
