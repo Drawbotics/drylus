@@ -172,6 +172,7 @@ export interface SelectProps<T> {
   /**
    * Size of the select. Can be small or default
    * @default Size.DEFAULT
+   * @description uses enum Size
    */
   size?: Size.SMALL | Size.DEFAULT;
 
