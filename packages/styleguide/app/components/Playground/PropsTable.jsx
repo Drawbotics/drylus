@@ -106,6 +106,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                               </Tag>
                             </Margin>
                             {capitalizeFirst(prop.deprecation)}
+                            {capitalizeFirst(prop.description)}
                           </Fragment>
                         );
                       }
