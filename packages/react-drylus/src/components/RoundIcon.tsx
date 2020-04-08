@@ -72,7 +72,10 @@ interface RoundIconProps {
   /** Name of the icon */
   name: keyof typeof Icons;
 
-  /** @default Size.DEFAULT */
+  /**
+   * @default Size.DEFAULT
+   * @description uses enum Size
+   * */
   size?: number | Size.SMALL | Size.DEFAULT | Size.LARGE;
 
   /** Makes the icon bold */

@@ -101,7 +101,6 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
           </div>
         );
       }
-      break;
     default:
       return null;
   }
