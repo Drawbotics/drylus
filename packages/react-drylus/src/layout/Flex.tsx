@@ -91,7 +91,6 @@ export interface FlexSpacerProps {
   /** Determines how much space a flex item takes within the flex container. */
   flex?: number | boolean;
 
-  /** @kind Size */
   size: Size;
 
   /** Used for style overrides */
