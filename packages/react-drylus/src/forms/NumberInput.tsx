@@ -168,6 +168,7 @@ export interface NumberInputProps {
   /**
    * Size of the input. Can be small or default
    * @default Size.DEFAULT
+   * @description uses enum Size
    */
   size?: Size.SMALL | Size.DEFAULT;
 
