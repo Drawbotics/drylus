@@ -5,7 +5,7 @@ import React from 'react';
 import { Icon, RoundIcon, Spinner } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -15,7 +15,7 @@ const styles = {
     width: 100%;
 
     &::after {
-      content: '\\ea2c';
+      content: '\\ea30';
       font-family: 'drycons';
       color: ${sv.colorPrimary};
       position: absolute;
@@ -140,7 +140,7 @@ export interface SelectProps<T> {
   options: Array<SelectOption<T>>;
 
   /** Determines which value is currently active */
-  value?: SelectOption<T>['value'];
+  value?: ((name?: string) => SelectOption<T>['value']) | SelectOption<T>['value'];
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -187,7 +187,7 @@ export interface SelectProps<T> {
 
 export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) => {
   const {
-    value,
+    value: _value,
     options = [],
     onChange,
     placeholder = ' -- ',
@@ -200,6 +200,8 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
     size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<SelectProps<T>>(rest, responsive);
+
+  const value = isFunction(_value) ? _value(props.name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     if (onChange != null) {

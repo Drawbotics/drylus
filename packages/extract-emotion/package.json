@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/extract-emotion",
-  "version": "6.0.0",
+  "version": "6.2.1-beta.23",
   "description": "Small utility to extract CSS styles from emotion components",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "",
@@ -27,8 +27,14 @@
     "emotion": "^10",
     "react": "^16.8.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Drawbotics/drylus",
+    "directory": "packages/extract-emotion"
+  },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
   },
   "gitHead": "8314d678c0c364d2aab35300a51324982cc0b85a"
 }

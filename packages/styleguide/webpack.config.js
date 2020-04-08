@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const checkEnv = require('@drawbotics/check-env');
+const { checkEnv } = require('@drawbotics/check-env');
 const betterWebpackProgress = require('better-webpack-progress');
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
