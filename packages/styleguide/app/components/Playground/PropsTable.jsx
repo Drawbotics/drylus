@@ -80,7 +80,8 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                                 <span style={{ color: sv.colorSecondary }}>
                                   <Tooltip
                                   content={<PropsInfo props={prop.type.values} />}
-                                  side={Position.RIGHT}>
+                                  side={Position.RIGHT}
+                                  style={{ maxWidth: '600px'}}>
                                     <Icon name="info" />
                                   </Tooltip>
                                 </span>
