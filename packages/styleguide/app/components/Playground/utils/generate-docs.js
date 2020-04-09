@@ -1,7 +1,5 @@
 /* eslint-disable no-use-before-define */
 
-import { useRef } from 'react';
-
 function _getInterfaceDescription(name, docs) {
   const flattenedProps = docs.children.reduce((memo, child) => {
     const propDescriptions = child?.children?.filter((c) => c.name.endsWith('Props')) ?? [];
@@ -31,11 +29,17 @@ function _computeObject(properties, docs, parentComponentName) {
   }, {});
 }
 
-function _getFunctionSignature(type) {
+function _getFunctionSignature(type, docs, parentComponentName) {
   const parameters = type.declaration.signatures[0]?.parameters?.map((p) => {
-    const displayType = p.type.type === 'union'
-      ? p.type.types.map((t) => t.name).join(' | ')
-      : p.type.name;
+    let displayType = '';
+    if (p.type.type === 'union') {
+      displayType = p.type.types.map((t) => t.name).join(' | ');
+    }
+    else {
+      const parsedType = _getType(p.type, docs, parentComponentName);
+      displayType = parsedType.name ?? parsedType.type ?? parsedType;
+    }
+
     return `${p.name}: ${displayType}`;
   }).join(', ');
 
@@ -53,11 +57,22 @@ function _resolveReference(ref, docs, parentComponentName) {
 
   if (doc == null) {
     const flattened = docs?.children.reduce((memo, module) => [...memo, ...(module?.children ?? [])], []);
-    doc = flattened?.find((entity) => entity?.name === ref.name);
+    const candidates = flattened?.filter((entity) => entity?.name === ref.name);
+    const withType = candidates?.find((c) => c.type != null);
+    if (withType != null) doc = withType;
+    else doc = candidates[0];
   }
 
-  if (doc == null) return ref 
+  if (doc == null) return ref
+  else if (doc?.type?.type === 'intersection') return ref.name
   else if (doc?.type != null) return _getType(doc.type, docs, parentComponentName);
+  if (doc?.type?.type === 'reflection') {
+    return {
+      type: 'function',
+      name: 'func',
+      values: _getFunctionSignature(doc.type, docs, parentComponentName)
+    };
+  }
   else if (doc?.kindString === 'Enumeration') {
     return {
       type: 'enum',
@@ -74,22 +89,21 @@ function _resolveReference(ref, docs, parentComponentName) {
   }
 }
 
-
+let _parsingStack = []
 function _getType(type, docs, componentName, comment) {
-  const parsingStack = useRef([]);
 
-  if (type.name !== 'Array' && type?.kindString !== 'Enumeration' && parsingStack.current.includes(type.name)) {
+  if (type.name !== 'Array' && type?.kindString !== 'Enumeration' && _parsingStack.includes(type.name)) {
     return type.name;
   }
   else {
     let mustPop = false
     if (type.name != null) {
       mustPop = true;
-      parsingStack.current.push(type.name);
+      _parsingStack.push(type.name);
     }
     const res = _parseType(type, docs, componentName, comment);
     
-    if (mustPop) parsingStack.current.pop();
+    if (mustPop) _parsingStack.pop();
     
     return res;
   }
@@ -180,7 +194,7 @@ function _parseType(type, docs, componentName, comment) {
       return {
         type: 'function',
         name: 'func',
-        values: _getFunctionSignature(type)
+        values: _getFunctionSignature(type, docs, componentName)
       }
     }
     else {
@@ -208,11 +222,25 @@ function _parseType(type, docs, componentName, comment) {
       };
     }
   }
+
   else if (type?.operator === 'keyof') {
     return {
       type: 'string',
       name: 'string',
     };
+  }
+  else if (type.type === 'indexedAccess') {
+    if (type?.objectType?.typeArguments) {
+      return {
+        type: `<${type?.objectType?.typeArguments?.map((t) => t.name).join(', ')}>: any`,
+      };
+    }
+    else {
+      return {
+        type: `${type?.objectType.name}['${type?.indexType?.value}']`
+      }
+    }
+    
   }
   else {
     return type.name;
