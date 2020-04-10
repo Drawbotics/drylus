@@ -149,9 +149,9 @@ export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
 export interface FlexProps {
   children:
     | React.ReactElement<typeof FlexItem>
-    | Array<React.ReactElement<typeof FlexItem>>
+    | Array<React.ReactElement<typeof FlexItem> | null>
     | React.ReactElement<typeof FlexSpacer>
-    | Array<React.ReactElement<typeof FlexSpacer>>;
+    | Array<React.ReactElement<typeof FlexSpacer> | null>;
 
   /**
    * Determines which way the flex layout should be
@@ -198,15 +198,15 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
     style,
   } = useResponsiveProps<FlexProps>(rest, responsive);
 
-  const invalidChildren = React.Children.map(children, (x) => x).some(
-    (child) =>
+  const invalidChildren = React.Children.map(children as any, (x) => x).some(
+    (child: React.ReactElement) =>
       child != null &&
       child.type !== FlexItem &&
       child.type !== FlexSpacer &&
       !child.type.toString().includes('fragment'),
   );
   if (invalidChildren) {
-    console.warn('Flex should only accept FlexItem or FlexSpacer as children');
+    console.warn('Flex should only accept FlexItem or FlexSpacer as children.');
   }
   return (
     <div
@@ -221,15 +221,17 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
         className,
       )}
       style={style}>
-      {React.Children.map(children, (child) => {
-        if (child?.type === FlexSpacer) {
-          return React.cloneElement(
-            child as React.ReactElement<typeof FlexSpacer>,
-            { direction } as Partial<typeof FlexSpacer>,
-          );
-        }
-        return child;
-      })}
+      {children != null
+        ? React.Children.map(children as any, (child) => {
+            if (child?.type === FlexSpacer) {
+              return React.cloneElement(
+                child as React.ReactElement<typeof FlexSpacer>,
+                { direction } as Partial<typeof FlexSpacer>,
+              );
+            }
+            return child;
+          })
+        : null}
     </div>
   );
 };

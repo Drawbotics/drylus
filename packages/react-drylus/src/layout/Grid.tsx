@@ -83,7 +83,7 @@ export const GridItem = ({ children, style, span = 1, columns = 1 }: GridItemPro
 
 export interface GridProps {
   /** Should all be of type GridItem */
-  children: React.ReactElement<typeof GridItem> | Array<React.ReactElement<typeof GridItem>>;
+  children: React.ReactElement<typeof GridItem> | Array<React.ReactElement<typeof GridItem> | null>;
 
   /** Number of columns for the grid */
   columns: number;
@@ -107,8 +107,8 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
     responsive,
   );
 
-  const invalidChildren = React.Children.map(children, (x) => x).some(
-    (child) =>
+  const invalidChildren = React.Children.map(children as any, (x) => x).some(
+    (child: React.ReactElement) =>
       child != null && (child.type !== GridItem || !child.type.toString().includes('fragment')),
   );
   if (invalidChildren) {
@@ -125,7 +125,7 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
         ]]: vGutters != null,
       })}
       style={style}>
-      {React.Children.map(children, (child: React.ReactElement<typeof GridItem>) =>
+      {React.Children.map(children as any, (child: React.ReactElement<typeof GridItem>) =>
         React.cloneElement(child, { columns } as Partial<typeof GridItem>),
       )}
     </div>
