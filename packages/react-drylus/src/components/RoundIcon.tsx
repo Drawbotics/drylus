@@ -90,7 +90,10 @@ export interface RoundIconProps {
   /** Name of the icon */
   name: IconType;
 
-  /** @default Size.DEFAULT */
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   * */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE | number;
 
   /** Makes the icon bold */
