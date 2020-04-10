@@ -1,5 +1,7 @@
 /* eslint-disable no-use-before-define */
 
+import omit from 'lodash/omit';
+
 function _getInterfaceDescription(name, docs) {
   const flattenedProps = docs.children.reduce((memo, child) => {
     const propDescriptions = child?.children?.filter((c) => c.name.endsWith('Props')) ?? [];
@@ -22,9 +24,16 @@ function _getDeprecation(prop) {
 
 function _computeObject(properties, docs, parentComponentName) {
   return properties?.reduce((memo, property) => {
+    const parsed = _getType(property.type, docs, parentComponentName);
+    
+    let value;
+    if (parsed?.type === 'enum') value = parsed.name;
+    else if (parsed?.type != null) value = omit(parsed, 'type'); 
+    else value = parsed;
+
     return {
       ...memo,
-      [property.name]: _getType(property.type, docs, parentComponentName),
+      [property.name]: value,
     }
   }, {});
 }
@@ -53,26 +62,23 @@ function _getResponsiveDoc(docs) {
 
 function _resolveReference(ref, docs, parentComponentName) {
   const parentModule = docs?.children.find((module) => module.name.includes(parentComponentName));
-  let doc = parentModule?.children.find((c) => c.name.includes(ref.name));
-
+  let doc = parentModule?.children.find((c) => c.name === ref.name);
+  
   if (doc == null) {
     const flattened = docs?.children.reduce((memo, module) => [...memo, ...(module?.children ?? [])], []);
     const candidates = flattened?.filter((entity) => entity?.name === ref.name);
+
     const withType = candidates?.find((c) => c.type != null);
+    const noRef = candidates.find((c) => c?.kindString !== 'Reference');
+    
     if (withType != null) doc = withType;
+    if (noRef != null) doc = noRef;
     else doc = candidates[0];
   }
-
+  
   if (doc == null) return ref
   else if (doc?.type?.type === 'intersection') return ref.name
   else if (doc?.type != null) return _getType(doc.type, docs, parentComponentName);
-  if (doc?.type?.type === 'reflection') {
-    return {
-      type: 'function',
-      name: 'func',
-      values: _getFunctionSignature(doc.type, docs, parentComponentName)
-    };
-  }
   else if (doc?.kindString === 'Enumeration') {
     return {
       type: 'enum',
@@ -80,7 +86,7 @@ function _resolveReference(ref, docs, parentComponentName) {
       values: doc.children.map((v) => `${doc.name}.${v.name}`),
     };
   }
-  else { 
+  else {
     return {
       type: 'shape',
       name: doc?.name,
@@ -161,9 +167,7 @@ function _parseType(type, docs, componentName, comment) {
       return type.typeArguments[0].queryType.name;
     }
     else if (type.name === 'React.ReactNode') {
-      return {
-        type: 'React node',
-      };
+      return 'React Node';
     }
     else if (type.name === 'Responsive') {
       const doc = _getResponsiveDoc(docs);
