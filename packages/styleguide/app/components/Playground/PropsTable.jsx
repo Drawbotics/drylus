@@ -77,7 +77,8 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                         let tooltip = (
                           <Tooltip
                             content={<PropsInfo props={tooltipValues} />}
-                            side={Position.RIGHT}>
+                            side={Position.RIGHT}
+                            style={{ maxWidth: '600px' }}>
                             <Flex justify={FlexJustify.START}>
                               <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
                               <FlexItem>
