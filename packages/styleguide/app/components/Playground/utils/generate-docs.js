@@ -158,14 +158,7 @@ function _parseType(type, docs, componentName, comment) {
       };
     }
     else if (type.name.includes('ReactElement')) {
-      let returnType = {
-        type: 'ReactElement',
-      }
-      if (type.typeArguments != null) {
-        returnType.query = type.typeArguments[0].queryType.name;
-        returnType.name = `ReactElement<${type.typeArguments[0].queryType.name}>`;
-      }
-      return returnType;
+      return type.typeArguments[0].queryType.name;
     }
     else if (type.name === 'React.ReactNode') {
       return {
