@@ -22,7 +22,7 @@ import upperFirst from 'lodash/upperFirst';
 import React, { Fragment } from 'react';
 
 import PropsInfo from './PropsInfo';
-import { generateDocs } from './utils';
+import { generateDocs, extractIntrinsics } from './utils';
 
 const styles = {
   table: css`
@@ -72,21 +72,37 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                   <TCell>
                     {do {
                       if (prop.type.values != null) {
-                        <Flex justify={FlexJustify.START}>
-                          <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
-                          <FlexItem>
-                            <Margin size={{ left: Size.EXTRA_SMALL }}>
-                              <span style={{ color: sv.colorSecondary }}>
-                                <Tooltip
-                                  content={<PropsInfo props={prop.type.values} />}
-                                  side={Position.RIGHT}
-                                  style={{ maxWidth: '600px' }}>
-                                  <Icon name="info" />
-                                </Tooltip>
-                              </span>
-                            </Margin>
-                          </FlexItem>
-                        </Flex>;
+                        const { variants, nonVariants } = _isEnum(prop) ? extractIntrinsics(prop.type.values) : { variants: [], nonVariants: [] };
+                        const tooltipValues = _isEnum(prop) ? variants : prop.type.values 
+                        let tooltip = (
+                          <Tooltip
+                            content={<PropsInfo props={tooltipValues} />}
+                            side={Position.RIGHT}>
+                            <Flex justify={FlexJustify.START}>
+                              <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
+                              <FlexItem>
+                                <Margin size={{ left: Size.EXTRA_SMALL }}>
+                                  <span style={{ color: sv.colorSecondary }}>
+                                    <Icon name="info" />
+                                  </span>
+                                </Margin>
+                              </FlexItem>
+                            </Flex>
+                          </Tooltip>
+                        );
+
+                        if (_isEnum(prop)) {
+                          if (nonVariants.length !== 0) {
+                            return (
+                              <Fragment>
+                                {tooltip}
+                                <span> Or {nonVariants.join(' or ')}</span>
+                              </Fragment>
+                            );
+                          }
+                        }
+
+                        return tooltip;
                       } else {
                         prop.type.name ?? prop.type.type ?? prop.type;
                       }
@@ -114,8 +130,18 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                           </Fragment>
                         );
                       } else if (_isEnum(prop)) {
-                        const { values } = prop.type;
-                        `One of: ${values.join(', ')}`;
+                        const { variants, nonVariants } = extractIntrinsics(prop.type.values);
+                        const variantsDesc = `One of: ${variants.join(', ')}`;
+                        if (nonVariants.length > 0) {
+                          return (
+                            <Fragment>
+                              {variantsDesc}
+                              <br/>
+                              <span>Or: {nonVariants.join(' or ')}</span>
+                            </Fragment>
+                          );
+                        }
+                        return variantsDesc;
                       } else {
                         upperFirst(prop.description);
                       }
