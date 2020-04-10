@@ -16,9 +16,9 @@ import {
   Tag,
   Tooltip,
 } from '@drawbotics/react-drylus';
-import upperFirst from 'lodash/upperfirst';
 import docs from '@drawbotics/react-drylus/docs.json';
 import { css } from 'emotion';
+import upperFirst from 'lodash/upperFirst';
 import React, { Fragment } from 'react';
 
 import PropsInfo from './PropsInfo';
@@ -71,23 +71,22 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                   {/* Type */}
                   <TCell>
                     {do {
-                      if  (prop.type.values != null) {
-                        
-                          <Flex justify={FlexJustify.START}>
-                            <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
-                            <FlexItem>
-                              <Margin size={{ left: Size.EXTRA_SMALL }}>
-                                <span style={{ color: sv.colorSecondary }}>
-                                  <Tooltip
+                      if (prop.type.values != null) {
+                        <Flex justify={FlexJustify.START}>
+                          <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
+                          <FlexItem>
+                            <Margin size={{ left: Size.EXTRA_SMALL }}>
+                              <span style={{ color: sv.colorSecondary }}>
+                                <Tooltip
                                   content={<PropsInfo props={prop.type.values} />}
                                   side={Position.RIGHT}
-                                  style={{ maxWidth: '600px'}}>
-                                    <Icon name="info" />
-                                  </Tooltip>
-                                </span>
-                              </Margin>
-                            </FlexItem>
-                          </Flex>
+                                  style={{ maxWidth: '600px' }}>
+                                  <Icon name="info" />
+                                </Tooltip>
+                              </span>
+                            </Margin>
+                          </FlexItem>
+                        </Flex>;
                       } else {
                         prop.type.name ?? prop.type.type ?? prop.type;
                       }
@@ -103,7 +102,9 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                       if (_hasDeprecation(prop)) {
                         return (
                           <Fragment>
-                            <Margin size={{ right: Size.EXTRA_SMALL }} style={{ display: 'inline-block'}} >
+                            <Margin
+                              size={{ right: Size.EXTRA_SMALL }}
+                              style={{ display: 'inline-block' }}>
                               <Tag color={Color.ORANGE} inversed>
                                 DEPRECATED
                               </Tag>
@@ -112,12 +113,10 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                             {upperFirst(prop.description)}
                           </Fragment>
                         );
-                      }
-                      else if (_isEnum(prop)) {
+                      } else if (_isEnum(prop)) {
                         const { values } = prop.type;
                         `One of: ${values.join(', ')}`;
-                      }
-                      else {
+                      } else {
                         upperFirst(prop.description);
                       }
                     }}
@@ -146,8 +145,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                   </TCell>
                 </TRow>
               );
-            })
-          }
+            })}
         </TBody>
       </Table>
     </div>
