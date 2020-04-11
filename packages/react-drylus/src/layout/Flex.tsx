@@ -151,7 +151,8 @@ export interface FlexProps {
     | React.ReactElement<typeof FlexItem>
     | Array<React.ReactElement<typeof FlexItem> | null>
     | React.ReactElement<typeof FlexSpacer>
-    | Array<React.ReactElement<typeof FlexSpacer> | null>;
+    | Array<React.ReactElement<typeof FlexSpacer> | null>
+    | React.ReactNode;
 
   /**
    * Determines which way the flex layout should be

@@ -83,7 +83,10 @@ export const GridItem = ({ children, style, span = 1, columns = 1 }: GridItemPro
 
 export interface GridProps {
   /** Should all be of type GridItem */
-  children: React.ReactElement<typeof GridItem> | Array<React.ReactElement<typeof GridItem> | null>;
+  children:
+    | React.ReactElement<typeof GridItem>
+    | Array<React.ReactElement<typeof GridItem> | null>
+    | React.ReactNode;
 
   /** Number of columns for the grid */
   columns: number;
