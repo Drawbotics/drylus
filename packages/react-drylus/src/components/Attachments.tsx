@@ -110,7 +110,7 @@ export interface AttachmentsProps {
     url?: string;
   }>;
 
-  /** Array of attachments to be displayed */
+  /** Specify how exactly to remove attachment, you can count on the id od the attachment  */
   onClickRemoveAttachment?: (attachmentId: string) => void;
 }
 
