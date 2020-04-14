@@ -174,7 +174,9 @@ function _isSound(type: string): type is Sound {
 export type FileType = Archive | Model | Document | Vector | PDF | Data | Image | Video | Sound;
 
 export interface FileIconProps {
+  /** Determines the color and text shown in the icon, should be the extension of the file */
   type: FileType;
+
   /** Used for style overrides */
   style?: Style;
 }
