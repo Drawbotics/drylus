@@ -109,7 +109,7 @@ export const BigCheckbox = ({
       <div data-element="header" className={styles.header}>
         <Label>{label}</Label>
         <div data-element="icon">
-          <RoundIcon name="check" color={Color.GREEN} />
+          <RoundIcon inversed name="check" color={Color.GREEN} />
         </div>
       </div>
       {children}
