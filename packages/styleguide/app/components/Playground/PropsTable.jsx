@@ -22,7 +22,7 @@ import upperFirst from 'lodash/upperFirst';
 import React, { Fragment } from 'react';
 
 import PropsInfo from './PropsInfo';
-import { generateDocs, extractIntrinsics } from './utils';
+import { extractIntrinsics, generateDocs } from './utils';
 
 const styles = {
   table: css`
@@ -72,8 +72,10 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                   <TCell>
                     {do {
                       if (prop.type.values != null) {
-                        const { variants, nonVariants } = _isEnum(prop) ? extractIntrinsics(prop.type.values) : { variants: [], nonVariants: [] };
-                        const tooltipValues = _isEnum(prop) ? variants : prop.type.values 
+                        const { variants, nonVariants } = _isEnum(prop)
+                          ? extractIntrinsics(prop.type.values)
+                          : { variants: [], nonVariants: [] };
+                        const tooltipValues = _isEnum(prop) ? variants : prop.type.values;
                         let tooltip = (
                           <Tooltip
                             content={<PropsInfo props={tooltipValues} />}
@@ -137,7 +139,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                           return (
                             <Fragment>
                               {variantsDesc}
-                              <br/>
+                              <br />
                               <span>Or: {nonVariants.join(' or ')}</span>
                             </Fragment>
                           );
