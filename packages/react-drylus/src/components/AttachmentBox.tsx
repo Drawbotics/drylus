@@ -28,7 +28,7 @@ const styles = {
   `,
 };
 
-export const Attachments = ({ attachment, onClickRemoveAttachment }: AttachmentProps) => {
+export const AttachmentBox = ({ attachment, onClickRemoveAttachment }: AttachmentProps) => {
   const handleDownload = () => {
     if (attachment.url != null) {
       window.open(attachment.url);

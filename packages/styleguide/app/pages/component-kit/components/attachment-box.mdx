@@ -1,13 +1,13 @@
-import { Attachments } from '@drawbotics/react-drylus';
+import { AttachmentBox } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
 
-# Attachment
+# Attachment Box
 Used to display attachment components.
 
 ```jsx
-import { Attachments } from '@drawbotics/react-drylus';
+import { AttachmentBox } from '@drawbotics/react-drylus';
 ```
 __Example__
 
@@ -32,7 +32,7 @@ export const secondAttachment = {
 
 export const onClickRemoveAttachment = () => {};
 
-<Playground component={Attachments}>
-  <Attachments attachment={attachment} onClickRemoveAttachment={onClickRemoveAttachment} />
-  <Attachments attachment={secondAttachment} onClickRemoveAttachment={onClickRemoveAttachment} />
+<Playground component={AttachmentBox}>
+  <AttachmentBox attachment={attachment} onClickRemoveAttachment={onClickRemoveAttachment} />
+  <AttachmentBox attachment={secondAttachment} onClickRemoveAttachment={onClickRemoveAttachment} />
 </Playground>
