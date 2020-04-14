@@ -23,7 +23,7 @@ const styles = {
   `,
   calendarContainer: css`
     position: fixed;
-    z-index: 999;
+    z-index: 99999;
     margin-top: calc(${sv.marginLarge} + ${sv.marginSmall});
     opacity: 0;
     transform: translateY(-5px);
