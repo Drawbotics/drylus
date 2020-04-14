@@ -11,6 +11,28 @@ import { Attachments } from '@drawbotics/react-drylus';
 ```
 __Example__
 
+export const attachment = {
+  id: '1',
+  fileName: 'DummyFile.jpg',
+  progress: {
+    percentage: 1,
+  },
+  attachmentId: '1-a',
+  url: 'https://stackoverflow.com/',
+};
+
+export const secondAttachment = {
+  id: '2',
+  fileName: 'SecondDummyFile.jpg',
+  progress: {
+    percentage: 0.6,
+  },
+  attachmentId: '2-a',
+  url: 'https://stackoverflow.com/',
+};
+
+export const onClickRemoveAttachment = () => {};
+
 <Playground component={Attachments}>
-  <Attachments />
+  <Attachments attachments={[attachment, secondAttachment]} onClickRemoveAttachment={onClickRemoveAttachment} />
 </Playground>

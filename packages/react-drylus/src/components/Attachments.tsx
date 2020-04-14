@@ -37,26 +37,6 @@ const styles = {
   `,
 };
 
-const fakeAttachment = {
-  id: '1',
-  fileName: 'DummyFile.jpg',
-  progress: {
-    percentage: 1,
-  },
-  attachmentId: '1-a',
-  url: 'https://stackoverflow.com/',
-};
-
-const fakeAttachment2 = {
-  id: '2',
-  fileName: 'SecondDummyFile.jpg',
-  progress: {
-    percentage: 0.6,
-  },
-  attachmentId: '2-a',
-  url: 'https://stackoverflow.com/',
-};
-
 const Attachment = ({ attachment, onClickRemoveAttachment }: AttachmentProps) => {
   const handleDownload = () => {
     if (attachment.url != null) {
@@ -134,10 +114,7 @@ export interface AttachmentsProps {
   onClickRemoveAttachment?: (attachmentId: string) => void;
 }
 
-export const Attachments = ({
-  attachments = [fakeAttachment, fakeAttachment2],
-  onClickRemoveAttachment = () => {},
-}: AttachmentsProps) => {
+export const Attachments = ({ attachments, onClickRemoveAttachment }: AttachmentsProps) => {
   return (
     <Flex direction={FlexDirection.VERTICAL} align={FlexAlign.START}>
       <FlexItem>
