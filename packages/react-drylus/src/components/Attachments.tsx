@@ -3,16 +3,7 @@ import { css } from 'emotion';
 import React from 'react';
 
 import { Color, Size } from '../enums';
-import {
-  Flex,
-  FlexAlign,
-  FlexDirection,
-  FlexItem,
-  FlexJustify,
-  ListTile,
-  Margin,
-  Padding,
-} from '../layout';
+import { Flex, FlexItem, FlexJustify, ListTile, Margin, Padding } from '../layout';
 import { run } from '../utils';
 import { Icon } from './Icon';
 import { ProgressBar } from './ProgressBar';
@@ -37,7 +28,7 @@ const styles = {
   `,
 };
 
-const Attachment = ({ attachment, onClickRemoveAttachment }: AttachmentProps) => {
+export const Attachments = ({ attachment, onClickRemoveAttachment }: AttachmentProps) => {
   const handleDownload = () => {
     if (attachment.url != null) {
       window.open(attachment.url);
@@ -97,39 +88,5 @@ const Attachment = ({ attachment, onClickRemoveAttachment }: AttachmentProps) =>
         </Flex>
       </Padding>
     </div>
-  );
-};
-
-export interface AttachmentsProps {
-  /** Array of attachments to be displayed */
-  attachments: Array<{
-    readonly id: string;
-    readonly fileName: string;
-    progress?: { percentage?: number };
-    attachmentId?: string;
-    url?: string;
-  }>;
-
-  /** Specify how exactly to remove attachment, you can count on the id od the attachment  */
-  onClickRemoveAttachment?: (attachmentId: string) => void;
-}
-
-export const Attachments = ({ attachments, onClickRemoveAttachment }: AttachmentsProps) => {
-  return (
-    <Flex direction={FlexDirection.VERTICAL} align={FlexAlign.START}>
-      <FlexItem>
-        <Margin size={{ bottom: Size.EXTRA_SMALL }}>
-          <Icon name="link" />
-          <Text>Attachments ({attachments.length})</Text>
-        </Margin>
-      </FlexItem>
-      {attachments.map((attachment) => (
-        <FlexItem key={attachment.id} style={{ width: '100%' }}>
-          <Margin size={{ bottom: Size.EXTRA_SMALL }}>
-            <Attachment attachment={attachment} onClickRemoveAttachment={onClickRemoveAttachment} />
-          </Margin>
-        </FlexItem>
-      ))}
-    </Flex>
   );
 };

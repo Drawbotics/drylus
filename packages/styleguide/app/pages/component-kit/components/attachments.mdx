@@ -33,5 +33,6 @@ export const secondAttachment = {
 export const onClickRemoveAttachment = () => {};
 
 <Playground component={Attachments}>
-  <Attachments attachments={[attachment, secondAttachment]} onClickRemoveAttachment={onClickRemoveAttachment} />
+  <Attachments attachment={attachment} onClickRemoveAttachment={onClickRemoveAttachment} />
+  <Attachments attachment={secondAttachment} onClickRemoveAttachment={onClickRemoveAttachment} />
 </Playground>
