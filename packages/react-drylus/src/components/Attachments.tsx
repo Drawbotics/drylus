@@ -3,7 +3,16 @@ import { css } from 'emotion';
 import React from 'react';
 
 import { Color, Size } from '../enums';
-import { Flex, FlexItem, FlexJustify, ListTile, Margin, Padding } from '../layout';
+import {
+  Flex,
+  FlexAlign,
+  FlexDirection,
+  FlexItem,
+  FlexJustify,
+  ListTile,
+  Margin,
+  Padding,
+} from '../layout';
 import { run } from '../utils';
 import { Icon } from './Icon';
 import { ProgressBar } from './ProgressBar';
@@ -32,16 +41,23 @@ const fakeAttachment = {
   id: '1',
   fileName: 'DummyFile.jpg',
   progress: {
-    percentage: 0.5,
+    percentage: 1,
   },
   attachmentId: '1-a',
   url: 'https://stackoverflow.com/',
 };
 
-export const Attachments = ({
-  attachment = fakeAttachment,
-  onClickRemoveAttachment,
-}: AttachmentProps) => {
+const fakeAttachment2 = {
+  id: '2',
+  fileName: 'SecondDummyFile.jpg',
+  progress: {
+    percentage: 0.6,
+  },
+  attachmentId: '2-a',
+  url: 'https://stackoverflow.com/',
+};
+
+const Attachment = ({ attachment, onClickRemoveAttachment }: AttachmentProps) => {
   const handleDownload = () => {
     if (attachment.url != null) {
       window.open(attachment.url);
@@ -101,5 +117,47 @@ export const Attachments = ({
         </Flex>
       </Padding>
     </div>
+  );
+};
+
+export interface AttachmentsProps {
+  /** Array of attachments to be displayed */
+  attachments: Array<{
+    readonly id: string;
+    readonly fileName: string;
+    progress?: { percentage?: number };
+    attachmentId?: string;
+    url?: string;
+  }>;
+
+  /** Array of attachments to be displayed */
+  onClickRemoveAttachment?: (attachmentId: string) => void;
+}
+
+export const Attachments = ({
+  attachments = [fakeAttachment, fakeAttachment2],
+  onClickRemoveAttachment = () => {},
+}: AttachmentsProps) => {
+  return (
+    <Flex direction={FlexDirection.VERTICAL} align={FlexAlign.START}>
+      <FlexItem>
+        <Margin size={{ bottom: Size.EXTRA_SMALL }}>
+          <Icon name="link" />
+          <Text>Attachments ({attachments.length})</Text>
+        </Margin>
+      </FlexItem>
+      {run(() =>
+        attachments.map((attachment) => (
+          <FlexItem key={attachment.id} style={{ width: '100%' }}>
+            <Margin size={{ bottom: Size.EXTRA_SMALL }}>
+              <Attachment
+                attachment={attachment}
+                onClickRemoveAttachment={onClickRemoveAttachment}
+              />
+            </Margin>
+          </FlexItem>
+        )),
+      )}
+    </Flex>
   );
 };
