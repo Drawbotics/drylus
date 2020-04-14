@@ -165,11 +165,11 @@ export interface DateObject {
   year: number;
 }
 
-function _objectToDate(object: DateObject) {
+export function objectToDate(object: DateObject) {
   return new Date(object.year, object.month - 1, object.day);
 }
 
-function _dateToObject(date: Date) {
+export function dateToObject(date: Date) {
   return {
     day: date.getDate(),
     month: date.getMonth() + 1,
@@ -186,7 +186,7 @@ function _stringToDateObject(string: string) {
   };
 }
 
-function _objectToDateString(object: DateObject) {
+function objectToDateString(object: DateObject) {
   return `${object.year}-${String(object.month).padStart(2, '0')}-${String(object.day).padStart(
     2,
     '0',
@@ -342,11 +342,11 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
     value === ''
       ? value
       : isDesktop
-      ? _objectToDate(value).toLocaleDateString(locale, {
+      ? objectToDate(value).toLocaleDateString(locale, {
           ...DEFAULT_OPTIONS,
           ...displayOptions,
         })
-      : _objectToDateString(value);
+      : objectToDateString(value);
 
   const pickerBox = pickerElement.current?.getBoundingClientRect();
   const rootBox = rootRef.current?.getBoundingClientRect();
@@ -383,8 +383,8 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
         onFocus={onChange != null ? () => setFocused(true) : null}
         placeholder={placeholder}
         type={isDesktop ? null : 'date'}
-        max={!isDesktop && maxDate ? _objectToDateString(maxDate) : null}
-        min={!isDesktop && minDate ? _objectToDateString(minDate) : null}
+        max={!isDesktop && maxDate ? objectToDateString(maxDate) : null}
+        min={!isDesktop && minDate ? objectToDateString(minDate) : null}
         size={size}
       />
       {isDesktop &&
@@ -406,18 +406,18 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
               })}>
               <Calendar
                 {...calendarOptions}
-                maxDate={maxDate && _objectToDate(maxDate)}
-                minDate={minDate && _objectToDate(minDate)}
+                maxDate={maxDate && objectToDate(maxDate)}
+                minDate={minDate && objectToDate(minDate)}
                 className={cx(styles.calendar, {
                   [styles.topRender]: topRender,
                 })}
                 tileClassName={styles.tile}
                 locale={locale}
-                activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
+                activeStartDate={activeStartDate && objectToDate(activeStartDate)}
                 onChange={
-                  onChange != null ? (v) => onChange(_dateToObject(v as Date), name) : undefined
+                  onChange != null ? (v) => onChange(dateToObject(v as Date), name) : undefined
                 }
-                value={value === '' ? undefined : _objectToDate(value)}
+                value={value === '' ? undefined : objectToDate(value)}
               />
             </div>
           </div>,
