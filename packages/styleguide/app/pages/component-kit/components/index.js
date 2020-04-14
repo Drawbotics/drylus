@@ -1,6 +1,6 @@
 import alerts from './alerts';
 import avatar from './avatar';
-import attachment from './attachment';
+import attachments from './attachments';
 import badge from './badge';
 import banner from './banner';
 import bigCheckbox from './big-checkbox';
@@ -89,7 +89,7 @@ const components = {
   progressBar,
   loadingPlaceholder,
   steppedProgressBar,
-  attachment
+  attachments
 };
 
 export default Object.keys(components)

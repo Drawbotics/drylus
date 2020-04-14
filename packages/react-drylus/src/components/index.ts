@@ -42,4 +42,4 @@ export * from './Tile';
 export * from './ProgressBar';
 export * from './LoadingPlaceholder';
 export * from './SteppedProgressBar';
-export * from './Attachment';
+export * from './Attachments';

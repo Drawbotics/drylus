@@ -38,7 +38,7 @@ const fakeAttachment = {
   url: 'https://stackoverflow.com/',
 };
 
-export const Attachment = ({
+export const Attachments = ({
   attachment = fakeAttachment,
   onClickRemoveAttachment,
 }: AttachmentProps) => {
