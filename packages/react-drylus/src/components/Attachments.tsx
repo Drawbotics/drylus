@@ -123,18 +123,13 @@ export const Attachments = ({ attachments, onClickRemoveAttachment }: Attachment
           <Text>Attachments ({attachments.length})</Text>
         </Margin>
       </FlexItem>
-      {run(() =>
-        attachments.map((attachment) => (
-          <FlexItem key={attachment.id} style={{ width: '100%' }}>
-            <Margin size={{ bottom: Size.EXTRA_SMALL }}>
-              <Attachment
-                attachment={attachment}
-                onClickRemoveAttachment={onClickRemoveAttachment}
-              />
-            </Margin>
-          </FlexItem>
-        )),
-      )}
+      {attachments.map((attachment) => (
+        <FlexItem key={attachment.id} style={{ width: '100%' }}>
+          <Margin size={{ bottom: Size.EXTRA_SMALL }}>
+            <Attachment attachment={attachment} onClickRemoveAttachment={onClickRemoveAttachment} />
+          </Margin>
+        </FlexItem>
+      ))}
     </Flex>
   );
 };
