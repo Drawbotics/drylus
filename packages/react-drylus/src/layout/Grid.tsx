@@ -112,7 +112,7 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
 
   const invalidChildren = React.Children.map(children as any, (x) => x).some(
     (child: React.ReactElement) =>
-      child != null && (child.type !== GridItem || !child.type.toString().includes('fragment')),
+      child != null && child.type !== GridItem && !child.type.toString().includes('fragment'),
   );
   if (invalidChildren) {
     console.warn('Grid should only accept GridItem as children');
