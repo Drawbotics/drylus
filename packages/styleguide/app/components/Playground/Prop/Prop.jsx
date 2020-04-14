@@ -3,7 +3,8 @@ import { css } from 'emotion';
 import React from 'react';
 
 import { InputProp, SelectProp, ToggleProp } from './props';
-import { extractIntrinsics, normalizeValue } from './utils';
+import { normalizeValue } from './utils';
+import { extractIntrinsics } from '../utils';
 
 const styles = {
   stacked: css`
