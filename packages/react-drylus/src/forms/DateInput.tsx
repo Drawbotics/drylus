@@ -299,10 +299,11 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const pickerElement = useRef<HTMLDivElement>(null);
+  const calendarElement = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleDocumentClick = (e: Event) =>
-      !pickerElement.current?.contains(e.target as Node) ? setFocused(false) : null;
+      !calendarElement.current?.contains(e.target as Node) ? setFocused(false) : null;
     const handleWindowScroll = () => {
       if (isDesktop) {
         setFocused(false);
@@ -404,21 +405,21 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
               className={cx(styles.calendarContainer, {
                 [styles.visible]: isFocused,
               })}>
-              <Calendar
-                {...calendarOptions}
-                maxDate={maxDate && objectToDate(maxDate)}
-                minDate={minDate && objectToDate(minDate)}
-                className={cx(styles.calendar, {
-                  [styles.topRender]: topRender,
-                })}
-                tileClassName={styles.tile}
-                locale={locale}
-                activeStartDate={activeStartDate && objectToDate(activeStartDate)}
-                onChange={
-                  onChange != null ? (v) => onChange(dateToObject(v as Date), name) : undefined
-                }
-                value={value === '' ? undefined : objectToDate(value)}
-              />
+              <div ref={calendarElement} className={topRender ? styles.topRender : undefined}>
+                <Calendar
+                  {...calendarOptions}
+                  maxDate={maxDate && objectToDate(maxDate)}
+                  minDate={minDate && objectToDate(minDate)}
+                  className={styles.calendar}
+                  tileClassName={styles.tile}
+                  locale={locale}
+                  activeStartDate={activeStartDate && objectToDate(activeStartDate)}
+                  onChange={
+                    onChange != null ? (v) => onChange(dateToObject(v as Date), name) : undefined
+                  }
+                  value={value === '' ? undefined : objectToDate(value)}
+                />
+              </div>
             </div>
           </div>,
           document.getElementById('picker-outlet') as Element,
