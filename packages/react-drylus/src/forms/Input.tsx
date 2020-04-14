@@ -5,7 +5,7 @@ import React, { forwardRef, useState } from 'react';
 import { Button, Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 import { Select } from './Select';
 
@@ -25,6 +25,7 @@ const styles = {
     z-index: 1;
   `,
   input: css`
+    text-overflow: ellipsis;
     background-color: ${sv.azureLight};
     color: ${sv.colorPrimary};
     padding: calc(${sv.paddingExtraSmall} * 1.5) ${sv.paddingSmall};
@@ -60,6 +61,7 @@ const styles = {
     &:read-only {
       box-shadow: none !important;
       pointer-events: none;
+      padding-right: ${sv.paddingExtraLarge};
     }
 
     @media ${sv.screenL} {
@@ -77,6 +79,7 @@ const styles = {
   valid: css`
     input {
       box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
+      padding-right: ${sv.paddingExtraLarge};
     }
   `,
   icon: css`
@@ -90,6 +93,7 @@ const styles = {
   error: css`
     input {
       box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
+      padding-right: ${sv.paddingExtraLarge};
     }
   `,
   hidden: css`
@@ -105,6 +109,13 @@ const styles = {
     border-radius: ${sv.defaultBorderRadius};
     padding: calc(${sv.paddingExtraSmall} * 1.5);
     color: ${sv.colorPrimary};
+  `,
+  smallFix: css`
+    padding: calc(${sv.paddingExtraSmall} - 1px);
+
+    i {
+      font-size: 1.1em;
+    }
   `,
   prefix: css`
     border-top-right-radius: 0;
@@ -157,11 +168,39 @@ const styles = {
       background-color: transparent;
     }
   `,
+  small: css`
+    input {
+      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+    }
+
+    button {
+      height: 30px;
+    }
+
+    [data-element='icon'] {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      right: ${sv.marginExtraSmall};
+    }
+
+    [data-element='lock-icon'] {
+      top: ${sv.marginExtraSmall};
+      right: ${sv.marginExtraSmall};
+
+      > i {
+        font-size: 0.95em;
+      }
+    }
+  `,
+  smallRightPadding: css`
+    input {
+      padding-right: ${sv.paddingLarge} !important;
+    }
+  `,
 };
 
-interface InputProps {
+export interface InputProps {
   /** Value displayed in the field */
-  value: number | string;
+  value: ((name?: string) => number | string) | number | string;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -202,6 +241,12 @@ interface InputProps {
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder?: boolean;
 
+  /**
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -212,14 +257,14 @@ interface InputProps {
   [x: string]: any;
 }
 
-interface RawInputProps extends InputProps {
+export interface RawInputProps extends InputProps {
   inputRef?: React.Ref<HTMLInputElement>;
   extraLeftPadding?: number;
 }
 
 const RawInput = ({ responsive, ...rest }: RawInputProps) => {
   const {
-    value,
+    value: _value,
     onChange,
     error,
     valid,
@@ -234,10 +279,13 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
     isPlaceholder,
     extraLeftPadding,
     type = 'text',
+    size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<RawInputProps>(rest, responsive);
 
   const [isFocused, setFocused] = useState(false);
+
+  const value = isFunction(_value) ? _value(props.name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (onChange != null) {
@@ -247,6 +295,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
 
   const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
   const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
+
   return (
     <div
       style={style}
@@ -255,6 +304,10 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
         [styles.error]: error != null && error !== false,
         [className as string]: className != null,
         [placeholderStyles.shimmer]: isPlaceholder,
+        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+        [styles.smallRightPadding]:
+          size === Size.SMALL &&
+          ((error != null && error !== false) || (Boolean(value) && valid) || onChange == null),
       })}>
       <div className={styles.outerWrapper}>
         {run(() => {
@@ -265,8 +318,11 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
                 className={cx(styles.fix, styles.prefix, {
                   [styles.prefixComponent]: isPrefixComponent,
                   [styles.transparentButton]: (prefix?.props as any)?.category == null, // TODO find better
+                  [styles.smallFix]: size === Size.SMALL && !isPrefixComponent,
                 })}>
-                {prefix}
+                {isPrefixComponent && size === Size.SMALL
+                  ? React.cloneElement(prefix as React.ReactElement, { size: Size.SMALL })
+                  : prefix}
               </div>
             );
           }
@@ -283,7 +339,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
               return (
                 <div
                   className={styles.icon}
-                  data-element="icon"
+                  data-element="lock-icon"
                   style={{ color: sv.colorSecondary }}>
                   <Icon name="lock" />
                 </div>
@@ -293,7 +349,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon name="x" size={Size.SMALL} color={Color.RED} />
+                  <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
                 </div>
               );
             } else if (Boolean(value) && valid) {
@@ -301,7 +357,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon name="check" size={Size.SMALL} color={Color.GREEN} />
+                  <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
                 </div>
               );
             }
@@ -322,7 +378,9 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
             style={{
               paddingLeft:
                 extraLeftPadding != null
-                  ? `calc(${sv.paddingSmall} + ${extraLeftPadding}px)`
+                  ? `calc(${
+                      size === Size.SMALL ? sv.paddingExtraSmall : sv.paddingSmall
+                    } + ${extraLeftPadding}px)`
                   : undefined,
             }}
             {...props}
@@ -336,8 +394,11 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
                 className={cx(styles.fix, styles.suffix, {
                   [styles.suffixComponent]: isSuffixComponent,
                   [styles.transparentButton]: (suffix?.props as any)?.category == null,
+                  [styles.smallFix]: size === Size.SMALL && !isSuffixComponent,
                 })}>
-                {suffix}
+                {isSuffixComponent && size === Size.SMALL
+                  ? React.cloneElement(suffix as React.ReactElement, { size: Size.SMALL })
+                  : suffix}
               </div>
             );
           }

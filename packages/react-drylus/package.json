@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/react-drylus",
-  "version": "6.2.0-alpha.5",
+  "version": "6.2.1-beta.28",
   "description": "React components for the Drawbotics' ecosystem",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "license": "ISC",
@@ -22,9 +22,8 @@
   },
   "dependencies": {
     "@drawbotics/drylus-style-vars": "file:../drylus-style-vars",
-    "@drawbotics/enums": "0.2.0",
     "@drawbotics/icons": "file:../icons",
-    "@drawbotics/use-screen-size": "^2.0.0",
+    "@drawbotics/use-screen-size": "^2.0.1",
     "@emotion/core": "^10.0.21",
     "@turf/circle": "^6.0.1",
     "animejs": "^3.0.1",
@@ -42,8 +41,14 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Drawbotics/drylus",
+    "directory": "packages/react-drylus"
+  },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
   },
   "gitHead": "99f6de1783059e9d24e6582f69fa2982d41a1af2"
 }

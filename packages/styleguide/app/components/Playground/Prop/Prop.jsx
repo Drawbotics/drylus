@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import React from 'react';
 
 import { InputProp, SelectProp, ToggleProp } from './props';
-import { normalizeValue, extractIntrinsics } from './utils';
+import { extractIntrinsics, normalizeValue } from './utils';
 
 const styles = {
   stacked: css`
@@ -18,7 +18,7 @@ function _isIntrinsic(type) {
 }
 
 function _isNumberStringUnion(array) {
-  return array.length === 2 &&array.includes('string') &&array.includes('number')
+  return array.length === 2 && array.includes('string') && array.includes('number');
 }
 
 const Prop = ({ prop, name, value, onChange, enums }) => {
@@ -29,8 +29,9 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
     case 'boolean':
       return <ToggleProp prop={propWithKey} value={value} onChange={onChange} />;
     case 'enum':
-      const { variants, nonVariants} = extractIntrinsics(type.values);
-      const valueIsEnumVariant = typeof value === 'string' && ! ['boolean', 'number', 'string'].includes(value);
+      const { variants, nonVariants } = extractIntrinsics(type.values);
+      const valueIsEnumVariant =
+        typeof value === 'string' && !['boolean', 'number', 'string'].includes(value);
       const updatedType = { ...type, values: variants };
       return (
         <div className={nonVariants.length > 0 ? styles.stacked : 'test'}>
@@ -74,7 +75,7 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
           />
         );
       }
-      if (type.values.every((v) => ! _isIntrinsic(v))) {
+      if (type.values.every((v) => !_isIntrinsic(v))) {
         return (
           <SelectProp
             prop={propWithKey}
@@ -84,8 +85,7 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
             isEnum={false}
           />
         );
-      }
-      else if (type.values.every((v) => _isIntrinsic(v))) {
+      } else if (type.values.every((v) => _isIntrinsic(v))) {
         return (
           <div className={styles.stacked}>
             {prop.type.values.map((type, i) => (

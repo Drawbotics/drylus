@@ -64,7 +64,7 @@ const styles = {
   `,
 };
 
-interface AvatarProps {
+export interface AvatarProps {
   /** Image url. Takes the full background of the avatar if given, will be fit to cover surface. Takes precedence over text */
   image?: string;
 
@@ -76,16 +76,16 @@ interface AvatarProps {
 
   /**
    * Size of the avatar
-   * @description uses enum Size */
+   * @kind Size */
   size?: number | Size.DEFAULT | Size.SMALL | Size.LARGE;
 
   /**
    * @deprecated Use color instead
-   * @description uses enum Category
+   * @kind Category
    */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  /** @description uses enum Color */
+  /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
   /** Custom override for the background color, useful for profiles */

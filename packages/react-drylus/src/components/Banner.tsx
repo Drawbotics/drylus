@@ -36,15 +36,15 @@ const styles = {
   `,
 };
 
-interface BannerProps {
+export interface BannerProps {
   /** Message shown in the banner */
   children: React.ReactNode;
 
   /** Larger text shown beside the icon */
   title?: string;
 
-  /** @description uses enum Category */
-  category: Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
+  /** @kind Category */
+  category: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** Component to be displayed on the far right of the banner. Should only be of type Button */
   trailing?: React.ReactElement<typeof Button>;

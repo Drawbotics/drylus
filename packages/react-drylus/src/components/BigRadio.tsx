@@ -60,15 +60,15 @@ const styles = {
   `,
 };
 
-interface BigRadioProps {
+export interface BigRadioProps<T> {
   /** Determines if the radio is checked */
   checked?: boolean;
 
   /** Triggered when big radio is clicked */
-  onChange: (value: string | number, name?: string) => void;
+  onChange: (value: T, name?: string) => void;
 
   /** Determines the value of the radio */
-  value: string | number;
+  value: T;
 
   /** Content displayed in the BigRadio */
   children?: React.ReactNode;
@@ -86,7 +86,7 @@ interface BigRadioProps {
   style?: Style;
 }
 
-export const BigRadio = ({
+export const BigRadio = <T extends any>({
   value,
   onChange,
   disabled,
@@ -95,7 +95,7 @@ export const BigRadio = ({
   name,
   label,
   style,
-}: BigRadioProps) => {
+}: BigRadioProps<T>) => {
   const handleOnChange = () => (!disabled ? onChange(value, name) : null);
   return (
     <div

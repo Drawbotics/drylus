@@ -21,7 +21,7 @@ const styles = {
   `,
 };
 
-interface ContentProps {
+export interface ContentProps {
   children: React.ReactNode;
 
   /** If true, the content will take all the height available */

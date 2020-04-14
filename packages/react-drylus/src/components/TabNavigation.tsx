@@ -121,7 +121,7 @@ const styles = {
   `,
 };
 
-interface TabNavigationOption extends Option {
+export interface TabNavigationOption<T> extends Option<T> {
   /** Shows a small number beside the tab */
   bullet?: number;
 
@@ -132,27 +132,15 @@ interface TabNavigationOption extends Option {
   loading?: boolean;
 }
 
-interface TabNavigationProps {
+export interface TabNavigationProps<T> {
   /** Determines the tabs which will be rendered */
-  options: Array<TabNavigationOption>;
-
-  /**
-   * Used to pick each value in the options array
-   * @default 'value'
-   */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey?: string;
+  options: Array<TabNavigationOption<T>>;
 
   /** Determines which value is currently active */
-  value?: string | number;
+  value?: TabNavigationOption<T>['value'];
 
   /** Triggered when a control is clicked */
-  onChange?: (value: string | number) => void;
+  onChange?: (value: TabNavigationOption<T>['value']) => void;
 
   /**
    * If true, the tabs are rendered in a vertical fashion, by default they take the full width of the container
@@ -167,32 +155,25 @@ interface TabNavigationProps {
   style?: Style;
 }
 
-export const TabNavigation = ({
+export const TabNavigation = <T extends any>({
   value,
   onChange,
   options,
-  valueKey = 'value',
-  labelKey = 'label',
   vertical = false,
   linkComponent: Link,
   style,
-}: TabNavigationProps) => {
-  const renderOption = (option: TabNavigationOption) => (
+}: TabNavigationProps<T>) => {
+  const renderOption = (option: TabNavigationOption<T>) => (
     <div
       style={style}
-      key={String(option[valueKey as keyof TabNavigationOption])}
+      key={String(option.value)}
       className={cx(styles.item, {
-        [styles.active]: value === option[valueKey as keyof TabNavigationOption],
-        [styles.verticalActive]:
-          vertical && value === option[valueKey as keyof TabNavigationOption],
+        [styles.active]: value === option.value,
+        [styles.verticalActive]: vertical && value === option.value,
         [styles.disabled]: option.disabled,
       })}
-      onClick={
-        !option.disabled && onChange != null
-          ? () => onChange(option[valueKey as keyof TabNavigationOption] as string | number)
-          : undefined
-      }>
-      {option[labelKey as keyof TabNavigationOption]}
+      onClick={!option.disabled && onChange != null ? () => onChange(option.value) : undefined}>
+      {option.label}
       {run(() => {
         if (option.loading) {
           return (
@@ -226,10 +207,8 @@ export const TabNavigation = ({
           ? React.createElement(
               Link as React.ComponentClass<{ href?: string }>,
               {
-                href: option.disabled
-                  ? undefined
-                  : String(option[valueKey as keyof TabNavigationOption]),
-                key: String(option[valueKey as keyof TabNavigationOption]),
+                href: option.disabled ? undefined : String(option.value),
+                key: String(option.value),
               },
               renderOption(option),
             )

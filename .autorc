@@ -18,5 +18,6 @@
     "major": {
       "title": "💥 Breaking - Major release"
     }
-  }
+  },
+  "prereleaseBranches": ["beta"]
 }

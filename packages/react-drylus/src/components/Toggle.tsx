@@ -42,7 +42,7 @@ const styles = {
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
 
     &::after {
-      content: '\\ea29';
+      content: '\\ea2d';
       font-family: 'drycons';
       color: ${sv.white};
       position: absolute;
@@ -75,7 +75,7 @@ const styles = {
   `,
 };
 
-interface ToggleProps {
+export interface ToggleProps {
   /** Triggered when toggle value is changed */
   onChange: (value: boolean) => void;
 
@@ -85,7 +85,7 @@ interface ToggleProps {
   /** Determines if toggle is active */
   value: boolean;
 
-  /** @description uses enum Size */
+  /** @kind Size */
   size: Size.SMALL | Size.DEFAULT;
 
   /** Used for style overrides */

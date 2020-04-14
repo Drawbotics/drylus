@@ -10,7 +10,7 @@ const styles = {
   `,
 };
 
-interface PageProps {
+export interface PageProps {
   children: React.ReactNode;
 
   /** Used for style overrides */

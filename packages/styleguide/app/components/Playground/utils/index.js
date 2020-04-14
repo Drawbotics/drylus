@@ -4,6 +4,7 @@ import omit from 'lodash/omit';
 import React from 'react';
 
 export * from './generate-docs';
+export * from './extract-intrinsics';
 
 function removeHash(string) {
   return string.replace(/(css-).*?(-)/gm, '');
@@ -19,11 +20,6 @@ function removeDuplicate(array) {
 
 function prependString(string) {
   return `Drylus-${string}`;
-}
-
-export function capitalizeFirst(text) {
-  if (typeof text !== 'string' || text === '') return text;
-  return text[0].toUpperCase() + text.slice(1);
 }
 
 export function hideSecrets(string) {

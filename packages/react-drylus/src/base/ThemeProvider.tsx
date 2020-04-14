@@ -18,7 +18,7 @@ const styles = {
 
 export const themeStyles = styles;
 
-interface ThemeProviderProps {
+export interface ThemeProviderProps {
   children: React.ReactNode;
 
   /** Used for style overrides */

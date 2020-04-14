@@ -25,7 +25,7 @@ const styles = {
   `,
 };
 
-interface FormGroupProps {
+export interface FormGroupProps {
   /** The label of the group, should be a Label component */
   label: React.ReactElement<typeof Label>;
 

@@ -2,7 +2,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
 import React from 'react';
 
-import { Style } from '../types';
+import { OnClickCallback, Style } from '../types';
 import { run } from '../utils';
 import { Icon } from './Icon';
 import { Label } from './Label';
@@ -35,7 +35,7 @@ const styles = {
   `,
 };
 
-interface CollapsibleProps {
+export interface CollapsibleProps {
   /** Shown on the left side as a label */
   title: React.ReactNode;
 
@@ -46,7 +46,7 @@ interface CollapsibleProps {
   children: React.ReactNode;
 
   /** Triggered when the arrow is clicked */
-  onClick?: () => void;
+  onClick?: OnClickCallback<HTMLDivElement>;
 
   /** Used for style overrides */
   style?: Style;

@@ -80,7 +80,7 @@ const styles = {
   `,
 };
 
-interface CircularProgressProps {
+export interface CircularProgressProps {
   /**
    * Determines the amount of the circle which is completed, between 0 and 1
    * @default 0
@@ -90,16 +90,18 @@ interface CircularProgressProps {
   /** Text shown within the circular progress. Not shown when size is smaller than DEFAULT */
   text?: string;
 
-  /** @deprecated Use color instead */
-  /** @description uses enum Category */
+  /**
+   * @deprecated Use color instead
+   * @kind Category
+   */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  /** @description uses enum Color */
+  /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
   /**
    * @default Size.DEFAULT
-   * @description uses enum Size
+   * @kind Size
    * */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
 

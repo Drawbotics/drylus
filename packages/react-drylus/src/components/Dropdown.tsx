@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Category, Position } from '../enums';
 import { Responsive, Style } from '../types';
 import { getEnumAsClass, run, useResponsiveProps } from '../utils';
-import { Icon, Icons } from './Icon';
+import { Icon, IconType } from './Icon';
 
 const styles = {
   wrapper: css`
@@ -122,7 +122,7 @@ const styles = {
   `,
 };
 
-interface DropdownOptionProps {
+export interface DropdownOptionProps {
   /** Text displayed in the option */
   text: string;
 
@@ -133,9 +133,9 @@ interface DropdownOptionProps {
   onClick?: () => void;
 
   /** Name of the icon to be shown on the left side */
-  icon?: keyof typeof Icons;
+  icon?: IconType;
 
-  /** @description uses enum Category */
+  /** @kind Category */
   category?: Category.SUCCESS | Category.WARNING | Category.DANGER;
 
   /** Used for style overrides */
@@ -178,7 +178,7 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
   );
 };
 
-interface DropdownTitleProps {
+export interface DropdownTitleProps {
   /** Value of the title */
   text: string;
 
@@ -198,12 +198,12 @@ export const DropdownSeparator = () => {
   return <div className={styles.separator} />;
 };
 
-type DropdownChild =
+export type DropdownChild =
   | React.ReactElement<typeof DropdownOption>
   | React.ReactElement<typeof DropdownTitle>
   | React.ReactElement<typeof DropdownSeparator>;
 
-interface DropdownProps {
+export interface DropdownProps {
   /** This will be the trigger of the dropdown, and relative to which the menu will be positioned */
   trigger?: React.ReactNode;
 

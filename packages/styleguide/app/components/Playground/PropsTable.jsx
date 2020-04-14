@@ -22,12 +22,12 @@ import {
 } from '@drawbotics/react-drylus';
 import docs from '@drawbotics/react-drylus/docs.json';
 import { css } from 'emotion';
+import upperFirst from 'lodash/upperFirst';
 import React, { Fragment } from 'react';
 
 import PropsInfo from './PropsInfo';
 import Prop from './Prop';
-import { extractIntrinsics } from './Prop/utils'
-import { generateDocs, capitalizeFirst } from './utils';
+import { extractIntrinsics, generateDocs } from './utils';
 
 const styles = {
   table: css`
@@ -76,12 +76,16 @@ const PropsTable = ({ component, onChange, activeProps }) => {
                   {/* Type */}
                   <TCell>
                     {do {
-                      if  (prop.type.values != null) {
-                        const tooltipValues = _isEnum(prop) ? extractIntrinsics(prop.type.values).variants : prop.type.values 
+                      if (prop.type.values != null) {
+                        const { variants } = _isEnum(prop)
+                          ? extractIntrinsics(prop.type.values)
+                          : { variants: [], nonVariants: [] };
+                        const tooltipValues = _isEnum(prop) ? variants : prop.type.values;
                         let tooltip = (
                           <Tooltip
                             content={<PropsInfo props={tooltipValues} />}
-                            side={Position.RIGHT}>
+                            side={Position.RIGHT}
+                            style={{ maxWidth: '600px' }}>
                             <Flex justify={FlexJustify.START}>
                               <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
                               <FlexItem>
@@ -122,30 +126,32 @@ const PropsTable = ({ component, onChange, activeProps }) => {
                       if (_hasDeprecation(prop)) {
                         return (
                           <Fragment>
-                            <Margin size={{ right: Size.EXTRA_SMALL }} style={{ display: 'inline-block'}} >
+                            <Margin
+                              size={{ right: Size.EXTRA_SMALL }}
+                              style={{ display: 'inline-block' }}>
                               <Tag color={Color.ORANGE} inversed>
                                 DEPRECATED
                               </Tag>
                             </Margin>
-                            {capitalizeFirst(prop.deprecation)}
+                            {upperFirst(prop.deprecation)}
+                            {upperFirst(prop.description)}
                           </Fragment>
                         );
-                      }
-                      else if (_isEnum(prop)) {
+                      } else if (_isEnum(prop)) {
                         const { variants, nonVariants } = extractIntrinsics(prop.type.values);
                         const variantsDesc = `One of: ${variants.join(', ')}`;
                         if (nonVariants.length > 0) {
                           return (
                             <Fragment>
                               {variantsDesc}
-                              <span> Or {nonVariants.join(' or ')}</span>
+                              <br />
+                              <span>Or: {nonVariants.join(' or ')}</span>
                             </Fragment>
                           );
                         }
                         return variantsDesc;
-                      }
-                      else {
-                        capitalizeFirst(prop.description);
+                      } else {
+                        upperFirst(prop.description);
                       }
                     }}
                   </TCell>
@@ -173,8 +179,7 @@ const PropsTable = ({ component, onChange, activeProps }) => {
                   </TCell>
                 </TRow>
               );
-            })
-          }
+            })}
         </TBody>
       </Table>
     </div>

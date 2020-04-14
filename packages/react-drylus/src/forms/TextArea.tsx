@@ -5,7 +5,7 @@ import React, { forwardRef, useState } from 'react';
 import { Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -83,11 +83,30 @@ const styles = {
     opacity: 0;
     transform: scale(0);
   `,
+  small: css`
+    textarea {
+      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+    }
+
+    [data-element='icon'] {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      right: ${sv.marginExtraSmall};
+    }
+
+    [data-element='lock-icon'] {
+      top: ${sv.marginExtraSmall};
+      right: ${sv.marginExtraSmall};
+
+      > i {
+        font-size: 0.95em;
+      }
+    }
+  `,
 };
 
-interface TextAreaProps {
+export interface TextAreaProps {
   /** Value displayed in the field */
-  value: string | number;
+  value: ((name?: string) => string | number) | string | number;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -119,6 +138,12 @@ interface TextAreaProps {
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder?: boolean;
 
+  /**
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -129,13 +154,13 @@ interface TextAreaProps {
   [x: string]: any;
 }
 
-interface RawTextAreaProps extends TextAreaProps {
+export interface RawTextAreaProps extends TextAreaProps {
   inputRef?: React.Ref<HTMLTextAreaElement>;
 }
 
 const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
   const {
-    value,
+    value: _value,
     onChange,
     error,
     valid,
@@ -146,10 +171,13 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
     loading,
     style,
     isPlaceholder,
+    size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<RawTextAreaProps>(rest, responsive);
 
   const [isFocused, setFocused] = useState(false);
+
+  const value = isFunction(_value) ? _value(props.name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
     if (onChange != null) {
@@ -165,6 +193,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
         [styles.error]: error != null && error !== false,
         [className as string]: className != null,
         [placeholderStyles.shimmer]: isPlaceholder,
+        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
       })}>
       <div className={styles.outerWrapper}>
         <div className={styles.innerWrapper}>
@@ -179,7 +208,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
               return (
                 <div
                   className={styles.icon}
-                  data-element="icon"
+                  data-element="lock-icon"
                   style={{ color: sv.colorSecondary }}>
                   <Icon name="lock" />
                 </div>
@@ -189,7 +218,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon name="x" size={Size.SMALL} color={Color.RED} />
+                  <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
                 </div>
               );
             } else if (Boolean(value) && valid) {
@@ -197,7 +226,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon name="check" size={Size.SMALL} color={Color.GREEN} />
+                  <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
                 </div>
               );
             }

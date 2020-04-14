@@ -7,7 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import { themeStyles } from '../base';
 import { Position, Size, Tier } from '../enums';
-import { Responsive, Style } from '../types';
+import { OnClickCallback, Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { Button } from './Button';
 import { Icon } from './Icon';
@@ -169,7 +169,7 @@ const styles = {
   `,
 };
 
-interface BaseDrawerProps {
+export interface BaseDrawerProps {
   /** Content rendered within the drawer */
   children: React.ReactNode;
 
@@ -177,7 +177,7 @@ interface BaseDrawerProps {
   footer?: React.ReactNode;
 
   /** Triggered when the "close" button is clicked */
-  onClickClose?: () => void;
+  onClickClose?: OnClickCallback<HTMLElement>;
 
   /** Shown at the top left of the drawer, not rendered if raw is true */
   title?: string;
@@ -221,14 +221,15 @@ export const BaseDrawer = ({ children, onClickClose, footer, title, style }: Bas
   );
 };
 
-interface DrawerProps extends BaseDrawerProps {
+export interface DrawerProps extends BaseDrawerProps {
   /** Determines if the drawer is visible or not */
   visible: boolean;
 
   /** If the drawer is in "asOverlay" mode, triggered when the overlay is clicked */
   onClickOverlay?: () => void;
 
-  /** If true, the whole page is hidden with an overlay and the content of the drawer is rendered most visible
+  /**
+   * If true, the whole page is hidden with an overlay and the content of the drawer is rendered most visible
    * @default false
    */
   asOverlay?: boolean;
@@ -251,7 +252,7 @@ interface DrawerProps extends BaseDrawerProps {
   /**
    * Only applies when the drawer is used with "asOverlay"
    * @default Position.RIGHT
-   * @description uses enum Position
+   * @kind Position
    */
   side?: Position.LEFT | Position.RIGHT;
 

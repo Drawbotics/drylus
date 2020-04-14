@@ -5,7 +5,7 @@ import React from 'react';
 import { Icon, RoundIcon, Spinner } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -15,7 +15,7 @@ const styles = {
     width: 100%;
 
     &::after {
-      content: '\\ea2c';
+      content: '\\ea30';
       font-family: 'drycons';
       color: ${sv.colorPrimary};
       position: absolute;
@@ -63,11 +63,15 @@ const styles = {
     box-shadow: none !important;
     pointer-events: none;
 
+    > select {
+      padding-right: ${sv.paddingExtraLarge} !important;
+    }
+
     &::after {
       content: none;
     }
 
-    [data-element='icon'] {
+    [data-element='lock-icon'] {
       right: ${sv.marginSmall};
     }
   `,
@@ -86,6 +90,7 @@ const styles = {
   error: css`
     > select {
       box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
+      padding-right: calc(${sv.paddingExtraLarge} + ${sv.defaultPadding});
     }
   `,
   noValue: css`
@@ -93,18 +98,49 @@ const styles = {
       color: ${sv.colorSecondary};
     }
   `,
+  small: css`
+    select {
+      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+      padding-right: ${sv.paddingHuge};
+    }
+
+    &::after {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      font-size: 1.1em;
+      right: ${sv.marginExtraSmall};
+    }
+
+    [data-element='icon'] {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      right: ${sv.marginLarge};
+    }
+
+    [data-element='lock-icon'] {
+      top: ${sv.marginExtraSmall};
+      right: ${sv.marginExtraSmall};
+
+      > i {
+        font-size: 0.95em;
+      }
+    }
+  `,
+  smallReadOnly: css`
+    select {
+      padding-right: ${sv.defaultPadding} !important;
+    }
+  `,
 };
 
-interface SelectOption extends Option {
+export interface SelectOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
-interface SelectProps {
+export interface SelectProps<T> {
   /** The options to show in the list of options */
-  options: Array<SelectOption>;
+  options: Array<SelectOption<T>>;
 
   /** Determines which value is currently active */
-  value?: number | string;
+  value?: ((name?: string) => SelectOption<T>['value']) | SelectOption<T>['value'];
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -113,25 +149,13 @@ interface SelectProps {
   disabled?: boolean;
 
   /**
-   * Used to pick each value in the options array
-   * @default 'value'
-   */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey?: string;
-
-  /**
    * Text shown when no value is selected
    * @default ' -- ''
    */
   placeholder?: string;
 
   /** Triggered when a new value is chosen, returns a value, key (label, value) pair. If not given, the field is read-only */
-  onChange?: (value: string | number, name?: string) => void;
+  onChange?: (value: SelectOption<T>['value'], name?: string) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -145,6 +169,13 @@ interface SelectProps {
   /** If true, a spinner is shown in the right corner, like with error and valid */
   loading?: boolean;
 
+  /**
+   * Size of the select. Can be small or default
+   * @default Size.DEFAULT
+   * @kind Size
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -155,13 +186,11 @@ interface SelectProps {
   [x: string]: any;
 }
 
-export const Select = ({ responsive, ...rest }: SelectProps) => {
+export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) => {
   const {
-    value,
+    value: _value,
     options = [],
     onChange,
-    valueKey = 'value',
-    labelKey = 'label',
     placeholder = ' -- ',
     disabled,
     hint,
@@ -169,12 +198,15 @@ export const Select = ({ responsive, ...rest }: SelectProps) => {
     valid,
     loading,
     style,
+    size = Size.DEFAULT,
     ...props
-  } = useResponsiveProps<SelectProps>(rest, responsive);
+  } = useResponsiveProps<SelectProps<T>>(rest, responsive);
+
+  const value = isFunction(_value) ? _value(props.name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     if (onChange != null) {
-      onChange((e.target as HTMLSelectElement).value, (e.target as HTMLSelectElement).name);
+      onChange((e.target as HTMLSelectElement).value as any, (e.target as HTMLSelectElement).name);
     }
   };
   return (
@@ -186,6 +218,8 @@ export const Select = ({ responsive, ...rest }: SelectProps) => {
         [styles.disabled]: disabled,
         [styles.valid]: Boolean(value) && valid,
         [styles.error]: error != null && error !== false,
+        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+        [styles.smallReadOnly]: onChange == null && size === Size.SMALL,
       })}>
       {run(() => {
         if (loading) {
@@ -196,20 +230,23 @@ export const Select = ({ responsive, ...rest }: SelectProps) => {
           );
         } else if (onChange == null) {
           return (
-            <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
+            <div
+              className={styles.icon}
+              data-element="lock-icon"
+              style={{ color: sv.colorSecondary }}>
               <Icon name="lock" />
             </div>
           );
         } else if (error) {
           return (
-            <div className={styles.icon}>
-              <RoundIcon name="x" size={Size.SMALL} color={Color.RED} />
+            <div className={styles.icon} data-element="icon">
+              <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
             </div>
           );
         } else if (value && valid) {
           return (
-            <div className={styles.icon}>
-              <RoundIcon name="check" size={Size.SMALL} color={Color.GREEN} />
+            <div className={styles.icon} data-element="icon">
+              <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
             </div>
           );
         }
@@ -226,11 +263,8 @@ export const Select = ({ responsive, ...rest }: SelectProps) => {
           }
         })}
         {options.map((option) => (
-          <option
-            key={option[valueKey as keyof Option]}
-            value={option[valueKey as keyof Option]}
-            disabled={option.disabled}>
-            {option[labelKey as keyof Option]}
+          <option key={option.value} value={option.value} disabled={option.disabled}>
+            {option.label}
           </option>
         ))}
       </select>

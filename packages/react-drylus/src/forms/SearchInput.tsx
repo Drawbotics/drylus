@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button, Icon, Spinner } from '../components';
 import { Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { isFunction, run, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
 const styles = {
@@ -47,21 +47,21 @@ const styles = {
   `,
 };
 
-interface SearchInputProps {
+export interface SearchInputProps<T> {
   /** The list of items displayed under the input ('value, key' pairs) its completely up to you to generate this list */
-  options?: Array<Option>;
+  options?: Array<Option<T>>;
 
   /** The text passed to the input */
-  value: string;
+  value: ((name?: string) => string) | string;
 
   /** Name of the form element (target.name) */
   name?: string;
 
   /** Triggered when the text is changed, and when the search button is pressed */
-  onChange: () => void;
+  onChange: (value: Option<T>['value'], name?: string) => void;
 
   /** Triggered when one of the results is clicked, returns the corresponding option value */
-  onClickResult?: (value: Option['value']) => void;
+  onClickResult?: (value: Option<T>['value']) => void;
 
   /**
    * Displayed when no results match the search
@@ -75,16 +75,10 @@ interface SearchInputProps {
   isLoading?: boolean;
 
   /**
-   * Used to pick each value in the options array
-   * @default 'value'
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
    */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey: string;
+  size?: Size.SMALL | Size.DEFAULT;
 
   /** Used for style overrides */
   style?: Style;
@@ -93,25 +87,25 @@ interface SearchInputProps {
   responsive?: Responsive<this>;
 }
 
-export const SearchInput = ({ responsive, ...rest }: SearchInputProps) => {
+export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputProps<T>) => {
   const {
     options,
-    value,
+    value: _value,
     onChange,
     noResultLabel = 'No results',
     placeholder,
     isLoading,
     name,
     style,
-    valueKey = 'value',
-    labelKey = 'label',
     onClickResult,
-  } = useResponsiveProps<SearchInputProps>(rest, responsive);
+    size = Size.DEFAULT,
+  } = useResponsiveProps<SearchInputProps<T>>(rest, responsive);
   const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
+  const value = isFunction(_value) ? _value(name) : _value;
   const shouldDisplayResults = value !== '' && isFocused;
 
   const handleDocumentClick = (e: Event) =>
@@ -144,6 +138,7 @@ export const SearchInput = ({ responsive, ...rest }: SearchInputProps) => {
         onFocus={() => setFocused(true)}
         onBlur={() => (canBlur ? setFocused(false) : null)}
         placeholder={placeholder}
+        size={size}
       />
       {run(() => {
         if (options == null) {
@@ -160,15 +155,15 @@ export const SearchInput = ({ responsive, ...rest }: SearchInputProps) => {
                 } else {
                   return options.map((option) => (
                     <div
-                      key={option[valueKey as keyof Option]}
+                      key={option.value}
                       className={styles.item}
                       onClick={() => {
                         if (onClickResult != null) {
-                          onClickResult(option[valueKey as keyof Option]);
+                          onClickResult(option.value);
                         }
                         setFocused(false);
                       }}>
-                      {option[labelKey as keyof Option]}
+                      {option.label}
                     </div>
                   ));
                 }

@@ -1,9 +1,9 @@
-import sv from '@drawbotics/drylus-style-vars';
+import sv, { lighten } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Category, Color } from '../enums';
-import { Style } from '../types';
+import { OnClickCallback, Style } from '../types';
 import { Deprecated, categoryEnumToColor, getEnumAsClass, run } from '../utils';
 import { Icon } from './Icon';
 
@@ -12,7 +12,7 @@ const styles = {
     display: inline-flex;
     align-items: center;
     padding: 5px;
-    background: ${sv.neutralLight};
+    background: ${sv.neutral};
     color: ${sv.colorPrimary};
     border-radius: ${sv.defaultBorderRadius};
     font-size: 0.85rem;
@@ -69,24 +69,29 @@ const styles = {
   `,
 };
 
-interface TagProps {
+export interface TagProps {
   children: string;
 
-  /** @deprecated use color instead */
-  /** @description uses enum Category */
+  /** @deprecated use color instead
+   * @kind Category
+   */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  /** @description uses enum Color */
-  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
+  /** @kind Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE | string;
 
   /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */
-  onClickRemove?: (e: React.MouseEvent<HTMLElement>) => void;
+  onClickRemove?: OnClickCallback<HTMLElement>;
 
-  /** Modifies the way the category is shown */
+  /** Modifies the way the color is shown */
   inversed?: boolean;
 
   /** Used for style overrides */
   style?: Style;
+}
+
+function _getClassNameForColor(color: Color, inversed?: boolean): string {
+  return inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
 }
 
 export const Tag = ({
@@ -94,17 +99,26 @@ export const Tag = ({
   category,
   onClickRemove,
   inversed,
-  style,
+  style: _style = {},
   color: _color,
 }: TagProps) => {
   const color = category ? categoryEnumToColor(category) : _color;
-  const className = inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
+  const enumColor = color != null && color in Color ? (color as Color) : null;
+  const className = enumColor != null ? _getClassNameForColor(enumColor, inversed) : null;
+  const style =
+    color != null && enumColor == null
+      ? {
+          ..._style,
+          color: inversed ? undefined : color,
+          background: inversed ? color : lighten(color, 52),
+        }
+      : _style;
   return (
     <div
       style={style}
       className={cx(styles.root, {
         [styles.inversed]: inversed,
-        [styles[className as keyof typeof styles]]: color != null,
+        [styles[className as keyof typeof styles]]: enumColor != null,
       })}>
       {children}
       {run(() => {

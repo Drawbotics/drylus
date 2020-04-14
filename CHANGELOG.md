@@ -1,3 +1,49 @@
+# v6.2.1 (Fri Mar 20 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- move step [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- allow exec permission [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- remove quotes [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- move branch name extraction to next job [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- fix echo [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- remove name [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- use separate script for prerelease [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- extract branch name from refs [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- trigger release when pushing to beta branch too [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- log all the refs [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- log github base_ref [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- log github ref [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- create beta branch [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+
+#### 🚧 Prerelease
+
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - Feature/react drylus typescript [#118](https://github.com/Drawbotics/drylus/pull/118) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- allow beta as pre-release branch  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.2.0 (Fri Mar 20 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - small change to trigger release [#120](https://github.com/Drawbotics/drylus/pull/120) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.1.0 (Wed Feb 26 2020)
 
 #### 🚀 Enhancement - Minor change

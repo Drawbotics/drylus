@@ -80,7 +80,7 @@ const styles = {
   `,
 };
 
-interface SegmentedControlOption extends Option {
+export interface SegmentedControlOption<T> extends Option<T> {
   /** If given, the control shows a value in a Badge */
   bullet?: number;
 
@@ -91,55 +91,37 @@ interface SegmentedControlOption extends Option {
   loading?: boolean;
 }
 
-interface SegmentedControlProps {
+export interface SegmentedControlProps<T> {
   /** Determines the controls which will be rendered */
-  options: Array<SegmentedControlOption>;
-
-  /**
-   * Used to pick each value in the options array
-   * @default 'value'
-   */
-  valueKey?: string;
-
-  /**
-   * Used to pick each label in the options array
-   * @default 'label'
-   */
-  labelKey?: string;
+  options: Array<SegmentedControlOption<T>>;
 
   /** Determines which value is currently active */
-  value: string | number;
+  value: SegmentedControlOption<T>['value'];
 
   /** Triggered when a control is clicked */
-  onChange?: (value: string | number) => void;
+  onChange?: (value: SegmentedControlOption<T>['value']) => void;
 
   /** Used for style overrides */
   style?: Style;
 }
 
-export const SegmentedControl = ({
+export const SegmentedControl = <T extends any>({
   value,
   onChange,
   options,
-  valueKey = 'value',
-  labelKey = 'label',
   style,
-}: SegmentedControlProps) => {
+}: SegmentedControlProps<T>) => {
   return (
     <div style={style} className={styles.root}>
       {options.map((option) => (
         <div
-          key={option[valueKey as keyof Option]}
+          key={option.value}
           className={cx(styles.control, {
-            [styles.active]: value === option[valueKey as keyof Option],
+            [styles.active]: value === option.value,
             [styles.disabled]: option.disabled,
           })}
-          onClick={
-            !option.disabled && onChange != null
-              ? () => onChange(option[valueKey as keyof Option])
-              : undefined
-          }>
-          <span>{option[labelKey as keyof Option]}</span>
+          onClick={!option.disabled && onChange != null ? () => onChange(option.value) : undefined}>
+          <span>{option.label}</span>
           {run(() => {
             if (option.loading === true) {
               return (

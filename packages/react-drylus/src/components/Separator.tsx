@@ -17,7 +17,7 @@ const styles = {
   `,
 };
 
-interface SeparatorProps {
+export interface SeparatorProps {
   /** If true, the separator is rendered in a vertical fashion, by default it takes the full width of the container */
   vertical?: boolean;
 

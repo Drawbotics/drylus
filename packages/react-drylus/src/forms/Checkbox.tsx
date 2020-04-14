@@ -1,13 +1,13 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import React from 'react';
+import React, { useRef } from 'react';
 import { v4 } from 'uuid';
 
 import { Icon } from '../components';
 import { placeholderStyles } from '../components';
 import { Category, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -151,12 +151,12 @@ const styles = {
   `,
 };
 
-interface CheckboxProps {
+export interface CheckboxProps {
   /** The dom property */
   id?: string;
 
   /** If passed, the text will be the label of the checkbox */
-  children?: string;
+  children?: React.ReactNode;
 
   /** Triggered when checkbox value is changed */
   onChange?: (value: boolean, name?: string) => void;
@@ -165,7 +165,7 @@ interface CheckboxProps {
   disabled?: boolean;
 
   /** Determines if checkbox is checked */
-  value?: boolean;
+  value?: ((name?: string) => boolean) | boolean;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -176,12 +176,15 @@ interface CheckboxProps {
   /**
    * Size of the checkbox. Can be large or default
    * @default Size.DEFAULT
-   * @description uses enum Size
+   * @kind Size
    */
-  size?: Size.DEFAULT | Size.LARGE;
+  size?: Size.LARGE | Size.DEFAULT;
 
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder?: boolean;
+
+  /** If true, and if the component is checked, the checkmark is replaced by a line to display a "indeterminate" state */
+  indeterminate?: boolean;
 
   /** Used for style overrides */
   style?: Style;
@@ -196,7 +199,7 @@ interface CheckboxProps {
 export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
   const {
     onChange,
-    value,
+    value: _value,
     id,
     children,
     disabled,
@@ -204,9 +207,12 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
     size = Size.DEFAULT,
     style,
     isPlaceholder,
+    indeterminate,
     ...props
   } = useResponsiveProps<CheckboxProps>(rest, responsive);
+  const inputRef = useRef<HTMLInputElement>(null);
 
+  const value = isFunction(_value) ? _value(props.name) : _value;
   const isChecked = value === true;
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -229,6 +235,7 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
         htmlFor={uniqId}>
         <div className={styles.checkbox}>
           <input
+            ref={inputRef}
             disabled={disabled}
             checked={isChecked}
             id={uniqId}
@@ -249,7 +256,7 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
               } else {
                 return (
                   <label data-element="icon" className={styles.iconLabel} htmlFor={uniqId}>
-                    <Icon bold name="check" />
+                    {<Icon bold name={indeterminate ? 'minus' : 'check'} />}
                   </label>
                 );
               }
@@ -257,7 +264,7 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
           </div>
         </div>
         {run(() => {
-          if (children) {
+          if (children != null) {
             return (
               <label data-element="label" className={styles.label} htmlFor={uniqId}>
                 {children}

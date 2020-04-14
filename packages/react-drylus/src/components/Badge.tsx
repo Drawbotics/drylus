@@ -41,17 +41,17 @@ const styles = {
   `,
 };
 
-interface BadgeProps {
+export interface BadgeProps {
   /** Value displayed by the badge */
   value: number;
 
   /** If the value is higher than the max, then a + is displayed with the max */
   max?: number;
 
-  /** @description uses enum Category */
+  /** @kind Category */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  /** @description uses enum Color */
+  /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
   /** Used for style overrides */

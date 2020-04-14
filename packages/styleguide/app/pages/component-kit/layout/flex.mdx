@@ -1,4 +1,13 @@
-import { Flex, FlexItem, FlexAlign, FlexDirection, FlexJustify } from '@drawbotics/react-drylus';
+import {
+  Flex,
+  FlexItem,
+  FlexAlign,
+  FlexDirection,
+  FlexJustify,
+  FlexSpacer,
+  Size,
+  Margin,
+} from '@drawbotics/react-drylus';
 
 import Playground, { PropsTable } from '~/components/Playground';
 
@@ -129,6 +138,34 @@ export const Item = ({ background }) => {
   </div>
 </Playground>
 
+
+### Flex Spacer
+You can use a `FlexSpacer` component to add margin between your `FlexItems`:
+<PropsTable component={FlexSpacer} />
+
+Example usage:
+<Playground mode="jsx">
+  <Margin size={{ bottom: Size.EXTRA_LARGE }}>
+    <Flex>
+      <FlexItem>
+        <Item background="red" />
+      </FlexItem>
+      <FlexSpacer size={Size.LARGE} />
+      <FlexItem>
+        <Item background="red" />
+      </FlexItem>
+    </Flex>
+  </Margin>
+  <Flex direction={FlexDirection.VERTICAL}>
+    <FlexItem>
+      <Item background="red" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="red" />
+    </FlexItem>
+  </Flex>
+</Playground>
 
 ## Layout examples
 A responsive grid layout with 4 columns, aligned to the left. Becomes a 2 column layout when the screen is "medium".

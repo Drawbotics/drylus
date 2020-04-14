@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Category, Color, Size, Tier } from '../enums';
-import { Responsive, Style } from '../types';
+import { OnClickCallback, Responsive, Style } from '../types';
 import { colorEnumToCategory, getEnumAsClass, run, useResponsiveProps } from '../utils';
 
 const styles = {
@@ -182,8 +182,7 @@ const styles = {
     }
   `,
   small: css`
-    padding: ${sv.paddingExtraSmall} ${sv.paddingExtraSmall};
-    font-size: 0.9rem;
+    padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
   `,
   large: css`
     padding: ${sv.paddingSmall} ${sv.paddingHuge};
@@ -276,17 +275,17 @@ export interface ButtonProps {
   disabled?: boolean;
 
   /** Triggered after the button is clicked */
-  onClick?: () => void;
+  onClick?: OnClickCallback<HTMLElement>;
 
-  /** @description uses enum Category */
+  /** @kind Category */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  /** @description uses enum Color */
+  /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
   /**
    * @default Size.DEFAULT
-   * @description uses enum Size
+   * @kind Size
    */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 

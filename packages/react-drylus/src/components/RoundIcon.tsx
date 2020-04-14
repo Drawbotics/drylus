@@ -1,11 +1,11 @@
-import sv from '@drawbotics/drylus-style-vars';
+import sv, { lighten } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 import { Responsive, Style } from 'src/types';
 
 import { Category, Color, Size } from '../enums';
 import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
-import { Icon, Icons } from './Icon';
+import { Icon, IconType } from './Icon';
 
 const styles = {
   root: css`
@@ -38,7 +38,6 @@ const styles = {
     > i {
       font-size: 1.3rem;
       margin-top: 0;
-      margin-left: -1px;
     }
   `,
   iconInherit: css`
@@ -47,46 +46,70 @@ const styles = {
     }
   `,
   red: css`
-    color: ${sv.white};
-    background: ${sv.red};
+    background: ${sv.redLight};
+    color: ${sv.redDark};
   `,
   blue: css`
-    color: ${sv.white};
-    background: ${sv.blue};
+    background: ${sv.blueLight};
+    color: ${sv.blueDark};
   `,
   green: css`
-    color: ${sv.white};
-    background: ${sv.green};
+    background: ${sv.greenLight};
+    color: ${sv.greenDark};
   `,
   orange: css`
-    color: ${sv.white};
-    background: ${sv.orange};
+    background: ${sv.orangeLight};
+    color: ${sv.orangeDark};
   `,
   brand: css`
+    background: ${sv.brandLight};
+    color: ${sv.brandDark};
+  `,
+  inversed: css`
     color: ${sv.white};
+    background: ${sv.neutralDarker};
+  `,
+  brandInversed: css`
     background: ${sv.brand};
+  `,
+  redInversed: css`
+    background: ${sv.red};
+  `,
+  greenInversed: css`
+    background: ${sv.green};
+  `,
+  orangeInversed: css`
+    background: ${sv.orange};
+  `,
+  blueInversed: css`
+    background: ${sv.blue};
   `,
 };
 
-interface RoundIconProps {
+export interface RoundIconProps {
   /** Name of the icon */
-  name: keyof typeof Icons;
+  name: IconType;
 
   /**
    * @default Size.DEFAULT
-   * @description uses enum Size
+   * @kind Size
    * */
-  size?: number | Size.SMALL | Size.DEFAULT | Size.LARGE;
+  size?: Size.SMALL | Size.DEFAULT | Size.LARGE | number;
 
   /** Makes the icon bold */
   bold?: boolean;
 
-  /** @deprecated use color instead */
-  /** @description uses enum Category */
+  /**
+   * @deprecated use color instead
+   * @kind Category
+   */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  /** @description uses enum Color */
+  /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
+
+  /** Modifies the way the color is shown */
+  inversed?: boolean;
 
   /** Used for style overrides */
   style?: Style;
@@ -95,25 +118,41 @@ interface RoundIconProps {
   responsive?: Responsive<this>;
 }
 
+function _getClassNameForColor(color: Color, inversed?: boolean): string {
+  return inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
+}
+
 export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
   const {
     name,
     size = Size.DEFAULT,
     category,
     bold,
-    style = {},
+    style: _style = {},
     color: _color,
+    inversed,
   } = useResponsiveProps<RoundIconProps>(rest, responsive);
 
   const customSize = typeof size === 'number';
   const color = category ? categoryEnumToColor(category) : _color;
+  const enumColor = color != null && color in Color ? (color as Color) : null;
+  const className = enumColor != null ? _getClassNameForColor(enumColor, inversed) : null;
+  const style =
+    color != null && enumColor == null
+      ? {
+          ..._style,
+          color: inversed ? undefined : color,
+          background: inversed ? color : lighten(color, 52),
+        }
+      : _style;
   return (
     <div
       className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
         [styles[customSize ? 'root' : getEnumAsClass<typeof styles>(size as Size)]]:
           size != null && !customSize,
         [styles.iconInherit]: customSize,
+        [styles.inversed]: inversed,
+        [styles[className as keyof typeof styles]]: enumColor != null,
       })}
       style={
         customSize

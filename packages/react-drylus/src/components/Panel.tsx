@@ -95,7 +95,7 @@ const styles = {
   `,
 };
 
-interface PanelHeaderProps {
+export interface PanelHeaderProps {
   /** Content of the header */
   children: React.ReactNode;
 
@@ -114,7 +114,7 @@ export const PanelHeader = ({ children, noPadding }: PanelHeaderProps) => {
   );
 };
 
-interface PanelBodyProps {
+export interface PanelBodyProps {
   /** Content of the body */
   children: React.ReactNode;
 
@@ -133,7 +133,7 @@ export const PanelBody = ({ children, noPadding, style }: PanelBodyProps) => {
   );
 };
 
-interface PanelSectionProps {
+export interface PanelSectionProps {
   /** Content of the section */
   children: React.ReactNode;
 
@@ -157,7 +157,7 @@ export const PanelSection = ({ children, title, style }: PanelSectionProps) => {
   );
 };
 
-interface PanelFooterProps {
+export interface PanelFooterProps {
   /** Content of the footer */
   children: React.ReactNode;
 
@@ -180,7 +180,7 @@ export const PanelFooter = ({ children, noPadding, style }: PanelFooterProps) =>
   );
 };
 
-interface PanelProps {
+export interface PanelProps {
   /** Component: PanelHeader, will render as the header of the panel */
   header?: React.ReactElement<typeof PanelHeader>;
 

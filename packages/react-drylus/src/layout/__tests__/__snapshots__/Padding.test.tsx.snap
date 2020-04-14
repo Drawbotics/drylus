@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Padding matches snapshot when has a different size on each side 1`] = `
+.emotion-0 {
+  padding: 24px;
+  padding: 0;
+  padding-left: 32px;
+  padding-right: 8px;
+  padding-top: 16px;
+  padding-bottom: 24px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding-left: 24px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding-right: calc(8px / 2);
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding-top: 8px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding-bottom: 16px;
+  }
+}
+
+<div
+  className="emotion-0"
+>
+  Content
+</div>
+`;
+
+exports[`Padding matches snapshot when has a size only on 1 side 1`] = `
+.emotion-0 {
+  padding: 24px;
+  padding: 0;
+  padding-left: 32px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding-left: 24px;
+  }
+}
+
+<div
+  className="emotion-0"
+>
+  Content
+</div>
+`;
+
+exports[`Padding matches snapshot when has a uniform size 1`] = `
+.emotion-0 {
+  padding: 24px;
+  padding: 32px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding: 24px;
+  }
+}
+
+<div
+  className="emotion-0"
+>
+  Content
+</div>
+`;
+
+exports[`Padding matches snapshot when has vertical and horizontal sizes 1`] = `
+.emotion-0 {
+  padding: 24px;
+  padding: 0;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding-left: 8px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding-right: 8px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding-top: 24px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-0 {
+    padding-bottom: 24px;
+  }
+}
+
+<div
+  className="emotion-0"
+>
+  Content
+</div>
+`;
