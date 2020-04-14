@@ -72,10 +72,13 @@ const styles = {
 export interface TagProps {
   children: string;
 
-  /** @deprecated use color instead */
-  category?: Exclude<Category, Category.PRIMARY>;
+  /** @deprecated use color instead
+   * @kind Category
+   */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  color?: Exclude<Color, Color.PRIMARY> | string;
+  /** @kind Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE | string;
 
   /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */
   onClickRemove?: OnClickCallback<HTMLElement>;

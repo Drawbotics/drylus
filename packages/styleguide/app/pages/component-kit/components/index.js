@@ -1,4 +1,4 @@
-import alerts from './alerts';
+import alerts from './alerts-provider';
 import avatar from './avatar';
 import badge from './badge';
 import banner from './banner';

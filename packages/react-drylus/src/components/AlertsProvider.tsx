@@ -113,7 +113,8 @@ export interface AlertProps {
   /** Text shown within the alert */
   text: string;
 
-  category: Exclude<Category, Category.PRIMARY>;
+  /** @kind Category  */
+  category: Category.DANGER | Category.SUCCESS | Category.INFO | Category.WARNING | Category.BRAND;
 
   /** Triggered when the dismiss button is clicked */
   onClickDismiss?: (id?: string) => void;

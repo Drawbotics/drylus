@@ -18,11 +18,11 @@ import {
 } from '@drawbotics/react-drylus';
 import docs from '@drawbotics/react-drylus/docs.json';
 import { css } from 'emotion';
-import React from 'react';
+import upperFirst from 'lodash/upperFirst';
+import React, { Fragment } from 'react';
 
-// import Prop from './Prop';
 import PropsInfo from './PropsInfo';
-import { generateDocs } from './utils';
+import { extractIntrinsics, generateDocs } from './utils';
 
 const styles = {
   table: css`
@@ -36,8 +36,17 @@ function _getProps(Component) {
   return description ?? {};
 }
 
+function _hasDeprecation(prop) {
+  return prop.deprecation != null;
+}
+
+function _isEnum(prop) {
+  return prop?.type?.type === 'enum';
+}
+
 const PropsTable = ({ component, onChange, activeProps, enums }) => {
   const props = _getProps(component);
+
   return (
     <div className={styles.table}>
       <Table>
@@ -52,74 +61,120 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
         <TBody>
           {Object.keys(props)
             .sort()
-            .map((key) => (
-              <TRow key={key}>
-                <TCell>{key}</TCell>
-                <TCell>
-                  {do {
-                    if (props[key].type.value) {
-                      <Tooltip
-                        content={<PropsInfo props={props[key].type.value} />}
-                        side={Position.RIGHT}>
-                        <Flex justify={FlexJustify.START}>
-                          <FlexItem>{props[key].type.name}</FlexItem>
-                          <FlexItem>
-                            <Margin size={{ left: Size.EXTRA_SMALL }}>
-                              <span style={{ color: sv.colorSecondary }}>
-                                <Icon name="info" />
-                              </span>
+            .map((key) => {
+              const prop = props[key];
+
+              return (
+                <TRow key={key}>
+                  {/* Name */}
+                  <TCell>{key}</TCell>
+                  {/* Type */}
+                  <TCell>
+                    {do {
+                      if (prop.type.values != null) {
+                        const { variants, nonVariants } = _isEnum(prop)
+                          ? extractIntrinsics(prop.type.values)
+                          : { variants: [], nonVariants: [] };
+                        const tooltipValues = _isEnum(prop) ? variants : prop.type.values;
+                        let tooltip = (
+                          <Tooltip
+                            content={<PropsInfo props={tooltipValues} />}
+                            side={Position.RIGHT}
+                            style={{ maxWidth: '600px' }}>
+                            <Flex justify={FlexJustify.START}>
+                              <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
+                              <FlexItem>
+                                <Margin size={{ left: Size.EXTRA_SMALL }}>
+                                  <span style={{ color: sv.colorSecondary }}>
+                                    <Icon name="info" />
+                                  </span>
+                                </Margin>
+                              </FlexItem>
+                            </Flex>
+                          </Tooltip>
+                        );
+
+                        if (_isEnum(prop)) {
+                          if (nonVariants.length !== 0) {
+                            return (
+                              <Fragment>
+                                {tooltip}
+                                <span> Or {nonVariants.join(' or ')}</span>
+                              </Fragment>
+                            );
+                          }
+                        }
+
+                        return tooltip;
+                      } else {
+                        prop.type.name ?? prop.type.type ?? prop.type;
+                      }
+                    }}
+                  </TCell>
+                  {/* Default */}
+                  <TCell>{prop.defaultValue}</TCell>
+                  {/* Required */}
+                  <TCell>{String(prop.required)}</TCell>
+                  {/* Description */}
+                  <TCell>
+                    {do {
+                      if (_hasDeprecation(prop)) {
+                        return (
+                          <Fragment>
+                            <Margin
+                              size={{ right: Size.EXTRA_SMALL }}
+                              style={{ display: 'inline-block' }}>
+                              <Tag color={Color.ORANGE} inversed>
+                                DEPRECATED
+                              </Tag>
                             </Margin>
-                          </FlexItem>
-                        </Flex>
-                      </Tooltip>;
-                    } else {
-                      props[key].type.name;
-                    }
-                  }}
-                </TCell>
-                <TCell>{/* {props[key].defaultValue?.value.replace(/'/g, '') || null} */}</TCell>
-                <TCell>{String(props[key].required)}</TCell>
-                <TCell>
-                  {do {
-                    if (props[key].description) {
-                      const val = props[key].description;
-                      val === 'DEPRECATED' ? (
-                        <Tag color={Color.ORANGE} inversed>
-                          {val}
-                        </Tag>
-                      ) : (
-                        val
-                      );
-                    } else if (props[key].type.name === 'enum') {
-                      const values = props[key].type.value.map((v) => v.value.replace(/'/g, ''));
-                      `One of: ${values.join(', ')}`;
-                    }
-                  }}
-                </TCell>
-                <TCell>
-                  {/* {do {
-                    if (activeProps) {
-                      <Prop
-                        enums={{
-                          ...enums,
-                          Category,
-                          Size,
-                          Tier,
-                          Align,
-                          Position,
-                          Color,
-                          Shade,
-                        }}
-                        name={key}
-                        prop={props[key]}
-                        value={activeProps[key]}
-                        onChange={onChange}
-                      />;
-                    }
-                  }} */}
-                </TCell>
-              </TRow>
-            ))}
+                            {upperFirst(prop.deprecation)}
+                            {upperFirst(prop.description)}
+                          </Fragment>
+                        );
+                      } else if (_isEnum(prop)) {
+                        const { variants, nonVariants } = extractIntrinsics(prop.type.values);
+                        const variantsDesc = `One of: ${variants.join(', ')}`;
+                        if (nonVariants.length > 0) {
+                          return (
+                            <Fragment>
+                              {variantsDesc}
+                              <br />
+                              <span>Or: {nonVariants.join(' or ')}</span>
+                            </Fragment>
+                          );
+                        }
+                        return variantsDesc;
+                      } else {
+                        upperFirst(prop.description);
+                      }
+                    }}
+                  </TCell>
+                  <TCell>
+                    {/* {do {
+                      if (activeProps) {
+                        <Prop
+                          enums={{
+                            ...enums,
+                            Category,
+                            Size,
+                            Tier,
+                            Align,
+                            Position,
+                            Color,
+                            Shade,
+                          }}
+                          name={key}
+                          prop={prop}
+                          value={activeProps[key]}
+                          onChange={onChange}
+                        />;
+                      }
+                    }} */}
+                  </TCell>
+                </TRow>
+              );
+            })}
         </TBody>
       </Table>
     </div>

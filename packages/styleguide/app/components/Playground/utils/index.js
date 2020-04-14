@@ -1,8 +1,10 @@
 import flow from 'lodash/flow';
-import last from 'lodash/last';
 import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import React from 'react';
+
+export * from './generate-docs';
+export * from './extract-intrinsics';
 
 function removeHash(string) {
   return string.replace(/(css-).*?(-)/gm, '');
@@ -94,41 +96,4 @@ export function recursiveMdxTransform(tree, target) {
     return transformMdxToReact(_tree, targetComponent, props);
   }
   return mdxTransform(tree);
-}
-
-function _getComplexType() {}
-
-function _getType(type) {
-  return {
-    name: type.name,
-    value: type.type === 'intrinsic' ? null : _getComplexType(type),
-  };
-}
-
-export function generateDocs(componentName, docs) {
-  const { children } = docs;
-  const componentDescription = children.find(
-    (child) => last(child.name.replace(/"/g, '').split('/')) === componentName,
-  );
-  const propsInterfaceName = `${componentName}Props`;
-  const interfaceDescription = componentDescription.children.find(
-    (child) => child.name === propsInterfaceName,
-  );
-  if (interfaceDescription == null) {
-    return null;
-  }
-  const res = interfaceDescription.children.reduce((props, prop) => {
-    const type = _getType(prop.type);
-    return {
-      ...props,
-      [prop.name]: {
-        required: !prop.flags?.isOptional,
-        type,
-        description: prop.comment?.shortText,
-      },
-    };
-  }, {});
-  // console.log(interfaceDescription.children);
-  // console.log(res);
-  return res;
 }

@@ -277,11 +277,16 @@ export interface ButtonProps {
   /** Triggered after the button is clicked */
   onClick?: OnClickCallback<HTMLElement>;
 
-  category?: Exclude<Category, Category.PRIMARY>;
+  /** @kind Category */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  color?: Exclude<Color, Color.PRIMARY>;
+  /** @kind Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
-  /** @default Size.DEFAULT */
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
   /** @default Tier.PRIMARY */

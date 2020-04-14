@@ -176,6 +176,7 @@ export interface CheckboxProps {
   /**
    * Size of the checkbox. Can be large or default
    * @default Size.DEFAULT
+   * @kind Size
    */
   size?: Size.LARGE | Size.DEFAULT;
 
