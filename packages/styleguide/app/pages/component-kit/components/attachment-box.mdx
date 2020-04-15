@@ -1,4 +1,4 @@
-import { AttachmentBox, Margin, Size } from '@drawbotics/react-drylus';
+import { AttachmentBox, Margin, Size, FlexDirection, Flex, FlexItem, FlexAlign } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -12,14 +12,11 @@ import { AttachmentBox } from '@drawbotics/react-drylus';
 __Example__
 
 export const attachment = {
-  id: '1',
   fileName: 'DummyFile.jpg',
   progress: 1,
-  url: 'https://stackoverflow.com/',
 };
 
 export const secondAttachment = {
-  id: '2',
   fileName: 'SecondDummyFile.jpg',
   progress: 0.6,
 };
@@ -28,8 +25,21 @@ export const onClickDownload = () => {};
 export const onClickClose = () => {};
 
 <Playground component={AttachmentBox}>
-  <Margin size={{ bottom: Size.SMALL }}>
-    <AttachmentBox fileName={attachment.fileName} progress={attachment.progress} onClickDownload={onClickDownload} onClickClose={onClickClose}/>
-  </Margin>
-  <AttachmentBox fileName={secondAttachment.fileName} progress={secondAttachment.progress} onClickDownload={onClickDownload} onClickClose={onClickClose} />
+    <AttachmentBox fileName="DummyFile.jpg" />
+</Playground>
+
+You can add a progress, and add mechanisms to handle download and removal.
+<Playground mode="jsx">
+  <Flex direction={FlexDirection.VERTICAL} align={FlexAlign.START}>
+    <FlexItem style={{width: '100%'}}>
+      <Margin size={{ bottom: Size.SMALL }}>
+        <AttachmentBox fileName="Second.jpg" progress={0.6} onClickDownload={onClickDownload} onClickClose={onClickClose}/>
+      </Margin>
+    </FlexItem>
+    <FlexItem style={{width: '100%'}}>
+      <Margin size={{ bottom: Size.SMALL }}>
+        <AttachmentBox fileName="Third.jpg" onClickDownload={onClickDownload} onClickClose={onClickClose}/>
+      </Margin>
+    </FlexItem>
+  </Flex>
 </Playground>
