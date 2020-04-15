@@ -49,7 +49,7 @@ function _isEnum(prop) {
   return prop?.type?.type === 'enum';
 }
 
-const PropsTable = ({ component, onChange, activeProps }) => {
+const PropsTable = ({ component, onChange, activeProps, enums }) => {
   const props = _getProps(component);
 
   return (
@@ -160,6 +160,7 @@ const PropsTable = ({ component, onChange, activeProps }) => {
                       if (activeProps) {
                         <Prop
                           enums={{
+                            ...enums,
                             Category,
                             Size,
                             Tier,
