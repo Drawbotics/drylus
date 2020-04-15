@@ -67,7 +67,6 @@ export const AttachmentBox = ({
               </Margin>
             </FlexItem>
           ) : null}
-          })}
           {onClickClose != null ? (
             <FlexItem>
               <Margin size={{ left: Size.EXTRA_SMALL }}>
@@ -75,7 +74,6 @@ export const AttachmentBox = ({
               </Margin>
             </FlexItem>
           ) : null}
-          )}
         </Flex>
       </Padding>
     </div>
