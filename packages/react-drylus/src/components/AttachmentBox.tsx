@@ -12,7 +12,6 @@ import { Text } from './Text';
 interface AttachmentBoxProps {
   /** Details of the attachment to be displayed */
   attachment: {
-    id: string;
     fileName: string;
     progress?: number;
   };
@@ -21,7 +20,7 @@ interface AttachmentBoxProps {
   onClickDownload?: () => void;
 
   /** To control what should happen when remove is clicked. If not provided remove button is not displyed */
-  onClickClose?: (attachmentId: string) => void;
+  onClickClose?: () => void;
 }
 
 const styles = {
@@ -87,7 +86,7 @@ export const AttachmentBox = ({
               return (
                 <FlexItem>
                   <Margin size={{ left: Size.EXTRA_SMALL }}>
-                    <Icon name="x" onClick={() => onClickClose(attachment.id)} />
+                    <Icon name="x" onClick={onClickClose} />
                   </Margin>
                 </FlexItem>
               );
