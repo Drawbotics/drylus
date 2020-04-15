@@ -4,6 +4,7 @@ import React from 'react';
 
 import { Color, Size } from '../enums';
 import { Flex, FlexItem, FlexJustify, ListTile, Margin, Padding } from '../layout';
+import { FileIcon, FileType } from './FileIcon';
 import { Icon } from './Icon';
 import { ProgressBar } from './ProgressBar';
 import { Text } from './Text';
@@ -43,7 +44,7 @@ export const AttachmentBox = ({
           <FlexItem flex>
             <ListTile
               style={{ width: '100%' }}
-              leading={<Icon name="file" />}
+              leading={<FileIcon type={fileName.split('.').pop() as FileType} />}
               title={<Text disabled={progress != null && progress !== 1}>{fileName}</Text>}
               subtitle={
                 progress != null ? (
