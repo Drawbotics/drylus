@@ -43,3 +43,4 @@ export * from './ProgressBar';
 export * from './LoadingPlaceholder';
 export * from './SteppedProgressBar';
 export * from './AttachmentBox';
+export * from './FileIcon';

@@ -15,6 +15,7 @@ import dot from './dot';
 import drawer from './drawer';
 import dropdown from './dropdown';
 import emptyState from './empty-state';
+import fileIcon from './file-icon';
 import filter from './filter';
 import filterGroup from './filter-group';
 import icon from './icon';
@@ -89,7 +90,8 @@ const components = {
   progressBar,
   loadingPlaceholder,
   steppedProgressBar,
-  attachmentBox
+  attachmentBox,
+  fileIcon
 };
 
 export default Object.keys(components)
