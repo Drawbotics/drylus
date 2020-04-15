@@ -8,6 +8,14 @@ import { Icon } from './Icon';
 import { ProgressBar } from './ProgressBar';
 import { Text } from './Text';
 
+const styles = {
+  root: css`
+    background: ${sv.neutralLighter};
+    border-radius: ${sv.defaultBorderRadius};
+    color: ${sv.colorPrimary};
+  `,
+};
+
 interface AttachmentBoxProps {
   /** Name of the file to be displayed */
   fileName: string;
@@ -22,14 +30,6 @@ interface AttachmentBoxProps {
   onClickClose?: () => void;
 }
 
-const styles = {
-  attachment: css`
-    background: ${sv.neutralLighter};
-    border-radius: ${sv.defaultBorderRadius};
-    color: ${sv.colorPrimary};
-  `,
-};
-
 export const AttachmentBox = ({
   fileName,
   progress,
@@ -37,7 +37,7 @@ export const AttachmentBox = ({
   onClickClose,
 }: AttachmentBoxProps) => {
   return (
-    <div className={styles.attachment}>
+    <div className={styles.root}>
       <Padding size={Size.EXTRA_SMALL}>
         <Flex justify={FlexJustify.SPACE_BETWEEN}>
           <FlexItem flex>
