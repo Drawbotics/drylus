@@ -10,13 +10,18 @@ import { ProgressBar } from './ProgressBar';
 import { Text } from './Text';
 
 interface AttachmentBoxProps {
+  /** Details of the attachment to be displayed */
   attachment: {
-    readonly id: string;
-    readonly fileName: string;
-    progress?: { percentage?: number };
+    id: string;
+    fileName: string;
+    progress?: number;
     url?: string;
   };
+
+  /** To control what should happen when download is clicked. If not provided download button is not displyed */
   onClickDownload?: (url: string) => void;
+
+  /** To control what should happen when download is clicked. If not provided download button is not displyed */
   onClickClose?: (attachmentId: string) => void;
 }
 
@@ -43,12 +48,12 @@ export const AttachmentBox = ({
               leading={<Icon name="file" />}
               title={<Text disabled={attachment.url == null}>{attachment.fileName}</Text>}
               subtitle={run(() => {
-                if (attachment.progress != null && attachment.progress.percentage !== 1) {
+                if (attachment.progress != null && attachment.progress !== 1) {
                   return (
                     <ProgressBar
                       size={Size.SMALL}
                       color={Color.GREEN}
-                      percentage={attachment.progress.percentage}
+                      percentage={attachment.progress}
                     />
                   );
                 }
@@ -57,11 +62,11 @@ export const AttachmentBox = ({
           </FlexItem>
           <FlexItem>
             {run(() => {
-              if (attachment.url != null) {
+              if (onClickDownload != null) {
                 return (
                   <Margin size={{ horizontal: Size.EXTRA_SMALL }}>
                     <Icon
-                      onClick={() => onClickDownload && onClickDownload(attachment.url ?? '')}
+                      onClick={() => onClickDownload(attachment.url ?? '')}
                       style={
                         attachment.url == null ? { opacity: 0, pointerEvents: 'none' } : undefined
                       }
