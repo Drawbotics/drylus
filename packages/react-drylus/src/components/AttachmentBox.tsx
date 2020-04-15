@@ -46,24 +46,16 @@ export const AttachmentBox = ({
               leading={<Icon name="file" />}
               title={<Text disabled={progress != null && progress !== 1}>{fileName}</Text>}
               subtitle={
-                progress != null && progress !== 1 ? (
+                progress != null ? (
                   <ProgressBar size={Size.SMALL} color={Color.GREEN} percentage={progress} />
                 ) : null
               }
             />
           </FlexItem>
-          {onClickDownload != null ? (
+          {onClickDownload != null && progress === 1 ? (
             <FlexItem>
               <Margin size={{ horizontal: Size.EXTRA_SMALL }}>
-                <Icon
-                  onClick={onClickDownload}
-                  style={
-                    progress != null && progress !== 1
-                      ? { opacity: 0, pointerEvents: 'none' }
-                      : undefined
-                  }
-                  name="download"
-                />
+                <Icon onClick={onClickDownload} name="download" />
               </Margin>
             </FlexItem>
           ) : null}
