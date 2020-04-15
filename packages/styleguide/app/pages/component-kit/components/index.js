@@ -42,6 +42,7 @@ import tile from './tile';
 import title from './title';
 import toggle from './toggle';
 import tooltip from './tooltip';
+import uploadBox from './upload-box';
 
 const components = {
   button,
@@ -88,6 +89,7 @@ const components = {
   progressBar,
   loadingPlaceholder,
   steppedProgressBar,
+  uploadBox,
 };
 
 export default Object.keys(components)

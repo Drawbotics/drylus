@@ -1,0 +1,20 @@
+import { UploadBox } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Upload Box
+This component is displayed to show a "upload file" cue to the user. It can be clicked, or used as a drag-and-drop area for files. The component also exposes a raw `upload` function that can be used with any other element to trigger an upload.
+
+```jsx
+import { UploadBox } from '@drawbotics/react-drylus';
+```
+__Example__
+
+<Playground component={UploadBox}>
+  <UploadBox />
+</Playground>
+
+The component is most often coupled with the [`AttachmentBox`](/component-kit/components/attachment-box) component to display the upload progress.
+
+<!-- TODO add attachment box example -->
