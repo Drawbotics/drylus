@@ -9,15 +9,15 @@ import { Icon } from './Icon';
 import { ProgressBar } from './ProgressBar';
 import { Text } from './Text';
 
-interface AttachmentProps {
+interface AttachmentBoxProps {
   attachment: {
     readonly id: string;
     readonly fileName: string;
     progress?: { percentage?: number };
-    attachmentId?: string;
     url?: string;
   };
-  onClickRemoveAttachment?: (attachmentId: string) => void;
+  onClickDownload?: (url: string) => void;
+  onClickClose?: (attachmentId: string) => void;
 }
 
 const styles = {
@@ -28,13 +28,11 @@ const styles = {
   `,
 };
 
-export const AttachmentBox = ({ attachment, onClickRemoveAttachment }: AttachmentProps) => {
-  const handleDownload = () => {
-    if (attachment.url != null) {
-      window.open(attachment.url);
-    }
-  };
-
+export const AttachmentBox = ({
+  attachment,
+  onClickDownload,
+  onClickClose,
+}: AttachmentBoxProps) => {
   return (
     <div className={styles.attachment}>
       <Padding size={Size.EXTRA_SMALL}>
@@ -63,7 +61,7 @@ export const AttachmentBox = ({ attachment, onClickRemoveAttachment }: Attachmen
                 return (
                   <Margin size={{ horizontal: Size.EXTRA_SMALL }}>
                     <Icon
-                      onClick={handleDownload}
+                      onClick={() => onClickDownload && onClickDownload(attachment.url ?? '')}
                       style={
                         attachment.url == null ? { opacity: 0, pointerEvents: 'none' } : undefined
                       }
@@ -75,11 +73,11 @@ export const AttachmentBox = ({ attachment, onClickRemoveAttachment }: Attachmen
             })}
           </FlexItem>
           {run(() => {
-            if (onClickRemoveAttachment != null) {
+            if (onClickClose != null) {
               return (
                 <FlexItem>
                   <Margin size={{ left: Size.EXTRA_SMALL }}>
-                    <Icon name="x" onClick={() => onClickRemoveAttachment(attachment.id)} />
+                    <Icon name="x" onClick={() => onClickClose(attachment.id)} />
                   </Margin>
                 </FlexItem>
               );
