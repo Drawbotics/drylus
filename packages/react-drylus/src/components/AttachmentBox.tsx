@@ -4,7 +4,6 @@ import React from 'react';
 
 import { Color, Size } from '../enums';
 import { Flex, FlexItem, FlexJustify, ListTile, Margin, Padding } from '../layout';
-import { run } from '../utils';
 import { Icon } from './Icon';
 import { ProgressBar } from './ProgressBar';
 import { Text } from './Text';
@@ -46,45 +45,37 @@ export const AttachmentBox = ({
               style={{ width: '100%' }}
               leading={<Icon name="file" />}
               title={<Text disabled={progress != null && progress !== 1}>{fileName}</Text>}
-              subtitle={run(() => {
-                if (progress != null && progress !== 1) {
-                  return (
-                    <ProgressBar size={Size.SMALL} color={Color.GREEN} percentage={progress} />
-                  );
-                }
-              })}
+              subtitle={
+                progress != null && progress !== 1 ? (
+                  <ProgressBar size={Size.SMALL} color={Color.GREEN} percentage={progress} />
+                ) : null
+              }
             />
           </FlexItem>
-          <FlexItem>
-            {run(() => {
-              if (onClickDownload != null) {
-                return (
-                  <Margin size={{ horizontal: Size.EXTRA_SMALL }}>
-                    <Icon
-                      onClick={onClickDownload}
-                      style={
-                        progress != null && progress !== 1
-                          ? { opacity: 0, pointerEvents: 'none' }
-                          : undefined
-                      }
-                      name="download"
-                    />
-                  </Margin>
-                );
-              }
-            })}
-          </FlexItem>
-          {run(() => {
-            if (onClickClose != null) {
-              return (
-                <FlexItem>
-                  <Margin size={{ left: Size.EXTRA_SMALL }}>
-                    <Icon name="x" onClick={onClickClose} />
-                  </Margin>
-                </FlexItem>
-              );
-            }
+          {onClickDownload != null ? (
+            <FlexItem>
+              <Margin size={{ horizontal: Size.EXTRA_SMALL }}>
+                <Icon
+                  onClick={onClickDownload}
+                  style={
+                    progress != null && progress !== 1
+                      ? { opacity: 0, pointerEvents: 'none' }
+                      : undefined
+                  }
+                  name="download"
+                />
+              </Margin>
+            </FlexItem>
+          ) : null}
           })}
+          {onClickClose != null ? (
+            <FlexItem>
+              <Margin size={{ left: Size.EXTRA_SMALL }}>
+                <Icon name="x" onClick={onClickClose} />
+              </Margin>
+            </FlexItem>
+          ) : null}
+          )}
         </Flex>
       </Padding>
     </div>
