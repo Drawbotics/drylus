@@ -15,11 +15,10 @@ interface AttachmentBoxProps {
     id: string;
     fileName: string;
     progress?: number;
-    url?: string;
   };
 
   /** To control what should happen when download is clicked. If not provided download button is not displyed */
-  onClickDownload?: (url: string) => void;
+  onClickDownload?: () => void;
 
   /** To control what should happen when remove is clicked. If not provided remove button is not displyed */
   onClickClose?: (attachmentId: string) => void;
@@ -46,7 +45,11 @@ export const AttachmentBox = ({
             <ListTile
               style={{ width: '100%' }}
               leading={<Icon name="file" />}
-              title={<Text disabled={attachment.url == null}>{attachment.fileName}</Text>}
+              title={
+                <Text disabled={attachment.progress != null && attachment.progress !== 1}>
+                  {attachment.fileName}
+                </Text>
+              }
               subtitle={run(() => {
                 if (attachment.progress != null && attachment.progress !== 1) {
                   return (
@@ -66,9 +69,11 @@ export const AttachmentBox = ({
                 return (
                   <Margin size={{ horizontal: Size.EXTRA_SMALL }}>
                     <Icon
-                      onClick={() => onClickDownload(attachment.url ?? '')}
+                      onClick={onClickDownload}
                       style={
-                        attachment.url == null ? { opacity: 0, pointerEvents: 'none' } : undefined
+                        attachment.progress != null && attachment.progress !== 1
+                          ? { opacity: 0, pointerEvents: 'none' }
+                          : undefined
                       }
                       name="download"
                     />
