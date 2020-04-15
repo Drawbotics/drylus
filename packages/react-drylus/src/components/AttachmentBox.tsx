@@ -1,9 +1,17 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { Color, Size } from '../enums';
-import { Flex, FlexItem, FlexJustify, ListTile, Margin, Padding } from '../layout';
+import {
+  Flex,
+  FlexDirection,
+  FlexItem,
+  FlexJustify,
+  FlexSpacer,
+  ListTile,
+  Padding,
+} from '../layout';
 import { FileIcon, FileType } from './FileIcon';
 import { Icon } from './Icon';
 import { ProgressBar } from './ProgressBar';
@@ -40,8 +48,8 @@ export const AttachmentBox = ({
   return (
     <div className={styles.root}>
       <Padding size={Size.EXTRA_SMALL}>
-        <Flex justify={FlexJustify.SPACE_BETWEEN}>
-          <FlexItem flex>
+        <Flex direction={FlexDirection.HORIZONTAL} justify={FlexJustify.SPACE_BETWEEN}>
+          <FlexItem flex style={{ display: 'flex' }}>
             <ListTile
               style={{ width: '100%' }}
               leading={<FileIcon type={fileName.split('.').pop() as FileType} />}
@@ -53,18 +61,18 @@ export const AttachmentBox = ({
               }
             />
           </FlexItem>
-          {onClickDownload != null && progress == null ? (
-            <FlexItem>
-              <Margin size={{ horizontal: Size.EXTRA_SMALL }}>
+          {onClickDownload != null ? (
+            <Fragment>
+              <FlexSpacer size={Size.SMALL} direction={FlexDirection.HORIZONTAL} />
+              <FlexItem style={{ display: 'flex' }}>
                 <Icon onClick={onClickDownload} name="download" />
-              </Margin>
-            </FlexItem>
+              </FlexItem>
+            </Fragment>
           ) : null}
+          <FlexSpacer size={Size.EXTRA_SMALL} direction={FlexDirection.HORIZONTAL} />
           {onClickClose != null ? (
-            <FlexItem>
-              <Margin size={{ left: Size.EXTRA_SMALL }}>
-                <Icon name="x" onClick={onClickClose} />
-              </Margin>
+            <FlexItem style={{ display: 'flex' }}>
+              <Icon name="x" onClick={onClickClose} />
             </FlexItem>
           ) : null}
         </Flex>
