@@ -21,7 +21,7 @@ interface AttachmentBoxProps {
   /** To control what should happen when download is clicked. If not provided download button is not displyed */
   onClickDownload?: (url: string) => void;
 
-  /** To control what should happen when download is clicked. If not provided download button is not displyed */
+  /** To control what should happen when remove is clicked. If not provided remove button is not displyed */
   onClickClose?: (attachmentId: string) => void;
 }
 
