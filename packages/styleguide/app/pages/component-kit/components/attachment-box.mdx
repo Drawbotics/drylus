@@ -28,17 +28,17 @@ export const onClickClose = () => {};
     <AttachmentBox fileName="DummyFile.jpg" />
 </Playground>
 
-You can add a progress, and add mechanisms to handle download and removal.
+You can add a progress, plus mechanisms to handle download and removal.
 <Playground mode="jsx">
   <Flex direction={FlexDirection.VERTICAL} align={FlexAlign.START}>
     <FlexItem style={{width: '100%'}}>
       <Margin size={{ bottom: Size.SMALL }}>
-        <AttachmentBox fileName="Second.jpg" progress={0.6} onClickDownload={onClickDownload} onClickClose={onClickClose}/>
+        <AttachmentBox fileName="Second.xls" progress={0.6} onClickDownload={onClickDownload} onClickClose={onClickClose}/>
       </Margin>
     </FlexItem>
     <FlexItem style={{width: '100%'}}>
       <Margin size={{ bottom: Size.SMALL }}>
-        <AttachmentBox fileName="Third.jpg" onClickDownload={onClickDownload} onClickClose={onClickClose}/>
+        <AttachmentBox fileName="Third.mp4" onClickDownload={onClickDownload} onClickClose={onClickClose}/>
       </Margin>
     </FlexItem>
   </Flex>
