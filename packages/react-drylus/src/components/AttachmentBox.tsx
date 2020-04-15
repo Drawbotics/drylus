@@ -52,7 +52,7 @@ export const AttachmentBox = ({
               }
             />
           </FlexItem>
-          {onClickDownload != null && progress === 1 ? (
+          {onClickDownload != null && progress == null ? (
             <FlexItem>
               <Margin size={{ horizontal: Size.EXTRA_SMALL }}>
                 <Icon onClick={onClickDownload} name="download" />
