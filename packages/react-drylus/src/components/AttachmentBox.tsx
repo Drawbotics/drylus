@@ -10,11 +10,11 @@ import { ProgressBar } from './ProgressBar';
 import { Text } from './Text';
 
 interface AttachmentBoxProps {
-  /** Details of the attachment to be displayed */
-  attachment: {
-    fileName: string;
-    progress?: number;
-  };
+  /** Name of the file to be displayed */
+  fileName: string;
+
+  /** Progress of the download to be displyed */
+  progress?: number;
 
   /** To control what should happen when download is clicked. If not provided download button is not displyed */
   onClickDownload?: () => void;
@@ -32,7 +32,8 @@ const styles = {
 };
 
 export const AttachmentBox = ({
-  attachment,
+  fileName,
+  progress,
   onClickDownload,
   onClickClose,
 }: AttachmentBoxProps) => {
@@ -44,19 +45,11 @@ export const AttachmentBox = ({
             <ListTile
               style={{ width: '100%' }}
               leading={<Icon name="file" />}
-              title={
-                <Text disabled={attachment.progress != null && attachment.progress !== 1}>
-                  {attachment.fileName}
-                </Text>
-              }
+              title={<Text disabled={progress != null && progress !== 1}>{fileName}</Text>}
               subtitle={run(() => {
-                if (attachment.progress != null && attachment.progress !== 1) {
+                if (progress != null && progress !== 1) {
                   return (
-                    <ProgressBar
-                      size={Size.SMALL}
-                      color={Color.GREEN}
-                      percentage={attachment.progress}
-                    />
+                    <ProgressBar size={Size.SMALL} color={Color.GREEN} percentage={progress} />
                   );
                 }
               })}
@@ -70,7 +63,7 @@ export const AttachmentBox = ({
                     <Icon
                       onClick={onClickDownload}
                       style={
-                        attachment.progress != null && attachment.progress !== 1
+                        progress != null && progress !== 1
                           ? { opacity: 0, pointerEvents: 'none' }
                           : undefined
                       }

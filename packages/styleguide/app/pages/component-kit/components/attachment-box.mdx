@@ -29,7 +29,7 @@ export const onClickClose = () => {};
 
 <Playground component={AttachmentBox}>
   <Margin size={{ bottom: Size.SMALL }}>
-    <AttachmentBox attachment={attachment} onClickDownload={onClickDownload} onClickClose={onClickClose}/>
+    <AttachmentBox fileName={attachment.fileName} progress={attachment.progress} onClickDownload={onClickDownload} onClickClose={onClickClose}/>
   </Margin>
-  <AttachmentBox attachment={secondAttachment} onClickDownload={onClickDownload} onClickClose={onClickClose} />
+  <AttachmentBox fileName={secondAttachment.fileName} progress={secondAttachment.progress} onClickDownload={onClickDownload} onClickClose={onClickClose} />
 </Playground>

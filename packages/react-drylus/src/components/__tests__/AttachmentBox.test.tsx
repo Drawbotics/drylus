@@ -18,32 +18,45 @@ const completedAttachment = {
   id: '3',
   fileName: 'CompleteFile.jpg',
   progress: 1,
-  url: 'https://www.aws.com',
 };
 
 describe('AttachmentBox', () => {
   describe('matches snapshot when', () => {
     it('is given the simplest attachment', () => {
-      const tree = create(<AttachmentBox attachment={simplestAttachment} />).toJSON();
+      const tree = create(<AttachmentBox fileName={simplestAttachment.fileName} />).toJSON();
       expect(tree).toMatchSnapshot();
     });
     it('is given attachment with progress', () => {
-      const tree = create(<AttachmentBox attachment={attachmentWithProgress} />).toJSON();
+      const tree = create(
+        <AttachmentBox
+          fileName={attachmentWithProgress.fileName}
+          progress={attachmentWithProgress.progress}
+        />,
+      ).toJSON();
       expect(tree).toMatchSnapshot();
     });
     it('is given a completed attachment', () => {
-      const tree = create(<AttachmentBox attachment={completedAttachment} />).toJSON();
+      const tree = create(
+        <AttachmentBox
+          fileName={completedAttachment.fileName}
+          progress={completedAttachment.progress}
+        />,
+      ).toJSON();
       expect(tree).toMatchSnapshot();
     });
     it('can download attachment', () => {
       const tree = create(
-        <AttachmentBox attachment={completedAttachment} onClickDownload={() => {}} />,
+        <AttachmentBox
+          fileName={completedAttachment.fileName}
+          progress={completedAttachment.progress}
+          onClickDownload={() => {}}
+        />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
     it('can remove attachment', () => {
       const tree = create(
-        <AttachmentBox attachment={simplestAttachment} onClickClose={() => {}} />,
+        <AttachmentBox fileName={simplestAttachment.fileName} onClickClose={() => {}} />,
       ).toJSON();
       expect(tree).toMatchSnapshot();
     });
