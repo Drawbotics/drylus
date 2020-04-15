@@ -1,4 +1,4 @@
-import { AttachmentBox } from '@drawbotics/react-drylus';
+import { AttachmentBox, Margin, Size } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -14,25 +14,22 @@ __Example__
 export const attachment = {
   id: '1',
   fileName: 'DummyFile.jpg',
-  progress: {
-    percentage: 1,
-  },
-  attachmentId: '1-a',
+  progress: 1,
   url: 'https://stackoverflow.com/',
 };
 
 export const secondAttachment = {
   id: '2',
   fileName: 'SecondDummyFile.jpg',
-  progress: {
-    percentage: 0.6,
-  },
-  attachmentId: '2-a',
+  progress: 0.6,
 };
 
-export const onClickRemoveAttachment = () => {};
+export const onClickDownload = () => {};
+export const onClickClose = () => {};
 
 <Playground component={AttachmentBox}>
-  <AttachmentBox attachment={attachment} onClickRemoveAttachment={onClickRemoveAttachment} />
-  <AttachmentBox attachment={secondAttachment} onClickRemoveAttachment={onClickRemoveAttachment} />
+  <Margin size={{ bottom: Size.SMALL }}>
+    <AttachmentBox attachment={attachment} onClickDownload={onClickDownload} onClickClose={onClickClose}/>
+  </Margin>
+  <AttachmentBox attachment={secondAttachment} onClickDownload={onClickDownload} onClickClose={onClickClose} />
 </Playground>
