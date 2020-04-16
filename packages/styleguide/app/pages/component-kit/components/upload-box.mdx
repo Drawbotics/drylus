@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { UploadBox, UploadHelper, Button, Category, Icon, Margin, Size, AttachmentBox } from '@drawbotics/react-drylus';
+import { UploadBox, UploadHelper, Button, Category, Icon, Margin, Size, AttachmentBox, AttachmentList } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 import { RenderChildren } from '../utils';
@@ -22,7 +22,7 @@ __Example__
     signingUrl={process.env.EXAMPLE_API_HOST + '/rails/active_storage/direct_uploads'} />
 </Playground>
 
-The component is most often coupled with the [`AttachmentBox`](/component-kit/components/attachment-box) and `AttachmentList` component to display the upload progress.
+The component is most often coupled with the [`AttachmentBox`](/component-kit/components/attachment-box) and [`AttachmentList`](/component-kit/components/attachment-list) component to display the upload progress.
 
 Try to upload some files to see it in action. The example is limited to 1 file at a time.
 <Playground mode="jsx">
@@ -36,14 +36,15 @@ Try to upload some files to see it in action. The example is limited to 1 file a
             onFinish={(file) => setState({ ...state, [file.name]: -1 })}
             fullWidth />
         </Margin>
-        {Object.keys(state).map((filename) => (
-          <Margin key={filename} size={{ bottom: Size.EXTRA_SMALL }}>
+        <AttachmentList>
+          {Object.keys(state).map((filename) => (
             <AttachmentBox
+              key={filename}
               onClickDownload={state[filename] === -1 ? () => {} : null}
               onClickClose={() => {}}
               fileName={filename} progress={state[filename] != -1 ? state[filename] : null} />
-          </Margin>
-        ))}
+          ))}
+        </AttachmentList>
       </div>
     )}
   </RenderChildren>

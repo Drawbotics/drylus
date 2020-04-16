@@ -1,5 +1,6 @@
 import alerts from './alerts';
 import attachmentBox from './attachment-box';
+import attachmentList from './attachment-list';
 import avatar from './avatar';
 import badge from './badge';
 import banner from './banner';
@@ -94,6 +95,7 @@ const components = {
   uploadBox,
   attachmentBox,
   fileIcon,
+  attachmentList,
 };
 
 export default Object.keys(components)

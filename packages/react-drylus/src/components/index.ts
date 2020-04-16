@@ -45,3 +45,4 @@ export * from './SteppedProgressBar';
 export * from './UploadBox';
 export * from './AttachmentBox';
 export * from './FileIcon';
+export * from './AttachmentList';
