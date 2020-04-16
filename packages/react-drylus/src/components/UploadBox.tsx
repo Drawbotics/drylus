@@ -1,10 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import React, { ChangeEvent, Fragment, useEffect, useRef } from 'react';
+import React, { ChangeEvent, Fragment, useEffect, useRef, useState } from 'react';
 
-import { Shade, Size } from '../enums';
+import { Category, Shade, Size } from '../enums';
+import { Hint } from '../forms';
 import { Margin } from '../layout';
-import { WrapperRef } from '../utils';
+import { SigningResult, WrapperRef, uploadFiles } from '../utils';
 import { Upload } from '../utils/illustrations';
 import { Text } from './Text';
 
@@ -23,9 +24,20 @@ const styles = {
       cursor: pointer;
       border-color: ${sv.brand};
     }
+
+    > * {
+      pointer-events: none;
+    }
   `,
   fullWidth: css`
     max-width: none;
+  `,
+  active: css`
+    border-color: ${sv.green};
+    background: ${sv.greenLighter} !important;
+  `,
+  error: css`
+    border-color: ${sv.red} !important;
   `,
 };
 
@@ -35,7 +47,7 @@ export interface UploadHelperProps {
 
   /**
    * If true, more than one attachment can be selected
-   * @default true
+   * @default false
    */
   multiple?: boolean;
 
@@ -43,44 +55,42 @@ export interface UploadHelperProps {
   uploadTargetUrl: string;
 
   /** Function called before the upload starts */
-  onInit?: (files: Array<any>) => void;
+  onInit?: (files: FileList) => void;
 
   /** Function called before the start of each file upload */
-  onStart?: (file: any) => void;
+  onStart?: (file: File) => void;
 
   /** Function called during the upload for each file */
-  onProgress?: (file: any, e: Event) => void;
+  onProgress?: (file: File, e: ProgressEvent) => void;
 
   /** Function called at the end of each file upload */
-  onFinish?: (file: any, signingResult: string, result: any) => void;
+  onFinish?: (file: File, signingResult?: SigningResult, result?: any) => void;
 
   /** Function called called if an error is thrown during each file upload */
-  onError?: (file: any, error: Error) => void;
+  onError?: (file: File, error: Error) => void;
 
   /** Function called once all files have been uploaded */
-  onComplete?: (files: Array<any>) => void;
+  onComplete?: (uploads: Array<{ file: File; signingResult?: SigningResult }>) => void;
 
-  /** Custom function to modify the file name before upload */
+  /** Custom function to modify the file name before upload, note that a default sanitizer already removes whitespace */
   sanitize?: (filename: string) => string;
 }
 
 export const UploadHelper = ({
-  multiple = true,
-  // uploadTargetUrl,
-  // onInit,
-  // onStart,
-  // onProgress,
-  // onFinish,
-  // onError,
-  // onComplete,
-  // sanitize,
+  multiple,
+  uploadTargetUrl,
   children,
+  ...rest
 }: UploadHelperProps) => {
   const childrenRef = useRef<HTMLElement>();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
+  const handleUploadFiles = async (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const files = inputRef.current?.files;
+    if (files != null) {
+      await uploadFiles(files, uploadTargetUrl, rest);
+    }
   };
 
   const handleMouseClick = () => {
@@ -89,6 +99,7 @@ export const UploadHelper = ({
 
   useEffect(() => {
     if (childrenRef.current != null) {
+      childrenRef.current.style.cursor = 'pointer';
       childrenRef.current.addEventListener('click', handleMouseClick);
     }
 
@@ -105,7 +116,7 @@ export const UploadHelper = ({
         style={{ display: 'none' }}
         ref={inputRef}
         type="file"
-        onChange={handleOnChange}
+        onChange={handleUploadFiles}
       />
     </Fragment>
   );
@@ -121,11 +132,17 @@ export interface UploadBoxProps extends UploadHelperProps {
    */
   label?: string;
 
+  /** Triggered when the drop is over and the number of files is more than 0 and multiple is false */
+  onMaxFilesExceeded?: VoidFunction;
+
   /** Callback that is triggered on dragEnter */
   onDragEnter?: VoidFunction;
 
   /** Callback that is triggered on dragLeave */
   onDragLeave?: VoidFunction;
+
+  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: boolean | string;
 }
 
 export const UploadBox = ({
@@ -133,11 +150,54 @@ export const UploadBox = ({
   fullWidth,
   onDragEnter,
   onDragLeave,
+  uploadTargetUrl,
+  multiple,
+  onMaxFilesExceeded,
+  error,
   ...rest
 }: UploadBoxProps) => {
+  const [isDragEntered, setIsDragEntered] = useState(false);
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragEntered(false);
+    if (onDragLeave != null) {
+      onDragLeave();
+    }
+  };
+
+  const handleOnDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleDragLeave(e);
+    const { files } = e.dataTransfer;
+    if (!multiple && files.length > 1 && onMaxFilesExceeded != null) {
+      onMaxFilesExceeded();
+    } else {
+      await uploadFiles(files, uploadTargetUrl, rest);
+    }
+  };
+
+  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragEntered(true);
+    if (onDragEnter != null) {
+      onDragEnter();
+    }
+  };
+
   return (
-    <UploadHelper {...rest}>
-      <div className={cx(styles.root, { [styles.fullWidth]: fullWidth === true })}>
+    <UploadHelper multiple={multiple} uploadTargetUrl={uploadTargetUrl} {...rest}>
+      <div
+        onDragOver={(e) => e.preventDefault()}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
+        onDrop={handleOnDrop}
+        className={cx(styles.root, {
+          [styles.fullWidth]: fullWidth === true,
+          [styles.active]: isDragEntered,
+          [styles.error]: error != null && error !== false,
+        })}>
         <Margin size={{ bottom: Size.SMALL }}>
           <Upload />
         </Margin>
@@ -145,6 +205,7 @@ export const UploadBox = ({
           {label}
         </Text>
       </div>
+      {error && typeof error === 'string' ? <Hint category={Category.DANGER}>{error}</Hint> : null}
     </UploadHelper>
   );
 };

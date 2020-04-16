@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { UploadBox } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -6,15 +7,42 @@ import Playground from '~/components/Playground';
 # Upload Box
 This component is displayed to show a "upload file" cue to the user. It can be clicked, or used as a drag-and-drop area for files. The component also exposes a raw `upload` function that can be used with any other element to trigger an upload.
 
+**NOTE**: this component will upload the file to the given target url (should be provided by the backend server), but then depending on the implementation you might still need to call a mutation to create the final attachment object in the database.
+
 ```jsx
 import { UploadBox } from '@drawbotics/react-drylus';
 ```
 __Example__
 
 <Playground component={UploadBox}>
-  <UploadBox />
+  <UploadBox
+    onComplete={(uploads) => console.log('Upload completed for: ', uploads.map((upload) => upload.file.name).join(', '))}
+    onProgress={(file, e) => console.log('Upload progress: ' + Math.round((e.loaded / e.total) * 100) + '% for', file.name)}
+    uploadTargetUrl={process.env.EXAMPLE_API_HOST + '/rails/active_storage/direct_uploads'} />
 </Playground>
 
 The component is most often coupled with the [`AttachmentBox`](/component-kit/components/attachment-box) component to display the upload progress.
 
 <!-- TODO add attachment box example -->
+
+### Error example
+By default the upload box does not allow for multiple files, so if someone tries to drag and drop more than 1 file nothing happens. You are provided a `onMaxFilesExceeded` callback that can be used to set the component to its error state if you want to show a message; you can also show an alert for example.
+
+export const ExampleWrapper = ({ children }) => {
+  const [error, setError] = useState();
+  return children({ error, setError });
+}
+
+<Playground mode="jsx">
+  <ExampleWrapper>
+    {({ error, setError }) => (
+      <UploadBox
+        error={error}
+        onMaxFilesExceeded={() => setError('You can only upload 1 file at a time')}
+        onInit={() => setError(null)}
+        onComplete={(uploads) => console.log('Upload completed for: ', uploads.map((upload) => upload.file.name).join(', '))}
+        onProgress={(file, e) => console.log('Upload progress: ' + Math.round((e.loaded / e.total) * 100) + '% for', file.name)}
+        uploadTargetUrl={process.env.EXAMPLE_API_HOST + '/rails/active_storage/direct_uploads'} />
+    )}
+  </ExampleWrapper>
+</Playground>
