@@ -213,15 +213,15 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
         onClick={() => setPanelOpen(!panelOpen)}>
         {label}
         <Icon
-          onClick={(e: React.MouseEvent<HTMLElement>) => {
-            if (active) {
-              e.stopPropagation();
-              if (onClear != null) {
-                onClear();
-              }
-            }
-          }}
-          name={active ? 'x' : panelOpen ? 'chevron-up' : 'chevron-down'}
+          // onClick={(e: React.MouseEvent<HTMLElement>) => {
+          //   if (active) {
+          //     e.stopPropagation();
+          //     if (onClear != null) {
+          //       onClear();
+          //     }
+          //   }
+          // }}
+          name={panelOpen ? 'chevron-up' : 'chevron-down'}
         />
       </div>
       <div

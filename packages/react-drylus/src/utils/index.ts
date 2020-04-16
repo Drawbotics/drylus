@@ -8,3 +8,4 @@ export * from './utils';
 export * from './illustrations';
 export * from './price';
 export * from './date';
+export * from './upload';

@@ -1,6 +1,7 @@
 import alerts from './alerts-provider';
-import avatar from './avatar';
 import attachmentBox from './attachment-box';
+import attachmentList from './attachment-list';
+import avatar from './avatar';
 import badge from './badge';
 import banner from './banner';
 import bigCheckbox from './big-checkbox';
@@ -44,6 +45,7 @@ import tile from './tile';
 import title from './title';
 import toggle from './toggle';
 import tooltip from './tooltip';
+import uploadBox from './upload-box';
 
 const components = {
   button,
@@ -90,8 +92,10 @@ const components = {
   progressBar,
   loadingPlaceholder,
   steppedProgressBar,
+  uploadBox,
   attachmentBox,
-  fileIcon
+  fileIcon,
+  attachmentList,
 };
 
 export default Object.keys(components)
