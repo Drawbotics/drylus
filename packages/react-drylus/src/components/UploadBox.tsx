@@ -51,8 +51,8 @@ export interface UploadHelperProps {
    */
   multiple?: boolean;
 
-  /** URL where the file will be uploaded */
-  uploadTargetUrl: string;
+  /** URL for the direct upload, here the attachment will be signed */
+  signingUrl: string;
 
   /** Function called before the upload starts */
   onInit?: (files: FileList) => void;
@@ -76,12 +76,7 @@ export interface UploadHelperProps {
   sanitize?: (filename: string) => string;
 }
 
-export const UploadHelper = ({
-  multiple,
-  uploadTargetUrl,
-  children,
-  ...rest
-}: UploadHelperProps) => {
+export const UploadHelper = ({ multiple, signingUrl, children, ...rest }: UploadHelperProps) => {
   const childrenRef = useRef<HTMLElement>();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -89,7 +84,7 @@ export const UploadHelper = ({
     e.preventDefault();
     const files = inputRef.current?.files;
     if (files != null) {
-      await uploadFiles(files, uploadTargetUrl, rest);
+      await uploadFiles(files, signingUrl, rest);
     }
   };
 
@@ -150,7 +145,7 @@ export const UploadBox = ({
   fullWidth,
   onDragEnter,
   onDragLeave,
-  uploadTargetUrl,
+  signingUrl,
   multiple,
   onMaxFilesExceeded,
   error,
@@ -174,7 +169,7 @@ export const UploadBox = ({
     if (!multiple && files.length > 1 && onMaxFilesExceeded != null) {
       onMaxFilesExceeded();
     } else {
-      await uploadFiles(files, uploadTargetUrl, rest);
+      await uploadFiles(files, signingUrl, rest);
     }
   };
 
@@ -187,7 +182,7 @@ export const UploadBox = ({
   };
 
   return (
-    <UploadHelper multiple={multiple} uploadTargetUrl={uploadTargetUrl} {...rest}>
+    <UploadHelper multiple={multiple} signingUrl={signingUrl} {...rest}>
       <div
         onDragOver={(e) => e.preventDefault()}
         onDragEnter={handleDragEnter}
