@@ -12,14 +12,13 @@ const dotenv = require('dotenv');
 const rehypePlayground = require('./utils/rehype-playground');
 
 
-const WEBPACK_PORT = 4000;
-
-
 dotenv.config();
 
 
 checkEnv([ 'NODE_ENV' ]);
 
+
+const WEBPACK_PORT = process.env.WEBPACK_PORT || 4000;
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -27,6 +26,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const basePlugins = [
   new webpack.EnvironmentPlugin({
     NODE_ENV: process.env.NODE_ENV,
+    EXAMPLE_API_HOST: process.env.EXAMPLE_API_HOST,
     MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
   }),
   new HtmlWebpackPlugin({

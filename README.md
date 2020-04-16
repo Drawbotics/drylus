@@ -89,12 +89,11 @@ You should also have a `.env` file with the following variables:
 ```
 AWS_SECRET_KEY=
 AWS_ACCESS_KEY=
-MAPBOX_ACCESS_TOKEN=
 GITHUB_TOKEN=
 GH_TOKEN=
 NPM_TOKEN=
 ```
-Where `GITHUB_TOKEN` and `GH_TOKEN` are the same value, but each is used for a different purpose. You can ask the maintainer for each of these or how to acquire them.
+Where `GITHUB_TOKEN` and `GH_TOKEN` are the same value, but each is used for a different purpose. You can ask the maintainer for each of these or how to acquire them. The `styleguide` package also requires additional vars, you can check which ones in the readme for that one.
 
 ### Requirements
 Some package require extra configuration to be used (this is also mentioned in each package's readme).

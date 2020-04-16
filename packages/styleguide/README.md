@@ -11,6 +11,13 @@
 npm start
 ```
 
+**NOTE**: an `.env` file containing the following variables is needed to run the styleguide:
+```
+MAPBOX_ACCESS_TOKEN=
+EXAMPLE_API_HOST=
+```
+To have valid API keys and urls for the examples.
+
 To build the static app (served through Github pages)
 ```
 npm run build
