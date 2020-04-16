@@ -409,7 +409,7 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
                   })}
                   key={option.value}
                   onClick={onChange != null ? () => handleOnChange(option.value) : undefined}>
-                  {option.value}
+                  {option.label}
                 </div>
               ))}
             </div>
