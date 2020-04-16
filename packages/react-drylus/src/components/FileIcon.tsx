@@ -175,7 +175,7 @@ export type FileType = Archive | Model | Document | Vector | PDF | Data | Image 
 
 export interface FileIconProps {
   /** Determines the color and text shown in the icon, should be the extension of the file */
-  type: FileType;
+  type: FileType | string;
 
   /** Used for style overrides */
   style?: Style;
