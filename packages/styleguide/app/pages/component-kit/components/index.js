@@ -1,4 +1,5 @@
 import alerts from './alerts';
+import attachmentBox from './attachment-box';
 import avatar from './avatar';
 import badge from './badge';
 import banner from './banner';
@@ -14,6 +15,7 @@ import dot from './dot';
 import drawer from './drawer';
 import dropdown from './dropdown';
 import emptyState from './empty-state';
+import fileIcon from './file-icon';
 import filter from './filter';
 import filterGroup from './filter-group';
 import icon from './icon';
@@ -90,6 +92,8 @@ const components = {
   loadingPlaceholder,
   steppedProgressBar,
   uploadBox,
+  attachmentBox,
+  fileIcon,
 };
 
 export default Object.keys(components)
