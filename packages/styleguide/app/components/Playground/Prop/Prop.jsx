@@ -2,9 +2,9 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
 import React from 'react';
 
+import { extractIntrinsics } from '../utils';
 import { InputProp, SelectProp, ToggleProp } from './props';
 import { normalizeValue } from './utils';
-import { extractIntrinsics } from '../utils';
 
 const styles = {
   stacked: css`
@@ -25,7 +25,7 @@ function _isNumberStringUnion(array) {
 const Prop = ({ prop, name, value, onChange, enums }) => {
   const { type } = prop;
   const propWithKey = { ...prop, key: name };
-  const typeName = type?.type ?? type;
+  const typeName = type.name === 'IconValues' ? type.name : type?.type ?? type;
   switch (typeName) {
     case 'boolean':
       return <ToggleProp prop={propWithKey} value={value} onChange={onChange} />;
@@ -55,6 +55,8 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
           ))}
         </div>
       );
+    case 'React Node':
+    case 'IconValues':
     case 'string':
       return <InputProp prop={propWithKey} value={value} onChange={onChange} />;
     case 'number':
@@ -66,6 +68,15 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
         />
       );
     case 'union':
+      if (type.values.some((v) => v === 'string')) {
+        return (
+          <InputProp
+            prop={propWithKey}
+            value={value}
+            onChange={(v, n) => onChange(normalizeValue(v), n)}
+          />
+        );
+      }
       // Show only one input box for props that accept `string | number`
       if (_isNumberStringUnion(type.values)) {
         return (
@@ -76,7 +87,10 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
           />
         );
       }
-      if (type.values.every((v) => !_isIntrinsic(v))) {
+      if (
+        type.values.every((v) => !_isIntrinsic(v)) &&
+        type.values.every((v) => typeof v !== 'object')
+      ) {
         return (
           <SelectProp
             prop={propWithKey}
