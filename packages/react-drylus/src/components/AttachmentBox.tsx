@@ -1,5 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
+import last from 'lodash/last';
 import React, { Fragment } from 'react';
 
 import { Color, Size } from '../enums';
@@ -33,10 +34,10 @@ interface AttachmentBoxProps {
   progress?: number;
 
   /** To control what should happen when download is clicked. If not provided download button is not displyed */
-  onClickDownload?: () => void;
+  onClickDownload?: VoidFunction;
 
   /** To control what should happen when remove is clicked. If not provided remove button is not displyed */
-  onClickClose?: () => void;
+  onClickClose?: VoidFunction;
 }
 
 export const AttachmentBox = ({
@@ -52,8 +53,8 @@ export const AttachmentBox = ({
           <FlexItem flex style={{ display: 'flex' }}>
             <ListTile
               style={{ width: '100%' }}
-              leading={<FileIcon type={fileName.split('.').pop() as FileType} />}
-              title={<Text disabled={progress != null && progress !== 1}>{fileName}</Text>}
+              leading={<FileIcon type={last(fileName.split('.')) as FileType} />}
+              title={<Text disabled={progress != null}>{fileName}</Text>}
               subtitle={
                 progress != null ? (
                   <ProgressBar size={Size.SMALL} color={Color.GREEN} percentage={progress} />
