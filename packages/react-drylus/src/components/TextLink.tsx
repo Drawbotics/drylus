@@ -1,9 +1,9 @@
 import sv, { darken } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
-import { Style } from 'src/types';
 
 import { Category, Shade } from '../enums';
+import { Style } from '../types';
 import { getEnumAsClass } from '../utils';
 
 const styles = {

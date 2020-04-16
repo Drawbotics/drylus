@@ -1,5 +1,6 @@
 import alerts from './alerts-provider';
 import avatar from './avatar';
+import attachmentBox from './attachment-box';
 import badge from './badge';
 import banner from './banner';
 import bigCheckbox from './big-checkbox';
@@ -14,6 +15,7 @@ import dot from './dot';
 import drawer from './drawer';
 import dropdown from './dropdown';
 import emptyState from './empty-state';
+import fileIcon from './file-icon';
 import filter from './filter';
 import filterGroup from './filter-group';
 import icon from './icon';
@@ -88,6 +90,8 @@ const components = {
   progressBar,
   loadingPlaceholder,
   steppedProgressBar,
+  attachmentBox,
+  fileIcon
 };
 
 export default Object.keys(components)

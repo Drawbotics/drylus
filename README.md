@@ -82,9 +82,22 @@ npx lerna link convert
 npm install
 ```
 
+## Getting started
+The packages have been moved to the Github Packages registry, which means you should login to your github account before installing with `npm` or installation for those packages will fail. You can read more about it [here](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages).
+
+You should also have a `.env` file with the following variables:
+```
+AWS_SECRET_KEY=
+AWS_ACCESS_KEY=
+MAPBOX_ACCESS_TOKEN=
+GITHUB_TOKEN=
+GH_TOKEN=
+NPM_TOKEN=
+```
+Where `GITHUB_TOKEN` and `GH_TOKEN` are the same value, but each is used for a different purpose. You can ask the maintainer for each of these or how to acquire them.
+
 ### Requirements
 Some package require extra configuration to be used (this is also mentioned in each package's readme).
-
 - `icons` requires you to set some environment variables at the root of the monorepo to sync the code with the Drawbotics CDN
 
 

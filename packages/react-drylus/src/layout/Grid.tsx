@@ -83,7 +83,10 @@ export const GridItem = ({ children, style, span = 1, columns = 1 }: GridItemPro
 
 export interface GridProps {
   /** Should all be of type GridItem */
-  children: React.ReactElement<typeof GridItem> | Array<React.ReactElement<typeof GridItem>>;
+  children:
+    | React.ReactElement<typeof GridItem>
+    | Array<React.ReactElement<typeof GridItem> | null>
+    | React.ReactNode;
 
   /** Number of columns for the grid */
   columns: number;
@@ -98,7 +101,7 @@ export interface GridProps {
    * Space between items left and right
    * @kind Size
    */
-  vGutters: Size.EXTRA_SMALL | Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
+  vGutters?: Size.EXTRA_SMALL | Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
 
   /** Used for style overrides */
   style?: Style;
@@ -113,9 +116,9 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
     responsive,
   );
 
-  const invalidChildren = React.Children.map(children, (x) => x).some(
-    (child) =>
-      child != null && (child.type !== GridItem || !child.type.toString().includes('fragment')),
+  const invalidChildren = React.Children.map(children as any, (x) => x).some(
+    (child: React.ReactElement) =>
+      child != null && child.type !== GridItem && !child.type.toString().includes('fragment'),
   );
   if (invalidChildren) {
     console.warn('Grid should only accept GridItem as children');
@@ -131,7 +134,7 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
         ]]: vGutters != null,
       })}
       style={style}>
-      {React.Children.map(children, (child: React.ReactElement<typeof GridItem>) =>
+      {React.Children.map(children as any, (child: React.ReactElement<typeof GridItem>) =>
         React.cloneElement(child, { columns } as Partial<typeof GridItem>),
       )}
     </div>
