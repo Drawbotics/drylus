@@ -10,7 +10,7 @@
     "clean": "rimraf lib/ tmp/",
     "build:ts": "tsc",
     "build:js": "babel --source-maps inline --copy-files --ignore  '**/__tests__/' --root-mode upward tmp/ --out-dir lib/",
-    "build:typedoc": "node_modules/.bin/typedoc --json docs.json --mode modules ./src",
+    "build:typedoc": "node_modules/.bin/typedoc --categorizeByGroup false --json docs.json --mode modules ./src",
     "watch:typedoc": "npm run build:typedoc && chokidar './tmp/**/*.d.ts' -c 'npm run build:typedoc'",
     "build:commonjs": "npm run build:ts && npm run build:js && npm run build:typedoc",
     "watch:commonjs": "npm run build:ts -- --watch & npm run build:js -- --watch & npm run watch:typedoc",

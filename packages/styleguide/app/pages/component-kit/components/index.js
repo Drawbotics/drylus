@@ -1,4 +1,4 @@
-import alerts from './alerts';
+import alerts from './alerts-provider';
 import attachmentBox from './attachment-box';
 import attachmentList from './attachment-list';
 import avatar from './avatar';

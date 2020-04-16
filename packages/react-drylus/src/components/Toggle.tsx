@@ -85,6 +85,7 @@ export interface ToggleProps {
   /** Determines if toggle is active */
   value: boolean;
 
+  /** @kind Size */
   size: Size.SMALL | Size.DEFAULT;
 
   /** Used for style overrides */

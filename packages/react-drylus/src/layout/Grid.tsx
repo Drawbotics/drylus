@@ -91,10 +91,16 @@ export interface GridProps {
   /** Number of columns for the grid */
   columns: number;
 
-  /** Space between items above and below */
+  /**
+   * Space between items above and below
+   * @kind Size
+   */
   hGutters?: Size.EXTRA_SMALL | Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
 
-  /** Space between items left and right */
+  /**
+   * Space between items left and right
+   * @kind Size
+   */
   vGutters?: Size.EXTRA_SMALL | Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
 
   /** Used for style overrides */

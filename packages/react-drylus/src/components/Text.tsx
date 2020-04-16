@@ -115,8 +115,11 @@ export interface TextProps {
    */
   light?: boolean;
 
-  /** @default Size.DEFAULT */
-  size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   */
+  size?: Size.DEFAULT | Size.SMALL | Size.LARGE;
 
   tier?: Tier;
 
@@ -131,11 +134,12 @@ export interface TextProps {
 
   children: TextChildren | Array<TextChildren>;
 
-  category?: Exclude<Category, Category.PRIMARY>;
+  /** @kind Category */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** Options to change the way the date is displayed, if provided. showTime toggles display of hour/minutes, format for dayjs overrides */
   dateOptions?: {
-    showTime?: ShowDateTime.DEFAULT | ShowDateTime.NEVER | ShowDateTime.ALWAYS;
+    showTime?: ShowDateTime;
     asArchive?: boolean;
     format?: any;
   };

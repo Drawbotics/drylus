@@ -41,10 +41,7 @@ const styles = {
   `,
 };
 
-export interface UploadHelperProps {
-  /** Whatever is given as a child will be the trigger for the upload */
-  children: React.ReactNode;
-
+interface BaseHelper {
   /**
    * If true, more than one attachment can be selected
    * @default false
@@ -74,6 +71,11 @@ export interface UploadHelperProps {
 
   /** Custom function to modify the file name before upload, note that a default sanitizer already removes whitespace */
   sanitize?: (filename: string) => string;
+}
+
+export interface UploadHelperProps extends BaseHelper {
+  /** Whatever is given as a child will be the trigger for the upload */
+  children: React.ReactNode;
 }
 
 export const UploadHelper = ({ multiple, signingUrl, children, ...rest }: UploadHelperProps) => {
@@ -117,7 +119,7 @@ export const UploadHelper = ({ multiple, signingUrl, children, ...rest }: Upload
   );
 };
 
-export interface UploadBoxProps extends UploadHelperProps {
+export interface UploadBoxProps extends BaseHelper {
   /** If true, the box takes all the space available */
   fullWidth?: boolean;
 

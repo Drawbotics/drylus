@@ -131,6 +131,7 @@ export interface BaseFilterProps {
   /**
    * Determines on which side the panel is aligned
    * @default Align.RIGHT
+   * @kind Align
    */
   align?: Align.LEFT | Align.RIGHT;
 

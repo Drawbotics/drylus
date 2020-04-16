@@ -83,12 +83,19 @@ export interface ProgressBarProps {
   /** Determines the amount of the bar which is completed, between 0 and 1. If not given the bar is indeterminate */
   percentage?: number;
 
-  /** @deprecated use color instead */
-  category?: Exclude<Category, Category.PRIMARY>;
+  /**
+   * @deprecated use color instead
+   * @kind Category
+   */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  color?: Exclude<Color, Color.PRIMARY>;
+  /** @kind Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
-  /** @default Size.DEFAULT */
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
   /** Used for style overrides */
