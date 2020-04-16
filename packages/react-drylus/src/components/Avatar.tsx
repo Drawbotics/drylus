@@ -117,7 +117,8 @@ export const Avatar = ({ responsive, ...rest }: AvatarProps) => {
     <div
       className={cx(styles.root, {
         [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
-        [styles[getEnumAsClass<typeof styles>(size as Size)]]: size != null && !customSize,
+        [styles[customSize ? 'root' : getEnumAsClass<typeof styles>(size as Size)]]:
+          size != null && !customSize,
         [styles.customBackground]: backgroundColor != null,
       })}
       style={{

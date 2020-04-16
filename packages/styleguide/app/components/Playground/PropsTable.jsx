@@ -1,6 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
 import {
   Color,
+  Category,
+  Tier,
+  Align,
+  Shade,
   Flex,
   FlexItem,
   FlexJustify,
@@ -22,6 +26,7 @@ import upperFirst from 'lodash/upperFirst';
 import React, { Fragment } from 'react';
 
 import PropsInfo from './PropsInfo';
+import Prop from './Prop';
 import { extractIntrinsics, generateDocs } from './utils';
 
 const styles = {
@@ -72,7 +77,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                   <TCell>
                     {do {
                       if (prop.type.values != null) {
-                        const { variants, nonVariants } = _isEnum(prop)
+                        const { variants } = _isEnum(prop)
                           ? extractIntrinsics(prop.type.values)
                           : { variants: [], nonVariants: [] };
                         const tooltipValues = _isEnum(prop) ? variants : prop.type.values;
@@ -93,8 +98,9 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                             </Flex>
                           </Tooltip>
                         );
-
+                        
                         if (_isEnum(prop)) {
+                          const { nonVariants } = extractIntrinsics(prop.type.values);
                           if (nonVariants.length !== 0) {
                             return (
                               <Fragment>
@@ -104,7 +110,6 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                             );
                           }
                         }
-
                         return tooltip;
                       } else {
                         prop.type.name ?? prop.type.type ?? prop.type;
@@ -151,7 +156,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                     }}
                   </TCell>
                   <TCell>
-                    {/* {do {
+                    {do {
                       if (activeProps) {
                         <Prop
                           enums={{
@@ -164,13 +169,14 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                             Color,
                             Shade,
                           }}
+                          type={prop.type.type}
                           name={key}
                           prop={prop}
                           value={activeProps[key]}
                           onChange={onChange}
                         />;
                       }
-                    }} */}
+                    }}
                   </TCell>
                 </TRow>
               );
