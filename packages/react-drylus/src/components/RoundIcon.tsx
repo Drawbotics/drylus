@@ -106,7 +106,7 @@ export interface RoundIconProps {
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** @kind Color */
-  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE | string;
 
   /** Modifies the way the color is shown */
   inversed?: boolean;

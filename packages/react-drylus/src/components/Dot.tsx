@@ -35,13 +35,17 @@ const styles = {
 };
 
 export interface DotProps {
-  /** @deprecated use color instead */
+  /**
+   * @deprecated use color instead
+   * @kind Category
+   */
   category?: Category;
+
+  /** @kind Color */
+  color?: Color;
 
   /** Used for style overrides */
   style?: Style;
-
-  color?: Color;
 }
 
 export const Dot = ({ category, style, color: _color }: DotProps) => {
