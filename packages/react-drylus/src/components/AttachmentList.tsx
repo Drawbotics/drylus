@@ -14,7 +14,7 @@ const styles = {
 
 export interface AttachmentListProps {
   /** List of attachments to display */
-  children:
+  children?:
     | React.ReactElement<typeof AttachmentBox>
     | Array<React.ReactElement<typeof AttachmentBox> | null>
     | React.ReactNode;
