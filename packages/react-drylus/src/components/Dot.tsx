@@ -37,11 +37,9 @@ const styles = {
 export interface DotProps {
   /**
    * @deprecated use color instead
-   * @kind Category
    */
   category?: Category;
 
-  /** @kind Color */
   color?: Color;
 
   /** Used for style overrides */
