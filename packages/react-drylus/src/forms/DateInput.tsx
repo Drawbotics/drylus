@@ -259,6 +259,7 @@ export interface DateInputProps {
   /**
    * Size of the input. Can be small or default
    * @default Size.DEFAULT
+   * @kind Size
    */
   size?: Size.SMALL | Size.DEFAULT;
 

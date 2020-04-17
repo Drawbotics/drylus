@@ -224,7 +224,7 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
       {run(() => {
         if (loading) {
           return (
-            <div className={styles.icon}>
+            <div className={styles.icon} data-element="icon">
               <Spinner size={Size.SMALL} />
             </div>
           );

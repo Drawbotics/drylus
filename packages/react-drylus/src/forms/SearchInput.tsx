@@ -12,21 +12,36 @@ const styles = {
   root: css`
     position: relative;
   `,
-  list: css`
+  listWrapper: css`
     position: absolute;
     z-index: 999;
-    top: 100%;
+    min-width: 100%;
+  `,
+  list: css`
     margin-top: ${sv.marginExtraSmall};
     min-width: 100%;
     background: ${sv.white};
     border-radius: ${sv.defaultBorderRadius};
     border: 1px solid ${sv.azure};
-    overflow: hidden;
     box-shadow: ${sv.elevation2};
     opacity: 0;
     transform: translateY(-5px);
     pointer-events: none;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    max-height: 200px;
+    overflow: auto;
+  `,
+  top: css`
+    transform: translateY(calc(-100% - 20px - 40px));
+  `,
+  topOpen: css`
+    transform: translateY(calc(-100% - 15px - 40px));
+  `,
+  topSmall: css`
+    transform: translateY(calc(-100% - 20px - 30px));
+  `,
+  topSmallOpen: css`
+    transform: translateY(calc(-100% - 15px - 30px));
   `,
   visible: css`
     opacity: 1;
@@ -46,6 +61,13 @@ const styles = {
     pointer-events: none;
   `,
 };
+
+function _getShouldRenderTop(box: DOMRect) {
+  if (box?.bottom > window.innerHeight) {
+    return true;
+  }
+  return false;
+}
 
 export interface SearchInputProps<T> {
   /** The list of items displayed under the input ('value, key' pairs) its completely up to you to generate this list */
@@ -71,12 +93,16 @@ export interface SearchInputProps<T> {
 
   placeholder?: string;
 
-  /** If true, the search button will display a spinner */
+  /** @deprecated use loading instead */
   isLoading?: boolean;
+
+  /** If true, the search button will display a spinner */
+  loading?: boolean;
 
   /**
    * Size of the input. Can be small or default
    * @default Size.DEFAULT
+   * @kind Size
    */
   size?: Size.SMALL | Size.DEFAULT;
 
@@ -95,6 +121,7 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
     noResultLabel = 'No results',
     placeholder,
     isLoading,
+    loading,
     name,
     style,
     onClickResult,
@@ -104,9 +131,13 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
   const [canBlur, setCanBlur] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
   const value = isFunction(_value) ? _value(name) : _value;
   const shouldDisplayResults = value !== '' && isFocused;
+
+  const listPanel = listRef.current?.getBoundingClientRect();
+  const topRender = listPanel ? _getShouldRenderTop(listPanel) : false;
 
   const handleDocumentClick = (e: Event) =>
     !rootRef.current?.contains(e.target as Node) ? setFocused(false) : null;
@@ -127,7 +158,7 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
       <InputWithRef
         prefix={
           <Button
-            leading={isLoading ? <Spinner size={Size.SMALL} /> : <Icon name="search" />}
+            leading={isLoading || loading ? <Spinner size={Size.SMALL} /> : <Icon name="search" />}
             onClick={() => inputRef.current?.focus()}
           />
         }
@@ -145,29 +176,35 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
           return null;
         } else {
           return (
-            <div
-              className={cx(styles.list, {
-                [styles.visible]: shouldDisplayResults,
-              })}>
-              {run(() => {
-                if (options.length === 0) {
-                  return <div className={cx(styles.item, styles.noResult)}>{noResultLabel}</div>;
-                } else {
-                  return options.map((option) => (
-                    <div
-                      key={option.value}
-                      className={styles.item}
-                      onClick={() => {
-                        if (onClickResult != null) {
-                          onClickResult(option.value);
-                        }
-                        setFocused(false);
-                      }}>
-                      {option.label}
-                    </div>
-                  ));
-                }
-              })}
+            <div ref={listRef} className={styles.listWrapper}>
+              <div
+                className={cx(styles.list, {
+                  [styles.visible]: shouldDisplayResults,
+                  [styles.top]: topRender,
+                  [styles.topOpen]: topRender && isFocused,
+                  [styles.topSmall]: topRender && size === Size.SMALL,
+                  [styles.topSmallOpen]: topRender && size === Size.SMALL && isFocused,
+                })}>
+                {run(() => {
+                  if (options.length === 0) {
+                    return <div className={cx(styles.item, styles.noResult)}>{noResultLabel}</div>;
+                  } else {
+                    return options.map((option) => (
+                      <div
+                        key={option.value}
+                        className={styles.item}
+                        onClick={() => {
+                          if (onClickResult != null) {
+                            onClickResult(option.value);
+                          }
+                          setFocused(false);
+                        }}>
+                        {option.label}
+                      </div>
+                    ));
+                  }
+                })}
+              </div>
             </div>
           );
         }

@@ -100,20 +100,36 @@ const styles = {
       padding-right: calc(${sv.paddingExtraLarge} + ${sv.defaultPadding});
     }
   `,
-  options: css`
+  optionsWrapper: css`
     position: absolute;
     z-index: 999;
+    min-width: 100%;
+  `,
+  options: css`
     margin-top: ${sv.marginExtraSmall};
     min-width: 100%;
     background: ${sv.white};
     border-radius: ${sv.defaultBorderRadius};
     border: 1px solid ${sv.azure};
-    overflow: hidden;
     box-shadow: ${sv.elevation2};
     opacity: 0;
     transform: translateY(-5px);
     pointer-events: none;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    max-height: 200px;
+    overflow: auto;
+  `,
+  top: css`
+    transform: translateY(calc(-100% - 20px - 40px));
+  `,
+  topOpen: css`
+    transform: translateY(calc(-100% - 15px - 40px));
+  `,
+  topSmall: css`
+    transform: translateY(calc(-100% - 20px - 30px));
+  `,
+  topSmallOpen: css`
+    transform: translateY(calc(-100% - 15px - 30px));
   `,
   open: css`
     opacity: 1;
@@ -195,6 +211,13 @@ const styles = {
   `,
 };
 
+function _getShouldRenderTop(box: DOMRect) {
+  if (box?.bottom > window.innerHeight) {
+    return true;
+  }
+  return false;
+}
+
 export interface MultiSelectOption<T> extends Option<T> {
   disabled?: boolean;
 }
@@ -238,6 +261,7 @@ export interface MultiSelectProps<T> {
   /**
    * Size of the input. Can be small or default
    * @default Size.DEFAULT
+   * @kind Size
    */
   size?: Size.SMALL | Size.DEFAULT;
 
@@ -270,6 +294,7 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
 
   const selectRef = useRef<HTMLSelectElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  const optionsRef = useRef<HTMLDivElement>(null);
   const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
   const { screenSize, ScreenSizes } = useScreenSize();
@@ -301,6 +326,9 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
         : onChange([...values, value], name);
     }
   };
+
+  const optionsPanel = optionsRef.current?.getBoundingClientRect();
+  const topRender = optionsPanel ? _getShouldRenderTop(optionsPanel) : false;
 
   // used for mobile
   const handleSelectChange = (options: HTMLOptionsCollection) => {
@@ -338,7 +366,7 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
       {run(() => {
         if (loading) {
           return (
-            <div className={styles.icon}>
+            <div className={styles.icon} data-element="icon">
               <Spinner size={Size.SMALL} />
             </div>
           );
@@ -398,20 +426,26 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
       {run(() => {
         if (screenSize > ScreenSizes.XL) {
           return (
-            <div
-              className={cx(styles.options, {
-                [styles.open]: isFocused,
-              })}>
-              {options.map((option) => (
-                <div
-                  className={cx(styles.option, {
-                    [styles.disabledOption]: option.disabled || values.includes(option.value),
-                  })}
-                  key={option.value}
-                  onClick={onChange != null ? () => handleOnChange(option.value) : undefined}>
-                  {option.label}
-                </div>
-              ))}
+            <div ref={optionsRef} className={styles.optionsWrapper}>
+              <div
+                className={cx(styles.options, {
+                  [styles.open]: isFocused,
+                  [styles.top]: topRender,
+                  [styles.topOpen]: topRender && isFocused,
+                  [styles.topSmall]: topRender && size === Size.SMALL,
+                  [styles.topSmallOpen]: topRender && size === Size.SMALL && isFocused,
+                })}>
+                {options.map((option) => (
+                  <div
+                    className={cx(styles.option, {
+                      [styles.disabledOption]: option.disabled || values.includes(option.value),
+                    })}
+                    key={option.value}
+                    onClick={onChange != null ? () => handleOnChange(option.value) : undefined}>
+                    {option.label}
+                  </div>
+                ))}
+              </div>
             </div>
           );
         }
