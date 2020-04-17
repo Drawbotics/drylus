@@ -35,7 +35,7 @@ export const AttachmentList = ({ children, label = 'Attachments' }: AttachmentLi
         </FlexItem>
         <FlexSpacer size={Size.EXTRA_SMALL} />
         <FlexItem>
-          <Text shade={Shade.MEDIUM}>{`${label} (${React.Children.count(children)})`}</Text>
+          <Text shade={Shade.MEDIUM} light>{`${label} (${React.Children.count(children)})`}</Text>
         </FlexItem>
       </Flex>
       {React.Children.map(children, (child) => (
