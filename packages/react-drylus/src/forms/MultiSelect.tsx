@@ -104,6 +104,7 @@ const styles = {
     position: absolute;
     z-index: 999;
     min-width: 100%;
+    pointer-events: none;
   `,
   options: css`
     margin-top: ${sv.marginExtraSmall};
