@@ -1,10 +1,6 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  plugins: [
-    '@typescript-eslint/eslint-plugin',
-    '@drawbotics/eslint-plugin-deprecated-props',
-    'jest',
-  ],
+  plugins: ['@typescript-eslint/eslint-plugin', 'deprecated-props', 'jest'],
   extends: ['eslint:recommended', 'plugin:jest/recommended'],
   parserOptions: {
     sourceType: 'module',
@@ -59,6 +55,6 @@ module.exports = {
     'react/display-name': ['off'],
 
     // Deprecation
-    '@drawbotics/deprecated-props/deprecated-props': ['warn'],
+    'deprecated-props/deprecated-props': ['warn'],
   },
 };
