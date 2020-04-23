@@ -32,8 +32,8 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@releases/v3
       env:
         ACCESS_TOKEN: ${{ secrets.GH_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: docs
         MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
-        BRANCH: gh-pages
-        FOLDER: docs
