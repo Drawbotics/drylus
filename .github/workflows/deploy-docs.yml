@@ -29,7 +29,7 @@ jobs:
         FOLDER: docs
         BUILD_SCRIPT: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" >> ~/.npmrc
+          npm install
           npx lerna exec --stream -- npm install
           npx lerna link convert
-          npm install
           npm run build
