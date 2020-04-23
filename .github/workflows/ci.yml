@@ -79,7 +79,7 @@ jobs:
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       if: contains(github.ref, 'master')
       run: |
-        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
         git remote -v
         git checkout -- .
         npm run release
