@@ -25,3 +25,20 @@ __Example__
       active: true,
     }]} />
 </Playground>
+
+You can also pass an icon with a label, or without.
+<Playground mode="jsx">
+  <Breadcrumbs
+    linkComponent="a"
+    crumbs={[{
+      icon: 'home',
+    }, {
+      label: 'Page',
+      icon: 'flyer',
+      url: 'home',
+    }, {
+      label: 'Project name - 123',
+      url: 'project',
+      active: true,
+    }]} />
+</Playground>
