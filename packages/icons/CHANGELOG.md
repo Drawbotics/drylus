@@ -1,3 +1,18 @@
+# v6.3.0 (Thu Apr 23 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/icons`, `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.6 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/icons`, `@drawbotics/react-drylus`
+  - improve icon exports [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.1.0 (Tue Dec 17 2019)
 
 #### 🐛  Bug Fix

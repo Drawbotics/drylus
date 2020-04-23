@@ -1,3 +1,62 @@
+# v6.3.0 (Thu Apr 23 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.4 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.8 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.7 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix icons types [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/icons`, `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.6 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/icons`, `@drawbotics/react-drylus`
+  - improve icon exports [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.5 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix more types [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix table onClickRow prop type [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - small type fixes [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix range input type [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.3 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.2 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - trigger change [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.1 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - fix versions [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+
+#### 🚧 Prerelease
+
+- `@drawbotics/react-drylus`
+  - improve table types [#122](https://github.com/Drawbotics/drylus/pull/122) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - allow all pr branches workflow [#122](https://github.com/Drawbotics/drylus/pull/122) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - export all interfaces [#122](https://github.com/Drawbotics/drylus/pull/122) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - improve option type with generic [#122](https://github.com/Drawbotics/drylus/pull/122) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - update deps and ci scripts  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.5.2 (Tue Feb 04 2020)
 
 #### ⚠️  Pushed to master

@@ -1,3 +1,36 @@
+# v6.3.0 (Thu Apr 23 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.8 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.7 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/icons`, `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.6 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.5 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.4 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.3 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.2 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.1 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - fix versions [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- update deps and ci scripts  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v5.1.0 (Tue Dec 17 2019)
 
 #### 🐛  Bug Fix
