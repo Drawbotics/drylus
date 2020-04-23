@@ -5,6 +5,14 @@ __NOTE__: this is a monorepo, meaning all the code is divided into packages (`/p
 npm install
 ```
 
+### Deprecation plugin
+In the `react-drylus` package, which is written in Typescript, we define component props within interfaces. Interface properties are documented through JSDoc comments, which are mainly used to generate the documentation in the styleguide. However, through JSDoc we also mark props as deprecated throught the `@deprecated` tag.
+
+Before, we used to use `prop-types`, and were able to show deprecation warnings in the console at _run time_. Now, through JSDoc and and an ESLint plugin (see below) we can achieve the same effect, but at compile time, which is a clear benefit.
+
+[**eslint-plugin-deprecated-props**](https://github.com/Drawbotics/eslint-plugin-deprecated-props) is the plugin to enable this feature; warnings/errors will be shown in the terminal if you have eslint in the pipeline, and in VSCode if you set it up as explained. Either way, it is important that you install it if you want to avoid using deprecated features in the library.
+
+---
 There are 7 total packages:
 - [![npm version](https://badge.fury.io/js/%40drawbotics%2Fdrylus-style-vars.svg)](https://badge.fury.io/js/%40drawbotics%2Fdrylus-style-vars) [drylus-style-vars](/packages/drylus-style-vars):
  This package holds all the variables used in the Drawbotics styles. Exports js, less and css vars.
