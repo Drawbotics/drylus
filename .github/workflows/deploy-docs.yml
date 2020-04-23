@@ -23,10 +23,11 @@ jobs:
       env:
         ACCESS_TOKEN: ${{ secrets.GH_TOKEN }}
         MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         BRANCH: gh-pages
         FOLDER: docs
         BUILD_SCRIPT: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
           npm install
           npx lerna link convert
           npx lerna exec --stream -- npm install
