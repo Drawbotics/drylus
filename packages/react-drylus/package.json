@@ -1,26 +1,29 @@
 {
   "name": "@drawbotics/react-drylus",
-  "version": "6.2.0",
+  "version": "6.2.1-beta.45",
   "description": "React components for the Drawbotics' ecosystem",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "license": "ISC",
   "main": "index.js",
-  "types": "index.d.ts",
+  "types": "./lib/index.d.ts",
   "scripts": {
-    "clean": "rimraf lib/",
-    "build:commonjs": "babel --ignore '**/__tests__/' --root-mode upward src/ --out-dir lib/",
-    "watch": "npm run clean && NODE_ENV=development npm run build:commonjs -- --watch",
-    "build:types": "node scripts/build-types.js",
-    "build": "npm run clean && NODE_ENV=production npm run build:commonjs && npm run build:types",
+    "clean": "rimraf lib/ tmp/",
+    "build:ts": "tsc",
+    "build:js": "babel --source-maps inline --copy-files --ignore  '**/__tests__/' --root-mode upward tmp/ --out-dir lib/",
+    "build:typedoc": "node_modules/.bin/typedoc --categorizeByGroup false --json docs.json --mode modules ./src",
+    "watch:typedoc": "npm run build:typedoc && chokidar './tmp/**/*.d.ts' -c 'npm run build:typedoc'",
+    "build:commonjs": "npm run build:ts && npm run build:js && npm run build:typedoc",
+    "watch:commonjs": "npm run build:ts -- --watch & npm run build:js -- --watch & npm run watch:typedoc",
+    "watch": "npm run clean && NODE_ENV=development && npm run build:ts && npm run watch:commonjs",
+    "build": "npm run clean && NODE_ENV=production npm run build:commonjs",
     "test": "NODE_ICU_DATA=../../node_modules/full-icu jest",
     "test:watch": "NODE_ICU_DATA=../../node_modules/full-icu jest --watchAll",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@drawbotics/drylus-style-vars": "file:../drylus-style-vars",
-    "@drawbotics/enums": "0.2.0",
     "@drawbotics/icons": "file:../icons",
-    "@drawbotics/use-screen-size": "^2.0.0",
+    "@drawbotics/use-screen-size": "^2.0.1",
     "@emotion/core": "^10.0.21",
     "@turf/circle": "^6.0.1",
     "animejs": "^3.0.1",
@@ -32,14 +35,21 @@
     "react-compound-slider": "^2.4.0",
     "react-mapbox-wrapper": "^2.4.0",
     "react-transition-group": "^4.0.1",
+    "spark-md5": "^3.0.1",
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
-  "publishConfig": {
-    "access": "public"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Drawbotics/drylus",
+    "directory": "packages/react-drylus"
   },
-  "gitHead": "2132c65dc070c386b7736959b4b6022145038bf7"
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "gitHead": "99f6de1783059e9d24e6582f69fa2982d41a1af2"
 }

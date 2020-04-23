@@ -7,6 +7,7 @@ import {
   Size,
   Avatar,
   Text,
+  Color,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -33,12 +34,12 @@ The same component can be used for many things, such as combining an icon, or an
 <Playground>
   <>
     <Margin size={{ bottom: Size.EXTRA_SMALL }}>
-      <ListTile title="Destructive action" leading={<Icon name="x" category={Category.DANGER} />} />
+      <ListTile title="Destructive action" leading={<Icon name="x" color={Color.RED} />} />
     </Margin>
     <Margin size={{ bottom: Size.EXTRA_LARGE }}>
-      <ListTile title="Success action" leading={<Icon name="check" category={Category.SUCCESS} />} />
+      <ListTile title="Success action" leading={<Icon name="check" color={Color.GREEN} />} />
     </Margin>
-    <ListTile title="Mr Man Boy" leading={<Avatar text="mb" category={Category.SUCCESS} />} />
+    <ListTile title="Mr Man Boy" leading={<Avatar text="mb" color={Color.GREEN} />} />
   </>
 </Playground>
 

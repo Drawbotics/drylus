@@ -1,0 +1,54 @@
+import { AttachmentBox, Margin, Size, FlexDirection, Flex, FlexItem, FlexAlign } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Attachment Box
+Used to display attachment components.
+
+```jsx
+import { AttachmentBox } from '@drawbotics/react-drylus';
+```
+__Example__
+
+export const attachment = {
+  fileName: 'DummyFile.jpg',
+  progress: 1,
+};
+
+export const secondAttachment = {
+  fileName: 'SecondDummyFile.jpg',
+  progress: 0.6,
+};
+
+export const onClickDownload = () => {};
+export const onClickClose = () => {};
+
+<Playground component={AttachmentBox}>
+  <div style={{ width: '300px'}}>
+    <AttachmentBox fileName="DummyFile.jpg" />
+  </div>
+</Playground>
+
+You can add a progress, plus mechanisms to handle download and removal.
+<Playground mode="jsx">
+  <div style={{ width: '300px'}}>
+  <Flex direction={FlexDirection.VERTICAL} align={FlexAlign.START}>
+    <FlexItem style={{width: '100%'}}>
+      <Margin size={{ bottom: Size.SMALL }}>
+        <AttachmentBox fileName="Second.xls" progress={0.6}/>
+      </Margin>
+    </FlexItem>
+    <FlexItem style={{width: '100%'}}>
+      <Margin size={{ bottom: Size.SMALL }}>
+        <AttachmentBox fileName="Third.zip" progress={0.6} onClickClose={onClickClose}/>
+      </Margin>
+    </FlexItem>
+    <FlexItem style={{width: '100%'}}>
+      <Margin size={{ bottom: Size.SMALL }}>
+        <AttachmentBox fileName="Fourth.mp4" onClickDownload={onClickDownload} onClickClose={onClickClose}/>
+      </Margin>
+    </FlexItem>
+  </Flex>
+  </div>
+</Playground>

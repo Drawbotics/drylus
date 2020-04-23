@@ -1,0 +1,22 @@
+import { AttachmentList, AttachmentBox } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# Attachment list
+Use in conjunction with the [`AttachmentBox`](/component-kit/components/attachment-box) component, to display a list of attachments.
+
+```jsx
+import { AttachmentList } from '@drawbotics/react-drylus';
+```
+__Example__
+
+<Playground component={AttachmentList}>
+  <div style={{ width: 400 }}>
+    <AttachmentList>
+      <AttachmentBox fileName="File1.jpg" onClickClose={() => {}} />
+      <AttachmentBox fileName="File2.svg" onClickClose={() => {}} />
+      <AttachmentBox fileName="File4.mov" onClickClose={() => {}} />
+    </AttachmentList>
+  </div>
+</Playground>

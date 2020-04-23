@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Checkbox, InputGroup } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -13,7 +14,7 @@ import { Checkbox } from '@drawbotics/react-drylus';
 __Example__
 <Playground component={Checkbox}>
   <ControlledBoolField component={
-    <Checkbox />
+    <Checkbox indeterminate />
   } />
 </Playground>
 
@@ -27,4 +28,44 @@ __Example__
       I'm a read-only checkbox
     </Checkbox>
   </InputGroup>
+</Playground>
+
+### Intermediate state example
+This is useful when you have a checkbox that should handle multiple checkboxes at once and represents their combined state.
+
+export const ControlledGroup = ({ children }) => {
+  const [checked, setChecked] = useState({ 1: false, 2: true, 3: false, 4: false });
+  const handleOnChange = (value, name) => {
+    setChecked({ ...checked, [name]: value });
+  };
+  return children({ checked, setChecked, handleOnChange });
+}
+
+<Playground mode="jsx">
+  <ControlledGroup>
+    {({ checked, setChecked, handleOnChange }) => (
+      <InputGroup>
+        <Checkbox
+          onChange={(value) => 
+            setChecked(Object.keys(checked).reduce((memo, check) => ({ ...memo, [check]: value }), {}))
+          }
+          value={Object.values(checked).some((c) => c)}
+          indeterminate={! Object.values(checked).every((c) => c)}>
+          All
+        </Checkbox>
+        <Checkbox name="1" value={checked['1']} onChange={handleOnChange}>
+          1 room apartment
+        </Checkbox>
+        <Checkbox name="2" value={checked['2']} onChange={handleOnChange}>
+          2 room apartment
+        </Checkbox>
+        <Checkbox name="3" value={checked['3']} onChange={handleOnChange}>
+          3 room apartment
+        </Checkbox>
+        <Checkbox name="4" value={checked['4']} onChange={handleOnChange}>
+          Penthouse
+        </Checkbox>
+      </InputGroup>
+    )}
+  </ControlledGroup>
 </Playground>

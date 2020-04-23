@@ -31,6 +31,11 @@ export const ControlledMultiField = ({ component: Component, style }) => {
   );
 };
 
+export const RenderChildren = ({ children, defaultValue }) => {
+  const [state, setState] = useState(defaultValue);
+  return children({ state, setState });
+};
+
 export function useDebounce(value, delay) {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {

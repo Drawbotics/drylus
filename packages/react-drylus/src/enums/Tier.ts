@@ -1,0 +1,5 @@
+export enum Tier {
+  PRIMARY = 'PRIMARY',
+  SECONDARY = 'SECONDARY',
+  TERTIARY = 'TERTIARY',
+}

@@ -1,0 +1,362 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListTile matches snapshot when has a custom title 1`] = `
+.emotion-0 {
+  background: #eaeff4;
+  color: #172b4e;
+  border-radius: 5px;
+  padding: calc(8px * 1.5) 24px;
+  outline: 0;
+  border: 0;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background: #d3dce6;
+}
+
+.emotion-0:active {
+  box-shadow: 0 1px 6px #879ba6 inset;
+}
+
+.emotion-0:disabled {
+  cursor: not-allowed;
+  background: #eaeff4;
+  color: rgba(135,155,166,0.5);
+  box-shadow: none;
+}
+
+.emotion-2 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-4 {
+  display: inline-block;
+}
+
+.emotion-1 {
+  margin-bottom: calc(8px / 2);
+}
+
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<div
+  className="emotion-4"
+>
+  <div
+    className="emotion-3"
+  >
+    <div
+      className="emotion-2"
+      style={Object {}}
+    >
+      <div
+        className="emotion-1"
+      >
+        <button
+          className="emotion-0"
+        >
+          Button
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ListTile matches snapshot when has a subtitle 1`] = `
+.emotion-2 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-4 {
+  display: inline-block;
+}
+
+.emotion-1 {
+  color: #879ba6;
+  font-size: 0.9rem;
+}
+
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 {
+  color: #172b4e;
+  margin-bottom: calc(8px / 2);
+}
+
+<div
+  className="emotion-4"
+>
+  <div
+    className="emotion-3"
+  >
+    <div
+      className="emotion-2"
+      style={Object {}}
+    >
+      <div
+        className="emotion-0"
+      >
+        Title
+      </div>
+      <div
+        className="emotion-1"
+      >
+        Subtitle
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ListTile matches snapshot when has a title 1`] = `
+.emotion-0 {
+  color: #172b4e;
+}
+
+.emotion-1 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-3 {
+  display: inline-block;
+}
+
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<div
+  className="emotion-3"
+>
+  <div
+    className="emotion-2"
+  >
+    <div
+      className="emotion-1"
+      style={Object {}}
+    >
+      <div
+        className="emotion-0"
+      >
+        Title
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ListTile matches snapshot when has a trailing and leading component 1`] = `
+.emotion-0 {
+  background: #eaeff4;
+  color: #172b4e;
+  border-radius: 5px;
+  padding: calc(8px * 1.5) 24px;
+  outline: 0;
+  border: 0;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.emotion-0:hover {
+  cursor: pointer;
+  background: #d3dce6;
+}
+
+.emotion-0:active {
+  box-shadow: 0 1px 6px #879ba6 inset;
+}
+
+.emotion-0:disabled {
+  cursor: not-allowed;
+  background: #eaeff4;
+  color: rgba(135,155,166,0.5);
+  box-shadow: none;
+}
+
+.emotion-3 {
+  color: #172b4e;
+}
+
+.emotion-4 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-9 {
+  display: inline-block;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<div
+  className="emotion-9"
+>
+  <div
+    className="emotion-8"
+  >
+    <div
+      className="emotion-2"
+      style={Object {}}
+    >
+      <div
+        className="emotion-1"
+      >
+        <button
+          className="emotion-0"
+        >
+          Leading
+        </button>
+      </div>
+    </div>
+    <div
+      className="emotion-4"
+      style={Object {}}
+    >
+      <div
+        className="emotion-3"
+      >
+        Title
+      </div>
+    </div>
+    <div
+      className="emotion-2"
+      style={Object {}}
+    >
+      <div
+        className="emotion-6"
+      >
+        <button
+          className="emotion-0"
+        >
+          Trailing
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

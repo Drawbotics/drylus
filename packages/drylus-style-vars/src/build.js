@@ -22,6 +22,12 @@ async function createTs(vars, buildDir) {
   const lines = [];
   lines.push(`declare module '@drawbotics/drylus-style-vars' {`);
   Object.keys(vars).forEach((key) => lines.push(`  export const ${key} = '${vars[key]}';`));
+  lines.push(`
+    function fade(color: string, value: number): string;
+    function darken(color: string, value: number): string;
+    function lighten(color: string, value: number): string;
+  `);
+  
   lines.push('}');
   const text = lines.join('\n');
 

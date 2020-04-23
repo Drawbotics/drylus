@@ -5,6 +5,9 @@ output
 dist
 .env
 docs
+tmp
+docs.json
+.nvmrc
 
 .DS_Store
 **/.DS_Store
