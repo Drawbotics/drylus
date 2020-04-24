@@ -1,16 +1,15 @@
 import sv from '@drawbotics/drylus-style-vars';
 import {
-  Color,
-  Category,
-  Tier,
   Align,
-  Shade,
+  Category,
+  Color,
   Flex,
   FlexItem,
   FlexJustify,
   Icon,
   Margin,
   Position,
+  Shade,
   Size,
   TBody,
   TCell,
@@ -18,6 +17,8 @@ import {
   TRow,
   Table,
   Tag,
+  Text,
+  Tier,
   Tooltip,
 } from '@drawbotics/react-drylus';
 import docs from '@drawbotics/react-drylus/docs.json';
@@ -25,8 +26,8 @@ import { css } from 'emotion';
 import upperFirst from 'lodash/upperFirst';
 import React, { Fragment } from 'react';
 
-import PropsInfo from './PropsInfo';
 import Prop from './Prop';
+import PropsInfo from './PropsInfo';
 import { extractIntrinsics, generateDocs } from './utils';
 
 const styles = {
@@ -98,7 +99,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                             </Flex>
                           </Tooltip>
                         );
-                        
+
                         if (_isEnum(prop)) {
                           const { nonVariants } = extractIntrinsics(prop.type.values);
                           if (nonVariants.length !== 0) {
@@ -126,15 +127,15 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                       if (_hasDeprecation(prop)) {
                         return (
                           <Fragment>
-                            <Margin
-                              size={{ right: Size.EXTRA_SMALL }}
-                              style={{ display: 'inline-block' }}>
+                            <Margin size={{ bottom: Size.EXTRA_SMALL }}>
                               <Tag color={Color.ORANGE} inversed>
                                 DEPRECATED
                               </Tag>
                             </Margin>
-                            {upperFirst(prop.deprecation)}
-                            {upperFirst(prop.description)}
+                            <Margin size={{ bottom: Size.EXTRA_SMALL }}>
+                              <Text shade={Shade.MEDIUM}>{upperFirst(prop.deprecation)}</Text>
+                            </Margin>
+                            <Text>{upperFirst(prop.description)}</Text>
                           </Fragment>
                         );
                       } else if (_isEnum(prop)) {
