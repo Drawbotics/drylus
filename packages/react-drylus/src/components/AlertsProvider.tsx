@@ -1,8 +1,8 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 } from 'uuid';
 
 import { themeStyles } from '../base/ThemeProvider';
@@ -18,9 +18,9 @@ const styles = {
     z-index: 99999;
     bottom: ${sv.defaultMargin};
     left: ${sv.defaultMargin};
-    display: inline-flex;
-    flex-direction: column-reverse;
-    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   `,
   root: css`
     display: inline-block;
@@ -237,26 +237,22 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
       {children}
       {ReactDOM.createPortal(
         <div className={themeStyles.root}>
-          <TransitionGroup className={styles.provider}>
-            {alerts.map((alert: AlertProps) => (
-              <CSSTransition
-                key={alert.id}
-                timeout={{
-                  enter: 500,
-                  exit: 300,
-                }}
-                classNames={{
-                  enter: styles.alertEnter,
-                  enterActive: styles.alertEnterActive,
-                  exit: styles.alertExit,
-                  exitActive: styles.alertExitActive,
-                }}>
-                <Margin size={{ top: Size.SMALL }}>
-                  <Alert onClickDismiss={(id) => hideAlert(id)} {...alert} />
-                </Margin>
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
+          <div className={styles.provider}>
+            <AnimatePresence>
+              {alerts.map((alert: AlertProps) => (
+                <motion.div
+                  key={alert.id}
+                  layoutTransition={{ duration: 0.2 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.7, transition: { duration: 0.3 } }}>
+                  <Margin size={{ top: Size.SMALL }}>
+                    <Alert onClickDismiss={(id) => hideAlert(id)} {...alert} />
+                  </Margin>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
         </div>,
         document.getElementById('alerts-outlet') as Element,
       )}
