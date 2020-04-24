@@ -18,9 +18,8 @@ const styles = {
     z-index: 99999;
     bottom: ${sv.defaultMargin};
     left: ${sv.defaultMargin};
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    width: 100%;
+    pointer-events: none;
   `,
   root: css`
     display: inline-block;
@@ -33,6 +32,7 @@ const styles = {
     max-width: 400px;
     color: ${sv.colorPrimary};
     overflow: hidden;
+    pointer-events: auto;
 
     [data-element='text'] {
       font-size: 0.95rem;
