@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 
 import { Style } from '../types';
 import { run } from '../utils';
+import { Icon, IconType } from './Icon';
 
 const styles = {
   root: css`
@@ -12,6 +13,8 @@ const styles = {
     justify-content: flex-start;
   `,
   crumb: css`
+    display: flex;
+    align-items: center;
     padding: 5px;
     transition: ${sv.transitionShort};
     color: ${sv.colorSecondary};
@@ -44,7 +47,8 @@ const styles = {
 };
 
 export interface Crumb {
-  label: string;
+  label?: string;
+  icon?: IconType;
   url?: string;
   active?: boolean;
 }
@@ -67,6 +71,9 @@ export const Breadcrumbs = ({ crumbs, linkComponent: Link, style }: BreadcrumbsP
         [styles.clickable]: crumb.url != null,
         [styles.active]: crumb.active,
       })}>
+      {crumb.icon != null ? (
+        <Icon name={crumb.icon} style={{ marginRight: crumb.label != null ? 4 : undefined }} />
+      ) : null}
       {crumb.label}
     </div>
   );
