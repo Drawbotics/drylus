@@ -225,7 +225,10 @@ export interface DrawerProps extends BaseDrawerProps {
   /** Determines if the drawer is visible or not */
   visible: boolean;
 
-  /** If the drawer is in "asOverlay" mode, triggered when the overlay is clicked */
+  /**
+   * If the drawer is in "asOverlay" mode, triggered when the overlay is clicked
+   * @deprecated Clicking the overlay will use onClickClose
+   */
   onClickOverlay?: () => void;
 
   /**
