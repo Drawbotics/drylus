@@ -87,26 +87,6 @@ const styles = {
       background: ${sv.green};
     }
   `,
-  alertEnter: css`
-    opacity: 0;
-    transform: translateY(-5px);
-  `,
-  alertEnterActive: css`
-    opacity: 1;
-    transform: translateY(0);
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-  `,
-  alertEnterDone: css``,
-  alertExit: css`
-    opacity: 1;
-    transform: translateY(0);
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-  `,
-  alertExitActive: css`
-    opacity: 0.01;
-    transform: translateY(5px);
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-  `,
 };
 
 export interface AlertProps {
@@ -245,7 +225,7 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
                   layoutTransition={{ duration: 0.2 }}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.7, transition: { duration: 0.3 } }}>
+                  exit={{ opacity: 0, y: 5, transition: { duration: 0.3 } }}>
                   <Margin size={{ top: Size.SMALL }}>
                     <Alert onClickDismiss={(id) => hideAlert(id)} {...alert} />
                   </Margin>
