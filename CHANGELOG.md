@@ -1,3 +1,26 @@
+# v6.3.1 (Fri Apr 24 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/breadcrumb icon [#142](https://github.com/Drawbotics/drylus/pull/142) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/icon shade [#143](https://github.com/Drawbotics/drylus/pull/143) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- use unscoped eslint deprecated props  ([@nicmosc](https://github.com/nicmosc))
+- fix playground css regex  ([@nicmosc](https://github.com/nicmosc))
+- fix deploy docs script  ([@nicmosc](https://github.com/nicmosc))
+- move vars up  ([@nicmosc](https://github.com/nicmosc))
+- update deploy docs script  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.3.0 (Thu Apr 23 2020)
 
 #### 🚀 Enhancement - Minor change
