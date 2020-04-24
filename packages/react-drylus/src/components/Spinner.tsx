@@ -95,7 +95,7 @@ export interface SpinnerProps {
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
   /**
-   * @deprecated use color instead
+   * @deprecated Use color instead
    * @kind Category
    * */
   category?: Category.BRAND | Category.INFO;

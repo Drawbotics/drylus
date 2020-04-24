@@ -70,7 +70,7 @@ export interface IconProps {
   /** Triggered when the icon is clicked */
   onClick?: OnClickCallback<HTMLElement>;
 
-  /** @deprecated use color instead */
+  /** @deprecated Use color instead */
   category?: Category;
 
   color?: Color;

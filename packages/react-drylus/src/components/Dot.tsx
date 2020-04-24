@@ -36,7 +36,7 @@ const styles = {
 
 export interface DotProps {
   /**
-   * @deprecated use color instead
+   * @deprecated Use color instead
    */
   category?: Category;
 

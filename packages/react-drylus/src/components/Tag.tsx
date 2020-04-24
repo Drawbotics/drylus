@@ -72,7 +72,7 @@ const styles = {
 export interface TagProps {
   children: string;
 
-  /** @deprecated use color instead
+  /** @deprecated Use color instead
    * @kind Category
    */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;

@@ -48,7 +48,7 @@ const styles = {
 };
 
 export interface SplashScreenProps {
-  /** @deprecated use component rendering instead */
+  /** @deprecated Use component rendering instead */
   visible?: boolean;
 
   /** Displayed under the animated logo */

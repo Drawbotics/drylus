@@ -94,7 +94,7 @@ export interface SearchInputProps<T> {
 
   placeholder?: string;
 
-  /** @deprecated use loading instead */
+  /** @deprecated Use loading instead */
   isLoading?: boolean;
 
   /** If true, the search button will display a spinner */

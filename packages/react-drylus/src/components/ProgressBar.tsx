@@ -84,7 +84,7 @@ export interface ProgressBarProps {
   percentage?: number;
 
   /**
-   * @deprecated use color instead
+   * @deprecated Use color instead
    * @kind Category
    */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;

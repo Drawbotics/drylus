@@ -66,7 +66,7 @@ export interface EmptyStateProps {
   /** Text shown to explain the situation */
   description?: string;
 
-  /** @deprecated use 'children' instead */
+  /** @deprecated Use 'children' instead */
   actions?: Array<React.ReactNode>;
 
   /** Shown below the illustrations, usually Buttons */

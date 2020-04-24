@@ -84,7 +84,7 @@ const styles = {
 };
 
 export interface PopoverProps {
-  /** @deprecated use content instead */
+  /** @deprecated Use content instead */
   message?: React.ReactNode;
 
   /** Content shown when the tooltip is visible */

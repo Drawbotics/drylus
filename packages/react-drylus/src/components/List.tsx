@@ -65,7 +65,7 @@ export interface ListItemProps {
   /** Content of the list item */
   children: React.ReactNode;
 
-  /** @deprecated use color instead */
+  /** @deprecated Use color instead */
   category?: Category;
 
   /** @default Color.PRIMARY */

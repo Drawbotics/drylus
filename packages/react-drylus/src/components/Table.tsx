@@ -723,13 +723,13 @@ export interface TableProps {
 
   /**
    * Returns the child given to each row cell. Params (value, index, columns)
-   * @deprecated use the data object directly instead
+   * @deprecated Use the data object directly instead
    */
   renderCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
 
   /**
    * Same as renderCell but applies to the children cells (nested)
-   * @deprecated use the data object directly instead
+   * @deprecated Use the data object directly instead
    */
   renderChildCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
 
