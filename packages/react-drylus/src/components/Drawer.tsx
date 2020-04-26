@@ -1,14 +1,14 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { CSSTransition } from 'react-transition-group';
 
 import { themeStyles } from '../base';
 import { Position, Size, Tier } from '../enums';
 import { OnClickCallback, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { fsv, run, useResponsiveProps } from '../utils';
 import { Button } from './Button';
 import { Icon } from './Icon';
 import { Title } from './Title';
@@ -99,72 +99,6 @@ const styles = {
     @media ${sv.screenL} {
       top: ${sv.marginExtraSmall};
       left: ${sv.marginExtraSmall};
-    }
-  `,
-  drawerEnter: css`
-    opacity: 0;
-    width: 0;
-  `,
-  drawerEnterActive: (width: string) => css`
-    opacity: 1;
-    width: ${width};
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-  `,
-  drawerEnterDone: (width: string) => css`
-    width: ${width};
-  `,
-  drawerExit: css`
-    opacity: 1;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-  `,
-  drawerExitActive: css`
-    opacity: 0.01;
-    width: 0;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-  `,
-  drawerOverlayEnter: css`
-    opacity: 0;
-
-    & [data-element='wrapper'] {
-      transform: translateX(100%);
-    }
-  `,
-  drawerOverlayEnterLeft: css`
-    opacity: 0;
-
-    & [data-element='wrapper'] {
-      transform: translateX(-100%);
-    }
-  `,
-  drawerOverlayEnterActive: css`
-    opacity: 1;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-
-    & [data-element='wrapper'] {
-      transform: translateX(0);
-      transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-    }
-  `,
-  drawerOverlayExit: css`
-    opacity: 1;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-
-    & [data-element='wrapper'] {
-      transform: translateX(0);
-    }
-  `,
-  drawerOverlayExitActive: css`
-    opacity: 0.01;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-
-    & [data-element='wrapper'] {
-      transform: translateX(100%);
-      transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-    }
-  `,
-  drawerOverlayExitActiveLeft: css`
-    & [data-element='wrapper'] {
-      transform: translateX(-100%);
     }
   `,
 };
@@ -259,19 +193,25 @@ export interface DrawerProps extends BaseDrawerProps {
    */
   side?: Position.LEFT | Position.RIGHT;
 
-  /**
-   * Passed to the CSSTransition component to fire events at different points of the animation. See reactcommunity.org/react-transition-group docs
-   * @default {}
-   */
-  cssTransitionCallbacks?: {
-    onEnter: () => void;
-    onEntering: () => void;
-    onEntered: () => void;
-    onExit: () => void;
-    onExiting: () => void;
-    onExited: () => void;
+  /** Called when the animation is started, and when it's over, respectively, see https://www.framer.com/api/motion/component/#motioncallbacks.onanimationstart */
+  animationCallbacks?: {
+    onAnimationStart: VoidFunction;
+    onAnimationComplete: VoidFunction;
   };
 }
+
+const variants = {
+  hidden: { opacity: 0, width: 0 },
+  visible: (width: number) => ({
+    opacity: 1,
+    width,
+    transition: {
+      ease: fsv.bouncyTransitionCurve,
+      delay: fsv.transitionTimeShort,
+      duration: fsv.defaultTransitionTime,
+    },
+  }),
+};
 
 export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
   const {
@@ -285,7 +225,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
     raw = false,
     title,
     side = Position.RIGHT,
-    cssTransitionCallbacks = {},
+    animationCallbacks,
   } = useResponsiveProps<DrawerProps>(rest, responsive);
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
@@ -359,55 +299,54 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
 
     return ReactDOM.createPortal(
       <div className={themeStyles.root}>
-        <CSSTransition
-          {...cssTransitionCallbacks}
-          in={visible}
-          timeout={300}
-          mountOnEnter
-          unmountOnExit
-          classNames={{
-            enter:
-              side === Position.LEFT ? styles.drawerOverlayEnterLeft : styles.drawerOverlayEnter,
-            enterActive: styles.drawerOverlayEnterActive,
-            exit: styles.drawerOverlayExit,
-            exitActive: cx(styles.drawerOverlayExitActive, {
-              [styles.drawerOverlayExitActiveLeft]: side === Position.LEFT,
-            }),
-          }}>
-          <div
-            onClick={handleClickOverlay}
-            className={cx(styles.overlay, {
-              [styles.leftOverlay]: side === Position.LEFT,
-            })}
-            ref={overlayElement}>
-            <div data-element="wrapper" style={{ width }}>
-              {content}
-            </div>
-          </div>
-        </CSSTransition>
+        <AnimatePresence>
+          {visible ? (
+            <motion.div
+              onAnimationComplete={animationCallbacks?.onAnimationComplete}
+              onAnimationStart={animationCallbacks?.onAnimationStart}
+              transition={{ duration: fsv.defaultTransitionTime, ease: 'easeInOut' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={handleClickOverlay}
+              className={cx(styles.overlay, {
+                [styles.leftOverlay]: side === Position.LEFT,
+              })}
+              ref={overlayElement}>
+              <motion.div
+                custom={width}
+                variants={variants}
+                style={{ position: 'relative' }}
+                initial="hidden"
+                animate="visible"
+                exit="hidden">
+                <div data-element="wrapper" className={styles.wrapper} style={{ width }}>
+                  {content}
+                </div>
+              </motion.div>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
       </div>,
       document.getElementById('drawers-outlet') as Element,
     );
   }
 
   return (
-    <CSSTransition
-      {...cssTransitionCallbacks}
-      in={visible}
-      timeout={300}
-      mountOnEnter
-      unmountOnExit
-      appear
-      classNames={{
-        enter: styles.drawerEnter,
-        enterActive: styles.drawerEnterActive(width),
-        enterDone: styles.drawerEnterDone(width),
-        exit: styles.drawerExit,
-        exitActive: styles.drawerExitActive,
-      }}>
-      <div className={styles.outerWrapper}>
-        <div className={styles.wrapper}>{content}</div>
-      </div>
-    </CSSTransition>
+    <AnimatePresence>
+      {visible ? (
+        <motion.div
+          onAnimationComplete={animationCallbacks?.onAnimationComplete}
+          onAnimationStart={animationCallbacks?.onAnimationStart}
+          initial={{ opacity: 0, width: 0 }}
+          animate={{ opacity: 1, width }}
+          exit={{ opacity: 0, width: 0 }}
+          className={styles.outerWrapper}>
+          <div style={{ width }} className={styles.wrapper}>
+            {content}
+          </div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 };
