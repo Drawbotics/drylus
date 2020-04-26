@@ -103,7 +103,7 @@ export const Toggle = ({ responsive, ...rest }: ToggleProps) => {
       className={cx(styles.root, {
         [styles.active]: value,
         [styles.small]: size === Size.SMALL,
-        [styles.disabled]: disabled,
+        [styles.disabled]: disabled === true,
       })}
       onClick={() => (disabled ? null : onChange(!value))}>
       <div className={styles.trigger} data-element="trigger" />

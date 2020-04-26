@@ -85,7 +85,7 @@ export const Title = ({ responsive, ...rest }: TitleProps) => {
       <h1
         style={style}
         className={cx(styles.root, styles.h1, {
-          [styles.noMargin]: noMargin,
+          [styles.noMargin]: noMargin === true,
           [styles.alignCenter]: align === Align.CENTER,
           [styles.alignRight]: align === Align.RIGHT,
         })}>
@@ -97,7 +97,7 @@ export const Title = ({ responsive, ...rest }: TitleProps) => {
       <h2
         style={style}
         className={cx(styles.root, styles.h2, {
-          [styles.noMargin]: noMargin,
+          [styles.noMargin]: noMargin === true,
           [styles.alignCenter]: align === Align.CENTER,
           [styles.alignRight]: align === Align.RIGHT,
         })}>
@@ -109,7 +109,7 @@ export const Title = ({ responsive, ...rest }: TitleProps) => {
       <h3
         style={style}
         className={cx(styles.root, styles.h3, {
-          [styles.noMargin]: noMargin,
+          [styles.noMargin]: noMargin === true,
           [styles.alignCenter]: align === Align.CENTER,
           [styles.alignRight]: align === Align.RIGHT,
         })}>
@@ -121,7 +121,7 @@ export const Title = ({ responsive, ...rest }: TitleProps) => {
       <h4
         style={style}
         className={cx(styles.root, styles.h4, {
-          [styles.noMargin]: noMargin,
+          [styles.noMargin]: noMargin === true,
           [styles.alignCenter]: align === Align.CENTER,
           [styles.alignRight]: align === Align.RIGHT,
         })}>

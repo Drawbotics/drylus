@@ -118,7 +118,7 @@ export const SegmentedControl = <T extends any>({
           key={option.value}
           className={cx(styles.control, {
             [styles.active]: value === option.value,
-            [styles.disabled]: option.disabled,
+            [styles.disabled]: option.disabled === true,
           })}
           onClick={!option.disabled && onChange != null ? () => onChange(option.value) : undefined}>
           <span>{option.label}</span>

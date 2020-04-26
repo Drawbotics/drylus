@@ -151,7 +151,7 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
         [styles[customSize ? 'root' : getEnumAsClass<typeof styles>(size as Size)]]:
           size != null && !customSize,
         [styles.iconInherit]: customSize,
-        [styles.inversed]: inversed,
+        [styles.inversed]: inversed === true,
         [styles[className as keyof typeof styles]]: enumColor != null,
       })}
       style={

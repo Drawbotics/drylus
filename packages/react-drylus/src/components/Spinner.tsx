@@ -130,7 +130,7 @@ export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
     <div
       style={style}
       className={cx(styles.container, {
-        [styles.fullSizeContainer]: fullSize,
+        [styles.fullSizeContainer]: fullSize === true,
       })}>
       <div
         className={cx(styles.root, {
@@ -142,7 +142,7 @@ export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
             className={cx(styles.path, {
               [styles.brand]: color === Color.BRAND,
               [styles.blue]: color === Color.BLUE,
-              [styles.white]: inversed,
+              [styles.white]: inversed === true,
             })}
             cx="50"
             cy="50"

@@ -230,7 +230,7 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
           [styles.disabled]: disabled === true,
           [styles.error]: error != null && error !== false,
           [styles.readOnly]: readOnly,
-          [placeholderStyles.shimmer]: isPlaceholder,
+          [placeholderStyles.shimmer]: isPlaceholder === true,
         })}
         htmlFor={uniqId}>
         <div className={styles.checkbox}>

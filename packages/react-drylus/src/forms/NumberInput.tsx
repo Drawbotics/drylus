@@ -276,7 +276,7 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
           withCounter && onChange != null ? (
             <div
               className={cx(styles.buttons, {
-                [styles.disabled]: disabled,
+                [styles.disabled]: disabled === true,
                 [styles.small]: size === Size.SMALL,
               })}>
               <button

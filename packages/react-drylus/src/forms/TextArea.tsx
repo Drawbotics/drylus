@@ -190,10 +190,10 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.valid]: Boolean(value) && valid,
+        [styles.valid]: Boolean(value) && valid === true,
         [styles.error]: error != null && error !== false,
         [className as string]: className != null,
-        [placeholderStyles.shimmer]: isPlaceholder,
+        [placeholderStyles.shimmer]: isPlaceholder === true,
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
       })}>
       <div className={styles.outerWrapper}>

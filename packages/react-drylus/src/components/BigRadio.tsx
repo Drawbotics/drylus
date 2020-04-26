@@ -101,8 +101,8 @@ export const BigRadio = <T extends any>({
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.checked]: checked,
-        [styles.disabled]: disabled,
+        [styles.checked]: checked === true,
+        [styles.disabled]: disabled === true,
       })}
       onClick={handleOnChange}>
       <div data-element="header" className={styles.header}>
