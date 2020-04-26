@@ -120,43 +120,6 @@ const styles = {
       right: ${sv.marginExtraSmall};
     }
   `,
-  modalEnter: css`
-    opacity: 0;
-
-    & [data-element='container'] {
-      transform: scale(1.3);
-      opacity: 0;
-    }
-  `,
-  modalEnterActive: css`
-    opacity: 1;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-
-    & [data-element='container'] {
-      transform: scale(1);
-      opacity: 1;
-      transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-    }
-  `,
-  modalExit: css`
-    opacity: 1;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-
-    & [data-element='container'] {
-      transform: scale(1);
-      opacity: 1;
-    }
-  `,
-  modalExitActive: css`
-    opacity: 0.01;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-
-    & [data-element='container'] {
-      transform: scale(1.2);
-      opacity: 0.01;
-      transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-    }
-  `,
 };
 
 export interface BaseModalProps {
