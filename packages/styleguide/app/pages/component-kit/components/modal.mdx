@@ -11,6 +11,7 @@ import {
   Tier,
   Category,
   Margin,
+  Text,
 } from '@drawbotics/react-drylus';
 
 
@@ -66,13 +67,8 @@ Basic modal example:
 <Playground component={Modal}>
   <ModalController component={
     <Modal
-      cssTransitionCallbacks={{
-        onEntered: () => console.log('entered'),
-        onEnter: () => console.log('going to enter'),
-        onExited: () => console.log('exited'),
-      }}
       visible={false}>
-      <Title size={4}>Im some content</Title>
+      <Text>Im some content</Text>
       <div style={{ height: 500, background: 'linear-gradient(red, blue)' }} />
     </Modal>
   } />
@@ -85,7 +81,7 @@ As you can see when the window height is smaller than the content, the modal is 
   <ModalController component={
     <Modal
       visible={false}
-      title="Modal title Modal title Modal title Modal title Modal title Modal title"
+      title="Modal title"
       footer={
         <Flex justify={FlexJustify.END}>
           <FlexItem>

@@ -155,6 +155,19 @@ export const BaseDrawer = ({ children, onClickClose, footer, title, style }: Bas
   );
 };
 
+const variants = {
+  hidden: { opacity: 0, width: 0 },
+  visible: (width: number) => ({
+    opacity: 1,
+    width,
+    transition: {
+      ease: fsv.bouncyTransitionCurve,
+      delay: fsv.transitionTimeShort,
+      duration: fsv.defaultTransitionTime,
+    },
+  }),
+};
+
 export interface DrawerProps extends BaseDrawerProps {
   /** Determines if the drawer is visible or not */
   visible: boolean;
@@ -199,19 +212,6 @@ export interface DrawerProps extends BaseDrawerProps {
     onAnimationComplete: VoidFunction;
   };
 }
-
-const variants = {
-  hidden: { opacity: 0, width: 0 },
-  visible: (width: number) => ({
-    opacity: 1,
-    width,
-    transition: {
-      ease: fsv.bouncyTransitionCurve,
-      delay: fsv.transitionTimeShort,
-      duration: fsv.defaultTransitionTime,
-    },
-  }),
-};
 
 export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
   const {
