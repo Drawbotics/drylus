@@ -117,7 +117,7 @@ export const Tag = ({
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.inversed]: inversed,
+        [styles.inversed]: inversed === true,
         [styles[className as keyof typeof styles]]: enumColor != null,
       })}>
       {children}

@@ -69,7 +69,7 @@ export const Breadcrumbs = ({ crumbs, linkComponent: Link, style }: BreadcrumbsP
     <div
       className={cx(styles.crumb, {
         [styles.clickable]: crumb.url != null,
-        [styles.active]: crumb.active,
+        [styles.active]: crumb.active === true,
       })}>
       {crumb.icon != null ? (
         <Icon name={crumb.icon} style={{ marginRight: crumb.label != null ? 4 : undefined }} />

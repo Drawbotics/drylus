@@ -202,13 +202,13 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.fullWidth]: fullWidth,
+        [styles.fullWidth]: fullWidth === true,
       })}>
       <div
         ref={triggerRef}
         data-element="trigger"
         className={cx(styles.trigger, {
-          [styles.active]: panelOpen || active,
+          [styles.active]: panelOpen || active === true,
         })}
         onClick={() => setPanelOpen(!panelOpen)}>
         {label}

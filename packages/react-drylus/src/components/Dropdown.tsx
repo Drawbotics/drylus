@@ -158,7 +158,7 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
       style={style}
       className={cx(styles.option, {
         [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
-        [styles.disabled]: disabled,
+        [styles.disabled]: disabled === true,
       })}
       onClick={
         disabled

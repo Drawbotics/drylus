@@ -356,9 +356,9 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.disabled]: disabled,
+        [styles.disabled]: disabled === true,
         [styles.readOnly]: onChange == null,
-        [styles.valid]: values?.length > 0 && valid,
+        [styles.valid]: values?.length > 0 && valid === true,
         [styles.error]: error != null && error !== false,
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
         [styles.smallReadOnly]: onChange == null && size === Size.SMALL,

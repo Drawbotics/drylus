@@ -167,10 +167,10 @@ const Radio = ({
     <div className={styles.root}>
       <label
         className={cx(styles.wrapper, {
-          [styles.disabled]: disabled,
+          [styles.disabled]: disabled === true,
           [styles.error]: error,
           [styles.readOnly]: readOnly,
-          [placeholderStyles.shimmer]: isPlaceholder,
+          [placeholderStyles.shimmer]: isPlaceholder === true,
         })}
         htmlFor={id}>
         <div className={styles.radio}>

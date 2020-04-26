@@ -103,7 +103,7 @@ export const BigCheckbox = ({
       style={style}
       className={cx(styles.root, {
         [styles.checked]: isChecked,
-        [styles.disabled]: disabled,
+        [styles.disabled]: disabled === true,
       })}
       onClick={handleOnChange}>
       <div data-element="header" className={styles.header}>

@@ -91,7 +91,7 @@ export const ListItem = ({
 }: ListItemProps) => {
   const color = category ? categoryEnumToColor(category) : _color;
   return (
-    <li style={style} className={cx(styles.item, { [styles.disabled]: disabled })}>
+    <li style={style} className={cx(styles.item, { [styles.disabled]: disabled === true })}>
       {children}
       {run(() => {
         if (icon != null) {

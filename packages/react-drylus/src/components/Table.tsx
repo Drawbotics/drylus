@@ -325,7 +325,7 @@ export const TCell = ({
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const className = cx(styles.cell, {
-    [styles.asContainer]: asContainer,
+    [styles.asContainer]: asContainer === true,
   });
   if (head) {
     return (
@@ -400,10 +400,10 @@ export const TRow = ({
       className={cx(styles.row, {
         [styles.collapsed]: !!collapsed,
         [styles.light]: !alt,
-        [styles.white]: alt,
-        [styles.pointer]: clickable && onClick != null,
-        [styles.highlightedRow]: highlighted,
-        [styles.noBorderBottom]: !!parent && !rowsStates[parent] && lastParentRow,
+        [styles.white]: alt === true,
+        [styles.pointer]: clickable === true && onClick != null,
+        [styles.highlightedRow]: highlighted === true,
+        [styles.noBorderBottom]: !!parent && !rowsStates[parent] && lastParentRow === true,
       })}
       onClick={onClick}
       data-nested={nested ?? undefined}
@@ -872,10 +872,10 @@ export const Table = ({
         [styles.leftPadded]:
           (hasNestedData ||
             withNesting ||
-            (sortableBy &&
+            (sortableBy != null &&
               sortableBy.includes(typeof header[0] === 'string' ? header[0] : header[0].value))) &&
           screenSize > ScreenSizes.L,
-        [styles.highlighted]: highlighted && !(hasNestedData || withNesting),
+        [styles.highlighted]: highlighted === true && !(hasNestedData || withNesting === true),
       })}>
       <RowsContext.Provider value={[rowsStates, handleSetRowState]}>
         {run(() => {

@@ -215,8 +215,8 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
       className={cx(styles.root, {
         [styles.noValue]: value == null,
         [styles.readOnly]: onChange == null,
-        [styles.disabled]: disabled,
-        [styles.valid]: Boolean(value) && valid,
+        [styles.disabled]: disabled === true,
+        [styles.valid]: Boolean(value) && valid === true,
         [styles.error]: error != null && error !== false,
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
         [styles.smallReadOnly]: onChange == null && size === Size.SMALL,

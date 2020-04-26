@@ -50,7 +50,7 @@ export const Tile = ({ style, title, children, noPadding }: TileProps) => {
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.noPadding]: noPadding,
+        [styles.noPadding]: noPadding === true,
       })}>
       {run(() => {
         if (title != null) {

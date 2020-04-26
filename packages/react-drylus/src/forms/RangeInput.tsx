@@ -117,7 +117,7 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled, hideTooltip }: 
   return (
     <div
       style={{ left: `${percent}%` }}
-      className={cx(styles.handle, { [styles.disabledHandle]: disabled })}
+      className={cx(styles.handle, { [styles.disabledHandle]: disabled === true })}
       {...getHandleProps(
         id,
         disabled || hideTooltip
@@ -153,7 +153,7 @@ const Track = ({ source, target, getTrackProps, disabled }: TrackProps) => {
         left: `${source.percent}%`,
         width: `${target.percent - source.percent}%`,
       }}
-      className={cx(styles.track, { [styles.disabledTrack]: disabled })}
+      className={cx(styles.track, { [styles.disabledTrack]: disabled === true })}
       {...getTrackProps()}
     />
   );
@@ -229,13 +229,13 @@ export const RangeInput = <T extends number | Array<number>>({
       onChange={(values) => onChange(isMultiHandle ? (values as any) : values[0])}
       mode={3}
       step={step}
-      className={cx(styles.root, { [styles.disabled]: disabled })}
+      className={cx(styles.root, { [styles.disabled]: disabled === true })}
       domain={[min, max]}
       values={values}>
       <Rail>
         {({ getRailProps }) => (
           <div
-            className={cx(styles.rail, { [styles.disabledRail]: disabled })}
+            className={cx(styles.rail, { [styles.disabledRail]: disabled === true })}
             {...getRailProps()}
           />
         )}
