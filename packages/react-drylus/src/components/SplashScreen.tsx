@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { themeStyles } from '../base';
-import { Deprecated, fsv, run } from '../utils';
+import { Deprecated, fsv } from '../utils';
 
 const styles = {
   root: css`
@@ -149,11 +149,7 @@ export const SplashScreen = ({ text }: SplashScreenProps) => {
             />
           </svg>
         </div>
-        {run(() => {
-          if (text != null) {
-            return <div className={styles.text}>{text}</div>;
-          }
-        })}
+        {text != null ? <div className={styles.text}>{text}</div> : null}
       </motion.div>
     </div>,
     document.getElementById('splash-outlet') as Element,
