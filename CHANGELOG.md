@@ -1,3 +1,16 @@
+# v6.3.3 (Sun Apr 26 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/animated alerts [#144](https://github.com/Drawbotics/drylus/pull/144) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.3.2 (Fri Apr 24 2020)
 
 #### ⚠️  Pushed to master
