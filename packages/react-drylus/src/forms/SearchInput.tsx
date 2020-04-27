@@ -100,6 +100,15 @@ export interface SearchInputProps<T> {
   /** If true, the search button will display a spinner */
   loading?: boolean;
 
+  /** Small text shown below the box, replaced by error if present */
+  hint?: string;
+
+  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: string | boolean;
+
+  /** If true the element displays a check icon and a green outline, overridden by "error" */
+  valid?: boolean;
+
   /**
    * Size of the input. Can be small or default
    * @default Size.DEFAULT
@@ -126,6 +135,9 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
     name,
     style,
     onClickResult,
+    hint,
+    error,
+    valid,
     size = Size.DEFAULT,
   } = useResponsiveProps<SearchInputProps<T>>(rest, responsive);
   const [isFocused, setFocused] = useState(false);
@@ -163,6 +175,9 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
             onClick={() => inputRef.current?.focus()}
           />
         }
+        error={error}
+        hint={hint}
+        valid={valid}
         value={value}
         onChange={onChange}
         name={name}
