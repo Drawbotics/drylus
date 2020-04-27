@@ -1,3 +1,18 @@
+# v6.3.4 (Mon Apr 27 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - improve classnames cx args types  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - add hint, valid and error to search input  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.3.2 (Fri Apr 24 2020)
 
 #### ⚠️  Pushed to master
