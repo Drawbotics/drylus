@@ -1,9 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
+import { motion, useAnimation } from 'framer-motion';
 import camelCase from 'lodash/camelCase';
 import omit from 'lodash/omit';
 import upperFirst from 'lodash/upperFirst';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { Size } from '../enums';
 import { Responsive, Style } from '../types';
@@ -67,15 +68,89 @@ export interface GridItemProps {
 
   /** @private */
   columns?: number;
+
+  /** @private */
+  animated?: boolean;
+
+  /** @private */
+  originOffset: React.MutableRefObject<{ top: number; left: number }>;
+
+  /** @private */
+  index: number;
 }
 
-export const GridItem = ({ children, style, span = 1, columns = 1 }: GridItemProps) => {
+const delayPerPixel = 0.0008;
+
+const originIndex = 0;
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.5,
+  },
+  visible: (delayRef: React.MutableRefObject<number>) => ({
+    opacity: 1,
+    scale: 1,
+    transition: { delay: delayRef.current },
+  }),
+};
+
+export const GridItem = ({
+  children,
+  style,
+  span = 1,
+  columns = 1,
+  animated,
+  originOffset,
+  index,
+}: GridItemProps) => {
   if (span > columns) {
     console.warn(`Warning: GridItem span cannot be more than number of columns`);
   }
   const withSpan = styles.withSpan(span);
+
+  // Animation
+  const delayRef = useRef(0);
+  const offset = useRef({ top: 0, left: 0 });
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (element == null) return;
+
+    offset.current = {
+      top: element.offsetTop,
+      left: element.offsetLeft,
+    };
+
+    if (index === originIndex) {
+      originOffset.current = offset.current;
+    }
+  }, [animated]);
+
+  useEffect(() => {
+    const dx = Math.abs(offset.current.left - originOffset.current.left);
+    const dy = Math.abs(offset.current.top - originOffset.current.top);
+    const d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+
+    delayRef.current = d * delayPerPixel;
+  }, [animated]);
+
+  if (animated) {
+    return (
+      <motion.div
+        variants={itemVariants}
+        custom={delayRef}
+        ref={ref}
+        className={cx(styles.item, { [withSpan]: span != null })}
+        style={style}>
+        {children}
+      </motion.div>
+    );
+  }
+
   return (
-    <div className={cx(styles.item, { [withSpan]: !!span })} style={style}>
+    <div className={cx(styles.item, { [withSpan]: span != null })} style={style}>
       {children}
     </div>
   );
@@ -108,13 +183,18 @@ export interface GridProps {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** If true, the grid items are animated following a stagger effect, as exemplified here https://miro.medium.com/max/2000/1*ShGeeuPIbLALrWwerNQvbw.gif */
+  animated?: boolean;
 }
 
 export const Grid = ({ responsive, ...rest }: GridProps) => {
-  const { children, columns, hGutters, vGutters, style } = useResponsiveProps<GridProps>(
+  const { children, columns, hGutters, vGutters, style, animated } = useResponsiveProps<GridProps>(
     rest,
     responsive,
   );
+  const originOffset = useRef({ top: 0, left: 0 });
+  const controls = useAnimation();
 
   const invalidChildren = React.Children.map(children as any, (x) => x).some(
     (child: React.ReactElement) =>
@@ -123,8 +203,16 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
   if (invalidChildren) {
     console.warn('Grid should only accept GridItem as children');
   }
+
+  useEffect(() => {
+    controls.start('visible');
+  }, [animated]);
+
   return (
-    <div
+    <motion.div
+      variants={{}}
+      initial="hidden"
+      animate={controls}
       className={cx(styles.root(columns), {
         [staticStyles[
           `hGutters${upperFirst(camelCase(hGutters ?? ''))}` as keyof typeof staticStyles
@@ -134,9 +222,13 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
         ]]: vGutters != null,
       })}
       style={style}>
-      {React.Children.map(children as any, (child: React.ReactElement<typeof GridItem>) =>
-        React.cloneElement(child, { columns } as Partial<typeof GridItem>),
+      {React.Children.map(
+        children as any,
+        (child: React.ReactElement<typeof GridItem>, index: number) =>
+          React.cloneElement(child, { columns, animated, originOffset, index } as Partial<
+            typeof GridItem
+          >),
       )}
-    </div>
+    </motion.div>
   );
 };

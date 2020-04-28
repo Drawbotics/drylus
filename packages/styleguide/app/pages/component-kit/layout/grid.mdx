@@ -1,4 +1,5 @@
-import { Grid, GridItem, Size } from '@drawbotics/react-drylus';
+import { Grid, GridItem, Size, Tile } from '@drawbotics/react-drylus';
+import sv from '@drawbotics/drylus-style-vars';
 
 import Playground, { PropsTable } from '~/components/Playground';
 
@@ -42,3 +43,19 @@ Example:
 ### Grid Item
 The `GridItem` by default will take 1 column of space, and only 1 row. By changing the `span` prop you can define how many columns it will take.
 <PropsTable component={GridItem} />
+
+
+### Animated Grid example
+If the animation already played, click on the refresh icon on the bottom right to start it again.
+
+<Playground mode="jsx">
+  <div style={{ background: sv.backgroundColor, margin: -24, padding: 24 }}>
+    <Grid animated columns={4} hGutters={Size.SMALL} vGutters={Size.SMALL}>
+      {[...Array(16).keys()].map((i) =>
+        <GridItem key={i}>
+          <Tile><div style={{ height: 100 }} /></Tile>
+        </GridItem>
+      )}
+    </Grid>
+  </div>
+</Playground>
