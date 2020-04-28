@@ -145,32 +145,41 @@ You can use a `FlexSpacer` component to add margin between your `FlexItems`:
 
 Example usage:
 <Playground mode="jsx">
-  <Margin size={{ bottom: Size.EXTRA_LARGE }}>
-    <Flex>
+  <>
+    <Margin size={{ bottom: Size.EXTRA_LARGE }}>
+      <Flex>
+        <FlexItem>
+          <Item background="red" />
+        </FlexItem>
+        <FlexSpacer size={Size.LARGE} />
+        <FlexItem>
+          <Item background="red" />
+        </FlexItem>
+      </Flex>
+    </Margin>
+    <Flex direction={FlexDirection.VERTICAL}>
       <FlexItem>
         <Item background="red" />
       </FlexItem>
-      <FlexSpacer size={Size.LARGE} />
+      <FlexSpacer size={Size.SMALL} />
       <FlexItem>
         <Item background="red" />
       </FlexItem>
     </Flex>
-  </Margin>
-  <Flex direction={FlexDirection.VERTICAL}>
-    <FlexItem>
-      <Item background="red" />
-    </FlexItem>
-    <FlexSpacer size={Size.SMALL} />
-    <FlexItem>
-      <Item background="red" />
-    </FlexItem>
-  </Flex>
+  </>
 </Playground>
 
-## Layout examples
-A responsive grid layout with 4 columns, aligned to the left. Becomes a 2 column layout when the screen is "medium".
+## Animated Flex example
+By passing the `animated` prop to the `Flex` container, the component will automatically animate its children, with each child bearing a small delay compared to the previous one (stagger effect). You can modify the animation options through the following props:
+- `animationDirection`: where the items should be coming in from (this is limited to each child, so `BOTTOM_UP` will mean that each item will have a small transition from a couple of pixels below its final position)
+- `animationSpeed`: how fast items are coming in
+- `animationEase`
 
-<Playground>
+
+## Layout examples
+A responsive grid layout with 4 columns, aligned to the left. Becomes a 2 column layout when the screen is "medium". Use [`Grid`](/component-kit/components/grid) for this instead.
+
+<Playground mode="jsx">
   <div style={{ border: '2px solid black' }}>
     <Flex justify={FlexJustify.START} wrap>
       <FlexItem flex={1/4}>
