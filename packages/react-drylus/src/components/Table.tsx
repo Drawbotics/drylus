@@ -839,19 +839,24 @@ export const Table = ({
   const handleScrollTable = () => {
     if (scrollableRef.current != null && tableRef.current != null) {
       const { scrollLeft, clientWidth } = scrollableRef.current;
-      const amount = scrollLeft / (tableRef.current.clientWidth - clientWidth);
-      setXScrollAmount(amount);
+      const difference = tableRef.current.clientWidth - clientWidth;
+      if (difference > 0) {
+        const amount = scrollLeft / difference;
+        setXScrollAmount(amount);
+      }
     }
   };
 
   useEffect(() => {
     if (scrollableRef.current != null) {
       scrollableRef.current.addEventListener('scroll', handleScrollTable, false);
+      setTimeout(handleScrollTable, 50); // trigger calculation once
     }
+
     return () => {
       scrollableRef.current?.removeEventListener('scroll', handleScrollTable, false);
     };
-  }, [scrollableRef.current == null]);
+  }, [scrollableRef, tableRef]);
 
   const handleSetRowState = (state: Record<string | number, boolean>) =>
     setRowState({ ...rowsStates, ...state });
