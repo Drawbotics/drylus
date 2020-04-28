@@ -220,7 +220,7 @@ export interface DateInputProps {
   disabled?: boolean;
 
   /** Text shown when no value is active */
-  placeholder?: boolean;
+  placeholder?: string;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
