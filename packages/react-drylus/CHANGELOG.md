@@ -1,3 +1,18 @@
+# v6.3.5 (Tue Apr 28 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix responsive table with no children  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - add  prop to Table  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.3.4 (Mon Apr 27 2020)
 
 #### ⚠️  Pushed to master
