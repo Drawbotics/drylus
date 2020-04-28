@@ -2,7 +2,7 @@ import { css, cx } from 'emotion';
 import camelCase from 'lodash/camelCase';
 import React from 'react';
 
-import { Size } from '../enums';
+import { Direction, Easing, Size, Speed } from '../enums';
 import { Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { Margin } from './Margin';
@@ -183,6 +183,16 @@ export interface FlexProps {
 
   /** If you need to customize the Flex container pass a custom className. E.g. if you want to use `display: inline-flex` */
   className?: string;
+
+  /** If true, flex children will be animated when entering */
+  animated?: boolean;
+
+  animationSpeed?: Speed;
+
+  animationEasing?: Easing;
+
+  /** Determines where the flex items will come in from (relative to their own position). If not specified, a scale animation is used rather than a translate one */
+  animationDirection?: Direction;
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
