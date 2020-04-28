@@ -1,9 +1,9 @@
-import sv from '@drawbotics/drylus-style-vars';
+import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
 import get from 'lodash/get';
 import omit from 'lodash/omit';
-import React, { Fragment, createContext, useContext, useState } from 'react';
+import React, { Fragment, createContext, useContext, useEffect, useRef, useState } from 'react';
 
 import { placeholderStyles } from '../components';
 import { Size } from '../enums';
@@ -288,6 +288,35 @@ const styles = {
   `,
   emptyTableHeader: css`
     padding-right: ${sv.paddingExtraSmall};
+  `,
+  scrollable: css`
+    overflow: auto;
+
+    &::after,
+    &::before {
+      content: ' ';
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 2;
+      transition: ${sv.defaultTransition};
+    }
+  `,
+  leftShadow: css`
+    &::before {
+      opacity: 1;
+      box-shadow: inset 20px 0 10px -15px ${fade(sv.neutralDark, 20)};
+    }
+  `,
+  rightShadow: css`
+    &::after {
+      opacity: 1;
+      box-shadow: inset -20px 0 10px -15px ${fade(sv.neutralDark, 20)};
+    }
   `,
 };
 
@@ -772,6 +801,9 @@ export interface TableProps {
   /** If present, all the content of the table is replaced with this, used to show info when there is no data in the table */
   emptyContent?: React.ReactNode;
 
+  /** If true, the table will stick to the parent width, but won't squish the content, rather will be scrollable horizontally */
+  scrollable?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 }
@@ -794,10 +826,31 @@ export const Table = ({
   clickable = false,
   activeRow,
   emptyContent,
+  scrollable,
   style,
 }: TableProps) => {
   const [rowsStates, setRowState] = useState<Record<string | number, boolean>>({});
   const { screenSize, ScreenSizes } = useScreenSize();
+  const tableRef = useRef<HTMLTableElement>(null);
+  const scrollableRef = useRef<HTMLDivElement>(null);
+  const [xScrollAmount, setXScrollAmount] = useState<number>();
+
+  const handleScrollTable = () => {
+    if (scrollableRef.current != null && tableRef.current != null) {
+      const { scrollLeft, clientWidth } = scrollableRef.current;
+      const amount = scrollLeft / (tableRef.current.clientWidth - clientWidth);
+      setXScrollAmount(amount);
+    }
+  };
+
+  useEffect(() => {
+    if (scrollableRef.current != null) {
+      scrollableRef.current.addEventListener('scroll', handleScrollTable, false);
+    }
+    return () => {
+      scrollableRef.current?.removeEventListener('scroll', handleScrollTable, false);
+    };
+  }, [scrollableRef.current == null]);
 
   const handleSetRowState = (state: Record<string | number, boolean>) =>
     setRowState({ ...rowsStates, ...state });
@@ -864,7 +917,7 @@ export const Table = ({
     console.warn('`data` was passed as prop but no/empty header, cannot render');
   }
 
-  return (
+  const table = (
     <table
       style={style}
       className={cx(styles.root, {
@@ -890,4 +943,48 @@ export const Table = ({
       </RowsContext.Provider>
     </table>
   );
+
+  if (scrollable && screenSize > ScreenSizes.L) {
+    return (
+      <div style={{ position: 'relative' }}>
+        <div
+          ref={scrollableRef}
+          className={cx(styles.scrollable, {
+            [styles.rightShadow]: xScrollAmount != null && xScrollAmount < 1,
+            [styles.leftShadow]: xScrollAmount != null && xScrollAmount > 0,
+          })}>
+          <table
+            ref={tableRef}
+            style={style}
+            className={cx(styles.root, {
+              [styles.fullWidth]: fullWidth,
+              [styles.leftPadded]:
+                (hasNestedData ||
+                  withNesting ||
+                  (sortableBy != null &&
+                    sortableBy.includes(
+                      typeof header[0] === 'string' ? header[0] : header[0].value,
+                    ))) &&
+                screenSize > ScreenSizes.L,
+              [styles.highlighted]:
+                highlighted === true && !(hasNestedData || withNesting === true),
+            })}>
+            <RowsContext.Provider value={[rowsStates, handleSetRowState]}>
+              {run(() => {
+                if (header && isLoading) {
+                  return <FakeTable columns={header} />;
+                } else if (header && emptyContent) {
+                  return <EmptyTable columns={header} emptyContent={emptyContent} />;
+                } else {
+                  return transformedChildren;
+                }
+              })}
+            </RowsContext.Provider>
+          </table>
+        </div>
+      </div>
+    );
+  }
+
+  return table;
 };
