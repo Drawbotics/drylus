@@ -604,8 +604,9 @@ const EmptyTable = ({ columns, emptyContent }: EmptyTableProps) => {
 };
 
 function _addAttributesToCells(
-  children: [React.ReactElement<typeof THead>, React.ReactElement<typeof TBody>],
+  children?: [React.ReactElement<typeof THead>, React.ReactElement<typeof TBody>],
 ): React.ReactNode {
+  if (children == null) return;
   if (children[0]?.type === THead && children[1]?.type === TBody) {
     // TODO fix .props as any
     const headerValues = (children[0].props as any).children.map(
@@ -944,7 +945,7 @@ export const Table = ({
     </table>
   );
 
-  if (scrollable && screenSize > ScreenSizes.L) {
+  if (scrollable) {
     return (
       <div style={{ position: 'relative' }}>
         <div
