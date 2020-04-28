@@ -32,7 +32,6 @@ import { extractIntrinsics, generateDocs } from './utils';
 
 const styles = {
   table: css`
-    overflow: scroll;
     border: 1px solid ${sv.neutralLight};
   `,
 };
@@ -55,7 +54,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
 
   return (
     <div className={styles.table}>
-      <Table>
+      <Table scrollable>
         <THead>
           <TCell>Name</TCell>
           <TCell>Type</TCell>
