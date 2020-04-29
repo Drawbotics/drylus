@@ -1,6 +1,7 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
+import { motion } from 'framer-motion';
 import get from 'lodash/get';
 import omit from 'lodash/omit';
 import React, { Fragment, createContext, useContext, useEffect, useRef, useState } from 'react';
@@ -381,6 +382,17 @@ export const TCell = ({
   );
 };
 
+const tableRowVariants = {
+  hidden: {
+    opacity: 0,
+    x: -10,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+  },
+};
+
 export interface TRowProps {
   /** Should be of type TCell */
   children: React.ReactElement<typeof TCell> | Array<React.ReactElement<typeof TCell>>;
@@ -408,6 +420,9 @@ export interface TRowProps {
 
   /** @private */
   lastParentRow?: boolean;
+
+  /** @private */
+  animated?: boolean;
 }
 
 export const TRow = ({
@@ -420,11 +435,25 @@ export const TRow = ({
   onClick,
   clickable,
   style,
+  animated,
 }: TRowProps) => {
   const [rowsStates, handleSetRowState] = useContext(RowsContext);
   const collapsed = nested && !rowsStates[nested];
+  const animationProps =
+    animated && !collapsed
+      ? {
+          variants: tableRowVariants,
+          transition: {
+            type: 'spring',
+            damping: 20,
+            stiffness: 300,
+          },
+        }
+      : {};
+
   return (
-    <tr
+    <motion.tr
+      {...animationProps}
       style={style}
       className={cx(styles.row, {
         [styles.collapsed]: !!collapsed,
@@ -454,7 +483,7 @@ export const TRow = ({
             } as Partial<TCellProps>,
           ),
         )}
-    </tr>
+    </motion.tr>
   );
 };
 
@@ -483,25 +512,45 @@ export const THead = ({ children }: THeadProps) => {
   );
 };
 
+const tableBodyVariants = {
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
 export interface TBodyProps {
   children: React.ReactElement<typeof TRow> | Array<React.ReactElement<typeof TRow>>;
+
+  /** If set, the rows will be animated when mounted. To be used only if the table is manually created i.e. without the `data` prop */
+  animated?: boolean;
 }
 
-export const TBody = ({ children }: TBodyProps) => {
+export const TBody = ({ children, animated }: TBodyProps) => {
   let light = true;
   let i = 0;
   const childrenCount = React.Children.count(children);
+  const animationProps = animated
+    ? {
+        variants: tableBodyVariants,
+        animate: 'visible',
+        initial: 'hidden',
+      }
+    : {};
+
   return (
-    <tbody className={styles.body}>
+    <motion.tbody {...animationProps} className={styles.body}>
       {React.Children.map(children, (child: React.ReactElement<typeof TRow>) => {
         light = (child.props as any).nested ? light : !light; // TODO find better
         i = i + 1;
         return React.cloneElement(child, {
+          animated,
           alt: light,
           lastParentRow: i === childrenCount - 1,
         } as Partial<TRowProps>);
       })}
-    </tbody>
+    </motion.tbody>
   );
 };
 
@@ -519,9 +568,10 @@ export type HeaderData = Array<DataEntry | { label: React.ReactNode; value: Data
 
 export interface LoadingTableProps {
   columns: HeaderData;
+  animated?: boolean;
 }
 
-const FakeTable = ({ columns }: LoadingTableProps) => {
+const LoadingTable = ({ columns, animated }: LoadingTableProps) => {
   return (
     <Fragment>
       <THead>
@@ -531,7 +581,7 @@ const FakeTable = ({ columns }: LoadingTableProps) => {
           </TCell>
         ))}
       </THead>
-      <TBody>
+      <TBody animated={animated}>
         {Array(5)
           .fill(null)
           .map((...args) => (
@@ -644,6 +694,7 @@ function _generateTable({
   onClickRow = () => {},
   clickable,
   activeRow,
+  animated,
 }: {
   data: Array<TableEntry> | TableEntry;
   header?: HeaderData;
@@ -653,10 +704,11 @@ function _generateTable({
   onClickRow?: (row: TableEntry) => void;
   clickable?: boolean;
   activeRow?: TableEntry['id'];
+  animated?: boolean;
 }): React.ReactElement<typeof TBody> | Array<React.ReactElement<typeof TRow>> {
   if (Array.isArray(data)) {
     return (
-      <TBody key="body">
+      <TBody key="body" animated={animated}>
         {data
           .map((rows) =>
             _generateTable({
@@ -680,6 +732,7 @@ function _generateTable({
     const renderData = renderCell ?? renderChildCell;
     const parentRow = (
       <TRow
+        animated={animated}
         key={uniqId}
         parent={hasData ? uniqId : undefined}
         onClick={() => onClickRow(row)}
@@ -805,6 +858,9 @@ export interface TableProps {
   /** If true, the table will stick to the parent width, but won't squish the content, rather will be scrollable horizontally */
   scrollable?: boolean;
 
+  /** If true, rows (excluding nested ones) will be animated when entering, only works in automatically generated tables. For manual tables, set `animated` in TBody */
+  animated?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 }
@@ -828,6 +884,7 @@ export const Table = ({
   activeRow,
   emptyContent,
   scrollable,
+  animated,
   style,
 }: TableProps) => {
   const [rowsStates, setRowState] = useState<Record<string | number, boolean>>({});
@@ -912,6 +969,7 @@ export const Table = ({
             onClickRow,
             clickable,
             activeRow,
+            animated,
           }),
         ]
       : children;
@@ -939,7 +997,7 @@ export const Table = ({
       <RowsContext.Provider value={[rowsStates, handleSetRowState]}>
         {run(() => {
           if (header && isLoading) {
-            return <FakeTable columns={header} />;
+            return <LoadingTable animated={animated} columns={header} />;
           } else if (header && emptyContent) {
             return <EmptyTable columns={header} emptyContent={emptyContent} />;
           } else {
@@ -959,34 +1017,7 @@ export const Table = ({
             [styles.rightShadow]: xScrollAmount != null && xScrollAmount < 1,
             [styles.leftShadow]: xScrollAmount != null && xScrollAmount > 0,
           })}>
-          <table
-            ref={tableRef}
-            style={style}
-            className={cx(styles.root, {
-              [styles.fullWidth]: fullWidth,
-              [styles.leftPadded]:
-                (hasNestedData ||
-                  withNesting ||
-                  (sortableBy != null &&
-                    sortableBy.includes(
-                      typeof header[0] === 'string' ? header[0] : header[0].value,
-                    ))) &&
-                screenSize > ScreenSizes.L,
-              [styles.highlighted]:
-                highlighted === true && !(hasNestedData || withNesting === true),
-            })}>
-            <RowsContext.Provider value={[rowsStates, handleSetRowState]}>
-              {run(() => {
-                if (header && isLoading) {
-                  return <FakeTable columns={header} />;
-                } else if (header && emptyContent) {
-                  return <EmptyTable columns={header} emptyContent={emptyContent} />;
-                } else {
-                  return transformedChildren;
-                }
-              })}
-            </RowsContext.Provider>
-          </table>
+          {table}
         </div>
       </div>
     );
