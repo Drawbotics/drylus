@@ -6,7 +6,7 @@ import omit from 'lodash/omit';
 import upperFirst from 'lodash/upperFirst';
 import React, { useEffect, useRef } from 'react';
 
-import { Size } from '../enums';
+import { Size, Speed } from '../enums';
 import { Responsive, Style } from '../types';
 import { useResponsiveProps } from '../utils';
 
@@ -53,6 +53,31 @@ const styles = {
 
 const staticStyles = omit(styles, ['root', 'withSpan']);
 
+const originIndex = 0;
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.5,
+  },
+  visible: (delayRef: React.MutableRefObject<number>) => ({
+    opacity: 1,
+    scale: 1,
+    transition: { delay: delayRef.current },
+  }),
+};
+
+function _getDelayFromSpeed(speed?: Speed): number {
+  switch (speed) {
+    case Speed.FAST:
+      return 0.0004;
+    case Speed.SLOW:
+      return 0.0015;
+    default:
+      return 0.0009;
+  }
+}
+
 export interface GridItemProps {
   /** Content of the item */
   children: React.ReactNode;
@@ -73,27 +98,14 @@ export interface GridItemProps {
   animated?: boolean;
 
   /** @private */
+  animationSpeed?: Speed;
+
+  /** @private */
   originOffset: React.MutableRefObject<{ top: number; left: number }>;
 
   /** @private */
   index: number;
 }
-
-const delayPerPixel = 0.0008;
-
-const originIndex = 0;
-
-const itemVariants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.5,
-  },
-  visible: (delayRef: React.MutableRefObject<number>) => ({
-    opacity: 1,
-    scale: 1,
-    transition: { delay: delayRef.current },
-  }),
-};
 
 export const GridItem = ({
   children,
@@ -103,6 +115,7 @@ export const GridItem = ({
   animated,
   originOffset,
   index,
+  animationSpeed,
 }: GridItemProps) => {
   if (span > columns) {
     console.warn(`Warning: GridItem span cannot be more than number of columns`);
@@ -113,6 +126,7 @@ export const GridItem = ({
   const delayRef = useRef(0);
   const offset = useRef({ top: 0, left: 0 });
   const ref = useRef<HTMLDivElement>(null);
+  const delayPerPixel = _getDelayFromSpeed(animationSpeed);
 
   useEffect(() => {
     const element = ref.current;
@@ -178,21 +192,28 @@ export interface GridProps {
    */
   vGutters?: Size.EXTRA_SMALL | Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
 
+  /** If true, the grid items are animated following a stagger effect, as exemplified here https://miro.medium.com/max/2000/1*ShGeeuPIbLALrWwerNQvbw.gif */
+  animated?: boolean;
+
+  animationSpeed?: Speed;
+
   /** Used for style overrides */
   style?: Style;
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
-
-  /** If true, the grid items are animated following a stagger effect, as exemplified here https://miro.medium.com/max/2000/1*ShGeeuPIbLALrWwerNQvbw.gif */
-  animated?: boolean;
 }
 
 export const Grid = ({ responsive, ...rest }: GridProps) => {
-  const { children, columns, hGutters, vGutters, style, animated } = useResponsiveProps<GridProps>(
-    rest,
-    responsive,
-  );
+  const {
+    children,
+    columns,
+    hGutters,
+    vGutters,
+    style,
+    animated,
+    animationSpeed,
+  } = useResponsiveProps<GridProps>(rest, responsive);
   const originOffset = useRef({ top: 0, left: 0 });
   const controls = useAnimation();
 
@@ -225,9 +246,13 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
       {React.Children.map(
         children as any,
         (child: React.ReactElement<typeof GridItem>, index: number) =>
-          React.cloneElement(child, { columns, animated, originOffset, index } as Partial<
-            typeof GridItem
-          >),
+          React.cloneElement(child, {
+            columns,
+            animated,
+            originOffset,
+            index,
+            animationSpeed,
+          } as Partial<typeof GridItem>),
       )}
     </motion.div>
   );
