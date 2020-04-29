@@ -1,12 +1,12 @@
 import sv from '@drawbotics/drylus-style-vars';
 import anime from 'animejs';
 import { css } from 'emotion';
+import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { CSSTransition } from 'react-transition-group';
 
 import { themeStyles } from '../base';
-import { Deprecated, run } from '../utils';
+import { Deprecated, fsv } from '../utils';
 
 const styles = {
   root: css`
@@ -38,13 +38,6 @@ const styles = {
     margin-top: ${sv.marginLarge};
     color: ${sv.colorTertiary};
   `,
-  splashEnter: css`
-    opacity: 0;
-  `,
-  splashEnterActive: css`
-    opacity: 1;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-  `,
 };
 
 export interface SplashScreenProps {
@@ -58,7 +51,7 @@ export interface SplashScreenProps {
 export const SplashScreen = ({ text }: SplashScreenProps) => {
   const [outletElement, setOutletElement] = useState<HTMLElement>();
 
-  const handleEnter = () => {
+  const handleAnimationStart = () => {
     const timeline = anime.timeline({
       easing: 'easeInOutSine',
       duration: 1000,
@@ -113,62 +106,51 @@ export const SplashScreen = ({ text }: SplashScreenProps) => {
 
   return ReactDOM.createPortal(
     <div className={themeStyles.root}>
-      <CSSTransition
-        timeout={300}
-        in
-        appear
-        mountOnEnter
-        unmountOnExit
-        onEnter={handleEnter}
-        classNames={{
-          appear: styles.splashEnter,
-          appearActive: styles.splashEnterActive,
-        }}>
-        <div className={styles.root}>
-          <div className={styles.animation}>
-            <svg height="100%" width="100%" viewBox="0 0 300 300">
-              <defs>
-                <linearGradient
-                  id="gradient"
-                  x1="0%"
-                  y1="0%"
-                  x2="0%"
-                  y2="100%"
-                  gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" style={{ stopColor: sv.brand, stopOpacity: 1 }} />
-                  <stop offset="100%" style={{ stopColor: sv.brandDark, stopOpacity: 1 }} />
-                </linearGradient>
-              </defs>
-              <polygon
-                className="first"
-                id="1"
-                stroke="url('#gradient')"
-                fill="none"
-                points="5,228 195,5 295,280"
-              />
-              <polyline
-                className="second"
-                id="2"
-                stroke="url('#gradient')"
-                fill="none"
-                points="5,228 132,188 295,280"
-              />
-              <polyline
-                className="third"
-                id="3"
-                stroke="url('#gradient')"
-                fill="none"
-                points="132,188 195,5"
-              />
-            </svg>
-          </div>
-          {run(() => {
-            if (text != null) {
-              return <div className={styles.text}>{text}</div>;
-            }
-          })}
+      <motion.div
+        className={styles.root}
+        onAnimationStart={handleAnimationStart}
+        transition={{ duration: fsv.defaultTransitionTime, ease: 'easeInOut' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}>
+        <div className={styles.animation}>
+          <svg height="100%" width="100%" viewBox="0 0 300 300">
+            <defs>
+              <linearGradient
+                id="gradient"
+                x1="0%"
+                y1="0%"
+                x2="0%"
+                y2="100%"
+                gradientUnits="userSpaceOnUse">
+                <stop offset="0%" style={{ stopColor: sv.brand, stopOpacity: 1 }} />
+                <stop offset="100%" style={{ stopColor: sv.brandDark, stopOpacity: 1 }} />
+              </linearGradient>
+            </defs>
+            <polygon
+              className="first"
+              id="1"
+              stroke="url('#gradient')"
+              fill="none"
+              points="5,228 195,5 295,280"
+            />
+            <polyline
+              className="second"
+              id="2"
+              stroke="url('#gradient')"
+              fill="none"
+              points="5,228 132,188 295,280"
+            />
+            <polyline
+              className="third"
+              id="3"
+              stroke="url('#gradient')"
+              fill="none"
+              points="132,188 195,5"
+            />
+          </svg>
         </div>
-      </CSSTransition>
+        {text != null ? <div className={styles.text}>{text}</div> : null}
+      </motion.div>
     </div>,
     document.getElementById('splash-outlet') as Element,
   );

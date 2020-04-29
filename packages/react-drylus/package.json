@@ -35,7 +35,6 @@
     "react-calendar": "^2.19.0",
     "react-compound-slider": "^2.4.0",
     "react-mapbox-wrapper": "^2.4.0",
-    "react-transition-group": "^4.0.1",
     "spark-md5": "^3.0.1",
     "uuid": "^3.3.2"
   },
