@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import camelCase from 'lodash/camelCase';
 import React from 'react';
 
-import { Direction, Easing, Size, Speed } from '../enums';
+import { Direction, Size, Speed } from '../enums';
 import { Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { Margin } from './Margin';
@@ -184,20 +184,13 @@ export interface FlexItemProps {
 
   /** @private */
   animationSpeed?: Speed;
-
-  /** @private */
-  animationEasing?: Easing;
 }
 
 export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
-  const {
-    children,
-    flex,
-    style = {},
-    animated,
-    animationSpeed,
-    // animationEasing,
-  } = useResponsiveProps(rest, responsive);
+  const { children, flex, style = {}, animated, animationSpeed } = useResponsiveProps(
+    rest,
+    responsive,
+  );
   const equalSpan = flex === true;
   const animationProps = animated
     ? {
@@ -298,8 +291,6 @@ export interface FlexProps {
 
   animationSpeed?: Speed;
 
-  animationEasing?: Easing;
-
   /** Determines where the flex items will come in from (relative to their own position). If not specified, a scale animation is used rather than a translate one */
   animationDirection?: Direction;
 
@@ -319,7 +310,6 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
     animated,
     animationSpeed,
     animationDirection,
-    animationEasing,
   } = useResponsiveProps<FlexProps>(rest, responsive);
 
   const invalidChildren = React.Children.map(children as any, (x) => x).some(
@@ -367,7 +357,7 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
             return animated
               ? React.cloneElement(
                   child as React.ReactElement<typeof FlexItem>,
-                  { animated, animationSpeed, animationEasing } as Partial<typeof FlexItem>,
+                  { animated, animationSpeed } as Partial<typeof FlexItem>,
                 )
               : child;
           })
