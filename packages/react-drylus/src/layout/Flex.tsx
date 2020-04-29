@@ -1,4 +1,5 @@
 import { css, cx } from 'emotion';
+import { motion } from 'framer-motion';
 import camelCase from 'lodash/camelCase';
 import React from 'react';
 
@@ -121,6 +122,51 @@ export const FlexSpacer = ({ responsive, direction, ...rest }: FlexSpacerProps) 
   );
 };
 
+function _getSettingsFromSpeed(speed?: Speed) {
+  switch (speed) {
+    case Speed.FAST:
+      return {
+        stiffness: 300,
+      };
+    case Speed.SLOW:
+      return {
+        damping: 15,
+      };
+    default:
+      return {};
+  }
+}
+
+const flexItemVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
+  small: {
+    scale: 0.5,
+  },
+  up: {
+    y: 10,
+  },
+  down: {
+    y: -10,
+  },
+  right: {
+    x: -10,
+  },
+  left: {
+    x: 10,
+  },
+  final: {
+    scale: 1,
+    opacity: 1,
+    y: 0,
+    x: 0,
+  },
+};
+
 export interface FlexItemProps {
   children: React.ReactNode;
 
@@ -132,19 +178,82 @@ export interface FlexItemProps {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** @private */
+  animated?: boolean;
+
+  /** @private */
+  animationSpeed?: Speed;
+
+  /** @private */
+  animationEasing?: Easing;
 }
 
 export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
-  const { children, flex, style = {} } = useResponsiveProps(rest, responsive);
+  const {
+    children,
+    flex,
+    style = {},
+    animated,
+    animationSpeed,
+    // animationEasing,
+  } = useResponsiveProps(rest, responsive);
   const equalSpan = flex === true;
+  const animationProps = animated
+    ? {
+        variants: flexItemVariants,
+        transition: {
+          type: 'spring',
+          damping: 20,
+          stiffness: 300,
+          ..._getSettingsFromSpeed(animationSpeed),
+        },
+      }
+    : {};
+
   return (
-    <div
+    <motion.div
+      {...animationProps}
       className={cx(styles.item, { [styles.equalSpan]: equalSpan })}
       style={flex && typeof flex !== 'boolean' ? { ...prefixFlex(flex), ...style } : style}>
       {children}
-    </div>
+    </motion.div>
   );
 };
+
+const flexVariants = {
+  final: (stagger: number = 0.2) => ({
+    transition: {
+      staggerChildren: stagger,
+    },
+  }),
+};
+
+function _getVariantFromDirection(direction?: Direction): keyof typeof flexItemVariants {
+  switch (direction) {
+    case Direction.TOP_DOWN:
+      return 'down';
+    case Direction.BOTTOM_UP:
+      return 'up';
+    case Direction.LEFT_RIGHT:
+      return 'right';
+    case Direction.RIGHT_LEFT:
+      return 'left';
+    default:
+      return 'small';
+  }
+}
+
+function _getStaggerFromSpeed(speed?: Speed): number {
+  switch (speed) {
+    case Speed.SLOW:
+      return 0.3;
+    case Speed.FAST:
+      return 0.1;
+    default:
+      return 0.2;
+  }
+}
 
 export interface FlexProps {
   children:
@@ -207,6 +316,10 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
     wrap = false,
     className,
     style,
+    animated,
+    animationSpeed,
+    animationDirection,
+    animationEasing,
   } = useResponsiveProps<FlexProps>(rest, responsive);
 
   const invalidChildren = React.Children.map(children as any, (x) => x).some(
@@ -219,8 +332,19 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
   if (invalidChildren) {
     console.warn('Flex should only accept FlexItem or FlexSpacer as children.');
   }
+
+  const animationProps = animated
+    ? {
+        custom: _getStaggerFromSpeed(animationSpeed),
+        variants: flexVariants,
+        animate: 'final',
+        initial: ['hidden', _getVariantFromDirection(animationDirection)],
+      }
+    : {};
+
   return (
-    <div
+    <motion.div
+      {...animationProps}
       className={cx(
         styles.root,
         {
@@ -240,9 +364,14 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
                 { direction } as Partial<typeof FlexSpacer>,
               );
             }
-            return child;
+            return animated
+              ? React.cloneElement(
+                  child as React.ReactElement<typeof FlexItem>,
+                  { animated, animationSpeed, animationEasing } as Partial<typeof FlexItem>,
+                )
+              : child;
           })
         : null}
-    </div>
+    </motion.div>
   );
 };

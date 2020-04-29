@@ -3,6 +3,8 @@ import {
   Align,
   Category,
   Color,
+  Direction,
+  Easing,
   Flex,
   FlexItem,
   FlexJustify,
@@ -11,6 +13,7 @@ import {
   Position,
   Shade,
   Size,
+  Speed,
   TBody,
   TCell,
   THead,
@@ -166,6 +169,9 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                             Position,
                             Color,
                             Shade,
+                            Speed,
+                            Direction,
+                            Easing,
                           }}
                           type={prop.type.type}
                           name={key}

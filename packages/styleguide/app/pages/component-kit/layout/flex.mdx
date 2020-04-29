@@ -7,6 +7,9 @@ import {
   FlexSpacer,
   Size,
   Margin,
+  Title,
+  Direction,
+  Speed,
 } from '@drawbotics/react-drylus';
 
 import Playground, { PropsTable } from '~/components/Playground';
@@ -175,6 +178,68 @@ By passing the `animated` prop to the `Flex` container, the component will autom
 - `animationSpeed`: how fast items are coming in
 - `animationEase`
 
+#### No direction, Scale
+Note: the animation will transform the FlexItem, so if your content is only aligned to the left of your FlexItem an unwanted visual effect my appear. If that's the case, you can use `FlexSpacer` with `flex` to achieve the same effect (see below).
+<Playground mode="jsx">
+  <Flex animated>
+    <FlexItem>
+      <Item background="red" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} flex />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+  </Flex>
+</Playground>
+
+#### Top down, slow
+<Playground mode="jsx">
+  <Flex animated animationDirection={Direction.TOP_DOWN} animationSpeed={Speed.SLOW}>
+    <FlexItem flex>
+      <Item background="red" />
+    </FlexItem>
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+  </Flex>
+</Playground>
+
+#### Left right, fast
+<Playground mode="jsx">
+  <Flex direction={FlexDirection.VERTICAL} animated animationDirection={Direction.LEFT_RIGHT} animationSpeed={Speed.FAST}>
+    <FlexItem>
+      <Item background="red" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+  </Flex>
+</Playground>
 
 ## Layout examples
 A responsive grid layout with 4 columns, aligned to the left. Becomes a 2 column layout when the screen is "medium". Use [`Grid`](/component-kit/components/grid) for this instead.
