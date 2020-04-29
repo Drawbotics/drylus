@@ -28,6 +28,11 @@ exports[`ProgressBar matches snapshot when has a color 1`] = `
   background: #3DB5D0;
 }
 
+.emotion-0::after {
+  background: #3DB5D0;
+  background-image: linear-gradient( to right, #3DB5D0 8%, #bee6ef 18%, #3DB5D0 33% ) !important;
+}
+
 <div
   className="emotion-1 undefined"
 >
