@@ -205,7 +205,7 @@ export interface SteppedProgressBarProps {
 
 export const SteppedProgressBar = ({ responsive, ...rest }: SteppedProgressBarProps) => {
   const {
-    percentage = 0,
+    percentage,
     category,
     size = Size.DEFAULT,
     style,
@@ -235,7 +235,7 @@ export const SteppedProgressBar = ({ responsive, ...rest }: SteppedProgressBarPr
                   if (id < activeStep || (id == activeStep && indeterminate)) {
                     return '100%';
                   } else if (id == activeStep) {
-                    return `${percentage * 100}%`;
+                    return `${(percentage ?? 0) * 100}%`;
                   } else {
                     return '0';
                   }

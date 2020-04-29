@@ -1,19 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx, keyframes } from 'emotion';
+import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
 import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
-
-const translateX = keyframes`
-  0% {
-    transform: translateX(-40%);
-  }
-  100% {
-    transform: translateX(140%);
-  }
-`;
+import { placeholderStyles as shimmerStyles } from './LoadingPlaceholder';
 
 const styles = {
   root: css`
@@ -40,8 +32,7 @@ const styles = {
     overflow: hidden;
   `,
   indeterminate: css`
-    width: 50% !important;
-    animation: ${translateX} calc(${sv.defaultTransitionTime} * 2) ease-in-out alternate infinite;
+    width: 100% !important;
   `,
   large: css`
     height: ${sv.marginSmall};
@@ -64,18 +55,68 @@ const styles = {
   `,
   brand: css`
     background: ${sv.brand};
+
+    &::after {
+      background: ${sv.brand};
+      background-image: linear-gradient(
+        to right,
+        ${sv.brand} 8%,
+        ${sv.brandLight} 18%,
+        ${sv.brand} 33%
+      ) !important;
+    }
   `,
   red: css`
     background: ${sv.red};
+
+    &::after {
+      background: ${sv.red};
+      background-image: linear-gradient(
+        to right,
+        ${sv.red} 8%,
+        ${sv.redLight} 18%,
+        ${sv.red} 33%
+      ) !important;
+    }
   `,
   blue: css`
     background: ${sv.blue};
+
+    &::after {
+      background: ${sv.blue};
+      background-image: linear-gradient(
+        to right,
+        ${sv.blue} 8%,
+        ${sv.blueLight} 18%,
+        ${sv.blue} 33%
+      ) !important;
+    }
   `,
   orange: css`
     background: ${sv.orange};
+
+    &::after {
+      background: ${sv.orange};
+      background-image: linear-gradient(
+        to right,
+        ${sv.orange} 8%,
+        ${sv.orangeLight} 18%,
+        ${sv.orange} 33%
+      ) !important;
+    }
   `,
   green: css`
     background: ${sv.green};
+
+    &::after {
+      background: ${sv.green};
+      background-image: linear-gradient(
+        to right,
+        ${sv.green} 8%,
+        ${sv.greenLight} 18%,
+        ${sv.green} 33%
+      ) !important;
+    }
   `,
 };
 
@@ -106,13 +147,9 @@ export interface ProgressBarProps {
 }
 
 export const ProgressBar = ({ responsive, ...rest }: ProgressBarProps) => {
-  const {
-    percentage = 0,
-    category,
-    size = Size.DEFAULT,
-    style,
-    color: _color,
-  } = useResponsiveProps<ProgressBarProps>(rest, responsive);
+  const { percentage, category, size = Size.DEFAULT, style, color: _color } = useResponsiveProps<
+    ProgressBarProps
+  >(rest, responsive);
 
   const indeterminate = percentage == null;
   const color = category ? categoryEnumToColor(category) : _color;
@@ -128,8 +165,9 @@ export const ProgressBar = ({ responsive, ...rest }: ProgressBarProps) => {
         className={cx(styles.bar, {
           [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
           [styles.indeterminate]: indeterminate,
+          [shimmerStyles.shimmer]: indeterminate,
         })}
-        style={{ width: `${percentage * 100}%` }}
+        style={{ width: `${(percentage ?? 0) * 100}%` }}
       />
     </div>
   );
