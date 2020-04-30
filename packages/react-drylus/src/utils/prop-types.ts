@@ -14,6 +14,14 @@ export const Deprecated = (() => {
 
 type FunctionComponent = (props: React.PropsWithChildren<any>) => React.ReactElement;
 
+function _isFragment(item: React.ReactElement): boolean {
+  return typeof item.type === 'symbol' && item.type!.toString().includes('fragment');
+}
+
+function _isMdxElement(item: React.ReactElement<any, React.FunctionComponent>): boolean {
+  return item.type?.displayName?.includes('MDX') ?? false;
+}
+
 export function checkComponentProps(
   props: Record<string, any | undefined>,
   expectedTypes: Record<string, FunctionComponent | Array<FunctionComponent>>,
@@ -27,26 +35,24 @@ export function checkComponentProps(
       expectedType == null ||
       currentProp == null ||
       (currentProp!.type == null && !Array.isArray(currentProp)) ||
-      (typeof currentProp!.type === 'symbol' &&
-        currentProp!.type.toString().includes('fragment')) ||
-      currentProp.type?.displayName?.includes('MDX')
+      _isFragment(currentProp) ||
+      _isMdxElement(currentProp)
     ) {
       return memo;
     }
     if (Array.isArray(currentProp)) {
       isTypeValid = currentProp.every((prop: any) => {
         // dont consider props that are not components with a type
-        if (prop.type == null) return true;
-        if (prop.type?.displayName?.includes('MDX')) return true;
+        if (prop?.type == null || _isMdxElement(prop) || _isFragment(prop)) return true;
 
         currentType = prop.type?.name ?? prop.type;
+
         if (Array.isArray(expectedType)) {
           return expectedType.includes(prop.type);
         }
         return prop.type === expectedType;
       });
     } else {
-      if (currentProp.type?.displayName?.includes('MDX')) return true;
       if (Array.isArray(expectedType)) {
         isTypeValid = expectedType.includes(currentProp.type);
       } else {
