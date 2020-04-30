@@ -1,3 +1,20 @@
+# v6.4.0 (Thu Apr 30 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Fix/indeterminate progress [#147](https://github.com/Drawbotics/drylus/pull/147) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- fix playground vanilla regex  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.3.7 (Wed Apr 29 2020)
 
 #### 🐛 Bug fix - Patch
