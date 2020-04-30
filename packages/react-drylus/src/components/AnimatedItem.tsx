@@ -1,6 +1,8 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 
 import { Direction, Speed } from '../enums';
+import { Responsive, Style } from '../types';
 
 export interface AnimationVariants {
   initial?: object;
@@ -36,10 +38,16 @@ export interface AnimatedItemProps {
    * Each variant can be overriden separately: `initial`, `enter` (framer `animate` equivalent), `exit`
    */
   variants?: AnimationVariants;
+
+  /** To override the root `div` element styles if needed */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
 }
 
-export const AnimatedItem = ({}: AnimationVariants) => {
-  return <div></div>;
+export const AnimatedItem = ({ children }: AnimatedItemProps) => {
+  return <motion.div>{children}</motion.div>;
 };
 
 export interface AnimationGroupProps {
@@ -63,6 +71,6 @@ export interface AnimationGroupProps {
   animateExit?: boolean;
 }
 
-export const AnimationGroup = ({}: AnimationGroupProps) => {
-  return <div></div>;
+export const AnimationGroup = ({ children }: AnimationGroupProps) => {
+  return <div>{children}</div>;
 };

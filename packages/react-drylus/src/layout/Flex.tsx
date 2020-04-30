@@ -280,9 +280,6 @@ export interface FlexProps {
    */
   wrap?: boolean;
 
-  /** To override simple styles on the flex element, use only for properties that do not require prefixing */
-  style?: Style;
-
   /** If you need to customize the Flex container pass a custom className. E.g. if you want to use `display: inline-flex` */
   className?: string;
 
@@ -293,6 +290,9 @@ export interface FlexProps {
 
   /** Determines where the flex items will come in from (relative to their own position). If not specified, a scale animation is used rather than a translate one */
   animationDirection?: Direction;
+
+  /** To override simple styles on the flex element, use only for properties that do not require prefixing */
+  style?: Style;
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
