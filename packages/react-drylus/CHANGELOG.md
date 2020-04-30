@@ -1,3 +1,18 @@
+# v6.4.1 (Thu Apr 30 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix import  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - add responsive and style to attachment box and attachment list  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.3.6 (Tue Apr 28 2020)
 
 #### ⚠️  Pushed to master
