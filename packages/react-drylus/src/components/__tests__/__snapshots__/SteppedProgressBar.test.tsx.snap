@@ -1,6 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SteppedProgressBar matches snapshot when has 4 steps 1`] = `
+@keyframes animation-0 {
+  0% {
+    background-position: -1200px 0;
+  }
+
+  100% {
+    background-position: 1200px 0;
+  }
+}
+
 .emotion-11 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -68,12 +78,31 @@ exports[`SteppedProgressBar matches snapshot when has 4 steps 1`] = `
   transition: all 0.15s ease-in-out;
   overflow: hidden;
   border-radius: 0 !important;
+  position: relative;
+  pointer-events: none;
 }
 
 .emotion-0::after {
   background: #879ba6;
   border-radius: 0 !important;
   background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
+}
+
+.emotion-0::after {
+  content: ' ';
+  position: absolute;
+  z-index: 9;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #d3dce6;
+  border-radius: 5px;
+  overflow: hidden;
+  background-image: linear-gradient( to right, #d3dce6 8%, #eaeff4 18%, #d3dce6 33% );
+  background-size: 1200px 100%;
+  -webkit-animation: animation-0 2s forwards infinite linear;
+  animation: animation-0 2s forwards infinite linear;
 }
 
 <div
@@ -88,7 +117,7 @@ exports[`SteppedProgressBar matches snapshot when has 4 steps 1`] = `
       data-element="bar"
       style={
         Object {
-          "width": "0%",
+          "width": "100%",
         }
       }
     />
@@ -148,6 +177,16 @@ exports[`SteppedProgressBar matches snapshot when has 4 steps 1`] = `
 `;
 
 exports[`SteppedProgressBar matches snapshot when has a color 1`] = `
+@keyframes animation-0 {
+  0% {
+    background-position: -1200px 0;
+  }
+
+  100% {
+    background-position: 1200px 0;
+  }
+}
+
 .emotion-11 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -197,6 +236,8 @@ exports[`SteppedProgressBar matches snapshot when has a color 1`] = `
   overflow: hidden;
   border-radius: 0 !important;
   background: #3DB5D0;
+  position: relative;
+  pointer-events: none;
 }
 
 .emotion-0::after {
@@ -208,6 +249,23 @@ exports[`SteppedProgressBar matches snapshot when has a color 1`] = `
 .emotion-0::after {
   background: #3DB5D0;
   background-image: linear-gradient( to right, #3DB5D0 8%, #bee6ef 18%, #3DB5D0 33% ) !important;
+}
+
+.emotion-0::after {
+  content: ' ';
+  position: absolute;
+  z-index: 9;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #d3dce6;
+  border-radius: 5px;
+  overflow: hidden;
+  background-image: linear-gradient( to right, #d3dce6 8%, #eaeff4 18%, #d3dce6 33% );
+  background-size: 1200px 100%;
+  -webkit-animation: animation-0 2s forwards infinite linear;
+  animation: animation-0 2s forwards infinite linear;
 }
 
 .emotion-3 {
@@ -247,7 +305,7 @@ exports[`SteppedProgressBar matches snapshot when has a color 1`] = `
       data-element="bar"
       style={
         Object {
-          "width": "0%",
+          "width": "100%",
         }
       }
     />
@@ -454,6 +512,16 @@ exports[`SteppedProgressBar matches snapshot when has a percentage 1`] = `
 `;
 
 exports[`SteppedProgressBar matches snapshot when is small 1`] = `
+@keyframes animation-0 {
+  0% {
+    background-position: -1200px 0;
+  }
+
+  100% {
+    background-position: 1200px 0;
+  }
+}
+
 .emotion-1 {
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -498,12 +566,31 @@ exports[`SteppedProgressBar matches snapshot when is small 1`] = `
   transition: all 0.15s ease-in-out;
   overflow: hidden;
   border-radius: 0 !important;
+  position: relative;
+  pointer-events: none;
 }
 
 .emotion-0::after {
   background: #879ba6;
   border-radius: 0 !important;
   background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
+}
+
+.emotion-0::after {
+  content: ' ';
+  position: absolute;
+  z-index: 9;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #d3dce6;
+  border-radius: 5px;
+  overflow: hidden;
+  background-image: linear-gradient( to right, #d3dce6 8%, #eaeff4 18%, #d3dce6 33% );
+  background-size: 1200px 100%;
+  -webkit-animation: animation-0 2s forwards infinite linear;
+  animation: animation-0 2s forwards infinite linear;
 }
 
 .emotion-11 {
@@ -553,7 +640,7 @@ exports[`SteppedProgressBar matches snapshot when is small 1`] = `
       data-element="bar"
       style={
         Object {
-          "width": "0%",
+          "width": "100%",
         }
       }
     />
