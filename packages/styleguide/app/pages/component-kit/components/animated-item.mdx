@@ -1,0 +1,37 @@
+import { AnimationGroup, AnimatedItem } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+# Animated Item
+
+Used in conjunction with `AnimationGroup` (see below) this component allows you to add animations to the UI easily. Using `Framer` under the hood most of the animation should work automatically. There are a couple of props available to customize the animation to better suit the interface.
+
+For common patterns you can see the examples below:
+
+
+__Usage__
+
+```jsx
+import { AnimatedItem } from '@drawbotics/react-drylus';
+```
+
+__Example__
+<Playground component={AnimatedItem}>
+  <AnimatedItem><div></div></AnimatedItem>
+</Playground>
+
+
+# Animation Group
+
+__Usage__
+
+```jsx
+import { AnimationGroup } from '@drawbotics/react-drylus';
+```
+
+__Example__
+<Playground component={AnimationGroup}>
+  <AnimationGroup>
+    <AnimatedItem>Item</AnimatedItem>
+  </AnimationGroup>
+</Playground>

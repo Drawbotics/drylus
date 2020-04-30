@@ -10,6 +10,7 @@ import {
   FlexJustify,
   Icon,
   Margin,
+  Paragraph,
   Position,
   Shade,
   Size,
@@ -127,15 +128,17 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                       if (_hasDeprecation(prop)) {
                         return (
                           <Fragment>
-                            <Margin size={{ bottom: Size.EXTRA_SMALL }}>
+                            <Margin size={{ vertical: Size.EXTRA_SMALL }}>
                               <Tag color={Color.ORANGE} inversed>
                                 DEPRECATED
                               </Tag>
                             </Margin>
-                            <Margin size={{ bottom: Size.EXTRA_SMALL }}>
-                              <Text shade={Shade.MEDIUM}>{upperFirst(prop.deprecation)}</Text>
-                            </Margin>
-                            <Text>{upperFirst(prop.description)}</Text>
+                            <Text shade={Shade.MEDIUM}>{upperFirst(prop.deprecation)}</Text>
+                            {upperFirst(prop.description)
+                              .split(/\n/)
+                              .map((line, i) => (
+                                <Paragraph key={i}>{line}</Paragraph>
+                              ))}
                           </Fragment>
                         );
                       } else if (_isEnum(prop)) {
@@ -150,9 +153,13 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                             </Fragment>
                           );
                         }
-                        return variantsDesc;
+                        variantsDesc
+                          .split(/\n/)
+                          .map((line, i) => <Paragraph key={i}>{line}</Paragraph>);
                       } else {
-                        upperFirst(prop.description);
+                        upperFirst(prop.description)
+                          .split(/\n/)
+                          .map((line, i) => <Paragraph key={i}>{line}</Paragraph>);
                       }
                     }}
                   </TCell>

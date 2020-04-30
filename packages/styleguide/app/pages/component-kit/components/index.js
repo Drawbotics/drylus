@@ -1,5 +1,5 @@
 import alerts from './alerts-provider';
-import animationGroup from './animation-group';
+import animatedItem from './animated-item';
 import attachmentBox from './attachment-box';
 import attachmentList from './attachment-list';
 import avatar from './avatar';
@@ -97,7 +97,7 @@ const components = {
   attachmentBox,
   fileIcon,
   attachmentList,
-  animationGroup,
+  animatedItem,
 };
 
 export default Object.keys(components)
