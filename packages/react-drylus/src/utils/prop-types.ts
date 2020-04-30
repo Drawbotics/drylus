@@ -36,10 +36,10 @@ export function checkComponentProps(
           // dont consider props that are not components with a type
           return true;
         }
+        currentType = prop.type?.name ?? prop.type;
         if (Array.isArray(expectedType)) {
           return expectedType.includes(prop.type);
         }
-        currentType = prop.type?.name;
         return prop.type === expectedType;
       });
     } else {
@@ -48,7 +48,7 @@ export function checkComponentProps(
       } else {
         isTypeValid = currentProp.type === expectedType;
       }
-      currentType = currentProp.type?.name;
+      currentType = currentProp.type?.name ?? currentProp.type;
     }
     if (!isTypeValid) {
       console.warn(
