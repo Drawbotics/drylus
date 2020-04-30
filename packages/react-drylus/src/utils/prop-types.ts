@@ -21,6 +21,7 @@ export function checkProps(
   return Object.keys(props).reduce<boolean>((memo, propName) => {
     const expectedType = expectedTypes[propName];
     const currentProp = props[propName];
+    let currentType;
     let isTypeValid = true;
     if (
       expectedType == null ||
@@ -38,6 +39,7 @@ export function checkProps(
         if (Array.isArray(expectedType)) {
           return expectedType.includes(prop.type);
         }
+        currentType = prop.type?.name;
         return prop.type === expectedType;
       });
     } else {
@@ -46,10 +48,11 @@ export function checkProps(
       } else {
         isTypeValid = currentProp.type === expectedType;
       }
+      currentType = currentProp.type?.name;
     }
     if (!isTypeValid) {
       console.warn(
-        `Prop ${propName} is not valid, accepted component types are: ${
+        `Prop \`${propName}\` is not valid (currently \`${currentType}\` component), accepted component types are: ${
           Array.isArray(expectedType)
             ? expectedType.map((func) => func.name).join(', ')
             : expectedType.name
