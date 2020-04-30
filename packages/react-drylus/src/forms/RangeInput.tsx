@@ -6,7 +6,7 @@ import { GetTrackProps, Handles, Rail, Slider, SliderItem, Tracks } from 'react-
 import { Text, tooltipStyles } from '../components';
 import { Size } from '../enums';
 import { Responsive } from '../types';
-import { useResponsiveProps } from '../utils';
+import { isFunction, useResponsiveProps } from '../utils';
 
 const styles = {
   root: css`
@@ -117,7 +117,7 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled, hideTooltip }: 
   return (
     <div
       style={{ left: `${percent}%` }}
-      className={cx(styles.handle, { [styles.disabledHandle]: disabled })}
+      className={cx(styles.handle, { [styles.disabledHandle]: disabled === true })}
       {...getHandleProps(
         id,
         disabled || hideTooltip
@@ -153,7 +153,7 @@ const Track = ({ source, target, getTrackProps, disabled }: TrackProps) => {
         left: `${source.percent}%`,
         width: `${target.percent - source.percent}%`,
       }}
-      className={cx(styles.track, { [styles.disabledTrack]: disabled })}
+      className={cx(styles.track, { [styles.disabledTrack]: disabled === true })}
       {...getTrackProps()}
     />
   );
@@ -167,10 +167,13 @@ export interface RangeInputProps<T> {
   max: number;
 
   /** If value is an array of numbers, then we display n handles, otherwise only 1 value shows 1 handle. If the value is larger than max, or smaller than min, the max or min will be used */
-  value: T;
+  value: ((name?: string) => T) | T;
 
   /** Determines the range between each value, can be float or int */
   step?: number;
+
+  /** Name of the form element (target.name) */
+  name?: string;
 
   /** Returns the value at the end of the slide (mouse up/touch end). For continuous updates while sliding use onUpdate */
   onChange: (value: T) => void;
@@ -201,7 +204,7 @@ export const RangeInput = <T extends number | Array<number>>({
   const {
     min,
     max,
-    value,
+    value: _value,
     step,
     onChange,
     onUpdate,
@@ -209,7 +212,10 @@ export const RangeInput = <T extends number | Array<number>>({
     renderValue,
     hideLabels,
     hideTooltips,
+    name,
   } = useResponsiveProps<RangeInputProps<T>>(rest, responsive);
+
+  const value = isFunction(_value) ? _value(name) : _value;
 
   const isMultiHandle = typeof value !== 'number' && (value as Array<number>).length > 1;
   const values: Array<number> = isMultiHandle ? (value as Array<number>) : [value as number];
@@ -223,13 +229,13 @@ export const RangeInput = <T extends number | Array<number>>({
       onChange={(values) => onChange(isMultiHandle ? (values as any) : values[0])}
       mode={3}
       step={step}
-      className={cx(styles.root, { [styles.disabled]: disabled })}
+      className={cx(styles.root, { [styles.disabled]: disabled === true })}
       domain={[min, max]}
       values={values}>
       <Rail>
         {({ getRailProps }) => (
           <div
-            className={cx(styles.rail, { [styles.disabledRail]: disabled })}
+            className={cx(styles.rail, { [styles.disabledRail]: disabled === true })}
             {...getRailProps()}
           />
         )}

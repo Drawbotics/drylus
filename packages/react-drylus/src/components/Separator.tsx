@@ -26,5 +26,7 @@ export interface SeparatorProps {
 }
 
 export const Separator = ({ vertical, style }: SeparatorProps) => {
-  return <div style={style} className={cx(styles.root, { [styles.vertical]: vertical })} />;
+  return (
+    <div style={style} className={cx(styles.root, { [styles.vertical]: vertical === true })} />
+  );
 };

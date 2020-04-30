@@ -131,6 +131,7 @@ export interface BaseFilterProps {
   /**
    * Determines on which side the panel is aligned
    * @default Align.RIGHT
+   * @kind Align
    */
   align?: Align.LEFT | Align.RIGHT;
 
@@ -201,26 +202,26 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.fullWidth]: fullWidth,
+        [styles.fullWidth]: fullWidth === true,
       })}>
       <div
         ref={triggerRef}
         data-element="trigger"
         className={cx(styles.trigger, {
-          [styles.active]: panelOpen || active,
+          [styles.active]: panelOpen || active === true,
         })}
         onClick={() => setPanelOpen(!panelOpen)}>
         {label}
         <Icon
-          onClick={(e: React.MouseEvent<HTMLElement>) => {
-            if (active) {
-              e.stopPropagation();
-              if (onClear != null) {
-                onClear();
-              }
-            }
-          }}
-          name={active ? 'x' : panelOpen ? 'chevron-up' : 'chevron-down'}
+          // onClick={(e: React.MouseEvent<HTMLElement>) => {
+          //   if (active) {
+          //     e.stopPropagation();
+          //     if (onClear != null) {
+          //       onClear();
+          //     }
+          //   }
+          // }}
+          name={panelOpen ? 'chevron-up' : 'chevron-down'}
         />
       </div>
       <div

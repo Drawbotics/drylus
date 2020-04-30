@@ -107,7 +107,7 @@ export const PanelHeader = ({ children, noPadding }: PanelHeaderProps) => {
   return (
     <div
       className={cx(styles.header, {
-        [styles.noSpacing]: noPadding,
+        [styles.noSpacing]: noPadding === true,
       })}>
       {children}
     </div>
@@ -127,7 +127,7 @@ export interface PanelBodyProps {
 
 export const PanelBody = ({ children, noPadding, style }: PanelBodyProps) => {
   return (
-    <div style={style} className={cx(styles.body, { [styles.noSpacing]: noPadding })}>
+    <div style={style} className={cx(styles.body, { [styles.noSpacing]: noPadding === true })}>
       {children}
     </div>
   );
@@ -173,7 +173,7 @@ export const PanelFooter = ({ children, noPadding, style }: PanelFooterProps) =>
     <div
       style={style}
       className={cx(styles.footer, {
-        [styles.noSpacing]: noPadding,
+        [styles.noSpacing]: noPadding === true,
       })}>
       {children}
     </div>

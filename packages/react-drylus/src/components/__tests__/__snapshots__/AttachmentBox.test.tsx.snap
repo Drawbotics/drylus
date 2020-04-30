@@ -1,0 +1,1491 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
+.emotion-7 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-9 {
+  display: inline-block;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.emotion-19 {
+  background: #f8f9fa;
+  border-radius: 5px;
+  color: #172b4e;
+}
+
+.emotion-18 {
+  padding: 24px;
+  padding: 8px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-18 {
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-18 {
+    padding: calc(8px / 2);
+  }
+}
+
+.emotion-17 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 {
+  display: inline-block;
+  position: relative;
+  border: 1.2px solid #8C8C8C;
+  border-image-slice: 1;
+  width: 16px;
+  height: 24px;
+  margin-left: calc(8px - 1px);
+  background: linear-gradient( 45deg, #fff calc(100% - 5px), rgba(255,255,255,0) calc(100% - 5px), rgba(255,255,255,0) 100% );
+  -webkit-clip-path: polygon( calc(100% - 7.5px) 0, 100% 7.5px, 100% 100%, -8px 100%, -8px 0 );
+  clip-path: polygon( calc(100% - 7.5px) 0, 100% 7.5px, 100% 100%, -8px 100%, -8px 0 );
+}
+
+.emotion-0::before {
+  content: ' ';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  height: 8px;
+  width: 8px;
+  box-shadow: -1px 1px 0px 0.2px #8C8C8C;
+  border-bottom-left-radius: 1px;
+  background: linear-gradient( 45deg, #fff calc(50% - 0.5px), #8C8C8C calc(50% - 0.5px), #8C8C8C calc(50% + 0.5px), transparent calc(50% + 0.5px), transparent 100% );
+}
+
+.emotion-0::after {
+  content: ' ';
+  position: absolute;
+  height: calc(8px + 1px);
+  width: calc(16px + 2px);
+  bottom: 3px;
+  left: calc(8px * -1);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 7px;
+  color: #fff;
+  background: #8C8C8C;
+  -webkit-letter-spacing: 0;
+  -moz-letter-spacing: 0;
+  -ms-letter-spacing: 0;
+  letter-spacing: 0;
+  padding-top: 1px;
+  padding-left: 1px;
+  font-family: "Rubik",sans-serif;
+  font-weight: 400;
+}
+
+.emotion-0[data-type]::after {
+  content: attr(data-type);
+}
+
+.emotion-0::after {
+  background: #2A41A2;
+}
+
+.emotion-15 {
+  margin: 24px;
+  margin: 0;
+  margin-right: 8px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-15 {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-15 {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-15 {
+    margin-right: calc(8px / 2);
+  }
+}
+
+.emotion-4 {
+  color: #172b4e;
+  margin-bottom: calc(8px / 2);
+}
+
+.emotion-3 {
+  display: inline;
+  color: rgba(135,155,166,0.5);
+  font-size: 1rem;
+}
+
+.emotion-6 {
+  height: 8px;
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eaeff4;
+  height: calc(8px / 2);
+  border-radius: calc(8px / 2);
+}
+
+.emotion-6 [data-element='bar'] {
+  border-radius: 8px;
+}
+
+.emotion-6 [data-element='bar'] {
+  border-radius: calc(8px / 2);
+}
+
+.emotion-5 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+  background: #3FBC9B;
+}
+
+.emotion-11 {
+  margin: 24px;
+  margin: 0;
+  margin-right: 16px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-11 {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-11 {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-11 {
+    margin-right: 8px;
+  }
+}
+
+.emotion-13 {
+  color: inherit;
+}
+
+.emotion-13:hover {
+  cursor: pointer;
+}
+
+<div
+  className="emotion-19"
+>
+  <div
+    className="emotion-18"
+  >
+    <div
+      className="emotion-17"
+    >
+      <div
+        className="emotion-7"
+        style={
+          Object {
+            "display": "flex",
+          }
+        }
+      >
+        <div
+          className="emotion-9"
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            className="emotion-8"
+          >
+            <div
+              className="emotion-2"
+              style={Object {}}
+            >
+              <div
+                className="emotion-1"
+              >
+                <div
+                  className="emotion-0"
+                  data-type="jpg"
+                />
+              </div>
+            </div>
+            <div
+              className="emotion-7"
+              style={Object {}}
+            >
+              <div
+                className="emotion-4"
+              >
+                <span
+                  className="emotion-3"
+                >
+                  CompleteFile.jpg
+                </span>
+              </div>
+              <div
+                className="emotion-6"
+              >
+                <div
+                  className="emotion-5"
+                  data-element="bar"
+                  style={
+                    Object {
+                      "width": "100%",
+                    }
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="emotion-2"
+        style={Object {}}
+      >
+        <div
+          className="emotion-11"
+        />
+      </div>
+      <div
+        className="emotion-2"
+        style={
+          Object {
+            "display": "flex",
+          }
+        }
+      >
+        <i
+          className="Drycon Drycon-download emotion-13"
+          onClick={[Function]}
+        />
+      </div>
+      <div
+        className="emotion-2"
+        style={Object {}}
+      >
+        <div
+          className="emotion-15"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AttachmentBox matches snapshot when can remove attachment 1`] = `
+.emotion-5 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-4 {
+  color: #172b4e;
+}
+
+.emotion-7 {
+  display: inline-block;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.emotion-15 {
+  background: #f8f9fa;
+  border-radius: 5px;
+  color: #172b4e;
+}
+
+.emotion-14 {
+  padding: 24px;
+  padding: 8px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-14 {
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-14 {
+    padding: calc(8px / 2);
+  }
+}
+
+.emotion-13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 {
+  display: inline-block;
+  position: relative;
+  border: 1.2px solid #8C8C8C;
+  border-image-slice: 1;
+  width: 16px;
+  height: 24px;
+  margin-left: calc(8px - 1px);
+  background: linear-gradient( 45deg, #fff calc(100% - 5px), rgba(255,255,255,0) calc(100% - 5px), rgba(255,255,255,0) 100% );
+  -webkit-clip-path: polygon( calc(100% - 7.5px) 0, 100% 7.5px, 100% 100%, -8px 100%, -8px 0 );
+  clip-path: polygon( calc(100% - 7.5px) 0, 100% 7.5px, 100% 100%, -8px 100%, -8px 0 );
+}
+
+.emotion-0::before {
+  content: ' ';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  height: 8px;
+  width: 8px;
+  box-shadow: -1px 1px 0px 0.2px #8C8C8C;
+  border-bottom-left-radius: 1px;
+  background: linear-gradient( 45deg, #fff calc(50% - 0.5px), #8C8C8C calc(50% - 0.5px), #8C8C8C calc(50% + 0.5px), transparent calc(50% + 0.5px), transparent 100% );
+}
+
+.emotion-0::after {
+  content: ' ';
+  position: absolute;
+  height: calc(8px + 1px);
+  width: calc(16px + 2px);
+  bottom: 3px;
+  left: calc(8px * -1);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 7px;
+  color: #fff;
+  background: #8C8C8C;
+  -webkit-letter-spacing: 0;
+  -moz-letter-spacing: 0;
+  -ms-letter-spacing: 0;
+  letter-spacing: 0;
+  padding-top: 1px;
+  padding-left: 1px;
+  font-family: "Rubik",sans-serif;
+  font-weight: 400;
+}
+
+.emotion-0[data-type]::after {
+  content: attr(data-type);
+}
+
+.emotion-0::after {
+  background: #2A41A2;
+}
+
+.emotion-3 {
+  display: inline;
+  color: #172b4e;
+  font-size: 1rem;
+}
+
+.emotion-9 {
+  margin: 24px;
+  margin: 0;
+  margin-right: 8px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-9 {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-9 {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-9 {
+    margin-right: calc(8px / 2);
+  }
+}
+
+.emotion-11 {
+  color: inherit;
+}
+
+.emotion-11:hover {
+  cursor: pointer;
+}
+
+<div
+  className="emotion-15"
+>
+  <div
+    className="emotion-14"
+  >
+    <div
+      className="emotion-13"
+    >
+      <div
+        className="emotion-5"
+        style={
+          Object {
+            "display": "flex",
+          }
+        }
+      >
+        <div
+          className="emotion-7"
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            className="emotion-6"
+          >
+            <div
+              className="emotion-2"
+              style={Object {}}
+            >
+              <div
+                className="emotion-1"
+              >
+                <div
+                  className="emotion-0"
+                  data-type="jpg"
+                />
+              </div>
+            </div>
+            <div
+              className="emotion-5"
+              style={Object {}}
+            >
+              <div
+                className="emotion-4"
+              >
+                <span
+                  className="emotion-3"
+                >
+                  FirstFile.jpg
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="emotion-2"
+        style={Object {}}
+      >
+        <div
+          className="emotion-9"
+        />
+      </div>
+      <div
+        className="emotion-2"
+        style={
+          Object {
+            "display": "flex",
+          }
+        }
+      >
+        <i
+          className="Drycon Drycon-x emotion-11"
+          onClick={[Function]}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AttachmentBox matches snapshot when is given a completed attachment 1`] = `
+.emotion-7 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-9 {
+  display: inline-block;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.emotion-15 {
+  background: #f8f9fa;
+  border-radius: 5px;
+  color: #172b4e;
+}
+
+.emotion-14 {
+  padding: 24px;
+  padding: 8px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-14 {
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-14 {
+    padding: calc(8px / 2);
+  }
+}
+
+.emotion-13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 {
+  display: inline-block;
+  position: relative;
+  border: 1.2px solid #8C8C8C;
+  border-image-slice: 1;
+  width: 16px;
+  height: 24px;
+  margin-left: calc(8px - 1px);
+  background: linear-gradient( 45deg, #fff calc(100% - 5px), rgba(255,255,255,0) calc(100% - 5px), rgba(255,255,255,0) 100% );
+  -webkit-clip-path: polygon( calc(100% - 7.5px) 0, 100% 7.5px, 100% 100%, -8px 100%, -8px 0 );
+  clip-path: polygon( calc(100% - 7.5px) 0, 100% 7.5px, 100% 100%, -8px 100%, -8px 0 );
+}
+
+.emotion-0::before {
+  content: ' ';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  height: 8px;
+  width: 8px;
+  box-shadow: -1px 1px 0px 0.2px #8C8C8C;
+  border-bottom-left-radius: 1px;
+  background: linear-gradient( 45deg, #fff calc(50% - 0.5px), #8C8C8C calc(50% - 0.5px), #8C8C8C calc(50% + 0.5px), transparent calc(50% + 0.5px), transparent 100% );
+}
+
+.emotion-0::after {
+  content: ' ';
+  position: absolute;
+  height: calc(8px + 1px);
+  width: calc(16px + 2px);
+  bottom: 3px;
+  left: calc(8px * -1);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 7px;
+  color: #fff;
+  background: #8C8C8C;
+  -webkit-letter-spacing: 0;
+  -moz-letter-spacing: 0;
+  -ms-letter-spacing: 0;
+  letter-spacing: 0;
+  padding-top: 1px;
+  padding-left: 1px;
+  font-family: "Rubik",sans-serif;
+  font-weight: 400;
+}
+
+.emotion-0[data-type]::after {
+  content: attr(data-type);
+}
+
+.emotion-0::after {
+  background: #2A41A2;
+}
+
+.emotion-11 {
+  margin: 24px;
+  margin: 0;
+  margin-right: 8px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-11 {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-11 {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-11 {
+    margin-right: calc(8px / 2);
+  }
+}
+
+.emotion-4 {
+  color: #172b4e;
+  margin-bottom: calc(8px / 2);
+}
+
+.emotion-3 {
+  display: inline;
+  color: rgba(135,155,166,0.5);
+  font-size: 1rem;
+}
+
+.emotion-6 {
+  height: 8px;
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eaeff4;
+  height: calc(8px / 2);
+  border-radius: calc(8px / 2);
+}
+
+.emotion-6 [data-element='bar'] {
+  border-radius: 8px;
+}
+
+.emotion-6 [data-element='bar'] {
+  border-radius: calc(8px / 2);
+}
+
+.emotion-5 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+  background: #3FBC9B;
+}
+
+<div
+  className="emotion-15"
+>
+  <div
+    className="emotion-14"
+  >
+    <div
+      className="emotion-13"
+    >
+      <div
+        className="emotion-7"
+        style={
+          Object {
+            "display": "flex",
+          }
+        }
+      >
+        <div
+          className="emotion-9"
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            className="emotion-8"
+          >
+            <div
+              className="emotion-2"
+              style={Object {}}
+            >
+              <div
+                className="emotion-1"
+              >
+                <div
+                  className="emotion-0"
+                  data-type="jpg"
+                />
+              </div>
+            </div>
+            <div
+              className="emotion-7"
+              style={Object {}}
+            >
+              <div
+                className="emotion-4"
+              >
+                <span
+                  className="emotion-3"
+                >
+                  CompleteFile.jpg
+                </span>
+              </div>
+              <div
+                className="emotion-6"
+              >
+                <div
+                  className="emotion-5"
+                  data-element="bar"
+                  style={
+                    Object {
+                      "width": "100%",
+                    }
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="emotion-2"
+        style={Object {}}
+      >
+        <div
+          className="emotion-11"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AttachmentBox matches snapshot when is given attachment with progress 1`] = `
+.emotion-7 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-9 {
+  display: inline-block;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.emotion-15 {
+  background: #f8f9fa;
+  border-radius: 5px;
+  color: #172b4e;
+}
+
+.emotion-14 {
+  padding: 24px;
+  padding: 8px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-14 {
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-14 {
+    padding: calc(8px / 2);
+  }
+}
+
+.emotion-13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 {
+  display: inline-block;
+  position: relative;
+  border: 1.2px solid #8C8C8C;
+  border-image-slice: 1;
+  width: 16px;
+  height: 24px;
+  margin-left: calc(8px - 1px);
+  background: linear-gradient( 45deg, #fff calc(100% - 5px), rgba(255,255,255,0) calc(100% - 5px), rgba(255,255,255,0) 100% );
+  -webkit-clip-path: polygon( calc(100% - 7.5px) 0, 100% 7.5px, 100% 100%, -8px 100%, -8px 0 );
+  clip-path: polygon( calc(100% - 7.5px) 0, 100% 7.5px, 100% 100%, -8px 100%, -8px 0 );
+}
+
+.emotion-0::before {
+  content: ' ';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  height: 8px;
+  width: 8px;
+  box-shadow: -1px 1px 0px 0.2px #8C8C8C;
+  border-bottom-left-radius: 1px;
+  background: linear-gradient( 45deg, #fff calc(50% - 0.5px), #8C8C8C calc(50% - 0.5px), #8C8C8C calc(50% + 0.5px), transparent calc(50% + 0.5px), transparent 100% );
+}
+
+.emotion-0::after {
+  content: ' ';
+  position: absolute;
+  height: calc(8px + 1px);
+  width: calc(16px + 2px);
+  bottom: 3px;
+  left: calc(8px * -1);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 7px;
+  color: #fff;
+  background: #8C8C8C;
+  -webkit-letter-spacing: 0;
+  -moz-letter-spacing: 0;
+  -ms-letter-spacing: 0;
+  letter-spacing: 0;
+  padding-top: 1px;
+  padding-left: 1px;
+  font-family: "Rubik",sans-serif;
+  font-weight: 400;
+}
+
+.emotion-0[data-type]::after {
+  content: attr(data-type);
+}
+
+.emotion-0::after {
+  background: #2A41A2;
+}
+
+.emotion-11 {
+  margin: 24px;
+  margin: 0;
+  margin-right: 8px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-11 {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-11 {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-11 {
+    margin-right: calc(8px / 2);
+  }
+}
+
+.emotion-4 {
+  color: #172b4e;
+  margin-bottom: calc(8px / 2);
+}
+
+.emotion-3 {
+  display: inline;
+  color: rgba(135,155,166,0.5);
+  font-size: 1rem;
+}
+
+.emotion-6 {
+  height: 8px;
+  width: 100%;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #eaeff4;
+  height: calc(8px / 2);
+  border-radius: calc(8px / 2);
+}
+
+.emotion-6 [data-element='bar'] {
+  border-radius: 8px;
+}
+
+.emotion-6 [data-element='bar'] {
+  border-radius: calc(8px / 2);
+}
+
+.emotion-5 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+  background: #3FBC9B;
+}
+
+<div
+  className="emotion-15"
+>
+  <div
+    className="emotion-14"
+  >
+    <div
+      className="emotion-13"
+    >
+      <div
+        className="emotion-7"
+        style={
+          Object {
+            "display": "flex",
+          }
+        }
+      >
+        <div
+          className="emotion-9"
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            className="emotion-8"
+          >
+            <div
+              className="emotion-2"
+              style={Object {}}
+            >
+              <div
+                className="emotion-1"
+              >
+                <div
+                  className="emotion-0"
+                  data-type="jpg"
+                />
+              </div>
+            </div>
+            <div
+              className="emotion-7"
+              style={Object {}}
+            >
+              <div
+                className="emotion-4"
+              >
+                <span
+                  className="emotion-3"
+                >
+                  ProgressFile.jpg
+                </span>
+              </div>
+              <div
+                className="emotion-6"
+              >
+                <div
+                  className="emotion-5"
+                  data-element="bar"
+                  style={
+                    Object {
+                      "width": "50%",
+                    }
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="emotion-2"
+        style={Object {}}
+      >
+        <div
+          className="emotion-11"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AttachmentBox matches snapshot when is given the simplest attachment 1`] = `
+.emotion-5 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-4 {
+  color: #172b4e;
+}
+
+.emotion-7 {
+  display: inline-block;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.emotion-13 {
+  background: #f8f9fa;
+  border-radius: 5px;
+  color: #172b4e;
+}
+
+.emotion-12 {
+  padding: 24px;
+  padding: 8px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-12 {
+    padding: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-12 {
+    padding: calc(8px / 2);
+  }
+}
+
+.emotion-11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-0 {
+  display: inline-block;
+  position: relative;
+  border: 1.2px solid #8C8C8C;
+  border-image-slice: 1;
+  width: 16px;
+  height: 24px;
+  margin-left: calc(8px - 1px);
+  background: linear-gradient( 45deg, #fff calc(100% - 5px), rgba(255,255,255,0) calc(100% - 5px), rgba(255,255,255,0) 100% );
+  -webkit-clip-path: polygon( calc(100% - 7.5px) 0, 100% 7.5px, 100% 100%, -8px 100%, -8px 0 );
+  clip-path: polygon( calc(100% - 7.5px) 0, 100% 7.5px, 100% 100%, -8px 100%, -8px 0 );
+}
+
+.emotion-0::before {
+  content: ' ';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  height: 8px;
+  width: 8px;
+  box-shadow: -1px 1px 0px 0.2px #8C8C8C;
+  border-bottom-left-radius: 1px;
+  background: linear-gradient( 45deg, #fff calc(50% - 0.5px), #8C8C8C calc(50% - 0.5px), #8C8C8C calc(50% + 0.5px), transparent calc(50% + 0.5px), transparent 100% );
+}
+
+.emotion-0::after {
+  content: ' ';
+  position: absolute;
+  height: calc(8px + 1px);
+  width: calc(16px + 2px);
+  bottom: 3px;
+  left: calc(8px * -1);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 7px;
+  color: #fff;
+  background: #8C8C8C;
+  -webkit-letter-spacing: 0;
+  -moz-letter-spacing: 0;
+  -ms-letter-spacing: 0;
+  letter-spacing: 0;
+  padding-top: 1px;
+  padding-left: 1px;
+  font-family: "Rubik",sans-serif;
+  font-weight: 400;
+}
+
+.emotion-0[data-type]::after {
+  content: attr(data-type);
+}
+
+.emotion-0::after {
+  background: #2A41A2;
+}
+
+.emotion-3 {
+  display: inline;
+  color: #172b4e;
+  font-size: 1rem;
+}
+
+.emotion-9 {
+  margin: 24px;
+  margin: 0;
+  margin-right: 8px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-9 {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-9 {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-9 {
+    margin-right: calc(8px / 2);
+  }
+}
+
+<div
+  className="emotion-13"
+>
+  <div
+    className="emotion-12"
+  >
+    <div
+      className="emotion-11"
+    >
+      <div
+        className="emotion-5"
+        style={
+          Object {
+            "display": "flex",
+          }
+        }
+      >
+        <div
+          className="emotion-7"
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+        >
+          <div
+            className="emotion-6"
+          >
+            <div
+              className="emotion-2"
+              style={Object {}}
+            >
+              <div
+                className="emotion-1"
+              >
+                <div
+                  className="emotion-0"
+                  data-type="jpg"
+                />
+              </div>
+            </div>
+            <div
+              className="emotion-5"
+              style={Object {}}
+            >
+              <div
+                className="emotion-4"
+              >
+                <span
+                  className="emotion-3"
+                >
+                  FirstFile.jpg
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="emotion-2"
+        style={Object {}}
+      >
+        <div
+          className="emotion-9"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

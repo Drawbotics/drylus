@@ -103,13 +103,13 @@ export const BigCheckbox = ({
       style={style}
       className={cx(styles.root, {
         [styles.checked]: isChecked,
-        [styles.disabled]: disabled,
+        [styles.disabled]: disabled === true,
       })}
       onClick={handleOnChange}>
       <div data-element="header" className={styles.header}>
         <Label>{label}</Label>
         <div data-element="icon">
-          <RoundIcon name="check" color={Color.GREEN} />
+          <RoundIcon inversed name="check" color={Color.GREEN} />
         </div>
       </div>
       {children}

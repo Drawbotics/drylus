@@ -5,7 +5,7 @@ import React from 'react';
 import { Icon, RoundIcon, Spinner } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -140,7 +140,7 @@ export interface SelectProps<T> {
   options: Array<SelectOption<T>>;
 
   /** Determines which value is currently active */
-  value?: SelectOption<T>['value'];
+  value?: ((name?: string) => SelectOption<T>['value']) | SelectOption<T>['value'];
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -172,6 +172,7 @@ export interface SelectProps<T> {
   /**
    * Size of the select. Can be small or default
    * @default Size.DEFAULT
+   * @kind Size
    */
   size?: Size.SMALL | Size.DEFAULT;
 
@@ -187,7 +188,7 @@ export interface SelectProps<T> {
 
 export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) => {
   const {
-    value,
+    value: _value,
     options = [],
     onChange,
     placeholder = ' -- ',
@@ -201,6 +202,8 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
     ...props
   } = useResponsiveProps<SelectProps<T>>(rest, responsive);
 
+  const value = isFunction(_value) ? _value(props.name) : _value;
+
   const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     if (onChange != null) {
       onChange((e.target as HTMLSelectElement).value as any, (e.target as HTMLSelectElement).name);
@@ -212,8 +215,8 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
       className={cx(styles.root, {
         [styles.noValue]: value == null,
         [styles.readOnly]: onChange == null,
-        [styles.disabled]: disabled,
-        [styles.valid]: Boolean(value) && valid,
+        [styles.disabled]: disabled === true,
+        [styles.valid]: Boolean(value) && valid === true,
         [styles.error]: error != null && error !== false,
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
         [styles.smallReadOnly]: onChange == null && size === Size.SMALL,
@@ -221,7 +224,7 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
       {run(() => {
         if (loading) {
           return (
-            <div className={styles.icon}>
+            <div className={styles.icon} data-element="icon">
               <Spinner size={Size.SMALL} />
             </div>
           );

@@ -95,3 +95,14 @@ export function getTimeDifferenceFromToday(_date: Date) {
     isSameYear,
   };
 }
+
+export function isFunction(value: any): value is Function {
+  return value != null && typeof value === 'function';
+}
+
+// Framer equivalent of animation and timing style vars
+export const fsv = {
+  defaultTransitionTime: 0.3,
+  transitionTimeShort: 0.15,
+  bouncyTransitionCurve: [0.44, 0.11, 0.07, 1.29],
+};

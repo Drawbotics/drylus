@@ -5,7 +5,7 @@ import React, { forwardRef, useState } from 'react';
 import { Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -106,7 +106,7 @@ const styles = {
 
 export interface TextAreaProps {
   /** Value displayed in the field */
-  value: string | number;
+  value: ((name?: string) => string | number) | string | number;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -141,6 +141,7 @@ export interface TextAreaProps {
   /**
    * Size of the input. Can be small or default
    * @default Size.DEFAULT
+   * @kind Size
    */
   size?: Size.SMALL | Size.DEFAULT;
 
@@ -160,7 +161,7 @@ export interface RawTextAreaProps extends TextAreaProps {
 
 const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
   const {
-    value,
+    value: _value,
     onChange,
     error,
     valid,
@@ -177,6 +178,8 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
 
   const [isFocused, setFocused] = useState(false);
 
+  const value = isFunction(_value) ? _value(props.name) : _value;
+
   const handleOnChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
     if (onChange != null) {
       onChange((e.target as HTMLTextAreaElement).value, (e.target as HTMLTextAreaElement).name);
@@ -187,10 +190,10 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.valid]: Boolean(value) && valid,
+        [styles.valid]: Boolean(value) && valid === true,
         [styles.error]: error != null && error !== false,
         [className as string]: className != null,
-        [placeholderStyles.shimmer]: isPlaceholder,
+        [placeholderStyles.shimmer]: isPlaceholder === true,
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
       })}>
       <div className={styles.outerWrapper}>

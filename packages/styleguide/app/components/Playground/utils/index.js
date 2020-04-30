@@ -3,6 +3,9 @@ import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import React from 'react';
 
+export * from './generate-docs';
+export * from './extract-intrinsics';
+
 function removeHash(string) {
   return string.replace(/(css-).*?(-)/gm, '');
 }

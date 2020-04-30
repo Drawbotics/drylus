@@ -121,7 +121,7 @@ export const Layout = ({ responsive, ...rest }: LayoutProps) => {
         {bar}
       </div>
       <div
-        className={cx(styles.content, { [styles.scrollable]: fixed })}
+        className={cx(styles.content, { [styles.scrollable]: fixed === true })}
         data-element="layout-content">
         {children}
       </div>

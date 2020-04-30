@@ -1,9 +1,9 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
-import { Responsive, Style } from 'src/types';
 
 import { Category, Color, Size } from '../enums';
+import { Responsive, Style } from '../types';
 import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
 
@@ -38,7 +38,6 @@ const styles = {
     > i {
       font-size: 1.3rem;
       margin-top: 0;
-      margin-left: -1px;
     }
   `,
   iconInherit: css`
@@ -91,16 +90,23 @@ export interface RoundIconProps {
   /** Name of the icon */
   name: IconType;
 
-  /** @default Size.DEFAULT */
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   * */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE | number;
 
   /** Makes the icon bold */
   bold?: boolean;
 
-  /** @deprecated use color instead */
-  category?: Exclude<Category, Category.PRIMARY>;
+  /**
+   * @deprecated Use color instead
+   * @kind Category
+   */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  color?: Exclude<Color, Color.PRIMARY> | string;
+  /** @kind Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE | string;
 
   /** Modifies the way the color is shown */
   inversed?: boolean;
@@ -136,7 +142,7 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
       ? {
           ..._style,
           color: inversed ? undefined : color,
-          background: inversed ? color : fade(color, 30),
+          background: inversed ? color : fade(color, 15),
         }
       : _style;
   return (
@@ -145,7 +151,7 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
         [styles[customSize ? 'root' : getEnumAsClass<typeof styles>(size as Size)]]:
           size != null && !customSize,
         [styles.iconInherit]: customSize,
-        [styles.inversed]: inversed,
+        [styles.inversed]: inversed === true,
         [styles[className as keyof typeof styles]]: enumColor != null,
       })}
       style={

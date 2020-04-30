@@ -1,9 +1,9 @@
 import sv, { darken } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
-import { Style } from 'src/types';
 
 import { Category, Shade } from '../enums';
+import { Style } from '../types';
 import { getEnumAsClass } from '../utils';
 
 const styles = {
@@ -91,8 +91,11 @@ export interface TextLinkProps {
   /** Text of the link */
   children?: React.ReactNode;
 
-  /** @default Category.INFO */
-  category?: Exclude<Category, Category.PRIMARY>;
+  /**
+   * @default Category.INFO
+   * @kind Category
+   * */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   shade?: Shade;
 

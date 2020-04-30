@@ -4,9 +4,9 @@ import { css, cx } from 'emotion';
 import isArray from 'lodash/isArray';
 import isObject from 'lodash/isObject';
 import React, { Fragment } from 'react';
-import { Responsive, Style } from 'src/types';
 
 import { Category, Shade, Size, Tier } from '../enums';
+import { Responsive, Style } from '../types';
 import {
   ShowDateTime,
   checkProps,
@@ -97,7 +97,8 @@ export type TextChildren =
   | React.ReactElement<typeof TextLink>
   | number
   | Price
-  | Date;
+  | Date
+  | React.ReactNode;
 
 export interface TextProps {
   /**
@@ -115,8 +116,11 @@ export interface TextProps {
    */
   light?: boolean;
 
-  /** @default Size.DEFAULT */
-  size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   */
+  size?: Size.DEFAULT | Size.SMALL | Size.LARGE;
 
   tier?: Tier;
 
@@ -131,11 +135,12 @@ export interface TextProps {
 
   children: TextChildren | Array<TextChildren>;
 
-  category?: Exclude<Category, Category.PRIMARY>;
+  /** @kind Category */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** Options to change the way the date is displayed, if provided. showTime toggles display of hour/minutes, format for dayjs overrides */
   dateOptions?: {
-    showTime?: ShowDateTime.DEFAULT | ShowDateTime.NEVER | ShowDateTime.ALWAYS;
+    showTime?: ShowDateTime;
     asArchive?: boolean;
     format?: any;
   };

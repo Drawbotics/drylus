@@ -1,8 +1,8 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 } from 'uuid';
 
 import { themeStyles } from '../base/ThemeProvider';
@@ -18,9 +18,8 @@ const styles = {
     z-index: 99999;
     bottom: ${sv.defaultMargin};
     left: ${sv.defaultMargin};
-    display: inline-flex;
-    flex-direction: column-reverse;
-    align-items: flex-start;
+    width: 100%;
+    pointer-events: none;
   `,
   root: css`
     display: inline-block;
@@ -33,6 +32,7 @@ const styles = {
     max-width: 400px;
     color: ${sv.colorPrimary};
     overflow: hidden;
+    pointer-events: auto;
 
     [data-element='text'] {
       font-size: 0.95rem;
@@ -87,33 +87,14 @@ const styles = {
       background: ${sv.green};
     }
   `,
-  alertEnter: css`
-    opacity: 0;
-    transform: translateY(-5px);
-  `,
-  alertEnterActive: css`
-    opacity: 1;
-    transform: translateY(0);
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-  `,
-  alertEnterDone: css``,
-  alertExit: css`
-    opacity: 1;
-    transform: translateY(0);
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-  `,
-  alertExitActive: css`
-    opacity: 0.01;
-    transform: translateY(5px);
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-  `,
 };
 
 export interface AlertProps {
   /** Text shown within the alert */
   text: string;
 
-  category: Exclude<Category, Category.PRIMARY>;
+  /** @kind Category  */
+  category: Category.DANGER | Category.SUCCESS | Category.INFO | Category.WARNING | Category.BRAND;
 
   /** Triggered when the dismiss button is clicked */
   onClickDismiss?: (id?: string) => void;
@@ -236,26 +217,22 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
       {children}
       {ReactDOM.createPortal(
         <div className={themeStyles.root}>
-          <TransitionGroup className={styles.provider}>
-            {alerts.map((alert: AlertProps) => (
-              <CSSTransition
-                key={alert.id}
-                timeout={{
-                  enter: 500,
-                  exit: 300,
-                }}
-                classNames={{
-                  enter: styles.alertEnter,
-                  enterActive: styles.alertEnterActive,
-                  exit: styles.alertExit,
-                  exitActive: styles.alertExitActive,
-                }}>
-                <Margin size={{ top: Size.SMALL }}>
-                  <Alert onClickDismiss={(id) => hideAlert(id)} {...alert} />
-                </Margin>
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
+          <div className={styles.provider}>
+            <AnimatePresence>
+              {alerts.map((alert: AlertProps) => (
+                <motion.div
+                  key={alert.id}
+                  layoutTransition={{ duration: 0.2 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 5, transition: { duration: 0.3 } }}>
+                  <Margin size={{ top: Size.SMALL }}>
+                    <Alert onClickDismiss={(id) => hideAlert(id)} {...alert} />
+                  </Margin>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
         </div>,
         document.getElementById('alerts-outlet') as Element,
       )}

@@ -39,9 +39,11 @@ export const Content = ({ children, fullHeight, fullWidth, style }: ContentProps
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.fullHeight]: fullHeight,
+        [styles.fullHeight]: fullHeight === true,
       })}>
-      <div className={cx(styles.children, { [styles.fullWidth]: fullWidth })}>{children}</div>
+      <div className={cx(styles.children, { [styles.fullWidth]: fullWidth === true })}>
+        {children}
+      </div>
     </div>
   );
 };

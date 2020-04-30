@@ -2,8 +2,10 @@ import { css, cx } from 'emotion';
 import camelCase from 'lodash/camelCase';
 import React from 'react';
 
+import { Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { useResponsiveProps } from '../utils';
+import { run, useResponsiveProps } from '../utils';
+import { Margin } from './Margin';
 
 const styles = {
   root: css`
@@ -85,6 +87,40 @@ function prefixFlex(value: number) {
   };
 }
 
+export interface FlexSpacerProps {
+  /** Determines how much space a flex item takes within the flex container. */
+  flex?: number | boolean;
+
+  size: Size;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+
+  /** @private */
+  direction?: FlexDirection;
+}
+
+export const FlexSpacer = ({ responsive, direction, ...rest }: FlexSpacerProps) => {
+  const { size, flex, style = {} } = useResponsiveProps(rest, responsive);
+  const equalSpan = flex === true;
+  return (
+    <div
+      className={cx(styles.item, { [styles.equalSpan]: equalSpan })}
+      style={flex && typeof flex !== 'boolean' ? { ...prefixFlex(flex), ...style } : style}>
+      {run(() => {
+        if (direction === FlexDirection.HORIZONTAL) {
+          return <Margin size={{ right: size }} />;
+        } else {
+          return <Margin size={{ bottom: size }} />;
+        }
+      })}
+    </div>
+  );
+};
+
 export interface FlexItemProps {
   children: React.ReactNode;
 
@@ -111,7 +147,12 @@ export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
 };
 
 export interface FlexProps {
-  children: React.ReactElement<typeof FlexItem> | Array<React.ReactElement<typeof FlexItem>>;
+  children:
+    | React.ReactElement<typeof FlexItem>
+    | Array<React.ReactElement<typeof FlexItem> | null>
+    | React.ReactElement<typeof FlexSpacer>
+    | Array<React.ReactElement<typeof FlexSpacer> | null>
+    | React.ReactNode;
 
   /**
    * Determines which way the flex layout should be
@@ -158,12 +199,15 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
     style,
   } = useResponsiveProps<FlexProps>(rest, responsive);
 
-  const invalidChildren = React.Children.map(children, (x) => x).some(
-    (child) =>
-      child != null && child.type !== FlexItem && !child.type.toString().includes('fragment'),
+  const invalidChildren = React.Children.map(children as any, (x) => x).some(
+    (child: React.ReactElement) =>
+      child != null &&
+      child.type !== FlexItem &&
+      child.type !== FlexSpacer &&
+      !child.type.toString().includes('fragment'),
   );
   if (invalidChildren) {
-    console.warn('Flex should only accept FlexItem as children');
+    console.warn('Flex should only accept FlexItem or FlexSpacer as children.');
   }
   return (
     <div
@@ -178,7 +222,17 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
         className,
       )}
       style={style}>
-      {children}
+      {children != null
+        ? React.Children.map(children as any, (child) => {
+            if (child?.type === FlexSpacer) {
+              return React.cloneElement(
+                child as React.ReactElement<typeof FlexSpacer>,
+                { direction } as Partial<typeof FlexSpacer>,
+              );
+            }
+            return child;
+          })
+        : null}
     </div>
   );
 };

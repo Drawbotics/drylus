@@ -65,7 +65,7 @@ export interface ListItemProps {
   /** Content of the list item */
   children: React.ReactNode;
 
-  /** @deprecated use color instead */
+  /** @deprecated Use color instead */
   category?: Category;
 
   /** @default Color.PRIMARY */
@@ -91,7 +91,7 @@ export const ListItem = ({
 }: ListItemProps) => {
   const color = category ? categoryEnumToColor(category) : _color;
   return (
-    <li style={style} className={cx(styles.item, { [styles.disabled]: disabled })}>
+    <li style={style} className={cx(styles.item, { [styles.disabled]: disabled === true })}>
       {children}
       {run(() => {
         if (icon != null) {

@@ -5,7 +5,7 @@ import React, { forwardRef, useState } from 'react';
 import { Button, Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { checkProps, getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { checkProps, getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 import { Select } from './Select';
 
@@ -200,7 +200,7 @@ const styles = {
 
 export interface InputProps {
   /** Value displayed in the field */
-  value: number | string;
+  value: ((name?: string) => number | string) | number | string;
 
   /** Name of the form element (target.name) */
   name?: string;
@@ -250,6 +250,7 @@ export interface InputProps {
   /**
    * Size of the input. Can be small or default
    * @default Size.DEFAULT
+   * @kind Size
    */
   size?: Size.SMALL | Size.DEFAULT;
 
@@ -270,7 +271,7 @@ export interface RawInputProps extends InputProps {
 
 const RawInput = ({ responsive, ...rest }: RawInputProps) => {
   const {
-    value,
+    value: _value,
     onChange,
     error,
     valid,
@@ -296,6 +297,8 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
 
   const [isFocused, setFocused] = useState(false);
 
+  const value = isFunction(_value) ? _value(props.name) : _value;
+
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (onChange != null) {
       onChange((e.target as HTMLInputElement).value, (e.target as HTMLInputElement).name);
@@ -304,14 +307,15 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
 
   const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
   const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
+
   return (
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.valid]: Boolean(value) && valid,
+        [styles.valid]: Boolean(value) && valid === true,
         [styles.error]: error != null && error !== false,
         [className as string]: className != null,
-        [placeholderStyles.shimmer]: isPlaceholder,
+        [placeholderStyles.shimmer]: isPlaceholder === true,
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
         [styles.smallRightPadding]:
           size === Size.SMALL &&

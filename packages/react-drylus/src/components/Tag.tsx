@@ -12,7 +12,7 @@ const styles = {
     display: inline-flex;
     align-items: center;
     padding: 5px;
-    background: ${sv.neutralLight};
+    background: ${sv.neutral};
     color: ${sv.colorPrimary};
     border-radius: ${sv.defaultBorderRadius};
     font-size: 0.85rem;
@@ -72,10 +72,13 @@ const styles = {
 export interface TagProps {
   children: string;
 
-  /** @deprecated use color instead */
-  category?: Exclude<Category, Category.PRIMARY>;
+  /** @deprecated Use color instead
+   * @kind Category
+   */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  color?: Exclude<Color, Color.PRIMARY> | string;
+  /** @kind Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE | string;
 
   /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */
   onClickRemove?: OnClickCallback<HTMLElement>;
@@ -107,14 +110,14 @@ export const Tag = ({
       ? {
           ..._style,
           color: inversed ? undefined : color,
-          background: inversed ? color : fade(color, 30),
+          background: inversed ? color : fade(color, 15),
         }
       : _style;
   return (
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.inversed]: inversed,
+        [styles.inversed]: inversed === true,
         [styles[className as keyof typeof styles]]: enumColor != null,
       })}>
       {children}

@@ -32,10 +32,19 @@ __Example__
 You are not limited to only `Input` of course, you can group any type of form element, for example inputs here:
 
 Example with error
-<Playground>
-  <InputGroup valid>
+<Playground mode="jsx">
+  <InputGroup error>
     <Input value="First thing" onChange={x=>x} />
     <Input value="Second thing" onChange={x=>x} />
-    <Input placeholder="Third thing..." onChange={x=>x} value="" />
+    <Select placeholder="Third thing..." options={[]} onChange={x=>x} value="" />
+  </InputGroup>
+</Playground>
+
+Form elements can also be aligned horizontally
+<Playground mode="jsx">
+  <InputGroup horizontal>
+    <Input value="First thing" onChange={x=>x} />
+    <Input value="Second thing" onChange={x=>x} />
+    <Select placeholder="Third thing..." options={[]} onChange={x=>x} value="" />
   </InputGroup>
 </Playground>

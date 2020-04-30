@@ -135,7 +135,8 @@ export interface DropdownOptionProps {
   /** Name of the icon to be shown on the left side */
   icon?: IconType;
 
-  category?: Category.DANGER | Category.SUCCESS | Category.WARNING;
+  /** @kind Category */
+  category?: Category.SUCCESS | Category.WARNING | Category.DANGER;
 
   /** Used for style overrides */
   style?: Style;
@@ -157,7 +158,7 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
       style={style}
       className={cx(styles.option, {
         [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
-        [styles.disabled]: disabled,
+        [styles.disabled]: disabled === true,
       })}
       onClick={
         disabled
