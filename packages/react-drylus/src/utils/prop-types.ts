@@ -26,7 +26,8 @@ export function checkComponentProps(
     if (
       expectedType == null ||
       currentProp == null ||
-      (currentProp!.type == null && !Array.isArray(currentProp))
+      (currentProp!.type == null && !Array.isArray(currentProp)) ||
+      (typeof currentProp!.type === 'symbol' && currentProp!.type.toString().includes('fragment'))
     ) {
       return memo;
     }
