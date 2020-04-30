@@ -14,7 +14,7 @@ export const Deprecated = (() => {
 
 type FunctionComponent = (props: React.PropsWithChildren<any>) => React.ReactElement;
 
-export function checkProps(
+export function checkComponentProps(
   props: Record<string, any | undefined>,
   expectedTypes: Record<string, FunctionComponent | Array<FunctionComponent>>,
 ): boolean {
@@ -52,7 +52,7 @@ export function checkProps(
     }
     if (!isTypeValid) {
       console.warn(
-        `Prop \`${propName}\` is not valid (currently \`${currentType}\` component), accepted component types are: ${
+        `Prop \`${propName}\` is not valid. Given: \`${currentType}\` component. Accepted component types are: ${
           Array.isArray(expectedType)
             ? expectedType.map((func) => func.name).join(', ')
             : expectedType.name

@@ -4,6 +4,7 @@ import React from 'react';
 
 import { Shade, Size } from '../enums';
 import { Flex, FlexItem, FlexJustify, FlexSpacer, Margin } from '../layout';
+import { checkComponentProps } from '../utils';
 import { AttachmentBox } from './AttachmentBox';
 import { Icon } from './Icon';
 import { Text } from './Text';
@@ -27,6 +28,7 @@ export interface AttachmentListProps {
 }
 
 export const AttachmentList = ({ children, label = 'Attachments' }: AttachmentListProps) => {
+  checkComponentProps({ children }, { children: AttachmentBox });
   return (
     <div className={styles.root}>
       <Flex justify={FlexJustify.START}>

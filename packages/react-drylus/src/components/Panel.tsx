@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Style } from '../types';
-import { checkProps, run } from '../utils';
+import { checkComponentProps, run } from '../utils';
 
 const styles = {
   root: css`
@@ -195,7 +195,7 @@ export interface PanelProps {
 }
 
 export const Panel = ({ header, body, footer, style }: PanelProps) => {
-  checkProps(
+  checkComponentProps(
     { header, body, footer },
     {
       header: PanelHeader,

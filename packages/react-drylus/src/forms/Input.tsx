@@ -5,7 +5,7 @@ import React, { forwardRef, useState } from 'react';
 import { Button, Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { checkProps, getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
+import { checkComponentProps, getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 import { Select } from './Select';
 
@@ -290,7 +290,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
     ...props
   } = useResponsiveProps<RawInputProps>(rest, responsive);
 
-  checkProps(
+  checkComponentProps(
     { prefix, suffix },
     { prefix: [Button, Select, Icon], suffix: [Button, Select, Icon] },
   );

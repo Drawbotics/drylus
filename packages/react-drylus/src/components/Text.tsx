@@ -9,7 +9,7 @@ import { Category, Shade, Size, Tier } from '../enums';
 import { Responsive, Style } from '../types';
 import {
   ShowDateTime,
-  checkProps,
+  checkComponentProps,
   generateDisplayedDate,
   generateDisplayedPrice,
   getEnumAsClass,
@@ -210,7 +210,7 @@ export const Text = ({ responsive, ...rest }: TextProps) => {
     locale = 'en',
   } = useResponsiveProps<TextProps>(rest, responsive);
 
-  checkProps({ children }, { children: [Text, TextLink] });
+  checkComponentProps({ children }, { children: [Text, TextLink] });
 
   const tier = _tier ?? (shade ? shadeEnumToTier(shade) : null);
 
