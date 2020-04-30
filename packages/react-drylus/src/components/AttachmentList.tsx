@@ -1,11 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
 import React from 'react';
-import { useResponsiveProps } from 'src/utils';
 
 import { Shade, Size } from '../enums';
 import { Flex, FlexItem, FlexJustify, FlexSpacer, Margin } from '../layout';
 import { Responsive, Style } from '../types';
+import { useResponsiveProps } from '../utils';
 import { AttachmentBox } from './AttachmentBox';
 import { Icon } from './Icon';
 import { Text } from './Text';
