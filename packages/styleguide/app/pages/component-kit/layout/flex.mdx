@@ -58,7 +58,7 @@ The `FlexItem` takes the following props
 <PropsTable component={FlexItem} />
 
 The `flex` property can take values of many types. Here is the list and what they do:
-- `true`: passing `true` (or simply the `flex` prop without value) will set the `flex` property to 1. If this prop is passed to all the `FlexItem`s they will all take the same space.
+- true: passing `true` (or simply the `flex` prop without value) will set the `flex` property to 1. If this prop is passed to all the `FlexItem`s they will all take the same space.
 - Number < 1: for example `1/4` or `3/5`. When a value below 1 is passed, the component will interpret it as the `flex-basis` and will set `flex-grow` and `flex-shrink` to 0. So `flex={1/4}` equals `flex: 0 0 25%` This is useful for building grid layouts (See example below).
 - Number > 1: this will be interpreted as the `flex` value. E.g. `flex={3}` equals `flex: 3`.
 

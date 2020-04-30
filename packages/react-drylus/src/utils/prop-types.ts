@@ -27,16 +27,18 @@ export function checkComponentProps(
       expectedType == null ||
       currentProp == null ||
       (currentProp!.type == null && !Array.isArray(currentProp)) ||
-      (typeof currentProp!.type === 'symbol' && currentProp!.type.toString().includes('fragment'))
+      (typeof currentProp!.type === 'symbol' &&
+        currentProp!.type.toString().includes('fragment')) ||
+      currentProp.type?.displayName?.includes('MDX')
     ) {
       return memo;
     }
     if (Array.isArray(currentProp)) {
       isTypeValid = currentProp.every((prop: any) => {
-        if (prop.type == null) {
-          // dont consider props that are not components with a type
-          return true;
-        }
+        // dont consider props that are not components with a type
+        if (prop.type == null) return true;
+        if (prop.type?.displayName?.includes('MDX')) return true;
+
         currentType = prop.type?.name ?? prop.type;
         if (Array.isArray(expectedType)) {
           return expectedType.includes(prop.type);
@@ -44,6 +46,7 @@ export function checkComponentProps(
         return prop.type === expectedType;
       });
     } else {
+      if (currentProp.type?.displayName?.includes('MDX')) return true;
       if (Array.isArray(expectedType)) {
         isTypeValid = expectedType.includes(currentProp.type);
       } else {
