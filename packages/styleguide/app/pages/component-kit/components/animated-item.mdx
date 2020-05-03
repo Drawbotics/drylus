@@ -28,12 +28,14 @@ __Usage__
 import { AnimatedItem } from '@drawbotics/react-drylus';
 ```
 
-export const Item = ({ width }) => {
+export const Item = ({ width, small }) => {
   return (
     <div style={{ width }}>
       <Tile noPadding>
-        <img src="https://www.brusselstimes.com/wp-content/uploads/2019/07/newtowertallestbrusselsrueloiperspectivebrussels.jpg" style={{ width: '100%', height: 200, objectFit: 'cover' }} />
-        <Padding size={Size.SMALL}>
+        <img
+          src={small ? 'https://thumbs.werkaandemuur.nl/1/28f0cea7dd6469c398da2500ccd4e936/817x600/thumbnail/fit.jpg' : 'https://www.brusselstimes.com/wp-content/uploads/2019/07/newtowertallestbrusselsrueloiperspectivebrussels.jpg'}
+          style={{ width: '100%', height: small ?  80 : 200, objectFit: 'cover' }} />
+        <Padding size={small ? Size.EXTRA_SMALL : Size.SMALL}>
           <Margin size={{ bottom: Size.EXTRA_SMALL }}>
             <Text>A cool project</Text>
           </Margin>
@@ -62,24 +64,37 @@ __Example__
   </Margin>
 </Playground>
 
+### Animation Speed
+
+When we talk about `speed` here we're not exactly modifying the _amount of time_ it takes for the animation to complete. Rather, we're tweaking the settings of the spring animation by modifying the mass, damping and stiffness to achieve a more relaxed, or stiffer animation. You can see the difference between `FAST`, `DEFAULT`, and `SLOW` below.
 
 <Playground>
   <Flex>
     <FlexItem>
-      <AnimatedItem speed={Speed.FAST} width="100%"><Item /></AnimatedItem>
+      <AnimatedItem speed={Speed.FAST}><Item /></AnimatedItem>
     </FlexItem>
     <FlexSpacer size={Size.DEFAULT} />
     <FlexItem>
-      <AnimatedItem width="100%"><Item /></AnimatedItem>
+      <AnimatedItem><Item /></AnimatedItem>
     </FlexItem>
     <FlexSpacer size={Size.DEFAULT} />
     <FlexItem>
-      <AnimatedItem speed={Speed.SLOW} width="100%"><Item /></AnimatedItem>
+      <AnimatedItem speed={Speed.SLOW}><Item /></AnimatedItem>
     </FlexItem>
   </Flex>
 </Playground>
 
 # Animation Group
+
+This component is complementarly to the `AnimatedItem` component, in that it allows for 2 things:
+
+1. By wrapping the items in this component, you can choose whether the `AnimatedItem` should also animate on exit (this is not possible otherwise)
+2. You can use it to automatically delay (stagger) each `AnimatedItem` within it. This is useful with lists, or menu elements arranged in a row.
+
+<!-- TODO rework the animateExit logic -->
+Note that the component's `animateExit` option will be applied to __all__ `AnimatedItem` components down the component tree.
+
+You'll often already have the option to animate children through the `Flex` layout component, or the `Grid`, so this component shouldn't be used for the same purpose, so see if you can achieve what you need with the two components just mentioned before wrapping everything with this component.
 
 __Usage__
 
@@ -90,6 +105,12 @@ import { AnimationGroup } from '@drawbotics/react-drylus';
 __Example__
 <Playground component={AnimationGroup}>
   <AnimationGroup>
-    <AnimatedItem>Item</AnimatedItem>
+    <AnimatedItem style={{ width: 300 }}><Item small /></AnimatedItem>
+    <AnimatedItem style={{ width: 300 }}>
+      <Margin size={{ top: Size.DEFAULT }}><Item small /></Margin>
+    </AnimatedItem>
+    <AnimatedItem style={{ width: 300 }}>
+      <Margin size={{ top: Size.DEFAULT }}><Item small /> </Margin>
+    </AnimatedItem>
   </AnimationGroup>
 </Playground>

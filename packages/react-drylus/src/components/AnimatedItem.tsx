@@ -123,6 +123,9 @@ export interface AnimatedItemProps {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** @private */
+  noAnimate: boolean;
 }
 
 export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
@@ -133,6 +136,7 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
     style,
     transition = {},
     variants = {},
+    noAnimate,
   } = useResponsiveProps<AnimatedItemProps>(rest, responsive);
 
   const { exit: customExit = {}, enter: customEnter = {}, initial: customInitial = {} } = variants;
@@ -149,7 +153,7 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
     <motion.div
       style={style}
       initial={['initial', getVariantFromDirection(direction), 'customInitial']}
-      animate={['enter', 'customEnter']}
+      animate={noAnimate ? undefined : ['enter', 'customEnter']}
       exit={['exit', 'customExit']}
       variants={{ ...itemVariants, customEnter, customExit, customInitial }}
       transition={transitionOptions}>
@@ -159,11 +163,8 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
 };
 
 export interface AnimationGroupProps {
-  /** Should be of AnimatedItem type */
-  children:
-    | React.ReactElement<typeof AnimatedItem>
-    | Array<React.ReactElement<typeof AnimatedItem> | null>
-    | React.ReactNode;
+  /** Some options require direct children be of AnimatedItem type */
+  children: React.ReactNode;
 
   /**
    * Will set a delay between each AnimatedItem child
@@ -177,8 +178,47 @@ export interface AnimationGroupProps {
    * Note 2: this propagates to ALL AnimatedItems within the Group
    */
   animateExit?: boolean;
+
+  /** Applies the `AnimatedItem` option of the same name to all the DIRECT `AnimatedItem` children */
+  direction?: Direction;
+
+  /** Applies the `AnimatedItem` option of the same name to all the DIRECT `AnimatedItem` children */
+  speed?: Speed;
 }
 
-export const AnimationGroup = ({ children }: AnimationGroupProps) => {
-  return <motion.div>{children}</motion.div>;
+const groupVariants = {
+  enter: (stagger: number = 0.2) => ({
+    transition: {
+      staggerChildren: stagger,
+    },
+  }),
+};
+
+export const AnimationGroup = ({
+  children,
+  direction,
+  speed,
+  staggerChildren,
+}: // animateExit,
+AnimationGroupProps) => {
+  const animationProps = {
+    custom: getStaggerFromSpeed(speed),
+    variants: groupVariants,
+    animate: staggerChildren ? 'enter' : undefined,
+    initial: ['initial', getVariantFromDirection(direction)],
+  };
+
+  return (
+    <motion.div {...animationProps}>
+      {React.Children.map(children as any, (child) => {
+        if (child?.type === AnimatedItem) {
+          return React.cloneElement(
+            child as React.ReactElement<typeof AnimatedItem>,
+            { direction, speed, noAnimate: staggerChildren } as Partial<typeof AnimatedItem>,
+          );
+        }
+        return child;
+      })}
+    </motion.div>
+  );
 };
