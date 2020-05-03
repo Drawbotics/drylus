@@ -122,9 +122,16 @@ export interface AnimatedItemProps {
 }
 
 export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
-  const { children, speed = Speed.DEFAULT, direction, style, transition = {} } = useResponsiveProps<
-    AnimatedItemProps
-  >(rest, responsive);
+  const {
+    children,
+    speed = Speed.DEFAULT,
+    direction,
+    style,
+    transition = {},
+    variants = {},
+  } = useResponsiveProps<AnimatedItemProps>(rest, responsive);
+
+  const { exit: customExit = {}, enter: customEnter = {}, initial: customInitial = {} } = variants;
 
   const transitionOptions = {
     type: 'spring',
@@ -137,9 +144,10 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
   return (
     <motion.div
       style={style}
-      initial={['initial', getVariantFromDirection(direction)]}
-      animate="enter"
-      variants={itemVariants}
+      initial={['initial', getVariantFromDirection(direction), 'customInitial']}
+      animate={['enter', 'customEnter']}
+      exit={['exit', 'customExit']}
+      variants={{ ...itemVariants, customEnter, customExit, customInitial }}
       transition={transitionOptions}>
       {children}
     </motion.div>
