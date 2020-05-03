@@ -65,11 +65,15 @@ export function getSettingsFromSpeed(speed?: Speed) {
   switch (speed) {
     case Speed.FAST:
       return {
-        stiffness: 350,
+        damping: 20,
+        mass: 0.7,
+        stiffness: 250,
       };
     case Speed.SLOW:
       return {
-        damping: 15,
+        stiffness: 350,
+        damping: 25,
+        mass: 2,
       };
     default:
       return {};
@@ -135,8 +139,8 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
 
   const transitionOptions = {
     type: 'spring',
-    damping: 20,
-    stiffness: 300,
+    damping: 17,
+    stiffness: 400,
     ...getSettingsFromSpeed(speed),
     ...transition,
   };

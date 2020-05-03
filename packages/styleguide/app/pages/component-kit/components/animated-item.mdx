@@ -7,6 +7,10 @@ import {
   Shade,
   Margin,
   Padding,
+  Flex,
+  FlexItem,
+  FlexSpacer,
+  Speed,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -56,6 +60,23 @@ __Example__
   <Margin size={{ top: Size.LARGE }}>
     <AnimatedItem transition={{ type: 'tween', duration: 5 }} style={{ width: 300 }}><Item /></AnimatedItem>
   </Margin>
+</Playground>
+
+
+<Playground>
+  <Flex>
+    <FlexItem>
+      <AnimatedItem speed={Speed.FAST} width="100%"><Item /></AnimatedItem>
+    </FlexItem>
+    <FlexSpacer size={Size.DEFAULT} />
+    <FlexItem>
+      <AnimatedItem width="100%"><Item /></AnimatedItem>
+    </FlexItem>
+    <FlexSpacer size={Size.DEFAULT} />
+    <FlexItem>
+      <AnimatedItem speed={Speed.SLOW} width="100%"><Item /></AnimatedItem>
+    </FlexItem>
+  </Flex>
 </Playground>
 
 # Animation Group

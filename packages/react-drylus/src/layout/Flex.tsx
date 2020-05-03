@@ -158,8 +158,8 @@ export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
         variants: itemVariants,
         transition: {
           type: 'spring',
-          damping: 20,
-          stiffness: 300,
+          damping: 17,
+          stiffness: 350,
           ...getSettingsFromSpeed(animationSpeed),
         },
       }
