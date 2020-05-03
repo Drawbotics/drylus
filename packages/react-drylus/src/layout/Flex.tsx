@@ -3,6 +3,12 @@ import { motion } from 'framer-motion';
 import camelCase from 'lodash/camelCase';
 import React from 'react';
 
+import {
+  getSettingsFromSpeed,
+  getStaggerFromSpeed,
+  getVariantFromDirection,
+  itemVariants,
+} from '../components';
 import { Direction, Size, Speed } from '../enums';
 import { Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
@@ -122,51 +128,6 @@ export const FlexSpacer = ({ responsive, direction, ...rest }: FlexSpacerProps) 
   );
 };
 
-function _getSettingsFromSpeed(speed?: Speed) {
-  switch (speed) {
-    case Speed.FAST:
-      return {
-        stiffness: 300,
-      };
-    case Speed.SLOW:
-      return {
-        damping: 15,
-      };
-    default:
-      return {};
-  }
-}
-
-const flexItemVariants = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-  },
-  small: {
-    scale: 0.5,
-  },
-  up: {
-    y: 10,
-  },
-  down: {
-    y: -10,
-  },
-  right: {
-    x: -10,
-  },
-  left: {
-    x: 10,
-  },
-  final: {
-    scale: 1,
-    opacity: 1,
-    y: 0,
-    x: 0,
-  },
-};
-
 export interface FlexItemProps {
   children: React.ReactNode;
 
@@ -194,12 +155,12 @@ export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
   const equalSpan = flex === true;
   const animationProps = animated
     ? {
-        variants: flexItemVariants,
+        variants: itemVariants,
         transition: {
           type: 'spring',
           damping: 20,
           stiffness: 300,
-          ..._getSettingsFromSpeed(animationSpeed),
+          ...getSettingsFromSpeed(animationSpeed),
         },
       }
     : {};
@@ -215,38 +176,12 @@ export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
 };
 
 const flexVariants = {
-  final: (stagger: number = 0.2) => ({
+  enter: (stagger: number = 0.2) => ({
     transition: {
       staggerChildren: stagger,
     },
   }),
 };
-
-function _getVariantFromDirection(direction?: Direction): keyof typeof flexItemVariants {
-  switch (direction) {
-    case Direction.TOP_DOWN:
-      return 'down';
-    case Direction.BOTTOM_UP:
-      return 'up';
-    case Direction.LEFT_RIGHT:
-      return 'right';
-    case Direction.RIGHT_LEFT:
-      return 'left';
-    default:
-      return 'small';
-  }
-}
-
-function _getStaggerFromSpeed(speed?: Speed): number {
-  switch (speed) {
-    case Speed.SLOW:
-      return 0.3;
-    case Speed.FAST:
-      return 0.1;
-    default:
-      return 0.2;
-  }
-}
 
 export interface FlexProps {
   children:
@@ -325,10 +260,10 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
 
   const animationProps = animated
     ? {
-        custom: _getStaggerFromSpeed(animationSpeed),
+        custom: getStaggerFromSpeed(animationSpeed),
         variants: flexVariants,
-        animate: 'final',
-        initial: ['hidden', _getVariantFromDirection(animationDirection)],
+        animate: 'enter',
+        initial: ['initial', getVariantFromDirection(animationDirection)],
       }
     : {};
 

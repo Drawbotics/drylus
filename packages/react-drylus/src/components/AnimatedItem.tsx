@@ -1,13 +1,85 @@
-import { motion } from 'framer-motion';
+import { Transition, Variant, motion } from 'framer-motion';
 import React from 'react';
 
 import { Direction, Speed } from '../enums';
 import { Responsive, Style } from '../types';
+import { useResponsiveProps } from '../utils';
+
+export const itemVariants = {
+  initial: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
+  small: {
+    scale: 0.7,
+  },
+  up: {
+    y: 20,
+  },
+  down: {
+    y: -20,
+  },
+  right: {
+    x: -20,
+  },
+  left: {
+    x: 20,
+  },
+  enter: {
+    scale: 1,
+    opacity: 1,
+    y: 0,
+    x: 0,
+  },
+};
+
+export function getVariantFromDirection(direction?: Direction): keyof typeof itemVariants {
+  switch (direction) {
+    case Direction.TOP_DOWN:
+      return 'down';
+    case Direction.BOTTOM_UP:
+      return 'up';
+    case Direction.LEFT_RIGHT:
+      return 'right';
+    case Direction.RIGHT_LEFT:
+      return 'left';
+    default:
+      return 'small';
+  }
+}
+
+export function getStaggerFromSpeed(speed?: Speed): number {
+  switch (speed) {
+    case Speed.SLOW:
+      return 0.3;
+    case Speed.FAST:
+      return 0.1;
+    default:
+      return 0.2;
+  }
+}
+
+export function getSettingsFromSpeed(speed?: Speed) {
+  switch (speed) {
+    case Speed.FAST:
+      return {
+        stiffness: 350,
+      };
+    case Speed.SLOW:
+      return {
+        damping: 15,
+      };
+    default:
+      return {};
+  }
+}
 
 export interface AnimationVariants {
-  initial?: object;
-  enter?: object;
-  exit?: object;
+  initial?: Variant;
+  enter?: Variant;
+  exit?: Variant;
 }
 
 export interface AnimatedItemProps {
@@ -39,6 +111,9 @@ export interface AnimatedItemProps {
    */
   variants?: AnimationVariants;
 
+  /** To override the default transition settings (these also change depending on the speed and direction) */
+  transition?: Transition;
+
   /** To override the root `div` element styles if needed */
   style?: Style;
 
@@ -46,8 +121,29 @@ export interface AnimatedItemProps {
   responsive?: Responsive<this>;
 }
 
-export const AnimatedItem = ({ children }: AnimatedItemProps) => {
-  return <motion.div>{children}</motion.div>;
+export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
+  const { children, speed = Speed.DEFAULT, direction, style, transition = {} } = useResponsiveProps<
+    AnimatedItemProps
+  >(rest, responsive);
+
+  const transitionOptions = {
+    type: 'spring',
+    damping: 20,
+    stiffness: 300,
+    ...getSettingsFromSpeed(speed),
+    ...transition,
+  };
+
+  return (
+    <motion.div
+      style={style}
+      initial={['initial', getVariantFromDirection(direction)]}
+      animate="enter"
+      variants={itemVariants}
+      transition={transitionOptions}>
+      {children}
+    </motion.div>
+  );
 };
 
 export interface AnimationGroupProps {
@@ -72,5 +168,5 @@ export interface AnimationGroupProps {
 }
 
 export const AnimationGroup = ({ children }: AnimationGroupProps) => {
-  return <div>{children}</div>;
+  return <motion.div>{children}</motion.div>;
 };

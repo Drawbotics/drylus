@@ -41,10 +41,22 @@ export const Item = ({ width }) => {
 };
 
 __Example__
+
 <Playground component={AnimatedItem}>
-  <AnimatedItem><Item width={300} /></AnimatedItem>
+  <div style={{ width: 300 }}>
+    <AnimatedItem>
+      <Item />
+    </AnimatedItem>
+  </div>
 </Playground>
 
+**NOTE**: the `AnimatedItem` will take up as much space as it needs, as such, if the item you want to animate takes only a certain width, either set that fixed width to the `AnimatedItem` itself, or set the `AnimatedItem` to `display: inline-block` or equivalent. This will avoid visual distortion where the children of `AnimatedItem` look like they're coming from the wrong place. The examples below have very low speed, to highlight this problem:
+<Playground>
+  <AnimatedItem transition={{ type: 'tween', duration: 5 }}><Item width={300} /></AnimatedItem>
+  <Margin size={{ top: Size.LARGE }}>
+    <AnimatedItem transition={{ type: 'tween', duration: 5 }} style={{ width: 300 }}><Item /></AnimatedItem>
+  </Margin>
+</Playground>
 
 # Animation Group
 
