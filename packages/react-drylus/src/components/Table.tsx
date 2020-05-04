@@ -10,7 +10,7 @@ import { placeholderStyles } from '../components';
 import { Size } from '../enums';
 import { Margin } from '../layout';
 import { OnClickCallback, Style } from '../types';
-import { run } from '../utils';
+import { checkComponentProps, run } from '../utils';
 import { Icon } from './Icon';
 import { Label } from './Label';
 
@@ -395,7 +395,10 @@ const tableRowVariants = {
 
 export interface TRowProps {
   /** Should be of type TCell */
-  children: React.ReactElement<typeof TCell> | Array<React.ReactElement<typeof TCell>>;
+  children:
+    | React.ReactElement<typeof TCell>
+    | Array<React.ReactElement<typeof TCell>>
+    | React.ReactNode;
 
   /** If true sets the background to neutral */
   highlighted?: boolean;
@@ -451,6 +454,8 @@ export const TRow = ({
         }
       : {};
 
+  checkComponentProps({ children }, { children: TCell });
+
   return (
     <motion.tr
       {...animationProps}
@@ -488,10 +493,15 @@ export const TRow = ({
 };
 
 export interface THeadProps {
-  children: React.ReactElement<typeof TCell> | Array<React.ReactElement<typeof TCell>>;
+  children:
+    | React.ReactElement<typeof TCell>
+    | Array<React.ReactElement<typeof TCell>>
+    | React.ReactNode;
 }
 
 export const THead = ({ children }: THeadProps) => {
+  checkComponentProps({ children }, { children: TCell });
+
   return (
     <thead className={styles.header}>
       <TRow>
@@ -521,7 +531,10 @@ const tableBodyVariants = {
 };
 
 export interface TBodyProps {
-  children: React.ReactElement<typeof TRow> | Array<React.ReactElement<typeof TRow>>;
+  children:
+    | React.ReactElement<typeof TRow>
+    | Array<React.ReactElement<typeof TRow>>
+    | React.ReactNode;
 
   /** If set, the rows will be animated when mounted. To be used only if the table is manually created i.e. without the `data` prop */
   animated?: boolean;
@@ -539,9 +552,11 @@ export const TBody = ({ children, animated }: TBodyProps) => {
       }
     : {};
 
+  checkComponentProps({ children }, { children: TRow });
+
   return (
     <motion.tbody {...animationProps} className={styles.body}>
-      {React.Children.map(children, (child: React.ReactElement<typeof TRow>) => {
+      {React.Children.map(children as any, (child: React.ReactElement<typeof TRow>) => {
         light = (child.props as any).nested ? light : !light; // TODO find better
         i = i + 1;
         return React.cloneElement(child, {
@@ -790,7 +805,8 @@ export interface TableProps {
   /** Will be THead and TBody, optional if using the auto generated table */
   children?:
     | [React.ReactElement<typeof THead>, React.ReactElement<typeof TBody>]
-    | React.ReactElement<typeof TBody>;
+    | React.ReactElement<typeof TBody>
+    | React.ReactNode;
 
   /**
    * If true, the table takes the full width of the container, defaults to true
@@ -892,6 +908,8 @@ export const Table = ({
   const tableRef = useRef<HTMLTableElement>(null);
   const scrollableRef = useRef<HTMLDivElement>(null);
   const [xScrollAmount, setXScrollAmount] = useState<number>();
+
+  checkComponentProps({ children }, { children: [TBody, THead] });
 
   const handleScrollTable = () => {
     if (scrollableRef.current != null && tableRef.current != null) {

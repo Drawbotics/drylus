@@ -5,7 +5,7 @@ import { Label } from '../components';
 import { Size } from '../enums';
 import { Flex, FlexAlign, FlexDirection, FlexItem, Margin } from '../layout';
 import { Responsive, Style } from '../types';
-import { useResponsiveProps } from '../utils';
+import { checkComponentProps, useResponsiveProps } from '../utils';
 import {
   Checkbox,
   Input,
@@ -27,7 +27,7 @@ const styles = {
 
 export interface FormGroupProps {
   /** The label of the group, should be a Label component */
-  label: React.ReactElement<typeof Label>;
+  label: React.ReactElement<typeof Label> | React.ReactNode;
 
   /** Can be a single form component (e.g. Select) or an InputGroup, see doc for that */
   input:
@@ -40,7 +40,8 @@ export interface FormGroupProps {
     | React.ReactElement<typeof Checkbox>
     | React.ReactElement<typeof RadioGroup>
     | React.ReactElement<typeof Input>
-    | React.ReactElement<typeof Select>;
+    | React.ReactElement<typeof Select>
+    | React.ReactNode;
 
   /** If true, the label will be placed on the left, and the input on the right (center flex aligned) */
   horizontal?: boolean;
@@ -54,6 +55,25 @@ export interface FormGroupProps {
 
 export const FormGroup = ({ responsive, ...rest }: FormGroupProps) => {
   const { label, input, horizontal, style } = useResponsiveProps<FormGroupProps>(rest, responsive);
+
+  checkComponentProps(
+    { input, label },
+    {
+      label: Label,
+      input: [
+        InputGroup,
+        MultiSelect,
+        RangeInput,
+        NumberInput,
+        SearchInput,
+        TextArea,
+        Checkbox,
+        RadioGroup,
+        Input,
+        Select,
+      ],
+    },
+  );
 
   return (
     <div style={style} className={styles.root}>

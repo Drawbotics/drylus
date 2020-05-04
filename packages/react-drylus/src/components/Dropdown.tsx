@@ -207,8 +207,8 @@ export interface DropdownProps {
   /** This will be the trigger of the dropdown, and relative to which the menu will be positioned */
   trigger?: React.ReactNode;
 
-  /** This is the content of the dropdown menu */
-  children: DropdownChild | Array<DropdownChild>;
+  /** This is the content of the dropdown menu. Can also be custom. */
+  children: DropdownChild | Array<DropdownChild> | React.ReactNode;
 
   /** @default Position.BOTTOM */
   side?: Position;
@@ -258,16 +258,17 @@ export const Dropdown = ({ responsive, ...rest }: DropdownProps) => {
           [styles.visible]: isOpen,
           [styles[getEnumAsClass<typeof styles>(side)]]: side != null,
         })}>
-        {React.Children.map(children, (child) =>
-          React.cloneElement(
-            child as DropdownChild,
-            child.type === DropdownOption
-              ? ({
-                  onClickClose: () => setDropdowOpen(false),
-                } as Partial<typeof DropdownOption>)
-              : undefined,
-          ),
-        )}
+        {React.Children.map(children as any, (child) => {
+          if (child?.type === DropdownOption) {
+            return React.cloneElement(
+              child as React.ReactElement<typeof DropdownOption>,
+              {
+                onClickClose: () => setDropdowOpen(false),
+              } as Partial<typeof DropdownOption>,
+            );
+          }
+          return child;
+        })}
       </div>
     </div>
   );

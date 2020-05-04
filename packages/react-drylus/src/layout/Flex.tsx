@@ -11,7 +11,7 @@ import {
 } from '../components';
 import { Direction, Size, Speed } from '../enums';
 import { Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { checkComponentProps, run, useResponsiveProps } from '../utils';
 import { Margin } from './Margin';
 
 const styles = {
@@ -247,16 +247,7 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
     animationDirection,
   } = useResponsiveProps<FlexProps>(rest, responsive);
 
-  const invalidChildren = React.Children.map(children as any, (x) => x).some(
-    (child: React.ReactElement) =>
-      child != null &&
-      child.type !== FlexItem &&
-      child.type !== FlexSpacer &&
-      !child.type.toString().includes('fragment'),
-  );
-  if (invalidChildren) {
-    console.warn('Flex should only accept FlexItem or FlexSpacer as children.');
-  }
+  checkComponentProps({ children }, { children: [FlexItem, FlexSpacer] });
 
   const animationProps = animated
     ? {

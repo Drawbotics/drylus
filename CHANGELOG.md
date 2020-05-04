@@ -1,3 +1,31 @@
+# v6.4.2 (Mon May 04 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/check component props [#132](https://github.com/Drawbotics/drylus/pull/132) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.4.1 (Thu Apr 30 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix import  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - add responsive and style to attachment box and attachment list  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.4.0 (Thu Apr 30 2020)
 
 #### 🚀 Enhancement - Minor change

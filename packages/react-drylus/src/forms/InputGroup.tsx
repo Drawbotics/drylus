@@ -3,7 +3,7 @@ import React from 'react';
 import { Category, Size } from '../enums';
 import { Flex, FlexAlign, FlexDirection, FlexItem, Margin } from '../layout';
 import { Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { checkComponentProps, run, useResponsiveProps } from '../utils';
 import {
   Checkbox,
   Input,
@@ -30,7 +30,7 @@ export type InputGroupChild =
 
 export interface InputGroupProps {
   /** Form components that will be grouped together */
-  children: Array<InputGroupChild>; // TODO only allow form components
+  children: Array<InputGroupChild>;
 
   /** Small text shown below the group, replaced by error if present */
   hint?: string;
@@ -55,6 +55,23 @@ export const InputGroup = ({ responsive, ...rest }: InputGroupProps) => {
   const { hint, error, valid, children, style, horizontal } = useResponsiveProps<InputGroupProps>(
     rest,
     responsive,
+  );
+
+  checkComponentProps(
+    { children },
+    {
+      children: [
+        MultiSelect,
+        RangeInput,
+        NumberInput,
+        SearchInput,
+        TextArea,
+        Checkbox,
+        RadioGroup,
+        Input,
+        Select,
+      ],
+    },
   );
 
   return (

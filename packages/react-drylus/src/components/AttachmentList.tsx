@@ -4,8 +4,8 @@ import React from 'react';
 
 import { Shade, Size } from '../enums';
 import { Flex, FlexItem, FlexJustify, FlexSpacer, Margin } from '../layout';
+import { checkComponentProps, useResponsiveProps } from '../utils';
 import { Responsive, Style } from '../types';
-import { useResponsiveProps } from '../utils';
 import { AttachmentBox } from './AttachmentBox';
 import { Icon } from './Icon';
 import { Text } from './Text';
@@ -39,6 +39,9 @@ export const AttachmentList = ({ responsive, ...rest }: AttachmentListProps) => 
     rest,
     responsive,
   );
+    
+  checkComponentProps({ children }, { children: AttachmentBox });
+  
   return (
     <div style={style} className={styles.root}>
       <Flex justify={FlexJustify.START}>
