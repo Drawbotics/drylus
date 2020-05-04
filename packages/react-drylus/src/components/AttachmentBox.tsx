@@ -13,6 +13,8 @@ import {
   ListTile,
   Padding,
 } from '../layout';
+import { Responsive, Style } from '../types';
+import { useResponsiveProps } from '../utils';
 import { FileIcon, FileType } from './FileIcon';
 import { Icon } from './Icon';
 import { ProgressBar } from './ProgressBar';
@@ -38,16 +40,20 @@ interface AttachmentBoxProps {
 
   /** To control what should happen when remove is clicked. If not provided remove button is not displyed */
   onClickClose?: VoidFunction;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
 }
 
-export const AttachmentBox = ({
-  fileName,
-  progress,
-  onClickDownload,
-  onClickClose,
-}: AttachmentBoxProps) => {
+export const AttachmentBox = ({ responsive, ...rest }: AttachmentBoxProps) => {
+  const { fileName, progress, onClickDownload, onClickClose, style } = useResponsiveProps<
+    AttachmentBoxProps
+  >(rest, responsive);
   return (
-    <div className={styles.root}>
+    <div style={style} className={styles.root}>
       <Padding size={Size.EXTRA_SMALL}>
         <Flex direction={FlexDirection.HORIZONTAL} justify={FlexJustify.SPACE_BETWEEN}>
           <FlexItem flex style={{ display: 'flex' }}>

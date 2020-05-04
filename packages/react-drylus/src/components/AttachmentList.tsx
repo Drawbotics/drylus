@@ -4,7 +4,8 @@ import React from 'react';
 
 import { Shade, Size } from '../enums';
 import { Flex, FlexItem, FlexJustify, FlexSpacer, Margin } from '../layout';
-import { checkComponentProps } from '../utils';
+import { checkComponentProps, useResponsiveProps } from '../utils';
+import { Responsive, Style } from '../types';
 import { AttachmentBox } from './AttachmentBox';
 import { Icon } from './Icon';
 import { Text } from './Text';
@@ -25,12 +26,24 @@ export interface AttachmentListProps {
    * @default 'Attachments'
    */
   label?: string;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
 }
 
-export const AttachmentList = ({ children, label = 'Attachments' }: AttachmentListProps) => {
+export const AttachmentList = ({ responsive, ...rest }: AttachmentListProps) => {
+  const { children, label = 'Attachments', style } = useResponsiveProps<AttachmentListProps>(
+    rest,
+    responsive,
+  );
+    
   checkComponentProps({ children }, { children: AttachmentBox });
+  
   return (
-    <div className={styles.root}>
+    <div style={style} className={styles.root}>
       <Flex justify={FlexJustify.START}>
         <FlexItem>
           <Icon style={{ color: sv.colorSecondary }} name="link" />
