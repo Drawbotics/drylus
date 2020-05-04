@@ -165,13 +165,15 @@ export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
       }
     : {};
 
+  const RootElement = animated ? motion.div : 'div';
+
   return (
-    <motion.div
+    <RootElement
       {...animationProps}
       className={cx(styles.item, { [styles.equalSpan]: equalSpan })}
       style={flex && typeof flex !== 'boolean' ? { ...prefixFlex(flex), ...style } : style}>
       {children}
-    </motion.div>
+    </RootElement>
   );
 };
 
@@ -258,8 +260,10 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
       }
     : {};
 
+  const RootElement = animated ? motion.div : 'div';
+
   return (
-    <motion.div
+    <RootElement
       {...animationProps}
       className={cx(
         styles.root,
@@ -288,6 +292,6 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
               : child;
           })
         : null}
-    </motion.div>
+    </RootElement>
   );
 };
