@@ -10,6 +10,12 @@ export const itemVariants = {
   initial: {
     opacity: 0,
   },
+  visible: {
+    opacity: 1,
+    transition: {
+      type: 'tween',
+    },
+  },
   small: {
     scale: 0.7,
   },
@@ -27,12 +33,14 @@ export const itemVariants = {
   },
   enter: {
     scale: 1,
-    opacity: 1,
     y: 0,
     x: 0,
   },
   exit: {
     opacity: 0,
+    transition: {
+      type: 'tween',
+    },
   },
 };
 
@@ -138,6 +146,7 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
     transition = {},
     variants = {},
     noAnimate,
+    animateExit,
   } = useResponsiveProps<AnimatedItemProps>(rest, responsive);
 
   const { exit: customExit = {}, enter: customEnter = {}, initial: customInitial = {} } = variants;
@@ -154,8 +163,8 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
     <motion.div
       style={style}
       initial={['initial', getVariantFromDirection(direction), 'customInitial']}
-      animate={noAnimate ? undefined : ['enter', 'customEnter']}
-      exit={noAnimate ? undefined : ['exit', 'customExit']}
+      animate={noAnimate ? undefined : ['enter', 'visible', 'customEnter']}
+      exit={animateExit ? ['exit', 'customExit'] : undefined}
       variants={{ ...itemVariants, customEnter, customExit, customInitial }}
       transition={transitionOptions}>
       {children}
@@ -191,6 +200,12 @@ export interface AnimationGroupProps {
 }
 
 export const groupVariants = {
+  visible: (stagger: number = 0.2) => ({
+    transition: {
+      duration: stagger * 2,
+      staggerChildren: stagger,
+    },
+  }),
   enter: (stagger: number = 0.2) => ({
     transition: {
       staggerChildren: stagger,
@@ -198,6 +213,7 @@ export const groupVariants = {
   }),
   exit: (stagger: number = 0.2) => ({
     transition: {
+      duration: stagger * 2,
       staggerChildren: stagger,
     },
   }),
@@ -213,7 +229,7 @@ export const AnimationGroup = ({
   const animationProps = {
     custom: getStaggerFromSpeed(speed),
     variants: groupVariants,
-    animate: staggerChildren ? 'enter' : undefined,
+    animate: staggerChildren ? ['enter', 'visible'] : undefined,
     initial: ['initial', getVariantFromDirection(direction)],
     exit: ['exit'],
   };
@@ -227,7 +243,9 @@ export const AnimationGroup = ({
       if (child?.type === AnimatedItem || child?.props.originalType === AnimatedItem) {
         return React.cloneElement(
           child as React.ReactElement<typeof AnimatedItem>,
-          { direction, speed, noAnimate: !!staggerChildren } as Partial<typeof AnimatedItem>,
+          { direction, speed, noAnimate: !!staggerChildren, animateExit } as Partial<
+            typeof AnimatedItem
+          >,
         );
       }
       return child;
@@ -241,7 +259,7 @@ export const AnimationGroup = ({
   );
 
   if (animateExit) {
-    return <AnimatePresence>{children == null ? null : content}</AnimatePresence>;
+    return <AnimatePresence exitBeforeEnter>{children == null ? null : content}</AnimatePresence>;
   }
 
   return children == null ? null : content;
