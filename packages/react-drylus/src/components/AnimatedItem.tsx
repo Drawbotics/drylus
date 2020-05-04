@@ -200,18 +200,26 @@ export interface AnimationGroupProps {
 }
 
 export const groupVariants = {
-  visible: (stagger: number = 0.2) => ({
+  visible: ({
+    stagger = 0.2,
+    staggerDirection,
+  }: {
+    stagger: number;
+    staggerDirection: number;
+  }) => ({
     transition: {
+      staggerDirection,
       duration: stagger * 2,
       staggerChildren: stagger,
     },
   }),
-  enter: (stagger: number = 0.2) => ({
+  enter: ({ stagger = 0.2, staggerDirection }: { stagger: number; staggerDirection: number }) => ({
     transition: {
+      staggerDirection,
       staggerChildren: stagger,
     },
   }),
-  exit: (stagger: number = 0.2) => ({
+  exit: ({ stagger = 0.2 }: { stagger: number }) => ({
     transition: {
       duration: stagger * 2,
       staggerChildren: stagger,
@@ -225,9 +233,10 @@ export const AnimationGroup = ({
   speed,
   staggerChildren = false,
   animateExit,
+  inversedStagger,
 }: AnimationGroupProps) => {
   const animationProps = {
-    custom: getStaggerFromSpeed(speed),
+    custom: { stagger: getStaggerFromSpeed(speed), staggerDirection: inversedStagger ? -1 : 1 },
     variants: groupVariants,
     animate: staggerChildren ? ['enter', 'visible'] : undefined,
     initial: ['initial', getVariantFromDirection(direction)],
@@ -253,7 +262,11 @@ export const AnimationGroup = ({
   );
 
   const content = staggerChildren ? (
-    <motion.div {...animationProps}>{_children}</motion.div>
+    <motion.div
+      transition={inversedStagger ? { staggerDirection: -1 } : undefined}
+      {...animationProps}>
+      {_children}
+    </motion.div>
   ) : (
     _children
   );
