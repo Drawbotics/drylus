@@ -1,3 +1,16 @@
+# v6.4.2 (Mon May 04 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/check component props [#132](https://github.com/Drawbotics/drylus/pull/132) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.4.1 (Thu Apr 30 2020)
 
 #### ⚠️  Pushed to master
