@@ -223,8 +223,10 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
 
   checkComponentProps({ children }, { children: GridItem });
 
+  const RootElement = animated ? motion.div : 'div';
+
   return (
-    <motion.div
+    <RootElement
       variants={{}}
       initial="hidden"
       animate={controls}
@@ -248,6 +250,6 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
             animationSpeed,
           } as Partial<typeof GridItem>),
       )}
-    </motion.div>
+    </RootElement>
   );
 };
