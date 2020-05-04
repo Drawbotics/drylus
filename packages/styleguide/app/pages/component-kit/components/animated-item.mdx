@@ -119,7 +119,7 @@ __Example__
 </Playground>
 
 export const AnimateExitExample = ({ children }) => {
-  const [isVisible, setIsVisible ] = useState(true);
+  const [isVisible, setIsVisible ] = useState(false);
   return children({ isVisible, toggle: () => setIsVisible(! isVisible) });
 };
 
@@ -133,14 +133,14 @@ Internally the `AnimationGroup` uses `AnimatePresence` from framer when the `ani
         <Margin size={{ bottom: Size.LARGE }}>  
           <Button onClick={toggle}>Toggle items</Button>
         </Margin>
-        <AnimationGroup direction={Direction.BOTTOM_UP} animateExit staggerChildren>
+        <AnimationGroup direction={Direction.BOTTOM_UP} staggerChildren animateExit>
           {isVisible ? (
             <Fragment>
-              <AnimatedItem id="1" style={{ width: 300 }}><Item small /></AnimatedItem>
-              <AnimatedItem id="2" style={{ width: 300 }}>
+              <AnimatedItem style={{ width: 300 }}><Item small /></AnimatedItem>
+              <AnimatedItem style={{ width: 300 }}>
                 <Margin size={{ top: Size.DEFAULT }}><Item small /></Margin>
               </AnimatedItem>
-              <AnimatedItem id="3" style={{ width: 300 }}>
+              <AnimatedItem style={{ width: 300 }}>
                 <Margin size={{ top: Size.DEFAULT }}><Item small /> </Margin>
               </AnimatedItem>
             </Fragment>

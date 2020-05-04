@@ -10,9 +10,6 @@ export const itemVariants = {
   initial: {
     opacity: 0,
   },
-  visible: {
-    opacity: 1,
-  },
   small: {
     scale: 0.7,
   },
@@ -96,7 +93,7 @@ export interface AnimatedItemProps {
 
   /**
    * Animates when unmounting, only possible if AnimationGroup wraps the component
-   * The exit animation will be the opposite of the enter animation i.e. if scale 0.5 -> 1, then exit = 1 -> 0.5
+   * The exit animation will be only a fade to opacity 0
    * This option can be used to individually animate one item within AnimationGroup, or disabling it as well if the option is set on the AnimationGroup
    */
   animateExit?: boolean;
@@ -158,7 +155,7 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
       style={style}
       initial={['initial', getVariantFromDirection(direction), 'customInitial']}
       animate={noAnimate ? undefined : ['enter', 'customEnter']}
-      exit={noAnimate ? undefined : ['exit', getVariantFromDirection(direction), 'customExit']}
+      exit={noAnimate ? undefined : ['exit', 'customExit']}
       variants={{ ...itemVariants, customEnter, customExit, customInitial }}
       transition={transitionOptions}>
       {children}
@@ -174,7 +171,10 @@ export interface AnimationGroupProps {
    * Will set a delay between each AnimatedItem child: only works with DIRECT children
    * @default false
    */
-  staggerChildren: boolean;
+  staggerChildren?: boolean;
+
+  /** If true, last children come in first */
+  inversedStagger?: boolean;
 
   /**
    * If true, any AnimatedItem will animate when unmounting, unless explicitely disabled by setting animateExit=false on the item
@@ -190,7 +190,7 @@ export interface AnimationGroupProps {
   speed?: Speed;
 }
 
-const groupVariants = {
+export const groupVariants = {
   enter: (stagger: number = 0.2) => ({
     transition: {
       staggerChildren: stagger,
@@ -215,7 +215,7 @@ export const AnimationGroup = ({
     variants: groupVariants,
     animate: staggerChildren ? 'enter' : undefined,
     initial: ['initial', getVariantFromDirection(direction)],
-    exit: ['exit', getVariantFromDirection(direction)],
+    exit: ['exit'],
   };
 
   const isFragmentWrapped =
@@ -241,8 +241,8 @@ export const AnimationGroup = ({
   );
 
   if (animateExit) {
-    return <AnimatePresence>{content}</AnimatePresence>;
+    return <AnimatePresence>{children == null ? null : content}</AnimatePresence>;
   }
 
-  return <Fragment>{content}</Fragment>;
+  return children == null ? null : content;
 };

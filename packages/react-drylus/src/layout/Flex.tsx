@@ -7,6 +7,7 @@ import {
   getSettingsFromSpeed,
   getStaggerFromSpeed,
   getVariantFromDirection,
+  groupVariants,
   itemVariants,
 } from '../components';
 import { Direction, Size, Speed } from '../enums';
@@ -177,14 +178,6 @@ export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
   );
 };
 
-const flexVariants = {
-  enter: (stagger: number = 0.2) => ({
-    transition: {
-      staggerChildren: stagger,
-    },
-  }),
-};
-
 export interface FlexProps {
   children:
     | React.ReactElement<typeof FlexItem>
@@ -254,8 +247,8 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
   const animationProps = animated
     ? {
         custom: getStaggerFromSpeed(animationSpeed),
-        variants: flexVariants,
-        animate: 'enter',
+        variants: groupVariants,
+        animate: ['enter'],
         initial: ['initial', getVariantFromDirection(animationDirection)],
       }
     : {};
