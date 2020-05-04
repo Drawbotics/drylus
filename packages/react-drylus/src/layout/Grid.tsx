@@ -7,7 +7,7 @@ import React from 'react';
 
 import { Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { useResponsiveProps } from '../utils';
+import { checkComponentProps, useResponsiveProps } from '../utils';
 
 const styles = {
   root: (cols: number) => css`
@@ -116,13 +116,8 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
     responsive,
   );
 
-  const invalidChildren = React.Children.map(children as any, (x) => x).some(
-    (child: React.ReactElement) =>
-      child != null && child.type !== GridItem && !child.type.toString().includes('fragment'),
-  );
-  if (invalidChildren) {
-    console.warn('Grid should only accept GridItem as children');
-  }
+  checkComponentProps({ children }, { children: GridItem });
+
   return (
     <div
       className={cx(styles.root(columns), {

@@ -5,7 +5,13 @@ import React from 'react';
 import { Category, Size } from '../enums';
 import { Flex, FlexAlign, FlexItem, FlexJustify, Margin } from '../layout';
 import { Responsive, Style } from '../types';
-import { getEnumAsClass, getIconForCategory, run, useResponsiveProps } from '../utils';
+import {
+  checkComponentProps,
+  getEnumAsClass,
+  getIconForCategory,
+  run,
+  useResponsiveProps,
+} from '../utils';
 import { Button } from './Button';
 import { Icon } from './Icon';
 
@@ -47,7 +53,7 @@ export interface BannerProps {
   category: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** Component to be displayed on the far right of the banner. Should only be of type Button */
-  trailing?: React.ReactElement<typeof Button>;
+  trailing?: React.ReactElement<typeof Button> | React.ReactNode;
 
   /** Used for style overrides */
   style?: Style;
@@ -59,9 +65,8 @@ export interface BannerProps {
 export const Banner = ({ responsive, ...rest }: BannerProps) => {
   const { children, category, title, style, trailing } = useResponsiveProps(rest, responsive);
 
-  if (trailing != null && trailing?.type !== Button) {
-    console.warn('`trailing` type should only be Button');
-  }
+  checkComponentProps({ trailing }, { trailing: Button });
+
   const icon = getIconForCategory(category);
 
   return (
