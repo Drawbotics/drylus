@@ -1,3 +1,4 @@
+import { Fragment, useState } from 'react';
 import {
   AnimationGroup,
   AnimatedItem,
@@ -11,6 +12,8 @@ import {
   FlexItem,
   FlexSpacer,
   Speed,
+  Button,
+  Direction,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -113,4 +116,37 @@ __Example__
       <Margin size={{ top: Size.DEFAULT }}><Item small /> </Margin>
     </AnimatedItem>
   </AnimationGroup>
+</Playground>
+
+export const AnimateExitExample = ({ children }) => {
+  const [isVisible, setIsVisible ] = useState(true);
+  return children({ isVisible, toggle: () => setIsVisible(! isVisible) });
+};
+
+### Animate Exit example
+Internally the `AnimationGroup` uses `AnimatePresence` from framer when the `animateExit` prop is given
+
+<Playground mode="jsx">
+  <AnimateExitExample>
+    {({ isVisible, toggle }) => (
+      <Fragment>
+        <Margin size={{ bottom: Size.LARGE }}>  
+          <Button onClick={toggle}>Toggle items</Button>
+        </Margin>
+        <AnimationGroup direction={Direction.BOTTOM_UP} animateExit staggerChildren>
+          {isVisible ? (
+            <Fragment>
+              <AnimatedItem id="1" style={{ width: 300 }}><Item small /></AnimatedItem>
+              <AnimatedItem id="2" style={{ width: 300 }}>
+                <Margin size={{ top: Size.DEFAULT }}><Item small /></Margin>
+              </AnimatedItem>
+              <AnimatedItem id="3" style={{ width: 300 }}>
+                <Margin size={{ top: Size.DEFAULT }}><Item small /> </Margin>
+              </AnimatedItem>
+            </Fragment>
+          ) : null}
+        </AnimationGroup>
+      </Fragment>
+    )}
+  </AnimateExitExample>
 </Playground>

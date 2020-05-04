@@ -1,5 +1,6 @@
-import { Transition, Variant, motion } from 'framer-motion';
-import React from 'react';
+import { AnimatePresence, Transition, Variant, motion } from 'framer-motion';
+import get from 'lodash/get';
+import React, { Fragment } from 'react';
 
 import { Direction, Speed } from '../enums';
 import { Responsive, Style } from '../types';
@@ -32,6 +33,9 @@ export const itemVariants = {
     opacity: 1,
     y: 0,
     x: 0,
+  },
+  exit: {
+    opacity: 0,
   },
 };
 
@@ -154,7 +158,7 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
       style={style}
       initial={['initial', getVariantFromDirection(direction), 'customInitial']}
       animate={noAnimate ? undefined : ['enter', 'customEnter']}
-      exit={['exit', 'customExit']}
+      exit={noAnimate ? undefined : ['exit', getVariantFromDirection(direction), 'customExit']}
       variants={{ ...itemVariants, customEnter, customExit, customInitial }}
       transition={transitionOptions}>
       {children}
@@ -167,8 +171,8 @@ export interface AnimationGroupProps {
   children: React.ReactNode;
 
   /**
-   * Will set a delay between each AnimatedItem child
-   * @default true
+   * Will set a delay between each AnimatedItem child: only works with DIRECT children
+   * @default false
    */
   staggerChildren: boolean;
 
@@ -192,33 +196,53 @@ const groupVariants = {
       staggerChildren: stagger,
     },
   }),
+  exit: (stagger: number = 0.2) => ({
+    transition: {
+      staggerChildren: stagger,
+    },
+  }),
 };
 
 export const AnimationGroup = ({
   children,
   direction,
   speed,
-  staggerChildren,
-}: // animateExit,
-AnimationGroupProps) => {
+  staggerChildren = false,
+  animateExit,
+}: AnimationGroupProps) => {
   const animationProps = {
     custom: getStaggerFromSpeed(speed),
     variants: groupVariants,
     animate: staggerChildren ? 'enter' : undefined,
     initial: ['initial', getVariantFromDirection(direction)],
+    exit: ['exit', getVariantFromDirection(direction)],
   };
 
-  return (
-    <motion.div {...animationProps}>
-      {React.Children.map(children as any, (child) => {
-        if (child?.type === AnimatedItem) {
-          return React.cloneElement(
-            child as React.ReactElement<typeof AnimatedItem>,
-            { direction, speed, noAnimate: staggerChildren } as Partial<typeof AnimatedItem>,
-          );
-        }
-        return child;
-      })}
-    </motion.div>
+  const isFragmentWrapped =
+    get(children, 'type') === Fragment || get(children, 'props.originalType') === Fragment;
+
+  const _children = React.Children.map(
+    isFragmentWrapped ? (children as any).props.children : (children as any),
+    (child) => {
+      if (child?.type === AnimatedItem || child?.props.originalType === AnimatedItem) {
+        return React.cloneElement(
+          child as React.ReactElement<typeof AnimatedItem>,
+          { direction, speed, noAnimate: !!staggerChildren } as Partial<typeof AnimatedItem>,
+        );
+      }
+      return child;
+    },
   );
+
+  const content = staggerChildren ? (
+    <motion.div {...animationProps}>{_children}</motion.div>
+  ) : (
+    _children
+  );
+
+  if (animateExit) {
+    return <AnimatePresence>{content}</AnimatePresence>;
+  }
+
+  return <Fragment>{content}</Fragment>;
 };
