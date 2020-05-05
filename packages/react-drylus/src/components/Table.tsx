@@ -1001,6 +1001,7 @@ export const Table = ({
 
   const table = (
     <table
+      ref={tableRef}
       style={style}
       className={cx(styles.root, {
         [styles.fullWidth]: fullWidth,
