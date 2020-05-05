@@ -86,7 +86,7 @@ export const Breadcrumbs = ({ crumbs, linkComponent: Link, style }: BreadcrumbsP
               return <div className={styles.divisor}>/</div>;
             }
           })}
-          {Link
+          {Link != null && crumb.url != null
             ? React.createElement(
                 Link as React.ComponentClass<{ href?: string }>,
                 { href: crumb.url },
