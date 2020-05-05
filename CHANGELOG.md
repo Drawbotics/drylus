@@ -1,3 +1,19 @@
+# v6.4.3 (Tue May 05 2020)
+
+#### ⚠️  Pushed to master
+
+- don't run check labels on synchronize  ([@nicmosc](https://github.com/nicmosc))
+- fix github action version  ([@nicmosc](https://github.com/nicmosc))
+- add check labels workflow  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - allow any child as Text children  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.4.2 (Mon May 04 2020)
 
 #### 🐛 Bug fix - Patch

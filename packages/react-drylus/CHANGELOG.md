@@ -1,3 +1,16 @@
+# v6.4.3 (Tue May 05 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - allow any child as Text children  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.4.1 (Thu Apr 30 2020)
 
 #### ⚠️  Pushed to master
