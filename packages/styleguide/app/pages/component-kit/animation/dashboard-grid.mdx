@@ -16,6 +16,8 @@ import {
   Tile,
   Direction,
   Speed,
+  AnimatedItem,
+  AnimationGroup,
 } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -44,16 +46,22 @@ export const Item = () => {
     <Navbar />
     <Content>
       <Padding>
-        <Margin size={{ top: Size.DEFAULT, bottom: Size.SMALL }}>
-          <Title size={2} noMargin>
-            Welcome Amber
-          </Title>
-        </Margin>
-        <Text>
-          Start by creating a projet
-        </Text>
+        <AnimationGroup speed={Speed.FAST} direction={Direction.LEFT_RIGHT} staggerChildren>
+          <AnimatedItem>
+            <Margin size={{ top: Size.DEFAULT, bottom: Size.SMALL }}>
+              <Title size={2} noMargin>
+                Welcome Amber
+              </Title>
+            </Margin>
+          </AnimatedItem>
+          <AnimatedItem>
+            <Text>
+              Start by creating a projet
+            </Text>
+          </AnimatedItem>
+        </AnimationGroup>
         <Margin size={{ top: Size.EXTRA_LARGE, bottom: Size.LARGE }}>
-          <Flex animated animationDirection={Direction.TOP_DOWN} animationSpeed={Speed.FAST}>
+          <Flex animationDelay={300} animated animationDirection={Direction.TOP_DOWN} animationSpeed={Speed.FAST}>
             <FlexItem>
               <Title size={4} noMargin>
                 Projects
@@ -88,8 +96,8 @@ export const Item = () => {
             </FlexItem>
           </Flex>
         </Margin>
-        <Grid animated hGutters={Size.DEFAULT} vGutters={Size.DEFAULT} columns={4}>
-          {[...Array(12).keys()].map((i) =>
+        <Grid animated animationDelay={600} hGutters={Size.DEFAULT} vGutters={Size.DEFAULT} columns={4}>
+          {[...Array(8).keys()].map((i) =>
             <GridItem key={i}>
               <Item />
             </GridItem>
