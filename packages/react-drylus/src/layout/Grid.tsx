@@ -58,7 +58,7 @@ const originIndex = 0;
 const itemVariants = {
   hidden: {
     opacity: 0,
-    scale: 0.5,
+    scale: 0.95,
   },
   visible: (delayRef: React.MutableRefObject<number>) => ({
     opacity: 1,
