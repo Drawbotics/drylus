@@ -5,7 +5,7 @@ import { Label } from '../components';
 import { Size } from '../enums';
 import { Flex, FlexAlign, FlexDirection, FlexItem, Margin } from '../layout';
 import { Responsive, Style } from '../types';
-import { checkComponentProps, useResponsiveProps } from '../utils';
+import { useResponsiveProps } from '../utils';
 import {
   Checkbox,
   Input,
@@ -55,25 +55,6 @@ export interface FormGroupProps {
 
 export const FormGroup = ({ responsive, ...rest }: FormGroupProps) => {
   const { label, input, horizontal, style } = useResponsiveProps<FormGroupProps>(rest, responsive);
-
-  checkComponentProps(
-    { input, label },
-    {
-      label: Label,
-      input: [
-        InputGroup,
-        MultiSelect,
-        RangeInput,
-        NumberInput,
-        SearchInput,
-        TextArea,
-        Checkbox,
-        RadioGroup,
-        Input,
-        Select,
-      ],
-    },
-  );
 
   return (
     <div style={style} className={styles.root}>
