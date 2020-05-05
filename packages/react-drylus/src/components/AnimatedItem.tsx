@@ -102,7 +102,7 @@ export interface AnimatedItemProps {
   /**
    * Animates when unmounting, only possible if AnimationGroup wraps the component
    * The exit animation will be only a fade to opacity 0
-   * This option can be used to individually animate one item within AnimationGroup, or disabling it as well if the option is set on the AnimationGroup
+   * This option can be used to individually disable the exit animation if the option is set on the AnimationGroup (not considered if `staggerChildren` is set)
    */
   animateExit?: boolean;
 
@@ -252,9 +252,12 @@ export const AnimationGroup = ({
       if (child?.type === AnimatedItem || child?.props.originalType === AnimatedItem) {
         return React.cloneElement(
           child as React.ReactElement<typeof AnimatedItem>,
-          { direction, speed, noAnimate: !!staggerChildren, animateExit } as Partial<
-            typeof AnimatedItem
-          >,
+          {
+            direction,
+            speed,
+            noAnimate: !!staggerChildren,
+            animateExit: child.props.animateExit != null ? child.props.animateExit : animateExit,
+          } as Partial<typeof AnimatedItem>,
         );
       }
       return child;
@@ -272,7 +275,11 @@ export const AnimationGroup = ({
   );
 
   if (animateExit) {
-    return <AnimatePresence exitBeforeEnter>{children == null ? null : content}</AnimatePresence>;
+    return (
+      <AnimatePresence exitBeforeEnter={React.Children.count(content) === 1}>
+        {children == null ? null : content}
+      </AnimatePresence>
+    );
   }
 
   return children == null ? null : content;

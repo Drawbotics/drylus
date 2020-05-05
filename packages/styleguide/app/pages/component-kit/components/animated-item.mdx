@@ -124,7 +124,9 @@ export const AnimateExitExample = ({ children }) => {
 };
 
 ### Animate Exit example
-Internally the `AnimationGroup` uses `AnimatePresence` from framer when the `animateExit` prop is given
+Internally the `AnimationGroup` uses `AnimatePresence` from framer when the `animateExit` prop is given, that's why the component should be placed outside of the content that is currently being toggled (enter/exit).
+
+This pattern can be used when you want to toggle between different items and want to animate the unmount of each one, or can be used to animate content between route changes.
 
 <Playground mode="jsx">
   <AnimateExitExample>
@@ -133,7 +135,7 @@ Internally the `AnimationGroup` uses `AnimatePresence` from framer when the `ani
         <Margin size={{ bottom: Size.LARGE }}>  
           <Button onClick={toggle}>Toggle items</Button>
         </Margin>
-        <AnimationGroup direction={Direction.BOTTOM_UP} staggerChildren animateExit>
+        <AnimationGroup direction={Direction.BOTTOM_UP} animateExit staggerChildren>
           {isVisible ? (
             <Fragment>
               <AnimatedItem style={{ width: 300 }}><Item small /></AnimatedItem>
