@@ -1,0 +1,92 @@
+import { css } from 'emotion';
+import {
+  Color,
+  Content,
+  Margin,
+  Size,
+  Title,
+  Padding,
+  Text,
+  Flex,
+  FlexItem,
+  FlexSpacer,
+  Direction,
+  Speed,
+  AnimatedItem,
+  AnimationGroup,
+  EmptyState,
+  Breadcrumbs,
+  Shade,
+  Button,
+  Category,
+  Avatar,
+  Icon,
+} from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+import { Navbar } from './components/Navbar';
+
+# Toolbar example
+
+<Playground mode="jsx">
+  <>
+    <Navbar />
+    <Content>
+      <Padding>
+        <Breadcrumbs
+          crumbs={[
+            {
+              icon: 'home',
+            },
+            {
+              label: 'Project',
+            },
+            {
+              label: 'Dashboard',
+              active: true,
+            },
+          ]}
+        />
+        <Margin size={{ top: Size.DEFAULT, bottom: Size.EXTRA_LARGE }}>
+          <Flex animated animationDirection={Direction.TOP_DOWN} animationSpeed={Speed.FAST}>
+            <FlexItem>
+              <Title size={4} noMargin>
+                Dashboard
+              </Title>
+            </FlexItem>
+            <FlexSpacer size={Size.SMALL} />
+            <FlexItem>
+              <Text shade={Shade.MEDIUM} size={Size.SMALL}>
+                The last 3 months
+              </Text>
+            </FlexItem>
+            <FlexSpacer flex size={Size.SMALL} />
+            <FlexItem>
+              <Button category={Category.BRAND}>Invite teammates</Button>
+            </FlexItem>
+            <FlexSpacer size={Size.SMALL} />
+            <FlexItem>
+              <Flex animated animationDelay={400} animationDirection={Direction.RIGHT_LEFT} speed={Speed.FAST}>
+                <FlexItem style={{ position: 'relative', zIndex: 4 }}>
+                  <Avatar text="M" color={Color.ORANGE} />
+                </FlexItem>
+                <FlexItem style={{ position: 'relative', zIndex: 3 }}>
+                  <Avatar style={{ marginLeft: -10 }} text="L" color={Color.BLUE} />
+                </FlexItem>
+                <FlexItem style={{ position: 'relative', zIndex: 2 }}>
+                  <Avatar style={{ marginLeft: -10 }} text="F" color={Color.GREEN} />
+                </FlexItem>
+                <FlexItem style={{ position: 'relative', zIndex: 1 }}>
+                  <Button size={Size.SMALL} style={{ marginLeft: -10 }} leading={<Icon name="plus" />} />
+                </FlexItem>
+              </Flex>
+            </FlexItem>
+          </Flex>
+        </Margin>
+        <AnimatedItem delay={1200}>
+          <EmptyState />
+        </AnimatedItem>
+      </Padding>
+    </Content>
+  </>
+</Playground>
