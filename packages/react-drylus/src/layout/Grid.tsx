@@ -105,6 +105,9 @@ export interface GridItemProps {
 
   /** @private */
   index: number;
+
+  /** @private */
+  delay?: number;
 }
 
 export const GridItem = ({
@@ -116,6 +119,7 @@ export const GridItem = ({
   originOffset,
   index,
   animationSpeed,
+  delay,
 }: GridItemProps) => {
   if (span > columns) {
     console.warn(`Warning: GridItem span cannot be more than number of columns`);
@@ -147,7 +151,7 @@ export const GridItem = ({
     const dy = Math.abs(offset.current.top - originOffset.current.top);
     const d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 
-    delayRef.current = d * delayPerPixel;
+    delayRef.current = d * delayPerPixel + (delay ? delay / 1000 : 0);
   }, [animated]);
 
   if (animated) {
@@ -197,6 +201,9 @@ export interface GridProps {
 
   animationSpeed?: Speed;
 
+  /** In ms, if given, the animation of the whole group will only begin once this time has passed */
+  animationDelay?: number;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -213,6 +220,7 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
     style,
     animated,
     animationSpeed,
+    animationDelay,
   } = useResponsiveProps<GridProps>(rest, responsive);
   const originOffset = useRef({ top: 0, left: 0 });
   const controls = useAnimation();
@@ -248,6 +256,7 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
             originOffset,
             index,
             animationSpeed,
+            delay: animationDelay,
           } as Partial<typeof GridItem>),
       )}
     </RootElement>

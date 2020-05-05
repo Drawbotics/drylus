@@ -221,6 +221,9 @@ export interface FlexProps {
   /** Determines where the flex items will come in from (relative to their own position). If not specified, a scale animation is used rather than a translate one */
   animationDirection?: Direction;
 
+  /** In ms, if given, the animation of the whole group will only begin once this time has passed */
+  animationDelay?: number;
+
   /** If true, last children come in first when animating */
   inversedStagger?: boolean;
 
@@ -244,6 +247,7 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
     animationSpeed,
     animationDirection,
     inversedStagger,
+    animationDelay,
   } = useResponsiveProps<FlexProps>(rest, responsive);
 
   checkComponentProps({ children }, { children: [FlexItem, FlexSpacer] });
@@ -253,6 +257,7 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
         custom: {
           stagger: getStaggerFromSpeed(animationSpeed),
           staggerDirection: inversedStagger ? -1 : 1,
+          delay: animationDelay,
         },
         variants: groupVariants,
         animate: ['enter', 'visible'],
