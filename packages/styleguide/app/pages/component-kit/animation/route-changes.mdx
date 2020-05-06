@@ -15,9 +15,11 @@ import {
   Button,
   Category,
   Tier,
+  AnimatedItem,
+  AnimationGroup,
 } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
-import { Redirect, Route, Link, HashRouter } from 'react-router-dom';
+import { Redirect, Route, Link, HashRouter, Switch } from 'react-router-dom';
 
 import Playground from '~/components/Playground';
 import { Navbar } from './components/Navbar';
@@ -26,7 +28,12 @@ import page2 from '~/assets/page-2.png';
 
 # Route change animation
 
-We used the `render` prop from `react-router-dom`'s `Route` component, but only for illustrative purposes, this will work with any other way you structure your routes.
+We used the `render` prop from `react-router-dom`'s `Route` component, but only for illustrative purposes, this will work with any other way you structure your routes. You have to respect the following constraint however:
+- When having items come in and out (replacing the current content) then the `AnimationGroup` will automatically set the `exitBeforeExit` prop from Framer, which will _wait_ for the previously visible elements to disappear. This prop __cannot work__ if there are more than 1 direct child of `AnimationGroup`, this is a constraint from Framer
+
+- The way Framer recognises unmounting, the `key` given to the direct child has to change when you want the animation to be triggered. This is why in the example below the `Switch` has a `key` equal to the current browser `location`. This patter can be applied to any child (e.g. in a gallery, each `img` will have a `key` equal to the currently active one, allowing the unmount animation to be triggered).
+
+- As mentioned in the `AnimationGroup` doc, when setting `animateExit`, the prop will only propagate to the direct `AnimatedItem`s, so any `AnimatedItem` you want to animate when unmounting will need to have the `animateExit` prop manually set, like in the example below.
 
 export const styles = {
   leftSplit: css`
@@ -79,59 +86,67 @@ export const BaseLayout = ({ content, image }) => {
 };
 
 <Playground mode="jsx">
-  <HashRouter>
-    <>
-      <Navbar />
-      <Route path="/1" render={() => {
-        return (
-          <BaseLayout
-            content={
-              <>
-                <Title>Sign in</Title>
-                <Text>Need an account? <TextLink>Sign up now</TextLink></Text>
-                <Margin size={{ bottom: Size.EXTRA_HUGE }} />
-                <FormGroup
-                  input={<Input value="" placeholder="your-email@gmail.com" onChange={() => {}} />}
-                  label={<Label>Email address</Label>} />
-                <Margin size={{ bottom: Size.DEFAULT }} />
-                <FormGroup
-                  input={<Input type="password" value="mysupersecurepassword" onChange={() => {}} />}
-                  label={<Label>Password</Label>} />
-                <Margin size={{ bottom: Size.SMALL }} />
-                <TextLink>Forgot your password?</TextLink>
-                <Margin size={{ bottom: Size.LARGE }} />
-                <Link to="/2">
-                  <ButtonLink category={Category.BRAND}>Sign in</ButtonLink>
-                </Link>
-                <Margin size={{ bottom: Size.LARGE }} />
-              </>
-            }
-            image={page1} />
-        );
-      }} />
-      <Route path="/2" render={() => {
-        return (
-          <BaseLayout
-            content={
-              <div className={styles.center}>
-                <Title>All done!</Title>
-                <Margin size={{ bottom: Size.DEFAULT }} />
-                <Text>You're almost done!</Text>
-                <Margin size={{ bottom: Size.EXTRA_SMALL }} />
-                <Text>Check your emails to validate your account</Text>
-                <Margin size={{ bottom: Size.LARGE }} />
-                <Button tier={Tier.SECONDARY}>I've already confirmed it</Button>
-                <Margin size={{ top: Size.LARGE }} />
-                <Link to="/1">
-                  <TextLink>Back to previous</TextLink>
-                </Link>
-                <Margin size={{ top: Size.LARGE }} />
-              </div>
-            }
-            image={page2} />
-        );
-      }} />
-      <Redirect from="/" to ="/1" />
-    </>
-  </HashRouter>
+  <>
+    <Navbar />
+    <HashRouter>
+      <Route render={({ location }) => (
+        <AnimationGroup animateExit>
+          <Switch location={location} key={location.pathname}>
+            <Route path="/1" render={() => {
+              return (
+                <BaseLayout
+                  content={
+                    <AnimatedItem animateExit>
+                      <Title>Sign in</Title>
+                      <Text>Need an account? <TextLink>Sign up now</TextLink></Text>
+                      <Margin size={{ bottom: Size.EXTRA_HUGE }} />
+                      <FormGroup
+                        input={<Input value="" placeholder="your-email@gmail.com" onChange={() => {}} />}
+                        label={<Label>Email address</Label>} />
+                      <Margin size={{ bottom: Size.DEFAULT }} />
+                      <FormGroup
+                        input={<Input type="password" value="mysupersecurepassword" onChange={() => {}} />}
+                        label={<Label>Password</Label>} />
+                      <Margin size={{ bottom: Size.SMALL }} />
+                      <TextLink>Forgot your password?</TextLink>
+                      <Margin size={{ bottom: Size.LARGE }} />
+                      <Link to="/2">
+                        <ButtonLink category={Category.BRAND}>Sign in</ButtonLink>
+                      </Link>
+                      <Margin size={{ bottom: Size.LARGE }} />
+                    </AnimatedItem>
+                  }
+                  image={page1} />
+              );
+            }} />
+            <Route path="/2" render={() => {
+              return (
+                <BaseLayout
+                  content={
+                    <AnimatedItem animateExit>
+                      <div className={styles.center}>
+                        <Title>All done!</Title>
+                        <Margin size={{ bottom: Size.DEFAULT }} />
+                        <Text>You're almost done!</Text>
+                        <Margin size={{ bottom: Size.EXTRA_SMALL }} />
+                        <Text>Check your emails to validate your account</Text>
+                        <Margin size={{ bottom: Size.LARGE }} />
+                        <Button tier={Tier.SECONDARY}>I've already confirmed it</Button>
+                        <Margin size={{ top: Size.LARGE }} />
+                        <Link to="/1">
+                          <TextLink>Back to previous</TextLink>
+                        </Link>
+                        <Margin size={{ top: Size.LARGE }} />
+                      </div>
+                    </AnimatedItem>
+                  }
+                  image={page2} />
+              );
+            }} />
+            <Redirect from="/" to ="/1" />
+          </Switch>
+        </AnimationGroup>
+      )} />
+    </HashRouter>
+  </>
 </Playground>

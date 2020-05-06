@@ -1,6 +1,6 @@
 import { AnimatePresence, Transition, Variant, motion } from 'framer-motion';
 import get from 'lodash/get';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 import { Direction, Speed } from '../enums';
 import { Responsive, Style } from '../types';
@@ -260,6 +260,8 @@ export const AnimationGroup = ({
   inversedStagger,
   delay,
 }: AnimationGroupProps) => {
+  const [exitBeforeEnter, setExitBeforeEnter] = useState<boolean>();
+
   const animationProps = {
     custom: {
       stagger: getStaggerFromSpeed(speed),
@@ -305,8 +307,14 @@ export const AnimationGroup = ({
   );
 
   if (animateExit) {
+    useEffect(() => {
+      if (exitBeforeEnter == null) {
+        setExitBeforeEnter(React.Children.count(content) === 1);
+      }
+    }, []);
+
     return (
-      <AnimatePresence exitBeforeEnter={React.Children.count(content) === 1}>
+      <AnimatePresence key={exitBeforeEnter ? 1 : -1} exitBeforeEnter={exitBeforeEnter}>
         {children == null ? null : content}
       </AnimatePresence>
     );
