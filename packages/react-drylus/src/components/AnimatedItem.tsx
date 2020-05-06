@@ -45,7 +45,9 @@ export const itemVariants = {
   },
 };
 
-export function getVariantFromDirection(direction?: Direction): keyof typeof itemVariants {
+export function getVariantFromDirection(
+  direction?: Direction,
+): keyof Pick<typeof itemVariants, 'down' | 'up' | 'right' | 'left' | 'small'> {
   switch (direction) {
     case Direction.TOP_DOWN:
       return 'down';
@@ -71,7 +73,7 @@ export function getStaggerFromSpeed(speed?: Speed): number {
   }
 }
 
-export function getSettingsFromSpeed(speed?: Speed) {
+export function getSettingsFromSpeed(speed?: Speed): Transition {
   switch (speed) {
     case Speed.FAST:
       return {
@@ -243,12 +245,6 @@ export const groupVariants = {
       staggerChildren: stagger,
     },
   }),
-  // exit: ({ stagger = 0.2 }: { stagger: number }) => ({
-  //   transition: {
-  //     duration: stagger * 2,
-  //     staggerChildren: stagger,
-  //   },
-  // }),
 };
 
 export const AnimationGroup = ({

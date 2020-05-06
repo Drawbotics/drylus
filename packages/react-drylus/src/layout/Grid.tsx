@@ -249,15 +249,16 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
       style={style}>
       {React.Children.map(
         children as any,
-        (child: React.ReactElement<typeof GridItem>, index: number) =>
-          React.cloneElement(child, {
+        (child: React.ReactElement<typeof GridItem>, index: number) => {
+          return React.cloneElement(child, {
             columns,
             animated,
             originOffset,
             index,
             animationSpeed,
             delay: animationDelay,
-          } as Partial<typeof GridItem>),
+          } as Partial<typeof GridItem>);
+        },
       )}
     </RootElement>
   );
