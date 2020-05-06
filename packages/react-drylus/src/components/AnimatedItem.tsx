@@ -243,12 +243,12 @@ export const groupVariants = {
       staggerChildren: stagger,
     },
   }),
-  exit: ({ stagger = 0.2 }: { stagger: number }) => ({
-    transition: {
-      duration: stagger * 2,
-      staggerChildren: stagger,
-    },
-  }),
+  // exit: ({ stagger = 0.2 }: { stagger: number }) => ({
+  //   transition: {
+  //     duration: stagger * 2,
+  //     staggerChildren: stagger,
+  //   },
+  // }),
 };
 
 export const AnimationGroup = ({

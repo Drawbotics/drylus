@@ -17,6 +17,8 @@ import {
   Tier,
   AnimatedItem,
   AnimationGroup,
+  Direction,
+  Speed,
 } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 import { Redirect, Route, Link, HashRouter, Switch } from 'react-router-dom';
@@ -50,7 +52,7 @@ export const styles = {
     top: 70px;
     right: -100px;
     width: calc(100% + 50px);
-    > img {
+    img {
       width: 100%;
       height: 100%;
       object-fit: contain;
@@ -77,7 +79,7 @@ export const BaseLayout = ({ content, image }) => {
       <Content fullWidth fullHeight>
         <div className={styles.wrapper}>
           <div className={styles.image}>
-            <img src={image} />
+            {image}
           </div>
         </div>
       </Content>
@@ -96,51 +98,77 @@ export const BaseLayout = ({ content, image }) => {
               return (
                 <BaseLayout
                   content={
-                    <AnimatedItem animateExit>
-                      <Title>Sign in</Title>
-                      <Text>Need an account? <TextLink>Sign up now</TextLink></Text>
+                    <AnimationGroup speed={Speed.FAST} staggerChildren direction={Direction.TOP_DOWN}>
+                      <AnimatedItem animateExit>
+                        <Title>Sign in</Title>
+                      </AnimatedItem>
+                      <AnimatedItem animateExit>
+                        <Text>Need an account? <TextLink>Sign up now</TextLink></Text>
+                      </AnimatedItem>
                       <Margin size={{ bottom: Size.EXTRA_HUGE }} />
-                      <FormGroup
-                        input={<Input value="" placeholder="your-email@gmail.com" onChange={() => {}} />}
-                        label={<Label>Email address</Label>} />
-                      <Margin size={{ bottom: Size.DEFAULT }} />
-                      <FormGroup
-                        input={<Input type="password" value="mysupersecurepassword" onChange={() => {}} />}
-                        label={<Label>Password</Label>} />
-                      <Margin size={{ bottom: Size.SMALL }} />
-                      <TextLink>Forgot your password?</TextLink>
+                      <AnimatedItem animateExit>
+                        <FormGroup
+                          input={<Input value="" placeholder="your-email@gmail.com" onChange={() => {}} />}
+                          label={<Label>Email address</Label>} />
+                        <Margin size={{ bottom: Size.DEFAULT }} />
+                        <FormGroup
+                          input={<Input type="password" value="mysupersecurepassword" onChange={() => {}} />}
+                          label={<Label>Password</Label>} />
+                        <Margin size={{ bottom: Size.SMALL }} />
+                        <TextLink>Forgot your password?</TextLink>
+                      </AnimatedItem>
                       <Margin size={{ bottom: Size.LARGE }} />
-                      <Link to="/2">
-                        <ButtonLink category={Category.BRAND}>Sign in</ButtonLink>
-                      </Link>
-                      <Margin size={{ bottom: Size.LARGE }} />
-                    </AnimatedItem>
+                      <AnimatedItem animateExit>
+                        <Link to="/2">
+                          <ButtonLink category={Category.BRAND}>Sign in</ButtonLink>
+                        </Link>
+                      </AnimatedItem>
+                      <AnimatedItem animateExit>
+                        <Margin size={{ bottom: Size.LARGE }} />
+                      </AnimatedItem>
+                    </AnimationGroup>
                   }
-                  image={page1} />
+                  image={
+                    <AnimatedItem speed={Speed.SLOW} direction={Direction.RIGHT_LEFT} animateExit>
+                      <img src={page1} />
+                    </AnimatedItem>
+                  } />
               );
             }} />
             <Route path="/2" render={() => {
               return (
                 <BaseLayout
                   content={
-                    <AnimatedItem animateExit>
-                      <div className={styles.center}>
-                        <Title>All done!</Title>
+                    <div className={styles.center}>
+                      <AnimationGroup speed={Speed.FAST} staggerChildren direction={Direction.TOP_DOWN}>
+                        <AnimatedItem animateExit>
+                          <Title>All done!</Title>
+                        </AnimatedItem>
                         <Margin size={{ bottom: Size.DEFAULT }} />
-                        <Text>You're almost done!</Text>
-                        <Margin size={{ bottom: Size.EXTRA_SMALL }} />
-                        <Text>Check your emails to validate your account</Text>
+                        <AnimatedItem animateExit>
+                          <Text>You're almost done!</Text>
+                          <Margin size={{ bottom: Size.EXTRA_SMALL }} />
+                          <Text>Check your emails to validate your account</Text>
+                        </AnimatedItem>
                         <Margin size={{ bottom: Size.LARGE }} />
-                        <Button tier={Tier.SECONDARY}>I've already confirmed it</Button>
-                        <Margin size={{ top: Size.LARGE }} />
-                        <Link to="/1">
-                          <TextLink>Back to previous</TextLink>
-                        </Link>
-                        <Margin size={{ top: Size.LARGE }} />
-                      </div>
-                    </AnimatedItem>
+                        <AnimatedItem animateExit>
+                          <Button tier={Tier.SECONDARY}>I've already confirmed it</Button>
+                        </AnimatedItem>
+                        <Margin size={{ bottom: Size.LARGE }} />
+                        <AnimatedItem animateExit>
+                          <Link to="/1">
+                            <TextLink>Back to previous</TextLink>
+                          </Link>
+                        </AnimatedItem>
+                        <Margin size={{ bottom: Size.LARGE }} />
+                      </AnimationGroup>
+                    </div>
                   }
-                  image={page2} />
+                  image={
+                    <AnimatedItem speed={Speed.SLOW} direction={Direction.RIGHT_LEFT} animateExit>
+                      <img src={page2} />
+                    </AnimatedItem>
+                  } />
               );
             }} />
             <Redirect from="/" to ="/1" />
