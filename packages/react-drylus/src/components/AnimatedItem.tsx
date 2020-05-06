@@ -273,7 +273,7 @@ export const AnimationGroup = ({
   const isFragmentWrapped =
     get(children, 'type') === Fragment || get(children, 'props.originalType') === Fragment;
 
-  const _children = React.Children.map(
+  const processedChildren = React.Children.map(
     isFragmentWrapped ? (children as any).props.children : (children as any),
     (child) => {
       if (child?.type === AnimatedItem || child?.props.originalType === AnimatedItem) {
@@ -296,10 +296,10 @@ export const AnimationGroup = ({
     <motion.div
       transition={inversedStagger ? { staggerDirection: -1 } : undefined}
       {...animationProps}>
-      {_children}
+      {processedChildren}
     </motion.div>
   ) : (
-    _children
+    processedChildren
   );
 
   if (animateExit) {
