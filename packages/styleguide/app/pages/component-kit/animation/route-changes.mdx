@@ -1,0 +1,65 @@
+import {
+  Layout,
+  Padding,
+  Content,
+  Position,
+  Title,
+} from '@drawbotics/react-drylus';
+import { css } from 'emotion';
+import { Redirect, Route, Link, HashRouter } from 'react-router-dom';
+
+import Playground from '~/components/Playground';
+import { Navbar } from './components/Navbar';
+
+# Route change animation
+
+export const styles = {
+  leftSplit: css`
+    width: 450px;
+  `,
+};
+
+export const BaseLayout = ({ content, image }) => {
+  return (
+    <Layout
+      position={Position.LEFT}
+      bar={
+        <div className={styles.leftSplit}>
+          <Padding>
+            {content}
+          </Padding>
+        </div>
+        }>
+      <Content fullWidth fullHeight>
+        <img src={image} />
+      </Content>
+    </Layout>
+  );
+};
+
+export const Route1 = () => {
+  return (
+    <div>
+      <Link to="/2">next</Link>
+    </div>
+  );
+};
+
+export const Route2 = () => {
+  return (
+    <div>
+      <Link to="/1">back</Link>
+    </div>
+  );
+};
+
+<Playground mode="jsx">
+  <HashRouter>
+    <div>
+      <Navbar />
+      <Route path="/1" component={Route1}/>
+      <Route exact path="/2" component={Route2} />
+      <Redirect from="/" to ="/1" />
+    </div>
+  </HashRouter>
+</Playground>
