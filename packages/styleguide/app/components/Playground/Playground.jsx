@@ -99,6 +99,9 @@ const Playground = ({ component, children, mode, __code, enums }) => {
   const [activeMode, setMode] = useState(supportedModes[0]);
   const childrenRef = useRef();
   const parentRef = useRef();
+  const [refreshKey, setRefreshKey] = useState(Math.random());
+
+  const refresh = () => setRefreshKey(Math.random());
 
   const staticReact = mode === 'jsx';
 
@@ -115,8 +118,8 @@ const Playground = ({ component, children, mode, __code, enums }) => {
             ? setCodeOpen(!codeOpen)
             : null
         }>
-        <div ref={childrenRef}>
-          <Preview raw={activeMode === 'vanilla'}>
+        <div ref={childrenRef} key={refreshKey}>
+          <Preview onClickRefresh={refresh} raw={activeMode === 'vanilla'}>
             {activeMode === 'vanilla' ? generatedMarkup : generatedComponent}
           </Preview>
           <div className={cx(styles.code, { [styles.codeHidden]: !codeOpen })}>

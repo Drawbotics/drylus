@@ -1,4 +1,5 @@
 import alerts from './alerts-provider';
+import animatedItem from './animated-item';
 import attachmentBox from './attachment-box';
 import attachmentList from './attachment-list';
 import avatar from './avatar';
@@ -96,6 +97,7 @@ const components = {
   attachmentBox,
   fileIcon,
   attachmentList,
+  animatedItem,
 };
 
 export default Object.keys(components)

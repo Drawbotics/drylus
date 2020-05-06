@@ -6,9 +6,7 @@ import { normalizeValue } from '../utils';
 const SelectProp = ({ prop, value, onChange, enums, isEnum }) => {
   const { key, type } = prop;
   const { values } = type;
-  const finalValue = isEnum
-    ? (type?.name || '') + '.' + (value?.description || value)
-    : value;
+  const finalValue = isEnum ? (type?.name || '') + '.' + (value?.description || value) : value;
   return (
     <div style={{ minWidth: 200 }}>
       <Select
@@ -24,7 +22,7 @@ const SelectProp = ({ prop, value, onChange, enums, isEnum }) => {
             value: v,
           })),
         ]}
-        onChange={(v, k) => onChange(normalizeValue(v, enums), k.toLowerCase())}
+        onChange={(v, k) => onChange(normalizeValue(v, enums), k)}
       />
     </div>
   );

@@ -361,14 +361,14 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
 `;
 
 exports[`AttachmentBox matches snapshot when can remove attachment 1`] = `
+.emotion-4 {
+  color: #172b4e;
+}
+
 .emotion-5 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-}
-
-.emotion-4 {
-  color: #172b4e;
 }
 
 .emotion-7 {
@@ -1251,14 +1251,14 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
 `;
 
 exports[`AttachmentBox matches snapshot when is given the simplest attachment 1`] = `
+.emotion-4 {
+  color: #172b4e;
+}
+
 .emotion-5 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-}
-
-.emotion-4 {
-  color: #172b4e;
 }
 
 .emotion-7 {

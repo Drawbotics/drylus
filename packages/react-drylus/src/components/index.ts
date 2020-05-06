@@ -46,3 +46,4 @@ export * from './UploadBox';
 export * from './AttachmentBox';
 export * from './FileIcon';
 export * from './AttachmentList';
+export * from './AnimatedItem';

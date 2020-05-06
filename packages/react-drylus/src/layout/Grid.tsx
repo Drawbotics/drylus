@@ -1,11 +1,12 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
+import { motion, useAnimation } from 'framer-motion';
 import camelCase from 'lodash/camelCase';
 import omit from 'lodash/omit';
 import upperFirst from 'lodash/upperFirst';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
-import { Size } from '../enums';
+import { Size, Speed } from '../enums';
 import { Responsive, Style } from '../types';
 import { checkComponentProps, useResponsiveProps } from '../utils';
 
@@ -52,6 +53,31 @@ const styles = {
 
 const staticStyles = omit(styles, ['root', 'withSpan']);
 
+const originIndex = 0;
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.95,
+  },
+  visible: (delayRef: React.MutableRefObject<number>) => ({
+    opacity: 1,
+    scale: 1,
+    transition: { delay: delayRef.current },
+  }),
+};
+
+function _getDelayFromSpeed(speed?: Speed): number {
+  switch (speed) {
+    case Speed.FAST:
+      return 0.0004;
+    case Speed.SLOW:
+      return 0.0015;
+    default:
+      return 0.0009;
+  }
+}
+
 export interface GridItemProps {
   /** Content of the item */
   children: React.ReactNode;
@@ -67,15 +93,82 @@ export interface GridItemProps {
 
   /** @private */
   columns?: number;
+
+  /** @private */
+  animated?: boolean;
+
+  /** @private */
+  animationSpeed?: Speed;
+
+  /** @private */
+  originOffset: React.MutableRefObject<{ top: number; left: number }>;
+
+  /** @private */
+  index: number;
+
+  /** @private */
+  delay?: number;
 }
 
-export const GridItem = ({ children, style, span = 1, columns = 1 }: GridItemProps) => {
+export const GridItem = ({
+  children,
+  style,
+  span = 1,
+  columns = 1,
+  animated,
+  originOffset,
+  index,
+  animationSpeed,
+  delay,
+}: GridItemProps) => {
   if (span > columns) {
     console.warn(`Warning: GridItem span cannot be more than number of columns`);
   }
   const withSpan = styles.withSpan(span);
+
+  // Animation
+  const delayRef = useRef(0);
+  const offset = useRef({ top: 0, left: 0 });
+  const ref = useRef<HTMLDivElement>(null);
+  const delayPerPixel = _getDelayFromSpeed(animationSpeed);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (element == null) return;
+
+    offset.current = {
+      top: element.offsetTop,
+      left: element.offsetLeft,
+    };
+
+    if (index === originIndex) {
+      originOffset.current = offset.current;
+    }
+  }, [animated]);
+
+  useEffect(() => {
+    const dx = Math.abs(offset.current.left - originOffset.current.left);
+    const dy = Math.abs(offset.current.top - originOffset.current.top);
+    const d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+
+    delayRef.current = d * delayPerPixel + (delay ? delay / 1000 : 0);
+  }, [animated]);
+
+  if (animated) {
+    return (
+      <motion.div
+        variants={itemVariants}
+        custom={delayRef}
+        ref={ref}
+        className={cx(styles.item, { [withSpan]: span != null })}
+        style={style}>
+        {children}
+      </motion.div>
+    );
+  }
+
   return (
-    <div className={cx(styles.item, { [withSpan]: !!span })} style={style}>
+    <div className={cx(styles.item, { [withSpan]: span != null })} style={style}>
       {children}
     </div>
   );
@@ -103,6 +196,14 @@ export interface GridProps {
    */
   vGutters?: Size.EXTRA_SMALL | Size.SMALL | Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
 
+  /** If true, the grid items are animated following a stagger effect, as exemplified here https://miro.medium.com/max/2000/1*ShGeeuPIbLALrWwerNQvbw.gif */
+  animated?: boolean;
+
+  animationSpeed?: Speed;
+
+  /** In ms, if given, the animation of the whole group will only begin once this time has passed */
+  animationDelay?: number;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -111,15 +212,32 @@ export interface GridProps {
 }
 
 export const Grid = ({ responsive, ...rest }: GridProps) => {
-  const { children, columns, hGutters, vGutters, style } = useResponsiveProps<GridProps>(
-    rest,
-    responsive,
-  );
+  const {
+    children,
+    columns,
+    hGutters,
+    vGutters,
+    style,
+    animated,
+    animationSpeed,
+    animationDelay,
+  } = useResponsiveProps<GridProps>(rest, responsive);
+  const originOffset = useRef({ top: 0, left: 0 });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    controls.start('visible');
+  }, [animated]);
 
   checkComponentProps({ children }, { children: GridItem });
 
+  const RootElement = animated ? motion.div : 'div';
+
   return (
-    <div
+    <RootElement
+      variants={{}}
+      initial="hidden"
+      animate={controls}
       className={cx(styles.root(columns), {
         [staticStyles[
           `hGutters${upperFirst(camelCase(hGutters ?? ''))}` as keyof typeof staticStyles
@@ -129,9 +247,19 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
         ]]: vGutters != null,
       })}
       style={style}>
-      {React.Children.map(children as any, (child: React.ReactElement<typeof GridItem>) =>
-        React.cloneElement(child, { columns } as Partial<typeof GridItem>),
+      {React.Children.map(
+        children as any,
+        (child: React.ReactElement<typeof GridItem>, index: number) => {
+          return React.cloneElement(child, {
+            columns,
+            animated,
+            originOffset,
+            index,
+            animationSpeed,
+            delay: animationDelay,
+          } as Partial<typeof GridItem>);
+        },
       )}
-    </div>
+    </RootElement>
   );
 };

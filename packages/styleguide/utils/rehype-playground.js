@@ -9,7 +9,7 @@ function getComponentName(value) {
 }
 
 function removePlaygroundTag(code) {
-  return code.replace(/<Playground>(.+)<\/Playground>/gms, '$1');
+  return code.replace(/<Playground.*?>(.+)<\/Playground>/gms, '$1');
 }
 
 function trim(arg) {

@@ -3,14 +3,18 @@ import {
   Align,
   Category,
   Color,
+  Direction,
+  Easing,
   Flex,
   FlexItem,
   FlexJustify,
   Icon,
   Margin,
+  Paragraph,
   Position,
   Shade,
   Size,
+  Speed,
   TBody,
   TCell,
   THead,
@@ -81,22 +85,20 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                           ? extractIntrinsics(prop.type.values)
                           : { variants: [], nonVariants: [] };
                         const tooltipValues = _isEnum(prop) ? variants : prop.type.values;
-                        let tooltip = (
-                          <Tooltip
-                            content={<PropsInfo props={tooltipValues} />}
-                            side={Position.RIGHT}
-                            style={{ maxWidth: '600px' }}>
-                            <Flex justify={FlexJustify.START}>
-                              <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
-                              <FlexItem>
-                                <Margin size={{ left: Size.EXTRA_SMALL }}>
-                                  <span style={{ color: sv.colorSecondary }}>
-                                    <Icon name="info" />
-                                  </span>
-                                </Margin>
-                              </FlexItem>
-                            </Flex>
-                          </Tooltip>
+                        const content = (
+                          <Flex justify={FlexJustify.START}>
+                            <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
+                            <FlexItem>
+                              <Margin size={{ left: Size.EXTRA_SMALL }}>
+                                <Tooltip
+                                  content={<PropsInfo props={tooltipValues} />}
+                                  side={Position.RIGHT}
+                                  style={{ maxWidth: '600px' }}>
+                                  <Icon name="info" shade={Shade.MEDIUM} />
+                                </Tooltip>
+                              </Margin>
+                            </FlexItem>
+                          </Flex>
                         );
 
                         if (_isEnum(prop)) {
@@ -104,13 +106,13 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                           if (nonVariants.length !== 0) {
                             return (
                               <Fragment>
-                                {tooltip}
+                                {content}
                                 <span> Or {nonVariants.join(' or ')}</span>
                               </Fragment>
                             );
                           }
                         }
-                        return tooltip;
+                        return content;
                       } else {
                         prop.type.name ?? prop.type.type ?? prop.type;
                       }
@@ -126,15 +128,17 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                       if (_hasDeprecation(prop)) {
                         return (
                           <Fragment>
-                            <Margin size={{ bottom: Size.EXTRA_SMALL }}>
+                            <Margin size={{ vertical: Size.EXTRA_SMALL }}>
                               <Tag color={Color.ORANGE} inversed>
                                 DEPRECATED
                               </Tag>
                             </Margin>
-                            <Margin size={{ bottom: Size.EXTRA_SMALL }}>
-                              <Text shade={Shade.MEDIUM}>{upperFirst(prop.deprecation)}</Text>
-                            </Margin>
-                            <Text>{upperFirst(prop.description)}</Text>
+                            <Text shade={Shade.MEDIUM}>{upperFirst(prop.deprecation)}</Text>
+                            {upperFirst(prop.description)
+                              .split(/\n/)
+                              .map((line, i) => (
+                                <Paragraph key={i}>{line}</Paragraph>
+                              ))}
                           </Fragment>
                         );
                       } else if (_isEnum(prop)) {
@@ -149,9 +153,13 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                             </Fragment>
                           );
                         }
-                        return variantsDesc;
+                        variantsDesc
+                          .split(/\n/)
+                          .map((line, i) => <Paragraph key={i}>{line}</Paragraph>);
                       } else {
-                        upperFirst(prop.description);
+                        upperFirst(prop.description)
+                          .split(/\n/)
+                          .map((line, i) => <Paragraph key={i}>{line}</Paragraph>);
                       }
                     }}
                   </TCell>
@@ -168,6 +176,9 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                             Position,
                             Color,
                             Shade,
+                            Speed,
+                            Direction,
+                            Easing,
                           }}
                           type={prop.type.type}
                           name={key}

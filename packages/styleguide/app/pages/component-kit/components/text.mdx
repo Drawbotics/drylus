@@ -32,11 +32,13 @@ The component also accepts instances of itself and of [`TextLink`](/components/T
 For example, if you pass an instance of `Date`, the date will be formatted following the Drawbotics conventions using the current locale. You can modify the formatting through the `dateOptions` prop.
 
 <Playground mode="jsx">
-  <Text locale="en">This is a text with a date: {new Date()}</Text>
-  <br/>
-  <Text locale="fr">Ceci est du texte avec une date: {new Date()}</Text>
-  <br/>
-  <Text locale="nl">Blabla: {new Date()}</Text>
+  <>
+    <Text locale="en">This is a text with a date: {new Date()}</Text>
+    <br/>
+    <Text locale="fr">Ceci est du texte avec une date: {new Date()}</Text>
+    <br/>
+    <Text locale="nl">Blabla: {new Date()}</Text>
+  </>
 </Playground>
 
 The internal function used for this is exposed as `formatDate`, which you can import from the package. Formatting options are from [Day.js](https://day.js.org/docs/en/display/format)
@@ -61,11 +63,13 @@ It also accepts objects with the following shape:
 ```
 And will render the price/value depending on the currency and current locale.
 <Playground mode="jsx">
-  <Text locale="en">This is a text with a price: {{ value: 10000, currency: 'USD' }}</Text>
-  <br/>
-  <Text locale="fr">Ceci est du texte avec un prix: {{ value: 10000, currency: 'EUR' }}</Text>
-  <br/>
-  <Text locale="en">The number {{ value: 10000 }} is just a number</Text>
+  <>
+    <Text locale="en">This is a text with a price: {{ value: 10000, currency: 'USD' }}</Text>
+    <br/>
+    <Text locale="fr">Ceci est du texte avec un prix: {{ value: 10000, currency: 'EUR' }}</Text>
+    <br/>
+    <Text locale="en">The number {{ value: 10000 }} is just a number</Text>
+  </>
 </Playground>
 
 The internal function used for this is exposed as `formatPrice`.

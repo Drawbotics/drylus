@@ -12,6 +12,9 @@ import {
   Position,
   Color,
   Shade,
+  Speed,
+  Direction,
+  Easing,
 } from '@drawbotics/react-drylus';
 ```
 
@@ -24,3 +27,6 @@ import {
 | Position | Used to position elements, usually in regards to a parent element | `TOP`, `BOTTOM`, `LEFT`, `RIGHT` |
 | Align | Often used with text components. Layouts have their own align constants  | `LEFT`, `CENTER`, `RIGHT` |
 | Shade | Used to determine the lightness/darkness of color e.g. in Text | `DARK`, `MEDIUM`, `LIGHT` |
+| Speed | Used to determine the speed of animations  | `SLOW`, `DEFAULT`, `FAST` |
+| Direction | Similar to Position, but holds a notion of movement, rather than static position  | `TOP_DOWN`, `BOTTOM_UP`, `LEFT_RIGHT`, `RIGHT_LEFT` |
+| Easing | Used to determine the animation curve  | `LINEAR`, `EASED`, `BOUNCY` |
