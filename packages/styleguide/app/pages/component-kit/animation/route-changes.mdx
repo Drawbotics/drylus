@@ -4,18 +4,55 @@ import {
   Content,
   Position,
   Title,
+  Text,
+  TextLink,
+  Margin,
+  Size,
+  Input,
+  FormGroup,
+  Label,
+  ButtonLink,
+  Button,
+  Category,
+  Tier,
 } from '@drawbotics/react-drylus';
 import { css } from 'emotion';
 import { Redirect, Route, Link, HashRouter } from 'react-router-dom';
 
 import Playground from '~/components/Playground';
 import { Navbar } from './components/Navbar';
+import page1 from '~/assets/page-1.png';
+import page2 from '~/assets/page-2.png';
 
 # Route change animation
+
+We used the `render` prop from `react-router-dom`'s `Route` component, but only for illustrative purposes, this will work with any other way you structure your routes.
 
 export const styles = {
   leftSplit: css`
     width: 450px;
+    min-height: 600px;
+  `,
+  wrapper: css`
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+  `,
+  image: css`
+    position: absolute;
+    top: 70px;
+    right: -100px;
+    width: calc(100% + 50px);
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  `,
+  center: css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   `,
 };
 
@@ -25,41 +62,76 @@ export const BaseLayout = ({ content, image }) => {
       position={Position.LEFT}
       bar={
         <div className={styles.leftSplit}>
-          <Padding>
+          <Padding size={Size.EXTRA_LARGE}>
             {content}
           </Padding>
         </div>
         }>
       <Content fullWidth fullHeight>
-        <img src={image} />
+        <div className={styles.wrapper}>
+          <div className={styles.image}>
+            <img src={image} />
+          </div>
+        </div>
       </Content>
     </Layout>
   );
 };
 
-export const Route1 = () => {
-  return (
-    <div>
-      <Link to="/2">next</Link>
-    </div>
-  );
-};
-
-export const Route2 = () => {
-  return (
-    <div>
-      <Link to="/1">back</Link>
-    </div>
-  );
-};
-
 <Playground mode="jsx">
   <HashRouter>
-    <div>
+    <>
       <Navbar />
-      <Route path="/1" component={Route1}/>
-      <Route exact path="/2" component={Route2} />
+      <Route path="/1" render={() => {
+        return (
+          <BaseLayout
+            content={
+              <>
+                <Title>Sign in</Title>
+                <Text>Need an account? <TextLink>Sign up now</TextLink></Text>
+                <Margin size={{ bottom: Size.EXTRA_HUGE }} />
+                <FormGroup
+                  input={<Input value="" placeholder="your-email@gmail.com" onChange={() => {}} />}
+                  label={<Label>Email address</Label>} />
+                <Margin size={{ bottom: Size.DEFAULT }} />
+                <FormGroup
+                  input={<Input type="password" value="mysupersecurepassword" onChange={() => {}} />}
+                  label={<Label>Password</Label>} />
+                <Margin size={{ bottom: Size.SMALL }} />
+                <TextLink>Forgot your password?</TextLink>
+                <Margin size={{ bottom: Size.LARGE }} />
+                <Link to="/2">
+                  <ButtonLink category={Category.BRAND}>Sign in</ButtonLink>
+                </Link>
+                <Margin size={{ bottom: Size.LARGE }} />
+              </>
+            }
+            image={page1} />
+        );
+      }} />
+      <Route path="/2" render={() => {
+        return (
+          <BaseLayout
+            content={
+              <div className={styles.center}>
+                <Title>All done!</Title>
+                <Margin size={{ bottom: Size.DEFAULT }} />
+                <Text>You're almost done!</Text>
+                <Margin size={{ bottom: Size.EXTRA_SMALL }} />
+                <Text>Check your emails to validate your account</Text>
+                <Margin size={{ bottom: Size.LARGE }} />
+                <Button tier={Tier.SECONDARY}>I've already confirmed it</Button>
+                <Margin size={{ top: Size.LARGE }} />
+                <Link to="/1">
+                  <TextLink>Back to previous</TextLink>
+                </Link>
+                <Margin size={{ top: Size.LARGE }} />
+              </div>
+            }
+            image={page2} />
+        );
+      }} />
       <Redirect from="/" to ="/1" />
-    </div>
+    </>
   </HashRouter>
 </Playground>
