@@ -1,3 +1,16 @@
+# v6.5.0 (Wed May 06 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature/animation [#146](https://github.com/Drawbotics/drylus/pull/146) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.4.4 (Tue May 05 2020)
 
 #### ⚠️  Pushed to master
