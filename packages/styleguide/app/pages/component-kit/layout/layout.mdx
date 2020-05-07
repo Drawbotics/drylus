@@ -69,3 +69,17 @@ Example with sidebar and floating bottom bar
     </Layout>
   </div>
 </Playground>
+
+Example with fixed sidebar and navbar
+
+<Playground>
+  <div style={{ height: 400 }}>
+    <Layout bar={<Navbar />} position={Position.TOP} fixed barScrollable={false}>
+      <Layout bar={<Sidebar />} position={Position.LEFT} fixed style={{ height: '100%' }}>
+        <div>
+          <div style={{ background: 'green', height: 500, padding: 20 }}>Content</div>
+        </div>
+      </Layout>
+    </Layout>
+  </div>
+</Playground>

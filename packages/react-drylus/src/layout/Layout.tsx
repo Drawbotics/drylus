@@ -69,7 +69,7 @@ const styles = {
 
     > [data-element='layout'] {
       flex: 1;
-      height: auto !important;
+      height: auto;
     }
   `,
   scrollable: css`
