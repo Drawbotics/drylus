@@ -17,25 +17,22 @@ const modal = () => {
 
     if (modal) {
       modal.style = null;
-      modal.classList.remove('Drylus-Modal__modalExit');
-      modal.classList.remove('Drylus-Modal__modalExitActive');
-      modal.classList.add('Drylus-Modal__modalEnter');
+      modal.style.opacity = '0';
+      modal.style.transition = 'all 0.15s ease-in-out';
+      modal.style.display = 'flex';
 
       setTimeout(() => {
-        modal.classList.add('Drylus-Modal__modalEnterActive');
+        modal.style.opacity = '1';
       }, 100);
     }
   };
 
   const hideModal = (modal) => {
-    modal.classList.add('Drylus-Modal__modalExit');
-    modal.classList.remove('Drylus-Modal__modalEnterActive');
-    modal.classList.remove('Drylus-Modal__modalEnter');
-    modal.classList.add('Drylus-Modal__modalExitActive');
+    modal.style.opacity = '0';
 
     setTimeout(() => {
       modal.style = 'display: none';
-    }, 300);
+    }, 150);
   };
 
   const handleClickOverlay = (e, modal) => {
@@ -71,14 +68,11 @@ const modal = () => {
 
 export const closeModal = (id) => {
   const modal = document.querySelector(`[data-modal="${id}"]`);
-  modal.classList.add('Drylus-Modal__modalExit');
-  modal.classList.remove('Drylus-Modal__modalEnterActive');
-  modal.classList.remove('Drylus-Modal__modalEnter');
-  modal.classList.add('Drylus-Modal__modalExitActive');
+  modal.style.opacity = '1';
 
   setTimeout(() => {
     modal.style = 'display: none';
-  }, 300);
+  }, 150);
 };
 
 export default () => document._ready(modal);
