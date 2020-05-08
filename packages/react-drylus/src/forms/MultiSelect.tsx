@@ -441,6 +441,7 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
                     className={cx(styles.option, {
                       [styles.disabledOption]: option.disabled || values.includes(option.value),
                     })}
+                    data-value={option.value}
                     key={option.value}
                     onClick={onChange != null ? () => handleOnChange(option.value) : undefined}>
                     {option.label}
