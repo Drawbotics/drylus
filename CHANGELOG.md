@@ -1,3 +1,16 @@
+# v6.5.2 (Fri May 08 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - add vanilla support to multi select  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.5.1 (Thu May 07 2020)
 
 #### ⚠️  Pushed to master
