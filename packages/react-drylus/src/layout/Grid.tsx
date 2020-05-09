@@ -101,10 +101,10 @@ export interface GridItemProps {
   animationSpeed?: Speed;
 
   /** @private */
-  originOffset: React.MutableRefObject<{ top: number; left: number }>;
+  originOffset?: React.MutableRefObject<{ top: number; left: number }>;
 
   /** @private */
-  index: number;
+  index?: number;
 
   /** @private */
   delay?: number;
@@ -141,14 +141,14 @@ export const GridItem = ({
       left: element.offsetLeft,
     };
 
-    if (index === originIndex) {
+    if (index === originIndex && originOffset != null) {
       originOffset.current = offset.current;
     }
   }, [animated]);
 
   useEffect(() => {
-    const dx = Math.abs(offset.current.left - originOffset.current.left);
-    const dy = Math.abs(offset.current.top - originOffset.current.top);
+    const dx = Math.abs(offset.current.left - (originOffset?.current.left ?? 0));
+    const dy = Math.abs(offset.current.top - (originOffset?.current.top ?? 0));
     const d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 
     delayRef.current = d * delayPerPixel + (delay ? delay / 1000 : 0);
