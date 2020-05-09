@@ -1,3 +1,16 @@
+# v6.5.7 (Sat May 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix grid item type  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.5.6 (Sat May 09 2020)
 
 #### ⚠️  Pushed to master
