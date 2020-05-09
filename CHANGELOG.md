@@ -1,3 +1,16 @@
+# v6.5.4 (Sat May 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - improve button style on banner  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.5.3 (Fri May 08 2020)
 
 #### ⚠️  Pushed to master
