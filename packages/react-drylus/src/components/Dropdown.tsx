@@ -37,8 +37,11 @@ const styles = {
     pointer-events: auto;
     transform: translateY(0);
   `,
-  bottom: css``,
+  bottom: css`
+    right: 0;
+  `,
   top: css`
+    right: 0;
     top: auto;
     bottom: 100%;
     margin-top: 0;
