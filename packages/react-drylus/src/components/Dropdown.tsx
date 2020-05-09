@@ -2,7 +2,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Category, Position } from '../enums';
+import { Category, Position, Shade } from '../enums';
 import { Responsive, Style } from '../types';
 import { getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
@@ -173,7 +173,7 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
       }>
       {run(() => {
         if (icon) {
-          return <Icon name={icon} />;
+          return <Icon shade={category ? undefined : Shade.MEDIUM} name={icon} />;
         }
       })}
       {text}
