@@ -198,12 +198,12 @@ const styles = {
   `,
 };
 
-export interface InputProps {
+export interface InputProps<T = string> {
   /** Value displayed in the field */
-  value: ((name?: string) => number | string) | number | string;
+  value: ((name?: T) => number | string) | number | string;
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: T;
 
   /** Disables the input */
   disabled?: boolean;
@@ -212,7 +212,7 @@ export interface InputProps {
   placeholder?: string;
 
   /** Triggered when the value is changed (typing). If not given, the field is read-only */
-  onChange?: (value: string | number, name?: string) => void;
+  onChange?: (value: string | number, name?: T) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -264,12 +264,12 @@ export interface InputProps {
   [x: string]: any;
 }
 
-export interface RawInputProps extends InputProps {
+export interface RawInputProps<T> extends InputProps<T> {
   inputRef?: React.Ref<HTMLInputElement>;
   extraLeftPadding?: number;
 }
 
-const RawInput = ({ responsive, ...rest }: RawInputProps) => {
+const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) => {
   const {
     value: _value,
     onChange,
@@ -288,7 +288,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
     type = 'text',
     size = Size.DEFAULT,
     ...props
-  } = useResponsiveProps<RawInputProps>(rest, responsive);
+  } = useResponsiveProps<RawInputProps<T>>(rest, responsive);
 
   checkComponentProps(
     { prefix, suffix },
@@ -301,7 +301,7 @@ const RawInput = ({ responsive, ...rest }: RawInputProps) => {
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (onChange != null) {
-      onChange((e.target as HTMLInputElement).value, (e.target as HTMLInputElement).name);
+      onChange((e.target as HTMLInputElement).value, (e.target as HTMLInputElement).name as T);
     }
   };
 
@@ -436,6 +436,6 @@ export const InputWithRef = forwardRef<HTMLInputElement, InputProps>((props, ref
 
 InputWithRef.displayName = 'Input';
 
-export const Input = (props: InputProps) => {
+export const Input = <T extends string>(props: InputProps<T>) => {
   return <RawInput {...props} />;
 };
