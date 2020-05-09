@@ -1,8 +1,8 @@
-import sv, { fade } from '@drawbotics/drylus-style-vars';
+import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Category, Size } from '../enums';
+import { Category, Size, Tier } from '../enums';
 import { Flex, FlexAlign, FlexItem, FlexJustify, Margin } from '../layout';
 import { Responsive, Style } from '../types';
 import {
@@ -102,10 +102,12 @@ export const Banner = ({ responsive, ...rest }: BannerProps) => {
                     trailing as React.ReactElement<typeof Button>,
                     {
                       size: Size.SMALL,
+                      tier: Tier.SECONDARY,
                       style: {
                         whiteSpace: 'nowrap',
-                        color: sv.colorPrimary,
-                        background: fade(sv.white, 60),
+                        color: sv.colorPrimaryInverse,
+                        boxShadow: `0 0 0 1px ${sv.white} inset`,
+                        background: 'transparent',
                       },
                     } as Partial<typeof Button>,
                   )}
