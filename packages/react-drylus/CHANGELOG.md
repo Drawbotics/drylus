@@ -1,3 +1,16 @@
+# v6.6.1 (Wed May 13 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - reduce font weight on inversed button  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.5.7 (Sat May 09 2020)
 
 #### ⚠️  Pushed to master
