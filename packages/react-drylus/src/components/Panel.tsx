@@ -103,12 +103,16 @@ export interface PanelHeaderProps {
 
   /** If true there is no space between the content and the border of the panel */
   noPadding?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
 }
 
-export const PanelHeader = ({ children, noPadding }: PanelHeaderProps) => {
+export const PanelHeader = ({ children, noPadding, style }: PanelHeaderProps) => {
   return (
     <Fragment>
       <div
+        style={style}
         className={cx(styles.header, {
           [styles.noHeaderSpacing]: noPadding === true,
         })}>
