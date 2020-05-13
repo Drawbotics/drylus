@@ -61,6 +61,41 @@ const styles = {
   noResult: css`
     pointer-events: none;
   `,
+  minimal: css`
+    input {
+      padding-left: ${sv.paddingExtraLarge};
+      background: transparent;
+      border-bottom-left-radius: ${sv.defaultBorderRadius};
+      border-top-left-radius: ${sv.defaultBorderRadius};
+    }
+
+    > div > div > {
+      position: relative;
+
+      &::after {
+        position: absolute;
+        content: '\\eac9';
+        font-family: 'drycons';
+        top: 50%;
+        transform: translateY(-50%);
+        left: ${sv.paddingSmall};
+        color: ${sv.colorSecondary};
+        font-size: 1.3em;
+      }
+    }
+  `,
+  smallMinimal: css`
+    input {
+      padding-left: ${sv.paddingExtraLarge} !important;
+    }
+
+    > div > div > {
+      &::after {
+        left: ${sv.paddingSmall};
+        font-size: 1em;
+      }
+    }
+  `,
 };
 
 function _getShouldRenderTop(box: DOMRect) {
@@ -109,6 +144,9 @@ export interface SearchInputProps<T> {
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;
 
+  /** If true, the input will blend more with its surroundings. This variant should be used when the search is not within a form */
+  minimal?: boolean;
+
   /**
    * Size of the input. Can be small or default
    * @default Size.DEFAULT
@@ -139,6 +177,7 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
     error,
     valid,
     size = Size.DEFAULT,
+    minimal,
   } = useResponsiveProps<SearchInputProps<T>>(rest, responsive);
   const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
@@ -167,13 +206,23 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
     };
   });
   return (
-    <div style={style} className={styles.root} ref={rootRef}>
+    <div
+      style={style}
+      className={cx(styles.root, {
+        [styles.minimal]: minimal === true,
+        [styles.smallMinimal]: minimal === true && size === Size.SMALL,
+      })}
+      ref={rootRef}>
       <InputWithRef
         prefix={
-          <Button
-            leading={isLoading || loading ? <Spinner size={Size.SMALL} /> : <Icon name="search" />}
-            onClick={() => inputRef.current?.focus()}
-          />
+          minimal ? null : (
+            <Button
+              leading={
+                isLoading || loading ? <Spinner size={Size.SMALL} /> : <Icon name="search" />
+              }
+              onClick={() => inputRef.current?.focus()}
+            />
+          )
         }
         error={error}
         hint={hint}
