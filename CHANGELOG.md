@@ -1,3 +1,23 @@
+# v6.6.0 (Wed May 13 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature/panel separators [#148](https://github.com/Drawbotics/drylus/pull/148) ([@nicmosc](https://github.com/nicmosc))
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/inversed button [#150](https://github.com/Drawbotics/drylus/pull/150) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/minimal search input [#149](https://github.com/Drawbotics/drylus/pull/149) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.5.7 (Sat May 09 2020)
 
 #### ⚠️  Pushed to master
