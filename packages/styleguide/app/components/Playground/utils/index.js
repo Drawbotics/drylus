@@ -42,7 +42,7 @@ export function transformClassname(string) {
 }
 
 export function adaptForVanilla(markup) {
-  const adapted = markup.replace(/css-.+?(?=")/gm, transformClassname);
+  const adapted = markup.replace(/css-.+?(?=["|\s])/gm, transformClassname);
   return adapted;
 }
 

@@ -1,74 +1,76 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { Style } from '../types';
 import { checkComponentProps, run } from '../utils';
+import { Separator } from './Separator';
 
 const styles = {
   root: css`
     background: ${sv.white};
     box-shadow: ${sv.elevation3};
     border-radius: ${sv.borderRadiusSmall};
+  `,
+  bodyAndFooter: css`
+    > [data-element='body'] {
+      padding-bottom: 0;
+    }
+  `,
+  bodyAndHeader: css`
+    > [data-element='body'] {
+      padding-top: 0;
+    }
+  `,
+  noSpacingBottom: css`
+    padding: 0;
+    padding-bottom: 3px;
+  `,
+  header: css`
+    padding: ${sv.paddingSmall} ${sv.defaultPadding};
+
+    @media ${sv.screenL} {
+      padding: ${sv.paddingSmall};
+    }
+  `,
+  body: css`
     padding: ${sv.defaultPadding};
 
     @media ${sv.screenL} {
       padding: ${sv.paddingSmall};
     }
   `,
-  doubleTopPadding: css`
-    padding-top: calc(${sv.defaultPadding} * 2);
-
-    @media ${sv.screenL} {
-      padding-top: ${sv.paddingLarge};
-    }
-  `,
-  doubleBottomPadding: css`
-    padding-bottom: calc(${sv.defaultPadding} * 2);
-
-    @media ${sv.screenL} {
-      padding-bottom: ${sv.paddingLarge};
-    }
-  `,
-  header: css`
-    padding-bottom: ${sv.defaultPadding};
-    margin-bottom: ${sv.defaultMargin};
-
-    @media ${sv.screenL} {
-      padding-bottom: ${sv.paddingSmall};
-      margin-bottom: ${sv.marginSmall};
-    }
-  `,
-  body: css`
-    margin-top: calc(${sv.defaultMargin} * -1);
-    margin-bottom: calc(${sv.defaultMargin} * -1);
-
-    @media ${sv.screenL} {
-      margin-top: calc(${sv.marginSmall} * -1);
-      margin-bottom: calc(${sv.marginSmall} * -1);
-    }
-  `,
   footer: css`
-    margin-top: ${sv.defaultMargin};
-    padding-top: ${sv.defaultPadding};
+    padding: ${sv.paddingSmall} ${sv.defaultPadding};
 
     @media ${sv.screenL} {
-      margin-top: ${sv.marginSmall};
-      padding-top: ${sv.marginSmall};
+      padding: ${sv.paddingSmall};
     }
   `,
-  noSpacing: css`
+  noBodySpacing: css`
     padding: 0;
     padding-top: 3px;
     padding-bottom: 3px;
-    margin-top: 0;
-    margin-bottom: 0;
-    margin: calc(${sv.defaultMargin} * -1);
 
     @media ${sv.screenL} {
-      margin: calc(${sv.marginSmall} * -1);
       padding-top: 0;
       padding-bottom: 0;
+    }
+  `,
+  noFooterSpacing: css`
+    padding: 0;
+    padding-bottom: 3px;
+
+    @media ${sv.screenL} {
+      padding-bottom: 0;
+    }
+  `,
+  noHeaderSpacing: css`
+    padding: 0;
+    padding-top: 3px;
+
+    @media ${sv.screenL} {
+      padding-top: 0;
     }
   `,
   section: css`
@@ -101,16 +103,23 @@ export interface PanelHeaderProps {
 
   /** If true there is no space between the content and the border of the panel */
   noPadding?: boolean;
+
+  /** Used for style overrides */
+  style?: Style;
 }
 
-export const PanelHeader = ({ children, noPadding }: PanelHeaderProps) => {
+export const PanelHeader = ({ children, noPadding, style }: PanelHeaderProps) => {
   return (
-    <div
-      className={cx(styles.header, {
-        [styles.noSpacing]: noPadding === true,
-      })}>
-      {children}
-    </div>
+    <Fragment>
+      <div
+        style={style}
+        className={cx(styles.header, {
+          [styles.noHeaderSpacing]: noPadding === true,
+        })}>
+        {children}
+      </div>
+      <Separator />
+    </Fragment>
   );
 };
 
@@ -127,7 +136,10 @@ export interface PanelBodyProps {
 
 export const PanelBody = ({ children, noPadding, style }: PanelBodyProps) => {
   return (
-    <div style={style} className={cx(styles.body, { [styles.noSpacing]: noPadding === true })}>
+    <div
+      data-element="body"
+      style={style}
+      className={cx(styles.body, { [styles.noBodySpacing]: noPadding === true })}>
       {children}
     </div>
   );
@@ -170,13 +182,16 @@ export interface PanelFooterProps {
 
 export const PanelFooter = ({ children, noPadding, style }: PanelFooterProps) => {
   return (
-    <div
-      style={style}
-      className={cx(styles.footer, {
-        [styles.noSpacing]: noPadding === true,
-      })}>
-      {children}
-    </div>
+    <Fragment>
+      <Separator />
+      <div
+        style={style}
+        className={cx(styles.footer, {
+          [styles.noFooterSpacing]: noPadding === true,
+        })}>
+        {children}
+      </div>
+    </Fragment>
   );
 };
 
@@ -205,11 +220,13 @@ export const Panel = ({ header, body, footer, style }: PanelProps) => {
   );
   return (
     <div
-      style={style}
       className={cx(styles.root, {
-        [styles.doubleTopPadding]: !header && (body?.props as any).noPadding == null, // TODO find better
-        [styles.doubleBottomPadding]: !footer && (body?.props as any).noPadding == null,
-      })}>
+        [styles.bodyAndFooter]:
+          body != null && footer != null && (body?.props as any).noPadding != null,
+        [styles.bodyAndHeader]:
+          body != null && header != null && (body?.props as any).noPadding != null,
+      })}
+      style={style}>
       {header}
       {body}
       {footer}
