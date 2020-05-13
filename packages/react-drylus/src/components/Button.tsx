@@ -267,6 +267,7 @@ const styles = {
   inversed: css`
     color: ${sv.colorPrimaryInverse};
     background: rgba(255, 255, 255, 0.3);
+    font-weight: 300;
 
     &:hover {
       background: rgba(255, 255, 255, 0.4);
