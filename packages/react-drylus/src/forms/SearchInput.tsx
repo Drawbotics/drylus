@@ -105,18 +105,18 @@ function _getShouldRenderTop(box: DOMRect) {
   return false;
 }
 
-export interface SearchInputProps<T> {
+export interface SearchInputProps<T, K = string> {
   /** The list of items displayed under the input ('value, key' pairs) its completely up to you to generate this list */
   options?: Array<Option<T>>;
 
   /** The text passed to the input */
-  value: ((name?: string) => string) | string;
+  value: ((name?: K) => string) | string;
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: K;
 
   /** Triggered when the text is changed, and when the search button is pressed */
-  onChange: (value: Option<T>['value'], name?: string) => void;
+  onChange: (value: Option<T>['value'], name?: K) => void;
 
   /** Triggered when one of the results is clicked, returns the corresponding option value */
   onClickResult?: (value: Option<T>['value']) => void;
@@ -161,7 +161,10 @@ export interface SearchInputProps<T> {
   responsive?: Responsive<this>;
 }
 
-export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputProps<T>) => {
+export const SearchInput = <T extends any, K extends string>({
+  responsive,
+  ...rest
+}: SearchInputProps<T, K>) => {
   const {
     options,
     value: _value,
@@ -178,7 +181,7 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
     valid,
     size = Size.DEFAULT,
     minimal,
-  } = useResponsiveProps<SearchInputProps<T>>(rest, responsive);
+  } = useResponsiveProps<SearchInputProps<T, K>>(rest, responsive);
   const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
