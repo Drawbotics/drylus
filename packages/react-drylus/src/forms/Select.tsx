@@ -135,15 +135,15 @@ export interface SelectOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
-export interface SelectProps<T> {
+export interface SelectProps<T, K = string> {
   /** The options to show in the list of options */
   options: Array<SelectOption<T>>;
 
   /** Determines which value is currently active */
-  value?: ((name?: string) => SelectOption<T>['value']) | SelectOption<T>['value'];
+  value?: ((name?: K) => SelectOption<T>['value']) | SelectOption<T>['value'];
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: K;
 
   /** Disables the select */
   disabled?: boolean;
@@ -155,7 +155,7 @@ export interface SelectProps<T> {
   placeholder?: string;
 
   /** Triggered when a new value is chosen, returns a value, key (label, value) pair. If not given, the field is read-only */
-  onChange?: (value: SelectOption<T>['value'], name?: string) => void;
+  onChange?: (value: SelectOption<T>['value'], name?: K) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -186,7 +186,10 @@ export interface SelectProps<T> {
   [x: string]: any;
 }
 
-export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) => {
+export const Select = <T extends any, K extends string>({
+  responsive,
+  ...rest
+}: SelectProps<T, K>) => {
   const {
     value: _value,
     options = [],
@@ -200,13 +203,16 @@ export const Select = <T extends any>({ responsive, ...rest }: SelectProps<T>) =
     style,
     size = Size.DEFAULT,
     ...props
-  } = useResponsiveProps<SelectProps<T>>(rest, responsive);
+  } = useResponsiveProps<SelectProps<T, K>>(rest, responsive);
 
   const value = isFunction(_value) ? _value(props.name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     if (onChange != null) {
-      onChange((e.target as HTMLSelectElement).value as any, (e.target as HTMLSelectElement).name);
+      onChange(
+        (e.target as HTMLSelectElement).value as any,
+        (e.target as HTMLSelectElement).name as K,
+      );
     }
   };
   return (
