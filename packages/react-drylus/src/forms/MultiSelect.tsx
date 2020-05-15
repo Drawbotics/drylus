@@ -223,7 +223,7 @@ export interface MultiSelectOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
-export interface MultiSelectProps<T, K> {
+export interface MultiSelectProps<T, K = string> {
   /** The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey */
   options: Array<MultiSelectOption<T>>;
 
