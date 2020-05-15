@@ -223,17 +223,17 @@ export interface MultiSelectOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
-export interface MultiSelectProps<T> {
+export interface MultiSelectProps<T, K> {
   /** The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey */
   options: Array<MultiSelectOption<T>>;
 
   /** Determines which values are currently active */
   values:
-    | ((name?: string) => Array<MultiSelectOption<T>['value']>)
+    | ((name?: K) => Array<MultiSelectOption<T>['value']>)
     | Array<MultiSelectOption<T>['value']>;
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: K;
 
   /** Disables the multi select */
   disabled?: boolean;
@@ -245,7 +245,7 @@ export interface MultiSelectProps<T> {
   placeholder?: string;
 
   /** Triggered when a new value is chosen, returns the array of selected values. If not given, the field is read-only */
-  onChange?: (value: Array<MultiSelectOption<T>['value']>, name?: string) => void;
+  onChange?: (value: Array<MultiSelectOption<T>['value']>, name?: K) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -276,7 +276,10 @@ export interface MultiSelectProps<T> {
   [x: string]: any;
 }
 
-export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectProps<T>) => {
+export const MultiSelect = <T extends any, K extends string>({
+  responsive,
+  ...rest
+}: MultiSelectProps<T, K>) => {
   const {
     values: _values,
     options = [],
@@ -291,7 +294,7 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
     style,
     size = Size.DEFAULT,
     ...props
-  } = useResponsiveProps<MultiSelectProps<T>>(rest, responsive);
+  } = useResponsiveProps<MultiSelectProps<T, K>>(rest, responsive);
 
   const selectRef = useRef<HTMLSelectElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -317,7 +320,7 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
     };
   });
 
-  const handleOnChange = (value: MultiSelectProps<T>['value']) => {
+  const handleOnChange = (value: MultiSelectProps<T, K>['value']) => {
     if (onChange != null) {
       values.includes(value)
         ? onChange(
