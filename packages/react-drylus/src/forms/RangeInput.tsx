@@ -159,7 +159,7 @@ const Track = ({ source, target, getTrackProps, disabled }: TrackProps) => {
   );
 };
 
-export interface RangeInputProps<T> {
+export interface RangeInputProps<T, K = string> {
   /** The minimum value displayed on the input, and the minimum selectable value */
   min: number;
 
@@ -167,13 +167,13 @@ export interface RangeInputProps<T> {
   max: number;
 
   /** If value is an array of numbers, then we display n handles, otherwise only 1 value shows 1 handle. If the value is larger than max, or smaller than min, the max or min will be used */
-  value: ((name?: string) => T) | T;
+  value: ((name?: K) => T) | T;
 
   /** Determines the range between each value, can be float or int */
   step?: number;
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: K;
 
   /** Returns the value at the end of the slide (mouse up/touch end). For continuous updates while sliding use onUpdate */
   onChange: (value: T) => void;
@@ -197,10 +197,10 @@ export interface RangeInputProps<T> {
   responsive?: Responsive<this>;
 }
 
-export const RangeInput = <T extends number | Array<number>>({
+export const RangeInput = <T extends number | Array<number>, K extends string>({
   responsive,
   ...rest
-}: RangeInputProps<T>) => {
+}: RangeInputProps<T, K>) => {
   const {
     min,
     max,
@@ -213,7 +213,7 @@ export const RangeInput = <T extends number | Array<number>>({
     hideLabels,
     hideTooltips,
     name,
-  } = useResponsiveProps<RangeInputProps<T>>(rest, responsive);
+  } = useResponsiveProps<RangeInputProps<T, K>>(rest, responsive);
 
   const value = isFunction(_value) ? _value(name) : _value;
 
