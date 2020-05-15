@@ -19,7 +19,6 @@ export interface ButtonLinkProps extends ButtonProps {}
 export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
   const {
     children,
-    disabled,
     onClick,
     category: _category,
     size = Size.DEFAULT,
@@ -29,6 +28,7 @@ export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
     fullWidth,
     style,
     color,
+    inversed,
   } = useResponsiveProps<ButtonLinkProps>(rest, responsive);
 
   if (!children && trailing && leading) {
@@ -44,13 +44,17 @@ export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
       onClick={onClick}
       className={cx(styles.root, {
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
-        [styles[getEnumAsClass<typeof styles>(tier)]]: tier != null,
-        [styles.round]: round,
-        [styles.roundSmall]: round && size === Size.SMALL,
+        [styles.round]: round === true,
+        [styles.roundSmall]: round === true && size === Size.SMALL,
         [styles[getEnumAsClass<typeof styles>(category)]]:
           category != null && tier === Tier.PRIMARY,
+        [styles[getEnumAsClass<typeof styles>(tier)]]: tier != null,
+        [styles[`${category?.toLowerCase() ?? ''}Alt` as keyof typeof styles]]:
+          category != null && tier !== Tier.PRIMARY,
         [styles.fullWidth]: fullWidth === true,
-        [styles.disabled]: disabled === true,
+        [styles.inversed]: inversed === true,
+        [styles.secondaryInversed]: inversed === true && tier === Tier.SECONDARY,
+        [styles.tertiaryInversed]: inversed === true && tier === Tier.TERTIARY,
       })}>
       {run(() => {
         if (leading) {

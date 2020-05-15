@@ -103,11 +103,9 @@ export const Banner = ({ responsive, ...rest }: BannerProps) => {
                     {
                       size: Size.SMALL,
                       tier: Tier.SECONDARY,
+                      inversed: true,
                       style: {
                         whiteSpace: 'nowrap',
-                        color: sv.colorPrimaryInverse,
-                        boxShadow: `0 0 0 1px ${sv.white} inset`,
-                        background: 'transparent',
                       },
                     } as Partial<typeof Button>,
                   )}

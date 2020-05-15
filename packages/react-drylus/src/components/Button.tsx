@@ -264,6 +264,40 @@ const styles = {
     display: flex;
     align-items: center;
   `,
+  inversed: css`
+    color: ${sv.colorPrimaryInverse};
+    background: rgba(255, 255, 255, 0.3);
+    font-weight: 300;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    &:active {
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.6) inset;
+    }
+  `,
+  secondaryInversed: css`
+    background: transparent;
+    box-shadow: 0 0 0 1px ${sv.white} inset;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    &:active {
+      box-shadow: 0 0 0 2px ${sv.white} inset;
+    }
+  `,
+  tertiaryInversed: css`
+    background: transparent;
+    color: ${sv.colorPrimaryInverse};
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: ${sv.colorPrimaryInverse};
+    }
+  `,
 };
 
 export const buttonStyles = styles;
@@ -301,6 +335,9 @@ export interface ButtonProps {
   /** Makes button take the full width of the container */
   fullWidth?: boolean;
 
+  /** Used when the button should be rendered on dark backgrounds. Will essentially make all visual elements of the button white for high contrast. Tiers are respected, but category/color is lost */
+  inversed?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -321,6 +358,7 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
     fullWidth,
     style,
     color,
+    inversed,
   } = useResponsiveProps<ButtonProps>(rest, responsive);
 
   if (!children && trailing && leading) {
@@ -345,6 +383,9 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
         [styles[`${category?.toLowerCase() ?? ''}Alt` as keyof typeof styles]]:
           category != null && tier !== Tier.PRIMARY,
         [styles.fullWidth]: fullWidth === true,
+        [styles.inversed]: inversed === true,
+        [styles.secondaryInversed]: inversed === true && tier === Tier.SECONDARY,
+        [styles.tertiaryInversed]: inversed === true && tier === Tier.TERTIARY,
       })}
       disabled={disabled}>
       {run(() => {

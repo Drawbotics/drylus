@@ -1,3 +1,88 @@
+# v6.6.1 (Wed May 13 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - reduce font weight on inversed button  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.6.0 (Wed May 13 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature/panel separators [#148](https://github.com/Drawbotics/drylus/pull/148) ([@nicmosc](https://github.com/nicmosc))
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/inversed button [#150](https://github.com/Drawbotics/drylus/pull/150) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/minimal search input [#149](https://github.com/Drawbotics/drylus/pull/149) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.5.7 (Sat May 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix grid item type  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.5.6 (Sat May 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - make dropdown icon medium shade by default  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.5.5 (Sat May 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - align dropdown to the bottom right  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.5.4 (Sat May 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - improve button style on banner  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.5.3 (Fri May 08 2020)
 
 #### ⚠️  Pushed to master

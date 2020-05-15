@@ -25,7 +25,7 @@ __Example__
 The component is most often coupled with the [`AttachmentBox`](/component-kit/components/attachment-box) and [`AttachmentList`](/component-kit/components/attachment-list) component to display the upload progress.
 
 Try to upload some files to see it in action. The example is limited to 1 file at a time.
-<Playground mode="jsx">
+<Playground>
   <RenderChildren defaultValue={{}}>
     {({ state, setState }) => (
       <div style={{ width: 400 }}>
@@ -58,7 +58,7 @@ export const ExampleWrapper = ({ children }) => {
   return children({ error, setError });
 }
 
-<Playground mode="jsx">
+<Playground>
   <ExampleWrapper>
     {({ error, setError }) => (
       <UploadBox

@@ -361,7 +361,7 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
+                  <RoundIcon bold inversed name="x" size={Size.SMALL} color={Color.RED} />
                 </div>
               );
             } else if (Boolean(value) && valid) {
@@ -369,7 +369,7 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
+                  <RoundIcon bold inversed name="check" size={Size.SMALL} color={Color.GREEN} />
                 </div>
               );
             }
