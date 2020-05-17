@@ -1,3 +1,16 @@
+# v6.6.2 (Sun May 17 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/generic form types [#151](https://github.com/Drawbotics/drylus/pull/151) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.6.1 (Wed May 13 2020)
 
 #### ⚠️  Pushed to master
