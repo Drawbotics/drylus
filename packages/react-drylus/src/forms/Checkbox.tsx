@@ -151,7 +151,7 @@ const styles = {
   `,
 };
 
-export interface CheckboxProps {
+export interface CheckboxProps<T = string> {
   /** The dom property */
   id?: string;
 
@@ -159,16 +159,16 @@ export interface CheckboxProps {
   children?: React.ReactNode;
 
   /** Triggered when checkbox value is changed */
-  onChange?: (value: boolean, name?: string) => void;
+  onChange?: (value: boolean, name?: T) => void;
 
   /** If true, checkbox is not clickable */
   disabled?: boolean;
 
   /** Determines if checkbox is checked */
-  value?: ((name?: string) => boolean) | boolean;
+  value?: ((name?: T) => boolean) | boolean;
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: T;
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error?: string | boolean;
@@ -196,7 +196,7 @@ export interface CheckboxProps {
   [x: string]: any;
 }
 
-export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
+export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProps<T>) => {
   const {
     onChange,
     value: _value,
@@ -209,7 +209,7 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
     isPlaceholder,
     indeterminate,
     ...props
-  } = useResponsiveProps<CheckboxProps>(rest, responsive);
+  } = useResponsiveProps<CheckboxProps<T>>(rest, responsive);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const value = isFunction(_value) ? _value(props.name) : _value;
@@ -217,7 +217,7 @@ export const Checkbox = ({ responsive, ...rest }: CheckboxProps) => {
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.stopPropagation();
-    onChange ? onChange(!isChecked, (e.target as HTMLInputElement).name) : null;
+    onChange ? onChange(!isChecked, (e.target as HTMLInputElement).name as T) : null;
   };
 
   const uniqId = id ? id : v4();

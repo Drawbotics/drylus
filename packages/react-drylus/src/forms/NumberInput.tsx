@@ -112,12 +112,12 @@ const styles = {
 
 type NumberInputValue = number | '-' | '';
 
-export interface NumberInputProps {
+export interface NumberInputProps<T = string> {
   /** Value displayed in the field */
-  value: ((name?: string) => NumberInputValue) | NumberInputValue;
+  value: ((name?: T) => NumberInputValue) | NumberInputValue;
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: T;
 
   /** Disables the countbox */
   disabled?: boolean;
@@ -126,7 +126,7 @@ export interface NumberInputProps {
   placeholder?: string;
 
   /** Triggered when the value is changed (typing or clicking +/-). If not given, the field is read-only */
-  onChange?: (v: NumberInputValue, name?: string) => void;
+  onChange?: (v: NumberInputValue, name?: T) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -181,7 +181,7 @@ export interface NumberInputProps {
   responsive?: Responsive<this>;
 }
 
-export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
+export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInputProps<T>) => {
   const {
     value: _value,
     placeholder,
@@ -199,7 +199,7 @@ export const NumberInput = ({ responsive, ...rest }: NumberInputProps) => {
     style,
     step = 1,
     size = Size.DEFAULT,
-  } = useResponsiveProps(rest, responsive);
+  } = useResponsiveProps<NumberInputProps<T>>(rest, responsive);
   const inputRef = useRef<HTMLInputElement>(null);
   const leftSpanRef = useRef<HTMLSpanElement>(null);
   const [extraLeftPadding, setExtraLeftPadding] = useState<number>();

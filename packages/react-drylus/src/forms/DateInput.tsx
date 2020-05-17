@@ -200,15 +200,15 @@ function _getShouldRenderTop(box: DOMRect) {
   return false;
 }
 
-export interface DateInputProps {
+export interface DateInputProps<T = string> {
   /** Can be empty string, or object containing day, month, year as numbers */
-  value: ((name?: string) => DateObject | '') | DateObject | '';
+  value: ((name?: T) => DateObject | '') | DateObject | '';
 
   /** Triggered when the date is chosen from the calendar. If not given, the field is read-only */
-  onChange?: (value: DateObject, name?: string) => void;
+  onChange?: (value: DateObject, name?: T) => void;
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: T;
 
   /**
    * Used to render the name of months in the calendar
@@ -270,7 +270,7 @@ export interface DateInputProps {
   responsive?: Responsive<this>;
 }
 
-export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
+export const DateInput = <T extends string>({ responsive, ...rest }: DateInputProps<T>) => {
   const {
     value: _value,
     onChange,
@@ -290,7 +290,7 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
     style,
     align = Align.LEFT,
     size = Size.DEFAULT,
-  } = useResponsiveProps<DateInputProps>(rest, responsive);
+  } = useResponsiveProps<DateInputProps<T>>(rest, responsive);
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
   const [isFocused, setFocused] = useState(false);

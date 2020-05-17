@@ -104,12 +104,12 @@ const styles = {
   `,
 };
 
-export interface TextAreaProps {
+export interface TextAreaProps<T = string> {
   /** Value displayed in the field */
-  value: ((name?: string) => string | number) | string | number;
+  value: ((name?: T) => string | number) | string | number;
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: T;
 
   /** Disables the input */
   disabled?: boolean;
@@ -118,7 +118,7 @@ export interface TextAreaProps {
   placeholder?: string;
 
   /** Triggered when the value is changed (typing). If not given, the field is read-only */
-  onChange?: (value: string | number, name?: string) => void;
+  onChange?: (value: string | number, name?: T) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -155,11 +155,11 @@ export interface TextAreaProps {
   [x: string]: any;
 }
 
-export interface RawTextAreaProps extends TextAreaProps {
+export interface RawTextAreaProps<T> extends TextAreaProps<T> {
   inputRef?: React.Ref<HTMLTextAreaElement>;
 }
 
-const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
+const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps<T>) => {
   const {
     value: _value,
     onChange,
@@ -174,7 +174,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
     isPlaceholder,
     size = Size.DEFAULT,
     ...props
-  } = useResponsiveProps<RawTextAreaProps>(rest, responsive);
+  } = useResponsiveProps<RawTextAreaProps<T>>(rest, responsive);
 
   const [isFocused, setFocused] = useState(false);
 
@@ -182,7 +182,10 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
 
   const handleOnChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
     if (onChange != null) {
-      onChange((e.target as HTMLTextAreaElement).value, (e.target as HTMLTextAreaElement).name);
+      onChange(
+        (e.target as HTMLTextAreaElement).value,
+        (e.target as HTMLTextAreaElement).name as T,
+      );
     }
   };
 
@@ -265,6 +268,6 @@ export const TextAreaWithRef = forwardRef<HTMLTextAreaElement, TextAreaProps>((p
 
 TextAreaWithRef.displayName = 'TextArea';
 
-export const TextArea = (props: TextAreaProps) => {
+export const TextArea = <T extends string>(props: TextAreaProps<T>) => {
   return <RawTextArea {...props} />;
 };
