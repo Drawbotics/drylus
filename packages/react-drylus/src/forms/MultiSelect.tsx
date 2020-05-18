@@ -303,7 +303,7 @@ export const MultiSelect = <T extends any, K extends string>({
   const [canBlur, setCanBlur] = useState(true);
   const { screenSize, ScreenSizes } = useScreenSize();
 
-  const values = isFunction(_values) ? _values(props.name) : _values;
+  const values = isFunction(_values) ? _values(name) : _values;
 
   const handleDocumentClick = (e: Event) =>
     !rootRef.current?.contains(e.target as Node) ? setFocused(false) : null;
