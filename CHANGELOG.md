@@ -1,3 +1,16 @@
+# v6.6.3 (Mon May 18 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add name field to RangeInput onChange  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.6.2 (Sun May 17 2020)
 
 #### 🐛 Bug fix - Patch
