@@ -1,3 +1,16 @@
+# v6.6.6 (Mon May 18 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - pass name to values as function in MultiSelect  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.6.5 (Mon May 18 2020)
 
 #### ⚠️  Pushed to master
