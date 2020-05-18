@@ -176,10 +176,10 @@ export interface RangeInputProps<T, K = string> {
   name?: K;
 
   /** Returns the value at the end of the slide (mouse up/touch end). For continuous updates while sliding use onUpdate */
-  onChange: (value: T) => void;
+  onChange: (value: T, name?: K) => void;
 
   /** Returns value but on every step changed by the handle: render intensive */
-  onUpdate?: (value: T) => void;
+  onUpdate?: (value: T, name?: K) => void;
 
   /** Disables the slider */
   disabled?: boolean;
