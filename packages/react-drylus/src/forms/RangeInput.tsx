@@ -224,9 +224,9 @@ export const RangeInput = <T extends number | Array<number>, K extends string>({
     <Slider
       disabled={disabled}
       onUpdate={(values) =>
-        onUpdate != null ? onUpdate(isMultiHandle ? (values as any) : values[0]) : undefined
+        onUpdate != null ? onUpdate(isMultiHandle ? (values as any) : values[0], name) : undefined
       }
-      onChange={(values) => onChange(isMultiHandle ? (values as any) : values[0])}
+      onChange={(values) => onChange(isMultiHandle ? (values as any) : values[0], name)}
       mode={3}
       step={step}
       className={cx(styles.root, { [styles.disabled]: disabled === true })}
