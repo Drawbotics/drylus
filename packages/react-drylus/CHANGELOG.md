@@ -1,3 +1,16 @@
+# v6.6.4 (Mon May 18 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - pass name on to onChange in RangeInput  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.6.3 (Mon May 18 2020)
 
 #### ⚠️  Pushed to master
