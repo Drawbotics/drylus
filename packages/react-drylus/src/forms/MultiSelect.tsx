@@ -338,7 +338,7 @@ export const MultiSelect = <T extends any, K extends string>({
   const handleSelectChange = (options: HTMLOptionsCollection) => {
     const selected = [].filter.call(options, (o: any) => o.selected).map((o: any) => o.value);
     if (onChange != null) {
-      onChange(selected);
+      onChange(selected, name);
     }
   };
 
@@ -351,7 +351,10 @@ export const MultiSelect = <T extends any, K extends string>({
   const handleClickRemove = (e: React.MouseEvent<HTMLElement>, value: string | number) => {
     e.stopPropagation();
     if (onChange != null) {
-      onChange(values.filter((v) => v !== value));
+      onChange(
+        values.filter((v) => v !== value),
+        name,
+      );
     }
   };
 
