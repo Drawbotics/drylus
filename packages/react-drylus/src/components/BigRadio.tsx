@@ -60,12 +60,12 @@ const styles = {
   `,
 };
 
-export interface BigRadioProps<T> {
+export interface BigRadioProps<T, K = string> {
   /** Determines if the radio is checked */
   checked?: boolean;
 
   /** Triggered when big radio is clicked */
-  onChange: (value: T, name?: string) => void;
+  onChange: (value: T, name?: K) => void;
 
   /** Determines the value of the radio */
   value: T;
@@ -77,7 +77,7 @@ export interface BigRadioProps<T> {
   label: string;
 
   /** To mimic e.target.name */
-  name?: string;
+  name?: K;
 
   /** If true, radio is not clickable */
   disabled?: boolean;
@@ -86,7 +86,7 @@ export interface BigRadioProps<T> {
   style?: Style;
 }
 
-export const BigRadio = <T extends any>({
+export const BigRadio = <T extends any, K extends string>({
   value,
   onChange,
   disabled,
@@ -95,7 +95,7 @@ export const BigRadio = <T extends any>({
   name,
   label,
   style,
-}: BigRadioProps<T>) => {
+}: BigRadioProps<T, K>) => {
   const handleOnChange = () => (!disabled ? onChange(value, name) : null);
   return (
     <div

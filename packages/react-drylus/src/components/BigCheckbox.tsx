@@ -64,9 +64,9 @@ const styles = {
   `,
 };
 
-export interface BigCheckboxProps {
+export interface BigCheckboxProps<T = string> {
   /** Triggered when big checkbox is clicked */
-  onChange: (value: boolean, name?: string) => void;
+  onChange: (value: boolean, name?: T) => void;
 
   /** Determines if checkbox is checked */
   value: boolean;
@@ -78,7 +78,7 @@ export interface BigCheckboxProps {
   label: string;
 
   /** To mimic e.target.name */
-  name?: string;
+  name?: T;
 
   /** If true, checkbox is not clickable */
   disabled?: boolean;
@@ -87,7 +87,7 @@ export interface BigCheckboxProps {
   style?: Style;
 }
 
-export const BigCheckbox = ({
+export const BigCheckbox = <T extends string>({
   value,
   onChange,
   disabled,
@@ -95,7 +95,7 @@ export const BigCheckbox = ({
   name,
   label,
   style,
-}: BigCheckboxProps) => {
+}: BigCheckboxProps<T>) => {
   const isChecked = Boolean(value);
   const handleOnChange = () => (!disabled ? onChange(!isChecked, name) : null);
   return (
