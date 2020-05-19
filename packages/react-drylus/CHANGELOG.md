@@ -1,3 +1,16 @@
+# v6.6.7 (Tue May 19 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add generic name to big radio and big checkbox  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.6.6 (Mon May 18 2020)
 
 #### ⚠️  Pushed to master
