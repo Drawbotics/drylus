@@ -234,8 +234,6 @@ const styles = {
       align-items: center;
       justify-content: center;
       margin-right: 0;
-      margin-left: -1px;
-      margin-bottom: -1px;
     }
   `,
   roundSmall: css`
@@ -244,7 +242,6 @@ const styles = {
 
     i {
       font-size: 1rem;
-      margin-bottom: -1px;
       margin-left: -1px;
     }
   `,
@@ -297,6 +294,11 @@ const styles = {
       background: rgba(255, 255, 255, 0.2);
       color: ${sv.colorPrimaryInverse};
     }
+  `,
+  icon: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
   `,
 };
 
@@ -390,13 +392,13 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
       disabled={disabled}>
       {run(() => {
         if (leading) {
-          return <div className={cx({ [styles.leading]: !round })}>{leading}</div>;
+          return <div className={cx(styles.icon, { [styles.leading]: !round })}>{leading}</div>;
         }
       })}
       {children}
       {run(() => {
         if (trailing) {
-          return <div className={cx({ [styles.trailing]: !round })}>{trailing}</div>;
+          return <div className={cx(styles.icon, { [styles.trailing]: !round })}>{trailing}</div>;
         }
       })}
     </button>
