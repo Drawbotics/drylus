@@ -1,3 +1,18 @@
+# v6.6.8 (Wed May 20 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix tests  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix centering of icon in buttons  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.6.7 (Tue May 19 2020)
 
 #### ⚠️  Pushed to master
