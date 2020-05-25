@@ -1,3 +1,16 @@
+# v6.6.9 (Mon May 25 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add loadingRows prop to table  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.6.8 (Wed May 20 2020)
 
 #### ⚠️  Pushed to master
