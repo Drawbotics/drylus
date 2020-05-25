@@ -583,10 +583,11 @@ export type HeaderData = Array<DataEntry | { label: React.ReactNode; value: Data
 
 export interface LoadingTableProps {
   columns: HeaderData;
+  rows: number;
   animated?: boolean;
 }
 
-const LoadingTable = ({ columns, animated }: LoadingTableProps) => {
+const LoadingTable = ({ columns, animated, rows }: LoadingTableProps) => {
   return (
     <Fragment>
       <THead>
@@ -597,7 +598,7 @@ const LoadingTable = ({ columns, animated }: LoadingTableProps) => {
         ))}
       </THead>
       <TBody animated={animated}>
-        {Array(5)
+        {Array(rows)
           .fill(null)
           .map((...args) => (
             <TRow key={args[1]}>
@@ -862,6 +863,12 @@ export interface TableProps {
   /** If true the content of the table will be overridden by a "fake" table with animated cells to show loading. You MUST pass header to render this */
   isLoading?: boolean;
 
+  /**
+   * Used to determine the amount of rows the table should have when showing the loading state
+   * @default 5
+   */
+  loadingRows?: number;
+
   /** Triggered when a row is clicked, returns the given data object for that row. If used with nested tables, it will only return the root row object value */
   onClickRow?: (row: TableEntry) => void;
 
@@ -902,6 +909,7 @@ export const Table = ({
   scrollable,
   animated,
   style,
+  loadingRows = 5,
 }: TableProps) => {
   const [rowsStates, setRowState] = useState<Record<string | number, boolean>>({});
   const { screenSize, ScreenSizes } = useScreenSize();
@@ -1016,7 +1024,7 @@ export const Table = ({
       <RowsContext.Provider value={[rowsStates, handleSetRowState]}>
         {run(() => {
           if (header && isLoading) {
-            return <LoadingTable animated={animated} columns={header} />;
+            return <LoadingTable animated={animated} columns={header} rows={loadingRows} />;
           } else if (header && emptyContent) {
             return <EmptyTable columns={header} emptyContent={emptyContent} />;
           } else {
