@@ -62,6 +62,14 @@ describe('generateDisplayedDate', () => {
       expect(res).toEqual('tomorrow, 2 Jun, 8:00 AM');
     });
 
+    it('is tomorrow, without specified time', () => {
+      const date = new Date('2020-06-02');
+
+      const res = generateDisplayedDate({ date, options: { showTime: ShowDateTime.NEVER } });
+
+      expect(res).toEqual('tomorrow, 2 Jun');
+    });
+
     it('is the same day, in the future', () => {
       const date = new Date('2020-06-01 15:00');
 
@@ -78,6 +86,14 @@ describe('generateDisplayedDate', () => {
       expect(res).toEqual('2h40 ago');
     });
 
+    it('is the same day, without specified time', () => {
+      const date = new Date('2020-06-01');
+
+      const res = generateDisplayedDate({ date, options: { showTime: ShowDateTime.NEVER } });
+
+      expect(res).toEqual('today');
+    });
+
     it('is the previous day', () => {
       const date = new Date('2020-05-31 13:00');
 
@@ -86,12 +102,28 @@ describe('generateDisplayedDate', () => {
       expect(res).toEqual('yesterday at 1:00 PM');
     });
 
+    it('is the previous day, without specified time', () => {
+      const date = new Date('2020-05-31');
+
+      const res = generateDisplayedDate({ date, options: { showTime: ShowDateTime.NEVER } });
+
+      expect(res).toEqual('yesterday');
+    });
+
     it('is the previous week', () => {
       const date = new Date('2020-05-28 8:00');
 
       const res = generateDisplayedDate({ date });
 
       expect(res).toEqual('last Thu, 28 May, 8:00 AM');
+    });
+
+    it('is the previous week, without specified time', () => {
+      const date = new Date('2020-05-28');
+
+      const res = generateDisplayedDate({ date, options: { showTime: ShowDateTime.NEVER } });
+
+      expect(res).toEqual('last Thu, 28 May');
     });
 
     it('is less than 365 days ago, same year', () => {

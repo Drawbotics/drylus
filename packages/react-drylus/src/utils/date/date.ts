@@ -66,7 +66,12 @@ export function generateDisplayedDate({
     timeFormat = 'HH:mm';
   }
   // Time in the past
-  else if (hoursDifference >= TimePeriod.DAY_AGO && hoursDifference < TimePeriod.NOW && isToday) {
+  else if (
+    hoursDifference >= TimePeriod.DAY_AGO &&
+    hoursDifference < TimePeriod.NOW &&
+    isToday &&
+    options.showTime !== ShowDateTime.NEVER
+  ) {
     const relativeMinutesDiff = hoursDifference * 60 - minutesDifference;
 
     Dayjs.extend(relativeTime);
@@ -123,6 +128,7 @@ export function generateDisplayedDate({
         undefined,
         extendedLocales[localeRoot as keyof typeof extendedLocales].calendar({
           format: outputFormat,
+          withTime: options.showTime !== ShowDateTime.NEVER,
         }),
       )
     : withLocale.format(outputFormat);
