@@ -4,15 +4,7 @@ import last from 'lodash/last';
 import React, { Fragment } from 'react';
 
 import { Color, Size } from '../enums';
-import {
-  Flex,
-  FlexDirection,
-  FlexItem,
-  FlexJustify,
-  FlexSpacer,
-  ListTile,
-  Padding,
-} from '../layout';
+import { Flex, FlexDirection, FlexItem, FlexJustify, FlexSpacer, Margin, Padding } from '../layout';
 import { Responsive, Style } from '../types';
 import { useResponsiveProps } from '../utils';
 import { FileIcon, FileType } from './FileIcon';
@@ -56,17 +48,23 @@ export const AttachmentBox = ({ responsive, ...rest }: AttachmentBoxProps) => {
     <div style={style} className={styles.root}>
       <Padding size={Size.EXTRA_SMALL}>
         <Flex direction={FlexDirection.HORIZONTAL} justify={FlexJustify.SPACE_BETWEEN}>
-          <FlexItem flex style={{ display: 'flex' }}>
-            <ListTile
-              style={{ width: '100%' }}
-              leading={<FileIcon type={last(fileName.split('.')) as FileType} />}
-              title={<Text disabled={progress != null}>{fileName}</Text>}
-              subtitle={
-                progress != null ? (
-                  <ProgressBar size={Size.SMALL} color={Color.GREEN} percentage={progress} />
-                ) : null
-              }
-            />
+          <FlexItem flex style={{ display: 'flex', minWidth: 0 }}>
+            <Flex style={{ width: '100%' }}>
+              <FlexItem>
+                <FileIcon type={last(fileName.split('.')) as FileType} />
+              </FlexItem>
+              <FlexSpacer size={Size.EXTRA_SMALL} />
+              <FlexItem flex style={{ minWidth: 0 }}>
+                <div style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                  <Text disabled={progress != null}>{fileName}</Text>
+                </div>
+                {progress != null ? (
+                  <Margin size={{ top: Size.EXTRA_SMALL }}>
+                    <ProgressBar size={Size.SMALL} color={Color.GREEN} percentage={progress} />
+                  </Margin>
+                ) : null}
+              </FlexItem>
+            </Flex>
           </FlexItem>
           {onClickDownload != null ? (
             <Fragment>

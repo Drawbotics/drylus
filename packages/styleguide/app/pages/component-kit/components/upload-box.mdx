@@ -1,5 +1,16 @@
 import { useState } from 'react';
-import { UploadBox, UploadHelper, Button, Category, Icon, Margin, Size, AttachmentBox, AttachmentList } from '@drawbotics/react-drylus';
+import {
+  UploadBox,
+  UploadHelper,
+  Button,
+  Category,
+  Icon,
+  Margin,
+  Size,
+  AttachmentBox,
+  AttachmentList,
+  uploadFiles,
+} from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 import { RenderChildren } from '../utils';
@@ -8,7 +19,7 @@ import { RenderChildren } from '../utils';
 # Upload Box
 This component is displayed to show a "upload file" cue to the user. It can be clicked, or used as a drag-and-drop area for files. The component also exposes the `uploadFile` and `uploadFiles` functions that can be used with any other element to trigger an upload.
 
-**NOTE**: this component will upload the file to the given target url (should be provided by the backend server), but then depending on the implementation you might still need to call a mutation to create the final attachment object in the database.
+**NOTE**: this component on its own will not upload the file. Instead you must provide it with a `onUploadFiles` function which will take care of the upload. Drylus exposes two file upload functions, which require a `signingUrl` which should point to the place where the upload should be made. If you have a different implementation, you can use your own and the function call will be triggered automatically on drop or when the file(s) are selected. Depending on the implementation you might still need to call a mutation to create the final attachment object in the database.
 
 ```jsx
 import { UploadBox } from '@drawbotics/react-drylus';
@@ -17,9 +28,16 @@ __Example__
 
 <Playground component={UploadBox}>
   <UploadBox
-    onComplete={(uploads) => console.log('Upload completed for: ', uploads.map((upload) => upload.file.name).join(', '))}
-    onProgress={(file, e) => console.log('Upload progress: ' + Math.round((e.loaded / e.total) * 100) + '% for', file.name)}
-    signingUrl={process.env.EXAMPLE_API_HOST + '/rails/active_storage/direct_uploads'} />
+    onUploadFiles={(files) => {
+      uploadFiles(
+        files,
+        process.env.EXAMPLE_API_HOST + '/rails/active_storage/direct_uploads',
+        {
+          onComplete: (uploads) => console.log('Upload completed for: ', uploads.map((upload) => upload.file.name).join(', ')),
+          onProgress: (file, e) => console.log('Upload progress: ' + Math.round((e.loaded / e.total) * 100) + '% for', file.name),
+        },
+      )
+    }}/>
 </Playground>
 
 The component is most often coupled with the [`AttachmentBox`](/component-kit/components/attachment-box) and [`AttachmentList`](/component-kit/components/attachment-list) component to display the upload progress.
@@ -31,9 +49,16 @@ Try to upload some files to see it in action. The example is limited to 1 file a
       <div style={{ width: 400 }}>
         <Margin size={{ bottom: Size.DEFAULT }}>
           <UploadBox
-            signingUrl={process.env.EXAMPLE_API_HOST + '/rails/active_storage/direct_uploads'}
-            onProgress={(file, e) => setState({ ...state, [file.name]: (e.loaded / e.total) })}
-            onFinish={(file) => setState({ ...state, [file.name]: -1 })}
+            onUploadFiles={(files) => {
+              uploadFiles(
+                files,
+                process.env.EXAMPLE_API_HOST + '/rails/active_storage/direct_uploads',
+                {
+                  onFinish: (file) => setState({ ...state, [file.name]: -1 }),
+                  onProgress: (file, e) => setState({ ...state, [file.name]: (e.loaded / e.total) }),
+                },
+              )
+            }}
             fullWidth />
         </Margin>
         <AttachmentList>
@@ -86,6 +111,7 @@ import { UploadHelper } from '@drawbotics/react-drylus';
 </Playground>
 
 ## Exposed functions
+These are upload functions which use the `signingUrl` and are exposed for convenience if this file upload method is enough for the use case.
 
 ```jsx
 import { uploadFiles, uploadFile } from '@drawbotics/react-drylus';
