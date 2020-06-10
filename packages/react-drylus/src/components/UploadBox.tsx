@@ -51,7 +51,7 @@ interface BaseHelper {
   multiple?: boolean;
 
   /** Handler function for the file upload */
-  onUploadFiles: (files: FileList) => VoidFunction;
+  onUploadFiles: (files: FileList) => void;
 }
 
 export interface UploadHelperProps extends BaseHelper {
