@@ -1,26 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
-.emotion-7 {
+.emotion-8 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-}
-
-.emotion-9 {
-  display: inline-block;
-}
-
-.emotion-1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-right: 8px;
 }
 
 .emotion-19 {
@@ -65,7 +49,7 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
   align-items: center;
 }
 
-.emotion-8 {
+.emotion-9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -150,39 +134,58 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
   background: #2A41A2;
 }
 
-.emotion-15 {
+.emotion-2 {
   margin: 24px;
   margin: 0;
   margin-right: 8px;
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-15 {
+  .emotion-2 {
     margin: 16px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-15 {
+  .emotion-2 {
     margin: 0;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-15 {
+  .emotion-2 {
     margin-right: calc(8px / 2);
   }
 }
 
 .emotion-4 {
-  color: #172b4e;
-  margin-bottom: calc(8px / 2);
-}
-
-.emotion-3 {
   display: inline;
   color: rgba(135,155,166,0.5);
   font-size: 1rem;
+}
+
+.emotion-7 {
+  margin: 24px;
+  margin: 0;
+  margin-top: 8px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-7 {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-7 {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-7 {
+    margin-top: calc(8px / 2);
+  }
 }
 
 .emotion-6 {
@@ -265,10 +268,11 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
       className="emotion-17"
     >
       <div
-        className="emotion-7"
+        className="emotion-8"
         style={
           Object {
             "display": "flex",
+            "minWidth": 0,
           }
         }
       >
@@ -281,34 +285,48 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
           }
         >
           <div
-            className="emotion-8"
+            className="emotion-1"
+            style={Object {}}
+          >
+            <div
+              className="emotion-0"
+              data-type="jpg"
+            />
+          </div>
+          <div
+            className="emotion-1"
+            style={Object {}}
           >
             <div
               className="emotion-2"
-              style={Object {}}
+            />
+          </div>
+          <div
+            className="emotion-8"
+            style={
+              Object {
+                "minWidth": 0,
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "overflow": "hidden",
+                  "textOverflow": "ellipsis",
+                  "whiteSpace": "nowrap",
+                }
+              }
             >
-              <div
-                className="emotion-1"
+              <span
+                className="emotion-4"
               >
-                <div
-                  className="emotion-0"
-                  data-type="jpg"
-                />
-              </div>
+                CompleteFile.jpg
+              </span>
             </div>
             <div
               className="emotion-7"
-              style={Object {}}
             >
-              <div
-                className="emotion-4"
-              >
-                <span
-                  className="emotion-3"
-                >
-                  CompleteFile.jpg
-                </span>
-              </div>
               <div
                 className="emotion-6"
               >
@@ -327,7 +345,7 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
         </div>
       </div>
       <div
-        className="emotion-2"
+        className="emotion-1"
         style={Object {}}
       >
         <div
@@ -335,7 +353,7 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
         />
       </div>
       <div
-        className="emotion-2"
+        className="emotion-1"
         style={
           Object {
             "display": "flex",
@@ -348,11 +366,11 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
         />
       </div>
       <div
-        className="emotion-2"
+        className="emotion-1"
         style={Object {}}
       >
         <div
-          className="emotion-15"
+          className="emotion-2"
         />
       </div>
     </div>
@@ -361,56 +379,36 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
 `;
 
 exports[`AttachmentBox matches snapshot when can remove attachment 1`] = `
-.emotion-4 {
-  color: #172b4e;
-}
-
 .emotion-5 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
 }
 
-.emotion-7 {
-  display: inline-block;
-}
-
-.emotion-1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-right: 8px;
-}
-
-.emotion-15 {
+.emotion-14 {
   background: #f8f9fa;
   border-radius: 5px;
   color: #172b4e;
 }
 
-.emotion-14 {
+.emotion-13 {
   padding: 24px;
   padding: 8px;
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-14 {
+  .emotion-13 {
     padding: 16px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-14 {
+  .emotion-13 {
     padding: calc(8px / 2);
   }
 }
 
-.emotion-13 {
+.emotion-12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -514,63 +512,64 @@ exports[`AttachmentBox matches snapshot when can remove attachment 1`] = `
   background: #2A41A2;
 }
 
-.emotion-3 {
-  display: inline;
-  color: #172b4e;
-  font-size: 1rem;
-}
-
-.emotion-9 {
+.emotion-2 {
   margin: 24px;
   margin: 0;
   margin-right: 8px;
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-9 {
+  .emotion-2 {
     margin: 16px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-9 {
+  .emotion-2 {
     margin: 0;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-9 {
+  .emotion-2 {
     margin-right: calc(8px / 2);
   }
 }
 
-.emotion-11 {
+.emotion-4 {
+  display: inline;
+  color: #172b4e;
+  font-size: 1rem;
+}
+
+.emotion-10 {
   color: inherit;
 }
 
-.emotion-11:hover {
+.emotion-10:hover {
   cursor: pointer;
 }
 
 <div
-  className="emotion-15"
+  className="emotion-14"
 >
   <div
-    className="emotion-14"
+    className="emotion-13"
   >
     <div
-      className="emotion-13"
+      className="emotion-12"
     >
       <div
         className="emotion-5"
         style={
           Object {
             "display": "flex",
+            "minWidth": 0,
           }
         }
       >
         <div
-          className="emotion-7"
+          className="emotion-6"
           style={
             Object {
               "width": "100%",
@@ -578,48 +577,58 @@ exports[`AttachmentBox matches snapshot when can remove attachment 1`] = `
           }
         >
           <div
-            className="emotion-6"
+            className="emotion-1"
+            style={Object {}}
+          >
+            <div
+              className="emotion-0"
+              data-type="jpg"
+            />
+          </div>
+          <div
+            className="emotion-1"
+            style={Object {}}
           >
             <div
               className="emotion-2"
-              style={Object {}}
-            >
-              <div
-                className="emotion-1"
-              >
-                <div
-                  className="emotion-0"
-                  data-type="jpg"
-                />
-              </div>
-            </div>
+            />
+          </div>
+          <div
+            className="emotion-5"
+            style={
+              Object {
+                "minWidth": 0,
+              }
+            }
+          >
             <div
-              className="emotion-5"
-              style={Object {}}
+              style={
+                Object {
+                  "overflow": "hidden",
+                  "textOverflow": "ellipsis",
+                  "whiteSpace": "nowrap",
+                }
+              }
             >
-              <div
+              <span
                 className="emotion-4"
               >
-                <span
-                  className="emotion-3"
-                >
-                  FirstFile.jpg
-                </span>
-              </div>
+                FirstFile.jpg
+              </span>
             </div>
           </div>
         </div>
       </div>
       <div
-        className="emotion-2"
+        className="emotion-1"
         style={Object {}}
       >
         <div
-          className="emotion-9"
+          className="emotion-2"
         />
       </div>
       <div
-        className="emotion-2"
+        className="emotion-1"
         style={
           Object {
             "display": "flex",
@@ -627,7 +636,7 @@ exports[`AttachmentBox matches snapshot when can remove attachment 1`] = `
         }
       >
         <i
-          className="Drycon Drycon-x emotion-11"
+          className="Drycon Drycon-x emotion-10"
           onClick={[Function]}
         />
       </div>
@@ -637,26 +646,10 @@ exports[`AttachmentBox matches snapshot when can remove attachment 1`] = `
 `;
 
 exports[`AttachmentBox matches snapshot when is given a completed attachment 1`] = `
-.emotion-7 {
+.emotion-8 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-}
-
-.emotion-9 {
-  display: inline-block;
-}
-
-.emotion-1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-right: 8px;
 }
 
 .emotion-15 {
@@ -701,7 +694,7 @@ exports[`AttachmentBox matches snapshot when is given a completed attachment 1`]
   align-items: center;
 }
 
-.emotion-8 {
+.emotion-9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -786,39 +779,58 @@ exports[`AttachmentBox matches snapshot when is given a completed attachment 1`]
   background: #2A41A2;
 }
 
-.emotion-11 {
+.emotion-2 {
   margin: 24px;
   margin: 0;
   margin-right: 8px;
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-11 {
+  .emotion-2 {
     margin: 16px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-11 {
+  .emotion-2 {
     margin: 0;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-11 {
+  .emotion-2 {
     margin-right: calc(8px / 2);
   }
 }
 
 .emotion-4 {
-  color: #172b4e;
-  margin-bottom: calc(8px / 2);
-}
-
-.emotion-3 {
   display: inline;
   color: rgba(135,155,166,0.5);
   font-size: 1rem;
+}
+
+.emotion-7 {
+  margin: 24px;
+  margin: 0;
+  margin-top: 8px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-7 {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-7 {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-7 {
+    margin-top: calc(8px / 2);
+  }
 }
 
 .emotion-6 {
@@ -869,10 +881,11 @@ exports[`AttachmentBox matches snapshot when is given a completed attachment 1`]
       className="emotion-13"
     >
       <div
-        className="emotion-7"
+        className="emotion-8"
         style={
           Object {
             "display": "flex",
+            "minWidth": 0,
           }
         }
       >
@@ -885,34 +898,48 @@ exports[`AttachmentBox matches snapshot when is given a completed attachment 1`]
           }
         >
           <div
-            className="emotion-8"
+            className="emotion-1"
+            style={Object {}}
+          >
+            <div
+              className="emotion-0"
+              data-type="jpg"
+            />
+          </div>
+          <div
+            className="emotion-1"
+            style={Object {}}
           >
             <div
               className="emotion-2"
-              style={Object {}}
+            />
+          </div>
+          <div
+            className="emotion-8"
+            style={
+              Object {
+                "minWidth": 0,
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "overflow": "hidden",
+                  "textOverflow": "ellipsis",
+                  "whiteSpace": "nowrap",
+                }
+              }
             >
-              <div
-                className="emotion-1"
+              <span
+                className="emotion-4"
               >
-                <div
-                  className="emotion-0"
-                  data-type="jpg"
-                />
-              </div>
+                CompleteFile.jpg
+              </span>
             </div>
             <div
               className="emotion-7"
-              style={Object {}}
             >
-              <div
-                className="emotion-4"
-              >
-                <span
-                  className="emotion-3"
-                >
-                  CompleteFile.jpg
-                </span>
-              </div>
               <div
                 className="emotion-6"
               >
@@ -931,11 +958,11 @@ exports[`AttachmentBox matches snapshot when is given a completed attachment 1`]
         </div>
       </div>
       <div
-        className="emotion-2"
+        className="emotion-1"
         style={Object {}}
       >
         <div
-          className="emotion-11"
+          className="emotion-2"
         />
       </div>
     </div>
@@ -944,26 +971,10 @@ exports[`AttachmentBox matches snapshot when is given a completed attachment 1`]
 `;
 
 exports[`AttachmentBox matches snapshot when is given attachment with progress 1`] = `
-.emotion-7 {
+.emotion-8 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-}
-
-.emotion-9 {
-  display: inline-block;
-}
-
-.emotion-1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-right: 8px;
 }
 
 .emotion-15 {
@@ -1008,7 +1019,7 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
   align-items: center;
 }
 
-.emotion-8 {
+.emotion-9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1093,39 +1104,58 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
   background: #2A41A2;
 }
 
-.emotion-11 {
+.emotion-2 {
   margin: 24px;
   margin: 0;
   margin-right: 8px;
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-11 {
+  .emotion-2 {
     margin: 16px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-11 {
+  .emotion-2 {
     margin: 0;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-11 {
+  .emotion-2 {
     margin-right: calc(8px / 2);
   }
 }
 
 .emotion-4 {
-  color: #172b4e;
-  margin-bottom: calc(8px / 2);
-}
-
-.emotion-3 {
   display: inline;
   color: rgba(135,155,166,0.5);
   font-size: 1rem;
+}
+
+.emotion-7 {
+  margin: 24px;
+  margin: 0;
+  margin-top: 8px;
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-7 {
+    margin: 16px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-7 {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .emotion-7 {
+    margin-top: calc(8px / 2);
+  }
 }
 
 .emotion-6 {
@@ -1176,10 +1206,11 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
       className="emotion-13"
     >
       <div
-        className="emotion-7"
+        className="emotion-8"
         style={
           Object {
             "display": "flex",
+            "minWidth": 0,
           }
         }
       >
@@ -1192,34 +1223,48 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
           }
         >
           <div
-            className="emotion-8"
+            className="emotion-1"
+            style={Object {}}
+          >
+            <div
+              className="emotion-0"
+              data-type="jpg"
+            />
+          </div>
+          <div
+            className="emotion-1"
+            style={Object {}}
           >
             <div
               className="emotion-2"
-              style={Object {}}
+            />
+          </div>
+          <div
+            className="emotion-8"
+            style={
+              Object {
+                "minWidth": 0,
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "overflow": "hidden",
+                  "textOverflow": "ellipsis",
+                  "whiteSpace": "nowrap",
+                }
+              }
             >
-              <div
-                className="emotion-1"
+              <span
+                className="emotion-4"
               >
-                <div
-                  className="emotion-0"
-                  data-type="jpg"
-                />
-              </div>
+                ProgressFile.jpg
+              </span>
             </div>
             <div
               className="emotion-7"
-              style={Object {}}
             >
-              <div
-                className="emotion-4"
-              >
-                <span
-                  className="emotion-3"
-                >
-                  ProgressFile.jpg
-                </span>
-              </div>
               <div
                 className="emotion-6"
               >
@@ -1238,11 +1283,11 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
         </div>
       </div>
       <div
-        className="emotion-2"
+        className="emotion-1"
         style={Object {}}
       >
         <div
-          className="emotion-11"
+          className="emotion-2"
         />
       </div>
     </div>
@@ -1251,56 +1296,36 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
 `;
 
 exports[`AttachmentBox matches snapshot when is given the simplest attachment 1`] = `
-.emotion-4 {
-  color: #172b4e;
-}
-
 .emotion-5 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
 }
 
-.emotion-7 {
-  display: inline-block;
-}
-
-.emotion-1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-right: 8px;
-}
-
-.emotion-13 {
+.emotion-12 {
   background: #f8f9fa;
   border-radius: 5px;
   color: #172b4e;
 }
 
-.emotion-12 {
+.emotion-11 {
   padding: 24px;
   padding: 8px;
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-12 {
+  .emotion-11 {
     padding: 16px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-12 {
+  .emotion-11 {
     padding: calc(8px / 2);
   }
 }
 
-.emotion-11 {
+.emotion-10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1404,55 +1429,56 @@ exports[`AttachmentBox matches snapshot when is given the simplest attachment 1`
   background: #2A41A2;
 }
 
-.emotion-3 {
-  display: inline;
-  color: #172b4e;
-  font-size: 1rem;
-}
-
-.emotion-9 {
+.emotion-2 {
   margin: 24px;
   margin: 0;
   margin-right: 8px;
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-9 {
+  .emotion-2 {
     margin: 16px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-9 {
+  .emotion-2 {
     margin: 0;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .emotion-9 {
+  .emotion-2 {
     margin-right: calc(8px / 2);
   }
 }
 
+.emotion-4 {
+  display: inline;
+  color: #172b4e;
+  font-size: 1rem;
+}
+
 <div
-  className="emotion-13"
+  className="emotion-12"
 >
   <div
-    className="emotion-12"
+    className="emotion-11"
   >
     <div
-      className="emotion-11"
+      className="emotion-10"
     >
       <div
         className="emotion-5"
         style={
           Object {
             "display": "flex",
+            "minWidth": 0,
           }
         }
       >
         <div
-          className="emotion-7"
+          className="emotion-6"
           style={
             Object {
               "width": "100%",
@@ -1460,44 +1486,54 @@ exports[`AttachmentBox matches snapshot when is given the simplest attachment 1`
           }
         >
           <div
-            className="emotion-6"
+            className="emotion-1"
+            style={Object {}}
+          >
+            <div
+              className="emotion-0"
+              data-type="jpg"
+            />
+          </div>
+          <div
+            className="emotion-1"
+            style={Object {}}
           >
             <div
               className="emotion-2"
-              style={Object {}}
-            >
-              <div
-                className="emotion-1"
-              >
-                <div
-                  className="emotion-0"
-                  data-type="jpg"
-                />
-              </div>
-            </div>
+            />
+          </div>
+          <div
+            className="emotion-5"
+            style={
+              Object {
+                "minWidth": 0,
+              }
+            }
+          >
             <div
-              className="emotion-5"
-              style={Object {}}
+              style={
+                Object {
+                  "overflow": "hidden",
+                  "textOverflow": "ellipsis",
+                  "whiteSpace": "nowrap",
+                }
+              }
             >
-              <div
+              <span
                 className="emotion-4"
               >
-                <span
-                  className="emotion-3"
-                >
-                  FirstFile.jpg
-                </span>
-              </div>
+                FirstFile.jpg
+              </span>
             </div>
           </div>
         </div>
       </div>
       <div
-        className="emotion-2"
+        className="emotion-1"
         style={Object {}}
       >
         <div
-          className="emotion-9"
+          className="emotion-2"
         />
       </div>
     </div>
