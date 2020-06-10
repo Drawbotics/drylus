@@ -183,12 +183,25 @@ export async function uploadFiles(
   files: FileList,
   signingUrl: string,
   extra: {
+    /** Function called before the upload starts */
     onInit?: (files: FileList) => void;
+
+    /** Function called before the start of each file upload */
     onStart?: (file: File) => void;
+
+    /** Function called during the upload for each file */
     onProgress?: (file: File, e: ProgressEvent) => void;
+
+    /** Function called at the end of each file upload */
     onFinish?: (file: File, signingResult?: SigningResult, result?: any) => void;
+
+    /** Function called called if an error is thrown during each file upload */
     onError?: (file: File, error: Error) => void;
+
+    /** Function called once all files have been uploaded */
     onComplete?: (files: Array<UploadedFile>) => void;
+
+    /** Custom function to modify the file name before upload, note that a default sanitizer already removes whitespace */
     sanitize?: (filename: string) => string;
   },
 ) {

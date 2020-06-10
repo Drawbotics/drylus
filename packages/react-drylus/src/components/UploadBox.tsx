@@ -5,7 +5,7 @@ import React, { ChangeEvent, Fragment, useEffect, useRef, useState } from 'react
 import { Category, Shade, Size } from '../enums';
 import { Hint } from '../forms';
 import { Margin } from '../layout';
-import { SigningResult, WrapperRef, uploadFiles } from '../utils';
+import { WrapperRef } from '../utils';
 import { Upload } from '../utils/illustrations';
 import { Text } from './Text';
 
@@ -48,29 +48,8 @@ interface BaseHelper {
    */
   multiple?: boolean;
 
-  /** URL for the direct upload, here the attachment will be signed */
-  signingUrl: string;
-
-  /** Function called before the upload starts */
-  onInit?: (files: FileList) => void;
-
-  /** Function called before the start of each file upload */
-  onStart?: (file: File) => void;
-
-  /** Function called during the upload for each file */
-  onProgress?: (file: File, e: ProgressEvent) => void;
-
-  /** Function called at the end of each file upload */
-  onFinish?: (file: File, signingResult?: SigningResult, result?: any) => void;
-
-  /** Function called called if an error is thrown during each file upload */
-  onError?: (file: File, error: Error) => void;
-
-  /** Function called once all files have been uploaded */
-  onComplete?: (uploads: Array<{ file: File; signingResult?: SigningResult }>) => void;
-
-  /** Custom function to modify the file name before upload, note that a default sanitizer already removes whitespace */
-  sanitize?: (filename: string) => string;
+  /** Handler function for the file upload */
+  onUploadFiles: <T>(files: FileList) => Promise<T>;
 }
 
 export interface UploadHelperProps extends BaseHelper {
@@ -78,7 +57,7 @@ export interface UploadHelperProps extends BaseHelper {
   children: React.ReactNode;
 }
 
-export const UploadHelper = ({ multiple, signingUrl, children, ...rest }: UploadHelperProps) => {
+export const UploadHelper = ({ multiple, onUploadFiles, children }: UploadHelperProps) => {
   const childrenRef = useRef<HTMLElement>();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -86,7 +65,7 @@ export const UploadHelper = ({ multiple, signingUrl, children, ...rest }: Upload
     e.preventDefault();
     const files = inputRef.current?.files;
     if (files != null) {
-      await uploadFiles(files, signingUrl, rest);
+      await onUploadFiles(files);
     }
   };
 
@@ -147,7 +126,7 @@ export const UploadBox = ({
   fullWidth,
   onDragEnter,
   onDragLeave,
-  signingUrl,
+  onUploadFiles,
   multiple,
   onMaxFilesExceeded,
   error,
@@ -171,7 +150,7 @@ export const UploadBox = ({
     if (!multiple && files.length > 1 && onMaxFilesExceeded != null) {
       onMaxFilesExceeded();
     } else {
-      await uploadFiles(files, signingUrl, rest);
+      await onUploadFiles(files);
     }
   };
 
@@ -184,7 +163,7 @@ export const UploadBox = ({
   };
 
   return (
-    <UploadHelper multiple={multiple} signingUrl={signingUrl} {...rest}>
+    <UploadHelper multiple={multiple} onUploadFiles={onUploadFiles} {...rest}>
       <div
         onDragOver={(e) => e.preventDefault()}
         onDragEnter={handleDragEnter}
