@@ -49,9 +49,16 @@ Try to upload some files to see it in action. The example is limited to 1 file a
       <div style={{ width: 400 }}>
         <Margin size={{ bottom: Size.DEFAULT }}>
           <UploadBox
-            signingUrl={process.env.EXAMPLE_API_HOST + '/rails/active_storage/direct_uploads'}
-            onProgress={(file, e) => setState({ ...state, [file.name]: (e.loaded / e.total) })}
-            onFinish={(file) => setState({ ...state, [file.name]: -1 })}
+            onUploadFiles={(files) => {
+              uploadFiles(
+                files,
+                process.env.EXAMPLE_API_HOST + '/rails/active_storage/direct_uploads',
+                {
+                  onFinish: (file) => setState({ ...state, [file.name]: -1 }),
+                  onProgress: (file, e) => setState({ ...state, [file.name]: (e.loaded / e.total) }),
+                },
+              )
+            }}
             fullWidth />
         </Margin>
         <AttachmentList>

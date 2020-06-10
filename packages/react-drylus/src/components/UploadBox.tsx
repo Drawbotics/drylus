@@ -9,6 +9,8 @@ import { WrapperRef } from '../utils';
 import { Upload } from '../utils/illustrations';
 import { Text } from './Text';
 
+export { uploadFile, uploadFiles } from '../utils';
+
 const styles = {
   root: css`
     padding: ${sv.defaultPadding} ${sv.paddingExtraLarge};
