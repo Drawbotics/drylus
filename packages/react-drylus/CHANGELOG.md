@@ -1,3 +1,16 @@
+# v6.7.1 (Wed Jun 10 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix UploadBox type  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.6.10 (Tue May 26 2020)
 
 #### ⚠️  Pushed to master
