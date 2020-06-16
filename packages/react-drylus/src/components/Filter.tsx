@@ -54,6 +54,9 @@ const styles = {
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
     padding-top: ${sv.paddingExtraSmall};
   `,
+  content: css`
+    overflow: auto;
+  `,
   rightAlign: css`
     right: 0;
   `,
@@ -110,6 +113,9 @@ const styles = {
       width: 100%;
     }
   `,
+  withLine: css`
+    border-bottom: 1px solid ${sv.neutralLight};
+  `,
 };
 
 export interface BaseFilterProps {
@@ -147,6 +153,9 @@ export interface BaseFilterProps {
    */
   closeOnClick?: boolean;
 
+  /** If given, the content will be limited to this height, and content will scroll */
+  contentHeight?: number;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -165,6 +174,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
     style,
     fullWidth,
     closeOnClick = false,
+    contentHeight,
   } = useResponsiveProps<BaseFilterProps>(rest, responsive);
 
   const panelRef = useRef<HTMLDivElement>(null);
@@ -212,17 +222,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
         })}
         onClick={() => setPanelOpen(!panelOpen)}>
         {label}
-        <Icon
-          // onClick={(e: React.MouseEvent<HTMLElement>) => {
-          //   if (active) {
-          //     e.stopPropagation();
-          //     if (onClear != null) {
-          //       onClear();
-          //     }
-          //   }
-          // }}
-          name={panelOpen ? 'chevron-up' : 'chevron-down'}
-        />
+        <Icon name={panelOpen ? 'chevron-up' : 'chevron-down'} />
       </div>
       <div
         ref={panelRef}
@@ -232,7 +232,11 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
           [styles.rightAlign]: align === Align.RIGHT,
         })}
         onClick={closeOnClick === true ? () => setPanelOpen(false) : undefined}>
-        <div>{children}</div>
+        <div
+          className={cx(styles.content, { [styles.withLine]: contentHeight != null })}
+          style={{ maxHeight: contentHeight }}>
+          {children}
+        </div>
         <div className={styles.clear} onClick={handleClickClear}>
           {clearLabel}
         </div>
