@@ -247,19 +247,21 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
         ]]: vGutters != null,
       })}
       style={style}>
-      {React.Children.map(
-        children as any,
-        (child: React.ReactElement<typeof GridItem>, index: number) => {
-          return React.cloneElement(child, {
-            columns,
-            animated,
-            originOffset,
-            index,
-            animationSpeed,
-            delay: animationDelay,
-          } as Partial<typeof GridItem>);
-        },
-      )}
+      {React.Children.toArray(children)
+        .filter((c) => Boolean(c))
+        .map((child, index) =>
+          React.cloneElement(
+            child as React.ReactElement<typeof GridItem>,
+            {
+              columns,
+              animated,
+              originOffset,
+              index,
+              animationSpeed,
+              delay: animationDelay,
+            } as Partial<typeof GridItem>,
+          ),
+        )}
     </RootElement>
   );
 };

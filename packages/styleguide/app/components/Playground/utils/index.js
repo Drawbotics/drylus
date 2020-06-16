@@ -79,7 +79,7 @@ export function recursiveMdxTransform(tree, target) {
 
           if (propKey === 'children' && Array.isArray(propValue)) {
             newProp = propValue.map((child, i) =>
-              child.$$typeof ? mdxTransform(child, `${propKey}${i}`) : child,
+              child?.$$typeof ? mdxTransform(child, `${propKey}${i}`) : child,
             );
           } else {
             if (Array.isArray(propValue)) {
