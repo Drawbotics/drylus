@@ -1,3 +1,16 @@
+# v6.7.5 (Wed Jun 17 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - pass any other prop to button as optional  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.7.4 (Tue Jun 16 2020)
 
 #### ⚠️  Pushed to master
