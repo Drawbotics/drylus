@@ -345,6 +345,9 @@ export interface ButtonProps {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** @private */
+  [x: string]: any;
 }
 
 export const Button = ({ responsive, ...rest }: ButtonProps) => {
@@ -361,6 +364,7 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
     style,
     color,
     inversed,
+    ...props
   } = useResponsiveProps<ButtonProps>(rest, responsive);
 
   if (!children && trailing && leading) {
@@ -389,7 +393,8 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
         [styles.secondaryInversed]: inversed === true && tier === Tier.SECONDARY,
         [styles.tertiaryInversed]: inversed === true && tier === Tier.TERTIARY,
       })}
-      disabled={disabled}>
+      disabled={disabled}
+      {...props}>
       {run(() => {
         if (leading) {
           return <div className={cx(styles.icon, { [styles.leading]: !round })}>{leading}</div>;
