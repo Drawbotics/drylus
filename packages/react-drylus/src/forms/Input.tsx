@@ -290,10 +290,12 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
     ...props
   } = useResponsiveProps<RawInputProps<T>>(rest, responsive);
 
-  checkComponentProps(
-    { prefix, suffix },
-    { prefix: [Button, Select, Icon], suffix: [Button, Select, Icon] },
-  );
+  if (inputRef == null) {
+    checkComponentProps(
+      { prefix, suffix },
+      { prefix: [Button, Select, Icon], suffix: [Button, Select, Icon] },
+    );
+  }
 
   const [isFocused, setFocused] = useState(false);
 
