@@ -131,9 +131,11 @@ export const Alert = ({ id, text, category, onClickDismiss, hideDelay = 4000 }: 
             </div>
           </Margin>
         </FlexItem>
-        <FlexItem flex>
+        <FlexItem flex style={{ minWidth: 0 }}>
           <Margin size={{ top: Size.EXTRA_SMALL, bottom: Size.EXTRA_SMALL }}>
-            <span data-element="text">{text}</span>
+            <span style={{ overflowWrap: 'break-word' }} data-element="text">
+              {text}
+            </span>
           </Margin>
         </FlexItem>
         <FlexItem>
