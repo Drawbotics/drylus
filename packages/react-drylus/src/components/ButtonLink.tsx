@@ -29,6 +29,7 @@ export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
     style,
     color,
     inversed,
+    disabled,
   } = useResponsiveProps<ButtonLinkProps>(rest, responsive);
 
   if (!children && trailing && leading) {
@@ -55,6 +56,7 @@ export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
         [styles.inversed]: inversed === true,
         [styles.secondaryInversed]: inversed === true && tier === Tier.SECONDARY,
         [styles.tertiaryInversed]: inversed === true && tier === Tier.TERTIARY,
+        [styles.disabled]: disabled === true,
       })}>
       {run(() => {
         if (leading) {
