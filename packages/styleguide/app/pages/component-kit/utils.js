@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export const ControlledField = ({ component: Component, style, initialValue = '' }) => {
+export const ControlledField = ({ component: Component, style, initialValue }) => {
   const [value, setValue] = useState(initialValue);
   return (
     <div style={style}>
