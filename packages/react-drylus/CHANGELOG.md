@@ -1,3 +1,20 @@
+# v6.7.6 (Fri Jun 19 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - break word when too long in Alert  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - dont check Input prop types if using inputRef  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - apply disabled style to ButtonLink  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.7.5 (Wed Jun 17 2020)
 
 #### ⚠️  Pushed to master
