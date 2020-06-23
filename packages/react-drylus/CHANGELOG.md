@@ -1,3 +1,16 @@
+# v6.7.7 (Tue Jun 23 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - set type button as default  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.7.6 (Fri Jun 19 2020)
 
 #### ⚠️  Pushed to master
