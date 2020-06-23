@@ -56,6 +56,7 @@ exports[`Button matches snapshot when has a category 1`] = `
 
 <button
   className="undefined emotion-0"
+  type="button"
 >
   Some content
 </button>
@@ -132,6 +133,7 @@ exports[`Button matches snapshot when has a leading component 1`] = `
 
 <button
   className="emotion-2"
+  type="button"
 >
   <div
     className="emotion-1"
@@ -202,6 +204,7 @@ exports[`Button matches snapshot when has a tier 1`] = `
 
 <button
   className="emotion-0"
+  type="button"
 >
   Some content
 </button>
@@ -278,6 +281,7 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
 
 <button
   className="emotion-2"
+  type="button"
 >
   Some content
   <div
@@ -332,6 +336,7 @@ exports[`Button matches snapshot when is basic 1`] = `
 
 <button
   className="emotion-0"
+  type="button"
 >
   Some content
 </button>
@@ -380,6 +385,7 @@ exports[`Button matches snapshot when is small 1`] = `
 
 <button
   className="emotion-0"
+  type="button"
 >
   Some content
 </button>

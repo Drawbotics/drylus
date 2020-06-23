@@ -88,6 +88,7 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
       >
         <button
           className="emotion-0"
+          type="button"
         >
           Button
         </button>
@@ -328,6 +329,7 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
       >
         <button
           className="emotion-0"
+          type="button"
         >
           Leading
         </button>
@@ -352,6 +354,7 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
       >
         <button
           className="emotion-0"
+          type="button"
         >
           Trailing
         </button>

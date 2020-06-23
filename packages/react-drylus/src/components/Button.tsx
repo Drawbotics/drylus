@@ -364,6 +364,7 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
     style,
     color,
     inversed,
+    type = 'button',
     ...props
   } = useResponsiveProps<ButtonProps>(rest, responsive);
 
@@ -394,6 +395,7 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
         [styles.tertiaryInversed]: inversed === true && tier === Tier.TERTIARY,
       })}
       disabled={disabled}
+      type={type}
       {...props}>
       {run(() => {
         if (leading) {
