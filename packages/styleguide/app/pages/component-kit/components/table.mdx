@@ -6,6 +6,7 @@ import {
   TRow,
   TBody,
   EmptyState,
+  Checkbox,
 } from '@drawbotics/react-drylus';
 import sv from '@drawbotics/drylus-style-vars';
 
@@ -464,5 +465,50 @@ export const data = [{
       { label: 'Seventh column', value: 'g' },
       { label: 'Eighth column', value: 'h' },
     ]} data={data} scrollable />
+  </div>
+</Playground>
+
+export const dataWithCheckbox = [{
+  id: 1,
+  a: <Checkbox onChange={() => {}} />,
+  b: 'Data B 1',
+  c: 'Data C 1',
+  d: 'Data D 1',
+}, {
+  id: 2,
+  a: <Checkbox onChange={() => {}} />,
+  b: 'Data B 2',
+  c: 'Data C 2',
+  d: 'Data D 2',
+}, {
+  id: 3,
+  a: <Checkbox onChange={() => {}} />,
+  b: 'Data B 3',
+  c: 'Data C 3',
+  d: 'Data D 3',
+}, {
+  id: 4,
+  a: <Checkbox onChange={() => {}} />,
+  b: 'Data B 4',
+  c: 'Data C 4',
+  d: 'Data D 4',
+}, {
+  id: 5,
+  a: <Checkbox onChange={() => {}} />,
+  b: 'Data B 5',
+  c: 'Data C 5',
+  d: 'Data D 5',
+}]
+
+
+### Table with actionable header
+<Playground>
+  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px', whiteSpace: 'nowrap' }}>
+    <Table header={[
+      { label: <Checkbox onChange={() => {}} />, value: 'a' },
+      { label: 'Second column', value: 'b' },
+      { label: 'Third column', value: 'c' },
+      { label: 'Fourth column', value: 'd' },
+    ]} data={dataWithCheckbox} />
   </div>
 </Playground>
