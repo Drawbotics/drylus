@@ -297,7 +297,8 @@ const styles = {
   `,
   scrollable: css`
     overflow: auto;
-
+  `,
+  sticky: css`
     thead > tr > th:first-of-type,
     tbody > tr > td:first-of-type {
       position: sticky;
@@ -321,6 +322,7 @@ const styles = {
     pointer-events: none;
     opacity: 1;
     transition: ${sv.defaultTransition};
+    border-right: 1px solid ${sv.neutral};
   `,
   leftDivisor: css`
     position: absolute;
@@ -333,6 +335,7 @@ const styles = {
     pointer-events: none;
     opacity: 1;
     transition: ${sv.defaultTransition};
+    border-left: 1px solid ${sv.neutral};
   `,
 };
 
@@ -893,7 +896,7 @@ export interface TableProps {
   /** If present, all the content of the table is replaced with this, used to show info when there is no data in the table */
   emptyContent?: React.ReactNode;
 
-  /** If true, the table will stick to the parent width, but won't squish the content, rather will be scrollable horizontally */
+  /** If true, the table will stick to the parent width, but won't squish the content, rather will be scrollable horizontally. With automatic tables, the first and last column are made sticky. */
   scrollable?: boolean;
 
   /** If true, rows (excluding nested ones) will be animated when entering, only works in automatically generated tables. For manual tables, set `animated` in TBody */
@@ -1076,7 +1079,9 @@ export const Table = ({
   if (scrollable) {
     return (
       <div style={{ position: 'relative' }}>
-        <div ref={scrollableRef} className={cx(styles.scrollable)}>
+        <div
+          ref={scrollableRef}
+          className={cx(styles.scrollable, { [styles.sticky]: header.length != 0 })}>
           {table}
         </div>
       </div>
