@@ -245,6 +245,11 @@ const styles = {
       color: ${sv.neutralDark};
     }
   `,
+  activeHeader: css`
+    span {
+      color: ${sv.colorPrimary} !important;
+    }
+  `,
   sortableIcons: css`
     position: absolute;
     left: calc(${sv.marginLarge} * -1);
@@ -265,11 +270,13 @@ const styles = {
   down: css`
     > i:last-of-type {
       color: ${sv.colorPrimary};
+      font-weight: bold;
     }
   `,
   up: css`
     > i:first-of-type {
       color: ${sv.colorPrimary};
+      font-weight: bold;
     }
   `,
   loadingBodyCell: css`
@@ -984,10 +991,12 @@ export const Table = ({
                 typeof hItem === 'string' || typeof hItem === 'number' ? hItem : hItem.label;
               const cellContent =
                 sortableBy?.includes(value) && screenSize > ScreenSizes.L ? (
-                  <span
-                    className={styles.headerWithArrows}
+                  <div
+                    className={cx(styles.headerWithArrows, {
+                      [styles.activeHeader]: activeHeader?.key === value,
+                    })}
                     onClick={() => (onClickHeader != null ? onClickHeader(value) : null)}>
-                    <span
+                    <div
                       className={cx(styles.sortableIcons, {
                         [styles.up]:
                           activeHeader?.key === value && activeHeader?.direction === 'asc',
@@ -996,9 +1005,9 @@ export const Table = ({
                       })}>
                       <Icon name="chevron-up" />
                       <Icon name="chevron-down" />
-                    </span>
-                    {label}
-                  </span>
+                    </div>
+                    <span>{label}</span>
+                  </div>
                 ) : (
                   label
                 );
