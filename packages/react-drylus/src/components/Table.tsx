@@ -991,6 +991,11 @@ export const Table = ({
     };
   }, [scrollableRef, tableRef]);
 
+  useEffect(() => {
+    handleScrollTable();
+    handleResize();
+  }, [data?.length, isLoading]);
+
   const handleSetRowState = (state: Record<string | number, boolean>) =>
     setRowState({ ...rowsStates, ...state });
 
