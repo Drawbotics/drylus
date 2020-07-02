@@ -1,3 +1,16 @@
+# v6.7.8 (Thu Jul 02 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Improve Table component UX [#153](https://github.com/Drawbotics/drylus/pull/153) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.7.7 (Tue Jun 23 2020)
 
 #### ⚠️  Pushed to master
