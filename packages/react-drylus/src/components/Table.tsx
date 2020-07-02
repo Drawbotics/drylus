@@ -310,12 +310,14 @@ const styles = {
     tbody > tr > td:first-of-type {
       position: sticky;
       left: 0;
+      z-index: 9999;
     }
 
     thead > tr > th:last-of-type,
     tbody > tr > td:last-of-type {
       position: sticky;
       right: 0;
+      z-index: 9999;
     }
   `,
   rightDivisor: css`
@@ -956,22 +958,32 @@ export const Table = ({
     }
   };
 
-  const handleSetDivisorHeight = () => {
+  const handleResize = () => {
     const height = tableRef.current?.clientHeight;
     setDivisorHeight(height);
+
+    if (scrollableRef.current != null && tableRef.current != null) {
+      const { clientWidth } = scrollableRef.current;
+      const difference = tableRef.current.clientWidth - clientWidth;
+      if (difference === 0) {
+        setXScrollAmount(undefined);
+      } else {
+        handleScrollTable();
+      }
+    }
   };
 
   useEffect(() => {
     if (scrollableRef.current != null) {
       scrollableRef.current.addEventListener('scroll', handleScrollTable, false);
-      window.addEventListener('resize', handleSetDivisorHeight, false);
+      window.addEventListener('resize', handleResize, false);
       setTimeout(handleScrollTable, 50); // trigger calculation once
-      setTimeout(handleSetDivisorHeight, 50);
+      setTimeout(handleResize, 50);
     }
 
     return () => {
       scrollableRef.current?.removeEventListener('scroll', handleScrollTable, false);
-      window.removeEventListener('resize', handleSetDivisorHeight, false);
+      window.removeEventListener('resize', handleResize, false);
     };
   }, [scrollableRef, tableRef]);
 
@@ -1090,7 +1102,9 @@ export const Table = ({
       <div style={{ position: 'relative' }}>
         <div
           ref={scrollableRef}
-          className={cx(styles.scrollable, { [styles.sticky]: header.length != 0 })}>
+          className={cx(styles.scrollable, {
+            [styles.sticky]: header.length != 0 && xScrollAmount != null,
+          })}>
           {table}
         </div>
       </div>
