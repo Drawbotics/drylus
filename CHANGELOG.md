@@ -1,3 +1,16 @@
+# v6.7.11 (Thu Jul 02 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - trigger table handlers on data and loading change  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.7.10 (Thu Jul 02 2020)
 
 #### ⚠️  Pushed to master
