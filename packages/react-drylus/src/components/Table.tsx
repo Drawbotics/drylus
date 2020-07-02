@@ -367,6 +367,9 @@ export interface TCellProps extends React.TdHTMLAttributes<HTMLElement> {
   active?: boolean;
 
   /** @private */
+  style?: Style;
+
+  /** @private */
   [x: string]: any;
 }
 
@@ -377,6 +380,7 @@ export const TCell = ({
   withChildToggle,
   onClickArrow,
   active,
+  style,
   ...props
 }: TCellProps) => {
   const { screenSize, ScreenSizes } = useScreenSize();
@@ -386,13 +390,13 @@ export const TCell = ({
   });
   if (head) {
     return (
-      <th className={className}>
+      <th className={className} style={style}>
         <Label>{children}</Label>
       </th>
     );
   }
   return (
-    <td className={className} colSpan={asContainer ? 100 : undefined} {...props}>
+    <td className={className} colSpan={asContainer ? 100 : undefined} style={style} {...props}>
       {run(() => {
         if (withChildToggle) {
           return (
@@ -1023,8 +1027,12 @@ export const Table = ({
                 ) : (
                   label
                 );
+              const noZIndex =
+                xScrollAmount == null ||
+                (i === 0 && xScrollAmount === 0) ||
+                (i === header.length - 1 && xScrollAmount === 1);
               return (
-                <TCell key={value}>
+                <TCell key={value} style={{ zIndex: noZIndex ? 'auto' : undefined }}>
                   {cellContent}
                   {i === 0 && scrollable ? (
                     <div
