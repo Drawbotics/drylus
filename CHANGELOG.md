@@ -1,3 +1,16 @@
+# v6.7.9 (Thu Jul 02 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - hide/show scrollable table on resize  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.7.8 (Thu Jul 02 2020)
 
 #### 🐛 Bug fix - Patch
