@@ -14,6 +14,7 @@
     "test:extract-emotion": "cd packages/extract-emotion && npm run test",
     "build:extract-emotion": "cd packages/extract-emotion && npm run build",
     "watch:styleguide": "cd packages/styleguide && npm run start",
+    "start": "npm run watch:styleguide",
     "build:styleguide": "cd packages/styleguide && npm run build",
     "build:vars": "cd packages/drylus-style-vars && npm run build",
     "dev:icons": "cd packages/icons && npm run build:dev",

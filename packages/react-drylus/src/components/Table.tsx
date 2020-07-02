@@ -101,6 +101,11 @@ const styles = {
   row: css`
     & > td:last-of-type {
       text-align: right;
+      background: inherit;
+    }
+
+    & > td:first-of-type {
+      background: inherit;
     }
 
     & > th:last-of-type {
@@ -240,6 +245,11 @@ const styles = {
       color: ${sv.neutralDark};
     }
   `,
+  activeHeader: css`
+    span {
+      color: ${sv.colorPrimary} !important;
+    }
+  `,
   sortableIcons: css`
     position: absolute;
     left: calc(${sv.marginLarge} * -1);
@@ -260,11 +270,13 @@ const styles = {
   down: css`
     > i:last-of-type {
       color: ${sv.colorPrimary};
+      font-weight: bold;
     }
   `,
   up: css`
     > i:first-of-type {
       color: ${sv.colorPrimary};
+      font-weight: bold;
     }
   `,
   loadingBodyCell: css`
@@ -292,32 +304,45 @@ const styles = {
   `,
   scrollable: css`
     overflow: auto;
-
-    &::after,
-    &::before {
-      content: ' ';
-      pointer-events: none;
-      position: absolute;
-      top: 0;
+  `,
+  sticky: css`
+    thead > tr > th:first-of-type,
+    tbody > tr > td:first-of-type {
+      position: sticky;
       left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      z-index: 2;
-      transition: ${sv.defaultTransition};
+    }
+
+    thead > tr > th:last-of-type,
+    tbody > tr > td:last-of-type {
+      position: sticky;
+      right: 0;
     }
   `,
-  leftShadow: css`
-    &::before {
-      opacity: 1;
-      box-shadow: inset 20px 0 10px -15px ${fade(sv.neutralDark, 20)};
-    }
+  rightDivisor: css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 100%;
+    transform: translateX(-100%);
+    box-shadow: inset -20px 0 10px -15px ${fade(sv.neutralDark, 20)};
+    pointer-events: none;
+    opacity: 1;
+    transition: ${sv.defaultTransition};
+    border-right: 1px solid ${sv.neutral};
   `,
-  rightShadow: css`
-    &::after {
-      opacity: 1;
-      box-shadow: inset -20px 0 10px -15px ${fade(sv.neutralDark, 20)};
-    }
+  leftDivisor: css`
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    transform: translateX(100%);
+    box-shadow: inset 20px 0 10px -15px ${fade(sv.neutralDark, 20)};
+    pointer-events: none;
+    opacity: 1;
+    transition: ${sv.defaultTransition};
+    border-left: 1px solid ${sv.neutral};
   `,
 };
 
@@ -878,7 +903,7 @@ export interface TableProps {
   /** If present, all the content of the table is replaced with this, used to show info when there is no data in the table */
   emptyContent?: React.ReactNode;
 
-  /** If true, the table will stick to the parent width, but won't squish the content, rather will be scrollable horizontally */
+  /** If true, the table will stick to the parent width, but won't squish the content, rather will be scrollable horizontally. With automatic tables, the first and last column are made sticky. */
   scrollable?: boolean;
 
   /** If true, rows (excluding nested ones) will be animated when entering, only works in automatically generated tables. For manual tables, set `animated` in TBody */
@@ -916,6 +941,7 @@ export const Table = ({
   const tableRef = useRef<HTMLTableElement>(null);
   const scrollableRef = useRef<HTMLDivElement>(null);
   const [xScrollAmount, setXScrollAmount] = useState<number>();
+  const [divisorHeight, setDivisorHeight] = useState<number>();
 
   checkComponentProps({ children }, { children: [TBody, THead] });
 
@@ -930,14 +956,22 @@ export const Table = ({
     }
   };
 
+  const handleSetDivisorHeight = () => {
+    const height = tableRef.current?.clientHeight;
+    setDivisorHeight(height);
+  };
+
   useEffect(() => {
     if (scrollableRef.current != null) {
       scrollableRef.current.addEventListener('scroll', handleScrollTable, false);
+      window.addEventListener('resize', handleSetDivisorHeight, false);
       setTimeout(handleScrollTable, 50); // trigger calculation once
+      setTimeout(handleSetDivisorHeight, 50);
     }
 
     return () => {
       scrollableRef.current?.removeEventListener('scroll', handleScrollTable, false);
+      window.removeEventListener('resize', handleSetDivisorHeight, false);
     };
   }, [scrollableRef, tableRef]);
 
@@ -950,38 +984,54 @@ export const Table = ({
     data != null && !isLoading && !emptyContent
       ? [
           <THead key="head">
-            {header.map((hItem) => {
-              const v =
+            {header.map((hItem, i) => {
+              const value =
                 typeof hItem === 'string' || typeof hItem === 'number' ? hItem : hItem.value;
+              const label =
+                typeof hItem === 'string' || typeof hItem === 'number' ? hItem : hItem.label;
+              const cellContent =
+                sortableBy?.includes(value) && screenSize > ScreenSizes.L ? (
+                  <div
+                    className={cx(styles.headerWithArrows, {
+                      [styles.activeHeader]: activeHeader?.key === value,
+                    })}
+                    onClick={() => (onClickHeader != null ? onClickHeader(value) : null)}>
+                    <div
+                      className={cx(styles.sortableIcons, {
+                        [styles.up]:
+                          activeHeader?.key === value && activeHeader?.direction === 'asc',
+                        [styles.down]:
+                          activeHeader?.key === value && activeHeader?.direction === 'desc',
+                      })}>
+                      <Icon name="chevron-up" />
+                      <Icon name="chevron-down" />
+                    </div>
+                    <span>{label}</span>
+                  </div>
+                ) : (
+                  label
+                );
               return (
-                <TCell key={v}>
-                  {run(() => {
-                    if (sortableBy?.includes(v) && screenSize > ScreenSizes.L) {
-                      return (
-                        <span
-                          className={styles.headerWithArrows}
-                          onClick={() => (onClickHeader != null ? onClickHeader(v) : null)}>
-                          <span
-                            className={cx(styles.sortableIcons, {
-                              [styles.up]:
-                                activeHeader?.key === v && activeHeader?.direction === 'asc',
-                              [styles.down]:
-                                activeHeader?.key === v && activeHeader?.direction === 'desc',
-                            })}>
-                            <Icon name="chevron-up" />
-                            <Icon name="chevron-down" />
-                          </span>
-                          {typeof hItem === 'string' || typeof hItem === 'number'
-                            ? hItem
-                            : hItem.label}
-                        </span>
-                      );
-                    } else {
-                      return typeof hItem === 'string' || typeof hItem === 'number'
-                        ? hItem
-                        : hItem.label;
-                    }
-                  })}
+                <TCell key={value}>
+                  {cellContent}
+                  {i === 0 && scrollable ? (
+                    <div
+                      className={styles.leftDivisor}
+                      style={{
+                        height: divisorHeight,
+                        opacity: xScrollAmount != null && xScrollAmount > 0 ? 1 : 0,
+                      }}
+                    />
+                  ) : null}
+                  {i === header.length - 1 && scrollable ? (
+                    <div
+                      className={styles.rightDivisor}
+                      style={{
+                        height: divisorHeight,
+                        opacity: xScrollAmount != null && xScrollAmount < 1 ? 1 : 0,
+                      }}
+                    />
+                  ) : null}
                 </TCell>
               );
             })}
@@ -1040,10 +1090,7 @@ export const Table = ({
       <div style={{ position: 'relative' }}>
         <div
           ref={scrollableRef}
-          className={cx(styles.scrollable, {
-            [styles.rightShadow]: xScrollAmount != null && xScrollAmount < 1,
-            [styles.leftShadow]: xScrollAmount != null && xScrollAmount > 0,
-          })}>
+          className={cx(styles.scrollable, { [styles.sticky]: header.length != 0 })}>
           {table}
         </div>
       </div>
