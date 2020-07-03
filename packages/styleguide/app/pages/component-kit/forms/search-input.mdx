@@ -26,7 +26,7 @@ If you want to debounce, you should provide that logic yourself by creating a wr
 __Example__
 <Playground component={SearchInput}>
   <div style={{ maxWidth: 300, height: 300 }}>
-    <ControlledField component={
+    <ControlledField initialValue="" component={
       <SearchInput onClickResult={() => {}} value="" placeholder="Search..." onChange={x=>x} options={[
         { label: 'Result 1', value: 1 },
         { label: 'Result 2', value: 2 },
@@ -44,7 +44,7 @@ If there are no results, the search displays a `noResultLabel` which can be modi
 
 <Playground>
   <div style={{ maxWidth: 300, height: 200 }}>
-    <ControlledField component={
+    <ControlledField initialValue="" component={
       <SearchInput value="" onChange={x=>x} options={[]} />
     } />
   </div>

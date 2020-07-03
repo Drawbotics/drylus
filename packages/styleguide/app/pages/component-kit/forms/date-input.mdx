@@ -13,7 +13,7 @@ import { DateInput } from '@drawbotics/react-drylus';
 __Example__
 <Playground component={DateInput}>
   <div style={{ maxWidth: 300 }}>
-    <ControlledField component={
+    <ControlledField initialValue="" component={
       <DateInput value="" align={Align.RIGHT} placeholder="Pick a date..." />
     } />
   </div>
@@ -23,7 +23,7 @@ If you need to limit the range of dates you can use `maxDate` and/or `minDate` (
 
 <Playground>
   <div style={{ maxWidth: 300 }}>
-    <ControlledField component={
+    <ControlledField initialValue="" component={
       <DateInput
         value=""
         placeholder="Pick a date..."
