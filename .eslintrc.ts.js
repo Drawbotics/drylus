@@ -1,9 +1,10 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint/eslint-plugin', 'jest'],
+  plugins: ['@typescript-eslint/eslint-plugin', 'deprecated-props', 'jest'],
   extends: ['eslint:recommended', 'plugin:jest/recommended'],
   parserOptions: {
     sourceType: 'module',
+    project: 'packages/react-drylus/tsconfig.json',
   },
   env: {
     node: true,
@@ -52,5 +53,8 @@ module.exports = {
     'react/no-unescaped-entities': ['off'],
     'react/style-prop-object': ['warn'],
     'react/display-name': ['off'],
+
+    // Deprecation
+    'deprecated-props/deprecated-props': ['warn'],
   },
 };

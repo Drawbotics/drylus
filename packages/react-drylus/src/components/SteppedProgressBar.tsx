@@ -181,12 +181,19 @@ export interface SteppedProgressBarProps {
   /** If specified the currently active bar has a precise width, should be between 0-1 */
   percentage?: number;
 
-  /** @deprecated use color instead */
-  category?: Exclude<Category, Category.PRIMARY>;
+  /**
+   * @deprecated Use color instead
+   * @kind Category
+   */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  color?: Exclude<Color, Color.PRIMARY>;
+  /** @kind Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
-  /** @default Size.DEFAULT */
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
   /** Used for style overrides */
@@ -198,7 +205,7 @@ export interface SteppedProgressBarProps {
 
 export const SteppedProgressBar = ({ responsive, ...rest }: SteppedProgressBarProps) => {
   const {
-    percentage = 0,
+    percentage,
     category,
     size = Size.DEFAULT,
     style,
@@ -228,7 +235,7 @@ export const SteppedProgressBar = ({ responsive, ...rest }: SteppedProgressBarPr
                   if (id < activeStep || (id == activeStep && indeterminate)) {
                     return '100%';
                   } else if (id == activeStep) {
-                    return `${percentage * 100}%`;
+                    return `${(percentage ?? 0) * 100}%`;
                   } else {
                     return '0';
                   }

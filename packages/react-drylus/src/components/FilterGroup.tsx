@@ -25,7 +25,7 @@ export interface FilterGroupProps {
   /** Icon rendered on the button that replaces the filters */
   icon: IconType;
 
-  /** @deprecated use children instead */
+  /** @deprecated Use children instead */
   filters?: Array<React.ReactNode>;
 
   /** Will be rendered within the content of the drawer, must be a filter */

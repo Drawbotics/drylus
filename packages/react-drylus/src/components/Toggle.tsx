@@ -42,7 +42,7 @@ const styles = {
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
 
     &::after {
-      content: '\\ea29';
+      content: '\\ea2d';
       font-family: 'drycons';
       color: ${sv.white};
       position: absolute;
@@ -85,6 +85,7 @@ export interface ToggleProps {
   /** Determines if toggle is active */
   value: boolean;
 
+  /** @kind Size */
   size: Size.SMALL | Size.DEFAULT;
 
   /** Used for style overrides */
@@ -102,7 +103,7 @@ export const Toggle = ({ responsive, ...rest }: ToggleProps) => {
       className={cx(styles.root, {
         [styles.active]: value,
         [styles.small]: size === Size.SMALL,
-        [styles.disabled]: disabled,
+        [styles.disabled]: disabled === true,
       })}
       onClick={() => (disabled ? null : onChange(!value))}>
       <div className={styles.trigger} data-element="trigger" />

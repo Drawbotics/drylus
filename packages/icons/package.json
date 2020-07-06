@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/icons",
-  "version": "6.2.1-beta.6",
+  "version": "6.3.0",
   "description": "Drawbotics Icons Collection",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "https://github.com/Drawbotics/drylus#readme",
@@ -16,8 +16,14 @@
     "build:dev": "npm run build && NODE_ENV=development npm run sync",
     "prepublishOnly": "npm run build && NODE_ENV=production npm run sync"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Drawbotics/drylus",
+    "directory": "packages/icons"
+  },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
   },
   "gitHead": "8314d678c0c364d2aab35300a51324982cc0b85a",
   "dependencies": {

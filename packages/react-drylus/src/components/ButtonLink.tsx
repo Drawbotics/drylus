@@ -19,7 +19,6 @@ export interface ButtonLinkProps extends ButtonProps {}
 export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
   const {
     children,
-    disabled,
     onClick,
     category: _category,
     size = Size.DEFAULT,
@@ -29,12 +28,14 @@ export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
     fullWidth,
     style,
     color,
+    inversed,
+    disabled,
   } = useResponsiveProps<ButtonLinkProps>(rest, responsive);
 
   if (!children && trailing && leading) {
     throw new Error('If no children are given, only pass trailing or leading, but not both');
   }
-  const round = !children && (trailing || leading);
+  const round = children == null && (trailing != null || leading != null);
 
   const category = color ? colorEnumToCategory(color) : _category;
 
@@ -44,12 +45,18 @@ export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
       onClick={onClick}
       className={cx(styles.root, {
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
-        [styles[getEnumAsClass<typeof styles>(tier)]]: tier != null,
         [styles.round]: round === true,
-        [styles.roundSmall]: round && size === Size.SMALL,
-        [styles[getEnumAsClass<typeof styles>(category)]]: category && tier === Tier.PRIMARY,
+        [styles.roundSmall]: round === true && size === Size.SMALL,
+        [styles[getEnumAsClass<typeof styles>(category)]]:
+          category != null && tier === Tier.PRIMARY,
+        [styles[getEnumAsClass<typeof styles>(tier)]]: tier != null,
+        [styles[`${category?.toLowerCase() ?? ''}Alt` as keyof typeof styles]]:
+          category != null && tier !== Tier.PRIMARY,
         [styles.fullWidth]: fullWidth === true,
-        [styles.disabled]: disabled,
+        [styles.inversed]: inversed === true,
+        [styles.secondaryInversed]: inversed === true && tier === Tier.SECONDARY,
+        [styles.tertiaryInversed]: inversed === true && tier === Tier.TERTIARY,
+        [styles.disabled]: disabled === true,
       })}>
       {run(() => {
         if (leading) {

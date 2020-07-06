@@ -3,6 +3,9 @@ import merge from 'lodash/merge';
 import omit from 'lodash/omit';
 import React from 'react';
 
+export * from './generate-docs';
+export * from './extract-intrinsics';
+
 function removeHash(string) {
   return string.replace(/(css-).*?(-)/gm, '');
 }
@@ -39,7 +42,7 @@ export function transformClassname(string) {
 }
 
 export function adaptForVanilla(markup) {
-  const adapted = markup.replace(/css-\S+(?=")/gm, transformClassname);
+  const adapted = markup.replace(/css-.+?(?=["|\s])/gm, transformClassname);
   return adapted;
 }
 
@@ -79,7 +82,7 @@ export function recursiveMdxTransform(tree, target) {
 
           if (propKey === 'children' && Array.isArray(propValue)) {
             newProp = propValue.map((child, i) =>
-              child.$$typeof ? mdxTransform(child, `${propKey}${i}`) : child,
+              child?.$$typeof ? mdxTransform(child, `${propKey}${i}`) : child,
             );
           } else {
             if (Array.isArray(propValue)) {

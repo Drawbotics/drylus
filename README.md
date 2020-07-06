@@ -5,6 +5,14 @@ __NOTE__: this is a monorepo, meaning all the code is divided into packages (`/p
 npm install
 ```
 
+### Deprecation plugin
+In the `react-drylus` package, which is written in Typescript, we define component props within interfaces. Interface properties are documented through JSDoc comments, which are mainly used to generate the documentation in the styleguide. However, through JSDoc we also mark props as deprecated throught the `@deprecated` tag.
+
+Before, we used to use `prop-types`, and were able to show deprecation warnings in the console at _run time_. Now, through JSDoc and and an ESLint plugin (see below) we can achieve the same effect, but at compile time, which is a clear benefit.
+
+[**eslint-plugin-deprecated-props**](https://github.com/Drawbotics/eslint-plugin-deprecated-props) is the plugin to enable this feature; warnings/errors will be shown in the terminal if you have eslint in the pipeline, and in VSCode if you set it up as explained. Either way, it is important that you install it if you want to avoid using deprecated features in the library.
+
+---
 There are 7 total packages:
 - [![npm version](https://badge.fury.io/js/%40drawbotics%2Fdrylus-style-vars.svg)](https://badge.fury.io/js/%40drawbotics%2Fdrylus-style-vars) [drylus-style-vars](/packages/drylus-style-vars):
  This package holds all the variables used in the Drawbotics styles. Exports js, less and css vars.
@@ -82,9 +90,21 @@ npx lerna link convert
 npm install
 ```
 
+## Getting started
+The packages have been moved to the Github Packages registry, which means you should login to your github account before installing with `npm` or installation for those packages will fail. You can read more about it [here](https://help.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages).
+
+You should also have a `.env` file with the following variables:
+```
+AWS_SECRET_KEY=
+AWS_ACCESS_KEY=
+GITHUB_TOKEN=
+GH_TOKEN=
+NPM_TOKEN=
+```
+Where `GITHUB_TOKEN` and `GH_TOKEN` are the same value, but each is used for a different purpose. You can ask the maintainer for each of these or how to acquire them. The `styleguide` package also requires additional vars, you can check which ones in the readme for that one.
+
 ### Requirements
 Some package require extra configuration to be used (this is also mentioned in each package's readme).
-
 - `icons` requires you to set some environment variables at the root of the monorepo to sync the code with the Drawbotics CDN
 
 

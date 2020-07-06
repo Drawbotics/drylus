@@ -1,15 +1,16 @@
-import sv from '@drawbotics/drylus-style-vars';
+import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
+import { motion } from 'framer-motion';
 import get from 'lodash/get';
 import omit from 'lodash/omit';
-import React, { Fragment, createContext, useContext, useState } from 'react';
+import React, { Fragment, createContext, useContext, useEffect, useRef, useState } from 'react';
 
 import { placeholderStyles } from '../components';
 import { Size } from '../enums';
 import { Margin } from '../layout';
 import { OnClickCallback, Style } from '../types';
-import { run } from '../utils';
+import { checkComponentProps, run } from '../utils';
 import { Icon } from './Icon';
 import { Label } from './Label';
 
@@ -100,6 +101,11 @@ const styles = {
   row: css`
     & > td:last-of-type {
       text-align: right;
+      background: inherit;
+    }
+
+    & > td:first-of-type {
+      background: inherit;
     }
 
     & > th:last-of-type {
@@ -239,6 +245,11 @@ const styles = {
       color: ${sv.neutralDark};
     }
   `,
+  activeHeader: css`
+    span {
+      color: ${sv.colorPrimary} !important;
+    }
+  `,
   sortableIcons: css`
     position: absolute;
     left: calc(${sv.marginLarge} * -1);
@@ -259,11 +270,13 @@ const styles = {
   down: css`
     > i:last-of-type {
       color: ${sv.colorPrimary};
+      font-weight: bold;
     }
   `,
   up: css`
     > i:first-of-type {
       color: ${sv.colorPrimary};
+      font-weight: bold;
     }
   `,
   loadingBodyCell: css`
@@ -289,6 +302,50 @@ const styles = {
   emptyTableHeader: css`
     padding-right: ${sv.paddingExtraSmall};
   `,
+  scrollable: css`
+    overflow: auto;
+  `,
+  sticky: css`
+    thead > tr > th:first-of-type,
+    tbody > tr > td:first-of-type {
+      position: sticky;
+      left: 0;
+      z-index: 9999;
+    }
+
+    thead > tr > th:last-of-type,
+    tbody > tr > td:last-of-type {
+      position: sticky;
+      right: 0;
+      z-index: 9999;
+    }
+  `,
+  rightDivisor: css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 100%;
+    transform: translateX(-100%);
+    box-shadow: inset -20px 0 10px -15px ${fade(sv.neutralDark, 20)};
+    pointer-events: none;
+    opacity: 1;
+    transition: ${sv.defaultTransition};
+    border-right: 1px solid ${sv.neutral};
+  `,
+  leftDivisor: css`
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    transform: translateX(100%);
+    box-shadow: inset 20px 0 10px -15px ${fade(sv.neutralDark, 20)};
+    pointer-events: none;
+    opacity: 1;
+    transition: ${sv.defaultTransition};
+    border-left: 1px solid ${sv.neutral};
+  `,
 };
 
 export interface TCellProps extends React.TdHTMLAttributes<HTMLElement> {
@@ -310,6 +367,9 @@ export interface TCellProps extends React.TdHTMLAttributes<HTMLElement> {
   active?: boolean;
 
   /** @private */
+  style?: Style;
+
+  /** @private */
   [x: string]: any;
 }
 
@@ -320,22 +380,23 @@ export const TCell = ({
   withChildToggle,
   onClickArrow,
   active,
+  style,
   ...props
 }: TCellProps) => {
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const className = cx(styles.cell, {
-    [styles.asContainer]: asContainer,
+    [styles.asContainer]: asContainer === true,
   });
   if (head) {
     return (
-      <th className={className}>
+      <th className={className} style={style}>
         <Label>{children}</Label>
       </th>
     );
   }
   return (
-    <td className={className} colSpan={asContainer ? 100 : undefined} {...props}>
+    <td className={className} colSpan={asContainer ? 100 : undefined} style={style} {...props}>
       {run(() => {
         if (withChildToggle) {
           return (
@@ -352,9 +413,23 @@ export const TCell = ({
   );
 };
 
+const tableRowVariants = {
+  hidden: {
+    opacity: 0,
+    x: -10,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+  },
+};
+
 export interface TRowProps {
   /** Should be of type TCell */
-  children: React.ReactElement<typeof TCell> | Array<React.ReactElement<typeof TCell>>;
+  children:
+    | React.ReactElement<typeof TCell>
+    | Array<React.ReactElement<typeof TCell>>
+    | React.ReactNode;
 
   /** If true sets the background to neutral */
   highlighted?: boolean;
@@ -379,6 +454,9 @@ export interface TRowProps {
 
   /** @private */
   lastParentRow?: boolean;
+
+  /** @private */
+  animated?: boolean;
 }
 
 export const TRow = ({
@@ -391,19 +469,35 @@ export const TRow = ({
   onClick,
   clickable,
   style,
+  animated,
 }: TRowProps) => {
   const [rowsStates, handleSetRowState] = useContext(RowsContext);
   const collapsed = nested && !rowsStates[nested];
+  const animationProps =
+    animated && !collapsed
+      ? {
+          variants: tableRowVariants,
+          transition: {
+            type: 'spring',
+            damping: 20,
+            stiffness: 300,
+          },
+        }
+      : {};
+
+  checkComponentProps({ children }, { children: TCell });
+
   return (
-    <tr
+    <motion.tr
+      {...animationProps}
       style={style}
       className={cx(styles.row, {
         [styles.collapsed]: !!collapsed,
         [styles.light]: !alt,
-        [styles.white]: alt,
-        [styles.pointer]: clickable && onClick != null,
-        [styles.highlightedRow]: highlighted,
-        [styles.noBorderBottom]: !!parent && !rowsStates[parent] && lastParentRow,
+        [styles.white]: alt === true,
+        [styles.pointer]: clickable === true && onClick != null,
+        [styles.highlightedRow]: highlighted === true,
+        [styles.noBorderBottom]: !!parent && !rowsStates[parent] && lastParentRow === true,
       })}
       onClick={onClick}
       data-nested={nested ?? undefined}
@@ -425,15 +519,20 @@ export const TRow = ({
             } as Partial<TCellProps>,
           ),
         )}
-    </tr>
+    </motion.tr>
   );
 };
 
 export interface THeadProps {
-  children: React.ReactElement<typeof TCell> | Array<React.ReactElement<typeof TCell>>;
+  children:
+    | React.ReactElement<typeof TCell>
+    | Array<React.ReactElement<typeof TCell>>
+    | React.ReactNode;
 }
 
 export const THead = ({ children }: THeadProps) => {
+  checkComponentProps({ children }, { children: TCell });
+
   return (
     <thead className={styles.header}>
       <TRow>
@@ -454,25 +553,50 @@ export const THead = ({ children }: THeadProps) => {
   );
 };
 
+const tableBodyVariants = {
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
 export interface TBodyProps {
-  children: React.ReactElement<typeof TRow> | Array<React.ReactElement<typeof TRow>>;
+  children:
+    | React.ReactElement<typeof TRow>
+    | Array<React.ReactElement<typeof TRow>>
+    | React.ReactNode;
+
+  /** If set, the rows will be animated when mounted. To be used only if the table is manually created i.e. without the `data` prop */
+  animated?: boolean;
 }
 
-export const TBody = ({ children }: TBodyProps) => {
+export const TBody = ({ children, animated }: TBodyProps) => {
   let light = true;
   let i = 0;
   const childrenCount = React.Children.count(children);
+  const animationProps = animated
+    ? {
+        variants: tableBodyVariants,
+        animate: 'visible',
+        initial: 'hidden',
+      }
+    : {};
+
+  checkComponentProps({ children }, { children: TRow });
+
   return (
-    <tbody className={styles.body}>
-      {React.Children.map(children, (child: React.ReactElement<typeof TRow>) => {
+    <motion.tbody {...animationProps} className={styles.body}>
+      {React.Children.map(children as any, (child: React.ReactElement<typeof TRow>) => {
         light = (child.props as any).nested ? light : !light; // TODO find better
         i = i + 1;
         return React.cloneElement(child, {
+          animated,
           alt: light,
           lastParentRow: i === childrenCount - 1,
         } as Partial<TRowProps>);
       })}
-    </tbody>
+    </motion.tbody>
   );
 };
 
@@ -490,9 +614,11 @@ export type HeaderData = Array<DataEntry | { label: React.ReactNode; value: Data
 
 export interface LoadingTableProps {
   columns: HeaderData;
+  rows: number;
+  animated?: boolean;
 }
 
-const FakeTable = ({ columns }: LoadingTableProps) => {
+const LoadingTable = ({ columns, animated, rows }: LoadingTableProps) => {
   return (
     <Fragment>
       <THead>
@@ -502,8 +628,8 @@ const FakeTable = ({ columns }: LoadingTableProps) => {
           </TCell>
         ))}
       </THead>
-      <TBody>
-        {Array(5)
+      <TBody animated={animated}>
+        {Array(rows)
           .fill(null)
           .map((...args) => (
             <TRow key={args[1]}>
@@ -575,8 +701,9 @@ const EmptyTable = ({ columns, emptyContent }: EmptyTableProps) => {
 };
 
 function _addAttributesToCells(
-  children: [React.ReactElement<typeof THead>, React.ReactElement<typeof TBody>],
+  children?: [React.ReactElement<typeof THead>, React.ReactElement<typeof TBody>],
 ): React.ReactNode {
+  if (children == null) return;
   if (children[0]?.type === THead && children[1]?.type === TBody) {
     // TODO fix .props as any
     const headerValues = (children[0].props as any).children.map(
@@ -614,6 +741,7 @@ function _generateTable({
   onClickRow = () => {},
   clickable,
   activeRow,
+  animated,
 }: {
   data: Array<TableEntry> | TableEntry;
   header?: HeaderData;
@@ -623,10 +751,11 @@ function _generateTable({
   onClickRow?: (row: TableEntry) => void;
   clickable?: boolean;
   activeRow?: TableEntry['id'];
+  animated?: boolean;
 }): React.ReactElement<typeof TBody> | Array<React.ReactElement<typeof TRow>> {
   if (Array.isArray(data)) {
     return (
-      <TBody key="body">
+      <TBody key="body" animated={animated}>
         {data
           .map((rows) =>
             _generateTable({
@@ -650,6 +779,7 @@ function _generateTable({
     const renderData = renderCell ?? renderChildCell;
     const parentRow = (
       <TRow
+        animated={animated}
         key={uniqId}
         parent={hasData ? uniqId : undefined}
         onClick={() => onClickRow(row)}
@@ -707,7 +837,8 @@ export interface TableProps {
   /** Will be THead and TBody, optional if using the auto generated table */
   children?:
     | [React.ReactElement<typeof THead>, React.ReactElement<typeof TBody>]
-    | React.ReactElement<typeof TBody>;
+    | React.ReactElement<typeof TBody>
+    | React.ReactNode;
 
   /**
    * If true, the table takes the full width of the container, defaults to true
@@ -723,13 +854,13 @@ export interface TableProps {
 
   /**
    * Returns the child given to each row cell. Params (value, index, columns)
-   * @deprecated use the data object directly instead
+   * @deprecated Use the data object directly instead
    */
   renderCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
 
   /**
    * Same as renderCell but applies to the children cells (nested)
-   * @deprecated use the data object directly instead
+   * @deprecated Use the data object directly instead
    */
   renderChildCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
 
@@ -763,6 +894,12 @@ export interface TableProps {
   /** If true the content of the table will be overridden by a "fake" table with animated cells to show loading. You MUST pass header to render this */
   isLoading?: boolean;
 
+  /**
+   * Used to determine the amount of rows the table should have when showing the loading state
+   * @default 5
+   */
+  loadingRows?: number;
+
   /** Triggered when a row is clicked, returns the given data object for that row. If used with nested tables, it will only return the root row object value */
   onClickRow?: (row: TableEntry) => void;
 
@@ -771,6 +908,12 @@ export interface TableProps {
 
   /** If present, all the content of the table is replaced with this, used to show info when there is no data in the table */
   emptyContent?: React.ReactNode;
+
+  /** If true, the table will stick to the parent width, but won't squish the content, rather will be scrollable horizontally. With automatic tables, the first and last column are made sticky. */
+  scrollable?: boolean;
+
+  /** If true, rows (excluding nested ones) will be animated when entering, only works in automatically generated tables. For manual tables, set `animated` in TBody */
+  animated?: boolean;
 
   /** Used for style overrides */
   style?: Style;
@@ -794,10 +937,64 @@ export const Table = ({
   clickable = false,
   activeRow,
   emptyContent,
+  scrollable,
+  animated,
   style,
+  loadingRows = 5,
 }: TableProps) => {
   const [rowsStates, setRowState] = useState<Record<string | number, boolean>>({});
   const { screenSize, ScreenSizes } = useScreenSize();
+  const tableRef = useRef<HTMLTableElement>(null);
+  const scrollableRef = useRef<HTMLDivElement>(null);
+  const [xScrollAmount, setXScrollAmount] = useState<number>();
+  const [divisorHeight, setDivisorHeight] = useState<number>();
+
+  checkComponentProps({ children }, { children: [TBody, THead] });
+
+  const handleScrollTable = () => {
+    if (scrollableRef.current != null && tableRef.current != null) {
+      const { scrollLeft, clientWidth } = scrollableRef.current;
+      const difference = tableRef.current.clientWidth - clientWidth;
+      if (difference > 0) {
+        const amount = scrollLeft / difference;
+        setXScrollAmount(amount);
+      }
+    }
+  };
+
+  const handleResize = () => {
+    const height = tableRef.current?.clientHeight;
+    setDivisorHeight(height);
+
+    if (scrollableRef.current != null && tableRef.current != null) {
+      const { clientWidth } = scrollableRef.current;
+      const difference = tableRef.current.clientWidth - clientWidth;
+      if (difference === 0) {
+        setXScrollAmount(undefined);
+      } else {
+        handleScrollTable();
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (scrollableRef.current != null) {
+      scrollableRef.current.addEventListener('scroll', handleScrollTable, false);
+      window.addEventListener('resize', handleResize, false);
+      setTimeout(handleScrollTable, 50); // trigger calculation once
+      setTimeout(handleResize, 50);
+    }
+
+    return () => {
+      scrollableRef.current?.removeEventListener('scroll', handleScrollTable, false);
+      window.removeEventListener('resize', handleResize, false);
+    };
+  }, [scrollableRef, tableRef]);
+
+  useEffect(() => {
+    handleScrollTable();
+    handleResize();
+  }, [data?.length, isLoading]);
 
   const handleSetRowState = (state: Record<string | number, boolean>) =>
     setRowState({ ...rowsStates, ...state });
@@ -808,38 +1005,58 @@ export const Table = ({
     data != null && !isLoading && !emptyContent
       ? [
           <THead key="head">
-            {header.map((hItem) => {
-              const v =
+            {header.map((hItem, i) => {
+              const value =
                 typeof hItem === 'string' || typeof hItem === 'number' ? hItem : hItem.value;
+              const label =
+                typeof hItem === 'string' || typeof hItem === 'number' ? hItem : hItem.label;
+              const cellContent =
+                sortableBy?.includes(value) && screenSize > ScreenSizes.L ? (
+                  <div
+                    className={cx(styles.headerWithArrows, {
+                      [styles.activeHeader]: activeHeader?.key === value,
+                    })}
+                    onClick={() => (onClickHeader != null ? onClickHeader(value) : null)}>
+                    <div
+                      className={cx(styles.sortableIcons, {
+                        [styles.up]:
+                          activeHeader?.key === value && activeHeader?.direction === 'asc',
+                        [styles.down]:
+                          activeHeader?.key === value && activeHeader?.direction === 'desc',
+                      })}>
+                      <Icon name="chevron-up" />
+                      <Icon name="chevron-down" />
+                    </div>
+                    <span>{label}</span>
+                  </div>
+                ) : (
+                  label
+                );
+              const noZIndex =
+                xScrollAmount == null ||
+                (i === 0 && xScrollAmount === 0) ||
+                (i === header.length - 1 && xScrollAmount === 1);
               return (
-                <TCell key={v}>
-                  {run(() => {
-                    if (sortableBy?.includes(v) && screenSize > ScreenSizes.L) {
-                      return (
-                        <span
-                          className={styles.headerWithArrows}
-                          onClick={() => (onClickHeader != null ? onClickHeader(v) : null)}>
-                          <span
-                            className={cx(styles.sortableIcons, {
-                              [styles.up]:
-                                activeHeader?.key === v && activeHeader?.direction === 'asc',
-                              [styles.down]:
-                                activeHeader?.key === v && activeHeader?.direction === 'desc',
-                            })}>
-                            <Icon name="chevron-up" />
-                            <Icon name="chevron-down" />
-                          </span>
-                          {typeof hItem === 'string' || typeof hItem === 'number'
-                            ? hItem
-                            : hItem.label}
-                        </span>
-                      );
-                    } else {
-                      return typeof hItem === 'string' || typeof hItem === 'number'
-                        ? hItem
-                        : hItem.label;
-                    }
-                  })}
+                <TCell key={value} style={{ zIndex: noZIndex ? 'auto' : undefined }}>
+                  {cellContent}
+                  {i === 0 && scrollable ? (
+                    <div
+                      className={styles.leftDivisor}
+                      style={{
+                        height: divisorHeight,
+                        opacity: xScrollAmount != null && xScrollAmount > 0 ? 1 : 0,
+                      }}
+                    />
+                  ) : null}
+                  {i === header.length - 1 && scrollable ? (
+                    <div
+                      className={styles.rightDivisor}
+                      style={{
+                        height: divisorHeight,
+                        opacity: xScrollAmount != null && xScrollAmount < 1 ? 1 : 0,
+                      }}
+                    />
+                  ) : null}
                 </TCell>
               );
             })}
@@ -853,6 +1070,7 @@ export const Table = ({
             onClickRow,
             clickable,
             activeRow,
+            animated,
           }),
         ]
       : children;
@@ -864,23 +1082,24 @@ export const Table = ({
     console.warn('`data` was passed as prop but no/empty header, cannot render');
   }
 
-  return (
+  const table = (
     <table
+      ref={tableRef}
       style={style}
       className={cx(styles.root, {
         [styles.fullWidth]: fullWidth,
         [styles.leftPadded]:
           (hasNestedData ||
             withNesting ||
-            (sortableBy &&
+            (sortableBy != null &&
               sortableBy.includes(typeof header[0] === 'string' ? header[0] : header[0].value))) &&
           screenSize > ScreenSizes.L,
-        [styles.highlighted]: highlighted && !(hasNestedData || withNesting),
+        [styles.highlighted]: highlighted === true && !(hasNestedData || withNesting === true),
       })}>
       <RowsContext.Provider value={[rowsStates, handleSetRowState]}>
         {run(() => {
           if (header && isLoading) {
-            return <FakeTable columns={header} />;
+            return <LoadingTable animated={animated} columns={header} rows={loadingRows} />;
           } else if (header && emptyContent) {
             return <EmptyTable columns={header} emptyContent={emptyContent} />;
           } else {
@@ -890,4 +1109,20 @@ export const Table = ({
       </RowsContext.Provider>
     </table>
   );
+
+  if (scrollable) {
+    return (
+      <div style={{ position: 'relative' }}>
+        <div
+          ref={scrollableRef}
+          className={cx(styles.scrollable, {
+            [styles.sticky]: header.length != 0 && xScrollAmount != null,
+          })}>
+          {table}
+        </div>
+      </div>
+    );
+  }
+
+  return table;
 };

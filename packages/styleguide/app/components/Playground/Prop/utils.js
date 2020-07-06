@@ -23,7 +23,3 @@ export function normalizeValue(v, enums) {
 
   return v;
 }
-
-export function displayValue(v) {
-  return v;
-}

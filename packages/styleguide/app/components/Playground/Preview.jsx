@@ -10,7 +10,7 @@ const styles = {
     background: ${sv.white};
 
     &:hover {
-      [data-element='full-screen-toggle'] {
+      [data-element='toggles'] {
         opacity: 1;
         pointer-events: auto;
       }
@@ -26,8 +26,10 @@ const styles = {
     overflow: scroll;
     border-radius: ${sv.defaultBorderRadius};
   `,
-  fullScreenToggle: css`
+  fullScreenToggles: css`
+    display: flex;
     position: absolute;
+    z-index: 99999;
     bottom: ${sv.marginExtraSmall};
     right: ${sv.marginExtraSmall};
     pointer-events: none;
@@ -40,7 +42,7 @@ const styles = {
   `,
 };
 
-const Preview = ({ children, raw }) => {
+const Preview = ({ children, raw, onClickRefresh }) => {
   const [fullScreen, setFullScreen] = useState(false);
 
   return (
@@ -49,10 +51,20 @@ const Preview = ({ children, raw }) => {
         [styles.fullScreen]: fullScreen,
       })}>
       <div
-        className={cx(styles.fullScreenToggle, {
+        className={cx(styles.fullScreenToggles, {
           [styles.floating]: fullScreen,
         })}
-        data-element="full-screen-toggle">
+        data-element="toggles">
+        {do {
+          if (onClickRefresh) {
+            <Button
+              onClick={onClickRefresh}
+              size={Size.SMALL}
+              tier={Tier.TERTIARY}
+              trailing={<Icon name="refresh-cw" />}
+            />;
+          }
+        }}
         <Button
           onClick={() => setFullScreen(!fullScreen)}
           size={Size.SMALL}

@@ -1,4 +1,4 @@
-import { NumberInput } from '@drawbotics/react-drylus';
+import { NumberInput, Size } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 import { ControlledField } from '../utils';
@@ -12,7 +12,7 @@ import { NumberInput } from '@drawbotics/react-drylus';
 
 __Example__
 <Playground component={NumberInput}>
-  <ControlledField style={{ width: 300 }} component={
+  <ControlledField initialValue="" style={{ width: 300 }} component={
     <NumberInput placeholder="Number of things" value="" />
   } />
 </Playground>
@@ -21,7 +21,11 @@ __Example__
 You can also use a custom `renderValue` function to customize the way the value is displayed
 
 <Playground>
-  <ControlledField style={{ width: 300 }} component={
-    <NumberInput renderValue={(v) => v + ' € HTVA'} placeholder="Price HTVA" value={0} onChange={x=>x} />
+  <ControlledField initialValue="" style={{ width: 300 }} component={
+    <NumberInput
+      renderValue={(v) => v + ' € HTVA'}
+      placeholder="Price HTVA"
+      value={0}
+      onChange={x=>x} />
   } />
 </Playground>

@@ -1,9 +1,19 @@
 import { css, cx } from 'emotion';
+import { motion } from 'framer-motion';
 import camelCase from 'lodash/camelCase';
 import React from 'react';
 
+import {
+  getSettingsFromSpeed,
+  getStaggerFromSpeed,
+  getVariantFromDirection,
+  groupVariants,
+  itemVariants,
+} from '../components';
+import { Direction, Size, Speed } from '../enums';
 import { Responsive, Style } from '../types';
-import { useResponsiveProps } from '../utils';
+import { checkComponentProps, run, useResponsiveProps } from '../utils';
+import { Margin } from './Margin';
 
 const styles = {
   root: css`
@@ -85,6 +95,40 @@ function prefixFlex(value: number) {
   };
 }
 
+export interface FlexSpacerProps {
+  /** Determines how much space a flex item takes within the flex container. */
+  flex?: number | boolean;
+
+  size: Size;
+
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+
+  /** @private */
+  direction?: FlexDirection;
+}
+
+export const FlexSpacer = ({ responsive, direction, ...rest }: FlexSpacerProps) => {
+  const { size, flex, style = {} } = useResponsiveProps(rest, responsive);
+  const equalSpan = flex === true;
+  return (
+    <div
+      className={cx(styles.item, { [styles.equalSpan]: equalSpan })}
+      style={flex && typeof flex !== 'boolean' ? { ...prefixFlex(flex), ...style } : style}>
+      {run(() => {
+        if (direction === FlexDirection.HORIZONTAL) {
+          return <Margin size={{ right: size }} />;
+        } else {
+          return <Margin size={{ bottom: size }} />;
+        }
+      })}
+    </div>
+  );
+};
+
 export interface FlexItemProps {
   children: React.ReactNode;
 
@@ -96,22 +140,51 @@ export interface FlexItemProps {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** @private */
+  animated?: boolean;
+
+  /** @private */
+  animationSpeed?: Speed;
 }
 
 export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
-  const { children, flex, style = {} } = useResponsiveProps(rest, responsive);
+  const { children, flex, style = {}, animated, animationSpeed } = useResponsiveProps(
+    rest,
+    responsive,
+  );
   const equalSpan = flex === true;
+  const animationProps = animated
+    ? {
+        variants: itemVariants,
+        transition: {
+          type: 'spring',
+          damping: 17,
+          stiffness: 350,
+          ...getSettingsFromSpeed(animationSpeed),
+        },
+      }
+    : {};
+
+  const RootElement = animated ? motion.div : 'div';
+
   return (
-    <div
+    <RootElement
+      {...animationProps}
       className={cx(styles.item, { [styles.equalSpan]: equalSpan })}
       style={flex && typeof flex !== 'boolean' ? { ...prefixFlex(flex), ...style } : style}>
       {children}
-    </div>
+    </RootElement>
   );
 };
 
 export interface FlexProps {
-  children: React.ReactElement<typeof FlexItem> | Array<React.ReactElement<typeof FlexItem>>;
+  children:
+    | React.ReactElement<typeof FlexItem>
+    | Array<React.ReactElement<typeof FlexItem> | null>
+    | React.ReactElement<typeof FlexSpacer>
+    | Array<React.ReactElement<typeof FlexSpacer> | null>
+    | React.ReactNode;
 
   /**
    * Determines which way the flex layout should be
@@ -137,11 +210,25 @@ export interface FlexProps {
    */
   wrap?: boolean;
 
-  /** To override simple styles on the flex element, use only for properties that do not require prefixing */
-  style?: Style;
-
   /** If you need to customize the Flex container pass a custom className. E.g. if you want to use `display: inline-flex` */
   className?: string;
+
+  /** If true, flex children will be animated when entering */
+  animated?: boolean;
+
+  animationSpeed?: Speed;
+
+  /** Determines where the flex items will come in from (relative to their own position). If not specified, a scale animation is used rather than a translate one */
+  animationDirection?: Direction;
+
+  /** In ms, if given, the animation of the whole group will only begin once this time has passed */
+  animationDelay?: number;
+
+  /** If true, last children come in first when animating */
+  inversedStagger?: boolean;
+
+  /** To override simple styles on the flex element, use only for properties that do not require prefixing */
+  style?: Style;
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
@@ -156,17 +243,33 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
     wrap = false,
     className,
     style,
+    animated,
+    animationSpeed,
+    animationDirection,
+    inversedStagger,
+    animationDelay,
   } = useResponsiveProps<FlexProps>(rest, responsive);
 
-  const invalidChildren = React.Children.map(children, (x) => x).some(
-    (child) =>
-      child != null && child.type !== FlexItem && !child.type.toString().includes('fragment'),
-  );
-  if (invalidChildren) {
-    console.warn('Flex should only accept FlexItem as children');
-  }
+  checkComponentProps({ children }, { children: [FlexItem, FlexSpacer] });
+
+  const animationProps = animated
+    ? {
+        custom: {
+          stagger: getStaggerFromSpeed(animationSpeed),
+          staggerDirection: inversedStagger ? -1 : 1,
+          delay: animationDelay,
+        },
+        variants: groupVariants,
+        animate: ['enter', 'visible'],
+        initial: ['initial', getVariantFromDirection(animationDirection)],
+      }
+    : {};
+
+  const RootElement = animated ? motion.div : 'div';
+
   return (
-    <div
+    <RootElement
+      {...animationProps}
       className={cx(
         styles.root,
         {
@@ -178,7 +281,22 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
         className,
       )}
       style={style}>
-      {children}
-    </div>
+      {children != null
+        ? React.Children.map(children as any, (child) => {
+            if (child?.type === FlexSpacer) {
+              return React.cloneElement(
+                child as React.ReactElement<typeof FlexSpacer>,
+                { direction } as Partial<typeof FlexSpacer>,
+              );
+            }
+            return animated
+              ? React.cloneElement(
+                  child as React.ReactElement<typeof FlexItem>,
+                  { animated, animationSpeed } as Partial<typeof FlexItem>,
+                )
+              : child;
+          })
+        : null}
+    </RootElement>
   );
 };

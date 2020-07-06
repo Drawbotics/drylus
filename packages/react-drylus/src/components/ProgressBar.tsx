@@ -1,19 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx, keyframes } from 'emotion';
+import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
 import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
-
-const translateX = keyframes`
-  0% {
-    transform: translateX(-40%);
-  }
-  100% {
-    transform: translateX(140%);
-  }
-`;
+import { placeholderStyles as shimmerStyles } from './LoadingPlaceholder';
 
 const styles = {
   root: css`
@@ -38,10 +30,20 @@ const styles = {
     background: ${sv.neutralDark};
     transition: ${sv.transitionShort};
     overflow: hidden;
+
+    &::after {
+      background: ${sv.neutralDark};
+      border-radius: 0 !important;
+      background-image: linear-gradient(
+        to right,
+        ${sv.neutralDark} 8%,
+        ${sv.neutral} 18%,
+        ${sv.neutralDark} 33%
+      ) !important;
+    }
   `,
   indeterminate: css`
-    width: 50% !important;
-    animation: ${translateX} calc(${sv.defaultTransitionTime} * 2) ease-in-out alternate infinite;
+    width: 100% !important;
   `,
   large: css`
     height: ${sv.marginSmall};
@@ -64,18 +66,68 @@ const styles = {
   `,
   brand: css`
     background: ${sv.brand};
+
+    &::after {
+      background: ${sv.brand};
+      background-image: linear-gradient(
+        to right,
+        ${sv.brand} 8%,
+        ${sv.brandLight} 18%,
+        ${sv.brand} 33%
+      ) !important;
+    }
   `,
   red: css`
     background: ${sv.red};
+
+    &::after {
+      background: ${sv.red};
+      background-image: linear-gradient(
+        to right,
+        ${sv.red} 8%,
+        ${sv.redLight} 18%,
+        ${sv.red} 33%
+      ) !important;
+    }
   `,
   blue: css`
     background: ${sv.blue};
+
+    &::after {
+      background: ${sv.blue};
+      background-image: linear-gradient(
+        to right,
+        ${sv.blue} 8%,
+        ${sv.blueLight} 18%,
+        ${sv.blue} 33%
+      ) !important;
+    }
   `,
   orange: css`
     background: ${sv.orange};
+
+    &::after {
+      background: ${sv.orange};
+      background-image: linear-gradient(
+        to right,
+        ${sv.orange} 8%,
+        ${sv.orangeLight} 18%,
+        ${sv.orange} 33%
+      ) !important;
+    }
   `,
   green: css`
     background: ${sv.green};
+
+    &::after {
+      background: ${sv.green};
+      background-image: linear-gradient(
+        to right,
+        ${sv.green} 8%,
+        ${sv.greenLight} 18%,
+        ${sv.green} 33%
+      ) !important;
+    }
   `,
 };
 
@@ -83,12 +135,19 @@ export interface ProgressBarProps {
   /** Determines the amount of the bar which is completed, between 0 and 1. If not given the bar is indeterminate */
   percentage?: number;
 
-  /** @deprecated use color instead */
-  category?: Exclude<Category, Category.PRIMARY>;
+  /**
+   * @deprecated Use color instead
+   * @kind Category
+   */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  color?: Exclude<Color, Color.PRIMARY>;
+  /** @kind Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
-  /** @default Size.DEFAULT */
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
   /** Used for style overrides */
@@ -99,13 +158,9 @@ export interface ProgressBarProps {
 }
 
 export const ProgressBar = ({ responsive, ...rest }: ProgressBarProps) => {
-  const {
-    percentage = 0,
-    category,
-    size = Size.DEFAULT,
-    style,
-    color: _color,
-  } = useResponsiveProps<ProgressBarProps>(rest, responsive);
+  const { percentage, category, size = Size.DEFAULT, style, color: _color } = useResponsiveProps<
+    ProgressBarProps
+  >(rest, responsive);
 
   const indeterminate = percentage == null;
   const color = category ? categoryEnumToColor(category) : _color;
@@ -121,8 +176,9 @@ export const ProgressBar = ({ responsive, ...rest }: ProgressBarProps) => {
         className={cx(styles.bar, {
           [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
           [styles.indeterminate]: indeterminate,
+          [shimmerStyles.shimmer]: indeterminate,
         })}
-        style={{ width: `${percentage * 100}%` }}
+        style={{ width: `${(percentage ?? 0) * 100}%` }}
       />
     </div>
   );

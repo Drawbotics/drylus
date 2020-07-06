@@ -1,3 +1,751 @@
+# v6.7.12 (Mon Jul 06 2020)
+
+#### ⚠️  Pushed to master
+
+- fix controlled field component  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix minimal search input loading indicator  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.7.11 (Thu Jul 02 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - trigger table handlers on data and loading change  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.7.10 (Thu Jul 02 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix zIndex in scrollable table  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.7.9 (Thu Jul 02 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - hide/show scrollable table on resize  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.7.8 (Thu Jul 02 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Improve Table component UX [#153](https://github.com/Drawbotics/drylus/pull/153) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.7.7 (Tue Jun 23 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - set type button as default  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.7.6 (Fri Jun 19 2020)
+
+#### ⚠️  Pushed to master
+
+- fix controlled field  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - break word when too long in Alert  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - dont check Input prop types if using inputRef  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - apply disabled style to ButtonLink  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.7.5 (Wed Jun 17 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - pass any other prop to button as optional  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.7.4 (Tue Jun 16 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add content height option to filter  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.7.3 (Tue Jun 16 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - filter out null children from grid  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.7.2 (Wed Jun 10 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix UploadBox type typo  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.7.1 (Wed Jun 10 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix UploadBox type  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.7.0 (Wed Jun 10 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature/extract upload [#152](https://github.com/Drawbotics/drylus/pull/152) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.6.10 (Tue May 26 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - improve date format without time  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.6.9 (Mon May 25 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add loadingRows prop to table  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.6.8 (Wed May 20 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix tests  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix centering of icon in buttons  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.6.7 (Tue May 19 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add generic name to big radio and big checkbox  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.6.6 (Mon May 18 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - pass name to values as function in MultiSelect  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.6.5 (Mon May 18 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add name to onChange in MultiSelect  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.6.4 (Mon May 18 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - pass name on to onChange in RangeInput  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.6.3 (Mon May 18 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add name field to RangeInput onChange  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.6.2 (Sun May 17 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/generic form types [#151](https://github.com/Drawbotics/drylus/pull/151) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.6.1 (Wed May 13 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - reduce font weight on inversed button  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.6.0 (Wed May 13 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature/panel separators [#148](https://github.com/Drawbotics/drylus/pull/148) ([@nicmosc](https://github.com/nicmosc))
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/inversed button [#150](https://github.com/Drawbotics/drylus/pull/150) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/minimal search input [#149](https://github.com/Drawbotics/drylus/pull/149) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.5.7 (Sat May 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix grid item type  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.5.6 (Sat May 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - make dropdown icon medium shade by default  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.5.5 (Sat May 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - align dropdown to the bottom right  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.5.4 (Sat May 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - improve button style on banner  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.5.3 (Fri May 08 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/vanilla-drylus`
+  - add simple transition to vanilla modal  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.5.2 (Fri May 08 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - add vanilla support to multi select  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.5.1 (Thu May 07 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix layout auto height  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.5.0 (Wed May 06 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature/animation [#146](https://github.com/Drawbotics/drylus/pull/146) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.4.4 (Tue May 05 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - don't render link component when no url is provided in breadcrumb  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - allow any input in FormGroup  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.4.3 (Tue May 05 2020)
+
+#### ⚠️  Pushed to master
+
+- don't run check labels on synchronize  ([@nicmosc](https://github.com/nicmosc))
+- fix github action version  ([@nicmosc](https://github.com/nicmosc))
+- add check labels workflow  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - allow any child as Text children  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.4.2 (Mon May 04 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/check component props [#132](https://github.com/Drawbotics/drylus/pull/132) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.4.1 (Thu Apr 30 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix import  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - add responsive and style to attachment box and attachment list  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.4.0 (Thu Apr 30 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Fix/indeterminate progress [#147](https://github.com/Drawbotics/drylus/pull/147) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- fix playground vanilla regex  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.3.7 (Wed Apr 29 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/replace css trans group with framer [#145](https://github.com/Drawbotics/drylus/pull/145) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.3.6 (Tue Apr 28 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix search input placeholder prop  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.3.5 (Tue Apr 28 2020)
+
+#### ⚠️  Pushed to master
+
+- fix invisible logo in styleguide mobile  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix responsive table with no children  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - add  prop to Table  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.3.4 (Mon Apr 27 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - improve classnames cx args types  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - add hint, valid and error to search input  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.3.3 (Sun Apr 26 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/animated alerts [#144](https://github.com/Drawbotics/drylus/pull/144) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.3.2 (Fri Apr 24 2020)
+
+#### ⚠️  Pushed to master
+
+- improve deprecated text look in props table  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - deprecate onClickDrawer in Drawer  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - capitalize @deprecated reason/alternative text  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.3.1 (Fri Apr 24 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/breadcrumb icon [#142](https://github.com/Drawbotics/drylus/pull/142) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/icon shade [#143](https://github.com/Drawbotics/drylus/pull/143) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- use unscoped eslint deprecated props  ([@nicmosc](https://github.com/nicmosc))
+- fix playground css regex  ([@nicmosc](https://github.com/nicmosc))
+- fix deploy docs script  ([@nicmosc](https://github.com/nicmosc))
+- move vars up  ([@nicmosc](https://github.com/nicmosc))
+- update deploy docs script  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
+# v6.3.0 (Thu Apr 23 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- improve readme [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- create beta branch [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- log github ref [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- log github base_ref [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- log all the refs [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- trigger release when pushing to beta branch too [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- extract branch name from refs [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- move step [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- remove name [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- fix release scrit [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- fix echo [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- fix release script [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- move branch name extraction to next job [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- remove quotes [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- fix script [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- change release workflow [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- use separate script for prerelease [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- remove yes option [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- delete old file [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- allow exec permission [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- change release script [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- change pre-release script [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- fix skip commit [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- fix ci filter [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- add yes option to lerna publish [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- try fixing script [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- fix ci script [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- fix lerna version [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.4 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - fix versions [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - trigger change [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.8 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.2 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Merge branch 'fix/better-types' into beta [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.3 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix range input type [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - small type fixes [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.1 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix more types [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.5 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/icons`, `@drawbotics/react-drylus`
+  - improve icon exports [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/icons`, `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.6 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix icons types [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - v6.2.1-beta.7 [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix table onClickRow prop type [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/drylus-style-vars`, `@drawbotics/extract-emotion`, `@drawbotics/icons`, `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - Typescript support [#121](https://github.com/Drawbotics/drylus/pull/121) ([@nicmosc](https://github.com/nicmosc) [@LeopoldArkham](https://github.com/LeopoldArkham) [@kossuthl4jos](https://github.com/kossuthl4jos))
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/input function value [#134](https://github.com/Drawbotics/drylus/pull/134) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Fix/filter-icon [#139](https://github.com/Drawbotics/drylus/pull/139) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Docs/interactive [#135](https://github.com/Drawbotics/drylus/pull/135) ([@LeopoldArkham](https://github.com/LeopoldArkham))
+- `@drawbotics/react-drylus`
+  - feature/attachment [#136](https://github.com/Drawbotics/drylus/pull/136) ([@kossuthl4jos](https://github.com/kossuthl4jos))
+- `@drawbotics/react-drylus`
+  - Feature/file icon [#137](https://github.com/Drawbotics/drylus/pull/137) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Docs/description [#129](https://github.com/Drawbotics/drylus/pull/129) ([@LeopoldArkham](https://github.com/LeopoldArkham) [@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/upload box [#138](https://github.com/Drawbotics/drylus/pull/138) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/flex spacer [#133](https://github.com/Drawbotics/drylus/pull/133) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/text children [#131](https://github.com/Drawbotics/drylus/pull/131) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/form component size prop [#127](https://github.com/Drawbotics/drylus/pull/127) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/indeterminate checkbox [#126](https://github.com/Drawbotics/drylus/pull/126) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/custom round icon color [#124](https://github.com/Drawbotics/drylus/pull/124) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - pass custom color to tag component [#123](https://github.com/Drawbotics/drylus/pull/123) ([@nicmosc](https://github.com/nicmosc))
+
+#### 🚧 Prerelease
+
+- `@drawbotics/react-drylus`
+  - improve table types [#122](https://github.com/Drawbotics/drylus/pull/122) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - allow all pr branches workflow [#122](https://github.com/Drawbotics/drylus/pull/122) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - export all interfaces [#122](https://github.com/Drawbotics/drylus/pull/122) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - improve option type with generic [#122](https://github.com/Drawbotics/drylus/pull/122) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - Feature/react drylus typescript [#118](https://github.com/Drawbotics/drylus/pull/118) ([@nicmosc](https://github.com/nicmosc))
+
+#### 📝  Documentation
+
+- Feature/deprecation [#141](https://github.com/Drawbotics/drylus/pull/141) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - React drylus typescript/docs [#119](https://github.com/Drawbotics/drylus/pull/119) ([@nicmosc](https://github.com/nicmosc) [@LeopoldArkham](https://github.com/LeopoldArkham))
+
+#### ⚠️  Pushed to master
+
+- add npm auth token  ([@nicmosc](https://github.com/nicmosc))
+- use npm token  ([@nicmosc](https://github.com/nicmosc))
+- allow beta as pre-release branch  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - update deps and ci scripts  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 2
+
+- [@LeopoldArkham](https://github.com/LeopoldArkham)
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.2.1 (Fri Mar 20 2020)
 
 #### 🚀 Enhancement - Minor change

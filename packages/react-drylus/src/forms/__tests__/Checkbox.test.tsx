@@ -1,6 +1,7 @@
 import React from 'react';
 import { create } from 'react-test-renderer';
 
+import { Text } from '../../components';
 import { Size } from '../../enums';
 import { Checkbox } from '../Checkbox';
 
@@ -24,6 +25,15 @@ describe('Checkbox', () => {
 
     it('has a label', () => {
       const tree = create(<Checkbox onChange={onChange}>Label</Checkbox>).toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('has a label as react node', () => {
+      const tree = create(
+        <Checkbox onChange={onChange}>
+          <Text bold>Label</Text>
+        </Checkbox>,
+      ).toJSON();
       expect(tree).toMatchSnapshot();
     });
 

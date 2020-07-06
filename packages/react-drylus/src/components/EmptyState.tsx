@@ -1,10 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
 import React from 'react';
-import { Responsive, Style } from 'src/types';
 
 import { Size, Tier } from '../enums';
 import { Flex, FlexDirection, FlexItem, Margin } from '../layout';
+import { Responsive, Style } from '../types';
 import {
   Deprecated,
   Empty,
@@ -66,7 +66,7 @@ export interface EmptyStateProps {
   /** Text shown to explain the situation */
   description?: string;
 
-  /** @deprecated use 'children' instead */
+  /** @deprecated Use 'children' instead */
   actions?: Array<React.ReactNode>;
 
   /** Shown below the illustrations, usually Buttons */

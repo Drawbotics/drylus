@@ -42,8 +42,8 @@ export const Label = ({ children, ellipsized, style, isPlaceholder }: LabelProps
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.ellipsized]: ellipsized,
-        [placeholderStyles.shimmer]: isPlaceholder,
+        [styles.ellipsized]: ellipsized === true,
+        [placeholderStyles.shimmer]: isPlaceholder === true,
       })}>
       {children}
     </div>

@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/styleguide",
-  "version": "6.2.1-beta.12",
+  "version": "6.7.12",
   "description": "Drawbotics Styleguide",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "license": "ISC",
@@ -15,11 +15,12 @@
   },
   "dependencies": {
     "@drawbotics/react-drylus": "file:../react-drylus",
-    "@drawbotics/use-screen-size": "^2.0.0",
+    "@drawbotics/use-screen-size": "^2.0.1",
     "@drawbotics/vanilla-drylus": "file:../vanilla-drylus",
     "core-js": "2",
     "fast-xml-parser": "^3.12.16",
     "hast-util-to-string": "^1.0.1",
+    "lodash.upperfirst": "^4.3.1",
     "react-hot-loader": "^4.8.8",
     "react-json-pretty": "^2.1.0",
     "react-router-dom": "^5.1.2",

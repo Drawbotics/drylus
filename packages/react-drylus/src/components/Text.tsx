@@ -1,11 +1,12 @@
+/* eslint-disable no-use-before-define */
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import isArray from 'lodash/isArray';
 import isObject from 'lodash/isObject';
-import React from 'react';
-import { Responsive, Style } from 'src/types';
+import React, { Fragment } from 'react';
 
 import { Category, Shade, Size, Tier } from '../enums';
+import { Responsive, Style } from '../types';
 import {
   ShowDateTime,
   generateDisplayedDate,
@@ -14,6 +15,7 @@ import {
   shadeEnumToTier,
   useResponsiveProps,
 } from '../utils';
+import { TextLink } from './TextLink';
 
 export {
   generateDisplayedPrice as formatPrice,
@@ -83,14 +85,19 @@ const styles = {
   `,
 };
 
+type Price = {
+  currency?: string;
+  value: number;
+};
+
 export type TextChildren =
   | string
+  | React.ReactElement<typeof Text>
+  | React.ReactElement<typeof TextLink>
   | number
-  | {
-      currency?: string;
-      value: number;
-    }
-  | Date;
+  | Price
+  | Date
+  | React.ReactNode;
 
 export interface TextProps {
   /**
@@ -108,8 +115,11 @@ export interface TextProps {
    */
   light?: boolean;
 
-  /** @default Size.DEFAULT */
-  size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   */
+  size?: Size.DEFAULT | Size.SMALL | Size.LARGE;
 
   tier?: Tier;
 
@@ -122,13 +132,14 @@ export interface TextProps {
    */
   disabled?: boolean;
 
-  children: TextChildren | Array<TextChildren>;
+  children: TextChildren | Array<TextChildren> | React.ReactNode;
 
-  category?: Exclude<Category, Category.PRIMARY>;
+  /** @kind Category */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** Options to change the way the date is displayed, if provided. showTime toggles display of hour/minutes, format for dayjs overrides */
   dateOptions?: {
-    showTime?: ShowDateTime.DEFAULT | ShowDateTime.NEVER | ShowDateTime.ALWAYS;
+    showTime?: ShowDateTime;
     asArchive?: boolean;
     format?: any;
   };
@@ -168,15 +179,14 @@ function _processChild(
         options: dateOptions,
         locale,
       });
-    } else if (child.value != null) {
+    } else if ((child as Price).value != null) {
       return generateDisplayedPrice({
-        price: child,
+        price: child as Price,
         options: priceOptions,
         locale,
       });
     } else {
-      console.warn('Unsupported Text child type. Please provde text, Date or Currency');
-      return '';
+      return child;
     }
   }
   return child;
@@ -202,15 +212,13 @@ export const Text = ({ responsive, ...rest }: TextProps) => {
   const tier = _tier ?? (shade ? shadeEnumToTier(shade) : null);
 
   const transformedChildren = isArray(children)
-    ? [...children]
-        .map((child) =>
-          _processChild(child, {
-            dateOptions,
-            locale,
-            priceOptions,
-          }),
-        )
-        .join('')
+    ? [...children].map((child) =>
+        _processChild(child, {
+          dateOptions,
+          locale,
+          priceOptions,
+        }),
+      )
     : _processChild(children, { dateOptions, locale, priceOptions });
 
   return (
@@ -233,7 +241,7 @@ export const Text = ({ responsive, ...rest }: TextProps) => {
           category != null && !disabled && !inversed,
       })}
       style={style}>
-      {transformedChildren}
+      <Fragment>{transformedChildren}</Fragment>
     </span>
   );
 };

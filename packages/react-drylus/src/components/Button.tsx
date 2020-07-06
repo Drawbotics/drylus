@@ -182,8 +182,7 @@ const styles = {
     }
   `,
   small: css`
-    padding: ${sv.paddingExtraSmall} ${sv.paddingExtraSmall};
-    font-size: 0.9rem;
+    padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
   `,
   large: css`
     padding: ${sv.paddingSmall} ${sv.paddingHuge};
@@ -235,8 +234,6 @@ const styles = {
       align-items: center;
       justify-content: center;
       margin-right: 0;
-      margin-left: -1px;
-      margin-bottom: -1px;
     }
   `,
   roundSmall: css`
@@ -245,7 +242,6 @@ const styles = {
 
     i {
       font-size: 1rem;
-      margin-bottom: -1px;
       margin-left: -1px;
     }
   `,
@@ -265,6 +261,45 @@ const styles = {
     display: flex;
     align-items: center;
   `,
+  inversed: css`
+    color: ${sv.colorPrimaryInverse};
+    background: rgba(255, 255, 255, 0.3);
+    font-weight: 300;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    &:active {
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.6) inset;
+    }
+  `,
+  secondaryInversed: css`
+    background: transparent;
+    box-shadow: 0 0 0 1px ${sv.white} inset;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    &:active {
+      box-shadow: 0 0 0 2px ${sv.white} inset;
+    }
+  `,
+  tertiaryInversed: css`
+    background: transparent;
+    color: ${sv.colorPrimaryInverse};
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: ${sv.colorPrimaryInverse};
+    }
+  `,
+  icon: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `,
 };
 
 export const buttonStyles = styles;
@@ -278,12 +313,17 @@ export interface ButtonProps {
   /** Triggered after the button is clicked */
   onClick?: OnClickCallback<HTMLElement>;
 
-  category?: Exclude<Category, Category.PRIMARY>;
+  /** @kind Category */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  color?: Exclude<Color, Color.PRIMARY>;
+  /** @kind Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
-  /** @default Size.DEFAULT */
-  size?: Extract<Size, Size.SMALL | Size.DEFAULT | Size.LARGE>;
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   */
+  size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
   /** @default Tier.PRIMARY */
   tier?: Tier;
@@ -297,11 +337,17 @@ export interface ButtonProps {
   /** Makes button take the full width of the container */
   fullWidth?: boolean;
 
+  /** Used when the button should be rendered on dark backgrounds. Will essentially make all visual elements of the button white for high contrast. Tiers are respected, but category/color is lost */
+  inversed?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** @private */
+  [x: string]: any;
 }
 
 export const Button = ({ responsive, ...rest }: ButtonProps) => {
@@ -317,6 +363,9 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
     fullWidth,
     style,
     color,
+    inversed,
+    type = 'button',
+    ...props
   } = useResponsiveProps<ButtonProps>(rest, responsive);
 
   if (!children && trailing && leading) {
@@ -341,17 +390,22 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
         [styles[`${category?.toLowerCase() ?? ''}Alt` as keyof typeof styles]]:
           category != null && tier !== Tier.PRIMARY,
         [styles.fullWidth]: fullWidth === true,
+        [styles.inversed]: inversed === true,
+        [styles.secondaryInversed]: inversed === true && tier === Tier.SECONDARY,
+        [styles.tertiaryInversed]: inversed === true && tier === Tier.TERTIARY,
       })}
-      disabled={disabled}>
+      disabled={disabled}
+      type={type}
+      {...props}>
       {run(() => {
         if (leading) {
-          return <div className={cx({ [styles.leading]: !round })}>{leading}</div>;
+          return <div className={cx(styles.icon, { [styles.leading]: !round })}>{leading}</div>;
         }
       })}
       {children}
       {run(() => {
         if (trailing) {
-          return <div className={cx({ [styles.trailing]: !round })}>{trailing}</div>;
+          return <div className={cx(styles.icon, { [styles.trailing]: !round })}>{trailing}</div>;
         }
       })}
     </button>

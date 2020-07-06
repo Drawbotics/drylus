@@ -1,3 +1,4 @@
+import animation from './animation';
 import base from './base';
 import brand from './brand';
 import components from './components';
@@ -10,6 +11,7 @@ export default {
   introduction,
   packages,
   brand,
+  animation,
   base,
   components,
   forms,

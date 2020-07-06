@@ -6,7 +6,7 @@ import { v4 } from 'uuid';
 import { Icon, placeholderStyles } from '../components';
 import { Category } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -167,10 +167,10 @@ const Radio = ({
     <div className={styles.root}>
       <label
         className={cx(styles.wrapper, {
-          [styles.disabled]: disabled,
+          [styles.disabled]: disabled === true,
           [styles.error]: error,
           [styles.readOnly]: readOnly,
-          [placeholderStyles.shimmer]: isPlaceholder,
+          [placeholderStyles.shimmer]: isPlaceholder === true,
         })}
         htmlFor={id}>
         <div className={styles.radio}>
@@ -220,21 +220,21 @@ export interface RadioGroupOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
-export interface RadioGroupProps<T> {
+export interface RadioGroupProps<T, K = string> {
   /** Determines the radio components which will be rendered */
   options: Array<RadioGroupOption<T>>;
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: K;
 
   /** Triggered when radio value is changed */
-  onChange?: (value: RadioGroupOption<T>['value'], name?: string) => void;
+  onChange?: (value: RadioGroupOption<T>['value'], name?: K) => void;
 
   /** If true, none of the checkboxes are clickable */
   disabled?: boolean;
 
   /** Determines which value is currently active */
-  value?: RadioGroupOption<T>['value'];
+  value?: ((name?: K) => RadioGroupOption<T>['value']) | RadioGroupOption<T>['value'];
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error?: string | number;
@@ -258,9 +258,12 @@ export interface RadioGroupProps<T> {
   [x: string]: any;
 }
 
-export const RadioGroup = <T extends any>({ responsive, ...rest }: RadioGroupProps<T>) => {
+export const RadioGroup = <T extends any, K extends string>({
+  responsive,
+  ...rest
+}: RadioGroupProps<T, K>) => {
   const {
-    value,
+    value: _value,
     onChange,
     options = [],
     error,
@@ -268,12 +271,17 @@ export const RadioGroup = <T extends any>({ responsive, ...rest }: RadioGroupPro
     hint,
     style,
     ...props
-  } = useResponsiveProps<RadioGroupProps<T>>(rest, responsive);
+  } = useResponsiveProps<RadioGroupProps<T, K>>(rest, responsive);
+
+  const value = isFunction(_value) ? _value(props.name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.stopPropagation();
     if (onChange != null) {
-      onChange((e.target as HTMLInputElement).value as any, (e.target as HTMLInputElement).name);
+      onChange(
+        (e.target as HTMLInputElement).value as any,
+        (e.target as HTMLInputElement).name as K,
+      );
     }
   };
 

@@ -5,7 +5,7 @@ import React, { forwardRef, useState } from 'react';
 import { Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -83,14 +83,33 @@ const styles = {
     opacity: 0;
     transform: scale(0);
   `,
+  small: css`
+    textarea {
+      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+    }
+
+    [data-element='icon'] {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      right: ${sv.marginExtraSmall};
+    }
+
+    [data-element='lock-icon'] {
+      top: ${sv.marginExtraSmall};
+      right: ${sv.marginExtraSmall};
+
+      > i {
+        font-size: 0.95em;
+      }
+    }
+  `,
 };
 
-export interface TextAreaProps {
+export interface TextAreaProps<T = string> {
   /** Value displayed in the field */
-  value: string | number;
+  value: ((name?: T) => string | number) | string | number;
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: T;
 
   /** Disables the input */
   disabled?: boolean;
@@ -99,7 +118,7 @@ export interface TextAreaProps {
   placeholder?: string;
 
   /** Triggered when the value is changed (typing). If not given, the field is read-only */
-  onChange?: (value: string | number, name?: string) => void;
+  onChange?: (value: string | number, name?: T) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -122,6 +141,13 @@ export interface TextAreaProps {
   /** If true the textarea is focused automatically on mount */
   autoFocus?: boolean;
 
+  /**
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
+   * @kind Size
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -132,13 +158,13 @@ export interface TextAreaProps {
   [x: string]: any;
 }
 
-export interface RawTextAreaProps extends TextAreaProps {
+export interface RawTextAreaProps<T> extends TextAreaProps<T> {
   inputRef?: React.Ref<HTMLTextAreaElement>;
 }
 
-const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
+const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps<T>) => {
   const {
-    value,
+    value: _value,
     onChange,
     error,
     valid,
@@ -149,14 +175,20 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
     loading,
     style,
     isPlaceholder,
+    size = Size.DEFAULT,
     ...props
-  } = useResponsiveProps<RawTextAreaProps>(rest, responsive);
+  } = useResponsiveProps<RawTextAreaProps<T>>(rest, responsive);
 
   const [isFocused, setFocused] = useState(false);
 
+  const value = isFunction(_value) ? _value(props.name) : _value;
+
   const handleOnChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
     if (onChange != null) {
-      onChange((e.target as HTMLTextAreaElement).value, (e.target as HTMLTextAreaElement).name);
+      onChange(
+        (e.target as HTMLTextAreaElement).value,
+        (e.target as HTMLTextAreaElement).name as T,
+      );
     }
   };
 
@@ -164,10 +196,11 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.valid]: Boolean(value) && valid,
+        [styles.valid]: Boolean(value) && valid === true,
         [styles.error]: error != null && error !== false,
         [className as string]: className != null,
-        [placeholderStyles.shimmer]: isPlaceholder,
+        [placeholderStyles.shimmer]: isPlaceholder === true,
+        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
       })}>
       <div className={styles.outerWrapper}>
         <div className={styles.innerWrapper}>
@@ -182,7 +215,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
               return (
                 <div
                   className={styles.icon}
-                  data-element="icon"
+                  data-element="lock-icon"
                   style={{ color: sv.colorSecondary }}>
                   <Icon name="lock" />
                 </div>
@@ -192,7 +225,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon name="x" size={Size.SMALL} color={Color.RED} />
+                  <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
                 </div>
               );
             } else if (Boolean(value) && valid) {
@@ -200,7 +233,7 @@ const RawTextArea = ({ responsive, ...rest }: RawTextAreaProps) => {
                 <div
                   className={cx(styles.icon, { [styles.hidden]: isFocused })}
                   data-element="icon">
-                  <RoundIcon name="check" size={Size.SMALL} color={Color.GREEN} />
+                  <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
                 </div>
               );
             }
@@ -238,6 +271,6 @@ export const TextAreaWithRef = forwardRef<HTMLTextAreaElement, TextAreaProps>((p
 
 TextAreaWithRef.displayName = 'TextArea';
 
-export const TextArea = (props: TextAreaProps) => {
+export const TextArea = <T extends string>(props: TextAreaProps<T>) => {
   return <RawTextArea {...props} />;
 };

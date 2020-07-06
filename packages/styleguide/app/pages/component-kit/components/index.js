@@ -1,4 +1,7 @@
-import alerts from './alerts';
+import alerts from './alerts-provider';
+import animatedItem from './animated-item';
+import attachmentBox from './attachment-box';
+import attachmentList from './attachment-list';
 import avatar from './avatar';
 import badge from './badge';
 import banner from './banner';
@@ -14,6 +17,7 @@ import dot from './dot';
 import drawer from './drawer';
 import dropdown from './dropdown';
 import emptyState from './empty-state';
+import fileIcon from './file-icon';
 import filter from './filter';
 import filterGroup from './filter-group';
 import icon from './icon';
@@ -42,6 +46,7 @@ import tile from './tile';
 import title from './title';
 import toggle from './toggle';
 import tooltip from './tooltip';
+import uploadBox from './upload-box';
 
 const components = {
   button,
@@ -88,6 +93,11 @@ const components = {
   progressBar,
   loadingPlaceholder,
   steppedProgressBar,
+  uploadBox,
+  attachmentBox,
+  fileIcon,
+  attachmentList,
+  animatedItem,
 };
 
 export default Object.keys(components)

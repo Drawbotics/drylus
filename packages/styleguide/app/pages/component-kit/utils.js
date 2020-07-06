@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export const ControlledField = ({ component: Component, style, initialValue = '' }) => {
+export const ControlledField = ({ component: Component, style, initialValue }) => {
   const [value, setValue] = useState(initialValue);
   return (
     <div style={style}>
@@ -29,6 +29,11 @@ export const ControlledMultiField = ({ component: Component, style }) => {
       })}
     </div>
   );
+};
+
+export const RenderChildren = ({ children, defaultValue }) => {
+  const [state, setState] = useState(defaultValue);
+  return children({ state, setState });
 };
 
 export function useDebounce(value, delay) {

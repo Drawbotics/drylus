@@ -1,4 +1,16 @@
-import { Flex, FlexItem, FlexAlign, FlexDirection, FlexJustify } from '@drawbotics/react-drylus';
+import {
+  Flex,
+  FlexItem,
+  FlexAlign,
+  FlexDirection,
+  FlexJustify,
+  FlexSpacer,
+  Size,
+  Margin,
+  Title,
+  Direction,
+  Speed,
+} from '@drawbotics/react-drylus';
 
 import Playground, { PropsTable } from '~/components/Playground';
 
@@ -49,7 +61,7 @@ The `FlexItem` takes the following props
 <PropsTable component={FlexItem} />
 
 The `flex` property can take values of many types. Here is the list and what they do:
-- `true`: passing `true` (or simply the `flex` prop without value) will set the `flex` property to 1. If this prop is passed to all the `FlexItem`s they will all take the same space.
+- true: passing `true` (or simply the `flex` prop without value) will set the `flex` property to 1. If this prop is passed to all the `FlexItem`s they will all take the same space.
 - Number < 1: for example `1/4` or `3/5`. When a value below 1 is passed, the component will interpret it as the `flex-basis` and will set `flex-grow` and `flex-shrink` to 0. So `flex={1/4}` equals `flex: 0 0 25%` This is useful for building grid layouts (See example below).
 - Number > 1: this will be interpreted as the `flex` value. E.g. `flex={3}` equals `flex: 3`.
 
@@ -130,8 +142,107 @@ export const Item = ({ background }) => {
 </Playground>
 
 
+### Flex Spacer
+You can use a `FlexSpacer` component to add margin between your `FlexItems`:
+<PropsTable component={FlexSpacer} />
+
+Example usage:
+<Playground>
+  <>
+    <Margin size={{ bottom: Size.EXTRA_LARGE }}>
+      <Flex>
+        <FlexItem>
+          <Item background="red" />
+        </FlexItem>
+        <FlexSpacer size={Size.LARGE} />
+        <FlexItem>
+          <Item background="red" />
+        </FlexItem>
+      </Flex>
+    </Margin>
+    <Flex direction={FlexDirection.VERTICAL}>
+      <FlexItem>
+        <Item background="red" />
+      </FlexItem>
+      <FlexSpacer size={Size.SMALL} />
+      <FlexItem>
+        <Item background="red" />
+      </FlexItem>
+    </Flex>
+  </>
+</Playground>
+
+## Animated Flex example
+By passing the `animated` prop to the `Flex` container, the component will automatically animate its children, with each child bearing a small delay compared to the previous one (stagger effect). You can modify the animation options through the following props:
+- `animationDirection`: where the items should be coming in from (this is limited to each child, so `BOTTOM_UP` will mean that each item will have a small transition from a couple of pixels below its final position)
+- `animationSpeed`: how fast items are coming in
+- `animationEase`
+
+#### No direction, Scale
+Note: the animation will transform the FlexItem, so if your content is only aligned to the left of your FlexItem an unwanted visual effect my appear. If that's the case, you can use `FlexSpacer` with `flex` to achieve the same effect (see below).
+<Playground mode="jsx">
+  <Flex animated>
+    <FlexItem>
+      <Item background="red" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} flex />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+  </Flex>
+</Playground>
+
+#### Top down, slow
+<Playground mode="jsx">
+  <Flex animated animationDirection={Direction.TOP_DOWN} animationSpeed={Speed.SLOW}>
+    <FlexItem flex>
+      <Item background="red" />
+    </FlexItem>
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+  </Flex>
+</Playground>
+
+#### Left right, fast
+<Playground mode="jsx">
+  <Flex direction={FlexDirection.VERTICAL} animated animationDirection={Direction.LEFT_RIGHT} animationSpeed={Speed.FAST}>
+    <FlexItem>
+      <Item background="red" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+    <FlexSpacer size={Size.SMALL} />
+    <FlexItem>
+      <Item background="blue" />
+    </FlexItem>
+  </Flex>
+</Playground>
+
 ## Layout examples
-A responsive grid layout with 4 columns, aligned to the left. Becomes a 2 column layout when the screen is "medium".
+A responsive grid layout with 4 columns, aligned to the left. Becomes a 2 column layout when the screen is "medium". Use [`Grid`](/component-kit/components/grid) for this instead.
 
 <Playground>
   <div style={{ border: '2px solid black' }}>

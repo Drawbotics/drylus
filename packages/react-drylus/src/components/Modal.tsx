@@ -1,14 +1,14 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { CSSTransition } from 'react-transition-group';
 
 import { themeStyles } from '../base';
 import { Size, Tier } from '../enums';
 import { Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { fsv, run, useResponsiveProps } from '../utils';
 import { Button } from './Button';
 import { Icon } from './Icon';
 import { Title } from './Title';
@@ -81,6 +81,7 @@ const styles = {
     margin-bottom: ${sv.defaultMargin};
     padding: ${sv.defaultPadding};
     padding-top: 0;
+    padding-right: ${sv.paddingExtraHuge};
 
     @media ${sv.screenL} {
       margin: 0 calc(${sv.marginSmall} * -1);
@@ -119,43 +120,6 @@ const styles = {
       right: ${sv.marginExtraSmall};
     }
   `,
-  modalEnter: css`
-    opacity: 0;
-
-    & [data-element='container'] {
-      transform: scale(1.3);
-      opacity: 0;
-    }
-  `,
-  modalEnterActive: css`
-    opacity: 1;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-
-    & [data-element='container'] {
-      transform: scale(1);
-      opacity: 1;
-      transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-    }
-  `,
-  modalExit: css`
-    opacity: 1;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-
-    & [data-element='container'] {
-      transform: scale(1);
-      opacity: 1;
-    }
-  `,
-  modalExitActive: css`
-    opacity: 0.01;
-    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-
-    & [data-element='container'] {
-      transform: scale(1.2);
-      opacity: 0.01;
-      transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-    }
-  `,
 };
 
 export interface BaseModalProps {
@@ -171,6 +135,7 @@ export interface BaseModalProps {
   /**
    * Determines the minimum width of the modal
    * @default Size.DEFAULT
+   * @kind Size
    */
   size?: Size.DEFAULT | Size.LARGE;
 
@@ -218,6 +183,19 @@ export const BaseModal = React.forwardRef<HTMLDivElement, BaseModalProps>(
 
 BaseModal.displayName = 'BaseModal';
 
+const variants = {
+  hidden: { opacity: 0, scale: 1.2 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      ease: fsv.bouncyTransitionCurve,
+      delay: fsv.transitionTimeShort,
+      duration: fsv.defaultTransitionTime,
+    },
+  },
+};
+
 export interface ModalProps extends BaseModalProps {
   /**
    * If true, the children are rendered without decoration, you have to style your own modal
@@ -231,17 +209,10 @@ export interface ModalProps extends BaseModalProps {
   /** Determines if the modal is visible or not */
   visible: boolean;
 
-  /**
-   * Passed to the CSSTransition component to fire events at different points of the animation. See reactcommunity.org/react-transition-group docs
-   * @default {}
-   */
-  cssTransitionCallbacks?: {
-    onEnter: () => void;
-    onEntering: () => void;
-    onEntered: () => void;
-    onExit: () => void;
-    onExiting: () => void;
-    onExited: () => void;
+  /** Called when the animation is started, and when it's over, respectively, see https://www.framer.com/api/motion/component/#motioncallbacks.onanimationstart */
+  animationCallbacks?: {
+    onAnimationStart: VoidFunction;
+    onAnimationComplete: VoidFunction;
   };
 }
 
@@ -255,7 +226,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     raw = false,
     title,
     style,
-    cssTransitionCallbacks = {},
+    animationCallbacks,
   } = useResponsiveProps<ModalProps>(rest, responsive);
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
@@ -359,44 +330,46 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
 
   return ReactDOM.createPortal(
     <div className={themeStyles.root}>
-      <CSSTransition
-        {...cssTransitionCallbacks}
-        in={visible}
-        timeout={300}
-        mountOnEnter
-        unmountOnExit
-        appear
-        classNames={{
-          enter: styles.modalEnter,
-          enterActive: styles.modalEnterActive,
-          exit: styles.modalExit,
-          exitActive: styles.modalExitActive,
-        }}>
-        <div onClick={handleClickOverlay} className={styles.overlay} ref={overlayElement}>
-          <div
-            ref={containerElement}
-            className={cx(styles.container, { [styles.alignTop]: overflowing })}
-            data-element="container">
-            {run(() => {
-              if (raw) {
-                return children;
-              } else {
-                return (
-                  <BaseModal
-                    size={size}
-                    ref={modalElement}
-                    onClickClose={onClickClose}
-                    footer={footer}
-                    style={style}
-                    title={title}>
-                    {children}
-                  </BaseModal>
-                );
-              }
-            })}
-          </div>
-        </div>
-      </CSSTransition>
+      <AnimatePresence>
+        {visible ? (
+          <motion.div
+            onAnimationComplete={animationCallbacks?.onAnimationComplete}
+            onAnimationStart={animationCallbacks?.onAnimationStart}
+            transition={{ duration: fsv.defaultTransitionTime, ease: 'easeInOut' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={handleClickOverlay}
+            className={styles.overlay}
+            ref={overlayElement}>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={variants}
+              exit="hidden"
+              ref={containerElement}
+              className={cx(styles.container, { [styles.alignTop]: overflowing })}>
+              {run(() => {
+                if (raw) {
+                  return children;
+                } else {
+                  return (
+                    <BaseModal
+                      size={size}
+                      ref={modalElement}
+                      onClickClose={onClickClose}
+                      footer={footer}
+                      style={style}
+                      title={title}>
+                      {children}
+                    </BaseModal>
+                  );
+                }
+              })}
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>,
     document.getElementById('modals-outlet') as Element,
   );

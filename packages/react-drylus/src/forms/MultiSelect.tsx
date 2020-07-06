@@ -6,7 +6,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Icon, RoundIcon, Spinner, Tag } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -16,7 +16,7 @@ const styles = {
     width: 100%;
 
     &::after {
-      content: '\\eaac';
+      content: '\\eab6';
       font-family: 'drycons';
       color: ${sv.colorPrimary};
       position: absolute;
@@ -56,13 +56,14 @@ const styles = {
 
     [data-element='select'] {
       box-shadow: none !important;
+      padding-right: ${sv.paddingExtraLarge} !important;
     }
 
     &::after {
       content: none;
     }
 
-    [data-element='icon'] {
+    [data-element='lock-icon'] {
       right: ${sv.marginSmall};
     }
   `,
@@ -99,20 +100,37 @@ const styles = {
       padding-right: calc(${sv.paddingExtraLarge} + ${sv.defaultPadding});
     }
   `,
-  options: css`
+  optionsWrapper: css`
     position: absolute;
     z-index: 999;
+    min-width: 100%;
+    pointer-events: none;
+  `,
+  options: css`
     margin-top: ${sv.marginExtraSmall};
     min-width: 100%;
     background: ${sv.white};
     border-radius: ${sv.defaultBorderRadius};
     border: 1px solid ${sv.azure};
-    overflow: hidden;
     box-shadow: ${sv.elevation2};
     opacity: 0;
     transform: translateY(-5px);
     pointer-events: none;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    max-height: 200px;
+    overflow: auto;
+  `,
+  top: css`
+    transform: translateY(calc(-100% - 20px - 40px));
+  `,
+  topOpen: css`
+    transform: translateY(calc(-100% - 15px - 40px));
+  `,
+  topSmall: css`
+    transform: translateY(calc(-100% - 20px - 30px));
+  `,
+  topSmallOpen: css`
+    transform: translateY(calc(-100% - 15px - 30px));
   `,
   open: css`
     opacity: 1;
@@ -143,30 +161,79 @@ const styles = {
     margin-bottom: -12px;
     margin-left: -8px;
   `,
+  smallValues: css`
+    margin-left: -5px;
+    margin-bottom: -6px;
+
+    [data-element='value'] {
+      margin-right: 2px;
+      margin-bottom: 2px;
+    }
+  `,
   icon: css`
     pointer-events: none;
     position: absolute;
     top: calc(${sv.marginExtraSmall} * 1.5);
     right: calc(${sv.marginSmall} * 2 + ${sv.marginExtraSmall});
   `,
+  small: css`
+    [data-element='select'] {
+      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+      padding-right: ${sv.paddingHuge};
+    }
+
+    &::after {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      font-size: 1.1em;
+      right: ${sv.marginExtraSmall};
+    }
+
+    [data-element='icon'] {
+      top: calc(${sv.marginExtraSmall} - 1px);
+      right: ${sv.marginLarge};
+    }
+
+    [data-element='lock-icon'] {
+      top: ${sv.marginExtraSmall};
+      right: ${sv.marginExtraSmall};
+
+      > i {
+        font-size: 0.95em;
+      }
+    }
+  `,
   placeholder: css`
     color: ${sv.colorSecondary};
   `,
+  smallReadOnly: css`
+    [data-element='select'] {
+      padding-right: ${sv.defaultPadding} !important;
+    }
+  `,
 };
+
+function _getShouldRenderTop(box: DOMRect) {
+  if (box?.bottom > window.innerHeight) {
+    return true;
+  }
+  return false;
+}
 
 export interface MultiSelectOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
-export interface MultiSelectProps<T> {
+export interface MultiSelectProps<T, K = string> {
   /** The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey */
   options: Array<MultiSelectOption<T>>;
 
   /** Determines which values are currently active */
-  values: Array<MultiSelectOption<T>['value']>;
+  values:
+    | ((name?: K) => Array<MultiSelectOption<T>['value']>)
+    | Array<MultiSelectOption<T>['value']>;
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: K;
 
   /** Disables the multi select */
   disabled?: boolean;
@@ -178,7 +245,7 @@ export interface MultiSelectProps<T> {
   placeholder?: string;
 
   /** Triggered when a new value is chosen, returns the array of selected values. If not given, the field is read-only */
-  onChange?: (value: Array<MultiSelectOption<T>['value']>, name?: string) => void;
+  onChange?: (value: Array<MultiSelectOption<T>['value']>, name?: K) => void;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -195,6 +262,13 @@ export interface MultiSelectProps<T> {
   /** If true the select is focused automatically on mount */
   autoFocus?: boolean;
 
+  /**
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
+   * @kind Size
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -205,9 +279,12 @@ export interface MultiSelectProps<T> {
   [x: string]: any;
 }
 
-export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectProps<T>) => {
+export const MultiSelect = <T extends any, K extends string>({
+  responsive,
+  ...rest
+}: MultiSelectProps<T, K>) => {
   const {
-    values,
+    values: _values,
     options = [],
     onChange,
     placeholder = ' -- ',
@@ -219,14 +296,18 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
     loading,
     style,
     autoFocus,
+    size = Size.DEFAULT,
     ...props
-  } = useResponsiveProps<MultiSelectProps<T>>(rest, responsive);
+  } = useResponsiveProps<MultiSelectProps<T, K>>(rest, responsive);
 
   const selectRef = useRef<HTMLSelectElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
+  const optionsRef = useRef<HTMLDivElement>(null);
   const [canBlur, setCanBlur] = useState(true);
   const { screenSize, ScreenSizes } = useScreenSize();
+
+  const values = isFunction(_values) ? _values(name) : _values;
 
   const handleDocumentClick = (e: Event) =>
     !rootRef.current?.contains(e.target as Node) ? setIsFocused(false) : null;
@@ -247,7 +328,7 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
     };
   }, []);
 
-  const handleOnChange = (value: MultiSelectProps<T>['value']) => {
+  const handleOnChange = (value: MultiSelectProps<T, K>['value']) => {
     if (onChange != null) {
       values.includes(value)
         ? onChange(
@@ -258,11 +339,14 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
     }
   };
 
+  const optionsPanel = optionsRef.current?.getBoundingClientRect();
+  const topRender = optionsPanel ? _getShouldRenderTop(optionsPanel) : false;
+
   // used for mobile
   const handleSelectChange = (options: HTMLOptionsCollection) => {
     const selected = [].filter.call(options, (o: any) => o.selected).map((o: any) => o.value);
     if (onChange != null) {
-      onChange(selected);
+      onChange(selected, name);
     }
   };
 
@@ -272,10 +356,13 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
     selectRef.current?.focus();
   };
 
-  const handleClickRemove = (e: React.MouseEvent<HTMLElement>, value: string | number) => {
+  const handleClickRemove = (e: React.MouseEvent<HTMLElement>, value: T) => {
     e.stopPropagation();
     if (onChange != null) {
-      onChange(values.filter((v) => v !== value));
+      onChange(
+        values.filter((v) => v !== value),
+        name,
+      );
     }
   };
 
@@ -283,35 +370,40 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.disabled]: disabled,
+        [styles.disabled]: disabled === true,
         [styles.readOnly]: onChange == null,
-        [styles.valid]: values?.length > 0 && valid,
+        [styles.valid]: values?.length > 0 && valid === true,
         [styles.error]: error != null && error !== false,
+        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+        [styles.smallReadOnly]: onChange == null && size === Size.SMALL,
       })}
       ref={rootRef}>
       {run(() => {
         if (loading) {
           return (
-            <div className={styles.icon}>
+            <div className={styles.icon} data-element="icon">
               <Spinner size={Size.SMALL} />
             </div>
           );
         } else if (onChange == null) {
           return (
-            <div className={styles.icon} data-element="icon" style={{ color: sv.colorSecondary }}>
+            <div
+              className={styles.icon}
+              data-element="lock-icon"
+              style={{ color: sv.colorSecondary }}>
               <Icon name="lock" />
             </div>
           );
         } else if (error) {
           return (
-            <div className={styles.icon}>
-              <RoundIcon name="x" size={Size.SMALL} color={Color.RED} />
+            <div className={styles.icon} data-element="icon">
+              <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
             </div>
           );
         } else if (values?.length > 0 && valid) {
           return (
-            <div className={styles.icon}>
-              <RoundIcon name="check" size={Size.SMALL} color={Color.GREEN} />
+            <div className={styles.icon} data-element="icon">
+              <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
             </div>
           );
         }
@@ -327,9 +419,9 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
             return <div className={styles.placeholder}>{placeholder}</div>;
           } else {
             return (
-              <div className={styles.values}>
+              <div className={cx(styles.values, { [styles.smallValues]: size === Size.SMALL })}>
                 {values.map((value) => (
-                  <div key={value} className={styles.value}>
+                  <div key={value as string} className={styles.value} data-element="value">
                     <Tag
                       inversed
                       onClickRemove={
@@ -349,20 +441,27 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
       {run(() => {
         if (screenSize > ScreenSizes.XL) {
           return (
-            <div
-              className={cx(styles.options, {
-                [styles.open]: isFocused,
-              })}>
-              {options.map((option) => (
-                <div
-                  className={cx(styles.option, {
-                    [styles.disabledOption]: option.disabled || values.includes(option.value),
-                  })}
-                  key={option.value}
-                  onClick={onChange != null ? () => handleOnChange(option.value) : undefined}>
-                  {option.label}
-                </div>
-              ))}
+            <div ref={optionsRef} className={styles.optionsWrapper}>
+              <div
+                className={cx(styles.options, {
+                  [styles.open]: isFocused,
+                  [styles.top]: topRender,
+                  [styles.topOpen]: topRender && isFocused,
+                  [styles.topSmall]: topRender && size === Size.SMALL,
+                  [styles.topSmallOpen]: topRender && size === Size.SMALL && isFocused,
+                })}>
+                {options.map((option) => (
+                  <div
+                    className={cx(styles.option, {
+                      [styles.disabledOption]: option.disabled || values.includes(option.value),
+                    })}
+                    data-value={option.value}
+                    key={option.value as string}
+                    onClick={onChange != null ? () => handleOnChange(option.value) : undefined}>
+                    {option.label}
+                  </div>
+                ))}
+              </div>
             </div>
           );
         }
@@ -383,7 +482,10 @@ export const MultiSelect = <T extends any>({ responsive, ...rest }: MultiSelectP
         multiple
         {...props}>
         {options.map((option) => (
-          <option key={option.value} value={option.value} disabled={option.disabled}>
+          <option
+            key={option.value as string}
+            value={option.value as string}
+            disabled={option.disabled}>
             {option.label}
           </option>
         ))}

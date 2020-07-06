@@ -1,15 +1,12 @@
 import { Select } from '@drawbotics/react-drylus';
 import React from 'react';
 
-import { displayValue, normalizeValue } from '../utils';
+import { normalizeValue } from '../utils';
 
-const SelectProp = ({ prop, value, onChange, enums }) => {
+const SelectProp = ({ prop, value, onChange, enums, isEnum }) => {
   const { key, type } = prop;
-  const { value: values } = type;
-  const isEnum = value?.description;
-  const finalValue = isEnum
-    ? (values[0].value.split('.')[0] || '') + '.' + (value?.description || value)
-    : normalizeValue(value);
+  const { values } = type;
+  const finalValue = isEnum ? (type?.name || '') + '.' + (value?.description || value) : value;
   return (
     <div style={{ minWidth: 200 }}>
       <Select
@@ -21,8 +18,8 @@ const SelectProp = ({ prop, value, onChange, enums }) => {
             value: '_empty',
           },
           ...values.map((v) => ({
-            label: isEnum ? `${displayValue(v.value)}` : `${normalizeValue(v.value)}`,
-            value: isEnum ? displayValue(v.value) : normalizeValue(v.value),
+            label: `${v}`,
+            value: v,
           })),
         ]}
         onChange={(v, k) => onChange(normalizeValue(v, enums), k)}

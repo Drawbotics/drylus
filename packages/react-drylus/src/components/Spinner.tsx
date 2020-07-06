@@ -88,12 +88,19 @@ const styles = {
 };
 
 export interface SpinnerProps {
-  /** @default Size.DEFAULT */
-  size?: Size.DEFAULT | Size.SMALL | Size.LARGE;
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   * */
+  size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
-  /** @deprecated use color instead */
+  /**
+   * @deprecated Use color instead
+   * @kind Category
+   * */
   category?: Category.BRAND | Category.INFO;
 
+  /** @kind Color */
   color?: Color.BRAND | Color.BLUE;
 
   /** If true, sets the color of the spinner to white (to be used against colored backgrounds) */
@@ -123,7 +130,7 @@ export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
     <div
       style={style}
       className={cx(styles.container, {
-        [styles.fullSizeContainer]: fullSize,
+        [styles.fullSizeContainer]: fullSize === true,
       })}>
       <div
         className={cx(styles.root, {
@@ -135,7 +142,7 @@ export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
             className={cx(styles.path, {
               [styles.brand]: color === Color.BRAND,
               [styles.blue]: color === Color.BLUE,
-              [styles.white]: inversed,
+              [styles.white]: inversed === true,
             })}
             cx="50"
             cy="50"

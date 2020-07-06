@@ -6,6 +6,7 @@ import {
   TRow,
   TBody,
   EmptyState,
+  Checkbox,
 } from '@drawbotics/react-drylus';
 import sv from '@drawbotics/drylus-style-vars';
 
@@ -383,7 +384,7 @@ You can set `isLoading` to `true` and display a placeholder table (with the same
 
 <Playground>
   <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
-    <Table isLoading header={[ 'age', 'height', 'something', 'else' ]} />
+    <Table animated isLoading loadingRows={6} header={[ 'age', 'height', 'something', 'else' ]} />
   </div>
 </Playground>
 
@@ -394,5 +395,120 @@ You can set `emptyContent` to replace the table content and show something else.
 <Playground>
   <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
     <Table header={[ 'age', 'height', 'something', 'else' ]} emptyContent={<EmptyState description="Sorry! This table is empty" />} />
+  </div>
+</Playground>
+
+### Large scrollabe table
+Sometimes there is too much data (columns) that we need to display, and given the limited screen width, the table can be set to `scrollable` which will set the first and last columns floating to show the user that there is more data.
+
+export const data = [{
+  id: 1,
+  a: 'Data A 1',
+  b: 'Data B 1',
+  c: 'Data C 1',
+  d: 'Data D 1',
+  e: 'Data E 1',
+  f: 'Data F 1',
+  g: 'Data G 1',
+  h: 'Data H 1',
+}, {
+  id: 2,
+  a: 'Data A 2',
+  b: 'Data B 2',
+  c: 'Data C 2',
+  d: 'Data D 2',
+  e: 'Data E 2',
+  f: 'Data F 2',
+  g: 'Data G 2',
+  h: 'Data H 2',
+}, {
+  id: 3,
+  a: 'Data A 3',
+  b: 'Data B 3',
+  c: 'Data C 3',
+  d: 'Data D 3',
+  e: 'Data E 3',
+  f: 'Data F 3',
+  g: 'Data G 3',
+  h: 'Data H 3',
+}, {
+  id: 4,
+  a: 'Data A 4',
+  b: 'Data B 4',
+  c: 'Data C 4',
+  d: 'Data D 4',
+  e: 'Data E 4',
+  f: 'Data F 4',
+  g: 'Data G 4',
+  h: 'Data H 4',
+}, {
+  id: 5,
+  a: 'Data A 5',
+  b: 'Data B 5',
+  c: 'Data C 5',
+  d: 'Data D 5',
+  e: 'Data E 5',
+  f: 'Data F 5',
+  g: 'Data G 5',
+  h: 'Data H 5',
+}]
+
+<Playground>
+  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px', whiteSpace: 'nowrap' }}>
+    <Table header={[
+      { label: 'First column', value: 'a' },
+      { label: 'Second column', value: 'b' },
+      { label: 'Third column', value: 'c' },
+      { label: 'Fourth column', value: 'd' },
+      { label: 'Fifth column', value: 'e' },
+      { label: 'Sixth column', value: 'f' },
+      { label: 'Seventh column', value: 'g' },
+      { label: 'Eighth column', value: 'h' },
+    ]} data={data} scrollable sortableBy={['b']} />
+  </div>
+</Playground>
+
+export const dataWithCheckbox = [{
+  id: 1,
+  a: <Checkbox onChange={() => {}} />,
+  b: 'Data B 1',
+  c: 'Data C 1',
+  d: 'Data D 1',
+}, {
+  id: 2,
+  a: <Checkbox onChange={() => {}} />,
+  b: 'Data B 2',
+  c: 'Data C 2',
+  d: 'Data D 2',
+}, {
+  id: 3,
+  a: <Checkbox onChange={() => {}} />,
+  b: 'Data B 3',
+  c: 'Data C 3',
+  d: 'Data D 3',
+}, {
+  id: 4,
+  a: <Checkbox onChange={() => {}} />,
+  b: 'Data B 4',
+  c: 'Data C 4',
+  d: 'Data D 4',
+}, {
+  id: 5,
+  a: <Checkbox onChange={() => {}} />,
+  b: 'Data B 5',
+  c: 'Data C 5',
+  d: 'Data D 5',
+}]
+
+
+### Table with actionable header
+<Playground>
+  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px', whiteSpace: 'nowrap' }}>
+    <Table header={[
+      { label: <Checkbox onChange={() => {}} />, value: 'a' },
+      { label: 'Second column', value: 'b' },
+      { label: 'Third column', value: 'c' },
+      { label: 'Fourth column', value: 'd' },
+    ]} data={dataWithCheckbox} />
   </div>
 </Playground>

@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Category, Color } from '../enums';
+import { Style } from '../types';
 import { Deprecated, categoryEnumToColor, getEnumAsClass } from '../utils';
 
 const styles = {
@@ -34,13 +35,15 @@ const styles = {
 };
 
 export interface DotProps {
-  /** @deprecated use color instead */
+  /**
+   * @deprecated Use color instead
+   */
   category?: Category;
 
-  /** Used for style overrides */
-  style?: Record<string, any>;
-
   color?: Color;
+
+  /** Used for style overrides */
+  style?: Style;
 }
 
 export const Dot = ({ category, style, color: _color }: DotProps) => {

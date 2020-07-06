@@ -1,0 +1,109 @@
+import { css } from 'emotion';
+import {
+  Content,
+  Margin,
+  Size,
+  Title,
+  Padding,
+  Text,
+  Flex,
+  FlexItem,
+  Grid,
+  GridItem,
+  FlexSpacer,
+  SelectFilter,
+  Shade,
+  Tile,
+  Direction,
+  Speed,
+  AnimatedItem,
+  AnimationGroup,
+} from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+import { Navbar } from './components/Navbar';
+
+# Dashboard grid example
+
+export const Item = () => {
+  return (
+    <Tile noPadding>
+      <img
+        src={'https://www.brusselstimes.com/wp-content/uploads/2019/07/newtowertallestbrusselsrueloiperspectivebrussels.jpg'}
+        style={{ width: '100%', height: 150, objectFit: 'cover' }} />
+      <Padding size={Size.SMALL}>
+        <Margin size={{ bottom: Size.EXTRA_SMALL }}>
+          <Text>A cool project</Text>
+        </Margin>
+        <Text size={Size.SMALL} shade={Shade.MEDIUM}>40% sold</Text>
+      </Padding>
+    </Tile>
+  );
+};
+
+<Playground mode="jsx">
+  <>
+    <Navbar />
+    <Content>
+      <Padding>
+        <AnimationGroup speed={Speed.FAST} direction={Direction.LEFT_RIGHT} staggerChildren>
+          <AnimatedItem>
+            <Margin size={{ top: Size.DEFAULT, bottom: Size.SMALL }}>
+              <Title size={2} noMargin>
+                Welcome Amber
+              </Title>
+            </Margin>
+          </AnimatedItem>
+          <AnimatedItem>
+            <Text>
+              Start by creating a projet
+            </Text>
+          </AnimatedItem>
+        </AnimationGroup>
+        <Margin size={{ top: Size.EXTRA_LARGE, bottom: Size.LARGE }}>
+          <Flex animationDelay={300} animated animationDirection={Direction.TOP_DOWN} animationSpeed={Speed.FAST}>
+            <FlexItem>
+              <Title size={4} noMargin>
+                Projects
+              </Title>
+            </FlexItem>
+            <FlexSpacer flex size={Size.SMALL} />
+            <FlexItem>
+              <SelectFilter
+                label="Filter"
+                onChange={() => {}}
+                onClear={() => {}}
+                options={[]}
+              />
+            </FlexItem>
+            <FlexSpacer size={Size.SMALL} />
+            <FlexItem>
+              <SelectFilter
+                label="Filter"
+                onChange={() => {}}
+                onClear={() => {}}
+                options={[]}
+              />
+            </FlexItem>
+            <FlexSpacer size={Size.SMALL} />
+            <FlexItem>
+              <SelectFilter
+                label="Filter"
+                onChange={() => {}}
+                onClear={() => {}}
+                options={[]}
+              />
+            </FlexItem>
+          </Flex>
+        </Margin>
+        <Grid animated animationDelay={600} hGutters={Size.DEFAULT} vGutters={Size.DEFAULT} columns={4}>
+          {[...Array(8).keys()].map((i) =>
+            <GridItem key={i}>
+              <Item />
+            </GridItem>
+          )}
+        </Grid>
+      </Padding>
+    </Content>
+  </>
+</Playground>

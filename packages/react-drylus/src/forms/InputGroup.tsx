@@ -3,7 +3,7 @@ import React from 'react';
 import { Category, Size } from '../enums';
 import { Flex, FlexAlign, FlexDirection, FlexItem, Margin } from '../layout';
 import { Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { checkComponentProps, run, useResponsiveProps } from '../utils';
 import {
   Checkbox,
   Input,
@@ -30,7 +30,7 @@ export type InputGroupChild =
 
 export interface InputGroupProps {
   /** Form components that will be grouped together */
-  children: Array<InputGroupChild>; // TODO only allow form components
+  children: Array<InputGroupChild>;
 
   /** Small text shown below the group, replaced by error if present */
   hint?: string;
@@ -41,6 +41,9 @@ export interface InputGroupProps {
   /** If true all elements display a check icon and a green outline, overridden by "error" */
   valid?: boolean;
 
+  /** If true, form elements will be aligned horizontally */
+  horizontal?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -49,28 +52,52 @@ export interface InputGroupProps {
 }
 
 export const InputGroup = ({ responsive, ...rest }: InputGroupProps) => {
-  const { hint, error, valid, children, style } = useResponsiveProps<InputGroupProps>(
+  const { hint, error, valid, children, style, horizontal } = useResponsiveProps<InputGroupProps>(
     rest,
     responsive,
   );
 
+  checkComponentProps(
+    { children },
+    {
+      children: [
+        MultiSelect,
+        RangeInput,
+        NumberInput,
+        SearchInput,
+        TextArea,
+        Checkbox,
+        RadioGroup,
+        Input,
+        Select,
+      ],
+    },
+  );
+
   return (
     <div style={style}>
-      <Flex direction={FlexDirection.VERTICAL} align={FlexAlign.STRETCH}>
-        {React.Children.map(children as any, (child, i) =>
-          child != null ? (
-            <FlexItem flex>
-              <Margin size={{ top: i === 0 ? undefined : Size.EXTRA_SMALL }}>
-                {React.cloneElement(child, {
-                  error: child.props.valid ? false : Boolean(error),
-                  valid: valid !== undefined ? valid : child.props.valid,
-                })}
-              </Margin>
-            </FlexItem>
-          ) : (
-            undefined
-          ),
-        )}
+      <Flex
+        direction={horizontal ? FlexDirection.HORIZONTAL : FlexDirection.VERTICAL}
+        align={FlexAlign.STRETCH}>
+        {React.Children.map(children as any, (child, i) => {
+          if (child != null) {
+            const margin = i === 0 ? undefined : Size.EXTRA_SMALL;
+            return (
+              <FlexItem flex>
+                <Margin
+                  size={{
+                    top: horizontal ? undefined : margin,
+                    left: horizontal ? margin : undefined,
+                  }}>
+                  {React.cloneElement(child, {
+                    error: child.props.valid ? false : Boolean(error),
+                    valid: valid !== undefined ? valid : child.props.valid,
+                  })}
+                </Margin>
+              </FlexItem>
+            );
+          }
+        })}
       </Flex>
       {run(() => {
         if (error != null && typeof error === 'string') {

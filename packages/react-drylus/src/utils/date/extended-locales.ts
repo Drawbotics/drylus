@@ -29,11 +29,11 @@ const en = {
       yy: '%d years',
     },
   }),
-  calendar: ({ format }: { format: string }) => ({
+  calendar: ({ format, withTime = true }: { format: string; withTime: boolean }) => ({
     sameElse: format,
     nextWeek: format,
-    lastDay: `[yesterday at] h:mm A`,
-    sameDay: '[today at] h:mm A',
+    lastDay: withTime ? `[yesterday at] h:mm A` : `[yesterday]`,
+    sameDay: withTime ? `[today at] h:mm A` : `[today]`,
     lastWeek: `[last] ${format}`,
     nextDay: `[tomorrow], ${format}`,
   }),
@@ -64,12 +64,14 @@ const fr = {
       yy: '%d ans',
     },
   }),
-  calendar: ({ format }: { format: string }) => ({
+  calendar: ({ format, withTime = true }: { format: string; withTime: boolean }) => ({
     sameElse: format,
     nextWeek: format,
     lastWeek: `${format.split(',')[0]} [passé],${tail(format.split(','))}`,
-    nextDay: `[demain], ${format.split(',').slice(0, -1)} [à]${last(format.split(','))}`,
-    sameDay: `[aujourd'hui à] HH:mm`,
+    nextDay: withTime
+      ? `[demain], ${format.split(',').slice(0, -1)} [à]${last(format.split(','))}`
+      : `[demain], ${format.split(',').slice(0, -1)}`,
+    sameDay: withTime ? `[aujourd'hui à] HH:mm` : `[aujourd'hui]`,
   }),
 };
 
@@ -100,12 +102,14 @@ const nl = {
       yy: '%d jaar',
     },
   }),
-  calendar: ({ format }: { format: string }) => ({
+  calendar: ({ format, withTime = true }: { format: string; withTime: boolean }) => ({
     sameElse: format,
     nextWeek: format,
     lastWeek: `[vorige] ${format}`,
-    nextDay: `[morgen], ${format.split(',').slice(0, -1)} [om]${last(format.split(','))}`,
-    sameDay: `[vandaag om] HH:mm`,
+    nextDay: withTime
+      ? `[morgen], ${format.split(',').slice(0, -1)} [om]${last(format.split(','))}`
+      : `[morgen], ${format.split(',').slice(0, -1)}`,
+    sameDay: withTime ? `[vandaag om] HH:mm` : `[vandaag]`,
   }),
 };
 

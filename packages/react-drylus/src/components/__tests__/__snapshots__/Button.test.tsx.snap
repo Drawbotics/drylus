@@ -56,6 +56,7 @@ exports[`Button matches snapshot when has a category 1`] = `
 
 <button
   className="undefined emotion-0"
+  type="button"
 >
   Some content
 </button>
@@ -101,7 +102,23 @@ exports[`Button matches snapshot when has a leading component 1`] = `
   box-shadow: none;
 }
 
+.emotion-0 {
+  color: inherit;
+}
+
 .emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   margin-right: 8px;
   height: 0;
   display: -webkit-box;
@@ -114,12 +131,9 @@ exports[`Button matches snapshot when has a leading component 1`] = `
   align-items: center;
 }
 
-.emotion-0 {
-  color: inherit;
-}
-
 <button
   className="emotion-2"
+  type="button"
 >
   <div
     className="emotion-1"
@@ -190,6 +204,7 @@ exports[`Button matches snapshot when has a tier 1`] = `
 
 <button
   className="emotion-0"
+  type="button"
 >
   Some content
 </button>
@@ -235,7 +250,23 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
   box-shadow: none;
 }
 
+.emotion-0 {
+  color: inherit;
+}
+
 .emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   margin-left: 8px;
   height: 0;
   display: -webkit-box;
@@ -248,12 +279,9 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
   align-items: center;
 }
 
-.emotion-0 {
-  color: inherit;
-}
-
 <button
   className="emotion-2"
+  type="button"
 >
   Some content
   <div
@@ -308,6 +336,7 @@ exports[`Button matches snapshot when is basic 1`] = `
 
 <button
   className="emotion-0"
+  type="button"
 >
   Some content
 </button>
@@ -335,8 +364,7 @@ exports[`Button matches snapshot when is small 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding: 8px 8px;
-  font-size: 0.9rem;
+  padding: calc(8px - 1px) 8px;
 }
 
 .emotion-0:hover {
@@ -357,6 +385,7 @@ exports[`Button matches snapshot when is small 1`] = `
 
 <button
   className="emotion-0"
+  type="button"
 >
   Some content
 </button>

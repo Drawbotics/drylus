@@ -1,9 +1,17 @@
 #!/bin/sh
 
-export PATH=$(npm bin):$PATH
+read version _ <<< $(node -v)
+echo "Current node version: $version"
 
-npx lerna version prerelease --no-commit-hooks --no-changelog --yes
+if [[ $version != *"v10"* ]];
+  then
+    echo "Due to compatibility issues, please use node 10 to pre-publish. This will be fixed soon, promised."
+  else
+    export PATH=$(npm bin):$PATH
 
-npx lerna publish from-package --ignore-prepublish --dist-tag beta --yes
+    npx lerna version prerelease --no-commit-hooks --no-changelog --yes
 
-git stash
+    npx lerna publish from-package --ignore-prepublish --dist-tag beta --pre-dist-tag beta --yes -m '%v [skip ci]'
+
+    git stash
+fi

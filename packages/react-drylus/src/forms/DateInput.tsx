@@ -8,9 +8,9 @@ import { createPortal } from 'react-dom';
 
 import { themeStyles } from '../base';
 import { Button, Icon } from '../components';
-import { Align } from '../enums';
+import { Align, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { useResponsiveProps } from '../utils';
+import { isFunction, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
 const styles = {
@@ -19,12 +19,11 @@ const styles = {
 
     input {
       white-space: nowrap;
-      min-height: 40px;
     }
   `,
   calendarContainer: css`
     position: fixed;
-    z-index: 999;
+    z-index: 99999;
     margin-top: calc(${sv.marginLarge} + ${sv.marginSmall});
     opacity: 0;
     transform: translateY(-5px);
@@ -166,11 +165,11 @@ export interface DateObject {
   year: number;
 }
 
-function _objectToDate(object: DateObject) {
+export function objectToDate(object: DateObject) {
   return new Date(object.year, object.month - 1, object.day);
 }
 
-function _dateToObject(date: Date) {
+export function dateToObject(date: Date) {
   return {
     day: date.getDate(),
     month: date.getMonth() + 1,
@@ -187,7 +186,7 @@ function _stringToDateObject(string: string) {
   };
 }
 
-function _objectToDateString(object: DateObject) {
+function objectToDateString(object: DateObject) {
   return `${object.year}-${String(object.month).padStart(2, '0')}-${String(object.day).padStart(
     2,
     '0',
@@ -201,15 +200,15 @@ function _getShouldRenderTop(box: DOMRect) {
   return false;
 }
 
-export interface DateInputProps {
+export interface DateInputProps<T = string> {
   /** Can be empty string, or object containing day, month, year as numbers */
-  value: DateObject | '';
+  value: ((name?: T) => DateObject | '') | DateObject | '';
 
   /** Triggered when the date is chosen from the calendar. If not given, the field is read-only */
-  onChange?: (value: DateObject, name?: string) => void;
+  onChange?: (value: DateObject, name?: T) => void;
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: T;
 
   /**
    * Used to render the name of months in the calendar
@@ -221,7 +220,7 @@ export interface DateInputProps {
   disabled?: boolean;
 
   /** Text shown when no value is active */
-  placeholder?: boolean;
+  placeholder?: string;
 
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
@@ -253,8 +252,16 @@ export interface DateInputProps {
   /**
    * Determines on which side the picker is aligned
    * @default Align.LEFT
+   * @kind Align
    */
   align?: Align.LEFT | Align.RIGHT;
+
+  /**
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
+   * @kind Size
+   */
+  size?: Size.SMALL | Size.DEFAULT;
 
   /** Used for style overrides */
   style?: Style;
@@ -266,9 +273,9 @@ export interface DateInputProps {
   [x: string]: any;
 }
 
-export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
+export const DateInput = <T extends string>({ responsive, ...rest }: DateInputProps<T>) => {
   const {
-    value,
+    value: _value,
     onChange,
     locale = 'en',
     disabled,
@@ -286,8 +293,9 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
     style,
     align = Align.LEFT,
     autoFocus,
+    size = Size.DEFAULT,
     ...props
-  } = useResponsiveProps<DateInputProps>(rest, responsive);
+  } = useResponsiveProps<DateInputProps<T>>(rest, responsive);
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
   const [isFocused, setIsFocused] = useState(false);
@@ -298,6 +306,7 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const pickerElement = useRef<HTMLDivElement>(null);
+  const calendarElement = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleDocumentClick = (e: Event) =>
@@ -344,15 +353,16 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
     };
   }, []);
 
+  const value = isFunction(_value) ? _value(name) : _value;
   const inputValue =
     value === ''
       ? value
       : isDesktop
-      ? _objectToDate(value).toLocaleDateString(locale, {
+      ? objectToDate(value).toLocaleDateString(locale, {
           ...DEFAULT_OPTIONS,
           ...displayOptions,
         })
-      : _objectToDateString(value);
+      : objectToDateString(value);
 
   const pickerBox = pickerElement.current?.getBoundingClientRect();
   const rootBox = rootRef.current?.getBoundingClientRect();
@@ -389,8 +399,9 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
         onFocus={onChange != null ? () => setIsFocused(true) : null}
         placeholder={placeholder}
         type={isDesktop ? null : 'date'}
-        max={!isDesktop && maxDate ? _objectToDateString(maxDate) : null}
-        min={!isDesktop && minDate ? _objectToDateString(minDate) : null}
+        max={!isDesktop && maxDate ? objectToDateString(maxDate) : null}
+        min={!isDesktop && minDate ? objectToDateString(minDate) : null}
+        size={size}
         {...props}
       />
       {isDesktop &&
@@ -410,21 +421,21 @@ export const DateInput = ({ responsive, ...rest }: DateInputProps) => {
               className={cx(styles.calendarContainer, {
                 [styles.visible]: isFocused,
               })}>
-              <Calendar
-                {...calendarOptions}
-                maxDate={maxDate && _objectToDate(maxDate)}
-                minDate={minDate && _objectToDate(minDate)}
-                className={cx(styles.calendar, {
-                  [styles.topRender]: topRender,
-                })}
-                tileClassName={styles.tile}
-                locale={locale}
-                activeStartDate={activeStartDate && _objectToDate(activeStartDate)}
-                onChange={
-                  onChange != null ? (v) => onChange(_dateToObject(v as Date), name) : undefined
-                }
-                value={value === '' ? undefined : _objectToDate(value)}
-              />
+              <div ref={calendarElement} className={topRender ? styles.topRender : undefined}>
+                <Calendar
+                  {...calendarOptions}
+                  maxDate={maxDate && objectToDate(maxDate)}
+                  minDate={minDate && objectToDate(minDate)}
+                  className={styles.calendar}
+                  tileClassName={styles.tile}
+                  locale={locale}
+                  activeStartDate={activeStartDate && objectToDate(activeStartDate)}
+                  onChange={
+                    onChange != null ? (v) => onChange(dateToObject(v as Date), name) : undefined
+                  }
+                  value={value === '' ? undefined : objectToDate(value)}
+                />
+              </div>
             </div>
           </div>,
           document.getElementById('picker-outlet') as Element,

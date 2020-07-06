@@ -5,28 +5,44 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button, Icon, Spinner } from '../components';
 import { Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { run, useResponsiveProps } from '../utils';
+import { isFunction, run, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
 const styles = {
   root: css`
     position: relative;
   `,
-  list: css`
+  listWrapper: css`
     position: absolute;
     z-index: 999;
-    top: 100%;
+    min-width: 100%;
+    pointer-events: none;
+  `,
+  list: css`
     margin-top: ${sv.marginExtraSmall};
     min-width: 100%;
     background: ${sv.white};
     border-radius: ${sv.defaultBorderRadius};
     border: 1px solid ${sv.azure};
-    overflow: hidden;
     box-shadow: ${sv.elevation2};
     opacity: 0;
     transform: translateY(-5px);
     pointer-events: none;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    max-height: 200px;
+    overflow: auto;
+  `,
+  top: css`
+    transform: translateY(calc(-100% - 20px - 40px));
+  `,
+  topOpen: css`
+    transform: translateY(calc(-100% - 15px - 40px));
+  `,
+  topSmall: css`
+    transform: translateY(calc(-100% - 20px - 30px));
+  `,
+  topSmallOpen: css`
+    transform: translateY(calc(-100% - 15px - 30px));
   `,
   visible: css`
     opacity: 1;
@@ -45,20 +61,74 @@ const styles = {
   noResult: css`
     pointer-events: none;
   `,
+  minimal: css`
+    input {
+      padding-left: ${sv.paddingExtraLarge};
+      background: transparent;
+      border-bottom-left-radius: ${sv.defaultBorderRadius};
+      border-top-left-radius: ${sv.defaultBorderRadius};
+    }
+
+    > [data-element='input-root'] > div > {
+      position: relative;
+
+      &::after {
+        position: absolute;
+        content: '\\eac9';
+        font-family: 'drycons';
+        top: 50%;
+        transform: translateY(-50%);
+        left: ${sv.paddingSmall};
+        color: ${sv.colorSecondary};
+        font-size: 1.3em;
+      }
+    }
+  `,
+  smallMinimal: css`
+    input {
+      padding-left: ${sv.paddingExtraLarge} !important;
+    }
+
+    > [data-element='input-root'] > div > {
+      &::after {
+        left: ${sv.paddingSmall};
+        font-size: 1em;
+      }
+    }
+  `,
+  loading: css`
+    > [data-element='input-root'] > div > {
+      &::after {
+        content: none;
+      }
+    }
+  `,
+  spinner: css`
+    position: absolute;
+    top: calc(${sv.marginExtraSmall} + 4px);
+    left: calc(${sv.marginExtraSmall} + 4px);
+  `,
 };
 
-export interface SearchInputProps<T> {
+function _getShouldRenderTop(box: DOMRect) {
+  if (box?.bottom > window.innerHeight) {
+    return true;
+  }
+  return false;
+}
+
+export interface SearchInputProps<T, K = string> {
   /** The list of items displayed under the input ('value, key' pairs) its completely up to you to generate this list */
   options?: Array<Option<T>>;
 
   /** The text passed to the input */
-  value: string;
+  value: ((name?: K) => string) | string;
 
   /** Name of the form element (target.name) */
-  name?: string;
+  name?: K;
 
   /** Triggered when the text is changed, and when the search button is pressed */
-  onChange: (value: Option<T>['value'], name?: string) => void;
+  onChange: (value: Option<T>['value'], name?: K) => void;
 
   /** Triggered when one of the results is clicked, returns the corresponding option value */
   onClickResult?: (value: Option<T>['value']) => void;
@@ -71,8 +141,30 @@ export interface SearchInputProps<T> {
 
   placeholder?: string;
 
-  /** If true, the search button will display a spinner */
+  /** @deprecated Use loading instead */
   isLoading?: boolean;
+
+  /** If true, the search button will display a spinner */
+  loading?: boolean;
+
+  /** Small text shown below the box, replaced by error if present */
+  hint?: string;
+
+  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: string | boolean;
+
+  /** If true the element displays a check icon and a green outline, overridden by "error" */
+  valid?: boolean;
+
+  /** If true, the input will blend more with its surroundings. This variant should be used when the search is not within a form */
+  minimal?: boolean;
+
+  /**
+   * Size of the input. Can be small or default
+   * @default Size.DEFAULT
+   * @kind Size
+   */
+  size?: Size.SMALL | Size.DEFAULT;
 
   /** Used for style overrides */
   style?: Style;
@@ -84,25 +176,40 @@ export interface SearchInputProps<T> {
   [x: string]: any;
 }
 
-export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputProps<T>) => {
+export const SearchInput = <T extends any, K extends string>({
+  responsive,
+  ...rest
+}: SearchInputProps<T, K>) => {
   const {
     options,
-    value,
+    value: _value,
     onChange,
     noResultLabel = 'No results',
     placeholder,
-    isLoading,
+    isLoading: _isLoading,
+    loading,
     name,
     style,
     onClickResult,
+    hint,
+    error,
+    valid,
+    size = Size.DEFAULT,
+    minimal,
     ...props
-  } = useResponsiveProps<SearchInputProps<T>>(rest, responsive);
+  } = useResponsiveProps<SearchInputProps<T, K>>(rest, responsive);
   const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
+  const value = isFunction(_value) ? _value(name) : _value;
   const shouldDisplayResults = value !== '' && isFocused;
+  const isLoading = _isLoading === true || loading === true;
+
+  const listPanel = listRef.current?.getBoundingClientRect();
+  const topRender = listPanel ? _getShouldRenderTop(listPanel) : false;
 
   const handleDocumentClick = (e: Event) =>
     !rootRef.current?.contains(e.target as Node) ? setFocused(false) : null;
@@ -119,14 +226,31 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
     };
   });
   return (
-    <div style={style} className={styles.root} ref={rootRef}>
+    <div
+      style={style}
+      className={cx(styles.root, {
+        [styles.minimal]: minimal === true,
+        [styles.smallMinimal]: minimal === true && size === Size.SMALL,
+        [styles.loading]: isLoading,
+      })}
+      ref={rootRef}>
+      {isLoading ? (
+        <div className={styles.spinner}>
+          <Spinner size={Size.SMALL} />
+        </div>
+      ) : null}
       <InputWithRef
         prefix={
-          <Button
-            leading={isLoading ? <Spinner size={Size.SMALL} /> : <Icon name="search" />}
-            onClick={() => inputRef.current?.focus()}
-          />
+          minimal ? null : (
+            <Button
+              leading={isLoading ? <Spinner size={Size.SMALL} /> : <Icon name="search" />}
+              onClick={() => inputRef.current?.focus()}
+            />
+          )
         }
+        error={error}
+        hint={hint}
+        valid={valid}
         value={value}
         onChange={onChange}
         name={name}
@@ -134,6 +258,7 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
         onFocus={() => setFocused(true)}
         onBlur={() => (canBlur ? setFocused(false) : null)}
         placeholder={placeholder}
+        size={size}
         {...props}
       />
       {run(() => {
@@ -141,29 +266,35 @@ export const SearchInput = <T extends any>({ responsive, ...rest }: SearchInputP
           return null;
         } else {
           return (
-            <div
-              className={cx(styles.list, {
-                [styles.visible]: shouldDisplayResults,
-              })}>
-              {run(() => {
-                if (options.length === 0) {
-                  return <div className={cx(styles.item, styles.noResult)}>{noResultLabel}</div>;
-                } else {
-                  return options.map((option) => (
-                    <div
-                      key={option.value}
-                      className={styles.item}
-                      onClick={() => {
-                        if (onClickResult != null) {
-                          onClickResult(option.value);
-                        }
-                        setFocused(false);
-                      }}>
-                      {option.label}
-                    </div>
-                  ));
-                }
-              })}
+            <div ref={listRef} className={styles.listWrapper}>
+              <div
+                className={cx(styles.list, {
+                  [styles.visible]: shouldDisplayResults,
+                  [styles.top]: topRender,
+                  [styles.topOpen]: topRender && isFocused,
+                  [styles.topSmall]: topRender && size === Size.SMALL,
+                  [styles.topSmallOpen]: topRender && size === Size.SMALL && isFocused,
+                })}>
+                {run(() => {
+                  if (options.length === 0) {
+                    return <div className={cx(styles.item, styles.noResult)}>{noResultLabel}</div>;
+                  } else {
+                    return options.map((option) => (
+                      <div
+                        key={option.value as string}
+                        className={styles.item}
+                        onClick={() => {
+                          if (onClickResult != null) {
+                            onClickResult(option.value);
+                          }
+                          setFocused(false);
+                        }}>
+                        {option.label}
+                      </div>
+                    ));
+                  }
+                })}
+              </div>
             </div>
           );
         }

@@ -3,48 +3,62 @@ import {
   Align,
   Category,
   Color,
+  Direction,
+  Easing,
   Flex,
   FlexItem,
   FlexJustify,
   Icon,
   Margin,
+  Paragraph,
   Position,
   Shade,
   Size,
+  Speed,
   TBody,
   TCell,
   THead,
   TRow,
   Table,
   Tag,
+  Text,
   Tier,
   Tooltip,
 } from '@drawbotics/react-drylus';
+import docs from '@drawbotics/react-drylus/docs.json';
 import { css } from 'emotion';
-import React from 'react';
+import upperFirst from 'lodash/upperFirst';
+import React, { Fragment } from 'react';
 
 import Prop from './Prop';
 import PropsInfo from './PropsInfo';
+import { extractIntrinsics, generateDocs } from './utils';
 
 const styles = {
   table: css`
-    overflow: scroll;
     border: 1px solid ${sv.neutralLight};
   `,
 };
 
-function getProps(Component) {
-  // const { __docgenInfo: docgenInfo } = Component;
-  // const { props } = docgenInfo;
-  return {};
-  // return props || {};
+function _getProps(Component) {
+  const description = generateDocs(Component.name, docs);
+  return description ?? {};
+}
+
+function _hasDeprecation(prop) {
+  return prop.deprecation != null;
+}
+
+function _isEnum(prop) {
+  return prop?.type?.type === 'enum';
 }
 
 const PropsTable = ({ component, onChange, activeProps, enums }) => {
-  const props = getProps(component);
+  const props = _getProps(component);
+
   return (
     <div className={styles.table}>
-      <Table>
+      <Table scrollable>
         <THead>
           <TCell>Name</TCell>
           <TCell>Type</TCell>
@@ -56,74 +70,128 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
         <TBody>
           {Object.keys(props)
             .sort()
-            .map((key) => (
-              <TRow key={key}>
-                <TCell>{key}</TCell>
-                <TCell>
-                  {do {
-                    if (props[key].type.value) {
-                      <Tooltip
-                        content={<PropsInfo props={props[key].type.value} />}
-                        side={Position.RIGHT}>
-                        <Flex justify={FlexJustify.START}>
-                          <FlexItem>{props[key].type.name}</FlexItem>
-                          <FlexItem>
-                            <Margin size={{ left: Size.EXTRA_SMALL }}>
-                              <span style={{ color: sv.colorSecondary }}>
-                                <Icon name="info" />
-                              </span>
+            .map((key) => {
+              const prop = props[key];
+
+              return (
+                <TRow key={key}>
+                  {/* Name */}
+                  <TCell>{key}</TCell>
+                  {/* Type */}
+                  <TCell>
+                    {do {
+                      if (prop.type.values != null) {
+                        const { variants } = _isEnum(prop)
+                          ? extractIntrinsics(prop.type.values)
+                          : { variants: [], nonVariants: [] };
+                        const tooltipValues = _isEnum(prop) ? variants : prop.type.values;
+                        const content = (
+                          <Flex justify={FlexJustify.START}>
+                            <FlexItem>{prop.type.name ?? prop.type.type}</FlexItem>
+                            <FlexItem>
+                              <Margin size={{ left: Size.EXTRA_SMALL }}>
+                                <Tooltip
+                                  content={<PropsInfo props={tooltipValues} />}
+                                  side={Position.RIGHT}
+                                  style={{ maxWidth: '600px' }}>
+                                  <Icon name="info" shade={Shade.MEDIUM} />
+                                </Tooltip>
+                              </Margin>
+                            </FlexItem>
+                          </Flex>
+                        );
+
+                        if (_isEnum(prop)) {
+                          const { nonVariants } = extractIntrinsics(prop.type.values);
+                          if (nonVariants.length !== 0) {
+                            return (
+                              <Fragment>
+                                {content}
+                                <span> Or {nonVariants.join(' or ')}</span>
+                              </Fragment>
+                            );
+                          }
+                        }
+                        return content;
+                      } else {
+                        prop.type.name ?? prop.type.type ?? prop.type;
+                      }
+                    }}
+                  </TCell>
+                  {/* Default */}
+                  <TCell>{prop.defaultValue}</TCell>
+                  {/* Required */}
+                  <TCell>{String(prop.required)}</TCell>
+                  {/* Description */}
+                  <TCell>
+                    {do {
+                      if (_hasDeprecation(prop)) {
+                        return (
+                          <Fragment>
+                            <Margin size={{ vertical: Size.EXTRA_SMALL }}>
+                              <Tag color={Color.ORANGE} inversed>
+                                DEPRECATED
+                              </Tag>
                             </Margin>
-                          </FlexItem>
-                        </Flex>
-                      </Tooltip>;
-                    } else {
-                      props[key].type.name;
-                    }
-                  }}
-                </TCell>
-                <TCell>{props[key].defaultValue?.value.replace(/'/g, '') || null}</TCell>
-                <TCell>{String(props[key].required)}</TCell>
-                <TCell>
-                  {do {
-                    if (props[key].description) {
-                      const val = props[key].description;
-                      val === 'DEPRECATED' ? (
-                        <Tag color={Color.ORANGE} inversed>
-                          {val}
-                        </Tag>
-                      ) : (
-                        val
-                      );
-                    } else if (props[key].type.name === 'enum') {
-                      const values = props[key].type.value.map((v) => v.value.replace(/'/g, ''));
-                      `One of: ${values.join(', ')}`;
-                    }
-                  }}
-                </TCell>
-                <TCell>
-                  {do {
-                    if (activeProps) {
-                      <Prop
-                        enums={{
-                          ...enums,
-                          Category,
-                          Size,
-                          Tier,
-                          Align,
-                          Position,
-                          Color,
-                          Shade,
-                        }}
-                        name={key}
-                        prop={props[key]}
-                        value={activeProps[key]}
-                        onChange={onChange}
-                      />;
-                    }
-                  }}
-                </TCell>
-              </TRow>
-            ))}
+                            <Text shade={Shade.MEDIUM}>{upperFirst(prop.deprecation)}</Text>
+                            {upperFirst(prop.description)
+                              .split(/\n/)
+                              .map((line, i) => (
+                                <Paragraph key={i}>{line}</Paragraph>
+                              ))}
+                          </Fragment>
+                        );
+                      } else if (_isEnum(prop)) {
+                        const { variants, nonVariants } = extractIntrinsics(prop.type.values);
+                        const variantsDesc = `One of: ${variants.join(', ')}`;
+                        if (nonVariants.length > 0) {
+                          return (
+                            <Fragment>
+                              {variantsDesc}
+                              <br />
+                              <span>Or: {nonVariants.join(' or ')}</span>
+                            </Fragment>
+                          );
+                        }
+                        variantsDesc
+                          .split(/\n/)
+                          .map((line, i) => <Paragraph key={i}>{line}</Paragraph>);
+                      } else {
+                        upperFirst(prop.description)
+                          .split(/\n/)
+                          .map((line, i) => <Paragraph key={i}>{line}</Paragraph>);
+                      }
+                    }}
+                  </TCell>
+                  <TCell>
+                    {do {
+                      if (activeProps) {
+                        <Prop
+                          enums={{
+                            ...enums,
+                            Category,
+                            Size,
+                            Tier,
+                            Align,
+                            Position,
+                            Color,
+                            Shade,
+                            Speed,
+                            Direction,
+                            Easing,
+                          }}
+                          type={prop.type.type}
+                          name={key}
+                          prop={prop}
+                          value={activeProps[key]}
+                          onChange={onChange}
+                        />;
+                      }
+                    }}
+                  </TCell>
+                </TRow>
+              );
+            })}
         </TBody>
       </Table>
     </div>

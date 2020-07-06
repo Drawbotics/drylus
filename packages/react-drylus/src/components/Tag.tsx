@@ -12,7 +12,7 @@ const styles = {
     display: inline-flex;
     align-items: center;
     padding: 5px;
-    background: ${sv.neutralLight};
+    background: ${sv.neutral};
     color: ${sv.colorPrimary};
     border-radius: ${sv.defaultBorderRadius};
     font-size: 0.85rem;
@@ -72,29 +72,26 @@ const styles = {
 export interface TagProps {
   children: string;
 
-  /** @deprecated use color instead */
-  category?: Exclude<Category, Category.PRIMARY>;
+  /** @deprecated Use color instead
+   * @kind Category
+   */
+  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
-  color?: Exclude<Color, Color.PRIMARY> | string;
+  /** @kind Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE | string;
 
   /** If present, an X icon is shown on the right of the tag, and the function is called when that icon is clicked */
   onClickRemove?: OnClickCallback<HTMLElement>;
 
-  /** Modifies the way the category is shown */
+  /** Modifies the way the color is shown */
   inversed?: boolean;
 
   /** Used for style overrides */
   style?: Style;
 }
 
-function _getClassNameForColor(
-  color: TagProps['color'],
-  inversed: TagProps['inversed'],
-): string | undefined {
-  if (color != null && Object.values(Color).includes(color as Color)) {
-    return inversed ? `${getEnumAsClass(color as Color)}Inversed` : getEnumAsClass(color as Color);
-  }
-  return color;
+function _getClassNameForColor(color: Color, inversed?: boolean): string {
+  return inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
 }
 
 export const Tag = ({
@@ -106,21 +103,22 @@ export const Tag = ({
   color: _color,
 }: TagProps) => {
   const color = category ? categoryEnumToColor(category) : _color;
-  const className = _getClassNameForColor(color, inversed);
+  const enumColor = color != null && color in Color ? (color as Color) : null;
+  const className = enumColor != null ? _getClassNameForColor(enumColor, inversed) : null;
   const style =
-    color != null && !Object.values(Color).includes(color as Color)
+    color != null && enumColor == null
       ? {
           ..._style,
           color: inversed ? undefined : color,
-          background: inversed ? color : fade(color, 30),
+          background: inversed ? color : fade(color, 15),
         }
       : _style;
   return (
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.inversed]: inversed,
-        [styles[className as keyof typeof styles]]: color != null,
+        [styles.inversed]: inversed === true,
+        [styles[className as keyof typeof styles]]: enumColor != null,
       })}>
       {children}
       {run(() => {

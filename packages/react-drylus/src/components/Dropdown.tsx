@@ -2,7 +2,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Category, Position } from '../enums';
+import { Category, Position, Shade } from '../enums';
 import { Responsive, Style } from '../types';
 import { getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
@@ -37,8 +37,11 @@ const styles = {
     pointer-events: auto;
     transform: translateY(0);
   `,
-  bottom: css``,
+  bottom: css`
+    right: 0;
+  `,
   top: css`
+    right: 0;
     top: auto;
     bottom: 100%;
     margin-top: 0;
@@ -135,7 +138,8 @@ export interface DropdownOptionProps {
   /** Name of the icon to be shown on the left side */
   icon?: IconType;
 
-  category?: Category.DANGER | Category.SUCCESS | Category.WARNING;
+  /** @kind Category */
+  category?: Category.SUCCESS | Category.WARNING | Category.DANGER;
 
   /** Used for style overrides */
   style?: Style;
@@ -157,7 +161,7 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
       style={style}
       className={cx(styles.option, {
         [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
-        [styles.disabled]: disabled,
+        [styles.disabled]: disabled === true,
       })}
       onClick={
         disabled
@@ -169,7 +173,7 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
       }>
       {run(() => {
         if (icon) {
-          return <Icon name={icon} />;
+          return <Icon shade={category ? undefined : Shade.MEDIUM} name={icon} />;
         }
       })}
       {text}
@@ -206,8 +210,8 @@ export interface DropdownProps {
   /** This will be the trigger of the dropdown, and relative to which the menu will be positioned */
   trigger?: React.ReactNode;
 
-  /** This is the content of the dropdown menu */
-  children: DropdownChild | Array<DropdownChild>;
+  /** This is the content of the dropdown menu. Can also be custom. */
+  children: DropdownChild | Array<DropdownChild> | React.ReactNode;
 
   /** @default Position.BOTTOM */
   side?: Position;
@@ -257,16 +261,17 @@ export const Dropdown = ({ responsive, ...rest }: DropdownProps) => {
           [styles.visible]: isOpen,
           [styles[getEnumAsClass<typeof styles>(side)]]: side != null,
         })}>
-        {React.Children.map(children, (child) =>
-          React.cloneElement(
-            child as DropdownChild,
-            child.type === DropdownOption
-              ? ({
-                  onClickClose: () => setDropdowOpen(false),
-                } as Partial<typeof DropdownOption>)
-              : undefined,
-          ),
-        )}
+        {React.Children.map(children as any, (child) => {
+          if (child?.type === DropdownOption) {
+            return React.cloneElement(
+              child as React.ReactElement<typeof DropdownOption>,
+              {
+                onClickClose: () => setDropdowOpen(false),
+              } as Partial<typeof DropdownOption>,
+            );
+          }
+          return child;
+        })}
       </div>
     </div>
   );

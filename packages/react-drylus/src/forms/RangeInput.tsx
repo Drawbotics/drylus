@@ -6,7 +6,7 @@ import { GetTrackProps, Handles, Rail, Slider, SliderItem, Tracks } from 'react-
 import { Text, tooltipStyles } from '../components';
 import { Size } from '../enums';
 import { Responsive } from '../types';
-import { useResponsiveProps } from '../utils';
+import { isFunction, useResponsiveProps } from '../utils';
 
 const styles = {
   root: css`
@@ -21,7 +21,7 @@ const styles = {
     width: 100%;
     height: calc(${sv.marginExtraSmall} / 2);
     border-radius: calc(${sv.marginExtraSmall} / 2);
-    background-color: ${sv.neutralLight};
+    background-color: ${sv.neutral};
   `,
   disabledRail: css`
     background-color: ${sv.neutralLighter};
@@ -98,9 +98,10 @@ export interface HandleProps {
   getHandleProps: (id: string, options: any) => any; // Broken at lib level
   renderValue?: (value: number) => string;
   disabled?: boolean;
+  hideTooltip?: boolean;
 }
 
-const Handle = ({ handle, getHandleProps, renderValue, disabled }: HandleProps) => {
+const Handle = ({ handle, getHandleProps, renderValue, disabled, hideTooltip }: HandleProps) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const { id, value, percent } = handle;
 
@@ -116,10 +117,10 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled }: HandleProps) 
   return (
     <div
       style={{ left: `${percent}%` }}
-      className={cx(styles.handle, { [styles.disabledHandle]: disabled })}
+      className={cx(styles.handle, { [styles.disabledHandle]: disabled === true })}
       {...getHandleProps(
         id,
-        disabled
+        disabled || hideTooltip
           ? {}
           : {
               onMouseDown: handleShowTooltip,
@@ -128,10 +129,12 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled }: HandleProps) 
               onTouchEnd: handleHideTooltip,
             },
       )}>
-      <RangeTooltip
-        visible={tooltipVisible}
-        value={renderValue != null ? renderValue(value) : value}
-      />
+      {!hideTooltip ? (
+        <RangeTooltip
+          visible={tooltipVisible}
+          value={renderValue != null ? renderValue(value) : value}
+        />
+      ) : null}
     </div>
   );
 };
@@ -150,13 +153,13 @@ const Track = ({ source, target, getTrackProps, disabled }: TrackProps) => {
         left: `${source.percent}%`,
         width: `${target.percent - source.percent}%`,
       }}
-      className={cx(styles.track, { [styles.disabledTrack]: disabled })}
+      className={cx(styles.track, { [styles.disabledTrack]: disabled === true })}
       {...getTrackProps()}
     />
   );
 };
 
-export interface RangeInputProps<T> {
+export interface RangeInputProps<T, K = string> {
   /** The minimum value displayed on the input, and the minimum selectable value */
   min: number;
 
@@ -164,16 +167,19 @@ export interface RangeInputProps<T> {
   max: number;
 
   /** If value is an array of numbers, then we display n handles, otherwise only 1 value shows 1 handle. If the value is larger than max, or smaller than min, the max or min will be used */
-  value: T;
+  value: ((name?: K) => T) | T;
 
   /** Determines the range between each value, can be float or int */
   step?: number;
 
+  /** Name of the form element (target.name) */
+  name?: K;
+
   /** Returns the value at the end of the slide (mouse up/touch end). For continuous updates while sliding use onUpdate */
-  onChange: (value: T) => void;
+  onChange: (value: T, name?: K) => void;
 
   /** Returns value but on every step changed by the handle: render intensive */
-  onUpdate?: (value: T) => void;
+  onUpdate?: (value: T, name?: K) => void;
 
   /** Disables the slider */
   disabled?: boolean;
@@ -181,17 +187,35 @@ export interface RangeInputProps<T> {
   /** Function to custom display the given value(s): (v) => {} */
   renderValue?: (value: number) => string;
 
+  /** If true, the min and max values are not rendered below the slider */
+  hideLabels?: boolean;
+
+  /** If true, the min and max values are not shown in the slider when modified */
+  hideTooltips?: boolean;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
-export const RangeInput = <T extends number | Array<number>>({
+export const RangeInput = <T extends number | Array<number>, K extends string>({
   responsive,
   ...rest
-}: RangeInputProps<T>) => {
-  const { min, max, value, step, onChange, onUpdate, disabled, renderValue } = useResponsiveProps<
-    RangeInputProps<T>
-  >(rest, responsive);
+}: RangeInputProps<T, K>) => {
+  const {
+    min,
+    max,
+    value: _value,
+    step,
+    onChange,
+    onUpdate,
+    disabled,
+    renderValue,
+    hideLabels,
+    hideTooltips,
+    name,
+  } = useResponsiveProps<RangeInputProps<T, K>>(rest, responsive);
+
+  const value = isFunction(_value) ? _value(name) : _value;
 
   const isMultiHandle = typeof value !== 'number' && (value as Array<number>).length > 1;
   const values: Array<number> = isMultiHandle ? (value as Array<number>) : [value as number];
@@ -200,18 +224,18 @@ export const RangeInput = <T extends number | Array<number>>({
     <Slider
       disabled={disabled}
       onUpdate={(values) =>
-        onUpdate != null ? onUpdate(isMultiHandle ? (values as any) : values[0]) : undefined
+        onUpdate != null ? onUpdate(isMultiHandle ? (values as any) : values[0], name) : undefined
       }
-      onChange={(values) => onChange(isMultiHandle ? (values as any) : values[0])}
+      onChange={(values) => onChange(isMultiHandle ? (values as any) : values[0], name)}
       mode={3}
       step={step}
-      className={cx(styles.root, { [styles.disabled]: disabled })}
+      className={cx(styles.root, { [styles.disabled]: disabled === true })}
       domain={[min, max]}
       values={values}>
       <Rail>
         {({ getRailProps }) => (
           <div
-            className={cx(styles.rail, { [styles.disabledRail]: disabled })}
+            className={cx(styles.rail, { [styles.disabledRail]: disabled === true })}
             {...getRailProps()}
           />
         )}
@@ -221,6 +245,7 @@ export const RangeInput = <T extends number | Array<number>>({
           <div>
             {handles.map((handle) => (
               <Handle
+                hideTooltip={hideTooltips}
                 disabled={disabled}
                 renderValue={renderValue != null ? (v) => renderValue(v) : undefined}
                 key={handle.id}
@@ -246,14 +271,16 @@ export const RangeInput = <T extends number | Array<number>>({
           </div>
         )}
       </Tracks>
-      <div className={cx(styles.labels)}>
-        <div>
-          <Text size={Size.SMALL}>{renderValue != null ? renderValue(min) : min}</Text>
+      {hideLabels !== true ? (
+        <div className={cx(styles.labels)}>
+          <div>
+            <Text size={Size.SMALL}>{renderValue != null ? renderValue(min) : min}</Text>
+          </div>
+          <div>
+            <Text size={Size.SMALL}>{renderValue != null ? renderValue(max) : max}</Text>
+          </div>
         </div>
-        <div>
-          <Text size={Size.SMALL}>{renderValue != null ? renderValue(max) : max}</Text>
-        </div>
-      </div>
+      ) : null}
     </Slider>
   );
 };

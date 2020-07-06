@@ -5,3 +5,6 @@ export * from './Position';
 export * from './Align';
 export * from './Color';
 export * from './Shade';
+export * from './Speed';
+export * from './Direction';
+export * from './Easing';
