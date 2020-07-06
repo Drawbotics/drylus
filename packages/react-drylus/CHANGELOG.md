@@ -1,3 +1,18 @@
+# v6.7.13 (Mon Jul 06 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - update tests  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix progress bar color when indeterminate  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.7.12 (Mon Jul 06 2020)
 
 #### ⚠️  Pushed to master
