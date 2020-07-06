@@ -29,6 +29,12 @@ exports[`ProgressBar matches snapshot when has a color 1`] = `
 }
 
 .emotion-0::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
+}
+
+.emotion-0::after {
   background: #3DB5D0;
   background-image: linear-gradient( to right, #3DB5D0 8%, #bee6ef 18%, #3DB5D0 33% ) !important;
 }
@@ -75,6 +81,12 @@ exports[`ProgressBar matches snapshot when has a value 1`] = `
   overflow: hidden;
 }
 
+.emotion-0::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
+}
+
 <div
   className="emotion-1 undefined"
 >
@@ -102,6 +114,12 @@ exports[`ProgressBar matches snapshot when is small 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
+}
+
+.emotion-0::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
 }
 
 .emotion-1 {

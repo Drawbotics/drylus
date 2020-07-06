@@ -222,6 +222,12 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
 }
 
 .emotion-5::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
+}
+
+.emotion-5::after {
   background: #3FBC9B;
   background-image: linear-gradient( to right, #3FBC9B 8%, #C1E8DE 18%, #3FBC9B 33% ) !important;
 }
@@ -867,6 +873,12 @@ exports[`AttachmentBox matches snapshot when is given a completed attachment 1`]
 }
 
 .emotion-5::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
+}
+
+.emotion-5::after {
   background: #3FBC9B;
   background-image: linear-gradient( to right, #3FBC9B 8%, #C1E8DE 18%, #3FBC9B 33% ) !important;
 }
@@ -1189,6 +1201,12 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
   transition: all 0.15s ease-in-out;
   overflow: hidden;
   background: #3FBC9B;
+}
+
+.emotion-5::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
 }
 
 .emotion-5::after {
