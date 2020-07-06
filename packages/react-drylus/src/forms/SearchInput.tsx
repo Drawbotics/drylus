@@ -69,7 +69,7 @@ const styles = {
       border-top-left-radius: ${sv.defaultBorderRadius};
     }
 
-    > div > div > {
+    > [data-element='input-root'] > div > {
       position: relative;
 
       &::after {
@@ -89,12 +89,24 @@ const styles = {
       padding-left: ${sv.paddingExtraLarge} !important;
     }
 
-    > div > div > {
+    > [data-element='input-root'] > div > {
       &::after {
         left: ${sv.paddingSmall};
         font-size: 1em;
       }
     }
+  `,
+  loading: css`
+    > [data-element='input-root'] > div > {
+      &::after {
+        content: none;
+      }
+    }
+  `,
+  spinner: css`
+    position: absolute;
+    top: calc(${sv.marginExtraSmall} + 4px);
+    left: calc(${sv.marginExtraSmall} + 4px);
   `,
 };
 
@@ -171,7 +183,7 @@ export const SearchInput = <T extends any, K extends string>({
     onChange,
     noResultLabel = 'No results',
     placeholder,
-    isLoading,
+    isLoading: _isLoading,
     loading,
     name,
     style,
@@ -190,6 +202,7 @@ export const SearchInput = <T extends any, K extends string>({
 
   const value = isFunction(_value) ? _value(name) : _value;
   const shouldDisplayResults = value !== '' && isFocused;
+  const isLoading = _isLoading === true || loading === true;
 
   const listPanel = listRef.current?.getBoundingClientRect();
   const topRender = listPanel ? _getShouldRenderTop(listPanel) : false;
@@ -214,15 +227,19 @@ export const SearchInput = <T extends any, K extends string>({
       className={cx(styles.root, {
         [styles.minimal]: minimal === true,
         [styles.smallMinimal]: minimal === true && size === Size.SMALL,
+        [styles.loading]: isLoading,
       })}
       ref={rootRef}>
+      {isLoading ? (
+        <div className={styles.spinner}>
+          <Spinner size={Size.SMALL} />
+        </div>
+      ) : null}
       <InputWithRef
         prefix={
           minimal ? null : (
             <Button
-              leading={
-                isLoading || loading ? <Spinner size={Size.SMALL} /> : <Icon name="search" />
-              }
+              leading={isLoading ? <Spinner size={Size.SMALL} /> : <Icon name="search" />}
               onClick={() => inputRef.current?.focus()}
             />
           )

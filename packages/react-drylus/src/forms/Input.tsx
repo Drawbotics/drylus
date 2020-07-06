@@ -312,6 +312,7 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
 
   return (
     <div
+      data-element="input-root"
       style={style}
       className={cx(styles.root, {
         [styles.valid]: Boolean(value) && valid === true,
