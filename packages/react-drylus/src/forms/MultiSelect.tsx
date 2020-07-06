@@ -279,7 +279,7 @@ export interface MultiSelectProps<T, K = string> {
   [x: string]: any;
 }
 
-export const MultiSelect = <T extends any, K extends string>({
+export const MultiSelect = <T extends React.ReactText, K extends string>({
   responsive,
   ...rest
 }: MultiSelectProps<T, K>) => {
@@ -421,7 +421,7 @@ export const MultiSelect = <T extends any, K extends string>({
             return (
               <div className={cx(styles.values, { [styles.smallValues]: size === Size.SMALL })}>
                 {values.map((value) => (
-                  <div key={value as string} className={styles.value} data-element="value">
+                  <div key={value} className={styles.value} data-element="value">
                     <Tag
                       inversed
                       onClickRemove={
@@ -456,7 +456,7 @@ export const MultiSelect = <T extends any, K extends string>({
                       [styles.disabledOption]: option.disabled || values.includes(option.value),
                     })}
                     data-value={option.value}
-                    key={option.value as string}
+                    key={option.value}
                     onClick={onChange != null ? () => handleOnChange(option.value) : undefined}>
                     {option.label}
                   </div>
@@ -482,10 +482,7 @@ export const MultiSelect = <T extends any, K extends string>({
         multiple
         {...props}>
         {options.map((option) => (
-          <option
-            key={option.value as string}
-            value={option.value as string}
-            disabled={option.disabled}>
+          <option key={option.value} value={option.value} disabled={option.disabled}>
             {option.label}
           </option>
         ))}

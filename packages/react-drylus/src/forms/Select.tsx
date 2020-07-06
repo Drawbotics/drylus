@@ -189,7 +189,7 @@ export interface SelectProps<T, K = string> {
   [x: string]: any;
 }
 
-export const Select = <T extends any, K extends string>({
+export const Select = <T extends React.ReactText, K extends string>({
   responsive,
   ...rest
 }: SelectProps<T, K>) => {
@@ -263,7 +263,7 @@ export const Select = <T extends any, K extends string>({
       <select
         disabled={disabled}
         className={styles.select}
-        value={value as string}
+        value={value}
         onChange={handleOnChange}
         {...props}>
         {run(() => {
@@ -272,10 +272,7 @@ export const Select = <T extends any, K extends string>({
           }
         })}
         {options.map((option) => (
-          <option
-            key={option.value as string}
-            value={option.value as string}
-            disabled={option.disabled}>
+          <option key={option.value} value={option.value} disabled={option.disabled}>
             {option.label}
           </option>
         ))}

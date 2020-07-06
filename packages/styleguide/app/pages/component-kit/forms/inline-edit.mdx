@@ -35,7 +35,7 @@ __Example__
     <InlineEdit
       onCancel={() => onChange(value)}
       onClickConfirm={() => setValue(tempValue)}
-      edit={<Input placeholder="Start typing..." value={tempValue ?? ''} onChange={onChange} />}>
+      edit={<Input size={Size.SMALL} placeholder="Start typing..." value={tempValue ?? ''} onChange={onChange} />}>
       <Text shade={! value ? Shade.MEDIUM : undefined}>{! value ? 'Click to edit...' : value}</Text>
     </InlineEdit>
   )} />
@@ -52,6 +52,7 @@ export const options = [
 
 Here are more examples with different form components and way to display the values:
 <Playground mode="jsx">
+  <>
   <Margin size={{ bottom: Size.DEFAULT }}>
     <FormGroup
       label={<Label>With a select</Label>}
@@ -115,4 +116,5 @@ Here are more examples with different form components and way to display the val
         </InlineEdit>
       )} />
     } />
+  </>
 </Playground>

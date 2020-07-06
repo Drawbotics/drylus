@@ -176,7 +176,7 @@ export interface SearchInputProps<T, K = string> {
   [x: string]: any;
 }
 
-export const SearchInput = <T extends any, K extends string>({
+export const SearchInput = <T extends React.ReactText, K extends string>({
   responsive,
   ...rest
 }: SearchInputProps<T, K>) => {
@@ -281,7 +281,7 @@ export const SearchInput = <T extends any, K extends string>({
                   } else {
                     return options.map((option) => (
                       <div
-                        key={option.value as string}
+                        key={option.value}
                         className={styles.item}
                         onClick={() => {
                           if (onClickResult != null) {
