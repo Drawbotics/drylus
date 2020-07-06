@@ -1,3 +1,17 @@
+# v6.7.12 (Mon Jul 06 2020)
+
+#### ⚠️  Pushed to master
+
+- fix controlled field component  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - fix minimal search input loading indicator  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.7.11 (Thu Jul 02 2020)
 
 #### ⚠️  Pushed to master
