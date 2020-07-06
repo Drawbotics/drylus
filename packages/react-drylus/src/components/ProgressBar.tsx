@@ -30,6 +30,17 @@ const styles = {
     background: ${sv.neutralDark};
     transition: ${sv.transitionShort};
     overflow: hidden;
+
+    &::after {
+      background: ${sv.neutralDark};
+      border-radius: 0 !important;
+      background-image: linear-gradient(
+        to right,
+        ${sv.neutralDark} 8%,
+        ${sv.neutral} 18%,
+        ${sv.neutralDark} 33%
+      ) !important;
+    }
   `,
   indeterminate: css`
     width: 100% !important;
