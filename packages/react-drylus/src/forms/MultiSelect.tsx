@@ -1,6 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
+import last from 'lodash/last';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
 import { Icon, RoundIcon, Spinner, Tag } from '../components';
@@ -204,6 +205,8 @@ const styles = {
   `,
   placeholder: css`
     color: ${sv.colorSecondary};
+    padding: calc(${sv.paddingExtraSmall} / 2) ${sv.paddingExtraSmall};
+    margin-bottom: ${sv.marginExtraSmall};
   `,
   smallReadOnly: css`
     [data-element='select'] {
@@ -232,10 +235,11 @@ const styles = {
 interface TypeZoneProps {
   placeholder?: string;
   onPressEnter: (value: MultiSelectOption<string>) => void;
+  onPressDelete: VoidFunction;
 }
 
 const TypeZone = forwardRef<HTMLInputElement, TypeZoneProps>(
-  ({ placeholder, onPressEnter }, ref) => {
+  ({ placeholder, onPressEnter, onPressDelete }, ref) => {
     const [value, setValue] = useState('');
     return (
       <div className={styles.typeZone}>
@@ -243,10 +247,12 @@ const TypeZone = forwardRef<HTMLInputElement, TypeZoneProps>(
           ref={ref}
           value={value}
           placeholder={placeholder}
-          onKeyPress={(e) => {
-            if (e.key === 'Enter') {
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && value !== '') {
               onPressEnter({ value: `${value}_${Math.random()}`, label: value });
               setValue('');
+            } else if ((e.key === 'Backspace' || e.key === 'Delete') && value === '') {
+              onPressDelete();
             }
           }}
           onChange={(e: React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value)}
@@ -418,8 +424,7 @@ export const MultiSelect = <T extends any, K extends string>({
     }
   };
 
-  const handleClickRemove = (e: React.MouseEvent<HTMLElement>, value: string | number) => {
-    e.stopPropagation();
+  const handleClickRemove = (value: string | number) => {
     if (onChange != null) {
       onChange(
         values.filter((v) => v !== value),
@@ -428,9 +433,25 @@ export const MultiSelect = <T extends any, K extends string>({
     }
   };
 
+  const handleRemoveTag = (value: MultiSelectOption<T>['value']) => {
+    handleClickRemove(value);
+    if (hideOptions && allowTyping) {
+      onChangeOptions?.(options.filter((v) => v.value !== value));
+      inputRef.current?.focus();
+    }
+  };
+
   const handlePressEnter = (option: MultiSelectOption<string>) => {
     onChangeOptions?.([...options, option]);
     handleOnChange(option.value);
+    inputRef.current?.focus();
+  };
+
+  const handlePressDelete = () => {
+    const lastValue = last(values);
+    if (lastValue != null) {
+      handleRemoveTag(lastValue);
+    }
   };
 
   return (
@@ -481,45 +502,31 @@ export const MultiSelect = <T extends any, K extends string>({
           [styles.active]: isFocused,
         })}
         onClick={onChange != null ? handleClickSelect : undefined}>
-        {run(() => {
-          if (allowTyping === true && values?.length === 0) {
-            return (
-              <div className={cx(styles.values, { [styles.smallValues]: size === Size.SMALL })}>
-                <TypeZone
-                  placeholder={values?.length === 0 ? placeholder : typeZonePlaceholder}
-                  onPressEnter={handlePressEnter}
-                />
-              </div>
-            );
-          } else if (values?.length === 0) {
-            return <div className={styles.placeholder}>{placeholder}</div>;
-          } else {
-            return (
-              <div className={cx(styles.values, { [styles.smallValues]: size === Size.SMALL })}>
-                {values.map((value) => (
-                  <div key={value} className={styles.value} data-element="value">
-                    <Tag
-                      inversed
-                      onClickRemove={(e: React.MouseEvent<HTMLElement>) => {
-                        handleClickRemove(e, value);
-                        if (hideOptions && allowTyping) {
-                          onChangeOptions?.(options.filter((v) => v.value !== value));
-                        }
-                      }}>
-                      {String((options.find((option) => option.value === value) ?? {}).label)}
-                    </Tag>
-                  </div>
-                ))}
-                {allowTyping === true ? (
-                  <TypeZone
-                    placeholder={values?.length === 0 ? placeholder : typeZonePlaceholder}
-                    onPressEnter={handlePressEnter}
-                  />
-                ) : null}
-              </div>
-            );
-          }
-        })}
+        <div className={cx(styles.values, { [styles.smallValues]: size === Size.SMALL })}>
+          {values?.length === 0 && !allowTyping ? (
+            <div className={styles.placeholder}>{placeholder}</div>
+          ) : null}
+          {values?.map((value) => (
+            <div key={value} className={styles.value} data-element="value">
+              <Tag
+                inversed
+                onClickRemove={(e) => {
+                  e.stopPropagation();
+                  handleRemoveTag(value);
+                }}>
+                {String((options.find((option) => option.value === value) ?? {}).label)}
+              </Tag>
+            </div>
+          ))}
+          {allowTyping === true ? (
+            <TypeZone
+              ref={inputRef}
+              placeholder={values?.length === 0 ? placeholder : typeZonePlaceholder}
+              onPressEnter={handlePressEnter}
+              onPressDelete={handlePressDelete}
+            />
+          ) : null}
+        </div>
       </div>
       {run(() => {
         if (screenSize > ScreenSizes.XL && !hideDropdown) {
