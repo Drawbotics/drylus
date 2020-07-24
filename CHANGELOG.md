@@ -1,3 +1,20 @@
+# v6.8.0 (Fri Jul 24 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature/typing multi select [#154](https://github.com/Drawbotics/drylus/pull/154) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- add mapbox token to build step  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.7.13 (Mon Jul 06 2020)
 
 #### ⚠️  Pushed to master
