@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { useResponsiveProps } from '../utils';
+import { isFunction, useResponsiveProps } from '../utils';
 
 const TRIGGER_DIMENSIONS = '21px';
 const TRIGGER_DIMENSIONS_SMALL = '16px';
@@ -75,18 +75,24 @@ const styles = {
   `,
 };
 
-export interface ToggleProps {
+export interface ToggleProps<T> {
   /** Triggered when toggle value is changed */
-  onChange: (value: boolean) => void;
+  onChange: (value: boolean, name?: T) => void;
 
   /** If true, toggle is not clickable */
   disabled?: boolean;
 
   /** Determines if toggle is active */
-  value: boolean;
+  value?: ((name?: T) => boolean) | boolean;
 
-  /** @kind Size */
-  size: Size.SMALL | Size.DEFAULT;
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   */
+  size?: Size.SMALL | Size.DEFAULT;
+
+  /** Name of the form element (target.name) */
+  name?: T;
 
   /** Used for style overrides */
   style?: Style;
@@ -95,13 +101,16 @@ export interface ToggleProps {
   responsive?: Responsive<this>;
 }
 
-export const Toggle = ({ responsive, ...rest }: ToggleProps) => {
-  const { onChange, disabled, value, size, style } = useResponsiveProps(rest, responsive);
+export const Toggle = <T extends string>({ responsive, ...rest }: ToggleProps<T>) => {
+  const { onChange, disabled, value: _value, size, style, name } = useResponsiveProps<
+    ToggleProps<T>
+  >(rest, responsive);
+  const value = isFunction(_value) ? _value(name) : _value;
   return (
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.active]: value,
+        [styles.active]: value === true,
         [styles.small]: size === Size.SMALL,
         [styles.disabled]: disabled === true,
       })}
