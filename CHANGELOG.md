@@ -1,3 +1,16 @@
+# v6.8.1 (Thu Aug 06 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add name to Toggle props  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.8.0 (Fri Jul 24 2020)
 
 #### 🚀 Enhancement - Minor change
