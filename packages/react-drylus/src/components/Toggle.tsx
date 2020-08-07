@@ -60,7 +60,7 @@ const styles = {
       width: ${TRIGGER_DIMENSIONS_SMALL};
 
       &::after {
-        left: calc(${TRIGGER_DIMENSIONS_SMALL} * -1.2);
+        left: calc(${TRIGGER_DIMENSIONS_SMALL} * -1);
         font-size: 0.9rem;
       }
     }
