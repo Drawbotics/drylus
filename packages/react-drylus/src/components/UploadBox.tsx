@@ -16,6 +16,7 @@ const styles = {
     padding: ${sv.defaultPadding} ${sv.paddingExtraLarge};
     display: flex;
     flex-direction: column;
+    justify-content: center;
     text-align: center;
     border: 2px dashed ${sv.neutral};
     width: 100%;
@@ -33,6 +34,9 @@ const styles = {
   `,
   fullWidth: css`
     max-width: none;
+  `,
+  fullHeight: css`
+    height: 100%;
   `,
   active: css`
     border-color: ${sv.green};
@@ -104,6 +108,9 @@ export interface UploadBoxProps extends BaseHelper {
   /** If true, the box takes all the space available */
   fullWidth?: boolean;
 
+  /** If true, the box takes all the vertical space available */
+  fullHeight?: boolean;
+
   /**
    * Text shown under the illustration
    * @default 'Drag and drop files here or just click to browse files'
@@ -126,6 +133,7 @@ export interface UploadBoxProps extends BaseHelper {
 export const UploadBox = ({
   label = 'Drag and drop files here or just click to browse files',
   fullWidth,
+  fullHeight,
   onDragEnter,
   onDragLeave,
   onUploadFiles,
@@ -173,6 +181,7 @@ export const UploadBox = ({
         onDrop={handleOnDrop}
         className={cx(styles.root, {
           [styles.fullWidth]: fullWidth === true,
+          [styles.fullHeight]: fullHeight === true,
           [styles.active]: isDragEntered,
           [styles.error]: error != null && error !== false,
         })}>
