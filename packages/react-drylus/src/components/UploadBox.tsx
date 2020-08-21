@@ -5,6 +5,7 @@ import React, { ChangeEvent, Fragment, useEffect, useRef, useState } from 'react
 import { Category, Shade, Size } from '../enums';
 import { Hint } from '../forms';
 import { Margin } from '../layout';
+import { Style } from '../types';
 import { WrapperRef } from '../utils';
 import { Upload } from '../utils/illustrations';
 import { Text } from './Text';
@@ -128,6 +129,9 @@ export interface UploadBoxProps extends BaseHelper {
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error?: boolean | string;
+
+  /** Used for style overrides */
+  style?: Style;
 }
 
 export const UploadBox = ({
@@ -140,6 +144,7 @@ export const UploadBox = ({
   multiple,
   onMaxFilesExceeded,
   error,
+  style,
   ...rest
 }: UploadBoxProps) => {
   const [isDragEntered, setIsDragEntered] = useState(false);
@@ -175,6 +180,7 @@ export const UploadBox = ({
   return (
     <UploadHelper multiple={multiple} onUploadFiles={onUploadFiles} {...rest}>
       <div
+        style={style}
         onDragOver={(e) => e.preventDefault()}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
