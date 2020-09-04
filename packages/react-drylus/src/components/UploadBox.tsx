@@ -57,6 +57,9 @@ interface BaseHelper {
 
   /** Handler function for the file upload */
   onUploadFiles: (files: FileList) => void;
+
+  /** Any file is allowed by default. Set the allowed formats with the following pattern: .pdf,.txt etc */
+  allowedFileFormats?: string;
 }
 
 export interface UploadHelperProps extends BaseHelper {
@@ -64,7 +67,12 @@ export interface UploadHelperProps extends BaseHelper {
   children: React.ReactNode;
 }
 
-export const UploadHelper = ({ multiple, onUploadFiles, children }: UploadHelperProps) => {
+export const UploadHelper = ({
+  multiple,
+  onUploadFiles,
+  children,
+  allowedFileFormats,
+}: UploadHelperProps) => {
   const childrenRef = useRef<HTMLElement>();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -99,6 +107,7 @@ export const UploadHelper = ({ multiple, onUploadFiles, children }: UploadHelper
         style={{ display: 'none' }}
         ref={inputRef}
         type="file"
+        accept={allowedFileFormats}
         onChange={handleUploadFiles}
       />
     </Fragment>
