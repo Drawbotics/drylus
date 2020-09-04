@@ -149,7 +149,6 @@ export interface TextProps {
 
   /**
    * Used to override the current locale if necessary (e.g. if the browser locale is not explicitely defined)
-   * @default 'en'
    */
   locale?: string;
 
@@ -206,7 +205,7 @@ export const Text = ({ responsive, ...rest }: TextProps) => {
     light = false,
     dateOptions,
     priceOptions,
-    locale = 'en',
+    locale,
   } = useResponsiveProps<TextProps>(rest, responsive);
 
   const tier = _tier ?? (shade ? shadeEnumToTier(shade) : null);
