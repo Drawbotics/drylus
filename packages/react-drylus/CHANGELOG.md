@@ -1,3 +1,16 @@
+# v6.8.7 (Fri Sep 04 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix yesterday translation in french and dutch  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.8.6 (Fri Sep 04 2020)
 
 #### ⚠️  Pushed to master
