@@ -67,6 +67,7 @@ const fr = {
   calendar: ({ format, withTime = true }: { format: string; withTime: boolean }) => ({
     sameElse: format,
     nextWeek: format,
+    lastDay: withTime ? `[hier à] HH:mm` : `[hier]`,
     lastWeek: `${format.split(',')[0]} [passé],${tail(format.split(','))}`,
     nextDay: withTime
       ? `[demain], ${format.split(',').slice(0, -1)} [à]${last(format.split(','))}`
@@ -106,6 +107,7 @@ const nl = {
     sameElse: format,
     nextWeek: format,
     lastWeek: `[vorige] ${format}`,
+    lastDay: withTime ? `[gisteren om] HH:mm` : `[gisteren]`,
     nextDay: withTime
       ? `[morgen], ${format.split(',').slice(0, -1)} [om]${last(format.split(','))}`
       : `[morgen], ${format.split(',').slice(0, -1)}`,
