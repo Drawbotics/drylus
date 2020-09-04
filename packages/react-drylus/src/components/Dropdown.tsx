@@ -147,16 +147,29 @@ export interface DropdownOptionProps {
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
+  /** If set, the component will be wrapped in the link */
+  linkWrapper?: {
+    component: React.ReactNode;
+    href: string;
+  };
+
   /** @private */
   onClickClose?: () => void;
 }
 
 export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => {
-  const { text, category, disabled, onClick, onClickClose, icon, style } = useResponsiveProps<
-    DropdownOptionProps
-  >(rest, responsive);
+  const {
+    text,
+    category,
+    disabled,
+    onClick,
+    onClickClose,
+    icon,
+    style,
+    linkWrapper,
+  } = useResponsiveProps<DropdownOptionProps>(rest, responsive);
 
-  return (
+  const option = (
     <div
       style={style}
       className={cx(styles.option, {
@@ -179,6 +192,16 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
       {text}
     </div>
   );
+
+  return linkWrapper != null
+    ? React.createElement(
+        linkWrapper.component as React.ComponentClass<{ href?: string }>,
+        {
+          href: linkWrapper.href,
+        },
+        option,
+      )
+    : option;
 };
 
 export interface DropdownTitleProps {

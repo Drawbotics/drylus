@@ -1,3 +1,4 @@
+
 import {
   Dropdown,
   DropdownOption,
@@ -79,6 +80,16 @@ You can also put whatever you want in a dropdown, as long as it respects the des
     </Margin>
     <DropdownSeparator />
     <DropdownOption text="Settings" />
+    <DropdownOption text="Logout" />
+  </Dropdown>
+</Playground>
+
+
+### Example with links
+Options in the dropdown can also be wrapped with links, in order to enable navigation
+<Playground>
+  <Dropdown trigger={<Avatar text="JD" />} side={Position.RIGHT}>
+    <DropdownOption text="Settings" linkWrapper={{ component: 'a', href: '#' }} />
     <DropdownOption text="Logout" />
   </Dropdown>
 </Playground>
