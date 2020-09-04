@@ -1,3 +1,16 @@
+# v6.8.6 (Fri Sep 04 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add allowed file formats to Upload components  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.8.5 (Fri Sep 04 2020)
 
 #### ⚠️  Pushed to master
