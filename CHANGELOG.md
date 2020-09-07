@@ -1,3 +1,16 @@
+# v6.8.8 (Mon Sep 07 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/dropdown-link-component [#156](https://github.com/Drawbotics/drylus/pull/156) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.8.7 (Fri Sep 04 2020)
 
 #### ⚠️  Pushed to master
