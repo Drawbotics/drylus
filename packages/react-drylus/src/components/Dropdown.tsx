@@ -181,6 +181,27 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
   );
 };
 
+export interface DropdownLinkProps extends DropdownOptionProps {
+  /**
+   *  The component used as link, defaults to the native 'a'
+   * @default 'a'
+   */
+  linkComponent: React.ReactNode;
+
+  /** Url string for the link */
+  href: string;
+}
+
+export const DropdownLink = ({ linkComponent = 'a', href, ...rest }: DropdownLinkProps) => {
+  return React.createElement(
+    linkComponent as React.ComponentClass<{ href: string }>,
+    {
+      href,
+    },
+    <DropdownOption {...rest} />,
+  );
+};
+
 export interface DropdownTitleProps {
   /** Value of the title */
   text: string;
