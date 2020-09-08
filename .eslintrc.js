@@ -52,6 +52,7 @@ module.exports = {
     'no-whitespace-before-property': [ 'warn' ],
     'no-unreachable': [ 'warn' ],
     'no-constant-condition': [ 'warn' ],
+    'no-case-declarations': [ 'off' ],
 
     // React
     'react/prop-types': [ 'off' ],

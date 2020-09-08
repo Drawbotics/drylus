@@ -171,9 +171,12 @@ export interface SearchInputProps<T, K = string> {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** @private */
+  [x: string]: any;
 }
 
-export const SearchInput = <T extends any, K extends string>({
+export const SearchInput = <T extends React.ReactText, K extends string>({
   responsive,
   ...rest
 }: SearchInputProps<T, K>) => {
@@ -193,6 +196,7 @@ export const SearchInput = <T extends any, K extends string>({
     valid,
     size = Size.DEFAULT,
     minimal,
+    ...props
   } = useResponsiveProps<SearchInputProps<T, K>>(rest, responsive);
   const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
@@ -255,6 +259,7 @@ export const SearchInput = <T extends any, K extends string>({
         onBlur={() => (canBlur ? setFocused(false) : null)}
         placeholder={placeholder}
         size={size}
+        {...props}
       />
       {run(() => {
         if (options == null) {

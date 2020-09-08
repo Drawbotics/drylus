@@ -1,0 +1,120 @@
+import { useState } from 'react';
+import {
+  InlineEdit,
+  Text,
+  Input,
+  Shade,
+  Select,
+  Label,
+  FormGroup,
+  Margin,
+  Size,
+  MultiSelect,
+  TextArea,
+} from '@drawbotics/react-drylus';
+
+import Playground, { PropsTable } from '~/components/Playground';
+
+
+# Inline Edit
+Used to edit information inline. Useful when the information displayed can be edited and a form appearance is not possible.
+```jsx
+import { InlineEdit } from '@drawbotics/react-drylus';
+```
+Note that this is a completely uncontrolled component. You are responsible for managing the state of edits and confirmation. This component simply provides a wrapper to combine a "view" and "edit" state for UI data.
+
+export const ControlledInlineEdit = ({ defaultValue, render }) => {
+  const [value, setValue] = useState(defaultValue);
+  const [tempValue, onChange] = useState(value);
+  return render({ value, setValue, tempValue, onChange });
+}
+
+__Example__
+<Playground mode="jsx">
+  <ControlledInlineEdit render={({ value, setValue, tempValue, onChange }) => (
+    <InlineEdit
+      onCancel={() => onChange(value)}
+      onClickConfirm={() => setValue(tempValue)}
+      edit={<Input size={Size.SMALL} placeholder="Start typing..." value={tempValue ?? ''} onChange={onChange} />}>
+      <Text shade={! value ? Shade.MEDIUM : undefined}>{! value ? 'Click to edit...' : value}</Text>
+    </InlineEdit>
+  )} />
+</Playground>
+
+<br />
+
+<PropsTable component={InlineEdit} />
+
+export const options = [
+  { value: 'belgium', label: 'Belgium' },
+  { value: 'italy', label: 'Italy' },
+];
+
+Here are more examples with different form components and way to display the values:
+<Playground mode="jsx">
+  <>
+  <Margin size={{ bottom: Size.DEFAULT }}>
+    <FormGroup
+      label={<Label>With a select</Label>}
+      input={
+        <ControlledInlineEdit render={({ value, setValue, tempValue, onChange }) => (
+          <InlineEdit
+            onCancel={() => onChange(value)}
+            onClickConfirm={() => setValue(tempValue)}
+            edit={
+              <Select
+                placeholder="Pick option..."
+                value={tempValue ?? ''}
+                onChange={onChange}
+                options={options}/>
+              }>
+            <Text shade={! value ? Shade.MEDIUM : undefined}>
+              {! value ? 'Click to pick option...' : options.find((option) => option.value === value).label}
+            </Text>
+          </InlineEdit>
+        )} />
+      } />
+  </Margin>
+  <Margin size={{ bottom: Size.DEFAULT }}>
+    <FormGroup
+      label={<Label>With a multi select</Label>}
+      input={
+        <ControlledInlineEdit render={({ value, setValue, tempValue, onChange }) => (
+          <InlineEdit
+            onCancel={() => onChange(value)}
+            onClickConfirm={() => setValue(tempValue)}
+            edit={
+              <MultiSelect
+                placeholder="Pick option..."
+                values={tempValue ?? []}
+                onChange={onChange}
+                options={options}/>
+              }>
+            <Text shade={! value ? Shade.MEDIUM : undefined}>
+              {! value
+                ? 'Click to pick options...'
+                : value?.map((v) => options.find((o) => o.value === v).label).join(', ')
+              }
+            </Text>
+          </InlineEdit>
+        )} />
+      } />
+  </Margin>
+  <FormGroup
+    label={<Label>With a textarea</Label>}
+    input={
+      <ControlledInlineEdit render={({ value, setValue, tempValue, onChange }) => (
+        <InlineEdit
+          onCancel={() => onChange(value)}
+          onClickConfirm={() => setValue(tempValue)}
+          edit={<TextArea placeholder="Start typing..." value={tempValue ?? ''} onChange={onChange} />}>
+          <Text
+            style={{ whiteSpace: 'pre-wrap' }}
+            shade={! value ? Shade.MEDIUM : undefined}>
+              {! value ? 'Click to edit...' : value}
+          </Text>
+        </InlineEdit>
+      )} />
+    } />
+  </>
+</Playground>

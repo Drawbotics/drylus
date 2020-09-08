@@ -247,6 +247,9 @@ export interface InputProps<T = string> {
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder?: boolean;
 
+  /** If true the input is focused automatically on mount */
+  autoFocus?: boolean;
+
   /**
    * Size of the input. Can be small or default
    * @default Size.DEFAULT

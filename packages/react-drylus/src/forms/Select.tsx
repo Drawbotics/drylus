@@ -169,6 +169,9 @@ export interface SelectProps<T, K = string> {
   /** If true, a spinner is shown in the right corner, like with error and valid */
   loading?: boolean;
 
+  /** If true the select is focused automatically on mount */
+  autoFocus?: boolean;
+
   /**
    * Size of the select. Can be small or default
    * @default Size.DEFAULT
@@ -186,7 +189,7 @@ export interface SelectProps<T, K = string> {
   [x: string]: any;
 }
 
-export const Select = <T extends any, K extends string>({
+export const Select = <T extends React.ReactText, K extends string>({
   responsive,
   ...rest
 }: SelectProps<T, K>) => {
@@ -219,7 +222,7 @@ export const Select = <T extends any, K extends string>({
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.noValue]: value == null,
+        [styles.noValue]: !value,
         [styles.readOnly]: onChange == null,
         [styles.disabled]: disabled === true,
         [styles.valid]: Boolean(value) && valid === true,

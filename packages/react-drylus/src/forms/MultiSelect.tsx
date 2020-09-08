@@ -324,6 +324,9 @@ export interface MultiSelectProps<T, K = string> {
   /** If true, a spinner is shown on the right corner, like with error and valid */
   loading?: boolean;
 
+  /** If true the select is focused automatically on mount */
+  autoFocus?: boolean;
+
   /**
    * Size of the input. Can be small or default
    * @default Size.DEFAULT
@@ -341,7 +344,7 @@ export interface MultiSelectProps<T, K = string> {
   [x: string]: any;
 }
 
-export const MultiSelect = <T extends any, K extends string>({
+export const MultiSelect = <T extends React.ReactText, K extends string>({
   responsive,
   ...rest
 }: MultiSelectProps<T, K>) => {
@@ -357,6 +360,7 @@ export const MultiSelect = <T extends any, K extends string>({
     name,
     loading,
     style,
+    autoFocus,
     size = Size.DEFAULT,
     allowTyping,
     hideOptions,
@@ -368,8 +372,8 @@ export const MultiSelect = <T extends any, K extends string>({
   const selectRef = useRef<HTMLSelectElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
+  const [isFocused, setIsFocused] = useState(false);
   const optionsRef = useRef<HTMLDivElement>(null);
-  const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
   const { screenSize, ScreenSizes } = useScreenSize();
 
@@ -377,19 +381,23 @@ export const MultiSelect = <T extends any, K extends string>({
   const hideDropdown = hideOptions === true && allowTyping === true;
 
   const handleDocumentClick = (e: Event) =>
-    !rootRef.current?.contains(e.target as Node) ? setFocused(false) : null;
+    !rootRef.current?.contains(e.target as Node) ? setIsFocused(false) : null;
 
   useEffect(() => {
     rootRef.current?.addEventListener('mousedown', () => setCanBlur(false));
     rootRef.current?.addEventListener('mouseup', () => setCanBlur(true));
     document.addEventListener('mousedown', handleDocumentClick);
 
+    if (autoFocus) {
+      setIsFocused(true);
+    }
+
     return () => {
       rootRef.current?.removeEventListener('mousedown', () => setCanBlur(false));
       rootRef.current?.removeEventListener('mouseup', () => setCanBlur(true));
       document.removeEventListener('mousedown', handleDocumentClick);
     };
-  });
+  }, []);
 
   const handleOnChange = (value: MultiSelectProps<T, K>['value']) => {
     if (onChange != null) {
@@ -418,7 +426,7 @@ export const MultiSelect = <T extends any, K extends string>({
     e.stopPropagation();
     if (allowTyping) {
       inputRef.current?.focus();
-      setFocused(true);
+      setIsFocused(true);
     } else {
       selectRef.current?.focus();
     }
@@ -567,8 +575,8 @@ export const MultiSelect = <T extends any, K extends string>({
         disabled={disabled}
         ref={selectRef}
         onChange={onChange != null ? (e) => handleSelectChange(e.target.options) : undefined}
-        onFocus={() => setFocused(true)}
-        onBlur={() => (canBlur ? setFocused(false) : null)}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => (canBlur ? setIsFocused(false) : null)}
         multiple
         {...props}>
         {options.map((option) => (

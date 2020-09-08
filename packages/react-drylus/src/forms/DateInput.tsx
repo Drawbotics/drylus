@@ -268,6 +268,9 @@ export interface DateInputProps<T = string> {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** @private */
+  [x: string]: any;
 }
 
 export const DateInput = <T extends string>({ responsive, ...rest }: DateInputProps<T>) => {
@@ -289,11 +292,13 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
     loading,
     style,
     align = Align.LEFT,
+    autoFocus,
     size = Size.DEFAULT,
+    ...props
   } = useResponsiveProps<DateInputProps<T>>(rest, responsive);
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
-  const [isFocused, setFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const isDesktop = screenSize > ScreenSizes.XL;
@@ -305,16 +310,24 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
 
   useEffect(() => {
     const handleDocumentClick = (e: Event) =>
-      !calendarElement.current?.contains(e.target as Node) ? setFocused(false) : null;
+      !pickerElement.current?.contains(e.target as Node) ? setIsFocused(false) : null;
     const handleWindowScroll = () => {
       if (isDesktop) {
-        setFocused(false);
+        setIsFocused(false);
         inputRef?.current?.blur();
       }
     };
 
     document.addEventListener('mousedown', handleDocumentClick);
     window.addEventListener('scroll', handleWindowScroll, true);
+
+    if (autoFocus) {
+      setTimeout(() => {
+        if (pickerElement.current != null) {
+          inputRef.current?.focus();
+        }
+      });
+    }
 
     return () => {
       document.removeEventListener('mousedown', handleDocumentClick);
@@ -383,12 +396,13 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
         value={inputValue}
         onChange={onChange != null ? handleOnChange : null}
         ref={inputRef}
-        onFocus={onChange != null ? () => setFocused(true) : null}
+        onFocus={onChange != null ? () => setIsFocused(true) : null}
         placeholder={placeholder}
         type={isDesktop ? null : 'date'}
         max={!isDesktop && maxDate ? objectToDateString(maxDate) : null}
         min={!isDesktop && minDate ? objectToDateString(minDate) : null}
         size={size}
+        {...props}
       />
       {isDesktop &&
         outletElement &&

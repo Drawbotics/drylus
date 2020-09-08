@@ -116,6 +116,7 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
           </div>
         );
       }
+      return null;
     default:
       return null;
   }

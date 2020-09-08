@@ -138,6 +138,9 @@ export interface TextAreaProps<T = string> {
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder?: boolean;
 
+  /** If true the textarea is focused automatically on mount */
+  autoFocus?: boolean;
+
   /**
    * Size of the input. Can be small or default
    * @default Size.DEFAULT

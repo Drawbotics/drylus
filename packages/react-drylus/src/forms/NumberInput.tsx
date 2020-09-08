@@ -179,6 +179,9 @@ export interface NumberInputProps<T = string> {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** @private */
+  [x: string]: any;
 }
 
 export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInputProps<T>) => {
@@ -199,6 +202,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
     style,
     step = 1,
     size = Size.DEFAULT,
+    ...props
   } = useResponsiveProps<NumberInputProps<T>>(rest, responsive);
   const inputRef = useRef<HTMLInputElement>(null);
   const leftSpanRef = useRef<HTMLSpanElement>(null);
@@ -308,6 +312,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
             </div>
           ) : null
         }
+        {...props}
       />
     </div>
   );
