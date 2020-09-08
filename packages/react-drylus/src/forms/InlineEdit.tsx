@@ -159,9 +159,9 @@ export const InlineEdit = ({
       exitOnClick
     ) {
       if (editing) {
-        onClickConfirm();
+        onCancel();
+        handleExitEditing();
       }
-      handleExitEditing();
     }
   };
 
@@ -170,7 +170,7 @@ export const InlineEdit = ({
       childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
       childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
       childrenRef.current.addEventListener('click', handleMouseClick);
-      window.addEventListener('click', handleWindowClick, true);
+      window.addEventListener('click', handleWindowClick, false);
 
       if (getComputedStyle(childrenRef.current).display !== 'none') {
         childrenCSSClassCopy.current = Object.assign({}, childrenRef.current.classList);
@@ -218,7 +218,9 @@ export const InlineEdit = ({
               <FlexItem>
                 <ActionButton
                   icon="check"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     handleExitEditing();
                     onClickConfirm();
                   }}
