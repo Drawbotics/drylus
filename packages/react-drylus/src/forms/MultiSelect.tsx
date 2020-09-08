@@ -1,7 +1,8 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
-import React, { useEffect, useRef, useState } from 'react';
+import last from 'lodash/last';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
 import { Icon, RoundIcon, Spinner, Tag } from '../components';
 import { Category, Color, Size } from '../enums';
@@ -204,13 +205,62 @@ const styles = {
   `,
   placeholder: css`
     color: ${sv.colorSecondary};
+    padding: calc(${sv.paddingExtraSmall} / 2) ${sv.paddingExtraSmall};
+    margin-bottom: ${sv.marginExtraSmall};
   `,
   smallReadOnly: css`
     [data-element='select'] {
       padding-right: ${sv.defaultPadding} !important;
     }
   `,
+  typeZone: css`
+    margin-right: ${sv.marginExtraSmall};
+    margin-bottom: ${sv.marginExtraSmall};
+
+    > input {
+      background: none;
+      border: none;
+      outline: none;
+      margin: 0;
+      padding: calc(${sv.paddingExtraSmall} / 2) ${sv.paddingExtraSmall};
+      color: ${sv.colorPrimary};
+
+      ::placeholder {
+        color: ${sv.colorSecondary};
+      }
+    }
+  `,
 };
+
+interface TypeZoneProps {
+  placeholder?: string;
+  onPressEnter: (value: MultiSelectOption<string>) => void;
+  onPressDelete: VoidFunction;
+}
+
+const TypeZone = forwardRef<HTMLInputElement, TypeZoneProps>(
+  ({ placeholder, onPressEnter, onPressDelete }, ref) => {
+    const [value, setValue] = useState('');
+    return (
+      <div className={styles.typeZone}>
+        <input
+          ref={ref}
+          value={value}
+          placeholder={placeholder}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && value !== '') {
+              onPressEnter({ value: `${value}_${Math.random()}`, label: value });
+              setValue('');
+            } else if ((e.key === 'Backspace' || e.key === 'Delete') && value === '') {
+              onPressDelete();
+            }
+          }}
+          onChange={(e: React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value)}
+        />
+      </div>
+    );
+  },
+);
 
 function _getShouldRenderTop(box: DOMRect) {
   if (box?.bottom > window.innerHeight) {
@@ -232,6 +282,21 @@ export interface MultiSelectProps<T, K = string> {
     | ((name?: K) => Array<MultiSelectOption<T>['value']>)
     | Array<MultiSelectOption<T>['value']>;
 
+  /** If true, allows the user to type into the multi select to add options. If the `hideOptions` is enabled, then the dropdown will not open when in focus */
+  allowTyping?: boolean;
+
+  /** Used in conjunction with `allowTyping`. If true, the dropdown with the options will not be shown. When this is true, if a tag is removed, the option is also deleted from the list to avoid duplicates */
+  hideOptions?: boolean;
+
+  /** When using `allowTyping`, pass the function to modify the `options` array prop. Returns the new array of `options` on add/remove */
+  onChangeOptions?: (value: Array<MultiSelectOption<T | string>>, name?: K) => void;
+
+  /**
+   *  When using `allowTyping` you may set a different placeholder to what is shown when no values are displayed
+   * @default 'Add option...'
+   */
+  typeZonePlaceholder?: string;
+
   /** Name of the form element (target.name) */
   name?: K;
 
@@ -240,7 +305,7 @@ export interface MultiSelectProps<T, K = string> {
 
   /**
    * Text shown when no value is selected
-   * @default ' -- ''
+   * @default ' -- '
    */
   placeholder?: string;
 
@@ -297,10 +362,15 @@ export const MultiSelect = <T extends React.ReactText, K extends string>({
     style,
     autoFocus,
     size = Size.DEFAULT,
+    allowTyping,
+    hideOptions,
+    onChangeOptions,
+    typeZonePlaceholder = 'Add option...',
     ...props
   } = useResponsiveProps<MultiSelectProps<T, K>>(rest, responsive);
 
   const selectRef = useRef<HTMLSelectElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
   const optionsRef = useRef<HTMLDivElement>(null);
@@ -308,6 +378,7 @@ export const MultiSelect = <T extends React.ReactText, K extends string>({
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const values = isFunction(_values) ? _values(name) : _values;
+  const hideDropdown = hideOptions === true && allowTyping === true;
 
   const handleDocumentClick = (e: Event) =>
     !rootRef.current?.contains(e.target as Node) ? setIsFocused(false) : null;
@@ -353,16 +424,41 @@ export const MultiSelect = <T extends React.ReactText, K extends string>({
   const handleClickSelect = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    selectRef.current?.focus();
+    if (allowTyping) {
+      inputRef.current?.focus();
+      setIsFocused(true);
+    } else {
+      selectRef.current?.focus();
+    }
   };
 
-  const handleClickRemove = (e: React.MouseEvent<HTMLElement>, value: T) => {
-    e.stopPropagation();
+  const handleClickRemove = (value: string | number) => {
     if (onChange != null) {
       onChange(
         values.filter((v) => v !== value),
         name,
       );
+    }
+  };
+
+  const handleRemoveTag = (value: MultiSelectOption<T>['value']) => {
+    handleClickRemove(value);
+    if (hideOptions && allowTyping) {
+      onChangeOptions?.(options.filter((v) => v.value !== value));
+      inputRef.current?.focus();
+    }
+  };
+
+  const handlePressEnter = (option: MultiSelectOption<string>) => {
+    onChangeOptions?.([...options, option]);
+    handleOnChange(option.value);
+    inputRef.current?.focus();
+  };
+
+  const handlePressDelete = () => {
+    const lastValue = last(values);
+    if (lastValue != null) {
+      handleRemoveTag(lastValue);
     }
   };
 
@@ -414,32 +510,34 @@ export const MultiSelect = <T extends React.ReactText, K extends string>({
           [styles.active]: isFocused,
         })}
         onClick={onChange != null ? handleClickSelect : undefined}>
-        {run(() => {
-          if (placeholder && values?.length === 0) {
-            return <div className={styles.placeholder}>{placeholder}</div>;
-          } else {
-            return (
-              <div className={cx(styles.values, { [styles.smallValues]: size === Size.SMALL })}>
-                {values.map((value) => (
-                  <div key={value} className={styles.value} data-element="value">
-                    <Tag
-                      inversed
-                      onClickRemove={
-                        onChange != null
-                          ? (e: React.MouseEvent<HTMLElement>) => handleClickRemove(e, value)
-                          : undefined
-                      }>
-                      {String((options.find((option) => option.value === value) ?? {}).label)}
-                    </Tag>
-                  </div>
-                ))}
-              </div>
-            );
-          }
-        })}
+        <div className={cx(styles.values, { [styles.smallValues]: size === Size.SMALL })}>
+          {values?.length === 0 && !allowTyping ? (
+            <div className={styles.placeholder}>{placeholder}</div>
+          ) : null}
+          {values?.map((value) => (
+            <div key={value} className={styles.value} data-element="value">
+              <Tag
+                inversed
+                onClickRemove={(e) => {
+                  e.stopPropagation();
+                  handleRemoveTag(value);
+                }}>
+                {String((options.find((option) => option.value === value) ?? {}).label)}
+              </Tag>
+            </div>
+          ))}
+          {allowTyping === true ? (
+            <TypeZone
+              ref={inputRef}
+              placeholder={values?.length === 0 ? placeholder : typeZonePlaceholder}
+              onPressEnter={handlePressEnter}
+              onPressDelete={handlePressDelete}
+            />
+          ) : null}
+        </div>
       </div>
       {run(() => {
-        if (screenSize > ScreenSizes.XL) {
+        if (screenSize > ScreenSizes.XL && !hideDropdown) {
           return (
             <div ref={optionsRef} className={styles.optionsWrapper}>
               <div

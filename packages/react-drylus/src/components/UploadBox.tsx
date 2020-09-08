@@ -5,6 +5,7 @@ import React, { ChangeEvent, Fragment, useEffect, useRef, useState } from 'react
 import { Category, Shade, Size } from '../enums';
 import { Hint } from '../forms';
 import { Margin } from '../layout';
+import { Style } from '../types';
 import { WrapperRef } from '../utils';
 import { Upload } from '../utils/illustrations';
 import { Text } from './Text';
@@ -16,6 +17,7 @@ const styles = {
     padding: ${sv.defaultPadding} ${sv.paddingExtraLarge};
     display: flex;
     flex-direction: column;
+    justify-content: center;
     text-align: center;
     border: 2px dashed ${sv.neutral};
     width: 100%;
@@ -33,6 +35,9 @@ const styles = {
   `,
   fullWidth: css`
     max-width: none;
+  `,
+  fullHeight: css`
+    height: 100%;
   `,
   active: css`
     border-color: ${sv.green};
@@ -52,6 +57,9 @@ interface BaseHelper {
 
   /** Handler function for the file upload */
   onUploadFiles: (files: FileList) => void;
+
+  /** Any file is allowed by default. Set the allowed formats with the following pattern: .pdf,.txt etc */
+  allowedFileFormats?: string;
 }
 
 export interface UploadHelperProps extends BaseHelper {
@@ -59,7 +67,12 @@ export interface UploadHelperProps extends BaseHelper {
   children: React.ReactNode;
 }
 
-export const UploadHelper = ({ multiple, onUploadFiles, children }: UploadHelperProps) => {
+export const UploadHelper = ({
+  multiple,
+  onUploadFiles,
+  children,
+  allowedFileFormats,
+}: UploadHelperProps) => {
   const childrenRef = useRef<HTMLElement>();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -94,6 +107,7 @@ export const UploadHelper = ({ multiple, onUploadFiles, children }: UploadHelper
         style={{ display: 'none' }}
         ref={inputRef}
         type="file"
+        accept={allowedFileFormats}
         onChange={handleUploadFiles}
       />
     </Fragment>
@@ -103,6 +117,9 @@ export const UploadHelper = ({ multiple, onUploadFiles, children }: UploadHelper
 export interface UploadBoxProps extends BaseHelper {
   /** If true, the box takes all the space available */
   fullWidth?: boolean;
+
+  /** If true, the box takes all the vertical space available */
+  fullHeight?: boolean;
 
   /**
    * Text shown under the illustration
@@ -121,17 +138,22 @@ export interface UploadBoxProps extends BaseHelper {
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error?: boolean | string;
+
+  /** Used for style overrides */
+  style?: Style;
 }
 
 export const UploadBox = ({
   label = 'Drag and drop files here or just click to browse files',
   fullWidth,
+  fullHeight,
   onDragEnter,
   onDragLeave,
   onUploadFiles,
   multiple,
   onMaxFilesExceeded,
   error,
+  style,
   ...rest
 }: UploadBoxProps) => {
   const [isDragEntered, setIsDragEntered] = useState(false);
@@ -167,12 +189,14 @@ export const UploadBox = ({
   return (
     <UploadHelper multiple={multiple} onUploadFiles={onUploadFiles} {...rest}>
       <div
+        style={style}
         onDragOver={(e) => e.preventDefault()}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
         onDrop={handleOnDrop}
         className={cx(styles.root, {
           [styles.fullWidth]: fullWidth === true,
+          [styles.fullHeight]: fullHeight === true,
           [styles.active]: isDragEntered,
           [styles.error]: error != null && error !== false,
         })}>

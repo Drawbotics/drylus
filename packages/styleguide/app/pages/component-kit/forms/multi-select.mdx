@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { MultiSelect } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
@@ -29,4 +30,57 @@ __Example__
         value: 'GR',
       }]} />
   } />
+</Playground>
+
+export const Controller = ({ children }) => {
+  const [options, setOptions] = useState([{
+    label: 'Apple',
+    value: 'Apple',
+  }, {
+    label: 'Pear',
+    value: 'Pear',
+  }, {
+    label: 'Strawberry',
+    value: 'Strawberry',
+  }]);
+  const [selected, setSelected] = useState([]);
+  return children({ options, setOptions, selected, setSelected });
+}
+
+### Multi Select with editable options
+<Playground mode="jsx">
+  <div style={{ maxWidth: 280, height: 300 }}>
+    <Controller>
+      {({ options, setOptions, selected, setSelected }) => (
+        <MultiSelect
+          allowTyping
+          placeholder="Select fruits..."
+          typeZonePlaceholder="Add more fruit..."
+          options={options}
+          values={selected}
+          onChange={setSelected}
+          onChangeOptions={setOptions} />
+        )}
+    </Controller>
+  </div>
+</Playground>
+
+### Multi Select without options dropdown
+This can be useful if you want the user to pick all the options (i.e. without defaults). This pattern is used when choosing email addresses for a mailing list for example.
+<Playground mode="jsx">
+  <div style={{ maxWidth: 500, height: 300 }}>
+    <Controller>
+      {({ options, setOptions, selected, setSelected }) => (
+        <MultiSelect
+          allowTyping
+          hideOptions
+          placeholder="Type to add emails..."
+          typeZonePlaceholder="Add more emails..."
+          options={options}
+          values={selected}
+          onChange={setSelected}
+          onChangeOptions={setOptions} />
+        )}
+    </Controller>
+  </div>
 </Playground>

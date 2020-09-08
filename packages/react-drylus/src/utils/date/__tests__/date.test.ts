@@ -233,6 +233,26 @@ describe('generateDisplayedDate', () => {
 
       expect(res).toEqual("aujourd'hui à 15h00");
     });
+
+    it('is the previous day, at a specific time', () => {
+      const date = new Date('2020-05-31 15:00');
+      languageGetter.mockReturnValue('fr');
+      languagesGetter.mockReturnValue(['fr']);
+
+      const res = generateDisplayedDate({ date });
+
+      expect(res).toEqual('hier à 15h00');
+    });
+
+    it('is the previous day', () => {
+      const date = new Date('2020-05-31');
+      languageGetter.mockReturnValue('fr');
+      languagesGetter.mockReturnValue(['fr']);
+
+      const res = generateDisplayedDate({ date, options: { showTime: ShowDateTime.NEVER } });
+
+      expect(res).toEqual('hier');
+    });
   });
 
   describe('it matches the desired output when the locale is NL', () => {
