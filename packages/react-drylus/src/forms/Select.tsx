@@ -189,7 +189,7 @@ export interface SelectProps<T, K = string> {
   [x: string]: any;
 }
 
-export const Select = <T extends React.ReactText, K extends string>({
+export const Select = <T extends any, K extends string>({
   responsive,
   ...rest
 }: SelectProps<T, K>) => {

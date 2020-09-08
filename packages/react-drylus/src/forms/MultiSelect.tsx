@@ -344,7 +344,7 @@ export interface MultiSelectProps<T, K = string> {
   [x: string]: any;
 }
 
-export const MultiSelect = <T extends React.ReactText, K extends string>({
+export const MultiSelect = <T extends any, K extends string>({
   responsive,
   ...rest
 }: MultiSelectProps<T, K>) => {

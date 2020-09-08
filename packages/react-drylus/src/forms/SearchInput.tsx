@@ -176,7 +176,7 @@ export interface SearchInputProps<T, K = string> {
   [x: string]: any;
 }
 
-export const SearchInput = <T extends React.ReactText, K extends string>({
+export const SearchInput = <T extends any, K extends string>({
   responsive,
   ...rest
 }: SearchInputProps<T, K>) => {
