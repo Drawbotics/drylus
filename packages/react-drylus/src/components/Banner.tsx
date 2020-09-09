@@ -5,13 +5,7 @@ import React from 'react';
 import { Category, Size, Tier } from '../enums';
 import { Flex, FlexAlign, FlexItem, FlexJustify, Margin } from '../layout';
 import { Responsive, Style } from '../types';
-import {
-  checkComponentProps,
-  getEnumAsClass,
-  getIconForCategory,
-  run,
-  useResponsiveProps,
-} from '../utils';
+import { getEnumAsClass, getIconForCategory, run, useResponsiveProps } from '../utils';
 import { Button } from './Button';
 import { Icon } from './Icon';
 
@@ -50,7 +44,7 @@ export interface BannerProps {
   title?: string;
 
   /** @kind Category */
-  category: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
+  category: Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** Component to be displayed on the far right of the banner. Should only be of type Button */
   trailing?: React.ReactElement<typeof Button> | React.ReactNode;
@@ -64,9 +58,6 @@ export interface BannerProps {
 
 export const Banner = ({ responsive, ...rest }: BannerProps) => {
   const { children, category, title, style, trailing } = useResponsiveProps(rest, responsive);
-
-  checkComponentProps({ trailing }, { trailing: Button });
-
   const icon = getIconForCategory(category);
 
   return (
@@ -98,17 +89,19 @@ export const Banner = ({ responsive, ...rest }: BannerProps) => {
             return (
               <FlexItem>
                 <Margin size={{ left: Size.EXTRA_SMALL }}>
-                  {React.cloneElement(
-                    trailing as React.ReactElement<typeof Button>,
-                    {
-                      size: Size.SMALL,
-                      tier: Tier.SECONDARY,
-                      inversed: true,
-                      style: {
-                        whiteSpace: 'nowrap',
-                      },
-                    } as Partial<typeof Button>,
-                  )}
+                  {(trailing as React.ReactElement<typeof Button>).type === Button
+                    ? React.cloneElement(
+                        trailing as React.ReactElement<typeof Button>,
+                        {
+                          size: Size.SMALL,
+                          tier: Tier.SECONDARY,
+                          inversed: true,
+                          style: {
+                            whiteSpace: 'nowrap',
+                          },
+                        } as Partial<typeof Button>,
+                      )
+                    : trailing}
                 </Margin>
               </FlexItem>
             );
