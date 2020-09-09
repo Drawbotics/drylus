@@ -1,3 +1,16 @@
+# v6.8.12 (Wed Sep 09 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - remove prop checks for banner trailing  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.8.11 (Tue Sep 08 2020)
 
 #### ⚠️  Pushed to master
