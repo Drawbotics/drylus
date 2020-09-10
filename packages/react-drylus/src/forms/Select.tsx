@@ -189,7 +189,7 @@ export interface SelectProps<T, K = string> {
   [x: string]: any;
 }
 
-export const Select = <T extends any, K extends string>({
+export const Select = <T extends number | string, K extends string>({
   responsive,
   ...rest
 }: SelectProps<T, K>) => {
@@ -212,8 +212,10 @@ export const Select = <T extends any, K extends string>({
 
   const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     if (onChange != null) {
+      const valueIsNumber = typeof value === 'string';
+      const newValue = (e.target as HTMLSelectElement).value;
       onChange(
-        (e.target as HTMLSelectElement).value as any,
+        (valueIsNumber ? Number(newValue) : newValue) as T,
         (e.target as HTMLSelectElement).name as K,
       );
     }
@@ -222,7 +224,7 @@ export const Select = <T extends any, K extends string>({
     <div
       style={style}
       className={cx(styles.root, {
-        [styles.noValue]: !value,
+        [styles.noValue]: value == null,
         [styles.readOnly]: onChange == null,
         [styles.disabled]: disabled === true,
         [styles.valid]: Boolean(value) && valid === true,
@@ -267,8 +269,8 @@ export const Select = <T extends any, K extends string>({
         onChange={handleOnChange}
         {...props}>
         {run(() => {
-          if (!value) {
-            return <option key={options.length}>{placeholder}</option>;
+          if (value == null) {
+            return <option key="_placeholder">{placeholder}</option>;
           }
         })}
         {options.map((option) => (
