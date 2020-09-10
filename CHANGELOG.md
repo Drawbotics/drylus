@@ -1,3 +1,16 @@
+# v6.8.13 (Thu Sep 10 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix option and value in Select  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.8.12 (Wed Sep 09 2020)
 
 #### ⚠️  Pushed to master
