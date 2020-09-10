@@ -212,7 +212,7 @@ export const Select = <T extends number | string, K extends string>({
 
   const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     if (onChange != null) {
-      const valueIsNumber = typeof value === 'string';
+      const valueIsNumber = typeof value === 'number';
       const newValue = (e.target as HTMLSelectElement).value;
       onChange(
         (valueIsNumber ? Number(newValue) : newValue) as T,
