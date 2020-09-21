@@ -67,10 +67,12 @@ export interface ExtendedNavigator extends Navigator {
 
 export function getCurrentLocale(): string {
   const navigator = window.navigator as ExtendedNavigator;
-  if (navigator.languages != null && navigator.languages.length != null) {
+  if (window.i18n != null && window.i18n.locale != null) {
+    return window.i18n.locale;
+  } else if (navigator.languages != null && navigator.languages.length != null) {
     return navigator.languages[0];
   } else {
-    return navigator.userLanguage || navigator.language || navigator.browserLanguage || 'en-GB';
+    return navigator.userLanguage ?? navigator.language ?? navigator.browserLanguage ?? 'en-GB';
   }
 }
 
