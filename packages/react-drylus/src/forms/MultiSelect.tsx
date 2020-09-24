@@ -245,6 +245,7 @@ const TypeZone = forwardRef<HTMLInputElement, TypeZoneProps>(
     return (
       <div className={styles.typeZone}>
         <input
+          style={{ width: '100%' }}
           ref={ref}
           value={value}
           placeholder={placeholder}
