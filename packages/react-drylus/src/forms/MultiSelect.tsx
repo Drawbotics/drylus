@@ -214,6 +214,7 @@ const styles = {
     }
   `,
   typeZone: css`
+    flex: 1;
     margin-right: ${sv.marginExtraSmall};
     margin-bottom: ${sv.marginExtraSmall};
 
