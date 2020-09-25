@@ -1,3 +1,16 @@
+# v6.9.1 (Fri Sep 25 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Fix avatar image placement  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.8.17 (Thu Sep 24 2020)
 
 #### ⚠️  Pushed to master
