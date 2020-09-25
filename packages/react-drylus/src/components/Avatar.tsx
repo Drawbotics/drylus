@@ -27,6 +27,9 @@ const styles = {
       object-fit: cover;
     }
   `,
+  withImage: css`
+    padding-top: 0;
+  `,
   small: css`
     height: ${sv.defaultMargin};
     width: ${sv.defaultMargin};
@@ -120,6 +123,7 @@ export const Avatar = ({ responsive, ...rest }: AvatarProps) => {
         [styles[customSize ? 'root' : getEnumAsClass<typeof styles>(size as Size)]]:
           size != null && !customSize,
         [styles.customBackground]: backgroundColor != null,
+        [styles.withImage]: image != null,
       })}
       style={{
         backgroundColor,
