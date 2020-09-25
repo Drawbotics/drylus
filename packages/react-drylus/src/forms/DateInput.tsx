@@ -371,7 +371,7 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
   const handleOnChange = (v: string) => {
     if (isDesktop) {
       return v;
-    } else if (onChange && Boolean(v)) {
+    } else if (onChange != null && v != null) {
       return onChange(_stringToDateObject(v), name);
     }
   };
@@ -394,7 +394,7 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
         hint={hint}
         loading={loading}
         value={inputValue}
-        onChange={onChange != null ? handleOnChange : null}
+        onChange={handleOnChange}
         ref={inputRef}
         onFocus={onChange != null ? () => setIsFocused(true) : null}
         placeholder={placeholder}
@@ -431,7 +431,12 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
                   locale={locale}
                   activeStartDate={activeStartDate && objectToDate(activeStartDate)}
                   onChange={
-                    onChange != null ? (v) => onChange(dateToObject(v as Date), name) : undefined
+                    onChange != null
+                      ? (v) => {
+                          onChange(dateToObject(v as Date), name);
+                          setTimeout(() => setIsFocused(false), 150);
+                        }
+                      : undefined
                   }
                   value={value === '' ? undefined : objectToDate(value)}
                 />
