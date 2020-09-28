@@ -166,6 +166,9 @@ export interface SearchInputProps<T, K = string> {
    */
   size?: Size.SMALL | Size.DEFAULT;
 
+  /** If true, the results list is shown even if no value is provided. Still, it shows only when the input is in focus */
+  alwaysShowResults?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -196,6 +199,7 @@ export const SearchInput = <T extends any, K extends string>({
     valid,
     size = Size.DEFAULT,
     minimal,
+    alwaysShowResults,
     ...props
   } = useResponsiveProps<SearchInputProps<T, K>>(rest, responsive);
   const [isFocused, setFocused] = useState(false);
@@ -205,7 +209,7 @@ export const SearchInput = <T extends any, K extends string>({
   const listRef = useRef<HTMLDivElement>(null);
 
   const value = isFunction(_value) ? _value(name) : _value;
-  const shouldDisplayResults = value !== '' && isFocused;
+  const shouldDisplayResults = (alwaysShowResults || value !== '') && isFocused;
   const isLoading = _isLoading === true || loading === true;
 
   const listPanel = listRef.current?.getBoundingClientRect();
@@ -225,6 +229,7 @@ export const SearchInput = <T extends any, K extends string>({
       document.removeEventListener('mousedown', handleDocumentClick);
     };
   });
+
   return (
     <div
       style={style}
