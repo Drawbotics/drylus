@@ -1,3 +1,16 @@
+# v6.10.1 (Mon Sep 28 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add missing name to Toggle onChange  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.10.0 (Mon Sep 28 2020)
 
 #### 🚀 Enhancement - Minor change
