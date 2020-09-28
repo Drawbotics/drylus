@@ -114,7 +114,7 @@ export const Toggle = <T extends string>({ responsive, ...rest }: ToggleProps<T>
         [styles.small]: size === Size.SMALL,
         [styles.disabled]: disabled === true,
       })}
-      onClick={() => (disabled ? null : onChange(!value))}>
+      onClick={() => (disabled ? null : onChange(!value, name))}>
       <div className={styles.trigger} data-element="trigger" />
     </div>
   );
