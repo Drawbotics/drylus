@@ -1,18 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
-    <title>Icon/Feather/moon</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M11.1441877,12.8180303 C8.90278993,10.5766325 8.24397847,7.29260898 9.27752593,4.437982 C6.09633644,5.5873034 3.89540402,8.67837285 4.00385273,12.2078365 C4.13368986,16.4333868 7.52883112,19.8285281 11.7543814,19.9583652 C15.2838451,20.0668139 18.3749145,17.8658815 19.5242359,14.684692 C16.669609,15.7182395 13.3855854,15.059428 11.1441877,12.8180303 Z M21.9576498,12.8823459 C21.4713729,18.1443552 16.9748949,22.1197182 11.692957,21.9574217 C6.41101918,21.7951253 2.16709261,17.5511988 2.00479619,12.2692609 C1.84249977,6.98732307 5.81786273,2.49084501 11.0798721,2.00456809 C11.9400195,1.92507947 12.4895134,2.90008536 11.9760569,3.59473245 C10.2106529,5.98311963 10.4582768,9.30369233 12.5584012,11.4038167 C14.6585256,13.5039411 17.9790983,13.7515651 20.3674855,11.986161 C21.0621326,11.4727046 22.0371385,12.0221984 21.9576498,12.8823459 Z" id="path-1"></path>
-    </defs>
-    <g id="Icon/Feather/moon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <mask id="mask-2" fill="white">
-            <use xlink:href="#path-1"></use>
-        </mask>
-        <use id="Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
-        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
-            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
-        </g>
-    </g>
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.7502 9.5925C15.422 13.1444 12.3869 15.8277 8.82156 15.7182C5.25625 15.6086 2.3916 12.744 2.28205 9.17867C2.1725 5.61336 4.85587 2.57824 8.40772 2.25C6.86299 4.33984 7.07967 7.24534 8.91727 9.08295C10.7549 10.9206 13.6604 11.1372 15.7502 9.5925Z" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

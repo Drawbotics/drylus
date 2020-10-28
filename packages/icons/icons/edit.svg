@@ -1,18 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
-    <title>Icon/Feather/edit</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M19,14.66 C19,14.1077153 19.4477153,13.66 20,13.66 C20.5522847,13.66 21,14.1077153 21,14.66 L21,20 C21,21.6568542 19.6568542,23 18,23 L4,23 C2.34314575,23 1,21.6568542 1,20 L1,6 C1,4.34314575 2.34314575,3 4,3 L9.34,3 C9.89228475,3 10.34,3.44771525 10.34,4 C10.34,4.55228475 9.89228475,5 9.34,5 L4,5 C3.44771525,5 3,5.44771525 3,6 L3,20 C3,20.5522847 3.44771525,21 4,21 L18,21 C18.5522847,21 19,20.5522847 19,20 L19,14.66 Z M18.7071068,1.29289322 L22.7071068,5.29289322 C23.0976311,5.68341751 23.0976311,6.31658249 22.7071068,6.70710678 L12.7071068,16.7071068 C12.5195704,16.8946432 12.2652165,17 12,17 L8,17 C7.44771525,17 7,16.5522847 7,16 L7,12 C7,11.7347835 7.10535684,11.4804296 7.29289322,11.2928932 L17.2928932,1.29289322 C17.6834175,0.902368927 18.3165825,0.902368927 18.7071068,1.29289322 Z M9,12.4142136 L9,15 L11.5857864,15 L20.5857864,6 L18,3.41421356 L9,12.4142136 Z" id="path-1"></path>
-    </defs>
-    <g id="Icon/Feather/edit" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <mask id="mask-2" fill="white">
-            <use xlink:href="#path-1"></use>
-        </mask>
-        <use id="Combined-Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
-        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
-            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
-        </g>
-    </g>
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.75 10.245V14.25C15.75 15.0784 15.0784 15.75 14.25 15.75H3.75C2.92157 15.75 2.25 15.0784 2.25 14.25V3.75C2.25 2.92157 2.92157 2.25 3.75 2.25H7.755" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M13.5 1.5L16.5 4.5L9 12H6V9L13.5 1.5Z" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

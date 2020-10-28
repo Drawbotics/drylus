@@ -1,15 +1,16 @@
 const path = require('path');
 const fs = require('fs');
 const rimraf = require('rimraf');
+const svgFixer = require('oslllo-svg-fixer');
 
-function removeWhitespace(string) {
-  return string.replace(/(\r?\n|\r)|(\s\s)/gm, '');
+function printProgress(progress, extra) {
+  process.stdout.clearLine();
+  process.stdout.cursorTo(0);
+  process.stdout.write(progress + '% | ' + extra);
 }
 
-function removeUnused(svgString) {
-  const noG = svgString.replace(/(.*)(?!use>).*(<g.*?\/g>)/gm, '$1');
-  const noMask = noG.replace(/<mask.*mask>/gm, '');
-  return noMask;
+function fixDimensions(string) {
+  return string.replace(/width="\d+" height="\d+"/, 'width="100%" height="100%"');
 }
 
 async function transform(iconsFolder, cacheFolder) {
@@ -19,13 +20,17 @@ async function transform(iconsFolder, cacheFolder) {
   // create folder
   fs.mkdirSync(cacheFolder);
 
-  const iconFiles = fs.readdirSync(iconsFolder);
-  console.log(iconFiles);
+  await svgFixer(iconsFolder, cacheFolder, { showProgressBar: true }).fix();
+
+  const iconFiles = fs.readdirSync(cacheFolder);
+
+  let i = 0;
   for (let filename of iconFiles) {
-    const contents = fs.readFileSync(path.resolve(iconsFolder, filename), 'utf8');
-    const flat = removeWhitespace(contents);
-    const cleaned = removeUnused(flat);
-    fs.writeFileSync(path.resolve(cacheFolder, filename), cleaned);
+    printProgress(i / iconFiles.length, 'Processing ' + filename);
+    const contents = fs.readFileSync(path.resolve(cacheFolder, filename), 'utf8');
+    const fixed = fixDimensions(contents);
+    fs.writeFileSync(path.resolve(cacheFolder, filename), fixed);
+    i++;
   }
 }
 

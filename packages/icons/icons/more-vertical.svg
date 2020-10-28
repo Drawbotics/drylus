@@ -1,18 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
-    <title>Icon/Feather/more-vertical</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M12,15 C10.3431458,15 9,13.6568542 9,12 C9,10.3431458 10.3431458,9 12,9 C13.6568542,9 15,10.3431458 15,12 C15,13.6568542 13.6568542,15 12,15 Z M12,13 C12.5522847,13 13,12.5522847 13,12 C13,11.4477153 12.5522847,11 12,11 C11.4477153,11 11,11.4477153 11,12 C11,12.5522847 11.4477153,13 12,13 Z M12,7 C10.3431458,7 9,5.65685425 9,4 C9,2.34314575 10.3431458,1 12,1 C13.6568542,1 15,2.34314575 15,4 C15,5.65685425 13.6568542,7 12,7 Z M12,5 C12.5522847,5 13,4.55228475 13,4 C13,3.44771525 12.5522847,3 12,3 C11.4477153,3 11,3.44771525 11,4 C11,4.55228475 11.4477153,5 12,5 Z M12,23 C10.3431458,23 9,21.6568542 9,20 C9,18.3431458 10.3431458,17 12,17 C13.6568542,17 15,18.3431458 15,20 C15,21.6568542 13.6568542,23 12,23 Z M12,21 C12.5522847,21 13,20.5522847 13,20 C13,19.4477153 12.5522847,19 12,19 C11.4477153,19 11,19.4477153 11,20 C11,20.5522847 11.4477153,21 12,21 Z" id="path-1"></path>
-    </defs>
-    <g id="Icon/Feather/more-vertical" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <mask id="mask-2" fill="white">
-            <use xlink:href="#path-1"></use>
-        </mask>
-        <use id="Combined-Shape" fill="#000000" xlink:href="#path-1"></use>
-        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
-            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
-        </g>
-    </g>
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9 10.5C9.82843 10.5 10.5 9.82843 10.5 9C10.5 8.17157 9.82843 7.5 9 7.5C8.17157 7.5 7.5 8.17157 7.5 9C7.5 9.82843 8.17157 10.5 9 10.5Z" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9 4.5C9.82843 4.5 10.5 3.82843 10.5 3C10.5 2.17157 9.82843 1.5 9 1.5C8.17157 1.5 7.5 2.17157 7.5 3C7.5 3.82843 8.17157 4.5 9 4.5Z" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9 16.5C9.82843 16.5 10.5 15.8284 10.5 15C10.5 14.1716 9.82843 13.5 9 13.5C8.17157 13.5 7.5 14.1716 7.5 15C7.5 15.8284 8.17157 16.5 9 16.5Z" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

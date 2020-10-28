@@ -1,18 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
-    <title>Icon/Feather/sidebar</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M8,4 L5,4 C4.44771525,4 4,4.44771525 4,5 L4,19 C4,19.5522847 4.44771525,20 5,20 L8,20 L8,4 Z M10,4 L10,20 L19,20 C19.5522847,20 20,19.5522847 20,19 L20,5 C20,4.44771525 19.5522847,4 19,4 L10,4 Z M5,2 L19,2 C20.6568542,2 22,3.34314575 22,5 L22,19 C22,20.6568542 20.6568542,22 19,22 L5,22 C3.34314575,22 2,20.6568542 2,19 L2,5 C2,3.34314575 3.34314575,2 5,2 Z" id="path-1"></path>
-    </defs>
-    <g id="Icon/Feather/sidebar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <mask id="mask-2" fill="white">
-            <use xlink:href="#path-1"></use>
-        </mask>
-        <use id="Combined-Shape" fill="#000000" xlink:href="#path-1"></use>
-        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
-            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
-        </g>
-    </g>
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 4.25C2.25 3.14543 3.14543 2.25 4.25 2.25H13.75C14.8546 2.25 15.75 3.14543 15.75 4.25V13.75C15.75 14.8546 14.8546 15.75 13.75 15.75H4.25C3.14543 15.75 2.25 14.8546 2.25 13.75V4.25Z" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6.75 2.25V15.75" stroke="#1A2C4D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

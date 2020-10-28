@@ -1,18 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
-    <title>Icon/Feather/corner-right-up</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M16,6.41421356 L16,16 C16,18.7614237 13.7614237,21 11,21 L4,21 C3.44771525,21 3,20.5522847 3,20 C3,19.4477153 3.44771525,19 4,19 L11,19 C12.6568542,19 14,17.6568542 14,16 L14,6.41421356 L10.7071068,9.70710678 C10.3165825,10.0976311 9.68341751,10.0976311 9.29289322,9.70710678 C8.90236893,9.31658249 8.90236893,8.68341751 9.29289322,8.29289322 L14.2928932,3.29289322 C14.6834175,2.90236893 15.3165825,2.90236893 15.7071068,3.29289322 L20.7071068,8.29289322 C21.0976311,8.68341751 21.0976311,9.31658249 20.7071068,9.70710678 C20.3165825,10.0976311 19.6834175,10.0976311 19.2928932,9.70710678 L16,6.41421356 Z" id="path-1"></path>
-    </defs>
-    <g id="Icon/Feather/corner-right-up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <mask id="mask-2" fill="white">
-            <use xlink:href="#path-1"></use>
-        </mask>
-        <use id="Combined-Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
-        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
-            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
-        </g>
-    </g>
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.5 6.75L11.25 3L15 6.75" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3 15H8.25C9.90685 15 11.25 13.6569 11.25 12V3" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

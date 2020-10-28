@@ -14,6 +14,7 @@
     "build:publish": "./publish.sh"
   },
   "dependencies": {
+    "@drawbotics/icons": "file:../icons",
     "@drawbotics/react-drylus": "file:../react-drylus",
     "@drawbotics/use-screen-size": "^2.0.1",
     "@drawbotics/vanilla-drylus": "file:../vanilla-drylus",

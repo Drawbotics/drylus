@@ -112,6 +112,7 @@
     "lodash": "^4.17.11",
     "memory-fs": "^0.4.1",
     "mermaid.cli": "^0.5.1",
+    "oslllo-svg-fixer": "^1.1.1",
     "prettier": "^1.19.1",
     "prettier-plugin-import-sort": "0.0.3",
     "prism-react-renderer": "^0.1.6",

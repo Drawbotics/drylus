@@ -4,7 +4,15 @@ import sv from '@drawbotics/drylus-style-vars';
 
 import Playground from '~/components/Playground';
 
-import icons from '~/../../icons/icons';
+export let icons = [];
+
+export function importAll (r) {
+  r.keys().forEach(key => icons.push(r(key)));
+}
+
+export const _ = importAll(require.context('@drawbotics/icons/icons/', true, /\.svg$/));
+// At build-time cache will be populated with all required modules.
+
 
 
 # Icon

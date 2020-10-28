@@ -1,7 +1,7 @@
 const fs = require('fs');
 const camelCase = require('lodash/camelCase');
 
-const ICONS_CDN_PATH = 'https://cdn.drawbotics.com/drycons';
+const ICONS_CDN_PATH = process.env.NODE_ENV !== "production" ? 'https://drawbotics-cdn.s3-eu-west-1.amazonaws.com/drycons' : 'https://cdn.drawbotics.com/drycons';
 
 function setFontSize(size, file) {
   const contents = fs.readFileSync(file, 'utf8');
