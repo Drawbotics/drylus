@@ -1,3 +1,16 @@
+# v6.10.2 (Wed Oct 28 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/icons`, `@drawbotics/react-drylus`
+  - Feature/new icons [#159](https://github.com/Drawbotics/drylus/pull/159) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.10.1 (Mon Sep 28 2020)
 
 #### ⚠️  Pushed to master
