@@ -1,7 +1,39 @@
 const fs = require('fs');
 const camelCase = require('lodash/camelCase');
 
-const ICONS_CDN_PATH = 'https://cdn.drawbotics.com/drycons';
+const ICONS_CDN_PATH = process.env.NODE_ENV !== "production" ? 'https://drawbotics-cdn.s3-eu-west-1.amazonaws.com/drycons' : 'https://cdn.drawbotics.com/drycons';
+
+// Maintain backward compatibility with old icon names
+const aliases = {
+  'next': ['arrow-right-line'],
+  'outdoor': ['beach-umbrella'],
+  'room': ['bed'],
+  'insights': ['data-points'],
+  'budget': ['money-bag'],
+  'send': ['paper-plane-horizontal'],
+  'drone-shoot': ['drone-shooting'],
+  'virtual-tour-exterior': ['exterior-tour-3d'],
+  'virtual-tour-interior': ['interior-tour-3d'],
+  'landing': ['landing-page'],
+  'maquette-360': ['model-360'],
+  'photo-shoot': ['photo-shooting'],
+  'revo': ['revo-alt'],
+  'tourama': ['tour-3d'],
+  'vr-headset': ['vr'],
+};
+
+function addAliases(file) {
+  const contents = fs.readFileSync(file, 'utf8');
+  fs.writeFileSync(
+    file,
+    contents.replace(
+      /Drycon-(\S+)::before/gm,
+      (_, $1) => aliases[$1] != null
+        ? `Drycon-${$1}::before, ${aliases[$1].map((alias) => `.Drycon-${alias}::before`).join(', ')}`
+        : `Drycon-${$1}::before`,
+    ),
+  );
+}
 
 function setFontSize(size, file) {
   const contents = fs.readFileSync(file, 'utf8');
@@ -17,7 +49,9 @@ function setFontSize(size, file) {
 function generateObjectMappings(targetFile, iconsFolder) {
   const icons = fs.readdirSync(iconsFolder);
   const iconNames = icons.map((fileName) => fileName.replace('.svg', ''));
-  const mapping = iconNames.reduce(
+  const aliasNames = Object.values(aliases).reduce((acc, val) => [ ...acc, ...val ], []);
+  console.log(aliasNames)
+  const mapping = [...iconNames, ...aliasNames].reduce(
     (memo, icon) => ({
       ...memo,
       [camelCase(icon)]: icon,
@@ -51,8 +85,10 @@ function generateJSFunction(file) {
 function generateTSType(targetFile, iconsFolder) {
   const icons = fs.readdirSync(iconsFolder);
   const iconNames = icons.map((fileName) => fileName.replace('.svg', ''));
-  const list = iconNames.map((name) => `"${name}"`).join(' | ');
-  const types = iconNames.map((name) => `"${camelCase(name)}"`).join(' | ');
+  const aliasNames = Object.values(aliases).reduce((acc, val) => [ ...acc, ...val ], []);
+  const allNames = [...iconNames, ...aliasNames];
+  const list = allNames.map((name) => `"${name}"`).join(' | ');
+  const types = allNames.map((name) => `"${camelCase(name)}"`).join(' | ');
 
   const finalContent = `
     export type Icons = ${list};
@@ -63,6 +99,7 @@ function generateTSType(targetFile, iconsFolder) {
 }
 
 module.exports = {
+  addAliases,
   setFontSize,
   generateJSFunction,
   generateObjectMappings,

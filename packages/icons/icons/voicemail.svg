@@ -1,18 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
-    <title>Icon/Feather/voicemail</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M9.74283789,15 L14.2571621,15 C13.4718176,14.0490595 13,12.8296292 13,11.5 C13,8.46243388 15.4624339,6 18.5,6 C21.5375661,6 24,8.46243388 24,11.5 C24,14.5375661 21.5375661,17 18.5,17 L5.5,17 C2.46243388,17 0,14.5375661 0,11.5 C0,8.46243388 2.46243388,6 5.5,6 C8.53756612,6 11,8.46243388 11,11.5 C11,12.8296292 10.5281824,14.0490595 9.74283789,15 Z M5.5,15 C7.43299662,15 9,13.4329966 9,11.5 C9,9.56700338 7.43299662,8 5.5,8 C3.56700338,8 2,9.56700338 2,11.5 C2,13.4329966 3.56700338,15 5.5,15 Z M18.5,15 C20.4329966,15 22,13.4329966 22,11.5 C22,9.56700338 20.4329966,8 18.5,8 C16.5670034,8 15,9.56700338 15,11.5 C15,13.4329966 16.5670034,15 18.5,15 Z" id="path-1"></path>
-    </defs>
-    <g id="Icon/Feather/voicemail" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <mask id="mask-2" fill="white">
-            <use xlink:href="#path-1"></use>
-        </mask>
-        <use id="Combined-Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
-        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
-            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
-        </g>
-    </g>
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M4.125 12C5.98896 12 7.5 10.489 7.5 8.625C7.5 6.76104 5.98896 5.25 4.125 5.25C2.26104 5.25 0.75 6.76104 0.75 8.625C0.75 10.489 2.26104 12 4.125 12Z" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M13.875 12C15.739 12 17.25 10.489 17.25 8.625C17.25 6.76104 15.739 5.25 13.875 5.25C12.011 5.25 10.5 6.76104 10.5 8.625C10.5 10.489 12.011 12 13.875 12Z" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4.125 12H13.875" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
