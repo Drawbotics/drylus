@@ -49,7 +49,8 @@ function setFontSize(size, file) {
 function generateObjectMappings(targetFile, iconsFolder) {
   const icons = fs.readdirSync(iconsFolder);
   const iconNames = icons.map((fileName) => fileName.replace('.svg', ''));
-  const mapping = iconNames.reduce(
+  const aliasNames = Object.values(aliases).flat();
+  const mapping = [...iconNames, ...aliasNames].reduce(
     (memo, icon) => ({
       ...memo,
       [camelCase(icon)]: icon,
@@ -83,8 +84,10 @@ function generateJSFunction(file) {
 function generateTSType(targetFile, iconsFolder) {
   const icons = fs.readdirSync(iconsFolder);
   const iconNames = icons.map((fileName) => fileName.replace('.svg', ''));
-  const list = iconNames.map((name) => `"${name}"`).join(' | ');
-  const types = iconNames.map((name) => `"${camelCase(name)}"`).join(' | ');
+  const aliasNames = Object.values(aliases).flat();
+  const allNames = [...iconNames, ...aliasNames];
+  const list = allNames.map((name) => `"${name}"`).join(' | ');
+  const types = allNames.map((name) => `"${camelCase(name)}"`).join(' | ');
 
   const finalContent = `
     export type Icons = ${list};
