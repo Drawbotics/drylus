@@ -1,4 +1,4 @@
-// import '@drawbotics/vanilla-drylus/dist/drylus.css';
+import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
 import { DrylusProvider, Layout, Page, Position } from '@drawbotics/react-drylus';
 import { useScreenSize } from '@drawbotics/use-screen-size';
