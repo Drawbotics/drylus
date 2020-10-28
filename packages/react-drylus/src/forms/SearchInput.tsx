@@ -74,7 +74,7 @@ const styles = {
 
       &::after {
         position: absolute;
-        content: '\\eac9';
+        content: '\\eaec';
         font-family: 'drycons';
         top: 50%;
         transform: translateY(-50%);

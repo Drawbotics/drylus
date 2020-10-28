@@ -15,7 +15,7 @@ const styles = {
     width: 100%;
 
     &::after {
-      content: '\\ea30';
+      content: '\\ea33';
       font-family: 'drycons';
       color: ${sv.colorPrimary};
       position: absolute;
