@@ -1,18 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
-    <title>Icon/Service/newsletter</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M17.6,1 C18.848,1 19.91168,2.01376 19.9947776,3.3334912 L20,3.5 L20,22.4 C20,23 19.6,23.4 19,23.4 C18.4428571,23.4 18.0581633,23.055102 18.0060496,22.5254373 L18,22.4 L18,10.7 L6,10.7 L6,22.3 C6,22.9 5.6,23.3 5,23.3 C4.44285714,23.3 4.05816327,22.955102 4.00604956,22.4254373 L4,22.3 L4,3.5 C4,2.156 5.01376,1.08848 6.2450176,1.0052288 L6.4,1 L17.6,1 Z M15.3,17.9 C15.9,17.9 16.3,18.3 16.3,18.9 C16.3,19.5 15.9,19.9 15.3,19.9 L15.3,19.9 L8.8,19.9 C8.2,19.9 7.8,19.5 7.8,18.9 C7.8,18.3 8.2,17.9 8.8,17.9 L8.8,17.9 Z M8.8,14.1 L15.3,14.1 C15.9,14.1 16.3,14.5 16.3,15.1 C16.3,15.6571429 15.955102,16.0418367 15.4254373,16.0939504 L15.3,16.1 L8.8,16.1 C8.2,16.1 7.8,15.7 7.8,15.1 C7.8,14.5428571 8.14489796,14.1581633 8.67456268,14.1060496 L8.8,14.1 L15.3,14.1 Z M17.6,3 L6.4,3 C6.22222222,3 6.04444444,3.15802469 6.00713306,3.40384088 L6,3.5 L6,8.7 L18,8.7 L18,3.5 C18,3.2 17.8,3 17.6,3 Z" id="path-1"></path>
-    </defs>
-    <g id="Icon/Service/newsletter" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <mask id="mask-2" fill="white">
-            <use xlink:href="#path-1"></use>
-        </mask>
-        <use id="Combined-Shape" fill="#172B4E" fill-rule="nonzero" xlink:href="#path-1"></use>
-        <g id="Color/Neutral/Darkest" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
-            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
-        </g>
-    </g>
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 16.4V3.05882C4 2.49412 4.42353 2 4.98824 2H12.8941C13.4588 2 13.8824 2.49412 13.8824 3.05882V16.3294H4V16.4Z" stroke="#172B4E" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4 7.08203H13.8824" stroke="#172B4E" stroke-width="1.5" stroke-miterlimit="10" stroke-linejoin="round"/>
+<path d="M6.68213 10.3298H11.2704" stroke="#172B4E" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6.68213 12.9414H11.2704" stroke="#172B4E" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

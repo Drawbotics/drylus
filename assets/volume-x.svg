@@ -1,18 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
-    <title>Icon/Feather/volume-x</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M21.4142136,12.0018773 L23.7071068,14.2947705 C24.0976311,14.6852948 24.0976311,15.3184598 23.7071068,15.7089841 C23.3165825,16.0995084 22.6834175,16.0995084 22.2928932,15.7089841 L20,13.4160909 L17.7071068,15.7089841 C17.3165825,16.0995084 16.6834175,16.0995084 16.2928932,15.7089841 C15.9023689,15.3184598 15.9023689,14.6852948 16.2928932,14.2947705 L18.5857864,12.0018773 L16.2928932,9.70898408 C15.9023689,9.31845979 15.9023689,8.68529481 16.2928932,8.29477052 C16.6834175,7.90424623 17.3165825,7.90424623 17.7071068,8.29477052 L20,10.5876637 L22.2928932,8.29477052 C22.6834175,7.90424623 23.3165825,7.90424623 23.7071068,8.29477052 C24.0976311,8.68529481 24.0976311,9.31845979 23.7071068,9.70898408 L21.4142136,12.0018773 Z M5.64921894,8.0018773 L10.375305,4.22100849 C11.0300683,3.69719782 12,4.16337109 12,5.0018773 L12,19.0018773 C12,19.8403835 11.0300683,20.3065568 10.375305,19.7827461 L5.64921894,16.0018773 L2,16.0018773 C1.44771525,16.0018773 1,15.5541621 1,15.0018773 L1,9.0018773 C1,8.44959255 1.44771525,8.0018773 2,8.0018773 L5.64921894,8.0018773 Z M6.62469505,9.78274611 C6.447382,9.92459655 6.2270715,10.0018773 6,10.0018773 L3,10.0018773 L3,14.0018773 L6,14.0018773 C6.2270715,14.0018773 6.447382,14.0791581 6.62469505,14.2210085 L10,16.9212525 L10,7.08250215 L6.62469505,9.78274611 Z" id="path-1"></path>
-    </defs>
-    <g id="Icon/Feather/volume-x" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <mask id="mask-2" fill="white">
-            <use xlink:href="#path-1"></use>
-        </mask>
-        <use id="Combined-Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
-        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
-            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
-        </g>
-    </g>
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 3.75L3.75 6.75H0.75V11.25H3.75L7.5 14.25V3.75V3.75Z" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16.5 6.75L12 11.25" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 6.75L16.5 11.25" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

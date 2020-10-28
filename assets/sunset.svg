@@ -1,18 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
-    <title>Icon/Feather/sunset</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M11,6.58578644 L11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L13,6.58578644 L15.2928932,4.29289322 C15.6834175,3.90236893 16.3165825,3.90236893 16.7071068,4.29289322 C17.0976311,4.68341751 17.0976311,5.31658249 16.7071068,5.70710678 L12.7071068,9.70710678 C12.3165825,10.0976311 11.6834175,10.0976311 11.2928932,9.70710678 L7.29289322,5.70710678 C6.90236893,5.31658249 6.90236893,4.68341751 7.29289322,4.29289322 C7.68341751,3.90236893 8.31658249,3.90236893 8.70710678,4.29289322 L11,6.58578644 Z M18,18 C18,18.5522847 17.5522847,19 17,19 C16.4477153,19 16,18.5522847 16,18 C16,15.790861 14.209139,14 12,14 C9.790861,14 8,15.790861 8,18 C8,18.5522847 7.55228475,19 7,19 C6.44771525,19 6,18.5522847 6,18 C6,14.6862915 8.6862915,12 12,12 C15.3137085,12 18,14.6862915 18,18 Z M3.51289322,10.9271068 C3.12236893,10.5365825 3.12236893,9.90341751 3.51289322,9.51289322 C3.90341751,9.12236893 4.53658249,9.12236893 4.92710678,9.51289322 L6.34710678,10.9328932 C6.73763107,11.3234175 6.73763107,11.9565825 6.34710678,12.3471068 C5.95658249,12.7376311 5.32341751,12.7376311 4.93289322,12.3471068 L3.51289322,10.9271068 Z M1,19 C0.44771525,19 0,18.5522847 0,18 C0,17.4477153 0.44771525,17 1,17 L3,17 C3.55228475,17 4,17.4477153 4,18 C4,18.5522847 3.55228475,19 3,19 L1,19 Z M21,19 C20.4477153,19 20,18.5522847 20,18 C20,17.4477153 20.4477153,17 21,17 L23,17 C23.5522847,17 24,17.4477153 24,18 C24,18.5522847 23.5522847,19 23,19 L21,19 Z M19.0671068,12.3471068 C18.6765825,12.7376311 18.0434175,12.7376311 17.6528932,12.3471068 C17.2623689,11.9565825 17.2623689,11.3234175 17.6528932,10.9328932 L19.0728932,9.51289322 C19.4634175,9.12236893 20.0965825,9.12236893 20.4871068,9.51289322 C20.8776311,9.90341751 20.8776311,10.5365825 20.4871068,10.9271068 L19.0671068,12.3471068 Z M23,21 C23.5522847,21 24,21.4477153 24,22 C24,22.5522847 23.5522847,23 23,23 L1,23 C0.44771525,23 0,22.5522847 0,22 C0,21.4477153 0.44771525,21 1,21 L23,21 Z" id="path-1"></path>
-    </defs>
-    <g id="Icon/Feather/sunset" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <mask id="mask-2" fill="white">
-            <use xlink:href="#path-1"></use>
-        </mask>
-        <use id="Combined-Shape" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
-        <g id="Color/Neutral/Black" mask="url(#mask-2)" fill="#172B4E" fill-rule="nonzero">
-            <rect id="Rectangle" x="0" y="0" width="24" height="24"></rect>
-        </g>
-    </g>
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.75 12.75C12.75 10.6789 11.0711 9 9 9C6.92893 9 5.25 10.6789 5.25 12.75" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9 6V0.75" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3.16504 6.91504L4.23004 7.98004" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M0.75 12.75H2.25" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15.75 12.75H17.25" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13.77 7.98004L14.835 6.91504" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17.25 15.75H0.75" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 3L9 6L6 3" stroke="#172B4E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
