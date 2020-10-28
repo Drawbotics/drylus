@@ -3,6 +3,38 @@ const camelCase = require('lodash/camelCase');
 
 const ICONS_CDN_PATH = process.env.NODE_ENV !== "production" ? 'https://drawbotics-cdn.s3-eu-west-1.amazonaws.com/drycons' : 'https://cdn.drawbotics.com/drycons';
 
+// Maintain backward compatibility with old icon names
+const aliases = {
+  'next': ['arrow-right-line'],
+  'outdoor': ['beach-umbrella'],
+  'room': ['bed'],
+  'insights': ['data-points'],
+  'budget': ['money-bag'],
+  'send': ['paper-plane-horizontal'],
+  'drone-shoot': ['drone-shooting'],
+  'virtual-tour-exterior': ['exterior-tour-3d'],
+  'virtual-tour-interior': ['interior-tour-3d'],
+  'landing': ['landing-page'],
+  'maquette-360': ['model-360'],
+  'photo-shoot': ['photo-shooting'],
+  'revo': ['revo-alt'],
+  'tourama': ['tour-3d'],
+  'vr-headset': ['vr'],
+};
+
+function addAliases(file) {
+  const contents = fs.readFileSync(file, 'utf8');
+  fs.writeFileSync(
+    file,
+    contents.replace(
+      /Drycon-(\S+)::before/gm,
+      (_, $1) => aliases[$1] != null
+        ? `Drycon-${$1}::before, ${aliases[$1].map((alias) => `.Drycon-${alias}::before`).join(', ')}`
+        : `Drycon-${$1}::before`,
+    ),
+  );
+}
+
 function setFontSize(size, file) {
   const contents = fs.readFileSync(file, 'utf8');
   fs.writeFileSync(
@@ -63,6 +95,7 @@ function generateTSType(targetFile, iconsFolder) {
 }
 
 module.exports = {
+  addAliases,
   setFontSize,
   generateJSFunction,
   generateObjectMappings,
