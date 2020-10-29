@@ -64,7 +64,7 @@ export interface IconProps {
   /** Name of the icon */
   name: IconType;
 
-  /** Makes icon T H I C C */
+  /** Makes icon bold */
   bold?: boolean;
 
   /** Triggered when the icon is clicked */
