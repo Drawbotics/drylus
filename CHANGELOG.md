@@ -1,3 +1,16 @@
+# v6.10.4 (Thu Oct 29 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/icons`
+  - fix video animation icon name  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.10.3 (Thu Oct 29 2020)
 
 #### ⚠️  Pushed to master
