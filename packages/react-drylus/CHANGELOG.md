@@ -1,3 +1,16 @@
+# v6.10.7 (Thu Oct 29 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/icons`, `@drawbotics/react-drylus`
+  - sync icons and react  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.10.5 (Thu Oct 29 2020)
 
 #### ⚠️  Pushed to master
