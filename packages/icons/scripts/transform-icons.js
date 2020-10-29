@@ -10,6 +10,7 @@ function _fixDimensions(string) {
 async function transform(iconsFolder, cacheFolder) {
   // clean icons cache
   rimraf.sync(cacheFolder);
+  console.log('Cleared cache');
 
   // create folder
   fs.mkdirSync(cacheFolder);
