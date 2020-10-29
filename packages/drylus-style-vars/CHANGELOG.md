@@ -1,3 +1,16 @@
+# v6.10.4 (Thu Oct 29 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/drylus-style-vars`, `@drawbotics/icons`, `@drawbotics/vanilla-drylus`
+  - restore env vars  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.3.1 (Thu Oct 29 2020)
 
 #### ⚠️  Pushed to master
