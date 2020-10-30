@@ -227,13 +227,15 @@ export interface InputProps<T = string> {
   prefix?:
     | React.ReactElement<typeof Icon>
     | React.ReactElement<typeof Button>
-    | React.ReactElement<typeof Select>;
+    | React.ReactElement<typeof Select>
+    | React.ReactNode;
 
   /** Node to be rendered at the end of the input field, for now limited to text, Button and Select */
   suffix?:
     | React.ReactElement<typeof Icon>
     | React.ReactElement<typeof Button>
-    | React.ReactElement<typeof Select>;
+    | React.ReactElement<typeof Select>
+    | React.ReactNode;
 
   /** Additional class name to override styles */
   className?: string;
@@ -260,7 +262,7 @@ export interface InputProps<T = string> {
   /** Used for style overrides */
   style?: Style;
 
-  /** Reponsive prop overrides */
+  /** Responsive prop overrides */
   responsive?: Responsive<this>;
 
   /** @private */
