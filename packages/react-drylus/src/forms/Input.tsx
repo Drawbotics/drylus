@@ -1,5 +1,6 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
+import get from 'lodash/get';
 import React, { forwardRef, useState } from 'react';
 
 import { Button, Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
@@ -312,8 +313,8 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
     }
   };
 
-  const isPrefixComponent = prefix?.type === Button || prefix?.type === Select;
-  const isSuffixComponent = suffix?.type === Button || suffix?.type === Select;
+  const isPrefixComponent = get(prefix, 'type') === Button || get(prefix, 'type') === Select;
+  const isSuffixComponent = get(suffix, 'type') === Button || get(suffix, 'type') === Select;
 
   return (
     <div
@@ -337,7 +338,7 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
                 data-element="prefix"
                 className={cx(styles.fix, styles.prefix, {
                   [styles.prefixComponent]: isPrefixComponent,
-                  [styles.transparentButton]: (prefix?.props as any)?.category == null, // TODO find better
+                  [styles.transparentButton]: get(prefix, 'props')?.category == null, // TODO find better
                   [styles.smallFix]: size === Size.SMALL && !isPrefixComponent,
                 })}>
                 {isPrefixComponent && size === Size.SMALL
@@ -413,7 +414,7 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
                 data-element="suffix"
                 className={cx(styles.fix, styles.suffix, {
                   [styles.suffixComponent]: isSuffixComponent,
-                  [styles.transparentButton]: (suffix?.props as any)?.category == null,
+                  [styles.transparentButton]: get(suffix, 'props')?.category == null,
                   [styles.smallFix]: size === Size.SMALL && !isSuffixComponent,
                 })}>
                 {isSuffixComponent && size === Size.SMALL
