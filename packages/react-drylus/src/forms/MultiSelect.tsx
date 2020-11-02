@@ -247,6 +247,12 @@ interface TypeZoneProps {
 const TypeZone = forwardRef<HTMLInputElement, TypeZoneProps>(
   ({ placeholder, onPressEnter, onPressDelete }, ref) => {
     const [value, setValue] = useState('');
+
+    const handleSubmit = () => {
+      onPressEnter({ value: `${value}_${Math.random()}`, label: value });
+      setValue('');
+    };
+
     return (
       <div className={styles.typeZone}>
         <input
@@ -256,12 +262,12 @@ const TypeZone = forwardRef<HTMLInputElement, TypeZoneProps>(
           placeholder={placeholder}
           onKeyDown={(e) => {
             if (e.key === 'Enter' && value !== '') {
-              onPressEnter({ value: `${value}_${Math.random()}`, label: value });
-              setValue('');
+              handleSubmit();
             } else if ((e.key === 'Backspace' || e.key === 'Delete') && value === '') {
               onPressDelete();
             }
           }}
+          onBlur={value !== '' ? handleSubmit : undefined}
           onChange={(e: React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value)}
         />
       </div>
