@@ -17,7 +17,7 @@ const styles = {
     width: 100%;
 
     &::after {
-      content: '\\ead6';
+      content: '\\ea33';
       font-family: 'drycons';
       color: ${sv.colorPrimary};
       position: absolute;
@@ -33,6 +33,11 @@ const styles = {
       overflow: hidden;
       opacity: 0;
       position: absolute;
+    }
+  `,
+  noChevron: css`
+    &::after {
+      content: none;
     }
   `,
   select: css`
@@ -474,6 +479,7 @@ export const MultiSelect = <T extends any, K extends string>({
         [styles.error]: error != null && error !== false,
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
         [styles.smallReadOnly]: onChange == null && size === Size.SMALL,
+        [styles.noChevron]: hideDropdown,
       })}
       ref={rootRef}>
       {run(() => {
