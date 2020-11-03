@@ -17,7 +17,7 @@ const styles = {
     width: 100%;
 
     &::after {
-      content: '\\ead6';
+      content: '\\ea33';
       font-family: 'drycons';
       color: ${sv.colorPrimary};
       position: absolute;
@@ -33,6 +33,11 @@ const styles = {
       overflow: hidden;
       opacity: 0;
       position: absolute;
+    }
+  `,
+  noChevron: css`
+    &::after {
+      content: none;
     }
   `,
   select: css`
@@ -242,6 +247,12 @@ interface TypeZoneProps {
 const TypeZone = forwardRef<HTMLInputElement, TypeZoneProps>(
   ({ placeholder, onPressEnter, onPressDelete }, ref) => {
     const [value, setValue] = useState('');
+
+    const handleSubmit = () => {
+      onPressEnter({ value: `${value}_${Math.random()}`, label: value });
+      setValue('');
+    };
+
     return (
       <div className={styles.typeZone}>
         <input
@@ -251,12 +262,12 @@ const TypeZone = forwardRef<HTMLInputElement, TypeZoneProps>(
           placeholder={placeholder}
           onKeyDown={(e) => {
             if (e.key === 'Enter' && value !== '') {
-              onPressEnter({ value: `${value}_${Math.random()}`, label: value });
-              setValue('');
+              handleSubmit();
             } else if ((e.key === 'Backspace' || e.key === 'Delete') && value === '') {
               onPressDelete();
             }
           }}
+          onBlur={value !== '' ? handleSubmit : undefined}
           onChange={(e: React.FormEvent<HTMLInputElement>) => setValue(e.currentTarget.value)}
         />
       </div>
@@ -474,6 +485,7 @@ export const MultiSelect = <T extends any, K extends string>({
         [styles.error]: error != null && error !== false,
         [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
         [styles.smallReadOnly]: onChange == null && size === Size.SMALL,
+        [styles.noChevron]: hideDropdown,
       })}
       ref={rootRef}>
       {run(() => {
