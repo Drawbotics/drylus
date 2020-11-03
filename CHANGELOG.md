@@ -1,3 +1,16 @@
+# v6.11.0 (Tue Nov 03 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Improve multi select with allowtyping [#160](https://github.com/Drawbotics/drylus/pull/160) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.10.9 (Fri Oct 30 2020)
 
 #### ⚠️  Pushed to master
