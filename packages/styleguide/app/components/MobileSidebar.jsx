@@ -30,6 +30,7 @@ const fadeIn = keyframes`
   }
   to {
     opacity: 1;
+    pointer-events: auto;
   }
 `;
 
@@ -139,10 +140,10 @@ const MobileSidebar = () => {
         raw
         responsive={{
           M: {
-            width: 'auto',
+            width: '100%',
           },
         }}>
-        <div className={styles.close} style={{ display: sidebarOpen ? null : 'none' }}>
+        <div onClick={() => toggleSidebar(false)} className={styles.close} style={{ display: sidebarOpen ? null : 'none' }}>
           <Icon name="x" />
         </div>
         <div className={styles.content}>
