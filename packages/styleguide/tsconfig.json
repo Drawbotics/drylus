@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "preserve",
     "moduleResolution": "node",
-    "module": "CommonJS",
-    "allowJs": true,
+    "allowJs": false,
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "ES2019",
+    "target": "ES2018",
     "sourceMap": false,
     "outDir": "./dist",
     "incremental": true,

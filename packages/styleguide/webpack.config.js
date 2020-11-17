@@ -147,6 +147,16 @@ module.exports = {
               rootMode: 'upward',
             },
           },
+          // {
+          //   loader: 'ts-loader',
+          //   options: {
+          //     onlyCompileBundledFiles: true,
+          //     compilerOptions: {
+          //       noUnusedLocals: isProduction,
+          //       noUnusedParameters: isProduction,
+          //     },
+          //   },
+          // },
           {
             loader: '@mdx-js/loader',
             options: {
