@@ -660,7 +660,7 @@ const EmptyTable = ({ columns, emptyContent }: EmptyTableProps) => {
     return (
       <TBody>
         <TRow>
-          <TCell>
+          <TCell style={{ background: sv.white }}>
             <div className={styles.emptyTableCell}>
               <div className={styles.emptyTableHeader}>
                 {columns.map((column, i) => (
@@ -691,7 +691,7 @@ const EmptyTable = ({ columns, emptyContent }: EmptyTableProps) => {
       </THead>
       <TBody>
         <TRow>
-          <TCell colSpan={100}>
+          <TCell colSpan={100} style={{ background: sv.white }}>
             <div className={styles.emptyTableCell}>{emptyContent}</div>
           </TCell>
         </TRow>
