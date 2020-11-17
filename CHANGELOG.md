@@ -1,3 +1,17 @@
+# v6.11.1 (Tue Nov 17 2020)
+
+#### ⚠️  Pushed to master
+
+- fix mobile sidebar in styleguide  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Set empty table background to white  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.11.0 (Tue Nov 03 2020)
 
 #### 🚀 Enhancement - Minor change

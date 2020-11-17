@@ -1,3 +1,16 @@
+# v6.11.1 (Tue Nov 17 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Set empty table background to white  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.10.9 (Fri Oct 30 2020)
 
 #### ⚠️  Pushed to master
