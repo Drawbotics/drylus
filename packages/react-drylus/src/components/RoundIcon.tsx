@@ -36,7 +36,7 @@ const styles = {
     width: ${sv.marginLarge};
 
     > i {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       margin-top: 0;
     }
   `,
@@ -46,23 +46,23 @@ const styles = {
     }
   `,
   red: css`
-    background: ${sv.redLight};
+    background: ${sv.redLighter};
     color: ${sv.redDark};
   `,
   blue: css`
-    background: ${sv.blueLight};
+    background: ${sv.blueLighter};
     color: ${sv.blueDark};
   `,
   green: css`
-    background: ${sv.greenLight};
+    background: ${sv.greenLighter};
     color: ${sv.greenDark};
   `,
   orange: css`
-    background: ${sv.orangeLight};
+    background: ${sv.orangeLighter};
     color: ${sv.orangeDark};
   `,
   brand: css`
-    background: ${sv.brandLight};
+    background: ${sv.brandLighter};
     color: ${sv.brandDark};
   `,
   inversed: css`
@@ -156,7 +156,7 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
       })}
       style={
         customSize
-          ? { height: size, width: size, fontSize: (size as number) * 0.5, ...style }
+          ? { height: size, width: size, fontSize: (size as number) * 0.4, ...style }
           : style
       }>
       <Icon name={name} bold={bold} />
