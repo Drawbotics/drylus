@@ -1,3 +1,17 @@
+# v6.11.2 (Wed Nov 18 2020)
+
+#### ⚠️  Pushed to master
+
+- allow skip-release as valid label  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - improve round icon look  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.11.1 (Tue Nov 17 2020)
 
 #### ⚠️  Pushed to master
