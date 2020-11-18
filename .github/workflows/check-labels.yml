@@ -12,4 +12,4 @@ jobs:
         uses: jesusvasquez333/verify-pr-label-action@v1.1.0
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
-          valid-labels: 'major, minor, patch'
+          valid-labels: 'major, minor, patch, skip-release'
