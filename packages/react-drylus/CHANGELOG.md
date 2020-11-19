@@ -1,3 +1,16 @@
+# v6.11.3 (Thu Nov 19 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - use default color in round icon  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.11.2 (Wed Nov 18 2020)
 
 #### ⚠️  Pushed to master
