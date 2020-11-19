@@ -92,7 +92,7 @@ export const ListTile = ({ responsive, ...rest }: ListTileProps) => {
                   </div>
                 );
               } else {
-                return <div className={styles.withMargin}>{title}</div>;
+                return subtitle != null ? <div className={styles.withMargin}>{title}</div> : title;
               }
             }
           })}
