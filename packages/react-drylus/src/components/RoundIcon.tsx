@@ -47,23 +47,23 @@ const styles = {
   `,
   red: css`
     background: ${sv.redLighter};
-    color: ${sv.redDark};
+    color: ${sv.red};
   `,
   blue: css`
     background: ${sv.blueLighter};
-    color: ${sv.blueDark};
+    color: ${sv.blue};
   `,
   green: css`
     background: ${sv.greenLighter};
-    color: ${sv.greenDark};
+    color: ${sv.green};
   `,
   orange: css`
     background: ${sv.orangeLighter};
-    color: ${sv.orangeDark};
+    color: ${sv.orange};
   `,
   brand: css`
     background: ${sv.brandLighter};
-    color: ${sv.brandDark};
+    color: ${sv.brand};
   `,
   inversed: css`
     color: ${sv.white};
