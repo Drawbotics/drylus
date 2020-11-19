@@ -40,21 +40,17 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
   box-shadow: none;
 }
 
-.emotion-2 {
+.emotion-1 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
 }
 
-.emotion-4 {
+.emotion-3 {
   display: inline-block;
 }
 
-.emotion-1 {
-  margin-bottom: calc(8px / 2);
-}
-
-.emotion-3 {
+.emotion-2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -74,25 +70,21 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
 }
 
 <div
-  className="emotion-4"
+  className="emotion-3"
 >
   <div
-    className="emotion-3"
+    className="emotion-2"
   >
     <div
-      className="emotion-2"
+      className="emotion-1"
       style={Object {}}
     >
-      <div
-        className="emotion-1"
+      <button
+        className="emotion-0"
+        type="button"
       >
-        <button
-          className="emotion-0"
-          type="button"
-        >
-          Button
-        </button>
-      </div>
+        Button
+      </button>
     </div>
   </div>
 </div>
