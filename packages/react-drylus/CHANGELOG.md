@@ -1,3 +1,18 @@
+# v6.11.4 (Thu Nov 19 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - udpate tests  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - remove ListTile title margin when no subtitle is given  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.11.3 (Thu Nov 19 2020)
 
 #### ⚠️  Pushed to master
