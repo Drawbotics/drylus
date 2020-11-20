@@ -4,7 +4,16 @@ import { css, cx } from 'emotion';
 import { motion } from 'framer-motion';
 import get from 'lodash/get';
 import omit from 'lodash/omit';
-import React, { Fragment, createContext, useContext, useEffect, useRef, useState } from 'react';
+import toString from 'lodash/toString';
+import React, {
+  Fragment,
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import { placeholderStyles } from '../components';
 import { Size } from '../enums';
@@ -383,6 +392,7 @@ export const TCell = ({
   style,
   ...props
 }: TCellProps) => {
+  console.log('rendering cell', children);
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const className = cx(styles.cell, {
@@ -460,7 +470,7 @@ export interface TRowProps {
 }
 
 export const TRow = ({
-  children,
+  children: _children,
   nested,
   parent,
   highlighted,
@@ -471,6 +481,7 @@ export const TRow = ({
   style,
   animated,
 }: TRowProps) => {
+  console.log('rendering row');
   const [rowsStates, handleSetRowState] = useContext(RowsContext);
   const collapsed = nested && !rowsStates[nested];
   const animationProps =
@@ -485,6 +496,7 @@ export const TRow = ({
         }
       : {};
 
+  const children = useMemo(() => _children, [_children]);
   checkComponentProps({ children }, { children: TCell });
 
   return (
@@ -775,7 +787,7 @@ function _generateTable({
   } else {
     const hasData = data.data != null;
     const row = hasData ? omit(data, 'data') : data;
-    const uniqId = Object.values(row).reduce<string>((memo, v) => `${memo}-${v}`, '');
+    const uniqId = Object.values(row).reduce<string>((memo, v) => `${memo}-${toString(v)}`, '');
     const renderData = renderCell ?? renderChildCell;
     const parentRow = (
       <TRow

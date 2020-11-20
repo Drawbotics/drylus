@@ -7,6 +7,8 @@ import {
   TBody,
   EmptyState,
   Checkbox,
+  Input,
+  Size,
 } from '@drawbotics/react-drylus';
 import sv from '@drawbotics/drylus-style-vars';
 
@@ -511,4 +513,34 @@ export const dataWithCheckbox = [{
       { label: 'Fourth column', value: 'd' },
     ]} data={dataWithCheckbox} />
   </div>
+</Playground>
+
+
+export const OptimizedWrapper = ({ render }) => {
+  const [tableData, setTableData] = useState(data);
+  const onChangeValue = (newRow) => {
+    const newData = tableData.map((row) => row.id === newRow.id ? newRow : row);
+    setTableData(newData);
+  }
+  const _data = tableData.map((row) => ({
+    id: row.id,
+    a: <Input value={row.a} onChange={(v) => onChangeValue({ ...row, a: v })} size={Size.SMALL} />,
+    b: <Input value={row.b} onChange={(v) => onChangeValue({ ...row, b: v })} size={Size.SMALL} />,
+    c: <Input value={row.c} onChange={(v) => onChangeValue({ ...row, c: v })} size={Size.SMALL} />,
+  }));
+  console.log(_data)
+  return (
+    <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
+      {render({ data: _data })}
+    </div>
+  );
+}
+
+### Optimized table
+Sometimes we have large tables with a lot of data which can change, and re-rendering the whole table on a single field change can be expensive. Thus you can pass the `optimized` option to enable memoization of the data, and only the affected rows will be re-rendered.
+
+<Playground>
+  <OptimizedWrapper render={({ data }) => (
+    <Table header={['a', 'b', 'c']} data={data} />
+  )} />
 </Playground>
