@@ -3,10 +3,12 @@ import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
 import { motion } from 'framer-motion';
 import get from 'lodash/get';
+import isEqual from 'lodash/isEqual';
 import omit from 'lodash/omit';
 import toString from 'lodash/toString';
 import React, {
   Fragment,
+  ReactNode,
   createContext,
   useContext,
   useEffect,
@@ -319,14 +321,14 @@ const styles = {
     tbody > tr > td:first-of-type {
       position: sticky;
       left: 0;
-      z-index: 9999;
+      z-index: 999;
     }
 
     thead > tr > th:last-of-type,
     tbody > tr > td:last-of-type {
       position: sticky;
       right: 0;
-      z-index: 9999;
+      z-index: 999;
     }
   `,
   rightDivisor: css`
@@ -392,7 +394,6 @@ export const TCell = ({
   style,
   ...props
 }: TCellProps) => {
-  console.log('rendering cell', children);
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const className = cx(styles.cell, {
@@ -744,8 +745,44 @@ function _addAttributesToCells(
   }
 }
 
+interface MemoizedTRowProps extends Omit<TRowProps, 'children'> {
+  header?: HeaderData;
+  memoData?: TableData;
+  rowData: Omit<TableEntry, 'data'>;
+  renderData: (data: ReactNode, row: number, column: number) => ReactNode;
+}
+
+const MemoizedTRow = React.memo(
+  ({ header, rowData, renderData, ...rest }: MemoizedTRowProps) => {
+    return (
+      <TRow {...rest}>
+        {run(() => {
+          if (header != null) {
+            return header.map((item: any, i: number) => {
+              const path = typeof item === 'string' || typeof item === 'number' ? item : item.value;
+              return (
+                <TCell key={`${i}-${get(rowData, path)}`}>
+                  {renderData(get(rowData, path), i, header.length)}
+                </TCell>
+              );
+            });
+          } else {
+            return Object.values(rowData).map((value, i, arr) => (
+              <TCell key={`${i}-${value}`}>{renderData(value, i, arr.length)}</TCell>
+            ));
+          }
+        })}
+      </TRow>
+    );
+  },
+  (prevProps, nextProps) => isEqual(prevProps.memoData, nextProps.memoData),
+);
+
+MemoizedTRow.displayName = 'TRow';
+
 function _generateTable({
   data,
+  memoDataValues,
   header,
   renderCell,
   renderChildCell = (x) => x,
@@ -756,6 +793,7 @@ function _generateTable({
   animated,
 }: {
   data: Array<TableEntry> | TableEntry;
+  memoDataValues?: Array<TableEntry> | TableEntry;
   header?: HeaderData;
   renderCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
   renderChildCell: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
@@ -769,9 +807,13 @@ function _generateTable({
     return (
       <TBody key="body" animated={animated}>
         {data
-          .map((rows) =>
+          .map((rows, i) =>
             _generateTable({
               data: rows,
+              memoDataValues:
+                memoDataValues != null && Array.isArray(memoDataValues)
+                  ? memoDataValues[i]
+                  : undefined,
               header,
               renderCell,
               renderChildCell,
@@ -786,34 +828,21 @@ function _generateTable({
     );
   } else {
     const hasData = data.data != null;
-    const row = hasData ? omit(data, 'data') : data;
-    const uniqId = Object.values(row).reduce<string>((memo, v) => `${memo}-${toString(v)}`, '');
+    const rowData = hasData ? omit(data, 'data') : data;
+    const uniqId = Object.values(rowData).reduce<string>((memo, v) => `${memo}-${toString(v)}`, '');
     const renderData = renderCell ?? renderChildCell;
     const parentRow = (
-      <TRow
+      <MemoizedTRow
+        header={header}
+        renderData={renderData}
+        rowData={rowData}
         animated={animated}
         key={uniqId}
         parent={hasData ? uniqId : undefined}
-        onClick={() => onClickRow(row)}
+        onClick={() => onClickRow(rowData)}
         clickable={clickable}
-        highlighted={activeRow != null && row.id != null && activeRow === row.id}>
-        {run(() => {
-          if (header != null) {
-            return header.map((item, i) => {
-              const path = typeof item === 'string' || typeof item === 'number' ? item : item.value;
-              return (
-                <TCell key={`${i}-${get(row, path)}`}>
-                  {renderData(get(row, path), i, header.length)}
-                </TCell>
-              );
-            });
-          } else {
-            return Object.values(row).map((value, i, arr) => (
-              <TCell key={`${i}-${value}`}>{renderData(value, i, arr.length)}</TCell>
-            ));
-          }
-        })}
-      </TRow>
+        highlighted={activeRow != null && rowData.id != null && activeRow === rowData.id}
+      />
     );
 
     if (hasData) {
@@ -822,13 +851,17 @@ function _generateTable({
         <TRow
           key={`${uniqId}-1`}
           nested={uniqId}
-          onClick={() => onClickRow(row)}
+          onClick={() => onClickRow(rowData)}
           clickable={clickable}>
           <TCell>
             <Table>
               {
                 _generateTable({
                   data: data.data ?? [],
+                  memoDataValues:
+                    memoDataValues != null && !Array.isArray(memoDataValues)
+                      ? memoDataValues?.data
+                      : [],
                   header: childHeader,
                   renderCell: undefined,
                   renderChildCell,
@@ -840,6 +873,7 @@ function _generateTable({
         </TRow>,
       ];
     } else {
+      console.log('no data');
       return [parentRow];
     }
   }
@@ -863,6 +897,9 @@ export interface TableProps {
 
   /** If passed, the table will be generated from this, and children will be ignored */
   data?: TableData;
+
+  /** When given, each table row will be shallowly compared to prevent unnecessary renders. Should have the same structure as the data prop to enable 1-to-1 equivalence */
+  memoDataValues?: TableData;
 
   /**
    * Returns the child given to each row cell. Params (value, index, columns)
@@ -953,6 +990,7 @@ export const Table = ({
   animated,
   style,
   loadingRows = 5,
+  memoDataValues,
 }: TableProps) => {
   const [rowsStates, setRowState] = useState<Record<string | number, boolean>>({});
   const { screenSize, ScreenSizes } = useScreenSize();
@@ -1075,6 +1113,7 @@ export const Table = ({
           </THead>,
           _generateTable({
             data,
+            memoDataValues,
             header,
             renderCell,
             renderChildCell,
