@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 
 import { themeStyles } from '../base';
 import { Color, Position, Size, Tier } from '../enums';
-import { OnClickCallback, Responsive, Style } from '../types';
+import { Responsive, Style } from '../types';
 import { fsv, run, useResponsiveProps } from '../utils';
 import { Button } from './Button';
 import { Icon } from './Icon';
@@ -111,7 +111,7 @@ export interface BaseDrawerProps {
   footer?: React.ReactNode;
 
   /** Triggered when the "close" button is clicked */
-  onClickClose?: OnClickCallback<HTMLElement>;
+  onClickClose?: VoidFunction;
 
   /** Shown at the top left of the drawer, not rendered if raw is true */
   title?: ReactNode;
@@ -297,8 +297,9 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
   if (asOverlay) {
     if (outletElement == null) return null;
     const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (e.target === overlayElement?.current && onClickOverlay != null) {
-        onClickOverlay();
+      if (e.target === overlayElement?.current && onClickClose != null) {
+        onClickClose();
+        onClickOverlay?.();
       }
     };
 
