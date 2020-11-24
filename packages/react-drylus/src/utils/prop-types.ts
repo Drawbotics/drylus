@@ -48,15 +48,21 @@ export function checkComponentProps(
         currentType = prop.type?.name ?? prop.type;
 
         if (Array.isArray(expectedType)) {
-          return expectedType.includes(prop.type);
+          return (
+            expectedType.includes(prop.type) ||
+            expectedType.map((func) => func.name).includes(prop.type.displayName)
+          );
         }
-        return prop.type === expectedType;
+        return prop.type === expectedType || prop.type.displayName === expectedType.name;
       });
     } else {
       if (Array.isArray(expectedType)) {
-        isTypeValid = expectedType.includes(currentProp.type);
+        isTypeValid =
+          expectedType.includes(currentProp.type) ||
+          expectedType.map((func) => func.name).includes(currentProp.type.displayName);
       } else {
-        isTypeValid = currentProp.type === expectedType;
+        isTypeValid =
+          currentProp.type === expectedType || currentProp.type.displayName === expectedType.name;
       }
       currentType = currentProp.type?.name ?? currentProp.type;
     }

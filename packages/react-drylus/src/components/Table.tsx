@@ -481,7 +481,6 @@ export const TRow = ({
   style,
   animated,
 }: TRowProps) => {
-  console.log('rendering row');
   const [rowsStates, handleSetRowState] = useContext(RowsContext);
   const collapsed = nested && !rowsStates[nested];
   const animationProps =
@@ -533,6 +532,8 @@ export const TRow = ({
     </motion.tr>
   );
 };
+
+TRow.displayName = 'TRow';
 
 export interface THeadProps {
   children:
@@ -605,7 +606,7 @@ export const TBody = ({ children, animated }: TBodyProps) => {
           animated,
           alt: light,
           lastParentRow: i === childrenCount - 1,
-        } as Partial<TRowProps>);
+        } as Partial<typeof TRow>);
       })}
     </motion.tbody>
   );
@@ -743,35 +744,41 @@ function _addAttributesToCells(
   }
 }
 
+function _generateRowChildren({
+  header,
+  rowData,
+  renderData,
+}: {
+  header?: HeaderData;
+  rowData: Omit<TableEntry, 'data'>;
+  renderData: (data: ReactNode, row: number, column: number) => ReactNode;
+}): ReactNode {
+  if (header != null) {
+    return header.map((item: any, i: number) => {
+      const path = typeof item === 'string' || typeof item === 'number' ? item : item.value;
+      return (
+        <TCell key={`${i}-${get(rowData, path)}`}>
+          {renderData(get(rowData, path), i, header.length)}
+        </TCell>
+      );
+    });
+  } else {
+    return Object.values(rowData).map((value, i, arr) => (
+      <TCell key={`${i}-${value}`}>{renderData(value, i, arr.length)}</TCell>
+    ));
+  }
+}
+
 interface MemoizedTRowProps extends Omit<TRowProps, 'children'> {
   header?: HeaderData;
-  memoData?: TableData;
+  memoData?: TableEntry;
   rowData: Omit<TableEntry, 'data'>;
   renderData: (data: ReactNode, row: number, column: number) => ReactNode;
 }
 
 const MemoizedTRow = React.memo(
   ({ header, rowData, renderData, ...rest }: MemoizedTRowProps) => {
-    return (
-      <TRow {...rest}>
-        {run(() => {
-          if (header != null) {
-            return header.map((item: any, i: number) => {
-              const path = typeof item === 'string' || typeof item === 'number' ? item : item.value;
-              return (
-                <TCell key={`${i}-${get(rowData, path)}`}>
-                  {renderData(get(rowData, path), i, header.length)}
-                </TCell>
-              );
-            });
-          } else {
-            return Object.values(rowData).map((value, i, arr) => (
-              <TCell key={`${i}-${value}`}>{renderData(value, i, arr.length)}</TCell>
-            ));
-          }
-        })}
-      </TRow>
-    );
+    return <TRow {...rest}>{_generateRowChildren({ header, rowData, renderData })}</TRow>;
   },
   (prevProps, nextProps) => isEqual(prevProps.memoData, nextProps.memoData),
 );
@@ -829,19 +836,31 @@ function _generateTable({
     const rowData = hasData ? omit(data, 'data') : data;
     const uniqId = Object.values(rowData).reduce<string>((memo, v) => `${memo}-${toString(v)}`, '');
     const renderData = renderCell ?? renderChildCell;
-    const parentRow = (
-      <MemoizedTRow
-        header={header}
-        renderData={renderData}
-        rowData={rowData}
-        animated={animated}
-        key={uniqId}
-        parent={hasData ? uniqId : undefined}
-        onClick={() => onClickRow(rowData)}
-        clickable={clickable}
-        highlighted={activeRow != null && rowData.id != null && activeRow === rowData.id}
-      />
-    );
+    const parentRow =
+      memoDataValues != null && !Array.isArray(memoDataValues) ? (
+        <MemoizedTRow
+          header={header}
+          renderData={renderData}
+          memoData={memoDataValues}
+          rowData={rowData}
+          animated={animated}
+          key={uniqId}
+          parent={hasData ? uniqId : undefined}
+          onClick={() => onClickRow(rowData)}
+          clickable={clickable}
+          highlighted={activeRow != null && rowData.id != null && activeRow === rowData.id}
+        />
+      ) : (
+        <TRow
+          animated={animated}
+          key={uniqId}
+          parent={hasData ? uniqId : undefined}
+          onClick={() => onClickRow(rowData)}
+          clickable={clickable}
+          highlighted={activeRow != null && rowData.id != null && activeRow === rowData.id}>
+          {_generateRowChildren({ header, rowData, renderData })}
+        </TRow>
+      );
 
     if (hasData) {
       return [
@@ -871,7 +890,6 @@ function _generateTable({
         </TRow>,
       ];
     } else {
-      console.log('no data');
       return [parentRow];
     }
   }

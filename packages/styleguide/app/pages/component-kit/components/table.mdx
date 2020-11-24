@@ -23,7 +23,7 @@ import { Table, THead, TCell, TRow, TBody } from '@drawbotics/react-drylus';
 
 __Example__
 
-<!-- Here is a simple example of a table. By default it has no elevation. If the table is the only content in the page it can be wrapped in a Panel to add elevation.
+Here is a simple example of a table. By default it has no elevation. If the table is the only content in the page it can be wrapped in a Panel to add elevation.
 
 <Playground component={Table}>
   <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
@@ -398,7 +398,7 @@ You can set `emptyContent` to replace the table content and show something else.
   <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
     <Table header={[ 'age', 'height', 'something', 'else' ]} emptyContent={<EmptyState description="Sorry! This table is empty" />} />
   </div>
-</Playground> -->
+</Playground>
 
 ### Large scrollabe table
 Sometimes there is too much data (columns) that we need to display, and given the limited screen width, the table can be set to `scrollable` which will set the first and last columns floating to show the user that there is more data.
@@ -526,14 +526,14 @@ export const OptimizedWrapper = ({ render }) => {
     a: <Input value={row.a} onChange={(v) => onChangeValue({ ...row, a: v })} size={Size.SMALL} />,
     b: <Input value={row.b} onChange={(v) => onChangeValue({ ...row, b: v })} size={Size.SMALL} />,
     c: <Input value={row.c} onChange={(v) => onChangeValue({ ...row, c: v })} size={Size.SMALL} />,
+    d: <Input value={row.d} onChange={(v) => onChangeValue({ ...row, d: v })} size={Size.SMALL} />,
+    e: <Input value={row.e} onChange={(v) => onChangeValue({ ...row, e: v })} size={Size.SMALL} />,
+    f: <Input value={row.f} onChange={(v) => onChangeValue({ ...row, f: v })} size={Size.SMALL} />,
+    g: <Input value={row.g} onChange={(v) => onChangeValue({ ...row, g: v })} size={Size.SMALL} />,
+    h: <Input value={row.h} onChange={(v) => onChangeValue({ ...row, h: v })} size={Size.SMALL} />,
   }));
-  const memoMapping = tableData.map((row) => ({
-    id: row.id,
-    a: row.a,
-    b: row.b,
-    c: row.c,
-  }));
-  console.log(renderData)
+  const memoMapping = tableData;
+  // console.log(renderData)
   return (
     <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
       {render({ data: renderData, memoMapping })}
@@ -542,10 +542,18 @@ export const OptimizedWrapper = ({ render }) => {
 }
 
 ### Optimized table
-Sometimes we have large tables with a lot of data which can change, and re-rendering the whole table on a single field change can be expensive. Thus you can pass the `optimized` option to enable memoization of the data, and only the affected rows will be re-rendered.
+Sometimes we have large tables with a lot of data which can change, and re-rendering the whole table on a single field change can be expensive. Thus you can pass the `memoDataValues` option to enable memoization of the data, and only the affected rows will be re-rendered. The `memoDataValues` prop should follow the same shape as the `data` prop (keys), but only include the values that can be compared for memoization. E.g. on header A we have an `Input` with value `Data A 1` but if we want to compare previous/next props, we should pass its raw value in key `a`, `Data A 1`. 
 
+**Optimized**
 <Playground>
   <OptimizedWrapper render={({ data, memoMapping }) => (
-    <Table header={['a', 'b', 'c']} data={data} memoDataValues={memoMapping} />
+    <Table header={['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']} data={data} memoDataValues={memoMapping} />
+  )} />
+</Playground>
+
+**Not optimized**
+<Playground>
+  <OptimizedWrapper render={({ data, memoMapping }) => (
+    <Table header={['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']} data={data} />
   )} />
 </Playground>
