@@ -27,7 +27,6 @@ export const DrawerController = ({ component: Component }) => {
         React.cloneElement(Component, {
           visible,
           onClickClose: () => setVisibility(false),
-          onClickOverlay: () => setVisibility(false),
         })
       } position={Position.RIGHT}>
         <div style={{ height: 500, padding: 20 }}>
