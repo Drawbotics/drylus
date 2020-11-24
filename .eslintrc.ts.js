@@ -4,7 +4,7 @@ module.exports = {
   extends: ['eslint:recommended', 'plugin:jest/recommended'],
   parserOptions: {
     sourceType: 'module',
-    project: 'packages/react-drylus/tsconfig.json',
+    project: ['packages/react-drylus/tsconfig.json', 'packages/styleguide/tsconfig.json'],
   },
   env: {
     node: true,

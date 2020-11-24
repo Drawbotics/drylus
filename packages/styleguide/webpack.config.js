@@ -1,3 +1,4 @@
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const { checkEnv } = require('@drawbotics/check-env');
@@ -73,7 +74,7 @@ module.exports = {
   mode: process.env.NODE_ENV,
   devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
   stats: 'none',
-  entry: './app/index.js',
+  entry: './app/index.tsx',
   resolve: {
     modules: [
       path.resolve(__dirname, './app'),
@@ -83,7 +84,8 @@ module.exports = {
       '~': path.resolve(__dirname, './app'),
       'react-dom': '@hot-loader/react-dom',
     },
-    extensions: [ '.js', '.jsx', '.css', '.mdx' ],
+    extensions: [ '.js', '.jsx', '.css', '.mdx', '.ts', '.tsx' ],
+    plugins: [new TsconfigPathsPlugin()],
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -97,6 +99,28 @@ module.exports = {
   plugins: isProduction ? prodPlugins : devPlugins,
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              rootMode: 'upward',
+            },
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              onlyCompileBundledFiles: true,
+              compilerOptions: {
+                noUnusedLocals: isProduction,
+                noUnusedParameters: isProduction,
+              },
+            },
+          },
+        ],
+      },
       {
         test: /\.jsx?$/,
         use: [{
@@ -123,6 +147,16 @@ module.exports = {
               rootMode: 'upward',
             },
           },
+          // {
+          //   loader: 'ts-loader',
+          //   options: {
+          //     onlyCompileBundledFiles: true,
+          //     compilerOptions: {
+          //       noUnusedLocals: isProduction,
+          //       noUnusedParameters: isProduction,
+          //     },
+          //   },
+          // },
           {
             loader: '@mdx-js/loader',
             options: {

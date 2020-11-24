@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import CodingGuidelines from './CodingGuidelines';
-import ComponentKit from './ComponentKit';
-import DesignGuidelines from './DesignGuidelines';
-import Intro from './Intro';
+import CodingGuidelines from './CodingGuidelines.jsx';
+import ComponentKit from './ComponentKit.jsx';
+import DesignGuidelines from './DesignGuidelines.jsx';
+import Intro from './Intro.jsx';
 
-const Root = () => {
+export const Root = () => {
   return (
     <Switch>
       <Route path="/component-kit" component={ComponentKit} />
@@ -16,5 +16,3 @@ const Root = () => {
     </Switch>
   );
 };
-
-export default Root;

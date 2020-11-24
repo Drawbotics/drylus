@@ -2,15 +2,16 @@ import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
 import { DrylusProvider, Layout, Page, Position } from '@drawbotics/react-drylus';
 import { useScreenSize } from '@drawbotics/use-screen-size';
+// @ts-ignore
 import drylus from '@drawbotics/vanilla-drylus/dist/drylus.js';
 import { css } from 'emotion';
 import React from 'react';
 import { hot } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 
-import MobileSidebar from './components/MobileSidebar';
-import Sidebar from './components/Sidebar';
-import Root from './routes/Root';
+import MobileSidebar from './components/MobileSidebar.jsx';
+import Sidebar from './components/Sidebar.jsx';
+import { Root } from './routes/Root';
 
 window._drylus = drylus;
 
@@ -24,7 +25,6 @@ const styles = {
 
 const App = () => {
   const { screenSize, ScreenSizes } = useScreenSize();
-  console.log('App running');
   return (
     <div className={styles.app}>
       <BrowserRouter basename="drylus">
@@ -44,7 +44,7 @@ const App = () => {
               <div
                 style={{
                   height: '100%',
-                  width: screenSize <= ScreenSizes.L ? '100vw' : null,
+                  width: screenSize <= ScreenSizes.L ? '100vw' : undefined,
                 }}>
                 <Root />
               </div>
