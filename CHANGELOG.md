@@ -1,3 +1,23 @@
+# v6.12.0 (Tue Nov 24 2020)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Fix/drawer style [#165](https://github.com/Drawbotics/drylus/pull/165) ([@nicmosc](https://github.com/nicmosc))
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Use React CSSProperties instead of custom Style type [#164](https://github.com/Drawbotics/drylus/pull/164) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/optimized table [#162](https://github.com/Drawbotics/drylus/pull/162) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.11.5 (Tue Nov 24 2020)
 
 #### 🏠  Internal
