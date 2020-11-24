@@ -169,6 +169,15 @@ const styles = {
   top: css`
     transform: translateY(calc(-100% - 20px - 40px));
   `,
+  topOpen: css`
+    transform: translateY(calc(-100% - 15px - 40px));
+  `,
+  topSmall: css`
+    transform: translateY(calc(-100% - 20px - 30px));
+  `,
+  topSmallOpen: css`
+    transform: translateY(calc(-100% - 15px - 30px));
+  `,
   open: css`
     opacity: 1;
     pointer-events: auto;
@@ -251,7 +260,9 @@ const NativeSelect = <T extends number | string, K extends string>({
   );
 };
 
-interface CustomSelectProps<T, K = string> extends NativeSelectProps<T, K> {}
+interface CustomSelectProps<T, K = string> extends NativeSelectProps<T, K> {
+  size: Size.SMALL | Size.DEFAULT;
+}
 
 const CustomSelect = <T extends number | string, K extends string>({
   disabled,
@@ -260,6 +271,7 @@ const CustomSelect = <T extends number | string, K extends string>({
   placeholder,
   options,
   name,
+  size,
 }: CustomSelectProps<T, K>) => {
   const rootRef = useRef<HTMLDivElement>(null);
   const selectRef = useRef<HTMLSelectElement>(null);
@@ -318,9 +330,9 @@ const CustomSelect = <T extends number | string, K extends string>({
           className={cx(styles.options, {
             [styles.open]: isFocused,
             [styles.top]: topRender,
-            // [styles.topOpen]: topRender && isFocused,
-            // [styles.topSmall]: topRender && size === Size.SMALL,
-            // [styles.topSmallOpen]: topRender && size === Size.SMALL && isFocused,
+            [styles.topOpen]: topRender && isFocused,
+            [styles.topSmall]: topRender && size === Size.SMALL,
+            [styles.topSmallOpen]: topRender && size === Size.SMALL && isFocused,
           })}>
           {options.map((option) => (
             <div
@@ -496,6 +508,7 @@ export const Select = <T extends number | string, K extends string>({
           onChange={onChange}
           placeholder={placeholder}
           disabled={disabled}
+          size={size}
           {...props}
         />
       )}
