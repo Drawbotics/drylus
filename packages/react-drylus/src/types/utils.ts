@@ -1,6 +1,8 @@
+import { CSSProperties } from 'react';
+
 import { Size } from '../enums';
 
-export type Style = Record<string, any>;
+export type Style = CSSProperties;
 
 export interface Responsive<T> {
   XS?: Partial<T>;
