@@ -12,7 +12,6 @@ import React, {
   createContext,
   useContext,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -471,7 +470,7 @@ export interface TRowProps {
 }
 
 export const TRow = ({
-  children: _children,
+  children,
   nested,
   parent,
   highlighted,
@@ -497,7 +496,6 @@ export const TRow = ({
         }
       : {};
 
-  const children = useMemo(() => _children, [_children]);
   checkComponentProps({ children }, { children: TCell });
 
   return (
