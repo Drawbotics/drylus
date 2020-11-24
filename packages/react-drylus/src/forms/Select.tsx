@@ -34,6 +34,20 @@ const styles = {
     position: absolute;
   `,
   disabled: css`
+    [data-element='select'] {
+      cursor: not-allowed;
+      background: ${sv.neutralLight};
+      color: ${sv.colorDisabled};
+      border-color: ${sv.neutralLight};
+      box-shadow: none;
+      opacity: 1;
+
+      & > div {
+        pointer-events: none;
+        opacity: 0.6;
+      }
+    }
+
     &::after {
       color: ${sv.colorDisabled};
     }
@@ -69,10 +83,10 @@ const styles = {
     }
   `,
   readOnly: css`
-    box-shadow: none !important;
     pointer-events: none;
 
-    > [data-element='select'] {
+    [data-element='select'] {
+      box-shadow: none !important;
       padding-right: ${sv.paddingExtraLarge} !important;
     }
 
@@ -277,6 +291,7 @@ const CustomSelect = <T extends number | string, K extends string>({
   const selectRef = useRef<HTMLSelectElement>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
 
   const optionsPanel = optionsRef.current?.getBoundingClientRect();
@@ -295,6 +310,7 @@ const CustomSelect = <T extends number | string, K extends string>({
 
   const handleOnChange = (value: SelectOption<T>['value']) => {
     onChange?.(value, name);
+    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -328,7 +344,7 @@ const CustomSelect = <T extends number | string, K extends string>({
       <div ref={optionsRef} className={styles.optionsWrapper}>
         <div
           className={cx(styles.options, {
-            [styles.open]: isFocused,
+            [styles.open]: isOpen,
             [styles.top]: topRender,
             [styles.topOpen]: topRender && isFocused,
             [styles.topSmall]: topRender && size === Size.SMALL,
@@ -359,8 +375,18 @@ const CustomSelect = <T extends number | string, K extends string>({
         disabled={disabled}
         className={styles.hiddenSelect}
         defaultValue={value}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => (canBlur ? setIsFocused(false) : null)}>
+        onFocus={() => {
+          setIsOpen(true);
+          setIsFocused(true);
+        }}
+        onBlur={
+          canBlur
+            ? () => {
+                setIsFocused(false);
+                setIsOpen(false);
+              }
+            : undefined
+        }>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
