@@ -317,7 +317,7 @@ export interface ButtonProps {
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
   /** @kind Color */
-  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE | Color.PRIMARY;
 
   /**
    * @default Size.DEFAULT
