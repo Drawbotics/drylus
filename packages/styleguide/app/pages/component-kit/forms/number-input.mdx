@@ -1,4 +1,4 @@
-import { NumberInput, Size } from '@drawbotics/react-drylus';
+import { NumberInput, Size, Button, Category } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 import { ControlledField } from '../utils';
@@ -27,5 +27,19 @@ You can also use a custom `renderValue` function to customize the way the value 
       placeholder="Price HTVA"
       value={0}
       onChange={x=>x} />
+  } />
+</Playground>
+
+
+You may also disable the counter, and style the NumberInput as a normal input.
+
+<Playground>
+  <ControlledField initialValue="" style={{ width: 300 }} component={
+    <NumberInput
+      withCounter={false}
+      prefix="$"
+      placeholder="Price of things"
+      value=""
+      suffix={<Button category={Category.INFO}>Click</Button>} />
   } />
 </Playground>
