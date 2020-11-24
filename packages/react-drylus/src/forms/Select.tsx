@@ -1,9 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Icon, IconType, RoundIcon, Spinner } from '../components';
 import { Category, Color, Size } from '../enums';
+import { Flex, FlexItem } from '../layout';
 import { Option, Responsive, Style } from '../types';
 import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
@@ -25,6 +26,13 @@ const styles = {
       pointer-events: none;
     }
   `,
+  hiddenSelect: css`
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    opacity: 0;
+    position: absolute;
+  `,
   disabled: css`
     &::after {
       color: ${sv.colorDisabled};
@@ -42,6 +50,7 @@ const styles = {
     outline: none !important;
     box-shadow: inset 0px 0px 0px 1px ${sv.azure};
     transition: ${sv.transitionShort};
+    letter-spacing: normal;
 
     &:hover {
       box-shadow: inset 0px 0px 0px 1px ${sv.azureDark};
@@ -63,7 +72,7 @@ const styles = {
     box-shadow: none !important;
     pointer-events: none;
 
-    > select {
+    > [data-element='select'] {
       padding-right: ${sv.paddingExtraLarge} !important;
     }
 
@@ -75,8 +84,11 @@ const styles = {
       right: ${sv.marginSmall};
     }
   `,
+  active: css`
+    box-shadow: inset 0px 0px 0px 2px ${sv.brand} !important;
+  `,
   valid: css`
-    > select {
+    > [data-element='select'] {
       box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
       padding-right: calc(${sv.paddingExtraLarge} + ${sv.defaultPadding});
     }
@@ -88,18 +100,18 @@ const styles = {
     right: calc(${sv.marginSmall} * 2 + ${sv.marginExtraSmall});
   `,
   error: css`
-    > select {
+    > [data-element='select'] {
       box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
       padding-right: calc(${sv.paddingExtraLarge} + ${sv.defaultPadding});
     }
   `,
   noValue: css`
-    > select {
+    > [data-element='select'] {
       color: ${sv.colorSecondary};
     }
   `,
   small: css`
-    select {
+    [data-element='select'] {
       padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
       padding-right: ${sv.paddingHuge};
     }
@@ -125,11 +137,67 @@ const styles = {
     }
   `,
   smallReadOnly: css`
-    select {
+    [data-element='select'] {
       padding-right: ${sv.defaultPadding} !important;
     }
   `,
+  placeholder: css`
+    color: ${sv.colorSecondary};
+    user-select: none;
+  `,
+  value: css``,
+  optionsWrapper: css`
+    position: absolute;
+    z-index: 999;
+    min-width: 100%;
+    pointer-events: none;
+  `,
+  options: css`
+    margin-top: ${sv.marginExtraSmall};
+    min-width: 100%;
+    background: ${sv.white};
+    border-radius: ${sv.defaultBorderRadius};
+    border: 1px solid ${sv.azure};
+    box-shadow: ${sv.elevation2};
+    opacity: 0;
+    transform: translateY(-5px);
+    pointer-events: none;
+    transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
+    max-height: 200px;
+    overflow: auto;
+  `,
+  top: css`
+    transform: translateY(calc(-100% - 20px - 40px));
+  `,
+  open: css`
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  `,
+  option: css`
+    display: flex;
+    align-items: center;
+    padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
+    color: ${sv.colorPrimary};
+    max-height: 32px; /* hardcoded for styling purposes */
+
+    &:hover {
+      cursor: pointer;
+      background-color: ${sv.neutralLighter};
+    }
+  `,
+  disabledOption: css`
+    pointer-events: none;
+    color: ${sv.colorDisabled};
+  `,
 };
+
+function _getShouldRenderTop(box: DOMRect) {
+  if (box?.bottom > window.innerHeight) {
+    return true;
+  }
+  return false;
+}
 
 export interface SelectOption<T> extends Option<T> {
   disabled?: boolean;
@@ -167,22 +235,127 @@ const NativeSelect = <T extends number | string, K extends string>({
 
   return (
     <select
+      data-element="select"
       disabled={disabled}
       className={styles.select}
       value={value}
       onChange={handleOnChange}
       {...props}>
-      {run(() => {
-        if (value == null) {
-          return <option key="_placeholder">{placeholder}</option>;
-        }
-      })}
+      {value == null ? <option key="_placeholder">{placeholder}</option> : null}
       {options.map((option) => (
         <option key={option.value} value={option.value} disabled={option.disabled}>
           {option.label}
         </option>
       ))}
     </select>
+  );
+};
+
+interface CustomSelectProps<T, K = string> extends NativeSelectProps<T, K> {}
+
+const CustomSelect = <T extends number | string, K extends string>({
+  disabled,
+  value,
+  onChange,
+  placeholder,
+  options,
+  name,
+}: CustomSelectProps<T, K>) => {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const selectRef = useRef<HTMLSelectElement>(null);
+  const optionsRef = useRef<HTMLDivElement>(null);
+  const [isFocused, setIsFocused] = useState(false);
+  const [canBlur, setCanBlur] = useState(true);
+
+  const optionsPanel = optionsRef.current?.getBoundingClientRect();
+  const topRender = optionsPanel ? _getShouldRenderTop(optionsPanel) : false;
+
+  const handleDocumentClick = (e: Event) =>
+    !rootRef.current?.contains(e.target as Node) ? setIsFocused(false) : null;
+
+  const handleClickSelect = (e: React.MouseEvent<HTMLElement>) => {
+    if (onChange != null) {
+      e.preventDefault();
+      e.stopPropagation();
+      selectRef.current?.focus();
+    }
+  };
+
+  const handleOnChange = (value: SelectOption<T>['value']) => {
+    onChange?.(value, name);
+  };
+
+  useEffect(() => {
+    rootRef.current?.addEventListener('mousedown', () => setCanBlur(false));
+    rootRef.current?.addEventListener('mouseup', () => setCanBlur(true));
+    document.addEventListener('mousedown', handleDocumentClick);
+
+    return () => {
+      rootRef.current?.removeEventListener('mousedown', () => setCanBlur(false));
+      rootRef.current?.removeEventListener('mouseup', () => setCanBlur(true));
+      document.removeEventListener('mousedown', handleDocumentClick);
+    };
+  }, []);
+
+  return (
+    <div ref={rootRef}>
+      <div
+        className={cx(styles.select, {
+          [styles.active]: isFocused,
+        })}
+        onClick={handleClickSelect}
+        data-element="select">
+        {value == null ? (
+          <div className={styles.placeholder}>{placeholder}</div>
+        ) : (
+          <div className={styles.value}>
+            {(options.find((option) => option.value === value) ?? {}).label}
+          </div>
+        )}
+      </div>
+      <div ref={optionsRef} className={styles.optionsWrapper}>
+        <div
+          className={cx(styles.options, {
+            [styles.open]: isFocused,
+            [styles.top]: topRender,
+            // [styles.topOpen]: topRender && isFocused,
+            // [styles.topSmall]: topRender && size === Size.SMALL,
+            // [styles.topSmallOpen]: topRender && size === Size.SMALL && isFocused,
+          })}>
+          {options.map((option) => (
+            <div
+              className={cx(styles.option, {
+                [styles.disabledOption]: option.disabled,
+              })}
+              data-value={option.value}
+              key={option.value}
+              onClick={() => handleOnChange(option.value)}>
+              <Flex style={{ width: '100%' }}>
+                <FlexItem flex>{option.label}</FlexItem>
+                {option.value === value ? (
+                  <FlexItem>
+                    <Icon name="check" />
+                  </FlexItem>
+                ) : null}
+              </Flex>
+            </div>
+          ))}
+        </div>
+      </div>
+      <select
+        ref={selectRef}
+        disabled={disabled}
+        className={styles.hiddenSelect}
+        defaultValue={value}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => (canBlur ? setIsFocused(false) : null)}>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 
@@ -219,9 +392,6 @@ export interface SelectProps<T, K = string> {
 
   /** If true, a spinner is shown in the right corner, like with error and valid */
   loading?: boolean;
-
-  /** If true the select is focused automatically on mount */
-  autoFocus?: boolean;
 
   /**
    * Size of the select. Can be small or default
@@ -262,6 +432,7 @@ export const Select = <T extends number | string, K extends string>({
     loading,
     style,
     size = Size.DEFAULT,
+    native = true,
     ...props
   } = useResponsiveProps<SelectProps<T, K>>(rest, responsive);
 
@@ -309,12 +480,25 @@ export const Select = <T extends number | string, K extends string>({
           );
         }
       })}
-      <NativeSelect
-        options={options}
-        onChange={onChange}
-        placeholder={placeholder}
-        disabled={disabled}
-      />
+      {native ? (
+        <NativeSelect
+          value={value}
+          options={options}
+          onChange={onChange}
+          placeholder={placeholder}
+          disabled={disabled}
+          {...props}
+        />
+      ) : (
+        <CustomSelect
+          value={value}
+          options={options}
+          onChange={onChange}
+          placeholder={placeholder}
+          disabled={disabled}
+          {...props}
+        />
+      )}
       {run(() => {
         if (error && typeof error === 'string') {
           return <Hint category={Category.DANGER}>{error}</Hint>;
