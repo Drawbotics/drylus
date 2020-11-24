@@ -1,3 +1,16 @@
+# v6.11.5 (Tue Nov 24 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Increase dropdown menu z-index  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.11.4 (Thu Nov 19 2020)
 
 #### ⚠️  Pushed to master
