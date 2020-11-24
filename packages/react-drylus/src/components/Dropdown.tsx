@@ -19,7 +19,7 @@ const styles = {
   `,
   root: css`
     position: absolute;
-    z-index: 9999;
+    z-index: 99999;
     top: 100%;
     margin-top: ${sv.marginExtraSmall};
     background: ${sv.white};
