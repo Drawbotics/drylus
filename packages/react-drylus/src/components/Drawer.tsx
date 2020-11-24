@@ -2,12 +2,12 @@ import sv from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { themeStyles } from '../base';
-import { Position, Size, Tier } from '../enums';
-import { OnClickCallback, Responsive, Style } from '../types';
+import { Color, Position, Size, Tier } from '../enums';
+import { Responsive, Style } from '../types';
 import { fsv, run, useResponsiveProps } from '../utils';
 import { Button } from './Button';
 import { Icon } from './Icon';
@@ -94,11 +94,11 @@ const styles = {
   close: css`
     position: absolute;
     top: ${sv.marginSmall};
-    left: ${sv.marginSmall};
+    right: ${sv.marginSmall};
 
     @media ${sv.screenL} {
       top: ${sv.marginExtraSmall};
-      left: ${sv.marginExtraSmall};
+      right: ${sv.marginExtraSmall};
     }
   `,
 };
@@ -111,10 +111,10 @@ export interface BaseDrawerProps {
   footer?: React.ReactNode;
 
   /** Triggered when the "close" button is clicked */
-  onClickClose?: OnClickCallback<HTMLElement>;
+  onClickClose?: VoidFunction;
 
   /** Shown at the top left of the drawer, not rendered if raw is true */
-  title?: string;
+  title?: ReactNode;
 
   /** Used for style overrides */
   style?: Style;
@@ -129,6 +129,7 @@ export const BaseDrawer = ({ children, onClickClose, footer, title, style }: Bas
           size={screenSize <= ScreenSizes.L ? Size.DEFAULT : Size.SMALL}
           onClick={onClickClose}
           tier={Tier.TERTIARY}
+          color={Color.PRIMARY}
           leading={<Icon name="x" />}
         />
       </div>
@@ -136,9 +137,13 @@ export const BaseDrawer = ({ children, onClickClose, footer, title, style }: Bas
         if (title) {
           return (
             <div className={styles.title}>
-              <Title size={4} noMargin>
-                {title}
-              </Title>
+              {typeof title === 'string' ? (
+                <Title size={4} noMargin>
+                  {title}
+                </Title>
+              ) : (
+                title
+              )}
             </div>
           );
         }
@@ -292,8 +297,9 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
   if (asOverlay) {
     if (outletElement == null) return null;
     const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (e.target === overlayElement?.current && onClickOverlay != null) {
-        onClickOverlay();
+      if (e.target === overlayElement?.current && onClickClose != null) {
+        onClickClose();
+        onClickOverlay?.();
       }
     };
 
