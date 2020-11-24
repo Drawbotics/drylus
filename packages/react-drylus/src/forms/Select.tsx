@@ -2,7 +2,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Icon, RoundIcon, Spinner } from '../components';
+import { Icon, IconType, RoundIcon, Spinner } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
 import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
@@ -133,7 +133,58 @@ const styles = {
 
 export interface SelectOption<T> extends Option<T> {
   disabled?: boolean;
+  icon?: IconType;
 }
+
+interface NativeSelectProps<T, K = string> {
+  options: Array<SelectOption<T>>;
+  value?: SelectOption<T>['value'];
+  name?: K;
+  disabled?: boolean;
+  placeholder?: string;
+  onChange?: (value: SelectOption<T>['value'], name?: K) => void;
+  [x: string]: any;
+}
+
+const NativeSelect = <T extends number | string, K extends string>({
+  disabled,
+  value,
+  onChange,
+  placeholder,
+  options,
+  ...props
+}: NativeSelectProps<T, K>) => {
+  const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
+    if (onChange != null) {
+      const valueIsNumber = typeof value === 'number';
+      const newValue = (e.target as HTMLSelectElement).value;
+      onChange(
+        (valueIsNumber ? Number(newValue) : newValue) as T,
+        (e.target as HTMLSelectElement).name as K,
+      );
+    }
+  };
+
+  return (
+    <select
+      disabled={disabled}
+      className={styles.select}
+      value={value}
+      onChange={handleOnChange}
+      {...props}>
+      {run(() => {
+        if (value == null) {
+          return <option key="_placeholder">{placeholder}</option>;
+        }
+      })}
+      {options.map((option) => (
+        <option key={option.value} value={option.value} disabled={option.disabled}>
+          {option.label}
+        </option>
+      ))}
+    </select>
+  );
+};
 
 export interface SelectProps<T, K = string> {
   /** The options to show in the list of options */
@@ -179,6 +230,12 @@ export interface SelectProps<T, K = string> {
    */
   size?: Size.SMALL | Size.DEFAULT;
 
+  /**
+   * If false, the component uses its non-native variant, which allows for icons in the options
+   * @default true
+   */
+  native?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -210,16 +267,6 @@ export const Select = <T extends number | string, K extends string>({
 
   const value = isFunction(_value) ? _value(props.name) : _value;
 
-  const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
-    if (onChange != null) {
-      const valueIsNumber = typeof value === 'number';
-      const newValue = (e.target as HTMLSelectElement).value;
-      onChange(
-        (valueIsNumber ? Number(newValue) : newValue) as T,
-        (e.target as HTMLSelectElement).name as K,
-      );
-    }
-  };
   return (
     <div
       style={style}
@@ -262,23 +309,12 @@ export const Select = <T extends number | string, K extends string>({
           );
         }
       })}
-      <select
+      <NativeSelect
+        options={options}
+        onChange={onChange}
+        placeholder={placeholder}
         disabled={disabled}
-        className={styles.select}
-        value={value}
-        onChange={handleOnChange}
-        {...props}>
-        {run(() => {
-          if (value == null) {
-            return <option key="_placeholder">{placeholder}</option>;
-          }
-        })}
-        {options.map((option) => (
-          <option key={option.value} value={option.value} disabled={option.disabled}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+      />
       {run(() => {
         if (error && typeof error === 'string') {
           return <Hint category={Category.DANGER}>{error}</Hint>;
