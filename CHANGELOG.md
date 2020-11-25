@@ -1,3 +1,16 @@
+# v6.12.1 (Wed Nov 25 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/non native select [#166](https://github.com/Drawbotics/drylus/pull/166) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.12.0 (Tue Nov 24 2020)
 
 #### 🚀 Enhancement - Minor change
