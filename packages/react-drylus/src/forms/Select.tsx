@@ -1,4 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
+import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -486,6 +487,7 @@ export const Select = <T extends number | string, K extends string>({
     native = true,
     ...props
   } = useResponsiveProps<SelectProps<T, K>>(rest, responsive);
+  const { screenSize, ScreenSizes } = useScreenSize();
 
   const value = isFunction(_value) ? _value(props.name) : _value;
 
@@ -531,7 +533,7 @@ export const Select = <T extends number | string, K extends string>({
           );
         }
       })}
-      {native ? (
+      {native || screenSize <= ScreenSizes.XL ? (
         <NativeSelect
           value={value}
           options={options}
