@@ -221,11 +221,8 @@ const styles = {
   `,
 };
 
-function _getShouldRenderTop(box: DOMRect) {
-  if (box?.bottom > window.innerHeight) {
-    return true;
-  }
-  return false;
+function _getShouldRenderTop(box: DOMRect): boolean {
+  return box?.bottom > window.innerHeight;
 }
 
 export interface SelectOption<T> extends Option<T> {
