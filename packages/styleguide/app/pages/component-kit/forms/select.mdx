@@ -27,3 +27,32 @@ __Example__
       }]} />
   } />
 </Playground>
+
+### Non-native select
+Sometimes you need a bit more information in a select (e.g. icons) then you can set the `native` prop to `false` and override the default select component, which normally uses the native browser `select`.
+
+<Playground>
+  <ControlledField style={{ maxWidth: 250, marginBottom: 200 }} component={
+    <Select
+      native={false}
+      placeholder="Select an option..."
+      options={[{
+        label: 'Award',
+        value: 'AW',
+        icon: 'award',
+      }, {
+        label: 'Book',
+        value: 'BO',
+        icon: 'book',
+      }, {
+        label: 'Briefcase',
+        value: 'BR',
+        icon: 'briefcase',
+      }, {
+        label: 'Cloud rain',
+        value: 'CL',
+        icon: 'cloud-rain',
+        disabled: true,
+      }]} />
+  } />
+</Playground>

@@ -3,8 +3,8 @@ import { css, cx } from 'emotion';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Icon, IconType, RoundIcon, Spinner } from '../components';
-import { Category, Color, Size } from '../enums';
-import { Flex, FlexItem } from '../layout';
+import { Category, Color, Shade, Size } from '../enums';
+import { Flex, FlexItem, FlexSpacer } from '../layout';
 import { Option, Responsive, Style } from '../types';
 import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
@@ -65,6 +65,7 @@ const styles = {
     box-shadow: inset 0px 0px 0px 1px ${sv.azure};
     transition: ${sv.transitionShort};
     letter-spacing: normal;
+    max-height: 40px;
 
     &:hover {
       box-shadow: inset 0px 0px 0px 1px ${sv.azureDark};
@@ -126,6 +127,7 @@ const styles = {
   `,
   small: css`
     [data-element='select'] {
+      max-height: 30px;
       padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
       padding-right: ${sv.paddingHuge};
     }
@@ -159,7 +161,11 @@ const styles = {
     color: ${sv.colorSecondary};
     user-select: none;
   `,
-  value: css``,
+  value: css`
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  `,
   optionsWrapper: css`
     position: absolute;
     z-index: 999;
@@ -325,6 +331,8 @@ const CustomSelect = <T extends number | string, K extends string>({
     };
   }, []);
 
+  const optionsValue = options.find((option) => option.value === value);
+
   return (
     <div ref={rootRef}>
       <div
@@ -332,12 +340,18 @@ const CustomSelect = <T extends number | string, K extends string>({
           [styles.active]: isFocused,
         })}
         onClick={handleClickSelect}
+        style={{ display: 'flex' }}
         data-element="select">
         {value == null ? (
           <div className={styles.placeholder}>{placeholder}</div>
         ) : (
           <div className={styles.value}>
-            {(options.find((option) => option.value === value) ?? {}).label}
+            <div>
+              {optionsValue?.icon != null ? (
+                <Icon style={{ marginRight: sv.marginExtraSmall }} name={optionsValue.icon} />
+              ) : null}
+            </div>
+            <div>{optionsValue?.label}</div>
           </div>
         )}
       </div>
@@ -359,10 +373,12 @@ const CustomSelect = <T extends number | string, K extends string>({
               key={option.value}
               onClick={() => handleOnChange(option.value)}>
               <Flex style={{ width: '100%' }}>
+                {option.icon != null ? <Icon name={option.icon} /> : null}
+                <FlexSpacer size={Size.EXTRA_SMALL} />
                 <FlexItem flex>{option.label}</FlexItem>
                 {option.value === value ? (
                   <FlexItem>
-                    <Icon name="check" />
+                    <Icon shade={Shade.MEDIUM} name="check" />
                   </FlexItem>
                 ) : null}
               </Flex>
