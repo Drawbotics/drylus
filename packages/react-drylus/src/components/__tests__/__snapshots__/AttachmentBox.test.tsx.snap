@@ -8,7 +8,7 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
 }
 
 .emotion-19 {
-  background: #f8f9fa;
+  background: #F1F5F9;
   border-radius: 5px;
   color: #172b4e;
 }
@@ -335,6 +335,11 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
             >
               <div
                 className="emotion-6"
+                style={
+                  Object {
+                    "backgroundColor": "#d3dce6",
+                  }
+                }
               >
                 <div
                   className="emotion-5"
@@ -392,7 +397,7 @@ exports[`AttachmentBox matches snapshot when can remove attachment 1`] = `
 }
 
 .emotion-14 {
-  background: #f8f9fa;
+  background: #F1F5F9;
   border-radius: 5px;
   color: #172b4e;
 }
@@ -659,7 +664,7 @@ exports[`AttachmentBox matches snapshot when is given a completed attachment 1`]
 }
 
 .emotion-15 {
-  background: #f8f9fa;
+  background: #F1F5F9;
   border-radius: 5px;
   color: #172b4e;
 }
@@ -954,6 +959,11 @@ exports[`AttachmentBox matches snapshot when is given a completed attachment 1`]
             >
               <div
                 className="emotion-6"
+                style={
+                  Object {
+                    "backgroundColor": "#d3dce6",
+                  }
+                }
               >
                 <div
                   className="emotion-5"
@@ -990,7 +1000,7 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
 }
 
 .emotion-15 {
-  background: #f8f9fa;
+  background: #F1F5F9;
   border-radius: 5px;
   color: #172b4e;
 }
@@ -1285,6 +1295,11 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
             >
               <div
                 className="emotion-6"
+                style={
+                  Object {
+                    "backgroundColor": "#d3dce6",
+                  }
+                }
               >
                 <div
                   className="emotion-5"
@@ -1321,7 +1336,7 @@ exports[`AttachmentBox matches snapshot when is given the simplest attachment 1`
 }
 
 .emotion-12 {
-  background: #f8f9fa;
+  background: #F1F5F9;
   border-radius: 5px;
   color: #172b4e;
 }
