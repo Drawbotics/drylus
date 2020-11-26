@@ -14,7 +14,7 @@ import { Text } from './Text';
 
 const styles = {
   root: css`
-    background: ${sv.neutralLighter};
+    background: ${sv.backgroundColor};
     border-radius: ${sv.defaultBorderRadius};
     color: ${sv.colorPrimary};
   `,
@@ -22,10 +22,13 @@ const styles = {
 
 interface AttachmentBoxProps {
   /** Name of the file to be displayed */
-  fileName: string;
+  fileName?: string;
 
   /** Progress of the download to be displyed */
   progress?: number;
+
+  /** If given, shows the folder icon variant instead. Note, this overrides the fileName */
+  asFolder?: boolean;
 
   /** To control what should happen when download is clicked. If not provided download button is not displyed */
   onClickDownload?: VoidFunction;
@@ -41,7 +44,7 @@ interface AttachmentBoxProps {
 }
 
 export const AttachmentBox = ({ responsive, ...rest }: AttachmentBoxProps) => {
-  const { fileName, progress, onClickDownload, onClickClose, style } = useResponsiveProps<
+  const { fileName, progress, onClickDownload, onClickClose, style, asFolder } = useResponsiveProps<
     AttachmentBoxProps
   >(rest, responsive);
   return (
@@ -51,7 +54,10 @@ export const AttachmentBox = ({ responsive, ...rest }: AttachmentBoxProps) => {
           <FlexItem flex style={{ display: 'flex', minWidth: 0 }}>
             <Flex style={{ width: '100%' }}>
               <FlexItem>
-                <FileIcon type={last(fileName.split('.')) as FileType} />
+                <FileIcon
+                  type={fileName != null ? (last(fileName.split('.')) as FileType) : undefined}
+                  asFolder={asFolder}
+                />
               </FlexItem>
               <FlexSpacer size={Size.EXTRA_SMALL} />
               <FlexItem flex style={{ minWidth: 0 }}>
@@ -60,7 +66,12 @@ export const AttachmentBox = ({ responsive, ...rest }: AttachmentBoxProps) => {
                 </div>
                 {progress != null ? (
                   <Margin size={{ top: Size.EXTRA_SMALL }}>
-                    <ProgressBar size={Size.SMALL} color={Color.GREEN} percentage={progress} />
+                    <ProgressBar
+                      style={{ backgroundColor: sv.neutral }}
+                      size={Size.SMALL}
+                      color={Color.GREEN}
+                      percentage={progress}
+                    />
                   </Margin>
                 ) : null}
               </FlexItem>
