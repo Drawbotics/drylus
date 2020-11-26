@@ -11,6 +11,23 @@ const labelDisplacement = sv.marginExtraSmall;
 const fontSize = '7px';
 const borderColor = '#8C8C8C';
 
+const FolderIcon = () => {
+  return (
+    <svg height="100%" viewBox="0 0 23 19">
+      <path
+        d="M20 2H7C5.89543 2 5 2.89543 5 4V6C5 7.10457 5.89543 8 7 8H20C21.1046 8 22 7.10457 22 6V4C22 2.89543 21.1046 2 20 2Z"
+        fill={sv.neutralDark}
+        stroke={borderColor}
+      />
+      <path
+        d="M1 2.5C1 1.67157 1.67157 1 2.5 1H7.52658C8.03943 1 8.51674 1.26201 8.79207 1.69469L10.5329 4.43031C10.8083 4.86299 11.2856 5.125 11.7984 5.125H20.5C21.3284 5.125 22 5.79657 22 6.625V16.5C22 17.3284 21.3284 18 20.5 18H2.5C1.67157 18 1 17.3284 1 16.5V2.5Z"
+        fill={sv.neutral}
+        stroke={borderColor}
+      />
+    </svg>
+  );
+};
+
 const styles = {
   root: css`
     display: inline-block;
@@ -52,7 +69,8 @@ const styles = {
         transparent 100%
       );
     }
-
+  `,
+  withExtension: css`
     &::after {
       content: ' ';
       position: absolute;
@@ -123,6 +141,11 @@ const styles = {
       background: ${sv.greenDark};
     }
   `,
+  folder: css`
+    display: inline-block;
+    height: 20px;
+    margin-top: 3px;
+  `,
 };
 
 type Archive = 'zip' | 'tar' | 'dmg' | 'jar' | 'rar';
@@ -175,27 +198,39 @@ export type FileType = Archive | Model | Document | Vector | PDF | Data | Image 
 
 export interface FileIconProps {
   /** Determines the color and text shown in the icon, should be the extension of the file */
-  type: FileType | string;
+  type?: FileType | string;
+
+  /** If given, the icon will be rendered as a folder. The file extension can still be given */
+  asFolder?: boolean;
 
   /** Used for style overrides */
   style?: Style;
 }
 
-export const FileIcon = ({ style, type }: FileIconProps) => {
+export const FileIcon = ({ style, type, asFolder }: FileIconProps) => {
+  if (asFolder) {
+    return (
+      <div style={style} className={styles.folder}>
+        <FolderIcon />
+      </div>
+    );
+  }
+
   return (
     <div
       data-type={type}
       style={style}
       className={cx(styles.root, {
-        [styles.archive]: _isArchive(type),
-        [styles.model]: _isModel(type),
-        [styles.document]: _isDocument(type),
-        [styles.vector]: _isVector(type),
-        [styles.pdf]: _isPDF(type),
-        [styles.data]: _isData(type),
-        [styles.image]: _isImage(type),
-        [styles.video]: _isVideo(type),
-        [styles.sound]: _isSound(type),
+        [styles.withExtension]: type != null,
+        [styles.archive]: type != null && _isArchive(type),
+        [styles.model]: type != null && _isModel(type),
+        [styles.document]: type != null && _isDocument(type),
+        [styles.vector]: type != null && _isVector(type),
+        [styles.pdf]: type != null && _isPDF(type),
+        [styles.data]: type != null && _isData(type),
+        [styles.image]: type != null && _isImage(type),
+        [styles.video]: type != null && _isVideo(type),
+        [styles.sound]: type != null && _isSound(type),
       })}
     />
   );
