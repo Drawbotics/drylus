@@ -13,7 +13,8 @@ const styles = {
     position: relative;
     display: inline-block;
     width: 100%;
-
+  `,
+  withCounter: css`
     & [data-element='suffix'] {
       padding: 0;
       align-items: stretch;
@@ -64,7 +65,8 @@ const styles = {
   `,
   small: css`
     i {
-      font-size: 0.8em;
+      font-size: 0.9em !important;
+      margin-bottom: -1px;
     }
   `,
   disabled: css`
@@ -240,7 +242,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
   const decimalPlaces = (String(step).split('.')[1] || []).length;
 
   return (
-    <div style={style} className={styles.root}>
+    <div style={style} className={cx(styles.root, { [styles.withCounter]: withCounter })}>
       {run(() => {
         if (renderValue != null && (value === 0 || value)) {
           const sections = renderValue(value).split(String(value));
