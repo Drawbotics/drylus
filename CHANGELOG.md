@@ -1,3 +1,16 @@
+# v6.12.3 (Fri Nov 27 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Fix/number input style [#163](https://github.com/Drawbotics/drylus/pull/163) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.12.2 (Thu Nov 26 2020)
 
 #### 🐛 Bug fix - Patch
