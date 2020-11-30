@@ -371,7 +371,11 @@ const CustomSelect = <T extends number | string, K extends string>({
               key={option.value}
               onClick={() => handleOnChange(option.value)}>
               <Flex style={{ width: '100%' }}>
-                {option.icon != null ? <Icon name={option.icon} /> : null}
+                {option.icon != null ? (
+                  <FlexItem>
+                    <Icon name={option.icon} />
+                  </FlexItem>
+                ) : null}
                 <FlexSpacer size={Size.EXTRA_SMALL} />
                 <FlexItem flex>{option.label}</FlexItem>
                 {option.value === value ? (
