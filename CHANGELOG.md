@@ -1,3 +1,16 @@
+# v6.12.4 (Mon Nov 30 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add FlexItem to Select options  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.12.3 (Fri Nov 27 2020)
 
 #### 🐛 Bug fix - Patch
