@@ -79,6 +79,29 @@ const styles = {
     opacity: 1;
     transform: translate(0, 0);
   `,
+  inversed: css`
+    background: ${sv.white};
+    color: ${sv.colorPrimary};
+
+    &::after {
+      border-top: ${sv.marginExtraSmall} solid ${sv.white};
+    }
+  `,
+  inversedBottom: css`
+    &::after {
+      border-bottom: ${sv.marginExtraSmall} solid ${sv.white};
+    }
+  `,
+  inversedLeft: css`
+    &::after {
+      border-left: ${sv.marginExtraSmall} solid ${sv.white};
+    }
+  `,
+  inversedRight: css`
+    &::after {
+      border-right: ${sv.marginExtraSmall} solid ${sv.white};
+    }
+  `,
 };
 
 export const tooltipStyles = styles;
@@ -96,6 +119,9 @@ export interface TooltipProps {
   /** @default Position.TOP */
   side?: Position;
 
+  /** If given, the popover will have a white background */
+  inversed?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -110,6 +136,7 @@ export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
     content: _content,
     side = Position.TOP,
     style = {},
+    inversed,
   } = useResponsiveProps<TooltipProps>(rest, responsive);
 
   const [visible, setVisible] = useState(false);
@@ -192,6 +219,10 @@ export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
               [styles.left]: side === Position.LEFT,
               [styles.right]: side === Position.RIGHT,
               [styles.visible]: visible,
+              [styles.inversed]: inversed,
+              [styles.inversedBottom]: side === Position.BOTTOM && inversed,
+              [styles.inversedLeft]: side === Position.LEFT && inversed,
+              [styles.inversedRight]: side === Position.RIGHT && inversed,
             })}
             style={{ ...tooltipStyle, ...style }}>
             {content}
