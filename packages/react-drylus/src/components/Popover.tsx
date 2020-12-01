@@ -12,8 +12,8 @@ const styles = {
   root: css`
     position: fixed;
     padding: ${sv.paddingExtraSmall} ${sv.defaultPadding};
-    background: ${sv.white};
-    color: ${sv.colorPrimary};
+    background: ${sv.neutralDarkest};
+    color: ${sv.colorPrimaryInverse};
     border-radius: ${sv.defaultBorderRadius};
     font-size: 0.9rem;
     opacity: 0;
@@ -36,7 +36,7 @@ const styles = {
       height: 0px;
       border-left: ${sv.marginExtraSmall} solid transparent;
       border-right: ${sv.marginExtraSmall} solid transparent;
-      border-top: ${sv.marginExtraSmall} solid ${sv.white};
+      border-top: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
     }
   `,
   bottom: css`
@@ -44,7 +44,7 @@ const styles = {
 
     &::after {
       top: calc(${sv.marginExtraSmall} * -1);
-      border-bottom: ${sv.marginExtraSmall} solid ${sv.white};
+      border-bottom: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
       border-left: ${sv.marginExtraSmall} solid transparent;
       border-right: ${sv.marginExtraSmall} solid transparent;
       border-top: 0;
@@ -57,7 +57,7 @@ const styles = {
       left: 100%;
       top: 50%;
       transform: translateY(-50%);
-      border-left: ${sv.marginExtraSmall} solid ${sv.white};
+      border-left: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
       border-bottom: ${sv.marginExtraSmall} solid transparent;
       border-top: ${sv.marginExtraSmall} solid transparent;
       border-right: 0;
@@ -70,7 +70,7 @@ const styles = {
       left: calc(${sv.marginExtraSmall} * -1);
       top: 50%;
       transform: translateY(-50%);
-      border-right: ${sv.marginExtraSmall} solid ${sv.white};
+      border-right: ${sv.marginExtraSmall} solid ${sv.neutralDarkest};
       border-bottom: ${sv.marginExtraSmall} solid transparent;
       border-top: ${sv.marginExtraSmall} solid transparent;
       border-left: 0;
@@ -102,6 +102,9 @@ export interface PopoverProps {
    */
   exitOnClick?: boolean;
 
+  /** If true, the popover will appear as it mounts */
+  openOnMount?: boolean;
+
   /** Used for style overrides */
   style?: Style;
 }
@@ -113,8 +116,9 @@ export const Popover = ({
   side = Position.TOP,
   style = {},
   exitOnClick = false,
+  openOnMount,
 }: PopoverProps) => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState<boolean>();
   const [outletElement, setOutletElement] = useState<HTMLElement>();
   const childrenRef = useRef<HTMLElement>();
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -139,6 +143,17 @@ export const Popover = ({
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (
+      childrenRef.current != null &&
+      popoverRef.current != null &&
+      openOnMount != null &&
+      visible == null
+    ) {
+      setVisible(openOnMount);
+    }
+  });
 
   useEffect(() => {
     const handleWindowClick = (e: Event) => {
