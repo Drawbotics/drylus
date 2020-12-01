@@ -1,3 +1,16 @@
+# v6.12.6 (Tue Dec 01 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - change Popover to have dark look, and add openOnMount prop  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.12.5 (Tue Dec 01 2020)
 
 #### ⚠️  Pushed to master
