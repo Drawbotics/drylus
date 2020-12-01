@@ -1,6 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React, { useEffect, useRef, useState } from 'react';
+import { v4 } from 'uuid';
 
 import { Align } from '../enums';
 import { Checkbox } from '../forms';
@@ -346,23 +347,26 @@ export const CheckboxFilter = <T extends any>({
       {...rest}
       label={currentLabel != null ? String(currentLabel) : label}
       active={currentLabel != null && values.length > 0}>
-      {options.map((option) => (
-        <label
-          htmlFor={String(option.value)}
-          key={option.value}
-          className={cx(styles.option, styles.defaultCursor)}>
-          <Checkbox
-            id={String(option.value)}
-            onChange={(checked: boolean) => {
-              checked
-                ? onChange([...values, option.value])
-                : onChange(values.filter((v) => String(v) !== String(option.value)));
-            }}
-            value={values.includes(option.value)}>
-            {String(option.label)}
-          </Checkbox>
-        </label>
-      ))}
+      {options.map((option) => {
+        const id = v4();
+        return (
+          <label
+            htmlFor={id}
+            key={option.value}
+            className={cx(styles.option, styles.defaultCursor)}>
+            <Checkbox
+              id={id}
+              onChange={(checked: boolean) => {
+                checked
+                  ? onChange([...values, option.value])
+                  : onChange(values.filter((v) => String(v) !== String(option.value)));
+              }}
+              value={values.includes(option.value)}>
+              {String(option.label)}
+            </Checkbox>
+          </label>
+        );
+      })}
     </BaseFilter>
   );
 };
