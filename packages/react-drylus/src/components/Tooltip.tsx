@@ -85,21 +85,27 @@ const styles = {
 
     &::after {
       border-top: ${sv.marginExtraSmall} solid ${sv.white};
+      border-bottom: 0;
     }
   `,
   inversedBottom: css`
     &::after {
       border-bottom: ${sv.marginExtraSmall} solid ${sv.white};
+      border-top: 0;
     }
   `,
   inversedLeft: css`
     &::after {
       border-left: ${sv.marginExtraSmall} solid ${sv.white};
+      border-bottom: ${sv.marginExtraSmall} solid transparent;
+      border-top: ${sv.marginExtraSmall} solid transparent;
     }
   `,
   inversedRight: css`
     &::after {
       border-right: ${sv.marginExtraSmall} solid ${sv.white};
+      border-bottom: ${sv.marginExtraSmall} solid transparent;
+      border-top: ${sv.marginExtraSmall} solid transparent;
     }
   `,
 };
