@@ -1,3 +1,16 @@
+# v6.12.8 (Tue Dec 01 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix inversed tooltip and popover tip style  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.12.7 (Tue Dec 01 2020)
 
 #### ⚠️  Pushed to master
