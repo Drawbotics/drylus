@@ -1,3 +1,16 @@
+# v6.12.5 (Tue Dec 01 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - ensure unique IDs between checkbox filter elements  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.12.4 (Mon Nov 30 2020)
 
 #### ⚠️  Pushed to master
