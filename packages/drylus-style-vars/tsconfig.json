@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "Node",
+    "module": "esnext",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "esnext",
+    "sourceMap": false,
+    "outDir": "./tmp/",
+    "incremental": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "strict": true,
+    "baseUrl": "./",
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "./src"
+  ]
+}
