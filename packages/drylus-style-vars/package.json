@@ -5,8 +5,8 @@
   "license": "UNLICENSED",
   "main": "dist/vars.js",
   "scripts": {
-    "clean": "rimraf dist/",
-    "build:ts": "tsc src/index.ts",
+    "clean": "rimraf dist/ tmp/",
+    "build:ts": "tsc",
     "build": "npm run clean && npm run build:ts && node scripts/build.js",
     "sync": "node scripts/sync.js",
     "build:dev": "npm run build && NODE_ENV=development npm run sync",

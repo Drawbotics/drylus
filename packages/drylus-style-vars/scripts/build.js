@@ -2,9 +2,12 @@ const fs = require('fs-extra');
 const path = require('path');
 const { kebabCase } = require('lodash');
 
-const vars = require('./vars-build');
+const vars = require('../tmp/vars.js');
 
-async function createJs(vars, buildDir) {
+const BUILD_DIR = path.resolve(__dirname, '../dist');
+const TMP_DIR = path.resolve(__dirname, '../tmp');
+
+async function createJs() {
   const lines = [];
   lines.push('module.exports = {');
   Object.keys(vars).forEach((key) => lines.push(`  ${key}: '${vars[key]}',`));
@@ -12,29 +15,26 @@ async function createJs(vars, buildDir) {
   let text = lines.join('\n');
 
   // append functions from colors.js
-  const colorsJs = await fs.readFile(path.resolve(__dirname, 'colors.js'), 'utf-8');
+  const colorsJs = await fs.readFile(path.resolve(__dirname, '../tmp/colors.js'), 'utf-8');
   text += `\n\n${colorsJs}`;
 
-  await fs.writeFile(path.resolve(buildDir, './vars.js'), text, 'utf-8');
+  await fs.writeFile(path.resolve(BUILD_DIR, './vars.js'), text, 'utf-8');
 }
 
-async function createTs(vars, buildDir) {
+async function createTs() {
   const lines = [];
   lines.push(`declare module '@drawbotics/drylus-style-vars' {`);
-  Object.keys(vars).forEach((key) => lines.push(`  export const ${key} = '${vars[key]}';`));
-  lines.push(`
-    function fade(color: string, value: number): string;
-    function darken(color: string, value: number): string;
-    function lighten(color: string, value: number): string;
-  `);
-  
+  const vars = await fs.readFile(path.resolve(TMP_DIR, './vars.d.ts'), 'utf-8');
+  const colors = await fs.readFile(path.resolve(TMP_DIR, './colors.d.ts'), 'utf-8');
+  lines.push(vars);
+  lines.push(colors);
   lines.push('}');
   const text = lines.join('\n');
 
-  await fs.writeFile(path.resolve(buildDir, './vars.d.ts'), text, 'utf-8');
+  await fs.writeFile(path.resolve(BUILD_DIR, './vars.d.ts'), text, 'utf-8');
 }
 
-async function createLess(vars, buildDir) {
+async function createLess() {
   const lines = [];
   Object.keys(vars).forEach((key) => {
     const value = vars[key];
@@ -46,25 +46,24 @@ async function createLess(vars, buildDir) {
     }
   });
   const text = lines.join('\n');
-  await fs.writeFile(path.resolve(buildDir, './vars.less'), text, 'utf-8');
+  await fs.writeFile(path.resolve(BUILD_DIR, './vars.less'), text, 'utf-8');
 }
 
-async function createCss(vars, buildDir) {
+async function createCss() {
   const lines = [];
   lines.push(':root {');
   Object.keys(vars).forEach((key) => lines.push(`  --${kebabCase(key)}: ${vars[key]};`));
   lines.push('}');
   const text = lines.join('\n');
-  await fs.writeFile(path.resolve(buildDir, './vars.css'), text, 'utf-8');
+  await fs.writeFile(path.resolve(BUILD_DIR, './vars.css'), text, 'utf-8');
 }
 
 async function main() {
-  const buildDir = path.resolve(__dirname, '../dist');
-  await fs.ensureDir(buildDir);
-  await createJs(vars, buildDir);
-  await createTs(vars, buildDir);
-  await createLess(vars, buildDir);
-  await createCss(vars, buildDir);
+  await fs.ensureDir(BUILD_DIR);
+  await createJs();
+  await createTs();
+  await createLess();
+  await createCss();
 }
 
 if (require.main === module) {

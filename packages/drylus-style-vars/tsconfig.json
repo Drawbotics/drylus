@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "moduleResolution": "Node",
-    "module": "esnext",
+    "module": "CommonJS",
     "allowJs": true,
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
@@ -15,9 +15,9 @@
     "strict": true,
     "baseUrl": "./",
     "declaration": true,
-    "declarationMap": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
+    "declarationMap": false,
+    "inlineSourceMap": false,
+    "inlineSources": false,
     "resolveJsonModule": true
   },
   "include": [
