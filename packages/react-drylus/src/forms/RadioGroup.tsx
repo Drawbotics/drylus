@@ -63,7 +63,12 @@ const styles = {
     }
 
     [data-element='icon'] {
-      background: ${sv.red};
+      top: 2px;
+      left: 2px;
+      height: calc(100% - 4px);
+      width: calc(100% - 4px);
+      border-radius: 1000px !important;
+      line-height: calc(${sv.defaultMargin} - 4px);
     }
   `,
   radio: css`
@@ -91,7 +96,7 @@ const styles = {
       background: ${sv.neutralLight} !important;
 
       [data-element='icon'] {
-        opacity: 0.7;
+        background: ${sv.neutral};
       }
     }
   `,

@@ -50,7 +50,7 @@ const styles = {
     }
 
     [data-element='icon'] {
-      background: ${sv.neutralLight};
+      background: ${sv.neutral};
     }
   `,
   error: css`
