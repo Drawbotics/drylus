@@ -113,9 +113,6 @@ const styles = {
 export const tooltipStyles = styles;
 
 export interface TooltipProps {
-  /** @deprecated Use 'content' instead */
-  message?: React.ReactNode;
-
   /** Content shown when the tooltip is visible */
   content: React.ReactNode;
 
@@ -136,22 +133,15 @@ export interface TooltipProps {
 }
 
 export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
-  const {
-    children,
-    message,
-    content: _content,
-    side = Position.TOP,
-    style = {},
-    inversed,
-  } = useResponsiveProps<TooltipProps>(rest, responsive);
+  const { children, content, side = Position.TOP, style = {}, inversed } = useResponsiveProps<
+    TooltipProps
+  >(rest, responsive);
 
   const [visible, setVisible] = useState(false);
   const [outletElement, setOutletElement] = useState<HTMLElement>();
   const childrenRef = useRef<HTMLElementWithDisabled>();
   const tooltipRef = useRef<HTMLDivElement>(null);
   const tooltipRect = tooltipRef.current?.getBoundingClientRect();
-
-  const content = _content != null ? _content : message;
 
   useEffect(() => {
     const outlet = document.getElementById('tooltips-outlet');

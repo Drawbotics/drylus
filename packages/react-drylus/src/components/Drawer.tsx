@@ -178,12 +178,6 @@ export interface DrawerProps extends BaseDrawerProps {
   visible: boolean;
 
   /**
-   * If the drawer is in "asOverlay" mode, triggered when the overlay is clicked
-   * @deprecated Clicking the overlay will use onClickClose
-   */
-  onClickOverlay?: () => void;
-
-  /**
    * If true, the whole page is hidden with an overlay and the content of the drawer is rendered most visible
    * @default false
    */
@@ -225,7 +219,6 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
     asOverlay: _asOverlay = false,
     visible,
     onClickClose,
-    onClickOverlay,
     width: rawWidth = 400,
     raw = false,
     title,
@@ -299,7 +292,6 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
     const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === overlayElement?.current && onClickClose != null) {
         onClickClose();
-        onClickOverlay?.();
       }
     };
 

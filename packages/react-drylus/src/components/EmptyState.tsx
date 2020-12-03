@@ -66,9 +66,6 @@ export interface EmptyStateProps {
   /** Text shown to explain the situation */
   description?: string;
 
-  /** @deprecated Use 'children' instead */
-  actions?: Array<React.ReactNode>;
-
   /** Shown below the illustrations, usually Buttons */
   children?: React.ReactNode;
 
@@ -86,13 +83,12 @@ export const EmptyState = ({ responsive, ...rest }: EmptyStateProps) => {
   const {
     description,
     title,
-    actions: _actions,
     style,
     variation = EmptyStateVariation.DEFAULT,
     children,
   } = useResponsiveProps<EmptyStateProps>(rest, responsive);
 
-  const actions = children != null ? React.Children.map(children, (x) => x) : _actions;
+  const actions = children != null ? React.Children.map(children, (x) => x) : null;
 
   return (
     <div style={style} className={styles.root}>

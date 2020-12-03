@@ -2,9 +2,9 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Category, Color, Size } from '../enums';
+import { Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, categoryEnumToColor, getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { Deprecated, getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { Icon } from './Icon';
 
 const styles = {
@@ -97,12 +97,6 @@ export interface CircularProgressProps {
   /** Text shown within the circular progress. Not shown when size is smaller than DEFAULT */
   text?: string;
 
-  /**
-   * @deprecated Use color instead
-   * @kind Category
-   */
-  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
-
   /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
@@ -120,19 +114,13 @@ export interface CircularProgressProps {
 }
 
 export const CircularProgress = ({ responsive, ...rest }: CircularProgressProps) => {
-  const {
-    percentage = 0,
-    category,
-    size = Size.DEFAULT,
-    text,
-    style,
-    color: _color,
-  } = useResponsiveProps(rest, responsive);
+  const { percentage = 0, size = Size.DEFAULT, text, style, color } = useResponsiveProps(
+    rest,
+    responsive,
+  );
 
   const circumference = 84 * Math.PI;
   const offset = percentage * circumference;
-
-  const color = category ? categoryEnumToColor(category) : _color;
 
   return (
     <div

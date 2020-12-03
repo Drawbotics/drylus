@@ -2,9 +2,9 @@ import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Category, Color } from '../enums';
+import { Color } from '../enums';
 import { OnClickCallback, Style } from '../types';
-import { Deprecated, categoryEnumToColor, getEnumAsClass, run } from '../utils';
+import { Deprecated, getEnumAsClass, run } from '../utils';
 import { Icon } from './Icon';
 
 const styles = {
@@ -72,11 +72,6 @@ const styles = {
 export interface TagProps {
   children: string;
 
-  /** @deprecated Use color instead
-   * @kind Category
-   */
-  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
-
   /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE | string;
 
@@ -94,15 +89,7 @@ function _getClassNameForColor(color: Color, inversed?: boolean): string {
   return inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
 }
 
-export const Tag = ({
-  children,
-  category,
-  onClickRemove,
-  inversed,
-  style: _style = {},
-  color: _color,
-}: TagProps) => {
-  const color = category ? categoryEnumToColor(category) : _color;
+export const Tag = ({ children, onClickRemove, inversed, style: _style = {}, color }: TagProps) => {
   const enumColor = color != null && color in Color ? (color as Color) : null;
   const className = enumColor != null ? _getClassNameForColor(enumColor, inversed) : null;
   const style =

@@ -2,9 +2,9 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React, { Fragment } from 'react';
 
-import { Category, Color, Size } from '../enums';
+import { Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, categoryEnumToColor, getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { Deprecated, getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { placeholderStyles as shimmerStyles } from './LoadingPlaceholder';
 
 const styles = {
@@ -181,12 +181,6 @@ export interface SteppedProgressBarProps {
   /** If specified the currently active bar has a precise width, should be between 0-1 */
   percentage?: number;
 
-  /**
-   * @deprecated Use color instead
-   * @kind Category
-   */
-  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
-
   /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
@@ -204,18 +198,11 @@ export interface SteppedProgressBarProps {
 }
 
 export const SteppedProgressBar = ({ responsive, ...rest }: SteppedProgressBarProps) => {
-  const {
-    percentage,
-    category,
-    size = Size.DEFAULT,
-    style,
-    steps,
-    activeStep,
-    color: _color,
-  } = useResponsiveProps<SteppedProgressBarProps>(rest, responsive);
+  const { percentage, size = Size.DEFAULT, style, steps, activeStep, color } = useResponsiveProps<
+    SteppedProgressBarProps
+  >(rest, responsive);
 
   const indeterminate = percentage == null;
-  const color = category ? categoryEnumToColor(category) : _color;
 
   return (
     <div

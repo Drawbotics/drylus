@@ -2,9 +2,9 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Category, Color } from '../enums';
+import { Color } from '../enums';
 import { Style } from '../types';
-import { Deprecated, categoryEnumToColor, checkComponentProps, run } from '../utils';
+import { Deprecated, checkComponentProps, run } from '../utils';
 import { Dot } from './Dot';
 import { Icon, IconType } from './Icon';
 
@@ -65,9 +65,6 @@ export interface ListItemProps {
   /** Content of the list item */
   children: React.ReactNode;
 
-  /** @deprecated Use color instead */
-  category?: Category;
-
   /** @default Color.PRIMARY */
   color?: Color;
 
@@ -84,12 +81,10 @@ export interface ListItemProps {
 export const ListItem = ({
   children,
   icon,
-  category,
   disabled,
   style,
-  color: _color = Color.PRIMARY,
+  color = Color.PRIMARY,
 }: ListItemProps) => {
-  const color = category ? categoryEnumToColor(category) : _color;
   return (
     <li style={style} className={cx(styles.item, { [styles.disabled]: disabled === true })}>
       {children}

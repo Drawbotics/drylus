@@ -2,9 +2,9 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Category, Color, Size } from '../enums';
+import { Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, categoryEnumToColor, getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { Deprecated, getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { Tooltip } from './Tooltip';
 
 const styles = {
@@ -82,12 +82,6 @@ export interface AvatarProps {
    * @kind Size */
   size?: number | Size.DEFAULT | Size.SMALL | Size.LARGE;
 
-  /**
-   * @deprecated Use color instead
-   * @kind Category
-   */
-  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
-
   /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
@@ -102,19 +96,11 @@ export interface AvatarProps {
 }
 
 export const Avatar = ({ responsive, ...rest }: AvatarProps) => {
-  const {
-    image,
-    text,
-    size,
-    category,
-    backgroundColor,
-    hint,
-    style = {},
-    color: _color,
-  } = useResponsiveProps<AvatarProps>(rest, responsive);
+  const { image, text, size, backgroundColor, hint, style = {}, color } = useResponsiveProps<
+    AvatarProps
+  >(rest, responsive);
 
   const customSize = typeof size === 'number';
-  const color = category ? categoryEnumToColor(category) : _color;
 
   const avatar = (
     <div

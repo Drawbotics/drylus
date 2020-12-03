@@ -2,9 +2,9 @@ import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Category, Color, Size } from '../enums';
+import { Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
+import { Deprecated, getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
 
 const largeHeight = sv.marginLarge;
@@ -104,12 +104,6 @@ export interface RoundIconProps {
   /** Makes the icon bold */
   bold?: boolean;
 
-  /**
-   * @deprecated Use color instead
-   * @kind Category
-   */
-  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
-
   /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE | string;
 
@@ -131,15 +125,13 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
   const {
     name,
     size = Size.DEFAULT,
-    category,
     bold,
     style: _style = {},
-    color: _color,
+    color,
     inversed,
   } = useResponsiveProps<RoundIconProps>(rest, responsive);
 
   const customSize = typeof size === 'number';
-  const color = category ? categoryEnumToColor(category) : _color;
   const enumColor = color != null && color in Color ? (color as Color) : null;
   const className = enumColor != null ? _getClassNameForColor(enumColor, inversed) : null;
   const style =

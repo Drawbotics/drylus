@@ -5,9 +5,9 @@ import packageJson from '@drawbotics/icons/package.json';
 import { css, cx, injectGlobal } from 'emotion';
 import React from 'react';
 
-import { Category, Color, Shade } from '../enums';
+import { Color, Shade } from '../enums';
 import { OnClickCallback, Style } from '../types';
-import { Deprecated, categoryEnumToColor, getEnumAsClass } from '../utils';
+import { Deprecated, getEnumAsClass } from '../utils';
 
 const env = require('../utils/get-static-env');
 
@@ -70,9 +70,6 @@ export interface IconProps {
   /** Triggered when the icon is clicked */
   onClick?: OnClickCallback<HTMLElement>;
 
-  /** @deprecated Use color instead */
-  category?: Category;
-
   color?: Color;
 
   /** @kind Shade */
@@ -82,8 +79,7 @@ export interface IconProps {
   style?: Style;
 }
 
-export const Icon = ({ name, bold, onClick, category, style, color: _color, shade }: IconProps) => {
-  const color = category ? categoryEnumToColor(category) : _color;
+export const Icon = ({ name, bold, onClick, style, color, shade }: IconProps) => {
   return (
     <i
       style={style}

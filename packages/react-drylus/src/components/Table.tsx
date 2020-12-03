@@ -747,25 +747,17 @@ function _addAttributesToCells(
 function _generateRowChildren({
   header,
   rowData,
-  renderData,
 }: {
   header?: HeaderData;
   rowData: Omit<TableEntry, 'data'>;
-  renderData: (data: ReactNode, row: number, column: number) => ReactNode;
 }): ReactNode {
   if (header != null) {
     return header.map((item: any, i: number) => {
       const path = typeof item === 'string' || typeof item === 'number' ? item : item.value;
-      return (
-        <TCell key={`${i}-${get(rowData, path)}`}>
-          {renderData(get(rowData, path), i, header.length)}
-        </TCell>
-      );
+      return <TCell key={`${i}-${get(rowData, path)}`}>{get(rowData, path)}</TCell>;
     });
   } else {
-    return Object.values(rowData).map((value, i, arr) => (
-      <TCell key={`${i}-${value}`}>{renderData(value, i, arr.length)}</TCell>
-    ));
+    return Object.values(rowData).map((value, i) => <TCell key={`${i}-${value}`}>{value}</TCell>);
   }
 }
 
@@ -773,12 +765,11 @@ interface MemoizedTRowProps extends Omit<TRowProps, 'children'> {
   header?: HeaderData;
   memoData?: TableEntry;
   rowData: Omit<TableEntry, 'data'>;
-  renderData: (data: ReactNode, row: number, column: number) => ReactNode;
 }
 
 const MemoizedTRow = React.memo(
-  ({ header, rowData, renderData, ...rest }: MemoizedTRowProps) => {
-    return <TRow {...rest}>{_generateRowChildren({ header, rowData, renderData })}</TRow>;
+  ({ header, rowData, ...rest }: MemoizedTRowProps) => {
+    return <TRow {...rest}>{_generateRowChildren({ header, rowData })}</TRow>;
   },
   (prevProps, nextProps) => isEqual(prevProps.memoData, nextProps.memoData),
 );
@@ -789,8 +780,6 @@ function _generateTable({
   data,
   memoDataValues,
   header,
-  renderCell,
-  renderChildCell = (x) => x,
   childHeader,
   onClickRow = () => {},
   clickable,
@@ -800,8 +789,6 @@ function _generateTable({
   data: Array<TableEntry> | TableEntry;
   memoDataValues?: Array<TableEntry> | TableEntry;
   header?: HeaderData;
-  renderCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
-  renderChildCell: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
   childHeader?: Array<DataEntry>;
   onClickRow?: (row: TableEntry) => void;
   clickable?: boolean;
@@ -820,8 +807,6 @@ function _generateTable({
                   ? memoDataValues[i]
                   : undefined,
               header,
-              renderCell,
-              renderChildCell,
               childHeader,
               onClickRow,
               clickable,
@@ -835,12 +820,10 @@ function _generateTable({
     const hasData = data.data != null;
     const rowData = hasData ? omit(data, 'data') : data;
     const uniqId = Object.values(rowData).reduce<string>((memo, v) => `${memo}-${toString(v)}`, '');
-    const renderData = renderCell ?? renderChildCell;
     const parentRow =
       memoDataValues != null && !Array.isArray(memoDataValues) ? (
         <MemoizedTRow
           header={header}
-          renderData={renderData}
           memoData={memoDataValues}
           rowData={rowData}
           animated={animated}
@@ -858,7 +841,7 @@ function _generateTable({
           onClick={() => onClickRow(rowData)}
           clickable={clickable}
           highlighted={activeRow != null && rowData.id != null && activeRow === rowData.id}>
-          {_generateRowChildren({ header, rowData, renderData })}
+          {_generateRowChildren({ header, rowData })}
         </TRow>
       );
 
@@ -880,8 +863,6 @@ function _generateTable({
                       ? memoDataValues?.data
                       : [],
                   header: childHeader,
-                  renderCell: undefined,
-                  renderChildCell,
                   clickable,
                 }) as React.ReactElement<typeof TBody>
               }
@@ -916,18 +897,6 @@ export interface TableProps {
 
   /** When given, each table row will be shallowly compared to prevent unnecessary renders. Should have the same structure as the data prop to enable 1-to-1 equivalence */
   memoDataValues?: TableData;
-
-  /**
-   * Returns the child given to each row cell. Params (value, index, columns)
-   * @deprecated Use the data object directly instead
-   */
-  renderCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
-
-  /**
-   * Same as renderCell but applies to the children cells (nested)
-   * @deprecated Use the data object directly instead
-   */
-  renderChildCell?: (data: React.ReactNode, i: number, span: number) => React.ReactNode;
 
   /** Array of strings to generate the header of the table (each string is a label). data prop keys will be filtered by these */
   header?: HeaderData;
@@ -989,8 +958,6 @@ export const Table = ({
   fullWidth = true,
   withNesting,
   data,
-  renderCell = (x) => x,
-  renderChildCell = (x) => x,
   header = [],
   childHeader,
   sortableBy,
@@ -1131,8 +1098,6 @@ export const Table = ({
             data,
             memoDataValues,
             header,
-            renderCell,
-            renderChildCell,
             childHeader,
             onClickRow,
             clickable,
