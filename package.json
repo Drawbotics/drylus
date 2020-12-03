@@ -16,6 +16,7 @@
     "watch:styleguide": "cd packages/styleguide && npm run start",
     "start": "npm run watch:styleguide",
     "build:styleguide": "cd packages/styleguide && npm run build",
+    "build:ts-vars": "cd packages/drylus-style-vars && npm run build:ts",
     "build:vars": "cd packages/drylus-style-vars && npm run build",
     "dev:icons": "cd packages/icons && npm run build:dev",
     "dev:vanilla": "cd packages/vanilla-drylus && npm run build:dev",

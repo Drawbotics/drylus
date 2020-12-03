@@ -1,5 +1,5 @@
-const { fade } = require('./colors');
-const { m, d, s, a } = require('./operations');
+import { fade } from './colors';
+import { add, divide, multiply, subtract } from './operations';
 
 // COLORS
 export const white = '#fff';
@@ -68,8 +68,8 @@ export const darkOverlay = fade(neutralDarker, 90);
 // BORDERS
 const baseBorderRadius = '5px';
 export const defaultBorderRadius = baseBorderRadius;
-export const borderRadiusLarge = m(baseBorderRadius, 1.5);
-export const borderRadiusSmall = d(baseBorderRadius, 1.5);
+export const borderRadiusLarge = multiply(baseBorderRadius, 1.5);
+export const borderRadiusSmall = divide(baseBorderRadius, 1.5);
 
 // TYPOGRAPHY
 const baseFontSize = '14px';
@@ -102,27 +102,27 @@ export const insetActiveLight = `0 1px 6px ${neutral} inset`;
 // PADDINGS AND MARGINS
 const basePadding = '24px';
 export const defaultPadding = basePadding;
-export const paddingSmall = s(basePadding, 8);
-export const paddingExtraSmall = s(paddingSmall, 8);
-export const paddingLarge = a(basePadding, 8);
-export const paddingExtraLarge = a(paddingLarge, 8);
-export const paddingHuge = m(paddingExtraSmall, 7);
-export const paddingExtraHuge = m(basePadding, 3);
-export const paddingMassive = m(basePadding, 5);
+export const paddingSmall = subtract(basePadding, 8);
+export const paddingExtraSmall = subtract(paddingSmall, 8);
+export const paddingLarge = add(basePadding, 8);
+export const paddingExtraLarge = add(paddingLarge, 8);
+export const paddingHuge = multiply(paddingExtraSmall, 7);
+export const paddingExtraHuge = multiply(basePadding, 3);
+export const paddingMassive = multiply(basePadding, 5);
 export const baseMargin = '24px';
 export const defaultMargin = basePadding;
-export const marginSmall = s(baseMargin, 8);
-export const marginExtraSmall = s(marginSmall, 8);
-export const marginLarge = a(baseMargin, 8);
-export const marginExtraLarge = a(marginLarge, 8);
-export const marginHuge = m(marginExtraSmall, 7);
-export const marginExtraHuge = m(baseMargin, 3);
-export const marginMassive = m(baseMargin, 5);
+export const marginSmall = subtract(baseMargin, 8);
+export const marginExtraSmall = subtract(marginSmall, 8);
+export const marginLarge = add(baseMargin, 8);
+export const marginExtraLarge = add(marginLarge, 8);
+export const marginHuge = multiply(marginExtraSmall, 7);
+export const marginExtraHuge = multiply(baseMargin, 3);
+export const marginMassive = multiply(baseMargin, 5);
 
 // TRANSITIONS AND ANIMATIONS
 const baseTransitionTime = '0.3s';
 export const defaultTransitionTime = baseTransitionTime;
-export const transitionTimeShort = d(baseTransitionTime, 2);
+export const transitionTimeShort = divide(baseTransitionTime, 2);
 export const bouncyTransitionCurve = 'cubic-bezier(0.44, 0.11, 0.07, 1.29)';
 export const defaultTransition = `all ${defaultTransitionTime} ease-in-out`;
 export const transitionShort = `all ${transitionTimeShort} ease-in-out`;
