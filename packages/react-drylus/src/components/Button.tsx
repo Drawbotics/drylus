@@ -48,7 +48,8 @@ const styles = {
     }
 
     &:disabled {
-      background: ${fade(sv.brand, 40)};
+      color: ${sv.colorDisabled} !important;
+      background: ${sv.neutralLight};
     }
   `,
   danger: css`
@@ -64,7 +65,8 @@ const styles = {
     }
 
     &:disabled {
-      background: ${fade(sv.red, 40)};
+      color: ${sv.colorDisabled} !important;
+      background: ${sv.neutralLight};
     }
   `,
   info: css`
@@ -80,7 +82,8 @@ const styles = {
     }
 
     &:disabled {
-      background: ${fade(sv.blue, 40)};
+      color: ${sv.colorDisabled} !important;
+      background: ${sv.neutralLight};
     }
   `,
   success: css`
@@ -96,7 +99,8 @@ const styles = {
     }
 
     &:disabled {
-      background: ${fade(sv.green, 40)};
+      color: ${sv.colorDisabled} !important;
+      background: ${sv.neutralLight};
     }
   `,
   warning: css`
@@ -112,7 +116,8 @@ const styles = {
     }
 
     &:disabled {
-      background: ${fade(sv.orange, 40)};
+      color: ${sv.colorDisabled} !important;
+      background: ${sv.neutralLight};
     }
   `,
   brandAlt: css`
@@ -123,7 +128,7 @@ const styles = {
     }
 
     &:disabled {
-      color: ${fade(sv.brand, 40)};
+      color: ${sv.colorDisabled};
     }
   `,
   dangerAlt: css`
@@ -134,7 +139,7 @@ const styles = {
     }
 
     &:disabled {
-      color: ${fade(sv.red, 40)};
+      color: ${sv.colorDisabled};
     }
   `,
   warningAlt: css`
@@ -145,7 +150,7 @@ const styles = {
     }
 
     &:disabled {
-      color: ${fade(sv.orange, 40)};
+      color: ${sv.colorDisabled};
     }
   `,
   infoAlt: css`
@@ -156,7 +161,7 @@ const styles = {
     }
 
     &:disabled {
-      color: ${fade(sv.blue, 40)};
+      color: ${sv.colorDisabled};
     }
   `,
   successAlt: css`
@@ -167,7 +172,7 @@ const styles = {
     }
 
     &:disabled {
-      color: ${fade(sv.green, 40)};
+      color: ${sv.colorDisabled};
     }
   `,
   primaryAlt: css`
