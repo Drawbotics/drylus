@@ -66,7 +66,7 @@ const styles = {
     }
   `,
   disabled: css`
-    opacity: 0.5;
+    background: ${sv.neutralLight} !important;
 
     &:hover {
       cursor: not-allowed;
