@@ -208,19 +208,86 @@ export const greens = {
   ],
 };
 
-export const socials = {
-  title: 'Socials',
-  background: sv.facebookColor,
-  description: 'If you need to reference any of the social networks, use their brand colors',
+export const violets = {
+  title: 'Violets',
+  background: sv.violet,
   colors: [
     {
-      name: 'facebookColor',
+      name: 'violetLighter',
+      light: true,
     },
     {
-      name: 'linkedinColor',
+      name: 'violetLight',
+      light: true,
     },
     {
-      name: 'twitterColor',
+      name: 'violet',
+    },
+    {
+      name: 'violetDark',
+    },
+  ],
+};
+
+export const purples = {
+  title: 'Purples',
+  background: sv.purple,
+  colors: [
+    {
+      name: 'purpleLighter',
+      light: true,
+    },
+    {
+      name: 'purpleLight',
+      light: true,
+    },
+    {
+      name: 'purple',
+    },
+    {
+      name: 'purpleDark',
+    },
+  ],
+};
+
+export const pinks = {
+  title: 'Pinks',
+  background: sv.pink,
+  colors: [
+    {
+      name: 'pinkLighter',
+      light: true,
+    },
+    {
+      name: 'pinkLight',
+      light: true,
+    },
+    {
+      name: 'pink',
+    },
+    {
+      name: 'pinkDark',
+    },
+  ],
+};
+
+export const yellows = {
+  title: 'Yellows',
+  background: sv.yellow,
+  colors: [
+    {
+      name: 'yellowLighter',
+      light: true,
+    },
+    {
+      name: 'pinkLight',
+      light: true,
+    },
+    {
+      name: 'yellow',
+    },
+    {
+      name: 'yellowDark',
     },
   ],
 };

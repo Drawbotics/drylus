@@ -37,7 +37,6 @@ export const red = '#EC4C47';
 export const redLight = '#F8C8C8';
 export const redLighter = '#fae2e2';
 export const danger = red;
-export const error = red;
 
 export const orangeDark = '#a16d22';
 export const orange = '#f8a00f';
@@ -57,9 +56,25 @@ export const greenLight = '#C1E8DE';
 export const greenLighter = '#E7F5F1';
 export const success = green;
 
-export const facebookColor = '#275a9b';
-export const twitterColor = '#00a2f5';
-export const linkedinColor = '#0077b5';
+export const pinkDark = '#852785';
+export const pink = '#BB36BB';
+export const pinkLight = '#EFDAEF';
+export const pinkLighter = '#FEF3FE';
+
+export const purpleDark = '#643790';
+export const purple = '#8C46D1';
+export const purpleLight = '#E1CEF5';
+export const purpleLighter = '#F7F0FF';
+
+export const violetDark = '#3B2F7D';
+export const violet = '#5D4AC8';
+export const violetLight = '#D4CFF3';
+export const violetLighter = '#EFEDFF';
+
+export const yellowDark = '#B49424';
+export const yellow = '#FADB4A';
+export const yellowLight = '#FFF0AB';
+export const yellowLighter = '#FFF9DC';
 
 export const lighterOverlay = fade(grey900, 5);
 export const lightOverlay = fade(grey900, 10);
