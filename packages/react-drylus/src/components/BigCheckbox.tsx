@@ -52,14 +52,21 @@ const styles = {
   `,
   disabled: css`
     opacity: 0.5;
+    box-shadow: inset 0px 0px 0px 1px ${sv.neutral} !important;
+
+    & [data-element='header'] > div {
+      color: ${sv.colorTertiary} !important;
+    }
 
     &:hover {
       cursor: not-allowed;
-      box-shadow: inset 0px 0px 0px 1px ${sv.neutral};
+    }
+  `,
+  checkedDisabled: css`
+    box-shadow: inset 0px 0px 0px 2px ${sv.neutral} !important;
 
-      & [data-element='header'] > div {
-        color: ${sv.colorTertiary};
-      }
+    & [data-element='icon'] > div {
+      background: ${sv.neutral} !important;
     }
   `,
 };
@@ -104,6 +111,7 @@ export const BigCheckbox = <T extends string>({
       className={cx(styles.root, {
         [styles.checked]: isChecked,
         [styles.disabled]: disabled === true,
+        [styles.checkedDisabled]: isChecked && disabled === true,
       })}
       onClick={handleOnChange}>
       <div data-element="header" className={styles.header}>
