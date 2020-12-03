@@ -23,9 +23,8 @@ async function createJs() {
 
 async function createTs() {
   const lines = [];
-  const vars = await fs.readFile(path.resolve(TMP_DIR, './vars.d.ts'), 'utf-8');
+  Object.keys(vars).forEach((key) => lines.push(`  export const ${key} = '${vars[key]}';`));
   const colors = await fs.readFile(path.resolve(TMP_DIR, './colors.d.ts'), 'utf-8');
-  lines.push(vars);
   lines.push(colors);
   const text = lines.join('\n');
 
