@@ -6,6 +6,9 @@ import { Category, Color, Size, Tier } from '../enums';
 import { OnClickCallback, Responsive, Style } from '../types';
 import { colorEnumToCategory, getEnumAsClass, run, useResponsiveProps } from '../utils';
 
+const defaultHeight = '40px';
+const smallHeight = '30px';
+
 const styles = {
   root: css`
     background: ${sv.neutralLight};
@@ -230,8 +233,8 @@ const styles = {
   `,
   round: css`
     border-radius: 1000px;
-    height: ${sv.marginExtraLarge};
-    width: ${sv.marginExtraLarge};
+    height: ${defaultHeight};
+    width: ${defaultHeight};
     padding: 0;
 
     i {
@@ -242,12 +245,12 @@ const styles = {
     }
   `,
   roundSmall: css`
-    height: ${sv.marginLarge};
-    width: ${sv.marginLarge};
+    height: ${smallHeight};
+    width: ${smallHeight};
 
     i {
       font-size: 1rem;
-      margin-left: -1px;
+      margin-right: 0;
     }
   `,
   fullWidth: css`

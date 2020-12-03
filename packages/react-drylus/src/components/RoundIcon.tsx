@@ -7,11 +7,15 @@ import { Responsive, Style } from '../types';
 import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
 
+const largeHeight = '48px';
+const defaultHeight = '40px';
+const smallHeight = '30px';
+
 const styles = {
   root: css`
     border-radius: 1000px;
-    height: ${sv.defaultMargin};
-    width: ${sv.defaultMargin};
+    height: ${defaultHeight};
+    width: ${defaultHeight};
     color: ${sv.colorPrimary};
     background: ${sv.neutralLight};
     display: inline-flex;
@@ -19,25 +23,25 @@ const styles = {
     justify-content: center;
 
     > i {
-      font-size: 1rem;
+      font-size: 1.1rem;
       margin-top: 1px;
     }
   `,
   small: css`
-    height: ${sv.marginSmall};
-    width: ${sv.marginSmall};
+    height: ${smallHeight};
+    width: ${smallHeight};
 
     > i {
-      font-size: 0.65rem;
+      font-size: 1rem;
     }
   `,
   large: css`
-    height: ${sv.marginLarge};
-    width: ${sv.marginLarge};
+    height: ${largeHeight};
+    width: ${largeHeight};
 
     > i {
       font-size: 1.2rem;
-      margin-top: 0;
+      margin-top: 1px;
     }
   `,
   iconInherit: css`
