@@ -7,9 +7,9 @@ import { Responsive, Style } from '../types';
 import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
 
-const largeHeight = '48px';
-const defaultHeight = '40px';
-const smallHeight = '30px';
+const largeHeight = '30px';
+const defaultHeight = '24px';
+const smallHeight = '16px';
 
 const styles = {
   root: css`
@@ -32,7 +32,8 @@ const styles = {
     width: ${smallHeight};
 
     > i {
-      font-size: 1rem;
+      font-size: 0.65rem;
+      margin-left: 1px;
     }
   `,
   large: css`
