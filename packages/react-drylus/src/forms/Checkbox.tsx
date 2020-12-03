@@ -48,6 +48,10 @@ const styles = {
       cursor: not-allowed !important;
       color: ${sv.colorDisabled};
     }
+
+    [data-element='icon'] {
+      background: ${sv.neutralLight};
+    }
   `,
   error: css`
     [data-element='sprite'] {
@@ -55,7 +59,12 @@ const styles = {
     }
 
     [data-element='icon'] {
-      background: ${sv.red};
+      top: 2px;
+      left: 2px;
+      height: calc(100% - 4px);
+      width: calc(100% - 4px);
+      border-radius: ${sv.borderRadiusSmall} !important;
+      line-height: calc(${sv.defaultMargin} - 4px);
     }
   `,
   checkbox: css`
@@ -81,10 +90,6 @@ const styles = {
     &:disabled + [data-element='sprite'] {
       cursor: not-allowed;
       background: ${sv.neutralLight} !important;
-
-      [data-element='icon'] {
-        opacity: 0.7;
-      }
     }
   `,
   label: css`
@@ -147,6 +152,11 @@ const styles = {
       > i {
         font-size: 1.2rem !important;
       }
+    }
+  `,
+  largeError: css`
+    [data-element='icon'] {
+      line-height: calc(${sv.marginLarge} + 4px);
     }
   `,
 };
@@ -229,6 +239,7 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
           [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
           [styles.disabled]: disabled === true,
           [styles.error]: error != null && error !== false,
+          [styles.largeError]: error != null && error !== false && size === Size.LARGE,
           [styles.readOnly]: readOnly,
           [placeholderStyles.shimmer]: isPlaceholder === true,
         })}
