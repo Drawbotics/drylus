@@ -15,7 +15,8 @@ const styles = {
     width: 100%;
   `,
   withCounter: css`
-    & [data-element='suffix'] {
+    & [data-element='suffix'],
+    & [data-element='prefix'] {
       padding: 0;
       align-items: stretch;
       overflow: hidden;
@@ -32,11 +33,6 @@ const styles = {
         margin: 0;
       }
     }
-  `,
-  buttons: css`
-    display: flex;
-    flex-direction: column;
-    flex: 1;
   `,
   button: css`
     flex: 1;
@@ -64,13 +60,29 @@ const styles = {
     }
   `,
   small: css`
+    padding: 0 ${sv.paddingExtraSmall};
+
     i {
       font-size: 0.9em !important;
       margin-bottom: -1px;
     }
   `,
   disabled: css`
-    > button {
+    & [data-element='suffix'] {
+      button {
+        box-shadow: 4px 0px 0px -2px ${sv.neutral} inset;
+        background: ${sv.neutralLight} !important;
+      }
+    }
+
+    & [data-element='prefix'] {
+      button {
+        box-shadow: -4px 0px 0px -2px ${sv.neutral} inset;
+        background: ${sv.neutralLight} !important;
+      }
+    }
+
+    button {
       background: ${sv.neutralLight};
       color: ${sv.colorDisabled};
       border-color: ${sv.neutralLight};
@@ -89,7 +101,7 @@ const styles = {
   renderedValue: css`
     position: absolute;
     top: 12px;
-    left: ${sv.marginSmall};
+    left: calc(${sv.marginSmall} + 48px);
     z-index: 9;
     color: red;
     letter-spacing: normal;
@@ -105,7 +117,7 @@ const styles = {
   `,
   smallRenderValue: css`
     top: calc(${sv.marginExtraSmall} - 1px);
-    left: ${sv.marginExtraSmall};
+    left: calc(${sv.marginExtraSmall} + 30px);
   `,
   value: css`
     color: transparent;
@@ -242,7 +254,12 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
   const decimalPlaces = (String(step).split('.')[1] || []).length;
 
   return (
-    <div style={style} className={cx(styles.root, { [styles.withCounter]: withCounter })}>
+    <div
+      style={style}
+      className={cx(styles.root, {
+        [styles.withCounter]: withCounter,
+        [styles.disabled]: disabled,
+      })}>
       {run(() => {
         if (renderValue != null && (value === 0 || value)) {
           const sections = renderValue(value).split(String(value));
@@ -279,39 +296,36 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
         extraLeftPadding={extraLeftPadding}
         size={size}
         suffix={
+          // [styles.small]: size === Size.SMALL,
           withCounter && onChange != null ? (
-            <div
-              className={cx(styles.buttons, {
-                [styles.disabled]: disabled === true,
+            <button
+              className={cx(styles.button, {
                 [styles.small]: size === Size.SMALL,
-              })}>
-              <button
-                className={styles.button}
-                onClick={() => {
-                  const res = (Number(value) ?? 0) + step;
-                  if (!disabled && value < max) {
-                    onChange(
-                      Number.isInteger(res) ? res : Number(res.toFixed(decimalPlaces)),
-                      name,
-                    );
-                  }
-                }}>
-                <Icon name="plus" bold />
-              </button>
-              <button
-                className={styles.button}
-                onClick={() => {
-                  const res = (Number(value) ?? 0) - step;
-                  if (!disabled && value > min) {
-                    onChange(
-                      Number.isInteger(res) ? res : Number(res.toFixed(decimalPlaces)),
-                      name,
-                    );
-                  }
-                }}>
-                <Icon name="minus" bold />
-              </button>
-            </div>
+              })}
+              onClick={() => {
+                const res = (Number(value) ?? 0) + step;
+                if (!disabled && value < max) {
+                  onChange(Number.isInteger(res) ? res : Number(res.toFixed(decimalPlaces)), name);
+                }
+              }}>
+              <Icon name="plus" bold />
+            </button>
+          ) : null
+        }
+        prefix={
+          withCounter && onChange != null ? (
+            <button
+              className={cx(styles.button, {
+                [styles.small]: size === Size.SMALL,
+              })}
+              onClick={() => {
+                const res = (Number(value) ?? 0) - step;
+                if (!disabled && value > min) {
+                  onChange(Number.isInteger(res) ? res : Number(res.toFixed(decimalPlaces)), name);
+                }
+              }}>
+              <Icon name="minus" bold />
+            </button>
           ) : null
         }
         {...props}
