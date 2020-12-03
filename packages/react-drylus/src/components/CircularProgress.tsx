@@ -5,13 +5,14 @@ import React from 'react';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
 import { Deprecated, categoryEnumToColor, getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { Icon } from './Icon';
 
 const styles = {
   root: css`
     height: 50px;
     width: 50px;
     position: relative;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 
     > svg {
       height: 100%;
@@ -23,8 +24,12 @@ const styles = {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: ${sv.colorTertiary};
+    color: ${sv.colorSecondary};
     text-align: center;
+
+    i {
+      font-size: 2em;
+    }
   `,
   circle: css`
     stroke-width: 8px;
@@ -42,16 +47,18 @@ const styles = {
   large: css`
     height: 70px;
     width: 70px;
-    font-size: 1rem;
   `,
   extraLarge: css`
     height: 90px;
     width: 90px;
-    font-size: 1.2rem;
   `,
   small: css`
     height: 30px;
     width: 30px;
+
+    i {
+      font-size: 0.9em;
+    }
   `,
   brand: css`
     & [data-element='circle'] {
@@ -135,6 +142,13 @@ export const CircularProgress = ({ responsive, ...rest }: CircularProgressProps)
         [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
       })}>
       {run(() => {
+        if (color === Color.GREEN && percentage === 1) {
+          return (
+            <div className={styles.text}>
+              <Icon bold name="check" color={Color.GREEN} />
+            </div>
+          );
+        }
         if (text && size !== Size.SMALL) {
           return <div className={styles.text}>{text}</div>;
         }
