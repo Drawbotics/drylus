@@ -16,7 +16,7 @@ async function createJs() {
 
   // append functions from colors.js
   const colorsJs = await fs.readFile(path.resolve(__dirname, '../tmp/colors.js'), 'utf-8');
-  text += `\n\n${colorsJs}`;
+  text += `\n\n${colorsJs.replace(/exports\./gm, 'module.exports.')}`;
 
   await fs.writeFile(path.resolve(BUILD_DIR, './vars.js'), text, 'utf-8');
 }

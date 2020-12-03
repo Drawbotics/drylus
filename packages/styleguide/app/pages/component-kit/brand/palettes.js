@@ -280,7 +280,7 @@ export const yellows = {
       light: true,
     },
     {
-      name: 'pinkLight',
+      name: 'yellowLight',
       light: true,
     },
     {
