@@ -31,10 +31,14 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
 }
 
 .emotion-4 {
-  height: calc(24px - 4px);
-  width: calc(24px - 4px);
+  height: 16px;
+  width: 16px;
   position: relative;
   overflow: hidden;
+}
+
+.emotion-8 {
+  margin-bottom: 8px;
 }
 
 .emotion-0 {
@@ -59,41 +63,17 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
 }
 
 .emotion-0:disabled + [data-element='sprite'] [data-element='icon'] {
-  opacity: 0.7;
+  background: #d3dce6;
 }
 
 .emotion-5 {
   margin-left: 8px;
   color: #172b4e;
   position: relative;
-  top: 1px;
 }
 
 .emotion-5:hover {
   cursor: pointer;
-}
-
-.emotion-2 {
-  cursor: inherit;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  background: #3FBC9B;
-  line-height: 24px;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  border-radius: 100px;
-}
-
-.emotion-2 > i {
-  font-size: 0.8rem;
-}
-
-.emotion-8 {
-  margin-bottom: 8px;
 }
 
 .emotion-3 {
@@ -121,6 +101,26 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
+}
+
+.emotion-2 {
+  cursor: inherit;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background: #3FBC9B;
+  line-height: calc(16px + 4px);
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  border-radius: 100px;
+}
+
+.emotion-2 > i {
+  font-size: 0.8rem;
+  margin-left: 1px;
 }
 
 .emotion-1 {
@@ -259,10 +259,14 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
 }
 
 .emotion-4 {
-  height: calc(24px - 4px);
-  width: calc(24px - 4px);
+  height: 16px;
+  width: 16px;
   position: relative;
   overflow: hidden;
+}
+
+.emotion-8 {
+  margin-bottom: 8px;
 }
 
 .emotion-0 {
@@ -287,41 +291,17 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
 }
 
 .emotion-0:disabled + [data-element='sprite'] [data-element='icon'] {
-  opacity: 0.7;
+  background: #d3dce6;
 }
 
 .emotion-5 {
   margin-left: 8px;
   color: #172b4e;
   position: relative;
-  top: 1px;
 }
 
 .emotion-5:hover {
   cursor: pointer;
-}
-
-.emotion-2 {
-  cursor: inherit;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  background: #3FBC9B;
-  line-height: 24px;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  border-radius: 100px;
-}
-
-.emotion-2 > i {
-  font-size: 0.8rem;
-}
-
-.emotion-8 {
-  margin-bottom: 8px;
 }
 
 .emotion-3 {
@@ -349,6 +329,26 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
+}
+
+.emotion-2 {
+  cursor: inherit;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background: #3FBC9B;
+  line-height: calc(16px + 4px);
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  border-radius: 100px;
+}
+
+.emotion-2 > i {
+  font-size: 0.8rem;
+  margin-left: 1px;
 }
 
 .emotion-1 {
@@ -471,10 +471,14 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
 }
 
 .emotion-4 {
-  height: calc(24px - 4px);
-  width: calc(24px - 4px);
+  height: 16px;
+  width: 16px;
   position: relative;
   overflow: hidden;
+}
+
+.emotion-8 {
+  margin-bottom: 8px;
 }
 
 .emotion-0 {
@@ -499,41 +503,17 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
 }
 
 .emotion-0:disabled + [data-element='sprite'] [data-element='icon'] {
-  opacity: 0.7;
+  background: #d3dce6;
 }
 
 .emotion-5 {
   margin-left: 8px;
   color: #172b4e;
   position: relative;
-  top: 1px;
 }
 
 .emotion-5:hover {
   cursor: pointer;
-}
-
-.emotion-2 {
-  cursor: inherit;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  background: #3FBC9B;
-  line-height: 24px;
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  border-radius: 100px;
-}
-
-.emotion-2 > i {
-  font-size: 0.8rem;
-}
-
-.emotion-8 {
-  margin-bottom: 8px;
 }
 
 .emotion-3 {
@@ -561,6 +541,26 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   overflow: hidden;
+}
+
+.emotion-2 {
+  cursor: inherit;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background: #3FBC9B;
+  line-height: calc(16px + 4px);
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  border-radius: 100px;
+}
+
+.emotion-2 > i {
+  font-size: 0.8rem;
+  margin-left: 1px;
 }
 
 .emotion-6 {
@@ -607,6 +607,10 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   color: #879ba6;
+}
+
+.emotion-6 [data-element='locked-icon'] > i {
+  font-size: 0.7rem !important;
 }
 
 <div

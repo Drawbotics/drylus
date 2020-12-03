@@ -27,8 +27,8 @@ exports[`Checkbox matches snapshot when has a label 1`] = `
 }
 
 .emotion-4 {
-  height: calc(24px - 4px);
-  width: calc(24px - 4px);
+  height: 16px;
+  width: 16px;
   position: relative;
   overflow: hidden;
 }
@@ -54,10 +54,6 @@ exports[`Checkbox matches snapshot when has a label 1`] = `
   background: #eaeff4 !important;
 }
 
-.emotion-0:disabled + [data-element='sprite'] [data-element='icon'] {
-  opacity: 0.7;
-}
-
 .emotion-5 {
   margin-left: 8px;
   color: #172b4e;
@@ -75,7 +71,7 @@ exports[`Checkbox matches snapshot when has a label 1`] = `
   left: 0;
   height: 100%;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 2px;
   background: #d3dce6;
   display: -webkit-box;
   display: -webkit-flex;
@@ -102,7 +98,7 @@ exports[`Checkbox matches snapshot when has a label 1`] = `
   height: 100%;
   width: 100%;
   background: #3FBC9B;
-  line-height: 24px;
+  line-height: calc(16px + 2px);
   -webkit-transform: scale(0);
   -ms-transform: scale(0);
   transform: scale(0);
@@ -113,6 +109,7 @@ exports[`Checkbox matches snapshot when has a label 1`] = `
 
 .emotion-2 > i {
   font-size: 0.8rem;
+  margin-left: 1px;
 }
 
 .emotion-1 {
@@ -191,8 +188,8 @@ exports[`Checkbox matches snapshot when has a label as react node 1`] = `
 }
 
 .emotion-4 {
-  height: calc(24px - 4px);
-  width: calc(24px - 4px);
+  height: 16px;
+  width: 16px;
   position: relative;
   overflow: hidden;
 }
@@ -218,10 +215,6 @@ exports[`Checkbox matches snapshot when has a label as react node 1`] = `
   background: #eaeff4 !important;
 }
 
-.emotion-0:disabled + [data-element='sprite'] [data-element='icon'] {
-  opacity: 0.7;
-}
-
 .emotion-6 {
   margin-left: 8px;
   color: #172b4e;
@@ -239,7 +232,7 @@ exports[`Checkbox matches snapshot when has a label as react node 1`] = `
   left: 0;
   height: 100%;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 2px;
   background: #d3dce6;
   display: -webkit-box;
   display: -webkit-flex;
@@ -266,7 +259,7 @@ exports[`Checkbox matches snapshot when has a label as react node 1`] = `
   height: 100%;
   width: 100%;
   background: #3FBC9B;
-  line-height: 24px;
+  line-height: calc(16px + 2px);
   -webkit-transform: scale(0);
   -ms-transform: scale(0);
   transform: scale(0);
@@ -277,6 +270,7 @@ exports[`Checkbox matches snapshot when has a label as react node 1`] = `
 
 .emotion-2 > i {
   font-size: 0.8rem;
+  margin-left: 1px;
 }
 
 .emotion-1 {
@@ -370,8 +364,8 @@ exports[`Checkbox matches snapshot when is checked 1`] = `
 }
 
 .emotion-4 {
-  height: calc(24px - 4px);
-  width: calc(24px - 4px);
+  height: 16px;
+  width: 16px;
   position: relative;
   overflow: hidden;
 }
@@ -397,17 +391,13 @@ exports[`Checkbox matches snapshot when is checked 1`] = `
   background: #eaeff4 !important;
 }
 
-.emotion-0:disabled + [data-element='sprite'] [data-element='icon'] {
-  opacity: 0.7;
-}
-
 .emotion-3 {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 2px;
   background: #d3dce6;
   display: -webkit-box;
   display: -webkit-flex;
@@ -434,7 +424,7 @@ exports[`Checkbox matches snapshot when is checked 1`] = `
   height: 100%;
   width: 100%;
   background: #3FBC9B;
-  line-height: 24px;
+  line-height: calc(16px + 2px);
   -webkit-transform: scale(0);
   -ms-transform: scale(0);
   transform: scale(0);
@@ -445,6 +435,7 @@ exports[`Checkbox matches snapshot when is checked 1`] = `
 
 .emotion-2 > i {
   font-size: 0.8rem;
+  margin-left: 1px;
 }
 
 .emotion-1 {
@@ -496,8 +487,8 @@ exports[`Checkbox matches snapshot when is large 1`] = `
 }
 
 .emotion-4 {
-  height: calc(24px - 4px);
-  width: calc(24px - 4px);
+  height: 16px;
+  width: 16px;
   position: relative;
   overflow: hidden;
 }
@@ -523,17 +514,13 @@ exports[`Checkbox matches snapshot when is large 1`] = `
   background: #eaeff4 !important;
 }
 
-.emotion-0:disabled + [data-element='sprite'] [data-element='icon'] {
-  opacity: 0.7;
-}
-
 .emotion-3 {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 2px;
   background: #d3dce6;
   display: -webkit-box;
   display: -webkit-flex;
@@ -560,7 +547,7 @@ exports[`Checkbox matches snapshot when is large 1`] = `
   height: 100%;
   width: 100%;
   background: #3FBC9B;
-  line-height: 24px;
+  line-height: calc(16px + 2px);
   -webkit-transform: scale(0);
   -ms-transform: scale(0);
   transform: scale(0);
@@ -571,6 +558,7 @@ exports[`Checkbox matches snapshot when is large 1`] = `
 
 .emotion-2 > i {
   font-size: 0.8rem;
+  margin-left: 1px;
 }
 
 .emotion-1 {
@@ -599,24 +587,18 @@ exports[`Checkbox matches snapshot when is large 1`] = `
 }
 
 .emotion-5 > div {
-  height: 32px;
-  width: 32px;
-}
-
-.emotion-5 [data-element='label'] {
-  font-size: 1.1rem;
-  margin-left: 16px;
-  top: 0;
+  height: 24px;
+  width: 24px;
 }
 
 .emotion-5 [data-element='icon'],
 .emotion-5 [data-element='locked-icon'] {
-  line-height: calc(32px + 5px);
+  line-height: calc(24px + 5px);
 }
 
 .emotion-5 [data-element='icon'] > i,
 .emotion-5 [data-element='locked-icon'] > i {
-  font-size: 1.2rem !important;
+  font-size: 1rem !important;
 }
 
 <div
@@ -683,8 +665,8 @@ exports[`Checkbox matches snapshot when is not checked 1`] = `
 }
 
 .emotion-4 {
-  height: calc(24px - 4px);
-  width: calc(24px - 4px);
+  height: 16px;
+  width: 16px;
   position: relative;
   overflow: hidden;
 }
@@ -710,17 +692,13 @@ exports[`Checkbox matches snapshot when is not checked 1`] = `
   background: #eaeff4 !important;
 }
 
-.emotion-0:disabled + [data-element='sprite'] [data-element='icon'] {
-  opacity: 0.7;
-}
-
 .emotion-3 {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 2px;
   background: #d3dce6;
   display: -webkit-box;
   display: -webkit-flex;
@@ -747,7 +725,7 @@ exports[`Checkbox matches snapshot when is not checked 1`] = `
   height: 100%;
   width: 100%;
   background: #3FBC9B;
-  line-height: 24px;
+  line-height: calc(16px + 2px);
   -webkit-transform: scale(0);
   -ms-transform: scale(0);
   transform: scale(0);
@@ -758,6 +736,7 @@ exports[`Checkbox matches snapshot when is not checked 1`] = `
 
 .emotion-2 > i {
   font-size: 0.8rem;
+  margin-left: 1px;
 }
 
 .emotion-1 {
@@ -813,8 +792,8 @@ exports[`Checkbox matches snapshot when is read only 1`] = `
 }
 
 .emotion-4 {
-  height: calc(24px - 4px);
-  width: calc(24px - 4px);
+  height: 16px;
+  width: 16px;
   position: relative;
   overflow: hidden;
 }
@@ -840,17 +819,13 @@ exports[`Checkbox matches snapshot when is read only 1`] = `
   background: #eaeff4 !important;
 }
 
-.emotion-0:disabled + [data-element='sprite'] [data-element='icon'] {
-  opacity: 0.7;
-}
-
 .emotion-3 {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 2px;
   background: #d3dce6;
   display: -webkit-box;
   display: -webkit-flex;
@@ -877,7 +852,7 @@ exports[`Checkbox matches snapshot when is read only 1`] = `
   height: 100%;
   width: 100%;
   background: #3FBC9B;
-  line-height: 24px;
+  line-height: calc(16px + 2px);
   -webkit-transform: scale(0);
   -ms-transform: scale(0);
   transform: scale(0);
@@ -888,6 +863,7 @@ exports[`Checkbox matches snapshot when is read only 1`] = `
 
 .emotion-2 > i {
   font-size: 0.8rem;
+  margin-left: 1px;
 }
 
 .emotion-5 {
