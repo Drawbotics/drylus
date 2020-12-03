@@ -23,12 +23,10 @@ async function createJs() {
 
 async function createTs() {
   const lines = [];
-  lines.push(`declare module '@drawbotics/drylus-style-vars' {`);
   const vars = await fs.readFile(path.resolve(TMP_DIR, './vars.d.ts'), 'utf-8');
   const colors = await fs.readFile(path.resolve(TMP_DIR, './colors.d.ts'), 'utf-8');
   lines.push(vars);
   lines.push(colors);
-  lines.push('}');
   const text = lines.join('\n');
 
   await fs.writeFile(path.resolve(BUILD_DIR, './vars.d.ts'), text, 'utf-8');

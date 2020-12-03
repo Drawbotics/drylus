@@ -4,6 +4,7 @@
   "description": "Style variable constants used by Drawbotics across different projects",
   "license": "UNLICENSED",
   "main": "dist/vars.js",
+  "types": "dist/vars.d.ts",
   "scripts": {
     "clean": "rimraf dist/ tmp/",
     "build:ts": "tsc",
