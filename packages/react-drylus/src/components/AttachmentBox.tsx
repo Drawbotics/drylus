@@ -4,7 +4,7 @@ import last from 'lodash/last';
 import React, { Fragment } from 'react';
 
 import { Color, Size } from '../enums';
-import { Flex, FlexDirection, FlexItem, FlexJustify, FlexSpacer, Margin, Padding } from '../layout';
+import { Flex, FlexDirection, FlexItem, FlexJustify, FlexSpacer } from '../layout';
 import { Responsive, Style } from '../types';
 import { useResponsiveProps } from '../utils';
 import { FileIcon, FileType } from './FileIcon';
@@ -17,6 +17,9 @@ const styles = {
     background: ${sv.backgroundColor};
     border-radius: ${sv.defaultBorderRadius};
     color: ${sv.colorPrimary};
+    /* hardcoded for styling purposes */
+    height: 32px;
+    padding: 0px 4px;
   `,
 };
 
@@ -49,50 +52,51 @@ export const AttachmentBox = ({ responsive, ...rest }: AttachmentBoxProps) => {
   >(rest, responsive);
   return (
     <div style={style} className={styles.root}>
-      <Padding size={Size.EXTRA_SMALL}>
-        <Flex direction={FlexDirection.HORIZONTAL} justify={FlexJustify.SPACE_BETWEEN}>
-          <FlexItem flex style={{ display: 'flex', minWidth: 0 }}>
-            <Flex style={{ width: '100%' }}>
-              <FlexItem>
-                <FileIcon
-                  type={fileName != null ? (last(fileName.split('.')) as FileType) : undefined}
-                  asFolder={asFolder}
-                />
-              </FlexItem>
-              <FlexSpacer size={Size.EXTRA_SMALL} />
-              <FlexItem flex style={{ minWidth: 0 }}>
-                <div style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
-                  <Text disabled={progress != null}>{fileName}</Text>
-                </div>
-                {progress != null ? (
-                  <Margin size={{ top: Size.EXTRA_SMALL }}>
-                    <ProgressBar
-                      style={{ backgroundColor: sv.neutral }}
-                      size={Size.SMALL}
-                      color={Color.GREEN}
-                      percentage={progress}
-                    />
-                  </Margin>
-                ) : null}
-              </FlexItem>
-            </Flex>
-          </FlexItem>
-          {onClickDownload != null ? (
-            <Fragment>
-              <FlexSpacer size={Size.SMALL} direction={FlexDirection.HORIZONTAL} />
-              <FlexItem style={{ display: 'flex' }}>
-                <Icon onClick={onClickDownload} name="download" />
-              </FlexItem>
-            </Fragment>
-          ) : null}
-          <FlexSpacer size={Size.EXTRA_SMALL} direction={FlexDirection.HORIZONTAL} />
-          {onClickClose != null ? (
+      <Flex
+        direction={FlexDirection.HORIZONTAL}
+        justify={FlexJustify.SPACE_BETWEEN}
+        style={{ height: '100%' }}>
+        <FlexItem flex style={{ display: 'flex', minWidth: 0 }}>
+          <Flex style={{ width: '100%' }}>
             <FlexItem style={{ display: 'flex' }}>
-              <Icon name="x" onClick={onClickClose} />
+              <FileIcon
+                type={fileName != null ? (last(fileName.split('.')) as FileType) : undefined}
+                asFolder={asFolder}
+              />
             </FlexItem>
-          ) : null}
-        </Flex>
-      </Padding>
+            <FlexSpacer size={Size.EXTRA_SMALL} />
+            <FlexItem flex style={{ minWidth: 0 }}>
+              <div style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+                <Text disabled={progress != null} size={progress != null ? Size.SMALL : undefined}>
+                  {fileName}
+                </Text>
+              </div>
+              {progress != null ? (
+                <ProgressBar
+                  style={{ backgroundColor: sv.neutral, marginTop: 4 }}
+                  size={Size.SMALL}
+                  color={Color.GREEN}
+                  percentage={progress}
+                />
+              ) : null}
+            </FlexItem>
+          </Flex>
+        </FlexItem>
+        {onClickDownload != null ? (
+          <Fragment>
+            <FlexSpacer size={Size.SMALL} direction={FlexDirection.HORIZONTAL} />
+            <FlexItem style={{ display: 'flex' }}>
+              <Icon onClick={onClickDownload} name="download" />
+            </FlexItem>
+          </Fragment>
+        ) : null}
+        <FlexSpacer size={Size.EXTRA_SMALL} direction={FlexDirection.HORIZONTAL} />
+        {onClickClose != null ? (
+          <FlexItem style={{ display: 'flex' }}>
+            <Icon name="x" onClick={onClickClose} />
+          </FlexItem>
+        ) : null}
+      </Flex>
     </div>
   );
 };
