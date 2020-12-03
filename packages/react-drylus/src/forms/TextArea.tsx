@@ -85,11 +85,11 @@ const styles = {
   `,
   small: css`
     textarea {
-      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+      padding: ${sv.paddingExtraSmall} ${sv.paddingExtraSmall};
     }
 
     [data-element='icon'] {
-      top: calc(${sv.marginExtraSmall} - 1px);
+      top: ${sv.marginExtraSmall};
       right: ${sv.marginExtraSmall};
     }
 
