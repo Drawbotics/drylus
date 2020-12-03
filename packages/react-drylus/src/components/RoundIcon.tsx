@@ -7,9 +7,9 @@ import { Responsive, Style } from '../types';
 import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
 
-const largeHeight = '30px';
-const defaultHeight = '24px';
-const smallHeight = '16px';
+const largeHeight = sv.marginLarge;
+const defaultHeight = sv.defaultMargin;
+const smallHeight = sv.marginSmall;
 
 const styles = {
   root: css`

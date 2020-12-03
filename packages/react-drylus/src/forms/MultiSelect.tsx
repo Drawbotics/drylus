@@ -184,18 +184,23 @@ const styles = {
   `,
   small: css`
     [data-element='select'] {
-      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+      padding: ${sv.paddingExtraSmall} ${sv.paddingExtraSmall};
       padding-right: ${sv.paddingHuge};
     }
 
+    [data-element='placeholder'],
+    [data-element='typezone'] {
+      margin-bottom: 2px;
+    }
+
     &::after {
-      top: calc(${sv.marginExtraSmall} - 1px);
+      top: ${sv.marginExtraSmall};
       font-size: 1.1em;
       right: ${sv.marginExtraSmall};
     }
 
     [data-element='icon'] {
-      top: calc(${sv.marginExtraSmall} - 1px);
+      top: ${sv.marginExtraSmall};
       right: ${sv.marginLarge};
     }
 
@@ -254,7 +259,7 @@ const TypeZone = forwardRef<HTMLInputElement, TypeZoneProps>(
     };
 
     return (
-      <div className={styles.typeZone}>
+      <div className={styles.typeZone} data-element="typezone">
         <input
           style={{ width: '100%' }}
           ref={ref}
@@ -526,7 +531,9 @@ export const MultiSelect = <T extends any, K extends string>({
         onClick={onChange != null ? handleClickSelect : undefined}>
         <div className={cx(styles.values, { [styles.smallValues]: size === Size.SMALL })}>
           {values?.length === 0 && !allowTyping ? (
-            <div className={styles.placeholder}>{placeholder}</div>
+            <div className={styles.placeholder} data-element="placeholder">
+              {placeholder}
+            </div>
           ) : null}
           {values?.map((value) => (
             <div key={value} className={styles.value} data-element="value">

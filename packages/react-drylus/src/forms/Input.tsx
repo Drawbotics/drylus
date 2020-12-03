@@ -112,7 +112,7 @@ const styles = {
     color: ${sv.colorPrimary};
   `,
   smallFix: css`
-    padding: calc(${sv.paddingExtraSmall} - 1px);
+    padding: ${sv.paddingExtraSmall};
 
     i {
       font-size: 1.1em;
@@ -171,7 +171,7 @@ const styles = {
   `,
   small: css`
     input {
-      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+      padding: ${sv.paddingExtraSmall} ${sv.paddingExtraSmall};
     }
 
     button {
@@ -179,7 +179,7 @@ const styles = {
     }
 
     [data-element='icon'] {
-      top: calc(${sv.marginExtraSmall} - 1px);
+      top: ${sv.marginExtraSmall};
       right: ${sv.marginExtraSmall};
     }
 

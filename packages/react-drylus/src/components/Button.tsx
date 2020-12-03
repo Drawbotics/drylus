@@ -190,7 +190,7 @@ const styles = {
     }
   `,
   small: css`
-    padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+    padding: ${sv.paddingExtraSmall} ${sv.paddingExtraSmall};
   `,
   large: css`
     padding: ${sv.paddingSmall} ${sv.paddingHuge};
