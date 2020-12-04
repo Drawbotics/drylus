@@ -129,7 +129,7 @@ const styles = {
   small: css`
     [data-element='select'] {
       max-height: 30px;
-      padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+      padding: ${sv.paddingExtraSmall} ${sv.paddingExtraSmall};
       padding-right: ${sv.paddingHuge};
     }
 

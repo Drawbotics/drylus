@@ -2,16 +2,20 @@ import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Category, Color, Size } from '../enums';
+import { Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
+import { getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
+
+const largeHeight = sv.marginLarge;
+const defaultHeight = sv.defaultMargin;
+const smallHeight = sv.marginSmall;
 
 const styles = {
   root: css`
     border-radius: 1000px;
-    height: ${sv.defaultMargin};
-    width: ${sv.defaultMargin};
+    height: ${defaultHeight};
+    width: ${defaultHeight};
     color: ${sv.colorPrimary};
     background: ${sv.neutralLight};
     display: inline-flex;
@@ -19,25 +23,26 @@ const styles = {
     justify-content: center;
 
     > i {
-      font-size: 1rem;
+      font-size: 1.1rem;
       margin-top: 1px;
     }
   `,
   small: css`
-    height: ${sv.marginSmall};
-    width: ${sv.marginSmall};
+    height: ${smallHeight};
+    width: ${smallHeight};
 
     > i {
       font-size: 0.65rem;
+      margin-left: 1px;
     }
   `,
   large: css`
-    height: ${sv.marginLarge};
-    width: ${sv.marginLarge};
+    height: ${largeHeight};
+    width: ${largeHeight};
 
     > i {
       font-size: 1.2rem;
-      margin-top: 0;
+      margin-top: 1px;
     }
   `,
   iconInherit: css`
@@ -99,12 +104,6 @@ export interface RoundIconProps {
   /** Makes the icon bold */
   bold?: boolean;
 
-  /**
-   * @deprecated Use color instead
-   * @kind Category
-   */
-  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
-
   /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE | string;
 
@@ -126,15 +125,13 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
   const {
     name,
     size = Size.DEFAULT,
-    category,
     bold,
     style: _style = {},
-    color: _color,
+    color,
     inversed,
   } = useResponsiveProps<RoundIconProps>(rest, responsive);
 
   const customSize = typeof size === 'number';
-  const color = category ? categoryEnumToColor(category) : _color;
   const enumColor = color != null && color in Color ? (color as Color) : null;
   const className = enumColor != null ? _getClassNameForColor(enumColor, inversed) : null;
   const style =
@@ -162,8 +159,4 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
       <Icon name={name} bold={bold} />
     </div>
   );
-};
-
-RoundIcon.propTypes = {
-  category: Deprecated,
 };

@@ -2,9 +2,9 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Category, Color, Size } from '../enums';
+import { Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, categoryEnumToColor, getEnumAsClass, useResponsiveProps } from '../utils';
+import { getEnumAsClass, useResponsiveProps } from '../utils';
 import { placeholderStyles as shimmerStyles } from './LoadingPlaceholder';
 
 const styles = {
@@ -135,12 +135,6 @@ export interface ProgressBarProps {
   /** Determines the amount of the bar which is completed, between 0 and 1. If not given the bar is indeterminate */
   percentage?: number;
 
-  /**
-   * @deprecated Use color instead
-   * @kind Category
-   */
-  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
-
   /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
@@ -158,12 +152,12 @@ export interface ProgressBarProps {
 }
 
 export const ProgressBar = ({ responsive, ...rest }: ProgressBarProps) => {
-  const { percentage, category, size = Size.DEFAULT, style, color: _color } = useResponsiveProps<
-    ProgressBarProps
-  >(rest, responsive);
+  const { percentage, size = Size.DEFAULT, style, color } = useResponsiveProps<ProgressBarProps>(
+    rest,
+    responsive,
+  );
 
   const indeterminate = percentage == null;
-  const color = category ? categoryEnumToColor(category) : _color;
 
   return (
     <div
@@ -182,8 +176,4 @@ export const ProgressBar = ({ responsive, ...rest }: ProgressBarProps) => {
       />
     </div>
   );
-};
-
-ProgressBar.propTypes = {
-  category: Deprecated,
 };

@@ -2,16 +2,17 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Category, Color, Size } from '../enums';
+import { Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, categoryEnumToColor, getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { Icon } from './Icon';
 
 const styles = {
   root: css`
     height: 50px;
     width: 50px;
     position: relative;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 
     > svg {
       height: 100%;
@@ -23,8 +24,12 @@ const styles = {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: ${sv.colorTertiary};
+    color: ${sv.colorSecondary};
     text-align: center;
+
+    i {
+      font-size: 2em;
+    }
   `,
   circle: css`
     stroke-width: 8px;
@@ -42,16 +47,18 @@ const styles = {
   large: css`
     height: 70px;
     width: 70px;
-    font-size: 1rem;
   `,
   extraLarge: css`
     height: 90px;
     width: 90px;
-    font-size: 1.2rem;
   `,
   small: css`
     height: 30px;
     width: 30px;
+
+    i {
+      font-size: 0.9em;
+    }
   `,
   brand: css`
     & [data-element='circle'] {
@@ -90,12 +97,6 @@ export interface CircularProgressProps {
   /** Text shown within the circular progress. Not shown when size is smaller than DEFAULT */
   text?: string;
 
-  /**
-   * @deprecated Use color instead
-   * @kind Category
-   */
-  category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
-
   /** @kind Color */
   color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
 
@@ -113,19 +114,13 @@ export interface CircularProgressProps {
 }
 
 export const CircularProgress = ({ responsive, ...rest }: CircularProgressProps) => {
-  const {
-    percentage = 0,
-    category,
-    size = Size.DEFAULT,
-    text,
-    style,
-    color: _color,
-  } = useResponsiveProps(rest, responsive);
+  const { percentage = 0, size = Size.DEFAULT, text, style, color } = useResponsiveProps(
+    rest,
+    responsive,
+  );
 
   const circumference = 84 * Math.PI;
   const offset = percentage * circumference;
-
-  const color = category ? categoryEnumToColor(category) : _color;
 
   return (
     <div
@@ -135,6 +130,13 @@ export const CircularProgress = ({ responsive, ...rest }: CircularProgressProps)
         [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
       })}>
       {run(() => {
+        if (color === Color.GREEN && percentage === 1) {
+          return (
+            <div className={styles.text}>
+              <Icon bold name="check" color={Color.GREEN} />
+            </div>
+          );
+        }
         if (text && size !== Size.SMALL) {
           return <div className={styles.text}>{text}</div>;
         }
@@ -152,8 +154,4 @@ export const CircularProgress = ({ responsive, ...rest }: CircularProgressProps)
       </svg>
     </div>
   );
-};
-
-CircularProgress.propTypes = {
-  category: Deprecated,
 };

@@ -55,6 +55,10 @@ const styles = {
       align-items: center;
       justify-content: center;
       color: ${sv.colorSecondary};
+
+      > i {
+        font-size: 0.7rem !important;
+      }
     }
   `,
   error: css`
@@ -63,12 +67,21 @@ const styles = {
     }
 
     [data-element='icon'] {
-      background: ${sv.red};
+      top: 2px;
+      left: 2px;
+      height: calc(100% - 4px);
+      width: calc(100% - 4px);
+      border-radius: 1000px !important;
+      line-height: calc(${sv.marginSmall} - 2px);
+
+      > i {
+        font-size: 0.7rem;
+      }
     }
   `,
   radio: css`
-    height: calc(${sv.defaultMargin} - 4px);
-    width: calc(${sv.defaultMargin} - 4px);
+    height: ${sv.marginSmall};
+    width: ${sv.marginSmall};
     position: relative;
     overflow: hidden;
   `,
@@ -91,7 +104,7 @@ const styles = {
       background: ${sv.neutralLight} !important;
 
       [data-element='icon'] {
-        opacity: 0.7;
+        background: ${sv.neutral};
       }
     }
   `,
@@ -99,7 +112,6 @@ const styles = {
     margin-left: ${sv.marginExtraSmall};
     color: ${sv.colorPrimary};
     position: relative;
-    top: 1px;
 
     &:hover {
       cursor: pointer;
@@ -127,13 +139,14 @@ const styles = {
     height: 100%;
     width: 100%;
     background: ${sv.green};
-    line-height: ${sv.defaultMargin};
+    line-height: calc(${sv.marginSmall} + 4px);
     transform: scale(0);
     transition: all ${sv.transitionTimeShort} ${sv.bouncyTransitionCurve};
     border-radius: 100px;
 
     > i {
       font-size: 0.8rem;
+      margin-left: 1px;
     }
   `,
 };

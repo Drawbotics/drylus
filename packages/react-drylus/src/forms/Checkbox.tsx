@@ -48,6 +48,10 @@ const styles = {
       cursor: not-allowed !important;
       color: ${sv.colorDisabled};
     }
+
+    [data-element='icon'] {
+      background: ${sv.neutral};
+    }
   `,
   error: css`
     [data-element='sprite'] {
@@ -55,12 +59,20 @@ const styles = {
     }
 
     [data-element='icon'] {
-      background: ${sv.red};
+      top: 2px;
+      left: 2px;
+      height: calc(100% - 4px);
+      width: calc(100% - 4px);
+      line-height: calc(${sv.marginSmall} - 4px);
+
+      > i {
+        font-size: 0.65rem;
+      }
     }
   `,
   checkbox: css`
-    height: calc(${sv.defaultMargin} - 4px);
-    width: calc(${sv.defaultMargin} - 4px);
+    height: ${sv.marginSmall};
+    width: ${sv.marginSmall};
     position: relative;
     overflow: hidden;
   `,
@@ -81,10 +93,6 @@ const styles = {
     &:disabled + [data-element='sprite'] {
       cursor: not-allowed;
       background: ${sv.neutralLight} !important;
-
-      [data-element='icon'] {
-        opacity: 0.7;
-      }
     }
   `,
   label: css`
@@ -103,7 +111,7 @@ const styles = {
     left: 0;
     height: 100%;
     width: 100%;
-    border-radius: ${sv.defaultBorderRadius};
+    border-radius: ${sv.borderRadiusSmall};
     background: ${sv.neutral};
     display: flex;
     align-items: center;
@@ -119,34 +127,34 @@ const styles = {
     height: 100%;
     width: 100%;
     background: ${sv.green};
-    line-height: ${sv.defaultMargin};
+    line-height: calc(${sv.marginSmall} + 2px);
     transform: scale(0);
     transition: all ${sv.transitionTimeShort} ${sv.bouncyTransitionCurve};
     border-radius: 100px;
 
     > i {
       font-size: 0.8rem;
+      margin-left: 1px;
     }
   `,
   large: css`
     > div {
-      height: ${sv.marginLarge};
-      width: ${sv.marginLarge};
-    }
-
-    [data-element='label'] {
-      font-size: 1.1rem;
-      margin-left: ${sv.marginSmall};
-      top: 0;
+      height: ${sv.defaultMargin};
+      width: ${sv.defaultMargin};
     }
 
     [data-element='icon'],
     [data-element='locked-icon'] {
-      line-height: calc(${sv.marginLarge} + 5px);
+      line-height: calc(${sv.defaultMargin} + 5px);
 
       > i {
-        font-size: 1.2rem !important;
+        font-size: 1rem !important;
       }
+    }
+  `,
+  largeError: css`
+    [data-element='icon'] {
+      line-height: calc(${sv.defaultMargin} + 2px);
     }
   `,
 };
@@ -229,6 +237,7 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
           [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
           [styles.disabled]: disabled === true,
           [styles.error]: error != null && error !== false,
+          [styles.largeError]: error != null && error !== false && size === Size.LARGE,
           [styles.readOnly]: readOnly,
           [placeholderStyles.shimmer]: isPlaceholder === true,
         })}

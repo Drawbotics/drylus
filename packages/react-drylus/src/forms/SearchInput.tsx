@@ -141,9 +141,6 @@ export interface SearchInputProps<T, K = string> {
 
   placeholder?: string;
 
-  /** @deprecated Use loading instead */
-  isLoading?: boolean;
-
   /** If true, the search button will display a spinner */
   loading?: boolean;
 
@@ -189,7 +186,6 @@ export const SearchInput = <T extends any, K extends string>({
     onChange,
     noResultLabel = 'No results',
     placeholder,
-    isLoading: _isLoading,
     loading,
     name,
     style,
@@ -210,7 +206,7 @@ export const SearchInput = <T extends any, K extends string>({
 
   const value = isFunction(_value) ? _value(name) : _value;
   const shouldDisplayResults = (alwaysShowResults || value !== '') && isFocused;
-  const isLoading = _isLoading === true || loading === true;
+  const isLoading = loading === true;
 
   const listPanel = listRef.current?.getBoundingClientRect();
   const topRender = listPanel ? _getShouldRenderTop(listPanel) : false;

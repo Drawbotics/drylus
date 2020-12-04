@@ -1,5 +1,5 @@
-const { fade } = require('./colors');
-const { m, d, s, a } = require('./operations');
+import { fade } from './colors';
+import { add, divide, multiply, subtract } from './operations';
 
 // COLORS
 export const white = '#fff';
@@ -37,7 +37,6 @@ export const red = '#EC4C47';
 export const redLight = '#F8C8C8';
 export const redLighter = '#fae2e2';
 export const danger = red;
-export const error = red;
 
 export const orangeDark = '#a16d22';
 export const orange = '#f8a00f';
@@ -57,19 +56,35 @@ export const greenLight = '#C1E8DE';
 export const greenLighter = '#E7F5F1';
 export const success = green;
 
-export const facebookColor = '#275a9b';
-export const twitterColor = '#00a2f5';
-export const linkedinColor = '#0077b5';
+export const pinkDark = '#852785';
+export const pink = '#BB36BB';
+export const pinkLight = '#EFDAEF';
+export const pinkLighter = '#FEF3FE';
+
+export const purpleDark = '#643790';
+export const purple = '#8C46D1';
+export const purpleLight = '#E1CEF5';
+export const purpleLighter = '#F7F0FF';
+
+export const violetDark = '#3B2F7D';
+export const violet = '#5D4AC8';
+export const violetLight = '#D4CFF3';
+export const violetLighter = '#EFEDFF';
+
+export const yellowDark = '#B49424';
+export const yellow = '#FADB4A';
+export const yellowLight = '#FFF0AB';
+export const yellowLighter = '#FFF9DC';
 
 export const lighterOverlay = fade(grey900, 5);
 export const lightOverlay = fade(grey900, 10);
 export const darkOverlay = fade(neutralDarker, 90);
 
 // BORDERS
-const baseBorderRadius = '5px';
+const baseBorderRadius = '4px';
 export const defaultBorderRadius = baseBorderRadius;
-export const borderRadiusLarge = m(baseBorderRadius, 1.5);
-export const borderRadiusSmall = d(baseBorderRadius, 1.5);
+export const borderRadiusLarge = multiply(baseBorderRadius, 2);
+export const borderRadiusSmall = divide(baseBorderRadius, 2);
 
 // TYPOGRAPHY
 const baseFontSize = '14px';
@@ -102,27 +117,27 @@ export const insetActiveLight = `0 1px 6px ${neutral} inset`;
 // PADDINGS AND MARGINS
 const basePadding = '24px';
 export const defaultPadding = basePadding;
-export const paddingSmall = s(basePadding, 8);
-export const paddingExtraSmall = s(paddingSmall, 8);
-export const paddingLarge = a(basePadding, 8);
-export const paddingExtraLarge = a(paddingLarge, 8);
-export const paddingHuge = m(paddingExtraSmall, 7);
-export const paddingExtraHuge = m(basePadding, 3);
-export const paddingMassive = m(basePadding, 5);
+export const paddingSmall = subtract(basePadding, 8);
+export const paddingExtraSmall = subtract(paddingSmall, 8);
+export const paddingLarge = add(basePadding, 8);
+export const paddingExtraLarge = add(paddingLarge, 8);
+export const paddingHuge = multiply(paddingExtraSmall, 7);
+export const paddingExtraHuge = multiply(basePadding, 3);
+export const paddingMassive = multiply(basePadding, 5);
 export const baseMargin = '24px';
 export const defaultMargin = basePadding;
-export const marginSmall = s(baseMargin, 8);
-export const marginExtraSmall = s(marginSmall, 8);
-export const marginLarge = a(baseMargin, 8);
-export const marginExtraLarge = a(marginLarge, 8);
-export const marginHuge = m(marginExtraSmall, 7);
-export const marginExtraHuge = m(baseMargin, 3);
-export const marginMassive = m(baseMargin, 5);
+export const marginSmall = subtract(baseMargin, 8);
+export const marginExtraSmall = subtract(marginSmall, 8);
+export const marginLarge = add(baseMargin, 8);
+export const marginExtraLarge = add(marginLarge, 8);
+export const marginHuge = multiply(marginExtraSmall, 7);
+export const marginExtraHuge = multiply(baseMargin, 3);
+export const marginMassive = multiply(baseMargin, 5);
 
 // TRANSITIONS AND ANIMATIONS
 const baseTransitionTime = '0.3s';
 export const defaultTransitionTime = baseTransitionTime;
-export const transitionTimeShort = d(baseTransitionTime, 2);
+export const transitionTimeShort = divide(baseTransitionTime, 2);
 export const bouncyTransitionCurve = 'cubic-bezier(0.44, 0.11, 0.07, 1.29)';
 export const defaultTransition = `all ${defaultTransitionTime} ease-in-out`;
 export const transitionShort = `all ${transitionTimeShort} ease-in-out`;

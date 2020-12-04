@@ -4,7 +4,7 @@ exports[`Button matches snapshot when has a category 1`] = `
 .emotion-0 {
   background: #eaeff4;
   color: #172b4e;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
@@ -51,7 +51,8 @@ exports[`Button matches snapshot when has a category 1`] = `
 }
 
 .emotion-0:disabled {
-  background: rgba(248,160,15,0.4);
+  color: rgba(135,155,166,0.5) !important;
+  background: #eaeff4;
 }
 
 <button
@@ -66,7 +67,7 @@ exports[`Button matches snapshot when has a leading component 1`] = `
 .emotion-2 {
   background: #eaeff4;
   color: #172b4e;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
@@ -150,7 +151,7 @@ exports[`Button matches snapshot when has a tier 1`] = `
 .emotion-0 {
   background: #eaeff4;
   color: #172b4e;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
@@ -214,7 +215,7 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
 .emotion-2 {
   background: #eaeff4;
   color: #172b4e;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
@@ -298,7 +299,7 @@ exports[`Button matches snapshot when is basic 1`] = `
 .emotion-0 {
   background: #eaeff4;
   color: #172b4e;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
@@ -346,7 +347,7 @@ exports[`Button matches snapshot when is small 1`] = `
 .emotion-0 {
   background: #eaeff4;
   color: #172b4e;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
@@ -364,7 +365,7 @@ exports[`Button matches snapshot when is small 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding: calc(8px - 1px) 8px;
+  padding: 8px 8px;
 }
 
 .emotion-0:hover {

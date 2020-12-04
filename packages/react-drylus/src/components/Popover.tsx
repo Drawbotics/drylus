@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { themeStyles } from '../base';
 import { Position } from '../enums';
 import { Style } from '../types';
-import { Deprecated, WrapperRef, getStyleForSide } from '../utils';
+import { WrapperRef, getStyleForSide } from '../utils';
 
 const styles = {
   root: css`
@@ -110,9 +110,6 @@ const styles = {
 };
 
 export interface PopoverProps {
-  /** @deprecated Use content instead */
-  message?: React.ReactNode;
-
   /** Content shown when the tooltip is visible */
   content: React.ReactNode;
 
@@ -140,8 +137,7 @@ export interface PopoverProps {
 
 export const Popover = ({
   children,
-  message,
-  content: _content,
+  content,
   side = Position.TOP,
   style = {},
   exitOnClick = false,
@@ -153,8 +149,6 @@ export const Popover = ({
   const childrenRef = useRef<HTMLElement>();
   const popoverRef = useRef<HTMLDivElement>(null);
   const popoverRect = popoverRef.current?.getBoundingClientRect();
-
-  const content = _content != null ? _content : message;
 
   useEffect(() => {
     const outlet = document.getElementById('popovers-outlet');
@@ -250,8 +244,4 @@ export const Popover = ({
       )}
     </Fragment>
   );
-};
-
-Popover.propTypes = {
-  message: Deprecated,
 };

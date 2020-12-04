@@ -2,9 +2,9 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx, keyframes } from 'emotion';
 import React from 'react';
 
-import { Category, Color, Size } from '../enums';
+import { Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, categoryEnumToColor, useResponsiveProps } from '../utils';
+import { useResponsiveProps } from '../utils';
 
 const rotate = keyframes`
   100% {
@@ -94,12 +94,6 @@ export interface SpinnerProps {
    * */
   size?: Size.SMALL | Size.DEFAULT | Size.LARGE;
 
-  /**
-   * @deprecated Use color instead
-   * @kind Category
-   * */
-  category?: Category.BRAND | Category.INFO;
-
   /** @kind Color */
   color?: Color.BRAND | Color.BLUE;
 
@@ -117,15 +111,9 @@ export interface SpinnerProps {
 }
 
 export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
-  const {
-    size = Size.DEFAULT,
-    category,
-    inversed,
-    fullSize,
-    style,
-    color: _color,
-  } = useResponsiveProps<SpinnerProps>(rest, responsive);
-  const color = category != null ? categoryEnumToColor(category) : _color;
+  const { size = Size.DEFAULT, inversed, fullSize, style, color } = useResponsiveProps<
+    SpinnerProps
+  >(rest, responsive);
   return (
     <div
       style={style}
@@ -153,8 +141,4 @@ export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
       </div>
     </div>
   );
-};
-
-Spinner.propTypes = {
-  category: Deprecated,
 };

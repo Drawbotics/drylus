@@ -299,59 +299,6 @@ Below is the table that it generates. Note that you need to at least pass `heade
   </div>
 </Playground>
 
-
-You can customize the look of the cell contents through the `renderCell` prop. For example the following `renderCell` function:
-
-```js
-const customizeCell = (v, i, cols) => {
-  if (i === 0) {
-    return <div style={{ fontWeight: 'bold', color: sv.blue }}>{v}</div>;
-  }
-  else if (i === cols - 1) {
-    return <div style={{ fontStyle: 'italic' }}>{v}</div>;
-  }
-  else {
-    return v;
-  }
-}
-```
-export const customizeCell = (v, i, cols) => {
-  if (i === 0) {
-    return <div style={{ fontWeight: 'bold', color: sv.blue }}>{v}</div>;
-  }
-  else if (i === cols - 1) {
-    return <div style={{ fontStyle: 'italic' }}>{v}</div>;
-  }
-  else {
-    return v;
-  }
-}
-
-We can do the same for the cells within nested rows. Combined this yields:
-
-<Playground>
-  <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
-    <Table
-      renderCell={customizeCell}
-      renderChildCell={customizeCell}
-      data={family}
-      header={[{
-        label: 'Name',
-        value: 'name',
-      }, {
-        label: 'Height (cm)',
-        value: 'height',
-      }, {
-        label: 'Age (yrs)',
-        value: 'age',
-      }, {
-        label: 'Children',
-        value: 'children',
-      }]}
-      childHeader={['height', 'name', 'age', 'children']} />
-  </div>
-</Playground>
-
 ### Sortable auto generated table
 You can pass an array of keys (`sortableBy`) to set which column is sortable in the table. This will enable the header of the column to be "clickable" and an onClick event will be triggered. Only the root data values can be sorted, since the headers correspond to the keys of such values, and not those of the children.
 

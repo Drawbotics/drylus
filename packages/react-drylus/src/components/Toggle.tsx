@@ -4,12 +4,11 @@ import React from 'react';
 
 import { Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { isFunction, useResponsiveProps } from '../utils';
+import { Deprecated, isFunction, useResponsiveProps } from '../utils';
 
-const TRIGGER_DIMENSIONS = '21px';
-const TRIGGER_DIMENSIONS_SMALL = '16px';
+const TRIGGER_DIMENSIONS = '18px';
 const TOGGLE_PADDING = '3px';
-const TRIGGER_OFFSET = '10px';
+const TRIGGER_OFFSET = '12px';
 
 const styles = {
   root: css`
@@ -52,21 +51,8 @@ const styles = {
       pointer-events: none;
     }
   `,
-  small: css`
-    width: calc(${TRIGGER_DIMENSIONS_SMALL} * 2 + ${TRIGGER_OFFSET});
-
-    & > [data-element='trigger'] {
-      height: ${TRIGGER_DIMENSIONS_SMALL};
-      width: ${TRIGGER_DIMENSIONS_SMALL};
-
-      &::after {
-        left: calc(${TRIGGER_DIMENSIONS_SMALL} * -1);
-        font-size: 0.9rem;
-      }
-    }
-  `,
   disabled: css`
-    opacity: 0.5;
+    background: ${sv.neutralLight} !important;
 
     &:hover {
       cursor: not-allowed;
@@ -88,6 +74,7 @@ export interface ToggleProps<T> {
   /**
    * @default Size.DEFAULT
    * @kind Size
+   * @deprecated Toggle has one size, this prop will be removed in the next major release
    */
   size?: Size.SMALL | Size.DEFAULT;
 
@@ -102,20 +89,24 @@ export interface ToggleProps<T> {
 }
 
 export const Toggle = <T extends string>({ responsive, ...rest }: ToggleProps<T>) => {
-  const { onChange, disabled, value: _value, size, style, name } = useResponsiveProps<
-    ToggleProps<T>
-  >(rest, responsive);
+  const { onChange, disabled, value: _value, style, name } = useResponsiveProps<ToggleProps<T>>(
+    rest,
+    responsive,
+  );
   const value = isFunction(_value) ? _value(name) : _value;
   return (
     <div
       style={style}
       className={cx(styles.root, {
         [styles.active]: value === true,
-        [styles.small]: size === Size.SMALL,
         [styles.disabled]: disabled === true,
       })}
       onClick={() => (disabled ? null : onChange(!value, name))}>
       <div className={styles.trigger} data-element="trigger" />
     </div>
   );
+};
+
+Toggle.propTypes = {
+  size: Deprecated,
 };

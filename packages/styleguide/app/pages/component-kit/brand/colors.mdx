@@ -19,7 +19,10 @@ import {
   greens,
   oranges,
   blues,
-  socials,
+  pinks,
+  purples,
+  violets,
+  yellows,
 } from './palettes';
 
 
@@ -90,9 +93,10 @@ export const Palette = ({
     <div className={styles.palette}>
       <div className={styles.header} style={{ background }}>
         <div className={styles.title}>{title}</div>
-        <Tooltip content={description}>
-          <Icon name="info" />
-        </Tooltip>
+        {description != null ?
+          <Tooltip content={description}>
+            <Icon name="info" />
+          </Tooltip> : null}
       </div>
       {colors.map((color, i) => (
         <div
@@ -148,6 +152,8 @@ These are the colors you will be using most often, since they represent statuses
 
 <Colors palettes={[reds, oranges, blues, greens, brands]} />
 
-### Misc
+### Complementary
 
-<Colors palettes={[socials]} />
+Additional colors used mostly for charts and other stylistic reasons
+
+<Colors palettes={[pinks, violets, purples, yellows]} />

@@ -6,6 +6,9 @@ import { Category, Color, Size, Tier } from '../enums';
 import { OnClickCallback, Responsive, Style } from '../types';
 import { colorEnumToCategory, getEnumAsClass, run, useResponsiveProps } from '../utils';
 
+const defaultHeight = '40px';
+const smallHeight = '30px';
+
 const styles = {
   root: css`
     background: ${sv.neutralLight};
@@ -48,7 +51,8 @@ const styles = {
     }
 
     &:disabled {
-      background: ${fade(sv.brand, 40)};
+      color: ${sv.colorDisabled} !important;
+      background: ${sv.neutralLight};
     }
   `,
   danger: css`
@@ -64,7 +68,8 @@ const styles = {
     }
 
     &:disabled {
-      background: ${fade(sv.red, 40)};
+      color: ${sv.colorDisabled} !important;
+      background: ${sv.neutralLight};
     }
   `,
   info: css`
@@ -80,7 +85,8 @@ const styles = {
     }
 
     &:disabled {
-      background: ${fade(sv.blue, 40)};
+      color: ${sv.colorDisabled} !important;
+      background: ${sv.neutralLight};
     }
   `,
   success: css`
@@ -96,7 +102,8 @@ const styles = {
     }
 
     &:disabled {
-      background: ${fade(sv.green, 40)};
+      color: ${sv.colorDisabled} !important;
+      background: ${sv.neutralLight};
     }
   `,
   warning: css`
@@ -112,7 +119,8 @@ const styles = {
     }
 
     &:disabled {
-      background: ${fade(sv.orange, 40)};
+      color: ${sv.colorDisabled} !important;
+      background: ${sv.neutralLight};
     }
   `,
   brandAlt: css`
@@ -123,7 +131,7 @@ const styles = {
     }
 
     &:disabled {
-      color: ${fade(sv.brand, 40)};
+      color: ${sv.colorDisabled};
     }
   `,
   dangerAlt: css`
@@ -134,7 +142,7 @@ const styles = {
     }
 
     &:disabled {
-      color: ${fade(sv.red, 40)};
+      color: ${sv.colorDisabled};
     }
   `,
   warningAlt: css`
@@ -145,7 +153,7 @@ const styles = {
     }
 
     &:disabled {
-      color: ${fade(sv.orange, 40)};
+      color: ${sv.colorDisabled};
     }
   `,
   infoAlt: css`
@@ -156,7 +164,7 @@ const styles = {
     }
 
     &:disabled {
-      color: ${fade(sv.blue, 40)};
+      color: ${sv.colorDisabled};
     }
   `,
   successAlt: css`
@@ -167,7 +175,7 @@ const styles = {
     }
 
     &:disabled {
-      color: ${fade(sv.green, 40)};
+      color: ${sv.colorDisabled};
     }
   `,
   primaryAlt: css`
@@ -182,7 +190,7 @@ const styles = {
     }
   `,
   small: css`
-    padding: calc(${sv.paddingExtraSmall} - 1px) ${sv.paddingExtraSmall};
+    padding: ${sv.paddingExtraSmall} ${sv.paddingExtraSmall};
   `,
   large: css`
     padding: ${sv.paddingSmall} ${sv.paddingHuge};
@@ -225,8 +233,8 @@ const styles = {
   `,
   round: css`
     border-radius: 1000px;
-    height: ${sv.marginExtraLarge};
-    width: ${sv.marginExtraLarge};
+    height: ${defaultHeight};
+    width: ${defaultHeight};
     padding: 0;
 
     i {
@@ -237,12 +245,12 @@ const styles = {
     }
   `,
   roundSmall: css`
-    height: ${sv.marginLarge};
-    width: ${sv.marginLarge};
+    height: ${smallHeight};
+    width: ${smallHeight};
 
     i {
       font-size: 1rem;
-      margin-left: -1px;
+      margin-right: 0;
     }
   `,
   fullWidth: css`

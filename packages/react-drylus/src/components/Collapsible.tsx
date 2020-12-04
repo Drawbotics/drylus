@@ -2,9 +2,11 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
 import React from 'react';
 
+import { Shade } from '../enums';
+import { ListTile } from '../layout';
 import { OnClickCallback, Style } from '../types';
 import { run } from '../utils';
-import { Icon } from './Icon';
+import { Icon, IconType } from './Icon';
 import { Label } from './Label';
 
 const styles = {
@@ -16,6 +18,11 @@ const styles = {
 
     & [data-element='title'] {
       transition: ${sv.transitionShort};
+
+      /* flex item */
+      > div > div > div {
+        display: flex;
+      }
     }
 
     &:hover {
@@ -48,22 +55,29 @@ export interface CollapsibleProps {
   /** Triggered when the arrow is clicked */
   onClick?: OnClickCallback<HTMLDivElement>;
 
+  /** If given displays an icon to the left of the title */
+  icon?: IconType;
+
   /** Used for style overrides */
   style?: Style;
 }
 
-export const Collapsible = ({ title, isOpen, children, onClick, style }: CollapsibleProps) => {
+export const Collapsible = ({
+  title,
+  isOpen,
+  children,
+  onClick,
+  style,
+  icon,
+}: CollapsibleProps) => {
   return (
     <div style={style} className={styles.root}>
       <div className={styles.header} onClick={onClick}>
         <div data-element="title">
-          {run(() => {
-            if (typeof title === 'string') {
-              return <Label ellipsized>{title}</Label>;
-            } else {
-              return title;
-            }
-          })}
+          <ListTile
+            title={typeof title === 'string' ? <Label ellipsized>{title}</Label> : title}
+            leading={icon != null ? <Icon name={icon} shade={Shade.LIGHT} /> : null}
+          />
         </div>
         <div className={styles.icon}>
           <Icon name={isOpen ? 'chevron-up' : 'chevron-down'} />

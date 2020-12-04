@@ -2,9 +2,9 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Category, Color } from '../enums';
+import { Color } from '../enums';
 import { Style } from '../types';
-import { Deprecated, categoryEnumToColor, getEnumAsClass } from '../utils';
+import { getEnumAsClass } from '../utils';
 
 const styles = {
   root: css`
@@ -35,19 +35,13 @@ const styles = {
 };
 
 export interface DotProps {
-  /**
-   * @deprecated Use color instead
-   */
-  category?: Category;
-
   color?: Color;
 
   /** Used for style overrides */
   style?: Style;
 }
 
-export const Dot = ({ category, style, color: _color }: DotProps) => {
-  const color = category ? categoryEnumToColor(category) : _color;
+export const Dot = ({ style, color }: DotProps) => {
   return (
     <div
       style={style}
@@ -56,8 +50,4 @@ export const Dot = ({ category, style, color: _color }: DotProps) => {
       })}
     />
   );
-};
-
-Dot.propTypes = {
-  category: Deprecated,
 };

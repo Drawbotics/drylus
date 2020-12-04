@@ -4,7 +4,7 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
 .emotion-0 {
   background: #eaeff4;
   color: #172b4e;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;
@@ -213,7 +213,7 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
 .emotion-0 {
   background: #eaeff4;
   color: #172b4e;
-  border-radius: 5px;
+  border-radius: 4px;
   padding: calc(8px * 1.5) 24px;
   outline: 0;
   border: 0;

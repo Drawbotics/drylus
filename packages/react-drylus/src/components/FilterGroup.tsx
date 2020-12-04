@@ -5,7 +5,7 @@ import React, { Fragment, useState } from 'react';
 
 import { Category, Size, Tier } from '../enums';
 import { Flex, FlexItem, FlexJustify, Margin } from '../layout';
-import { Deprecated, run } from '../utils';
+import { run } from '../utils';
 import { Button } from './Button';
 import { Drawer } from './Drawer';
 import { Icon, IconType } from './Icon';
@@ -24,9 +24,6 @@ export interface FilterGroupProps {
 
   /** Icon rendered on the button that replaces the filters */
   icon: IconType;
-
-  /** @deprecated Use children instead */
-  filters?: Array<React.ReactNode>;
 
   /** Will be rendered within the content of the drawer, must be a filter */
   children?: React.ReactNode;
@@ -50,7 +47,6 @@ export interface FilterGroupProps {
 export const FilterGroup = ({
   label,
   icon,
-  filters: _filters = [],
   renderButton = (x) => x,
   clearAllLabel = 'Clear all',
   active,
@@ -61,9 +57,7 @@ export const FilterGroup = ({
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const filters =
-    children != null
-      ? (React.Children.map(children, (x) => x) as Array<React.ReactNode>)
-      : _filters;
+    children != null ? (React.Children.map(children, (x) => x) as Array<React.ReactNode>) : [];
 
   if (screenSize > ScreenSizes.L) {
     if (filters == null) {
@@ -124,8 +118,4 @@ export const FilterGroup = ({
       </Drawer>
     </Fragment>
   );
-};
-
-FilterGroup.propTypes = {
-  filters: Deprecated,
 };
