@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, useResponsiveProps } from '../utils';
+import { useResponsiveProps } from '../utils';
 
 const rotate = keyframes`
   100% {
@@ -141,8 +141,4 @@ export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
       </div>
     </div>
   );
-};
-
-Spinner.propTypes = {
-  category: Deprecated,
 };

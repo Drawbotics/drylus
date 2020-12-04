@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, getEnumAsClass, useResponsiveProps } from '../utils';
+import { getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
 
 const largeHeight = sv.marginLarge;
@@ -159,8 +159,4 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
       <Icon name={name} bold={bold} />
     </div>
   );
-};
-
-RoundIcon.propTypes = {
-  category: Deprecated,
 };

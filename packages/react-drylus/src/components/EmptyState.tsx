@@ -5,16 +5,7 @@ import React from 'react';
 import { Size, Tier } from '../enums';
 import { Flex, FlexDirection, FlexItem, Margin } from '../layout';
 import { Responsive, Style } from '../types';
-import {
-  Deprecated,
-  Empty,
-  Failed,
-  NotAllowed,
-  NotFound,
-  Processing,
-  run,
-  useResponsiveProps,
-} from '../utils';
+import { Empty, Failed, NotAllowed, NotFound, Processing, run, useResponsiveProps } from '../utils';
 import { Paragraph } from './Paragraph';
 import { Text } from './Text';
 import { Title } from './Title';
@@ -134,8 +125,4 @@ export const EmptyState = ({ responsive, ...rest }: EmptyStateProps) => {
       </Flex>
     </div>
   );
-};
-
-EmptyState.propTypes = {
-  actions: Deprecated,
 };

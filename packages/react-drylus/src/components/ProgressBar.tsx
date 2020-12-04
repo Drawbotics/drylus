@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, getEnumAsClass, useResponsiveProps } from '../utils';
+import { getEnumAsClass, useResponsiveProps } from '../utils';
 import { placeholderStyles as shimmerStyles } from './LoadingPlaceholder';
 
 const styles = {
@@ -176,8 +176,4 @@ export const ProgressBar = ({ responsive, ...rest }: ProgressBarProps) => {
       />
     </div>
   );
-};
-
-ProgressBar.propTypes = {
-  category: Deprecated,
 };

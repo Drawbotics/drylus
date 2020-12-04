@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { Icon } from './Icon';
 
 const styles = {
@@ -154,8 +154,4 @@ export const CircularProgress = ({ responsive, ...rest }: CircularProgressProps)
       </svg>
     </div>
   );
-};
-
-CircularProgress.propTypes = {
-  category: Deprecated,
 };

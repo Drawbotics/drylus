@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { themeStyles } from '../base';
 import { Position } from '../enums';
 import { Style } from '../types';
-import { Deprecated, WrapperRef, getStyleForSide } from '../utils';
+import { WrapperRef, getStyleForSide } from '../utils';
 
 const styles = {
   root: css`
@@ -244,8 +244,4 @@ export const Popover = ({
       )}
     </Fragment>
   );
-};
-
-Popover.propTypes = {
-  message: Deprecated,
 };

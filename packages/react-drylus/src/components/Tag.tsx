@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Color } from '../enums';
 import { OnClickCallback, Style } from '../types';
-import { Deprecated, getEnumAsClass, run } from '../utils';
+import { getEnumAsClass, run } from '../utils';
 import { Icon } from './Icon';
 
 const styles = {
@@ -115,8 +115,4 @@ export const Tag = ({ children, onClickRemove, inversed, style: _style = {}, col
       })}
     </div>
   );
-};
-
-Tag.propTypes = {
-  category: Deprecated,
 };

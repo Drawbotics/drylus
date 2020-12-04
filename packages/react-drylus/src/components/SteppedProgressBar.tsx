@@ -4,7 +4,7 @@ import React, { Fragment } from 'react';
 
 import { Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { placeholderStyles as shimmerStyles } from './LoadingPlaceholder';
 
 const styles = {
@@ -240,8 +240,4 @@ export const SteppedProgressBar = ({ responsive, ...rest }: SteppedProgressBarPr
       ))}
     </div>
   );
-};
-
-SteppedProgressBar.propTypes = {
-  category: Deprecated,
 };

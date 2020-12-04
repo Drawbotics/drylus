@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Color } from '../enums';
 import { Style } from '../types';
-import { Deprecated, getEnumAsClass } from '../utils';
+import { getEnumAsClass } from '../utils';
 
 const styles = {
   root: css`
@@ -50,8 +50,4 @@ export const Dot = ({ style, color }: DotProps) => {
       })}
     />
   );
-};
-
-Dot.propTypes = {
-  category: Deprecated,
 };

@@ -7,7 +7,7 @@ import React from 'react';
 
 import { Color, Shade } from '../enums';
 import { OnClickCallback, Style } from '../types';
-import { Deprecated, getEnumAsClass } from '../utils';
+import { getEnumAsClass } from '../utils';
 
 const env = require('../utils/get-static-env');
 
@@ -92,8 +92,4 @@ export const Icon = ({ name, bold, onClick, style, color, shade }: IconProps) =>
       onClick={onClick}
     />
   );
-};
-
-Icon.propTypes = {
-  category: Deprecated,
 };

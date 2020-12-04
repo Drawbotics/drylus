@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Color } from '../enums';
 import { Style } from '../types';
-import { Deprecated, checkComponentProps, run } from '../utils';
+import { checkComponentProps, run } from '../utils';
 import { Dot } from './Dot';
 import { Icon, IconType } from './Icon';
 
@@ -101,10 +101,6 @@ export const ListItem = ({
       })}
     </li>
   );
-};
-
-ListItem.propTypes = {
-  category: Deprecated,
 };
 
 export interface ListProps {

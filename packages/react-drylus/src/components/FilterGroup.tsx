@@ -5,7 +5,7 @@ import React, { Fragment, useState } from 'react';
 
 import { Category, Size, Tier } from '../enums';
 import { Flex, FlexItem, FlexJustify, Margin } from '../layout';
-import { Deprecated, run } from '../utils';
+import { run } from '../utils';
 import { Button } from './Button';
 import { Drawer } from './Drawer';
 import { Icon, IconType } from './Icon';
@@ -118,8 +118,4 @@ export const FilterGroup = ({
       </Drawer>
     </Fragment>
   );
-};
-
-FilterGroup.propTypes = {
-  filters: Deprecated,
 };

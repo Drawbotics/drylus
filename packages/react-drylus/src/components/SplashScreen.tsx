@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { themeStyles } from '../base';
-import { Deprecated, fsv } from '../utils';
+import { fsv } from '../utils';
 
 const styles = {
   root: css`
@@ -153,8 +153,4 @@ export const SplashScreen = ({ text }: SplashScreenProps) => {
   );
   // eslint-disable-next-line no-unreachable
   return <div></div>; // NOTE: proptypes fail if no "concrete" element is returned
-};
-
-SplashScreen.propTypes = {
-  visible: Deprecated,
 };

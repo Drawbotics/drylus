@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { themeStyles } from '../base';
 import { Position } from '../enums';
 import { HTMLElementWithDisabled, Responsive, Style } from '../types';
-import { Deprecated, WrapperRef, getStyleForSide, useResponsiveProps } from '../utils';
+import { WrapperRef, getStyleForSide, useResponsiveProps } from '../utils';
 
 const styles = {
   root: css`
@@ -228,8 +228,4 @@ export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
       )}
     </Fragment>
   );
-};
-
-Tooltip.propTypes = {
-  category: Deprecated,
 };
