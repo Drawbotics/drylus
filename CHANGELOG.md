@@ -1,3 +1,16 @@
+# v7.0.0 (Fri Dec 04 2020)
+
+#### 💥 Breaking - Major release
+
+- `@drawbotics/drylus-style-vars`, `@drawbotics/react-drylus`
+  - Design system sync [#168](https://github.com/Drawbotics/drylus/pull/168) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v6.12.8 (Tue Dec 01 2020)
 
 #### ⚠️  Pushed to master
