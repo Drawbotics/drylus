@@ -134,8 +134,13 @@ const styles = {
     button {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
-      border-top-left-radius: ${sv.defaultBorderRadius};
-      border-bottom-left-radius: ${sv.defaultBorderRadius};
+      border-top-left-radius: calc(${sv.defaultBorderRadius} - 1px);
+      border-bottom-left-radius: calc(${sv.defaultBorderRadius} - 1px);
+    }
+    button {
+      height: calc(${sv.marginExtraLarge} - 2px);
+      width: calc(100% - 2px);
+      white-space: nowrap;
     }
     select {
       background-color: transparent;
@@ -157,8 +162,13 @@ const styles = {
     button {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      border-top-right-radius: ${sv.defaultBorderRadius};
-      border-bottom-right-radius: ${sv.defaultBorderRadius};
+      border-top-right-radius: calc(${sv.defaultBorderRadius} - 1px);
+      border-bottom-right-radius: calc(${sv.defaultBorderRadius} - 1px);
+    }
+    button {
+      height: calc(${sv.marginExtraLarge} - 2px);
+      width: calc(100% - 2px);
+      white-space: nowrap;
     }
     select {
       background-color: transparent;
@@ -175,7 +185,9 @@ const styles = {
     }
 
     button {
-      height: 30px;
+      height: calc(${sv.marginLarge} - 2px) !important;
+      width: calc(100% - 2px);
+      white-space: nowrap;
     }
 
     [data-element='icon'] {

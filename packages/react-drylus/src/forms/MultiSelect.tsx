@@ -10,6 +10,9 @@ import { Option, Responsive, Style } from '../types';
 import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
+const defaultHeight = sv.marginExtraLarge;
+const smallHeight = sv.marginLarge;
+
 const styles = {
   root: css`
     display: inline-block;
@@ -127,16 +130,16 @@ const styles = {
     overflow: auto;
   `,
   top: css`
-    transform: translateY(calc(-100% - 20px - 40px));
+    transform: translateY(calc(-100% - 20px - ${defaultHeight}));
   `,
   topOpen: css`
-    transform: translateY(calc(-100% - 15px - 40px));
+    transform: translateY(calc(-100% - 15px - ${defaultHeight}));
   `,
   topSmall: css`
-    transform: translateY(calc(-100% - 20px - 30px));
+    transform: translateY(calc(-100% - 20px - ${smallHeight}));
   `,
   topSmallOpen: css`
-    transform: translateY(calc(-100% - 15px - 30px));
+    transform: translateY(calc(-100% - 15px - ${smallHeight}));
   `,
   open: css`
     opacity: 1;

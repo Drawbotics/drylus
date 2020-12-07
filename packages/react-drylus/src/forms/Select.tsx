@@ -10,6 +10,9 @@ import { Option, Responsive, Style } from '../types';
 import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
+const defaultHeight = sv.marginExtraLarge;
+const smallHeight = sv.marginLarge;
+
 const styles = {
   root: css`
     display: inline-block;
@@ -66,7 +69,7 @@ const styles = {
     box-shadow: inset 0px 0px 0px 1px ${sv.azure};
     transition: ${sv.transitionShort};
     letter-spacing: normal;
-    max-height: 40px;
+    max-height: ${defaultHeight};
 
     &:hover {
       box-shadow: inset 0px 0px 0px 1px ${sv.azureDark};
@@ -128,7 +131,7 @@ const styles = {
   `,
   small: css`
     [data-element='select'] {
-      max-height: 30px;
+      max-height: ${smallHeight};
       padding: ${sv.paddingExtraSmall} ${sv.paddingExtraSmall};
       padding-right: ${sv.paddingHuge};
     }
@@ -188,16 +191,16 @@ const styles = {
     overflow: auto;
   `,
   top: css`
-    transform: translateY(calc(-100% - 20px - 40px));
+    transform: translateY(calc(-100% - 20px - ${defaultHeight}));
   `,
   topOpen: css`
-    transform: translateY(calc(-100% - 15px - 40px));
+    transform: translateY(calc(-100% - 15px - ${defaultHeight}));
   `,
   topSmall: css`
-    transform: translateY(calc(-100% - 20px - 30px));
+    transform: translateY(calc(-100% - 20px - ${smallHeight}));
   `,
   topSmallOpen: css`
-    transform: translateY(calc(-100% - 15px - 30px));
+    transform: translateY(calc(-100% - 15px - ${smallHeight}));
   `,
   open: css`
     opacity: 1;
@@ -209,7 +212,7 @@ const styles = {
     align-items: center;
     padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
     color: ${sv.colorPrimary};
-    max-height: 32px; /* hardcoded for styling purposes */
+    max-height: ${smallHeight};
 
     &:hover {
       cursor: pointer;

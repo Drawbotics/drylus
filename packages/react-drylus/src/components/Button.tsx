@@ -6,8 +6,8 @@ import { Category, Color, Size, Tier } from '../enums';
 import { OnClickCallback, Responsive, Style } from '../types';
 import { colorEnumToCategory, getEnumAsClass, run, useResponsiveProps } from '../utils';
 
-const defaultHeight = '40px';
-const smallHeight = '30px';
+const defaultHeight = sv.marginExtraLarge;
+const smallHeight = sv.marginLarge;
 
 const styles = {
   root: css`

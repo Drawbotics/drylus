@@ -8,6 +8,8 @@ import { Responsive, Style } from '../types';
 import { isFunction, run, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
+const smallHeight = sv.marginLarge;
+
 const styles = {
   root: css`
     position: relative;
@@ -117,7 +119,7 @@ const styles = {
   `,
   smallRenderValue: css`
     top: calc(${sv.marginExtraSmall} - 1px);
-    left: calc(${sv.marginExtraSmall} + 30px);
+    left: calc(${sv.marginExtraSmall} + ${smallHeight});
   `,
   value: css`
     color: transparent;

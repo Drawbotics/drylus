@@ -8,6 +8,9 @@ import { Option, Responsive, Style } from '../types';
 import { isFunction, run, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
+const defaultHeight = sv.marginExtraLarge;
+const smallHeight = sv.marginLarge;
+
 const styles = {
   root: css`
     position: relative;
@@ -33,16 +36,16 @@ const styles = {
     overflow: auto;
   `,
   top: css`
-    transform: translateY(calc(-100% - 20px - 40px));
+    transform: translateY(calc(-100% - 20px - ${defaultHeight}));
   `,
   topOpen: css`
-    transform: translateY(calc(-100% - 15px - 40px));
+    transform: translateY(calc(-100% - 15px - ${defaultHeight}));
   `,
   topSmall: css`
-    transform: translateY(calc(-100% - 20px - 30px));
+    transform: translateY(calc(-100% - 20px - ${smallHeight}));
   `,
   topSmallOpen: css`
-    transform: translateY(calc(-100% - 15px - 30px));
+    transform: translateY(calc(-100% - 15px - ${smallHeight}));
   `,
   visible: css`
     opacity: 1;
