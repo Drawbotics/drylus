@@ -1,3 +1,16 @@
+# v7.0.1 (Mon Dec 07 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - small UI tweaks  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.0.0 (Fri Dec 04 2020)
 
 #### 💥 Breaking - Major release
