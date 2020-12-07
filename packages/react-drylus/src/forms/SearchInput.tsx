@@ -244,7 +244,7 @@ export const SearchInput = <T extends any, K extends string>({
         </div>
       ) : null}
       <InputWithRef
-        prefix={
+        leading={
           minimal ? null : (
             <Button
               leading={isLoading ? <Spinner size={Size.SMALL} /> : <Icon name="search" />}
