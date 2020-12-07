@@ -61,7 +61,7 @@ export interface CollapsibleProps {
 
   /**
    * If given displays an icon to the left of the title
-   * @deprecated Use prefix instead
+   * @deprecated Use leading instead
    */
   icon?: IconType;
 
