@@ -6,7 +6,7 @@ import React, { ReactNode } from 'react';
 import { Shade } from '../enums';
 import { ListTile } from '../layout';
 import { OnClickCallback, Style } from '../types';
-import { checkComponentProps, run } from '../utils';
+import { Deprecated, checkComponentProps, run } from '../utils';
 import { Icon, IconType } from './Icon';
 import { Label } from './Label';
 
@@ -112,4 +112,8 @@ export const Collapsible = ({
       })}
     </div>
   );
+};
+
+Collapsible.propTypes = {
+  icon: Deprecated,
 };
