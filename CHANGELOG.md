@@ -1,3 +1,18 @@
+# v7.0.2 (Mon Dec 07 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/collapsible leading trailing [#169](https://github.com/Drawbotics/drylus/pull/169) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Feature/deprecate prefix suffix [#170](https://github.com/Drawbotics/drylus/pull/170) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.0.1 (Mon Dec 07 2020)
 
 #### ⚠️  Pushed to master
