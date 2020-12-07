@@ -371,10 +371,10 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
       <div className={styles.outerWrapper}>
         {leading != null ? (
           <div
-            data-element="prefix"
+            data-element="leading"
             className={cx(styles.fix, styles.leading, {
               [styles.leadingComponent]: isLeadingComponent,
-              [styles.transparentButton]: get(prefix, 'props')?.category == null, // TODO find better
+              [styles.transparentButton]: get(leading, 'props')?.category == null, // TODO find better
               [styles.smallFix]: size === Size.SMALL && !isLeadingComponent,
             })}>
             {isLeadingComponent && size === Size.SMALL
@@ -443,7 +443,7 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
         </div>
         {trailing != null ? (
           <div
-            data-element="suffix"
+            data-element="trailing"
             className={cx(styles.fix, styles.trailing, {
               [styles.trailingComponent]: isTrailingComponent,
               [styles.transparentButton]: get(suffix, 'props')?.category == null,

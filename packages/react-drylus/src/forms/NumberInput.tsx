@@ -15,8 +15,8 @@ const styles = {
     width: 100%;
   `,
   withCounter: css`
-    & [data-element='suffix'],
-    & [data-element='prefix'] {
+    & [data-element='trailing'],
+    & [data-element='leading'] {
       padding: 0;
       align-items: stretch;
       overflow: hidden;
@@ -68,14 +68,14 @@ const styles = {
     }
   `,
   disabled: css`
-    & [data-element='suffix'] {
+    & [data-element='trailing'] {
       button {
         box-shadow: 4px 0px 0px -2px ${sv.neutral} inset;
         background: ${sv.neutralLight} !important;
       }
     }
 
-    & [data-element='prefix'] {
+    & [data-element='leading'] {
       button {
         box-shadow: -4px 0px 0px -2px ${sv.neutral} inset;
         background: ${sv.neutralLight} !important;
@@ -295,8 +295,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
         className={styles.numberInput}
         extraLeftPadding={extraLeftPadding}
         size={size}
-        suffix={
-          // [styles.small]: size === Size.SMALL,
+        trailing={
           withCounter && onChange != null ? (
             <button
               className={cx(styles.button, {
@@ -312,7 +311,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
             </button>
           ) : null
         }
-        prefix={
+        leading={
           withCounter && onChange != null ? (
             <button
               className={cx(styles.button, {

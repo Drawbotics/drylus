@@ -37,7 +37,7 @@ If no `onChange` value is passed, the field is automatically set to `read-only`,
   <Input value="The value is locked" style={{ maxWidth: 300 }} />
 </Playground>
 
-You can also add a prefix and suffix.
+You can also add a leading and trailing components.
 
 export const style = {
   example: css`
@@ -59,13 +59,13 @@ export const Example = ({ children }) => {
 
 <Playground>
   <Example>
-    <Input placeholder="Something..." prefix="$" value="" onChange={x=>x} />
-    <Input placeholder="Something..." prefix={<Icon name="command" />} value="" onChange={x=>x} />
-    <Input placeholder="Something..." suffix=".com" value="" onChange={x=>x} />
-    <Input placeholder="Something..." prefix={
+    <Input placeholder="Something..." leading="$" value="" onChange={x=>x} />
+    <Input placeholder="Something..." leading={<Icon name="command" />} value="" onChange={x=>x} />
+    <Input placeholder="Something..." trailing=".com" value="" onChange={x=>x} />
+    <Input placeholder="Something..." leading={
       <Select value="option" options={[{ label: 'Option', value: 'option' }]} placeholder="Select..." onChange={x=>x} />
     } value="" onChange={x=>x} />
-    <Input placeholder="Something else..." suffix={
+    <Input placeholder="Something else..." trailing={
       <Button leading={<Icon name="copy" />}>Click me</Button>
     } value="" onChange={x=>x} />
   </Example>
@@ -87,12 +87,12 @@ You can use the smaller size variant when space is scarce on the pace (this will
         <Button category={Category.INFO} size={Size.SMALL}>Click me</Button>
       </FlexItem>
     </Flex>
-    <Input size={Size.SMALL} placeholder="Something..." prefix={<Icon name="command" />} value="" onChange={x=>x} />
-    <Input size={Size.SMALL} placeholder="Something..." suffix=".com" value="" onChange={() => {}} />
-    <Input size={Size.SMALL} placeholder="Something..." prefix={
+    <Input size={Size.SMALL} placeholder="Something..." leading={<Icon name="command" />} value="" onChange={x=>x} />
+    <Input size={Size.SMALL} placeholder="Something..." trailing=".com" value="" onChange={() => {}} />
+    <Input size={Size.SMALL} placeholder="Something..." leading={
       <Select value="option" options={[{ label: 'Option', value: 'option' }]} placeholder="Select..." onChange={x=>x} />
     } value="" onChange={() => {}} />
-    <Input size={Size.SMALL} placeholder="Something else..." suffix={
+    <Input size={Size.SMALL} placeholder="Something else..." trailing={
       <Button leading={<Icon name="copy" />}>Click me</Button>
     } value="" onChange={() => {}} />
   </Example>
