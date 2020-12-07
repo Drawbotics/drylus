@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Collapsible } from '@drawbotics/react-drylus';
+import { Collapsible, Icon, Shade, Button, Size, Category } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
@@ -25,6 +25,22 @@ export const ControlledField = ({ component: Component }) => {
 <Playground component={Collapsible}>
   <ControlledField component={
     <Collapsible title="Some information">
+      <div style={{ background: 'red', height: 150 }} />
+    </Collapsible>
+  } />
+</Playground>
+
+
+## With leading and trailing
+
+<Playground>
+  <ControlledField component={
+    <Collapsible
+      title="Some information"
+      leading={<Icon name="globe" shade={Shade.LIGHT} />}
+      trailing={
+        <Button leading={<Icon name="trash" />} category={Category.DANGER} size={Size.SMALL} />
+      }>
       <div style={{ background: 'red', height: 150 }} />
     </Collapsible>
   } />

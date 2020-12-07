@@ -24,15 +24,14 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
 }
 
 .emotion-6 [data-element='title'] {
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .emotion-6 [data-element='title'] > div > div > div {
@@ -155,15 +154,14 @@ exports[`Collapsible matches snapshot when it is open 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
 }
 
 .emotion-6 [data-element='title'] {
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .emotion-6 [data-element='title'] > div > div > div {
@@ -299,15 +297,14 @@ exports[`Collapsible matches snapshot when the title is a node 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
 }
 
 .emotion-7 [data-element='title'] {
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .emotion-7 [data-element='title'] > div > div > div {
