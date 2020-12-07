@@ -6,7 +6,14 @@ import React, { forwardRef, useState } from 'react';
 import { Button, Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { checkComponentProps, getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
+import {
+  Deprecated,
+  checkComponentProps,
+  getEnumAsClass,
+  isFunction,
+  run,
+  useResponsiveProps,
+} from '../utils';
 import { Hint } from './Hint';
 import { Select } from './Select';
 
@@ -118,7 +125,7 @@ const styles = {
       font-size: 1.1em;
     }
   `,
-  prefix: css`
+  leading: css`
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     margin-right: -1px;
@@ -127,7 +134,7 @@ const styles = {
       font-size: 1.2rem;
     }
   `,
-  prefixComponent: css`
+  leadingComponent: css`
     padding: 0;
 
     select,
@@ -141,7 +148,7 @@ const styles = {
       background-color: transparent;
     }
   `,
-  suffix: css`
+  trailing: css`
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     margin-left: -1px;
@@ -150,7 +157,7 @@ const styles = {
       font-size: 1.2rem;
     }
   `,
-  suffixComponent: css`
+  trailingComponent: css`
     padding: 0;
 
     select,
@@ -224,15 +231,37 @@ export interface InputProps<T = string> {
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;
 
-  /** Node to be rendered in front of the input field, for now limited to text, Button and Select */
+  /**
+   * Node to be rendered in front of the input field, for now limited to text, Button and Select
+   *
+   * @deprecated Use `leading` instead
+   */
   prefix?:
     | React.ReactElement<typeof Icon>
     | React.ReactElement<typeof Button>
     | React.ReactElement<typeof Select>
     | React.ReactNode;
 
-  /** Node to be rendered at the end of the input field, for now limited to text, Button and Select */
+  /** Node to be rendered in front of the input field, for now limited to text, Button and Select */
+  leading?:
+    | React.ReactElement<typeof Icon>
+    | React.ReactElement<typeof Button>
+    | React.ReactElement<typeof Select>
+    | React.ReactNode;
+
+  /**
+   * Node to be rendered at the end of the input field, for now limited to text, Button and Select
+   *
+   * @deprecated Use `trailing` instead
+   */
   suffix?:
+    | React.ReactElement<typeof Icon>
+    | React.ReactElement<typeof Button>
+    | React.ReactElement<typeof Select>
+    | React.ReactNode;
+
+  /** Node to be rendered at the end of the input field, for now limited to text, Button and Select */
+  trailing?:
     | React.ReactElement<typeof Icon>
     | React.ReactElement<typeof Button>
     | React.ReactElement<typeof Select>
@@ -283,7 +312,9 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
     valid,
     hint,
     prefix,
+    leading: _leading,
     suffix,
+    trailing: _trailing,
     disabled,
     inputRef,
     className,
@@ -298,8 +329,13 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
 
   if (inputRef == null) {
     checkComponentProps(
-      { prefix, suffix },
-      { prefix: [Button, Select, Icon], suffix: [Button, Select, Icon] },
+      { prefix, suffix, leading: _leading, trailing: _trailing },
+      {
+        prefix: [Button, Select, Icon],
+        suffix: [Button, Select, Icon],
+        leading: [Button, Select, Icon],
+        trailing: [Button, Select, Icon],
+      },
     );
   }
 
@@ -313,8 +349,10 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
     }
   };
 
-  const isPrefixComponent = get(prefix, 'type') === Button || get(prefix, 'type') === Select;
-  const isSuffixComponent = get(suffix, 'type') === Button || get(suffix, 'type') === Select;
+  const leading = _leading != null ? _leading : prefix;
+  const trailing = _trailing != null ? _trailing : suffix;
+  const isLeadingComponent = get(leading, 'type') === Button || get(leading, 'type') === Select;
+  const isTrailingComponent = get(trailing, 'type') === Button || get(trailing, 'type') === Select;
 
   return (
     <div
@@ -331,23 +369,19 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
           ((error != null && error !== false) || (Boolean(value) && valid) || onChange == null),
       })}>
       <div className={styles.outerWrapper}>
-        {run(() => {
-          if (prefix) {
-            return (
-              <div
-                data-element="prefix"
-                className={cx(styles.fix, styles.prefix, {
-                  [styles.prefixComponent]: isPrefixComponent,
-                  [styles.transparentButton]: get(prefix, 'props')?.category == null, // TODO find better
-                  [styles.smallFix]: size === Size.SMALL && !isPrefixComponent,
-                })}>
-                {isPrefixComponent && size === Size.SMALL
-                  ? React.cloneElement(prefix as React.ReactElement, { size: Size.SMALL })
-                  : prefix}
-              </div>
-            );
-          }
-        })}
+        {leading != null ? (
+          <div
+            data-element="prefix"
+            className={cx(styles.fix, styles.leading, {
+              [styles.leadingComponent]: isLeadingComponent,
+              [styles.transparentButton]: get(prefix, 'props')?.category == null, // TODO find better
+              [styles.smallFix]: size === Size.SMALL && !isLeadingComponent,
+            })}>
+            {isLeadingComponent && size === Size.SMALL
+              ? React.cloneElement(leading as React.ReactElement, { size: Size.SMALL })
+              : leading}
+          </div>
+        ) : null}
         <div className={styles.innerWrapper}>
           {run(() => {
             if (loading) {
@@ -390,8 +424,8 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
             onChange={handleOnChange}
             readOnly={onChange == null}
             className={cx(styles.input, {
-              [styles.straightLeft]: prefix != null,
-              [styles.straightRight]: suffix != null,
+              [styles.straightLeft]: leading != null,
+              [styles.straightRight]: trailing != null,
             })}
             type={type}
             value={value}
@@ -407,23 +441,19 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
             {...props}
           />
         </div>
-        {run(() => {
-          if (suffix) {
-            return (
-              <div
-                data-element="suffix"
-                className={cx(styles.fix, styles.suffix, {
-                  [styles.suffixComponent]: isSuffixComponent,
-                  [styles.transparentButton]: get(suffix, 'props')?.category == null,
-                  [styles.smallFix]: size === Size.SMALL && !isSuffixComponent,
-                })}>
-                {isSuffixComponent && size === Size.SMALL
-                  ? React.cloneElement(suffix as React.ReactElement, { size: Size.SMALL })
-                  : suffix}
-              </div>
-            );
-          }
-        })}
+        {trailing != null ? (
+          <div
+            data-element="suffix"
+            className={cx(styles.fix, styles.trailing, {
+              [styles.trailingComponent]: isTrailingComponent,
+              [styles.transparentButton]: get(suffix, 'props')?.category == null,
+              [styles.smallFix]: size === Size.SMALL && !isTrailingComponent,
+            })}>
+            {isTrailingComponent && size === Size.SMALL
+              ? React.cloneElement(trailing as React.ReactElement, { size: Size.SMALL })
+              : trailing}
+          </div>
+        ) : null}
       </div>
       {run(() => {
         if (error && typeof error === 'string') {
@@ -434,6 +464,11 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
       })}
     </div>
   );
+};
+
+RawInput.propTypes = {
+  prefix: Deprecated,
+  suffix: Deprecated,
 };
 
 /**
