@@ -19,6 +19,9 @@ const styles = {
   withSpan: (span: number) => css`
     grid-column: span ${span};
   `,
+  withRowSpan: (span: number) => css`
+    grid-row: span ${span};
+  `,
   hGuttersExtraSmall: css`
     grid-row-gap: ${sv.marginExtraSmall};
   `,
@@ -88,6 +91,12 @@ export interface GridItemProps {
    */
   span?: number;
 
+  /**
+   * How many rows should this item span
+   * @default 1
+   */
+  rowSpan?: number;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -114,6 +123,7 @@ export const GridItem = ({
   children,
   style,
   span = 1,
+  rowSpan = 1,
   columns = 1,
   animated,
   originOffset,
@@ -125,6 +135,7 @@ export const GridItem = ({
     console.warn(`Warning: GridItem span cannot be more than number of columns`);
   }
   const withSpan = styles.withSpan(span);
+  const withRowSpan = styles.withRowSpan(rowSpan);
 
   // Animation
   const delayRef = useRef(0);
@@ -160,7 +171,7 @@ export const GridItem = ({
         variants={itemVariants}
         custom={delayRef}
         ref={ref}
-        className={cx(styles.item, { [withSpan]: span != null })}
+        className={cx(styles.item, { [withSpan]: span != null, [withRowSpan]: rowSpan != null })}
         style={style}>
         {children}
       </motion.div>
@@ -168,7 +179,9 @@ export const GridItem = ({
   }
 
   return (
-    <div className={cx(styles.item, { [withSpan]: span != null })} style={style}>
+    <div
+      className={cx(styles.item, { [withSpan]: span != null, [withRowSpan]: rowSpan != null })}
+      style={style}>
       {children}
     </div>
   );
@@ -241,10 +254,10 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
       className={cx(styles.root(columns), {
         [staticStyles[
           `hGutters${upperFirst(camelCase(hGutters ?? ''))}` as keyof typeof staticStyles
-        ]]: hGutters != null,
+        ] as any]: hGutters != null,
         [staticStyles[
           `vGutters${upperFirst(camelCase(vGutters ?? ''))}` as keyof typeof staticStyles
-        ]]: vGutters != null,
+        ] as any]: vGutters != null,
       })}
       style={style}>
       {React.Children.toArray(children)

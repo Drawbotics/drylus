@@ -13,17 +13,17 @@ Grid only acts horizontally, creating a fixed number of columns, and a variable 
 import { Grid, GridItem } from '@drawbotics/react-drylus';
 ```
 
-export const Component = () => {
+export const Component = ({ style = {} }) => {
   return (
-    <div style={{ height: '50px', width: '100%', background: 'red', border: '1px solid orange' }} />
+    <div style={{ height: '50px', width: '100%', background: 'red', border: '1px solid orange', ...style }} />
   );
 };
 
 Example:
 <Playground component={Grid}>
   <Grid columns={4} hGutters={Size.DEFAULT} vGutters={Size.DEFAULT}>
-    <GridItem>
-      <Component />
+    <GridItem rowSpan={2}>
+      <Component style={{ height: '100%' }} />
     </GridItem>
     <GridItem span={2}>
       <Component />
