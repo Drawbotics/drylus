@@ -146,7 +146,7 @@ const styles = {
     }
     button {
       height: calc(${sv.marginExtraLarge} - 2px);
-      width: calc(100% - 2px);
+      /* width: calc(100% - 2px); */
       white-space: nowrap;
     }
     select {
@@ -174,7 +174,7 @@ const styles = {
     }
     button {
       height: calc(${sv.marginExtraLarge} - 2px);
-      width: calc(100% - 2px);
+      margin-right: 1px;
       white-space: nowrap;
     }
     select {
@@ -193,7 +193,7 @@ const styles = {
 
     button {
       height: calc(${sv.marginLarge} - 2px) !important;
-      width: calc(100% - 2px);
+      margin-right: 1px;
       white-space: nowrap;
     }
 

@@ -126,7 +126,7 @@ const styles = {
     transform: translateY(-5px);
     pointer-events: none;
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
-    max-height: 200px;
+    max-height: 210px;
     overflow: auto;
   `,
   top: css`
