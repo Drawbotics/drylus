@@ -1,3 +1,16 @@
+# v7.0.4 (Tue Dec 08 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - add rowSpan to GridItem  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.0.3 (Tue Dec 08 2020)
 
 #### ⚠️  Pushed to master
