@@ -1,3 +1,18 @@
+# v7.0.6 (Tue Dec 15 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - remove prop check in Input trailing and leading  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - allow toggle in Collapsible leading  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.0.5 (Fri Dec 11 2020)
 
 #### ⚠️  Pushed to master
