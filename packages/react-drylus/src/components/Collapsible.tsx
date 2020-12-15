@@ -90,7 +90,7 @@ export const Collapsible = ({
 
   const leading =
     _leading != null ? _leading : icon != null ? <Icon name={icon} shade={Shade.LIGHT} /> : null;
-  const isValidLeading = get(leading, 'type') === Icon;
+  const isValidLeading = get(leading, 'type') === Icon || get(leading, 'type') === Toggle;
 
   return (
     <div style={style} className={styles.root}>
