@@ -228,6 +228,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
   const overlayElement = useRef<HTMLDivElement>(null);
+  const clickTargetElement = useRef<EventTarget | null>(null);
   const { screenSize, ScreenSizes } = useScreenSize();
 
   useEffect(() => {
@@ -290,7 +291,11 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
   if (asOverlay) {
     if (outletElement == null) return null;
     const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-      if (e.target === overlayElement?.current && onClickClose != null) {
+      if (
+        e.target === overlayElement?.current &&
+        onClickClose != null &&
+        e.target === clickTargetElement.current
+      ) {
         onClickClose();
       }
     };
@@ -306,6 +311,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              onMouseDown={(e) => (clickTargetElement.current = e.target)}
               onClick={handleClickOverlay}
               className={cx(styles.overlay, {
                 [styles.leftOverlay]: side === Position.LEFT,
