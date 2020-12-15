@@ -9,6 +9,7 @@ import { OnClickCallback, Style } from '../types';
 import { Deprecated, checkComponentProps, run } from '../utils';
 import { Icon, IconType } from './Icon';
 import { Label } from './Label';
+import { Toggle } from './Toggle';
 
 const styles = {
   root: css``,
@@ -66,7 +67,7 @@ export interface CollapsibleProps {
   icon?: IconType;
 
   /** If given, renders in front of the collapsible title. For now limited to Icon */
-  leading?: React.ReactElement<typeof Icon> | ReactNode;
+  leading?: React.ReactElement<typeof Icon> | React.ReactElement<typeof Toggle> | ReactNode;
 
   /** If given, renders after the collapsible arrow. Can be anything */
   trailing?: ReactNode;
@@ -85,7 +86,7 @@ export const Collapsible = ({
   leading: _leading,
   trailing,
 }: CollapsibleProps) => {
-  checkComponentProps({ leading: _leading }, { leading: [Icon] });
+  checkComponentProps({ leading: _leading }, { leading: [Icon, Toggle] });
 
   const leading =
     _leading != null ? _leading : icon != null ? <Icon name={icon} shade={Shade.LIGHT} /> : null;
