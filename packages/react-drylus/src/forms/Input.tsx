@@ -6,14 +6,7 @@ import React, { forwardRef, useState } from 'react';
 import { Button, Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import {
-  Deprecated,
-  checkComponentProps,
-  getEnumAsClass,
-  isFunction,
-  run,
-  useResponsiveProps,
-} from '../utils';
+import { Deprecated, getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 import { Select } from './Select';
 
@@ -254,7 +247,7 @@ export interface InputProps<T = string> {
     | React.ReactElement<typeof Select>
     | React.ReactNode;
 
-  /** Node to be rendered in front of the input field, for now limited to text, Button and Select */
+  /** Node to be rendered in front of the input field, Button and Select are rendered specially */
   leading?:
     | React.ReactElement<typeof Icon>
     | React.ReactElement<typeof Button>
@@ -272,7 +265,7 @@ export interface InputProps<T = string> {
     | React.ReactElement<typeof Select>
     | React.ReactNode;
 
-  /** Node to be rendered at the end of the input field, for now limited to text, Button and Select */
+  /** Node to be rendered at the end of the input field, Button and Select are rendered specially */
   trailing?:
     | React.ReactElement<typeof Icon>
     | React.ReactElement<typeof Button>
@@ -338,18 +331,6 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
     size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<RawInputProps<T>>(rest, responsive);
-
-  if (inputRef == null) {
-    checkComponentProps(
-      { prefix, suffix, leading: _leading, trailing: _trailing },
-      {
-        prefix: [Button, Select, Icon],
-        suffix: [Button, Select, Icon],
-        leading: [Button, Select, Icon],
-        trailing: [Button, Select, Icon],
-      },
-    );
-  }
 
   const [isFocused, setFocused] = useState(false);
 
