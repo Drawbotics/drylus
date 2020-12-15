@@ -1,3 +1,16 @@
+# v7.0.8 (Tue Dec 15 2020)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Only close Drawer if click is fully on overlay [#171](https://github.com/Drawbotics/drylus/pull/171) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.0.7 (Tue Dec 15 2020)
 
 #### ⚠️  Pushed to master
