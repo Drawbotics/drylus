@@ -31,7 +31,7 @@ const basePlugins = [
     MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
   }),
   new HtmlWebpackPlugin({
-    filename: isProduction ? '404.html' : 'index.html',
+    filename: 'index.html',
     template: './public/index.html',
     inject: true,
     favicon: './public/favicon.ico',
@@ -60,6 +60,12 @@ const devPlugins = [
 
 const prodPlugins = [
   ...basePlugins,
+  new HtmlWebpackPlugin({
+    filename: '404.html',
+    template: './public/index.html',
+    inject: true,
+    favicon: './public/favicon.ico',
+  }),
   {
     apply: (compiler) => {
       compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
