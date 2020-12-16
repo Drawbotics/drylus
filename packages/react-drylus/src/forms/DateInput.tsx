@@ -379,8 +379,8 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
   return (
     <div style={style} className={styles.root} ref={rootRef}>
       <InputWithRef
-        suffix={
-          onChange != null ? (
+        trailing={
+          onChange != null && isDesktop ? (
             <Button
               disabled={disabled}
               leading={<Icon name="calendar" />}

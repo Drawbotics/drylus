@@ -111,7 +111,7 @@ const Search = ({ open, onClickClose }) => {
         onChange={handleOnChange}
         value={inputValue}
         placeholder="Component name, page..."
-        suffix={
+        trailing={
           <Button
             onClick={() => setSearching(true)}
             category={Category.BRAND}
