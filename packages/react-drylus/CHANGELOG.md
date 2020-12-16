@@ -1,3 +1,16 @@
+# v7.0.10 (Wed Dec 16 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Hide DateInput trailing button if not desktop  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.0.7 (Tue Dec 15 2020)
 
 #### ⚠️  Pushed to master

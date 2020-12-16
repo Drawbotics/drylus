@@ -1,3 +1,18 @@
+# v7.0.10 (Wed Dec 16 2020)
+
+#### ⚠️  Pushed to master
+
+- create index as well  ([@nicmosc](https://github.com/nicmosc))
+- remove commented code  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Hide DateInput trailing button if not desktop  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.0.9 (Wed Dec 16 2020)
 
 #### ⚠️  Pushed to master
