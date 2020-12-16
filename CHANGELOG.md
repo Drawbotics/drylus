@@ -1,3 +1,16 @@
+# v7.0.9 (Wed Dec 16 2020)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/icons`
+  - Add some filled icon variants  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.0.8 (Tue Dec 15 2020)
 
 #### 🐛 Bug fix - Patch
