@@ -1,12 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
-import get from 'lodash/get';
 import React, { ReactNode } from 'react';
 
 import { Shade } from '../enums';
 import { ListTile } from '../layout';
 import { OnClickCallback, Style } from '../types';
-import { Deprecated, checkComponentProps, run } from '../utils';
+import { Deprecated, checkComponentProps } from '../utils';
 import { Icon, IconType } from './Icon';
 import { Label } from './Label';
 import { Toggle } from './Toggle';
@@ -66,8 +65,8 @@ export interface CollapsibleProps {
    */
   icon?: IconType;
 
-  /** If given, renders in front of the collapsible title. For now limited to Icon */
-  leading?: React.ReactElement<typeof Icon> | React.ReactElement<typeof Toggle> | ReactNode;
+  /** If given, renders in front of the collapsible title */
+  leading?: ReactNode;
 
   /** If given, renders after the collapsible arrow. Can be anything */
   trailing?: ReactNode;
@@ -90,7 +89,6 @@ export const Collapsible = ({
 
   const leading =
     _leading != null ? _leading : icon != null ? <Icon name={icon} shade={Shade.LIGHT} /> : null;
-  const isValidLeading = get(leading, 'type') === Icon || get(leading, 'type') === Toggle;
 
   return (
     <div style={style} className={styles.root}>
@@ -98,7 +96,7 @@ export const Collapsible = ({
         <div data-element="title" onClick={onClick}>
           <ListTile
             title={typeof title === 'string' ? <Label ellipsized>{title}</Label> : title}
-            leading={isValidLeading ? leading : null}
+            leading={leading}
           />
         </div>
         <div className={styles.arrow} onClick={onClick}>
@@ -106,11 +104,7 @@ export const Collapsible = ({
         </div>
         {trailing != null ? <div className={styles.trailing}>{trailing}</div> : null}
       </div>
-      {run(() => {
-        if (isOpen) {
-          return <div className={styles.content}>{children}</div>;
-        }
-      })}
+      {isOpen ? <div className={styles.content}>{children}</div> : null}
     </div>
   );
 };
