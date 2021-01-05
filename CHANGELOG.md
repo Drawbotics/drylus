@@ -1,3 +1,16 @@
+# v7.0.11 (Tue Jan 05 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Allow any type as Collapsible leading  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.0.10 (Wed Dec 16 2020)
 
 #### ⚠️  Pushed to master
