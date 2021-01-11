@@ -78,7 +78,6 @@ const styles = {
     border-bottom: 1px solid ${sv.neutralLight};
     margin: 0 calc(${sv.defaultMargin} * -1);
     margin-top: calc(${sv.defaultMargin} * -1);
-    margin-bottom: ${sv.defaultMargin};
     padding: ${sv.defaultPadding};
     padding-top: 0;
     padding-right: ${sv.paddingExtraHuge};
@@ -86,7 +85,6 @@ const styles = {
     @media ${sv.screenL} {
       margin: 0 calc(${sv.marginSmall} * -1);
       margin-top: calc(${sv.marginSmall} * -1);
-      margin-bottom: ${sv.marginSmall};
       padding: ${sv.paddingSmall};
       padding-top: 0;
     }
