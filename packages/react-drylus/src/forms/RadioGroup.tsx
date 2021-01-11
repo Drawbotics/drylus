@@ -4,7 +4,7 @@ import React from 'react';
 import { v4 } from 'uuid';
 
 import { Icon, placeholderStyles } from '../components';
-import { Category } from '../enums';
+import { Category, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
 import { isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
@@ -15,6 +15,9 @@ const styles = {
   `,
   radioWrapper: css`
     margin-bottom: ${sv.marginExtraSmall};
+  `,
+  largeRadioWrapper: css`
+    margin-bottom: ${sv.marginSmall};
   `,
   root: css`
     position: relative;
@@ -84,6 +87,14 @@ const styles = {
     width: ${sv.marginSmall};
     position: relative;
     overflow: hidden;
+  `,
+  radioLarge: css`
+    height: ${sv.defaultMargin};
+    width: ${sv.defaultMargin};
+
+    label {
+      line-height: calc(${sv.defaultMargin} + 3px);
+    }
   `,
   input: css`
     visibility: hidden;
@@ -155,6 +166,7 @@ export interface RadioProps {
   value: string | number;
   onChange: (e: React.FormEvent<HTMLInputElement>) => void;
   disabled?: boolean;
+  size?: Size.DEFAULT | Size.LARGE;
   error: boolean;
   checked: boolean;
   children?: string;
@@ -173,6 +185,7 @@ const Radio = ({
   children,
   isPlaceholder,
   readOnly,
+  size,
   ...rest
 }: RadioProps) => {
   const id = v4();
@@ -186,7 +199,7 @@ const Radio = ({
           [placeholderStyles.shimmer]: isPlaceholder === true,
         })}
         htmlFor={id}>
-        <div className={styles.radio}>
+        <div className={cx(styles.radio, { [styles.radioLarge]: size === Size.LARGE })}>
           <input
             disabled={disabled}
             checked={checked}
@@ -249,6 +262,13 @@ export interface RadioGroupProps<T, K = string> {
   /** Determines which value is currently active */
   value?: ((name?: K) => RadioGroupOption<T>['value']) | RadioGroupOption<T>['value'];
 
+  /**
+   * Size of the radios. Can be large or default
+   * @default Size.DEFAULT
+   * @kind Size
+   */
+  size?: Size.LARGE | Size.DEFAULT;
+
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error?: string | number;
 
@@ -283,6 +303,7 @@ export const RadioGroup = <T extends any, K extends string>({
     className,
     hint,
     style,
+    size,
     ...props
   } = useResponsiveProps<RadioGroupProps<T, K>>(rest, responsive);
 
@@ -304,7 +325,11 @@ export const RadioGroup = <T extends any, K extends string>({
     <div style={style} className={cx(styles.radioGroup, className)}>
       <div>
         {options.map((option) => (
-          <div key={option.value} className={styles.radioWrapper}>
+          <div
+            key={option.value}
+            className={cx(styles.radioWrapper, {
+              [styles.largeRadioWrapper]: size === Size.LARGE,
+            })}>
             <Radio
               readOnly={readOnly}
               error={!!error}
@@ -312,6 +337,7 @@ export const RadioGroup = <T extends any, K extends string>({
               checked={value == option.value}
               value={option.value}
               disabled={option.disabled}
+              size={size}
               {...props}>
               {option.label}
             </Radio>
