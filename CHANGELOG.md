@@ -1,3 +1,23 @@
+# v7.1.0 (Mon Jan 11 2021)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Add LARGE variant to radio group [#174](https://github.com/Drawbotics/drylus/pull/174) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Add Align JUSTIFY enum [#173](https://github.com/Drawbotics/drylus/pull/173) ([@nicmosc](https://github.com/nicmosc))
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Fix modal title margin leak [#172](https://github.com/Drawbotics/drylus/pull/172) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.0.11 (Tue Jan 05 2021)
 
 #### ⚠️  Pushed to master
