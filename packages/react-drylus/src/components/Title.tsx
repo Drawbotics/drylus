@@ -50,6 +50,9 @@ const styles = {
   alignCenter: css`
     text-align: center;
   `,
+  alignJustify: css`
+    text-align: justify;
+  `,
 };
 
 export interface TitleProps {
@@ -88,6 +91,7 @@ export const Title = ({ responsive, ...rest }: TitleProps) => {
           [styles.noMargin]: noMargin === true,
           [styles.alignCenter]: align === Align.CENTER,
           [styles.alignRight]: align === Align.RIGHT,
+          [styles.alignJustify]: align === Align.JUSTIFY,
         })}>
         {children}
       </h1>
@@ -100,6 +104,7 @@ export const Title = ({ responsive, ...rest }: TitleProps) => {
           [styles.noMargin]: noMargin === true,
           [styles.alignCenter]: align === Align.CENTER,
           [styles.alignRight]: align === Align.RIGHT,
+          [styles.alignJustify]: align === Align.JUSTIFY,
         })}>
         {children}
       </h2>
@@ -112,6 +117,7 @@ export const Title = ({ responsive, ...rest }: TitleProps) => {
           [styles.noMargin]: noMargin === true,
           [styles.alignCenter]: align === Align.CENTER,
           [styles.alignRight]: align === Align.RIGHT,
+          [styles.alignJustify]: align === Align.JUSTIFY,
         })}>
         {children}
       </h3>
@@ -124,6 +130,7 @@ export const Title = ({ responsive, ...rest }: TitleProps) => {
           [styles.noMargin]: noMargin === true,
           [styles.alignCenter]: align === Align.CENTER,
           [styles.alignRight]: align === Align.RIGHT,
+          [styles.alignJustify]: align === Align.JUSTIFY,
         })}>
         {children}
       </h4>

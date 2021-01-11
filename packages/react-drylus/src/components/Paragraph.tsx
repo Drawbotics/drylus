@@ -17,6 +17,9 @@ const styles = {
   alignCenter: css`
     text-align: center;
   `,
+  alignJustify: css`
+    text-align: justify;
+  `,
 };
 
 export interface ParagraphProps {
@@ -44,6 +47,7 @@ export const Paragraph = ({ responsive, ...rest }: ParagraphProps) => {
       className={cx(styles.root, {
         [styles.alignCenter]: align === Align.CENTER,
         [styles.alignRight]: align === Align.RIGHT,
+        [styles.alignJustify]: align === Align.JUSTIFY,
       })}>
       {children}
     </p>
