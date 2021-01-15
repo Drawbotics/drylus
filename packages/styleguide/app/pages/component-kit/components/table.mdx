@@ -282,6 +282,8 @@ Below is the table that it generates. Note that you need to at least pass `heade
 <Playground>
   <div style={{ background: '#eaeff4', padding: '20px', margin: '-24px' }}>
     <Table
+      onEnterRow={console.log}
+      onExitRow={console.log}
       data={family}
       header={[{
         label: 'Name',

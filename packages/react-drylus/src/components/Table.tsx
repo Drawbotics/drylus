@@ -447,6 +447,12 @@ export interface TRowProps {
   /** Triggered when any part of the row is clicked */
   onClick?: OnClickCallback<HTMLTableRowElement>;
 
+  /** Triggered when any part of the row is entered (hover) */
+  onEnter?: OnClickCallback<HTMLTableRowElement>;
+
+  /** Triggered when any part of the row is exited (hover) */
+  onExit?: OnClickCallback<HTMLTableRowElement>;
+
   /** If true and `onClick` is provided, shows a pointer when hovering the row	 */
   clickable?: boolean;
 
@@ -477,6 +483,8 @@ export const TRow = ({
   alt,
   lastParentRow,
   onClick,
+  onEnter,
+  onExit,
   clickable,
   style,
   animated,
@@ -509,6 +517,8 @@ export const TRow = ({
         [styles.highlightedRow]: highlighted === true,
         [styles.noBorderBottom]: !!parent && !rowsStates[parent] && lastParentRow === true,
       })}
+      onMouseEnter={onEnter}
+      onMouseLeave={onExit}
       onClick={onClick}
       data-nested={nested ?? undefined}
       data-parent={parent ?? undefined}>
@@ -782,6 +792,8 @@ function _generateTable({
   header,
   childHeader,
   onClickRow = () => {},
+  onEnterRow = () => {},
+  onExitRow = () => {},
   clickable,
   activeRow,
   animated,
@@ -791,6 +803,8 @@ function _generateTable({
   header?: HeaderData;
   childHeader?: Array<DataEntry>;
   onClickRow?: (row: TableEntry) => void;
+  onEnterRow?: (row: TableEntry) => void;
+  onExitRow?: (row: TableEntry) => void;
   clickable?: boolean;
   activeRow?: TableEntry['id'];
   animated?: boolean;
@@ -809,6 +823,8 @@ function _generateTable({
               header,
               childHeader,
               onClickRow,
+              onEnterRow,
+              onExitRow,
               clickable,
               activeRow,
             }),
@@ -830,6 +846,8 @@ function _generateTable({
           key={uniqId}
           parent={hasData ? uniqId : undefined}
           onClick={() => onClickRow(rowData)}
+          onEnter={() => onEnterRow(rowData)}
+          onExit={() => onExitRow(rowData)}
           clickable={clickable}
           highlighted={activeRow != null && rowData.id != null && activeRow === rowData.id}
         />
@@ -839,6 +857,8 @@ function _generateTable({
           key={uniqId}
           parent={hasData ? uniqId : undefined}
           onClick={() => onClickRow(rowData)}
+          onEnter={() => onEnterRow(rowData)}
+          onExit={() => onExitRow(rowData)}
           clickable={clickable}
           highlighted={activeRow != null && rowData.id != null && activeRow === rowData.id}>
           {_generateRowChildren({ header, rowData })}
@@ -852,6 +872,8 @@ function _generateTable({
           key={`${uniqId}-1`}
           nested={uniqId}
           onClick={() => onClickRow(rowData)}
+          onEnter={() => onEnterRow(rowData)}
+          onExit={() => onExitRow(rowData)}
           clickable={clickable}>
           <TCell>
             <Table>
@@ -937,6 +959,12 @@ export interface TableProps {
   /** Triggered when a row is clicked, returns the given data object for that row. If used with nested tables, it will only return the root row object value */
   onClickRow?: (row: TableEntry) => void;
 
+  /** Triggered when a row is entered (hover), returns the given data object for that row. If used with nested tables, it will only return the root row object value */
+  onEnterRow?: (row: TableEntry) => void;
+
+  /** Triggered when a row is exited (hover), returns the given data object for that row. If used with nested tables, it will only return the root row object value */
+  onExitRow?: (row: TableEntry) => void;
+
   /** Will set the row with the same `id` property to "highlighted", useful when working with data generated tables */
   activeRow?: TableEntry['id'];
 
@@ -966,6 +994,8 @@ export const Table = ({
   highlighted,
   isLoading,
   onClickRow,
+  onEnterRow,
+  onExitRow,
   clickable = false,
   activeRow,
   emptyContent,
@@ -1100,6 +1130,8 @@ export const Table = ({
             header,
             childHeader,
             onClickRow,
+            onEnterRow,
+            onExitRow,
             clickable,
             activeRow,
             animated,
