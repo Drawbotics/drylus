@@ -1,3 +1,16 @@
+# v7.1.1 (Fri Jan 15 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Add onEnterRow and onExitRow to Table  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.1.0 (Mon Jan 11 2021)
 
 #### 🚀 Enhancement - Minor change
