@@ -123,8 +123,8 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled, hideTooltip }: 
         disabled || hideTooltip
           ? {}
           : {
-              onMouseDown: handleShowTooltip,
-              onMouseUp: handleHideTooltip,
+              onMouseEnter: handleShowTooltip,
+              onMouseOut: handleHideTooltip,
               onTouchStart: handleShowTooltip,
               onTouchEnd: handleHideTooltip,
             },
