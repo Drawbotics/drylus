@@ -123,7 +123,9 @@ export function generateDisplayedDate({
 
   const withLocale = Dayjs(date).locale(localeRoot);
 
-  const result = extendedLocales[localeRoot as keyof typeof extendedLocales]
+  const result = options?.format
+    ? withLocale.format(outputFormat)
+    : extendedLocales[localeRoot as keyof typeof extendedLocales]
     ? withLocale.calendar(
         undefined,
         extendedLocales[localeRoot as keyof typeof extendedLocales].calendar({
