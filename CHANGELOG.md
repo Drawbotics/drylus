@@ -1,3 +1,18 @@
+# v7.1.3 (Fri Jan 22 2021)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - RangeInput: show tooltip on hover [#175](https://github.com/Drawbotics/drylus/pull/175) ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/icons`
+  - Icons: add gallery and view icons [#176](https://github.com/Drawbotics/drylus/pull/176) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.1.2 (Fri Jan 22 2021)
 
 #### ⚠️  Pushed to master
