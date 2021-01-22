@@ -24,8 +24,8 @@ const styles = {
       &::before {
         position: absolute;
         left: calc(${sv.marginSmall} * -1.2);
-        top: calc(50% - 1px);
-        transform: translate(-25%, -50%);
+        top: 0;
+        transform: translateX(-25%);
         content: counter(custom-counter) '. ';
       }
 
@@ -47,8 +47,8 @@ const styles = {
     [data-element='dot'] {
       position: absolute;
       left: calc(${sv.marginSmall} * -1.2);
-      top: calc(50% - 1px);
-      transform: translate(-25%, -50%);
+      top: 0;
+      transform: translateX(-25%);
       font-size: 1rem;
     }
   `,
