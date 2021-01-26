@@ -47,6 +47,7 @@ import title from './title';
 import toggle from './toggle';
 import tooltip from './tooltip';
 import uploadBox from './upload-box';
+import tabMenu from './tab-menu';
 
 const components = {
   button,
@@ -98,6 +99,7 @@ const components = {
   fileIcon,
   attachmentList,
   animatedItem,
+  tabMenu,
 };
 
 export default Object.keys(components)

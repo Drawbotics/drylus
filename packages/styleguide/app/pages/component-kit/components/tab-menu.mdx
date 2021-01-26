@@ -1,0 +1,66 @@
+import { TabMenu, TabMenuItem, Flex, FlexItem, FlexJustify, Spinner, Badge, Category, Icon, Size, TabMenuLink } from '@drawbotics/react-drylus';
+import sv from '@drawbotics/drylus-style-vars';
+
+import Playground, { PropsTable } from '~/components/Playground';
+import { ControlledField } from '../utils';
+
+
+# Tab Menu
+
+It is primarily used to change the context of a whole page, that is in contrast with `SegmentedControl` which only should modify part of a page's content.
+```jsx
+import { TabMenu, TabMenuItem, TabMenuLink } from '@drawbotics/react-drylus';
+```
+
+__Example__
+
+This is the most basic usage of a tab menu, composed of multiple TabMenuItems
+
+<Playground component={TabMenu}>
+  <TabMenu>
+    <TabMenuItem active text="First option" />
+    <TabMenuItem text="Second option" />
+    <TabMenuItem text="Third option" />
+  </TabMenu>
+</Playground>
+
+However it can also be set vertically:
+
+<Playground>
+  <div style={{ maxWidth: 300 }}>
+    <TabMenu vertical>
+      <TabMenuItem active text="First option" />
+      <TabMenuItem text="Second option" />
+      <TabMenuItem text="Third option" />
+    </TabMenu>
+  </div>
+</Playground>
+
+#### TabMeu Item
+<Playground component={TabMenuItem}>
+  <TabMenuItem text="I'm an item" />
+</Playground>
+
+#### TabMeu Link
+Extends the `TabMenuItem` props but adds `href` and `linkComponent`
+<PropsTable component={TabMenuLink} />
+
+You can also give leading and trailing to items, and disable them:
+<Playground>
+  <TabMenu>
+    <TabMenuItem active text="First option" trailing={<Spinner size={Size.SMALL}  />} />
+    <TabMenuItem text="Second option" trailing={<Badge value={5} category={Category.DANGER} />} />
+    <TabMenuItem text="Third option" disabled leading={<Icon name="brand-id" />} />
+  </TabMenu>
+</Playground>
+
+### Link component and links
+If you want to use the tabs to navigate with links rather than with the `onClick` function, you can use `TabMenuLink`.
+
+<Playground>
+  <TabMenu linkComponent="a">
+    <TabMenuLink href="#1" active text="First option" />
+    <TabMenuLink href="#2" text="Second option" />
+    <TabMenuLink href="#2" text="Third option" />
+  </TabMenu>
+</Playground>
