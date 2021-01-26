@@ -31,15 +31,13 @@ You can also use a custom `renderValue` function to customize the way the value 
 </Playground>
 
 
-You may also disable the counter, and style the NumberInput as a normal input.
+You may also disable the counter
 
 <Playground>
   <ControlledField initialValue="" style={{ width: 300 }} component={
     <NumberInput
       withCounter={false}
-      leading="$"
       placeholder="Price of things"
-      value=""
-      trailing={<Button category={Category.INFO}>Click</Button>} />
+      value="" />
   } />
 </Playground>
