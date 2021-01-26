@@ -82,6 +82,9 @@ export const UploadHelper = ({
     if (files != null) {
       await onUploadFiles(files);
     }
+    if (inputRef.current != null) {
+      inputRef.current.value = '';
+    }
   };
 
   const handleMouseClick = () => {
