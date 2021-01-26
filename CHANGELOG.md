@@ -1,3 +1,19 @@
+# v7.1.4 (Tue Jan 26 2021)
+
+#### ⚠️  Pushed to master
+
+- trigger styleguide deploy  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - UploadHelper: reset input value to re-upload same file  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Modal: restore title margin  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.1.3 (Fri Jan 22 2021)
 
 #### 🐛 Bug fix - Patch
