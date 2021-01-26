@@ -5,7 +5,7 @@ import React, { ComponentClass, ReactElement, ReactNode } from 'react';
 import { Size } from '../enums';
 import { Padding } from '../layout';
 import { Responsive, Style } from '../types';
-import { useResponsiveProps } from '../utils';
+import { checkComponentProps, useResponsiveProps } from '../utils';
 
 const styles = {
   root: css`
@@ -216,6 +216,8 @@ export interface TabMenuProps {
 
 export const TabMenu = ({ responsive, ...rest }: TabMenuProps) => {
   const { children, vertical = false, style } = useResponsiveProps<TabMenuProps>(rest, responsive);
+  checkComponentProps({ children }, { children: [TabMenuItem, TabMenuLink] });
+
   return (
     <div
       style={style}

@@ -155,6 +155,10 @@ export interface TabNavigationProps<T> {
   style?: Style;
 }
 
+/**
+ * @deprecated
+ * Use the TabMenu component instead
+ */
 export const TabNavigation = <T extends any>({
   value,
   onChange,
@@ -163,6 +167,9 @@ export const TabNavigation = <T extends any>({
   linkComponent: Link,
   style,
 }: TabNavigationProps<T>) => {
+  console.warn(
+    'TabNavigation has been deprecated, please use TabMenu instead. This component will be removed in the next major version',
+  );
   const renderOption = (option: TabNavigationOption<T>) => (
     <div
       style={style}
