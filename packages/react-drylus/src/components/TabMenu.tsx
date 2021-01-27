@@ -181,7 +181,7 @@ interface TabMenuLinkProps extends TabMenuItemProps {
    *  The component used as link, defaults to the native 'a'
    * @default 'a'
    */
-  linkComponent: ReactNode;
+  linkComponent?: ReactNode;
 
   /** Url string for the link */
   href: string;
