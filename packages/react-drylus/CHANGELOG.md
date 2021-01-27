@@ -1,3 +1,16 @@
+# v7.2.1 (Wed Jan 27 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - TabMenu: make linkComponent optional  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.1.4 (Tue Jan 26 2021)
 
 #### ⚠️  Pushed to master
