@@ -1,3 +1,21 @@
+# v7.2.0 (Wed Jan 27 2021)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature/tab menu [#178](https://github.com/Drawbotics/drylus/pull/178) ([@nicmosc](https://github.com/nicmosc))
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Text: force custom date format if provided [#177](https://github.com/Drawbotics/drylus/pull/177) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.1.4 (Tue Jan 26 2021)
 
 #### ⚠️  Pushed to master
