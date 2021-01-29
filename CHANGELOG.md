@@ -1,3 +1,18 @@
+# v7.2.3 (Fri Jan 29 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Drawer: add overlayStyle prop to customize overlay  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/icons`
+  - Icons: add briefing icon  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.2.2 (Wed Jan 27 2021)
 
 #### ⚠️  Pushed to master
