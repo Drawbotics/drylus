@@ -195,6 +195,9 @@ export interface DrawerProps extends BaseDrawerProps {
    */
   raw?: boolean;
 
+  /** Used to override the style of the overlay */
+  overlayStyle?: Style;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -224,6 +227,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
     title,
     side = Position.RIGHT,
     animationCallbacks,
+    overlayStyle,
   } = useResponsiveProps<DrawerProps>(rest, responsive);
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
@@ -316,6 +320,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
               className={cx(styles.overlay, {
                 [styles.leftOverlay]: side === Position.LEFT,
               })}
+              style={overlayStyle}
               ref={overlayElement}>
               <motion.div
                 custom={width}
