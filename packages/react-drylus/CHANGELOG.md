@@ -1,3 +1,16 @@
+# v7.2.5 (Tue Feb 02 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Icon: (and other components) icon symbols are now extracted directly from the CSS styles avoiding icon mismatches when upgrading  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.2.4 (Tue Feb 02 2021)
 
 #### ⚠️  Pushed to master
