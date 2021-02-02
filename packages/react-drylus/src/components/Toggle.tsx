@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, isFunction, useResponsiveProps } from '../utils';
+import { Deprecated, getIconContent, isFunction, useResponsiveProps } from '../utils';
 
 const TRIGGER_DIMENSIONS = '18px';
 const TOGGLE_PADDING = '3px';
@@ -41,7 +41,7 @@ const styles = {
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
 
     &::after {
-      content: '\\ea30';
+      content: ${getIconContent('check')};
       font-family: 'drycons';
       color: ${sv.white};
       position: absolute;

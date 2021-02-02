@@ -1,7 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
+import { generateIconStyles } from '@drawbotics/icons/dist/drycons.js';
+import packageJson from '@drawbotics/icons/package.json';
 import { injectGlobal } from 'emotion';
 
 import { normalize } from './normalize';
+const env = require('../utils/get-static-env');
 
 export const globalStyles = `
   @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
@@ -31,9 +34,12 @@ export const root = `
   }
 `;
 
+export const icons = generateIconStyles(env === "'development'" ? 'dev' : packageJson.version);
+
 export function injectGlobalStyles(): void {
   injectGlobal(globalStyles);
   injectGlobal(normalize);
+  injectGlobal(icons);
   injectGlobal(`
     .Drylus-ThemeProvider__root {
       ${root}

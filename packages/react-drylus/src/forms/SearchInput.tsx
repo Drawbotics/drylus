@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Button, Icon, Spinner } from '../components';
 import { Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { isFunction, run, useResponsiveProps } from '../utils';
+import { getIconContent, isFunction, run, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
 const defaultHeight = sv.marginExtraLarge;
@@ -77,7 +77,7 @@ const styles = {
 
       &::after {
         position: absolute;
-        content: '\\eaec';
+        content: ${getIconContent('search')};
         font-family: 'drycons';
         top: 50%;
         transform: translateY(-50%);

@@ -3,11 +3,12 @@ import { css, cx } from 'emotion';
 import React, { Fragment } from 'react';
 
 import { Style } from '../types';
-import { globalStyles, normalize, root } from '../utils';
+import { globalStyles, icons, normalize, root } from '../utils';
 
 const styles = {
   global: globalCSS(globalStyles),
   normalize: globalCSS(normalize),
+  icons: globalCSS(icons),
   root: css(root),
   wrapper: css`
     display: flex;
@@ -28,7 +29,7 @@ export interface ThemeProviderProps {
 export const ThemeProvider = ({ children, style }: ThemeProviderProps) => {
   return (
     <Fragment>
-      <Global styles={[styles.global, styles.normalize]} />
+      <Global styles={[styles.global, styles.normalize, styles.icons]} />
       <div className={cx(styles.root, styles.wrapper)} style={style}>
         {children}
       </div>

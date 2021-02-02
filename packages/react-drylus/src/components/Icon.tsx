@@ -1,19 +1,12 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { IconKeys, Icons as IconValues } from '@drawbotics/icons/dist/drycons';
-import { generateIconStyles, mapping } from '@drawbotics/icons/dist/drycons.js';
-import packageJson from '@drawbotics/icons/package.json';
-import { css, cx, injectGlobal } from 'emotion';
+import { mapping } from '@drawbotics/icons/dist/drycons.js';
+import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Color, Shade } from '../enums';
 import { OnClickCallback, Style } from '../types';
 import { getEnumAsClass } from '../utils';
-
-const env = require('../utils/get-static-env');
-
-injectGlobal`
-  ${generateIconStyles(env === "'development'" ? 'dev' : packageJson.version)}
-`;
 
 const styles = {
   root: css`

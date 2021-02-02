@@ -7,7 +7,7 @@ import { Icon, IconType, RoundIcon, Spinner } from '../components';
 import { Category, Color, Shade, Size } from '../enums';
 import { Flex, FlexItem, FlexSpacer } from '../layout';
 import { Option, Responsive, Style } from '../types';
-import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
+import { getEnumAsClass, getIconContent, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const defaultHeight = sv.marginExtraLarge;
@@ -20,7 +20,7 @@ const styles = {
     width: 100%;
 
     &::after {
-      content: '\\ea33';
+      content: ${getIconContent('chevron-down')};
       font-family: 'drycons';
       color: ${sv.colorPrimary};
       position: absolute;
