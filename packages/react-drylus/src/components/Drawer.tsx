@@ -198,6 +198,9 @@ export interface DrawerProps extends BaseDrawerProps {
   /** Used to override the style of the overlay */
   overlayStyle?: Style;
 
+  /** Used to override the style of the wrapper element. Note that the `width` prop takes precedence  */
+  wrapperStyle?: Style;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -228,6 +231,8 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
     side = Position.RIGHT,
     animationCallbacks,
     overlayStyle,
+    wrapperStyle = {},
+    style,
   } = useResponsiveProps<DrawerProps>(rest, responsive);
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
@@ -287,7 +292,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
   const content = raw ? (
     children
   ) : (
-    <BaseDrawer title={title} onClickClose={onClickClose} footer={footer}>
+    <BaseDrawer style={style} title={title} onClickClose={onClickClose} footer={footer}>
       {children}
     </BaseDrawer>
   );
@@ -329,7 +334,10 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
                 initial="hidden"
                 animate="visible"
                 exit="hidden">
-                <div data-element="wrapper" className={styles.wrapper} style={{ width }}>
+                <div
+                  data-element="wrapper"
+                  className={styles.wrapper}
+                  style={{ ...wrapperStyle, width }}>
                   {content}
                 </div>
               </motion.div>
