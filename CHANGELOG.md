@@ -1,3 +1,16 @@
+# v7.2.4 (Tue Feb 02 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Drawer: add wrapperStyle prop and pass style to BaseDrawer  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.2.3 (Fri Jan 29 2021)
 
 #### ⚠️  Pushed to master
