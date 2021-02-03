@@ -1,3 +1,16 @@
+# v7.2.6 (Wed Feb 03 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Modal: overlay position is fixed to avoid visual bug when scrolling body  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.2.5 (Tue Feb 02 2021)
 
 #### ⚠️  Pushed to master
