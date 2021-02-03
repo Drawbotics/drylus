@@ -15,7 +15,7 @@ import { Title } from './Title';
 
 const styles = {
   overlay: css`
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
