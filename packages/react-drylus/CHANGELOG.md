@@ -1,3 +1,16 @@
+# v7.2.7 (Mon Feb 08 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Modal: add overlayStyle prop and remove padding when raw  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.2.6 (Wed Feb 03 2021)
 
 #### ⚠️  Pushed to master
