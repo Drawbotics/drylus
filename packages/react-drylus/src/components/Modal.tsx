@@ -206,6 +206,9 @@ export interface ModalProps extends BaseModalProps {
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
+  /** Used to override the style of the overlay */
+  overlayStyle?: Style;
+
   /** Determines if the modal is visible or not */
   visible: boolean;
 
@@ -227,6 +230,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     title,
     style,
     animationCallbacks,
+    overlayStyle,
   } = useResponsiveProps<ModalProps>(rest, responsive);
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
@@ -341,6 +345,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
             exit={{ opacity: 0 }}
             onClick={handleClickOverlay}
             className={styles.overlay}
+            style={overlayStyle}
             ref={overlayElement}>
             <motion.div
               initial="hidden"
@@ -348,6 +353,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
               variants={variants}
               exit="hidden"
               ref={containerElement}
+              style={{ padding: raw ? '0' : undefined }}
               className={cx(styles.container, { [styles.alignTop]: overflowing })}>
               {run(() => {
                 if (raw) {
