@@ -161,9 +161,9 @@ export const BaseDrawer = ({ children, onClickClose, footer, title, style }: Bas
 };
 
 const variants = {
-  hidden: { opacity: 0, width: 0 },
   visible: (width: number) => ({
     opacity: 1,
+    x: 0,
     width,
     transition: {
       ease: fsv.bouncyTransitionCurve,
@@ -331,9 +331,9 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
                 custom={width}
                 variants={variants}
                 style={{ position: 'relative' }}
-                initial="hidden"
+                initial={{ opacity: 0, width: 0, x: side === Position.LEFT ? `-${width}` : 0 }}
                 animate="visible"
-                exit="hidden">
+                exit={{ opacity: 0, width: 0, x: side === Position.LEFT ? `-${width}` : 0 }}>
                 <div
                   data-element="wrapper"
                   className={styles.wrapper}
