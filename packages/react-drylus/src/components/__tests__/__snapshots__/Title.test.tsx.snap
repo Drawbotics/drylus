@@ -55,11 +55,11 @@ exports[`Title matches snapshot when has a h2 size 1`] = `
   }
 }
 
-<h2
+<h1
   className="emotion-0"
 >
   Title content
-</h2>
+</h1>
 `;
 
 exports[`Title matches snapshot when has a h3 size 1`] = `
@@ -75,11 +75,11 @@ exports[`Title matches snapshot when has a h3 size 1`] = `
   }
 }
 
-<h3
+<h1
   className="emotion-0"
 >
   Title content
-</h3>
+</h1>
 `;
 
 exports[`Title matches snapshot when has a h4 size 1`] = `
@@ -96,11 +96,11 @@ exports[`Title matches snapshot when has a h4 size 1`] = `
   }
 }
 
-<h4
+<h1
   className="emotion-0"
 >
   Title content
-</h4>
+</h1>
 `;
 
 exports[`Title matches snapshot when has a node as children 1`] = `
@@ -116,7 +116,7 @@ exports[`Title matches snapshot when has a node as children 1`] = `
   }
 }
 
-<h2
+<h1
   className="emotion-0"
 >
   <span
@@ -129,7 +129,7 @@ exports[`Title matches snapshot when has a node as children 1`] = `
     Some 
   </span>
    content
-</h2>
+</h1>
 `;
 
 exports[`Title matches snapshot when is aligned to the right 1`] = `
