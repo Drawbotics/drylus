@@ -56,16 +56,23 @@ export interface BadgeProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const Badge = ({ value, max, category, style, color: _color }: BadgeProps) => {
+export const Badge = ({ value, max, category, style, color: _color, className }: BadgeProps) => {
   const color = category ? categoryEnumToColor(category) : _color;
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
+        },
+        className,
+      )}>
       {max != null && value > max ? `${max}+` : value}
     </div>
   );

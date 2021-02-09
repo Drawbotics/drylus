@@ -103,6 +103,9 @@ export interface SegmentedControlProps<T> {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 export const SegmentedControl = <T extends any>({
@@ -110,9 +113,10 @@ export const SegmentedControl = <T extends any>({
   onChange,
   options,
   style,
+  className,
 }: SegmentedControlProps<T>) => {
   return (
-    <div style={style} className={styles.root}>
+    <div style={style} className={cx(styles.root, className)}>
       {options.map((option) => (
         <div
           key={option.value}

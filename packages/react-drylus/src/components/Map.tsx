@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { LngLat, LngLatBounds } from 'mapbox-gl';
 import React, { useRef, useState } from 'react';
 import MapboxMap, { Marker as MapboxMarker } from 'react-mapbox-wrapper';
@@ -114,6 +114,9 @@ export interface MapProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** @private */
   [x: string]: any;
 }
@@ -124,6 +127,7 @@ export const Map = ({
   height = 300,
   style,
   interactive = false,
+  className,
   ...props
 }: MapProps) => {
   const ref = useRef();
@@ -155,7 +159,7 @@ export const Map = ({
   };
 
   return (
-    <div className={styles.root} style={{ height, ...style }}>
+    <div className={cx(styles.root, className)} style={{ height, ...style }}>
       <MapboxMap
         interactive={interactive}
         onLoad={handleFitMarkers}

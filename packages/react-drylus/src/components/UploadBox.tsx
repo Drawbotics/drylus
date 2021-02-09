@@ -144,6 +144,9 @@ export interface UploadBoxProps extends BaseHelper {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 export const UploadBox = ({
@@ -157,6 +160,7 @@ export const UploadBox = ({
   onMaxFilesExceeded,
   error,
   style,
+  className,
   ...rest
 }: UploadBoxProps) => {
   const [isDragEntered, setIsDragEntered] = useState(false);
@@ -197,12 +201,16 @@ export const UploadBox = ({
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
         onDrop={handleOnDrop}
-        className={cx(styles.root, {
-          [styles.fullWidth]: fullWidth === true,
-          [styles.fullHeight]: fullHeight === true,
-          [styles.active]: isDragEntered,
-          [styles.error]: error != null && error !== false,
-        })}>
+        className={cx(
+          styles.root,
+          {
+            [styles.fullWidth]: fullWidth === true,
+            [styles.fullHeight]: fullHeight === true,
+            [styles.active]: isDragEntered,
+            [styles.error]: error != null && error !== false,
+          },
+          className,
+        )}>
         <Margin size={{ bottom: Size.SMALL }}>
           <Upload />
         </Margin>

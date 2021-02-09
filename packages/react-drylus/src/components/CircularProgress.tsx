@@ -109,12 +109,15 @@ export interface CircularProgressProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const CircularProgress = ({ responsive, ...rest }: CircularProgressProps) => {
-  const { percentage = 0, size = Size.DEFAULT, text, style, color } = useResponsiveProps(
+  const { percentage = 0, size = Size.DEFAULT, text, style, color, className } = useResponsiveProps(
     rest,
     responsive,
   );
@@ -125,10 +128,14 @@ export const CircularProgress = ({ responsive, ...rest }: CircularProgressProps)
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
-        [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+          [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
+        },
+        className,
+      )}>
       {run(() => {
         if (color === Color.GREEN && percentage === 1) {
           return (

@@ -62,9 +62,17 @@ export interface BreadcrumbsProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const Breadcrumbs = ({ crumbs, linkComponent: Link, style }: BreadcrumbsProps) => {
+export const Breadcrumbs = ({
+  crumbs,
+  linkComponent: Link,
+  style,
+  className,
+}: BreadcrumbsProps) => {
   const renderCrumb = (crumb: Crumb) => (
     <div
       className={cx(styles.crumb, {
@@ -78,7 +86,7 @@ export const Breadcrumbs = ({ crumbs, linkComponent: Link, style }: BreadcrumbsP
     </div>
   );
   return (
-    <div className={styles.root} style={style}>
+    <div className={cx(styles.root, className)} style={style}>
       {crumbs.map((crumb, i) => (
         <Fragment key={i}>
           {run(() => {

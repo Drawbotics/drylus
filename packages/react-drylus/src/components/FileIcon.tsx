@@ -205,12 +205,15 @@ export interface FileIconProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const FileIcon = ({ style, type, asFolder }: FileIconProps) => {
+export const FileIcon = ({ style, type, asFolder, className }: FileIconProps) => {
   if (asFolder) {
     return (
-      <div style={style} className={styles.folder}>
+      <div style={style} className={cx(styles.folder, className)}>
         <FolderIcon />
       </div>
     );
@@ -220,18 +223,22 @@ export const FileIcon = ({ style, type, asFolder }: FileIconProps) => {
     <div
       data-type={type}
       style={style}
-      className={cx(styles.root, {
-        [styles.withExtension]: type != null,
-        [styles.archive]: type != null && _isArchive(type),
-        [styles.model]: type != null && _isModel(type),
-        [styles.document]: type != null && _isDocument(type),
-        [styles.vector]: type != null && _isVector(type),
-        [styles.pdf]: type != null && _isPDF(type),
-        [styles.data]: type != null && _isData(type),
-        [styles.image]: type != null && _isImage(type),
-        [styles.video]: type != null && _isVideo(type),
-        [styles.sound]: type != null && _isSound(type),
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles.withExtension]: type != null,
+          [styles.archive]: type != null && _isArchive(type),
+          [styles.model]: type != null && _isModel(type),
+          [styles.document]: type != null && _isDocument(type),
+          [styles.vector]: type != null && _isVector(type),
+          [styles.pdf]: type != null && _isPDF(type),
+          [styles.data]: type != null && _isData(type),
+          [styles.image]: type != null && _isImage(type),
+          [styles.video]: type != null && _isVideo(type),
+          [styles.sound]: type != null && _isSound(type),
+        },
+        className,
+      )}
     />
   );
 };

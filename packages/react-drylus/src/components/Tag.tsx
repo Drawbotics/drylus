@@ -83,13 +83,23 @@ export interface TagProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 function _getClassNameForColor(color: Color, inversed?: boolean): string {
   return inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
 }
 
-export const Tag = ({ children, onClickRemove, inversed, style: _style = {}, color }: TagProps) => {
+export const Tag = ({
+  children,
+  onClickRemove,
+  inversed,
+  style: _style = {},
+  color,
+  className: customClassName,
+}: TagProps) => {
   const enumColor = color != null && color in Color ? (color as Color) : null;
   const className = enumColor != null ? _getClassNameForColor(enumColor, inversed) : null;
   const style =
@@ -103,10 +113,14 @@ export const Tag = ({ children, onClickRemove, inversed, style: _style = {}, col
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.inversed]: inversed === true,
-        [styles[className as keyof typeof styles]]: enumColor != null,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles.inversed]: inversed === true,
+          [styles[className as keyof typeof styles]]: enumColor != null,
+        },
+        customClassName,
+      )}>
       {children}
       {run(() => {
         if (onClickRemove != null) {

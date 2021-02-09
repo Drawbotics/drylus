@@ -351,6 +351,9 @@ export interface ButtonProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -372,8 +375,7 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
     style,
     color,
     inversed,
-    type = 'button',
-    ...props
+    className,
   } = useResponsiveProps<ButtonProps>(rest, responsive);
 
   if (!children && trailing && leading) {
@@ -388,23 +390,26 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
     <button
       style={style}
       onClick={onClick}
-      className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
-        [styles.round]: round === true,
-        [styles.roundSmall]: round === true && size === Size.SMALL,
-        [styles[getEnumAsClass<typeof styles>(category)]]:
-          category != null && tier === Tier.PRIMARY,
-        [styles[getEnumAsClass<typeof styles>(tier)]]: tier != null,
-        [styles[`${category?.toLowerCase() ?? ''}Alt` as keyof typeof styles]]:
-          category != null && tier !== Tier.PRIMARY,
-        [styles.fullWidth]: fullWidth === true,
-        [styles.inversed]: inversed === true,
-        [styles.secondaryInversed]: inversed === true && tier === Tier.SECONDARY,
-        [styles.tertiaryInversed]: inversed === true && tier === Tier.TERTIARY,
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+          [styles.round]: round === true,
+          [styles.roundSmall]: round === true && size === Size.SMALL,
+          [styles[getEnumAsClass<typeof styles>(category)]]:
+            category != null && tier === Tier.PRIMARY,
+          [styles[getEnumAsClass<typeof styles>(tier)]]: tier != null,
+          [styles[`${category?.toLowerCase() ?? ''}Alt` as keyof typeof styles]]:
+            category != null && tier !== Tier.PRIMARY,
+          [styles.fullWidth]: fullWidth === true,
+          [styles.inversed]: inversed === true,
+          [styles.secondaryInversed]: inversed === true && tier === Tier.SECONDARY,
+          [styles.tertiaryInversed]: inversed === true && tier === Tier.TERTIARY,
+        },
+        className,
+      )}
       disabled={disabled}
-      type={type}
-      {...props}>
+      type="button">
       {run(() => {
         if (leading) {
           return <div className={cx(styles.icon, { [styles.leading]: !round })}>{leading}</div>;

@@ -144,6 +144,9 @@ export interface DropdownOptionProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -152,17 +155,28 @@ export interface DropdownOptionProps {
 }
 
 export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => {
-  const { text, category, disabled, onClick, onClickClose, icon, style } = useResponsiveProps<
-    DropdownOptionProps
-  >(rest, responsive);
+  const {
+    text,
+    category,
+    disabled,
+    onClick,
+    onClickClose,
+    icon,
+    style,
+    className,
+  } = useResponsiveProps<DropdownOptionProps>(rest, responsive);
 
   return (
     <div
       style={style}
-      className={cx(styles.option, {
-        [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
-        [styles.disabled]: disabled === true,
-      })}
+      className={cx(
+        styles.option,
+        {
+          [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
+          [styles.disabled]: disabled === true,
+        },
+        className,
+      )}
       onClick={
         disabled
           ? undefined
@@ -208,11 +222,14 @@ export interface DropdownTitleProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const DropdownTitle = ({ text, style }: DropdownTitleProps) => {
+export const DropdownTitle = ({ text, style, className }: DropdownTitleProps) => {
   return (
-    <div style={style} className={styles.title}>
+    <div style={style} className={cx(styles.title, className)}>
       {text}
     </div>
   );
@@ -240,15 +257,17 @@ export interface DropdownProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const Dropdown = ({ responsive, ...rest }: DropdownProps) => {
-  const { children, trigger, side = Position.BOTTOM, style } = useResponsiveProps<DropdownProps>(
-    rest,
-    responsive,
-  );
+  const { children, trigger, side = Position.BOTTOM, style, className } = useResponsiveProps<
+    DropdownProps
+  >(rest, responsive);
 
   if (!React.isValidElement(trigger)) {
     console.warn('Dropdown only accepts a single child as trigger');
@@ -272,7 +291,7 @@ export const Dropdown = ({ responsive, ...rest }: DropdownProps) => {
   }, []);
 
   return (
-    <div style={style} className={styles.wrapper}>
+    <div style={style} className={cx(styles.wrapper, className)}>
       <div onClick={() => setDropdowOpen(true)} className={styles.trigger}>
         {trigger}
       </div>

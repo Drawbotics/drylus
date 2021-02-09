@@ -91,6 +91,9 @@ export interface BigRadioProps<T, K = string> {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 export const BigRadio = <T extends any, K extends string>({
@@ -102,16 +105,21 @@ export const BigRadio = <T extends any, K extends string>({
   name,
   label,
   style,
+  className,
 }: BigRadioProps<T, K>) => {
   const handleOnChange = () => (!disabled ? onChange(value, name) : null);
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.checked]: checked === true,
-        [styles.disabled]: disabled === true,
-        [styles.checkedDisabled]: checked === true && disabled === true,
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles.checked]: checked === true,
+          [styles.disabled]: disabled === true,
+          [styles.checkedDisabled]: checked === true && disabled === true,
+        },
+        className,
+      )}
       onClick={handleOnChange}>
       <div data-element="header" className={styles.header}>
         <Label>{label}</Label>

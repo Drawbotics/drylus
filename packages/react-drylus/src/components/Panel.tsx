@@ -106,16 +106,23 @@ export interface PanelHeaderProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const PanelHeader = ({ children, noPadding, style }: PanelHeaderProps) => {
+export const PanelHeader = ({ children, noPadding, style, className }: PanelHeaderProps) => {
   return (
     <Fragment>
       <div
         style={style}
-        className={cx(styles.header, {
-          [styles.noHeaderSpacing]: noPadding === true,
-        })}>
+        className={cx(
+          styles.header,
+          {
+            [styles.noHeaderSpacing]: noPadding === true,
+          },
+          className,
+        )}>
         {children}
       </div>
       <Separator />
@@ -132,14 +139,17 @@ export interface PanelBodyProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const PanelBody = ({ children, noPadding, style }: PanelBodyProps) => {
+export const PanelBody = ({ children, noPadding, style, className }: PanelBodyProps) => {
   return (
     <div
       data-element="body"
       style={style}
-      className={cx(styles.body, { [styles.noBodySpacing]: noPadding === true })}>
+      className={cx(styles.body, { [styles.noBodySpacing]: noPadding === true }, className)}>
       {children}
     </div>
   );
@@ -154,11 +164,14 @@ export interface PanelSectionProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const PanelSection = ({ children, title, style }: PanelSectionProps) => {
+export const PanelSection = ({ children, title, style, className }: PanelSectionProps) => {
   return (
-    <div style={style} className={styles.section}>
+    <div style={style} className={cx(styles.section, className)}>
       {run(() => {
         if (title) {
           return <div className={styles.sectionTitle}>{title}</div>;
@@ -178,17 +191,24 @@ export interface PanelFooterProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const PanelFooter = ({ children, noPadding, style }: PanelFooterProps) => {
+export const PanelFooter = ({ children, noPadding, style, className }: PanelFooterProps) => {
   return (
     <Fragment>
       <Separator />
       <div
         style={style}
-        className={cx(styles.footer, {
-          [styles.noFooterSpacing]: noPadding === true,
-        })}>
+        className={cx(
+          styles.footer,
+          {
+            [styles.noFooterSpacing]: noPadding === true,
+          },
+          className,
+        )}>
         {children}
       </div>
     </Fragment>
@@ -207,9 +227,12 @@ export interface PanelProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const Panel = ({ header, body, footer, style }: PanelProps) => {
+export const Panel = ({ header, body, footer, style, className }: PanelProps) => {
   checkComponentProps(
     { header, body, footer },
     {
@@ -220,12 +243,16 @@ export const Panel = ({ header, body, footer, style }: PanelProps) => {
   );
   return (
     <div
-      className={cx(styles.root, {
-        [styles.bodyAndFooter]:
-          body != null && footer != null && (body?.props as any).noPadding != null,
-        [styles.bodyAndHeader]:
-          body != null && header != null && (body?.props as any).noPadding != null,
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles.bodyAndFooter]:
+            body != null && footer != null && (body?.props as any).noPadding != null,
+          [styles.bodyAndHeader]:
+            body != null && header != null && (body?.props as any).noPadding != null,
+        },
+        className,
+      )}
       style={style}>
       {header}
       {body}

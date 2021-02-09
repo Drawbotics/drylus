@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import last from 'lodash/last';
 import React, { Fragment } from 'react';
 
@@ -42,16 +42,25 @@ interface AttachmentBoxProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const AttachmentBox = ({ responsive, ...rest }: AttachmentBoxProps) => {
-  const { fileName, progress, onClickDownload, onClickClose, style, asFolder } = useResponsiveProps<
-    AttachmentBoxProps
-  >(rest, responsive);
+  const {
+    fileName,
+    progress,
+    onClickDownload,
+    onClickClose,
+    style,
+    asFolder,
+    className,
+  } = useResponsiveProps<AttachmentBoxProps>(rest, responsive);
   return (
-    <div style={style} className={styles.root}>
+    <div style={style} className={cx(styles.root, className)}>
       <Flex
         direction={FlexDirection.HORIZONTAL}
         justify={FlexJustify.SPACE_BETWEEN}

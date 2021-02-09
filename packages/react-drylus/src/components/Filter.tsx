@@ -160,6 +160,9 @@ export interface BaseFilterProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
@@ -176,6 +179,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
     fullWidth,
     closeOnClick = false,
     contentHeight,
+    className,
   } = useResponsiveProps<BaseFilterProps>(rest, responsive);
 
   const panelRef = useRef<HTMLDivElement>(null);
@@ -212,9 +216,13 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.fullWidth]: fullWidth === true,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles.fullWidth]: fullWidth === true,
+        },
+        className,
+      )}>
       <div
         ref={triggerRef}
         data-element="trigger"
@@ -266,6 +274,9 @@ export interface SelectFilterProps<T> extends BaseFilterProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 export const SelectFilter = <T extends any>({
@@ -332,6 +343,9 @@ export interface CheckboxFilterProps<T> extends BaseFilterProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 export const CheckboxFilter = <T extends any>({

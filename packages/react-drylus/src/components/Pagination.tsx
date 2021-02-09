@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Category, Size, Tier } from '../enums';
@@ -93,6 +93,9 @@ export interface PaginationProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 export const Pagination = ({
@@ -103,13 +106,14 @@ export const Pagination = ({
   value,
   maxVisiblePages = 5,
   style,
+  className,
 }: PaginationProps) => {
   if (maxVisiblePages < 4) {
     console.warn('`maxVisiblePages` has to be at least 4');
   }
   const labels = _getLabels(value, pages, Math.max(maxVisiblePages, 4));
   return (
-    <div style={style} className={styles.root}>
+    <div style={style} className={cx(styles.root, className)}>
       <Button
         onClick={value === 1 ? undefined : () => onChange(value - 1)}
         disabled={value === 1}

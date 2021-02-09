@@ -70,18 +70,26 @@ export interface IconProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const Icon = ({ name, bold, onClick, style, color, shade }: IconProps) => {
+export const Icon = ({ name, bold, onClick, style, color, shade, className }: IconProps) => {
   return (
     <i
       style={style}
-      className={cx(styles.root, `Drycon Drycon-${name}`, {
-        [styles.bold]: bold != null,
-        [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
-        [styles[getEnumAsClass<typeof styles>(shade)]]: shade != null,
-        [styles.clickable]: onClick != null,
-      })}
+      className={cx(
+        styles.root,
+        `Drycon Drycon-${name}`,
+        {
+          [styles.bold]: bold != null,
+          [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
+          [styles[getEnumAsClass<typeof styles>(shade)]]: shade != null,
+          [styles.clickable]: onClick != null,
+        },
+        className,
+      )}
       onClick={onClick}
     />
   );

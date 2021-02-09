@@ -142,6 +142,9 @@ export interface TabMenuItemProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -159,15 +162,20 @@ export const TabMenuItem = ({ responsive, ...rest }: TabMenuItemProps) => {
     active,
     style,
     vertical,
+    className,
   } = useResponsiveProps<TabMenuItemProps>(rest, responsive);
   return (
     <div
       style={style}
-      className={cx(styles.item, {
-        [styles.active]: active,
-        [styles.verticalActive]: vertical && active,
-        [styles.disabled]: disabled,
-      })}
+      className={cx(
+        styles.item,
+        {
+          [styles.active]: active,
+          [styles.verticalActive]: vertical && active,
+          [styles.disabled]: disabled,
+        },
+        className,
+      )}
       onClick={disabled ? undefined : onClick}>
       {leading ? <Padding size={{ right: Size.EXTRA_SMALL }}>{leading}</Padding> : null}
       {text}
@@ -210,20 +218,30 @@ export interface TabMenuProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const TabMenu = ({ responsive, ...rest }: TabMenuProps) => {
-  const { children, vertical = false, style } = useResponsiveProps<TabMenuProps>(rest, responsive);
+  const { children, vertical = false, style, className } = useResponsiveProps<TabMenuProps>(
+    rest,
+    responsive,
+  );
   checkComponentProps({ children }, { children: [TabMenuItem, TabMenuLink] });
 
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.vertical]: vertical,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles.vertical]: vertical,
+        },
+        className,
+      )}>
       {React.Children.map(children as any, (child) => {
         if (child?.type === TabMenuItem || child?.type === TabMenuLink) {
           return React.cloneElement(

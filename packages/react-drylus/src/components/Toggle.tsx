@@ -84,23 +84,29 @@ export interface ToggleProps<T> {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const Toggle = <T extends string>({ responsive, ...rest }: ToggleProps<T>) => {
-  const { onChange, disabled, value: _value, style, name } = useResponsiveProps<ToggleProps<T>>(
-    rest,
-    responsive,
-  );
+  const { onChange, disabled, value: _value, style, name, className } = useResponsiveProps<
+    ToggleProps<T>
+  >(rest, responsive);
   const value = isFunction(_value) ? _value(name) : _value;
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.active]: value === true,
-        [styles.disabled]: disabled === true,
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles.active]: value === true,
+          [styles.disabled]: disabled === true,
+        },
+        className,
+      )}
       onClick={() => (disabled ? null : onChange(!value, name))}>
       <div className={styles.trigger} data-element="trigger" />
     </div>

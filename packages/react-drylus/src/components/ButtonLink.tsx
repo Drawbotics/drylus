@@ -30,6 +30,7 @@ export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
     color,
     inversed,
     disabled,
+    className,
   } = useResponsiveProps<ButtonLinkProps>(rest, responsive);
 
   if (!children && trailing && leading) {
@@ -43,21 +44,25 @@ export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
     <span
       style={style}
       onClick={onClick}
-      className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
-        [styles.round]: round === true,
-        [styles.roundSmall]: round === true && size === Size.SMALL,
-        [styles[getEnumAsClass<typeof styles>(category)]]:
-          category != null && tier === Tier.PRIMARY,
-        [styles[getEnumAsClass<typeof styles>(tier)]]: tier != null,
-        [styles[`${category?.toLowerCase() ?? ''}Alt` as keyof typeof styles]]:
-          category != null && tier !== Tier.PRIMARY,
-        [styles.fullWidth]: fullWidth === true,
-        [styles.inversed]: inversed === true,
-        [styles.secondaryInversed]: inversed === true && tier === Tier.SECONDARY,
-        [styles.tertiaryInversed]: inversed === true && tier === Tier.TERTIARY,
-        [styles.disabled]: disabled === true,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+          [styles.round]: round === true,
+          [styles.roundSmall]: round === true && size === Size.SMALL,
+          [styles[getEnumAsClass<typeof styles>(category)]]:
+            category != null && tier === Tier.PRIMARY,
+          [styles[getEnumAsClass<typeof styles>(tier)]]: tier != null,
+          [styles[`${category?.toLowerCase() ?? ''}Alt` as keyof typeof styles]]:
+            category != null && tier !== Tier.PRIMARY,
+          [styles.fullWidth]: fullWidth === true,
+          [styles.inversed]: inversed === true,
+          [styles.secondaryInversed]: inversed === true && tier === Tier.SECONDARY,
+          [styles.tertiaryInversed]: inversed === true && tier === Tier.TERTIARY,
+          [styles.disabled]: disabled === true,
+        },
+        className,
+      )}>
       {run(() => {
         if (leading) {
           return <div className={cx({ [styles.leading]: !round })}>{leading}</div>;

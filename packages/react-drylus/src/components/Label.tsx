@@ -33,18 +33,25 @@ export interface LabelProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** If true, a loading overlay is displayed on top of the component */
   isPlaceholder?: boolean;
 }
 
-export const Label = ({ children, ellipsized, style, isPlaceholder }: LabelProps) => {
+export const Label = ({ children, ellipsized, style, isPlaceholder, className }: LabelProps) => {
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.ellipsized]: ellipsized === true,
-        [placeholderStyles.shimmer]: isPlaceholder === true,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles.ellipsized]: ellipsized === true,
+          [placeholderStyles.shimmer]: isPlaceholder === true,
+        },
+        className,
+      )}>
       {children}
     </div>
   );

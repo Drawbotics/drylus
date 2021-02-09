@@ -133,6 +133,9 @@ export interface PopoverProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 export const Popover = ({
@@ -143,6 +146,7 @@ export const Popover = ({
   exitOnClick = false,
   openOnMount,
   inversed,
+  className,
 }: PopoverProps) => {
   const [visible, setVisible] = useState<boolean>();
   const [outletElement, setOutletElement] = useState<HTMLElement>();
@@ -226,16 +230,20 @@ export const Popover = ({
         <div className={themeStyles.root}>
           <div
             ref={popoverRef}
-            className={cx(styles.root, {
-              [styles.bottom]: side === Position.BOTTOM,
-              [styles.left]: side === Position.LEFT,
-              [styles.right]: side === Position.RIGHT,
-              [styles.visible]: visible,
-              [styles.inversed]: inversed,
-              [styles.inversedBottom]: side === Position.BOTTOM && inversed,
-              [styles.inversedLeft]: side === Position.LEFT && inversed,
-              [styles.inversedRight]: side === Position.RIGHT && inversed,
-            })}
+            className={cx(
+              styles.root,
+              {
+                [styles.bottom]: side === Position.BOTTOM,
+                [styles.left]: side === Position.LEFT,
+                [styles.right]: side === Position.RIGHT,
+                [styles.visible]: visible,
+                [styles.inversed]: inversed,
+                [styles.inversedBottom]: side === Position.BOTTOM && inversed,
+                [styles.inversedLeft]: side === Position.LEFT && inversed,
+                [styles.inversedRight]: side === Position.RIGHT && inversed,
+              },
+              className,
+            )}
             style={{ ...popoverStyle, ...style }}>
             {content}
           </div>

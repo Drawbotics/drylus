@@ -52,20 +52,30 @@ export interface BannerProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const Banner = ({ responsive, ...rest }: BannerProps) => {
-  const { children, category, title, style, trailing } = useResponsiveProps(rest, responsive);
+  const { children, category, title, style, trailing, className } = useResponsiveProps(
+    rest,
+    responsive,
+  );
   const icon = getIconForCategory(category);
 
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
+        },
+        className,
+      )}>
       <Flex justify={FlexJustify.SPACE_BETWEEN}>
         <FlexItem>
           <Flex align={FlexAlign.START} justify={FlexJustify.START}>

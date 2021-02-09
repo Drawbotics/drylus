@@ -106,20 +106,27 @@ export interface SpinnerProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
-  const { size = Size.DEFAULT, inversed, fullSize, style, color } = useResponsiveProps<
+  const { size = Size.DEFAULT, inversed, fullSize, style, color, className } = useResponsiveProps<
     SpinnerProps
   >(rest, responsive);
   return (
     <div
       style={style}
-      className={cx(styles.container, {
-        [styles.fullSizeContainer]: fullSize === true,
-      })}>
+      className={cx(
+        styles.container,
+        {
+          [styles.fullSizeContainer]: fullSize === true,
+        },
+        className,
+      )}>
       <div
         className={cx(styles.root, {
           [styles.small]: size === Size.SMALL,
