@@ -5,7 +5,7 @@ import { GetTrackProps, Handles, Rail, Slider, SliderItem, Tracks } from 'react-
 
 import { Text, tooltipStyles } from '../components';
 import { Size } from '../enums';
-import { Responsive } from '../types';
+import { Responsive, Style } from '../types';
 import { isFunction, useResponsiveProps } from '../utils';
 
 const styles = {
@@ -193,6 +193,12 @@ export interface RangeInputProps<T, K = string> {
   /** If true, the min and max values are not shown in the slider when modified */
   hideTooltips?: boolean;
 
+  /** Used for style overrides */
+  style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
@@ -213,6 +219,8 @@ export const RangeInput = <T extends number | Array<number>, K extends string>({
     hideLabels,
     hideTooltips,
     name,
+    className,
+    style,
   } = useResponsiveProps<RangeInputProps<T, K>>(rest, responsive);
 
   const value = isFunction(_value) ? _value(name) : _value;
@@ -222,6 +230,7 @@ export const RangeInput = <T extends number | Array<number>, K extends string>({
 
   return (
     <Slider
+      rootStyle={style}
       disabled={disabled}
       onUpdate={(values) =>
         onUpdate != null ? onUpdate(isMultiHandle ? (values as any) : values[0], name) : undefined
@@ -229,7 +238,7 @@ export const RangeInput = <T extends number | Array<number>, K extends string>({
       onChange={(values) => onChange(isMultiHandle ? (values as any) : values[0], name)}
       mode={3}
       step={step}
-      className={cx(styles.root, { [styles.disabled]: disabled === true })}
+      className={cx(styles.root, { [styles.disabled]: disabled === true }, className)}
       domain={[min, max]}
       values={values}>
       <Rail>

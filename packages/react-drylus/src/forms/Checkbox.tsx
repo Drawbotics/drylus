@@ -197,6 +197,9 @@ export interface CheckboxProps<T = string> {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -216,6 +219,7 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
     style,
     isPlaceholder,
     indeterminate,
+    className,
     ...props
   } = useResponsiveProps<CheckboxProps<T>>(rest, responsive);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -231,7 +235,7 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
   const uniqId = id ? id : v4();
   const readOnly = onChange == null;
   return (
-    <div style={style} className={styles.root}>
+    <div style={style} className={cx(styles.root, className)}>
       <label
         className={cx(styles.wrapper, {
           [styles[getEnumAsClass<typeof styles>(size)]]: size != null,

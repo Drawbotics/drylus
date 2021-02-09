@@ -266,6 +266,9 @@ export interface DateInputProps<T = string> {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -294,6 +297,7 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
     align = Align.LEFT,
     autoFocus,
     size = Size.DEFAULT,
+    className,
     ...props
   } = useResponsiveProps<DateInputProps<T>>(rest, responsive);
 
@@ -377,7 +381,7 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
   };
 
   return (
-    <div style={style} className={styles.root} ref={rootRef}>
+    <div style={style} className={cx(styles.root, className)} ref={rootRef}>
       <InputWithRef
         trailing={
           onChange != null && isDesktop ? (

@@ -272,9 +272,6 @@ export interface InputProps<T = string> {
     | React.ReactElement<typeof Select>
     | React.ReactNode;
 
-  /** Additional class name to override styles */
-  className?: string;
-
   /** @default 'text' */
   type?: 'text' | 'password' | 'email' | 'tel' | 'url';
 
@@ -296,6 +293,9 @@ export interface InputProps<T = string> {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 
   /** Responsive prop overrides */
   responsive?: Responsive<this>;
@@ -351,16 +351,19 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
     <div
       data-element="input-root"
       style={style}
-      className={cx(styles.root, {
-        [styles.valid]: Boolean(value) && valid === true,
-        [styles.error]: error != null && error !== false,
-        [className as string]: className != null,
-        [placeholderStyles.shimmer]: isPlaceholder === true,
-        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
-        [styles.smallRightPadding]:
-          size === Size.SMALL &&
-          ((error != null && error !== false) || (Boolean(value) && valid) || onChange == null),
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles.valid]: Boolean(value) && valid === true,
+          [styles.error]: error != null && error !== false,
+          [placeholderStyles.shimmer]: isPlaceholder === true,
+          [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+          [styles.smallRightPadding]:
+            size === Size.SMALL &&
+            ((error != null && error !== false) || (Boolean(value) && valid) || onChange == null),
+        },
+        className,
+      )}>
       <div className={styles.outerWrapper}>
         {leading != null ? (
           <div

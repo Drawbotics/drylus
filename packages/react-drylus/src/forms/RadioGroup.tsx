@@ -272,9 +272,6 @@ export interface RadioGroupProps<T, K = string> {
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error?: string | number;
 
-  /** Passed to the wrapper component, to override any styles */
-  className?: string;
-
   /** Small text shown below the group, replaced by error if present */
   hint?: string;
 
@@ -283,6 +280,9 @@ export interface RadioGroupProps<T, K = string> {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;

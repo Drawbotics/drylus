@@ -26,19 +26,26 @@ export interface HintProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const Hint = ({ responsive, ...rest }: HintProps) => {
-  const { children, category, style } = useResponsiveProps<HintProps>(rest, responsive);
+  const { children, category, style, className } = useResponsiveProps<HintProps>(rest, responsive);
 
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
+        },
+        className,
+      )}>
       {children}
     </div>
   );

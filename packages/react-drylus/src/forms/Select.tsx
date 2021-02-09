@@ -468,6 +468,9 @@ export interface SelectProps<T, K = string> {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -492,6 +495,7 @@ export const Select = <T extends number | string, K extends string>({
     style,
     size = Size.DEFAULT,
     native = true,
+    className,
     ...props
   } = useResponsiveProps<SelectProps<T, K>>(rest, responsive);
   const { screenSize, ScreenSizes } = useScreenSize();
@@ -501,15 +505,19 @@ export const Select = <T extends number | string, K extends string>({
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.noValue]: value == null,
-        [styles.readOnly]: onChange == null,
-        [styles.disabled]: disabled === true,
-        [styles.valid]: Boolean(value) && valid === true,
-        [styles.error]: error != null && error !== false,
-        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
-        [styles.smallReadOnly]: onChange == null && size === Size.SMALL,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles.noValue]: value == null,
+          [styles.readOnly]: onChange == null,
+          [styles.disabled]: disabled === true,
+          [styles.valid]: Boolean(value) && valid === true,
+          [styles.error]: error != null && error !== false,
+          [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+          [styles.smallReadOnly]: onChange == null && size === Size.SMALL,
+        },
+        className,
+      )}>
       {run(() => {
         if (loading) {
           return (
