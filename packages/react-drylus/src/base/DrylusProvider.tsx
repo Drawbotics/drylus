@@ -9,11 +9,14 @@ export interface DrylusProviderProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const DrylusProvider = ({ children, style }: DrylusProviderProps) => {
+export const DrylusProvider = ({ children, style, className }: DrylusProviderProps) => {
   return (
-    <ThemeProvider style={style}>
+    <ThemeProvider style={style} className={className}>
       <AlertsProvider>{children}</AlertsProvider>
     </ThemeProvider>
   );
