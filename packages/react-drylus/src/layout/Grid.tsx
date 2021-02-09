@@ -220,6 +220,9 @@ export interface GridProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
@@ -234,6 +237,7 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
     animated,
     animationSpeed,
     animationDelay,
+    className,
   } = useResponsiveProps<GridProps>(rest, responsive);
   const originOffset = useRef({ top: 0, left: 0 });
   const controls = useAnimation();
@@ -251,14 +255,18 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
       variants={{}}
       initial="hidden"
       animate={controls}
-      className={cx(styles.root(columns), {
-        [staticStyles[
-          `hGutters${upperFirst(camelCase(hGutters ?? ''))}` as keyof typeof staticStyles
-        ] as any]: hGutters != null,
-        [staticStyles[
-          `vGutters${upperFirst(camelCase(vGutters ?? ''))}` as keyof typeof staticStyles
-        ] as any]: vGutters != null,
-      })}
+      className={cx(
+        styles.root(columns),
+        {
+          [staticStyles[
+            `hGutters${upperFirst(camelCase(hGutters ?? ''))}` as keyof typeof staticStyles
+          ] as any]: hGutters != null,
+          [staticStyles[
+            `vGutters${upperFirst(camelCase(vGutters ?? ''))}` as keyof typeof staticStyles
+          ] as any]: vGutters != null,
+        },
+        className,
+      )}
       style={style}>
       {React.Children.toArray(children)
         .filter((c) => Boolean(c))
