@@ -24,13 +24,16 @@ export interface ThemeProviderProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const ThemeProvider = ({ children, style }: ThemeProviderProps) => {
+export const ThemeProvider = ({ children, style, className }: ThemeProviderProps) => {
   return (
     <Fragment>
       <Global styles={[styles.global, styles.normalize, styles.icons]} />
-      <div className={cx(styles.root, styles.wrapper)} style={style}>
+      <div className={cx(styles.root, styles.wrapper, className)} style={style}>
         {children}
       </div>
     </Fragment>

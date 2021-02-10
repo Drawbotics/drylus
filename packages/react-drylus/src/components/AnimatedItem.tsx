@@ -136,6 +136,9 @@ export interface AnimatedItemProps {
   /** To override the root `div` element styles if needed */
   style?: Style;
 
+  /** Passed to the root `div` element */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -154,6 +157,7 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
     noAnimate,
     animateExit,
     delay = 0,
+    className,
   } = useResponsiveProps<AnimatedItemProps>(rest, responsive);
 
   const { exit: customExit = {}, enter: customEnter = {}, initial: customInitial = {} } = variants;
@@ -170,6 +174,7 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
   return (
     <motion.div
       style={style}
+      className={className}
       custom={noAnimate ? undefined : delay}
       initial={['initial', getVariantFromDirection(direction), 'customInitial']}
       animate={noAnimate ? undefined : ['enter', 'visible', 'customEnter']}

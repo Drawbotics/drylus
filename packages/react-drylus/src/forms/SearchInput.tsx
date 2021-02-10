@@ -172,6 +172,9 @@ export interface SearchInputProps<T, K = string> {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -199,6 +202,7 @@ export const SearchInput = <T extends any, K extends string>({
     size = Size.DEFAULT,
     minimal,
     alwaysShowResults,
+    className,
     ...props
   } = useResponsiveProps<SearchInputProps<T, K>>(rest, responsive);
   const [isFocused, setFocused] = useState(false);
@@ -232,11 +236,15 @@ export const SearchInput = <T extends any, K extends string>({
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.minimal]: minimal === true,
-        [styles.smallMinimal]: minimal === true && size === Size.SMALL,
-        [styles.loading]: isLoading,
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles.minimal]: minimal === true,
+          [styles.smallMinimal]: minimal === true && size === Size.SMALL,
+          [styles.loading]: isLoading,
+        },
+        className,
+      )}
       ref={rootRef}>
       {isLoading ? (
         <div className={styles.spinner}>

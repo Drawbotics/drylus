@@ -76,6 +76,9 @@ export interface ListItemProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 export const ListItem = ({
@@ -84,9 +87,12 @@ export const ListItem = ({
   disabled,
   style,
   color = Color.PRIMARY,
+  className,
 }: ListItemProps) => {
   return (
-    <li style={style} className={cx(styles.item, { [styles.disabled]: disabled === true })}>
+    <li
+      style={style}
+      className={cx(styles.item, { [styles.disabled]: disabled === true }, className)}>
       {children}
       {run(() => {
         if (icon != null) {
@@ -118,20 +124,23 @@ export interface ListProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const List = ({ children, ordered = false, style }: ListProps) => {
+export const List = ({ children, ordered = false, style, className }: ListProps) => {
   checkComponentProps({ children }, { children: ListItem });
 
   if (ordered) {
     return (
-      <ol style={style} className={cx(styles.root, styles.ordered)}>
+      <ol style={style} className={cx(styles.root, styles.ordered, className)}>
         {children}
       </ol>
     );
   }
   return (
-    <ul style={style} className={styles.root}>
+    <ul style={style} className={cx(styles.root, className)}>
       {children}
     </ul>
   );

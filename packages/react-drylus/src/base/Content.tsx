@@ -32,15 +32,22 @@ export interface ContentProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const Content = ({ children, fullHeight, fullWidth, style }: ContentProps) => {
+export const Content = ({ children, fullHeight, fullWidth, style, className }: ContentProps) => {
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.fullHeight]: fullHeight === true,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles.fullHeight]: fullHeight === true,
+        },
+        className,
+      )}>
       <div className={cx(styles.children, { [styles.fullWidth]: fullWidth === true })}>
         {children}
       </div>

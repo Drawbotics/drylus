@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Size, Tier } from '../enums';
@@ -66,6 +66,9 @@ export interface EmptyStateProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
@@ -77,12 +80,13 @@ export const EmptyState = ({ responsive, ...rest }: EmptyStateProps) => {
     style,
     variation = EmptyStateVariation.DEFAULT,
     children,
+    className,
   } = useResponsiveProps<EmptyStateProps>(rest, responsive);
 
   const actions = children != null ? React.Children.map(children, (x) => x) : null;
 
   return (
-    <div style={style} className={styles.root}>
+    <div style={style} className={cx(styles.root, className)}>
       <Flex direction={FlexDirection.VERTICAL}>
         <FlexItem>
           <div className={styles.image}>{_getImageForVariation(variation)}</div>

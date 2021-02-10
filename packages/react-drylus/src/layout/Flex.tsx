@@ -104,6 +104,9 @@ export interface FlexSpacerProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -112,11 +115,11 @@ export interface FlexSpacerProps {
 }
 
 export const FlexSpacer = ({ responsive, direction, ...rest }: FlexSpacerProps) => {
-  const { size, flex, style = {} } = useResponsiveProps(rest, responsive);
+  const { size, flex, style = {}, className } = useResponsiveProps(rest, responsive);
   const equalSpan = flex === true;
   return (
     <div
-      className={cx(styles.item, { [styles.equalSpan]: equalSpan })}
+      className={cx(styles.item, { [styles.equalSpan]: equalSpan }, className)}
       style={flex && typeof flex !== 'boolean' ? { ...prefixFlex(flex), ...style } : style}>
       {run(() => {
         if (direction === FlexDirection.HORIZONTAL) {
@@ -138,6 +141,9 @@ export interface FlexItemProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -149,7 +155,7 @@ export interface FlexItemProps {
 }
 
 export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
-  const { children, flex, style = {}, animated, animationSpeed } = useResponsiveProps(
+  const { children, flex, style = {}, animated, animationSpeed, className } = useResponsiveProps(
     rest,
     responsive,
   );
@@ -171,7 +177,7 @@ export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
   return (
     <RootElement
       {...animationProps}
-      className={cx(styles.item, { [styles.equalSpan]: equalSpan })}
+      className={cx(styles.item, { [styles.equalSpan]: equalSpan }, className)}
       style={flex && typeof flex !== 'boolean' ? { ...prefixFlex(flex), ...style } : style}>
       {children}
     </RootElement>
@@ -210,9 +216,6 @@ export interface FlexProps {
    */
   wrap?: boolean;
 
-  /** If you need to customize the Flex container pass a custom className. E.g. if you want to use `display: inline-flex` */
-  className?: string;
-
   /** If true, flex children will be animated when entering */
   animated?: boolean;
 
@@ -229,6 +232,9 @@ export interface FlexProps {
 
   /** To override simple styles on the flex element, use only for properties that do not require prefixing */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;

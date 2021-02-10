@@ -47,15 +47,17 @@ export interface InputGroupProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const InputGroup = ({ responsive, ...rest }: InputGroupProps) => {
-  const { hint, error, valid, children, style, horizontal } = useResponsiveProps<InputGroupProps>(
-    rest,
-    responsive,
-  );
+  const { hint, error, valid, children, style, horizontal, className } = useResponsiveProps<
+    InputGroupProps
+  >(rest, responsive);
 
   checkComponentProps(
     { children },
@@ -75,7 +77,7 @@ export const InputGroup = ({ responsive, ...rest }: InputGroupProps) => {
   );
 
   return (
-    <div style={style}>
+    <div style={style} className={className}>
       <Flex
         direction={horizontal ? FlexDirection.HORIZONTAL : FlexDirection.VERTICAL}
         align={FlexAlign.STRETCH}>

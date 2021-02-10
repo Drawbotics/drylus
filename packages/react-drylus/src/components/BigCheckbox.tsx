@@ -92,6 +92,9 @@ export interface BigCheckboxProps<T = string> {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 export const BigCheckbox = <T extends string>({
@@ -102,17 +105,22 @@ export const BigCheckbox = <T extends string>({
   name,
   label,
   style,
+  className,
 }: BigCheckboxProps<T>) => {
   const isChecked = Boolean(value);
   const handleOnChange = () => (!disabled ? onChange(!isChecked, name) : null);
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.checked]: isChecked,
-        [styles.disabled]: disabled === true,
-        [styles.checkedDisabled]: isChecked && disabled === true,
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles.checked]: isChecked,
+          [styles.disabled]: disabled === true,
+          [styles.checkedDisabled]: isChecked && disabled === true,
+        },
+        className,
+      )}
       onClick={handleOnChange}>
       <div data-element="header" className={styles.header}>
         <Label>{label}</Label>

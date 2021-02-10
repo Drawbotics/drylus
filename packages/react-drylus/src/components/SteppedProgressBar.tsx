@@ -193,21 +193,34 @@ export interface SteppedProgressBarProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const SteppedProgressBar = ({ responsive, ...rest }: SteppedProgressBarProps) => {
-  const { percentage, size = Size.DEFAULT, style, steps, activeStep, color } = useResponsiveProps<
-    SteppedProgressBarProps
-  >(rest, responsive);
+  const {
+    percentage,
+    size = Size.DEFAULT,
+    style,
+    steps,
+    activeStep,
+    color,
+    className,
+  } = useResponsiveProps<SteppedProgressBarProps>(rest, responsive);
 
   const indeterminate = percentage == null;
 
   return (
     <div
       style={style}
-      className={cx(styles.root, { [styles[getEnumAsClass<typeof styles>(size)]]: size != null })}>
+      className={cx(
+        styles.root,
+        { [styles[getEnumAsClass<typeof styles>(size)]]: size != null },
+        className,
+      )}>
       {[...Array(steps).keys()].map((id, i) => (
         <Fragment key={id}>
           <div data-element="step" className={styles.step}>

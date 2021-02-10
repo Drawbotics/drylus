@@ -155,6 +155,9 @@ export interface TextProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
@@ -206,6 +209,7 @@ export const Text = ({ responsive, ...rest }: TextProps) => {
     dateOptions,
     priceOptions,
     locale,
+    className,
   } = useResponsiveProps<TextProps>(rest, responsive);
 
   const tier = _tier ?? (shade ? shadeEnumToTier(shade) : null);
@@ -222,23 +226,27 @@ export const Text = ({ responsive, ...rest }: TextProps) => {
 
   return (
     <span
-      className={cx(styles.root, {
-        [styles.bold]: bold,
-        [styles.light]: light,
-        [styles.primary]: tier === Tier.PRIMARY && !disabled && !inversed,
-        [styles.secondary]: tier === Tier.SECONDARY && !disabled && !inversed,
-        [styles.tertiary]: tier === Tier.TERTIARY && !disabled && !inversed,
-        [styles.disabled]: disabled && !inversed,
-        [styles.primaryInversed]: tier === Tier.PRIMARY && !disabled && inversed,
-        [styles.secondaryInversed]: tier === Tier.SECONDARY && !disabled && inversed,
-        [styles.tertiaryInversed]: tier === Tier.TERTIARY && !disabled && inversed,
-        [styles.disabledInversed]: disabled && inversed,
-        [styles.small]: size === Size.SMALL,
-        [styles.default]: size === Size.DEFAULT,
-        [styles.large]: size === Size.LARGE,
-        [styles[getEnumAsClass<typeof styles>(category)]]:
-          category != null && !disabled && !inversed,
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles.bold]: bold,
+          [styles.light]: light,
+          [styles.primary]: tier === Tier.PRIMARY && !disabled && !inversed,
+          [styles.secondary]: tier === Tier.SECONDARY && !disabled && !inversed,
+          [styles.tertiary]: tier === Tier.TERTIARY && !disabled && !inversed,
+          [styles.disabled]: disabled && !inversed,
+          [styles.primaryInversed]: tier === Tier.PRIMARY && !disabled && inversed,
+          [styles.secondaryInversed]: tier === Tier.SECONDARY && !disabled && inversed,
+          [styles.tertiaryInversed]: tier === Tier.TERTIARY && !disabled && inversed,
+          [styles.disabledInversed]: disabled && inversed,
+          [styles.small]: size === Size.SMALL,
+          [styles.default]: size === Size.DEFAULT,
+          [styles.large]: size === Size.LARGE,
+          [styles[getEnumAsClass<typeof styles>(category)]]:
+            category != null && !disabled && !inversed,
+        },
+        className,
+      )}
       style={style}>
       <Fragment>{transformedChildren}</Fragment>
     </span>

@@ -91,26 +91,40 @@ export interface AvatarProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const Avatar = ({ responsive, ...rest }: AvatarProps) => {
-  const { image, text, size, backgroundColor, hint, style = {}, color } = useResponsiveProps<
-    AvatarProps
-  >(rest, responsive);
+  const {
+    image,
+    text,
+    size,
+    backgroundColor,
+    hint,
+    style = {},
+    color,
+    className,
+  } = useResponsiveProps<AvatarProps>(rest, responsive);
 
   const customSize = typeof size === 'number';
 
   const avatar = (
     <div
-      className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
-        [styles[customSize ? 'root' : getEnumAsClass<typeof styles>(size as Size)]]:
-          size != null && !customSize,
-        [styles.customBackground]: backgroundColor != null,
-        [styles.withImage]: image != null,
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
+          [styles[customSize ? 'root' : getEnumAsClass<typeof styles>(size as Size)]]:
+            size != null && !customSize,
+          [styles.customBackground]: backgroundColor != null,
+          [styles.withImage]: image != null,
+        },
+        className,
+      )}
       style={{
         backgroundColor,
         height: customSize ? size : undefined,

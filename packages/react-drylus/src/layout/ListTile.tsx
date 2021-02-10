@@ -57,20 +57,22 @@ export interface ListTileProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const ListTile = ({ responsive, ...rest }: ListTileProps) => {
-  const { title, subtitle, leading, trailing, onClick, style } = useResponsiveProps<ListTileProps>(
-    rest,
-    responsive,
-  );
+  const { title, subtitle, leading, trailing, onClick, style, className } = useResponsiveProps<
+    ListTileProps
+  >(rest, responsive);
 
   return (
     <div
       style={style}
-      className={cx(styles.root, { [styles.clickable]: !!onClick })}
+      className={cx(styles.root, { [styles.clickable]: onClick != null }, className)}
       onClick={onClick}>
       <Flex>
         {run(() => {

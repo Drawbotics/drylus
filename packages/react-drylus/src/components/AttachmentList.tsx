@@ -1,11 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Shade, Size } from '../enums';
 import { Flex, FlexItem, FlexJustify, FlexSpacer, Margin } from '../layout';
-import { checkComponentProps, useResponsiveProps } from '../utils';
 import { Responsive, Style } from '../types';
+import { checkComponentProps, useResponsiveProps } from '../utils';
 import { AttachmentBox } from './AttachmentBox';
 import { Icon } from './Icon';
 import { Text } from './Text';
@@ -30,20 +30,22 @@ export interface AttachmentListProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const AttachmentList = ({ responsive, ...rest }: AttachmentListProps) => {
-  const { children, label = 'Attachments', style } = useResponsiveProps<AttachmentListProps>(
-    rest,
-    responsive,
-  );
-    
+  const { children, label = 'Attachments', style, className } = useResponsiveProps<
+    AttachmentListProps
+  >(rest, responsive);
+
   checkComponentProps({ children }, { children: AttachmentBox });
-  
+
   return (
-    <div style={style} className={styles.root}>
+    <div style={style} className={cx(styles.root, className)}>
       <Flex justify={FlexJustify.START}>
         <FlexItem>
           <Icon style={{ color: sv.colorSecondary }} name="link" />

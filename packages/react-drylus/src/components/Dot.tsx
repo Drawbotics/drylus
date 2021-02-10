@@ -39,15 +39,22 @@ export interface DotProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const Dot = ({ style, color }: DotProps) => {
+export const Dot = ({ style, color, className }: DotProps) => {
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
+        },
+        className,
+      )}
     />
   );
 };

@@ -147,24 +147,30 @@ export interface ProgressBarProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const ProgressBar = ({ responsive, ...rest }: ProgressBarProps) => {
-  const { percentage, size = Size.DEFAULT, style, color } = useResponsiveProps<ProgressBarProps>(
-    rest,
-    responsive,
-  );
+  const { percentage, size = Size.DEFAULT, style, color, className } = useResponsiveProps<
+    ProgressBarProps
+  >(rest, responsive);
 
   const indeterminate = percentage == null;
 
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+        },
+        className,
+      )}>
       <div
         data-element="bar"
         className={cx(styles.bar, {

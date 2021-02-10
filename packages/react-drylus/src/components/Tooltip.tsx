@@ -128,14 +128,22 @@ export interface TooltipProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
-  const { children, content, side = Position.TOP, style = {}, inversed } = useResponsiveProps<
-    TooltipProps
-  >(rest, responsive);
+  const {
+    children,
+    content,
+    side = Position.TOP,
+    style = {},
+    inversed,
+    className,
+  } = useResponsiveProps<TooltipProps>(rest, responsive);
 
   const [visible, setVisible] = useState(false);
   const [outletElement, setOutletElement] = useState<HTMLElement>();
@@ -210,16 +218,20 @@ export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
         <div className={themeStyles.root}>
           <div
             ref={tooltipRef}
-            className={cx(styles.root, {
-              [styles.bottom]: side === Position.BOTTOM,
-              [styles.left]: side === Position.LEFT,
-              [styles.right]: side === Position.RIGHT,
-              [styles.visible]: visible,
-              [styles.inversed]: inversed,
-              [styles.inversedBottom]: side === Position.BOTTOM && inversed,
-              [styles.inversedLeft]: side === Position.LEFT && inversed,
-              [styles.inversedRight]: side === Position.RIGHT && inversed,
-            })}
+            className={cx(
+              styles.root,
+              {
+                [styles.bottom]: side === Position.BOTTOM,
+                [styles.left]: side === Position.LEFT,
+                [styles.right]: side === Position.RIGHT,
+                [styles.visible]: visible,
+                [styles.inversed]: inversed,
+                [styles.inversedBottom]: side === Position.BOTTOM && inversed,
+                [styles.inversedLeft]: side === Position.LEFT && inversed,
+                [styles.inversedRight]: side === Position.RIGHT && inversed,
+              },
+              className,
+            )}
             style={{ ...tooltipStyle, ...style }}>
             {content}
           </div>

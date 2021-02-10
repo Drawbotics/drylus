@@ -358,6 +358,9 @@ export interface MultiSelectProps<T, K = string> {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -387,6 +390,7 @@ export const MultiSelect = <T extends any, K extends string>({
     hideOptions,
     onChangeOptions,
     typeZonePlaceholder = 'Add option...',
+    className,
     ...props
   } = useResponsiveProps<MultiSelectProps<T, K>>(rest, responsive);
 
@@ -486,15 +490,19 @@ export const MultiSelect = <T extends any, K extends string>({
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.disabled]: disabled === true,
-        [styles.readOnly]: onChange == null,
-        [styles.valid]: values?.length > 0 && valid === true,
-        [styles.error]: error != null && error !== false,
-        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
-        [styles.smallReadOnly]: onChange == null && size === Size.SMALL,
-        [styles.noChevron]: hideDropdown,
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles.disabled]: disabled === true,
+          [styles.readOnly]: onChange == null,
+          [styles.valid]: values?.length > 0 && valid === true,
+          [styles.error]: error != null && error !== false,
+          [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+          [styles.smallReadOnly]: onChange == null && size === Size.SMALL,
+          [styles.noChevron]: hideDropdown,
+        },
+        className,
+      )}
       ref={rootRef}>
       {run(() => {
         if (loading) {

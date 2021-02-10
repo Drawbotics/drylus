@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import React, { ReactNode } from 'react';
 
 import { Shade } from '../enums';
@@ -73,6 +73,9 @@ export interface CollapsibleProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 export const Collapsible = ({
@@ -84,6 +87,7 @@ export const Collapsible = ({
   icon,
   leading: _leading,
   trailing,
+  className,
 }: CollapsibleProps) => {
   checkComponentProps({ leading: _leading }, { leading: [Icon, Toggle] });
 
@@ -91,7 +95,7 @@ export const Collapsible = ({
     _leading != null ? _leading : icon != null ? <Icon name={icon} shade={Shade.LIGHT} /> : null;
 
   return (
-    <div style={style} className={styles.root}>
+    <div style={style} className={cx(styles.root, className)}>
       <div className={styles.header}>
         <div data-element="title" onClick={onClick}>
           <ListTile

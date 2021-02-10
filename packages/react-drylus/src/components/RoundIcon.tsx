@@ -113,6 +113,9 @@ export interface RoundIconProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
@@ -129,6 +132,7 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
     style: _style = {},
     color,
     inversed,
+    className: customClassName,
   } = useResponsiveProps<RoundIconProps>(rest, responsive);
 
   const customSize = typeof size === 'number';
@@ -144,13 +148,17 @@ export const RoundIcon = ({ responsive, ...rest }: RoundIconProps) => {
       : _style;
   return (
     <div
-      className={cx(styles.root, {
-        [styles[customSize ? 'root' : getEnumAsClass<typeof styles>(size as Size)]]:
-          size != null && !customSize,
-        [styles.iconInherit]: customSize,
-        [styles.inversed]: inversed === true,
-        [styles[className as keyof typeof styles]]: enumColor != null,
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles[customSize ? 'root' : getEnumAsClass<typeof styles>(size as Size)]]:
+            size != null && !customSize,
+          [styles.iconInherit]: customSize,
+          [styles.inversed]: inversed === true,
+          [styles[className as keyof typeof styles]]: enumColor != null,
+        },
+        customClassName,
+      )}
       style={
         customSize
           ? { height: size, width: size, fontSize: (size as number) * 0.4, ...style }

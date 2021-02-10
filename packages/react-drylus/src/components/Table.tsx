@@ -979,6 +979,9 @@ export interface TableProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 export const Table = ({
@@ -1004,6 +1007,7 @@ export const Table = ({
   style,
   loadingRows = 5,
   memoDataValues,
+  className,
 }: TableProps) => {
   const [rowsStates, setRowState] = useState<Record<string | number, boolean>>({});
   const { screenSize, ScreenSizes } = useScreenSize();
@@ -1150,16 +1154,22 @@ export const Table = ({
     <table
       ref={tableRef}
       style={style}
-      className={cx(styles.root, {
-        [styles.fullWidth]: fullWidth,
-        [styles.leftPadded]:
-          (hasNestedData ||
-            withNesting ||
-            (sortableBy != null &&
-              sortableBy.includes(typeof header[0] === 'string' ? header[0] : header[0].value))) &&
-          screenSize > ScreenSizes.L,
-        [styles.highlighted]: highlighted === true && !(hasNestedData || withNesting === true),
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles.fullWidth]: fullWidth,
+          [styles.leftPadded]:
+            (hasNestedData ||
+              withNesting ||
+              (sortableBy != null &&
+                sortableBy.includes(
+                  typeof header[0] === 'string' ? header[0] : header[0].value,
+                ))) &&
+            screenSize > ScreenSizes.L,
+          [styles.highlighted]: highlighted === true && !(hasNestedData || withNesting === true),
+        },
+        className,
+      )}>
       <RowsContext.Provider value={[rowsStates, handleSetRowState]}>
         {run(() => {
           if (header && isLoading) {

@@ -71,6 +71,9 @@ export interface TitleProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** @default Align.LEFT */
   align?: Align;
 
@@ -79,64 +82,32 @@ export interface TitleProps {
 }
 
 export const Title = ({ responsive, ...rest }: TitleProps) => {
-  const { children, size = 1, noMargin, style, align = Align.LEFT } = useResponsiveProps<
+  const { children, size = 1, noMargin, style, align = Align.LEFT, className } = useResponsiveProps<
     TitleProps
   >(rest, responsive);
 
-  if (size === 1) {
-    return (
-      <h1
-        style={style}
-        className={cx(styles.root, styles.h1, {
-          [styles.noMargin]: noMargin === true,
-          [styles.alignCenter]: align === Align.CENTER,
-          [styles.alignRight]: align === Align.RIGHT,
-          [styles.alignJustify]: align === Align.JUSTIFY,
-        })}>
-        {children}
-      </h1>
-    );
-  } else if (size === 2) {
-    return (
-      <h2
-        style={style}
-        className={cx(styles.root, styles.h2, {
-          [styles.noMargin]: noMargin === true,
-          [styles.alignCenter]: align === Align.CENTER,
-          [styles.alignRight]: align === Align.RIGHT,
-          [styles.alignJustify]: align === Align.JUSTIFY,
-        })}>
-        {children}
-      </h2>
-    );
-  } else if (size === 3) {
-    return (
-      <h3
-        style={style}
-        className={cx(styles.root, styles.h3, {
-          [styles.noMargin]: noMargin === true,
-          [styles.alignCenter]: align === Align.CENTER,
-          [styles.alignRight]: align === Align.RIGHT,
-          [styles.alignJustify]: align === Align.JUSTIFY,
-        })}>
-        {children}
-      </h3>
-    );
-  } else if (size === 4) {
-    return (
-      <h4
-        style={style}
-        className={cx(styles.root, styles.h4, {
-          [styles.noMargin]: noMargin === true,
-          [styles.alignCenter]: align === Align.CENTER,
-          [styles.alignRight]: align === Align.RIGHT,
-          [styles.alignJustify]: align === Align.JUSTIFY,
-        })}>
-        {children}
-      </h4>
-    );
-  } else {
+  if (size < 1 || size > 4) {
     console.warn('Unsupported title size');
     return null;
   }
+  return (
+    <h1
+      style={style}
+      className={cx(
+        styles.root,
+        {
+          [styles.h1]: size === 1,
+          [styles.h2]: size === 2,
+          [styles.h3]: size === 3,
+          [styles.h4]: size === 4,
+          [styles.noMargin]: noMargin === true,
+          [styles.alignCenter]: align === Align.CENTER,
+          [styles.alignRight]: align === Align.RIGHT,
+          [styles.alignJustify]: align === Align.JUSTIFY,
+        },
+        className,
+      )}>
+      {children}
+    </h1>
+  );
 };

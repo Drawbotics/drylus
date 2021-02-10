@@ -129,9 +129,6 @@ export interface TextAreaProps<T = string> {
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;
 
-  /** Additional class name to override styles */
-  className?: string;
-
   /** If true, a spinner is shown on the right top corner, like with error and valid */
   loading?: boolean;
 
@@ -150,6 +147,9 @@ export interface TextAreaProps<T = string> {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
@@ -195,13 +195,16 @@ const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.valid]: Boolean(value) && valid === true,
-        [styles.error]: error != null && error !== false,
-        [className as string]: className != null,
-        [placeholderStyles.shimmer]: isPlaceholder === true,
-        [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles.valid]: Boolean(value) && valid === true,
+          [styles.error]: error != null && error !== false,
+          [placeholderStyles.shimmer]: isPlaceholder === true,
+          [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
+        },
+        className,
+      )}>
       <div className={styles.outerWrapper}>
         <div className={styles.innerWrapper}>
           {run(() => {

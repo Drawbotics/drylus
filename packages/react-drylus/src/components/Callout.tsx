@@ -56,16 +56,23 @@ export interface CalloutProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const Callout = ({ children, category, style }: CalloutProps) => {
+export const Callout = ({ children, category, style, className }: CalloutProps) => {
   const icon = getIconForCategory(category);
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
+        },
+        className,
+      )}>
       <Flex align={FlexAlign.START} justify={FlexJustify.START}>
         <FlexItem>
           <Margin size={{ right: Size.SMALL }}>

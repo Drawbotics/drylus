@@ -217,6 +217,9 @@ export interface ModalProps extends BaseModalProps {
     onAnimationStart: VoidFunction;
     onAnimationComplete: VoidFunction;
   };
+
+  /** Used for style overrides, given to outermost parent for easy access to children customisation */
+  className?: string;
 }
 
 export const Modal = ({ responsive, ...rest }: ModalProps) => {
@@ -231,6 +234,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     style,
     animationCallbacks,
     overlayStyle,
+    className,
   } = useResponsiveProps<ModalProps>(rest, responsive);
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
@@ -344,7 +348,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleClickOverlay}
-            className={styles.overlay}
+            className={cx(styles.overlay, className)}
             style={overlayStyle}
             ref={overlayElement}>
             <motion.div

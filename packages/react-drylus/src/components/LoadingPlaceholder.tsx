@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css, keyframes } from 'emotion';
+import { css, cx, keyframes } from 'emotion';
 import React from 'react';
 
 import { Responsive, Style } from '../types';
@@ -62,12 +62,15 @@ export interface LoadingPlaceholderProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 export const LoadingPlaceholder = ({ responsive, ...rest }: LoadingPlaceholderProps) => {
-  const { height = sv.defaultMargin, width = 200, style } = useResponsiveProps<
+  const { height = sv.defaultMargin, width = 200, style, className } = useResponsiveProps<
     LoadingPlaceholderProps
   >(rest, responsive);
 
-  return <div className={styles.shimmer} style={{ height, width, ...style }} />;
+  return <div className={cx(styles.shimmer, className)} style={{ height, width, ...style }} />;
 };

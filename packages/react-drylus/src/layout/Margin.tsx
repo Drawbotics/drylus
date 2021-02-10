@@ -326,30 +326,40 @@ export interface MarginProps {
   /** Prop to override any style if necessary, use sparingly */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const Margin = ({ responsive, ...rest }: MarginProps) => {
-  const { children, size: rawSize, style } = useResponsiveProps<MarginProps>(rest, responsive);
+  const { children, size: rawSize, style, className } = useResponsiveProps<MarginProps>(
+    rest,
+    responsive,
+  );
 
   const isUniform = typeof rawSize !== 'object';
 
   const size = !isUniform && _isRectangular(rawSize) ? _computeSize(rawSize) : rawSize;
   return (
     <div
-      className={cx(styles.root, {
-        [styles[camelCase(size as Size) as keyof typeof styles]]: isUniform && size != null,
-        [styles.resetMargin]: !isUniform,
-        [styles[camelCase(`${(size as Variable)?.left}_LEFT`) as keyof typeof styles]]:
-          !isUniform && (size as Variable)?.left != null,
-        [styles[camelCase(`${(size as Variable)?.right}_RIGHT`) as keyof typeof styles]]:
-          !isUniform && (size as Variable)?.right != null,
-        [styles[camelCase(`${(size as Variable)?.top}_TOP`) as keyof typeof styles]]:
-          !isUniform && (size as Variable)?.top != null,
-        [styles[camelCase(`${(size as Variable)?.bottom}_BOTTOM`) as keyof typeof styles]]:
-          !isUniform && (size as Variable)?.bottom != null,
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles[camelCase(size as Size) as keyof typeof styles]]: isUniform && size != null,
+          [styles.resetMargin]: !isUniform,
+          [styles[camelCase(`${(size as Variable)?.left}_LEFT`) as keyof typeof styles]]:
+            !isUniform && (size as Variable)?.left != null,
+          [styles[camelCase(`${(size as Variable)?.right}_RIGHT`) as keyof typeof styles]]:
+            !isUniform && (size as Variable)?.right != null,
+          [styles[camelCase(`${(size as Variable)?.top}_TOP`) as keyof typeof styles]]:
+            !isUniform && (size as Variable)?.top != null,
+          [styles[camelCase(`${(size as Variable)?.bottom}_BOTTOM`) as keyof typeof styles]]:
+            !isUniform && (size as Variable)?.bottom != null,
+        },
+        className,
+      )}
       style={style}>
       {children}
     </div>

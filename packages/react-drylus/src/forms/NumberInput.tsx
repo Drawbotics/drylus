@@ -193,6 +193,9 @@ export interface NumberInputProps<T = string> {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 
@@ -218,6 +221,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
     style,
     step = 1,
     size = Size.DEFAULT,
+    className,
     ...props
   } = useResponsiveProps<NumberInputProps<T>>(rest, responsive);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -258,10 +262,14 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.withCounter]: withCounter,
-        [styles.disabled]: disabled,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles.withCounter]: withCounter,
+          [styles.disabled]: disabled,
+        },
+        className,
+      )}>
       {run(() => {
         if (renderValue != null && (value === 0 || value)) {
           const sections = renderValue(value).split(String(value));

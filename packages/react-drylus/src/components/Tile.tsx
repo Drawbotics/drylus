@@ -43,15 +43,22 @@ export interface TileProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const Tile = ({ style, title, children, noPadding }: TileProps) => {
+export const Tile = ({ style, title, children, noPadding, className }: TileProps) => {
   return (
     <div
       style={style}
-      className={cx(styles.root, {
-        [styles.noPadding]: noPadding === true,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles.noPadding]: noPadding === true,
+        },
+        className,
+      )}>
       {run(() => {
         if (title != null) {
           return <div className={styles.title}>{title}</div>;

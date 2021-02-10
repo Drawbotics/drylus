@@ -23,10 +23,16 @@ export interface SeparatorProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const Separator = ({ vertical, style }: SeparatorProps) => {
+export const Separator = ({ vertical, style, className }: SeparatorProps) => {
   return (
-    <div style={style} className={cx(styles.root, { [styles.vertical]: vertical === true })} />
+    <div
+      style={style}
+      className={cx(styles.root, { [styles.vertical]: vertical === true }, className)}
+    />
   );
 };

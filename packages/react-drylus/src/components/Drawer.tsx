@@ -216,6 +216,9 @@ export interface DrawerProps extends BaseDrawerProps {
     onAnimationStart: VoidFunction;
     onAnimationComplete: VoidFunction;
   };
+
+  /** Used for style overrides. Passed to the outermost parent */
+  className?: string;
 }
 
 export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
@@ -233,6 +236,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
     overlayStyle,
     wrapperStyle = {},
     style,
+    className,
   } = useResponsiveProps<DrawerProps>(rest, responsive);
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
@@ -322,9 +326,13 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
               exit={{ opacity: 0 }}
               onMouseDown={(e) => (clickTargetElement.current = e.target)}
               onClick={handleClickOverlay}
-              className={cx(styles.overlay, {
-                [styles.leftOverlay]: side === Position.LEFT,
-              })}
+              className={cx(
+                styles.overlay,
+                {
+                  [styles.leftOverlay]: side === Position.LEFT,
+                },
+                className,
+              )}
               style={overlayStyle}
               ref={overlayElement}>
               <motion.div
@@ -358,7 +366,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
           initial={{ opacity: 0, width: 0 }}
           animate={{ opacity: 1, width }}
           exit={{ opacity: 0, width: 0 }}
-          className={styles.outerWrapper}>
+          className={cx(styles.outerWrapper, className)}>
           <div style={{ width }} className={styles.wrapper}>
             {content}
           </div>

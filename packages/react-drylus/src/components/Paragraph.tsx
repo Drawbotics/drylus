@@ -32,23 +32,30 @@ export interface ParagraphProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const Paragraph = ({ responsive, ...rest }: ParagraphProps) => {
-  const { children, style, align = Align.LEFT } = useResponsiveProps<ParagraphProps>(
+  const { children, style, align = Align.LEFT, className } = useResponsiveProps<ParagraphProps>(
     rest,
     responsive,
   );
   return (
     <p
       style={style}
-      className={cx(styles.root, {
-        [styles.alignCenter]: align === Align.CENTER,
-        [styles.alignRight]: align === Align.RIGHT,
-        [styles.alignJustify]: align === Align.JUSTIFY,
-      })}>
+      className={cx(
+        styles.root,
+        {
+          [styles.alignCenter]: align === Align.CENTER,
+          [styles.alignRight]: align === Align.RIGHT,
+          [styles.alignJustify]: align === Align.JUSTIFY,
+        },
+        className,
+      )}>
       {children}
     </p>
   );

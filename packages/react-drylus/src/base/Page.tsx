@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Style } from '../types';
@@ -15,11 +15,14 @@ export interface PageProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
-export const Page = ({ children, style }: PageProps) => {
+export const Page = ({ children, style, className }: PageProps) => {
   return (
-    <div className={styles.root} style={style}>
+    <div className={cx(styles.root, className)} style={style}>
       {children}
     </div>
   );

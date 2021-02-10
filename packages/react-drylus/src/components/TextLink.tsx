@@ -104,6 +104,9 @@ export interface TextLinkProps {
 
   /** Used for style overrides */
   style?: Style;
+
+  /** Used for style overrides */
+  className?: string;
 }
 
 export const TextLink = ({
@@ -112,17 +115,22 @@ export const TextLink = ({
   underlined = LinkUnderlined.HOVER,
   style,
   shade,
+  className,
   ...rest
 }: TextLinkProps) => {
   return (
     <span
       style={style}
-      className={cx(styles.root, {
-        [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
-        [styles[getEnumAsClass<typeof styles>(shade)]]: shade != null,
-        [styles.underlinedHover]: underlined === LinkUnderlined.HOVER,
-        [styles.underlinedAlways]: underlined === LinkUnderlined.ALWAYS,
-      })}
+      className={cx(
+        styles.root,
+        {
+          [styles[getEnumAsClass<typeof styles>(category)]]: category != null,
+          [styles[getEnumAsClass<typeof styles>(shade)]]: shade != null,
+          [styles.underlinedHover]: underlined === LinkUnderlined.HOVER,
+          [styles.underlinedAlways]: underlined === LinkUnderlined.ALWAYS,
+        },
+        className,
+      )}
       {...rest}>
       {children}
     </span>

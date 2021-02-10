@@ -99,22 +99,35 @@ export interface LayoutProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const Layout = ({ responsive, ...rest }: LayoutProps) => {
-  const { children, position, bar, fixed, barScrollable = true, style } = useResponsiveProps<
-    LayoutProps
-  >(rest, responsive);
+  const {
+    children,
+    position,
+    bar,
+    fixed,
+    barScrollable = true,
+    style,
+    className,
+  } = useResponsiveProps<LayoutProps>(rest, responsive);
 
   return (
     <div
       style={style}
       data-element="layout"
-      className={cx(styles.layout, {
-        [styles[getEnumAsClass<typeof styles>(position)]]: position != null,
-      })}>
+      className={cx(
+        styles.layout,
+        {
+          [styles[getEnumAsClass<typeof styles>(position)]]: position != null,
+        },
+        className,
+      )}>
       <div
         className={cx(styles.bar, { [styles.scrollable]: barScrollable })}
         data-element="layout-bar">

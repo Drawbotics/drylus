@@ -1,4 +1,4 @@
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import React from 'react';
 
 import { Label } from '../components';
@@ -49,15 +49,21 @@ export interface FormGroupProps {
   /** Used for style overrides */
   style?: Style;
 
+  /** Used for style overrides */
+  className?: string;
+
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
 }
 
 export const FormGroup = ({ responsive, ...rest }: FormGroupProps) => {
-  const { label, input, horizontal, style } = useResponsiveProps<FormGroupProps>(rest, responsive);
+  const { label, input, horizontal, style, className } = useResponsiveProps<FormGroupProps>(
+    rest,
+    responsive,
+  );
 
   return (
-    <div style={style} className={styles.root}>
+    <div style={style} className={cx(styles.root, className)}>
       <Flex
         direction={horizontal ? FlexDirection.HORIZONTAL : FlexDirection.VERTICAL}
         align={horizontal ? FlexAlign.CENTER : FlexAlign.STRETCH}>
