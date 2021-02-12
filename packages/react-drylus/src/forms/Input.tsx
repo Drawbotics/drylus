@@ -442,7 +442,7 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
             data-element="trailing"
             className={cx(styles.fix, styles.trailing, {
               [styles.trailingComponent]: isTrailingComponent,
-              [styles.transparentButton]: get(suffix, 'props')?.category == null,
+              [styles.transparentButton]: get(trailing, 'props')?.category == null,
               [styles.smallFix]: size === Size.SMALL && !isTrailingComponent,
             })}>
             {isTrailingComponent && size === Size.SMALL
