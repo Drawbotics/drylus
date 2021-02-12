@@ -22,7 +22,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     steps:
     - name: Checkout
@@ -44,7 +44,7 @@ jobs:
   release:
     needs: test
     if: contains(github.ref, 'master')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
