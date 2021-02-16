@@ -16,6 +16,7 @@ const styles = {
       padding ${sv.transitionTimeShort} ease-in-out;
   `,
   hovered: css`
+    cursor: pointer;
     padding-left: 2px;
     padding-right: 2px;
     box-shadow: 0px 0px 0px 4px ${fade(sv.neutral, 50)};
