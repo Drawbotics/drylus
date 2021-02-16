@@ -1,3 +1,16 @@
+# v7.3.2 (Tue Feb 16 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - InlineEdit: cursor pointer when hovering editable area  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.3.1 (Fri Feb 12 2021)
 
 #### ⚠️  Pushed to master
