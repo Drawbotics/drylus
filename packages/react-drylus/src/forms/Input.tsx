@@ -179,6 +179,21 @@ const styles = {
       background-color: transparent;
     }
   `,
+  buttonWithCategory: css`
+    background: none;
+
+    button {
+      height: ${sv.marginExtraLarge};
+      margin-right: 0px;
+      margin-left: 0px;
+      white-space: nowrap;
+    }
+  `,
+  buttonWithCategorySmall: css`
+    button {
+      height: ${sv.marginLarge} !important;
+    }
+  `,
   small: css`
     input {
       padding: ${sv.paddingExtraSmall} ${sv.paddingExtraSmall};
@@ -371,6 +386,9 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
             className={cx(styles.fix, styles.leading, {
               [styles.leadingComponent]: isLeadingComponent,
               [styles.transparentButton]: get(leading, 'props')?.category == null, // TODO find better
+              [styles.buttonWithCategory]: get(leading, 'props')?.category != null,
+              [styles.buttonWithCategorySmall]:
+                get(leading, 'props')?.category != null && size === Size.SMALL,
               [styles.smallFix]: size === Size.SMALL && !isLeadingComponent,
             })}>
             {isLeadingComponent && size === Size.SMALL
@@ -443,6 +461,9 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
             className={cx(styles.fix, styles.trailing, {
               [styles.trailingComponent]: isTrailingComponent,
               [styles.transparentButton]: get(trailing, 'props')?.category == null,
+              [styles.buttonWithCategory]: get(trailing, 'props')?.category != null,
+              [styles.buttonWithCategorySmall]:
+                get(trailing, 'props')?.category != null && size === Size.SMALL,
               [styles.smallFix]: size === Size.SMALL && !isTrailingComponent,
             })}>
             {isTrailingComponent && size === Size.SMALL

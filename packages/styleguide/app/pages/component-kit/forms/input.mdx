@@ -68,6 +68,12 @@ export const Example = ({ children }) => {
     <Input placeholder="Something else..." trailing={
       <Button leading={<Icon name="copy" />}>Click me</Button>
     } value="" onChange={x=>x} />
+    <Input placeholder="Something else..." trailing={
+      <Button category={Category.INFO}>Click me</Button>
+    } value="" onChange={() => {}} />
+    <Input placeholder="Something else..." leading={
+      <Button category={Category.INFO}>Click me</Button>
+    } value="" onChange={() => {}} />
   </Example>
 </Playground>
 
@@ -94,6 +100,9 @@ You can use the smaller size variant when space is scarce on the pace (this will
     } value="" onChange={() => {}} />
     <Input size={Size.SMALL} placeholder="Something else..." trailing={
       <Button leading={<Icon name="copy" />}>Click me</Button>
+    } value="" onChange={() => {}} />
+    <Input size={Size.SMALL} placeholder="Something else..." trailing={
+      <Button category={Category.DANGER}>Click me</Button>
     } value="" onChange={() => {}} />
   </Example>
 </Playground>
