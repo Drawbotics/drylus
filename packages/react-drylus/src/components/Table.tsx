@@ -47,7 +47,8 @@ const styles = {
     [data-nested] tr {
       background: none !important;
     }
-
+  `,
+  responsive: css`
     @media ${sv.screenL} {
       tbody {
         display: table;
@@ -103,7 +104,8 @@ const styles = {
         text-align: right;
       }
     }
-
+  `,
+  responsiveHeader: css`
     @media ${sv.screenL} {
       display: none;
     }
@@ -144,7 +146,8 @@ const styles = {
         }
       }
     }
-
+  `,
+  responsiveRow: css`
     @media ${sv.screenL} {
       display: table-row-group;
 
@@ -240,7 +243,10 @@ const styles = {
       &:hover {
         cursor: pointer;
       }
-
+    }
+  `,
+  responsiveWithToggle: css`
+    > i {
       @media ${sv.screenL} {
         display: none;
       }
@@ -380,6 +386,9 @@ export interface TCellProps extends React.TdHTMLAttributes<HTMLElement> {
   style?: Style;
 
   /** @private */
+  responsive?: boolean;
+
+  /** @private */
   [x: string]: any;
 }
 
@@ -391,6 +400,7 @@ export const TCell = ({
   onClickArrow,
   active,
   style,
+  responsive = true,
   ...props
 }: TCellProps) => {
   const { screenSize, ScreenSizes } = useScreenSize();
@@ -410,7 +420,7 @@ export const TCell = ({
       {run(() => {
         if (withChildToggle) {
           return (
-            <div className={styles.withToggle}>
+            <div className={cx(styles.withToggle, { [styles.responsiveWithToggle]: responsive })}>
               <Icon onClick={onClickArrow} name={active ? 'chevron-up' : 'chevron-down'} />
               {children}
             </div>
@@ -473,6 +483,9 @@ export interface TRowProps {
 
   /** @private */
   animated?: boolean;
+
+  /** @private */
+  responsive?: boolean;
 }
 
 export const TRow = ({
@@ -488,6 +501,7 @@ export const TRow = ({
   clickable,
   style,
   animated,
+  responsive = true,
 }: TRowProps) => {
   const [rowsStates, handleSetRowState] = useContext(RowsContext);
   const collapsed = nested && !rowsStates[nested];
@@ -510,6 +524,7 @@ export const TRow = ({
       {...animationProps}
       style={style}
       className={cx(styles.row, {
+        [styles.responsiveRow]: responsive,
         [styles.collapsed]: !!collapsed,
         [styles.light]: !alt,
         [styles.white]: alt === true,
@@ -533,6 +548,7 @@ export const TRow = ({
               asContainer: !!nested,
               withChildToggle: !!parent && key === 0,
               active: !!parent && rowsStates[parent],
+              responsive,
               onClickArrow: parent
                 ? () => handleSetRowState({ [parent]: !rowsStates[parent] })
                 : null,
@@ -550,14 +566,16 @@ export interface THeadProps {
     | React.ReactElement<typeof TCell>
     | Array<React.ReactElement<typeof TCell>>
     | React.ReactNode;
+  /** @private */
+  responsive?: boolean;
 }
 
-export const THead = ({ children }: THeadProps) => {
+export const THead = ({ children, responsive = true }: THeadProps) => {
   checkComponentProps({ children }, { children: TCell });
 
   return (
-    <thead className={styles.header}>
-      <TRow>
+    <thead className={cx(styles.header, { [styles.responsiveHeader]: responsive })}>
+      <TRow responsive={responsive}>
         {React.Children.toArray(children)
           .filter((c) => Boolean(c))
           .map((child, key) =>
@@ -567,6 +585,7 @@ export const THead = ({ children }: THeadProps) => {
                 ...(child as React.ReactElement<typeof TCell>).props,
                 key,
                 head: true,
+                responsive,
               } as Partial<TCellProps>,
             ),
           )}
@@ -757,14 +776,20 @@ function _addAttributesToCells(
 function _generateRowChildren({
   header,
   rowData,
+  responsive,
 }: {
   header?: HeaderData;
   rowData: Omit<TableEntry, 'data'>;
+  responsive?: boolean;
 }): ReactNode {
   if (header != null) {
     return header.map((item: any, i: number) => {
       const path = typeof item === 'string' || typeof item === 'number' ? item : item.value;
-      return <TCell key={`${i}-${get(rowData, path)}`}>{get(rowData, path)}</TCell>;
+      return (
+        <TCell key={`${i}-${get(rowData, path)}`} responsive={responsive}>
+          {get(rowData, path)}
+        </TCell>
+      );
     });
   } else {
     return Object.values(rowData).map((value, i) => <TCell key={`${i}-${value}`}>{value}</TCell>);
@@ -779,7 +804,11 @@ interface MemoizedTRowProps extends Omit<TRowProps, 'children'> {
 
 const MemoizedTRow = React.memo(
   ({ header, rowData, ...rest }: MemoizedTRowProps) => {
-    return <TRow {...rest}>{_generateRowChildren({ header, rowData })}</TRow>;
+    return (
+      <TRow {...rest}>
+        {_generateRowChildren({ header, rowData, responsive: rest.responsive })}
+      </TRow>
+    );
   },
   (prevProps, nextProps) => isEqual(prevProps.memoData, nextProps.memoData),
 );
@@ -797,6 +826,7 @@ function _generateTable({
   clickable,
   activeRow,
   animated,
+  responsive = true,
 }: {
   data: Array<TableEntry> | TableEntry;
   memoDataValues?: Array<TableEntry> | TableEntry;
@@ -808,6 +838,7 @@ function _generateTable({
   clickable?: boolean;
   activeRow?: TableEntry['id'];
   animated?: boolean;
+  responsive?: boolean;
 }): React.ReactElement<typeof TBody> | Array<React.ReactElement<typeof TRow>> {
   if (Array.isArray(data)) {
     return (
@@ -827,6 +858,7 @@ function _generateTable({
               onExitRow,
               clickable,
               activeRow,
+              responsive,
             }),
           )
           .flat()}
@@ -839,6 +871,7 @@ function _generateTable({
     const parentRow =
       memoDataValues != null && !Array.isArray(memoDataValues) ? (
         <MemoizedTRow
+          responsive={responsive}
           header={header}
           memoData={memoDataValues}
           rowData={rowData}
@@ -853,6 +886,7 @@ function _generateTable({
         />
       ) : (
         <TRow
+          responsive={responsive}
           animated={animated}
           key={uniqId}
           parent={hasData ? uniqId : undefined}
@@ -869,13 +903,14 @@ function _generateTable({
       return [
         parentRow,
         <TRow
+          responsive={responsive}
           key={`${uniqId}-1`}
           nested={uniqId}
           onClick={() => onClickRow(rowData)}
           onEnter={() => onEnterRow(rowData)}
           onExit={() => onExitRow(rowData)}
           clickable={clickable}>
-          <TCell>
+          <TCell responsive={responsive}>
             <Table>
               {
                 _generateTable({
@@ -886,6 +921,7 @@ function _generateTable({
                       : [],
                   header: childHeader,
                   clickable,
+                  responsive,
                 }) as React.ReactElement<typeof TBody>
               }
             </Table>
@@ -982,6 +1018,12 @@ export interface TableProps {
 
   /** Used for style overrides */
   className?: string;
+
+  /**
+   * If false, Table stays in its desktop layout
+   * @default true
+   */
+  responsive?: boolean;
 }
 
 export const Table = ({
@@ -1008,6 +1050,7 @@ export const Table = ({
   loadingRows = 5,
   memoDataValues,
   className,
+  responsive = true,
 }: TableProps) => {
   const [rowsStates, setRowState] = useState<Record<string | number, boolean>>({});
   const { screenSize, ScreenSizes } = useScreenSize();
@@ -1071,7 +1114,7 @@ export const Table = ({
   const tableContents =
     data != null && !isLoading && !emptyContent
       ? [
-          <THead key="head">
+          <THead key="head" responsive={responsive}>
             {header.map((hItem, i) => {
               const value =
                 typeof hItem === 'string' || typeof hItem === 'number' ? hItem : hItem.value;
@@ -1104,7 +1147,10 @@ export const Table = ({
                 (i === 0 && xScrollAmount === 0) ||
                 (i === header.length - 1 && xScrollAmount === 1);
               return (
-                <TCell key={value} style={{ zIndex: noZIndex ? 'auto' : undefined }}>
+                <TCell
+                  key={value}
+                  style={{ zIndex: noZIndex ? 'auto' : undefined }}
+                  responsive={responsive}>
                   {cellContent}
                   {i === 0 && scrollable ? (
                     <div
@@ -1139,12 +1185,15 @@ export const Table = ({
             clickable,
             activeRow,
             animated,
+            responsive,
           }),
         ]
       : children;
 
   const transformedChildren =
-    screenSize <= ScreenSizes.L ? _addAttributesToCells(tableContents as any) : tableContents;
+    screenSize <= ScreenSizes.L && responsive
+      ? _addAttributesToCells(tableContents as any)
+      : tableContents;
 
   if (data && (!header || header.length === 0)) {
     console.warn('`data` was passed as prop but no/empty header, cannot render');
@@ -1157,6 +1206,7 @@ export const Table = ({
       className={cx(
         styles.root,
         {
+          [styles.responsive]: responsive,
           [styles.fullWidth]: fullWidth,
           [styles.leftPadded]:
             (hasNestedData ||
@@ -1165,7 +1215,7 @@ export const Table = ({
                 sortableBy.includes(
                   typeof header[0] === 'string' ? header[0] : header[0].value,
                 ))) &&
-            screenSize > ScreenSizes.L,
+            (screenSize > ScreenSizes.L || !responsive),
           [styles.highlighted]: highlighted === true && !(hasNestedData || withNesting === true),
         },
         className,
