@@ -2,7 +2,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Color } from '../enums';
+import { Color, Size } from '../enums';
 import { Style } from '../types';
 import { getEnumAsClass } from '../utils';
 
@@ -13,6 +13,10 @@ const styles = {
     height: ${sv.marginExtraSmall};
     width: ${sv.marginExtraSmall};
     background: ${sv.neutral};
+  `,
+  large: css`
+    height: calc(${sv.marginSmall} - 4px);
+    width: calc(${sv.marginSmall} - 4px);
   `,
   brand: css`
     background: ${sv.brand};
@@ -35,7 +39,14 @@ const styles = {
 };
 
 export interface DotProps {
-  color?: Color;
+  /** Can be either a Color or a hex string */
+  color?: Color | string;
+
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   */
+  size?: Size.DEFAULT | Size.LARGE;
 
   /** Used for style overrides */
   style?: Style;
@@ -44,14 +55,16 @@ export interface DotProps {
   className?: string;
 }
 
-export const Dot = ({ style, color, className }: DotProps) => {
+export const Dot = ({ style, color, className, size }: DotProps) => {
+  const isEnumColor = color != null && color in Color;
   return (
     <div
-      style={style}
+      style={{ ...style, backgroundColor: isEnumColor ? undefined : color }}
       className={cx(
         styles.root,
         {
-          [styles[getEnumAsClass<typeof styles>(color)]]: color != null,
+          [styles.large]: size === Size.LARGE,
+          [styles[getEnumAsClass<typeof styles>(color as Color)]]: isEnumColor,
         },
         className,
       )}
