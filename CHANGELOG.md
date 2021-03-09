@@ -1,3 +1,19 @@
+# v7.3.4 (Tue Mar 09 2021)
+
+#### ⚠️  Pushed to master
+
+- try using tag creation  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Dot: add size and extend color props  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Table: allow responsive prop to prevent mobile layout  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.3.4 (Mon Mar 08 2021)
 
 #### ⚠️  Pushed to master
