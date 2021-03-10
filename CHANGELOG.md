@@ -1,3 +1,16 @@
+# v7.3.6 (Wed Mar 10 2021)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/icons`
+  -  [#180](https://github.com/Drawbotics/drylus/pull/180) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.3.4 (Tue Mar 09 2021)
 
 #### ⚠️  Pushed to master
