@@ -1,4 +1,4 @@
-import { SegmentedControl } from '@drawbotics/react-drylus';
+import { SegmentedControl, SegmentedControlItem, Callout, Spinner, Badge, Category, Icon, Size } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 import { ControlledField } from '../utils';
@@ -7,11 +7,40 @@ import { ControlledField } from '../utils';
 # Segmented Control
 Usage
 ```jsx
-import { SegmentedControl } from '@drawbotics/react-drylus';
+import { SegmentedControl, SegmentedControlItem } from '@drawbotics/react-drylus';
 ```
 
 __Example__
 <Playground component={SegmentedControl}>
+  <SegmentedControl>
+    <SegmentedControlItem active text="First choice" />
+    <SegmentedControlItem text="Second choice" />
+    <SegmentedControlItem text="Third choice" />
+  </SegmentedControl>
+</Playground>
+
+#### SegmentedControl Item
+<Playground component={SegmentedControlItem}>
+  <SegmentedControlItem text="I'm an item" />
+</Playground>
+
+You can also give leading and trailing to items, and disable them:
+<Playground>
+  <SegmentedControl>
+    <SegmentedControlItem active text="First option" trailing={<Spinner size={Size.SMALL}  />} />
+    <SegmentedControlItem text="Second option" trailing={<Badge value={5} category={Category.DANGER} />} />
+    <SegmentedControlItem text="Third option" disabled leading={<Icon name="brand-id" />} />
+  </SegmentedControl>
+</Playground>
+
+__Old Examples__
+<Callout category={Category.DANGER}>
+  Part of the API has been deprecated, please use the new one described above instead.
+</Callout>
+
+<br />
+
+<Playground>
   <ControlledField component={
     <SegmentedControl
       options={[{
@@ -26,7 +55,6 @@ __Example__
       }]} />
   } />
 </Playground>
-
 
 You can also have a number value displayed within each control through `bullet`. Each option can also be `disabled`.
 
