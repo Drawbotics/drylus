@@ -1,3 +1,16 @@
+# v7.3.7 (Thu Mar 11 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Button, ButtonLink: remove onClick when disabled  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.3.5 (Tue Mar 09 2021)
 
 #### ⚠️  Pushed to master
