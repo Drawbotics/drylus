@@ -389,7 +389,7 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
   return (
     <button
       style={style}
-      onClick={onClick}
+      onClick={disabled ? undefined : onClick}
       className={cx(
         styles.root,
         {

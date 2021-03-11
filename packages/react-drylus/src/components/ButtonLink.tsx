@@ -43,7 +43,7 @@ export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
   return (
     <span
       style={style}
-      onClick={onClick}
+      onClick={disabled ? undefined : onClick}
       className={cx(
         styles.root,
         {
