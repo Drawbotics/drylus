@@ -1,3 +1,16 @@
+# v7.4.1 (Fri Mar 12 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - SegmentedControl: (fix) make deprecated props optional  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.3.7 (Thu Mar 11 2021)
 
 #### ⚠️  Pushed to master
