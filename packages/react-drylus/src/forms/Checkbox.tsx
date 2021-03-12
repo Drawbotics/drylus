@@ -96,6 +96,7 @@ const styles = {
     }
   `,
   label: css`
+    flex: 1;
     margin-left: ${sv.marginExtraSmall};
     color: ${sv.colorPrimary};
     position: relative;
