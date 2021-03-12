@@ -1,3 +1,20 @@
+# v7.4.2 (Fri Mar 12 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - fix tests  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Checkbox: fix sprite getting squished when label was too long  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - EmptyState: add image prop for custom illustrations  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.4.1 (Fri Mar 12 2021)
 
 #### ⚠️  Pushed to master
