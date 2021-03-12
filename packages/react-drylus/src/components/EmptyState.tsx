@@ -63,6 +63,9 @@ export interface EmptyStateProps {
   /** @default EmptyStateVariation.DEFAULT */
   variation?: EmptyStateVariation;
 
+  /** Alternative to the `variation` prop, you can use this to pass your own image path (best results with SVG) */
+  image?: string;
+
   /** Used for style overrides */
   style?: Style;
 
@@ -81,6 +84,7 @@ export const EmptyState = ({ responsive, ...rest }: EmptyStateProps) => {
     variation = EmptyStateVariation.DEFAULT,
     children,
     className,
+    image,
   } = useResponsiveProps<EmptyStateProps>(rest, responsive);
 
   const actions = children != null ? React.Children.map(children, (x) => x) : null;
@@ -89,7 +93,13 @@ export const EmptyState = ({ responsive, ...rest }: EmptyStateProps) => {
     <div style={style} className={cx(styles.root, className)}>
       <Flex direction={FlexDirection.VERTICAL}>
         <FlexItem>
-          <div className={styles.image}>{_getImageForVariation(variation)}</div>
+          <div className={styles.image}>
+            {image != null ? (
+              <img style={{ height: '100%', width: '100%' }} src={image} />
+            ) : (
+              _getImageForVariation(variation)
+            )}
+          </div>
         </FlexItem>
         <FlexItem>
           <Title style={{ textAlign: 'center' }} size={3}>
