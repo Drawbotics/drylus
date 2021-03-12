@@ -156,13 +156,13 @@ export interface SegmentedControlProps<T> {
    * @deprecated Use SegmentedControl components instead
    * Determines the controls which will be rendered
    */
-  options: Array<SegmentedControlOption<T>>;
+  options?: Array<SegmentedControlOption<T>>;
 
   /**
    * @deprecated Use SegmentedControl components instead
    * Determines which value is currently active
    */
-  value: SegmentedControlOption<T>['value'];
+  value?: SegmentedControlOption<T>['value'];
 
   /**
    * @deprecated Use SegmentedControl components instead
