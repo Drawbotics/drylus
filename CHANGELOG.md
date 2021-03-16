@@ -1,3 +1,16 @@
+# v7.4.3 (Tue Mar 16 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - SegmentedControl: (fix) make children optional  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.4.2 (Fri Mar 12 2021)
 
 #### ⚠️  Pushed to master
