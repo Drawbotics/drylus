@@ -171,7 +171,7 @@ export interface SegmentedControlProps<T> {
   onChange?: (value: SegmentedControlOption<T>['value']) => void;
 
   /** Should be SegmentedControlItem */
-  children: ReactNode;
+  children?: ReactNode;
 
   /** Used for style overrides */
   style?: Style;
