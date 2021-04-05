@@ -18,7 +18,7 @@ window._drylus = drylus;
 const styles = {
   app: css`
     [data-element='layout-bar'] {
-      z-index: 11;
+      z-index: 12;
     }
   `,
 };
