@@ -1,3 +1,17 @@
+# v7.4.5 (Thu Apr 08 2021)
+
+#### ⚠️  Pushed to master
+
+- trigger styleguide build  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Add sideEffects false to react-drylus for tree shaking  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.4.4 (Thu Apr 01 2021)
 
 #### ⚠️  Pushed to master
