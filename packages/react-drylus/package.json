@@ -6,6 +6,7 @@
   "license": "ISC",
   "main": "index.js",
   "types": "./lib/index.d.ts",
+  "sideEffects": false,
   "scripts": {
     "clean": "rimraf lib/ tmp/",
     "build:ts": "tsc",
