@@ -1,3 +1,16 @@
+# v7.4.6 (Wed Apr 14 2021)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - RadioGroup: add horizontal layout option [#182](https://github.com/Drawbotics/drylus/pull/182) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.4.5 (Thu Apr 08 2021)
 
 #### ⚠️  Pushed to master
