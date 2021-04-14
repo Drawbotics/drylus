@@ -19,6 +19,14 @@ const styles = {
   largeRadioWrapper: css`
     margin-bottom: ${sv.marginSmall};
   `,
+  radioWrapperHorizontal: css`
+    margin-bottom: 0;
+    margin-right: ${sv.marginLarge};
+  `,
+  largeRadioWrapperHorizontal: css`
+    margin-bottom: 0;
+    margin-right: ${sv.marginExtraLarge};
+  `,
   root: css`
     position: relative;
     display: inline-block;
@@ -160,6 +168,11 @@ const styles = {
       margin-left: 1px;
     }
   `,
+  horizontal: css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  `,
 };
 
 export interface RadioProps {
@@ -269,6 +282,9 @@ export interface RadioGroupProps<T, K = string> {
    */
   size?: Size.LARGE | Size.DEFAULT;
 
+  /** If true, form elements will be aligned horizontally */
+  horizontal?: boolean;
+
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error?: string | number;
 
@@ -304,6 +320,7 @@ export const RadioGroup = <T extends any, K extends string>({
     hint,
     style,
     size,
+    horizontal,
     ...props
   } = useResponsiveProps<RadioGroupProps<T, K>>(rest, responsive);
 
@@ -323,12 +340,14 @@ export const RadioGroup = <T extends any, K extends string>({
 
   return (
     <div style={style} className={cx(styles.radioGroup, className)}>
-      <div>
+      <div className={horizontal ? styles.horizontal : undefined}>
         {options.map((option) => (
           <div
             key={option.value}
             className={cx(styles.radioWrapper, {
+              [styles.radioWrapperHorizontal]: horizontal === true,
               [styles.largeRadioWrapper]: size === Size.LARGE,
+              [styles.largeRadioWrapperHorizontal]: size === Size.LARGE && horizontal === true,
             })}>
             <Radio
               readOnly={readOnly}
