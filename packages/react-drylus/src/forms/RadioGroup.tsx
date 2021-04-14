@@ -22,10 +22,18 @@ const styles = {
   radioWrapperHorizontal: css`
     margin-bottom: 0;
     margin-right: ${sv.marginLarge};
+
+    &:last-of-type {
+      margin-right: 0;
+    }
   `,
   largeRadioWrapperHorizontal: css`
     margin-bottom: 0;
     margin-right: ${sv.marginExtraLarge};
+
+    &:last-of-type {
+      margin-right: 0;
+    }
   `,
   root: css`
     position: relative;
