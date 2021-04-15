@@ -114,12 +114,16 @@ const styles = {
     color: ${sv.colorSecondary};
     pointer-events: none;
   `,
-  smallMax: css`
+  withoutCounter: css`
+    left: ${sv.marginSmall};
     max-width: calc(100% - ${sv.marginSmall});
   `,
   smallRenderValue: css`
-    top: calc(${sv.marginExtraSmall} - 1px);
+    top: calc(${sv.marginExtraSmall});
     left: calc(${sv.marginExtraSmall} + ${smallHeight});
+  `,
+  smallWithoutCounter: css`
+    left: ${sv.marginExtraSmall};
   `,
   value: css`
     color: transparent;
@@ -276,8 +280,9 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
           return (
             <span
               className={cx(styles.renderedValue, {
-                [styles.smallMax]: !withCounter,
+                [styles.withoutCounter]: withCounter === false,
                 [styles.smallRenderValue]: size === Size.SMALL,
+                [styles.smallWithoutCounter]: withCounter === false && size === Size.SMALL,
               })}>
               <span ref={leftSpanRef}>{sections[0]}</span>
               <span className={styles.value}>{value}</span>
