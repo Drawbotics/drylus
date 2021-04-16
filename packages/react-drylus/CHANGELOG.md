@@ -1,3 +1,16 @@
+# v7.4.9 (Fri Apr 16 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - MultiSelect: add native option  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.4.8 (Thu Apr 15 2021)
 
 #### ⚠️  Pushed to master
