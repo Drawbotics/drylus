@@ -349,6 +349,12 @@ export interface MultiSelectProps<T, K = string> {
   autoFocus?: boolean;
 
   /**
+   * If false, the multi select will not change to native on mobile devices
+   * @default 'true'
+   */
+  native?: boolean;
+
+  /**
    * Size of the input. Can be small or default
    * @default Size.DEFAULT
    * @kind Size
@@ -391,6 +397,7 @@ export const MultiSelect = <T extends any, K extends string>({
     onChangeOptions,
     typeZonePlaceholder = 'Add option...',
     className,
+    native = true,
     ...props
   } = useResponsiveProps<MultiSelectProps<T, K>>(rest, responsive);
 
@@ -569,7 +576,7 @@ export const MultiSelect = <T extends any, K extends string>({
         </div>
       </div>
       {run(() => {
-        if (screenSize > ScreenSizes.XL && !hideDropdown) {
+        if ((!native || screenSize > ScreenSizes.XL) && !hideDropdown) {
           return (
             <div ref={optionsRef} className={styles.optionsWrapper}>
               <div
