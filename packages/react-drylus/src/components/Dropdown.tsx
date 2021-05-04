@@ -123,6 +123,12 @@ const styles = {
     color: ${sv.colorTertiary};
     text-transform: uppercase;
   `,
+  leading: css`
+    display: flex;
+    align-items: center;
+    margin-right: ${sv.marginExtraSmall};
+    height: 0;
+  `,
 };
 
 export interface DropdownOptionProps {
@@ -137,6 +143,9 @@ export interface DropdownOptionProps {
 
   /** Name of the icon to be shown on the left side */
   icon?: IconType;
+
+  /** Shown in front of the button text, can be a Spinner or Icon */
+  leading?: React.ReactNode;
 
   /** @kind Category */
   category?: Category.SUCCESS | Category.WARNING | Category.DANGER;
@@ -162,6 +171,7 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
     onClick,
     onClickClose,
     icon,
+    leading,
     style,
     className,
   } = useResponsiveProps<DropdownOptionProps>(rest, responsive);
@@ -186,6 +196,9 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
             }
       }>
       {run(() => {
+        if (leading) {
+          return <div className={styles.leading}>{leading}</div>;
+        }
         if (icon) {
           return <Icon shade={category ? undefined : Shade.MEDIUM} name={icon} />;
         }
