@@ -2,8 +2,8 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
-import { Category, Position, Shade } from '../enums';
-import { ListTile } from '../layout';
+import { Category, Position, Shade, Size } from '../enums';
+import { Padding } from '../layout';
 import { Responsive, Style } from '../types';
 import { Deprecated, getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
@@ -71,10 +71,6 @@ const styles = {
     &:hover {
       cursor: pointer;
       background: ${sv.neutralLight};
-    }
-
-    > i {
-      margin-right: ${sv.marginExtraSmall};
     }
   `,
   disabled: css`
@@ -200,7 +196,8 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
               onClick != null ? onClick() : null;
             }
       }>
-      <ListTile title={text} leading={leading} />
+      {leading ? <Padding size={{ right: Size.EXTRA_SMALL }}>{leading}</Padding> : null}
+      {text}
     </div>
   );
 };
