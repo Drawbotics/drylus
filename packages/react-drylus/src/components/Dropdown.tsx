@@ -1,9 +1,9 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
-import { ListTile } from 'src/layout';
 
 import { Category, Position, Shade } from '../enums';
+import { ListTile } from '../layout';
 import { Responsive, Style } from '../types';
 import { Deprecated, getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
