@@ -1,10 +1,10 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
 import { Category, Position, Shade } from '../enums';
 import { Responsive, Style } from '../types';
-import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { Deprecated, getEnumAsClass, run, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
 
 const styles = {
@@ -141,11 +141,14 @@ export interface DropdownOptionProps {
   /** Triggered when the option is clicked */
   onClick?: () => void;
 
-  /** Name of the icon to be shown on the left side */
+  /**
+   * If given displays an icon to the left of the title
+   * @deprecated Use leading instead
+   */
   icon?: IconType;
 
-  /** Shown in front of the button text, can be a Spinner or Icon */
-  leading?: React.ReactNode;
+  /** If given, renders in front of the collapsible title. */
+  leading?: React.ReactElement<typeof Icon> | ReactNode;
 
   /** @kind Category */
   category?: Category.SUCCESS | Category.WARNING | Category.DANGER;
@@ -206,6 +209,10 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
       {text}
     </div>
   );
+};
+
+DropdownOption.propTypes = {
+  icon: Deprecated,
 };
 
 export interface DropdownLinkProps extends DropdownOptionProps {
