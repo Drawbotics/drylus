@@ -54,7 +54,7 @@ Extends the `DropdownOption` props but adds `href` and `linkComponent`
 <Playground>
   <Dropdown trigger={<Avatar text="MK" />} side={Position.RIGHT}>
     <DropdownOption text="Alright option" category={Category.SUCCESS} />
-    <DropdownOption text="Not okay" category={Category.DANGER} icon="alert-circle" />
+    <DropdownOption text="Not okay" category={Category.DANGER} leading={<Icon name="alert-circle" />} />
     <DropdownOption text="Maybe okay" category={Category.WARNING} />
   </Dropdown>
 </Playground>
