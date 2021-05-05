@@ -124,12 +124,6 @@ const styles = {
     color: ${sv.colorTertiary};
     text-transform: uppercase;
   `,
-  leading: css`
-    display: flex;
-    align-items: center;
-    margin-right: ${sv.marginExtraSmall};
-    height: 0;
-  `,
 };
 
 export interface DropdownOptionProps {
