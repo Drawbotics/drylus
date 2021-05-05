@@ -1,10 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { ListTile } from 'src/layout';
 
 import { Category, Position, Shade } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { Deprecated, getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
 
 const styles = {
@@ -147,7 +148,7 @@ export interface DropdownOptionProps {
    */
   icon?: IconType;
 
-  /** If given, renders in front of the collapsible title. */
+  /** If given, renders in front of the dropdown option. */
   leading?: React.ReactElement<typeof Icon> | ReactNode;
 
   /** @kind Category */
@@ -174,10 +175,13 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
     onClick,
     onClickClose,
     icon,
-    leading,
+    leading: _leading,
     style,
     className,
   } = useResponsiveProps<DropdownOptionProps>(rest, responsive);
+
+  const leading =
+    _leading != null ? _leading : icon != null ? <Icon name={icon} shade={Shade.MEDIUM} /> : null;
 
   return (
     <div
@@ -198,15 +202,7 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
               onClick != null ? onClick() : null;
             }
       }>
-      {run(() => {
-        if (leading) {
-          return <div className={styles.leading}>{leading}</div>;
-        }
-        if (icon) {
-          return <Icon shade={category ? undefined : Shade.MEDIUM} name={icon} />;
-        }
-      })}
-      {text}
+      <ListTile title={text} leading={leading} />
     </div>
   );
 };
