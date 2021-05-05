@@ -175,7 +175,11 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
   } = useResponsiveProps<DropdownOptionProps>(rest, responsive);
 
   const leading =
-    _leading != null ? _leading : icon != null ? <Icon name={icon} shade={Shade.MEDIUM} /> : null;
+    _leading != null ? (
+      _leading
+    ) : icon != null ? (
+      <Icon name={icon} shade={category ? undefined : Shade.MEDIUM} />
+    ) : null;
 
   return (
     <div
