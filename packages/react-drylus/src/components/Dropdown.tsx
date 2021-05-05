@@ -149,7 +149,7 @@ export interface DropdownOptionProps {
   icon?: IconType;
 
   /** If given, renders in front of the dropdown option. */
-  leading?: React.ReactElement<typeof Icon> | ReactNode;
+  leading?: ReactNode;
 
   /** @kind Category */
   category?: Category.SUCCESS | Category.WARNING | Category.DANGER;
