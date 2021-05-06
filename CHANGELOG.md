@@ -1,3 +1,16 @@
+# v7.5.0 (Thu May 06 2021)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - feature/dropdown-option-extension [#183](https://github.com/Drawbotics/drylus/pull/183) ([@kossuthl4jos](https://github.com/kossuthl4jos))
+
+#### Authors: 1
+
+- lajos ([@kossuthl4jos](https://github.com/kossuthl4jos))
+
+---
+
 # v7.4.9 (Fri Apr 16 2021)
 
 #### ⚠️  Pushed to master
