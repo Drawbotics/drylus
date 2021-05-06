@@ -1,10 +1,11 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
-import { Category, Position, Shade } from '../enums';
+import { Category, Position, Shade, Size } from '../enums';
+import { Padding } from '../layout';
 import { Responsive, Style } from '../types';
-import { getEnumAsClass, run, useResponsiveProps } from '../utils';
+import { Deprecated, getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
 
 const styles = {
@@ -71,10 +72,6 @@ const styles = {
       cursor: pointer;
       background: ${sv.neutralLight};
     }
-
-    > i {
-      margin-right: ${sv.marginExtraSmall};
-    }
   `,
   disabled: css`
     color: ${sv.colorDisabled};
@@ -135,8 +132,14 @@ export interface DropdownOptionProps {
   /** Triggered when the option is clicked */
   onClick?: () => void;
 
-  /** Name of the icon to be shown on the left side */
+  /**
+   * If given displays an icon to the left of the title
+   * @deprecated Use leading instead
+   */
   icon?: IconType;
+
+  /** If given, renders in front of the dropdown option. */
+  leading?: ReactNode;
 
   /** @kind Category */
   category?: Category.SUCCESS | Category.WARNING | Category.DANGER;
@@ -162,9 +165,17 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
     onClick,
     onClickClose,
     icon,
+    leading: _leading,
     style,
     className,
   } = useResponsiveProps<DropdownOptionProps>(rest, responsive);
+
+  const leading =
+    _leading != null ? (
+      _leading
+    ) : icon != null ? (
+      <Icon name={icon} shade={category ? undefined : Shade.MEDIUM} />
+    ) : null;
 
   return (
     <div
@@ -185,14 +196,14 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
               onClick != null ? onClick() : null;
             }
       }>
-      {run(() => {
-        if (icon) {
-          return <Icon shade={category ? undefined : Shade.MEDIUM} name={icon} />;
-        }
-      })}
+      {leading ? <Padding size={{ right: Size.EXTRA_SMALL }}>{leading}</Padding> : null}
       {text}
     </div>
   );
+};
+
+DropdownOption.propTypes = {
+  icon: Deprecated,
 };
 
 export interface DropdownLinkProps extends DropdownOptionProps {

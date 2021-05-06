@@ -13,10 +13,12 @@ import {
   Size,
   Text,
   Tier,
+  Icon,
+  RoundIcon
 } from '@drawbotics/react-drylus';
 
 import Playground, { PropsTable } from '~/components/Playground';
-
+import testSVG from '~/assets/coding-guidelines.svg';
 
 # Dropdown
 A little floating menu used to perform actions. Can also contain some information, but should be kept at a minimum. If you see that the content of the dropdown is becoming excessive, use a [`Modal`](/component-kit/components/modal) instead.
@@ -50,12 +52,15 @@ __Example__
 Extends the `DropdownOption` props but adds `href` and `linkComponent`
 <PropsTable component={DropdownLink} />
 
-### Example with categories & Icons
+### Example with categories & leading
 <Playground>
   <Dropdown trigger={<Avatar text="MK" />} side={Position.RIGHT}>
     <DropdownOption text="Alright option" category={Category.SUCCESS} />
-    <DropdownOption text="Not okay" category={Category.DANGER} icon="alert-circle" />
+    <DropdownOption text="Not okay" category={Category.DANGER} leading={<Icon name="alert-circle" />} />
     <DropdownOption text="Maybe okay" category={Category.WARNING} />
+    <DropdownOption text="Option with RoundIcon" leading={<RoundIcon name="heart" />} />
+    <DropdownOption text="And an Avatar" leading={<Avatar text="TT" />} />
+    <DropdownOption text="Custom SVG fits too" leading={<img src={testSVG} style={{ height: '20px' }}/>} />
   </Dropdown>
 </Playground>
 
