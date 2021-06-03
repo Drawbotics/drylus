@@ -82,6 +82,7 @@ export interface Marker {
   label?: React.ReactNode;
   title?: string;
   subtitle?: string;
+  marker?: React.ReactNode;
   coordinates: {
     lng: number;
     lat: number;
@@ -184,11 +185,11 @@ export const Map = ({
                         content={
                           <PopoverContent title={marker.title} subtitle={marker.subtitle} />
                         }>
-                        {renderMarker(marker)}
+                        {marker.marker ?? renderMarker(marker)}
                       </Popover>
                     );
                   } else {
-                    return renderMarker(marker);
+                    return marker.marker ?? renderMarker(marker);
                   }
                 })}
               </MapboxMarker>
