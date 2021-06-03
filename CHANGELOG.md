@@ -1,3 +1,16 @@
+# v7.6.0 (Thu Jun 03 2021)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature: add support for custom map markers [#184](https://github.com/Drawbotics/drylus/pull/184) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.5.0 (Thu May 06 2021)
 
 #### 🚀 Enhancement - Minor change
