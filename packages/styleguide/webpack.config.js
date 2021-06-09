@@ -34,7 +34,7 @@ const basePlugins = [
     filename: 'index.html',
     template: './public/index.html',
     inject: true,
-    favicon: './public/favicon.ico',
+    favicon: './public/favicon.png',
   }),
   new ProgressPlugin(betterWebpackProgress({
     mode: 'compact',
@@ -64,7 +64,7 @@ const prodPlugins = [
     filename: '404.html',
     template: './public/index.html',
     inject: true,
-    favicon: './public/favicon.ico',
+    favicon: './public/favicon.png',
   }),
   {
     apply: (compiler) => {
