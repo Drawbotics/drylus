@@ -1,3 +1,17 @@
+# v7.6.1 (Wed Jun 09 2021)
+
+#### ⚠️  Pushed to master
+
+- use different favicon  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Fix: wrap alerts provider with theme provider to style alerts  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.6.0 (Thu Jun 03 2021)
 
 #### 🚀 Enhancement - Minor change

@@ -1,3 +1,16 @@
+# v7.6.1 (Wed Jun 09 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Fix: wrap alerts provider with theme provider to style alerts  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.4.9 (Fri Apr 16 2021)
 
 #### ⚠️  Pushed to master
