@@ -5,10 +5,11 @@ import isArray from 'lodash/isArray';
 import isObject from 'lodash/isObject';
 import React, { Fragment } from 'react';
 
-import { Category, Shade, Size, Tier } from '../enums';
+import { Category, Color, Shade, Size, Tier } from '../enums';
 import { Responsive, Style } from '../types';
 import {
   ShowDateTime,
+  colorEnumToCategory,
   generateDisplayedDate,
   generateDisplayedPrice,
   getEnumAsClass,
@@ -137,6 +138,9 @@ export interface TextProps {
   /** @kind Category */
   category?: Category.BRAND | Category.SUCCESS | Category.INFO | Category.WARNING | Category.DANGER;
 
+  /** @kind Color */
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE | Color.PRIMARY;
+
   /** Options to change the way the date is displayed, if provided. showTime toggles display of hour/minutes, format for dayjs overrides */
   dateOptions?: {
     showTime?: ShowDateTime;
@@ -202,7 +206,8 @@ export const Text = ({ responsive, ...rest }: TextProps) => {
     tier: _tier,
     disabled = false,
     children,
-    category,
+    category: _category,
+    color,
     shade = Shade.DARK,
     style,
     light = false,
@@ -213,6 +218,7 @@ export const Text = ({ responsive, ...rest }: TextProps) => {
   } = useResponsiveProps<TextProps>(rest, responsive);
 
   const tier = _tier ?? (shade ? shadeEnumToTier(shade) : null);
+  const category = color ? colorEnumToCategory(color) : _category;
 
   const transformedChildren = isArray(children)
     ? [...children].map((child) =>
