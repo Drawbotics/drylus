@@ -1,3 +1,16 @@
+# v7.4.5 (Fri Jun 11 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/icons`
+  - Patch: add new icons  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.3.7 (Thu Apr 01 2021)
 
 #### ⚠️  Pushed to master
