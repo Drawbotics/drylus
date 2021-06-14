@@ -1,3 +1,16 @@
+# v7.6.4 (Mon Jun 14 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Dot: add extra large size  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.6.3 (Fri Jun 11 2021)
 
 #### ⚠️  Pushed to master
