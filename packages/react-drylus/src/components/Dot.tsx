@@ -18,6 +18,10 @@ const styles = {
     height: calc(${sv.marginSmall} - 4px);
     width: calc(${sv.marginSmall} - 4px);
   `,
+  extraLarge: css`
+    height: ${sv.marginSmall};
+    width: ${sv.marginSmall};
+  `,
   brand: css`
     background: ${sv.brand};
   `,
@@ -46,7 +50,7 @@ export interface DotProps {
    * @default Size.DEFAULT
    * @kind Size
    */
-  size?: Size.DEFAULT | Size.LARGE;
+  size?: Size.DEFAULT | Size.LARGE | Size.EXTRA_LARGE;
 
   /** Used for style overrides */
   style?: Style;
@@ -64,6 +68,7 @@ export const Dot = ({ style, color, className, size }: DotProps) => {
         styles.root,
         {
           [styles.large]: size === Size.LARGE,
+          [styles.extraLarge]: size === Size.EXTRA_LARGE,
           [styles[getEnumAsClass<typeof styles>(color as Color)]]: isEnumColor,
         },
         className,
