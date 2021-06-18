@@ -2,6 +2,7 @@ import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
 import { motion } from 'framer-motion';
+import { omitBy } from 'lodash';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
 import omit from 'lodash/omit';
@@ -792,7 +793,7 @@ function _generateRowChildren({
       );
     });
   } else {
-    return Object.values(rowData).map((value, i) => <TCell key={`${i}-${value}`}>{value}</TCell>);
+    return Object.values(omitBy(rowData, (_, key) => key.startsWith('_'))).map((value, i) => <TCell key={`${i}-${value}`}>{value}</TCell>);
   }
 }
 
