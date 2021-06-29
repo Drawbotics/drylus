@@ -99,7 +99,7 @@ export interface FlexSpacerProps {
   /** Determines how much space a flex item takes within the flex container. */
   flex?: number | boolean;
 
-  size: Size;
+  size?: Size;
 
   /** Used for style overrides */
   style?: Style;
@@ -115,7 +115,7 @@ export interface FlexSpacerProps {
 }
 
 export const FlexSpacer = ({ responsive, direction, ...rest }: FlexSpacerProps) => {
-  const { size, flex, style = {}, className } = useResponsiveProps(rest, responsive);
+  const { size = Size.DEFAULT, flex, style = {}, className } = useResponsiveProps(rest, responsive);
   const equalSpan = flex === true;
   return (
     <div
