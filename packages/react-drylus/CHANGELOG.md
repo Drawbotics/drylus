@@ -1,3 +1,18 @@
+# v7.6.6 (Thu Jul 08 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Dropdown: add info category option  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Flex: give FlexSpacer default size  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.6.5 (Fri Jun 18 2021)
 
 #### ⚠️  Pushed to master
