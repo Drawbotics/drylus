@@ -108,6 +108,14 @@ const styles = {
       background: ${sv.orangeLighter};
     }
   `,
+  info: css`
+    color: ${sv.blue};
+
+    &:hover {
+      color: ${sv.blueDark};
+      background: ${sv.blueLighter};
+    }
+  `,
   separator: css`
     height: 1px;
     width: 100%;
@@ -142,7 +150,7 @@ export interface DropdownOptionProps {
   leading?: ReactNode;
 
   /** @kind Category */
-  category?: Category.SUCCESS | Category.WARNING | Category.DANGER;
+  category?: Category.SUCCESS | Category.WARNING | Category.DANGER | Category.INFO;
 
   /** Used for style overrides */
   style?: Style;
