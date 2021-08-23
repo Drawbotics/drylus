@@ -13,7 +13,7 @@ import { Title } from './Title';
 const styles = {
   root: css``,
   image: css`
-    width: 300px;
+    width: 250px;
 
     @media ${sv.screenL} {
       max-width: 170px;
