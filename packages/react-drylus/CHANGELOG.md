@@ -1,3 +1,16 @@
+# v7.6.8 (Wed Aug 25 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - EmptyState: slightly reduce image size  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.6.6 (Thu Jul 08 2021)
 
 #### ⚠️  Pushed to master
