@@ -34,8 +34,7 @@ export const ModalController = ({ component: Component }) => {
       <Button onClick={() => setVisibility(true)}>Show modal</Button>
       {React.cloneElement(Component, {
         visible,
-        onClickClose: () => setVisibility(false),
-        onClickOverlay: () => setVisibility(false),
+        onClickClose: () => setVisibility(false)
       })}
     </div>
   );

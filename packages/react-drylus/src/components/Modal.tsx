@@ -152,31 +152,25 @@ export const BaseModal = React.forwardRef<HTMLDivElement, BaseModalProps>(
       style={style}
       className={cx(styles.root, { [styles.large]: size === Size.LARGE })}
       ref={ref}>
-      <div className={styles.close}>
-        <Button
-          size={Size.SMALL}
-          onClick={onClickClose}
-          tier={Tier.TERTIARY}
-          leading={<Icon name="x" />}
-        />
-      </div>
-      {run(() => {
-        if (title != null) {
-          return (
-            <div className={styles.title}>
-              <Title size={4} noMargin>
-                {title}
-              </Title>
-            </div>
-          );
-        }
-      })}
+      {onClickClose != null ? (
+        <div className={styles.close}>
+          <Button
+            size={Size.SMALL}
+            onClick={onClickClose}
+            tier={Tier.TERTIARY}
+            leading={<Icon name="x" />}
+          />
+        </div>
+      ) : null}
+      {title != null ? (
+        <div className={styles.title}>
+          <Title size={4} noMargin>
+            {title}
+          </Title>
+        </div>
+      ) : null}
       <div className={styles.content}>{children}</div>
-      {run(() => {
-        if (footer != null) {
-          return <div className={styles.footer}>{footer}</div>;
-        }
-      })}
+      {footer != null ? <div className={styles.footer}>{footer}</div> : null}
     </div>
   ),
 );
