@@ -1,3 +1,16 @@
+# v7.6.9 (Fri Aug 27 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Modal: hide close button if onClickClose is null  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.6.8 (Wed Aug 25 2021)
 
 #### ⚠️  Pushed to master
