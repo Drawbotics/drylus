@@ -25,7 +25,7 @@ const styles = {
 
 const App = () => {
   const { screenSize, ScreenSizes } = useScreenSize();
-  
+
   return (
     <div className={styles.app}>
       <BrowserRouter basename="drylus">

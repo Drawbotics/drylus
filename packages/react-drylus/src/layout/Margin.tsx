@@ -4,7 +4,7 @@ import camelCase from 'lodash/camelCase';
 import React from 'react';
 
 import { Size } from '../enums';
-import { Rectangular, Responsive, Style, Variable } from '../types';
+import { Directional, Rectangular, Responsive, Style } from '../types';
 import { useResponsiveProps } from '../utils';
 
 const styles = {
@@ -297,8 +297,16 @@ const styles = {
   `,
 };
 
+function _isDirectional(size: any): size is Directional {
+  return 'left' in size || 'right' in size || 'top' in size || 'bottom' in size;
+}
+
+function _isRectangular(size: any): size is Rectangular {
+  return 'vertical' in size || 'horizontal' in size;
+}
+
 function _computeSize(sizeDescription: Rectangular) {
-  let size: Variable = {};
+  let size: Directional = _isDirectional(sizeDescription) ? sizeDescription : {};
 
   if (sizeDescription.horizontal) {
     size.left = sizeDescription.horizontal;
@@ -312,13 +320,9 @@ function _computeSize(sizeDescription: Rectangular) {
   return size;
 }
 
-function _isRectangular(size: any): size is Rectangular {
-  return size.vertical || size.horizontal;
-}
-
 export interface MarginProps {
   /** Determines the amount of margin given to the component. If a single value, the margin is applied equally to each side */
-  size?: Size | Rectangular | Variable;
+  size?: Size | (Rectangular & Directional);
 
   /** The content of the margin wrapper */
   children?: React.ReactNode;
@@ -349,14 +353,14 @@ export const Margin = ({ responsive, ...rest }: MarginProps) => {
         {
           [styles[camelCase(size as Size) as keyof typeof styles]]: isUniform && size != null,
           [styles.resetMargin]: !isUniform,
-          [styles[camelCase(`${(size as Variable)?.left}_LEFT`) as keyof typeof styles]]:
-            !isUniform && (size as Variable)?.left != null,
-          [styles[camelCase(`${(size as Variable)?.right}_RIGHT`) as keyof typeof styles]]:
-            !isUniform && (size as Variable)?.right != null,
-          [styles[camelCase(`${(size as Variable)?.top}_TOP`) as keyof typeof styles]]:
-            !isUniform && (size as Variable)?.top != null,
-          [styles[camelCase(`${(size as Variable)?.bottom}_BOTTOM`) as keyof typeof styles]]:
-            !isUniform && (size as Variable)?.bottom != null,
+          [styles[camelCase(`${(size as Directional)?.left}_LEFT`) as keyof typeof styles]]:
+            !isUniform && (size as Directional)?.left != null,
+          [styles[camelCase(`${(size as Directional)?.right}_RIGHT`) as keyof typeof styles]]:
+            !isUniform && (size as Directional)?.right != null,
+          [styles[camelCase(`${(size as Directional)?.top}_TOP`) as keyof typeof styles]]:
+            !isUniform && (size as Directional)?.top != null,
+          [styles[camelCase(`${(size as Directional)?.bottom}_BOTTOM`) as keyof typeof styles]]:
+            !isUniform && (size as Directional)?.bottom != null,
         },
         className,
       )}

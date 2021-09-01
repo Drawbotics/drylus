@@ -25,7 +25,7 @@ export interface Rectangular {
   horizontal?: Size;
 }
 
-export interface Variable {
+export interface Directional {
   left?: Size;
   top?: Size;
   right?: Size;
