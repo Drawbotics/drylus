@@ -238,6 +238,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
   const overlayElement = useRef<HTMLDivElement>(null);
   const modalElement = useRef<HTMLDivElement>(null);
   const containerElement = useRef<HTMLDivElement>(null);
+  const overlayClicked = useRef<boolean>(false);
 
   const handleWindowResize = () => {
     if (modalElement.current) {
@@ -265,6 +266,14 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
       if (touchY >= 0) {
         setTouchY(touchY);
       }
+    }
+  };
+
+  const handleMouseDown = (e: MouseEvent) => {
+    if (e.target === overlayElement.current) {
+      overlayClicked.current = true;
+    } else {
+      overlayClicked.current = false;
     }
   };
 
@@ -315,17 +324,25 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     window.addEventListener('touchstart', handleTouchStart);
     window.addEventListener('touchmove', handleTouchMove);
 
+    if (overlayElement.current != null) {
+      overlayElement.current.addEventListener('mousedown', handleMouseDown);
+    }
+
     return () => {
       window.removeEventListener('resize', handleWindowResize);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
+
+      if (overlayElement.current != null) {
+        overlayElement.current.removeEventListener('mousedown', handleMouseDown);
+      }
     };
   });
 
   if (outletElement == null) return null;
 
   const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === overlayElement?.current && onClickClose != null) {
+    if (e.target === overlayElement?.current && onClickClose != null && overlayClicked.current) {
       onClickClose();
     }
   };
