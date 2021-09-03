@@ -255,6 +255,7 @@ export const SearchInput = <T extends any, K extends string>({
         leading={
           minimal ? null : (
             <Button
+              tabIndex={-1}
               leading={isLoading ? <Spinner size={Size.SMALL} /> : <Icon name="search" />}
               onClick={() => inputRef.current?.focus()}
             />

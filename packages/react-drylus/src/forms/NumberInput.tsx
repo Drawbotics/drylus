@@ -313,6 +313,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
         trailing={
           withCounter && onChange != null ? (
             <button
+              tabIndex={-1}
               className={cx(styles.button, {
                 [styles.small]: size === Size.SMALL,
               })}
@@ -329,6 +330,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
         leading={
           withCounter && onChange != null ? (
             <button
+              tabIndex={-1}
               className={cx(styles.button, {
                 [styles.small]: size === Size.SMALL,
               })}
