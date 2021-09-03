@@ -1,3 +1,21 @@
+# v7.6.10 (Fri Sep 03 2021)
+
+#### ⚠️  Pushed to master
+
+- don't clean folder when watching in dev  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Inputs: use tabindex to avoid focus on leading/trailing  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Modal: prevent closing when clicking inside then outside modal  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - Margin/Padding: accept both rectangular and directional props  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.6.9 (Fri Aug 27 2021)
 
 #### ⚠️  Pushed to master

@@ -1,3 +1,16 @@
+# v7.6.8 (Fri Sep 03 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/icons`
+  - Fix: invalidate cloudfront when uploading icons to dev  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.6.4 (Fri Aug 20 2021)
 
 #### ⚠️  Pushed to master
