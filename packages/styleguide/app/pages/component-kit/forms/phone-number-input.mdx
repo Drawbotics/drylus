@@ -1,0 +1,18 @@
+import { PhoneNumberInput } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+import { ControlledField } from '../utils';
+
+
+# Phone Number Input
+Used in forms to set a phone number. Includes a select to change the number prefix with country flag emojis.
+```jsx
+import { PhoneNumberInput } from '@drawbotics/react-drylus';
+```
+
+__Example__
+<Playground component={PhoneNumberInput}>
+  <ControlledField initialValue="" style={{ width: 300 }} component={
+    <PhoneNumberInput placeholder="+32 47 123 45 56" value="" />
+  } />
+</Playground>
