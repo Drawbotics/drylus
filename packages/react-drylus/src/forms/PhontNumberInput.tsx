@@ -46,6 +46,14 @@ const timezoneCountryMapping: Record<string, string> = Country.getAllCountries()
   {} as Record<string, string>,
 );
 
+export function getTrailingPhoneNumber(value: string): string {
+  const match = Object.values(countryPrefixMapping)
+    .map((prefix) => `00${prefix}|\\+${prefix}`)
+    .join('|');
+  const trailing = String(value).replace(new RegExp(match, 'g'), '');
+  return trailing;
+}
+
 export interface PhoneNumberInputProps<T = string>
   extends Exclude<InputProps, 'type' | 'leading'> {}
 
@@ -83,10 +91,7 @@ export const PhoneNumberInput = <T extends string>({
     if (value === '' && value == null) {
       onChange?.(value, name);
     } else {
-      const match = Object.values(countryPrefixMapping)
-        .map((prefix) => `00${prefix}|\\+${prefix}`)
-        .join('|');
-      const trailing = String(value).replace(new RegExp(match, 'g'), '');
+      const trailing = getTrailingPhoneNumber(String(value));
       onChange?.(prefix + trailing.replace(/^\s/, ''), name);
     }
     setCountry(newCountry);
