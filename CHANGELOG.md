@@ -1,3 +1,16 @@
+# v7.7.0 (Wed Sep 08 2021)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Add PhoneNumberInput component [#185](https://github.com/Drawbotics/drylus/pull/185) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.6.10 (Fri Sep 03 2021)
 
 #### ⚠️  Pushed to master
