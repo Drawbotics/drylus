@@ -13,6 +13,7 @@ import rangeInput from './range-input';
 import searchInput from './search-input';
 import select from './select';
 import textArea from './text-area';
+import phoneNumberInput from './phone-number-input';
 
 const components = {
   select,
@@ -30,6 +31,7 @@ const components = {
   textArea,
   rangeInput,
   inlineEdit,
+  phoneNumberInput,
 };
 
 export default Object.keys(components)

@@ -29,6 +29,8 @@
     "@turf/circle": "^6.0.1",
     "animejs": "^3.0.1",
     "core-js": "^2.6.5",
+    "countries-list": "^2.6.1",
+    "country-state-city": "^3.0.1",
     "dayjs": "^1.8.19",
     "emotion": "^10.0.9",
     "framer-motion": "^1.10.3",
