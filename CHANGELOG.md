@@ -1,3 +1,16 @@
+# v7.7.1 (Thu Sep 09 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - PhoneNumberInput: fix value types  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.7.0 (Wed Sep 08 2021)
 
 #### 🚀 Enhancement - Minor change
