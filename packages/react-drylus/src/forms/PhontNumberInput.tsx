@@ -4,7 +4,9 @@ import { Country } from 'country-state-city';
 import { css } from 'emotion';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import { Responsive } from 'src/types';
 
+import { isFunction, useResponsiveProps } from '../utils';
 import { Input, InputProps } from './Input';
 import { Select } from './Select';
 
@@ -55,19 +57,24 @@ export function getTrailingPhoneNumber(value: string): string {
 }
 
 export interface PhoneNumberInputProps<T = string>
-  extends Exclude<InputProps, 'type' | 'leading'> {}
+  extends Exclude<InputProps<T>, 'type' | 'leading' | 'responsive'> {
+  /** Reponsive prop overrides */
+  responsive?: Responsive<this>;
+}
 
 export const PhoneNumberInput = <T extends string>({
-  value: _value,
-  onChange,
-  name,
-  ...props
+  responsive,
+  ...rest
 }: PhoneNumberInputProps<T>) => {
+  const { value: _value, onChange, name, ...props } = useResponsiveProps<PhoneNumberInputProps<T>>(
+    rest,
+    responsive,
+  );
   const [country, setCountry] = useState<keyof typeof countries>();
-  const value = typeof _value === 'function' ? _value(name) : _value;
+  const value = isFunction(_value) ? _value(name) : _value;
 
-  const handleChangeNumber = (_value: string | number) => {
-    const value = _value as string;
+  const handleChangeNumber = (_value: number | string) => {
+    const value = String(_value);
     if (/\+?[^\d+]/g.test(value.replace(/\s/g, ''))) {
       // Invalid number format
       return;
@@ -130,7 +137,7 @@ export const PhoneNumberInput = <T extends string>({
           />
         }
         type="tel"
-        value={value}
+        value={_value}
         onChange={handleChangeNumber}
       />
     </div>
