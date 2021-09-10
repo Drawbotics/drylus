@@ -136,6 +136,7 @@ export const PhoneNumberInput = <T extends string>({
             onChange={handleChangeCountry}
           />
         }
+        name={name}
         type="tel"
         value={_value}
         onChange={handleChangeNumber}
