@@ -1,22 +1,15 @@
 import React from 'react';
 
 import { AlertsProvider } from '../components';
-import { Style } from '../types';
+import { AlertsProviderProps } from '../components';
+import { ThemeProviderProps } from './ThemeProvider';
 import { ThemeProvider } from './ThemeProvider';
 
-export interface DrylusProviderProps {
-  children: React.ReactNode;
+export interface DrylusProviderProps extends ThemeProviderProps, AlertsProviderProps {}
 
-  /** Used for style overrides */
-  style?: Style;
-
-  /** Used for style overrides */
-  className?: string;
-}
-
-export const DrylusProvider = ({ children, style, className }: DrylusProviderProps) => {
+export const DrylusProvider = ({ children, style, className, baseColor }: DrylusProviderProps) => {
   return (
-    <ThemeProvider style={style} className={className}>
+    <ThemeProvider baseColor={baseColor} style={style} className={className}>
       <AlertsProvider>{children}</AlertsProvider>
     </ThemeProvider>
   );

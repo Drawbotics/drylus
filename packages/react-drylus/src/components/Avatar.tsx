@@ -83,7 +83,7 @@ export interface AvatarProps {
   size?: number | Size.DEFAULT | Size.SMALL | Size.LARGE;
 
   /** @kind Color */
-  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE;
+  color?: Color.BRAND | Color.RED | Color.BLUE | Color.GREEN | Color.ORANGE | Color.PRIMARY;
 
   /** Custom override for the background color, useful for profiles */
   backgroundColor?: string;

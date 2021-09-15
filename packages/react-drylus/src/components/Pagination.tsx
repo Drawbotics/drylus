@@ -2,7 +2,8 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React from 'react';
 
-import { Category, Size, Tier } from '../enums';
+import { useThemeColor } from '../base';
+import { Size, Tier } from '../enums';
 import { Style } from '../types';
 import { run } from '../utils';
 import { Button } from './Button';
@@ -112,6 +113,7 @@ export const Pagination = ({
     console.warn('`maxVisiblePages` has to be at least 4');
   }
   const labels = _getLabels(value, pages, Math.max(maxVisiblePages, 4));
+  const color = useThemeColor();
   return (
     <div style={style} className={cx(styles.root, className)}>
       <Button
@@ -135,7 +137,7 @@ export const Pagination = ({
               return (
                 <Button
                   onClick={() => onChange(label as number)}
-                  category={value === label ? Category.BRAND : undefined}
+                  color={value === label ? color : undefined}
                   tier={value === label ? Tier.PRIMARY : Tier.TERTIARY}
                   size={Size.SMALL}>
                   {`${label}`}
