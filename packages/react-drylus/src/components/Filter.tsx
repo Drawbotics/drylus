@@ -46,6 +46,9 @@ const styles = {
     margin-top: ${sv.marginExtraSmall};
     background: ${sv.white};
     min-width: 180px;
+    max-height: 290px;
+    display: flex;
+    flex-direction: column;
     border-radius: ${sv.defaultBorderRadius};
     border: 1px solid ${sv.azure};
     box-shadow: ${sv.elevation2};
