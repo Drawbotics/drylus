@@ -13,7 +13,7 @@ exports[`Text matches snapshot when it has Text and TextLink as children 1`] = `
   text-decoration: none;
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
-  color: #4673D1;
+  color: #3A78F2;
 }
 
 .emotion-1:hover {
