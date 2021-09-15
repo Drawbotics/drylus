@@ -4,10 +4,11 @@ import { LngLat, LngLatBounds } from 'mapbox-gl';
 import React, { useRef, useState } from 'react';
 import MapboxMap, { Marker as MapboxMarker } from 'react-mapbox-wrapper';
 
+import { useThemeColor } from '../base';
 import { Size, Tier } from '../enums';
 import { Flex, FlexDirection, FlexItem, Margin } from '../layout';
 import { Style } from '../types';
-import { run } from '../utils';
+import { getEnumAsClass, run } from '../utils';
 import { Popover } from './Popover';
 import { Text } from './Text';
 
@@ -38,6 +39,18 @@ const styles = {
     border-radius: 0 50% 80% 50%;
     transform: rotate(-135deg);
     background: ${sv.brand};
+  `,
+  blue: css`
+    background: ${sv.blue};
+  `,
+  red: css`
+    background: ${sv.red};
+  `,
+  green: css`
+    background: ${sv.green};
+  `,
+  orange: css`
+    background: ${sv.orange};
   `,
   label: css`
     position: absolute;
@@ -132,8 +145,8 @@ export const Map = ({
   ...props
 }: MapProps) => {
   const ref = useRef();
-
   const [mapRef, setMapRef] = useState(ref.current);
+  const themeColor = useThemeColor();
 
   const handleFitMarkers = (map: typeof MapboxMap) => {
     const coordinatesToFit = markers.reduce((coords, marker) => {
@@ -153,7 +166,11 @@ export const Map = ({
           }
         })}
         <div className={styles.dropContainer}>
-          <div className={styles.drop} />
+          <div
+            className={cx(styles.drop, {
+              [styles[getEnumAsClass<typeof styles>(themeColor)]]: themeColor != null,
+            })}
+          />
         </div>
       </div>
     );
