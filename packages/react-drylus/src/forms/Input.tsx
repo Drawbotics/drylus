@@ -3,6 +3,7 @@ import { css, cx } from 'emotion';
 import get from 'lodash/get';
 import React, { forwardRef, useState } from 'react';
 
+import { useThemeColor } from '../base';
 import { Button, Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
@@ -67,6 +68,26 @@ const styles = {
 
     @media ${sv.screenL} {
       height: ${sv.marginExtraLarge};
+    }
+  `,
+  blue: css`
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px ${sv.blue} !important;
+    }
+  `,
+  red: css`
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
+    }
+  `,
+  orange: css`
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px ${sv.orange} !important;
+    }
+  `,
+  green: css`
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
     }
   `,
   straightLeft: css`
@@ -348,6 +369,7 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
   } = useResponsiveProps<RawInputProps<T>>(rest, responsive);
 
   const [isFocused, setFocused] = useState(false);
+  const themeColor = useThemeColor();
 
   const value = isFunction(_value) ? _value(props.name) : _value;
 
@@ -440,6 +462,7 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
             className={cx(styles.input, {
               [styles.straightLeft]: leading != null,
               [styles.straightRight]: trailing != null,
+              [styles[getEnumAsClass<typeof styles>(themeColor)]]: themeColor != null,
             })}
             type={type}
             value={value}

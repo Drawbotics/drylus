@@ -2,6 +2,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React, { forwardRef, useState } from 'react';
 
+import { useThemeColor } from '../base';
 import { Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
@@ -59,6 +60,26 @@ const styles = {
     &:read-only {
       box-shadow: none !important;
       pointer-events: none;
+    }
+  `,
+  blue: css`
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px ${sv.blue} !important;
+    }
+  `,
+  red: css`
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
+    }
+  `,
+  orange: css`
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px ${sv.orange} !important;
+    }
+  `,
+  green: css`
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
     }
   `,
   valid: css`
@@ -178,6 +199,7 @@ const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps
     size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<RawTextAreaProps<T>>(rest, responsive);
+  const themeColor = useThemeColor();
 
   const [isFocused, setFocused] = useState(false);
 
@@ -247,7 +269,9 @@ const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps
             onBlur={() => setFocused(false)}
             onChange={handleOnChange}
             readOnly={onChange == null}
-            className={styles.textarea}
+            className={cx(styles.textarea, {
+              [styles[getEnumAsClass<typeof styles>(themeColor)]]: themeColor != null,
+            })}
             value={value}
             ref={inputRef}
             {...props}
