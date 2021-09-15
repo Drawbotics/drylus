@@ -113,7 +113,7 @@ export const Pagination = ({
     console.warn('`maxVisiblePages` has to be at least 4');
   }
   const labels = _getLabels(value, pages, Math.max(maxVisiblePages, 4));
-  const color = useThemeColor();
+  const themeColor = useThemeColor();
   return (
     <div style={style} className={cx(styles.root, className)}>
       <Button
@@ -129,7 +129,7 @@ export const Pagination = ({
           {run(() => {
             if (label === '...') {
               return (
-                <Button tier={Tier.TERTIARY} size={Size.SMALL}>
+                <Button color={themeColor} tier={Tier.TERTIARY} size={Size.SMALL}>
                   {label}
                 </Button>
               );
@@ -137,7 +137,7 @@ export const Pagination = ({
               return (
                 <Button
                   onClick={() => onChange(label as number)}
-                  color={value === label ? color : undefined}
+                  color={value === label ? themeColor : undefined}
                   tier={value === label ? Tier.PRIMARY : Tier.TERTIARY}
                   size={Size.SMALL}>
                   {`${label}`}
