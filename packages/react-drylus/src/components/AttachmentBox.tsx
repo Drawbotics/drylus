@@ -3,13 +3,14 @@ import { css, cx } from 'emotion';
 import last from 'lodash/last';
 import React, { Fragment } from 'react';
 
-import { Color, Size } from '../enums';
+import { useThemeColor } from '../base';
+import { Size } from '../enums';
 import { Flex, FlexDirection, FlexItem, FlexJustify, FlexSpacer } from '../layout';
 import { Responsive, Style } from '../types';
 import { useResponsiveProps } from '../utils';
 import { FileIcon, FileType } from './FileIcon';
 import { Icon } from './Icon';
-import { ProgressBar } from './ProgressBar';
+import { ProgressBar, ProgressBarProps } from './ProgressBar';
 import { Text } from './Text';
 
 const styles = {
@@ -59,6 +60,8 @@ export const AttachmentBox = ({ responsive, ...rest }: AttachmentBoxProps) => {
     asFolder,
     className,
   } = useResponsiveProps<AttachmentBoxProps>(rest, responsive);
+  const themeColor = useThemeColor();
+
   return (
     <div style={style} className={cx(styles.root, className)}>
       <Flex
@@ -84,7 +87,7 @@ export const AttachmentBox = ({ responsive, ...rest }: AttachmentBoxProps) => {
                 <ProgressBar
                   style={{ backgroundColor: sv.neutral, marginTop: 4 }}
                   size={Size.SMALL}
-                  color={Color.GREEN}
+                  color={themeColor as ProgressBarProps['color']}
                   percentage={progress}
                 />
               ) : null}
