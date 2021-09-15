@@ -1,3 +1,16 @@
+# v7.8.1 (Wed Sep 15 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Filter: limit max height to 290px  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.7.2 (Fri Sep 10 2021)
 
 #### ⚠️  Pushed to master
