@@ -6,11 +6,11 @@ import { CalendarProps } from 'react-calendar';
 import Calendar from 'react-calendar/dist/entry.nostyle';
 import { createPortal } from 'react-dom';
 
-import { themeStyles } from '../base';
+import { themeStyles, useThemeColor } from '../base';
 import { Button, Icon } from '../components';
 import { Align, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { isFunction, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, useResponsiveProps } from '../utils';
 import { InputWithRef } from './Input';
 
 const styles = {
@@ -146,6 +146,34 @@ const styles = {
 
     &.react-calendar__month-view__days__day--neighboringMonth {
       color: ${sv.colorSecondary};
+    }
+  `,
+  blue: css`
+    &.react-calendar__tile--active {
+      & > abbr {
+        background: ${sv.blue} !important;
+      }
+    }
+  `,
+  red: css`
+    &.react-calendar__tile--active {
+      & > abbr {
+        background: ${sv.red} !important;
+      }
+    }
+  `,
+  green: css`
+    &.react-calendar__tile--active {
+      & > abbr {
+        background: ${sv.green} !important;
+      }
+    }
+  `,
+  orange: css`
+    &.react-calendar__tile--active {
+      & > abbr {
+        background: ${sv.orange} !important;
+      }
     }
   `,
   topRender: css`
@@ -304,6 +332,7 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
   const [outletElement, setOutletElement] = useState<HTMLElement>();
   const [isFocused, setIsFocused] = useState(false);
   const { screenSize, ScreenSizes } = useScreenSize();
+  const themeColor = useThemeColor();
 
   const isDesktop = screenSize > ScreenSizes.XL;
 
@@ -431,7 +460,9 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
                   maxDate={maxDate && objectToDate(maxDate)}
                   minDate={minDate && objectToDate(minDate)}
                   className={styles.calendar}
-                  tileClassName={styles.tile}
+                  tileClassName={cx(styles.tile, {
+                    [styles[getEnumAsClass<typeof styles>(themeColor)]]: themeColor != null,
+                  })}
                   locale={locale}
                   activeStartDate={activeStartDate && objectToDate(activeStartDate)}
                   onChange={
