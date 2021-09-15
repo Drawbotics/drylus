@@ -42,7 +42,7 @@ const styles = {
     right: 0;
   `,
   top: css`
-    right: 0;
+    left: 0;
     top: auto;
     bottom: 100%;
     margin-top: 0;

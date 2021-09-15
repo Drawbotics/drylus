@@ -45,7 +45,7 @@ export const orangeLighter = '#fff7eb';
 export const warning = orange;
 
 export const blueDark = '#2A41A2';
-export const blue = '#4673D1';
+export const blue = '#3A78F2';
 export const blueLight = '#CFD8FF';
 export const blueLighter = '#E7EBFC';
 export const info = blue;

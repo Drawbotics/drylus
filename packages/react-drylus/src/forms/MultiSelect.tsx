@@ -4,6 +4,7 @@ import { css, cx } from 'emotion';
 import last from 'lodash/last';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
+import { useThemeColor } from '../base';
 import { Icon, RoundIcon, Spinner, Tag } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
@@ -78,6 +79,19 @@ const styles = {
   `,
   active: css`
     box-shadow: inset 0px 0px 0px 2px ${sv.brand} !important;
+  `,
+
+  blue: css`
+    box-shadow: inset 0px 0px 0px 2px ${sv.blue} !important;
+  `,
+  red: css`
+    box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
+  `,
+  orange: css`
+    box-shadow: inset 0px 0px 0px 2px ${sv.orange} !important;
+  `,
+  green: css`
+    box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
   `,
   disabled: css`
     & > [data-element='select'] {
@@ -408,6 +422,7 @@ export const MultiSelect = <T extends any, K extends string>({
   const optionsRef = useRef<HTMLDivElement>(null);
   const [canBlur, setCanBlur] = useState(true);
   const { screenSize, ScreenSizes } = useScreenSize();
+  const themeColor = useThemeColor();
 
   const values = isFunction(_values) ? _values(name) : _values;
   const hideDropdown = hideOptions === true && allowTyping === true;
@@ -545,6 +560,7 @@ export const MultiSelect = <T extends any, K extends string>({
         data-element="select"
         className={cx(styles.select, {
           [styles.active]: isFocused,
+          [styles[getEnumAsClass<typeof styles>(themeColor)]]: themeColor != null && isFocused,
         })}
         onClick={onChange != null ? handleClickSelect : undefined}>
         <div className={cx(styles.values, { [styles.smallValues]: size === Size.SMALL })}>

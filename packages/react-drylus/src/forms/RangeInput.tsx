@@ -3,10 +3,11 @@ import { css, cx } from 'emotion';
 import React, { useState } from 'react';
 import { GetTrackProps, Handles, Rail, Slider, SliderItem, Tracks } from 'react-compound-slider';
 
+import { useThemeColor } from '../base';
 import { Text, tooltipStyles } from '../components';
 import { Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { isFunction, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, useResponsiveProps } from '../utils';
 
 const styles = {
   root: css`
@@ -40,6 +41,18 @@ const styles = {
     margin-left: -6px;
     cursor: pointer;
   `,
+  blue: css`
+    border-color: ${sv.blue};
+  `,
+  red: css`
+    border-color: ${sv.red};
+  `,
+  orange: css`
+    border-color: ${sv.orange};
+  `,
+  green: css`
+    border-color: ${sv.green};
+  `,
   disabledHandle: css`
     border-color: ${sv.neutral};
     cursor: not-allowed;
@@ -52,6 +65,18 @@ const styles = {
     background-color: ${sv.brand};
     border-radius: ${sv.defaultBorderRadius};
     cursor: pointer;
+  `,
+  blueTrack: css`
+    background-color: ${sv.blue};
+  `,
+  redTrack: css`
+    background-color: ${sv.red};
+  `,
+  orangeTrack: css`
+    background-color: ${sv.orange};
+  `,
+  greenTrack: css`
+    background-color: ${sv.green};
   `,
   disabledTrack: css`
     background-color: ${sv.neutral};
@@ -103,6 +128,7 @@ export interface HandleProps {
 
 const Handle = ({ handle, getHandleProps, renderValue, disabled, hideTooltip }: HandleProps) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
+  const themeColor = useThemeColor();
   const { id, value, percent } = handle;
 
   const handleHideTooltip = () => {
@@ -117,7 +143,10 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled, hideTooltip }: 
   return (
     <div
       style={{ left: `${percent}%` }}
-      className={cx(styles.handle, { [styles.disabledHandle]: disabled === true })}
+      className={cx(styles.handle, {
+        [styles[getEnumAsClass<typeof styles>(themeColor)]]: themeColor != null,
+        [styles.disabledHandle]: disabled === true,
+      })}
       {...getHandleProps(
         id,
         disabled || hideTooltip
@@ -147,13 +176,17 @@ export interface TrackProps {
 }
 
 const Track = ({ source, target, getTrackProps, disabled }: TrackProps) => {
+  const themeColor = useThemeColor();
   return (
     <div
       style={{
         left: `${source.percent}%`,
         width: `${target.percent - source.percent}%`,
       }}
-      className={cx(styles.track, { [styles.disabledTrack]: disabled === true })}
+      className={cx(styles.track, {
+        [styles[`${getEnumAsClass(themeColor)}Track` as keyof typeof styles]]: themeColor != null,
+        [styles.disabledTrack]: disabled === true,
+      })}
       {...getTrackProps()}
     />
   );

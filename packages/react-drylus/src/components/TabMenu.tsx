@@ -2,10 +2,11 @@ import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
 import React, { ComponentClass, ReactElement, ReactNode } from 'react';
 
+import { useThemeColor } from '../base';
 import { Size } from '../enums';
 import { Padding } from '../layout';
 import { Responsive, Style } from '../types';
-import { checkComponentProps, useResponsiveProps } from '../utils';
+import { checkComponentProps, getEnumAsClass, useResponsiveProps } from '../utils';
 
 const styles = {
   root: css`
@@ -88,6 +89,26 @@ const styles = {
       transition: ${sv.transitionShort};
     }
   `,
+  blue: css`
+    &::after {
+      background: ${sv.blue};
+    }
+  `,
+  red: css`
+    &::after {
+      background: ${sv.red};
+    }
+  `,
+  green: css`
+    &::after {
+      background: ${sv.green};
+    }
+  `,
+  orange: css`
+    &::after {
+      background: ${sv.orange};
+    }
+  `,
   active: css`
     color: ${sv.colorPrimary};
 
@@ -164,6 +185,7 @@ export const TabMenuItem = ({ responsive, ...rest }: TabMenuItemProps) => {
     vertical,
     className,
   } = useResponsiveProps<TabMenuItemProps>(rest, responsive);
+  const themeColor = useThemeColor();
   return (
     <div
       style={style}
@@ -173,6 +195,7 @@ export const TabMenuItem = ({ responsive, ...rest }: TabMenuItemProps) => {
           [styles.active]: active,
           [styles.verticalActive]: vertical && active,
           [styles.disabled]: disabled,
+          [styles[getEnumAsClass<typeof styles>(themeColor)]]: themeColor != null,
         },
         className,
       )}

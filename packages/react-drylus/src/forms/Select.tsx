@@ -3,6 +3,7 @@ import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from 'emotion';
 import React, { useEffect, useRef, useState } from 'react';
 
+import { useThemeColor } from '../base';
 import { Icon, IconType, RoundIcon, Spinner } from '../components';
 import { Category, Color, Shade, Size } from '../enums';
 import { Flex, FlexItem, FlexSpacer } from '../layout';
@@ -87,6 +88,26 @@ const styles = {
       box-shadow: none;
     }
   `,
+  blue: css`
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px ${sv.blue} !important;
+    }
+  `,
+  red: css`
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
+    }
+  `,
+  orange: css`
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px ${sv.orange} !important;
+    }
+  `,
+  green: css`
+    &:focus {
+      box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
+    }
+  `,
   readOnly: css`
     pointer-events: none;
 
@@ -105,6 +126,18 @@ const styles = {
   `,
   active: css`
     box-shadow: inset 0px 0px 0px 2px ${sv.brand} !important;
+  `,
+  blueActive: css`
+    box-shadow: inset 0px 0px 0px 2px ${sv.blue} !important;
+  `,
+  redActive: css`
+    box-shadow: inset 0px 0px 0px 2px ${sv.red} !important;
+  `,
+  orangeActive: css`
+    box-shadow: inset 0px 0px 0px 2px ${sv.orange} !important;
+  `,
+  greenActive: css`
+    box-shadow: inset 0px 0px 0px 2px ${sv.green} !important;
   `,
   valid: css`
     > [data-element='select'] {
@@ -252,6 +285,8 @@ const NativeSelect = <T extends number | string, K extends string>({
   options,
   ...props
 }: NativeSelectProps<T, K>) => {
+  const themeColor = useThemeColor();
+
   const handleOnChange = (e: React.FormEvent<HTMLSelectElement>) => {
     if (onChange != null) {
       const valueIsNumber = typeof value === 'number';
@@ -267,7 +302,9 @@ const NativeSelect = <T extends number | string, K extends string>({
     <select
       data-element="select"
       disabled={disabled}
-      className={styles.select}
+      className={cx(styles.select, {
+        [styles[getEnumAsClass<typeof styles>(themeColor)]]: themeColor != null,
+      })}
       value={value}
       onChange={handleOnChange}
       {...props}>
@@ -300,6 +337,7 @@ const CustomSelect = <T extends number | string, K extends string>({
   const [isFocused, setIsFocused] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
+  const themeColor = useThemeColor();
 
   const optionsPanel = optionsRef.current?.getBoundingClientRect();
   const topRender = optionsPanel ? _getShouldRenderTop(optionsPanel) : false;
@@ -339,6 +377,8 @@ const CustomSelect = <T extends number | string, K extends string>({
       <div
         className={cx(styles.select, {
           [styles.active]: isFocused,
+          [styles[`${getEnumAsClass(themeColor)}Active` as keyof typeof styles]]:
+            themeColor != null && isFocused,
         })}
         onClick={handleClickSelect}
         style={{ display: 'flex' }}

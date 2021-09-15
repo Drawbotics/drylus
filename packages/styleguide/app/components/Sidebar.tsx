@@ -1,5 +1,9 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import {
+  Avatar,
+  Color,
+  Dropdown,
+  DropdownOption,
   Flex,
   FlexDirection,
   FlexItem,
@@ -15,6 +19,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Logo from './Logo';
+// @ts-ignore
 import Search from './Search';
 
 const styles = {
@@ -42,12 +47,20 @@ const styles = {
   `,
 };
 
-const Sidebar = () => {
+interface SidebarProps {
+  color: Color;
+  onChangeColor: (color: Color) => void;
+}
+
+const Sidebar = ({ color, onChangeColor }: SidebarProps) => {
   const [searchOpen, toggleSearch] = useState(false);
 
   return (
     <div className={styles.sidebar}>
-      <Flex direction={FlexDirection.VERTICAL} justify={FlexJustify.START}>
+      <Flex
+        style={{ height: '100%' }}
+        direction={FlexDirection.VERTICAL}
+        justify={FlexJustify.START}>
         <FlexItem>
           <Margin size={{ bottom: Size.SMALL }}>
             <Link to="/">
@@ -92,7 +105,7 @@ const Sidebar = () => {
             </Tooltip>
           </Margin>
         </FlexItem>
-        <FlexItem>
+        <FlexItem flex>
           <Margin size={{ bottom: Size.SMALL }}>
             <Tooltip
               content="Coding guidelines"
@@ -105,6 +118,20 @@ const Sidebar = () => {
               </Link>
             </Tooltip>
           </Margin>
+        </FlexItem>
+        <FlexItem>
+          <Dropdown
+            style={{ right: 'initial', left: 0 }}
+            side={Position.TOP}
+            trigger={<Avatar color={color} />}>
+            {Object.keys(Color).map((color) => (
+              <DropdownOption
+                onClick={() => onChangeColor(color as Color)}
+                key={color}
+                text={color}
+              />
+            ))}
+          </Dropdown>
         </FlexItem>
       </Flex>
       <Search open={searchOpen} onClickClose={() => toggleSearch(false)} />

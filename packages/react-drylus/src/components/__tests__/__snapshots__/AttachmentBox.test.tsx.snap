@@ -7,6 +7,25 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
   flex: 1;
 }
 
+.emotion-5 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+}
+
+.emotion-5::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
+}
+
 .emotion-17 {
   background: #F1F5F9;
   border-radius: 4px;
@@ -166,31 +185,6 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
 
 .emotion-6 [data-element='bar'] {
   border-radius: calc(8px / 2);
-}
-
-.emotion-5 {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  background: #879ba6;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
-  overflow: hidden;
-  background: #3FBC9B;
-}
-
-.emotion-5::after {
-  background: #879ba6;
-  border-radius: 0 !important;
-  background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
-}
-
-.emotion-5::after {
-  background: #3FBC9B;
-  background-image: linear-gradient( to right, #3FBC9B 8%, #C1E8DE 18%, #3FBC9B 33% ) !important;
 }
 
 .emotion-10 {
@@ -616,6 +610,25 @@ exports[`AttachmentBox matches snapshot when is given a completed attachment 1`]
   flex: 1;
 }
 
+.emotion-5 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+}
+
+.emotion-5::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
+}
+
 .emotion-13 {
   background: #F1F5F9;
   border-radius: 4px;
@@ -775,31 +788,6 @@ exports[`AttachmentBox matches snapshot when is given a completed attachment 1`]
 
 .emotion-6 [data-element='bar'] {
   border-radius: calc(8px / 2);
-}
-
-.emotion-5 {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  background: #879ba6;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
-  overflow: hidden;
-  background: #3FBC9B;
-}
-
-.emotion-5::after {
-  background: #879ba6;
-  border-radius: 0 !important;
-  background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
-}
-
-.emotion-5::after {
-  background: #3FBC9B;
-  background-image: linear-gradient( to right, #3FBC9B 8%, #C1E8DE 18%, #3FBC9B 33% ) !important;
 }
 
 <div
@@ -915,6 +903,25 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
   flex: 1;
 }
 
+.emotion-5 {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #879ba6;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+}
+
+.emotion-5::after {
+  background: #879ba6;
+  border-radius: 0 !important;
+  background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
+}
+
 .emotion-13 {
   background: #F1F5F9;
   border-radius: 4px;
@@ -1074,31 +1081,6 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
 
 .emotion-6 [data-element='bar'] {
   border-radius: calc(8px / 2);
-}
-
-.emotion-5 {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  background: #879ba6;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
-  overflow: hidden;
-  background: #3FBC9B;
-}
-
-.emotion-5::after {
-  background: #879ba6;
-  border-radius: 0 !important;
-  background-image: linear-gradient( to right, #879ba6 8%, #d3dce6 18%, #879ba6 33% ) !important;
-}
-
-.emotion-5::after {
-  background: #3FBC9B;
-  background-image: linear-gradient( to right, #3FBC9B 8%, #C1E8DE 18%, #3FBC9B 33% ) !important;
 }
 
 <div
