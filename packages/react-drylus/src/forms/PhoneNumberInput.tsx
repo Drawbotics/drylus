@@ -1,11 +1,12 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { countries } from 'countries-list';
 import { Country } from 'country-state-city';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Responsive } from 'src/types';
 
+import { Size } from '../enums';
 import { isFunction, useResponsiveProps } from '../utils';
 import { Input, InputProps } from './Input';
 import { Select } from './Select';
@@ -26,6 +27,9 @@ const styles = {
     left: ${sv.marginSmall};
     z-index: 99;
     font-size: 1.4rem;
+  `,
+  small: css`
+    bottom: 4px;
   `,
 };
 
@@ -66,10 +70,9 @@ export const PhoneNumberInput = <T extends string>({
   responsive,
   ...rest
 }: PhoneNumberInputProps<T>) => {
-  const { value: _value, onChange, name, ...props } = useResponsiveProps<PhoneNumberInputProps<T>>(
-    rest,
-    responsive,
-  );
+  const { value: _value, onChange, name, size, ...props } = useResponsiveProps<
+    PhoneNumberInputProps<T>
+  >(rest, responsive);
   const [country, setCountry] = useState<keyof typeof countries>();
   const value = isFunction(_value) ? _value(name) : _value;
 
@@ -118,9 +121,14 @@ export const PhoneNumberInput = <T extends string>({
 
   return (
     <div className={styles.group}>
-      {country != null ? <div className={styles.emoji}>{countries[country].emoji}</div> : null}
+      {country != null ? (
+        <div className={cx(styles.emoji, { [styles.small]: size === Size.SMALL })}>
+          {countries[country].emoji}
+        </div>
+      ) : null}
       <Input
         {...props}
+        size={size}
         leading={
           <Select
             className={styles.select}
