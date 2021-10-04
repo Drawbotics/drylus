@@ -12,4 +12,4 @@ export * from './Hint';
 export * from './TextArea';
 export * from './RangeInput';
 export * from './InlineEdit';
-export * from './PhontNumberInput';
+export * from './PhoneNumberInput';
