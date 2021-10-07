@@ -18,6 +18,10 @@ const styles = {
   select: css`
     [data-element='select'] {
       color: transparent !important;
+
+      > option {
+        color: initial;
+      }
     }
   `,
   emoji: css`
