@@ -1,3 +1,16 @@
+# v7.8.3 (Thu Oct 07 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - PhoneNumberInput: make text for options visible  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.8.2 (Mon Oct 04 2021)
 
 #### ⚠️  Pushed to master
