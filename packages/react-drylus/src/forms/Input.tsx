@@ -266,8 +266,11 @@ export interface InputProps<T = string> {
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
 
-  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: boolean | string;
+  /** Used to trigger validation after an user switches inputs */
+  validate?: (name?: T) => void;
+
+  /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: boolean | string | ((name?: T) => string | undefined);
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;
@@ -347,9 +350,10 @@ export interface RawInputProps<T> extends InputProps<T> {
 
 const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) => {
   const {
+    name,
     value: _value,
     onChange,
-    error,
+    error: _error,
     valid,
     hint,
     prefix,
@@ -365,8 +369,11 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
     extraLeftPadding,
     type = 'text',
     size = Size.DEFAULT,
+    validate,
     ...props
   } = useResponsiveProps<RawInputProps<T>>(rest, responsive);
+
+  const error = typeof _error === 'function' ? _error(props.name) : _error
 
   const [isFocused, setFocused] = useState(false);
   const themeColor = useThemeColor();
@@ -454,9 +461,13 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
             }
           })}
           <input
+            name={name}
             disabled={disabled}
             onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
+            onBlur={() =>{
+              setFocused(false)
+              validate && validate(name)
+            }}
             onChange={handleOnChange}
             readOnly={onChange == null}
             className={cx(styles.input, {

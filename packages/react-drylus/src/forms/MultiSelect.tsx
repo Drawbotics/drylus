@@ -350,8 +350,11 @@ export interface MultiSelectProps<T, K = string> {
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
 
-  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: string | boolean;
+  /** Used to trigger validation after an user switches inputs */
+  validate?: (name?: K) => void;
+
+  /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: boolean | string | ((name?: K) => string | undefined);
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;
@@ -399,7 +402,7 @@ export const MultiSelect = <T extends any, K extends string>({
     placeholder = ' -- ',
     disabled,
     hint,
-    error,
+    error: _error,
     valid,
     name,
     loading,
@@ -412,8 +415,10 @@ export const MultiSelect = <T extends any, K extends string>({
     typeZonePlaceholder = 'Add option...',
     className,
     native = true,
+    validate,
     ...props
   } = useResponsiveProps<MultiSelectProps<T, K>>(rest, responsive);
+  const error = typeof _error === 'function' ? _error(name) : _error
 
   const selectRef = useRef<HTMLSelectElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -631,7 +636,12 @@ export const MultiSelect = <T extends any, K extends string>({
         ref={selectRef}
         onChange={onChange != null ? (e) => handleSelectChange(e.target.options) : undefined}
         onFocus={() => setIsFocused(true)}
-        onBlur={() => (canBlur ? setIsFocused(false) : null)}
+        onBlur={() => {
+          if(canBlur) {
+            setIsFocused(false)
+            validate && validate(name)
+          }
+        }}
         multiple
         {...props}>
         {options.map((option) => (

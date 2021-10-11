@@ -5,9 +5,10 @@ import { GetTrackProps, Handles, Rail, Slider, SliderItem, Tracks } from 'react-
 
 import { useThemeColor } from '../base';
 import { Text, tooltipStyles } from '../components';
-import { Size } from '../enums';
+import { Size, Category } from '../enums';
 import { Responsive, Style } from '../types';
-import { getEnumAsClass, isFunction, useResponsiveProps } from '../utils';
+import { getEnumAsClass, isFunction, useResponsiveProps, run } from '../utils';
+import { Hint } from './Hint';
 
 const styles = {
   root: css`
@@ -124,9 +125,10 @@ export interface HandleProps {
   renderValue?: (value: number) => string;
   disabled?: boolean;
   hideTooltip?: boolean;
+  invalid?: boolean
 }
 
-const Handle = ({ handle, getHandleProps, renderValue, disabled, hideTooltip }: HandleProps) => {
+const Handle = ({ handle, getHandleProps, renderValue, disabled, hideTooltip, invalid }: HandleProps) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const themeColor = useThemeColor();
   const { id, value, percent } = handle;
@@ -146,6 +148,7 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled, hideTooltip }: 
       className={cx(styles.handle, {
         [styles[getEnumAsClass<typeof styles>(themeColor)]]: themeColor != null,
         [styles.disabledHandle]: disabled === true,
+        [styles.red]: invalid
       })}
       {...getHandleProps(
         id,
@@ -173,9 +176,10 @@ export interface TrackProps {
   target: SliderItem;
   getTrackProps: GetTrackProps;
   disabled?: boolean;
+  invalid?: boolean
 }
 
-const Track = ({ source, target, getTrackProps, disabled }: TrackProps) => {
+const Track = ({ source, target, getTrackProps, disabled, invalid }: TrackProps) => {
   const themeColor = useThemeColor();
   return (
     <div
@@ -186,6 +190,7 @@ const Track = ({ source, target, getTrackProps, disabled }: TrackProps) => {
       className={cx(styles.track, {
         [styles[`${getEnumAsClass(themeColor)}Track` as keyof typeof styles]]: themeColor != null,
         [styles.disabledTrack]: disabled === true,
+        [styles.redTrack]: invalid
       })}
       {...getTrackProps()}
     />
@@ -234,6 +239,12 @@ export interface RangeInputProps<T, K = string> {
 
   /** Reponsive prop overrides */
   responsive?: Responsive<this>;
+
+  /** Used to trigger validation after an user switches inputs */
+  validate?: (name?: K) => void;
+
+  /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: boolean | string | ((name?: K) => string | undefined);
 }
 
 export const RangeInput = <T extends number | Array<number>, K extends string>({
@@ -254,75 +265,87 @@ export const RangeInput = <T extends number | Array<number>, K extends string>({
     name,
     className,
     style,
+    error: _error,
+    validate
   } = useResponsiveProps<RangeInputProps<T, K>>(rest, responsive);
-
+  const error = typeof _error === 'function' ? _error(name) : _error
   const value = isFunction(_value) ? _value(name) : _value;
 
   const isMultiHandle = typeof value !== 'number' && (value as Array<number>).length > 1;
   const values: Array<number> = isMultiHandle ? (value as Array<number>) : [value as number];
 
   return (
-    <Slider
-      rootStyle={style}
-      disabled={disabled}
-      onUpdate={(values) =>
-        onUpdate != null ? onUpdate(isMultiHandle ? (values as any) : values[0], name) : undefined
-      }
-      onChange={(values) => onChange(isMultiHandle ? (values as any) : values[0], name)}
-      mode={3}
-      step={step}
-      className={cx(styles.root, { [styles.disabled]: disabled === true }, className)}
-      domain={[min, max]}
-      values={values}>
-      <Rail>
-        {({ getRailProps }) => (
-          <div
-            className={cx(styles.rail, { [styles.disabledRail]: disabled === true })}
-            {...getRailProps()}
-          />
-        )}
-      </Rail>
-      <Handles>
-        {({ handles, getHandleProps }) => (
-          <div>
-            {handles.map((handle) => (
-              <Handle
-                hideTooltip={hideTooltips}
-                disabled={disabled}
-                renderValue={renderValue != null ? (v) => renderValue(v) : undefined}
-                key={handle.id}
-                handle={handle}
-                getHandleProps={getHandleProps}
-              />
-            ))}
+    <>
+      <Slider
+        rootStyle={style}
+        disabled={disabled}
+        onUpdate={(values) =>
+          onUpdate != null ? onUpdate(isMultiHandle ? (values as any) : values[0], name) : undefined
+        }
+        onChange={(values) => onChange(isMultiHandle ? (values as any) : values[0], name)}
+        onSlideEnd={() => validate && validate(name)}
+        mode={3}
+        step={step}
+        className={cx(styles.root, { [styles.disabled]: disabled === true }, className)}
+        domain={[min, max]}
+        values={values}>
+        <Rail>
+          {({ getRailProps }) => (
+            <div
+              className={cx(styles.rail, { [styles.disabledRail]: disabled === true })}
+              {...getRailProps()}
+            />
+          )}
+        </Rail>
+        <Handles>
+          {({ handles, getHandleProps }) => (
+            <div>
+              {handles.map((handle) => (
+                <Handle
+                  hideTooltip={hideTooltips}
+                  disabled={disabled}
+                  renderValue={renderValue != null ? (v) => renderValue(v) : undefined}
+                  key={handle.id}
+                  handle={handle}
+                  getHandleProps={getHandleProps}
+                  invalid={!!error}
+                />
+              ))}
+            </div>
+          )}
+        </Handles>
+        <Tracks left={!isMultiHandle} right={false}>
+          {({ tracks, getTrackProps }) => (
+            <div>
+              {tracks.map(({ id, source, target }) => (
+                <Track
+                  disabled={disabled}
+                  key={id}
+                  source={source}
+                  target={target}
+                  getTrackProps={getTrackProps}
+                  invalid={!!error}
+                />
+              ))}
+            </div>
+          )}
+        </Tracks>
+        {hideLabels !== true ? (
+          <div className={cx(styles.labels)}>
+            <div>
+              <Text size={Size.SMALL}>{renderValue != null ? renderValue(min) : min}</Text>
+            </div>
+            <div>
+              <Text size={Size.SMALL}>{renderValue != null ? renderValue(max) : max}</Text>
+            </div>
           </div>
-        )}
-      </Handles>
-      <Tracks left={!isMultiHandle} right={false}>
-        {({ tracks, getTrackProps }) => (
-          <div>
-            {tracks.map(({ id, source, target }) => (
-              <Track
-                disabled={disabled}
-                key={id}
-                source={source}
-                target={target}
-                getTrackProps={getTrackProps}
-              />
-            ))}
-          </div>
-        )}
-      </Tracks>
-      {hideLabels !== true ? (
-        <div className={cx(styles.labels)}>
-          <div>
-            <Text size={Size.SMALL}>{renderValue != null ? renderValue(min) : min}</Text>
-          </div>
-          <div>
-            <Text size={Size.SMALL}>{renderValue != null ? renderValue(max) : max}</Text>
-          </div>
-        </div>
-      ) : null}
-    </Slider>
+        ) : null}
+      </Slider>
+      {run(() => {
+        if (error && typeof error === 'string') {
+          return <Hint category={Category.DANGER}>{error}</Hint>;
+        }
+      })}
+    </>
   );
 };

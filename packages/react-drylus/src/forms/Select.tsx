@@ -274,6 +274,7 @@ interface NativeSelectProps<T, K = string> {
   disabled?: boolean;
   placeholder?: string;
   onChange?: (value: SelectOption<T>['value'], name?: K) => void;
+  onBlur: () => void;
   [x: string]: any;
 }
 
@@ -281,6 +282,7 @@ const NativeSelect = <T extends number | string, K extends string>({
   disabled,
   value,
   onChange,
+  onBlur,
   placeholder,
   options,
   ...props
@@ -307,6 +309,7 @@ const NativeSelect = <T extends number | string, K extends string>({
       })}
       value={value}
       onChange={handleOnChange}
+      onBlur={onBlur}
       {...props}>
       {value == null ? <option key="_placeholder">{placeholder}</option> : null}
       {options.map((option) => (
@@ -326,6 +329,7 @@ const CustomSelect = <T extends number | string, K extends string>({
   disabled,
   value,
   onChange,
+  onBlur,
   placeholder,
   options,
   name,
@@ -445,6 +449,7 @@ const CustomSelect = <T extends number | string, K extends string>({
             ? () => {
                 setIsFocused(false);
                 setIsOpen(false);
+                onBlur()
               }
             : undefined
         }>
@@ -483,8 +488,11 @@ export interface SelectProps<T, K = string> {
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
 
-  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: string | boolean;
+  /** Used to trigger validation after an user switches inputs */
+  validate?: (name?: K) => void;
+
+  /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: boolean | string | ((name?: K) => string | undefined);
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;
@@ -529,15 +537,19 @@ export const Select = <T extends number | string, K extends string>({
     placeholder = ' -- ',
     disabled,
     hint,
-    error,
+    error: _error,
+    validate,
     valid,
     loading,
     style,
     size = Size.DEFAULT,
     native = true,
     className,
+    name,
     ...props
   } = useResponsiveProps<SelectProps<T, K>>(rest, responsive);
+  const error = typeof _error === 'function' ? _error(name) : _error
+
   const { screenSize, ScreenSizes } = useScreenSize();
 
   const value = isFunction(_value) ? _value(props.name) : _value;
@@ -590,18 +602,22 @@ export const Select = <T extends number | string, K extends string>({
       })}
       {native || screenSize <= ScreenSizes.XL ? (
         <NativeSelect
+          name={name}
           value={value}
           options={options}
           onChange={onChange}
+          onBlur={() => validate && validate(name)}
           placeholder={placeholder}
           disabled={disabled}
           {...props}
         />
       ) : (
         <CustomSelect
+          name={name}
           value={value}
           options={options}
           onChange={onChange}
+          onBlur={() => validate && validate(name)}
           placeholder={placeholder}
           disabled={disabled}
           size={size}

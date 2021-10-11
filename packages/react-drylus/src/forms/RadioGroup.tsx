@@ -186,6 +186,7 @@ const styles = {
 export interface RadioProps {
   value: string | number;
   onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   disabled?: boolean;
   size?: Size.DEFAULT | Size.LARGE;
   error: boolean;
@@ -229,6 +230,7 @@ const Radio = ({
             type="radio"
             className={styles.input}
             onChange={onChange}
+            onBlur={rest.onBlur}
             {...rest}
           />
           <div data-element="sprite" className={styles.sprite}>
@@ -293,8 +295,11 @@ export interface RadioGroupProps<T, K = string> {
   /** If true, form elements will be aligned horizontally */
   horizontal?: boolean;
 
-  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: string | number;
+  /** Used to trigger validation after an user switches inputs */
+  validate?: (name?: K) => void;
+
+  /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: boolean | string | ((name?: K) => string | undefined);
 
   /** Small text shown below the group, replaced by error if present */
   hint?: string;
@@ -320,19 +325,22 @@ export const RadioGroup = <T extends any, K extends string>({
   ...rest
 }: RadioGroupProps<T, K>) => {
   const {
+    name,
     value: _value,
     onChange,
     options = [],
-    error,
+    error: _error,
     className,
     hint,
     style,
     size,
     horizontal,
+    validate,
     ...props
   } = useResponsiveProps<RadioGroupProps<T, K>>(rest, responsive);
+  const error = typeof _error === 'function' ? _error(name) : _error
 
-  const value = isFunction(_value) ? _value(props.name) : _value;
+  const value = isFunction(_value) ? _value(name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.stopPropagation();
@@ -358,9 +366,11 @@ export const RadioGroup = <T extends any, K extends string>({
               [styles.largeRadioWrapperHorizontal]: size === Size.LARGE && horizontal === true,
             })}>
             <Radio
+              name={name}
               readOnly={readOnly}
               error={!!error}
               onChange={handleOnChange}
+              onBlur={() => validate && validate(name)}
               checked={value == option.value}
               value={option.value}
               disabled={option.disabled}
