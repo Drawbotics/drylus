@@ -1,13 +1,13 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { GetTrackProps, Handles, Rail, Slider, SliderItem, Tracks } from 'react-compound-slider';
 
 import { useThemeColor } from '../base';
 import { Text, tooltipStyles } from '../components';
-import { Size, Category } from '../enums';
+import { Category, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { getEnumAsClass, isFunction, useResponsiveProps, run } from '../utils';
+import { getEnumAsClass, isFunction, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -125,10 +125,17 @@ export interface HandleProps {
   renderValue?: (value: number) => string;
   disabled?: boolean;
   hideTooltip?: boolean;
-  invalid?: boolean
+  invalid?: boolean;
 }
 
-const Handle = ({ handle, getHandleProps, renderValue, disabled, hideTooltip, invalid }: HandleProps) => {
+const Handle = ({
+  handle,
+  getHandleProps,
+  renderValue,
+  disabled,
+  hideTooltip,
+  invalid,
+}: HandleProps) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const themeColor = useThemeColor();
   const { id, value, percent } = handle;
@@ -148,7 +155,7 @@ const Handle = ({ handle, getHandleProps, renderValue, disabled, hideTooltip, in
       className={cx(styles.handle, {
         [styles[getEnumAsClass<typeof styles>(themeColor)]]: themeColor != null,
         [styles.disabledHandle]: disabled === true,
-        [styles.red]: invalid
+        [styles.red]: !!invalid,
       })}
       {...getHandleProps(
         id,
@@ -176,7 +183,7 @@ export interface TrackProps {
   target: SliderItem;
   getTrackProps: GetTrackProps;
   disabled?: boolean;
-  invalid?: boolean
+  invalid?: boolean;
 }
 
 const Track = ({ source, target, getTrackProps, disabled, invalid }: TrackProps) => {
@@ -190,7 +197,7 @@ const Track = ({ source, target, getTrackProps, disabled, invalid }: TrackProps)
       className={cx(styles.track, {
         [styles[`${getEnumAsClass(themeColor)}Track` as keyof typeof styles]]: themeColor != null,
         [styles.disabledTrack]: disabled === true,
-        [styles.redTrack]: invalid
+        [styles.redTrack]: !!invalid,
       })}
       {...getTrackProps()}
     />
@@ -266,16 +273,16 @@ export const RangeInput = <T extends number | Array<number>, K extends string>({
     className,
     style,
     error: _error,
-    validate
+    validate,
   } = useResponsiveProps<RangeInputProps<T, K>>(rest, responsive);
-  const error = typeof _error === 'function' ? _error(name) : _error
+  const error = isFunction(_error) ? _error(name) : _error;
   const value = isFunction(_value) ? _value(name) : _value;
 
   const isMultiHandle = typeof value !== 'number' && (value as Array<number>).length > 1;
   const values: Array<number> = isMultiHandle ? (value as Array<number>) : [value as number];
 
   return (
-    <>
+    <Fragment>
       <Slider
         rootStyle={style}
         disabled={disabled}
@@ -283,7 +290,7 @@ export const RangeInput = <T extends number | Array<number>, K extends string>({
           onUpdate != null ? onUpdate(isMultiHandle ? (values as any) : values[0], name) : undefined
         }
         onChange={(values) => onChange(isMultiHandle ? (values as any) : values[0], name)}
-        onSlideEnd={() => validate && validate(name)}
+        onSlideEnd={() => validate?.(name)}
         mode={3}
         step={step}
         className={cx(styles.root, { [styles.disabled]: disabled === true }, className)}
@@ -341,11 +348,7 @@ export const RangeInput = <T extends number | Array<number>, K extends string>({
           </div>
         ) : null}
       </Slider>
-      {run(() => {
-        if (error && typeof error === 'string') {
-          return <Hint category={Category.DANGER}>{error}</Hint>;
-        }
-      })}
-    </>
+      {typeof error === 'string' ? <Hint category={Category.DANGER}>{error}</Hint> : null}
+    </Fragment>
   );
 };

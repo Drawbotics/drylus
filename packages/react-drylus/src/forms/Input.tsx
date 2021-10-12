@@ -373,7 +373,7 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
     ...props
   } = useResponsiveProps<RawInputProps<T>>(rest, responsive);
 
-  const error = typeof _error === 'function' ? _error(props.name) : _error
+  const error = isFunction(_error) ? _error(props.name) : _error
 
   const [isFocused, setFocused] = useState(false);
   const themeColor = useThemeColor();
@@ -466,7 +466,8 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
             onFocus={() => setFocused(true)}
             onBlur={() =>{
               setFocused(false)
-              validate && validate(name)
+              
+              validate?.(name)
             }}
             onChange={handleOnChange}
             readOnly={onChange == null}

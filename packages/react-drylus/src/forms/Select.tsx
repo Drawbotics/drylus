@@ -548,7 +548,7 @@ export const Select = <T extends number | string, K extends string>({
     name,
     ...props
   } = useResponsiveProps<SelectProps<T, K>>(rest, responsive);
-  const error = typeof _error === 'function' ? _error(name) : _error
+  const error = isFunction(_error) ? _error(name) : _error
 
   const { screenSize, ScreenSizes } = useScreenSize();
 
@@ -606,7 +606,7 @@ export const Select = <T extends number | string, K extends string>({
           value={value}
           options={options}
           onChange={onChange}
-          onBlur={() => validate && validate(name)}
+          onBlur={() => validate?.(name)}
           placeholder={placeholder}
           disabled={disabled}
           {...props}
@@ -617,7 +617,7 @@ export const Select = <T extends number | string, K extends string>({
           value={value}
           options={options}
           onChange={onChange}
-          onBlur={() => validate && validate(name)}
+          onBlur={() => validate?.(name)}
           placeholder={placeholder}
           disabled={disabled}
           size={size}

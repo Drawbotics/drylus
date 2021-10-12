@@ -201,6 +201,7 @@ export interface RadioProps {
 const Radio = ({
   value,
   onChange,
+  onBlur,
   disabled,
   error,
   checked,
@@ -230,7 +231,7 @@ const Radio = ({
             type="radio"
             className={styles.input}
             onChange={onChange}
-            onBlur={rest.onBlur}
+            onBlur={onBlur}
             {...rest}
           />
           <div data-element="sprite" className={styles.sprite}>
@@ -338,7 +339,7 @@ export const RadioGroup = <T extends any, K extends string>({
     validate,
     ...props
   } = useResponsiveProps<RadioGroupProps<T, K>>(rest, responsive);
-  const error = typeof _error === 'function' ? _error(name) : _error
+  const error = isFunction(_error) ? _error(name) : _error
 
   const value = isFunction(_value) ? _value(name) : _value;
 
@@ -370,7 +371,7 @@ export const RadioGroup = <T extends any, K extends string>({
               readOnly={readOnly}
               error={!!error}
               onChange={handleOnChange}
-              onBlur={() => validate && validate(name)}
+              onBlur={() => validate?.(name)}
               checked={value == option.value}
               value={option.value}
               disabled={option.disabled}

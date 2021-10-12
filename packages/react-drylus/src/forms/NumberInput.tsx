@@ -274,7 +274,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
         styles.root,
         {
           [styles.withCounter]: withCounter,
-          [styles.disabled]: disabled,
+          [styles.disabled]: !!disabled,
         },
         className,
       )}>

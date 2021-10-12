@@ -209,7 +209,7 @@ export const SearchInput = <T extends any, K extends string>({
     className,
     ...props
   } = useResponsiveProps<SearchInputProps<T, K>>(rest, responsive);
-  const error = typeof _error === 'function' ? _error(name) : _error
+  const error = isFunction(_error) ? _error(name) : _error
   const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
