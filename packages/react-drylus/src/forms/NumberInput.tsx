@@ -151,8 +151,11 @@ export interface NumberInputProps<T = string> {
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
 
-  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: string | boolean;
+  /** Used to trigger validation after an user switches inputs */
+  validate?: (name?: T) => void;
+
+  /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: boolean | string | ((name?: T) => string | undefined);
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;
@@ -226,6 +229,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
     step = 1,
     size = Size.DEFAULT,
     className,
+    validate,
     ...props
   } = useResponsiveProps<NumberInputProps<T>>(rest, responsive);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -270,7 +274,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
         styles.root,
         {
           [styles.withCounter]: withCounter,
-          [styles.disabled]: disabled,
+          [styles.disabled]: disabled === true,
         },
         className,
       )}>
@@ -294,6 +298,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
       <InputWithRef
         ref={inputRef}
         error={error}
+        validate={validate}
         hint={hint}
         valid={valid}
         loading={loading}

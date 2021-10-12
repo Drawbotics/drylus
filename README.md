@@ -59,16 +59,16 @@ npm run test:react
 npm run build:react
 ```
 
-__vanilla-drylus__
-```
-npm run watch:vanilla
-npm run build:vanilla
-```
-
 __extract-emotion__
 ```
 npm run test:extract-emotion
 npm run build:extract-emotion
+```
+
+__vanilla-drylus__
+```
+npm run watch:vanilla
+npm run build:vanilla
 ```
 
 __styleguide__

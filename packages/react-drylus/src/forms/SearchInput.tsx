@@ -150,8 +150,11 @@ export interface SearchInputProps<T, K = string> {
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
 
-  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: string | boolean;
+  /** Used to trigger validation after an user switches inputs */
+  validate?: (name?: K) => void;
+
+  /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: boolean | string | ((name?: K) => string | undefined);
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;
@@ -197,7 +200,8 @@ export const SearchInput = <T extends any, K extends string>({
     style,
     onClickResult,
     hint,
-    error,
+    error: _error,
+    validate,
     valid,
     size = Size.DEFAULT,
     minimal,
@@ -205,6 +209,7 @@ export const SearchInput = <T extends any, K extends string>({
     className,
     ...props
   } = useResponsiveProps<SearchInputProps<T, K>>(rest, responsive);
+  const error = isFunction(_error) ? _error(name) : _error;
   const [isFocused, setFocused] = useState(false);
   const [canBlur, setCanBlur] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -262,6 +267,7 @@ export const SearchInput = <T extends any, K extends string>({
           )
         }
         error={error}
+        validate={validate}
         hint={hint}
         valid={valid}
         value={value}

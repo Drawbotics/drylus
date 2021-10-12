@@ -144,8 +144,11 @@ export interface TextAreaProps<T = string> {
   /** Small text shown below the box, replaced by error if present */
   hint?: string;
 
-  /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: string | boolean;
+  /** Used to trigger validation after an user switches inputs */
+  validate?: (name?: T) => void;
+
+  /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
+  error?: boolean | string | ((name?: T) => string | undefined);
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;
@@ -185,9 +188,11 @@ export interface RawTextAreaProps<T> extends TextAreaProps<T> {
 
 const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps<T>) => {
   const {
+    name,
     value: _value,
     onChange,
-    error,
+    error: _error,
+    validate,
     valid,
     hint,
     disabled,
@@ -199,6 +204,8 @@ const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps
     size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<RawTextAreaProps<T>>(rest, responsive);
+  const error = isFunction(_error) ? _error(name) : _error;
+
   const themeColor = useThemeColor();
 
   const [isFocused, setFocused] = useState(false);
@@ -264,9 +271,13 @@ const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps
             }
           })}
           <textarea
+            name={name}
             disabled={disabled}
             onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
+            onBlur={() => {
+              setFocused(false);
+              validate?.(name);
+            }}
             onChange={handleOnChange}
             readOnly={onChange == null}
             className={cx(styles.textarea, {
