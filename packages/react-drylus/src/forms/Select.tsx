@@ -552,7 +552,7 @@ export const Select = <T extends number | string, K extends string>({
 
   const { screenSize, ScreenSizes } = useScreenSize();
 
-  const value = isFunction(_value) ? _value(props.name) : _value;
+  const value = isFunction(_value) ? _value(name) : _value;
 
   return (
     <div

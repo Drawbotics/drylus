@@ -210,7 +210,7 @@ const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps
 
   const [isFocused, setFocused] = useState(false);
 
-  const value = isFunction(_value) ? _value(props.name) : _value;
+  const value = isFunction(_value) ? _value(name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
     if (onChange != null) {
