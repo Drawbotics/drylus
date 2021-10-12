@@ -1,3 +1,16 @@
+# v7.9.0 (Tue Oct 12 2021)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature: add support for better form integration [#189](https://github.com/Drawbotics/drylus/pull/189) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v7.8.3 (Thu Oct 07 2021)
 
 #### ⚠️  Pushed to master
