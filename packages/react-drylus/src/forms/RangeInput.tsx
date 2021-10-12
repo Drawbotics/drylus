@@ -155,7 +155,7 @@ const Handle = ({
       className={cx(styles.handle, {
         [styles[getEnumAsClass<typeof styles>(themeColor)]]: themeColor != null,
         [styles.disabledHandle]: disabled === true,
-        [styles.red]: !!invalid,
+        [styles.red]: invalid === true,
       })}
       {...getHandleProps(
         id,
@@ -197,7 +197,7 @@ const Track = ({ source, target, getTrackProps, disabled, invalid }: TrackProps)
       className={cx(styles.track, {
         [styles[`${getEnumAsClass(themeColor)}Track` as keyof typeof styles]]: themeColor != null,
         [styles.disabledTrack]: disabled === true,
-        [styles.redTrack]: !!invalid,
+        [styles.redTrack]: invalid === true,
       })}
       {...getTrackProps()}
     />

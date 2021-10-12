@@ -466,7 +466,6 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
             onFocus={() => setFocused(true)}
             onBlur={() => {
               setFocused(false);
-
               validate?.(name);
             }}
             onChange={handleOnChange}
