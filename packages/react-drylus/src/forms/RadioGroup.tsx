@@ -339,7 +339,7 @@ export const RadioGroup = <T extends any, K extends string>({
     validate,
     ...props
   } = useResponsiveProps<RadioGroupProps<T, K>>(rest, responsive);
-  const error = isFunction(_error) ? _error(name) : _error
+  const error = isFunction(_error) ? _error(name) : _error;
 
   const value = isFunction(_value) ? _value(name) : _value;
 

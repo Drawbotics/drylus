@@ -418,7 +418,7 @@ export const MultiSelect = <T extends any, K extends string>({
     validate,
     ...props
   } = useResponsiveProps<MultiSelectProps<T, K>>(rest, responsive);
-  const error = isFunction(_error) ? _error(name) : _error
+  const error = isFunction(_error) ? _error(name) : _error;
 
   const selectRef = useRef<HTMLSelectElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -637,9 +637,9 @@ export const MultiSelect = <T extends any, K extends string>({
         onChange={onChange != null ? (e) => handleSelectChange(e.target.options) : undefined}
         onFocus={() => setIsFocused(true)}
         onBlur={() => {
-          if(canBlur) {
-            setIsFocused(false)
-            validate?.(name)
+          if (canBlur) {
+            setIsFocused(false);
+            validate?.(name);
           }
         }}
         multiple

@@ -449,7 +449,7 @@ const CustomSelect = <T extends number | string, K extends string>({
             ? () => {
                 setIsFocused(false);
                 setIsOpen(false);
-                onBlur()
+                onBlur();
               }
             : undefined
         }>
@@ -548,7 +548,7 @@ export const Select = <T extends number | string, K extends string>({
     name,
     ...props
   } = useResponsiveProps<SelectProps<T, K>>(rest, responsive);
-  const error = isFunction(_error) ? _error(name) : _error
+  const error = isFunction(_error) ? _error(name) : _error;
 
   const { screenSize, ScreenSizes } = useScreenSize();
 

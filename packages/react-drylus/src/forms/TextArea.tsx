@@ -204,7 +204,7 @@ const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps
     size = Size.DEFAULT,
     ...props
   } = useResponsiveProps<RawTextAreaProps<T>>(rest, responsive);
-  const error = isFunction(_error) ? _error(name) : _error
+  const error = isFunction(_error) ? _error(name) : _error;
 
   const themeColor = useThemeColor();
 
@@ -275,8 +275,8 @@ const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps
             disabled={disabled}
             onFocus={() => setFocused(true)}
             onBlur={() => {
-              setFocused(false)
-              validate?.(name)
+              setFocused(false);
+              validate?.(name);
             }}
             onChange={handleOnChange}
             readOnly={onChange == null}
