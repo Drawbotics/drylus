@@ -373,12 +373,12 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
     ...props
   } = useResponsiveProps<RawInputProps<T>>(rest, responsive);
 
-  const error = isFunction(_error) ? _error(props.name) : _error;
+  const error = isFunction(_error) ? _error(name) : _error;
 
   const [isFocused, setFocused] = useState(false);
   const themeColor = useThemeColor();
 
-  const value = isFunction(_value) ? _value(props.name) : _value;
+  const value = isFunction(_value) ? _value(name) : _value;
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (onChange != null) {
