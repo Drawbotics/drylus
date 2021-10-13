@@ -1,3 +1,16 @@
+# v7.9.1 (Wed Oct 13 2021)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Form names are not being correctly injected into prop methods [#191](https://github.com/Drawbotics/drylus/pull/191) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v7.9.0 (Tue Oct 12 2021)
 
 #### 🚀 Enhancement - Minor change
