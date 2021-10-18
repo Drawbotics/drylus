@@ -7,7 +7,13 @@ import { Icon } from '../components';
 import { placeholderStyles } from '../components';
 import { Category, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
+import {
+  ERROR_MESSAGES_JOIN_STRING,
+  getEnumAsClass,
+  isFunction,
+  run,
+  useResponsiveProps,
+} from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -180,7 +186,7 @@ export interface CheckboxProps<T = string> {
   name?: T;
 
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: string | boolean;
+  error?: string | string[] | boolean | ((name?: T) => string | string[] | undefined);
 
   /**
    * Size of the checkbox. Can be large or default
@@ -215,7 +221,7 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
     id,
     children,
     disabled,
-    error,
+    error: _error,
     size = Size.DEFAULT,
     style,
     isPlaceholder,
@@ -225,6 +231,7 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
   } = useResponsiveProps<CheckboxProps<T>>(rest, responsive);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const error = typeof _error === 'function' ? _error(props.name) : _error;
   const value = isFunction(_value) ? _value(props.name) : _value;
   const isChecked = value === true;
 
@@ -290,6 +297,8 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
       {run(() => {
         if (error && typeof error === 'string') {
           return <Hint category={Category.DANGER}>{error}</Hint>;
+        } else if (error && Array.isArray(error)) {
+          return <Hint category={Category.DANGER}>{error.join(ERROR_MESSAGES_JOIN_STRING)}</Hint>;
         }
       })}
     </div>

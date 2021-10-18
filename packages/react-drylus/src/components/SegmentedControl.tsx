@@ -127,8 +127,8 @@ export const SegmentedControlItem = ({ responsive, ...rest }: SegmentedControlIt
       className={cx(
         styles.control,
         {
-          [styles.active]: active,
-          [styles.disabled]: disabled,
+          [styles.active]: !!active,
+          [styles.disabled]: !!disabled,
         },
         className,
       )}

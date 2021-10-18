@@ -6,7 +6,7 @@ import { v4 } from 'uuid';
 import { Icon, placeholderStyles } from '../components';
 import { Category, Size } from '../enums';
 import { Option, Responsive, Style } from '../types';
-import { isFunction, run, useResponsiveProps } from '../utils';
+import { ERROR_MESSAGES_JOIN_STRING, isFunction, run, useResponsiveProps } from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -300,7 +300,7 @@ export interface RadioGroupProps<T, K = string> {
   validate?: (name?: K) => void;
 
   /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: boolean | string | ((name?: K) => string | undefined);
+  error?: boolean | string | string[] | ((name?: K) => string | string[] | undefined);
 
   /** Small text shown below the group, replaced by error if present */
   hint?: string;
@@ -385,6 +385,8 @@ export const RadioGroup = <T extends any, K extends string>({
       {run(() => {
         if (error && typeof error === 'string') {
           return <Hint category={Category.DANGER}>{error}</Hint>;
+        } else if (error && Array.isArray(error)) {
+          return <Hint category={Category.DANGER}>{error.join(ERROR_MESSAGES_JOIN_STRING)}</Hint>;
         } else if (hint != null) {
           return <Hint>{hint}</Hint>;
         }

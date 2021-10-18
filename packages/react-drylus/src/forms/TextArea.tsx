@@ -6,7 +6,13 @@ import { useThemeColor } from '../base';
 import { Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { getEnumAsClass, isFunction, run, useResponsiveProps } from '../utils';
+import {
+  ERROR_MESSAGES_JOIN_STRING,
+  getEnumAsClass,
+  isFunction,
+  run,
+  useResponsiveProps,
+} from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -148,7 +154,7 @@ export interface TextAreaProps<T = string> {
   validate?: (name?: T) => void;
 
   /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: boolean | string | ((name?: T) => string | undefined);
+  error?: boolean | string | string[] | ((name?: T) => string | string[] | undefined);
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;
@@ -292,6 +298,8 @@ const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps
       {run(() => {
         if (error && typeof error === 'string') {
           return <Hint category={Category.DANGER}>{error}</Hint>;
+        } else if (error && Array.isArray(error)) {
+          return <Hint category={Category.DANGER}>{error.join(ERROR_MESSAGES_JOIN_STRING)}</Hint>;
         } else if (hint) {
           return <Hint>{hint}</Hint>;
         }
