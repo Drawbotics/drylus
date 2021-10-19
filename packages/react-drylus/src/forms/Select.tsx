@@ -8,7 +8,14 @@ import { Icon, IconType, RoundIcon, Spinner } from '../components';
 import { Category, Color, Shade, Size } from '../enums';
 import { Flex, FlexItem, FlexSpacer } from '../layout';
 import { Option, Responsive, Style } from '../types';
-import { getEnumAsClass, getIconContent, isFunction, run, useResponsiveProps } from '../utils';
+import {
+  ERROR_MESSAGES_JOIN_STRING,
+  getEnumAsClass,
+  getIconContent,
+  isFunction,
+  run,
+  useResponsiveProps,
+} from '../utils';
 import { Hint } from './Hint';
 
 const defaultHeight = sv.marginExtraLarge;
@@ -412,7 +419,7 @@ const CustomSelect = <T extends number | string, K extends string>({
           {options.map((option) => (
             <div
               className={cx(styles.option, {
-                [styles.disabledOption]: option.disabled,
+                [styles.disabledOption]: !!option.disabled,
               })}
               data-value={option.value}
               key={option.value}
@@ -492,7 +499,7 @@ export interface SelectProps<T, K = string> {
   validate?: (name?: K) => void;
 
   /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: boolean | string | ((name?: K) => string | undefined);
+  error?: boolean | string | string[] | ((name?: K) => string | string[] | undefined);
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;
@@ -627,6 +634,8 @@ export const Select = <T extends number | string, K extends string>({
       {run(() => {
         if (error && typeof error === 'string') {
           return <Hint category={Category.DANGER}>{error}</Hint>;
+        } else if (error && Array.isArray(error)) {
+          return <Hint category={Category.DANGER}>{error.join(ERROR_MESSAGES_JOIN_STRING)}</Hint>;
         } else if (hint) {
           return <Hint>{hint}</Hint>;
         }

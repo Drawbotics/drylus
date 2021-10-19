@@ -7,7 +7,12 @@ import { useThemeColor } from '../base';
 import { Text, tooltipStyles } from '../components';
 import { Category, Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { getEnumAsClass, isFunction, useResponsiveProps } from '../utils';
+import {
+  ERROR_MESSAGES_JOIN_STRING,
+  getEnumAsClass,
+  isFunction,
+  useResponsiveProps,
+} from '../utils';
 import { Hint } from './Hint';
 
 const styles = {
@@ -251,7 +256,7 @@ export interface RangeInputProps<T, K = string> {
   validate?: (name?: K) => void;
 
   /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: boolean | string | ((name?: K) => string | undefined);
+  error?: boolean | string | string[] | ((name?: K) => string | string[] | undefined);
 }
 
 export const RangeInput = <T extends number | Array<number>, K extends string>({
@@ -348,7 +353,11 @@ export const RangeInput = <T extends number | Array<number>, K extends string>({
           </div>
         ) : null}
       </Slider>
-      {typeof error === 'string' ? <Hint category={Category.DANGER}>{error}</Hint> : null}
+      {typeof error === 'string' ? (
+        <Hint category={Category.DANGER}>{error}</Hint>
+      ) : Array.isArray(error) ? (
+        <Hint category={Category.DANGER}>{error.join(ERROR_MESSAGES_JOIN_STRING)}</Hint>
+      ) : null}
     </Fragment>
   );
 };

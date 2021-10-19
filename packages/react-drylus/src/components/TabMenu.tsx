@@ -192,9 +192,9 @@ export const TabMenuItem = ({ responsive, ...rest }: TabMenuItemProps) => {
       className={cx(
         styles.item,
         {
-          [styles.active]: active,
-          [styles.verticalActive]: vertical && active,
-          [styles.disabled]: disabled,
+          [styles.active]: !!active,
+          [styles.verticalActive]: !!vertical && !!active,
+          [styles.disabled]: !!disabled,
           [styles[getEnumAsClass<typeof styles>(themeColor)]]: themeColor != null,
         },
         className,

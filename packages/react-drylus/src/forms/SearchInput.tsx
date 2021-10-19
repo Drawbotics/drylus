@@ -154,7 +154,7 @@ export interface SearchInputProps<T, K = string> {
   validate?: (name?: K) => void;
 
   /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: boolean | string | ((name?: K) => string | undefined);
+  error?: boolean | string | string[] | ((name?: K) => string | string[] | undefined);
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;

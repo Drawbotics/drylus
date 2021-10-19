@@ -155,7 +155,7 @@ export interface NumberInputProps<T = string> {
   validate?: (name?: T) => void;
 
   /** Error text (or function that returns an error text) to prompt the user to act, or a boolean if you don't want to show a message */
-  error?: boolean | string | ((name?: T) => string | undefined);
+  error?: boolean | string | string[] | ((name?: T) => string | string[] | undefined);
 
   /** If true the element displays a check icon and a green outline, overridden by "error" */
   valid?: boolean;
