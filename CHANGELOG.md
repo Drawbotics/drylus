@@ -1,3 +1,16 @@
+# v7.10.0 (Tue Oct 19 2021)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Add multiple form errors to inputs [#192](https://github.com/Drawbotics/drylus/pull/192) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v7.9.1 (Wed Oct 13 2021)
 
 #### 🐛 Bug fix - Patch
