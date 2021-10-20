@@ -185,6 +185,9 @@ export interface CheckboxProps<T = string> {
   /** Name of the form element (target.name) */
   name?: T;
 
+  /** Used to trigger validation after an user switches inputs */
+  validate?: (name?: T) => void;
+
   /** Error text to prompt the user to act, or a boolean if you don't want to show a message */
   error?: string | string[] | boolean | ((name?: T) => string | string[] | undefined);
 
@@ -227,6 +230,7 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
     isPlaceholder,
     indeterminate,
     className,
+    validate,
     ...props
   } = useResponsiveProps<CheckboxProps<T>>(rest, responsive);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -237,7 +241,11 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
 
   const handleOnChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.stopPropagation();
-    onChange ? onChange(!isChecked, (e.target as HTMLInputElement).name as T) : null;
+
+    const name = (e.target as HTMLInputElement).name as T;
+
+    onChange ? onChange(!isChecked, name) : null;
+    validate ? validate() : null;
   };
 
   const uniqId = id ? id : v4();
