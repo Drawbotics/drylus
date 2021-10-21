@@ -1,3 +1,16 @@
+# v7.11.0 (Thu Oct 21 2021)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Add validate method to checkbox [#193](https://github.com/Drawbotics/drylus/pull/193) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v7.10.0 (Tue Oct 19 2021)
 
 #### 🚀 Enhancement - Minor change
