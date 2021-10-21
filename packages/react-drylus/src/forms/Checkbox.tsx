@@ -244,8 +244,8 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
 
     const name = (e.target as HTMLInputElement).name as T;
 
-    onChange ? onChange(!isChecked, name) : null;
-    validate ? validate() : null;
+    onChange?.(!isChecked, name);
+    validate?.(name);
   };
 
   const uniqId = id ? id : v4();
