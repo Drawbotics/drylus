@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { countries } from 'countries-list';
-import { Country } from 'country-state-city';
+import countryTimezones from 'country-state-city/dist/assets/country.json';
 import { css, cx } from 'emotion';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
@@ -45,7 +45,7 @@ const countryPrefixMapping: Record<keyof typeof countries, string> = Object.keys
   {} as Record<keyof typeof countries, string>,
 );
 
-const timezoneCountryMapping: Record<string, string> = Country.getAllCountries().reduce(
+const timezoneCountryMapping: Record<string, string> = countryTimezones.reduce(
   (memo, country) => ({
     ...memo,
     ...country.timezones?.reduce(
