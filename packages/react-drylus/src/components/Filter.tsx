@@ -233,7 +233,9 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
           [styles.active]: panelOpen || active === true,
         })}
         onClick={() => setPanelOpen(!panelOpen)}>
-        {label}
+        <span data-element="label" data-default-label={label}>
+          {label}
+        </span>
         <Icon name={panelOpen ? 'chevron-up' : 'chevron-down'} />
       </div>
       <div
@@ -300,6 +302,7 @@ export const SelectFilter = <T extends any>({
       {options.map((option) => (
         <div
           key={option.value}
+          data-filter-label={option.label}
           className={cx(styles.option, styles.smallPadding, {
             [styles.activeOption]: String(value) === String(option.value),
           })}
