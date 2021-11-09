@@ -1,3 +1,16 @@
+# v7.12.0 (Tue Nov 09 2021)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - Filter: add vanilla support [#194](https://github.com/Drawbotics/drylus/pull/194) ([@LeopoldArkham](https://github.com/LeopoldArkham))
+
+#### Authors: 1
+
+- [@LeopoldArkham](https://github.com/LeopoldArkham)
+
+---
+
 # v7.11.1 (Wed Nov 03 2021)
 
 #### ⚠️  Pushed to master
