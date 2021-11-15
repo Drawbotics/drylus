@@ -255,7 +255,7 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
       checkboxRef.current !== e.target &&
       canValidate.current
     ) {
-      validate?.();
+      validate?.(name);
       canValidate.current = false;
     }
   };
