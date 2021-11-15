@@ -1,3 +1,16 @@
+# v7.12.2 (Mon Nov 15 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Checkbox: fix missing name prop  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.12.1 (Mon Nov 15 2021)
 
 #### 🐛 Bug fix - Patch
