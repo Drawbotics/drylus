@@ -53,7 +53,7 @@ export const ControlledGroup = ({ children }) => {
           indeterminate={! Object.values(checked).every((c) => c)}>
           All
         </Checkbox>
-        <Checkbox name="1" value={checked['1']} onChange={handleOnChange}>
+        <Checkbox name="1" value={checked['1']} onChange={handleOnChange} validate={() => console.log('validating')}>
           1 room apartment
         </Checkbox>
         <Checkbox name="2" value={checked['2']} onChange={handleOnChange}>
