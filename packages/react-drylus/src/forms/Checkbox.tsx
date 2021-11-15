@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { v4 } from 'uuid';
 
 import { Icon } from '../components';
@@ -233,7 +233,8 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
     validate,
     ...props
   } = useResponsiveProps<CheckboxProps<T>>(rest, responsive);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const checkboxRef = useRef<HTMLLabelElement>(null);
+  const canValidate = useRef(false);
 
   const error = typeof _error === 'function' ? _error(props.name) : _error;
   const value = isFunction(_value) ? _value(props.name) : _value;
@@ -245,14 +246,34 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
     const name = (e.target as HTMLInputElement).name as T;
 
     onChange?.(!isChecked, name);
-    validate?.(name);
+    canValidate.current = true;
   };
+
+  const handleClickWindow = (e: Event) => {
+    if (
+      !checkboxRef.current?.contains(e.target as Node) &&
+      checkboxRef.current !== e.target &&
+      canValidate.current
+    ) {
+      validate?.();
+      canValidate.current = false;
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', handleClickWindow);
+
+    return () => {
+      window.removeEventListener('click', handleClickWindow);
+    };
+  }, []);
 
   const uniqId = id ? id : v4();
   const readOnly = onChange == null;
   return (
     <div style={style} className={cx(styles.root, className)}>
       <label
+        ref={checkboxRef}
         className={cx(styles.wrapper, {
           [styles[getEnumAsClass<typeof styles>(size)]]: size != null,
           [styles.disabled]: disabled === true,
@@ -264,7 +285,6 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
         htmlFor={uniqId}>
         <div className={styles.checkbox}>
           <input
-            ref={inputRef}
             disabled={disabled}
             checked={isChecked}
             id={uniqId}
