@@ -1,3 +1,16 @@
+# v7.12.1 (Mon Nov 15 2021)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Checkbox: fix validation logic [#195](https://github.com/Drawbotics/drylus/pull/195) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.12.0 (Tue Nov 09 2021)
 
 #### 🚀 Enhancement - Minor change
