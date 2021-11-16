@@ -376,6 +376,7 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
     color,
     inversed,
     className,
+    ...props
   } = useResponsiveProps<ButtonProps>(rest, responsive);
 
   if (!children && trailing && leading) {
@@ -409,7 +410,8 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
         className,
       )}
       disabled={disabled}
-      type="button">
+      type="button"
+      {...props}>
       {run(() => {
         if (leading) {
           return <div className={cx(styles.icon, { [styles.leading]: !round })}>{leading}</div>;
