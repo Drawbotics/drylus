@@ -1,3 +1,16 @@
+# v7.12.3 (Tue Nov 16 2021)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Button: pass extra props to button element  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.12.2 (Mon Nov 15 2021)
 
 #### ⚠️  Pushed to master
