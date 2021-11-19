@@ -20,8 +20,6 @@ const styles = {
   `,
 };
 
-export const themeStyles = styles;
-
 export interface ThemeContext {
   themeColor: Color;
 }
