@@ -58,7 +58,7 @@ exports[`Tile matches snapshot when has a title 1`] = `
   color: #879ba6;
   text-transform: uppercase;
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.9em;
   margin-bottom: 16px;
 }
 

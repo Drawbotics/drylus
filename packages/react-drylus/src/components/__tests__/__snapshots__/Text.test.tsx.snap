@@ -4,7 +4,7 @@ exports[`Text matches snapshot when it has Text and TextLink as children 1`] = `
 .emotion-0 {
   display: inline;
   color: #172b4e;
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 .emotion-1 {
@@ -51,7 +51,7 @@ exports[`Text matches snapshot when it has a size and category 1`] = `
 .emotion-0 {
   display: inline;
   color: #172b4e;
-  font-size: 1.1rem;
+  font-size: 1.1em;
   color: #3DB5D0;
 }
 
@@ -66,7 +66,7 @@ exports[`Text matches snapshot when it has children 1`] = `
 .emotion-0 {
   display: inline;
   color: #172b4e;
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 <span
@@ -80,12 +80,12 @@ exports[`Text matches snapshot when it is bold 1`] = `
 .emotion-0 {
   display: inline;
   font-weight: 500;
-  -webkit-letter-spacing: 0.01rem;
-  -moz-letter-spacing: 0.01rem;
-  -ms-letter-spacing: 0.01rem;
-  letter-spacing: 0.01rem;
+  -webkit-letter-spacing: 0.01em;
+  -moz-letter-spacing: 0.01em;
+  -ms-letter-spacing: 0.01em;
+  letter-spacing: 0.01em;
   color: #172b4e;
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 <span
@@ -99,12 +99,12 @@ exports[`Text matches snapshot when it is light and inversed 1`] = `
 .emotion-0 {
   display: inline;
   font-weight: 300;
-  -webkit-letter-spacing: 0.06rem;
-  -moz-letter-spacing: 0.06rem;
-  -ms-letter-spacing: 0.06rem;
-  letter-spacing: 0.06rem;
+  -webkit-letter-spacing: 0.06em;
+  -moz-letter-spacing: 0.06em;
+  -ms-letter-spacing: 0.06em;
+  letter-spacing: 0.06em;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 <span
