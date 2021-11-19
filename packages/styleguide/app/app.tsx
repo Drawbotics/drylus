@@ -1,4 +1,4 @@
-import '@drawbotics/vanilla-drylus/dist/drylus.css';
+// import '@drawbotics/vanilla-drylus/dist/drylus.css';
 
 import { Color, DrylusProvider, Layout, Page, Position } from '@drawbotics/react-drylus';
 import { useScreenSize } from '@drawbotics/use-screen-size';
@@ -39,7 +39,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <BrowserRouter basename="drylus">
-        <DrylusProvider baseColor={baseColor}>
+        <DrylusProvider injectGlobal={false} baseColor={baseColor}>
           <Page>
             <Layout
               bar={<Sidebar color={baseColor} onChangeColor={setBaseColor} />}

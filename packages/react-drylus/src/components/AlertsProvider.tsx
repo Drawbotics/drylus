@@ -218,7 +218,7 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
     <Context.Provider value={{ showAlert, hideAlert }}>
       {children}
       {ReactDOM.createPortal(
-        <ThemeProvider>
+        <ThemeProvider injectGlobal={false}>
           <div className={themeStyles.root}>
             <div className={styles.provider}>
               <AnimatePresence>

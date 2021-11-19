@@ -4,17 +4,24 @@ import packageJson from '@drawbotics/icons/package.json';
 import { injectGlobal } from 'emotion';
 
 import { normalize } from './normalize';
+
 const env = require('../utils/get-static-env');
 
-export const globalStyles = `
-  @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
+export const baseStyleProperties = `
+  font-size: ${sv.defaultFontSize};
+  line-height: ${sv.defaultLineHeight};
+  letter-spacing: ${sv.defaultLetterSpacing};
+  -webkit-font-smoothing: auto;
+  -webkit-overflow-scrolling: touch;
+`;
 
+export const fonts = `
+  @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
+`;
+
+export const globalStyles = `
   html, body {
-    font-size: ${sv.defaultFontSize};
-    line-height: ${sv.defaultLineHeight};
-    letter-spacing: ${sv.defaultLetterSpacing};
-    -webkit-font-smoothing: auto;
-    -webkit-overflow-scrolling: touch;
+    ${baseStyleProperties}
   }
 `;
 
@@ -37,6 +44,7 @@ export const root = `
 export const icons = generateIconStyles(env === "'development'" ? 'dev' : packageJson.version);
 
 export function injectGlobalStyles(): void {
+  injectGlobal(fonts);
   injectGlobal(globalStyles);
   injectGlobal(normalize);
   injectGlobal(icons);
