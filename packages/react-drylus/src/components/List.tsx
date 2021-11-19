@@ -49,7 +49,7 @@ const styles = {
       left: calc(${sv.marginSmall} * -1.2);
       top: 0;
       transform: translateX(-25%);
-      font-size: 1rem;
+      font-size: 1em;
     }
   `,
   disabled: css`

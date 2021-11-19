@@ -6,7 +6,7 @@ import { CalendarProps } from 'react-calendar';
 import Calendar from 'react-calendar/dist/entry.nostyle';
 import { createPortal } from 'react-dom';
 
-import { themeStyles, useThemeColor } from '../base';
+import { ThemeProvider, useThemeColor } from '../base';
 import { Button, Icon } from '../components';
 import { Align, Size } from '../enums';
 import { Responsive, Style } from '../types';
@@ -94,7 +94,7 @@ const styles = {
     }
 
     & .react-calendar__month-view__weekdays {
-      font-size: 0.9rem;
+      font-size: 0.9em;
       color: ${sv.colorSecondary};
       text-align: center;
       margin-bottom: ${sv.marginExtraSmall};
@@ -119,7 +119,7 @@ const styles = {
       border-radius: 1000px;
       height: calc(${sv.defaultMargin} + 4px);
       width: calc(${sv.defaultMargin} + 4px);
-      font-size: 0.95rem;
+      font-size: 0.95em;
 
       &:hover {
         cursor: pointer;
@@ -445,7 +445,7 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
       {isDesktop &&
         outletElement &&
         createPortal(
-          <div className={themeStyles.root}>
+          <ThemeProvider injectGlobal={false}>
             <div
               style={{
                 top: rootBox?.top,
@@ -482,7 +482,7 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
                 />
               </div>
             </div>
-          </div>,
+          </ThemeProvider>,
           document.getElementById('picker-outlet') as Element,
         )}
     </div>

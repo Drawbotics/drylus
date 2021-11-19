@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { themeStyles } from '../base';
+import { ThemeProvider } from '../base';
 import { Position } from '../enums';
 import { Style } from '../types';
 import { WrapperRef, getStyleForSide } from '../utils';
@@ -15,7 +15,7 @@ const styles = {
     background: ${sv.neutralDarkest};
     color: ${sv.colorPrimaryInverse};
     border-radius: ${sv.defaultBorderRadius};
-    font-size: 0.9rem;
+    font-size: 0.9em;
     opacity: 0;
     z-index: 99999;
     max-width: 300px;
@@ -227,7 +227,7 @@ export const Popover = ({
     <Fragment>
       <WrapperRef setChildrenRef={(node) => (childrenRef.current = node)}>{children}</WrapperRef>
       {ReactDOM.createPortal(
-        <div className={themeStyles.root}>
+        <ThemeProvider injectGlobal={false}>
           <div
             ref={popoverRef}
             className={cx(
@@ -247,7 +247,7 @@ export const Popover = ({
             style={{ ...popoverStyle, ...style }}>
             {content}
           </div>
-        </div>,
+        </ThemeProvider>,
         document.getElementById('popovers-outlet') as Element,
       )}
     </Fragment>

@@ -3,7 +3,7 @@ import { css, cx } from 'emotion';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { themeStyles } from '../base';
+import { ThemeProvider } from '../base';
 import { Position } from '../enums';
 import { HTMLElementWithDisabled, Responsive, Style } from '../types';
 import { WrapperRef, getStyleForSide, useResponsiveProps } from '../utils';
@@ -15,7 +15,7 @@ const styles = {
     background: ${sv.neutralDarkest};
     color: ${sv.colorPrimaryInverse};
     border-radius: ${sv.defaultBorderRadius};
-    font-size: 0.9rem;
+    font-size: 0.9em;
     opacity: 0;
     pointer-events: none;
     z-index: 99999;
@@ -215,7 +215,7 @@ export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
     <Fragment>
       <WrapperRef setChildrenRef={(node) => (childrenRef.current = node)}>{children}</WrapperRef>
       {ReactDOM.createPortal(
-        <div className={themeStyles.root}>
+        <ThemeProvider injectGlobal={false}>
           <div
             ref={tooltipRef}
             className={cx(
@@ -235,7 +235,7 @@ export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
             style={{ ...tooltipStyle, ...style }}>
             {content}
           </div>
-        </div>,
+        </ThemeProvider>,
         document.getElementById('tooltips-outlet') as Element,
       )}
     </Fragment>

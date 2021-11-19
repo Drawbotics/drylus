@@ -30,11 +30,11 @@ const styles = {
   `,
   bold: css`
     font-weight: 500;
-    letter-spacing: 0.01rem;
+    letter-spacing: 0.01em;
   `,
   light: css`
     font-weight: 300;
-    letter-spacing: 0.06rem;
+    letter-spacing: 0.06em;
   `,
   primary: css`
     color: ${sv.colorPrimary};
@@ -61,13 +61,13 @@ const styles = {
     color: ${sv.colorDisabledInverse};
   `,
   small: css`
-    font-size: 0.9rem;
+    font-size: 0.9em;
   `,
   default: css`
-    font-size: 1rem;
+    font-size: 1em;
   `,
   large: css`
-    font-size: 1.1rem;
+    font-size: 1.1em;
   `,
   brand: css`
     color: ${sv.brand};

@@ -5,7 +5,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { v4 } from 'uuid';
 
-import { ThemeProvider, themeStyles } from '../base/ThemeProvider';
+import { ThemeProvider } from '../base/ThemeProvider';
 import { Category, Size, Tier } from '../enums';
 import { Flex, FlexAlign, FlexItem, FlexJustify, Margin } from '../layout';
 import { getEnumAsClass, getIconForCategory } from '../utils';
@@ -35,7 +35,7 @@ const styles = {
     pointer-events: auto;
 
     [data-element='text'] {
-      font-size: 0.95rem;
+      font-size: 0.95em;
     }
 
     [data-element='icon'] {
@@ -219,23 +219,21 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
       {children}
       {ReactDOM.createPortal(
         <ThemeProvider injectGlobal={false}>
-          <div className={themeStyles.root}>
-            <div className={styles.provider}>
-              <AnimatePresence>
-                {alerts.map((alert: AlertProps) => (
-                  <motion.div
-                    key={alert.id}
-                    layoutTransition={{ duration: 0.2 }}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 5, transition: { duration: 0.3 } }}>
-                    <Margin size={{ top: Size.SMALL }}>
-                      <Alert onClickDismiss={(id) => hideAlert(id)} {...alert} />
-                    </Margin>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </div>
+          <div className={styles.provider}>
+            <AnimatePresence>
+              {alerts.map((alert: AlertProps) => (
+                <motion.div
+                  key={alert.id}
+                  layoutTransition={{ duration: 0.2 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 5, transition: { duration: 0.3 } }}>
+                  <Margin size={{ top: Size.SMALL }}>
+                    <Alert onClickDismiss={(id) => hideAlert(id)} {...alert} />
+                  </Margin>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         </ThemeProvider>,
         document.getElementById('alerts-outlet') as Element,

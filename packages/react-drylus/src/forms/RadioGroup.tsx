@@ -94,7 +94,7 @@ const styles = {
       line-height: calc(${sv.marginSmall} - 2px);
 
       > i {
-        font-size: 0.7rem;
+        font-size: 0.7em;
       }
     }
   `,
@@ -172,7 +172,7 @@ const styles = {
     border-radius: 100px;
 
     > i {
-      font-size: 0.8rem;
+      font-size: 0.8em;
       margin-left: 1px;
     }
   `,

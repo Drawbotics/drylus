@@ -30,7 +30,7 @@ const styles = {
     bottom: calc(${sv.marginExtraSmall} + 1px);
     left: ${sv.marginSmall};
     z-index: 99;
-    font-size: 1.4rem;
+    font-size: 1.4em;
   `,
   small: css`
     bottom: 4px;

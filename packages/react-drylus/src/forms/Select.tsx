@@ -33,7 +33,7 @@ const styles = {
       color: ${sv.colorPrimary};
       position: absolute;
       top: calc(${sv.marginExtraSmall} * 1.3);
-      font-size: 1.3rem;
+      font-size: 1.3em;
       right: ${sv.marginSmall};
       pointer-events: none;
     }

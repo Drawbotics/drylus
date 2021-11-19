@@ -23,7 +23,7 @@ const styles = {
     justify-content: center;
 
     > i {
-      font-size: 1.1rem;
+      font-size: 1.1em;
       margin-top: 1px;
     }
   `,
@@ -32,7 +32,7 @@ const styles = {
     width: ${smallHeight};
 
     > i {
-      font-size: 0.65rem;
+      font-size: 0.65em;
       margin-left: 1px;
     }
   `,
@@ -41,7 +41,7 @@ const styles = {
     width: ${largeHeight};
 
     > i {
-      font-size: 1.2rem;
+      font-size: 1.2em;
       margin-top: 1px;
     }
   `,

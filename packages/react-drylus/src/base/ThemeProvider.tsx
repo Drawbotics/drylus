@@ -62,8 +62,8 @@ export const ThemeProvider = ({
       <Global
         styles={[
           injectGlobal ? styles.global : undefined,
+          injectGlobal ? styles.normalize : undefined,
           styles.fonts,
-          styles.normalize,
           styles.icons,
         ]}
       />

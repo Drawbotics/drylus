@@ -33,13 +33,13 @@ const styles = {
   small: css`
     height: ${sv.defaultMargin};
     width: ${sv.defaultMargin};
-    font-size: 0.8rem;
+    font-size: 0.8em;
     padding-top: 1px;
   `,
   large: css`
     height: ${sv.marginExtraLarge};
     width: ${sv.marginExtraLarge};
-    font-size: 1.1rem;
+    font-size: 1.1em;
     padding-top: 0;
   `,
   red: css`

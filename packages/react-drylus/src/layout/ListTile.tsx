@@ -31,7 +31,7 @@ const styles = {
   `,
   subtitle: css`
     color: ${sv.colorSecondary};
-    font-size: 0.9rem;
+    font-size: 0.9em;
   `,
   withMargin: css`
     margin-bottom: calc(${sv.marginExtraSmall} / 2);
