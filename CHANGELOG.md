@@ -1,3 +1,23 @@
+# v7.13.0 (Mon Nov 22 2021)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/drylus-style-vars`, `@drawbotics/react-drylus`
+  - Feature/global style option [#196](https://github.com/Drawbotics/drylus/pull/196) ([@nicmosc](https://github.com/nicmosc))
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`
+  - Revert "formatPrice: default currency to EUR"  ([@nicmosc](https://github.com/nicmosc))
+- `@drawbotics/react-drylus`
+  - formatPrice: default currency to EUR  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.12.3 (Tue Nov 16 2021)
 
 #### ⚠️  Pushed to master
