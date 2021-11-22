@@ -16,7 +16,7 @@ export function generateDisplayedPrice({
   locale?: string;
   options?: any;
 }) {
-  const { value, currency } = price;
+  const { value, currency = 'EUR' } = price;
 
   const localeRoot = locale.split('-')[0];
 
