@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { themeStyles } from '../base';
+import { ThemeProvider } from '../base';
 import { Color, Position, Size, Tier } from '../enums';
 import { Responsive, Style } from '../types';
 import { fsv, run, useResponsiveProps } from '../utils';
@@ -314,7 +314,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
     };
 
     return ReactDOM.createPortal(
-      <div className={themeStyles.root}>
+      <ThemeProvider injectGlobal={false}>
         <AnimatePresence>
           {visible ? (
             <motion.div
@@ -352,7 +352,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
             </motion.div>
           ) : null}
         </AnimatePresence>
-      </div>,
+      </ThemeProvider>,
       document.getElementById('drawers-outlet') as Element,
     );
   }

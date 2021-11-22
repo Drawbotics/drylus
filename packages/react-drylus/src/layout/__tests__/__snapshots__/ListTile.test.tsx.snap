@@ -103,7 +103,7 @@ exports[`ListTile matches snapshot when has a subtitle 1`] = `
 
 .emotion-1 {
   color: #879ba6;
-  font-size: 0.9rem;
+  font-size: 0.9em;
 }
 
 .emotion-3 {

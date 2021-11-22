@@ -12,7 +12,7 @@ const styles = {
     height: 50px;
     width: 50px;
     position: relative;
-    font-size: 0.9rem;
+    font-size: 0.9em;
 
     > svg {
       height: 100%;

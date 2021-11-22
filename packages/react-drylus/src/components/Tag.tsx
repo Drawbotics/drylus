@@ -15,10 +15,10 @@ const styles = {
     background: ${sv.neutral};
     color: ${sv.colorPrimary};
     border-radius: ${sv.defaultBorderRadius};
-    font-size: 0.85rem;
+    font-size: 0.85em;
 
     > i {
-      font-size: 0.85rem;
+      font-size: 0.85em;
       margin-left: 5px;
       margin-bottom: -1px;
       color: ${sv.colorSecondary};

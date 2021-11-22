@@ -119,7 +119,7 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
 }
 
 .emotion-2 > i {
-  font-size: 0.8rem;
+  font-size: 0.8em;
   margin-left: 1px;
 }
 
@@ -349,7 +349,7 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
 }
 
 .emotion-2 > i {
-  font-size: 0.8rem;
+  font-size: 0.8em;
   margin-left: 1px;
 }
 
@@ -563,7 +563,7 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
 }
 
 .emotion-2 > i {
-  font-size: 0.8rem;
+  font-size: 0.8em;
   margin-left: 1px;
 }
 

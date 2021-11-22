@@ -11,10 +11,10 @@ const styles = {
     color: ${sv.colorTertiary};
     text-transform: uppercase;
     font-weight: 500;
-    font-size: 0.88rem;
+    font-size: 0.88em;
 
     @media ${sv.screenL} {
-      font-size: 0.8rem;
+      font-size: 0.8em;
     }
   `,
   ellipsized: css`

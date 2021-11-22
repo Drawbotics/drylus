@@ -14,7 +14,7 @@ const styles = {
     justify-content: center;
     padding: 2px 5px 1px 5px;
     border-radius: 1000px;
-    font-size: 0.8rem;
+    font-size: 0.8em;
     background: ${sv.neutral};
     color: ${sv.colorPrimary};
     letter-spacing: 0px;

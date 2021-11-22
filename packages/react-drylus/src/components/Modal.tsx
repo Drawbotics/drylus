@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { themeStyles } from '../base';
+import { ThemeProvider } from '../base';
 import { Size, Tier } from '../enums';
 import { Responsive, Style } from '../types';
 import { fsv, run, useResponsiveProps } from '../utils';
@@ -348,7 +348,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
   };
 
   return ReactDOM.createPortal(
-    <div className={themeStyles.root}>
+    <ThemeProvider injectGlobal={false}>
       <AnimatePresence>
         {visible ? (
           <motion.div
@@ -391,7 +391,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
           </motion.div>
         ) : null}
       </AnimatePresence>
-    </div>,
+    </ThemeProvider>,
     document.getElementById('modals-outlet') as Element,
   );
 };

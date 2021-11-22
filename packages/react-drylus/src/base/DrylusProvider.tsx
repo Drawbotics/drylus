@@ -7,9 +7,19 @@ import { ThemeProvider } from './ThemeProvider';
 
 export interface DrylusProviderProps extends ThemeProviderProps, AlertsProviderProps {}
 
-export const DrylusProvider = ({ children, style, className, baseColor }: DrylusProviderProps) => {
+export const DrylusProvider = ({
+  children,
+  style,
+  className,
+  baseColor,
+  injectGlobal,
+}: DrylusProviderProps) => {
   return (
-    <ThemeProvider baseColor={baseColor} style={style} className={className}>
+    <ThemeProvider
+      injectGlobal={injectGlobal}
+      baseColor={baseColor}
+      style={style}
+      className={className}>
       <AlertsProvider>{children}</AlertsProvider>
     </ThemeProvider>
   );

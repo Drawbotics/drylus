@@ -12,32 +12,32 @@ const styles = {
     font-weight: 300;
   `,
   h1: css`
-    font-size: 3.4rem;
+    font-size: 3.4em;
 
     @media ${sv.screenL} {
-      font-size: 2.8rem;
+      font-size: 2.8em;
     }
   `,
   h2: css`
-    font-size: 2.4rem;
+    font-size: 2.4em;
 
     @media ${sv.screenL} {
-      font-size: 2rem;
+      font-size: 2em;
     }
   `,
   h3: css`
-    font-size: 2rem;
+    font-size: 2em;
 
     @media ${sv.screenL} {
-      font-size: 1.6rem;
+      font-size: 1.6em;
     }
   `,
   h4: css`
-    font-size: 1.3rem;
+    font-size: 1.3em;
     font-weight: 400;
 
     @media ${sv.screenL} {
-      font-size: 1.1rem;
+      font-size: 1.1em;
     }
   `,
   noMargin: css`

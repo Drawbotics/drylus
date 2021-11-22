@@ -152,7 +152,7 @@ const styles = {
     margin-right: -1px;
 
     i {
-      font-size: 1.2rem;
+      font-size: 1.2em;
     }
   `,
   leadingComponent: css`
@@ -180,7 +180,7 @@ const styles = {
     margin-left: -1px;
 
     i {
-      font-size: 1.2rem;
+      font-size: 1.2em;
     }
   `,
   trailingComponent: css`

@@ -188,7 +188,7 @@ const styles = {
           color: ${sv.colorTertiary};
           text-transform: uppercase;
           font-weight: 500;
-          font-size: 0.8rem;
+          font-size: 0.8em;
           text-align: left;
           padding: calc(${sv.paddingExtraSmall} / 2) ${sv.paddingSmall};
         }

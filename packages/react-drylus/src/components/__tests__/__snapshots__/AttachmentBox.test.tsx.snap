@@ -165,7 +165,7 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
 .emotion-4 {
   display: inline;
   color: rgba(135,155,166,0.5);
-  font-size: 0.9rem;
+  font-size: 0.9em;
 }
 
 .emotion-6 {
@@ -492,7 +492,7 @@ exports[`AttachmentBox matches snapshot when can remove attachment 1`] = `
 .emotion-4 {
   display: inline;
   color: #172b4e;
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 .emotion-10 {
@@ -768,7 +768,7 @@ exports[`AttachmentBox matches snapshot when is given a completed attachment 1`]
 .emotion-4 {
   display: inline;
   color: rgba(135,155,166,0.5);
-  font-size: 0.9rem;
+  font-size: 0.9em;
 }
 
 .emotion-6 {
@@ -1061,7 +1061,7 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
 .emotion-4 {
   display: inline;
   color: rgba(135,155,166,0.5);
-  font-size: 0.9rem;
+  font-size: 0.9em;
 }
 
 .emotion-6 {
@@ -1335,7 +1335,7 @@ exports[`AttachmentBox matches snapshot when is given the simplest attachment 1`
 .emotion-4 {
   display: inline;
   color: #172b4e;
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 <div

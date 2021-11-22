@@ -4,11 +4,13 @@ import React from 'react';
 
 import { Color } from '../enums';
 import { Style } from '../types';
-import { globalStyles, icons, normalize, root } from '../utils';
+import { baseStyleProperties, fonts, globalStyles, icons, normalize, root } from '../utils';
 
 const styles = {
   global: globalCSS(globalStyles),
+  local: css(baseStyleProperties),
   normalize: globalCSS(normalize),
+  fonts: globalCSS(fonts),
   icons: globalCSS(icons),
   root: css(root),
   wrapper: css`
@@ -17,8 +19,6 @@ const styles = {
     align-items: stretch;
   `,
 };
-
-export const themeStyles = styles;
 
 export interface ThemeContext {
   themeColor: Color;
@@ -40,6 +40,12 @@ export interface ThemeProviderProps {
    * @default Color.BRAND
    */
   baseColor?: Color;
+
+  /**
+   * Used to set the global styles for the whole website (body/html)
+   * @default true
+   */
+  injectGlobal?: boolean;
 }
 
 export const ThemeProvider = ({
@@ -47,11 +53,26 @@ export const ThemeProvider = ({
   style,
   className,
   baseColor = Color.BRAND,
+  injectGlobal = true,
 }: ThemeProviderProps) => {
   return (
     <Context.Provider value={{ themeColor: baseColor }}>
-      <Global styles={[styles.global, styles.normalize, styles.icons]} />
-      <div className={cx(styles.root, styles.wrapper, className)} style={style}>
+      <Global
+        styles={[
+          injectGlobal ? styles.global : undefined,
+          injectGlobal ? styles.normalize : undefined,
+          styles.fonts,
+          styles.icons,
+        ]}
+      />
+      <div
+        className={cx(
+          styles.root,
+          injectGlobal ? undefined : styles.local,
+          styles.wrapper,
+          className,
+        )}
+        style={style}>
         {children}
       </div>
     </Context.Provider>

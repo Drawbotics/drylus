@@ -8,7 +8,7 @@ import { getEnumAsClass, useResponsiveProps } from '../utils';
 
 const styles = {
   root: css`
-    font-size: 0.8rem;
+    font-size: 0.8em;
     color: ${sv.colorSecondary};
     margin-top: ${sv.marginExtraSmall};
   `,

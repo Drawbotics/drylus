@@ -111,7 +111,7 @@ exports[`Checkbox matches snapshot when has a label 1`] = `
 }
 
 .emotion-2 > i {
-  font-size: 0.8rem;
+  font-size: 0.8em;
   margin-left: 1px;
 }
 
@@ -275,7 +275,7 @@ exports[`Checkbox matches snapshot when has a label as react node 1`] = `
 }
 
 .emotion-2 > i {
-  font-size: 0.8rem;
+  font-size: 0.8em;
   margin-left: 1px;
 }
 
@@ -287,12 +287,12 @@ exports[`Checkbox matches snapshot when has a label as react node 1`] = `
 .emotion-5 {
   display: inline;
   font-weight: 500;
-  -webkit-letter-spacing: 0.01rem;
-  -moz-letter-spacing: 0.01rem;
-  -ms-letter-spacing: 0.01rem;
-  letter-spacing: 0.01rem;
+  -webkit-letter-spacing: 0.01em;
+  -moz-letter-spacing: 0.01em;
+  -ms-letter-spacing: 0.01em;
+  letter-spacing: 0.01em;
   color: #172b4e;
-  font-size: 1rem;
+  font-size: 1em;
 }
 
 <div
@@ -440,7 +440,7 @@ exports[`Checkbox matches snapshot when is checked 1`] = `
 }
 
 .emotion-2 > i {
-  font-size: 0.8rem;
+  font-size: 0.8em;
   margin-left: 1px;
 }
 
@@ -563,7 +563,7 @@ exports[`Checkbox matches snapshot when is large 1`] = `
 }
 
 .emotion-2 > i {
-  font-size: 0.8rem;
+  font-size: 0.8em;
   margin-left: 1px;
 }
 
@@ -741,7 +741,7 @@ exports[`Checkbox matches snapshot when is not checked 1`] = `
 }
 
 .emotion-2 > i {
-  font-size: 0.8rem;
+  font-size: 0.8em;
   margin-left: 1px;
 }
 
@@ -868,7 +868,7 @@ exports[`Checkbox matches snapshot when is read only 1`] = `
 }
 
 .emotion-2 > i {
-  font-size: 0.8rem;
+  font-size: 0.8em;
   margin-left: 1px;
 }
 

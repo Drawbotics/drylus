@@ -29,7 +29,7 @@ const styles = {
   `,
   title: css`
     margin-bottom: ${sv.marginSmall};
-    font-size: 1.2rem;
+    font-size: 1.2em;
   `,
   message: css`
     margin-top: 2px;

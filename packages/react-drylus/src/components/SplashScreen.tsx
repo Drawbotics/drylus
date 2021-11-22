@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { themeStyles } from '../base';
+import { ThemeProvider } from '../base';
 import { fsv } from '../utils';
 
 const styles = {
@@ -102,7 +102,7 @@ export const SplashScreen = ({ text }: SplashScreenProps) => {
   if (!outletElement) return null;
 
   return ReactDOM.createPortal(
-    <div className={themeStyles.root}>
+    <ThemeProvider injectGlobal={false}>
       <motion.div
         className={styles.root}
         onAnimationStart={handleAnimationStart}
@@ -148,7 +148,7 @@ export const SplashScreen = ({ text }: SplashScreenProps) => {
         </div>
         {text != null ? <div className={styles.text}>{text}</div> : null}
       </motion.div>
-    </div>,
+    </ThemeProvider>,
     document.getElementById('splash-outlet') as Element,
   );
   // eslint-disable-next-line no-unreachable

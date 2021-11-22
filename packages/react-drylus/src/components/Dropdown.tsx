@@ -124,7 +124,7 @@ const styles = {
   `,
   title: css`
     padding: ${sv.paddingExtraSmall};
-    font-size: 0.8rem;
+    font-size: 0.8em;
     color: ${sv.colorTertiary};
     text-transform: uppercase;
   `,

@@ -88,7 +88,7 @@ const styles = {
     color: ${sv.colorSecondary};
     text-transform: uppercase;
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.9em;
     margin-bottom: ${sv.marginSmall};
 
     @media ${sv.screenL} {
