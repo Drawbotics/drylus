@@ -11,7 +11,6 @@ const SelectProp = ({ prop, value, onChange, enums, isEnum }) => {
     v === `${match[0]}.${value?.description || value}` ||
     v === `${match[1]}.${value?.description || value}`)) : value;
 
-  // const finalValue = isEnum ? (type?.name || '') + '.' + (value?.description || value) : value;
   return (
     <div style={{ minWidth: 200 }}>
       <Select
