@@ -6,3 +6,10 @@ export enum Color {
   ORANGE = 'ORANGE',
   PRIMARY = 'PRIMARY',
 }
+
+export enum ExtendedColor {
+  PINK = 'PINK',
+  PURPLE = 'PURPLE',
+  VIOLET = 'VIOLET',
+  YELLOW = 'YELLOW',
+}

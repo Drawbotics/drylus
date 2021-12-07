@@ -31,14 +31,12 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
       return <ToggleProp prop={propWithKey} value={value} onChange={onChange} />;
     case 'enum':
       const { variants, nonVariants } = extractIntrinsics(type.values);
-      const valueIsEnumVariant =
-        typeof value === 'string' && !['boolean', 'number', 'string'].includes(value);
       const updatedType = { ...type, values: variants };
       return (
         <div className={nonVariants.length > 0 ? styles.stacked : 'test'}>
           <SelectProp
             prop={{ ...propWithKey, type: updatedType }}
-            value={valueIsEnumVariant ? value : null}
+            value={value}
             onChange={onChange}
             enums={enums}
             isEnum={true}
@@ -49,7 +47,7 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
               name={name}
               prop={{ type }}
               enums={enums}
-              value={valueIsEnumVariant ? null : value}
+              value={value}
               onChange={onChange}
             />
           ))}
@@ -58,7 +56,7 @@ const Prop = ({ prop, name, value, onChange, enums }) => {
     case 'React Node':
     case 'IconValues':
     case 'string':
-      return <InputProp prop={propWithKey} value={value} onChange={onChange} />;
+      return <InputProp prop={propWithKey} value={value} onChange={(v, n) => onChange(normalizeValue(v), n)} />;
     case 'number':
       return (
         <InputProp
