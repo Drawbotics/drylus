@@ -24,6 +24,7 @@ import {
   Text,
   Tier,
   Tooltip,
+  ExtendedColor,
 } from '@drawbotics/react-drylus';
 import docs from '@drawbotics/react-drylus/docs.json';
 import { css } from 'emotion';
@@ -179,6 +180,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                             Speed,
                             Direction,
                             Easing,
+                            ExtendedColor,
                           }}
                           type={prop.type.type}
                           name={key}

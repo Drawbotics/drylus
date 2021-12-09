@@ -106,7 +106,7 @@ function _resolveReference(ref, docs, parentComponentName) {
 }
 
 let _parsingStack = [];
-function _getType(type, docs, componentName, comment) {
+function _getType(type, docs, componentName, comment, enums) {
   if (
     type.name !== 'Array' &&
     type?.kindString !== 'Enumeration' &&
@@ -119,7 +119,7 @@ function _getType(type, docs, componentName, comment) {
       mustPop = true;
       _parsingStack.push(type.name);
     }
-    const res = _parseType(type, docs, componentName, comment);
+    const res = _parseType(type, docs, componentName, comment, enums);
 
     if (mustPop) _parsingStack.pop();
 
@@ -127,17 +127,22 @@ function _getType(type, docs, componentName, comment) {
   }
 }
 
-function _parseType(type, docs, componentName, comment) {
+function _parseType(type, docs, componentName, comment, enums) {
   const enumTag = comment?.tags?.find((t) => t.tag === 'kind');
   if (enumTag != null) {
-    const match = enumTag.text.match('(?<name>[A-Z][a-z]+)');
-    const enumName = match.groups.name;
+    const match = enumTag.text.match(/([A-z]+)/g);
+    const enumName = match[0];
+    const intrinsic = type.types.filter((t) => t.type === 'intrinsic');
+    const enumValues = match.reduce((memo, name) => [
+      ...memo,
+      ...enums.find((e) => e.name === name).values.map((v) => `${name}.${v}`),
+    ], []);
 
     return {
       type: 'enum',
-      name: enumName,
-      values: type.types.filter((t) => t.name !== 'undefined').map((t) => `${enumName}.${t.name}`),
-    };
+      name: match.join(','),
+      values: [...enumValues, ...intrinsic.map((i) => `${enumName}.${i.name}`)],
+    }
   } else if (type.type === 'instrinsic') {
     return {
       type: type.name,
@@ -244,12 +249,27 @@ function _parseType(type, docs, componentName, comment) {
   }
 }
 
+function _getSearchableEnums(docs) {
+  const enumFiles = docs.children.filter((file) => file.name.includes('src/enums'));
+  return enumFiles.reduce((memo, file) => {
+    if (file.children.some((c) => c.kindString !== 'Enumeration')) {
+      return memo;
+    }
+    const definitions = file.children.map((_enum) => ({
+      name: _enum.name,
+      values: _enum.children.map((value) => value.name),
+    }));
+    return [ ...memo, ...definitions ];
+  }, []);
+}
+
 export function generateDocs(componentName, docs) {
   const interfaceDescription = _getInterfaceDescription(componentName, docs);
 
   if (interfaceDescription == null) {
     return null;
   }
+  const enums = _getSearchableEnums(docs);
   const res = interfaceDescription.children.reduce((props, prop) => {
     if (prop?.flags?.isPrivate) {
       return props;
@@ -259,7 +279,7 @@ export function generateDocs(componentName, docs) {
       ...props,
       [prop.name]: {
         required: !prop.flags?.isOptional,
-        type: _getType(prop.type, docs, componentName, prop.comment),
+        type: _getType(prop.type, docs, componentName, prop.comment, enums),
         deprecation: _getDeprecation(prop),
         defaultValue: _getDefault(prop),
         description: prop.comment?.shortText || '',

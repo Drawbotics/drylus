@@ -6,7 +6,11 @@ import { normalizeValue } from '../utils';
 const SelectProp = ({ prop, value, onChange, enums, isEnum }) => {
   const { key, type } = prop;
   const { values } = type;
-  const finalValue = isEnum ? (type?.name || '') + '.' + (value?.description || value) : value;
+  const match = type?.name == null ? '' : type.name.match(/([A-z]+)/g);
+  const finalValue = isEnum ? type.values.find((v) => (
+    v === `${match[0]}.${value?.description || value}` ||
+    v === `${match[1]}.${value?.description || value}`)) : value;
+
   return (
     <div style={{ minWidth: 200 }}>
       <Select
