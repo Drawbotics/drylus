@@ -1,3 +1,16 @@
+# v7.14.1 (Mon Jan 10 2022)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Hotfix/range input [#198](https://github.com/Drawbotics/drylus/pull/198) ([@manuelitox](https://github.com/manuelitox))
+
+#### Authors: 1
+
+- Manuel González ([@manuelitox](https://github.com/manuelitox))
+
+---
+
 # v7.14.0 (Thu Dec 09 2021)
 
 #### 🚀 Enhancement - Minor change
