@@ -286,11 +286,10 @@ export const RangeInput = <T extends number | Array<number>, K extends string>({
   const isMultiHandle = typeof value !== 'number' && (value as Array<number>).length > 1;
   const values: Array<number> = isMultiHandle ? (value as Array<number>) : [value as number];
 
-  const minAndMaxAreEqual = min === max;
   const formatHandles = (handle: SliderItem) => {
     // handle.value will be NaN when min and max are equal.
     // When this condition is right, lets to set the minimum as a value by default.
-    return isNaN(handle.value) ? { ...handle, value: minAndMaxAreEqual ? min : 0 } : handle;
+    return isNaN(handle.value) ? { ...handle, value: min === max ? min : 0 } : handle;
   };
 
   return (
