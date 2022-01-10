@@ -286,6 +286,12 @@ export const RangeInput = <T extends number | Array<number>, K extends string>({
   const isMultiHandle = typeof value !== 'number' && (value as Array<number>).length > 1;
   const values: Array<number> = isMultiHandle ? (value as Array<number>) : [value as number];
 
+  const formatHandles = (handle: SliderItem) => {
+    // handle.value will be NaN when min and max are equal.
+    // When this condition is right, lets to set the minimum as a value by default.
+    return isNaN(handle.value) ? { ...handle, value: min === max ? min : 0 } : handle;
+  };
+
   return (
     <Fragment>
       <Slider
@@ -312,7 +318,7 @@ export const RangeInput = <T extends number | Array<number>, K extends string>({
         <Handles>
           {({ handles, getHandleProps }) => (
             <div>
-              {handles.map((handle) => (
+              {handles.map(formatHandles).map((handle) => (
                 <Handle
                   hideTooltip={hideTooltips}
                   disabled={disabled}

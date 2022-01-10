@@ -17,6 +17,14 @@ __Example__
   } />
 </Playground>
 
+### Range where min and max values are equal
+__Example__
+<Playground>
+  <ControlledField style={{ maxWidth: 300, width: '100%' }} initialValue={0} component={
+    <RangeInput step={1} onChange={x => x} max={0} min={0} value={0} />
+  } />
+</Playground>
+
 
 ### Range with 2 possible values
 <Playground>
