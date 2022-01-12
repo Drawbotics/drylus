@@ -133,16 +133,23 @@ function _parseType(type, docs, componentName, comment, enums) {
     const match = enumTag.text.match(/([A-z]+)/g);
     const enumName = match[0];
     const intrinsic = type.types.filter((t) => t.type === 'intrinsic');
-    const enumValues = match.reduce((memo, name) => [
-      ...memo,
-      ...enums.find((e) => e.name === name).values.map((v) => `${name}.${v}`),
-    ], []);
+    const nonIntrinsic = type.types.filter((t) => t.type !== 'intrinsic');
+    const enumValues = match.reduce(
+      (memo, name) => [
+        ...memo,
+        ...enums
+          .find((e) => e.name === name)
+          .values.filter((e) => !!nonIntrinsic.find((type) => type.name === e))
+          .map((v) => `${name}.${v}`),
+      ],
+      [],
+    );
 
     return {
       type: 'enum',
       name: match.join(','),
       values: [...enumValues, ...intrinsic.map((i) => `${enumName}.${i.name}`)],
-    }
+    };
   } else if (type.type === 'instrinsic') {
     return {
       type: type.name,
@@ -259,7 +266,7 @@ function _getSearchableEnums(docs) {
       name: _enum.name,
       values: _enum.children.map((value) => value.name),
     }));
-    return [ ...memo, ...definitions ];
+    return [...memo, ...definitions];
   }, []);
 }
 
