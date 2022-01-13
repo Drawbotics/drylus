@@ -1,3 +1,16 @@
+# v7.15.0 (Thu Jan 13 2022)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Add padding size prop to table [#199](https://github.com/Drawbotics/drylus/pull/199) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v7.14.1 (Mon Jan 10 2022)
 
 #### 🐛 Bug fix - Patch
