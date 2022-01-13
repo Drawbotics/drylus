@@ -1,3 +1,16 @@
+# v7.16.0 (Thu Jan 13 2022)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Add embedded search input in CheckboxInput [#200](https://github.com/Drawbotics/drylus/pull/200) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.15.0 (Thu Jan 13 2022)
 
 #### 🚀 Enhancement - Minor change
