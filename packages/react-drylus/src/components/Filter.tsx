@@ -3,12 +3,13 @@ import { css, cx } from 'emotion';
 import React, { useEffect, useRef, useState } from 'react';
 import { v4 } from 'uuid';
 
-import { Align } from '../enums';
-import { Checkbox } from '../forms';
+import { Align, Size } from '../enums';
+import { Checkbox, SearchInput } from '../forms';
 import { ListTile } from '../layout';
 import { Option, Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { Icon } from './Icon';
+import { Separator } from './Separator';
 
 const styles = {
   root: css`
@@ -58,6 +59,15 @@ const styles = {
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
     padding-top: ${sv.paddingExtraSmall};
   `,
+  searchInput: css`
+    padding-top: ${sv.paddingExtraSmall};
+    padding-bottom: ${sv.paddingSmall};
+    padding-left: ${sv.paddingSmall};
+    padding-right: ${sv.paddingSmall};
+  `,
+  searchSection: css`
+    padding-bottom: ${sv.paddingSmall};
+  `,
   content: css`
     overflow: auto;
   `,
@@ -83,7 +93,7 @@ const styles = {
   option: css`
     display: flex;
     align-items: center;
-    padding: 5px ${sv.paddingExtraSmall};
+    padding: ${sv.paddingExtraSmall} ${sv.paddingSmall};
     transition: ${sv.transitionShort};
 
     &:hover {
@@ -135,6 +145,9 @@ export interface BaseFilterProps {
   /** Triggered when the clear button is clicked */
   onClear?: () => void;
 
+  /** @private */
+  header?: React.ReactNode;
+
   /** Content displayed within the filter panel */
   children?: React.ReactNode;
 
@@ -183,6 +196,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
     closeOnClick = false,
     contentHeight,
     className,
+    header,
   } = useResponsiveProps<BaseFilterProps>(rest, responsive);
 
   const panelRef = useRef<HTMLDivElement>(null);
@@ -246,6 +260,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
           [styles.rightAlign]: align === Align.RIGHT,
         })}
         onClick={closeOnClick === true ? () => setPanelOpen(false) : undefined}>
+        {header}
         <div
           className={cx(styles.content, { [styles.withLine]: contentHeight != null })}
           style={{ maxHeight: contentHeight }}>
@@ -352,6 +367,12 @@ export interface CheckboxFilterProps<T> extends BaseFilterProps {
 
   /** Used for style overrides */
   className?: string;
+
+  /** show a search box where you can search for the available options */
+  enableSearch?: boolean;
+
+  /** placeholder to show on search input, when enabled */
+  searchPlaceholder?: string;
 }
 
 export const CheckboxFilter = <T extends any>({
@@ -359,15 +380,51 @@ export const CheckboxFilter = <T extends any>({
   values = [],
   onChange,
   label,
+  enableSearch,
+  searchPlaceholder,
   ...rest
 }: CheckboxFilterProps<T>) => {
   const currentLabel = getLabelForCheckboxFilter(label, options, values);
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    if (!enableSearch) {
+      setSearchTerm('');
+    }
+  }, [enableSearch]);
+
+  const filteredOptions =
+    searchTerm != null && searchTerm != ''
+      ? options.filter((option) => {
+          const searchableLabel = option.label.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+          return searchableLabel.startsWith(searchTerm);
+        })
+      : options;
+
   return (
     <BaseFilter
       {...rest}
       label={currentLabel != null ? String(currentLabel) : label}
-      active={currentLabel != null && values.length > 0}>
-      {options.map((option) => {
+      active={currentLabel != null && values.length > 0}
+      header={
+        enableSearch ? (
+          <div className={cx(styles.searchSection)}>
+            <div className={cx(styles.searchInput)}>
+              <SearchInput
+                value={searchTerm}
+                onChange={setSearchTerm}
+                placeholder={searchPlaceholder}
+                size={Size.SMALL}
+                minimal
+              />
+            </div>
+            <Separator />
+          </div>
+        ) : null
+      }>
+      {filteredOptions.map((option) => {
         const id = v4();
         return (
           <label

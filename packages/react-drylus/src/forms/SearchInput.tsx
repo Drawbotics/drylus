@@ -89,12 +89,12 @@ const styles = {
   `,
   smallMinimal: css`
     input {
-      padding-left: ${sv.paddingExtraLarge} !important;
+      padding-left: ${sv.paddingLarge} !important;
     }
 
     > [data-element='input-root'] > div > {
       &::after {
-        left: ${sv.paddingSmall};
+        left: ${sv.paddingExtraSmall};
         font-size: 1em;
       }
     }
