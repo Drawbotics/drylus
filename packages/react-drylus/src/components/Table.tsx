@@ -60,6 +60,15 @@ const styles = {
   fullWidth: css`
     width: 100%;
   `,
+  compact: css`
+    th,
+    td {
+      padding-top: ${sv.paddingExtraSmall};
+      padding-bottom: ${sv.paddingExtraSmall};
+      padding-left: ${sv.paddingSmall};
+      padding-right: ${sv.paddingSmall};
+    }
+  `,
   highlighted: css`
     tr {
       &:hover {
@@ -793,7 +802,9 @@ function _generateRowChildren({
       );
     });
   } else {
-    return Object.values(omitBy(rowData, (_, key) => key.startsWith('_'))).map((value, i) => <TCell key={`${i}-${value}`}>{value}</TCell>);
+    return Object.values(omitBy(rowData, (_, key) => key.startsWith('_'))).map((value, i) => (
+      <TCell key={`${i}-${value}`}>{value}</TCell>
+    ));
   }
 }
 
@@ -1025,6 +1036,12 @@ export interface TableProps {
    * @default true
    */
   responsive?: boolean;
+
+  /**
+   * @default Size.DEFAULT
+   * @kind Size
+   */
+  size?: Size.SMALL | Size.DEFAULT;
 }
 
 export const Table = ({
@@ -1052,6 +1069,7 @@ export const Table = ({
   memoDataValues,
   className,
   responsive = true,
+  size = Size.DEFAULT,
 }: TableProps) => {
   const [rowsStates, setRowState] = useState<Record<string | number, boolean>>({});
   const { screenSize, ScreenSizes } = useScreenSize();
@@ -1218,6 +1236,7 @@ export const Table = ({
                 ))) &&
             (screenSize > ScreenSizes.L || !responsive),
           [styles.highlighted]: highlighted === true && !(hasNestedData || withNesting === true),
+          [styles.compact]: size === Size.SMALL,
         },
         className,
       )}>
