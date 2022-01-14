@@ -1,3 +1,16 @@
+# v7.16.1 (Fri Jan 14 2022)
+
+#### ⚠️  Pushed to master
+
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - install deps  ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.13.0 (Mon Nov 22 2021)
 
 #### ⚠️  Pushed to master
