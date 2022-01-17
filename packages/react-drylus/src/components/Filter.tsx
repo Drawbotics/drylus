@@ -263,7 +263,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
           [styles.rightAlign]: align === Align.RIGHT,
         })}
         onClick={closeOnClick === true ? () => setPanelOpen(false) : undefined}
-        style={{ width: panelWidth != null ? panelWidth : undefined }}>
+        style={{ width: panelWidth }}>
         {header}
         <div
           className={cx(styles.content, { [styles.withLine]: contentHeight != null })}
