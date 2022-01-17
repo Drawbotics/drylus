@@ -47,7 +47,6 @@ const styles = {
     margin-top: ${sv.marginExtraSmall};
     background: ${sv.white};
     min-width: 180px;
-    max-height: 290px;
     display: flex;
     flex-direction: column;
     border-radius: ${sv.defaultBorderRadius};
@@ -170,6 +169,9 @@ export interface BaseFilterProps {
    */
   closeOnClick?: boolean;
 
+  /** If given, the panel will be set to this width */
+  panelWidth?: number;
+
   /** If given, the content will be limited to this height, and content will scroll */
   contentHeight?: number;
 
@@ -197,6 +199,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
     contentHeight,
     className,
     header,
+    panelWidth,
   } = useResponsiveProps<BaseFilterProps>(rest, responsive);
 
   const panelRef = useRef<HTMLDivElement>(null);
@@ -259,11 +262,12 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
           [styles.visible]: panelOpen,
           [styles.rightAlign]: align === Align.RIGHT,
         })}
-        onClick={closeOnClick === true ? () => setPanelOpen(false) : undefined}>
+        onClick={closeOnClick === true ? () => setPanelOpen(false) : undefined}
+        style={{ width: panelWidth != null ? panelWidth : undefined }}>
         {header}
         <div
           className={cx(styles.content, { [styles.withLine]: contentHeight != null })}
-          style={{ maxHeight: contentHeight }}>
+          style={{ maxHeight: contentHeight ?? '290px' }}>
           {children}
         </div>
         <div className={styles.clear} onClick={handleClickClear}>

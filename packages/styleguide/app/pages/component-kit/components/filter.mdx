@@ -28,7 +28,7 @@ import { BaseFilter, SelectFilter, CheckboxFilter } from '@drawbotics/react-dryl
 
 __Example__
 <Playground component={BaseFilter}>
-  <div style={{ height: 200, marginLeft: 100 }}>
+  <div style={{ marginLeft: 100 }}>
     <BaseFilter label="Base filter" onClear={x=>x}>
       <div style={{ height: 70, background: 'red', padding: 20 }}>
         Some custom content
@@ -119,7 +119,7 @@ __Example__
 `CheckboxFilter` inherits all props from `BaseFilter` and adds the following
 
 <Playground component={CheckboxFilter}>
-  <div style={{ height: 200, marginLeft: 100 }}>
+  <div style={{ marginLeft: 100 }}>
     <ControlledMultiField component={
       <CheckboxFilter
         align={Align.LEFT}
@@ -127,17 +127,53 @@ __Example__
         onClear={x=>x}
         onChange={x=>x}
         options={[{
-          label: 'Exterior 3D',
-          value: 'exterior3d',
+          label: 'Option 1',
+          value: 'option-1',
         }, {
-          label: 'Interior 3D',
-          value: 'interior3d',
+          label: 'Option 2',
+          value: 'option-2',
         }, {
-          label: 'Shoebox',
-          value: 'shoebox',
+          label: 'Option 3',
+          value: 'option-3',
         }, {
-          label: 'Website',
-          value: 'website',
+          label: 'Option 4',
+          value: 'option-4',
+        }, {
+          label: 'Option 5',
+          value: 'option-5',
+        }, {
+          label: 'Option 6',
+          value: 'option-6',
+        }, {
+          label: 'Option 7',
+          value: 'option-7',
+        }, {
+          label: 'Option 8',
+          value: 'option-8',
+        },{
+          label: 'Option 9',
+          value: 'option-9',
+        }, {
+          label: 'Option 10',
+          value: 'option-10',
+        }, {
+          label: 'Option 11',
+          value: 'option-11',
+        }, {
+          label: 'Option 12',
+          value: 'option-12',
+        }, {
+          label: 'Option 13',
+          value: 'option-13',
+        }, {
+          label: 'Option 14',
+          value: 'option-14',
+        }, {
+          label: 'Option 15',
+          value: 'option-15',
+        }, {
+          label: 'Option 16',
+          value: 'option-16',
         }]} />
     } />
   </div>
