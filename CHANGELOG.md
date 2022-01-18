@@ -1,3 +1,16 @@
+# v7.17.0 (Tue Jan 18 2022)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/icons`
+  - Add archive icon [#202](https://github.com/Drawbotics/drylus/pull/202) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v7.16.1 (Fri Jan 14 2022)
 
 #### ⚠️  Pushed to master
