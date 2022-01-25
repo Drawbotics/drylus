@@ -136,7 +136,7 @@ const styles = {
     background: ${fade(sv.azure, 30)};
     box-shadow: inset 0px 0px 0px 1px ${sv.azure};
     border-radius: ${sv.defaultBorderRadius};
-    padding: calc(${sv.paddingExtraSmall} * 1.5);
+    padding: 0 calc(${sv.paddingExtraSmall} * 1.5);
     color: ${sv.colorPrimary};
   `,
   smallFix: css`
@@ -150,6 +150,7 @@ const styles = {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     margin-right: -1px;
+    line-height: 1em;
 
     i {
       font-size: 1.2em;
@@ -173,11 +174,17 @@ const styles = {
     select {
       background-color: transparent;
     }
+
+    /* NOTE: fix for select caret */
+    > div::after {
+      top: 12px;
+    }
   `,
   trailing: css`
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     margin-left: -1px;
+    line-height: 1em;
 
     i {
       font-size: 1.2em;
@@ -200,6 +207,11 @@ const styles = {
     }
     select {
       background-color: transparent;
+    }
+
+    /* NOTE: fix for select caret */
+    > div::after {
+      top: 12px;
     }
   `,
   transparentButton: css`
@@ -244,6 +256,14 @@ const styles = {
 
       > i {
         font-size: 0.95em;
+      }
+    }
+
+    [data-element='leading'],
+    [data-element='trailing'] {
+      /* NOTE: fix for select caret */
+      > div::after {
+        top: 8px;
       }
     }
   `,
