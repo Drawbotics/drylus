@@ -1,3 +1,16 @@
+# v7.18.0 (Wed Jan 26 2022)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/icons`
+  - Replace man-1 and man-2 with new man icon [#203](https://github.com/Drawbotics/drylus/pull/203) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v7.17.1 (Tue Jan 25 2022)
 
 #### ⚠️  Pushed to master
