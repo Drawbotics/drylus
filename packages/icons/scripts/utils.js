@@ -5,31 +5,33 @@ const ICONS_CDN_PATH = 'https://cdn.drawbotics.com/drycons';
 
 // Maintain backward compatibility with old icon names
 const aliases = {
-  'next': ['arrow-right-line'],
-  'outdoor': ['beach-umbrella'],
-  'room': ['bed'],
-  'insights': ['data-points'],
-  'budget': ['money-bag'],
-  'send': ['paper-plane-horizontal'],
+  next: ['arrow-right-line'],
+  outdoor: ['beach-umbrella'],
+  room: ['bed'],
+  insights: ['data-points'],
+  budget: ['money-bag'],
+  send: ['paper-plane-horizontal'],
   'drone-shoot': ['drone-shooting'],
   'virtual-tour-exterior': ['exterior-tour-3d'],
   'virtual-tour-interior': ['interior-tour-3d'],
-  'landing': ['landing-page'],
+  landing: ['landing-page'],
   'maquette-360': ['model-360'],
   'photo-shoot': ['photo-shooting'],
-  'revo': ['revo-alt'],
-  'tourama': ['tour-3d'],
+  revo: ['revo-alt'],
+  tourama: ['tour-3d'],
   'vr-headset': ['vr'],
+  man: ['man-1', 'man-2'],
 };
 
 function addAliases(file) {
   const contents = fs.readFileSync(file, 'utf8');
   fs.writeFileSync(
     file,
-    contents.replace(
-      /Drycon-(\S+)::before/gm,
-      (_, $1) => aliases[$1] != null
-        ? `Drycon-${$1}::before, ${aliases[$1].map((alias) => `.Drycon-${alias}::before`).join(', ')}`
+    contents.replace(/Drycon-(\S+)::before/gm, (_, $1) =>
+      aliases[$1] != null
+        ? `Drycon-${$1}::before, ${aliases[$1]
+            .map((alias) => `.Drycon-${alias}::before`)
+            .join(', ')}`
         : `Drycon-${$1}::before`,
     ),
   );
@@ -49,8 +51,8 @@ function setFontSize(size, file) {
 function generateObjectMappings(targetFile, iconsFolder) {
   const icons = fs.readdirSync(iconsFolder);
   const iconNames = icons.map((fileName) => fileName.replace('.svg', ''));
-  const aliasNames = Object.values(aliases).reduce((acc, val) => [ ...acc, ...val ], []);
-  console.log(aliasNames)
+  const aliasNames = Object.values(aliases).reduce((acc, val) => [...acc, ...val], []);
+  console.log(aliasNames);
   const mapping = [...iconNames, ...aliasNames].reduce(
     (memo, icon) => ({
       ...memo,
@@ -85,7 +87,7 @@ function generateJSFunction(file) {
 function generateTSType(targetFile, iconsFolder) {
   const icons = fs.readdirSync(iconsFolder);
   const iconNames = icons.map((fileName) => fileName.replace('.svg', ''));
-  const aliasNames = Object.values(aliases).reduce((acc, val) => [ ...acc, ...val ], []);
+  const aliasNames = Object.values(aliases).reduce((acc, val) => [...acc, ...val], []);
   const allNames = [...iconNames, ...aliasNames];
   const list = allNames.map((name) => `"${name}"`).join(' | ');
   const types = allNames.map((name) => `"${camelCase(name)}"`).join(' | ');
