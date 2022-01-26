@@ -1,3 +1,16 @@
+# v7.18.1 (Wed Jan 26 2022)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/icons`
+  - Fix breaking man-1 and man-2 icon changes with aliases [#204](https://github.com/Drawbotics/drylus/pull/204) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v7.18.0 (Wed Jan 26 2022)
 
 #### 🚀 Enhancement - Minor change
