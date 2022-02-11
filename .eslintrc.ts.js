@@ -53,6 +53,7 @@ module.exports = {
     'react/no-unescaped-entities': ['off'],
     'react/style-prop-object': ['warn'],
     'react/display-name': ['off'],
+    'react/no-children-props': ['off'],
 
     // Deprecation
     'deprecated-props/deprecated-props': ['warn'],

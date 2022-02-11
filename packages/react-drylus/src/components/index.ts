@@ -48,3 +48,4 @@ export * from './FileIcon';
 export * from './AttachmentList';
 export * from './AnimatedItem';
 export * from './TabMenu';
+export * from './Sortable';

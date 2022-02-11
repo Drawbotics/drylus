@@ -48,6 +48,7 @@ import toggle from './toggle';
 import tooltip from './tooltip';
 import uploadBox from './upload-box';
 import tabMenu from './tab-menu';
+import sortable from './sortable';
 
 const components = {
   button,
@@ -100,6 +101,7 @@ const components = {
   attachmentList,
   animatedItem,
   tabMenu,
+  sortable
 };
 
 export default Object.keys(components)

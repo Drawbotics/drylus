@@ -1,0 +1,44 @@
+import { useState } from 'react';
+import { SortableGrid, SortableItem, Size } from '@drawbotics/react-drylus';
+
+import Playground from '~/components/Playground';
+
+
+# SortableGrid
+Usage
+```jsx
+import { SortableGrid, SortableItem } from '@drawbotics/react-drylus';
+```
+
+export const ControlledField = ({ defaultValue, render }) => {
+  const [items, setItems] = useState(defaultValue);
+  return render({ items, onSortEnd: setItems });
+};
+
+
+export const Content = () => {
+  return <div style={{ width: '100%', height: '100px', background: 'red' }} />
+}
+
+__Example__
+
+<Playground mode="jsx" component={SortableGrid}>
+  <ControlledField
+    defaultValue={[
+      {id: 1, label: 'First' },
+      { id: 2, label: 'Second' },
+      { id: 3, label: 'Third' },
+      { id: 4, label: 'Fourth' },
+      { id: 5, label: 'Fifth' },
+      { id: 6, label: 'Sixth' },
+    ]}
+    render={({ items, onSortEnd }) => (
+      <SortableGrid items={items} onSortEnd={onSortEnd} hGutters={Size.DEFAULT} vGutters={Size.DEFAULT} columns={3}>
+        {items.map((item) => (
+          <SortableItem key={item.id} label={item.label}>
+            <Content />
+          </SortableItem>
+        ))}
+    </SortableGrid>
+    )} />
+</Playground>
