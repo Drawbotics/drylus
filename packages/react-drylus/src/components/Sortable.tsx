@@ -2,7 +2,7 @@ import { DndContext, DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, arrayMove, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import sv from '@drawbotics/drylus-style-vars';
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import React from 'react';
 
 import { useThemeColor } from '../base';
@@ -21,7 +21,24 @@ const styles = {
     border-radius: ${sv.defaultBorderRadius};
     transition: box-shadow ease-in-out ${sv.transitionTimeShort};
   `,
-  handle: css`
+  minimal: css`
+    padding: 0;
+    overflow: hidden;
+
+    [data-element='controls'] {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      padding: ${sv.paddingExtraSmall};
+      background: linear-gradient(rgba(0, 0, 0, 0.7), transparent);
+    }
+
+    i {
+      color: ${sv.white} !important;
+    }
+  `,
+  icon: css`
     &:hover {
       cursor: pointer;
 
@@ -29,6 +46,9 @@ const styles = {
         color: ${sv.colorPrimary};
       }
     }
+  `,
+  content: css`
+    display: flex;
   `,
 };
 
@@ -44,9 +64,12 @@ export interface SortableItemProps {
 
   /** @private */
   id: string;
+
+  /** @private */
+  minimal?: boolean;
 }
 
-export const SortableItem = ({ id, label, onClickClose, children }: SortableItemProps) => {
+export const SortableItem = ({ id, label, onClickClose, children, minimal }: SortableItemProps) => {
   const color = useThemeColor();
   const { transform, transition, setNodeRef, attributes, listeners, active } = useSortable({
     id,
@@ -63,25 +86,34 @@ export const SortableItem = ({ id, label, onClickClose, children }: SortableItem
   };
 
   return (
-    <div className={styles.item} ref={setNodeRef} style={style}>
-      <Flex justify={FlexJustify.START}>
-        <FlexItem>
-          <div className={styles.handle} {...attributes} {...listeners}>
-            <Icon shade={Shade.MEDIUM} name="drag-and-drop" />
-          </div>
-        </FlexItem>
-        <FlexSpacer size={Size.EXTRA_SMALL} />
-        <FlexItem flex>
-          <Text size={Size.SMALL}>{label}</Text>
-        </FlexItem>
-        {onClickClose != null ? (
+    <div
+      className={cx(styles.item, { [styles.minimal]: minimal === true })}
+      ref={setNodeRef}
+      style={style}>
+      <div data-element="controls">
+        <Flex justify={FlexJustify.START}>
           <FlexItem>
-            {/* TODO: modify with overlay */}
-            <Icon shade={Shade.MEDIUM} onClick={onClickClose} name="x" />
+            <div className={styles.icon} {...attributes} {...listeners}>
+              <Icon shade={Shade.MEDIUM} name="drag-and-drop" />
+            </div>
           </FlexItem>
-        ) : null}
-      </Flex>
-      {children}
+          <FlexSpacer size={Size.EXTRA_SMALL} />
+          <FlexItem flex>
+            <Text inversed={minimal} size={Size.SMALL}>
+              {label}
+            </Text>
+          </FlexItem>
+          {onClickClose != null ? (
+            <FlexItem className={styles.icon}>
+              {/* TODO: modify with overlay */}
+              <Icon shade={Shade.MEDIUM} onClick={onClickClose} name="x" />
+            </FlexItem>
+          ) : null}
+        </Flex>
+      </div>
+      <div className={styles.content} data-element="content">
+        {children}
+      </div>
     </div>
   );
 };
@@ -98,6 +130,12 @@ export interface SortableGridProps {
     | React.ReactElement<typeof SortableItem>
     | Array<React.ReactElement<typeof SortableItem> | null>
     | React.ReactNode;
+
+  /**
+   * If true, sortable items have a minimal look (used for galleries mostly)
+   * @default false
+   */
+  minimal?: boolean;
 
   /** Number of columns for the grid */
   columns: number;
@@ -134,6 +172,7 @@ export const SortableGrid = ({ responsive, ...rest }: SortableGridProps) => {
     onSortEnd,
     style,
     className,
+    minimal = false,
   } = useResponsiveProps<SortableGridProps>(rest, responsive);
 
   checkComponentProps({ children }, { children: SortableItem });
@@ -166,7 +205,7 @@ export const SortableGrid = ({ responsive, ...rest }: SortableGridProps) => {
                 key: index,
                 children: React.cloneElement(
                   child as React.ReactElement<typeof SortableItem>,
-                  { id: items[index].id } as Partial<typeof SortableItem>,
+                  { id: items[index].id, minimal } as Partial<typeof SortableItem>,
                 ),
               }),
             )}

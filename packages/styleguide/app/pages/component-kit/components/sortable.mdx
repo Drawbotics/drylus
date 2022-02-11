@@ -35,8 +35,35 @@ __Example__
     render={({ items, onSortEnd }) => (
       <SortableGrid items={items} onSortEnd={onSortEnd} hGutters={Size.DEFAULT} vGutters={Size.DEFAULT} columns={3}>
         {items.map((item) => (
-          <SortableItem key={item.id} label={item.label}>
+          <SortableItem onClickClose={() => {}} key={item.id} label={item.label}>
             <Content />
+          </SortableItem>
+        ))}
+    </SortableGrid>
+    )} />
+</Playground>
+
+### Minimal look (for galleries)
+
+<Playground mode="jsx">
+  <ControlledField
+    defaultValue={[
+      {id: 1 },
+      { id: 2 },
+      { id: 3 },
+      { id: 4 },
+      { id: 5 },
+      { id: 6 },
+      { id: 7 },
+      { id: 8 },
+      { id: 9 },
+      { id: 10 },
+    ]}
+    render={({ items, onSortEnd }) => (
+      <SortableGrid minimal items={items} onSortEnd={onSortEnd} hGutters={Size.DEFAULT} vGutters={Size.DEFAULT} columns={5}>
+        {items.map((item) => (
+          <SortableItem label={'Image ' + item.id} key={item.id}>
+            <img style={{ objectFit: 'cover' }} src="https://www.thespruceeats.com/thmb/iloyF0wMep_WzaEY582p4r_9Ziw=/735x0/how-to-make-your-own-bacon-4146515-17-5b4643f1c9e77c0037514094.jpg" width="100%" height={150} />
           </SortableItem>
         ))}
     </SortableGrid>
