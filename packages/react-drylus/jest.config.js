@@ -18,7 +18,6 @@ module.exports = {
     '/node_modules/',
     '/lib/',
     '/tmp/',
-    'src/components/Sortable.tsx'
   ],
   setupFilesAfterEnv: [
     './jest.setup.js',
@@ -31,6 +30,9 @@ module.exports = {
   globals: {
     'ts-jest': {
       tsConfig: './tsconfig.test.json',
+      diagnostics: {
+        ignoreCodes: [ 'TS2345' ],
+      },
     },
   },
 };
