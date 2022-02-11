@@ -5,6 +5,7 @@ import sv from '@drawbotics/drylus-style-vars';
 import { css } from 'emotion';
 import React from 'react';
 
+import { useThemeColor } from '../base';
 import { Shade, Size } from '../enums';
 import { Flex, FlexItem, FlexJustify, FlexSpacer, Grid, GridItem } from '../layout';
 import { Responsive, Style } from '../types';
@@ -18,6 +19,16 @@ const styles = {
     background: ${sv.backgroundColor};
     padding: ${sv.paddingExtraSmall};
     border-radius: ${sv.defaultBorderRadius};
+    transition: box-shadow ease-in-out ${sv.transitionTimeShort};
+  `,
+  handle: css`
+    &:hover {
+      cursor: pointer;
+
+      i {
+        color: ${sv.colorPrimary};
+      }
+    }
   `,
 };
 
@@ -36,6 +47,7 @@ export interface SortableItemProps {
 }
 
 export const SortableItem = ({ id, label, onClickClose, children }: SortableItemProps) => {
+  const color = useThemeColor();
   const { transform, transition, setNodeRef, attributes, listeners, active } = useSortable({
     id,
   });
@@ -44,14 +56,17 @@ export const SortableItem = ({ id, label, onClickClose, children }: SortableItem
     transform: CSS.Transform.toString(transform),
     transition: transition ?? undefined,
     zIndex: active?.id === id ? 999 : undefined,
-    boxShadow: active?.id === id ? sv.elevation2 : undefined,
+    boxShadow:
+      active?.id === id
+        ? `${sv.elevation2}, 0px 0px 0px 2px ${sv[color.toLowerCase() as keyof typeof sv]}`
+        : undefined,
   };
 
   return (
     <div className={styles.item} ref={setNodeRef} style={style}>
       <Flex justify={FlexJustify.START}>
         <FlexItem>
-          <div {...attributes} {...listeners}>
+          <div className={styles.handle} {...attributes} {...listeners}>
             <Icon shade={Shade.MEDIUM} name="drag-and-drop" />
           </div>
         </FlexItem>
@@ -146,6 +161,7 @@ export const SortableGrid = ({ responsive, ...rest }: SortableGridProps) => {
           {React.Children.toArray(children)
             .filter((c) => Boolean(c))
             .map((child, index) =>
+              // eslint-disable-next-line react/no-children-prop
               React.createElement(GridItem, {
                 key: index,
                 children: React.cloneElement(
