@@ -1,3 +1,16 @@
+# v7.19.0 (Fri Feb 11 2022)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature/sortable [#205](https://github.com/Drawbotics/drylus/pull/205) ([@nicmosc](https://github.com/nicmosc))
+
+#### Authors: 1
+
+- Nicolaos Moscholios ([@nicmosc](https://github.com/nicmosc))
+
+---
+
 # v7.18.1 (Wed Jan 26 2022)
 
 #### 🐛 Bug fix - Patch
