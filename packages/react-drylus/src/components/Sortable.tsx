@@ -84,8 +84,8 @@ export const SortableItem = ({
   align,
 }: SortableItemProps) => {
   const color = useThemeColor();
+  // @ts-ignore Tests fail because jest thinks `id` is not a valid argument... go figure
   const { transform, transition, setNodeRef, attributes, listeners, active } = useSortable({
-    // @ts-ignore Tests fail because jest thinks `id` is not a valid argument... go figure
     id,
   });
 
