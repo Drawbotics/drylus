@@ -1,13 +1,16 @@
 import { useState } from 'react';
-import { SortableGrid, SortableItem, Size } from '@drawbotics/react-drylus';
+import { SortableGrid, SortableItem, Size, SortableList, Checkbox, Flex, FlexItem, FlexAlign, FlexJustify, FlexSpacer, Align } from '@drawbotics/react-drylus';
 
 import Playground from '~/components/Playground';
 
 
-# SortableGrid
+# Sortable
+
+## Sortable Grid
+
 Usage
 ```jsx
-import { SortableGrid, SortableItem } from '@drawbotics/react-drylus';
+import { SortableGrid, SortableItem, SortableList } from '@drawbotics/react-drylus';
 ```
 
 export const ControlledField = ({ defaultValue, render }) => {
@@ -18,6 +21,10 @@ export const ControlledField = ({ defaultValue, render }) => {
 
 export const Content = () => {
   return <div style={{ width: '100%', height: '100px', background: 'red' }} />
+}
+
+export const Content2 = () => {
+  return <div style={{ width: '100%', height: '50px', background: 'blue' }} />
 }
 
 __Example__
@@ -68,4 +75,85 @@ __Example__
         ))}
     </SortableGrid>
     )} />
+</Playground>
+
+## Sortable List
+
+<Playground mode="jsx" component={SortableList}>
+  <div style={{ width: 300 }}>
+    <ControlledField
+      defaultValue={[
+        {id: 1, label: 'First' },
+        { id: 2, label: 'Second' },
+        { id: 3, label: 'Third' },
+        { id: 4, label: 'Fourth' },
+        { id: 5, label: 'Fifth' },
+        { id: 6, label: 'Sixth' },
+      ]}
+      render={({ items, onSortEnd }) => (
+        <SortableList items={items} onSortEnd={onSortEnd}>
+          {items.map((item) => (
+            <SortableItem onClickClose={() => {}} key={item.id} label={item.label}>
+              <Flex style={{ width: '100%' }} align={FlexAlign.CENTER} justify={FlexJustify.END}>
+                <FlexItem>
+                  <Checkbox value={true} onChange={() => {}} />
+                </FlexItem>
+              </Flex>
+            </SortableItem>
+          ))}
+      </SortableList>
+      )} />
+  </div>
+</Playground>
+
+### Align content center or top
+
+<Playground mode="jsx">
+  <Flex>
+    <FlexItem>
+      <div style={{ width: 300 }}>
+        <ControlledField
+          defaultValue={[
+            {id: 1, label: 'First' },
+            { id: 2, label: 'Second' },
+            { id: 3, label: 'Third' },
+            { id: 4, label: 'Fourth' },
+            { id: 5, label: 'Fifth' },
+            { id: 6, label: 'Sixth' },
+          ]}
+          render={({ items, onSortEnd }) => (
+            <SortableList align={Align.TOP} items={items} onSortEnd={onSortEnd}>
+              {items.map((item) => (
+                <SortableItem onClickClose={() => {}} key={item.id} label={item.label}>
+                   <Content2 />
+                </SortableItem>
+              ))}
+          </SortableList>
+          )} />
+      </div>
+    </FlexItem>
+    <FlexSpacer />
+    <FlexItem>
+      <div style={{ width: 300 }}>
+        <ControlledField
+          defaultValue={[
+            {id: 1, label: 'First' },
+            { id: 2, label: 'Second' },
+            { id: 3, label: 'Third' },
+            { id: 4, label: 'Fourth' },
+            { id: 5, label: 'Fifth' },
+            { id: 6, label: 'Sixth' },
+          ]}
+          render={({ items, onSortEnd }) => (
+            <SortableList items={items} onSortEnd={onSortEnd}>
+              {items.map((item) => (
+                <SortableItem onClickClose={() => {}} key={item.id} label={item.label}>
+                  <Content2 />
+                </SortableItem>
+              ))}
+          </SortableList>
+          )} />
+      </div>
+    </FlexItem>
+  </Flex>
 </Playground>
