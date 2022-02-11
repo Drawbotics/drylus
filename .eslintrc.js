@@ -58,5 +58,6 @@ module.exports = {
     'react/prop-types': [ 'off' ],
     'react/no-unescaped-entities': [ 'off' ],
     'react/style-prop-object': [ 'warn' ],
+    'react/no-children-props': ['off'],
   },
 };
