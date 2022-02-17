@@ -53,7 +53,7 @@ const Example = () => {
         visible={modalVisible}
         onClickClose={() => setModalVisibility(false)}>
         <div>
-          Im some content
+          I'm some content
         </div>
       </Modal>
     </div>
@@ -67,7 +67,7 @@ Basic modal example:
   <ModalController component={
     <Modal
       visible={false}>
-      <Text>Im some content</Text>
+      <Text>I'm some content</Text>
       <div style={{ height: 500, background: 'linear-gradient(red, blue)' }} />
     </Modal>
   } />
@@ -93,7 +93,9 @@ As you can see when the window height is smaller than the content, the modal is 
           </FlexItem>
         </Flex>
       }>
-      <Paragraph>Im some content</Paragraph>
+      <Paragraph>I'm some content</Paragraph>
+      <div style={{ height: 500, background: 'linear-gradient(red, blue)' }} />
+      <Margin />
       <div style={{ height: 500, background: 'linear-gradient(red, blue)' }} />
     </Modal>
   } />
@@ -126,7 +128,7 @@ export const modalMarkup = `
         <h4 class="Drylus-Title__root Drylus-Title__h4 Drylus-Title__noMargin">Modal title</h4>
       </div>
       <div class="Drylus-Modal__content">
-        <p class="Drylus-Paragraph__root">Im some content</p>
+        <p class="Drylus-Paragraph__root">I'm some content</p>
         <div style="height: 300px"></div>
       </div>
       <div class="Drylus-Modal__footer">
