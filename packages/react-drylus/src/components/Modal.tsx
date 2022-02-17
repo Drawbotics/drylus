@@ -32,7 +32,6 @@ const styles = {
     display: flex;
     align-items: center;
     justify-content: center;
-    pointer-events: none;
     padding: ${sv.defaultPadding};
     overscroll-behavior: none;
 
@@ -197,7 +196,7 @@ export interface ModalProps extends BaseModalProps {
    */
   raw?: boolean;
 
-  /** Reponsive prop overrides */
+  /** Responsive prop overrides */
   responsive?: Responsive<this>;
 
   /** Used to override the style of the overlay */
@@ -238,7 +237,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
   const overlayElement = useRef<HTMLDivElement>(null);
   const modalElement = useRef<HTMLDivElement>(null);
   const containerElement = useRef<HTMLDivElement>(null);
-  const overlayClicked = useRef<boolean>(false);
+  // const overlayClicked = useRef<boolean>(false);
 
   const handleWindowResize = () => {
     if (modalElement.current) {
@@ -269,13 +268,13 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     }
   };
 
-  const handleMouseDown = (e: MouseEvent) => {
-    if (e.target === overlayElement.current) {
-      overlayClicked.current = true;
-    } else {
-      overlayClicked.current = false;
-    }
-  };
+  // const handleMouseDown = (e: MouseEvent) => {
+  //   if (e.target === overlayElement.current) {
+  //     overlayClicked.current = true;
+  //   } else {
+  //     overlayClicked.current = false;
+  //   }
+  // };
 
   useEffect(() => {
     const outlet = document.getElementById('modals-outlet');
@@ -325,7 +324,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     window.addEventListener('touchmove', handleTouchMove);
 
     if (overlayElement.current != null) {
-      overlayElement.current.addEventListener('mousedown', handleMouseDown);
+      // overlayElement.current.addEventListener('mousedown', handleMouseDown);
     }
 
     return () => {
@@ -334,16 +333,16 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
       window.removeEventListener('touchmove', handleTouchMove);
 
       if (overlayElement.current != null) {
-        overlayElement.current.removeEventListener('mousedown', handleMouseDown);
+        // overlayElement.current.removeEventListener('mousedown', handleMouseDown);
       }
     };
   });
 
   if (outletElement == null) return null;
 
-  const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === overlayElement?.current && onClickClose != null && overlayClicked.current) {
-      onClickClose();
+  const handleClickOutsideModal = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === containerElement.current) {
+      onClickClose?.();
     }
   };
 
@@ -358,11 +357,11 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={handleClickOverlay}
             className={cx(styles.overlay, className)}
             style={overlayStyle}
             ref={overlayElement}>
             <motion.div
+              onClick={handleClickOutsideModal}
               initial="hidden"
               animate="visible"
               variants={variants}
