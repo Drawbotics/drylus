@@ -234,10 +234,8 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
   const [overflowing, setOverflowing] = useState(false);
   const [previousTouchY, setTouchY] = useState<number>();
   const { screenSize, ScreenSizes } = useScreenSize();
-  const overlayElement = useRef<HTMLDivElement>(null);
   const modalElement = useRef<HTMLDivElement>(null);
   const containerElement = useRef<HTMLDivElement>(null);
-  // const overlayClicked = useRef<boolean>(false);
 
   const handleWindowResize = () => {
     if (modalElement.current) {
@@ -267,14 +265,6 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
       }
     }
   };
-
-  // const handleMouseDown = (e: MouseEvent) => {
-  //   if (e.target === overlayElement.current) {
-  //     overlayClicked.current = true;
-  //   } else {
-  //     overlayClicked.current = false;
-  //   }
-  // };
 
   useEffect(() => {
     const outlet = document.getElementById('modals-outlet');
@@ -323,18 +313,10 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     window.addEventListener('touchstart', handleTouchStart);
     window.addEventListener('touchmove', handleTouchMove);
 
-    if (overlayElement.current != null) {
-      // overlayElement.current.addEventListener('mousedown', handleMouseDown);
-    }
-
     return () => {
       window.removeEventListener('resize', handleWindowResize);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
-
-      if (overlayElement.current != null) {
-        // overlayElement.current.removeEventListener('mousedown', handleMouseDown);
-      }
     };
   });
 
@@ -358,10 +340,9 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className={cx(styles.overlay, className)}
-            style={overlayStyle}
-            ref={overlayElement}>
+            style={overlayStyle}>
             <motion.div
-              onClick={handleClickOutsideModal}
+              onMouseDown={handleClickOutsideModal}
               initial="hidden"
               animate="visible"
               variants={variants}
