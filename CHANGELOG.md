@@ -1,3 +1,17 @@
+# v7.19.1 (Tue Feb 22 2022)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Fix/modal scroll [#206](https://github.com/Drawbotics/drylus/pull/206) (leopold@drawbotics.com [@LeopoldArkham](https://github.com/LeopoldArkham))
+
+#### Authors: 2
+
+- [@LeopoldArkham](https://github.com/LeopoldArkham)
+- LeopoldArkham (leopold@drawbotics.com)
+
+---
+
 # v7.19.0 (Fri Feb 11 2022)
 
 #### 🚀 Enhancement - Minor change
