@@ -398,8 +398,9 @@ export const CheckboxFilter = <T extends any>({
     searchTerm != null && searchTerm != ''
       ? options.filter((option) => {
           const searchableLabel = option.label.toLowerCase().replace(/[^a-z0-9]/g, '');
+          const searchTermConverted = searchTerm.toLowerCase().replace(/[^a-z0-9]/g, '');
 
-          return searchableLabel.startsWith(searchTerm);
+          return searchableLabel.includes(searchTermConverted);
         })
       : options;
 
