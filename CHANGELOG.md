@@ -1,3 +1,16 @@
+# v7.19.2 (Fri Mar 04 2022)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Fix search in filters only matches the start of the string [#209](https://github.com/Drawbotics/drylus/pull/209) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v7.19.1 (Tue Feb 22 2022)
 
 #### 🐛 Bug fix - Patch
