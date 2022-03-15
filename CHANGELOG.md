@@ -1,3 +1,16 @@
+# v8.0.0 (Tue Mar 15 2022)
+
+#### 💥 Breaking - Major release
+
+- `@drawbotics/react-drylus`
+  - Replace MultiSelect with react-select [#211](https://github.com/Drawbotics/drylus/pull/211) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v7.19.2 (Fri Mar 04 2022)
 
 #### 🐛 Bug fix - Patch
