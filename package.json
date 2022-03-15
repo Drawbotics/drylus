@@ -24,7 +24,7 @@
     "build:icons": "cd packages/icons && npm run build",
     "build": "lerna run build --stream",
     "watch": "lerna run watch --stream",
-    "bootstrap": "lerna link convert && lerna exec npm install && npm install",
+    "bootstrap": "npm install -g lerna && lerna link convert && lerna exec npm install && npm install",
     "update:assets": "mmdc -i assets/graph.mmd -o assets/graph.svg",
     "lint": "eslint --ext js,jsx --format node_modules/eslint-formatter-pretty packages/",
     "build-libs": "npm run build:vars && npm run build:icons && npm run build:extract-emotion",
