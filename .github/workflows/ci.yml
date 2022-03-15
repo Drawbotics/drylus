@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-        - master
+      - master
     paths:
       - 'packages/react-drylus/**'
       - 'packages/extract-emotion/**'
@@ -25,62 +25,62 @@ jobs:
     runs-on: ubuntu-18.04
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '10.x'
-        registry-url: https://npm.pkg.github.com/
-        scope: '@drawbotics'
-    - run: echo 'Current ref = ${{ github.ref }}'
-    - name: Install dependencies and run tests
-      run: |
-        npm install
-        npx lerna link convert
-        npm run test
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
-  
+      - name: Checkout
+        uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+          registry-url: https://npm.pkg.github.com/
+          scope: '@drawbotics'
+      - run: echo 'Current ref = ${{ github.ref }}'
+      - name: Install dependencies and run tests
+        run: |
+          npm run bootstrap
+          npx lerna link convert
+          npm run test
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
+
   release:
     needs: test
     if: contains(github.ref, 'master')
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '10.x'
-        registry-url: https://npm.pkg.github.com/
-        scope: '@drawbotics'
-    - name: Install dependencies & build libs
-      run: |
-        npm install
-        npx lerna link convert
-        npm run build-libs
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
-    
-    - name: Prepare repository
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: |
-        git checkout "${GITHUB_REF:11}"
-        git remote rm origin
-        git remote add origin "https://$GH_TOKEN@github.com/drawbotics/drylus.git"
-        git fetch origin
-        git branch --set-upstream-to origin/master
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+          registry-url: https://npm.pkg.github.com/
+          scope: '@drawbotics'
+      - name: Install dependencies & build libs
+        run: |
+          npm run bootstrap
+          npx lerna link convert
+          npm run build-libs
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
 
-    - name: Publish
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
-        AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-        MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
-      if: contains(github.ref, 'master')
-      run: |
-        echo "//npm.pkg.github.com/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" >> ~/.npmrc
-        git remote -v
-        git checkout -- .
-        npm run release
+      - name: Prepare repository
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          git checkout "${GITHUB_REF:11}"
+          git remote rm origin
+          git remote add origin "https://$GH_TOKEN@github.com/drawbotics/drylus.git"
+          git fetch origin
+          git branch --set-upstream-to origin/master
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+          MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
+        if: contains(github.ref, 'master')
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" >> ~/.npmrc
+          git remote -v
+          git checkout -- .
+          npm run release
