@@ -91,9 +91,6 @@ export interface MultiSelectProps<T, K = string> {
     | ((name?: K) => Array<MultiSelectOption<T>['value']>)
     | Array<MultiSelectOption<T>['value']>;
 
-  /** Used in conjunction with `allowTyping`. If true, the dropdown with the options will not be shown. When this is true, if a tag is removed, the option is also deleted from the list to avoid duplicates */
-  hideOptions?: boolean;
-
   /** When using `allowTyping`, pass the function to modify the `options` array prop. Returns the new array of `options` on add/remove */
   onChangeOptions?: (value: Array<MultiSelectOption<T | string>>, name?: K) => void;
 
@@ -129,12 +126,6 @@ export interface MultiSelectProps<T, K = string> {
 
   /** If true the select is focused automatically on mount */
   autoFocus?: boolean;
-
-  /**
-   * If false, the multi select will not change to native on mobile devices
-   * @default 'true'
-   */
-  native?: boolean;
 
   /** Used for style overrides */
   style?: Style;
