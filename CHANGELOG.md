@@ -1,3 +1,16 @@
+# v8.1.0 (Wed Mar 16 2022)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Can now add custom options to MultiSelect [#214](https://github.com/Drawbotics/drylus/pull/214) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.0.1 (Wed Mar 16 2022)
 
 #### 🐛 Bug fix - Patch
