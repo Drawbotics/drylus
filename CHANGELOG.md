@@ -1,3 +1,16 @@
+# v8.0.1 (Wed Mar 16 2022)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Inject current name into value and error getters in MultiSelect [#212](https://github.com/Drawbotics/drylus/pull/212) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.0.0 (Tue Mar 15 2022)
 
 #### 💥 Breaking - Major release
