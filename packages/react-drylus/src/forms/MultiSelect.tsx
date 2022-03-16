@@ -1,7 +1,14 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import React from 'react';
-import Select, { components } from 'react-select';
+import React, { ReactNode } from 'react';
+import Select, {
+  ActionMeta,
+  GroupBase,
+  IndicatorsContainerProps,
+  MultiValue,
+  components,
+} from 'react-select';
+import CreatableSelect from 'react-select/creatable';
 
 import { Icon, RoundIcon, Spinner } from '../components';
 import { Category, Color, Size } from '../enums';
@@ -94,6 +101,9 @@ export interface MultiSelectProps<T, K = string> {
   /** When using `allowTyping`, pass the function to modify the `options` array prop. Returns the new array of `options` on add/remove */
   onChangeOptions?: (value: Array<MultiSelectOption<T | string>>, name?: K) => void;
 
+  /** Used in conjunction with `onChangeOptions`. Gets the label for the "create new ..." option in the menu. */
+  formatCreateLabel?: (inputValue: string) => ReactNode;
+
   /** Name of the form element (target.name) */
   name?: K;
 
@@ -146,74 +156,98 @@ export const MultiSelect = <T extends any, K extends string>({
   const error = isFunction(props.error) ? props.error(props.name) : props.error;
   const values = isFunction(props.values) ? props.values(props.name) : props.values;
 
+  const baseProps = {
+    isMulti: true,
+    options: props.options,
+    isOptionDisabled: (option: MultiSelectOption<T>) => !!option.disabled,
+    isDisabled: props.disabled,
+    isSearchable: true,
+    isClearable: false,
+    defaultValue: null,
+    value: props.options.filter((o) => {
+      return values.includes(o.value);
+    }),
+    onChange: (
+      options: MultiValue<MultiSelectOption<T>>,
+      action: ActionMeta<MultiSelectOption<T>>,
+    ) => {
+      if (props.onChangeOptions && action.action === 'create-option') {
+        props.onChangeOptions([...props.options, action.option]);
+      }
+
+      if (props.onChange) {
+        props.onChange(
+          options.map((o) => o.value),
+          props.name,
+        );
+      }
+    },
+    autoFocus: props.autoFocus,
+    placeholder: props.placeholder,
+    classNamePrefix: 'drylus-multiselect',
+    className: cx(styles.select, {
+      [styles.valid]: values?.length > 0 && props.valid === true,
+      [styles.error]: error != null && error !== false,
+    }),
+    components: {
+      IndicatorsContainer: (
+        indicatorContainerProps: React.PropsWithChildren<
+          IndicatorsContainerProps<MultiSelectOption<T>, true, GroupBase<MultiSelectOption<T>>>
+        >,
+      ) => {
+        return (
+          <>
+            {run(() => {
+              if (props.loading) {
+                return (
+                  <div className={styles.icon} data-element="icon">
+                    <Spinner size={Size.SMALL} />
+                  </div>
+                );
+              } else if (props.onChange == null) {
+                return (
+                  <div
+                    className={styles.icon}
+                    data-element="lock-icon"
+                    style={{ color: sv.colorSecondary }}>
+                    <Icon name="lock" />
+                  </div>
+                );
+              } else if (error) {
+                return (
+                  <div className={styles.icon} data-element="icon">
+                    <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
+                  </div>
+                );
+              } else if (values?.length > 0 && props.valid) {
+                return (
+                  <div className={styles.icon} data-element="icon">
+                    <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
+                  </div>
+                );
+              }
+            })}
+            <components.IndicatorsContainer {...indicatorContainerProps} />
+          </>
+        );
+      },
+    },
+  } as const;
+
   return (
     <div style={props.style} className={props.className}>
-      <Select<MultiSelectOption<T>, true>
-        isMulti
-        options={props.options}
-        isOptionDisabled={(option) => !!option.disabled}
-        isDisabled={props.disabled}
-        isSearchable
-        isClearable={false}
-        defaultValue={null}
-        value={props.options.filter((o) => {
-          return values.includes(o.value);
-        })}
-        onChange={(options) => {
-          if (props.onChange) {
-            props.onChange(
-              options.map((o) => o.value),
-              props.name,
-            );
+      {props.onChangeOptions ? (
+        <CreatableSelect<MultiSelectOption<T>, true>
+          {...baseProps}
+          formatCreateLabel={
+            props.onChangeOptions
+              ? props.formatCreateLabel ?? ((inputValue) => `+ ${inputValue}`)
+              : undefined
           }
-        }}
-        autoFocus={props.autoFocus}
-        placeholder={props.placeholder}
-        classNamePrefix={'drylus-multiselect'}
-        className={cx(styles.select, {
-          [styles.valid]: values?.length > 0 && props.valid === true,
-          [styles.error]: error != null && error !== false,
-        })}
-        components={{
-          IndicatorsContainer: (indicatorContainerProps) => {
-            return (
-              <>
-                {run(() => {
-                  if (props.loading) {
-                    return (
-                      <div className={styles.icon} data-element="icon">
-                        <Spinner size={Size.SMALL} />
-                      </div>
-                    );
-                  } else if (props.onChange == null) {
-                    return (
-                      <div
-                        className={styles.icon}
-                        data-element="lock-icon"
-                        style={{ color: sv.colorSecondary }}>
-                        <Icon name="lock" />
-                      </div>
-                    );
-                  } else if (error) {
-                    return (
-                      <div className={styles.icon} data-element="icon">
-                        <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
-                      </div>
-                    );
-                  } else if (values?.length > 0 && props.valid) {
-                    return (
-                      <div className={styles.icon} data-element="icon">
-                        <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
-                      </div>
-                    );
-                  }
-                })}
-                <components.IndicatorsContainer {...indicatorContainerProps} />
-              </>
-            );
-          },
-        }}
-      />
+        />
+      ) : (
+        <Select<MultiSelectOption<T>, true> {...baseProps} />
+      )}
       {run(() => {
         if (error && typeof error === 'string') {
           return <Hint category={Category.DANGER}>{error}</Hint>;
