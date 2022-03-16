@@ -143,8 +143,8 @@ export const MultiSelect = <T extends any, K extends string>({
 }: MultiSelectProps<T, K>) => {
   const props = useResponsiveProps<MultiSelectProps<T, K>>(rest, responsive);
 
-  const error = isFunction(props.error) ? props.error(name) : props.error;
-  const values = isFunction(props.values) ? props.values(name) : props.values;
+  const error = isFunction(props.error) ? props.error(props.name) : props.error;
+  const values = isFunction(props.values) ? props.values(props.name) : props.values;
 
   return (
     <div style={props.style} className={props.className}>
