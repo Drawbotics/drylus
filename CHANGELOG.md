@@ -1,3 +1,16 @@
+# v8.2.0 (Thu Mar 17 2022)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Add delimiter option to CheckboxFilter [#215](https://github.com/Drawbotics/drylus/pull/215) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.1.0 (Wed Mar 16 2022)
 
 #### 🚀 Enhancement - Minor change
