@@ -9,6 +9,7 @@ import { ListTile } from '../layout';
 import { Option, Responsive, Style } from '../types';
 import { run, useResponsiveProps } from '../utils';
 import { Icon } from './Icon';
+import { Label } from './Label';
 import { Separator } from './Separator';
 
 const styles = {
@@ -100,6 +101,9 @@ const styles = {
       cursor: pointer;
       background: ${sv.neutralLight};
     }
+  `,
+  delimiter: css`
+    padding: ${sv.paddingSmall} ${sv.paddingExtraSmall} ${sv.paddingExtraSmall} ${sv.paddingSmall};
   `,
   smallPadding: css`
     padding: 5px ${sv.paddingSmall};
@@ -336,15 +340,26 @@ export const SelectFilter = <T extends any>({
   );
 };
 
+interface Delimiter {
+  delimiter: true;
+  label: string;
+}
+
 function getLabelForCheckboxFilter<T>(
   label: string,
-  options: Array<Option<T>>,
+  options: Array<Option<T> | Delimiter>,
   values: Array<Option<T>['value']>,
 ) {
   if (values == null) {
     return label;
   } else if (values.length === 1) {
-    return options.find((option) => String(option.value) === String(values[0]))?.label;
+    return options.find((option) => {
+      if ('value' in option) {
+        return String(option.value) === String(values[0]);
+      } else {
+        return false;
+      }
+    })?.label;
   } else if (values.length > 1) {
     return `${label} (${values.length})`;
   } else {
@@ -354,7 +369,7 @@ function getLabelForCheckboxFilter<T>(
 
 export interface CheckboxFilterProps<T> extends BaseFilterProps {
   /** The items to show in the filter panel: value(string, number), label(string) */
-  options: Array<Option<T>>;
+  options: Array<Option<T> | Delimiter>;
 
   /** Determines which values are currently active */
   values?: Array<Option<T>['value']>;
@@ -397,6 +412,9 @@ export const CheckboxFilter = <T extends any>({
   const filteredOptions =
     searchTerm != null && searchTerm != ''
       ? options.filter((option) => {
+          if ('delimiter' in option) {
+            return true;
+          }
           const searchableLabel = option.label.toLowerCase().replace(/[^a-z0-9]/g, '');
           const searchTermConverted = searchTerm.toLowerCase().replace(/[^a-z0-9]/g, '');
 
@@ -427,23 +445,32 @@ export const CheckboxFilter = <T extends any>({
       }>
       {filteredOptions.map((option) => {
         const id = v4();
-        return (
-          <label
-            htmlFor={id}
-            key={option.value}
-            className={cx(styles.option, styles.defaultCursor)}>
-            <Checkbox
-              id={id}
-              onChange={(checked: boolean) => {
-                checked
-                  ? onChange([...values, option.value])
-                  : onChange(values.filter((v) => String(v) !== String(option.value)));
-              }}
-              value={values.includes(option.value)}>
-              {String(option.label)}
-            </Checkbox>
-          </label>
-        );
+
+        if ('delimiter' in option) {
+          return (
+            <Label key={id} className={cx(styles.delimiter)}>
+              {option.label}
+            </Label>
+          );
+        } else {
+          return (
+            <label
+              htmlFor={id}
+              key={option.value}
+              className={cx(styles.option, styles.defaultCursor)}>
+              <Checkbox
+                id={id}
+                onChange={(checked: boolean) => {
+                  checked
+                    ? onChange([...values, option.value])
+                    : onChange(values.filter((v) => String(v) !== String(option.value)));
+                }}
+                value={values.includes(option.value)}>
+                {String(option.label)}
+              </Checkbox>
+            </label>
+          );
+        }
       })}
     </BaseFilter>
   );
