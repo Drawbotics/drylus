@@ -1,3 +1,16 @@
+# v8.2.1 (Fri Mar 18 2022)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - CheckboxFilter delimiter styling fixes [#216](https://github.com/Drawbotics/drylus/pull/216) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.2.0 (Thu Mar 17 2022)
 
 #### 🚀 Enhancement - Minor change
