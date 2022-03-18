@@ -103,7 +103,15 @@ const styles = {
     }
   `,
   delimiter: css`
-    padding: ${sv.paddingSmall} ${sv.paddingExtraSmall} ${sv.paddingExtraSmall} ${sv.paddingSmall};
+    padding-left: ${sv.paddingSmall};
+    padding-right: ${sv.paddingExtraSmall};
+
+    &:not(:first-child) {
+      padding-top: ${sv.paddingSmall};
+      padding-bottom: ${sv.paddingExtraSmall};
+    }
+
+    display: block;
   `,
   smallPadding: css`
     padding: 5px ${sv.paddingSmall};
