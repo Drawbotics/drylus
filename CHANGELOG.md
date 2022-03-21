@@ -1,3 +1,16 @@
+# v8.3.0 (Mon Mar 21 2022)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - In Filters, do not show clear button if no clear function is set [#217](https://github.com/Drawbotics/drylus/pull/217) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.2.1 (Fri Mar 18 2022)
 
 #### 🐛 Bug fix - Patch
