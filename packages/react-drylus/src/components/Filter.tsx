@@ -60,6 +60,9 @@ const styles = {
     transition: all ${sv.defaultTransitionTime} ${sv.bouncyTransitionCurve};
     padding-top: ${sv.paddingExtraSmall};
   `,
+  panelNoClear: css`
+    padding-bottom: ${sv.paddingExtraSmall};
+  `,
   searchInput: css`
     padding-top: ${sv.paddingExtraSmall};
     padding-bottom: ${sv.paddingSmall};
@@ -227,13 +230,14 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
     }
   };
 
-  const handleClickClear = () => {
-    setPanelOpen(false);
+  const handleClickClear =
+    onClear != null
+      ? () => {
+          setPanelOpen(false);
 
-    if (onClear != null) {
-      onClear();
-    }
-  };
+          onClear();
+        }
+      : null;
 
   useEffect(() => {
     document.addEventListener('click', handleDocumentClick);
@@ -270,6 +274,7 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
         className={cx(styles.panel, {
           [styles.visible]: panelOpen,
           [styles.rightAlign]: align === Align.RIGHT,
+          [styles.panelNoClear]: !handleClickClear,
         })}
         onClick={closeOnClick === true ? () => setPanelOpen(false) : undefined}>
         {header}
@@ -278,9 +283,11 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
           style={{ maxHeight: contentHeight }}>
           {children}
         </div>
-        <div className={styles.clear} onClick={handleClickClear}>
-          {clearLabel}
-        </div>
+        {handleClickClear ? (
+          <div className={styles.clear} onClick={handleClickClear}>
+            {clearLabel}
+          </div>
+        ) : null}
       </div>
     </div>
   );
