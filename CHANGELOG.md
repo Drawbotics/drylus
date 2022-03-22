@@ -1,3 +1,16 @@
+# v8.3.1 (Tue Mar 22 2022)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Fix styles for disabled Multi Select [#218](https://github.com/Drawbotics/drylus/pull/218) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.3.0 (Mon Mar 21 2022)
 
 #### 🚀 Enhancement - Minor change
