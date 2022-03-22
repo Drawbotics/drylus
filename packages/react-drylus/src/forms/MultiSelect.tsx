@@ -83,6 +83,20 @@ const styles = {
   icon: css`
     pointer-events: none;
   `,
+  disabled: css`
+    .drylus-multiselect__control {
+      background: ${sv.neutralLight};
+      color: ${sv.colorDisabled};
+      border-color: ${sv.neutralLight};
+      box-shadow: none;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .drylus-multiselect__indicator {
+      color: ${sv.colorDisabled};
+    }
+  `,
 };
 
 export interface MultiSelectOption<T> extends Option<T> {
@@ -186,6 +200,7 @@ export const MultiSelect = <T extends any, K extends string>({
     placeholder: props.placeholder,
     classNamePrefix: 'drylus-multiselect',
     className: cx(styles.select, {
+      [styles.disabled]: props.disabled,
       [styles.valid]: values?.length > 0 && props.valid === true,
       [styles.error]: error != null && error !== false,
     }),
