@@ -97,6 +97,9 @@ const styles = {
       color: ${sv.colorDisabled};
     }
   `,
+  disabledPointer: css`
+    cursor: not-allowed;
+  `,
 };
 
 export interface MultiSelectOption<T> extends Option<T> {
@@ -200,7 +203,7 @@ export const MultiSelect = <T extends any, K extends string>({
     placeholder: props.placeholder,
     classNamePrefix: 'drylus-multiselect',
     className: cx(styles.select, {
-      [styles.disabled]: props.disabled,
+      [styles.disabled]: Boolean(props.disabled),
       [styles.valid]: values?.length > 0 && props.valid === true,
       [styles.error]: error != null && error !== false,
     }),
@@ -250,7 +253,14 @@ export const MultiSelect = <T extends any, K extends string>({
   } as const;
 
   return (
-    <div style={props.style} className={props.className}>
+    <div
+      style={props.style}
+      className={cx(
+        {
+          [styles.disabledPointer]: Boolean(props.disabled),
+        },
+        props.className,
+      )}>
       {props.onChangeOptions ? (
         <CreatableSelect<MultiSelectOption<T>, true>
           {...baseProps}
