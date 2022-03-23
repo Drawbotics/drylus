@@ -1,3 +1,16 @@
+# v8.3.2 (Wed Mar 23 2022)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Fix typing issue with multi select + added disabled cursor [#219](https://github.com/Drawbotics/drylus/pull/219) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.3.1 (Tue Mar 22 2022)
 
 #### 🐛 Bug fix - Patch
