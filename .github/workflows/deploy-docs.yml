@@ -4,37 +4,37 @@ on:
   push:
     branches:
       - master
-      
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-18.04
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        persist-credentials: false
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '10.x'
-        registry-url: https://npm.pkg.github.com/
-        scope: '@drawbotics'
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+          registry-url: https://npm.pkg.github.com/
+          scope: '@drawbotics'
 
-    - name: Install and Build
-      run: |
-        npm install
-        npx lerna link convert
-        npm run build
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
-        MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
+      - name: Install and Build
+        run: |
+          npm run bootstrap
+          npx lerna link convert
+          npm run build
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
+          MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
 
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@releases/v3
-      with:
-        ACCESS_TOKEN: ${{ secrets.GH_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: docs
-        MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.GH_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: docs
+          MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
