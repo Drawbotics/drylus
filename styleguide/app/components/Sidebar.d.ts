@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { Color } from '@drawbotics/react-drylus';
 interface SidebarProps {
     color: Color;

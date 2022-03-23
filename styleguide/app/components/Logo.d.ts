@@ -1,4 +1,3 @@
-/// <reference types="react" />
 declare const Logo: ({ color }: {
     color?: string | undefined;
 }) => JSX.Element;
