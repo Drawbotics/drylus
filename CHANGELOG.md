@@ -1,3 +1,17 @@
+# v8.3.3 (Mon Apr 04 2022)
+
+#### 🐛 Bug fix - Patch
+
+- Fix install command for docs deploy [#213](https://github.com/Drawbotics/drylus/pull/213) ([@Bartmr](https://github.com/Bartmr))
+- `@drawbotics/react-drylus`
+  - Pagination: disable next when current page number is bigger than total [#220](https://github.com/Drawbotics/drylus/pull/220) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.3.2 (Wed Mar 23 2022)
 
 #### 🐛 Bug fix - Patch
