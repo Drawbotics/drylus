@@ -149,7 +149,7 @@ export const Pagination = ({
       ))}
       <Button
         onClick={value === pages ? undefined : () => onChange(value + 1)}
-        disabled={value === pages}
+        disabled={value >= pages}
         tier={Tier.TERTIARY}
         size={Size.SMALL}
         trailing={<Icon name="chevron-right" />}>
