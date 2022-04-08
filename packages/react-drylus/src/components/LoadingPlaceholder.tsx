@@ -22,7 +22,6 @@ const styles = {
     &::after {
       content: ' ';
       position: absolute;
-      z-index: 9;
       height: 100%;
       width: 100%;
       top: 0;
