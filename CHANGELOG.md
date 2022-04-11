@@ -1,3 +1,16 @@
+# v8.3.4 (Mon Apr 11 2022)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Remove zIndex from loading placeholder [#221](https://github.com/Drawbotics/drylus/pull/221) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.3.3 (Mon Apr 04 2022)
 
 #### 🐛 Bug fix - Patch
