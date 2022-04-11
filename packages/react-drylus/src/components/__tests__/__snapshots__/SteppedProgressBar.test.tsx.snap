@@ -91,7 +91,6 @@ exports[`SteppedProgressBar matches snapshot when has 4 steps 1`] = `
 .emotion-0::after {
   content: ' ';
   position: absolute;
-  z-index: 9;
   height: 100%;
   width: 100%;
   top: 0;
@@ -254,7 +253,6 @@ exports[`SteppedProgressBar matches snapshot when has a color 1`] = `
 .emotion-0::after {
   content: ' ';
   position: absolute;
-  z-index: 9;
   height: 100%;
   width: 100%;
   top: 0;
@@ -579,7 +577,6 @@ exports[`SteppedProgressBar matches snapshot when is small 1`] = `
 .emotion-0::after {
   content: ' ';
   position: absolute;
-  z-index: 9;
   height: 100%;
   width: 100%;
   top: 0;

@@ -19,7 +19,6 @@ exports[`LoadingPlaceholder matches snapshot when has custom sizes 1`] = `
 .emotion-0::after {
   content: ' ';
   position: absolute;
-  z-index: 9;
   height: 100%;
   width: 100%;
   top: 0;
@@ -63,7 +62,6 @@ exports[`LoadingPlaceholder matches snapshot when has no specified sizes 1`] = `
 .emotion-0::after {
   content: ' ';
   position: absolute;
-  z-index: 9;
   height: 100%;
   width: 100%;
   top: 0;
