@@ -4,8 +4,8 @@ import countryTimezones from 'country-state-city/dist/assets/country.json';
 import { css, cx } from 'emotion';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Responsive } from 'src/types';
 
+import { Responsive } from '../types';
 import { Size } from '../enums';
 import { isFunction, useResponsiveProps } from '../utils';
 import { Input, InputProps } from './Input';
