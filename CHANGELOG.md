@@ -1,3 +1,16 @@
+# v8.3.5 (Mon May 02 2022)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Do not use absolute import paths in PhoneNumberInput [#222](https://github.com/Drawbotics/drylus/pull/222) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.3.4 (Mon Apr 11 2022)
 
 #### 🐛 Bug fix - Patch
