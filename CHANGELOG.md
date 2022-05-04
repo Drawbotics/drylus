@@ -1,3 +1,16 @@
+# v8.4.0 (Wed May 04 2022)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/icons`
+  - Add start-filled icon [#223](https://github.com/Drawbotics/drylus/pull/223) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.3.5 (Mon May 02 2022)
 
 #### 🐛 Bug fix - Patch
