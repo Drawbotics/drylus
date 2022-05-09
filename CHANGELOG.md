@@ -1,3 +1,17 @@
+# v8.4.1 (Mon May 09 2022)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Fix PhoneNumberInput flag when error or hint provided [#224](https://github.com/Drawbotics/drylus/pull/224) (leopold@drawbotics.com [@LeopoldArkham](https://github.com/LeopoldArkham))
+
+#### Authors: 2
+
+- [@LeopoldArkham](https://github.com/LeopoldArkham)
+- LeopoldArkham (leopold@drawbotics.com)
+
+---
+
 # v8.4.0 (Wed May 04 2022)
 
 #### 🚀 Enhancement - Minor change
