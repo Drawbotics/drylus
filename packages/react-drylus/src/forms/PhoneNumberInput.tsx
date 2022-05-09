@@ -5,8 +5,8 @@ import { css, cx } from 'emotion';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 
-import { Responsive } from '../types';
 import { Size } from '../enums';
+import { Responsive } from '../types';
 import { isFunction, useResponsiveProps } from '../utils';
 import { Input, InputProps } from './Input';
 import { Select } from './Select';
@@ -27,13 +27,13 @@ const styles = {
   emoji: css`
     pointer-events: none;
     position: absolute;
-    bottom: calc(${sv.marginExtraSmall} + 1px);
+    top: calc(${sv.marginExtraSmall} + 1px);
     left: ${sv.marginSmall};
     z-index: 99;
     font-size: 1.4em;
   `,
   small: css`
-    bottom: 4px;
+    top: 4px;
   `,
 };
 
