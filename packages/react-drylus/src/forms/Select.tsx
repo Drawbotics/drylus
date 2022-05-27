@@ -212,7 +212,7 @@ const styles = {
   `,
   optionsWrapper: css`
     position: absolute;
-    z-index: 999;
+    z-index: 1;
     min-width: 100%;
     pointer-events: none;
   `,
