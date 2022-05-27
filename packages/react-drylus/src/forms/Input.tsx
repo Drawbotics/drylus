@@ -31,7 +31,6 @@ const styles = {
   innerWrapper: css`
     position: relative;
     flex: 1;
-    z-index: 1;
   `,
   input: css`
     text-overflow: ellipsis;
@@ -44,7 +43,6 @@ const styles = {
     outline: none !important;
     box-shadow: inset 0px 0px 0px 1px ${sv.azure};
     transition: ${sv.transitionShort};
-    z-index: 1;
     width: 100%;
 
     &::placeholder {
@@ -114,7 +112,6 @@ const styles = {
   icon: css`
     pointer-events: none;
     position: absolute;
-    z-index: 2;
     top: calc(${sv.marginExtraSmall} * 1.5);
     right: ${sv.marginSmall};
     transition: all ${sv.transitionTimeShort} ${sv.bouncyTransitionCurve};

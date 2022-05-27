@@ -200,34 +200,34 @@ export const SegmentedControl = <T extends any>({
       {options == null || children != null
         ? children
         : // If using deprecated API, still render until removed in next major version
-          options.map((option) => (
-            <div
-              key={option.value}
-              className={cx(styles.control, {
-                [styles.active]: value === option.value,
-                [styles.disabled]: option.disabled === true,
-              })}
-              onClick={
-                !option.disabled && onChange != null ? () => onChange(option.value) : undefined
-              }>
-              <span>{option.label}</span>
-              {run(() => {
-                if (option.loading === true) {
-                  return (
-                    <div data-element="extra" className={styles.extra}>
-                      <Spinner size={Size.SMALL} color={Color.BRAND} />
-                    </div>
-                  );
-                } else if (option.bullet != null) {
-                  return (
-                    <div data-element="extra" className={styles.extra}>
-                      <Badge color={Color.BRAND} value={option.bullet} max={99} />
-                    </div>
-                  );
-                }
-              })}
-            </div>
-          ))}
+        options.map((option) => (
+          <div
+            key={option.value as string}
+            className={cx(styles.control, {
+              [styles.active]: value === option.value,
+              [styles.disabled]: option.disabled === true,
+            })}
+            onClick={
+              !option.disabled && onChange != null ? () => onChange(option.value) : undefined
+            }>
+            <span>{option.label}</span>
+            {run(() => {
+              if (option.loading === true) {
+                return (
+                  <div data-element="extra" className={styles.extra}>
+                    <Spinner size={Size.SMALL} color={Color.BRAND} />
+                  </div>
+                );
+              } else if (option.bullet != null) {
+                return (
+                  <div data-element="extra" className={styles.extra}>
+                    <Badge color={Color.BRAND} value={option.bullet} max={99} />
+                  </div>
+                );
+              }
+            })}
+          </div>
+        ))}
     </div>
   );
 };

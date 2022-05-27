@@ -112,8 +112,8 @@ export interface MultiSelectProps<T, K = string> {
 
   /** Determines which values are currently active */
   values:
-    | ((name?: K) => Array<MultiSelectOption<T>['value']>)
-    | Array<MultiSelectOption<T>['value']>;
+  | ((name?: K) => Array<MultiSelectOption<T>['value']>)
+  | Array<MultiSelectOption<T>['value']>;
 
   /** When using `allowTyping`, pass the function to modify the `options` array prop. Returns the new array of `options` on add/remove */
   onChangeOptions?: (value: Array<MultiSelectOption<T | string>>, name?: K) => void;
@@ -264,11 +264,7 @@ export const MultiSelect = <T extends any, K extends string>({
       {props.onChangeOptions ? (
         <CreatableSelect<MultiSelectOption<T>, true>
           {...baseProps}
-          formatCreateLabel={
-            props.onChangeOptions
-              ? props.formatCreateLabel ?? ((inputValue) => `+ ${inputValue}`)
-              : undefined
-          }
+          formatCreateLabel={props.formatCreateLabel ?? ((inputValue) => `+ ${inputValue}`)}
         />
       ) : (
         <Select<MultiSelectOption<T>, true> {...baseProps} />

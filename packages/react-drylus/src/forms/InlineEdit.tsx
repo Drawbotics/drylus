@@ -29,7 +29,6 @@ const styles = {
     position: absolute;
     top: calc(100% + ${sv.marginExtraSmall});
     right: 0;
-    z-index: 999;
   `,
   button: css`
     height: ${sv.marginLarge};

@@ -233,10 +233,10 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
   const handleClickClear =
     onClear != null
       ? () => {
-          setPanelOpen(false);
+        setPanelOpen(false);
 
-          onClear();
-        }
+        onClear();
+      }
       : null;
 
   useEffect(() => {
@@ -335,7 +335,7 @@ export const SelectFilter = <T extends any>({
       active={currentLabel != null && value != null}>
       {options.map((option) => (
         <div
-          key={option.value}
+          key={option.value as string}
           data-filter-label={option.label}
           className={cx(styles.option, styles.smallPadding, {
             [styles.activeOption]: String(value) === String(option.value),
@@ -427,14 +427,14 @@ export const CheckboxFilter = <T extends any>({
   const filteredOptions =
     searchTerm != null && searchTerm != ''
       ? options.filter((option) => {
-          if ('delimiter' in option) {
-            return true;
-          }
-          const searchableLabel = option.label.toLowerCase().replace(/[^a-z0-9]/g, '');
-          const searchTermConverted = searchTerm.toLowerCase().replace(/[^a-z0-9]/g, '');
+        if ('delimiter' in option) {
+          return true;
+        }
+        const searchableLabel = option.label.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const searchTermConverted = searchTerm.toLowerCase().replace(/[^a-z0-9]/g, '');
 
-          return searchableLabel.includes(searchTermConverted);
-        })
+        return searchableLabel.includes(searchTermConverted);
+      })
       : options;
 
   return (
@@ -471,7 +471,7 @@ export const CheckboxFilter = <T extends any>({
           return (
             <label
               htmlFor={id}
-              key={option.value}
+              key={option.value as string}
               className={cx(styles.option, styles.defaultCursor)}>
               <Checkbox
                 id={id}

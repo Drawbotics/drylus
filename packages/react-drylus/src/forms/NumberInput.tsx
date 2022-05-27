@@ -104,7 +104,6 @@ const styles = {
     position: absolute;
     top: 12px;
     left: calc(${sv.marginSmall} + 48px);
-    z-index: 9;
     color: red;
     letter-spacing: normal;
     white-space: nowrap;
