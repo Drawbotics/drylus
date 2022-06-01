@@ -202,7 +202,7 @@ export const SegmentedControl = <T extends any>({
         : // If using deprecated API, still render until removed in next major version
         options.map((option) => (
           <div
-            key={option.value as string}
+            key={option.value as unknown as string}
             className={cx(styles.control, {
               [styles.active]: value === option.value,
               [styles.disabled]: option.disabled === true,

@@ -360,7 +360,7 @@ export const RadioGroup = <T extends any, K extends string>({
       <div className={horizontal ? styles.horizontal : undefined}>
         {options.map((option) => (
           <div
-            key={option.value as string}
+            key={option.value as unknown as string}
             className={cx(styles.radioWrapper, {
               [styles.radioWrapperHorizontal]: horizontal === true,
               [styles.largeRadioWrapper]: size === Size.LARGE,
@@ -373,7 +373,7 @@ export const RadioGroup = <T extends any, K extends string>({
               onChange={handleOnChange}
               onBlur={() => validate?.(name)}
               checked={value == option.value}
-              value={option.value as string}
+              value={option.value as unknown as string}
               disabled={option.disabled}
               size={size}
               {...props}>
