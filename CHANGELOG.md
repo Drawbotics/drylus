@@ -1,3 +1,16 @@
+# v8.5.1 (Wed Jun 01 2022)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Feature/z indexes [#225](https://github.com/Drawbotics/drylus/pull/225) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.5.0 (Wed Jun 01 2022)
 
 #### 🚀 Enhancement - Minor change
