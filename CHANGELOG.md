@@ -1,3 +1,17 @@
+# v8.5.0 (Wed Jun 01 2022)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Feature/foward click event [#226](https://github.com/Drawbotics/drylus/pull/226) (leopold@drawbotics.com [@LeopoldArkham](https://github.com/LeopoldArkham))
+
+#### Authors: 2
+
+- [@LeopoldArkham](https://github.com/LeopoldArkham)
+- LeopoldArkham (leopold@drawbotics.com)
+
+---
+
 # v8.4.1 (Mon May 09 2022)
 
 #### 🐛 Bug fix - Patch
