@@ -300,7 +300,7 @@ export const SearchInput = <T extends any, K extends string>({
                   } else {
                     return options.map((option) => (
                       <div
-                        key={option.value as string}
+                        key={option.value as unknown as string}
                         className={styles.item}
                         onClick={() => {
                           if (onClickResult != null) {

@@ -335,7 +335,7 @@ export const SelectFilter = <T extends any>({
       active={currentLabel != null && value != null}>
       {options.map((option) => (
         <div
-          key={option.value as string}
+          key={option.value as unknown as string}
           data-filter-label={option.label}
           className={cx(styles.option, styles.smallPadding, {
             [styles.activeOption]: String(value) === String(option.value),
@@ -471,7 +471,7 @@ export const CheckboxFilter = <T extends any>({
           return (
             <label
               htmlFor={id}
-              key={option.value as string}
+              key={option.value as unknown as string}
               className={cx(styles.option, styles.defaultCursor)}>
               <Checkbox
                 id={id}
