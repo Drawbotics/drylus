@@ -544,7 +544,7 @@ export const TRow = ({
       })}
       onMouseEnter={onEnter}
       onMouseLeave={onExit}
-      onClick={onClick}
+      onClick={(e) => onClick?.(e)}
       data-nested={nested ?? undefined}
       data-parent={parent ?? undefined}>
       {React.Children.toArray(children)
@@ -844,7 +844,7 @@ function _generateTable({
   memoDataValues?: Array<TableEntry> | TableEntry;
   header?: HeaderData;
   childHeader?: Array<DataEntry>;
-  onClickRow?: (row: TableEntry) => void;
+  onClickRow?: (row: TableEntry, e: React.MouseEvent<HTMLDivElement>) => void;
   onEnterRow?: (row: TableEntry) => void;
   onExitRow?: (row: TableEntry) => void;
   clickable?: boolean;
@@ -890,7 +890,7 @@ function _generateTable({
           animated={animated}
           key={uniqId}
           parent={hasData ? uniqId : undefined}
-          onClick={() => onClickRow(rowData)}
+          onClick={(e) => onClickRow(rowData, e)}
           onEnter={() => onEnterRow(rowData)}
           onExit={() => onExitRow(rowData)}
           clickable={clickable}
@@ -902,7 +902,7 @@ function _generateTable({
           animated={animated}
           key={uniqId}
           parent={hasData ? uniqId : undefined}
-          onClick={() => onClickRow(rowData)}
+          onClick={(e) => onClickRow(rowData, e)}
           onEnter={() => onEnterRow(rowData)}
           onExit={() => onExitRow(rowData)}
           clickable={clickable}
@@ -918,7 +918,7 @@ function _generateTable({
           responsive={responsive}
           key={`${uniqId}-1`}
           nested={uniqId}
-          onClick={() => onClickRow(rowData)}
+          onClick={(e) => onClickRow(rowData, e)}
           onEnter={() => onEnterRow(rowData)}
           onExit={() => onExitRow(rowData)}
           clickable={clickable}>
@@ -1005,7 +1005,7 @@ export interface TableProps {
   loadingRows?: number;
 
   /** Triggered when a row is clicked, returns the given data object for that row. If used with nested tables, it will only return the root row object value */
-  onClickRow?: (row: TableEntry) => void;
+  onClickRow?: (row: TableEntry, e: React.MouseEvent<HTMLDivElement>) => void;
 
   /** Triggered when a row is entered (hover), returns the given data object for that row. If used with nested tables, it will only return the root row object value */
   onEnterRow?: (row: TableEntry) => void;
