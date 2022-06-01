@@ -104,8 +104,8 @@ const styles = {
     position: absolute;
     top: 12px;
     left: calc(${sv.marginSmall} + 48px);
-    z-index: 9;
     color: red;
+    z-index: 1;
     letter-spacing: normal;
     white-space: nowrap;
     max-width: calc(100% - 65px);

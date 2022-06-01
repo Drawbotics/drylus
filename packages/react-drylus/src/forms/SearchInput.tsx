@@ -17,7 +17,7 @@ const styles = {
   `,
   listWrapper: css`
     position: absolute;
-    z-index: 999;
+    z-index: 1;
     min-width: 100%;
     pointer-events: none;
   `,
@@ -300,7 +300,7 @@ export const SearchInput = <T extends any, K extends string>({
                   } else {
                     return options.map((option) => (
                       <div
-                        key={option.value}
+                        key={option.value as unknown as string}
                         className={styles.item}
                         onClick={() => {
                           if (onClickResult != null) {

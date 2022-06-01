@@ -29,7 +29,7 @@ const styles = {
     position: absolute;
     top: calc(${sv.marginExtraSmall} + 1px);
     left: ${sv.marginSmall};
-    z-index: 99;
+    z-index: 1;
     font-size: 1.4em;
   `,
   small: css`
