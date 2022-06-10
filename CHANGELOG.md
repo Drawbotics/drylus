@@ -1,3 +1,17 @@
+# v8.6.0 (Fri Jun 10 2022)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Close modal on Esc key [#228](https://github.com/Drawbotics/drylus/pull/228) (leopold@drawbotics.com [@LeopoldArkham](https://github.com/LeopoldArkham))
+
+#### Authors: 2
+
+- [@LeopoldArkham](https://github.com/LeopoldArkham)
+- LeopoldArkham (leopold@drawbotics.com)
+
+---
+
 # v8.5.1 (Wed Jun 01 2022)
 
 #### 🐛 Bug fix - Patch
