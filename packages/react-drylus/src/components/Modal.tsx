@@ -266,6 +266,12 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     }
   };
 
+  const handleEscKey = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClickClose?.();
+    }
+  };
+
   useEffect(() => {
     const outlet = document.getElementById('modals-outlet');
     if (outlet == null) {
@@ -312,11 +318,13 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     window.addEventListener('resize', handleWindowResize);
     window.addEventListener('touchstart', handleTouchStart);
     window.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('keydown', handleEscKey, false);
 
     return () => {
       window.removeEventListener('resize', handleWindowResize);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
+      document.addEventListener('keydown', handleEscKey, false);
     };
   });
 
