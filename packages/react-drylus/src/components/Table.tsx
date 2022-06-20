@@ -336,14 +336,12 @@ const styles = {
     tbody > tr > td:first-of-type {
       position: sticky;
       left: 0;
-      z-index: 999;
     }
 
     thead > tr > th:last-of-type,
     tbody > tr > td:last-of-type {
       position: sticky;
       right: 0;
-      z-index: 999;
     }
   `,
   rightDivisor: css`
