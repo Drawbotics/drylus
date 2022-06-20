@@ -1,3 +1,16 @@
+# v8.6.1 (Mon Jun 20 2022)
+
+#### 🐛 Bug fix - Patch
+
+- `@drawbotics/react-drylus`
+  - Fix table z indexes [#227](https://github.com/Drawbotics/drylus/pull/227) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.6.0 (Fri Jun 10 2022)
 
 #### 🚀 Enhancement - Minor change
