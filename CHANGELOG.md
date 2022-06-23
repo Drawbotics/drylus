@@ -1,3 +1,16 @@
+# v8.7.0 (Thu Jun 23 2022)
+
+#### 🚀 Enhancement - Minor change
+
+- `@drawbotics/react-drylus`
+  - Add Multi Text features to Multi Select [#230](https://github.com/Drawbotics/drylus/pull/230) ([@Bartmr](https://github.com/Bartmr))
+
+#### Authors: 1
+
+- Bartmr ([@Bartmr](https://github.com/Bartmr))
+
+---
+
 # v8.6.2 (Mon Jun 20 2022)
 
 #### 🐛 Bug fix - Patch
