@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import Select, {
   ActionMeta,
   GroupBase,
@@ -108,7 +108,7 @@ export interface MultiSelectOption<T> extends Option<T> {
 
 export interface MultiSelectProps<T, K = string> {
   /** The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey */
-  options: Array<MultiSelectOption<T>>;
+  options?: Array<MultiSelectOption<T>>;
 
   /** Determines which values are currently active */
   values:
@@ -173,6 +173,8 @@ export const MultiSelect = <T extends any, K extends string>({
   const error = isFunction(props.error) ? props.error(props.name) : props.error;
   const values = isFunction(props.values) ? props.values(props.name) : props.values;
 
+  const [temporaryInput, setTemporaryInput] = useState("");
+
   const baseProps = {
     isMulti: true,
     options: props.options,
@@ -181,15 +183,20 @@ export const MultiSelect = <T extends any, K extends string>({
     isSearchable: true,
     isClearable: false,
     defaultValue: null,
-    value: props.options.filter((o) => {
+    value: props.options ? props.options.filter((o) => {
       return values.includes(o.value);
-    }),
+    }) : values.map((value) => ({
+      label: value,
+      value: value
+    } as MultiSelectOption<T>)),
     onChange: (
       options: MultiValue<MultiSelectOption<T>>,
       action: ActionMeta<MultiSelectOption<T>>,
     ) => {
+      setTemporaryInput("");
+
       if (props.onChangeOptions && action.action === 'create-option') {
-        props.onChangeOptions([...props.options, action.option]);
+        props.onChangeOptions([...(props.options ?? []), action.option]);
       }
 
       if (props.onChange) {
@@ -208,6 +215,7 @@ export const MultiSelect = <T extends any, K extends string>({
       [styles.error]: error != null && error !== false,
     }),
     components: {
+      DropdownIndicator: props.options ? components.DropdownIndicator : null,
       IndicatorsContainer: (
         indicatorContainerProps: React.PropsWithChildren<
           IndicatorsContainerProps<MultiSelectOption<T>, true, GroupBase<MultiSelectOption<T>>>
@@ -243,6 +251,8 @@ export const MultiSelect = <T extends any, K extends string>({
                     <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
                   </div>
                 );
+              } else {
+                return null
               }
             })}
             <components.IndicatorsContainer {...indicatorContainerProps} />
@@ -261,14 +271,39 @@ export const MultiSelect = <T extends any, K extends string>({
         },
         props.className,
       )}>
-      {props.onChangeOptions ? (
-        <CreatableSelect<MultiSelectOption<T>, true>
-          {...baseProps}
-          formatCreateLabel={props.formatCreateLabel ?? ((inputValue) => `+ ${inputValue}`)}
-        />
-      ) : (
-        <Select<MultiSelectOption<T>, true> {...baseProps} />
-      )}
+      {run(() => {
+        if (!props.options) {
+          return <CreatableSelect<MultiSelectOption<T>, true>
+            {...baseProps}
+            inputValue={temporaryInput}
+            isClearable={false}
+            isMulti
+            menuIsOpen={false}
+            onInputChange={(inputValue: string) => {
+              setTemporaryInput(inputValue)
+            }}
+            onKeyDown={(event) => {
+              if (!temporaryInput) return;
+              switch (event.key) {
+                case 'Enter':
+                case 'Tab':
+                  setTemporaryInput("");
+                  props.onChange?.([...values, temporaryInput as T], props.name)
+                  event.preventDefault();
+              }
+            }}
+            formatCreateLabel={props.formatCreateLabel ?? ((inputValue) => `+ ${inputValue}`)}
+          />
+        } else if (props.onChangeOptions) {
+          return <CreatableSelect<MultiSelectOption<T>, true>
+            {...baseProps}
+            formatCreateLabel={props.formatCreateLabel ?? ((inputValue) => `+ ${inputValue}`)}
+          />
+        } else {
+          return <Select<MultiSelectOption<T>, true> {...baseProps} />
+
+        }
+      })}
       {run(() => {
         if (error && typeof error === 'string') {
           return <Hint category={Category.DANGER}>{error}</Hint>;
