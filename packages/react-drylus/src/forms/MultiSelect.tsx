@@ -191,7 +191,7 @@ export const MultiSelect = <T extends any, K extends string>({
     }) : values.map((value) => ({
       label: value,
       value: value
-    } as MultiSelectOption<T>)),
+    } as unknown as MultiSelectOption<T>)),
     onChange: (
       options: MultiValue<MultiSelectOption<T>>,
       action: ActionMeta<MultiSelectOption<T>>,
@@ -291,7 +291,7 @@ export const MultiSelect = <T extends any, K extends string>({
                 case 'Enter':
                 case 'Tab':
                   setTemporaryInput("");
-                  props.onChange?.([...values, temporaryInput as T], props.name)
+                  props.onChange?.([...values, temporaryInput as unknown as T], props.name)
                   event.preventDefault();
               }
             }}
