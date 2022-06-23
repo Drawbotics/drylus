@@ -107,7 +107,10 @@ export interface MultiSelectOption<T> extends Option<T> {
 }
 
 export interface MultiSelectProps<T, K = string> {
-  /** The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey */
+  /**
+   * The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey
+   * If this is not provided, the component will behave like as a multiple input field, with dropdown and select functionality disabled
+   * */
   options?: Array<MultiSelectOption<T>>;
 
   /** Determines which values are currently active */
