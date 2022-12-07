@@ -129,3 +129,8 @@ Which will automatically create a release for the next `beta` version i.e. MISSI
 ## Issues
 Here are some issues you may ecounter when trying to develop/publish:
 - If you try to publish with node version >= 12, it will fail because of an old dependency of `s3`. For now use node version 10 or lower for that. A fix is coming.
+
+
+## License
+
+See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
