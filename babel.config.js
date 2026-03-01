@@ -15,13 +15,13 @@ module.exports = function(api) {
     'packages/*',
   ];
 
+  const emotionPlugin = ['babel-plugin-emotion', {
+    sourceMap: false,
+    autoLabel: true,
+    labelFormat: '[filename]__[local]',
+  }];
+
   const plugins = [
-    'react-hot-loader/babel',
-    ['babel-plugin-emotion', {
-      sourceMap: false,
-      autoLabel: true,
-      labelFormat: '[filename]__[local]',
-    }],
     'babel-plugin-codegen',
     'babel-plugin-react-docgen',
     '@babel/plugin-proposal-export-default-from',
@@ -31,10 +31,16 @@ module.exports = function(api) {
   ];
 
   const env = {
+    development: {
+      plugins: [
+        'react-hot-loader/babel',
+      ],
+    },
     test: {
       presets,
       plugins: [
-        ...plugins,
+        'react-hot-loader/babel',
+        emotionPlugin,
         '@babel/plugin-transform-modules-commonjs',
       ],
     },

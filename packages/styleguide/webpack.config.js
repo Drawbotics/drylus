@@ -89,6 +89,7 @@ module.exports = {
     alias: {
       '~': path.resolve(__dirname, './app'),
       'react-dom': '@hot-loader/react-dom',
+      'react': path.resolve(__dirname, '../../node_modules/react'),
     },
     extensions: [ '.js', '.jsx', '.css', '.mdx', '.ts', '.tsx' ],
     plugins: [new TsconfigPathsPlugin()],
@@ -107,7 +108,7 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /use-screen-size\/lib/],
         use: [
           {
             loader: 'babel-loader',
@@ -135,7 +136,7 @@ module.exports = {
             rootMode: 'upward',
           },
         }],
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /use-screen-size\/lib/, /react-drylus\/lib/],
       },
       {
         test: /\.css$/,

@@ -1,6 +1,5 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from 'emotion';
-import get from 'lodash/get';
 import React, { forwardRef, useState } from 'react';
 
 import { useThemeColor } from '../base';
@@ -412,8 +411,8 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
 
   const leading = _leading != null ? _leading : prefix;
   const trailing = _trailing != null ? _trailing : suffix;
-  const isLeadingComponent = get(leading, 'type') === Button || get(leading, 'type') === Select;
-  const isTrailingComponent = get(trailing, 'type') === Button || get(trailing, 'type') === Select;
+  const isLeadingComponent = React.isValidElement(leading);
+  const isTrailingComponent = React.isValidElement(trailing);
 
   return (
     <div
@@ -438,10 +437,10 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
             data-element="leading"
             className={cx(styles.fix, styles.leading, {
               [styles.leadingComponent]: isLeadingComponent,
-              [styles.transparentButton]: get(leading, 'props')?.category == null, // TODO find better
-              [styles.buttonWithCategory]: get(leading, 'props')?.category != null,
+              [styles.transparentButton]: isLeadingComponent && !(leading as React.ReactElement).props?.category,
+              [styles.buttonWithCategory]: isLeadingComponent && (leading as React.ReactElement).props?.category,
               [styles.buttonWithCategorySmall]:
-                get(leading, 'props')?.category != null && size === Size.SMALL,
+                isLeadingComponent && (leading as React.ReactElement).props?.category && size === Size.SMALL,
               [styles.smallFix]: size === Size.SMALL && !isLeadingComponent,
             })}>
             {isLeadingComponent && size === Size.SMALL
@@ -518,10 +517,10 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
             data-element="trailing"
             className={cx(styles.fix, styles.trailing, {
               [styles.trailingComponent]: isTrailingComponent,
-              [styles.transparentButton]: get(trailing, 'props')?.category == null,
-              [styles.buttonWithCategory]: get(trailing, 'props')?.category != null,
+              [styles.transparentButton]: isTrailingComponent && !(trailing as React.ReactElement).props?.category,
+              [styles.buttonWithCategory]: isTrailingComponent && (trailing as React.ReactElement).props?.category,
               [styles.buttonWithCategorySmall]:
-                get(trailing, 'props')?.category != null && size === Size.SMALL,
+                isTrailingComponent && (trailing as React.ReactElement).props?.category && size === Size.SMALL,
               [styles.smallFix]: size === Size.SMALL && !isTrailingComponent,
             })}>
             {isTrailingComponent && size === Size.SMALL

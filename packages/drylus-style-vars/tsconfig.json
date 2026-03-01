@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "esnext",
+    "target": "ES2018",
     "sourceMap": false,
     "outDir": "./tmp/",
     "incremental": true,

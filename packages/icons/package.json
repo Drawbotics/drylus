@@ -28,5 +28,10 @@
   "gitHead": "8314d678c0c364d2aab35300a51324982cc0b85a",
   "dependencies": {
     "core-js": "^2.6.9"
+  },
+  "devDependencies": {
+    "oslllo-svg-fixer": "^5.0.0",
+    "rimraf": "^6.0.1",
+    "webfont": "^11.2.26"
   }
 }

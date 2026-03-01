@@ -22,21 +22,20 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '10.x'
+          node-version: '18.x'
           registry-url: https://npm.pkg.github.com/
           scope: '@drawbotics'
       - run: echo 'Current ref = ${{ github.ref }}'
       - name: Install dependencies and run tests
         run: |
           npm run bootstrap
-          npx lerna link convert
           npm run test
         env:
           NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
@@ -44,18 +43,17 @@ jobs:
   release:
     needs: test
     if: contains(github.ref, 'master')
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '10.x'
+          node-version: '18.x'
           registry-url: https://npm.pkg.github.com/
           scope: '@drawbotics'
       - name: Install dependencies & build libs
         run: |
           npm run bootstrap
-          npx lerna link convert
           npm run build-libs
         env:
           NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}

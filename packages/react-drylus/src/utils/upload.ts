@@ -168,7 +168,7 @@ export async function uploadFile(
     signingResult = uploadResult.signingResult;
   } catch (err) {
     if (onError != null) {
-      onError(file, err);
+      onError(file, err as Error);
     }
   }
 

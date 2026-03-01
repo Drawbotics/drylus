@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { countries } from 'countries-list';
-import countryTimezones from 'country-state-city/dist/assets/country.json';
+import { Country } from 'country-state-city';
 import { css, cx } from 'emotion';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
@@ -37,23 +37,27 @@ const styles = {
   `,
 };
 
-const countryPrefixMapping: Record<keyof typeof countries, string> = Object.keys(countries).reduce(
-  (memo, country) => ({
+type CountryCode = keyof typeof countries;
+
+const countryPrefixMapping: Record<CountryCode, string> = (Object.keys(countries) as CountryCode[]).reduce(
+  (memo: Record<CountryCode, string>, country: CountryCode) => ({
     ...memo,
-    [country]: countries[country as keyof typeof countries].phone,
+    [country]: countries[country].phone,
   }),
-  {} as Record<keyof typeof countries, string>,
+  {} as Record<CountryCode, string>,
 );
 
-const timezoneCountryMapping: Record<string, string> = countryTimezones.reduce(
-  (memo, country) => ({
+interface CountryData {
+  isoCode: string;
+  phonecode: string;
+}
+
+const timezoneCountryMapping: Record<string, string> = Country.getAllCountries().reduce(
+  (memo: Record<string, string>, country: CountryData) => ({
     ...memo,
-    ...country.timezones?.reduce(
-      (memo, timezone) => ({ ...memo, [timezone.zoneName]: country.isoCode }),
-      {},
-    ),
+    [country.isoCode]: country.phonecode,
   }),
-  {} as Record<string, string>,
+  {},
 );
 
 export function getTrailingPhoneNumber(value: string): string {

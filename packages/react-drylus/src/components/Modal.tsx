@@ -207,15 +207,15 @@ export interface ModalProps extends BaseModalProps {
 
   /** Called when the animation is started, and when it's over, respectively, see https://www.framer.com/api/motion/component/#motioncallbacks.onanimationstart */
   animationCallbacks?: {
-    onAnimationStart: VoidFunction;
-    onAnimationComplete: VoidFunction;
+    onAnimationStart: () => void;
+    onAnimationComplete: () => void;
   };
 
   /** Used for style overrides, given to outermost parent for easy access to children customisation */
   className?: string;
 }
 
-export const Modal = ({ responsive, ...rest }: ModalProps) => {
+export const Modal = ({ responsive, ...rest }: ModalProps): React.ReactPortal | null => {
   const {
     children,
     footer,
@@ -250,7 +250,8 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
   };
 
   const handleTouchMove = (e: TouchEvent) => {
-    if (modalElement?.current?.contains(e.target as Node)) {
+    const target = e.target;
+    if (target instanceof Node && modalElement?.current?.contains(target)) {
       const touchY = e.changedTouches[0]?.clientY;
       if (previousTouchY != null && containerElement.current != null) {
         const touchDelta = Math.abs(touchY - previousTouchY);
@@ -328,7 +329,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     };
   });
 
-  if (outletElement == null) return null;
+  if (!outletElement) return null;
 
   const handleClickOutsideModal = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === containerElement.current) {
@@ -336,7 +337,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
     }
   };
 
-  return ReactDOM.createPortal(
+  const modalContent = (
     <ThemeProvider injectGlobal={false}>
       <AnimatePresence>
         {visible ? (
@@ -379,7 +380,8 @@ export const Modal = ({ responsive, ...rest }: ModalProps) => {
           </motion.div>
         ) : null}
       </AnimatePresence>
-    </ThemeProvider>,
-    document.getElementById('modals-outlet') as Element,
+    </ThemeProvider>
   );
+
+  return ReactDOM.createPortal(modalContent, outletElement);
 };

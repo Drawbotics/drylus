@@ -15,7 +15,7 @@ export const Deprecated = (() => {
 type FunctionComponent = (props: React.PropsWithChildren<any>) => React.ReactElement;
 
 function _isFragment(item: React.ReactElement): boolean {
-  return typeof item.type === 'symbol' && item.type!.toString().includes('fragment');
+  return typeof item.type === 'symbol' && String(item.type).includes('fragment');
 }
 
 function _isMdxElement(item: React.ReactElement<any, React.FunctionComponent>): boolean {

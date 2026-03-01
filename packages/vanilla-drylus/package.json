@@ -11,10 +11,10 @@
     "sync": "node scripts/sync.js",
     "watch:lib": "NODE_ENV=development webpack --config webpack.config.js --watch",
     "watch:react": "node ./scripts/watch-react.js",
-    "watch": "npm run watch:react & npm run watch:lib",
+    "watch": "NODE_ENV=development webpack --config webpack.config.js --watch",
     "build:lib": "NODE_ENV=production webpack --config webpack.config.js",
-    "extract-css": "extract-emotion ./src/styles/react-components.js --output ./src/styles/ --prefix Drylus --filename  react-styles.css",
-    "build": "npm run clean && npm run extract-css && npm run build:lib",
+    "extract-css": "extract-emotion ./src/styles/react-components.js --output ./src/styles/ --prefix Drylus --filename react-styles.css",
+    "build": "npm run clean && cd ../react-drylus && npm run build && cd ../vanilla-drylus && npm run extract-css && npm run build:lib",
     "build:dev": "npm run build && NODE_ENV=development npm run sync",
     "prepublishOnly": "npm run build && NODE_ENV=production npm run sync"
   },
@@ -30,5 +30,8 @@
     "access": "public",
     "registry": "https://npm.pkg.github.com/"
   },
-  "gitHead": "99f6de1783059e9d24e6582f69fa2982d41a1af2"
+  "gitHead": "99f6de1783059e9d24e6582f69fa2982d41a1af2",
+  "devDependencies": {
+    "emotion": "^10.0.27"
+  }
 }

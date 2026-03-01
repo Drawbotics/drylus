@@ -181,7 +181,7 @@ const styles = {
   `,
 };
 
-const DEFAULT_OPTIONS = {
+const DEFAULT_OPTIONS: Intl.DateTimeFormatOptions = {
   year: 'numeric',
   month: 'long',
   day: 'numeric',

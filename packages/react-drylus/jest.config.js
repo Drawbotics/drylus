@@ -14,6 +14,10 @@ module.exports = {
     '^.+\\.(js|jsx)?$': ['babel-jest', { rootMode: 'upward' }],
     '^.+\\.(ts|tsx)?$': 'ts-jest',
   },
+  transformIgnorePatterns: [
+    '/node_modules/',
+    'use-screen-size/lib/',
+  ],
   testPathIgnorePatterns: [
     '/node_modules/',
     '/lib/',
@@ -24,7 +28,9 @@ module.exports = {
     'jest-expect-message',
   ],
   'moduleNameMapper': {
-    '~': '<rootDir>'
+    '~': '<rootDir>',
+    '^react$': path.resolve(__dirname, '../../node_modules/react'),
+    '^react-dom$': path.resolve(__dirname, '../../node_modules/react-dom'),
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   globals: {

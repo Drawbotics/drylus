@@ -74,20 +74,24 @@ function getMarkupForMode(mode, component) {
     );
     return '';
   }
-  const generatedHTMLString = ReactDOMServer.renderToStaticMarkup(component);
-  const generatedJSXString = ReactElementToString(component, {
-    showDefaultProps: false,
-    showFunctions: true,
-    functionValue: (v) => v.name,
-  });
-  switch (mode) {
-    case 'vanilla':
+  try {
+    if (mode === 'vanilla') {
+      const generatedHTMLString = ReactDOMServer.renderToStaticMarkup(component);
       return adaptForVanilla(generatedHTMLString);
-    case 'react':
+    } else if (mode === 'react') {
+      const generatedJSXString = ReactElementToString(component, {
+        showDefaultProps: false,
+        showFunctions: true,
+        functionValue: (v) => v.name,
+      });
       return generatedJSXString;
-    default:
+    } else {
       console.warn('Render mode not supported');
       return '';
+    }
+  } catch (e) {
+    console.warn('Failed to generate code preview:', e);
+    return '/* Error generating code preview */';
   }
 }
 
@@ -106,7 +110,10 @@ const Playground = ({ component, children, mode, __code, enums }) => {
   const staticReact = mode === 'jsx';
 
   const generatedComponent = recursiveMdxTransform(children, { component, props });
-  const generatedMarkup = staticReact ? null : getMarkupForMode(activeMode, generatedComponent);
+  // Defer markup generation until the code panel is opened or vanilla mode is active.
+  // renderToStaticMarkup + ReactElementToString are expensive and block the main thread.
+  const needsMarkup = !staticReact && (codeOpen || activeMode === 'vanilla');
+  const generatedMarkup = needsMarkup ? getMarkupForMode(activeMode, generatedComponent) : null;
 
   return (
     <div className={styles.playground}>
@@ -132,7 +139,7 @@ const Playground = ({ component, children, mode, __code, enums }) => {
             }}
             <div className={styles.codeBox}>
               <CodeBox format mode={mode} type={activeMode} style={{ margin: 0 }}>
-                {staticReact ? __code : flow(replaceSymbol, hideSecrets)(generatedMarkup)}
+                {staticReact ? __code : generatedMarkup ? flow(replaceSymbol, hideSecrets)(generatedMarkup) : ''}
               </CodeBox>
             </div>
           </div>

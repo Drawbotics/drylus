@@ -5,22 +5,31 @@ const webpack = require('webpack');
 const MemoryFS = require('memory-fs');
 
 async function build(input, output) {
-  const fs = new MemoryFS();
+  const memFs = new MemoryFS();
   const compiler = webpack({
     mode: 'development',
     entry: { bundle: input },
     output: {
       path: output,
     },
+    externals: {
+      'mapbox-gl': '{}',
+      'react-mapbox-wrapper': '{}',
+    },
   });
-  compiler.outputFileSystem = fs;
+  compiler.outputFileSystem = memFs;
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) {
-        reject();
+        reject(err);
+        return;
       }
-      const content = fs.readFileSync(path.resolve(output, 'bundle.js'), 'utf8');
+      if (stats.hasErrors()) {
+        reject(new Error(stats.toString()));
+        return;
+      }
+      const content = memFs.readFileSync(path.resolve(output, 'bundle.js'), 'utf8');
       resolve(content);
     });
   });

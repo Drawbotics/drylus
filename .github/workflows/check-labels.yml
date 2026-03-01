@@ -6,7 +6,7 @@ on:
 
 jobs:
   check-labels:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Check labels
         uses: jesusvasquez333/verify-pr-label-action@v1.1.0

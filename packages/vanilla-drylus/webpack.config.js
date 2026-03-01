@@ -23,6 +23,12 @@ const basePlugins = [
   new CopyWebpackPlugin([
     { from: 'src/styles/react-styles.css', to: 'drylus.css' },
   ]),
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+    },
+    _css: JSON.stringify('css'),
+  }),
 ];
 
 
@@ -33,6 +39,9 @@ module.exports = {
   entry: './src/index.js',
   resolve: {
     extensions: [ '.js', '.css' ],
+    alias: {
+      'emotion': require.resolve('emotion'),
+    },
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -60,6 +69,9 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             rootMode: 'upward',
+            plugins: [
+              'babel-plugin-emotion',
+            ],
           },
         }],
         exclude: /node_modules/,

@@ -41,21 +41,26 @@ function _computeObject(properties, docs, parentComponentName) {
 }
 
 function _getFunctionSignature(type, docs, parentComponentName) {
-  const parameters = type.declaration.signatures[0]?.parameters
+  const signatures = type.declaration?.signatures;
+  if (!signatures || !signatures[0]) return '() => void';
+
+  const parameters = signatures[0]?.parameters
     ?.map((p) => {
+      if (!p.type) return p.name;
       let displayType = '';
       if (p.type.type === 'union') {
-        displayType = p.type.types.map((t) => t.name).join(' | ');
+        displayType = p.type.types?.map((t) => t.name ?? t.value ?? 'unknown').join(' | ') ?? 'unknown';
       } else {
         const parsedType = _getType(p.type, docs, parentComponentName);
-        displayType = parsedType.name ?? parsedType.type ?? parsedType;
+        displayType = parsedType?.name ?? parsedType?.type ?? parsedType ?? 'unknown';
       }
 
       return `${p.name}: ${displayType}`;
     })
     .join(', ');
 
-  return `(${parameters ?? ''}) => ${type.declaration.signatures[0].type.name}`;
+  const returnType = signatures[0]?.type?.name ?? 'void';
+  return `(${parameters ?? ''}) => ${returnType}`;
 }
 
 function _getResponsiveDoc(docs) {
@@ -80,11 +85,11 @@ function _resolveReference(ref, docs, parentComponentName) {
     const candidates = flattened?.filter((entity) => entity?.name === ref.name);
 
     const withType = candidates?.find((c) => c.type != null);
-    const noRef = candidates.find((c) => c?.kindString !== 'Reference');
+    const noRef = candidates?.find((c) => c?.kindString !== 'Reference');
 
     if (withType != null) doc = withType;
     if (noRef != null) doc = noRef;
-    else doc = candidates[0];
+    else doc = candidates?.[0];
   }
 
   if (doc == null) return ref;
@@ -94,7 +99,7 @@ function _resolveReference(ref, docs, parentComponentName) {
     return {
       type: 'enum',
       name: doc.name,
-      values: doc.children.map((v) => `${doc.name}.${v.name}`),
+      values: doc.children?.map((v) => `${doc.name}.${v.name}`) ?? [],
     };
   } else {
     return {
@@ -107,6 +112,9 @@ function _resolveReference(ref, docs, parentComponentName) {
 
 let _parsingStack = [];
 function _getType(type, docs, componentName, comment, enums) {
+  if (type == null) {
+    return 'function';
+  }
   if (
     type.name !== 'Array' &&
     type?.kindString !== 'Enumeration' &&
@@ -119,11 +127,14 @@ function _getType(type, docs, componentName, comment, enums) {
       mustPop = true;
       _parsingStack.push(type.name);
     }
-    const res = _parseType(type, docs, componentName, comment, enums);
-
-    if (mustPop) _parsingStack.pop();
-
-    return res;
+    try {
+      const res = _parseType(type, docs, componentName, comment, enums);
+      if (mustPop) _parsingStack.pop();
+      return res;
+    } catch (e) {
+      if (mustPop) _parsingStack.pop();
+      return type.name ?? 'unknown';
+    }
   }
 }
 
@@ -131,17 +142,21 @@ function _parseType(type, docs, componentName, comment, enums) {
   const enumTag = comment?.tags?.find((t) => t.tag === 'kind');
   if (enumTag != null) {
     const match = enumTag.text.match(/([A-z]+)/g);
+    if (!match) return type.name ?? 'unknown';
     const enumName = match[0];
-    const intrinsic = type.types.filter((t) => t.type === 'intrinsic');
-    const nonIntrinsic = type.types.filter((t) => t.type !== 'intrinsic');
+    const intrinsic = type.types?.filter((t) => t.type === 'intrinsic') ?? [];
+    const nonIntrinsic = type.types?.filter((t) => t.type !== 'intrinsic') ?? [];
     const enumValues = match.reduce(
-      (memo, name) => [
-        ...memo,
-        ...enums
-          .find((e) => e.name === name)
-          .values.filter((e) => !!nonIntrinsic.find((type) => type.name === e))
-          .map((v) => `${name}.${v}`),
-      ],
+      (memo, name) => {
+        const found = enums?.find((e) => e.name === name);
+        if (!found) return memo;
+        return [
+          ...memo,
+          ...found.values
+            .filter((e) => !!nonIntrinsic.find((type) => type.name === e))
+            .map((v) => `${name}.${v}`),
+        ];
+      },
       [],
     );
 
@@ -150,17 +165,17 @@ function _parseType(type, docs, componentName, comment, enums) {
       name: match.join(','),
       values: [...enumValues, ...intrinsic.map((i) => `${enumName}.${i.name}`)],
     };
-  } else if (type.type === 'instrinsic') {
+  } else if (type.type === 'instrinsic' || type.type === 'intrinsic') {
     return {
       type: type.name,
       name: type.name,
     };
-  } else if (type.type === 'stringLiteral') {
-    return type.value;
+  } else if (type.type === 'stringLiteral' || type.type === 'literal') {
+    return type.value ?? String(type.value);
   } else if (type.type === 'tuple') {
     return {
       type: 'tuple',
-      values: type.elements.map((e) => _getType(e, docs, componentName)),
+      values: type.elements?.map((e) => _getType(e, docs, componentName)) ?? [],
     };
   }
 
@@ -169,7 +184,7 @@ function _parseType(type, docs, componentName, comment, enums) {
     if (type.name === 'Array') {
       return {
         type: 'array',
-        values: type.typeArguments.map((v) => _getType(v, docs, componentName)),
+        values: type.typeArguments?.map((v) => _getType(v, docs, componentName)) ?? [],
       };
     } else if (type.name === 'Style') {
       return {
@@ -179,12 +194,14 @@ function _parseType(type, docs, componentName, comment, enums) {
           CssProperty: 'string',
         },
       };
-    } else if (type.name.includes('ReactElement')) {
-      return type.typeArguments[0].queryType.name;
+    } else if (type.name?.includes('ReactElement')) {
+      const queryName = type.typeArguments?.[0]?.queryType?.name;
+      return queryName ?? 'React Element';
     } else if (type.name === 'React.ReactNode') {
       return 'React Node';
     } else if (type.name === 'Responsive') {
       const doc = _getResponsiveDoc(docs);
+      if (!doc?.children) return 'Responsive';
       return {
         type: 'shape',
         name: 'Responsive',
@@ -203,7 +220,7 @@ function _parseType(type, docs, componentName, comment, enums) {
 
   // Reflection
   else if (type.type === 'reflection') {
-    if (type.declaration.signatures != null) {
+    if (type.declaration?.signatures != null) {
       return {
         type: 'function',
         name: 'func',
@@ -212,28 +229,30 @@ function _parseType(type, docs, componentName, comment, enums) {
     } else {
       return {
         type: 'shape',
-        values: _computeObject(type.declaration.children, docs, componentName),
+        values: _computeObject(type.declaration?.children, docs, componentName),
       };
     }
   }
 
   // Union
   else if (type.type === 'union') {
-    const potentialTypes = type?.types?.filter((t) => t.name !== 'undefined').map((t) => t.name);
+    const types = type?.types ?? [];
+    const potentialTypes = types
+      .filter((t) => (t.name ?? t.value) !== 'undefined')
+      .map((t) => t.name ?? t.value ?? 'unknown');
     if (potentialTypes.includes('true') && potentialTypes.includes('false')) {
       return 'boolean';
     } else if (potentialTypes.length === 1) {
       // This means the only other member was undefined (optional) and we can treat this as a regular type
-      return _getType(
-        type.types.find((t) => t.name === potentialTypes[0]),
-        docs,
-        componentName,
-        comment,
-      );
+      const match = types.find((t) => (t.name ?? t.value) === potentialTypes[0]);
+      if (match) {
+        return _getType(match, docs, componentName, comment);
+      }
+      return potentialTypes[0];
     } else {
       return {
         type: 'union',
-        values: type.types.map((t) => _getType(t, docs, componentName)),
+        values: types.map((t) => _getType(t, docs, componentName)),
       };
     }
   } else if (type?.operator === 'keyof') {
@@ -248,23 +267,23 @@ function _parseType(type, docs, componentName, comment, enums) {
       };
     } else {
       return {
-        type: `${type?.objectType.name}['${type?.indexType?.value}']`,
+        type: `${type?.objectType?.name ?? 'unknown'}['${type?.indexType?.value ?? '?'}']`,
       };
     }
   } else {
-    return type.name;
+    return type.name ?? 'unknown';
   }
 }
 
 function _getSearchableEnums(docs) {
-  const enumFiles = docs.children.filter((file) => file.name.includes('src/enums'));
+  const enumFiles = docs.children.filter((file) => file.name === 'enums' || file.name.startsWith('enums/'));
   return enumFiles.reduce((memo, file) => {
     if (file.children.some((c) => c.kindString !== 'Enumeration')) {
       return memo;
     }
     const definitions = file.children.map((_enum) => ({
       name: _enum.name,
-      values: _enum.children.map((value) => value.name),
+      values: _enum.children?.map((value) => value.name) ?? [],
     }));
     return [...memo, ...definitions];
   }, []);
@@ -282,14 +301,15 @@ export function generateDocs(componentName, docs) {
       return props;
     }
 
+    const comment = prop.comment || prop.signatures?.[0]?.comment;
     return {
       ...props,
       [prop.name]: {
         required: !prop.flags?.isOptional,
-        type: _getType(prop.type, docs, componentName, prop.comment, enums),
+        type: _getType(prop.type, docs, componentName, comment, enums),
         deprecation: _getDeprecation(prop),
         defaultValue: _getDefault(prop),
-        description: prop.comment?.shortText || '',
+        description: comment?.shortText || '',
       },
     };
   }, {});
