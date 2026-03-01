@@ -1,7 +1,6 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
-const { checkEnv } = require('@drawbotics/check-env');
 const betterWebpackProgress = require('better-webpack-progress');
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
@@ -16,7 +15,9 @@ const rehypePlayground = require('./utils/rehype-playground');
 dotenv.config();
 
 
-checkEnv([ 'NODE_ENV' ]);
+if (!process.env.NODE_ENV) {
+  throw new Error('NODE_ENV is required');
+}
 
 
 const WEBPACK_PORT = process.env.WEBPACK_PORT || 4000;
