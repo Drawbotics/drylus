@@ -31,6 +31,7 @@ module.exports = {
     '~': '<rootDir>',
     '^react$': path.resolve(__dirname, '../../node_modules/react'),
     '^react-dom$': path.resolve(__dirname, '../../node_modules/react-dom'),
+    '^@drawbotics/use-screen-size$': '<rootDir>/__mocks__/@drawbotics/use-screen-size.js',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   globals: {
