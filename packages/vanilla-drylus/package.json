@@ -32,6 +32,6 @@
   },
   "gitHead": "99f6de1783059e9d24e6582f69fa2982d41a1af2",
   "devDependencies": {
-    "emotion": "^10.0.27"
+    "emotion": "10.0.27"
   }
 }
