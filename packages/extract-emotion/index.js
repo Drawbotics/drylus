@@ -15,6 +15,7 @@ async function build(input, output) {
     externals: {
       'mapbox-gl': '{}',
       'react-mapbox-wrapper': '{}',
+      '@drawbotics/use-screen-size': '{}',
     },
   });
   compiler.outputFileSystem = memFs;
