@@ -10,6 +10,8 @@ on:
       - 'packages/vanilla-drylus/**'
       - 'packages/drylus-style-vars/**'
       - 'packages/icons/**'
+      - '.github/workflows/ci.yml'
+      - 'package.json'
   pull_request:
     branches:
       - '*'
@@ -19,6 +21,8 @@ on:
       - 'packages/vanilla-drylus/**'
       - 'packages/drylus-style-vars/**'
       - 'packages/icons/**'
+      - '.github/workflows/ci.yml'
+      - 'package.json'
 
 jobs:
   test:
