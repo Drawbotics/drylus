@@ -23,7 +23,9 @@ jobs:
       - name: Install and Build
         run: |
           npm run bootstrap
-          npm run build
+          npm run build-libs
+          npm run build:react
+          npm run build:styleguide
         env:
           NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
           MAPBOX_ACCESS_TOKEN: ${{ secrets.MAPBOX_ACCESS_TOKEN }}

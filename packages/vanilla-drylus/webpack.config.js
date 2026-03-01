@@ -1,13 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
-const { checkEnv } = require('@drawbotics/check-env');
 const betterWebpackProgress = require('better-webpack-progress');
 const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
-checkEnv([ 'NODE_ENV' ]);
+if (!process.env.NODE_ENV) {
+  throw new Error('NODE_ENV is required');
+}
 
 
 const isProduction = process.env.NODE_ENV === 'production';
