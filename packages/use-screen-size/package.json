@@ -1,0 +1,11 @@
+{
+  "name": "@drawbotics/use-screen-size",
+  "version": "2.0.1",
+  "description": "Hook used to get the current screen size for responsive behaviour",
+  "main": "index.js",
+  "license": "UNLICENSED",
+  "peerDependencies": {
+    "@drawbotics/drylus-style-vars": "*",
+    "react": "^16.8.x"
+  }
+}

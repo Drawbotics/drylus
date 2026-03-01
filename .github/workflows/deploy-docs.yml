@@ -23,7 +23,6 @@ jobs:
       - name: Install and Build
         run: |
           npm run bootstrap
-          npm install @drawbotics/use-screen-size@2.0.1 --no-save
           npm run build-libs
           npm run build:react
           npm run build:vanilla
