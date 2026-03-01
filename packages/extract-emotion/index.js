@@ -46,7 +46,7 @@ function writeFile(file, data) {
 }
 
 function removeHash(css, replacement) {
-  return css.replace(/(css-).*?(-)/gm, replacement ? `${replacement}-` : '');
+  return css.replace(/(css-)[a-zA-Z0-9]+(-)/gm, replacement ? `${replacement}-` : '');
 }
 
 function runBrowser(code) {
