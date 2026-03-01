@@ -33,9 +33,30 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: '@drawbotics'
       - run: echo 'Current ref = ${{ github.ref }}'
-      - name: Install dependencies and run tests
+      - name: Install dependencies
         run: |
           npm run bootstrap
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
+      - name: Debug emotion version
+        run: |
+          echo "=== Root node_modules ==="
+          cat node_modules/emotion/package.json 2>/dev/null | grep '"version"' || echo "emotion not in root node_modules"
+          echo "=== react-drylus node_modules ==="
+          cat packages/react-drylus/node_modules/emotion/package.json 2>/dev/null | grep '"version"' || echo "emotion not in react-drylus node_modules"
+          echo "=== react-drylus package.json emotion line ==="
+          grep emotion packages/react-drylus/package.json
+          echo "=== npm ls emotion ==="
+          npm ls emotion 2>&1 || true
+          echo "=== .npmrc ==="
+          cat .npmrc 2>/dev/null || echo "no .npmrc"
+      - name: Fix emotion version if needed
+        run: |
+          cd packages/react-drylus && npm install emotion@10.0.27 --save --save-exact && cd ../..
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
+      - name: Run tests
+        run: |
           npm run test
         env:
           NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
