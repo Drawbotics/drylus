@@ -65,6 +65,7 @@
     "@babel/preset-react": "^7.0.0",
     "@drawbotics/check-env": "file:../check-env",
     "@drawbotics/s3sync": "file:../s3sync",
+    "@drawbotics/use-screen-size": "^2.0.1",
     "@emotion/core": "^10.0.21",
     "@hot-loader/react-dom": "^16.8.6",
     "@mdx-js/loader": "^1.6.21",
