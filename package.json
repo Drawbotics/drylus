@@ -132,7 +132,6 @@
     "react-mapbox-wrapper": "^2.6.1",
     "react-test-renderer": "^16.10.1",
     "rimraf": "^2.6.2",
-    "stmux": "^1.8.1",
     "style-loader": "^0.23.1",
     "ts-jest": "^24.3.0",
     "ts-loader": "^8.0.11",
@@ -151,5 +150,8 @@
     "@drawbotics/react-drylus": "file:packages/react-drylus",
     "@drawbotics/styleguide": "file:packages/styleguide",
     "@drawbotics/vanilla-drylus": "file:packages/vanilla-drylus"
+  },
+  "optionalDependencies": {
+    "stmux": "^1.8.1"
   }
 }
