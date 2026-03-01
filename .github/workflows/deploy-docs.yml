@@ -23,6 +23,11 @@ jobs:
       - name: Install and Build
         run: |
           npm run bootstrap
+          echo "Checking use-screen-size..."
+          ls node_modules/@drawbotics/use-screen-size/package.json 2>/dev/null && echo "Found at root" || echo "NOT at root"
+          ls packages/react-drylus/node_modules/@drawbotics/use-screen-size/package.json 2>/dev/null && echo "Found in react-drylus" || echo "NOT in react-drylus"
+          ls packages/styleguide/node_modules/@drawbotics/use-screen-size/package.json 2>/dev/null && echo "Found in styleguide" || echo "NOT in styleguide"
+          npm ls @drawbotics/use-screen-size 2>&1 || true
           npm run build-libs
           npm run build:react
           npm run build:vanilla
