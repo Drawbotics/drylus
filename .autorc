@@ -8,16 +8,22 @@
       }
     ]
   ],
-  "labels": {
-    "patch": {
-      "title": "🐛 Bug fix - Patch"
+  "labels": [
+    {
+      "name": "patch",
+      "changelogTitle": "🐛 Bug fix - Patch",
+      "releaseType": "patch"
     },
-    "minor": {
-      "title": "🚀 Enhancement - Minor change"
+    {
+      "name": "minor",
+      "changelogTitle": "🚀 Enhancement - Minor change",
+      "releaseType": "minor"
     },
-    "major": {
-      "title": "💥 Breaking - Major release"
+    {
+      "name": "major",
+      "changelogTitle": "💥 Breaking - Major release",
+      "releaseType": "major"
     }
-  },
+  ],
   "prereleaseBranches": ["beta"]
 }
