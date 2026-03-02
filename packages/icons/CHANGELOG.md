@@ -1,3 +1,16 @@
+# v8.7.2 (Mon Mar 02 2026)
+
+#### ⚠️ Pushed to `master`
+
+- v8.7.1 ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix vulnerabilities, update deps, and fix styleguide compatibility ([@LaurentClaes](https://github.com/LaurentClaes))
+
+#### Authors: 1
+
+- [@LaurentClaes](https://github.com/LaurentClaes)
+
+---
+
 # v7.6.8 (Fri Sep 03 2021)
 
 #### ⚠️  Pushed to master

@@ -1,3 +1,18 @@
+# v8.7.2 (Mon Mar 02 2026)
+
+#### ⚠️ Pushed to `master`
+
+- v8.7.1 ([@LaurentClaes](https://github.com/LaurentClaes))
+- Pin emotion to exact 10.0.27 to prevent CI resolving tombstone v11 ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix deploy-docs workflow and inline check-env ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix vulnerabilities, update deps, and fix styleguide compatibility ([@LaurentClaes](https://github.com/LaurentClaes))
+
+#### Authors: 1
+
+- [@LaurentClaes](https://github.com/LaurentClaes)
+
+---
+
 # v7.16.1 (Fri Jan 14 2022)
 
 #### ⚠️  Pushed to master

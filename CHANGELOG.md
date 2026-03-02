@@ -1,3 +1,54 @@
+# v8.7.1 (Mon Mar 02 2026)
+
+#### ⚠️ Pushed to `master`
+
+- Fix repo URL casing in CI release job ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fetch full git history in release job for auto changelog ([@LaurentClaes](https://github.com/LaurentClaes))
+- Upgrade auto from v7 to v11 to fix git log depth error ([@LaurentClaes](https://github.com/LaurentClaes))
+- Revert NODE_AUTH_TOKEN back to GH_TOKEN ([@LaurentClaes](https://github.com/LaurentClaes))
+- Use GITHUB_TOKEN for GitHub Packages auth in CI ([@LaurentClaes](https://github.com/LaurentClaes))
+- Bump use-screen-size to v2.0.2 ([@LaurentClaes](https://github.com/LaurentClaes))
+- Remove peerDependencies from local use-screen-size package ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix use-screen-size resolution in deploy-docs by installing explicitly ([@LaurentClaes](https://github.com/LaurentClaes))
+- Debug: check use-screen-size installation in deploy-docs workflow ([@LaurentClaes](https://github.com/LaurentClaes))
+- Add use-screen-size to root devDependencies for CI resolution ([@LaurentClaes](https://github.com/LaurentClaes))
+- Clean up CI workflow: remove debug step, consolidate steps ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix bootstrap order: root npm install before lerna exec ([@LaurentClaes](https://github.com/LaurentClaes))
+- Include CI workflow and root package.json in CI path triggers ([@LaurentClaes](https://github.com/LaurentClaes))
+- Add debug step for emotion version and force correct install on CI ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix .npmrc to use GitHub Packages registry instead of local path ([@LaurentClaes](https://github.com/LaurentClaes))
+- Upgrade CI to Node 20 and make stmux optional ([@LaurentClaes](https://github.com/LaurentClaes))
+- Mention license ([@StanBoyet](https://github.com/StanBoyet))
+- Add license ([@StanBoyet](https://github.com/StanBoyet))
+- `@drawbotics/drylus-style-vars`, `@drawbotics/extract-emotion`, `@drawbotics/icons`, `@drawbotics/react-drylus`, `@drawbotics/styleguide`, `@drawbotics/vanilla-drylus`
+  - v8.7.1 ([@LaurentClaes](https://github.com/LaurentClaes))
+  - Fix vulnerabilities, update deps, and fix styleguide compatibility ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/styleguide`
+  - Remove deprecated minimal-ui viewport directive ([@LaurentClaes](https://github.com/LaurentClaes))
+  - Fix styleguide build: use published use-screen-size, build vanilla-drylus ([@LaurentClaes](https://github.com/LaurentClaes))
+  - Show webpack errors in styleguide build ([@LaurentClaes](https://github.com/LaurentClaes))
+  - Inline check-env in styleguide webpack config ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/react-drylus`, `@drawbotics/styleguide`
+  - Switch use-screen-size, check-env, and s3sync to GitHub Packages ([@LaurentClaes](https://github.com/LaurentClaes))
+  - Add use-screen-size as local package to fix CI resolution ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/react-drylus`
+  - Fix typedoc build for docs.json generation in deploy-docs ([@LaurentClaes](https://github.com/LaurentClaes))
+  - Add jest mock for @drawbotics/use-screen-size ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/extract-emotion`
+  - Fix removeHash regex to not corrupt CSS for hash-only class names ([@LaurentClaes](https://github.com/LaurentClaes))
+  - Add use-screen-size as webpack external in extract-emotion ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/react-drylus`, `@drawbotics/vanilla-drylus`
+  - Pin emotion to exact 10.0.27 to prevent CI resolving tombstone v11 ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/vanilla-drylus`
+  - Fix deploy-docs workflow and inline check-env ([@LaurentClaes](https://github.com/LaurentClaes))
+
+#### Authors: 2
+
+- [@LaurentClaes](https://github.com/LaurentClaes)
+- Stanislas Boyet ([@StanBoyet](https://github.com/StanBoyet))
+
+---
+
 # v8.7.0 (Thu Jun 23 2022)
 
 #### 🚀 Enhancement - Minor change

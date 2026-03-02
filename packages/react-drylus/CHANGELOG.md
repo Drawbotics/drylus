@@ -1,3 +1,21 @@
+# v8.7.2 (Mon Mar 02 2026)
+
+#### ⚠️ Pushed to `master`
+
+- v8.7.1 ([@LaurentClaes](https://github.com/LaurentClaes))
+- Switch use-screen-size, check-env, and s3sync to GitHub Packages ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix typedoc build for docs.json generation in deploy-docs ([@LaurentClaes](https://github.com/LaurentClaes))
+- Add use-screen-size as local package to fix CI resolution ([@LaurentClaes](https://github.com/LaurentClaes))
+- Add jest mock for @drawbotics/use-screen-size ([@LaurentClaes](https://github.com/LaurentClaes))
+- Pin emotion to exact 10.0.27 to prevent CI resolving tombstone v11 ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix vulnerabilities, update deps, and fix styleguide compatibility ([@LaurentClaes](https://github.com/LaurentClaes))
+
+#### Authors: 1
+
+- [@LaurentClaes](https://github.com/LaurentClaes)
+
+---
+
 # v7.17.1 (Tue Jan 25 2022)
 
 #### ⚠️  Pushed to master
