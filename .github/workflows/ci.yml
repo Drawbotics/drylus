@@ -70,7 +70,7 @@ jobs:
         run: |
           git checkout "${GITHUB_REF:11}"
           git remote rm origin
-          git remote add origin "https://$GH_TOKEN@github.com/drawbotics/drylus.git"
+          git remote add origin "https://$GH_TOKEN@github.com/Drawbotics/drylus.git"
           git fetch origin
           git branch --set-upstream-to origin/master
 
