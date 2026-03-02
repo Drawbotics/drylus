@@ -42,8 +42,7 @@
     "linters": {
       "!(bundle*).{js,jsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0",
       "!(bundle*).{ts,tsx}": "eslint --format node_modules/eslint-formatter-pretty --max-warnings=0 --config .eslintrc.ts.js"
-    },
-    "ignore": ["packages/use-screen-size/**"]
+    }
   },
   "author": "nicmosc <nick@drawbotics.com>",
   "repository": {
@@ -64,9 +63,9 @@
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
-    "@drawbotics/check-env": "file:../check-env",
-    "@drawbotics/s3sync": "file:../s3sync",
-    "@drawbotics/use-screen-size": "file:packages/use-screen-size",
+    "@drawbotics/check-env": "^3.0.0",
+    "@drawbotics/s3sync": "^1.0.1",
+    "@drawbotics/use-screen-size": "^2.0.2",
     "@emotion/core": "^10.0.21",
     "@hot-loader/react-dom": "^16.8.6",
     "@mdx-js/loader": "^1.6.21",
