@@ -1,5 +1,6 @@
+import React from 'react';
 declare const Logo: ({ color }: {
     color?: string | undefined;
-}) => JSX.Element;
+}) => React.JSX.Element;
 export default Logo;
 //# sourceMappingURL=Logo.d.ts.map
