@@ -42,7 +42,7 @@ jobs:
           npm run bootstrap
           npm run test
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
 
   release:
     needs: test
@@ -60,7 +60,7 @@ jobs:
           npm run bootstrap
           npm run build-libs
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
 
       - name: Prepare repository
         env:
