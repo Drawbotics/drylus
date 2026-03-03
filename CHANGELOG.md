@@ -2,6 +2,22 @@
 
 #### 🐛 Bug Fix
 
+- `@drawbotics/react-drylus`
+  - Fix CheckboxFilter #207, Table mobile headers #210, release workflow [#232](https://github.com/Drawbotics/drylus/pull/232) ([@LaurentClaes](https://github.com/LaurentClaes) [@laurent86](https://github.com/laurent86))
+- `@drawbotics/extract-emotion`, `@drawbotics/react-drylus`, `@drawbotics/styleguide`
+  - Widen React peerDependencies, bump use-screen-size, add React 18 CI [#231](https://github.com/Drawbotics/drylus/pull/231) ([@LaurentClaes](https://github.com/LaurentClaes) [@laurent86](https://github.com/laurent86))
+
+#### Authors: 2
+
+- [@laurent86](https://github.com/laurent86)
+- [@LaurentClaes](https://github.com/LaurentClaes)
+
+---
+
+# v8.7.4 (Tue Mar 03 2026)
+
+#### 🐛 Bug Fix
+
 - `@drawbotics/extract-emotion`, `@drawbotics/react-drylus`, `@drawbotics/styleguide`
   - Widen React peerDependencies, bump use-screen-size, add React 18 CI [#231](https://github.com/Drawbotics/drylus/pull/231) ([@LaurentClaes](https://github.com/LaurentClaes) [@laurent86](https://github.com/laurent86))
 

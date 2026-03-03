@@ -1,3 +1,16 @@
+# v8.7.5 (Tue Mar 03 2026)
+
+#### 🐛 Bug Fix
+
+- Fix CheckboxFilter #207, Table mobile headers #210, release workflow [#232](https://github.com/Drawbotics/drylus/pull/232) ([@LaurentClaes](https://github.com/LaurentClaes) [@laurent86](https://github.com/laurent86))
+
+#### Authors: 2
+
+- [@laurent86](https://github.com/laurent86)
+- [@LaurentClaes](https://github.com/LaurentClaes)
+
+---
+
 # v8.7.3 (Mon Mar 02 2026)
 
 #### ⚠️ Pushed to `master`
