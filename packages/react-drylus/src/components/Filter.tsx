@@ -367,16 +367,21 @@ function getLabelForCheckboxFilter<T>(
 ) {
   if (values == null) {
     return label;
-  } else if (values.length === 1) {
+  }
+  const optionValues = options
+    .filter((option): option is Option<T> => 'value' in option)
+    .map((option) => String(option.value));
+  const matchedValues = values.filter((v) => optionValues.includes(String(v)));
+  if (matchedValues.length === 1) {
     return options.find((option) => {
       if ('value' in option) {
-        return String(option.value) === String(values[0]);
+        return String(option.value) === String(matchedValues[0]);
       } else {
         return false;
       }
     })?.label;
-  } else if (values.length > 1) {
-    return `${label} (${values.length})`;
+  } else if (matchedValues.length > 1) {
+    return `${label} (${matchedValues.length})`;
   } else {
     return label;
   }
@@ -416,6 +421,19 @@ export const CheckboxFilter = <T extends any>({
 }: CheckboxFilterProps<T>) => {
   const currentLabel = getLabelForCheckboxFilter(label, options, values);
 
+  if (process.env.NODE_ENV !== 'production' && values.length > 0) {
+    const optionValues = options
+      .filter((option): option is Option<T> => 'value' in option)
+      .map((option) => String(option.value));
+    const unmatched = values.filter((v) => !optionValues.includes(String(v)));
+    if (unmatched.length > 0) {
+      console.warn(
+        `CheckboxFilter: values [${unmatched.join(', ')}] do not match any option. ` +
+        `These values will be ignored in the displayed count.`,
+      );
+    }
+  }
+
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -441,7 +459,7 @@ export const CheckboxFilter = <T extends any>({
     <BaseFilter
       {...rest}
       label={currentLabel != null ? String(currentLabel) : label}
-      active={currentLabel != null && values.length > 0}
+      active={currentLabel != null && currentLabel !== label}
       header={
         enableSearch ? (
           <div className={cx(styles.searchSection)}>
