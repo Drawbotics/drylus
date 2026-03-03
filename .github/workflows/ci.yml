@@ -62,8 +62,16 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
       - name: Swap to React 18
         run: |
-          npm install --save-dev react@18 react-dom@18 react-test-renderer@18 --legacy-peer-deps
-          npx lerna link
+          # Install React 18 in a temp dir to avoid disrupting lerna's symlinks
+          TMPDIR=$(mktemp -d)
+          cd "$TMPDIR" && npm init -y > /dev/null 2>&1
+          npm install react@18 react-dom@18 react-test-renderer@18 2>&1
+          # Replace only the react packages in root node_modules (where jest resolves them)
+          for pkg in react react-dom react-test-renderer scheduler; do
+            rm -rf "$GITHUB_WORKSPACE/node_modules/$pkg"
+            [ -d "$TMPDIR/node_modules/$pkg" ] && cp -rL "$TMPDIR/node_modules/$pkg" "$GITHUB_WORKSPACE/node_modules/$pkg"
+          done
+          rm -rf "$TMPDIR"
       - name: Run react-drylus tests
         run: npm run test:react
 
