@@ -56,8 +56,10 @@ jobs:
           node-version: '20.x'
           registry-url: https://npm.pkg.github.com/
           scope: '@drawbotics'
-      - name: Install dependencies
-        run: npm run bootstrap
+      - name: Install dependencies and build libs
+        run: |
+          npm run bootstrap
+          npm run build-libs
         env:
           NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
       - name: Swap to React 18
