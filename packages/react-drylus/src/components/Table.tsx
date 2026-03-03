@@ -749,14 +749,25 @@ const EmptyTable = ({ columns, emptyContent }: EmptyTableProps) => {
   );
 };
 
+function _extractCellLabel(children: React.ReactNode): string {
+  if (children == null) return '';
+  if (typeof children === 'string' || typeof children === 'number') return String(children);
+  if (Array.isArray(children)) {
+    return children.map(_extractCellLabel).filter(Boolean).join('');
+  }
+  if (React.isValidElement(children) && (children.props as any).children != null) {
+    return _extractCellLabel((children.props as any).children);
+  }
+  return '';
+}
+
 function _addAttributesToCells(
   children?: [React.ReactElement<typeof THead>, React.ReactElement<typeof TBody>],
 ): React.ReactNode {
   if (children == null) return;
   if (children[0]?.type === THead && children[1]?.type === TBody) {
-    // TODO fix .props as any
     const headerValues = (children[0].props as any).children.map(
-      (child: React.ReactElement<typeof TCell>) => (child.props as any).children,
+      (child: React.ReactElement<typeof TCell>) => _extractCellLabel((child.props as any).children),
     );
     const transformedRows: typeof children[1] = React.Children.map(
       (children[1].props as any).children,
