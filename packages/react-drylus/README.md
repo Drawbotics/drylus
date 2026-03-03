@@ -4,6 +4,10 @@ The "root" package for all of the Drawbotics styles (excluding [icons]('../icons
 
 The components are written in React and are styled using [emotion](https://github.com/emotion-js/emotion).
 
+## React Version Support
+- Developed and tested against **React 16**
+- **React 18/19** support is best-effort and community-tested
+- If you encounter issues on newer React versions, please report them
 
 ## Development
 ```
