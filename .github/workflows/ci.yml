@@ -61,7 +61,9 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
       - name: Swap to React 18
-        run: npm install --save-dev react@18 react-dom@18 react-test-renderer@18 --legacy-peer-deps
+        run: |
+          npm install --save-dev react@18 react-dom@18 react-test-renderer@18 --legacy-peer-deps
+          npx lerna link
       - name: Run react-drylus tests
         run: npm run test:react
 
