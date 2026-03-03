@@ -25,7 +25,7 @@
   },
   "peerDependencies": {
     "emotion": "^10",
-    "react": "^16.8.0"
+    "react": ">=16.8.0 <20"
   },
   "repository": {
     "type": "git",

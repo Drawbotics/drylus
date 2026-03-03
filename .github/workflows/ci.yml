@@ -44,6 +44,39 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
 
+  test-react-18:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: https://npm.pkg.github.com/
+          scope: '@drawbotics'
+      - name: Install dependencies and build libs
+        run: |
+          npm run bootstrap
+          npm run build-libs
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
+      - name: Swap to React 18
+        run: |
+          # Install React 18 in a temp dir to avoid disrupting lerna's symlinks
+          TMPDIR=$(mktemp -d)
+          cd "$TMPDIR" && npm init -y > /dev/null 2>&1
+          npm install react@18 react-dom@18 react-test-renderer@18 2>&1
+          # Replace only the react packages in root node_modules (where jest resolves them)
+          for pkg in react react-dom react-test-renderer scheduler; do
+            rm -rf "$GITHUB_WORKSPACE/node_modules/$pkg"
+            [ -d "$TMPDIR/node_modules/$pkg" ] && cp -rL "$TMPDIR/node_modules/$pkg" "$GITHUB_WORKSPACE/node_modules/$pkg"
+          done
+          rm -rf "$TMPDIR"
+      - name: Run react-drylus tests
+        run: npm run test:react
+
   release:
     needs: test
     if: contains(github.ref, 'master')
