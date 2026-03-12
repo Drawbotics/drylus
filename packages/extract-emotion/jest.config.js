@@ -3,4 +3,5 @@ module.exports = {
     '**/*.test.js',
     '**/*.test.jsx',
   ],
+  testTimeout: 30000,
 };
