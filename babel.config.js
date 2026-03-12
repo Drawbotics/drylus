@@ -7,7 +7,7 @@ module.exports = function(api) {
     ['@babel/preset-env', {
       'useBuiltIns': 'usage',
       'modules': false,
-      'corejs': '2',
+      'corejs': '3',
     }],
     ['@babel/preset-react', { runtime: 'classic' }],
     ...(isTest ? [['@babel/preset-typescript', { allExtensions: true, isTSX: true }]] : []),

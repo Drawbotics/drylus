@@ -27,7 +27,7 @@
   },
   "gitHead": "8314d678c0c364d2aab35300a51324982cc0b85a",
   "dependencies": {
-    "core-js": "^2.6.9"
+    "core-js": "^3.0.0"
   },
   "devDependencies": {
     "oslllo-svg-fixer": "^5.0.0",

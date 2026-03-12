@@ -2,7 +2,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const fs = require('fs-extra');
+const fs = require('fs');
 const dotenv = require('dotenv');
 
 const rehypePlayground = require('./utils/rehype-playground');
@@ -53,7 +53,7 @@ const prodPlugins = [
   {
     apply: (compiler) => {
       compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compilation) => {
-        fs.copySync('./dist', '../../docs');
+        fs.cpSync('./dist', '../../docs', { recursive: true });
       });
     },
   },
