@@ -12,11 +12,28 @@ async function build(input, output) {
     output: {
       path: output,
     },
-    externals: {
-      'mapbox-gl': '{}',
-      'react-mapbox-wrapper': '{}',
-      '@drawbotics/use-screen-size': '{}',
+    resolve: {
+      mainFields: ['main', 'module'],
     },
+    module: {
+      rules: [
+        { test: /\.mjs$/, include: /node_modules/, type: 'javascript/auto' },
+      ],
+    },
+    externals: [
+      { 'mapbox-gl': '{}' },
+      { 'react-map-gl': '{}' },
+      { 'framer-motion': '{}' },
+      { 'animejs': '{}' },
+      { '@drawbotics/use-screen-size': '{}' },
+      function(context, request, callback) {
+        // Ignore CSS imports and problematic modules that don't contribute emotion styles
+        if (/\.css$/.test(request) || /^mapbox-gl/.test(request) || /^get-user-locale/.test(request)) {
+          return callback(null, '{}');
+        }
+        callback();
+      },
+    ],
   });
   compiler.outputFileSystem = memFs;
 
