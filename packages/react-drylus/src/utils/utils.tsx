@@ -1,26 +1,26 @@
 import Dayjs from 'dayjs';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { ReactNode, useCallback } from 'react';
 
 import { Position } from '../enums';
 
 export interface WrapperRefProps {
-  setChildrenRef: (node: any) => void;
+  setChildrenRef: (node: HTMLElement | null) => void;
+  children?: ReactNode;
 }
 
-export class WrapperRef extends React.Component<WrapperRefProps> {
-  componentDidMount() {
-    const { setChildrenRef } = this.props;
-    // eslint-disable-next-line react/no-find-dom-node
-    const node = ReactDOM.findDOMNode(this);
-    setChildrenRef(node);
-  }
-
-  render() {
-    const { children } = this.props;
-    return children;
-  }
-}
+export const WrapperRef = ({ setChildrenRef, children }: WrapperRefProps) => {
+  const ref = useCallback(
+    (node: HTMLSpanElement | null) => {
+      setChildrenRef(node);
+    },
+    [setChildrenRef],
+  );
+  return (
+    <span ref={ref} style={{ display: 'contents' }}>
+      {children}
+    </span>
+  );
+};
 
 export function getStyleForSide({
   side,
