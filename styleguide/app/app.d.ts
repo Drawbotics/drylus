@@ -1,5 +1,4 @@
 import '@drawbotics/vanilla-drylus/dist/drylus.css';
-import React from 'react';
-declare const _default: () => React.JSX.Element;
-export default _default;
+declare const App: () => JSX.Element;
+export default App;
 //# sourceMappingURL=app.d.ts.map
