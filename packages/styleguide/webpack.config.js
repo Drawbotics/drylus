@@ -140,6 +140,21 @@ module.exports = {
         exclude: [/node_modules/, /use-screen-size\/lib/, /react-drylus\/lib/],
       },
       {
+        test: /\.mjs$/,
+        include: /node_modules\/framer-motion/,
+        type: 'javascript/auto',
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: [['@babel/preset-env', { modules: false }]],
+            plugins: [
+              '@babel/plugin-transform-optional-chaining',
+              '@babel/plugin-transform-nullish-coalescing-operator',
+            ],
+          },
+        }],
+      },
+      {
         test: /\.css$/,
         use: [
           'style-loader',
