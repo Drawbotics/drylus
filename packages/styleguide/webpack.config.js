@@ -140,8 +140,8 @@ module.exports = {
         exclude: [/node_modules/, /use-screen-size\/lib/, /react-drylus\/lib/],
       },
       {
-        test: /\.mjs$/,
-        include: /node_modules\/framer-motion/,
+        test: /\.m?js$/,
+        include: /node_modules\/(framer-motion|motion-dom|motion-utils|animejs)/,
         type: 'javascript/auto',
         use: [{
           loader: 'babel-loader',
