@@ -18,12 +18,6 @@ module.exports = function(api) {
     'packages/*',
   ];
 
-  const emotionPlugin = ['babel-plugin-emotion', {
-    sourceMap: false,
-    autoLabel: true,
-    labelFormat: '[filename]__[local]',
-  }];
-
   const plugins = [
     ...(isTest ? [] : ['react-hot-loader/babel']),
     ...(isTest ? [] : [['babel-plugin-emotion', {
