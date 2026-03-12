@@ -14,7 +14,7 @@ export const itemVariants = {
     opacity: 1,
     transition: {
       ...(delay ? { delay: delay / 1000 } : {}),
-      type: 'tween',
+      type: 'tween' as const,
     },
   }),
   small: {
@@ -40,7 +40,7 @@ export const itemVariants = {
   exit: {
     opacity: 0,
     transition: {
-      type: 'tween',
+      type: 'tween' as const,
     },
   },
 };
@@ -163,7 +163,7 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
   const { exit: customExit = {}, enter: customEnter = {}, initial: customInitial = {} } = variants;
 
   const transitionOptions = {
-    type: 'spring',
+    type: 'spring' as const,
     damping: 17,
     stiffness: 400,
     ...getSettingsFromSpeed(speed),

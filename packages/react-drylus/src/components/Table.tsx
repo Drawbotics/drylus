@@ -518,7 +518,7 @@ export const TRow = ({
       ? {
           variants: tableRowVariants,
           transition: {
-            type: 'spring',
+            type: 'spring' as const,
             damping: 20,
             stiffness: 300,
           },

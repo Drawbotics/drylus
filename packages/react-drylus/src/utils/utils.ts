@@ -106,5 +106,5 @@ export function isFunction(value: any): value is Function {
 export const fsv = {
   defaultTransitionTime: 0.3,
   transitionTimeShort: 0.15,
-  bouncyTransitionCurve: [0.44, 0.11, 0.07, 1.29],
+  bouncyTransitionCurve: [0.44, 0.11, 0.07, 1.29] as [number, number, number, number],
 };

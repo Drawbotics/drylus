@@ -224,7 +224,7 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
               {alerts.map((alert: AlertProps) => (
                 <motion.div
                   key={alert.id}
-                  layoutTransition={{ duration: 0.2 }}
+                  layout
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 5, transition: { duration: 0.3 } }}>
