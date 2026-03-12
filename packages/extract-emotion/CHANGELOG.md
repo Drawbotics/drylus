@@ -1,3 +1,21 @@
+# v8.7.5 (Thu Mar 12 2026)
+
+#### 🐛 Bug Fix
+
+- Fix #207, #210, release workflow, and check-labels [#233](https://github.com/Drawbotics/drylus/pull/233) ([@LaurentClaes](https://github.com/LaurentClaes) [@laurent86](https://github.com/laurent86))
+
+#### ⚠️ Pushed to `master`
+
+- Fix extract-emotion tests for Node.js 22 ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix vanilla-drylus build for Node.js 22 (OpenSSL 3) ([@LaurentClaes](https://github.com/LaurentClaes))
+
+#### Authors: 2
+
+- [@laurent86](https://github.com/laurent86)
+- [@LaurentClaes](https://github.com/LaurentClaes)
+
+---
+
 # v8.7.4 (Tue Mar 03 2026)
 
 #### 🐛 Bug Fix

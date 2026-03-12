@@ -1,3 +1,15 @@
+# v8.7.7 (Thu Mar 12 2026)
+
+#### ⚠️ Pushed to `master`
+
+- Modernize dependencies and fix security vulnerabilities ([@LaurentClaes](https://github.com/LaurentClaes))
+
+#### Authors: 1
+
+- [@LaurentClaes](https://github.com/LaurentClaes)
+
+---
+
 # v8.7.3 (Mon Mar 02 2026)
 
 #### ⚠️ Pushed to `master`
