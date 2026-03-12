@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import { motion, useAnimation } from 'framer-motion';
 import camelCase from 'lodash/camelCase';
 import omit from 'lodash/omit';

@@ -43,10 +43,13 @@ module.exports = {
     'no-whitespace-before-property': ['warn'],
 
     // TypeScript
+    'no-undef': ['off'], // TypeScript handles this; base rule produces false positives
     'no-unused-vars': ['off'],
     '@typescript-eslint/no-unused-vars': ['warn', { ignoreRestSiblings: true }],
     'no-useless-constructor': ['off'],
     '@typescript-eslint/no-useless-constructor': ['warn'],
+    'no-use-before-define': ['off'],
+    '@typescript-eslint/no-use-before-define': ['warn', { functions: false, variables: false }],
 
     // React
     'react/prop-types': ['off'],

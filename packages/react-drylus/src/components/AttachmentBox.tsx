@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import last from 'lodash/last';
 import React, { Fragment } from 'react';
 

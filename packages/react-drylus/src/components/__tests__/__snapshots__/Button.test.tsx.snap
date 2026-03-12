@@ -19,11 +19,11 @@ exports[`Button matches snapshot when has a category 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: #f8a00f;
-  color: #fff !important;
+  color: #fff!important;
 }
 
 .emotion-0:hover {
@@ -38,7 +38,7 @@ exports[`Button matches snapshot when has a category 1`] = `
 .emotion-0:disabled {
   cursor: not-allowed;
   background: #eaeff4;
-  color: rgba(135,155,166,0.5);
+  color: rgba(135, 155, 166, 0.5);
   box-shadow: none;
 }
 
@@ -51,7 +51,7 @@ exports[`Button matches snapshot when has a category 1`] = `
 }
 
 .emotion-0:disabled {
-  color: rgba(135,155,166,0.5) !important;
+  color: rgba(135, 155, 166, 0.5)!important;
   background: #eaeff4;
 }
 
@@ -64,7 +64,7 @@ exports[`Button matches snapshot when has a category 1`] = `
 `;
 
 exports[`Button matches snapshot when has a leading component 1`] = `
-.emotion-2 {
+.emotion-0 {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 4px;
@@ -82,29 +82,25 @@ exports[`Button matches snapshot when has a leading component 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
 }
 
-.emotion-2:hover {
+.emotion-0:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.emotion-2:active {
+.emotion-0:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.emotion-2:disabled {
+.emotion-0:disabled {
   cursor: not-allowed;
   background: #eaeff4;
-  color: rgba(135,155,166,0.5);
+  color: rgba(135, 155, 166, 0.5);
   box-shadow: none;
-}
-
-.emotion-0 {
-  color: inherit;
 }
 
 .emotion-1 {
@@ -117,8 +113,8 @@ exports[`Button matches snapshot when has a leading component 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   margin-right: 8px;
   height: 0;
@@ -132,15 +128,19 @@ exports[`Button matches snapshot when has a leading component 1`] = `
   align-items: center;
 }
 
+.emotion-2 {
+  color: inherit;
+}
+
 <button
-  className="emotion-2"
+  className="emotion-0"
   type="button"
 >
   <div
     className="emotion-1"
   >
     <i
-      className="emotion-0 Drycon Drycon-check"
+      className="emotion-2 Drycon Drycon-check"
     />
   </div>
   Some content
@@ -166,8 +166,8 @@ exports[`Button matches snapshot when has a tier 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   background: transparent;
   color: #172b4e;
@@ -186,7 +186,7 @@ exports[`Button matches snapshot when has a tier 1`] = `
 .emotion-0:disabled {
   cursor: not-allowed;
   background: #eaeff4;
-  color: rgba(135,155,166,0.5);
+  color: rgba(135, 155, 166, 0.5);
   box-shadow: none;
 }
 
@@ -212,7 +212,7 @@ exports[`Button matches snapshot when has a tier 1`] = `
 `;
 
 exports[`Button matches snapshot when has a trailing component 1`] = `
-.emotion-2 {
+.emotion-0 {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 4px;
@@ -230,29 +230,25 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
 }
 
-.emotion-2:hover {
+.emotion-0:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.emotion-2:active {
+.emotion-0:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.emotion-2:disabled {
+.emotion-0:disabled {
   cursor: not-allowed;
   background: #eaeff4;
-  color: rgba(135,155,166,0.5);
+  color: rgba(135, 155, 166, 0.5);
   box-shadow: none;
-}
-
-.emotion-0 {
-  color: inherit;
 }
 
 .emotion-1 {
@@ -265,8 +261,8 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   margin-left: 8px;
   height: 0;
@@ -280,8 +276,12 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
   align-items: center;
 }
 
+.emotion-2 {
+  color: inherit;
+}
+
 <button
-  className="emotion-2"
+  className="emotion-0"
   type="button"
 >
   Some content
@@ -289,7 +289,7 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
     className="emotion-1"
   >
     <i
-      className="emotion-0 Drycon Drycon-check"
+      className="emotion-2 Drycon Drycon-check"
     />
   </div>
 </button>
@@ -314,8 +314,8 @@ exports[`Button matches snapshot when is basic 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
 }
 
@@ -331,7 +331,7 @@ exports[`Button matches snapshot when is basic 1`] = `
 .emotion-0:disabled {
   cursor: not-allowed;
   background: #eaeff4;
-  color: rgba(135,155,166,0.5);
+  color: rgba(135, 155, 166, 0.5);
   box-shadow: none;
 }
 
@@ -362,8 +362,8 @@ exports[`Button matches snapshot when is small 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   padding: 8px 8px;
 }
@@ -380,7 +380,7 @@ exports[`Button matches snapshot when is small 1`] = `
 .emotion-0:disabled {
   cursor: not-allowed;
   background: #eaeff4;
-  color: rgba(135,155,166,0.5);
+  color: rgba(135, 155, 166, 0.5);
   box-shadow: none;
 }
 

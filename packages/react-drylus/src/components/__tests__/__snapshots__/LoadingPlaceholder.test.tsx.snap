@@ -3,10 +3,12 @@
 exports[`LoadingPlaceholder matches snapshot when has custom sizes 1`] = `
 @keyframes animation-0 {
   0% {
+    -webkit-background-position: -1200px 0;
     background-position: -1200px 0;
   }
 
   100% {
+    -webkit-background-position: 1200px 0;
     background-position: 1200px 0;
   }
 }
@@ -26,7 +28,13 @@ exports[`LoadingPlaceholder matches snapshot when has custom sizes 1`] = `
   background: #d3dce6;
   border-radius: 4px;
   overflow: hidden;
-  background-image: linear-gradient( to right, #d3dce6 8%, #eaeff4 18%, #d3dce6 33% );
+  background-image: linear-gradient(
+          to right,
+          #d3dce6 8%,
+          #eaeff4 18%,
+          #d3dce6 33%
+        );
+  -webkit-background-size: 1200px 100%;
   background-size: 1200px 100%;
   -webkit-animation: animation-0 2s forwards infinite linear;
   animation: animation-0 2s forwards infinite linear;
@@ -35,7 +43,7 @@ exports[`LoadingPlaceholder matches snapshot when has custom sizes 1`] = `
 <div
   className="emotion-0"
   style={
-    Object {
+    {
       "height": 200,
       "width": 100,
     }
@@ -46,10 +54,12 @@ exports[`LoadingPlaceholder matches snapshot when has custom sizes 1`] = `
 exports[`LoadingPlaceholder matches snapshot when has no specified sizes 1`] = `
 @keyframes animation-0 {
   0% {
+    -webkit-background-position: -1200px 0;
     background-position: -1200px 0;
   }
 
   100% {
+    -webkit-background-position: 1200px 0;
     background-position: 1200px 0;
   }
 }
@@ -69,7 +79,13 @@ exports[`LoadingPlaceholder matches snapshot when has no specified sizes 1`] = `
   background: #d3dce6;
   border-radius: 4px;
   overflow: hidden;
-  background-image: linear-gradient( to right, #d3dce6 8%, #eaeff4 18%, #d3dce6 33% );
+  background-image: linear-gradient(
+          to right,
+          #d3dce6 8%,
+          #eaeff4 18%,
+          #d3dce6 33%
+        );
+  -webkit-background-size: 1200px 100%;
   background-size: 1200px 100%;
   -webkit-animation: animation-0 2s forwards infinite linear;
   animation: animation-0 2s forwards infinite linear;
@@ -78,7 +94,7 @@ exports[`LoadingPlaceholder matches snapshot when has no specified sizes 1`] = `
 <div
   className="emotion-0"
   style={
-    Object {
+    {
       "height": "24px",
       "width": 200,
     }

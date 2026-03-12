@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const webfont = require('webfont').default;
+const webfont = require('webfont').webfont;
 
 async function generate(options) {
   return new Promise((resolve, reject) => {

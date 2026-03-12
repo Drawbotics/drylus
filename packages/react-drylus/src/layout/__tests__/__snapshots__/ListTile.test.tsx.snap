@@ -2,6 +2,35 @@
 
 exports[`ListTile matches snapshot when has a custom title 1`] = `
 .emotion-0 {
+  display: inline-block;
+}
+
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-2 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-3 {
   background: #eaeff4;
   color: #172b4e;
   border-radius: 4px;
@@ -19,68 +48,39 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
 }
 
-.emotion-0:hover {
+.emotion-3:hover {
   cursor: pointer;
   background: #d3dce6;
 }
 
-.emotion-0:active {
+.emotion-3:active {
   box-shadow: 0 1px 6px #879ba6 inset;
 }
 
-.emotion-0:disabled {
+.emotion-3:disabled {
   cursor: not-allowed;
   background: #eaeff4;
-  color: rgba(135,155,166,0.5);
+  color: rgba(135, 155, 166, 0.5);
   box-shadow: none;
 }
 
-.emotion-1 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.emotion-3 {
-  display: inline-block;
-}
-
-.emotion-2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
 <div
-  className="emotion-3"
+  className="emotion-0"
 >
   <div
-    className="emotion-2"
+    className="emotion-1"
   >
     <div
-      className="emotion-1"
-      style={Object {}}
+      className="emotion-2"
+      style={{}}
     >
       <button
-        className="emotion-0"
+        className="emotion-3"
         type="button"
       >
         Button
@@ -91,22 +91,11 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
 `;
 
 exports[`ListTile matches snapshot when has a subtitle 1`] = `
-.emotion-2 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.emotion-4 {
+.emotion-0 {
   display: inline-block;
 }
 
 .emotion-1 {
-  color: #879ba6;
-  font-size: 0.9em;
-}
-
-.emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -116,8 +105,8 @@ exports[`ListTile matches snapshot when has a subtitle 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -125,28 +114,39 @@ exports[`ListTile matches snapshot when has a subtitle 1`] = `
   align-items: center;
 }
 
-.emotion-0 {
+.emotion-2 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-3 {
   color: #172b4e;
   margin-bottom: calc(8px / 2);
 }
 
+.emotion-4 {
+  color: #879ba6;
+  font-size: 0.9em;
+}
+
 <div
-  className="emotion-4"
+  className="emotion-0"
 >
   <div
-    className="emotion-3"
+    className="emotion-1"
   >
     <div
       className="emotion-2"
-      style={Object {}}
+      style={{}}
     >
       <div
-        className="emotion-0"
+        className="emotion-3"
       >
         Title
       </div>
       <div
-        className="emotion-1"
+        className="emotion-4"
       >
         Subtitle
       </div>
@@ -157,20 +157,10 @@ exports[`ListTile matches snapshot when has a subtitle 1`] = `
 
 exports[`ListTile matches snapshot when has a title 1`] = `
 .emotion-0 {
-  color: #172b4e;
-}
-
-.emotion-1 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.emotion-3 {
   display: inline-block;
 }
 
-.emotion-2 {
+.emotion-1 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -180,8 +170,8 @@ exports[`ListTile matches snapshot when has a title 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -189,18 +179,28 @@ exports[`ListTile matches snapshot when has a title 1`] = `
   align-items: center;
 }
 
+.emotion-2 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-3 {
+  color: #172b4e;
+}
+
 <div
-  className="emotion-3"
+  className="emotion-0"
 >
   <div
-    className="emotion-2"
+    className="emotion-1"
   >
     <div
-      className="emotion-1"
-      style={Object {}}
+      className="emotion-2"
+      style={{}}
     >
       <div
-        className="emotion-0"
+        className="emotion-3"
       >
         Title
       </div>
@@ -211,59 +211,29 @@ exports[`ListTile matches snapshot when has a title 1`] = `
 
 exports[`ListTile matches snapshot when has a trailing and leading component 1`] = `
 .emotion-0 {
-  background: #eaeff4;
-  color: #172b4e;
-  border-radius: 4px;
-  padding: calc(8px * 1.5) 24px;
-  outline: 0;
-  border: 0;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.emotion-0:hover {
-  cursor: pointer;
-  background: #d3dce6;
-}
-
-.emotion-0:active {
-  box-shadow: 0 1px 6px #879ba6 inset;
-}
-
-.emotion-0:disabled {
-  cursor: not-allowed;
-  background: #eaeff4;
-  color: rgba(135,155,166,0.5);
-  box-shadow: none;
-}
-
-.emotion-3 {
-  color: #172b4e;
-}
-
-.emotion-4 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.emotion-9 {
   display: inline-block;
 }
 
 .emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -275,7 +245,56 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   margin-right: 8px;
 }
 
+.emotion-4 {
+  background: #eaeff4;
+  color: #172b4e;
+  border-radius: 4px;
+  padding: calc(8px * 1.5) 24px;
+  outline: 0;
+  border: 0;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-4:hover {
+  cursor: pointer;
+  background: #d3dce6;
+}
+
+.emotion-4:active {
+  box-shadow: 0 1px 6px #879ba6 inset;
+}
+
+.emotion-4:disabled {
+  cursor: not-allowed;
+  background: #eaeff4;
+  color: rgba(135, 155, 166, 0.5);
+  box-shadow: none;
+}
+
+.emotion-5 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
 .emotion-6 {
+  color: #172b4e;
+}
+
+.emotion-8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -287,40 +306,21 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
   margin-left: 8px;
 }
 
-.emotion-8 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
 <div
-  className="emotion-9"
+  className="emotion-0"
 >
   <div
-    className="emotion-8"
+    className="emotion-1"
   >
     <div
       className="emotion-2"
-      style={Object {}}
+      style={{}}
     >
       <div
-        className="emotion-1"
+        className="emotion-3"
       >
         <button
-          className="emotion-0"
+          className="emotion-4"
           type="button"
         >
           Leading
@@ -328,24 +328,24 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
       </div>
     </div>
     <div
-      className="emotion-4"
-      style={Object {}}
+      className="emotion-5"
+      style={{}}
     >
       <div
-        className="emotion-3"
+        className="emotion-6"
       >
         Title
       </div>
     </div>
     <div
       className="emotion-2"
-      style={Object {}}
+      style={{}}
     >
       <div
-        className="emotion-6"
+        className="emotion-8"
       >
         <button
-          className="emotion-0"
+          className="emotion-4"
           type="button"
         >
           Trailing

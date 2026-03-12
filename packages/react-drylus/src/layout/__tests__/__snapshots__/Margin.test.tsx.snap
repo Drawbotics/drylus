@@ -10,37 +10,37 @@ exports[`Margin matches snapshot when has a different size on each side 1`] = `
   margin-bottom: 24px;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin: 16px;
   }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin: 0;
   }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin-left: 24px;
   }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin-right: calc(8px / 2);
   }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin-top: 8px;
   }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin-bottom: 16px;
   }
@@ -60,19 +60,19 @@ exports[`Margin matches snapshot when has a size only on 1 side 1`] = `
   margin-left: 32px;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin: 16px;
   }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin: 0;
   }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin-left: 24px;
   }
@@ -91,13 +91,13 @@ exports[`Margin matches snapshot when has a uniform size 1`] = `
   margin: 32px;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin: 16px;
   }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin: 24px;
   }
@@ -120,37 +120,37 @@ exports[`Margin matches snapshot when has vertical and horizontal sizes 1`] = `
   margin-bottom: 32px;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin: 16px;
   }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin: 0;
   }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin-left: 8px;
   }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin-right: 8px;
   }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin-top: 24px;
   }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     margin-bottom: 24px;
   }

@@ -1,6 +1,6 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import { motion } from 'framer-motion';
 import { omitBy } from 'lodash';
 import get from 'lodash/get';
@@ -542,7 +542,7 @@ export const TRow = ({
       })}
       onMouseEnter={onEnter}
       onMouseLeave={onExit}
-      onClick={(e) => onClick?.(e)}
+      onClick={(e: React.MouseEvent<HTMLTableRowElement>) => onClick?.(e)}
       data-nested={nested ?? undefined}
       data-parent={parent ?? undefined}>
       {React.Children.toArray(children)

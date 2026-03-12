@@ -9,7 +9,7 @@ exports[`Title matches snapshot when does not have margins 1`] = `
   margin-bottom: 0;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     font-size: 2.8em;
   }
@@ -29,7 +29,7 @@ exports[`Title matches snapshot when has a h1 size 1`] = `
   font-size: 3.4em;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     font-size: 2.8em;
   }
@@ -49,7 +49,7 @@ exports[`Title matches snapshot when has a h2 size 1`] = `
   font-size: 2.4em;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     font-size: 2em;
   }
@@ -69,7 +69,7 @@ exports[`Title matches snapshot when has a h3 size 1`] = `
   font-size: 2em;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     font-size: 1.6em;
   }
@@ -90,7 +90,7 @@ exports[`Title matches snapshot when has a h4 size 1`] = `
   font-weight: 400;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     font-size: 1.1em;
   }
@@ -110,7 +110,7 @@ exports[`Title matches snapshot when has a node as children 1`] = `
   font-size: 2.4em;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     font-size: 2em;
   }
@@ -121,7 +121,7 @@ exports[`Title matches snapshot when has a node as children 1`] = `
 >
   <span
     style={
-      Object {
+      {
         "fontWeight": 500,
       }
     }
@@ -140,7 +140,7 @@ exports[`Title matches snapshot when is aligned to the right 1`] = `
   text-align: right;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     font-size: 2.8em;
   }
@@ -161,7 +161,7 @@ exports[`Title matches snapshot when is center aligned 1`] = `
   text-align: center;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     font-size: 2.8em;
   }

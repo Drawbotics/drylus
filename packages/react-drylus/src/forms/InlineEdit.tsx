@@ -1,5 +1,5 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 
 import { Icon, IconType } from '../components';

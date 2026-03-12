@@ -1,8 +1,9 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
-import { LngLat, LngLatBounds } from 'mapbox-gl';
-import React, { useRef, useState } from 'react';
-import MapboxMap, { Marker as MapboxMarker } from 'react-mapbox-wrapper';
+import { css, cx } from '@emotion/css';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import React, { useCallback } from 'react';
+import ReactMapGL, { Marker as MapMarker } from 'react-map-gl';
 
 import { useThemeColor } from '../base';
 import { Size, Tier } from '../enums';
@@ -141,21 +142,25 @@ export const Map = ({
   height = 300,
   style,
   interactive = false,
+  zoom,
   className,
   ...props
 }: MapProps) => {
-  const ref = useRef();
-  const [mapRef, setMapRef] = useState(ref.current);
   const themeColor = useThemeColor();
 
-  const handleFitMarkers = (map: typeof MapboxMap) => {
-    const coordinatesToFit = markers.reduce((coords, marker) => {
-      const { coordinates } = marker;
-      return coords.extend(new LngLat(coordinates.lng, coordinates.lat));
-    }, new LngLatBounds());
-    map.fitBounds(coordinatesToFit, { padding: { top: 60, bottom: 60, left: 60, right: 60 } });
-    setMapRef(map);
-  };
+  const handleLoad = useCallback(
+    (event: mapboxgl.MapboxEvent) => {
+      const map = event.target;
+      if (markers.length > 1) {
+        const bounds = new mapboxgl.LngLatBounds();
+        markers.forEach((marker) => {
+          bounds.extend(new mapboxgl.LngLat(marker.coordinates.lng, marker.coordinates.lat));
+        });
+        map.fitBounds(bounds, { padding: { top: 60, bottom: 60, left: 60, right: 60 } });
+      }
+    },
+    [markers],
+  );
 
   const renderMarker = (marker: Marker) => {
     return (
@@ -178,42 +183,48 @@ export const Map = ({
 
   return (
     <div className={cx(styles.root, className)} style={{ height, ...style }}>
-      <MapboxMap
-        interactive={interactive}
-        onLoad={handleFitMarkers}
-        className={styles.map}
-        accessToken={accessToken}
-        // eslint-disable-next-line react/style-prop-object
-        style="mapbox://styles/mapbox/light-v9"
-        coordinates={markers[0]?.coordinates}
+      <ReactMapGL
+        mapboxAccessToken={accessToken}
+        mapStyle="mapbox://styles/mapbox/light-v9"
+        initialViewState={{
+          longitude: markers[0]?.coordinates.lng ?? 0,
+          latitude: markers[0]?.coordinates.lat ?? 0,
+          zoom: zoom ?? 10,
+        }}
+        scrollZoom={interactive}
+        boxZoom={interactive}
+        dragRotate={interactive}
+        dragPan={interactive}
+        keyboard={interactive}
+        doubleClickZoom={interactive}
+        touchZoomRotate={interactive}
+        onLoad={handleLoad}
+        style={{ width: '100%', height: '100%' }}
         {...props}>
-        {run(() => {
-          if (mapRef) {
-            return markers.map((marker, i) => (
-              <MapboxMarker
-                key={i}
-                coordinates={marker.coordinates}
-                map={mapRef}
-                {...marker.options}>
-                {run(() => {
-                  if (marker.title) {
-                    return (
-                      <Popover
-                        content={
-                          <PopoverContent title={marker.title} subtitle={marker.subtitle} />
-                        }>
-                        {marker.marker ?? renderMarker(marker)}
-                      </Popover>
-                    );
-                  } else {
-                    return marker.marker ?? renderMarker(marker);
-                  }
-                })}
-              </MapboxMarker>
-            ));
-          }
-        })}
-      </MapboxMap>
+        {markers.map((marker, i) => (
+          <MapMarker
+            key={i}
+            longitude={marker.coordinates.lng}
+            latitude={marker.coordinates.lat}
+            anchor="bottom"
+            {...marker.options}>
+            {run(() => {
+              if (marker.title) {
+                return (
+                  <Popover
+                    content={
+                      <PopoverContent title={marker.title} subtitle={marker.subtitle} />
+                    }>
+                    {marker.marker ?? renderMarker(marker)}
+                  </Popover>
+                );
+              } else {
+                return marker.marker ?? renderMarker(marker);
+              }
+            })}
+          </MapMarker>
+        ))}
+      </ReactMapGL>
     </div>
   );
 };

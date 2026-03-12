@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
@@ -324,7 +324,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onMouseDown={(e) => (clickTargetElement.current = e.target)}
+              onMouseDown={(e: React.MouseEvent<HTMLDivElement>) => (clickTargetElement.current = e.target)}
               onClick={handleClickOverlay}
               className={cx(
                 styles.overlay,

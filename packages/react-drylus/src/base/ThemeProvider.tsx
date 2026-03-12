@@ -1,5 +1,5 @@
-import { Global, css as globalCSS } from '@emotion/core';
-import { css, cx } from 'emotion';
+import { Global, css as globalCSS } from '@emotion/react';
+import { css, cx } from '@emotion/css';
 import React from 'react';
 
 import { Color } from '../enums';

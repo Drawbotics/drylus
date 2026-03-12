@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import isArray from 'lodash/isArray';
 import isObject from 'lodash/isObject';
 import React, { Fragment } from 'react';

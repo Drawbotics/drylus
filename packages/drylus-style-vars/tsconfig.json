@@ -18,7 +18,8 @@
     "declarationMap": false,
     "inlineSourceMap": false,
     "inlineSources": false,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true
   },
   "include": [
     "./src"

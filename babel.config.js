@@ -1,5 +1,7 @@
 module.exports = function(api) {
-  api.cache(true);
+  const isTest = process.env.NODE_ENV === 'test';
+
+  api.cache(() => isTest);
 
   const presets = [
     ['@babel/preset-env', {
@@ -8,6 +10,7 @@ module.exports = function(api) {
       'corejs': '2',
     }],
     ['@babel/preset-react'],
+    ...(isTest ? [['@babel/preset-typescript', { allExtensions: true, isTSX: true }]] : []),
   ];
 
   const babelrcRoots = [
@@ -22,35 +25,25 @@ module.exports = function(api) {
   }];
 
   const plugins = [
-    'babel-plugin-codegen',
-    'babel-plugin-react-docgen',
+    ...(isTest ? [] : ['react-hot-loader/babel']),
+    ...(isTest ? [] : [['babel-plugin-emotion', {
+      sourceMap: false,
+      autoLabel: true,
+      labelFormat: '[filename]__[local]',
+    }]]),
+    ...(isTest ? [] : ['babel-plugin-codegen']),
+    ...(isTest ? [] : ['babel-plugin-react-docgen']),
     '@babel/plugin-proposal-export-default-from',
-    ['@babel/plugin-proposal-optional-chaining', { 'loose': false }],
+    '@babel/plugin-transform-optional-chaining',
     '@babel/plugin-proposal-do-expressions',
-    '@babel/plugin-proposal-nullish-coalescing-operator',
+    '@babel/plugin-transform-nullish-coalescing-operator',
+    ...(isTest ? ['@babel/plugin-transform-modules-commonjs'] : []),
   ];
-
-  const env = {
-    development: {
-      plugins: [
-        'react-hot-loader/babel',
-      ],
-    },
-    test: {
-      presets,
-      plugins: [
-        'react-hot-loader/babel',
-        emotionPlugin,
-        '@babel/plugin-transform-modules-commonjs',
-      ],
-    },
-  };
 
   return {
     presets,
     plugins,
     babelrcRoots,
     sourceType: 'unambiguous',
-    env,
   };
 }

@@ -1,9 +1,9 @@
 /* eslint-disable */
-import serializer from 'jest-emotion';
+import { createSerializer } from '@emotion/jest';
 
 // Set up for jest to display css values in snapshot
 expect.addSnapshotSerializer(
-  serializer,
+  createSerializer(),
 );
 
 

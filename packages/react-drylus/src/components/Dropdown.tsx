@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
 import { Category, Position, Shade, Size } from '../enums';

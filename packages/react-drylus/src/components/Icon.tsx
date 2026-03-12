@@ -1,7 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { IconKeys, Icons as IconValues } from '@drawbotics/icons/dist/drycons';
 import { mapping } from '@drawbotics/icons/dist/drycons.js';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import React from 'react';
 
 import { Color, Shade } from '../enums';

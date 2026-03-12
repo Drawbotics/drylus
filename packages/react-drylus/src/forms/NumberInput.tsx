@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Icon } from '../components';
@@ -324,7 +324,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
               })}
               onClick={() => {
                 const res = (Number(value) ?? 0) + step;
-                if (!disabled && value < max) {
+                if (!disabled && Number(value) < max) {
                   onChange(Number.isInteger(res) ? res : Number(res.toFixed(decimalPlaces)), name);
                 }
               }}>
@@ -341,7 +341,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
               })}
               onClick={() => {
                 const res = (Number(value) ?? 0) - step;
-                if (!disabled && value > min) {
+                if (!disabled && Number(value) > min) {
                   onChange(Number.isInteger(res) ? res : Number(res.toFixed(decimalPlaces)), name);
                 }
               }}>

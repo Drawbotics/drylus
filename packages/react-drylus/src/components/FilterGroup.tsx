@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import React, { Fragment, useState } from 'react';
 
 import { Category, Size, Tier } from '../enums';

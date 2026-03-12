@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';

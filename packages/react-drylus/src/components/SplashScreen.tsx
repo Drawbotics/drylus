@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
-import anime from 'animejs';
-import { css } from 'emotion';
+import { createDrawable, createTimeline } from 'animejs';
+import { css } from '@emotion/css';
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
@@ -49,32 +49,24 @@ export const SplashScreen = ({ text }: SplashScreenProps) => {
   const [outletElement, setOutletElement] = useState<HTMLElement>();
 
   const handleAnimationStart = () => {
-    const timeline = anime.timeline({
-      easing: 'easeInOutSine',
-      duration: 1000,
+    const timeline = createTimeline({
+      defaults: {
+        ease: 'inOutSine',
+        duration: 1000,
+      },
       loop: true,
     });
-    timeline.add({
-      targets: '.first',
-      strokeDashoffset: [anime.setDashoffset, 0],
+    timeline.add(createDrawable('.first'), {
+      draw: '0 1',
     });
-    timeline.add(
-      {
-        targets: '.second',
-        strokeDashoffset: [anime.setDashoffset, 0],
-      },
-      600,
-    );
-    timeline.add(
-      {
-        targets: '.third',
-        duration: 500,
-        strokeDashoffset: [anime.setDashoffset, 0],
-      },
-      1300,
-    );
-    timeline.add({
-      targets: `.${styles.animation}`,
+    timeline.add(createDrawable('.second'), {
+      draw: '0 1',
+    }, 600);
+    timeline.add(createDrawable('.third'), {
+      duration: 500,
+      draw: '0 1',
+    }, 1300);
+    timeline.add(`.${styles.animation}`, {
       opacity: 0,
       duration: 300,
       scale: 0.7,

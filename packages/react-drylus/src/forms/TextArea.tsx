@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import React, { forwardRef, useState } from 'react';
 
 import { useThemeColor } from '../base';

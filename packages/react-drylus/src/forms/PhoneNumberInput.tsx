@@ -1,7 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { countries } from 'countries-list';
-import { Country } from 'country-state-city';
-import { css, cx } from 'emotion';
+import countryTimezones from 'country-state-city/lib/assets/country.json';
+import { css, cx } from '@emotion/css';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -39,24 +39,37 @@ const styles = {
 
 type CountryCode = keyof typeof countries;
 
-const countryPrefixMapping: Record<CountryCode, string> = (Object.keys(countries) as CountryCode[]).reduce(
-  (memo: Record<CountryCode, string>, country: CountryCode) => ({
+const getFlagEmoji = (countryCode: string): string => {
+  const codePoints = countryCode
+    .toUpperCase()
+    .split('')
+    .map((char) => 127397 + char.charCodeAt(0));
+  return String.fromCodePoint(...codePoints);
+};
+
+const countryPrefixMapping: Record<keyof typeof countries, string> = Object.keys(countries).reduce(
+  (memo, country) => ({
     ...memo,
-    [country]: countries[country].phone,
+    [country]: String(countries[country as keyof typeof countries].phone[0]),
   }),
   {} as Record<CountryCode, string>,
 );
 
-interface CountryData {
+interface CountryTimezone {
   isoCode: string;
   phonecode: string;
+  timezones?: Array<{ zoneName: string }>;
 }
 
-const timezoneCountryMapping: Record<string, string> = Country.getAllCountries().reduce(
-  (memo: Record<string, string>, country: CountryData) => ({
-    ...memo,
-    [country.isoCode]: country.phonecode,
-  }),
+const timezoneCountryMapping: Record<string, string> = (countryTimezones as CountryTimezone[]).reduce(
+  (memo: Record<string, string>, country: CountryTimezone) => {
+    if (country.timezones) {
+      country.timezones.forEach((tz) => {
+        memo[tz.zoneName] = country.isoCode;
+      });
+    }
+    return memo;
+  },
   {},
 );
 
@@ -131,7 +144,7 @@ export const PhoneNumberInput = <T extends string>({
     <div className={styles.group}>
       {country != null ? (
         <div className={cx(styles.emoji, { [styles.small]: size === Size.SMALL })}>
-          {countries[country].emoji}
+          {getFlagEmoji(country)}
         </div>
       ) : null}
       <Input

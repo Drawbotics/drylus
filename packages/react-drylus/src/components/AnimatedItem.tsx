@@ -315,7 +315,7 @@ export const AnimationGroup = ({
     }, []);
 
     return (
-      <AnimatePresence key={exitBeforeEnter ? 1 : -1} exitBeforeEnter={exitBeforeEnter}>
+      <AnimatePresence key={exitBeforeEnter ? 1 : -1} mode={exitBeforeEnter ? 'wait' : undefined}>
         {children == null ? null : content}
       </AnimatePresence>
     );

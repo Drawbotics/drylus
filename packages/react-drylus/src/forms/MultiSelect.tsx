@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import React, { ReactNode, useState } from 'react';
 import Select, {
   ActionMeta,
@@ -285,7 +285,7 @@ export const MultiSelect = <T extends any, K extends string>({
             onInputChange={(inputValue: string) => {
               setTemporaryInput(inputValue)
             }}
-            onKeyDown={(event) => {
+            onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
               if (!temporaryInput) return;
               switch (event.key) {
                 case 'Enter':

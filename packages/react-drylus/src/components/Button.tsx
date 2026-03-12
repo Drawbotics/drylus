@@ -1,5 +1,5 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import React from 'react';
 
 import { Category, Color, Size, Tier } from '../enums';

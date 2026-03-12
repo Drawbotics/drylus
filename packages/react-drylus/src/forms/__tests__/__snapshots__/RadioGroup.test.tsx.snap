@@ -1,16 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RadioGroup matches snapshot when is has a value 1`] = `
-.emotion-18 {
+.emotion-0 {
   display: inline-block;
 }
 
-.emotion-7 {
+.emotion-1 {
+  margin-bottom: 8px;
+}
+
+.emotion-2 {
   position: relative;
   display: inline-block;
 }
 
-.emotion-6 {
+.emotion-3 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -20,13 +24,13 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
   justify-content: flex-start;
   cursor: pointer;
 }
 
-.emotion-6:hover [data-element='sprite'] {
+.emotion-3:hover [data-element='sprite'] {
   background: #879ba6;
 }
 
@@ -37,46 +41,33 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
   overflow: hidden;
 }
 
-.emotion-8 {
-  margin-bottom: 8px;
-}
-
-.emotion-0 {
+.emotion-5 {
   visibility: hidden;
 }
 
-.emotion-0:checked + [data-element='sprite'] [data-element='icon'] {
+.emotion-5:checked+[data-element='sprite'] [data-element='icon'] {
   -webkit-transform: scale(1);
+  -moz-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
   border-radius: 0;
 }
 
-.emotion-0:checked + [data-element='sprite'] [data-element='locked-icon'] {
+.emotion-5:checked+[data-element='sprite'] [data-element='locked-icon'] {
   background: #3FBC9B;
   color: #fff;
 }
 
-.emotion-0:disabled + [data-element='sprite'] {
+.emotion-5:disabled+[data-element='sprite'] {
   cursor: not-allowed;
-  background: #eaeff4 !important;
+  background: #eaeff4!important;
 }
 
-.emotion-0:disabled + [data-element='sprite'] [data-element='icon'] {
+.emotion-5:disabled+[data-element='sprite'] [data-element='icon'] {
   background: #d3dce6;
 }
 
-.emotion-5 {
-  margin-left: 8px;
-  color: #172b4e;
-  position: relative;
-}
-
-.emotion-5:hover {
-  cursor: pointer;
-}
-
-.emotion-3 {
+.emotion-6 {
   position: absolute;
   top: 0;
   left: 0;
@@ -93,8 +84,8 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   text-align: center;
   cursor: pointer;
@@ -103,7 +94,7 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
   overflow: hidden;
 }
 
-.emotion-2 {
+.emotion-7 {
   cursor: inherit;
   color: #fff;
   height: 100%;
@@ -111,68 +102,79 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
   background: #3FBC9B;
   line-height: calc(16px + 4px);
   -webkit-transform: scale(0);
+  -moz-transform: scale(0);
   -ms-transform: scale(0);
   transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  -webkit-transition: all 0.15s cubic-bezier(0.44, 0.11, 0.07, 1.29);
+  transition: all 0.15s cubic-bezier(0.44, 0.11, 0.07, 1.29);
   border-radius: 100px;
 }
 
-.emotion-2 > i {
+.emotion-7>i {
   font-size: 0.8em;
   margin-left: 1px;
 }
 
-.emotion-1 {
+.emotion-8 {
   color: inherit;
-  font-weight: bold !important;
+  font-weight: bold!important;
+}
+
+.emotion-9 {
+  margin-left: 8px;
+  color: #172b4e;
+  position: relative;
+}
+
+.emotion-9:hover {
+  cursor: pointer;
 }
 
 <div
-  className="emotion-18"
+  className="emotion-0"
 >
   <div>
     <div
-      className="emotion-8"
+      className="emotion-1"
     >
       <div
-        className="emotion-7"
+        className="emotion-2"
       >
         <label
-          className="emotion-6"
-          htmlFor={1}
+          className="emotion-3"
+          htmlFor="1"
         >
           <div
             className="emotion-4"
           >
             <input
               checked={true}
-              className="emotion-0"
-              id={1}
+              className="emotion-5"
+              id="1"
               onBlur={[Function]}
               onChange={[Function]}
               type="radio"
               value="1"
             />
             <div
-              className="emotion-3"
+              className="emotion-6"
               data-element="sprite"
             >
               <label
-                className="emotion-2"
+                className="emotion-7"
                 data-element="icon"
-                htmlFor={1}
+                htmlFor="1"
               >
                 <i
-                  className="Drycon Drycon-check emotion-1"
+                  className="Drycon Drycon-check emotion-8"
                 />
               </label>
             </div>
           </div>
           <label
-            className="emotion-5"
+            className="emotion-9"
             data-element="label"
-            htmlFor={1}
+            htmlFor="1"
           >
             1
           </label>
@@ -180,46 +182,46 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
       </div>
     </div>
     <div
-      className="emotion-8"
+      className="emotion-1"
     >
       <div
-        className="emotion-7"
+        className="emotion-2"
       >
         <label
-          className="emotion-6"
-          htmlFor={1}
+          className="emotion-3"
+          htmlFor="1"
         >
           <div
             className="emotion-4"
           >
             <input
               checked={false}
-              className="emotion-0"
-              id={1}
+              className="emotion-5"
+              id="1"
               onBlur={[Function]}
               onChange={[Function]}
               type="radio"
               value="3"
             />
             <div
-              className="emotion-3"
+              className="emotion-6"
               data-element="sprite"
             >
               <label
-                className="emotion-2"
+                className="emotion-7"
                 data-element="icon"
-                htmlFor={1}
+                htmlFor="1"
               >
                 <i
-                  className="Drycon Drycon-check emotion-1"
+                  className="Drycon Drycon-check emotion-8"
                 />
               </label>
             </div>
           </div>
           <label
-            className="emotion-5"
+            className="emotion-9"
             data-element="label"
-            htmlFor={1}
+            htmlFor="1"
           >
             2
           </label>
@@ -231,16 +233,20 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
 `;
 
 exports[`RadioGroup matches snapshot when is has no value 1`] = `
-.emotion-18 {
+.emotion-0 {
   display: inline-block;
 }
 
-.emotion-7 {
+.emotion-1 {
+  margin-bottom: 8px;
+}
+
+.emotion-2 {
   position: relative;
   display: inline-block;
 }
 
-.emotion-6 {
+.emotion-3 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -250,13 +256,13 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
   justify-content: flex-start;
   cursor: pointer;
 }
 
-.emotion-6:hover [data-element='sprite'] {
+.emotion-3:hover [data-element='sprite'] {
   background: #879ba6;
 }
 
@@ -267,46 +273,33 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
   overflow: hidden;
 }
 
-.emotion-8 {
-  margin-bottom: 8px;
-}
-
-.emotion-0 {
+.emotion-5 {
   visibility: hidden;
 }
 
-.emotion-0:checked + [data-element='sprite'] [data-element='icon'] {
+.emotion-5:checked+[data-element='sprite'] [data-element='icon'] {
   -webkit-transform: scale(1);
+  -moz-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
   border-radius: 0;
 }
 
-.emotion-0:checked + [data-element='sprite'] [data-element='locked-icon'] {
+.emotion-5:checked+[data-element='sprite'] [data-element='locked-icon'] {
   background: #3FBC9B;
   color: #fff;
 }
 
-.emotion-0:disabled + [data-element='sprite'] {
+.emotion-5:disabled+[data-element='sprite'] {
   cursor: not-allowed;
-  background: #eaeff4 !important;
+  background: #eaeff4!important;
 }
 
-.emotion-0:disabled + [data-element='sprite'] [data-element='icon'] {
+.emotion-5:disabled+[data-element='sprite'] [data-element='icon'] {
   background: #d3dce6;
 }
 
-.emotion-5 {
-  margin-left: 8px;
-  color: #172b4e;
-  position: relative;
-}
-
-.emotion-5:hover {
-  cursor: pointer;
-}
-
-.emotion-3 {
+.emotion-6 {
   position: absolute;
   top: 0;
   left: 0;
@@ -323,8 +316,8 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   text-align: center;
   cursor: pointer;
@@ -333,7 +326,7 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
   overflow: hidden;
 }
 
-.emotion-2 {
+.emotion-7 {
   cursor: inherit;
   color: #fff;
   height: 100%;
@@ -341,68 +334,79 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
   background: #3FBC9B;
   line-height: calc(16px + 4px);
   -webkit-transform: scale(0);
+  -moz-transform: scale(0);
   -ms-transform: scale(0);
   transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
+  -webkit-transition: all 0.15s cubic-bezier(0.44, 0.11, 0.07, 1.29);
+  transition: all 0.15s cubic-bezier(0.44, 0.11, 0.07, 1.29);
   border-radius: 100px;
 }
 
-.emotion-2 > i {
+.emotion-7>i {
   font-size: 0.8em;
   margin-left: 1px;
 }
 
-.emotion-1 {
+.emotion-8 {
   color: inherit;
-  font-weight: bold !important;
+  font-weight: bold!important;
+}
+
+.emotion-9 {
+  margin-left: 8px;
+  color: #172b4e;
+  position: relative;
+}
+
+.emotion-9:hover {
+  cursor: pointer;
 }
 
 <div
-  className="emotion-18"
+  className="emotion-0"
 >
   <div>
     <div
-      className="emotion-8"
+      className="emotion-1"
     >
       <div
-        className="emotion-7"
+        className="emotion-2"
       >
         <label
-          className="emotion-6"
-          htmlFor={1}
+          className="emotion-3"
+          htmlFor="1"
         >
           <div
             className="emotion-4"
           >
             <input
               checked={false}
-              className="emotion-0"
-              id={1}
+              className="emotion-5"
+              id="1"
               onBlur={[Function]}
               onChange={[Function]}
               type="radio"
               value="1"
             />
             <div
-              className="emotion-3"
+              className="emotion-6"
               data-element="sprite"
             >
               <label
-                className="emotion-2"
+                className="emotion-7"
                 data-element="icon"
-                htmlFor={1}
+                htmlFor="1"
               >
                 <i
-                  className="Drycon Drycon-check emotion-1"
+                  className="Drycon Drycon-check emotion-8"
                 />
               </label>
             </div>
           </div>
           <label
-            className="emotion-5"
+            className="emotion-9"
             data-element="label"
-            htmlFor={1}
+            htmlFor="1"
           >
             1
           </label>
@@ -410,46 +414,46 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
       </div>
     </div>
     <div
-      className="emotion-8"
+      className="emotion-1"
     >
       <div
-        className="emotion-7"
+        className="emotion-2"
       >
         <label
-          className="emotion-6"
-          htmlFor={1}
+          className="emotion-3"
+          htmlFor="1"
         >
           <div
             className="emotion-4"
           >
             <input
               checked={false}
-              className="emotion-0"
-              id={1}
+              className="emotion-5"
+              id="1"
               onBlur={[Function]}
               onChange={[Function]}
               type="radio"
               value="3"
             />
             <div
-              className="emotion-3"
+              className="emotion-6"
               data-element="sprite"
             >
               <label
-                className="emotion-2"
+                className="emotion-7"
                 data-element="icon"
-                htmlFor={1}
+                htmlFor="1"
               >
                 <i
-                  className="Drycon Drycon-check emotion-1"
+                  className="Drycon Drycon-check emotion-8"
                 />
               </label>
             </div>
           </div>
           <label
-            className="emotion-5"
+            className="emotion-9"
             data-element="label"
-            htmlFor={1}
+            htmlFor="1"
           >
             2
           </label>
@@ -461,113 +465,20 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
 `;
 
 exports[`RadioGroup matches snapshot when is read only 1`] = `
+.emotion-0 {
+  display: inline-block;
+}
+
 .emotion-1 {
-  color: inherit;
-}
-
-.emotion-18 {
-  display: inline-block;
-}
-
-.emotion-7 {
-  position: relative;
-  display: inline-block;
-}
-
-.emotion-4 {
-  height: 16px;
-  width: 16px;
-  position: relative;
-  overflow: hidden;
-}
-
-.emotion-8 {
   margin-bottom: 8px;
 }
 
-.emotion-0 {
-  visibility: hidden;
-}
-
-.emotion-0:checked + [data-element='sprite'] [data-element='icon'] {
-  -webkit-transform: scale(1);
-  -ms-transform: scale(1);
-  transform: scale(1);
-  border-radius: 0;
-}
-
-.emotion-0:checked + [data-element='sprite'] [data-element='locked-icon'] {
-  background: #3FBC9B;
-  color: #fff;
-}
-
-.emotion-0:disabled + [data-element='sprite'] {
-  cursor: not-allowed;
-  background: #eaeff4 !important;
-}
-
-.emotion-0:disabled + [data-element='sprite'] [data-element='icon'] {
-  background: #d3dce6;
-}
-
-.emotion-5 {
-  margin-left: 8px;
-  color: #172b4e;
+.emotion-2 {
   position: relative;
-}
-
-.emotion-5:hover {
-  cursor: pointer;
+  display: inline-block;
 }
 
 .emotion-3 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  border-radius: 1000px;
-  background: #d3dce6;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  text-align: center;
-  cursor: pointer;
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
-  overflow: hidden;
-}
-
-.emotion-2 {
-  cursor: inherit;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  background: #3FBC9B;
-  line-height: calc(16px + 4px);
-  -webkit-transform: scale(0);
-  -ms-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  transition: all 0.15s cubic-bezier(0.44,0.11,0.07,1.29);
-  border-radius: 100px;
-}
-
-.emotion-2 > i {
-  font-size: 0.8em;
-  margin-left: 1px;
-}
-
-.emotion-6 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -577,23 +488,24 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
   justify-content: flex-start;
   cursor: pointer;
   pointer-events: none;
 }
 
-.emotion-6:hover [data-element='sprite'] {
+.emotion-3:hover [data-element='sprite'] {
   background: #879ba6;
 }
 
-.emotion-6 [data-element='sprite'] {
-  background: #eaeff4 !important;
+.emotion-3 [data-element='sprite'] {
+  background: #eaeff4!important;
 }
 
-.emotion-6 [data-element='locked-icon'] {
+.emotion-3 [data-element='locked-icon'] {
   -webkit-transform: scale(1);
+  -moz-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
   border-radius: 0;
@@ -607,60 +519,155 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
   -ms-flex-align: center;
   align-items: center;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   color: #879ba6;
 }
 
-.emotion-6 [data-element='locked-icon'] > i {
-  font-size: 0.7rem !important;
+.emotion-3 [data-element='locked-icon']>i {
+  font-size: 0.7rem!important;
+}
+
+.emotion-4 {
+  height: 16px;
+  width: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.emotion-5 {
+  visibility: hidden;
+}
+
+.emotion-5:checked+[data-element='sprite'] [data-element='icon'] {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  border-radius: 0;
+}
+
+.emotion-5:checked+[data-element='sprite'] [data-element='locked-icon'] {
+  background: #3FBC9B;
+  color: #fff;
+}
+
+.emotion-5:disabled+[data-element='sprite'] {
+  cursor: not-allowed;
+  background: #eaeff4!important;
+}
+
+.emotion-5:disabled+[data-element='sprite'] [data-element='icon'] {
+  background: #d3dce6;
+}
+
+.emotion-6 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 1000px;
+  background: #d3dce6;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  overflow: hidden;
+}
+
+.emotion-7 {
+  cursor: inherit;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background: #3FBC9B;
+  line-height: calc(16px + 4px);
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: all 0.15s cubic-bezier(0.44, 0.11, 0.07, 1.29);
+  transition: all 0.15s cubic-bezier(0.44, 0.11, 0.07, 1.29);
+  border-radius: 100px;
+}
+
+.emotion-7>i {
+  font-size: 0.8em;
+  margin-left: 1px;
+}
+
+.emotion-8 {
+  color: inherit;
+}
+
+.emotion-9 {
+  margin-left: 8px;
+  color: #172b4e;
+  position: relative;
+}
+
+.emotion-9:hover {
+  cursor: pointer;
 }
 
 <div
-  className="emotion-18"
+  className="emotion-0"
 >
   <div>
     <div
-      className="emotion-8"
+      className="emotion-1"
     >
       <div
-        className="emotion-7"
+        className="emotion-2"
       >
         <label
-          className="emotion-6"
-          htmlFor={1}
+          className="emotion-3"
+          htmlFor="1"
         >
           <div
             className="emotion-4"
           >
             <input
               checked={true}
-              className="emotion-0"
-              id={1}
+              className="emotion-5"
+              id="1"
               onBlur={[Function]}
               onChange={[Function]}
               type="radio"
               value="1"
             />
             <div
-              className="emotion-3"
+              className="emotion-6"
               data-element="sprite"
             >
               <label
-                className="emotion-2"
+                className="emotion-7"
                 data-element="locked-icon"
               >
                 <i
-                  className="emotion-1 Drycon Drycon-lock"
+                  className="emotion-8 Drycon Drycon-lock"
                 />
               </label>
             </div>
           </div>
           <label
-            className="emotion-5"
+            className="emotion-9"
             data-element="label"
-            htmlFor={1}
+            htmlFor="1"
           >
             1
           </label>
@@ -668,45 +675,45 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
       </div>
     </div>
     <div
-      className="emotion-8"
+      className="emotion-1"
     >
       <div
-        className="emotion-7"
+        className="emotion-2"
       >
         <label
-          className="emotion-6"
-          htmlFor={1}
+          className="emotion-3"
+          htmlFor="1"
         >
           <div
             className="emotion-4"
           >
             <input
               checked={false}
-              className="emotion-0"
-              id={1}
+              className="emotion-5"
+              id="1"
               onBlur={[Function]}
               onChange={[Function]}
               type="radio"
               value="3"
             />
             <div
-              className="emotion-3"
+              className="emotion-6"
               data-element="sprite"
             >
               <label
-                className="emotion-2"
+                className="emotion-7"
                 data-element="locked-icon"
               >
                 <i
-                  className="emotion-1 Drycon Drycon-lock"
+                  className="emotion-8 Drycon Drycon-lock"
                 />
               </label>
             </div>
           </div>
           <label
-            className="emotion-5"
+            className="emotion-9"
             data-element="label"
-            htmlFor={1}
+            htmlFor="1"
           >
             2
           </label>

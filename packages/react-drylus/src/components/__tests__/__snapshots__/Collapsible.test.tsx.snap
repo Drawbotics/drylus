@@ -1,21 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Collapsible matches snapshot when is not open 1`] = `
-.emotion-4 {
-  color: inherit;
-}
-
 .emotion-1 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.emotion-3 {
-  display: inline-block;
-}
-
-.emotion-6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -26,7 +12,7 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
   align-items: center;
 }
 
-.emotion-6 [data-element='title'] {
+.emotion-1 [data-element='title'] {
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   -webkit-flex: 1;
@@ -34,29 +20,29 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
   flex: 1;
 }
 
-.emotion-6 [data-element='title'] > div > div > div {
+.emotion-1 [data-element='title']>div>div>div {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.emotion-6:hover {
+.emotion-1:hover {
   cursor: pointer;
 }
 
-.emotion-6:hover [data-element='title'] {
+.emotion-1:hover [data-element='title'] {
   -webkit-transform: translateX(5px);
+  -moz-transform: translateX(5px);
   -ms-transform: translateX(5px);
   transform: translateX(5px);
 }
 
-.emotion-5 {
-  margin-bottom: -2px;
-  color: #879ba6;
+.emotion-2 {
+  display: inline-block;
 }
 
-.emotion-2 {
+.emotion-3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -66,8 +52,8 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   -webkit-box-pack: center;
-  -webkit-justify-content: center;
   -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -75,9 +61,15 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
   align-items: center;
 }
 
-.emotion-0 {
+.emotion-4 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-5 {
   display: inline-block;
-  color: rgba(135,155,166,0.7);
+  color: rgba(135, 155, 166, 0.7);
   text-transform: uppercase;
   font-weight: 500;
   font-size: 0.88em;
@@ -85,243 +77,10 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
   text-overflow: ellipsis;
 }
 
-@media only screen and (max-width:768px) {
-  .emotion-0 {
+@media only screen and (max-width: 768px) {
+  .emotion-5 {
     font-size: 0.8em;
   }
-}
-
-<div
-  className="emotion-7"
->
-  <div
-    className="emotion-6"
-  >
-    <div
-      data-element="title"
-    >
-      <div
-        className="emotion-3"
-      >
-        <div
-          className="emotion-2"
-        >
-          <div
-            className="emotion-1"
-            style={Object {}}
-          >
-            <div
-              className="emotion-0"
-            >
-              Title
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="emotion-5"
-    >
-      <i
-        className="emotion-4 Drycon Drycon-chevron-down"
-      />
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Collapsible matches snapshot when it is open 1`] = `
-.emotion-4 {
-  color: inherit;
-}
-
-.emotion-1 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.emotion-3 {
-  display: inline-block;
-}
-
-.emotion-6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.emotion-6 [data-element='title'] {
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.emotion-6 [data-element='title'] > div > div > div {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.emotion-6:hover {
-  cursor: pointer;
-}
-
-.emotion-6:hover [data-element='title'] {
-  -webkit-transform: translateX(5px);
-  -ms-transform: translateX(5px);
-  transform: translateX(5px);
-}
-
-.emotion-5 {
-  margin-bottom: -2px;
-  color: #879ba6;
-}
-
-.emotion-7 {
-  padding-top: 8px;
-}
-
-.emotion-2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.emotion-0 {
-  display: inline-block;
-  color: rgba(135,155,166,0.7);
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 0.88em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-@media only screen and (max-width:768px) {
-  .emotion-0 {
-    font-size: 0.8em;
-  }
-}
-
-<div
-  className="emotion-8"
->
-  <div
-    className="emotion-6"
-  >
-    <div
-      data-element="title"
-    >
-      <div
-        className="emotion-3"
-      >
-        <div
-          className="emotion-2"
-        >
-          <div
-            className="emotion-1"
-            style={Object {}}
-          >
-            <div
-              className="emotion-0"
-            >
-              Title
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="emotion-5"
-    >
-      <i
-        className="emotion-4 Drycon Drycon-chevron-up"
-      />
-    </div>
-  </div>
-  <div
-    className="emotion-7"
-  >
-    Collapsible content
-  </div>
-</div>
-`;
-
-exports[`Collapsible matches snapshot when the title is a node 1`] = `
-.emotion-5 {
-  color: inherit;
-}
-
-.emotion-1 {
-  color: #172b4e;
-}
-
-.emotion-2 {
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.emotion-4 {
-  display: inline-block;
-}
-
-.emotion-7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.emotion-7 [data-element='title'] {
-  -webkit-transition: all 0.15s ease-in-out;
-  transition: all 0.15s ease-in-out;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.emotion-7 [data-element='title'] > div > div > div {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.emotion-7:hover {
-  cursor: pointer;
-}
-
-.emotion-7:hover [data-element='title'] {
-  -webkit-transform: translateX(5px);
-  -ms-transform: translateX(5px);
-  transform: translateX(5px);
 }
 
 .emotion-6 {
@@ -329,62 +88,33 @@ exports[`Collapsible matches snapshot when the title is a node 1`] = `
   color: #879ba6;
 }
 
-.emotion-8 {
-  padding-top: 8px;
-}
-
-.emotion-3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.emotion-0 {
-  display: inline;
-  color: #172b4e;
-  font-size: 1em;
+.emotion-7 {
+  color: inherit;
 }
 
 <div
-  className="emotion-9"
+  className="emotion-0"
 >
   <div
-    className="emotion-7"
+    className="emotion-1"
   >
     <div
       data-element="title"
     >
       <div
-        className="emotion-4"
+        className="emotion-2"
       >
         <div
           className="emotion-3"
         >
           <div
-            className="emotion-2"
-            style={Object {}}
+            className="emotion-4"
+            style={{}}
           >
             <div
-              className="emotion-1"
+              className="emotion-5"
             >
-              <span
-                className="emotion-0"
-              >
-                The title
-              </span>
+              Title
             </div>
           </div>
         </div>
@@ -394,12 +124,285 @@ exports[`Collapsible matches snapshot when the title is a node 1`] = `
       className="emotion-6"
     >
       <i
-        className="emotion-5 Drycon Drycon-chevron-up"
+        className="emotion-7 Drycon Drycon-chevron-down"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Collapsible matches snapshot when it is open 1`] = `
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 [data-element='title'] {
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-1 [data-element='title']>div>div>div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+}
+
+.emotion-1:hover [data-element='title'] {
+  -webkit-transform: translateX(5px);
+  -moz-transform: translateX(5px);
+  -ms-transform: translateX(5px);
+  transform: translateX(5px);
+}
+
+.emotion-2 {
+  display: inline-block;
+}
+
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-4 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-5 {
+  display: inline-block;
+  color: rgba(135, 155, 166, 0.7);
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.88em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media only screen and (max-width: 768px) {
+  .emotion-5 {
+    font-size: 0.8em;
+  }
+}
+
+.emotion-6 {
+  margin-bottom: -2px;
+  color: #879ba6;
+}
+
+.emotion-7 {
+  color: inherit;
+}
+
+.emotion-8 {
+  padding-top: 8px;
+}
+
+<div
+  className="emotion-0"
+>
+  <div
+    className="emotion-1"
+  >
+    <div
+      data-element="title"
+    >
+      <div
+        className="emotion-2"
+      >
+        <div
+          className="emotion-3"
+        >
+          <div
+            className="emotion-4"
+            style={{}}
+          >
+            <div
+              className="emotion-5"
+            >
+              Title
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="emotion-6"
+    >
+      <i
+        className="emotion-7 Drycon Drycon-chevron-up"
       />
     </div>
   </div>
   <div
     className="emotion-8"
+  >
+    Collapsible content
+  </div>
+</div>
+`;
+
+exports[`Collapsible matches snapshot when the title is a node 1`] = `
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-1 [data-element='title'] {
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-1 [data-element='title']>div>div>div {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.emotion-1:hover {
+  cursor: pointer;
+}
+
+.emotion-1:hover [data-element='title'] {
+  -webkit-transform: translateX(5px);
+  -moz-transform: translateX(5px);
+  -ms-transform: translateX(5px);
+  transform: translateX(5px);
+}
+
+.emotion-2 {
+  display: inline-block;
+}
+
+.emotion-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-4 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.emotion-5 {
+  color: #172b4e;
+}
+
+.emotion-6 {
+  display: inline;
+  color: #172b4e;
+  font-size: 1em;
+}
+
+.emotion-7 {
+  margin-bottom: -2px;
+  color: #879ba6;
+}
+
+.emotion-8 {
+  color: inherit;
+}
+
+.emotion-9 {
+  padding-top: 8px;
+}
+
+<div
+  className="emotion-0"
+>
+  <div
+    className="emotion-1"
+  >
+    <div
+      data-element="title"
+    >
+      <div
+        className="emotion-2"
+      >
+        <div
+          className="emotion-3"
+        >
+          <div
+            className="emotion-4"
+            style={{}}
+          >
+            <div
+              className="emotion-5"
+            >
+              <span
+                className="emotion-6"
+              >
+                The title
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="emotion-7"
+    >
+      <i
+        className="emotion-8 Drycon Drycon-chevron-up"
+      />
+    </div>
+  </div>
+  <div
+    className="emotion-9"
   >
     Collapsible content
   </div>

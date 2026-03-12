@@ -3,9 +3,9 @@ import { create } from 'react-test-renderer';
 
 import { RadioGroup } from '../RadioGroup';
 
-jest.mock('uuid/v4', () => {
-  return jest.fn(() => 1);
-});
+jest.mock('uuid', () => ({
+  v4: jest.fn(() => '1'),
+}));
 
 describe('RadioGroup', () => {
   const onChange = jest.fn();

@@ -1,7 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { generateIconStyles } from '@drawbotics/icons/dist/drycons.js';
 import packageJson from '@drawbotics/icons/package.json';
-import { injectGlobal } from 'emotion';
+import { injectGlobal } from '@emotion/css';
 
 import { normalize } from './normalize';
 

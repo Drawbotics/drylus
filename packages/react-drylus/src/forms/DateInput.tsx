@@ -1,9 +1,8 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import React, { useEffect, useRef, useState } from 'react';
-import { CalendarProps } from 'react-calendar';
-import Calendar from 'react-calendar/dist/entry.nostyle';
+import Calendar, { CalendarProps } from 'react-calendar';
 import { createPortal } from 'react-dom';
 
 import { ThemeProvider, useThemeColor } from '../base';
@@ -185,7 +184,7 @@ const DEFAULT_OPTIONS: Intl.DateTimeFormatOptions = {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
-};
+} as const satisfies Intl.DateTimeFormatOptions;
 
 export interface DateObject {
   day: number;
@@ -453,7 +452,7 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
                   align === Align.LEFT
                     ? rootBox?.left
                     : (rootBox?.left ?? 0) -
-                        Math.abs((rootBox?.width ?? 0) - (pickerBox?.width ?? 0)) ?? undefined,
+                        Math.abs((rootBox?.width ?? 0) - (pickerBox?.width ?? 0)),
               }}
               ref={pickerElement}
               className={cx(styles.calendarContainer, {

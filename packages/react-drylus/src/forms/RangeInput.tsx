@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import React, { Fragment, useState } from 'react';
 import { GetTrackProps, Handles, Rail, Slider, SliderItem, Tracks } from 'react-compound-slider';
 

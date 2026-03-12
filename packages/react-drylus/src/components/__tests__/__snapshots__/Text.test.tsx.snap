@@ -7,7 +7,7 @@ exports[`Text matches snapshot when it has Text and TextLink as children 1`] = `
   font-size: 1em;
 }
 
-.emotion-1 {
+.emotion-2 {
   color: inherit;
   -webkit-text-decoration: none;
   text-decoration: none;
@@ -16,17 +16,17 @@ exports[`Text matches snapshot when it has Text and TextLink as children 1`] = `
   color: #3A78F2;
 }
 
-.emotion-1:hover {
+.emotion-2:hover {
   cursor: pointer;
 }
 
-.emotion-1:hover {
+.emotion-2:hover {
   color: #2A41A2;
 }
 
-.emotion-1:hover {
-  -webkit-text-decoration: underline !important;
-  text-decoration: underline !important;
+.emotion-2:hover {
+  -webkit-text-decoration: underline!important;
+  text-decoration: underline!important;
 }
 
 <span
@@ -40,7 +40,7 @@ exports[`Text matches snapshot when it has Text and TextLink as children 1`] = `
   </span>
    with a 
   <span
-    className="emotion-1"
+    className="emotion-2"
   >
     link
   </span>
@@ -80,9 +80,6 @@ exports[`Text matches snapshot when it is bold 1`] = `
 .emotion-0 {
   display: inline;
   font-weight: 500;
-  -webkit-letter-spacing: 0.01em;
-  -moz-letter-spacing: 0.01em;
-  -ms-letter-spacing: 0.01em;
   letter-spacing: 0.01em;
   color: #172b4e;
   font-size: 1em;
@@ -99,9 +96,6 @@ exports[`Text matches snapshot when it is light and inversed 1`] = `
 .emotion-0 {
   display: inline;
   font-weight: 300;
-  -webkit-letter-spacing: 0.06em;
-  -moz-letter-spacing: 0.06em;
-  -ms-letter-spacing: 0.06em;
   letter-spacing: 0.06em;
   color: #fff;
   font-size: 1em;

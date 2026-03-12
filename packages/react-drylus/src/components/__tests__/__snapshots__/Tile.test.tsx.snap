@@ -3,11 +3,11 @@
 exports[`Tile matches snapshot when does not have a title 1`] = `
 .emotion-0 {
   background: #fff;
-  box-shadow: 0 2px 10px rgba(135,155,166,0.1);
+  box-shadow: 0 2px 10px rgba(135, 155, 166, 0.1);
   padding: 24px;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     padding: 16px;
   }
@@ -23,12 +23,12 @@ exports[`Tile matches snapshot when does not have a title 1`] = `
 exports[`Tile matches snapshot when does not have any padding 1`] = `
 .emotion-0 {
   background: #fff;
-  box-shadow: 0 2px 10px rgba(135,155,166,0.1);
+  box-shadow: 0 2px 10px rgba(135, 155, 166, 0.1);
   padding: 24px;
-  padding: 0px !important;
+  padding: 0px!important;
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
   .emotion-0 {
     padding: 16px;
   }
@@ -42,19 +42,19 @@ exports[`Tile matches snapshot when does not have any padding 1`] = `
 `;
 
 exports[`Tile matches snapshot when has a title 1`] = `
-.emotion-1 {
+.emotion-0 {
   background: #fff;
-  box-shadow: 0 2px 10px rgba(135,155,166,0.1);
+  box-shadow: 0 2px 10px rgba(135, 155, 166, 0.1);
   padding: 24px;
 }
 
-@media only screen and (max-width:768px) {
-  .emotion-1 {
+@media only screen and (max-width: 768px) {
+  .emotion-0 {
     padding: 16px;
   }
 }
 
-.emotion-0 {
+.emotion-1 {
   color: #879ba6;
   text-transform: uppercase;
   font-weight: 500;
@@ -62,17 +62,17 @@ exports[`Tile matches snapshot when has a title 1`] = `
   margin-bottom: 16px;
 }
 
-@media only screen and (max-width:768px) {
-  .emotion-0 {
+@media only screen and (max-width: 768px) {
+  .emotion-1 {
     margin-bottom: 8px;
   }
 }
 
 <div
-  className="emotion-1"
+  className="emotion-0"
 >
   <div
-    className="emotion-0"
+    className="emotion-1"
   >
     Title
   </div>

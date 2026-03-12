@@ -1,5 +1,5 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import React, { ComponentClass, ReactElement, ReactNode } from 'react';
 
 import { useThemeColor } from '../base';

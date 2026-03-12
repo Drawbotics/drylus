@@ -3,6 +3,7 @@ const path = require('path');
 
 
 module.exports = {
+  testEnvironment: 'jest-environment-jsdom',
   verbose: false,
   testMatch: [
     '**/*.test.js',
@@ -11,8 +12,7 @@ module.exports = {
     '**/*.test.tsx',
   ],
   transform: {
-    '^.+\\.(js|jsx)?$': ['babel-jest', { rootMode: 'upward' }],
-    '^.+\\.(ts|tsx)?$': 'ts-jest',
+    '^.+\\.(js|jsx|ts|tsx)?$': ['babel-jest', { rootMode: 'upward' }],
   },
   transformIgnorePatterns: [
     '/node_modules/',
@@ -32,14 +32,14 @@ module.exports = {
     '^react$': path.resolve(__dirname, '../../node_modules/react'),
     '^react-dom$': path.resolve(__dirname, '../../node_modules/react-dom'),
     '^@drawbotics/use-screen-size$': '<rootDir>/__mocks__/@drawbotics/use-screen-size.js',
+    '^memoize$': '<rootDir>/../../node_modules/memoize/distribution/index.js',
+    '^mimic-function$': '<rootDir>/../../node_modules/mimic-function/index.js',
+    '^mapbox-gl$': '<rootDir>/src/__mocks__/mapbox-gl.js',
+    'mapbox-gl/dist/mapbox-gl\\.css$': '<rootDir>/src/__mocks__/empty.js',
+    '^react-map-gl$': '<rootDir>/src/__mocks__/react-map-gl.js',
   },
+  transformIgnorePatterns: [
+    '/node_modules/(?!(react-calendar|get-user-locale|memoize|mimic-function|@wojtekmaj|uuid))',
+  ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  globals: {
-    'ts-jest': {
-      tsConfig: './tsconfig.test.json',
-      diagnostics: {
-        ignoreCodes: [ 'TS2345' ],
-      },
-    },
-  },
 };
