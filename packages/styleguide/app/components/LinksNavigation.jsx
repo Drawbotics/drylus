@@ -105,28 +105,25 @@ export function generateLinks({ route, routeName, parent = '', pathname, base = 
   if (typeof route !== 'function') {
     return (
       <div key={cleaned} className={styles.section}>
-        {do {
-          if (routeName) {
-            const link = (
-              <div
-                className={cx(styles.title, {
-                  [styles.link]: route.index,
-                  [styles.active]: active,
-                })}>
-                {startCase(routeName)}
-              </div>
+        {routeName && (() => {
+          const link = (
+            <div
+              className={cx(styles.title, {
+                [styles.link]: route.index,
+                [styles.active]: active,
+              })}>
+              {startCase(routeName)}
+            </div>
+          );
+          if (route.index) {
+            return (
+              <Link onClick={onClickLink} to={cleaned}>
+                {link}
+              </Link>
             );
-            if (route.index) {
-              return (
-                <Link onClick={onClickLink} to={cleaned}>
-                  {link}
-                </Link>
-              );
-            } else {
-              return link;
-            }
           }
-        }}
+          return link;
+        })()}
         <div className={cx(styles.sublinks, { [styles.root]: !routeName })}>
           {Object.keys(omit(route, 'index')).map((routeName) =>
             generateLinks({

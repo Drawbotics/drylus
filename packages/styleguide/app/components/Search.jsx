@@ -120,9 +120,9 @@ const Search = ({ open, onClickClose }) => {
         }
       />
       <div className={styles.results}>
-        {do {
+        {(() => {
           if (searchTerm && results.length > 0) {
-            results.map((route, i, array) => (
+            return results.map((route, i, array) => (
               <Fragment key={i}>
                 <Result
                   onClick={handleOnClose}
@@ -130,23 +130,22 @@ const Search = ({ open, onClickClose }) => {
                   title={route.name}
                   url={route.url}
                 />
-                {do {
-                  if (i < array.length - 1) {
-                    <Separator />;
-                  }
-                }}
+                {i < array.length - 1 && <Separator />}
               </Fragment>
             ));
           } else if (searchTerm) {
-            <Margin size={{ top: Size.DEFAULT }}>
-              <EmptyState description="No results match your search." />
-            </Margin>;
-          } else {
+            return (
+              <Margin size={{ top: Size.DEFAULT }}>
+                <EmptyState description="No results match your search." />
+              </Margin>
+            );
+          }
+          return (
             <Margin size={{ top: Size.DEFAULT }}>
               <EmptyState description="No results. Type to find documentation." />
-            </Margin>;
-          }
-        }}
+            </Margin>
+          );
+        })()}
       </div>
     </Modal>
   );

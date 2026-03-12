@@ -153,92 +153,86 @@ const MobileSidebar = () => {
                 <Logo />
               </div>
             </Link>
-            {do {
-              if (linksVisible) {
-                <Flex>
-                  <FlexItem>
-                    <Title size={3} style={{ color: sv.colorPrimaryInverse }}>
-                      {title}
-                    </Title>
-                  </FlexItem>
-                  <FlexItem>
-                    <Padding style={{ display: 'flex' }} size={{ left: Size.LARGE }}>
-                      <Icon
-                        style={{ color: sv.colorPrimaryInverse }}
-                        onClick={() => toggleLinks(false)}
-                        name="arrow-left"
-                      />
-                    </Padding>
-                  </FlexItem>
-                </Flex>;
-              }
-            }}
+            {linksVisible && (
+              <Flex>
+                <FlexItem>
+                  <Title size={3} style={{ color: sv.colorPrimaryInverse }}>
+                    {title}
+                  </Title>
+                </FlexItem>
+                <FlexItem>
+                  <Padding style={{ display: 'flex' }} size={{ left: Size.LARGE }}>
+                    <Icon
+                      style={{ color: sv.colorPrimaryInverse }}
+                      onClick={() => toggleLinks(false)}
+                      name="arrow-left"
+                    />
+                  </Padding>
+                </FlexItem>
+              </Flex>
+            )}
           </div>
-          {do {
-            if (linksVisible) {
-              links;
-            } else {
-              <div className={styles.navigation}>
-                <Flex direction={FlexDirection.VERTICAL} align={FlexAlign.START}>
-                  <FlexItem>
-                    <Padding size={{ top: Size.DEFAULT }}>
+          {linksVisible ? links : (
+            <div className={styles.navigation}>
+              <Flex direction={FlexDirection.VERTICAL} align={FlexAlign.START}>
+                <FlexItem>
+                  <Padding size={{ top: Size.DEFAULT }}>
+                    <ListTile
+                      onClick={() => toggleSearch(true)}
+                      leading={<Icon name="search" />}
+                      title={
+                        <Text inversed size={Size.LARGE}>
+                          Search
+                        </Text>
+                      }
+                    />
+                  </Padding>
+                </FlexItem>
+                <FlexItem>
+                  <Padding size={{ top: Size.LARGE }}>
+                    <Link to="/component-kit">
                       <ListTile
-                        onClick={() => toggleSearch(true)}
-                        leading={<Icon name="search" />}
+                        leading={<Icon name="package" />}
                         title={
                           <Text inversed size={Size.LARGE}>
-                            Search
+                            Component kit
                           </Text>
                         }
                       />
-                    </Padding>
-                  </FlexItem>
-                  <FlexItem>
-                    <Padding size={{ top: Size.LARGE }}>
-                      <Link to="/component-kit">
-                        <ListTile
-                          leading={<Icon name="package" />}
-                          title={
-                            <Text inversed size={Size.LARGE}>
-                              Component kit
-                            </Text>
-                          }
-                        />
-                      </Link>
-                    </Padding>
-                  </FlexItem>
-                  <FlexItem>
-                    <Padding size={{ top: Size.LARGE }}>
-                      <Link to="/design-guidelines">
-                        <ListTile
-                          leading={<Icon name="layout" />}
-                          title={
-                            <Text inversed size={Size.LARGE}>
-                              Design guidelines
-                            </Text>
-                          }
-                        />
-                      </Link>
-                    </Padding>
-                  </FlexItem>
-                  <FlexItem>
-                    <Padding size={{ top: Size.LARGE }}>
-                      <Link to="/coding-guidelines">
-                        <ListTile
-                          leading={<Icon name="command" />}
-                          title={
-                            <Text inversed size={Size.LARGE}>
-                              Coding guidelines
-                            </Text>
-                          }
-                        />
-                      </Link>
-                    </Padding>
-                  </FlexItem>
-                </Flex>
-              </div>;
-            }
-          }}
+                    </Link>
+                  </Padding>
+                </FlexItem>
+                <FlexItem>
+                  <Padding size={{ top: Size.LARGE }}>
+                    <Link to="/design-guidelines">
+                      <ListTile
+                        leading={<Icon name="layout" />}
+                        title={
+                          <Text inversed size={Size.LARGE}>
+                            Design guidelines
+                          </Text>
+                        }
+                      />
+                    </Link>
+                  </Padding>
+                </FlexItem>
+                <FlexItem>
+                  <Padding size={{ top: Size.LARGE }}>
+                    <Link to="/coding-guidelines">
+                      <ListTile
+                        leading={<Icon name="command" />}
+                        title={
+                          <Text inversed size={Size.LARGE}>
+                            Coding guidelines
+                          </Text>
+                        }
+                      />
+                    </Link>
+                  </Padding>
+                </FlexItem>
+              </Flex>
+            </div>
+          )}
         </div>
       </Drawer>
       <Search open={searchOpen} onClickClose={hideAll} />

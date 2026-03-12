@@ -9,7 +9,7 @@ module.exports = function(api) {
       'modules': false,
       'corejs': '2',
     }],
-    ['@babel/preset-react'],
+    ['@babel/preset-react', { runtime: 'classic' }],
     ...(isTest ? [['@babel/preset-typescript', { allExtensions: true, isTSX: true }]] : []),
   ];
 

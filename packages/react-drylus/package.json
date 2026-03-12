@@ -11,7 +11,7 @@
     "clean": "rimraf lib/ tmp/",
     "build:ts": "tsc --skipLibCheck || true",
     "build:js": "babel --source-maps inline --copy-files --ignore  '**/__tests__/' --root-mode upward tmp/ --out-dir lib/",
-    "build:typedoc": "typedoc --exclude node_modules --categorizeByGroup false --json docs.json --entryPointStrategy expand ./src",
+    "build:typedoc": "typedoc --skipErrorChecking --exclude node_modules --categorizeByGroup false --json docs.json --entryPointStrategy expand ./src",
     "watch:typedoc": "npm run build:typedoc && chokidar './tmp/**/*.d.ts' -c 'npm run build:typedoc'",
     "build:commonjs": "npm run build:ts && npm run build:js",
     "watch:commonjs": "npm run build:ts -- --watch & npm run build:js -- --watch & npm run watch:typedoc",
@@ -37,7 +37,7 @@
     "countries-list": "^3.2.2",
     "country-state-city": "^3.2.1",
     "dayjs": "^1.11.19",
-    "framer-motion": "^12.34.3",
+    "framer-motion": "^6.5.1",
     "mapbox-gl": "^3.19.0",
     "react-calendar": "^6.0.0",
     "react-compound-slider": "^3.4.0",
@@ -78,7 +78,7 @@
     "@types/uuid": "^3.4.11",
     "react-hot-loader": "^4.13.1",
     "rimraf": "^6.0.1",
-    "typedoc": "^0.22.0",
+    "typedoc": "^0.24.8",
     "typescript": "^4.4.4"
   }
 }

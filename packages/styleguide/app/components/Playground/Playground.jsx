@@ -130,13 +130,11 @@ const Playground = ({ component, children, mode, __code, enums }) => {
             {activeMode === 'vanilla' ? generatedMarkup : generatedComponent}
           </Preview>
           <div className={cx(styles.code, { [styles.codeHidden]: !codeOpen })}>
-            {do {
-              if (!staticReact) {
-                <div className={styles.switcher} data-element="switcher">
-                  <ModeSwitcher modes={supportedModes} activeMode={activeMode} onChange={setMode} />
-                </div>;
-              }
-            }}
+            {!staticReact && (
+              <div className={styles.switcher} data-element="switcher">
+                <ModeSwitcher modes={supportedModes} activeMode={activeMode} onChange={setMode} />
+              </div>
+            )}
             <div className={styles.codeBox}>
               <CodeBox format mode={mode} type={activeMode} style={{ margin: 0 }}>
                 {staticReact ? __code : generatedMarkup ? flow(replaceSymbol, hideSecrets)(generatedMarkup) : ''}
@@ -146,22 +144,20 @@ const Playground = ({ component, children, mode, __code, enums }) => {
         </div>
         <div className={styles.toggle}>Toggle code</div>
       </div>
-      {do {
-        if (component) {
-          <div className={styles.table}>
-            <PropsTable
-              enums={enums}
-              component={component}
-              activeProps={props}
-              onChange={(v, n) =>
-                v === '_empty' || v === ''
-                  ? setProps(omit(props, n))
-                  : setProps({ ...props, [n]: v })
-              }
-            />
-          </div>;
-        }
-      }}
+      {component && (
+        <div className={styles.table}>
+          <PropsTable
+            enums={enums}
+            component={component}
+            activeProps={props}
+            onChange={(v, n) =>
+              v === '_empty' || v === ''
+                ? setProps(omit(props, n))
+                : setProps({ ...props, [n]: v })
+            }
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -80,7 +80,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                   <TCell>{key}</TCell>
                   {/* Type */}
                   <TCell>
-                    {do {
+                    {(() => {
                       if (prop.type.values != null) {
                         const { variants } = _isEnum(prop)
                           ? extractIntrinsics(prop.type.values)
@@ -114,10 +114,9 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                           }
                         }
                         return content;
-                      } else {
-                        prop.type.name ?? prop.type.type ?? prop.type;
                       }
-                    }}
+                      return prop.type.name ?? prop.type.type ?? prop.type;
+                    })()}
                   </TCell>
                   {/* Default */}
                   <TCell>{prop.defaultValue}</TCell>
@@ -125,7 +124,7 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                   <TCell>{String(prop.required)}</TCell>
                   {/* Description */}
                   <TCell>
-                    {do {
+                    {(() => {
                       if (_hasDeprecation(prop)) {
                         return (
                           <Fragment>
@@ -154,42 +153,39 @@ const PropsTable = ({ component, onChange, activeProps, enums }) => {
                             </Fragment>
                           );
                         }
-                        variantsDesc
-                          .split(/\n/)
-                          .map((line, i) => <Paragraph key={i}>{line}</Paragraph>);
-                      } else {
-                        upperFirst(prop.description)
+                        return variantsDesc
                           .split(/\n/)
                           .map((line, i) => <Paragraph key={i}>{line}</Paragraph>);
                       }
-                    }}
+                      return upperFirst(prop.description)
+                        .split(/\n/)
+                        .map((line, i) => <Paragraph key={i}>{line}</Paragraph>);
+                    })()}
                   </TCell>
                   <TCell>
-                    {do {
-                      if (activeProps) {
-                        <Prop
-                          enums={{
-                            ...enums,
-                            Category,
-                            Size,
-                            Tier,
-                            Align,
-                            Position,
-                            Color,
-                            Shade,
-                            Speed,
-                            Direction,
-                            Easing,
-                            ExtendedColor,
-                          }}
-                          type={prop.type.type}
-                          name={key}
-                          prop={prop}
-                          value={activeProps[key]}
-                          onChange={onChange}
-                        />;
-                      }
-                    }}
+                    {activeProps && (
+                      <Prop
+                        enums={{
+                          ...enums,
+                          Category,
+                          Size,
+                          Tier,
+                          Align,
+                          Position,
+                          Color,
+                          Shade,
+                          Speed,
+                          Direction,
+                          Easing,
+                          ExtendedColor,
+                        }}
+                        type={prop.type.type}
+                        name={key}
+                        prop={prop}
+                        value={activeProps[key]}
+                        onChange={onChange}
+                      />
+                    )}
                   </TCell>
                 </TRow>
               );

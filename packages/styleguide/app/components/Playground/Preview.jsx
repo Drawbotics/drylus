@@ -56,16 +56,14 @@ const Preview = ({ children, raw, onClickRefresh }) => {
           [styles.floating]: fullScreen,
         })}
         data-element="toggles">
-        {do {
-          if (onClickRefresh) {
-            <Button
-              onClick={onClickRefresh}
-              size={Size.SMALL}
-              tier={Tier.TERTIARY}
-              trailing={<Icon name="refresh-cw" />}
-            />;
-          }
-        }}
+        {onClickRefresh && (
+          <Button
+            onClick={onClickRefresh}
+            size={Size.SMALL}
+            tier={Tier.TERTIARY}
+            trailing={<Icon name="refresh-cw" />}
+          />
+        )}
         <Button
           onClick={() => setFullScreen(!fullScreen)}
           size={Size.SMALL}
@@ -73,13 +71,10 @@ const Preview = ({ children, raw, onClickRefresh }) => {
           trailing={<Icon name={fullScreen ? 'minimize' : 'maximize'} />}
         />
       </div>
-      {do {
-        if (raw) {
-          <div dangerouslySetInnerHTML={{ __html: children }} />;
-        } else {
-          <Fragment>{children}</Fragment>;
-        }
-      }}
+      {raw
+        ? <div dangerouslySetInnerHTML={{ __html: children }} />
+        : <Fragment>{children}</Fragment>
+      }
     </div>
   );
 

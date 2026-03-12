@@ -24,8 +24,8 @@ const isProduction = process.env.NODE_ENV === 'production';
 const basePlugins = [
   new webpack.EnvironmentPlugin({
     NODE_ENV: process.env.NODE_ENV,
-    EXAMPLE_API_HOST: process.env.EXAMPLE_API_HOST,
-    MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
+    EXAMPLE_API_HOST: process.env.EXAMPLE_API_HOST || '',
+    MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN || '',
   }),
   new HtmlWebpackPlugin({
     filename: 'index.html',
