@@ -36,7 +36,7 @@ module.exports = {
     '^mimic-function$': '<rootDir>/../../node_modules/mimic-function/index.js',
     '^mapbox-gl$': '<rootDir>/src/__mocks__/mapbox-gl.js',
     'mapbox-gl/dist/mapbox-gl\\.css$': '<rootDir>/src/__mocks__/empty.js',
-    '^react-map-gl$': '<rootDir>/src/__mocks__/react-map-gl.js',
+    '^react-map-gl(/mapbox)?$': '<rootDir>/src/__mocks__/react-map-gl.js',
   },
   transformIgnorePatterns: [
     '/node_modules/(?!(react-calendar|get-user-locale|memoize/|mimic-function|@wojtekmaj|uuid))',

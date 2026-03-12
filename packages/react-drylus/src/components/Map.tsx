@@ -3,7 +3,7 @@ import { css, cx } from '@emotion/css';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import React, { useCallback } from 'react';
-import ReactMapGL, { Marker as MapMarker } from 'react-map-gl';
+import ReactMapGL, { Marker as MapMarker } from 'react-map-gl/mapbox';
 
 import { useThemeColor } from '../base';
 import { Size, Tier } from '../enums';
