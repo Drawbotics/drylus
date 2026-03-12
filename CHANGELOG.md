@@ -9,6 +9,47 @@
 - Reset lerna version after failed publish ([@LaurentClaes](https://github.com/LaurentClaes))
 - Reset lerna version after failed 8.7.6 publish ([@LaurentClaes](https://github.com/LaurentClaes))
 - Add legacy-peer-deps to .npmrc for lerna publish compatibility ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/drylus-style-vars`, `@drawbotics/extract-emotion`, `@drawbotics/icons`, `@drawbotics/react-drylus`, `@drawbotics/styleguide`
+  - Upgrade low-risk dependencies and reduce vulnerabilities ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/react-drylus`, `@drawbotics/styleguide`
+  - Fix styleguide build: downgrade framer-motion, replace do-expressions, update prettier imports ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/extract-emotion`, `@drawbotics/react-drylus`
+  - Fix webpack 5 fullySpecified resolution and tsc exit code ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/extract-emotion`, `@drawbotics/styleguide`, `@drawbotics/vanilla-drylus`
+  - Upgrade dev tooling: webpack 5, eslint 8, prettier 3, husky 9 ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/styleguide`
+  - Transpile all modern node_modules for webpack 4 in styleguide ([@LaurentClaes](https://github.com/LaurentClaes))
+  - Transpile framer-motion ESM for webpack 4 in styleguide ([@LaurentClaes](https://github.com/LaurentClaes))
+  - Fix styleguide build for Node.js 20+ (OpenSSL 3) ([@LaurentClaes](https://github.com/LaurentClaes))
+  - Fix styleguide fullscreen preview overlapping sidebar ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/extract-emotion`
+  - Fix extract-emotion tests for Node.js 22 ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/extract-emotion`, `@drawbotics/vanilla-drylus`
+  - Fix vanilla-drylus build for Node.js 22 (OpenSSL 3) ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/react-drylus`
+  - Fix framer-motion type errors for TypeScript 5 compatibility ([@LaurentClaes](https://github.com/LaurentClaes))
+  - Modernize dependencies and fix security vulnerabilities ([@LaurentClaes](https://github.com/LaurentClaes))
+- `@drawbotics/drylus-style-vars`, `@drawbotics/icons`, `@drawbotics/react-drylus`
+  - Modernize dependencies and fix security vulnerabilities ([@LaurentClaes](https://github.com/LaurentClaes))
+
+#### Authors: 2
+
+- [@laurent86](https://github.com/laurent86)
+- [@LaurentClaes](https://github.com/LaurentClaes)
+
+---
+
+# v8.7.6 (Thu Mar 12 2026)
+
+#### 🐛 Bug Fix
+
+- Fix #207, #210, release workflow, and check-labels [#233](https://github.com/Drawbotics/drylus/pull/233) ([@LaurentClaes](https://github.com/LaurentClaes) [@laurent86](https://github.com/laurent86))
+
+#### ⚠️ Pushed to `master`
+
+- Reset lerna version after failed publish ([@LaurentClaes](https://github.com/LaurentClaes))
+- Reset lerna version after failed 8.7.6 publish ([@LaurentClaes](https://github.com/LaurentClaes))
+- Add legacy-peer-deps to .npmrc for lerna publish compatibility ([@LaurentClaes](https://github.com/LaurentClaes))
 - `@drawbotics/react-drylus`, `@drawbotics/styleguide`
   - Fix styleguide build: downgrade framer-motion, replace do-expressions, update prettier imports ([@LaurentClaes](https://github.com/LaurentClaes))
 - `@drawbotics/extract-emotion`, `@drawbotics/react-drylus`
