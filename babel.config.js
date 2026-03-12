@@ -19,9 +19,9 @@ module.exports = function(api) {
   ];
 
   const plugins = [
-    ...(isTest ? [] : [['babel-plugin-emotion', {
+    ...(isTest ? [] : [['@emotion/babel-plugin', {
       sourceMap: false,
-      autoLabel: true,
+      autoLabel: 'dev-only',
       labelFormat: '[filename]__[local]',
     }]]),
     ...(isTest ? [] : ['babel-plugin-codegen']),
