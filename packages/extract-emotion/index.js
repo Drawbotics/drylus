@@ -13,12 +13,10 @@ async function build(input, output) {
     output: {
       path: output,
     },
-    resolve: {
-      mainFields: ['main', 'module'],
-    },
     module: {
       rules: [
         { test: /\.mjs$/, include: /node_modules/, type: 'javascript/auto' },
+        { test: /\.m?js$/, resolve: { fullySpecified: false } },
       ],
     },
     externals: [

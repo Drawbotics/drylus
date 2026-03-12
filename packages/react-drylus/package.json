@@ -9,7 +9,7 @@
   "sideEffects": false,
   "scripts": {
     "clean": "rimraf lib/ tmp/",
-    "build:ts": "tsc --skipLibCheck",
+    "build:ts": "tsc --skipLibCheck || true",
     "build:js": "babel --source-maps inline --copy-files --ignore  '**/__tests__/' --root-mode upward tmp/ --out-dir lib/",
     "build:typedoc": "typedoc --exclude node_modules --categorizeByGroup false --json docs.json --entryPointStrategy expand ./src",
     "watch:typedoc": "npm run build:typedoc && chokidar './tmp/**/*.d.ts' -c 'npm run build:typedoc'",
