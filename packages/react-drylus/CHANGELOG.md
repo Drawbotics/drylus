@@ -1,3 +1,25 @@
+# v8.7.12 (Thu Mar 12 2026)
+
+#### 🐛 Bug Fix
+
+- Fix #207, #210, release workflow, and check-labels [#233](https://github.com/Drawbotics/drylus/pull/233) ([@LaurentClaes](https://github.com/LaurentClaes) [@laurent86](https://github.com/laurent86))
+
+#### ⚠️ Pushed to `master`
+
+- Upgrade remaining dependencies to latest compatible versions ([@LaurentClaes](https://github.com/LaurentClaes))
+- Upgrade low-risk dependencies and reduce vulnerabilities ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix styleguide build: downgrade framer-motion, replace do-expressions, update prettier imports ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix webpack 5 fullySpecified resolution and tsc exit code ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix framer-motion type errors for TypeScript 5 compatibility ([@LaurentClaes](https://github.com/LaurentClaes))
+- Modernize dependencies and fix security vulnerabilities ([@LaurentClaes](https://github.com/LaurentClaes))
+
+#### Authors: 2
+
+- [@laurent86](https://github.com/laurent86)
+- [@LaurentClaes](https://github.com/LaurentClaes)
+
+---
+
 # v8.7.11 (Thu Mar 12 2026)
 
 #### 🐛 Bug Fix
