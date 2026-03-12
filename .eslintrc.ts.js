@@ -29,7 +29,7 @@ module.exports = {
     'no-lone-blocks': ['warn'],
     'no-loop-func': ['warn'],
     'no-multi-str': ['warn'],
-    'no-native-reassign': ['warn'],
+    'no-global-assign': ['warn'],
     'no-new-wrappers': ['warn'],
     'no-script-url': ['warn'],
     'no-self-compare': ['warn'],

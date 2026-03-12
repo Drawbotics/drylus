@@ -1,8 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const betterWebpackProgress = require('better-webpack-progress');
-const ProgressPlugin = require('webpack/lib/ProgressPlugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
@@ -18,12 +15,12 @@ const basePlugins = [
   new webpack.EnvironmentPlugin({
     NODE_ENV: process.env.NODE_ENV,
   }),
-  new ProgressPlugin(betterWebpackProgress({
-    mode: 'compact',
-  })),
-  new CopyWebpackPlugin([
-    { from: 'src/styles/react-styles.css', to: 'drylus.css' },
-  ]),
+  new webpack.ProgressPlugin(),
+  new CopyWebpackPlugin({
+    patterns: [
+      { from: 'src/styles/react-styles.css', to: 'drylus.css' },
+    ],
+  }),
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
@@ -35,7 +32,7 @@ const basePlugins = [
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
+  devtool: isProduction ? 'source-map' : 'eval-cheap-module-source-map',
   stats: 'none',
   entry: './src/index.js',
   resolve: {
@@ -47,21 +44,12 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'drylus.js',
-    library: 'drylus',
-    libraryTarget: 'umd',
+    library: {
+      name: 'drylus',
+      type: 'umd',
+    },
   },
-  plugins: isProduction ? basePlugins : [
-    ...basePlugins,
-    new webpack.NoEmitOnErrorsPlugin(),
-    new FriendlyErrorsWebpackPlugin({
-      clearConsole: true,
-      compilationSuccessInfo: {
-        messages: [
-          `Vanilla bundle compiled`,
-        ],
-      },
-    }),
-  ],
+  plugins: basePlugins,
   module: {
     rules: [
       {
@@ -77,10 +65,6 @@ module.exports = {
         }],
         exclude: /node_modules/,
       },
-      // {
-      //   test: /\.css$/,
-      //   use: ['style-loader', 'css-loader'],
-      // },
     ],
   },
 };

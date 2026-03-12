@@ -10,7 +10,7 @@
     "clean:test": "rimraf **/output",
     "clean:lib": "rimraf lib/",
     "build": "npm run clean:lib && NODE_ENV=production babel ./index.js --out-dir lib/",
-    "test": "npm run build && npm run clean:test && NODE_OPTIONS=--openssl-legacy-provider jest",
+    "test": "npm run build && npm run clean:test && jest",
     "extract-emotion": "node ./bin/cli.js",
     "prepublishOnly": "npm run build"
   },
@@ -21,7 +21,8 @@
     "node": ">= 6.11.5"
   },
   "dependencies": {
-    "jsdom": "^14.0.0"
+    "jsdom": "^14.0.0",
+    "memfs": "^4.0.0"
   },
   "peerDependencies": {
     "emotion": "^10",

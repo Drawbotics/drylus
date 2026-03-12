@@ -1,11 +1,7 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
-const betterWebpackProgress = require('better-webpack-progress');
-const ProgressPlugin = require('webpack/lib/ProgressPlugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ip = require('ip');
 const fs = require('fs-extra');
 const dotenv = require('dotenv');
 
@@ -37,25 +33,12 @@ const basePlugins = [
     inject: true,
     favicon: './public/favicon.png',
   }),
-  new ProgressPlugin(betterWebpackProgress({
-    mode: 'compact',
-  })),
+  new webpack.ProgressPlugin(),
 ];
 
 
 const devPlugins = [
   ...basePlugins,
-  new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoEmitOnErrorsPlugin(),
-  new FriendlyErrorsWebpackPlugin({
-    clearConsole: true,
-    compilationSuccessInfo: {
-      messages: [
-        `The styleguide is running at http://localhost:${WEBPACK_PORT}`,
-        `The styleguide is running at http://${ip.address()}:${WEBPACK_PORT}`
-      ],
-    },
-  }),
 ];
 
 
@@ -79,7 +62,7 @@ const prodPlugins = [
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
+  devtool: isProduction ? 'source-map' : 'eval-cheap-module-source-map',
   stats: 'errors-only',
   entry: './app/index.tsx',
   resolve: {
@@ -89,7 +72,6 @@ module.exports = {
     ],
     alias: {
       '~': path.resolve(__dirname, './app'),
-      'react-dom': '@hot-loader/react-dom',
       'react': path.resolve(__dirname, '../../node_modules/react'),
     },
     extensions: [ '.js', '.jsx', '.css', '.mdx', '.ts', '.tsx' ],
@@ -101,7 +83,6 @@ module.exports = {
     publicPath: isProduction ? '/drylus/' : '/',
   },
   optimization: {
-    namedModules: true,
     minimize: false,
   },
   plugins: isProduction ? prodPlugins : devPlugins,
@@ -140,21 +121,6 @@ module.exports = {
         exclude: [/node_modules/, /use-screen-size\/lib/, /react-drylus\/lib/],
       },
       {
-        test: /\.m?js$/,
-        include: /node_modules\/(framer-motion|motion-dom|motion-utils|animejs)/,
-        type: 'javascript/auto',
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: [['@babel/preset-env', { modules: false }]],
-            plugins: [
-              '@babel/plugin-transform-optional-chaining',
-              '@babel/plugin-transform-nullish-coalescing-operator',
-            ],
-          },
-        }],
-      },
-      {
         test: /\.css$/,
         use: [
           'style-loader',
@@ -180,28 +146,21 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|svg)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'assets/[name].[ext]',
-            },
-          },
-        ],
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[name][ext]',
+        },
       },
     ],
   },
   devServer: {
     host: '0.0.0.0',
     port: WEBPACK_PORT,
-    inline: true,
     hot: true,
     historyApiFallback: true,
-    publicPath: '/',
-    quiet: true,
-    stats: true,
-    noInfo: false,
-    clientLogLevel: 'none',
-    overlay: true,
+    client: {
+      logging: 'none',
+      overlay: true,
+    },
   },
 };

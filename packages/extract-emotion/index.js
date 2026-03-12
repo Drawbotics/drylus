@@ -2,10 +2,11 @@ const path = require('path');
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
 const webpack = require('webpack');
-const MemoryFS = require('memory-fs');
+const { createFsFromVolume, Volume } = require('memfs');
 
 async function build(input, output) {
-  const memFs = new MemoryFS();
+  const memFs = createFsFromVolume(new Volume());
+  memFs.join = path.join.bind(path);
   const compiler = webpack({
     mode: 'development',
     entry: { bundle: input },
@@ -26,7 +27,7 @@ async function build(input, output) {
       { 'framer-motion': '{}' },
       { 'animejs': '{}' },
       { '@drawbotics/use-screen-size': '{}' },
-      function(context, request, callback) {
+      function({ request }, callback) {
         // Ignore CSS imports and problematic modules that don't contribute emotion styles
         if (/\.css$/.test(request) || /^mapbox-gl/.test(request) || /^get-user-locale/.test(request)) {
           return callback(null, '{}');

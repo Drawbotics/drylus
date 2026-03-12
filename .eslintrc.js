@@ -1,5 +1,5 @@
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   env: {
     browser: true,
     es6: true,
@@ -8,15 +8,13 @@ module.exports = {
   },
   parserOptions: {
     sourceType: 'module',
-    ecmaFeatures: {
-      experimentalObjectRestSpread: true,
-    },
+    requireConfigFile: false,
   },
   extends: [ 'eslint:recommended', 'plugin:react/recommended' ],
   plugins: [ 'react' ],
   settings: {
     react: {
-      version: 'latest',
+      version: 'detect',
     },
   },
   rules: {
@@ -36,7 +34,7 @@ module.exports = {
     'no-lone-blocks': [ 'warn' ],
     'no-loop-func': [ 'warn' ],
     'no-multi-str': [ 'warn' ],
-    'no-native-reassign': [ 'warn' ],
+    'no-global-assign': [ 'warn' ],
     'no-new-wrappers': [ 'warn' ],
     'no-script-url': [ 'warn' ],
     'no-self-compare': [ 'warn' ],

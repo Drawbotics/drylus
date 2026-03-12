@@ -9,11 +9,11 @@
   "scripts": {
     "clean": "rimraf dist",
     "sync": "node scripts/sync.js",
-    "watch:lib": "NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=development webpack --config webpack.config.js --watch",
+    "watch:lib": "NODE_ENV=development webpack --config webpack.config.js --watch",
     "watch:react": "node ./scripts/watch-react.js",
-    "watch": "NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=development webpack --config webpack.config.js --watch",
-    "build:lib": "NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=production webpack --config webpack.config.js",
-    "extract-css": "NODE_OPTIONS=--openssl-legacy-provider extract-emotion ./src/styles/react-components.js --output ./src/styles/ --prefix Drylus --filename react-styles.css",
+    "watch": "NODE_ENV=development webpack --config webpack.config.js --watch",
+    "build:lib": "NODE_ENV=production webpack --config webpack.config.js",
+    "extract-css": "extract-emotion ./src/styles/react-components.js --output ./src/styles/ --prefix Drylus --filename react-styles.css",
     "build": "npm run clean && cd ../react-drylus && npm run build && cd ../vanilla-drylus && npm run extract-css && npm run build:lib",
     "build:dev": "npm run build && NODE_ENV=development npm run sync",
     "prepublishOnly": "npm run build && NODE_ENV=production npm run sync"

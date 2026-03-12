@@ -6,7 +6,6 @@ import { useScreenSize } from '@drawbotics/use-screen-size';
 import drylus from '@drawbotics/vanilla-drylus/dist/drylus.js';
 import { css } from 'emotion';
 import React, { useState } from 'react';
-import { hot } from 'react-hot-loader';
 import { BrowserRouter } from 'react-router-dom';
 
 import MobileSidebar from './components/MobileSidebar.jsx';
@@ -68,4 +67,4 @@ const App = () => {
   );
 };
 
-export default hot(module)(App);
+export default App;
