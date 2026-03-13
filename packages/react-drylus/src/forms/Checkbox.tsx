@@ -1,7 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
 import React, { useEffect, useRef } from 'react';
-import { v4 } from 'uuid';
 
 import { Icon } from '../components';
 import { placeholderStyles } from '../components';
@@ -268,7 +267,7 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
     };
   }, []);
 
-  const uniqId = id ? id : v4();
+  const uniqId = id ? id : crypto.randomUUID();
   const readOnly = onChange == null;
   return (
     <div style={style} className={cx(styles.root, className)}>

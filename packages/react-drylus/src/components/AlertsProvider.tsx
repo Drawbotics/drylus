@@ -3,7 +3,6 @@ import { css, cx } from '@emotion/css';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { v4 } from 'uuid';
 
 import { ThemeProvider } from '../base/ThemeProvider';
 import { Category, Size, Tier } from '../enums';
@@ -189,7 +188,7 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
   };
 
   const showAlert = (alertProps: AlertProps) => {
-    const id = v4();
+    const id = crypto.randomUUID();
     const alert = { id, ...alertProps };
     dispatch({ type: 'showAlert', payload: { alert } });
   };

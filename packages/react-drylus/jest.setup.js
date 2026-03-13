@@ -7,6 +7,13 @@ expect.addSnapshotSerializer(
 );
 
 
+// Mock crypto.randomUUID for deterministic snapshots
+let uuidCounter = 0;
+const originalRandomUUID = crypto.randomUUID?.bind(crypto);
+crypto.randomUUID = () => `test-uuid-${++uuidCounter}`;
+beforeEach(() => { uuidCounter = 0; });
+
+
 // Create missing function
 window.URL.createObjectURL = function () { };
 

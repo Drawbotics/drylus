@@ -1,7 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
 import React, { useEffect, useRef, useState } from 'react';
-import { v4 } from 'uuid';
 
 import { Align, Size } from '../enums';
 import { Checkbox, SearchInput } from '../forms';
@@ -477,7 +476,7 @@ export const CheckboxFilter = <T extends any>({
         ) : null
       }>
       {filteredOptions.map((option) => {
-        const id = v4();
+        const id = crypto.randomUUID();
 
         if ('delimiter' in option) {
           return (

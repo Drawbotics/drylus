@@ -39,7 +39,7 @@ module.exports = {
     '^react-map-gl(/mapbox)?$': '<rootDir>/src/__mocks__/react-map-gl.js',
   },
   transformIgnorePatterns: [
-    '/node_modules/(?!(react-calendar|get-user-locale|memoize/|mimic-function|@wojtekmaj|uuid))',
+    '/node_modules/(?!(react-calendar|get-user-locale|memoize/|mimic-function|@wojtekmaj))',
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };

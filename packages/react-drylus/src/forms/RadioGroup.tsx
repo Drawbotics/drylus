@@ -1,7 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
 import React from 'react';
-import { v4 } from 'uuid';
 
 import { Icon, placeholderStyles } from '../components';
 import { Category, Size } from '../enums';
@@ -211,7 +210,7 @@ const Radio = ({
   size,
   ...rest
 }: RadioProps) => {
-  const id = v4();
+  const id = crypto.randomUUID();
   return (
     <div className={styles.root}>
       <label
