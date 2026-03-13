@@ -15,9 +15,16 @@ export const baseStyleProperties = `
   -webkit-overflow-scrolling: touch;
 `;
 
-export const fonts = `
-  @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
-`;
+export const GOOGLE_FONTS_URL = 'https://fonts.googleapis.com/css?family=Rubik:300,400,500';
+
+export function injectFontLink(): void {
+  if (typeof document === 'undefined') return;
+  if (document.querySelector(`link[href="${GOOGLE_FONTS_URL}"]`)) return;
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = GOOGLE_FONTS_URL;
+  document.head.appendChild(link);
+}
 
 export const globalStyles = `
   html, body {
@@ -44,7 +51,7 @@ export const root = `
 export const icons = generateIconStyles(env === "'development'" ? 'dev' : packageJson.version);
 
 export function injectGlobalStyles(): void {
-  injectGlobal(fonts);
+  injectFontLink();
   injectGlobal(globalStyles);
   injectGlobal(normalize);
   injectGlobal(icons);

@@ -4,13 +4,12 @@ import React from 'react';
 
 import { Color } from '../enums';
 import { Style } from '../types';
-import { baseStyleProperties, fonts, globalStyles, icons, normalize, root } from '../utils';
+import { baseStyleProperties, globalStyles, icons, injectFontLink, normalize, root } from '../utils';
 
 const styles = {
   global: globalCSS(globalStyles),
   local: css(baseStyleProperties),
   normalize: globalCSS(normalize),
-  fonts: globalCSS(fonts),
   icons: globalCSS(icons),
   root: css(root),
   wrapper: css`
@@ -55,13 +54,13 @@ export const ThemeProvider = ({
   baseColor = Color.BRAND,
   injectGlobal = true,
 }: ThemeProviderProps) => {
+  injectFontLink();
   return (
     <Context.Provider value={{ themeColor: baseColor }}>
       <Global
         styles={[
           injectGlobal ? styles.global : undefined,
           injectGlobal ? styles.normalize : undefined,
-          styles.fonts,
           styles.icons,
         ]}
       />
