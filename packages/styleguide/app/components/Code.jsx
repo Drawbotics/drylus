@@ -1,13 +1,17 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx, injectGlobal } from 'emotion';
+import { css, cx } from 'emotion';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import React from 'react';
 
 import theme from '../utils/code-theme';
 
-injectGlobal`
-  @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
-`;
+const ROBOTO_MONO_URL = 'https://fonts.googleapis.com/css?family=Roboto+Mono';
+if (typeof document !== 'undefined' && !document.querySelector(`link[href="${ROBOTO_MONO_URL}"]`)) {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = ROBOTO_MONO_URL;
+  document.head.appendChild(link);
+}
 
 const styles = {
   codeWrapper: css`
