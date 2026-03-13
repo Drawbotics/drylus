@@ -1,3 +1,4 @@
+/* eslint-disable jest/valid-expect */
 import { matcherHint, printExpected, printReceived } from 'jest-matcher-utils';
 
 import { generateDisplayedPrice } from '../price';

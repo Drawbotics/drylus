@@ -323,7 +323,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
                 [styles.small]: size === Size.SMALL,
               })}
               onClick={() => {
-                const res = (Number(value) ?? 0) + step;
+                const res = Number(value) + step;
                 if (!disabled && Number(value) < max) {
                   onChange(Number.isInteger(res) ? res : Number(res.toFixed(decimalPlaces)), name);
                 }
@@ -340,7 +340,7 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
                 [styles.small]: size === Size.SMALL,
               })}
               onClick={() => {
-                const res = (Number(value) ?? 0) - step;
+                const res = Number(value) - step;
                 if (!disabled && Number(value) > min) {
                   onChange(Number.isInteger(res) ? res : Number(res.toFixed(decimalPlaces)), name);
                 }

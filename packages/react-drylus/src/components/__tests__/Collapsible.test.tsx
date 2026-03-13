@@ -15,7 +15,7 @@ describe('Collapsible', () => {
       expect(tree).toMatchSnapshot();
     });
 
-    it('it is open', () => {
+    it('is open', () => {
       const tree = create(
         <Collapsible title="Title" isOpen={true}>
           Collapsible content

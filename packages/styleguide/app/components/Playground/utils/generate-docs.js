@@ -131,7 +131,7 @@ function _getType(type, docs, componentName, comment, enums) {
       const res = _parseType(type, docs, componentName, comment, enums);
       if (mustPop) _parsingStack.pop();
       return res;
-    } catch (e) {
+    } catch {
       if (mustPop) _parsingStack.pop();
       return type.name ?? 'unknown';
     }

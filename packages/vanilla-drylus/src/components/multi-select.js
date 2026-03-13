@@ -28,7 +28,7 @@ const multiSelect = () => {
         : '';
     trigger.setAttribute('value', values);
 
-    /* eslint-disable no-debugger, no-use-before-define */
+    /* eslint-disable no-use-before-define */
     handleSetValues({ values, trigger, option });
   };
 

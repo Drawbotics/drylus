@@ -21,7 +21,6 @@ import {
 } from '@drawbotics/react-drylus';
 import { MDXProvider } from '@mdx-js/react';
 import { css } from 'emotion';
-/* eslint-disable react/display-name */
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 

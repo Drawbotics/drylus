@@ -131,7 +131,7 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
 </div>
 `;
 
-exports[`Collapsible matches snapshot when it is open 1`] = `
+exports[`Collapsible matches snapshot when is open 1`] = `
 .emotion-1 {
   display: -webkit-box;
   display: -webkit-flex;

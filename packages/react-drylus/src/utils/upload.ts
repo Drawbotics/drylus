@@ -23,7 +23,7 @@ async function request(
       let data = null;
       try {
         data = JSON.parse(e.target?.responseText);
-      } catch (err) {
+      } catch {
         data = e.target.responseText;
       }
       return resolve(data);
