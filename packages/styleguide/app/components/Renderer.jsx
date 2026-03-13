@@ -114,7 +114,7 @@ const components = {
           <Panel
             body={
               <PanelBody>
-                <PanelSection title="Description">{rest}</PanelSection>
+                <PanelSection title="Description">{rest.map((child, i) => <Fragment key={i}>{child}</Fragment>)}</PanelSection>
               </PanelBody>
             }
           />

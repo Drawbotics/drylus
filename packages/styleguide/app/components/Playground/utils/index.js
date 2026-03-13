@@ -72,7 +72,7 @@ export function recursiveMdxTransform(tree, target) {
 
   function mdxTransform(_tree, key) {
     if (Array.isArray(_tree)) {
-      return React.createElement(React.Fragment, {}, ...React.Children.map(_tree, mdxTransform));
+      return React.createElement(React.Fragment, {}, ...React.Children.map(_tree, (child, i) => mdxTransform(child, i)));
     }
     if (Object.values(_tree.props || {}).some((c) => !!c?.$$typeof || Array.isArray(c))) {
       const newTree = React.cloneElement(_tree, {
@@ -96,7 +96,8 @@ export function recursiveMdxTransform(tree, target) {
       });
       return transformMdxToReact(newTree, targetComponent, props);
     }
-    return transformMdxToReact(_tree, targetComponent, props);
+    const keyedTree = key != null && _tree.key == null ? React.cloneElement(_tree, { key }) : _tree;
+    return transformMdxToReact(keyedTree, targetComponent, props);
   }
   return mdxTransform(tree);
 }

@@ -329,6 +329,7 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
     size = Size.DEFAULT,
     className,
     validate,
+    onClear: _onClear,
     ...props
   } = useResponsiveProps<DateInputProps<T>>(rest, responsive);
 
