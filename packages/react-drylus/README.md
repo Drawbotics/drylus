@@ -5,9 +5,30 @@ The "root" package for all of the Drawbotics styles (excluding [icons]('../icons
 The components are written in React and are styled using [emotion](https://github.com/emotion-js/emotion).
 
 ## React Version Support
-- Developed and tested against **React 16**
-- **React 18/19** support is best-effort and community-tested
-- If you encounter issues on newer React versions, please report them
+- Developed and tested against **React 18**
+- Peer dependency: `react >= 16.8.0 < 20`
+- React 16/17 may still work but are no longer tested
+
+### Migrating from React 16/17 to React 18
+
+If you are upgrading your application to React 18 alongside this package, note the following breaking changes:
+
+- **`ReactDOM.render()` is deprecated.** Use `createRoot` instead:
+  ```jsx
+  // Before
+  import ReactDOM from 'react-dom';
+  ReactDOM.render(<App />, document.getElementById('root'));
+
+  // After
+  import { createRoot } from 'react-dom/client';
+  createRoot(document.getElementById('root')).render(<App />);
+  ```
+
+- **`WrapperRef` now renders a `<span style="display: contents">` wrapper.** Components that use `Tooltip`, `Popover`, or other overlay components internally use `WrapperRef` which previously used `ReactDOM.findDOMNode` (removed in React 18 StrictMode). It now wraps children in a transparent `<span>`. This should not affect layout but may affect CSS selectors that rely on direct parent-child relationships.
+
+- **`framer-motion` upgraded from v6 to v12.** If you import `AnimationGroup` or `AnimatedItem`, the `exitBeforeEnter` prop on `AnimatePresence` has been replaced by `mode="wait"`. This is handled internally — no consumer changes needed unless you use framer-motion directly.
+
+- **`react-map-gl` upgraded from v7 to v8.** The `Map` component now imports from `react-map-gl/mapbox` internally. No consumer API changes.
 
 ## Development
 ```
