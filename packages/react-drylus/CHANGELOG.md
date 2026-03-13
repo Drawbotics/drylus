@@ -1,3 +1,29 @@
+# v8.7.16 (Fri Mar 13 2026)
+
+#### 🐛 Bug Fix
+
+- Fix #207, #210, release workflow, and check-labels [#233](https://github.com/Drawbotics/drylus/pull/233) ([@LaurentClaes](https://github.com/LaurentClaes) [@laurent86](https://github.com/laurent86))
+
+#### ⚠️ Pushed to `master`
+
+- Update README with React 18 migration guide and breaking changes ([@LaurentClaes](https://github.com/LaurentClaes))
+- Upgrade Jest 29 to 30, webpack-cli 5 to 6, @types/jest to 30 ([@LaurentClaes](https://github.com/LaurentClaes))
+- Migrate ESLint 8 to 9 flat config ([@LaurentClaes](https://github.com/LaurentClaes))
+- Upgrade to React 18 and framer-motion 12 ([@LaurentClaes](https://github.com/LaurentClaes))
+- Upgrade remaining dependencies to latest compatible versions ([@LaurentClaes](https://github.com/LaurentClaes))
+- Upgrade low-risk dependencies and reduce vulnerabilities ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix styleguide build: downgrade framer-motion, replace do-expressions, update prettier imports ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix webpack 5 fullySpecified resolution and tsc exit code ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix framer-motion type errors for TypeScript 5 compatibility ([@LaurentClaes](https://github.com/LaurentClaes))
+- Modernize dependencies and fix security vulnerabilities ([@LaurentClaes](https://github.com/LaurentClaes))
+
+#### Authors: 2
+
+- [@laurent86](https://github.com/laurent86)
+- [@LaurentClaes](https://github.com/LaurentClaes)
+
+---
+
 # v8.7.15 (Fri Mar 13 2026)
 
 #### 🐛 Bug Fix
