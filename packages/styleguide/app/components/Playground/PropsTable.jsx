@@ -27,7 +27,7 @@ import {
   ExtendedColor,
 } from '@drawbotics/react-drylus';
 import docs from '@drawbotics/react-drylus/docs.json';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import upperFirst from 'lodash/upperFirst';
 import React, { Fragment } from 'react';
 

@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { Button, Icon, Size, Tier } from '@drawbotics/react-drylus';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import React, { Fragment, useState } from 'react';
 import ReactDOM from 'react-dom';
 

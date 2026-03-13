@@ -14,7 +14,7 @@ import {
   Size,
   Tooltip,
 } from '@drawbotics/react-drylus';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 

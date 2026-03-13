@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css, cx } from 'emotion';
+import { css, cx } from '@emotion/css';
 import flow from 'lodash/flow';
 import omit from 'lodash/omit';
 import React, { useRef, useState } from 'react';

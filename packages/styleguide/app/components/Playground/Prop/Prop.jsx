@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import React from 'react';
 
 import { extractIntrinsics } from '../utils';

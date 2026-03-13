@@ -1,5 +1,5 @@
 import { Toggle } from '@drawbotics/react-drylus';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import React from 'react';
 
 const styles = {

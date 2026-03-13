@@ -13,7 +13,7 @@ import {
   Text,
 } from '@drawbotics/react-drylus';
 import Logo from '~/components/Logo';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import React from 'react';
 
 const styles = {

@@ -4,7 +4,7 @@ import { Color, DrylusProvider, Layout, Page, Position } from '@drawbotics/react
 import { useScreenSize } from '@drawbotics/use-screen-size';
 // @ts-ignore
 import drylus from '@drawbotics/vanilla-drylus/dist/drylus.js';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 

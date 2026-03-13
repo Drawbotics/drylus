@@ -13,7 +13,7 @@ import background3 from '~/assets/background-3.svg';
 import codingGuidelines from '~/assets/coding-guidelines.svg';
 import componentKit from '~/assets/component-kit.svg';
 import designGuidelines from '~/assets/design-guidelines.svg';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
