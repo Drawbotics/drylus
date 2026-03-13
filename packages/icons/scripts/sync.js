@@ -1,12 +1,12 @@
 const path = require('path');
 const s3sync = require('@drawbotics/s3sync');
-const aws = require('aws-sdk');
+const { CloudFrontClient, CreateInvalidationCommand } = require('@aws-sdk/client-cloudfront');
 
 const version = require('../package.json').version;
-const cloudfront = new aws.CloudFront();
+const cloudfront = new CloudFrontClient();
 
 function invalidateDistribution(folder) {
-  const params = {
+  const command = new CreateInvalidationCommand({
     DistributionId: 'E2S7MPSAFSXZ32',
     InvalidationBatch: {
       CallerReference: `${Math.floor(new Date().getTime() / 1000)}`,
@@ -15,10 +15,8 @@ function invalidateDistribution(folder) {
         Items: [ `/${folder}*` ],
       },
     },
-  };
-  return new Promise((resolve, reject) => {
-    cloudfront.createInvalidation(params, (err, data) => err ? reject(err) : resolve(data));
   });
+  return cloudfront.send(command);
 }
 
 async function sync() {
