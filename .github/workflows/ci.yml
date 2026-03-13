@@ -1,6 +1,7 @@
 name: CI
 # Test + Release pipeline
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
