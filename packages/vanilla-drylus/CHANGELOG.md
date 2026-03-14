@@ -1,3 +1,23 @@
+# v8.7.25 (Sat Mar 14 2026)
+
+#### 🐛 Bug Fix
+
+- Fix #207, #210, release workflow, and check-labels [#233](https://github.com/Drawbotics/drylus/pull/233) ([@LaurentClaes](https://github.com/LaurentClaes) [@laurent86](https://github.com/laurent86))
+
+#### ⚠️ Pushed to `master`
+
+- Build, bundle, and dependency optimizations ([@LaurentClaes](https://github.com/LaurentClaes))
+- Migrate ESLint 8 to 9 flat config ([@LaurentClaes](https://github.com/LaurentClaes))
+- Upgrade dev tooling: webpack 5, eslint 8, prettier 3, husky 9 ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix vanilla-drylus build for Node.js 22 (OpenSSL 3) ([@LaurentClaes](https://github.com/LaurentClaes))
+
+#### Authors: 2
+
+- [@laurent86](https://github.com/laurent86)
+- [@LaurentClaes](https://github.com/LaurentClaes)
+
+---
+
 # v8.7.24 (Sat Mar 14 2026)
 
 #### 🐛 Bug Fix
