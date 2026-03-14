@@ -27,6 +27,7 @@ jobs:
           npm run build-libs
           npm run build:react
           npm run typedoc
+          npm run build:vanilla
           npm run build:styleguide
         env:
           NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}
