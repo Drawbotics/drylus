@@ -220,7 +220,7 @@ interface TabMenuLinkProps extends TabMenuItemProps {
 
 export const TabMenuLink = ({ linkComponent = 'a', href, ...rest }: TabMenuLinkProps) => {
   return React.createElement(
-    linkComponent as ComponentClass<{ href: string }>,
+    linkComponent as unknown as ComponentClass<{ href: string }>,
     {
       href,
     },

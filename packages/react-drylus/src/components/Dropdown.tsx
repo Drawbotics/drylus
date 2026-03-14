@@ -227,7 +227,7 @@ export interface DropdownLinkProps extends DropdownOptionProps {
 
 export const DropdownLink = ({ linkComponent = 'a', href, ...rest }: DropdownLinkProps) => {
   return React.createElement(
-    linkComponent as React.ComponentClass<{ href: string }>,
+    linkComponent as unknown as React.ComponentClass<{ href: string }>,
     {
       href,
     },

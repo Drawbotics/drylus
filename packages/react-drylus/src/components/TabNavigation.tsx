@@ -212,7 +212,7 @@ export const TabNavigation = <T extends any>({
       {options.map((option) =>
         Link != null
           ? React.createElement(
-              Link as React.ComponentClass<{ href?: string }>,
+              Link as unknown as React.ComponentClass<{ href?: string }>,
               {
                 href: option.disabled ? undefined : String(option.value),
                 key: String(option.value),

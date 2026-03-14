@@ -96,7 +96,7 @@ export const Breadcrumbs = ({
           })}
           {Link != null && crumb.url != null
             ? React.createElement(
-                Link as React.ComponentClass<{ href?: string }>,
+                Link as unknown as React.ComponentClass<{ href?: string }>,
                 { href: crumb.url },
                 renderCrumb(crumb),
               )

@@ -551,7 +551,7 @@ RawInput.propTypes = {
  * forward-ref
  */
 export const InputWithRef = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  return <RawInput {...props} inputRef={ref} />;
+  return <RawInput {...(props as any)} inputRef={ref} />;
 });
 
 InputWithRef.displayName = 'Input';

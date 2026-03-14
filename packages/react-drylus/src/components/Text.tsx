@@ -217,7 +217,7 @@ export const Text = ({ responsive, ...rest }: TextProps) => {
   const tier = _tier ?? (shade ? shadeEnumToTier(shade) : null);
   const category = color ? colorEnumToCategory(color) : _category;
 
-  const transformedChildren = Array.isArray(children)
+  const transformedChildren = (Array.isArray(children)
     ? [...children].map((child) =>
         _processChild(child, {
           dateOptions,
@@ -225,7 +225,7 @@ export const Text = ({ responsive, ...rest }: TextProps) => {
           priceOptions,
         }),
       )
-    : _processChild(children, { dateOptions, locale, priceOptions });
+    : _processChild(children, { dateOptions, locale, priceOptions })) as React.ReactNode;
 
   return (
     <span

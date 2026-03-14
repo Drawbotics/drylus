@@ -310,7 +310,7 @@ const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps
  * forward-ref
  */
 export const TextAreaWithRef = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
-  return <RawTextArea {...props} inputRef={ref} />;
+  return <RawTextArea {...(props as any)} inputRef={ref} />;
 });
 
 TextAreaWithRef.displayName = 'TextArea';
