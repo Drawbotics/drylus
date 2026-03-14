@@ -75,7 +75,7 @@
     "babel-jest": "^30.0.0",
     "babel-loader": "^10.0.0",
     "babel-plugin-codegen": "^4.0.0",
-    "babel-plugin-react-docgen": "^4.2.1",
+    "babel-plugin-react-docgen": "^3.1.0",
     "chalk": "^4.1.2",
     "countries-list": "^3.2.2",
     "country-state-city": "^3.2.1",
