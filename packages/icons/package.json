@@ -7,6 +7,17 @@
   "license": "ISC",
   "main": "dist/drycons.css",
   "types": "dist/drycons.ts",
+  "sideEffects": false,
+  "files": [
+    "dist/drycons.css",
+    "dist/drycons.js",
+    "dist/drycons.ts",
+    "dist/drycons.woff",
+    "dist/drycons.woff2",
+    "dist/drycons.eot",
+    "dist/drycons.ttf",
+    "dist/drycons.hash"
+  ],
   "scripts": {
     "clean": "rimraf dist",
     "generate-fonts": "webfont ./icons/*.svg --dest ./dist --template css --template-class-name drycon --font-name drycons --font-height 150",
@@ -26,12 +37,10 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "gitHead": "8314d678c0c364d2aab35300a51324982cc0b85a",
-  "dependencies": {
-    "core-js": "^3.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@aws-sdk/client-cloudfront": "^3.0.0",
-    "oslllo-svg-fixer": "^5.0.0",
+    "oslllo-svg-fixer": "^6.0.1",
     "rimraf": "^6.0.1",
     "webfont": "^11.2.26"
   }

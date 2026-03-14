@@ -6,7 +6,7 @@ import last from 'lodash/last';
 import omit from 'lodash/omit';
 import startCase from 'lodash/startCase';
 import React, { useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const styles = {
   linksNavigation: css`
@@ -153,7 +153,9 @@ export function generateLinks({ route, routeName, parent = '', pathname, base = 
   }
 }
 
-const LinksNavigation = ({ title, routes, location, base, onClickLink }) => {
+const LinksNavigation = ({ title, routes, base, onClickLink }) => {
+  const location = useLocation();
+
   useEffect(() => {
     const current = last(location.pathname.split('/'));
     document.title = `Drawbotics Styleguide - ${startCase(current)}`;
@@ -178,4 +180,4 @@ const LinksNavigation = ({ title, routes, location, base, onClickLink }) => {
   );
 };
 
-export default withRouter(LinksNavigation);
+export default LinksNavigation;

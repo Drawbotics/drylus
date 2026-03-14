@@ -1,13 +1,13 @@
 module.exports = function(api) {
   const isTest = process.env.NODE_ENV === 'test';
 
-  api.cache(() => isTest);
+  api.cache.using(() => process.env.NODE_ENV);
 
   const presets = [
     ['@babel/preset-env', {
       'modules': false,
     }],
-    ['@babel/preset-react', { runtime: 'classic' }],
+    ['@babel/preset-react', { runtime: 'automatic' }],
     ...(isTest ? [['@babel/preset-typescript', { allExtensions: true, isTSX: true }]] : []),
   ];
 
@@ -28,6 +28,7 @@ module.exports = function(api) {
     '@babel/plugin-transform-optional-chaining',
     '@babel/plugin-proposal-do-expressions',
     '@babel/plugin-transform-nullish-coalescing-operator',
+    ['@babel/plugin-transform-runtime', { helpers: true }],
     ...(isTest ? ['@babel/plugin-transform-modules-commonjs'] : []),
   ];
 

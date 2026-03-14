@@ -14,10 +14,10 @@
     "noUnusedParameters": false,
     "strict": true,
     "baseUrl": "./",
-    "declaration": true,
-    "declarationMap": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
+    "declaration": false,
+    "declarationMap": false,
+    "inlineSourceMap": false,
+    "inlineSources": false,
     "resolveJsonModule": true,
     "paths": {
       "~/*": ["./app/*"]

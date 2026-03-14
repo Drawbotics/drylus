@@ -6,6 +6,7 @@
   "homepage": "",
   "license": "ISC",
   "main": "dist/drylus.js",
+  "sideEffects": false,
   "scripts": {
     "clean": "rimraf dist",
     "sync": "node scripts/sync.js",

@@ -5,6 +5,10 @@
   "license": "UNLICENSED",
   "main": "dist/vars.js",
   "types": "dist/vars.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "clean": "rimraf dist/ tmp/",
     "build:ts": "tsc",
@@ -14,9 +18,11 @@
     "prepublishOnly": "npm run build && NODE_ENV=production npm run sync"
   },
   "dependencies": {
-    "fs-extra": "^11.0.0",
-    "lodash": "^4.17.10",
     "tinycolor2": "^1.4.1"
+  },
+  "devDependencies": {
+    "fs-extra": "^11.0.0",
+    "lodash": "^4.17.10"
   },
   "repository": {
     "type": "git",

@@ -5,20 +5,62 @@
   "author": "nicmosc <nmoscholios@gmail.com>",
   "license": "ISC",
   "main": "index.js",
+  "module": "index.js",
   "types": "./lib/index.d.ts",
   "sideEffects": false,
+  "files": [
+    "lib/",
+    "index.js",
+    "!lib/__mocks__/",
+    "!lib/**/__tests__/",
+    "!lib/**/*.d.ts.map"
+  ],
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./index.js",
+      "default": "./index.js"
+    },
+    "./components/*": {
+      "types": "./lib/components/*.d.ts",
+      "import": "./lib/components/*.js",
+      "default": "./lib/components/*.js"
+    },
+    "./forms/*": {
+      "types": "./lib/forms/*.d.ts",
+      "import": "./lib/forms/*.js",
+      "default": "./lib/forms/*.js"
+    },
+    "./layout/*": {
+      "types": "./lib/layout/*.d.ts",
+      "import": "./lib/layout/*.js",
+      "default": "./lib/layout/*.js"
+    },
+    "./base/*": {
+      "types": "./lib/base/*.d.ts",
+      "import": "./lib/base/*.js",
+      "default": "./lib/base/*.js"
+    },
+    "./enums": {
+      "types": "./lib/enums/index.d.ts",
+      "import": "./lib/enums/index.js",
+      "default": "./lib/enums/index.js"
+    },
+    "./docs.json": "./docs.json",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "clean": "rimraf lib/ tmp/",
     "build:ts": "tsc --skipLibCheck || true",
-    "build:js": "babel --source-maps inline --copy-files --ignore  '**/__tests__/' --root-mode upward tmp/ --out-dir lib/",
+    "build:js": "babel --copy-files --ignore '**/__tests__/','**/__mocks__/' --root-mode upward tmp/ --out-dir lib/ && find lib -type d -name __tests__ -exec rm -rf {} + 2>/dev/null; rm -rf lib/__mocks__ lib/tsconfig.tsbuildinfo lib/utils/get-static-env.js lib/utils/get-static-env.d.ts",
     "build:typedoc": "typedoc --skipErrorChecking --exclude node_modules --categorizeByGroup false --json docs.json --entryPointStrategy expand ./src",
     "watch:typedoc": "npm run build:typedoc && chokidar './tmp/**/*.d.ts' -c 'npm run build:typedoc'",
     "build:commonjs": "npm run build:ts && npm run build:js",
     "watch:commonjs": "npm run build:ts -- --watch & npm run build:js -- --watch & npm run watch:typedoc",
-    "watch": "NODE_ENV=development && npm run build:ts && npm run watch:commonjs",
+    "watch": "NODE_ENV=development npm run build:ts && npm run watch:commonjs",
     "build": "npm run clean && NODE_ENV=production npm run build:commonjs",
-    "test": "NODE_ICU_DATA=../../node_modules/full-icu jest",
-    "test:watch": "NODE_ICU_DATA=../../node_modules/full-icu jest --watchAll",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
@@ -30,24 +72,31 @@
     "@drawbotics/icons": "file:../icons",
     "@drawbotics/use-screen-size": "^3.0.1",
     "@emotion/css": "^11.13.5",
-    "@emotion/react": "^11.14.0",
-    "animejs": "^4.3.6",
-    "countries-list": "^3.2.2",
-    "country-state-city": "^3.2.1",
     "dayjs": "^1.11.19",
     "framer-motion": "^12.0.0",
     "lodash": "^4.17.21",
-    "mapbox-gl": "^3.19.0",
-    "prop-types": "^15.7.2",
-    "react-calendar": "^6.0.0",
-    "react-compound-slider": "^3.4.0",
-    "react-map-gl": "^8.0.0",
     "react-select": "^5.10.2",
     "spark-md5": "^3.0.2"
   },
   "peerDependencies": {
+    "countries-list": "^3.2.2",
+    "country-state-city": "^3.2.1",
+    "mapbox-gl": "^3.19.0",
     "react": ">=16.8.0 <20",
-    "react-dom": ">=16.8.0 <20"
+    "react-calendar": "^6.0.0",
+    "react-compound-slider": "^3.4.0",
+    "react-dom": ">=16.8.0 <20",
+    "react-map-gl": "^8.0.0",
+    "animejs": "^4.3.6"
+  },
+  "peerDependenciesMeta": {
+    "animejs": { "optional": true },
+    "countries-list": { "optional": true },
+    "country-state-city": { "optional": true },
+    "mapbox-gl": { "optional": true },
+    "react-calendar": { "optional": true },
+    "react-compound-slider": { "optional": true },
+    "react-map-gl": { "optional": true }
   },
   "repository": {
     "type": "git",

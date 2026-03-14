@@ -1,28 +1,29 @@
 import React from 'react';
-import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import { generateRoutes } from '../utils';
 import Renderer from './Renderer';
 
-const RoutesHandler = ({ location, match, routes, base }) => {
+const RoutesHandler = ({ routes, base }) => {
+  const location = useLocation();
   const route = routes[location.pathname];
   if (route) {
     return <Renderer>{React.createElement(route)}</Renderer>;
   } else {
-    return <Redirect to={`/${base}/introduction`} />;
+    return <Navigate to={`/${base}/introduction`} replace />;
   }
 };
 
-const RoutesRenderer = ({ routes, base, ...props }) => {
+const RoutesRenderer = ({ routes, base }) => {
   const generatedRoutes = generateRoutes({ route: routes, base });
   return (
-    <Switch>
+    <Routes>
       <Route
-        path={[`/${base}/*`, `/${base}`]}
-        render={() => <RoutesHandler {...props} base={base} routes={generatedRoutes} />}
+        path="*"
+        element={<RoutesHandler base={base} routes={generatedRoutes} />}
       />
-    </Switch>
+    </Routes>
   );
 };
 
-export default withRouter(RoutesRenderer);
+export default RoutesRenderer;

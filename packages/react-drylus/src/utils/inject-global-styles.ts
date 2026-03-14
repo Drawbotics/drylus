@@ -5,8 +5,6 @@ import { injectGlobal } from '@emotion/css';
 
 import { normalize } from './normalize';
 
-const env = require('../utils/get-static-env');
-
 export const baseStyleProperties = `
   font-size: ${sv.defaultFontSize};
   line-height: ${sv.defaultLineHeight};
@@ -48,7 +46,7 @@ export const root = `
   }
 `;
 
-export const icons = generateIconStyles(env === "'development'" ? 'dev' : packageJson.version);
+export const icons = generateIconStyles(process.env.NODE_ENV === 'development' ? 'dev' : packageJson.version);
 
 export function injectGlobalStyles(): void {
   injectFontLink();

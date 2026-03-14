@@ -19,6 +19,7 @@ jobs:
           node-version: '20.x'
           registry-url: https://npm.pkg.github.com/
           scope: '@drawbotics'
+          cache: 'npm'
 
       - name: Install and Build
         run: |
@@ -26,7 +27,6 @@ jobs:
           npm run build-libs
           npm run build:react
           npm run typedoc
-          npm run build:vanilla
           npm run build:styleguide
         env:
           NODE_AUTH_TOKEN: ${{secrets.GH_TOKEN}}

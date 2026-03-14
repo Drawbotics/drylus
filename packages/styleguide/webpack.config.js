@@ -83,7 +83,7 @@ module.exports = {
     publicPath: isProduction ? '/drylus/' : '/',
   },
   optimization: {
-    minimize: false,
+    minimize: isProduction,
   },
   plugins: isProduction ? prodPlugins : devPlugins,
   module: {

@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
-import Highlight, { defaultProps } from 'prism-react-renderer';
+import { Highlight } from 'prism-react-renderer';
 import React from 'react';
 
 import theme from '../utils/code-theme';
@@ -38,7 +38,7 @@ const Code = ({ children, className, style: styleProp }) => {
   const language = className?.replace(/language-/, '');
 
   return (
-    <Highlight {...defaultProps} theme={theme} code={children} language={language}>
+    <Highlight theme={theme} code={children} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <div className={styles.codeWrapper} style={styleProp}>
           <pre className={cx(className, styles.code)} style={style}>

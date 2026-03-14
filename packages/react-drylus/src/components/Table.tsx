@@ -2,7 +2,7 @@ import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from '@emotion/css';
 import { motion } from 'framer-motion';
-import { omitBy } from 'lodash';
+import omitBy from 'lodash/omitBy';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
 import omit from 'lodash/omit';

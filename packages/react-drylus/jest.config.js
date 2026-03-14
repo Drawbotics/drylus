@@ -1,4 +1,3 @@
-/* eslint-disable */
 const path = require('path');
 
 
@@ -15,8 +14,7 @@ module.exports = {
     '^.+\\.(js|jsx|ts|tsx)?$': ['babel-jest', { rootMode: 'upward' }],
   },
   transformIgnorePatterns: [
-    '/node_modules/',
-    'use-screen-size/lib/',
+    '/node_modules/(?!(react-calendar|get-user-locale|memoize/|mimic-function|@wojtekmaj))',
   ],
   testPathIgnorePatterns: [
     '/node_modules/',
@@ -38,8 +36,5 @@ module.exports = {
     'mapbox-gl/dist/mapbox-gl\\.css$': '<rootDir>/src/__mocks__/empty.js',
     '^react-map-gl(/mapbox)?$': '<rootDir>/src/__mocks__/react-map-gl.js',
   },
-  transformIgnorePatterns: [
-    '/node_modules/(?!(react-calendar|get-user-locale|memoize/|mimic-function|@wojtekmaj))',
-  ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };

@@ -49,6 +49,10 @@ module.exports = {
       type: 'umd',
     },
   },
+  externals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM',
+  },
   plugins: basePlugins,
   module: {
     rules: [
