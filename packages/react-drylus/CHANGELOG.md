@@ -1,3 +1,38 @@
+# v8.7.29 (Sat Mar 14 2026)
+
+#### 🐛 Bug Fix
+
+- Fix #207, #210, release workflow, and check-labels [#233](https://github.com/Drawbotics/drylus/pull/233) ([@LaurentClaes](https://github.com/LaurentClaes) [@laurent86](https://github.com/laurent86))
+
+#### ⚠️ Pushed to `master`
+
+- Revert ThemeProvider to use @emotion/react Global component ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix all pre-existing TypeScript errors ([@LaurentClaes](https://github.com/LaurentClaes))
+- ESM transition, lodash removal, and TypeScript fixes ([@LaurentClaes](https://github.com/LaurentClaes))
+- Build, bundle, and dependency optimizations ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix pre-existing React warnings in styleguide ([@LaurentClaes](https://github.com/LaurentClaes))
+- Remove deprecated @types/mapbox-gl, stale core-js and @types/uuid from root ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix @import CSS ordering warning by loading Google Fonts via link tag ([@LaurentClaes](https://github.com/LaurentClaes))
+- Improve dependency management: remove uuid/core-js, fix misplaced deps, dedupe React ([@LaurentClaes](https://github.com/LaurentClaes))
+- Remove 8 stale dependencies ([@LaurentClaes](https://github.com/LaurentClaes))
+- Update README with React 18 migration guide and breaking changes ([@LaurentClaes](https://github.com/LaurentClaes))
+- Upgrade Jest 29 to 30, webpack-cli 5 to 6, @types/jest to 30 ([@LaurentClaes](https://github.com/LaurentClaes))
+- Migrate ESLint 8 to 9 flat config ([@LaurentClaes](https://github.com/LaurentClaes))
+- Upgrade to React 18 and framer-motion 12 ([@LaurentClaes](https://github.com/LaurentClaes))
+- Upgrade remaining dependencies to latest compatible versions ([@LaurentClaes](https://github.com/LaurentClaes))
+- Upgrade low-risk dependencies and reduce vulnerabilities ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix styleguide build: downgrade framer-motion, replace do-expressions, update prettier imports ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix webpack 5 fullySpecified resolution and tsc exit code ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix framer-motion type errors for TypeScript 5 compatibility ([@LaurentClaes](https://github.com/LaurentClaes))
+- Modernize dependencies and fix security vulnerabilities ([@LaurentClaes](https://github.com/LaurentClaes))
+
+#### Authors: 2
+
+- [@laurent86](https://github.com/laurent86)
+- [@LaurentClaes](https://github.com/LaurentClaes)
+
+---
+
 # v8.7.27 (Sat Mar 14 2026)
 
 #### 🐛 Bug Fix
