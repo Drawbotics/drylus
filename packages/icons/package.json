@@ -6,7 +6,6 @@
   "homepage": "https://github.com/Drawbotics/drylus#readme",
   "license": "ISC",
   "main": "dist/drycons.css",
-  "module": "dist/drycons.js",
   "types": "dist/drycons.ts",
   "sideEffects": false,
   "files": [

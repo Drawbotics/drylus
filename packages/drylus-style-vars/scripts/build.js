@@ -9,34 +9,25 @@ const TMP_DIR = path.resolve(__dirname, '../tmp');
 
 async function createJs() {
   const lines = [];
-
-  // Import for color functions
-  lines.push("import tc from 'tinycolor2';");
+  lines.push("const tc = require('tinycolor2');");
   lines.push('');
-
-  // Named exports for each var
-  Object.keys(vars).forEach((key) => lines.push(`export const ${key} = '${vars[key]}';`));
-
-  // Default export with all vars
-  lines.push('');
-  lines.push('const vars = {');
-  Object.keys(vars).forEach((key) => lines.push(`  ${key},`));
+  lines.push('module.exports = {');
+  Object.keys(vars).forEach((key) => lines.push(`  ${key}: '${vars[key]}',`));
   lines.push('};');
-  lines.push('export default vars;');
 
-  // Color utility functions (from colors.ts)
+  // Color utility functions
   lines.push('');
-  lines.push('export function lighten(color, amount) {');
+  lines.push('module.exports.lighten = function lighten(color, amount) {');
   lines.push('  return tc(color).lighten(amount).toString();');
-  lines.push('}');
+  lines.push('};');
   lines.push('');
-  lines.push('export function fade(color, amount) {');
+  lines.push('module.exports.fade = function fade(color, amount) {');
   lines.push('  return tc(color).setAlpha(amount / 100).toString();');
-  lines.push('}');
+  lines.push('};');
   lines.push('');
-  lines.push('export function darken(color, amount) {');
+  lines.push('module.exports.darken = function darken(color, amount) {');
   lines.push('  return tc(color).darken(amount).toString();');
-  lines.push('}');
+  lines.push('};');
 
   const text = lines.join('\n');
   await fs.writeFile(path.resolve(BUILD_DIR, './vars.js'), text, 'utf-8');
