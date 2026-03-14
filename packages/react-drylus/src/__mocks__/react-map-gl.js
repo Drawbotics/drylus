@@ -1,16 +1,12 @@
-const React = require('react');
+import React from 'react';
 
 const MapGL = React.forwardRef(function MapGL(props, ref) {
   return React.createElement('div', { 'data-testid': 'map', ref }, props.children);
 });
 
-function Marker(props) {
+export function Marker(props) {
   return React.createElement('div', { 'data-testid': 'marker' }, props.children);
 }
 
-module.exports = {
-  __esModule: true,
-  default: MapGL,
-  Map: MapGL,
-  Marker,
-};
+export { MapGL as Map };
+export default MapGL;

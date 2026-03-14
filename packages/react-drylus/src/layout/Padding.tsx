@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
-import camelCase from 'lodash/camelCase';
+import { camelCase } from '../utils/helpers';
 import React from 'react';
 
 import { Size } from '../enums';

@@ -4,7 +4,15 @@
   "description": "Style variable constants used by Drawbotics across different projects",
   "license": "UNLICENSED",
   "main": "dist/vars.js",
+  "module": "dist/vars.js",
   "types": "dist/vars.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/vars.d.ts",
+      "import": "./dist/vars.js",
+      "default": "./dist/vars.js"
+    }
+  },
   "sideEffects": false,
   "files": [
     "dist/"

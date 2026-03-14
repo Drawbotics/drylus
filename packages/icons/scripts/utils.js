@@ -61,11 +61,12 @@ function generateObjectMappings(targetFile, iconsFolder) {
     {},
   );
   const jsString = `const mapping = ${JSON.stringify(mapping)};`;
-  const exportString = `module.exports = { generateIconStyles, mapping }`;
+  const exportString = `export { generateIconStyles, mapping }`;
   const finalContent = `
     ${jsString}
 
     ${exportString};
+    export default { generateIconStyles, mapping };
   `;
 
   fs.writeFileSync(targetFile, finalContent, { flag: 'a' });

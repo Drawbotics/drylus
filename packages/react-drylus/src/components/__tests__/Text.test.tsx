@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import { get } from '../../utils/helpers';
 import React from 'react';
 import { create } from 'react-test-renderer';
 

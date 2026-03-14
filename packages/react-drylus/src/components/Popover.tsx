@@ -150,7 +150,7 @@ export const Popover = ({
 }: PopoverProps) => {
   const [visible, setVisible] = useState<boolean>();
   const [outletElement, setOutletElement] = useState<HTMLElement>();
-  const childrenRef = useRef<HTMLElement>();
+  const childrenRef = useRef<HTMLElement | null>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
   const popoverRect = popoverRef.current?.getBoundingClientRect();
 

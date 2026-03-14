@@ -1,5 +1,4 @@
 import { useScreenSize } from '@drawbotics/use-screen-size';
-import assign from 'lodash/assign';
 import { useState } from 'react';
 
 import { Responsive } from '../types';
@@ -32,7 +31,7 @@ export function useResponsiveProps<T>(original: T, responsive?: Responsive<T>) {
 
   const responsiveProps = _getPropsForSize<T>(responsive);
 
-  const props = assign({}, original, responsiveProps);
+  const props = Object.assign({}, original, responsiveProps);
 
   return props;
 }

@@ -73,7 +73,7 @@ export const UploadHelper = ({
   children,
   allowedFileFormats,
 }: UploadHelperProps) => {
-  const childrenRef = useRef<HTMLElement>();
+  const childrenRef = useRef<HTMLElement | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleUploadFiles = async (e: ChangeEvent<HTMLInputElement>) => {

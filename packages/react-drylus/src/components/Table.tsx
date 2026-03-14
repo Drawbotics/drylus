@@ -2,11 +2,7 @@ import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '@drawbotics/use-screen-size';
 import { css, cx } from '@emotion/css';
 import { motion } from 'framer-motion';
-import omitBy from 'lodash/omitBy';
-import get from 'lodash/get';
-import isEqual from 'lodash/isEqual';
-import omit from 'lodash/omit';
-import toString from 'lodash/toString';
+import { get, isEqual, omit, omitBy } from '../utils/helpers';
 import React, {
   Fragment,
   ReactNode,
@@ -888,7 +884,7 @@ function _generateTable({
   } else {
     const hasData = data.data != null;
     const rowData = hasData ? omit(data, 'data') : data;
-    const uniqId = Object.values(rowData).reduce<string>((memo, v) => `${memo}-${toString(v)}`, '');
+    const uniqId = Object.values(rowData).reduce<string>((memo, v) => `${memo}-${String(v)}`, '');
     const parentRow =
       memoDataValues != null && !Array.isArray(memoDataValues) ? (
         <MemoizedTRow

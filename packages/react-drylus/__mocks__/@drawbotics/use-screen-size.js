@@ -6,12 +6,10 @@ const ScreenSizes = {
   XL: 5,
 };
 
-function useScreenSize() {
+export function useScreenSize() {
   return { screenSize: ScreenSizes.L, ScreenSizes };
 }
 
-function getScreenSize() {
+export function getScreenSize() {
   return ScreenSizes.L;
 }
-
-module.exports = { useScreenSize, getScreenSize };

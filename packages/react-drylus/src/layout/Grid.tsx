@@ -1,9 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
 import { motion, useAnimation } from 'framer-motion';
-import camelCase from 'lodash/camelCase';
-import omit from 'lodash/omit';
-import upperFirst from 'lodash/upperFirst';
+import { camelCase, omit, upperFirst } from '../utils/helpers';
 import React, { useEffect, useRef } from 'react';
 
 import { Size, Speed } from '../enums';

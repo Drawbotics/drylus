@@ -110,7 +110,7 @@ export const InlineEdit = ({
   exitOnClick = true,
   onCancel,
 }: InlineEditProps) => {
-  const childrenRef = useRef<HTMLElement>();
+  const childrenRef = useRef<HTMLElement | null>(null);
   const editRef = useRef<HTMLDivElement>(null);
   const childrenCSSClassCopy = useRef<DOMTokenList>();
   const childrenDisplayCopy = useRef<string>();

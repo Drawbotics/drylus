@@ -2,8 +2,6 @@ import 'dayjs/locale/fr';
 import 'dayjs/locale/nl';
 import 'dayjs/locale/en';
 
-import last from 'lodash/last';
-import tail from 'lodash/tail';
 
 const en = {
   relative: ({
@@ -68,9 +66,9 @@ const fr = {
     sameElse: format,
     nextWeek: format,
     lastDay: withTime ? `[hier à] HH:mm` : `[hier]`,
-    lastWeek: `${format.split(',')[0]} [passé],${tail(format.split(','))}`,
+    lastWeek: `${format.split(',')[0]} [passé],${format.split(',').slice(1)}`,
     nextDay: withTime
-      ? `[demain], ${format.split(',').slice(0, -1)} [à]${last(format.split(','))}`
+      ? `[demain], ${format.split(',').slice(0, -1)} [à]${format.split(',').at(-1)}`
       : `[demain], ${format.split(',').slice(0, -1)}`,
     sameDay: withTime ? `[aujourd'hui à] HH:mm` : `[aujourd'hui]`,
   }),
@@ -109,7 +107,7 @@ const nl = {
     lastWeek: `[vorige] ${format}`,
     lastDay: withTime ? `[gisteren om] HH:mm` : `[gisteren]`,
     nextDay: withTime
-      ? `[morgen], ${format.split(',').slice(0, -1)} [om]${last(format.split(','))}`
+      ? `[morgen], ${format.split(',').slice(0, -1)} [om]${format.split(',').at(-1)}`
       : `[morgen], ${format.split(',').slice(0, -1)}`,
     sameDay: withTime ? `[vandaag om] HH:mm` : `[vandaag]`,
   }),

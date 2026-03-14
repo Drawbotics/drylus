@@ -1,6 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
-import last from 'lodash/last';
 import React, { Fragment } from 'react';
 
 import { useThemeColor } from '../base';
@@ -72,7 +71,7 @@ export const AttachmentBox = ({ responsive, ...rest }: AttachmentBoxProps) => {
           <Flex style={{ width: '100%' }}>
             <FlexItem style={{ display: 'flex' }}>
               <FileIcon
-                type={fileName != null ? (last(fileName.split('.')) as FileType) : undefined}
+                type={fileName != null ? (fileName.split('.').at(-1) as FileType) : undefined}
                 asFolder={asFolder}
               />
             </FlexItem>

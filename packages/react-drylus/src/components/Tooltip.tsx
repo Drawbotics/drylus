@@ -147,7 +147,7 @@ export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
 
   const [visible, setVisible] = useState(false);
   const [outletElement, setOutletElement] = useState<HTMLElement>();
-  const childrenRef = useRef<HTMLElementWithDisabled>();
+  const childrenRef = useRef<HTMLElementWithDisabled | null>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
   const tooltipRect = tooltipRef.current?.getBoundingClientRect();
 

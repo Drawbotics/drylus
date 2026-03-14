@@ -1,4 +1,4 @@
-import camelCase from 'lodash/camelCase';
+import { camelCase } from './helpers';
 
 import { IconType } from '../components';
 import { Category, Color, ExtendedColor, Position, Shade, Size, Speed, Tier } from '../enums';

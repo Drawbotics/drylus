@@ -1,5 +1,4 @@
 import { AnimatePresence, Transition, Variant, motion } from 'framer-motion';
-import get from 'lodash/get';
 import React, { Fragment, useEffect, useState } from 'react';
 
 import { Direction, Speed } from '../enums';
@@ -276,7 +275,7 @@ export const AnimationGroup = ({
   };
 
   const isFragmentWrapped =
-    get(children, 'type') === Fragment || get(children, 'props.originalType') === Fragment;
+    (children as any)?.type === Fragment || (children as any)?.props?.originalType === Fragment;
 
   const processedChildren = React.Children.map(
     isFragmentWrapped ? (children as any).props.children : (children as any),

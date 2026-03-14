@@ -1,7 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
-import isArray from 'lodash/isArray';
-import isObject from 'lodash/isObject';
 import React, { Fragment } from 'react';
 
 import { Category, Color, Shade, Size, Tier } from '../enums';
@@ -177,7 +175,7 @@ function _processChild(
     priceOptions: TextProps['priceOptions'];
   },
 ) {
-  if (isObject(child)) {
+  if (typeof child === 'object' && child !== null) {
     if (child instanceof Date) {
       return generateDisplayedDate({
         date: child,
@@ -219,7 +217,7 @@ export const Text = ({ responsive, ...rest }: TextProps) => {
   const tier = _tier ?? (shade ? shadeEnumToTier(shade) : null);
   const category = color ? colorEnumToCategory(color) : _category;
 
-  const transformedChildren = isArray(children)
+  const transformedChildren = Array.isArray(children)
     ? [...children].map((child) =>
         _processChild(child, {
           dateOptions,

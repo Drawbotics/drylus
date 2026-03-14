@@ -27,10 +27,5 @@ class Marker {
   remove() {}
 }
 
-module.exports = {
-  Map,
-  Marker,
-  LngLat,
-  LngLatBounds,
-  default: { Map, Marker, LngLat, LngLatBounds },
-};
+export { Map, Marker, LngLat, LngLatBounds };
+export default { Map, Marker, LngLat, LngLatBounds };

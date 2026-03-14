@@ -8,6 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "ES2018",
+    "lib": ["ES2022", "DOM"],
     "sourceMap": false,
     "outDir": "./tmp/",
     "incremental": true,
