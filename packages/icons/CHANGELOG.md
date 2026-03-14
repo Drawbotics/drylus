@@ -1,3 +1,20 @@
+# v8.7.23 (Sat Mar 14 2026)
+
+#### ⚠️ Pushed to `master`
+
+- Build, bundle, and dependency optimizations ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix Lerna version drift: sync stale packages and force-publish all ([@LaurentClaes](https://github.com/LaurentClaes))
+- Fix styleguide Prop error and icons aws-sdk missing module ([@LaurentClaes](https://github.com/LaurentClaes))
+- Migrate ESLint 8 to 9 flat config ([@LaurentClaes](https://github.com/LaurentClaes))
+- Upgrade low-risk dependencies and reduce vulnerabilities ([@LaurentClaes](https://github.com/LaurentClaes))
+- Modernize dependencies and fix security vulnerabilities ([@LaurentClaes](https://github.com/LaurentClaes))
+
+#### Authors: 1
+
+- [@LaurentClaes](https://github.com/LaurentClaes)
+
+---
+
 # v8.7.20 (Fri Mar 13 2026)
 
 #### ⚠️ Pushed to `master`
