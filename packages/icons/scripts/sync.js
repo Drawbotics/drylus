@@ -3,7 +3,7 @@ const s3sync = require('@drawbotics/s3sync');
 const { CloudFrontClient, CreateInvalidationCommand } = require('@aws-sdk/client-cloudfront');
 
 const version = require('../package.json').version;
-const cloudfront = new CloudFrontClient();
+const cloudfront = new CloudFrontClient({ region: 'eu-west-1' });
 
 function invalidateDistribution(folder) {
   const command = new CreateInvalidationCommand({
