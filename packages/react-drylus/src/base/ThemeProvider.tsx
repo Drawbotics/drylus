@@ -1,12 +1,16 @@
-import { css, cx, injectGlobal } from '@emotion/css';
-import React, { useRef } from 'react';
+import { Global, css as globalCSS } from '@emotion/react';
+import { css, cx } from '@emotion/css';
+import React from 'react';
 
 import { Color } from '../enums';
 import { Style } from '../types';
 import { baseStyleProperties, globalStyles, icons, injectFontLink, normalize, root } from '../utils';
 
 const styles = {
+  global: globalCSS(globalStyles),
   local: css(baseStyleProperties),
+  normalize: globalCSS(normalize),
+  icons: globalCSS(icons),
   root: css(root),
   wrapper: css`
     display: flex;
@@ -43,38 +47,27 @@ export interface ThemeProviderProps {
   injectGlobal?: boolean;
 }
 
-let globalStylesInjected = false;
-let iconsInjected = false;
-
 export const ThemeProvider = ({
   children,
   style,
   className,
   baseColor = Color.BRAND,
-  injectGlobal: shouldInjectGlobal = true,
+  injectGlobal = true,
 }: ThemeProviderProps) => {
-  const hasInjected = useRef(false);
-
-  if (!hasInjected.current) {
-    if (shouldInjectGlobal && !globalStylesInjected) {
-      injectGlobal(globalStyles);
-      injectGlobal(normalize);
-      globalStylesInjected = true;
-    }
-    if (!iconsInjected) {
-      injectGlobal(icons);
-      iconsInjected = true;
-    }
-    hasInjected.current = true;
-  }
-
   injectFontLink();
   return (
     <Context.Provider value={{ themeColor: baseColor }}>
+      <Global
+        styles={[
+          injectGlobal ? styles.global : undefined,
+          injectGlobal ? styles.normalize : undefined,
+          styles.icons,
+        ]}
+      />
       <div
         className={cx(
           styles.root,
-          shouldInjectGlobal ? undefined : styles.local,
+          injectGlobal ? undefined : styles.local,
           styles.wrapper,
           className,
         )}
