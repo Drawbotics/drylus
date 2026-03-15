@@ -66,6 +66,7 @@ module.exports = {
   stats: 'errors-only',
   entry: './app/index.tsx',
   resolve: {
+    symlinks: false,
     modules: [
       path.resolve(__dirname, './app'),
       'node_modules',
@@ -73,6 +74,10 @@ module.exports = {
     alias: {
       '~': path.resolve(__dirname, './app'),
       'react': path.resolve(__dirname, '../../node_modules/react'),
+      'react-dom': path.resolve(__dirname, '../../node_modules/react-dom'),
+      'react-router': path.resolve(__dirname, 'node_modules/react-router'),
+      'react-router-dom': path.resolve(__dirname, 'node_modules/react-router-dom'),
+      '@remix-run/router': path.resolve(__dirname, '../../node_modules/@remix-run/router'),
     },
     extensions: [ '.js', '.jsx', '.css', '.mdx', '.ts', '.tsx' ],
     plugins: [new TsconfigPathsPlugin()],

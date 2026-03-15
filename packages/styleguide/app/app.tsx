@@ -37,7 +37,7 @@ const App = () => {
 
   return (
     <div className={styles.app}>
-      <BrowserRouter basename="drylus">
+      <BrowserRouter basename="drylus" future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DrylusProvider baseColor={baseColor}>
           <Page>
             <Layout

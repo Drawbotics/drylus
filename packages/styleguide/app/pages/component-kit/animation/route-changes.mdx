@@ -21,7 +21,7 @@ import {
   Speed,
 } from '@drawbotics/react-drylus';
 import { css } from '@emotion/css';
-import { Navigate, Route, Link, HashRouter, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Link, MemoryRouter, Routes, useLocation } from 'react-router-dom';
 
 import Playground from '~/components/Playground';
 import { Navbar } from './components/Navbar';
@@ -171,11 +171,9 @@ export const AnimatedRoutes = () => {
   );
 };
 
-<Playground mode="jsx">
-  <>
-    <Navbar />
-    <HashRouter>
-      <AnimatedRoutes />
-    </HashRouter>
-  </>
-</Playground>
+```jsx
+<Navbar />
+<MemoryRouter>
+  <AnimatedRoutes />
+</MemoryRouter>
+```
