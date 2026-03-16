@@ -1,5 +1,11 @@
-const path = require('path');
-const s3sync = require('@drawbotics/s3sync');
+/* global process */
+import path from 'path';
+import { fileURLToPath } from 'url';
+import s3sync from '@drawbotics/s3sync';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const version = require('../package.json').version;
 

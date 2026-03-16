@@ -1,6 +1,12 @@
-const path = require('path');
-const s3sync = require('@drawbotics/s3sync');
-const { CloudFrontClient, CreateInvalidationCommand } = require('@aws-sdk/client-cloudfront');
+/* global process, console */
+import path from 'path';
+import { fileURLToPath } from 'url';
+import s3sync from '@drawbotics/s3sync';
+import { CloudFrontClient, CreateInvalidationCommand } from '@aws-sdk/client-cloudfront';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const version = require('../package.json').version;
 const cloudfront = new CloudFrontClient({ region: 'eu-west-1' });

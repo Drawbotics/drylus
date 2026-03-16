@@ -23,7 +23,7 @@
     "generate-fonts": "webfont ./icons/*.svg --dest ./dist --template css --template-class-name drycon --font-name drycons --font-height 150",
     "build:fonts": "node scripts/build.js",
     "build": "npm run clean && mkdir dist && npm run build:fonts",
-    "sync": "node scripts/sync.js",
+    "sync": "node scripts/sync.mjs",
     "build:dev": "npm run build && NODE_ENV=development npm run sync",
     "prepublishOnly": "npm run build && NODE_ENV=production npm run sync"
   },

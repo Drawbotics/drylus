@@ -9,7 +9,7 @@
   "sideEffects": false,
   "scripts": {
     "clean": "rimraf dist",
-    "sync": "node scripts/sync.js",
+    "sync": "node scripts/sync.mjs",
     "watch:lib": "NODE_ENV=development webpack --config webpack.config.js --watch",
     "watch:react": "node ./scripts/watch-react.js",
     "watch": "NODE_ENV=development webpack --config webpack.config.js --watch",

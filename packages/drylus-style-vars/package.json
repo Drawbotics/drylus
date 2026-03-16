@@ -13,7 +13,7 @@
     "clean": "rimraf dist/ tmp/",
     "build:ts": "tsc",
     "build": "npm run clean && npm run build:ts && node scripts/build.js",
-    "sync": "node scripts/sync.js",
+    "sync": "node scripts/sync.mjs",
     "build:dev": "npm run build && NODE_ENV=development npm run sync",
     "prepublishOnly": "npm run build && NODE_ENV=production npm run sync"
   },

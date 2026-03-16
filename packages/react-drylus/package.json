@@ -66,7 +66,7 @@
   "dependencies": {
     "@drawbotics/drylus-style-vars": "file:../drylus-style-vars",
     "@drawbotics/icons": "file:../icons",
-    "@drawbotics/use-screen-size": "^3.0.1",
+    "@drawbotics/use-screen-size": "^3.1.0",
     "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
     "dayjs": "^1.11.19",
