@@ -97,11 +97,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        include: /use-screen-size/,
-        resolve: { fullySpecified: false },
-      },
-      {
         test: /\.tsx?$/,
         exclude: [/node_modules/, /use-screen-size\/lib/],
         use: [
