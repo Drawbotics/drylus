@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import { get } from '~/utils/lodash-replacements';
 
 export function normalizeValue(v, enums) {
   if (!v) return '';

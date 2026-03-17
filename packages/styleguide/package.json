@@ -24,7 +24,6 @@
     "@drawbotics/vanilla-drylus": "file:../vanilla-drylus",
     "@emotion/css": "^11.13.5",
     "hast-util-to-string": "^1.0.1",
-    "lodash.upperfirst": "^4.3.1",
     "react-json-pretty": "^2.1.0",
     "react-router-dom": "^6.30.0",
     "react-select": "^5.10.2",

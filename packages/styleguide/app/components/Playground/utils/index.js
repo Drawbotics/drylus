@@ -1,6 +1,4 @@
-import flow from 'lodash/flow';
-import merge from 'lodash/merge';
-import omit from 'lodash/omit';
+import { flow, merge, omit } from '~/utils/lodash-replacements';
 import React from 'react';
 
 export * from './generate-docs';

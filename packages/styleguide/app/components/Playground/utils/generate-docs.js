@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 
-import omit from 'lodash/omit';
+import { omit } from '~/utils/lodash-replacements';
 
 function _getInterfaceDescription(name, docs) {
   const flattenedProps = docs.children.reduce((memo, child) => {

@@ -1,10 +1,7 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { Title } from '@drawbotics/react-drylus';
 import { css, cx } from '@emotion/css';
-import kebabCase from 'lodash/kebabCase';
-import last from 'lodash/last';
-import omit from 'lodash/omit';
-import startCase from 'lodash/startCase';
+import { kebabCase, last, omit, startCase } from '~/utils/lodash-replacements';
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 

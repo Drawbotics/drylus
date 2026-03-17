@@ -84,11 +84,14 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js',
+    filename: isProduction ? '[name].[contenthash:8].js' : 'bundle.js',
     publicPath: isProduction ? '/drylus/' : '/',
   },
   optimization: {
     minimize: isProduction,
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   plugins: isProduction ? prodPlugins : devPlugins,
   module: {

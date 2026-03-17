@@ -1,7 +1,15 @@
 const is = require('unist-util-is');
 const nodeToString = require('hast-util-to-string');
 const strip = require('strip-indent');
-const { flow } = require('lodash');
+function flow(...fns) {
+  return (...args) => {
+    let result = fns[0](...args);
+    for (let i = 1; i < fns.length; i++) {
+      result = fns[i](result);
+    }
+    return result;
+  };
+}
 
 function getComponentName(value) {
   const match = value.match(/^<\\?(\w+)/);

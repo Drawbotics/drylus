@@ -1,5 +1,4 @@
-import kebabCase from 'lodash/kebabCase';
-import startCase from 'lodash/startCase';
+import { kebabCase, startCase } from './lodash-replacements';
 
 export function generateRoutes({ route, routeName, parent = '', base }) {
   const newPath = routeName
