@@ -2,7 +2,7 @@
 
 export PATH=$(npm bin):$PATH
 
-VERSION=`npx auto version`
+VERSION=${FORCE_VERSION:-`npx auto version`}
 
 if [ ! -z "$VERSION" ]; then
   npx auto changelog
