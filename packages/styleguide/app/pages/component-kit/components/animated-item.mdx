@@ -20,7 +20,7 @@ import Playground from '~/components/Playground';
 
 # Animated Item
 
-Used in conjunction with `AnimationGroup` (see below) this component allows you to add animations to the UI easily. Using `Framer` under the hood most of the animation should work automatically. There are a couple of props available to customize the animation to better suit the interface.
+Used in conjunction with `AnimationGroup` (see below) this component allows you to add animations to the UI easily. Using `framer-motion` under the hood most of the animation should work automatically. There are a couple of props available to customize the animation to better suit the interface.
 
 For common patterns you can see the examples here: [animation patterns](/component-kit/animation).
 
@@ -124,7 +124,7 @@ export const AnimateExitExample = ({ children }) => {
 };
 
 ### Animate Exit example
-Internally the `AnimationGroup` uses `AnimatePresence` from framer when the `animateExit` prop is given, that's why the component should be placed outside of the content that is currently being toggled (enter/exit).
+Internally the `AnimationGroup` uses `AnimatePresence` from framer-motion when the `animateExit` prop is given, that's why the component should be placed outside of the content that is currently being toggled (enter/exit).
 
 This pattern can be used when you want to toggle between different items and want to animate the unmount of each one, or can be used to animate content between route changes.
 

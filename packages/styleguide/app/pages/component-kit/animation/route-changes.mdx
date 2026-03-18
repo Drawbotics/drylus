@@ -31,9 +31,9 @@ import page2 from '~/assets/page-2.png';
 # Route change animation
 
 We used the `element` prop from `react-router-dom`'s `Route` component, but only for illustrative purposes, this will work with any other way you structure your routes. You have to respect the following constraint however:
-- When having items come in and out (replacing the current content) then the `AnimationGroup` will automatically set the `exitBeforeExit` prop from Framer, which will _wait_ for the previously visible elements to disappear. This prop __cannot work__ if there are more than 1 direct child of `AnimationGroup`, this is a constraint from Framer
+- When having items come in and out (replacing the current content) then the `AnimationGroup` will automatically set `AnimatePresence` to `mode="wait"`, which will _wait_ for the previously visible elements to disappear before animating new ones in. This __cannot work__ if there are more than 1 direct child of `AnimationGroup`, this is a constraint from framer-motion.
 
-- The way Framer recognises unmounting, the `key` given to the direct child has to change when you want the animation to be triggered. This is why in the example below the `Routes` has a `key` equal to the current browser `location`. This patter can be applied to any child (e.g. in a gallery, each `img` will have a `key` equal to the currently active one, allowing the unmount animation to be triggered).
+- The way framer-motion recognises unmounting, the `key` given to the direct child has to change when you want the animation to be triggered. This is why in the example below the `Routes` has a `key` equal to the current browser `location`. This pattern can be applied to any child (e.g. in a gallery, each `img` will have a `key` equal to the currently active one, allowing the unmount animation to be triggered).
 
 - As mentioned in the `AnimationGroup` doc, when setting `animateExit`, the prop will only propagate to the direct `AnimatedItem`s, so any `AnimatedItem` you want to animate when unmounting will need to have the `animateExit` prop manually set, like in the example below.
 
