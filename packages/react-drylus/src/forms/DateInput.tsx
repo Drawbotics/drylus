@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { useScreenSize } from '@drawbotics/use-screen-size';
+import { useScreenSize } from '../utils/use-screen-size';
 import { css, cx } from '@emotion/css';
 import React, { useEffect, useRef, useState } from 'react';
 import Calendar, { CalendarProps } from 'react-calendar';
@@ -370,7 +370,7 @@ export const DateInput = <T extends string>({ responsive, ...rest }: DateInputPr
       document.removeEventListener('mousedown', handleDocumentClick);
       window.removeEventListener('scroll', handleWindowScroll);
     };
-  }, []);
+  }, [isDesktop, autoFocus]);
 
   useEffect(() => {
     const outlet = document.getElementById('picker-outlet');

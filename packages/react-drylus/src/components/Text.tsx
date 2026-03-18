@@ -195,7 +195,7 @@ function _processChild(
   return child;
 }
 
-export const Text = ({ responsive, ...rest }: TextProps) => {
+export const Text = React.memo(({ responsive, ...rest }: TextProps) => {
   const {
     inversed = false,
     bold = false,
@@ -254,4 +254,5 @@ export const Text = ({ responsive, ...rest }: TextProps) => {
       <Fragment>{transformedChildren}</Fragment>
     </span>
   );
-};
+});
+Text.displayName = 'Text';

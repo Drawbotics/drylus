@@ -216,7 +216,7 @@ export interface CheckboxProps<T = string> {
   [x: string]: any;
 }
 
-export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProps<T>) => {
+const _Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProps<T>) => {
   const {
     onChange,
     value: _value,
@@ -331,3 +331,4 @@ export const Checkbox = <T extends string>({ responsive, ...rest }: CheckboxProp
     </div>
   );
 };
+export const Checkbox = React.memo(_Checkbox) as typeof _Checkbox;

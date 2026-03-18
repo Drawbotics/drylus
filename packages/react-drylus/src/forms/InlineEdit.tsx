@@ -151,42 +151,50 @@ export const InlineEdit = ({
     }
   };
 
-  const handleWindowClick = (e: Event) => {
-    if (
-      e.target !== childrenRef.current &&
-      !childrenRef.current?.contains(e.target as Node) &&
-      e.target !== editRef.current &&
-      !editRef.current?.contains(e.target as Node) &&
-      exitOnClick
-    ) {
-      if (editing) {
-        onCancel();
-        handleExitEditing();
-      }
-    }
-  };
+  const editingRef = useRef(editing);
+  editingRef.current = editing;
+  const exitOnClickRef = useRef(exitOnClick);
+  exitOnClickRef.current = exitOnClick;
+  const onCancelRef = useRef(onCancel);
+  onCancelRef.current = onCancel;
 
   useEffect(() => {
-    if (childrenRef.current != null) {
-      childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
-      childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
-      childrenRef.current.addEventListener('click', handleMouseClick);
+    const handleWindowClick = (e: Event) => {
+      if (
+        e.target !== childrenRef.current &&
+        !childrenRef.current?.contains(e.target as Node) &&
+        e.target !== editRef.current &&
+        !editRef.current?.contains(e.target as Node) &&
+        exitOnClickRef.current
+      ) {
+        if (editingRef.current) {
+          onCancelRef.current();
+          handleExitEditing();
+        }
+      }
+    };
+
+    const el = childrenRef.current;
+    if (el != null) {
+      el.addEventListener('mouseenter', handleMouseEnter);
+      el.addEventListener('mouseleave', handleMouseLeave);
+      el.addEventListener('click', handleMouseClick);
       window.addEventListener('click', handleWindowClick, false);
 
-      if (getComputedStyle(childrenRef.current).display !== 'none') {
-        childrenCSSClassCopy.current = Object.assign({}, childrenRef.current.classList);
-        childrenDisplayCopy.current = getComputedStyle(childrenRef.current).display;
-        childrenRef.current.classList.add(styles.inlineEditChild);
+      if (getComputedStyle(el).display !== 'none') {
+        childrenCSSClassCopy.current = Object.assign({}, el.classList);
+        childrenDisplayCopy.current = getComputedStyle(el).display;
+        el.classList.add(styles.inlineEditChild);
       }
     }
 
     return () => {
-      childrenRef.current?.removeEventListener('mouseenter', handleMouseEnter);
-      childrenRef.current?.removeEventListener('mouseleave', handleMouseLeave);
-      childrenRef.current?.removeEventListener('click', handleMouseClick);
+      el?.removeEventListener('mouseenter', handleMouseEnter);
+      el?.removeEventListener('mouseleave', handleMouseLeave);
+      el?.removeEventListener('click', handleMouseClick);
       window.removeEventListener('click', handleWindowClick);
     };
-  });
+  }, []);
 
   return (
     <Fragment>

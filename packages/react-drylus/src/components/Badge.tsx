@@ -61,7 +61,7 @@ export interface BadgeProps {
   className?: string;
 }
 
-export const Badge = ({ value, max, category, style, color: _color, className }: BadgeProps) => {
+export const Badge = React.memo(({ value, max, category, style, color: _color, className }: BadgeProps) => {
   const color = category ? categoryEnumToColor(category) : _color;
   return (
     <div
@@ -76,4 +76,5 @@ export const Badge = ({ value, max, category, style, color: _color, className }:
       {max != null && value > max ? `${max}+` : value}
     </div>
   );
-};
+});
+Badge.displayName = 'Badge';

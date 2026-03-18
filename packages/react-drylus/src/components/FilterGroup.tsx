@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { useScreenSize } from '@drawbotics/use-screen-size';
+import { useScreenSize } from '../utils/use-screen-size';
 import { css } from '@emotion/css';
 import React, { Fragment, useState } from 'react';
 

@@ -9,7 +9,7 @@ export const Deprecated = (() => {
   };
 })();
 
-type FunctionComponent = (props: React.PropsWithChildren<any>) => React.ReactElement;
+type FunctionComponent = ((props: any) => any) | React.NamedExoticComponent<any>;
 
 function _isFragment(item: React.ReactElement): boolean {
   return typeof item.type === 'symbol' && String(item.type).includes('fragment');

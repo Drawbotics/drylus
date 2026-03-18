@@ -35,7 +35,9 @@ export * from './SplashScreen';
 export * from './Breadcrumbs';
 export * from './Dropdown';
 export * from './List';
-export * from './Map';
+// Map is exported from a separate entry point ('react-drylus/map') to avoid
+// bundling the heavy mapbox-gl dependency (~200KB) in the main bundle.
+// Import Map directly: import { Map } from '@drawbotics/react-drylus/map';
 export * from './FilterGroup';
 export * from './Popover';
 export * from './Tile';

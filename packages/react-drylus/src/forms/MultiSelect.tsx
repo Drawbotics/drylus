@@ -106,6 +106,62 @@ export interface MultiSelectOption<T> extends Option<T> {
   disabled?: boolean;
 }
 
+interface CustomIndicatorsContainerProps<T> {
+  indicatorContainerProps: React.PropsWithChildren<
+    IndicatorsContainerProps<MultiSelectOption<T>, true, GroupBase<MultiSelectOption<T>>>
+  >;
+  loading?: boolean;
+  readOnly: boolean;
+  hasError: boolean;
+  showValid: boolean;
+}
+
+function CustomIndicatorsContainer<T>({
+  indicatorContainerProps,
+  loading,
+  readOnly,
+  hasError,
+  showValid,
+}: CustomIndicatorsContainerProps<T>) {
+  return (
+    <>
+      {run(() => {
+        if (loading) {
+          return (
+            <div className={styles.icon} data-element="icon">
+              <Spinner size={Size.SMALL} />
+            </div>
+          );
+        } else if (readOnly) {
+          return (
+            <div
+              className={styles.icon}
+              data-element="lock-icon"
+              style={{ color: sv.colorSecondary }}>
+              <Icon name="lock" />
+            </div>
+          );
+        } else if (hasError) {
+          return (
+            <div className={styles.icon} data-element="icon">
+              <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
+            </div>
+          );
+        } else if (showValid) {
+          return (
+            <div className={styles.icon} data-element="icon">
+              <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
+            </div>
+          );
+        } else {
+          return null;
+        }
+      })}
+      <components.IndicatorsContainer {...indicatorContainerProps} />
+    </>
+  );
+}
+
 export interface MultiSelectProps<T, K = string> {
   /**
    * The options to show in the list of options, note that label and value may differ depending on valueKey and labelKey
@@ -167,7 +223,7 @@ export interface MultiSelectProps<T, K = string> {
   responsive?: Responsive<this>;
 }
 
-export const MultiSelect = <T extends any, K extends string>({
+const _MultiSelect = <T extends any, K extends string>({
   responsive,
   ...rest
 }: MultiSelectProps<T, K>) => {
@@ -223,45 +279,15 @@ export const MultiSelect = <T extends any, K extends string>({
         indicatorContainerProps: React.PropsWithChildren<
           IndicatorsContainerProps<MultiSelectOption<T>, true, GroupBase<MultiSelectOption<T>>>
         >,
-      ) => {
-        return (
-          <>
-            {run(() => {
-              if (props.loading) {
-                return (
-                  <div className={styles.icon} data-element="icon">
-                    <Spinner size={Size.SMALL} />
-                  </div>
-                );
-              } else if (props.onChange == null) {
-                return (
-                  <div
-                    className={styles.icon}
-                    data-element="lock-icon"
-                    style={{ color: sv.colorSecondary }}>
-                    <Icon name="lock" />
-                  </div>
-                );
-              } else if (error) {
-                return (
-                  <div className={styles.icon} data-element="icon">
-                    <RoundIcon inversed name="x" size={Size.SMALL} color={Color.RED} />
-                  </div>
-                );
-              } else if (values?.length > 0 && props.valid) {
-                return (
-                  <div className={styles.icon} data-element="icon">
-                    <RoundIcon inversed name="check" size={Size.SMALL} color={Color.GREEN} />
-                  </div>
-                );
-              } else {
-                return null
-              }
-            })}
-            <components.IndicatorsContainer {...indicatorContainerProps} />
-          </>
-        );
-      },
+      ) => (
+        <CustomIndicatorsContainer<T>
+          indicatorContainerProps={indicatorContainerProps}
+          loading={props.loading}
+          readOnly={props.onChange == null}
+          hasError={error != null && error !== false}
+          showValid={values?.length > 0 && props.valid === true}
+        />
+      ),
     },
   } as const;
 
@@ -319,3 +345,4 @@ export const MultiSelect = <T extends any, K extends string>({
     </div>
   );
 };
+export const MultiSelect = React.memo(_MultiSelect) as typeof _MultiSelect;

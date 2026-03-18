@@ -1,7 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { useScreenSize } from '@drawbotics/use-screen-size';
+import { useScreenSize } from '../utils/use-screen-size';
 import { css, cx } from '@emotion/css';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -232,10 +232,12 @@ export const Modal = ({ responsive, ...rest }: ModalProps): React.ReactPortal | 
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
   const [overflowing, setOverflowing] = useState(false);
-  const [previousTouchY, setTouchY] = useState<number>();
+  const previousTouchYRef = useRef<number>();
   const { screenSize, ScreenSizes } = useScreenSize();
   const modalElement = useRef<HTMLDivElement>(null);
   const containerElement = useRef<HTMLDivElement>(null);
+  const onClickCloseRef = useRef(onClickClose);
+  onClickCloseRef.current = onClickClose;
 
   const handleWindowResize = () => {
     if (modalElement.current) {
@@ -246,30 +248,31 @@ export const Modal = ({ responsive, ...rest }: ModalProps): React.ReactPortal | 
   };
 
   const handleTouchStart = (e: TouchEvent) => {
-    setTouchY(e.touches[0]?.clientY);
+    previousTouchYRef.current = e.touches[0]?.clientY;
   };
 
   const handleTouchMove = (e: TouchEvent) => {
     const target = e.target;
     if (target instanceof Node && modalElement?.current?.contains(target)) {
       const touchY = e.changedTouches[0]?.clientY;
-      if (previousTouchY != null && containerElement.current != null) {
-        const touchDelta = Math.abs(touchY - previousTouchY);
-        if (touchY > previousTouchY && touchDelta < 50) {
+      const prevY = previousTouchYRef.current;
+      if (prevY != null && containerElement.current != null) {
+        const touchDelta = Math.abs(touchY - prevY);
+        if (touchY > prevY && touchDelta < 50) {
           containerElement.current.scrollTop -= touchDelta;
-        } else if (touchY < previousTouchY && touchDelta < 50) {
+        } else if (touchY < prevY && touchDelta < 50) {
           containerElement.current.scrollTop += touchDelta;
         }
       }
       if (touchY >= 0) {
-        setTouchY(touchY);
+        previousTouchYRef.current = touchY;
       }
     }
   };
 
   const handleEscKey = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
-      onClickClose?.();
+      onClickCloseRef.current?.();
     }
   };
 
@@ -325,9 +328,9 @@ export const Modal = ({ responsive, ...rest }: ModalProps): React.ReactPortal | 
       window.removeEventListener('resize', handleWindowResize);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
-      document.addEventListener('keydown', handleEscKey, false);
+      document.removeEventListener('keydown', handleEscKey, false);
     };
-  });
+  }, []);
 
   if (!outletElement) return null;
 
@@ -341,7 +344,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps): React.ReactPortal | 
     <ThemeProvider injectGlobal={false}>
       <AnimatePresence>
         {visible ? (
-          <motion.div
+          <m.div
             onAnimationComplete={animationCallbacks?.onAnimationComplete}
             onAnimationStart={animationCallbacks?.onAnimationStart}
             transition={{ duration: fsv.defaultTransitionTime, ease: 'easeInOut' }}
@@ -350,7 +353,7 @@ export const Modal = ({ responsive, ...rest }: ModalProps): React.ReactPortal | 
             exit={{ opacity: 0 }}
             className={cx(styles.overlay, className)}
             style={overlayStyle}>
-            <motion.div
+            <m.div
               onMouseDown={handleClickOutsideModal}
               initial="hidden"
               animate="visible"
@@ -376,8 +379,8 @@ export const Modal = ({ responsive, ...rest }: ModalProps): React.ReactPortal | 
                   );
                 }
               })}
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         ) : null}
       </AnimatePresence>
     </ThemeProvider>

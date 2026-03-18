@@ -98,7 +98,7 @@ export interface AvatarProps {
   responsive?: Responsive<this>;
 }
 
-export const Avatar = ({ responsive, ...rest }: AvatarProps) => {
+export const Avatar = React.memo(({ responsive, ...rest }: AvatarProps) => {
   const {
     image,
     text,
@@ -146,4 +146,5 @@ export const Avatar = ({ responsive, ...rest }: AvatarProps) => {
   } else {
     return avatar;
   }
-};
+});
+Avatar.displayName = 'Avatar';

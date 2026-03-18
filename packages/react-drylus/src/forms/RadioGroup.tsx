@@ -320,7 +320,7 @@ export interface RadioGroupProps<T, K = string> {
   [x: string]: any;
 }
 
-export const RadioGroup = <T extends any, K extends string>({
+const _RadioGroup = <T extends any, K extends string>({
   responsive,
   ...rest
 }: RadioGroupProps<T, K>) => {
@@ -393,3 +393,4 @@ export const RadioGroup = <T extends any, K extends string>({
     </div>
   );
 };
+export const RadioGroup = React.memo(_RadioGroup) as typeof _RadioGroup;

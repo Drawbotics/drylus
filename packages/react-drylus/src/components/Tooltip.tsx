@@ -135,7 +135,7 @@ export interface TooltipProps {
   responsive?: Responsive<this>;
 }
 
-export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
+export const Tooltip = React.memo(({ responsive, ...rest }: TooltipProps) => {
   const {
     children,
     content,
@@ -181,27 +181,28 @@ export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
       setVisible(false);
     };
 
-    if (childrenRef.current != null) {
-      if (childrenRef.current.disabled) {
-        childrenRef.current.addEventListener('pointerenter', handleMouseEnter);
-        childrenRef.current.addEventListener('pointerleave', handleMouseLeave);
+    const el = childrenRef.current;
+    if (el != null) {
+      if (el.disabled) {
+        el.addEventListener('pointerenter', handleMouseEnter);
+        el.addEventListener('pointerleave', handleMouseLeave);
       } else {
-        childrenRef.current.addEventListener('mouseenter', handleMouseEnter);
-        childrenRef.current.addEventListener('mouseleave', handleMouseLeave);
+        el.addEventListener('mouseenter', handleMouseEnter);
+        el.addEventListener('mouseleave', handleMouseLeave);
       }
 
       window.addEventListener('scroll', handleMouseLeave, true);
     }
 
     return () => {
-      childrenRef.current?.removeEventListener('mouseenter', handleMouseEnter);
-      childrenRef.current?.removeEventListener('pointerenter', handleMouseEnter);
-      childrenRef.current?.removeEventListener('mouseleave', handleMouseLeave);
-      childrenRef.current?.removeEventListener('pointerleave', handleMouseLeave);
+      el?.removeEventListener('mouseenter', handleMouseEnter);
+      el?.removeEventListener('pointerenter', handleMouseEnter);
+      el?.removeEventListener('mouseleave', handleMouseLeave);
+      el?.removeEventListener('pointerleave', handleMouseLeave);
 
       window.removeEventListener('scroll', handleMouseLeave);
     };
-  });
+  }, []);
 
   if (outletElement == null) return null;
 
@@ -240,4 +241,5 @@ export const Tooltip = ({ responsive, ...rest }: TooltipProps) => {
       )}
     </Fragment>
   );
-};
+});
+Tooltip.displayName = 'Tooltip';

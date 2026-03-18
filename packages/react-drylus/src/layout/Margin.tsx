@@ -337,7 +337,7 @@ export interface MarginProps {
   responsive?: Responsive<this>;
 }
 
-export const Margin = ({ responsive, ...rest }: MarginProps) => {
+export const Margin = React.memo(({ responsive, ...rest }: MarginProps) => {
   const { children, size: rawSize, style, className } = useResponsiveProps<MarginProps>(
     rest,
     responsive,
@@ -368,4 +368,5 @@ export const Margin = ({ responsive, ...rest }: MarginProps) => {
       {children}
     </div>
   );
-};
+});
+Margin.displayName = 'Margin';

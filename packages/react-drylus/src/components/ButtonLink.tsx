@@ -16,7 +16,7 @@ const styles = {
 
 export interface ButtonLinkProps extends ButtonProps {}
 
-export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
+export const ButtonLink = React.memo(({ responsive, ...rest }: ButtonLinkProps) => {
   const {
     children,
     onClick,
@@ -76,4 +76,5 @@ export const ButtonLink = ({ responsive, ...rest }: ButtonLinkProps) => {
       })}
     </span>
   );
-};
+});
+ButtonLink.displayName = 'ButtonLink';

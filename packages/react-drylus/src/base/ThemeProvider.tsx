@@ -1,5 +1,6 @@
 import { Global, css as globalCSS } from '@emotion/react';
 import { css, cx } from '@emotion/css';
+import { LazyMotion, domAnimation } from 'framer-motion';
 import React from 'react';
 
 import { Color } from '../enums';
@@ -57,23 +58,25 @@ export const ThemeProvider = ({
   injectFontLink();
   return (
     <Context.Provider value={{ themeColor: baseColor }}>
-      <Global
-        styles={[
-          injectGlobal ? styles.global : undefined,
-          injectGlobal ? styles.normalize : undefined,
-          styles.icons,
-        ]}
-      />
-      <div
-        className={cx(
-          styles.root,
-          injectGlobal ? undefined : styles.local,
-          styles.wrapper,
-          className,
-        )}
-        style={style}>
-        {children}
-      </div>
+      <LazyMotion features={domAnimation} strict>
+        <Global
+          styles={[
+            injectGlobal ? styles.global : undefined,
+            injectGlobal ? styles.normalize : undefined,
+            styles.icons,
+          ]}
+        />
+        <div
+          className={cx(
+            styles.root,
+            injectGlobal ? undefined : styles.local,
+            styles.wrapper,
+            className,
+          )}
+          style={style}>
+          {children}
+        </div>
+      </LazyMotion>
     </Context.Provider>
   );
 };

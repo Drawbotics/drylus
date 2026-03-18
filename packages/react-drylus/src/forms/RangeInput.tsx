@@ -151,7 +151,7 @@ const Handle = ({
 
   const handleShowTooltip = () => {
     setTooltipVisible(true);
-    window.addEventListener('mouseup', handleHideTooltip);
+    window.addEventListener('mouseup', handleHideTooltip, { once: true });
   };
 
   return (

@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
-import { motion, useAnimation } from 'framer-motion';
+import { m, useAnimation } from 'framer-motion';
 import { camelCase, omit, upperFirst } from '../utils/helpers';
 import React, { useEffect, useRef } from 'react';
 
@@ -165,14 +165,14 @@ export const GridItem = ({
 
   if (animated) {
     return (
-      <motion.div
+      <m.div
         variants={itemVariants}
         custom={delayRef}
         ref={ref}
         className={cx(styles.item, { [withSpan]: span != null, [withRowSpan]: rowSpan != null })}
         style={style}>
         {children}
-      </motion.div>
+      </m.div>
     );
   }
 
@@ -246,7 +246,7 @@ export const Grid = ({ responsive, ...rest }: GridProps) => {
 
   checkComponentProps({ children }, { children: GridItem });
 
-  const RootElement = animated ? motion.div : 'div';
+  const RootElement = animated ? m.div : 'div';
 
   return (
     <RootElement

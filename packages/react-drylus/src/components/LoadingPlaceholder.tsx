@@ -66,10 +66,11 @@ export interface LoadingPlaceholderProps {
   className?: string;
 }
 
-export const LoadingPlaceholder = ({ responsive, ...rest }: LoadingPlaceholderProps) => {
+export const LoadingPlaceholder = React.memo(({ responsive, ...rest }: LoadingPlaceholderProps) => {
   const { height = sv.defaultMargin, width = 200, style, className } = useResponsiveProps<
     LoadingPlaceholderProps
   >(rest, responsive);
 
   return <div className={cx(styles.shimmer, className)} style={{ height, width, ...style }} />;
-};
+});
+LoadingPlaceholder.displayName = 'LoadingPlaceholder';

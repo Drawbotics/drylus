@@ -165,7 +165,7 @@ export interface DropdownOptionProps {
   onClickClose?: () => void;
 }
 
-export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => {
+export const DropdownOption = React.memo(({ responsive, ...rest }: DropdownOptionProps) => {
   const {
     text,
     category,
@@ -208,9 +208,10 @@ export const DropdownOption = ({ responsive, ...rest }: DropdownOptionProps) => 
       {text}
     </div>
   );
-};
+});
+DropdownOption.displayName = 'DropdownOption';
 
-DropdownOption.propTypes = {
+(DropdownOption as any).propTypes = {
   icon: Deprecated,
 };
 
@@ -225,7 +226,7 @@ export interface DropdownLinkProps extends DropdownOptionProps {
   href: string;
 }
 
-export const DropdownLink = ({ linkComponent = 'a', href, ...rest }: DropdownLinkProps) => {
+export const DropdownLink = React.memo(({ linkComponent = 'a', href, ...rest }: DropdownLinkProps) => {
   return React.createElement(
     linkComponent as unknown as React.ComponentClass<{ href: string }>,
     {
@@ -233,7 +234,8 @@ export const DropdownLink = ({ linkComponent = 'a', href, ...rest }: DropdownLin
     },
     <DropdownOption {...rest} />,
   );
-};
+});
+DropdownLink.displayName = 'DropdownLink';
 
 export interface DropdownTitleProps {
   /** Value of the title */
@@ -246,17 +248,19 @@ export interface DropdownTitleProps {
   className?: string;
 }
 
-export const DropdownTitle = ({ text, style, className }: DropdownTitleProps) => {
+export const DropdownTitle = React.memo(({ text, style, className }: DropdownTitleProps) => {
   return (
     <div style={style} className={cx(styles.title, className)}>
       {text}
     </div>
   );
-};
+});
+DropdownTitle.displayName = 'DropdownTitle';
 
-export const DropdownSeparator = () => {
+export const DropdownSeparator = React.memo(() => {
   return <div className={styles.separator} />;
-};
+});
+DropdownSeparator.displayName = 'DropdownSeparator';
 
 export type DropdownChild =
   | React.ReactElement<typeof DropdownOption>
@@ -283,7 +287,7 @@ export interface DropdownProps {
   responsive?: Responsive<this>;
 }
 
-export const Dropdown = ({ responsive, ...rest }: DropdownProps) => {
+export const Dropdown = React.memo(({ responsive, ...rest }: DropdownProps) => {
   const { children, trigger, side = Position.BOTTOM, style, className } = useResponsiveProps<
     DropdownProps
   >(rest, responsive);
@@ -334,4 +338,5 @@ export const Dropdown = ({ responsive, ...rest }: DropdownProps) => {
       </div>
     </div>
   );
-};
+});
+Dropdown.displayName = 'Dropdown';

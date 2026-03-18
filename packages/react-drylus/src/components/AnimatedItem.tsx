@@ -1,4 +1,4 @@
-import { AnimatePresence, Transition, Variant, motion } from 'framer-motion';
+import { AnimatePresence, Transition, Variant, m } from 'framer-motion';
 import React, { Fragment, useEffect, useState } from 'react';
 
 import { Direction, Speed } from '../enums';
@@ -171,7 +171,7 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
   };
 
   return (
-    <motion.div
+    <m.div
       style={style}
       className={className}
       custom={noAnimate ? undefined : delay}
@@ -181,7 +181,7 @@ export const AnimatedItem = ({ responsive, ...rest }: AnimatedItemProps) => {
       variants={{ ...itemVariants, customEnter, customExit, customInitial }}
       transition={transitionOptions}>
       {children}
-    </motion.div>
+    </m.div>
   );
 };
 
@@ -297,11 +297,11 @@ export const AnimationGroup = ({
   );
 
   const content = staggerChildren ? (
-    <motion.div
+    <m.div
       transition={inversedStagger ? { staggerDirection: -1 } : undefined}
       {...animationProps}>
       {processedChildren}
-    </motion.div>
+    </m.div>
   ) : (
     processedChildren
   );

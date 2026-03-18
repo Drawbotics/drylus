@@ -76,7 +76,7 @@ export interface EmptyStateProps {
   responsive?: Responsive<this>;
 }
 
-export const EmptyState = ({ responsive, ...rest }: EmptyStateProps) => {
+export const EmptyState = React.memo(({ responsive, ...rest }: EmptyStateProps) => {
   const {
     description,
     title,
@@ -139,4 +139,5 @@ export const EmptyState = ({ responsive, ...rest }: EmptyStateProps) => {
       </Flex>
     </div>
   );
-};
+});
+EmptyState.displayName = 'EmptyState';

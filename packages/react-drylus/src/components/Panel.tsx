@@ -111,7 +111,7 @@ export interface PanelHeaderProps {
   className?: string;
 }
 
-export const PanelHeader = ({ children, noPadding, style, className }: PanelHeaderProps) => {
+export const PanelHeader = React.memo(({ children, noPadding, style, className }: PanelHeaderProps) => {
   return (
     <Fragment>
       <div
@@ -128,7 +128,8 @@ export const PanelHeader = ({ children, noPadding, style, className }: PanelHead
       <Separator />
     </Fragment>
   );
-};
+});
+PanelHeader.displayName = 'PanelHeader';
 
 export interface PanelBodyProps {
   /** Content of the body */
@@ -144,7 +145,7 @@ export interface PanelBodyProps {
   className?: string;
 }
 
-export const PanelBody = ({ children, noPadding, style, className }: PanelBodyProps) => {
+export const PanelBody = React.memo(({ children, noPadding, style, className }: PanelBodyProps) => {
   return (
     <div
       data-element="body"
@@ -153,7 +154,8 @@ export const PanelBody = ({ children, noPadding, style, className }: PanelBodyPr
       {children}
     </div>
   );
-};
+});
+PanelBody.displayName = 'PanelBody';
 
 export interface PanelSectionProps {
   /** Content of the section */
@@ -169,7 +171,7 @@ export interface PanelSectionProps {
   className?: string;
 }
 
-export const PanelSection = ({ children, title, style, className }: PanelSectionProps) => {
+export const PanelSection = React.memo(({ children, title, style, className }: PanelSectionProps) => {
   return (
     <div style={style} className={cx(styles.section, className)}>
       {run(() => {
@@ -180,7 +182,8 @@ export const PanelSection = ({ children, title, style, className }: PanelSection
       {children}
     </div>
   );
-};
+});
+PanelSection.displayName = 'PanelSection';
 
 export interface PanelFooterProps {
   /** Content of the footer */
@@ -196,7 +199,7 @@ export interface PanelFooterProps {
   className?: string;
 }
 
-export const PanelFooter = ({ children, noPadding, style, className }: PanelFooterProps) => {
+export const PanelFooter = React.memo(({ children, noPadding, style, className }: PanelFooterProps) => {
   return (
     <Fragment>
       <Separator />
@@ -213,7 +216,8 @@ export const PanelFooter = ({ children, noPadding, style, className }: PanelFoot
       </div>
     </Fragment>
   );
-};
+});
+PanelFooter.displayName = 'PanelFooter';
 
 export interface PanelProps {
   /** Component: PanelHeader, will render as the header of the panel */
@@ -232,7 +236,7 @@ export interface PanelProps {
   className?: string;
 }
 
-export const Panel = ({ header, body, footer, style, className }: PanelProps) => {
+export const Panel = React.memo(({ header, body, footer, style, className }: PanelProps) => {
   checkComponentProps(
     { header, body, footer },
     {
@@ -259,4 +263,5 @@ export const Panel = ({ header, body, footer, style, className }: PanelProps) =>
       {footer}
     </div>
   );
-};
+});
+Panel.displayName = 'Panel';

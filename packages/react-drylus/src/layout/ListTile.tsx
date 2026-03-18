@@ -64,7 +64,7 @@ export interface ListTileProps {
   responsive?: Responsive<this>;
 }
 
-export const ListTile = ({ responsive, ...rest }: ListTileProps) => {
+export const ListTile = React.memo(({ responsive, ...rest }: ListTileProps) => {
   const { title, subtitle, leading, trailing, onClick, style, className } = useResponsiveProps<
     ListTileProps
   >(rest, responsive);
@@ -120,4 +120,5 @@ export const ListTile = ({ responsive, ...rest }: ListTileProps) => {
       </Flex>
     </div>
   );
-};
+});
+ListTile.displayName = 'ListTile';

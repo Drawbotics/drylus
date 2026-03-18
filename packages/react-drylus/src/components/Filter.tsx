@@ -197,7 +197,7 @@ export interface BaseFilterProps {
   responsive?: Responsive<this>;
 }
 
-export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
+export const BaseFilter = React.memo(({ responsive, ...rest }: BaseFilterProps) => {
   const {
     clearLabel = 'Clear',
     label,
@@ -290,7 +290,8 @@ export const BaseFilter = ({ responsive, ...rest }: BaseFilterProps) => {
       </div>
     </div>
   );
-};
+});
+BaseFilter.displayName = 'BaseFilter';
 
 export interface SelectFilterOption<T> extends Option<T> {
   /** Shown at the end of the option */
@@ -317,7 +318,7 @@ export interface SelectFilterProps<T> extends BaseFilterProps {
   className?: string;
 }
 
-export const SelectFilter = <T extends any>({
+const _SelectFilter = <T extends any>({
   options,
   value,
   onChange,
@@ -353,6 +354,7 @@ export const SelectFilter = <T extends any>({
     </BaseFilter>
   );
 };
+export const SelectFilter = React.memo(_SelectFilter) as typeof _SelectFilter;
 
 interface Delimiter {
   delimiter: true;
@@ -409,7 +411,7 @@ export interface CheckboxFilterProps<T> extends BaseFilterProps {
   searchPlaceholder?: string;
 }
 
-export const CheckboxFilter = <T extends any>({
+const _CheckboxFilter = <T extends any>({
   options,
   values = [],
   onChange,
@@ -507,3 +509,4 @@ export const CheckboxFilter = <T extends any>({
     </BaseFilter>
   );
 };
+export const CheckboxFilter = React.memo(_CheckboxFilter) as typeof _CheckboxFilter;

@@ -337,7 +337,7 @@ export interface PaddingProps {
   responsive?: Responsive<this>;
 }
 
-export const Padding = ({ responsive, ...rest }: PaddingProps) => {
+export const Padding = React.memo(({ responsive, ...rest }: PaddingProps) => {
   const { children, size: rawSize, style, className } = useResponsiveProps<PaddingProps>(
     rest,
     responsive,
@@ -369,4 +369,5 @@ export const Padding = ({ responsive, ...rest }: PaddingProps) => {
       {children}
     </div>
   );
-};
+});
+Padding.displayName = 'Padding';

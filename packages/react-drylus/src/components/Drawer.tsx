@@ -1,7 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { useScreenSize } from '@drawbotics/use-screen-size';
+import { useScreenSize } from '../utils/use-screen-size';
 import { css, cx } from '@emotion/css';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -317,7 +317,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
       <ThemeProvider injectGlobal={false}>
         <AnimatePresence>
           {visible ? (
-            <motion.div
+            <m.div
               onAnimationComplete={animationCallbacks?.onAnimationComplete}
               onAnimationStart={animationCallbacks?.onAnimationStart}
               transition={{ duration: fsv.defaultTransitionTime, ease: 'easeInOut' }}
@@ -335,7 +335,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
               )}
               style={overlayStyle}
               ref={overlayElement}>
-              <motion.div
+              <m.div
                 custom={width}
                 variants={variants}
                 style={{ position: 'relative' }}
@@ -348,8 +348,8 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
                   style={{ ...wrapperStyle, width }}>
                   {content}
                 </div>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           ) : null}
         </AnimatePresence>
       </ThemeProvider>,
@@ -360,7 +360,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
   return (
     <AnimatePresence>
       {visible ? (
-        <motion.div
+        <m.div
           onAnimationComplete={animationCallbacks?.onAnimationComplete}
           onAnimationStart={animationCallbacks?.onAnimationStart}
           initial={{ opacity: 0, width: 0 }}
@@ -370,7 +370,7 @@ export const Drawer = ({ responsive, ...rest }: DrawerProps) => {
           <div style={{ width }} className={styles.wrapper}>
             {content}
           </div>
-        </motion.div>
+        </m.div>
       ) : null}
     </AnimatePresence>
   );

@@ -4,6 +4,7 @@ export * from './inject-global-styles';
 export * from './normalize';
 export * from './prop-types';
 export * from './hooks';
+export * from './use-screen-size';
 export * from './run';
 export * from './utils';
 export * from './illustrations';

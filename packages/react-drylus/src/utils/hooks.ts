@@ -1,4 +1,4 @@
-import { useScreenSize } from '@drawbotics/use-screen-size';
+import { useScreenSize } from './use-screen-size';
 import { useState } from 'react';
 
 import { Responsive } from '../types';

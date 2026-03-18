@@ -1,5 +1,5 @@
 import sv from '@drawbotics/drylus-style-vars';
-import { useScreenSize } from '@drawbotics/use-screen-size';
+import { useScreenSize } from '../utils/use-screen-size';
 import { css, cx } from '@emotion/css';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -370,13 +370,16 @@ const CustomSelect = <T extends number | string, K extends string>({
   };
 
   useEffect(() => {
-    rootRef.current?.addEventListener('mousedown', () => setCanBlur(false));
-    rootRef.current?.addEventListener('mouseup', () => setCanBlur(true));
+    const el = rootRef.current;
+    const handleMouseDown = () => setCanBlur(false);
+    const handleMouseUp = () => setCanBlur(true);
+    el?.addEventListener('mousedown', handleMouseDown);
+    el?.addEventListener('mouseup', handleMouseUp);
     document.addEventListener('mousedown', handleDocumentClick);
 
     return () => {
-      rootRef.current?.removeEventListener('mousedown', () => setCanBlur(false));
-      rootRef.current?.removeEventListener('mouseup', () => setCanBlur(true));
+      el?.removeEventListener('mousedown', handleMouseDown);
+      el?.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('mousedown', handleDocumentClick);
     };
   }, []);
@@ -533,7 +536,7 @@ export interface SelectProps<T, K = string> {
   [x: string]: any;
 }
 
-export const Select = <T extends number | string, K extends string>({
+const _Select = <T extends number | string, K extends string>({
   responsive,
   ...rest
 }: SelectProps<T, K>) => {
@@ -643,3 +646,4 @@ export const Select = <T extends number | string, K extends string>({
     </div>
   );
 };
+export const Select = React.memo(_Select) as typeof _Select;

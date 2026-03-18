@@ -63,7 +63,7 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@drawbotics/s3sync": "^2.0.0",
-    "@drawbotics/use-screen-size": "^3.1.1",
+    "@drawbotics/use-screen-size": "^3.1.2",
     "@emotion/babel-plugin": "^11.13.5",
     "@emotion/jest": "^11.14.0",
     "@mdx-js/loader": "^1.6.21",

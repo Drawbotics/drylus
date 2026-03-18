@@ -118,7 +118,7 @@ function _getClassNameForColor(color: Color | ExtendedColor, inversed?: boolean)
   return inversed ? `${getEnumAsClass(color)}Inversed` : getEnumAsClass(color);
 }
 
-export const Tag = ({
+export const Tag = React.memo(({
   children,
   onClickRemove,
   inversed,
@@ -158,4 +158,5 @@ export const Tag = ({
       })}
     </div>
   );
-};
+});
+Tag.displayName = 'Tag';

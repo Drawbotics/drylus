@@ -1,8 +1,8 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { createDrawable, createTimeline } from 'animejs';
 import { css } from '@emotion/css';
-import { motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import { m } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { ThemeProvider } from '../base';
@@ -47,6 +47,7 @@ export interface SplashScreenProps {
 
 export const SplashScreen = ({ text }: SplashScreenProps) => {
   const [outletElement, setOutletElement] = useState<HTMLElement>();
+  const timelineRef = useRef<ReturnType<typeof createTimeline> | null>(null);
 
   const handleAnimationStart = () => {
     const timeline = createTimeline({
@@ -71,6 +72,7 @@ export const SplashScreen = ({ text }: SplashScreenProps) => {
       duration: 300,
       scale: 0.7,
     });
+    timelineRef.current = timeline;
   };
 
   useEffect(() => {
@@ -85,6 +87,8 @@ export const SplashScreen = ({ text }: SplashScreenProps) => {
     }
 
     return () => {
+      timelineRef.current?.pause();
+      timelineRef.current = null;
       if (outletElement) {
         document.body.removeChild(outletElement);
       }
@@ -95,7 +99,7 @@ export const SplashScreen = ({ text }: SplashScreenProps) => {
 
   return ReactDOM.createPortal(
     <ThemeProvider injectGlobal={false}>
-      <motion.div
+      <m.div
         className={styles.root}
         onAnimationStart={handleAnimationStart}
         transition={{ duration: fsv.defaultTransitionTime, ease: 'easeInOut' }}
@@ -139,7 +143,7 @@ export const SplashScreen = ({ text }: SplashScreenProps) => {
           </svg>
         </div>
         {text != null ? <div className={styles.text}>{text}</div> : null}
-      </motion.div>
+      </m.div>
     </ThemeProvider>,
     document.getElementById('splash-outlet') as Element,
   );

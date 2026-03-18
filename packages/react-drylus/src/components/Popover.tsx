@@ -181,17 +181,22 @@ export const Popover = ({
     ) {
       setVisible(openOnMount);
     }
-  });
+  }, [openOnMount, visible]);
+
+  const visibleRef = useRef(visible);
+  visibleRef.current = visible;
+  const exitOnClickRef = useRef(exitOnClick);
+  exitOnClickRef.current = exitOnClick;
 
   useEffect(() => {
     const handleWindowClick = (e: Event) => {
       if (
-        (visible &&
+        (visibleRef.current &&
           e.target !== childrenRef.current &&
           !childrenRef.current?.contains(e.target as Node) &&
           e.target !== popoverRef.current &&
           !popoverRef.current?.contains(e.target as Node)) ||
-        exitOnClick
+        exitOnClickRef.current
       ) {
         setVisible(false);
       }
@@ -201,19 +206,20 @@ export const Popover = ({
 
     const handleMouseLeave = () => setVisible(false);
 
-    if (childrenRef.current != null) {
-      childrenRef.current.style.cursor = 'pointer';
-      childrenRef.current.addEventListener('click', handleMouseClick);
+    const el = childrenRef.current;
+    if (el != null) {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', handleMouseClick);
       window.addEventListener('click', handleWindowClick, true);
       window.addEventListener('scroll', handleMouseLeave, true);
     }
 
     return () => {
-      childrenRef.current?.removeEventListener('click', handleMouseClick);
+      el?.removeEventListener('click', handleMouseClick);
       window.removeEventListener('click', handleWindowClick);
       window.removeEventListener('scroll', handleMouseLeave);
     };
-  });
+  }, []);
 
   if (outletElement == null) return null;
 

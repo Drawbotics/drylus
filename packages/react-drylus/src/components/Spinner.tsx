@@ -113,7 +113,7 @@ export interface SpinnerProps {
   responsive?: Responsive<this>;
 }
 
-export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
+export const Spinner = React.memo(({ responsive, ...rest }: SpinnerProps) => {
   const { size = Size.DEFAULT, inversed, fullSize, style, color, className } = useResponsiveProps<
     SpinnerProps
   >(rest, responsive);
@@ -148,4 +148,5 @@ export const Spinner = ({ responsive, ...rest }: SpinnerProps) => {
       </div>
     </div>
   );
-};
+});
+Spinner.displayName = 'Spinner';

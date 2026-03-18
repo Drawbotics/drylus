@@ -361,7 +361,7 @@ export interface ButtonProps {
   [x: string]: any;
 }
 
-export const Button = ({ responsive, ...rest }: ButtonProps) => {
+export const Button = React.memo(({ responsive, ...rest }: ButtonProps) => {
   const {
     children,
     disabled,
@@ -425,4 +425,5 @@ export const Button = ({ responsive, ...rest }: ButtonProps) => {
       })}
     </button>
   );
-};
+});
+Button.displayName = 'Button';

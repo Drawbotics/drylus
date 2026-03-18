@@ -1,5 +1,5 @@
 import { css, cx } from '@emotion/css';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { camelCase } from '../utils/helpers';
 import React from 'react';
 
@@ -114,7 +114,7 @@ export interface FlexSpacerProps {
   direction?: FlexDirection;
 }
 
-export const FlexSpacer = ({ responsive, direction, ...rest }: FlexSpacerProps) => {
+export const FlexSpacer = React.memo(({ responsive, direction, ...rest }: FlexSpacerProps) => {
   const { size = Size.DEFAULT, flex, style = {}, className } = useResponsiveProps(rest, responsive);
   const equalSpan = flex === true;
   return (
@@ -130,7 +130,8 @@ export const FlexSpacer = ({ responsive, direction, ...rest }: FlexSpacerProps) 
       })}
     </div>
   );
-};
+});
+FlexSpacer.displayName = 'FlexSpacer';
 
 export interface FlexItemProps {
   children: React.ReactNode;
@@ -154,7 +155,7 @@ export interface FlexItemProps {
   animationSpeed?: Speed;
 }
 
-export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
+export const FlexItem = React.memo(({ responsive, ...rest }: FlexItemProps) => {
   const { children, flex, style = {}, animated, animationSpeed, className } = useResponsiveProps(
     rest,
     responsive,
@@ -172,7 +173,7 @@ export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
       }
     : {};
 
-  const RootElement = animated ? motion.div : 'div';
+  const RootElement = animated ? m.div : 'div';
 
   return (
     <RootElement
@@ -182,7 +183,8 @@ export const FlexItem = ({ responsive, ...rest }: FlexItemProps) => {
       {children}
     </RootElement>
   );
-};
+});
+FlexItem.displayName = 'FlexItem';
 
 export interface FlexProps {
   children:
@@ -240,7 +242,7 @@ export interface FlexProps {
   responsive?: Responsive<this>;
 }
 
-export const Flex = ({ responsive, ...rest }: FlexProps) => {
+export const Flex = React.memo(({ responsive, ...rest }: FlexProps) => {
   const {
     children,
     direction = FlexDirection.HORIZONTAL,
@@ -271,7 +273,7 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
       }
     : {};
 
-  const RootElement = animated ? motion.div : 'div';
+  const RootElement = animated ? m.div : 'div';
 
   return (
     <RootElement
@@ -305,4 +307,5 @@ export const Flex = ({ responsive, ...rest }: FlexProps) => {
         : null}
     </RootElement>
   );
-};
+});
+Flex.displayName = 'Flex';

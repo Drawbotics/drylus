@@ -1,7 +1,7 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
-import { useScreenSize } from '@drawbotics/use-screen-size';
+import { useScreenSize } from '../utils/use-screen-size';
 import { css, cx } from '@emotion/css';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { get, isEqual, omit, omitBy } from '../utils/helpers';
 import React, {
   Fragment,
@@ -524,7 +524,7 @@ export const TRow = ({
   checkComponentProps({ children }, { children: TCell });
 
   return (
-    <motion.tr
+    <m.tr
       {...animationProps}
       style={style}
       className={cx(styles.row, {
@@ -559,7 +559,7 @@ export const TRow = ({
             } as Partial<TCellProps>,
           ),
         )}
-    </motion.tr>
+    </m.tr>
   );
 };
 
@@ -631,7 +631,7 @@ export const TBody = ({ children, animated }: TBodyProps) => {
   checkComponentProps({ children }, { children: TRow });
 
   return (
-    <motion.tbody {...animationProps} className={styles.body}>
+    <m.tbody {...animationProps} className={styles.body}>
       {React.Children.map(children as any, (child: React.ReactElement<typeof TRow>) => {
         light = (child.props as any).nested ? light : !light; // TODO find better
         i = i + 1;
@@ -641,7 +641,7 @@ export const TBody = ({ children, animated }: TBodyProps) => {
           lastParentRow: i === childrenCount - 1,
         } as Partial<typeof TRow>);
       })}
-    </motion.tbody>
+    </m.tbody>
   );
 };
 

@@ -75,7 +75,7 @@ export interface IconProps {
   className?: string;
 }
 
-export const Icon = ({ name, bold, onClick, style, color, shade, className }: IconProps) => {
+export const Icon = React.memo(({ name, bold, onClick, style, color, shade, className }: IconProps) => {
   return (
     <i
       style={style}
@@ -93,4 +93,5 @@ export const Icon = ({ name, bold, onClick, style, color, shade, className }: Ic
       onClick={onClick}
     />
   );
-};
+});
+Icon.displayName = 'Icon';

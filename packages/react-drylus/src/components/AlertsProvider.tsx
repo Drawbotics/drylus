@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import React, { useEffect, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -221,7 +221,7 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
           <div className={styles.provider}>
             <AnimatePresence>
               {alerts.map((alert: AlertProps) => (
-                <motion.div
+                <m.div
                   key={alert.id}
                   layout
                   initial={{ opacity: 0, y: 30 }}
@@ -230,7 +230,7 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
                   <Margin size={{ top: Size.SMALL }}>
                     <Alert onClickDismiss={(id) => hideAlert(id)} {...alert} />
                   </Margin>
-                </motion.div>
+                </m.div>
               ))}
             </AnimatePresence>
           </div>

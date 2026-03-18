@@ -556,6 +556,7 @@ export const InputWithRef = forwardRef<HTMLInputElement, InputProps>((props, ref
 
 InputWithRef.displayName = 'Input';
 
-export const Input = <T extends string>(props: InputProps<T>) => {
+const _Input = <T extends string>(props: InputProps<T>) => {
   return <RawInput {...props} />;
 };
+export const Input = React.memo(_Input) as typeof _Input;
