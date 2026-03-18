@@ -7,8 +7,10 @@ import React, {
   Fragment,
   ReactNode,
   createContext,
+  useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -236,6 +238,8 @@ const styles = {
   `,
   body: css`
     color: ${sv.colorPrimary};
+    content-visibility: auto;
+    contain-intrinsic-block-size: auto 500px;
   `,
   withToggle: css`
     position: relative;
@@ -521,7 +525,9 @@ export const TRow = ({
         }
       : {};
 
-  checkComponentProps({ children }, { children: TCell });
+  if (process.env.NODE_ENV !== 'production') {
+    checkComponentProps({ children }, { children: TCell });
+  }
 
   return (
     <m.tr
@@ -575,7 +581,9 @@ export interface THeadProps {
 }
 
 export const THead = ({ children, responsive = true }: THeadProps) => {
-  checkComponentProps({ children }, { children: TCell });
+  if (process.env.NODE_ENV !== 'production') {
+    checkComponentProps({ children }, { children: TCell });
+  }
 
   return (
     <thead className={cx(styles.header, { [styles.responsiveHeader]: responsive })}>
@@ -628,7 +636,9 @@ export const TBody = ({ children, animated }: TBodyProps) => {
       }
     : {};
 
-  checkComponentProps({ children }, { children: TRow });
+  if (process.env.NODE_ENV !== 'production') {
+    checkComponentProps({ children }, { children: TRow });
+  }
 
   return (
     <m.tbody {...animationProps} className={styles.body}>
@@ -885,36 +895,24 @@ function _generateTable({
     const hasData = data.data != null;
     const rowData = hasData ? omit(data, 'data') : data;
     const uniqId = Object.values(rowData).reduce<string>((memo, v) => `${memo}-${String(v)}`, '');
-    const parentRow =
-      memoDataValues != null && !Array.isArray(memoDataValues) ? (
-        <MemoizedTRow
-          responsive={responsive}
-          header={header}
-          memoData={memoDataValues}
-          rowData={rowData}
-          animated={animated}
-          key={uniqId}
-          parent={hasData ? uniqId : undefined}
-          onClick={(e) => onClickRow(rowData, e)}
-          onEnter={() => onEnterRow(rowData)}
-          onExit={() => onExitRow(rowData)}
-          clickable={clickable}
-          highlighted={activeRow != null && rowData.id != null && activeRow === rowData.id}
-        />
-      ) : (
-        <TRow
-          responsive={responsive}
-          animated={animated}
-          key={uniqId}
-          parent={hasData ? uniqId : undefined}
-          onClick={(e) => onClickRow(rowData, e)}
-          onEnter={() => onEnterRow(rowData)}
-          onExit={() => onExitRow(rowData)}
-          clickable={clickable}
-          highlighted={activeRow != null && rowData.id != null && activeRow === rowData.id}>
-          {_generateRowChildren({ header, rowData })}
-        </TRow>
-      );
+    const memoData =
+      memoDataValues != null && !Array.isArray(memoDataValues) ? memoDataValues : rowData;
+    const parentRow = (
+      <MemoizedTRow
+        responsive={responsive}
+        header={header}
+        memoData={memoData}
+        rowData={rowData}
+        animated={animated}
+        key={uniqId}
+        parent={hasData ? uniqId : undefined}
+        onClick={(e) => onClickRow(rowData, e)}
+        onEnter={() => onEnterRow(rowData)}
+        onExit={() => onExitRow(rowData)}
+        clickable={clickable}
+        highlighted={activeRow != null && rowData.id != null && activeRow === rowData.id}
+      />
+    );
 
     if (hasData) {
       return [
@@ -970,7 +968,7 @@ export interface TableProps {
   /** If passed, the table will be generated from this, and children will be ignored */
   data?: TableData;
 
-  /** When given, each table row will be shallowly compared to prevent unnecessary renders. Should have the same structure as the data prop to enable 1-to-1 equivalence */
+  /** Rows are memoized by default using their data for comparison. When row cells contain React elements (e.g. Input, Checkbox), pass this prop with primitive-only values matching the `data` shape so the comparator can detect changes accurately */
   memoDataValues?: TableData;
 
   /** Array of strings to generate the header of the table (each string is a label). data prop keys will be filtered by these */
@@ -1083,9 +1081,14 @@ export const Table = ({
   const [xScrollAmount, setXScrollAmount] = useState<number>();
   const [divisorHeight, setDivisorHeight] = useState<number>();
 
-  checkComponentProps({ children }, { children: [TBody, THead] });
+  if (process.env.NODE_ENV !== 'production') {
+    checkComponentProps({ children }, { children: [TBody, THead] });
+  }
 
-  const handleScrollTable = () => {
+  const scrollRafRef = useRef<number>();
+  const resizeRafRef = useRef<number>();
+
+  const updateScrollAmount = useCallback(() => {
     if (scrollableRef.current != null && tableRef.current != null) {
       const { scrollLeft, clientWidth } = scrollableRef.current;
       const difference = tableRef.current.clientWidth - clientWidth;
@@ -1094,125 +1097,153 @@ export const Table = ({
         setXScrollAmount(amount);
       }
     }
-  };
+  }, []);
 
-  const handleResize = () => {
-    const height = tableRef.current?.clientHeight;
-    setDivisorHeight(height);
-
-    if (scrollableRef.current != null && tableRef.current != null) {
-      const { clientWidth } = scrollableRef.current;
-      const difference = tableRef.current.clientWidth - clientWidth;
-      if (difference === 0) {
-        setXScrollAmount(undefined);
-      } else {
-        handleScrollTable();
-      }
+  const handleScrollTable = useCallback(() => {
+    if (scrollRafRef.current != null) {
+      cancelAnimationFrame(scrollRafRef.current);
     }
-  };
+    scrollRafRef.current = requestAnimationFrame(updateScrollAmount);
+  }, [updateScrollAmount]);
+
+  const handleResize = useCallback(() => {
+    if (resizeRafRef.current != null) {
+      cancelAnimationFrame(resizeRafRef.current);
+    }
+    resizeRafRef.current = requestAnimationFrame(() => {
+      const height = tableRef.current?.clientHeight;
+      setDivisorHeight(height);
+
+      if (scrollableRef.current != null && tableRef.current != null) {
+        const { clientWidth } = scrollableRef.current;
+        const difference = tableRef.current.clientWidth - clientWidth;
+        if (difference === 0) {
+          setXScrollAmount(undefined);
+        } else {
+          updateScrollAmount();
+        }
+      }
+    });
+  }, [updateScrollAmount]);
 
   useEffect(() => {
     if (scrollableRef.current != null) {
       scrollableRef.current.addEventListener('scroll', handleScrollTable, false);
       window.addEventListener('resize', handleResize, false);
-      setTimeout(handleScrollTable, 50); // trigger calculation once
-      setTimeout(handleResize, 50);
+      handleScrollTable();
+      handleResize();
     }
 
     return () => {
       scrollableRef.current?.removeEventListener('scroll', handleScrollTable, false);
       window.removeEventListener('resize', handleResize, false);
+      if (scrollRafRef.current != null) cancelAnimationFrame(scrollRafRef.current);
+      if (resizeRafRef.current != null) cancelAnimationFrame(resizeRafRef.current);
     };
-  }, [scrollableRef, tableRef]);
+  }, [handleScrollTable, handleResize]);
 
   useEffect(() => {
     handleScrollTable();
     handleResize();
-  }, [data?.length, isLoading]);
+  }, [data?.length, isLoading, handleScrollTable, handleResize]);
 
-  const handleSetRowState = (state: Record<string | number, boolean>) =>
-    setRowState({ ...rowsStates, ...state });
+  const handleSetRowState = useCallback(
+    (state: Record<string | number, boolean>) =>
+      setRowState((prev) => ({ ...prev, ...state })),
+    [],
+  );
+
+  const rowsContextValue = useMemo<
+    [Record<string, boolean>, (val: Record<string, boolean>) => void]
+  >(() => [rowsStates, handleSetRowState], [rowsStates, handleSetRowState]);
 
   const hasNestedData = data != null ? data.some((d) => d.data) : false;
 
+  const tableHead = useMemo(() => {
+    if (data == null || isLoading || emptyContent) return null;
+    return (
+      <THead key="head" responsive={responsive}>
+        {header.map((hItem, i) => {
+          const value =
+            typeof hItem === 'string' || typeof hItem === 'number' ? hItem : hItem.value;
+          const label =
+            typeof hItem === 'string' || typeof hItem === 'number' ? hItem : hItem.label;
+          const cellContent =
+            sortableBy?.includes(value) && screenSize > ScreenSizes.L ? (
+              <div
+                className={cx(styles.headerWithArrows, {
+                  [styles.activeHeader]: activeHeader?.key === value,
+                })}
+                onClick={() => (onClickHeader != null ? onClickHeader(value) : null)}>
+                <div
+                  className={cx(styles.sortableIcons, {
+                    [styles.up]:
+                      activeHeader?.key === value && activeHeader?.direction === 'asc',
+                    [styles.down]:
+                      activeHeader?.key === value && activeHeader?.direction === 'desc',
+                  })}>
+                  <Icon name="chevron-up" />
+                  <Icon name="chevron-down" />
+                </div>
+                <span>{label}</span>
+              </div>
+            ) : (
+              label
+            );
+          const noZIndex =
+            xScrollAmount == null ||
+            (i === 0 && xScrollAmount === 0) ||
+            (i === header.length - 1 && xScrollAmount === 1);
+          return (
+            <TCell
+              key={value}
+              style={{ zIndex: noZIndex ? 'auto' : undefined }}
+              responsive={responsive}>
+              {cellContent}
+              {i === 0 && scrollable ? (
+                <div
+                  className={styles.leftDivisor}
+                  style={{
+                    height: divisorHeight,
+                    opacity: xScrollAmount != null && xScrollAmount > 0 ? 1 : 0,
+                  }}
+                />
+              ) : null}
+              {i === header.length - 1 && scrollable ? (
+                <div
+                  className={styles.rightDivisor}
+                  style={{
+                    height: divisorHeight,
+                    opacity: xScrollAmount != null && xScrollAmount < 1 ? 1 : 0,
+                  }}
+                />
+              ) : null}
+            </TCell>
+          );
+        })}
+      </THead>
+    );
+  }, [header, sortableBy, activeHeader, screenSize, onClickHeader, xScrollAmount, divisorHeight, scrollable, responsive, data, isLoading, emptyContent]);
+
+  const tableBody = useMemo(() => {
+    if (data == null || isLoading || emptyContent) return null;
+    return _generateTable({
+      data,
+      memoDataValues,
+      header,
+      childHeader,
+      onClickRow,
+      onEnterRow,
+      onExitRow,
+      clickable,
+      activeRow,
+      animated,
+      responsive,
+    });
+  }, [data, memoDataValues, header, childHeader, onClickRow, onEnterRow, onExitRow, clickable, activeRow, animated, responsive, isLoading, emptyContent]);
+
   const tableContents =
-    data != null && !isLoading && !emptyContent
-      ? [
-          <THead key="head" responsive={responsive}>
-            {header.map((hItem, i) => {
-              const value =
-                typeof hItem === 'string' || typeof hItem === 'number' ? hItem : hItem.value;
-              const label =
-                typeof hItem === 'string' || typeof hItem === 'number' ? hItem : hItem.label;
-              const cellContent =
-                sortableBy?.includes(value) && screenSize > ScreenSizes.L ? (
-                  <div
-                    className={cx(styles.headerWithArrows, {
-                      [styles.activeHeader]: activeHeader?.key === value,
-                    })}
-                    onClick={() => (onClickHeader != null ? onClickHeader(value) : null)}>
-                    <div
-                      className={cx(styles.sortableIcons, {
-                        [styles.up]:
-                          activeHeader?.key === value && activeHeader?.direction === 'asc',
-                        [styles.down]:
-                          activeHeader?.key === value && activeHeader?.direction === 'desc',
-                      })}>
-                      <Icon name="chevron-up" />
-                      <Icon name="chevron-down" />
-                    </div>
-                    <span>{label}</span>
-                  </div>
-                ) : (
-                  label
-                );
-              const noZIndex =
-                xScrollAmount == null ||
-                (i === 0 && xScrollAmount === 0) ||
-                (i === header.length - 1 && xScrollAmount === 1);
-              return (
-                <TCell
-                  key={value}
-                  style={{ zIndex: noZIndex ? 'auto' : undefined }}
-                  responsive={responsive}>
-                  {cellContent}
-                  {i === 0 && scrollable ? (
-                    <div
-                      className={styles.leftDivisor}
-                      style={{
-                        height: divisorHeight,
-                        opacity: xScrollAmount != null && xScrollAmount > 0 ? 1 : 0,
-                      }}
-                    />
-                  ) : null}
-                  {i === header.length - 1 && scrollable ? (
-                    <div
-                      className={styles.rightDivisor}
-                      style={{
-                        height: divisorHeight,
-                        opacity: xScrollAmount != null && xScrollAmount < 1 ? 1 : 0,
-                      }}
-                    />
-                  ) : null}
-                </TCell>
-              );
-            })}
-          </THead>,
-          _generateTable({
-            data,
-            memoDataValues,
-            header,
-            childHeader,
-            onClickRow,
-            onEnterRow,
-            onExitRow,
-            clickable,
-            activeRow,
-            animated,
-            responsive,
-          }),
-        ]
-      : children;
+    tableHead != null && tableBody != null ? [tableHead, tableBody] : children;
 
   const transformedChildren =
     screenSize <= ScreenSizes.L && responsive
@@ -1245,7 +1276,7 @@ export const Table = ({
         },
         className,
       )}>
-      <RowsContext.Provider value={[rowsStates, handleSetRowState]}>
+      <RowsContext.Provider value={rowsContextValue}>
         {run(() => {
           if (header && isLoading) {
             return <LoadingTable animated={animated} columns={header} rows={loadingRows} />;
