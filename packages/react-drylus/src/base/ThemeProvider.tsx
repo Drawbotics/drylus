@@ -56,16 +56,22 @@ export const ThemeProvider = ({
   injectGlobal = true,
 }: ThemeProviderProps) => {
   injectFontLink();
+
+  const contextValue = React.useMemo(() => ({ themeColor: baseColor }), [baseColor]);
+
+  const globalStylesArray = React.useMemo(
+    () => [
+      injectGlobal ? styles.global : undefined,
+      injectGlobal ? styles.normalize : undefined,
+      styles.icons,
+    ],
+    [injectGlobal],
+  );
+
   return (
-    <Context.Provider value={{ themeColor: baseColor }}>
+    <Context.Provider value={contextValue}>
       <LazyMotion features={domAnimation} strict>
-        <Global
-          styles={[
-            injectGlobal ? styles.global : undefined,
-            injectGlobal ? styles.normalize : undefined,
-            styles.icons,
-          ]}
-        />
+        <Global styles={globalStylesArray} />
         <div
           className={cx(
             styles.root,
