@@ -288,13 +288,20 @@ export const Dropdown = React.memo(({ responsive, ...rest }: DropdownProps) => {
     DropdownProps
   >(rest, responsive);
 
-  if (!React.isValidElement(trigger)) {
-    console.warn('Dropdown only accepts a single child as trigger');
-    return null;
-  }
-
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setDropdowOpen] = useState(false);
+
+  const isValidTrigger = React.isValidElement(trigger);
+
+  useEffect(() => {
+    if (!isValidTrigger) {
+      console.warn('Dropdown only accepts a single child as trigger');
+    }
+  }, [isValidTrigger]);
+
+  if (!isValidTrigger) {
+    return null;
+  }
 
   const handleDocumentClick = (e: Event) => {
     // Needs Event because React.MouseEvent<HTMLDivElement> does not match addEventListener signature

@@ -87,7 +87,6 @@ export const Title = ({ responsive, ...rest }: TitleProps) => {
   >(rest, responsive);
 
   if (size < 1 || size > 4) {
-    console.warn('Unsupported title size');
     return null;
   }
   return (

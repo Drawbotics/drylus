@@ -243,7 +243,9 @@ export const Modal = ({ responsive, ...rest }: ModalProps): React.ReactPortal | 
   const modalElement = useRef<HTMLDivElement>(null);
   const containerElement = useRef<HTMLDivElement>(null);
   const onClickCloseRef = useRef(onClickClose);
-  onClickCloseRef.current = onClickClose;
+  useEffect(() => {
+    onClickCloseRef.current = onClickClose;
+  });
 
   const handleWindowResize = () => {
     if (modalElement.current) {

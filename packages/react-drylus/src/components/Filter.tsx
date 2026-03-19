@@ -422,18 +422,20 @@ const _CheckboxFilter = <T extends any>({
 }: CheckboxFilterProps<T>) => {
   const currentLabel = getLabelForCheckboxFilter(label, options, values);
 
-  if (process.env.NODE_ENV !== 'production' && values.length > 0) {
-    const optionValues = options
-      .filter((option): option is Option<T> => 'value' in option)
-      .map((option) => String(option.value));
-    const unmatched = values.filter((v) => !optionValues.includes(String(v)));
-    if (unmatched.length > 0) {
-      console.warn(
-        `CheckboxFilter: values [${unmatched.join(', ')}] do not match any option. ` +
-        `These values will be ignored in the displayed count.`,
-      );
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'production' && values.length > 0) {
+      const optionValues = options
+        .filter((option): option is Option<T> => 'value' in option)
+        .map((option) => String(option.value));
+      const unmatched = values.filter((v) => !optionValues.includes(String(v)));
+      if (unmatched.length > 0) {
+        console.warn(
+          `CheckboxFilter: values [${unmatched.join(', ')}] do not match any option. ` +
+          `These values will be ignored in the displayed count.`,
+        );
+      }
     }
-  }
+  }, [values, options]);
 
   const [searchTerm, setSearchTerm] = useState('');
 

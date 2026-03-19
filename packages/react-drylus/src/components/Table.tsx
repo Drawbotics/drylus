@@ -1250,9 +1250,11 @@ export const Table = ({
       ? _addAttributesToCells(tableContents as any)
       : tableContents;
 
-  if (data && (!header || header.length === 0)) {
-    console.warn('`data` was passed as prop but no/empty header, cannot render');
-  }
+  useEffect(() => {
+    if (data && (!header || header.length === 0)) {
+      console.warn('`data` was passed as prop but no/empty header, cannot render');
+    }
+  }, [data, header]);
 
   const table = (
     <table

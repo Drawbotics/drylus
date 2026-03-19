@@ -1,6 +1,6 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Color, Size } from '../enums';
 import { Option, Style } from '../types';
@@ -167,9 +167,12 @@ export const TabNavigation = <T extends any>({
   linkComponent: Link,
   style,
 }: TabNavigationProps<T>) => {
-  console.warn(
-    'TabNavigation has been deprecated, please use TabMenu instead. This component will be removed in the next major version',
-  );
+  useEffect(() => {
+    console.warn(
+      'TabNavigation has been deprecated, please use TabMenu instead. This component will be removed in the next major version',
+    );
+  }, []);
+
   const renderOption = (option: TabNavigationOption<T>) => (
     <div
       style={style}

@@ -152,11 +152,13 @@ export const InlineEdit = ({
   };
 
   const editingRef = useRef(editing);
-  editingRef.current = editing;
   const exitOnClickRef = useRef(exitOnClick);
-  exitOnClickRef.current = exitOnClick;
   const onCancelRef = useRef(onCancel);
-  onCancelRef.current = onCancel;
+  useEffect(() => {
+    editingRef.current = editing;
+    exitOnClickRef.current = exitOnClick;
+    onCancelRef.current = onCancel;
+  });
 
   useEffect(() => {
     const handleWindowClick = (e: Event) => {
