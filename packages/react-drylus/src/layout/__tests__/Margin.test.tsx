@@ -1,5 +1,5 @@
 import React from 'react';
-import { create } from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import { Size } from '../../enums';
 import { Margin } from '../Margin';
@@ -7,17 +7,17 @@ import { Margin } from '../Margin';
 describe('Margin', () => {
   describe('matches snapshot when', () => {
     it('has a uniform size', () => {
-      const tree = create(<Margin size={Size.LARGE}>Content</Margin>).toJSON();
+      const tree = render(<Margin size={Size.LARGE}>Content</Margin>).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('has a size only on 1 side', () => {
-      const tree = create(<Margin size={{ left: Size.LARGE }}>Content</Margin>).toJSON();
+      const tree = render(<Margin size={{ left: Size.LARGE }}>Content</Margin>).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('has a different size on each side', () => {
-      const tree = create(
+      const tree = render(
         <Margin
           size={{
             left: Size.LARGE,
@@ -27,12 +27,12 @@ describe('Margin', () => {
           }}>
           Content
         </Margin>,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('has vertical and horizontal sizes', () => {
-      const tree = create(
+      const tree = render(
         <Margin
           size={{
             vertical: Size.LARGE,
@@ -40,7 +40,7 @@ describe('Margin', () => {
           }}>
           Content
         </Margin>,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
   });

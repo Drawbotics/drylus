@@ -1,5 +1,5 @@
 import React from 'react';
-import { create } from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import { AttachmentBox } from '../AttachmentBox';
 
@@ -23,41 +23,41 @@ const completedAttachment = {
 describe('AttachmentBox', () => {
   describe('matches snapshot when', () => {
     it('is given the simplest attachment', () => {
-      const tree = create(<AttachmentBox fileName={simplestAttachment.fileName} />).toJSON();
+      const tree = render(<AttachmentBox fileName={simplestAttachment.fileName} />).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
     it('is given attachment with progress', () => {
-      const tree = create(
+      const tree = render(
         <AttachmentBox
           fileName={attachmentWithProgress.fileName}
           progress={attachmentWithProgress.progress}
         />,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
     it('is given a completed attachment', () => {
-      const tree = create(
+      const tree = render(
         <AttachmentBox
           fileName={completedAttachment.fileName}
           progress={completedAttachment.progress}
         />,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
     it('can download attachment', () => {
-      const tree = create(
+      const tree = render(
         <AttachmentBox
           fileName={completedAttachment.fileName}
           progress={completedAttachment.progress}
           onClickDownload={() => {}}
         />,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
     it('can remove attachment', () => {
-      const tree = create(
+      const tree = render(
         <AttachmentBox fileName={simplestAttachment.fileName} onClickClose={() => {}} />,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
   });

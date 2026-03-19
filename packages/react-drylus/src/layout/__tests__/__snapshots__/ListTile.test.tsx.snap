@@ -70,17 +70,16 @@ exports[`ListTile matches snapshot when has a custom title 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
   >
     <div
-      className="emotion-2"
-      style={{}}
+      class="emotion-2"
     >
       <button
-        className="emotion-3"
+        class="emotion-3"
         type="button"
       >
         Button
@@ -131,22 +130,21 @@ exports[`ListTile matches snapshot when has a subtitle 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
   >
     <div
-      className="emotion-2"
-      style={{}}
+      class="emotion-2"
     >
       <div
-        className="emotion-3"
+        class="emotion-3"
       >
         Title
       </div>
       <div
-        className="emotion-4"
+        class="emotion-4"
       >
         Subtitle
       </div>
@@ -190,17 +188,16 @@ exports[`ListTile matches snapshot when has a title 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
   >
     <div
-      className="emotion-2"
-      style={{}}
+      class="emotion-2"
     >
       <div
-        className="emotion-3"
+        class="emotion-3"
       >
         Title
       </div>
@@ -307,20 +304,19 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
   >
     <div
-      className="emotion-2"
-      style={{}}
+      class="emotion-2"
     >
       <div
-        className="emotion-3"
+        class="emotion-3"
       >
         <button
-          className="emotion-4"
+          class="emotion-4"
           type="button"
         >
           Leading
@@ -328,24 +324,22 @@ exports[`ListTile matches snapshot when has a trailing and leading component 1`]
       </div>
     </div>
     <div
-      className="emotion-5"
-      style={{}}
+      class="emotion-5"
     >
       <div
-        className="emotion-6"
+        class="emotion-6"
       >
         Title
       </div>
     </div>
     <div
-      className="emotion-2"
-      style={{}}
+      class="emotion-2"
     >
       <div
-        className="emotion-8"
+        class="emotion-8"
       >
         <button
-          className="emotion-4"
+          class="emotion-4"
           type="button"
         >
           Trailing

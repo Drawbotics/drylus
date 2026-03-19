@@ -75,8 +75,8 @@ module.exports = {
       '~': path.resolve(__dirname, './app'),
       'react': path.resolve(__dirname, '../../node_modules/react'),
       'react-dom': path.resolve(__dirname, '../../node_modules/react-dom'),
-      'react-router': path.resolve(__dirname, 'node_modules/react-router'),
-      'react-router-dom': path.resolve(__dirname, 'node_modules/react-router-dom'),
+      'react-router': path.resolve(__dirname, '../../node_modules/react-router'),
+      'react-router-dom': path.resolve(__dirname, '../../node_modules/react-router-dom'),
       '@remix-run/router': path.resolve(__dirname, '../../node_modules/@remix-run/router'),
     },
     extensions: [ '.js', '.jsx', '.css', '.mdx', '.ts', '.tsx' ],
@@ -84,7 +84,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: isProduction ? '[name].[contenthash:8].js' : 'bundle.js',
+    filename: isProduction ? '[name].[contenthash:8].js' : '[name].bundle.js',
     publicPath: isProduction ? '/drylus/' : '/',
   },
   optimization: {

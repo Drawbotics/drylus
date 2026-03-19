@@ -131,50 +131,48 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div>
     <div
-      className="emotion-1"
+      class="emotion-1"
     >
       <div
-        className="emotion-2"
+        class="emotion-2"
       >
         <label
-          className="emotion-3"
-          htmlFor="test-uuid-1"
+          class="emotion-3"
+          for="test-uuid-1"
         >
           <div
-            className="emotion-4"
+            class="emotion-4"
           >
             <input
-              checked={true}
-              className="emotion-5"
+              checked=""
+              class="emotion-5"
               id="test-uuid-1"
-              onBlur={[Function]}
-              onChange={[Function]}
               type="radio"
               value="1"
             />
             <div
-              className="emotion-6"
+              class="emotion-6"
               data-element="sprite"
             >
               <label
-                className="emotion-7"
+                class="emotion-7"
                 data-element="icon"
-                htmlFor="test-uuid-1"
+                for="test-uuid-1"
               >
                 <i
-                  className="Drycon Drycon-check emotion-8"
+                  class="Drycon Drycon-check emotion-8"
                 />
               </label>
             </div>
           </div>
           <label
-            className="emotion-9"
+            class="emotion-9"
             data-element="label"
-            htmlFor="test-uuid-1"
+            for="test-uuid-1"
           >
             1
           </label>
@@ -182,46 +180,43 @@ exports[`RadioGroup matches snapshot when is has a value 1`] = `
       </div>
     </div>
     <div
-      className="emotion-1"
+      class="emotion-1"
     >
       <div
-        className="emotion-2"
+        class="emotion-2"
       >
         <label
-          className="emotion-3"
-          htmlFor="test-uuid-2"
+          class="emotion-3"
+          for="test-uuid-2"
         >
           <div
-            className="emotion-4"
+            class="emotion-4"
           >
             <input
-              checked={false}
-              className="emotion-5"
+              class="emotion-5"
               id="test-uuid-2"
-              onBlur={[Function]}
-              onChange={[Function]}
               type="radio"
               value="3"
             />
             <div
-              className="emotion-6"
+              class="emotion-6"
               data-element="sprite"
             >
               <label
-                className="emotion-7"
+                class="emotion-7"
                 data-element="icon"
-                htmlFor="test-uuid-2"
+                for="test-uuid-2"
               >
                 <i
-                  className="Drycon Drycon-check emotion-8"
+                  class="Drycon Drycon-check emotion-8"
                 />
               </label>
             </div>
           </div>
           <label
-            className="emotion-9"
+            class="emotion-9"
             data-element="label"
-            htmlFor="test-uuid-2"
+            for="test-uuid-2"
           >
             2
           </label>
@@ -363,50 +358,47 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div>
     <div
-      className="emotion-1"
+      class="emotion-1"
     >
       <div
-        className="emotion-2"
+        class="emotion-2"
       >
         <label
-          className="emotion-3"
-          htmlFor="test-uuid-1"
+          class="emotion-3"
+          for="test-uuid-1"
         >
           <div
-            className="emotion-4"
+            class="emotion-4"
           >
             <input
-              checked={false}
-              className="emotion-5"
+              class="emotion-5"
               id="test-uuid-1"
-              onBlur={[Function]}
-              onChange={[Function]}
               type="radio"
               value="1"
             />
             <div
-              className="emotion-6"
+              class="emotion-6"
               data-element="sprite"
             >
               <label
-                className="emotion-7"
+                class="emotion-7"
                 data-element="icon"
-                htmlFor="test-uuid-1"
+                for="test-uuid-1"
               >
                 <i
-                  className="Drycon Drycon-check emotion-8"
+                  class="Drycon Drycon-check emotion-8"
                 />
               </label>
             </div>
           </div>
           <label
-            className="emotion-9"
+            class="emotion-9"
             data-element="label"
-            htmlFor="test-uuid-1"
+            for="test-uuid-1"
           >
             1
           </label>
@@ -414,46 +406,43 @@ exports[`RadioGroup matches snapshot when is has no value 1`] = `
       </div>
     </div>
     <div
-      className="emotion-1"
+      class="emotion-1"
     >
       <div
-        className="emotion-2"
+        class="emotion-2"
       >
         <label
-          className="emotion-3"
-          htmlFor="test-uuid-2"
+          class="emotion-3"
+          for="test-uuid-2"
         >
           <div
-            className="emotion-4"
+            class="emotion-4"
           >
             <input
-              checked={false}
-              className="emotion-5"
+              class="emotion-5"
               id="test-uuid-2"
-              onBlur={[Function]}
-              onChange={[Function]}
               type="radio"
               value="3"
             />
             <div
-              className="emotion-6"
+              class="emotion-6"
               data-element="sprite"
             >
               <label
-                className="emotion-7"
+                class="emotion-7"
                 data-element="icon"
-                htmlFor="test-uuid-2"
+                for="test-uuid-2"
               >
                 <i
-                  className="Drycon Drycon-check emotion-8"
+                  class="Drycon Drycon-check emotion-8"
                 />
               </label>
             </div>
           </div>
           <label
-            className="emotion-9"
+            class="emotion-9"
             data-element="label"
-            htmlFor="test-uuid-2"
+            for="test-uuid-2"
           >
             2
           </label>
@@ -625,49 +614,47 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div>
     <div
-      className="emotion-1"
+      class="emotion-1"
     >
       <div
-        className="emotion-2"
+        class="emotion-2"
       >
         <label
-          className="emotion-3"
-          htmlFor="test-uuid-1"
+          class="emotion-3"
+          for="test-uuid-1"
         >
           <div
-            className="emotion-4"
+            class="emotion-4"
           >
             <input
-              checked={true}
-              className="emotion-5"
+              checked=""
+              class="emotion-5"
               id="test-uuid-1"
-              onBlur={[Function]}
-              onChange={[Function]}
               type="radio"
               value="1"
             />
             <div
-              className="emotion-6"
+              class="emotion-6"
               data-element="sprite"
             >
               <label
-                className="emotion-7"
+                class="emotion-7"
                 data-element="locked-icon"
               >
                 <i
-                  className="emotion-8 Drycon Drycon-lock"
+                  class="emotion-8 Drycon Drycon-lock"
                 />
               </label>
             </div>
           </div>
           <label
-            className="emotion-9"
+            class="emotion-9"
             data-element="label"
-            htmlFor="test-uuid-1"
+            for="test-uuid-1"
           >
             1
           </label>
@@ -675,45 +662,42 @@ exports[`RadioGroup matches snapshot when is read only 1`] = `
       </div>
     </div>
     <div
-      className="emotion-1"
+      class="emotion-1"
     >
       <div
-        className="emotion-2"
+        class="emotion-2"
       >
         <label
-          className="emotion-3"
-          htmlFor="test-uuid-2"
+          class="emotion-3"
+          for="test-uuid-2"
         >
           <div
-            className="emotion-4"
+            class="emotion-4"
           >
             <input
-              checked={false}
-              className="emotion-5"
+              class="emotion-5"
               id="test-uuid-2"
-              onBlur={[Function]}
-              onChange={[Function]}
               type="radio"
               value="3"
             />
             <div
-              className="emotion-6"
+              class="emotion-6"
               data-element="sprite"
             >
               <label
-                className="emotion-7"
+                class="emotion-7"
                 data-element="locked-icon"
               >
                 <i
-                  className="emotion-8 Drycon Drycon-lock"
+                  class="emotion-8 Drycon Drycon-lock"
                 />
               </label>
             </div>
           </div>
           <label
-            className="emotion-9"
+            class="emotion-9"
             data-element="label"
-            htmlFor="test-uuid-2"
+            for="test-uuid-2"
           >
             2
           </label>

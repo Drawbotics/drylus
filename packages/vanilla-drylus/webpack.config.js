@@ -37,9 +37,6 @@ module.exports = {
   entry: './src/index.js',
   resolve: {
     extensions: [ '.js', '.css' ],
-    alias: {
-      'emotion': require.resolve('emotion'),
-    },
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -63,7 +60,7 @@ module.exports = {
           options: {
             rootMode: 'upward',
             plugins: [
-              'babel-plugin-emotion',
+              '@emotion/babel-plugin',
             ],
           },
         }],

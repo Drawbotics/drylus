@@ -47,7 +47,7 @@ exports[`Margin matches snapshot when has a different size on each side 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   Content
 </div>
@@ -79,7 +79,7 @@ exports[`Margin matches snapshot when has a size only on 1 side 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   Content
 </div>
@@ -104,7 +104,7 @@ exports[`Margin matches snapshot when has a uniform size 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   Content
 </div>
@@ -157,7 +157,7 @@ exports[`Margin matches snapshot when has vertical and horizontal sizes 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   Content
 </div>

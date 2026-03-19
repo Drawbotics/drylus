@@ -112,8 +112,8 @@ export const InlineEdit = ({
 }: InlineEditProps) => {
   const childrenRef = useRef<HTMLElement | null>(null);
   const editRef = useRef<HTMLDivElement>(null);
-  const childrenCSSClassCopy = useRef<DOMTokenList>();
-  const childrenDisplayCopy = useRef<string>();
+  const childrenCSSClassCopy = useRef<DOMTokenList>(undefined);
+  const childrenDisplayCopy = useRef<string>(undefined);
   const [editing, setIsEditing] = useState(false);
 
   const handleMouseLeave = () => {

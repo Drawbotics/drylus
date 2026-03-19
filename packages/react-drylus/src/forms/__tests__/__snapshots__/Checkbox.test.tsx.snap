@@ -123,42 +123,39 @@ exports[`Checkbox matches snapshot when has a label 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <label
-    className="emotion-1 undefined"
-    htmlFor="test-uuid-1"
+    class="emotion-1 undefined"
+    for="test-uuid-1"
   >
     <div
-      className="emotion-2"
+      class="emotion-2"
     >
       <input
-        checked={false}
-        className="emotion-3"
+        class="emotion-3"
         id="test-uuid-1"
-        onChange={[Function]}
-        readOnly={false}
         type="checkbox"
       />
       <div
-        className="emotion-4"
+        class="emotion-4"
         data-element="sprite"
       >
         <label
-          className="emotion-5"
+          class="emotion-5"
           data-element="icon"
-          htmlFor="test-uuid-1"
+          for="test-uuid-1"
         >
           <i
-            className="Drycon Drycon-check emotion-6"
+            class="Drycon Drycon-check emotion-6"
           />
         </label>
       </div>
     </div>
     <label
-      className="emotion-7"
+      class="emotion-7"
       data-element="label"
-      htmlFor="test-uuid-1"
+      for="test-uuid-1"
     >
       Label
     </label>
@@ -297,45 +294,42 @@ exports[`Checkbox matches snapshot when has a label as react node 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <label
-    className="emotion-1 undefined"
-    htmlFor="test-uuid-1"
+    class="emotion-1 undefined"
+    for="test-uuid-1"
   >
     <div
-      className="emotion-2"
+      class="emotion-2"
     >
       <input
-        checked={false}
-        className="emotion-3"
+        class="emotion-3"
         id="test-uuid-1"
-        onChange={[Function]}
-        readOnly={false}
         type="checkbox"
       />
       <div
-        className="emotion-4"
+        class="emotion-4"
         data-element="sprite"
       >
         <label
-          className="emotion-5"
+          class="emotion-5"
           data-element="icon"
-          htmlFor="test-uuid-1"
+          for="test-uuid-1"
         >
           <i
-            className="Drycon Drycon-check emotion-6"
+            class="Drycon Drycon-check emotion-6"
           />
         </label>
       </div>
     </div>
     <label
-      className="emotion-7"
+      class="emotion-7"
       data-element="label"
-      htmlFor="test-uuid-1"
+      for="test-uuid-1"
     >
       <span
-        className="emotion-8"
+        class="emotion-8"
       >
         Label
       </span>
@@ -453,34 +447,32 @@ exports[`Checkbox matches snapshot when is checked 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <label
-    className="emotion-1 undefined"
-    htmlFor="test-uuid-1"
+    class="emotion-1 undefined"
+    for="test-uuid-1"
   >
     <div
-      className="emotion-2"
+      class="emotion-2"
     >
       <input
-        checked={true}
-        className="emotion-3"
+        checked=""
+        class="emotion-3"
         id="test-uuid-1"
-        onChange={[Function]}
-        readOnly={false}
         type="checkbox"
       />
       <div
-        className="emotion-4"
+        class="emotion-4"
         data-element="sprite"
       >
         <label
-          className="emotion-5"
+          class="emotion-5"
           data-element="icon"
-          htmlFor="test-uuid-1"
+          for="test-uuid-1"
         >
           <i
-            className="Drycon Drycon-check emotion-6"
+            class="Drycon Drycon-check emotion-6"
           />
         </label>
       </div>
@@ -613,34 +605,31 @@ exports[`Checkbox matches snapshot when is large 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <label
-    className="emotion-1"
-    htmlFor="test-uuid-1"
+    class="emotion-1"
+    for="test-uuid-1"
   >
     <div
-      className="emotion-2"
+      class="emotion-2"
     >
       <input
-        checked={false}
-        className="emotion-3"
+        class="emotion-3"
         id="test-uuid-1"
-        onChange={[Function]}
-        readOnly={false}
         type="checkbox"
       />
       <div
-        className="emotion-4"
+        class="emotion-4"
         data-element="sprite"
       >
         <label
-          className="emotion-5"
+          class="emotion-5"
           data-element="icon"
-          htmlFor="test-uuid-1"
+          for="test-uuid-1"
         >
           <i
-            className="Drycon Drycon-check emotion-6"
+            class="Drycon Drycon-check emotion-6"
           />
         </label>
       </div>
@@ -758,34 +747,31 @@ exports[`Checkbox matches snapshot when is not checked 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <label
-    className="emotion-1 undefined"
-    htmlFor="test-uuid-1"
+    class="emotion-1 undefined"
+    for="test-uuid-1"
   >
     <div
-      className="emotion-2"
+      class="emotion-2"
     >
       <input
-        checked={false}
-        className="emotion-3"
+        class="emotion-3"
         id="test-uuid-1"
-        onChange={[Function]}
-        readOnly={false}
         type="checkbox"
       />
       <div
-        className="emotion-4"
+        class="emotion-4"
         data-element="sprite"
       >
         <label
-          className="emotion-5"
+          class="emotion-5"
           data-element="icon"
-          htmlFor="test-uuid-1"
+          for="test-uuid-1"
         >
           <i
-            className="Drycon Drycon-check emotion-6"
+            class="Drycon Drycon-check emotion-6"
           />
         </label>
       </div>
@@ -917,33 +903,32 @@ exports[`Checkbox matches snapshot when is read only 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <label
-    className="undefined emotion-1"
-    htmlFor="test-uuid-1"
+    class="undefined emotion-1"
+    for="test-uuid-1"
   >
     <div
-      className="emotion-2"
+      class="emotion-2"
     >
       <input
-        checked={true}
-        className="emotion-3"
+        checked=""
+        class="emotion-3"
         id="test-uuid-1"
-        onChange={[Function]}
-        readOnly={true}
+        readonly=""
         type="checkbox"
       />
       <div
-        className="emotion-4"
+        class="emotion-4"
         data-element="sprite"
       >
         <label
-          className="emotion-5"
+          class="emotion-5"
           data-element="locked-icon"
         >
           <i
-            className="emotion-6 Drycon Drycon-lock"
+            class="emotion-6 Drycon Drycon-lock"
           />
         </label>
       </div>

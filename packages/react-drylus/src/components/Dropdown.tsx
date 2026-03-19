@@ -5,7 +5,7 @@ import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { Category, Position, Shade, Size } from '../enums';
 import { Padding } from '../layout';
 import { Responsive, Style } from '../types';
-import { Deprecated, getEnumAsClass, useResponsiveProps } from '../utils';
+import { getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
 
 const styles = {
@@ -210,10 +210,6 @@ export const DropdownOption = React.memo(({ responsive, ...rest }: DropdownOptio
   );
 });
 DropdownOption.displayName = 'DropdownOption';
-
-(DropdownOption as any).propTypes = {
-  icon: Deprecated,
-};
 
 export interface DropdownLinkProps extends DropdownOptionProps {
   /**

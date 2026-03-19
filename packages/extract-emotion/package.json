@@ -25,8 +25,8 @@
     "memfs": "^4.0.0"
   },
   "peerDependencies": {
-    "emotion": "^10",
-    "react": ">=16.8.0 <20"
+    "@emotion/css": "^11.0.0",
+    "react": ">=16.8.0 <21"
   },
   "repository": {
     "type": "git",

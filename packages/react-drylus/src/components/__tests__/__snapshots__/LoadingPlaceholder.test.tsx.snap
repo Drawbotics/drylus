@@ -41,13 +41,8 @@ exports[`LoadingPlaceholder matches snapshot when has custom sizes 1`] = `
 }
 
 <div
-  className="emotion-0"
-  style={
-    {
-      "height": 200,
-      "width": 100,
-    }
-  }
+  class="emotion-0"
+  style="height: 200px; width: 100px;"
 />
 `;
 
@@ -92,12 +87,7 @@ exports[`LoadingPlaceholder matches snapshot when has no specified sizes 1`] = `
 }
 
 <div
-  className="emotion-0"
-  style={
-    {
-      "height": "24px",
-      "width": 200,
-    }
-  }
+  class="emotion-0"
+  style="height: 24px; width: 200px;"
 />
 `;

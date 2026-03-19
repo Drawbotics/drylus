@@ -1,7 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
 import { AnimatePresence, m } from 'framer-motion';
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { use, useEffect, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { ThemeProvider } from '../base/ThemeProvider';
@@ -214,7 +214,7 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
   if (!outletElement) return null;
 
   return (
-    <Context.Provider value={{ showAlert, hideAlert }}>
+    <Context value={{ showAlert, hideAlert }}>
       {children}
       {ReactDOM.createPortal(
         <ThemeProvider injectGlobal={false}>
@@ -237,10 +237,10 @@ export const AlertsProvider = ({ children }: AlertsProviderProps) => {
         </ThemeProvider>,
         document.getElementById('alerts-outlet') as Element,
       )}
-    </Context.Provider>
+    </Context>
   );
 };
 
 export function useAlert() {
-  return React.useContext(Context);
+  return use(Context);
 }

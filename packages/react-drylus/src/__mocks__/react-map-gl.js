@@ -1,8 +1,8 @@
 import React from 'react';
 
-const MapGL = React.forwardRef(function MapGL(props, ref) {
-  return React.createElement('div', { 'data-testid': 'map', ref }, props.children);
-});
+function MapGL(props) {
+  return React.createElement('div', { 'data-testid': 'map', ref: props.ref }, props.children);
+}
 
 export function Marker(props) {
   return React.createElement('div', { 'data-testid': 'marker' }, props.children);

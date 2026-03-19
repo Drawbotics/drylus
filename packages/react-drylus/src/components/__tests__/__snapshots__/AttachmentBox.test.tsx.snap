@@ -245,126 +245,82 @@ exports[`AttachmentBox matches snapshot when can download attachment 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
-    style={
-      {
-        "height": "100%",
-      }
-    }
+    class="emotion-1"
+    style="height: 100%;"
   >
     <div
-      className="emotion-2"
-      style={
-        {
-          "display": "flex",
-          "minWidth": 0,
-        }
-      }
+      class="emotion-2"
+      style="display: flex; min-width: 0;"
     >
       <div
-        className="emotion-3"
-        style={
-          {
-            "width": "100%",
-          }
-        }
+        class="emotion-3"
+        style="width: 100%;"
       >
         <div
-          className="emotion-4"
-          style={
-            {
-              "display": "flex",
-            }
-          }
+          class="emotion-4"
+          style="display: flex;"
         >
           <div
-            className="emotion-5"
+            class="emotion-5"
             data-type="jpg"
           />
         </div>
         <div
-          className="emotion-4"
-          style={{}}
+          class="emotion-4"
         >
           <div
-            className="emotion-7"
+            class="emotion-7"
           />
         </div>
         <div
-          className="emotion-2"
-          style={
-            {
-              "minWidth": 0,
-            }
-          }
+          class="emotion-2"
+          style="min-width: 0;"
         >
           <div
-            style={
-              {
-                "overflow": "hidden",
-                "textOverflow": "ellipsis",
-                "whiteSpace": "nowrap",
-              }
-            }
+            style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"
           >
             <span
-              className="emotion-9"
+              class="emotion-9"
             >
               CompleteFile.jpg
             </span>
           </div>
           <div
-            className="emotion-10"
-            style={
-              {
-                "backgroundColor": "#d3dce6",
-                "marginTop": 4,
-              }
-            }
+            class="emotion-10"
+            style="background-color: rgb(211, 220, 230); margin-top: 4px;"
           >
             <div
-              className="emotion-11"
+              class="emotion-11"
               data-element="bar"
-              style={
-                {
-                  "width": "100%",
-                }
-              }
+              style="width: 100%;"
             />
           </div>
         </div>
       </div>
     </div>
     <div
-      className="emotion-4"
-      style={{}}
+      class="emotion-4"
     >
       <div
-        className="emotion-13"
+        class="emotion-13"
       />
     </div>
     <div
-      className="emotion-4"
-      style={
-        {
-          "display": "flex",
-        }
-      }
+      class="emotion-4"
+      style="display: flex;"
     >
       <i
-        className="Drycon Drycon-download emotion-15"
-        onClick={[Function]}
+        class="Drycon Drycon-download emotion-15"
       />
     </div>
     <div
-      className="emotion-4"
-      style={{}}
+      class="emotion-4"
     >
       <div
-        className="emotion-7"
+        class="emotion-7"
       />
     </div>
   </div>
@@ -549,73 +505,45 @@ exports[`AttachmentBox matches snapshot when can remove attachment 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
-    style={
-      {
-        "height": "100%",
-      }
-    }
+    class="emotion-1"
+    style="height: 100%;"
   >
     <div
-      className="emotion-2"
-      style={
-        {
-          "display": "flex",
-          "minWidth": 0,
-        }
-      }
+      class="emotion-2"
+      style="display: flex; min-width: 0;"
     >
       <div
-        className="emotion-3"
-        style={
-          {
-            "width": "100%",
-          }
-        }
+        class="emotion-3"
+        style="width: 100%;"
       >
         <div
-          className="emotion-4"
-          style={
-            {
-              "display": "flex",
-            }
-          }
+          class="emotion-4"
+          style="display: flex;"
         >
           <div
-            className="emotion-5"
+            class="emotion-5"
             data-type="jpg"
           />
         </div>
         <div
-          className="emotion-4"
-          style={{}}
+          class="emotion-4"
         >
           <div
-            className="emotion-7"
+            class="emotion-7"
           />
         </div>
         <div
-          className="emotion-2"
-          style={
-            {
-              "minWidth": 0,
-            }
-          }
+          class="emotion-2"
+          style="min-width: 0;"
         >
           <div
-            style={
-              {
-                "overflow": "hidden",
-                "textOverflow": "ellipsis",
-                "whiteSpace": "nowrap",
-              }
-            }
+            style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"
           >
             <span
-              className="emotion-9"
+              class="emotion-9"
             >
               FirstFile.jpg
             </span>
@@ -624,24 +552,18 @@ exports[`AttachmentBox matches snapshot when can remove attachment 1`] = `
       </div>
     </div>
     <div
-      className="emotion-4"
-      style={{}}
+      class="emotion-4"
     >
       <div
-        className="emotion-7"
+        class="emotion-7"
       />
     </div>
     <div
-      className="emotion-4"
-      style={
-        {
-          "display": "flex",
-        }
-      }
+      class="emotion-4"
+      style="display: flex;"
     >
       <i
-        className="Drycon Drycon-x emotion-13"
-        onClick={[Function]}
+        class="Drycon Drycon-x emotion-13"
       />
     </div>
   </div>
@@ -861,105 +783,67 @@ exports[`AttachmentBox matches snapshot when is given a completed attachment 1`]
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
-    style={
-      {
-        "height": "100%",
-      }
-    }
+    class="emotion-1"
+    style="height: 100%;"
   >
     <div
-      className="emotion-2"
-      style={
-        {
-          "display": "flex",
-          "minWidth": 0,
-        }
-      }
+      class="emotion-2"
+      style="display: flex; min-width: 0;"
     >
       <div
-        className="emotion-3"
-        style={
-          {
-            "width": "100%",
-          }
-        }
+        class="emotion-3"
+        style="width: 100%;"
       >
         <div
-          className="emotion-4"
-          style={
-            {
-              "display": "flex",
-            }
-          }
+          class="emotion-4"
+          style="display: flex;"
         >
           <div
-            className="emotion-5"
+            class="emotion-5"
             data-type="jpg"
           />
         </div>
         <div
-          className="emotion-4"
-          style={{}}
+          class="emotion-4"
         >
           <div
-            className="emotion-7"
+            class="emotion-7"
           />
         </div>
         <div
-          className="emotion-2"
-          style={
-            {
-              "minWidth": 0,
-            }
-          }
+          class="emotion-2"
+          style="min-width: 0;"
         >
           <div
-            style={
-              {
-                "overflow": "hidden",
-                "textOverflow": "ellipsis",
-                "whiteSpace": "nowrap",
-              }
-            }
+            style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"
           >
             <span
-              className="emotion-9"
+              class="emotion-9"
             >
               CompleteFile.jpg
             </span>
           </div>
           <div
-            className="emotion-10"
-            style={
-              {
-                "backgroundColor": "#d3dce6",
-                "marginTop": 4,
-              }
-            }
+            class="emotion-10"
+            style="background-color: rgb(211, 220, 230); margin-top: 4px;"
           >
             <div
-              className="emotion-11"
+              class="emotion-11"
               data-element="bar"
-              style={
-                {
-                  "width": "100%",
-                }
-              }
+              style="width: 100%;"
             />
           </div>
         </div>
       </div>
     </div>
     <div
-      className="emotion-4"
-      style={{}}
+      class="emotion-4"
     >
       <div
-        className="emotion-7"
+        class="emotion-7"
       />
     </div>
   </div>
@@ -1179,105 +1063,67 @@ exports[`AttachmentBox matches snapshot when is given attachment with progress 1
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
-    style={
-      {
-        "height": "100%",
-      }
-    }
+    class="emotion-1"
+    style="height: 100%;"
   >
     <div
-      className="emotion-2"
-      style={
-        {
-          "display": "flex",
-          "minWidth": 0,
-        }
-      }
+      class="emotion-2"
+      style="display: flex; min-width: 0;"
     >
       <div
-        className="emotion-3"
-        style={
-          {
-            "width": "100%",
-          }
-        }
+        class="emotion-3"
+        style="width: 100%;"
       >
         <div
-          className="emotion-4"
-          style={
-            {
-              "display": "flex",
-            }
-          }
+          class="emotion-4"
+          style="display: flex;"
         >
           <div
-            className="emotion-5"
+            class="emotion-5"
             data-type="jpg"
           />
         </div>
         <div
-          className="emotion-4"
-          style={{}}
+          class="emotion-4"
         >
           <div
-            className="emotion-7"
+            class="emotion-7"
           />
         </div>
         <div
-          className="emotion-2"
-          style={
-            {
-              "minWidth": 0,
-            }
-          }
+          class="emotion-2"
+          style="min-width: 0;"
         >
           <div
-            style={
-              {
-                "overflow": "hidden",
-                "textOverflow": "ellipsis",
-                "whiteSpace": "nowrap",
-              }
-            }
+            style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"
           >
             <span
-              className="emotion-9"
+              class="emotion-9"
             >
               ProgressFile.jpg
             </span>
           </div>
           <div
-            className="emotion-10"
-            style={
-              {
-                "backgroundColor": "#d3dce6",
-                "marginTop": 4,
-              }
-            }
+            class="emotion-10"
+            style="background-color: rgb(211, 220, 230); margin-top: 4px;"
           >
             <div
-              className="emotion-11"
+              class="emotion-11"
               data-element="bar"
-              style={
-                {
-                  "width": "50%",
-                }
-              }
+              style="width: 50%;"
             />
           </div>
         </div>
       </div>
     </div>
     <div
-      className="emotion-4"
-      style={{}}
+      class="emotion-4"
     >
       <div
-        className="emotion-7"
+        class="emotion-7"
       />
     </div>
   </div>
@@ -1454,73 +1300,45 @@ exports[`AttachmentBox matches snapshot when is given the simplest attachment 1`
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
-    style={
-      {
-        "height": "100%",
-      }
-    }
+    class="emotion-1"
+    style="height: 100%;"
   >
     <div
-      className="emotion-2"
-      style={
-        {
-          "display": "flex",
-          "minWidth": 0,
-        }
-      }
+      class="emotion-2"
+      style="display: flex; min-width: 0;"
     >
       <div
-        className="emotion-3"
-        style={
-          {
-            "width": "100%",
-          }
-        }
+        class="emotion-3"
+        style="width: 100%;"
       >
         <div
-          className="emotion-4"
-          style={
-            {
-              "display": "flex",
-            }
-          }
+          class="emotion-4"
+          style="display: flex;"
         >
           <div
-            className="emotion-5"
+            class="emotion-5"
             data-type="jpg"
           />
         </div>
         <div
-          className="emotion-4"
-          style={{}}
+          class="emotion-4"
         >
           <div
-            className="emotion-7"
+            class="emotion-7"
           />
         </div>
         <div
-          className="emotion-2"
-          style={
-            {
-              "minWidth": 0,
-            }
-          }
+          class="emotion-2"
+          style="min-width: 0;"
         >
           <div
-            style={
-              {
-                "overflow": "hidden",
-                "textOverflow": "ellipsis",
-                "whiteSpace": "nowrap",
-              }
-            }
+            style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"
           >
             <span
-              className="emotion-9"
+              class="emotion-9"
             >
               FirstFile.jpg
             </span>
@@ -1529,11 +1347,10 @@ exports[`AttachmentBox matches snapshot when is given the simplest attachment 1`
       </div>
     </div>
     <div
-      className="emotion-4"
-      style={{}}
+      class="emotion-4"
     >
       <div
-        className="emotion-7"
+        class="emotion-7"
       />
     </div>
   </div>

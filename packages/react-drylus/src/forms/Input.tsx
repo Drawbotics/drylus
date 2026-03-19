@@ -1,13 +1,12 @@
 import sv, { fade } from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
-import React, { forwardRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useThemeColor } from '../base';
 import { Button, Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
 import { Category, Color, Size } from '../enums';
 import { Responsive, Style } from '../types';
 import {
-  Deprecated,
   ERROR_MESSAGES_JOIN_STRING,
   getEnumAsClass,
   isFunction,
@@ -437,10 +436,10 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
             data-element="leading"
             className={cx(styles.fix, styles.leading, {
               [styles.leadingComponent]: isLeadingComponent,
-              [styles.transparentButton]: isLeadingComponent && !(leading as React.ReactElement).props?.category,
-              [styles.buttonWithCategory]: isLeadingComponent && (leading as React.ReactElement).props?.category,
+              [styles.transparentButton]: isLeadingComponent && !(leading as React.ReactElement<any>).props?.category,
+              [styles.buttonWithCategory]: isLeadingComponent && (leading as React.ReactElement<any>).props?.category,
               [styles.buttonWithCategorySmall]:
-                isLeadingComponent && (leading as React.ReactElement).props?.category && size === Size.SMALL,
+                isLeadingComponent && (leading as React.ReactElement<any>).props?.category && size === Size.SMALL,
               [styles.smallFix]: size === Size.SMALL && !isLeadingComponent,
             })}>
             {isLeadingComponent && size === Size.SMALL
@@ -517,10 +516,10 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
             data-element="trailing"
             className={cx(styles.fix, styles.trailing, {
               [styles.trailingComponent]: isTrailingComponent,
-              [styles.transparentButton]: isTrailingComponent && !(trailing as React.ReactElement).props?.category,
-              [styles.buttonWithCategory]: isTrailingComponent && (trailing as React.ReactElement).props?.category,
+              [styles.transparentButton]: isTrailingComponent && !(trailing as React.ReactElement<any>).props?.category,
+              [styles.buttonWithCategory]: isTrailingComponent && (trailing as React.ReactElement<any>).props?.category,
               [styles.buttonWithCategorySmall]:
-                isTrailingComponent && (trailing as React.ReactElement).props?.category && size === Size.SMALL,
+                isTrailingComponent && (trailing as React.ReactElement<any>).props?.category && size === Size.SMALL,
               [styles.smallFix]: size === Size.SMALL && !isTrailingComponent,
             })}>
             {isTrailingComponent && size === Size.SMALL
@@ -542,17 +541,12 @@ const RawInput = <T extends string>({ responsive, ...rest }: RawInputProps<T>) =
   );
 };
 
-RawInput.propTypes = {
-  prefix: Deprecated,
-  suffix: Deprecated,
-};
-
 /**
  * forward-ref
  */
-export const InputWithRef = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const InputWithRef = ({ ref, ...props }: InputProps & { ref?: React.Ref<HTMLInputElement> }) => {
   return <RawInput {...(props as any)} inputRef={ref} />;
-});
+};
 
 InputWithRef.displayName = 'Input';
 

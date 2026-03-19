@@ -56,7 +56,7 @@ exports[`Button matches snapshot when has a category 1`] = `
 }
 
 <button
-  className="undefined emotion-0"
+  class="undefined emotion-0"
   type="button"
 >
   Some content
@@ -133,14 +133,14 @@ exports[`Button matches snapshot when has a leading component 1`] = `
 }
 
 <button
-  className="emotion-0"
+  class="emotion-0"
   type="button"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
   >
     <i
-      className="emotion-2 Drycon Drycon-check"
+      class="emotion-2 Drycon Drycon-check"
     />
   </div>
   Some content
@@ -204,7 +204,7 @@ exports[`Button matches snapshot when has a tier 1`] = `
 }
 
 <button
-  className="emotion-0"
+  class="emotion-0"
   type="button"
 >
   Some content
@@ -281,15 +281,15 @@ exports[`Button matches snapshot when has a trailing component 1`] = `
 }
 
 <button
-  className="emotion-0"
+  class="emotion-0"
   type="button"
 >
   Some content
   <div
-    className="emotion-1"
+    class="emotion-1"
   >
     <i
-      className="emotion-2 Drycon Drycon-check"
+      class="emotion-2 Drycon Drycon-check"
     />
   </div>
 </button>
@@ -336,7 +336,7 @@ exports[`Button matches snapshot when is basic 1`] = `
 }
 
 <button
-  className="emotion-0"
+  class="emotion-0"
   type="button"
 >
   Some content
@@ -385,7 +385,7 @@ exports[`Button matches snapshot when is small 1`] = `
 }
 
 <button
-  className="emotion-0"
+  class="emotion-0"
   type="button"
 >
   Some content

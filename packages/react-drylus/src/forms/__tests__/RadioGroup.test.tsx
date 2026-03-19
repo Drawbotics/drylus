@@ -1,5 +1,5 @@
 import React from 'react';
-import { create } from 'react-test-renderer';
+import { fireEvent, render } from '@testing-library/react';
 
 import { RadioGroup } from '../RadioGroup';
 
@@ -12,7 +12,7 @@ describe('RadioGroup', () => {
 
   describe('matches snapshot when', () => {
     it('is has no value', () => {
-      const tree = create(
+      const tree = render(
         <RadioGroup
           onChange={onChange}
           options={[
@@ -26,12 +26,12 @@ describe('RadioGroup', () => {
             },
           ]}
         />,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('is has a value', () => {
-      const tree = create(
+      const tree = render(
         <RadioGroup
           value="1"
           onChange={onChange}
@@ -46,12 +46,12 @@ describe('RadioGroup', () => {
             },
           ]}
         />,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('is read only', () => {
-      const tree = create(
+      const tree = render(
         <RadioGroup
           value="1"
           options={[
@@ -65,7 +65,7 @@ describe('RadioGroup', () => {
             },
           ]}
         />,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
   });
@@ -76,7 +76,7 @@ describe('RadioGroup', () => {
 
       expect(value).toBeUndefined();
 
-      const component = create(
+      const { container } = render(
         <RadioGroup
           value={value}
           options={[
@@ -93,14 +93,8 @@ describe('RadioGroup', () => {
         />,
       );
 
-      const input = component.root.findAllByProps({ type: 'radio' })[0];
-      const changeEvent = new Event('change');
-      Object.defineProperty(changeEvent, 'target', {
-        writable: false,
-        value: { value: input.props.value },
-      });
-
-      input.props.onChange(changeEvent);
+      const input = container.querySelectorAll('input[type="radio"]')[0]!;
+      fireEvent.click(input);
 
       expect(value).toEqual('1');
     });

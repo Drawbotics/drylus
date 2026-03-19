@@ -7,8 +7,8 @@ import React, {
   Fragment,
   ReactNode,
   createContext,
+  use,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useRef,
@@ -511,7 +511,7 @@ export const TRow = ({
   animated,
   responsive = true,
 }: TRowProps) => {
-  const [rowsStates, handleSetRowState] = useContext(RowsContext);
+  const [rowsStates, handleSetRowState] = use(RowsContext);
   const collapsed = nested && !rowsStates[nested];
   const animationProps =
     animated && !collapsed
@@ -1085,8 +1085,8 @@ export const Table = ({
     checkComponentProps({ children }, { children: [TBody, THead] });
   }
 
-  const scrollRafRef = useRef<number>();
-  const resizeRafRef = useRef<number>();
+  const scrollRafRef = useRef<number>(undefined);
+  const resizeRafRef = useRef<number>(undefined);
 
   const updateScrollAmount = useCallback(() => {
     if (scrollableRef.current != null && tableRef.current != null) {
@@ -1276,7 +1276,7 @@ export const Table = ({
         },
         className,
       )}>
-      <RowsContext.Provider value={rowsContextValue}>
+      <RowsContext value={rowsContextValue}>
         {run(() => {
           if (header && isLoading) {
             return <LoadingTable animated={animated} columns={header} rows={loadingRows} />;
@@ -1286,7 +1286,7 @@ export const Table = ({
             return transformedChildren;
           }
         })}
-      </RowsContext.Provider>
+      </RowsContext>
     </table>
   );
 

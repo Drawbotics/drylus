@@ -37,7 +37,6 @@ import separator from './separator';
 import spinner from './spinner';
 import splashScreen from './splash-screen';
 import steppedProgressBar from './stepped-progress-bar';
-import tabNavigation from './tab-navigation';
 import table from './table';
 import tag from './tag';
 import text from './text';
@@ -63,7 +62,6 @@ const components = {
   drawer,
   filter,
   icon,
-  tabNavigation,
   avatar,
   text,
   dot,

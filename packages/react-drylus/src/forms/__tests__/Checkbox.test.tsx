@@ -1,5 +1,5 @@
 import React from 'react';
-import { create } from 'react-test-renderer';
+import { fireEvent, render } from '@testing-library/react';
 
 import { Text } from '../../components';
 import { Size } from '../../enums';
@@ -14,36 +14,36 @@ describe('Checkbox', () => {
 
   describe('matches snapshot when', () => {
     it('is not checked', () => {
-      const tree = create(<Checkbox onChange={onChange} />).toJSON();
+      const tree = render(<Checkbox onChange={onChange} />).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('is checked', () => {
-      const tree = create(<Checkbox value={true} onChange={onChange} />).toJSON();
+      const tree = render(<Checkbox value={true} onChange={onChange} />).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('has a label', () => {
-      const tree = create(<Checkbox onChange={onChange}>Label</Checkbox>).toJSON();
+      const tree = render(<Checkbox onChange={onChange}>Label</Checkbox>).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('has a label as react node', () => {
-      const tree = create(
+      const tree = render(
         <Checkbox onChange={onChange}>
           <Text bold>Label</Text>
         </Checkbox>,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('is read only', () => {
-      const tree = create(<Checkbox value={true} />).toJSON();
+      const tree = render(<Checkbox value={true} />).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('is large', () => {
-      const tree = create(<Checkbox size={Size.LARGE} onChange={onChange} />).toJSON();
+      const tree = render(<Checkbox size={Size.LARGE} onChange={onChange} />).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
   });
@@ -54,17 +54,14 @@ describe('Checkbox', () => {
 
       expect(checked).toBeFalsy();
 
-      const component = create(
+      const { container } = render(
         <Checkbox value={checked} onChange={(c) => (checked = c)}>
           Label
         </Checkbox>,
       );
 
-      const input = component.root.findByProps({ type: 'checkbox' });
-      const changeEvent = new Event('change');
-      Object.defineProperty(changeEvent, 'target', { writable: false, value: input });
-
-      input.props.onChange(changeEvent);
+      const input = container.querySelector('input[type="checkbox"]')!;
+      fireEvent.click(input);
 
       expect(checked).toBeTruthy();
     });
