@@ -46,15 +46,17 @@ export function omitBy<T extends Record<string, any>>(
   ) as Partial<T>;
 }
 
-export function isEqual(a: any, b: any): boolean {
+export function isEqual(a: any, b: any, seen = new Set()): boolean {
   if (a === b) return true;
   if (a == null || b == null) return false;
   if (typeof a !== typeof b) return false;
   if (typeof a !== 'object') return false;
+  if (seen.has(a)) return true;
+  seen.add(a);
 
   const keysA = Object.keys(a);
   const keysB = Object.keys(b);
   if (keysA.length !== keysB.length) return false;
 
-  return keysA.every((key) => isEqual(a[key], b[key]));
+  return keysA.every((key) => isEqual(a[key], b[key], seen));
 }
