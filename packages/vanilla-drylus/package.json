@@ -1,6 +1,6 @@
 {
   "name": "@drawbotics/vanilla-drylus",
-  "version": "8.7.38",
+  "version": "8.7.39",
   "description": "Vanilla JS/CSS export of component styles and logic",
   "author": "nicmosc <nmoscholios@gmail.com>",
   "homepage": "",
@@ -32,6 +32,5 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "gitHead": "99f6de1783059e9d24e6582f69fa2982d41a1af2",
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
