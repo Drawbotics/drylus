@@ -80,6 +80,7 @@
     "babel-jest": "^30.0.0",
     "babel-loader": "^10.0.0",
     "babel-plugin-codegen": "^4.0.0",
+    "babel-plugin-react-compiler": "^1.0.0",
     "babel-plugin-react-docgen": "^3.1.0",
     "chalk": "^4.1.2",
     "chokidar-cli": "^3.0.0",

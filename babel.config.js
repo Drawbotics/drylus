@@ -17,6 +17,7 @@ module.exports = function(api) {
   ];
 
   const plugins = [
+    ...(isTest ? [] : ['babel-plugin-react-compiler']),
     ...(isTest ? [] : [['@emotion/babel-plugin', {
       sourceMap: false,
       autoLabel: 'dev-only',

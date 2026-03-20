@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 
-import { AlertsProvider } from '../components';
-import { AlertsProviderProps } from '../components';
 import { ThemeProviderProps } from './ThemeProvider';
 import { ThemeProvider } from './ThemeProvider';
 
-export interface DrylusProviderProps extends ThemeProviderProps, AlertsProviderProps {}
+const LazyAlertsProvider = lazy(() =>
+  import('../components/AlertsProvider').then((m) => ({ default: m.AlertsProvider })),
+);
+
+export interface DrylusProviderProps extends ThemeProviderProps {
+  /**
+   * If true, the AlertsProvider is included, enabling the useAlert() hook.
+   * When false (default), AlertsProvider and its dependencies are excluded from the bundle.
+   * @default false
+   */
+  enableAlerts?: boolean;
+}
 
 export const DrylusProvider = ({
   children,
@@ -13,6 +22,7 @@ export const DrylusProvider = ({
   className,
   baseColor,
   injectGlobal,
+  enableAlerts = false,
 }: DrylusProviderProps) => {
   return (
     <ThemeProvider
@@ -20,7 +30,13 @@ export const DrylusProvider = ({
       baseColor={baseColor}
       style={style}
       className={className}>
-      <AlertsProvider>{children}</AlertsProvider>
+      {enableAlerts ? (
+        <Suspense fallback={children}>
+          <LazyAlertsProvider>{children}</LazyAlertsProvider>
+        </Suspense>
+      ) : (
+        children
+      )}
     </ThemeProvider>
   );
 };
