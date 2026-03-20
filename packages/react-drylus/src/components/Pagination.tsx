@@ -109,9 +109,6 @@ export const Pagination = ({
   style,
   className,
 }: PaginationProps) => {
-  if (maxVisiblePages < 4) {
-    console.warn('`maxVisiblePages` has to be at least 4');
-  }
   const labels = _getLabels(value, pages, Math.max(maxVisiblePages, 4));
   const themeColor = useThemeColor();
   return (

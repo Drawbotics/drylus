@@ -93,26 +93,25 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
   >
     <div
       data-element="title"
     >
       <div
-        className="emotion-2"
+        class="emotion-2"
       >
         <div
-          className="emotion-3"
+          class="emotion-3"
         >
           <div
-            className="emotion-4"
-            style={{}}
+            class="emotion-4"
           >
             <div
-              className="emotion-5"
+              class="emotion-5"
             >
               Title
             </div>
@@ -121,10 +120,10 @@ exports[`Collapsible matches snapshot when is not open 1`] = `
       </div>
     </div>
     <div
-      className="emotion-6"
+      class="emotion-6"
     >
       <i
-        className="emotion-7 Drycon Drycon-chevron-down"
+        class="emotion-7 Drycon Drycon-chevron-down"
       />
     </div>
   </div>
@@ -228,26 +227,25 @@ exports[`Collapsible matches snapshot when is open 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
   >
     <div
       data-element="title"
     >
       <div
-        className="emotion-2"
+        class="emotion-2"
       >
         <div
-          className="emotion-3"
+          class="emotion-3"
         >
           <div
-            className="emotion-4"
-            style={{}}
+            class="emotion-4"
           >
             <div
-              className="emotion-5"
+              class="emotion-5"
             >
               Title
             </div>
@@ -256,15 +254,15 @@ exports[`Collapsible matches snapshot when is open 1`] = `
       </div>
     </div>
     <div
-      className="emotion-6"
+      class="emotion-6"
     >
       <i
-        className="emotion-7 Drycon Drycon-chevron-up"
+        class="emotion-7 Drycon Drycon-chevron-up"
       />
     </div>
   </div>
   <div
-    className="emotion-8"
+    class="emotion-8"
   >
     Collapsible content
   </div>
@@ -362,29 +360,28 @@ exports[`Collapsible matches snapshot when the title is a node 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
   >
     <div
       data-element="title"
     >
       <div
-        className="emotion-2"
+        class="emotion-2"
       >
         <div
-          className="emotion-3"
+          class="emotion-3"
         >
           <div
-            className="emotion-4"
-            style={{}}
+            class="emotion-4"
           >
             <div
-              className="emotion-5"
+              class="emotion-5"
             >
               <span
-                className="emotion-6"
+                class="emotion-6"
               >
                 The title
               </span>
@@ -394,15 +391,15 @@ exports[`Collapsible matches snapshot when the title is a node 1`] = `
       </div>
     </div>
     <div
-      className="emotion-7"
+      class="emotion-7"
     >
       <i
-        className="emotion-8 Drycon Drycon-chevron-up"
+        class="emotion-8 Drycon Drycon-chevron-up"
       />
     </div>
   </div>
   <div
-    className="emotion-9"
+    class="emotion-9"
   >
     Collapsible content
   </div>

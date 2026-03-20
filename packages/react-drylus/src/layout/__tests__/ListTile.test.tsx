@@ -1,5 +1,5 @@
 import React from 'react';
-import { create } from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import { Button } from '../../components';
 import { ListTile } from '../ListTile';
@@ -7,28 +7,28 @@ import { ListTile } from '../ListTile';
 describe('ListTile', () => {
   describe('matches snapshot when', () => {
     it('has a title', () => {
-      const tree = create(<ListTile title="Title" />).toJSON();
+      const tree = render(<ListTile title="Title" />).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('has a subtitle', () => {
-      const tree = create(<ListTile title="Title" subtitle="Subtitle" />).toJSON();
+      const tree = render(<ListTile title="Title" subtitle="Subtitle" />).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('has a custom title', () => {
-      const tree = create(<ListTile title={<Button>Button</Button>} />).toJSON();
+      const tree = render(<ListTile title={<Button>Button</Button>} />).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('has a trailing and leading component', () => {
-      const tree = create(
+      const tree = render(
         <ListTile
           title="Title"
           trailing={<Button>Trailing</Button>}
           leading={<Button>Leading</Button>}
         />,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
   });
@@ -39,9 +39,10 @@ describe('ListTile', () => {
 
       expect(triggered).toBeFalsy();
 
-      const component = create(<ListTile title="Title" onClick={() => (triggered = true)} />);
+      const onClick = jest.fn(() => { triggered = true; });
+      render(<ListTile title="Title" onClick={onClick} />);
 
-      component.root.props.onClick();
+      onClick();
 
       expect(triggered).toBeTruthy();
     });

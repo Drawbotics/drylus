@@ -7,7 +7,7 @@ exports[`Paragraph matches snapshot when is aligned to the left 1`] = `
 }
 
 <p
-  className="emotion-0"
+  class="emotion-0"
 >
   Some content
 </p>
@@ -21,7 +21,7 @@ exports[`Paragraph matches snapshot when is aligned to the right 1`] = `
 }
 
 <p
-  className="emotion-0"
+  class="emotion-0"
 >
   Some content
 </p>
@@ -35,7 +35,7 @@ exports[`Paragraph matches snapshot when is center aligned 1`] = `
 }
 
 <p
-  className="emotion-0"
+  class="emotion-0"
 >
   Some content
 </p>

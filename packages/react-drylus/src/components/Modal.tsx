@@ -145,33 +145,39 @@ export interface BaseModalProps {
   style?: Style;
 }
 
-export const BaseModal = React.forwardRef<HTMLDivElement, BaseModalProps>(
-  ({ children, onClickClose, footer, size = Size.DEFAULT, title, style }: BaseModalProps, ref) => (
-    <div
-      style={style}
-      className={cx(styles.root, { [styles.large]: size === Size.LARGE })}
-      ref={ref}>
-      {onClickClose != null ? (
-        <div className={styles.close}>
-          <Button
-            size={Size.SMALL}
-            onClick={onClickClose}
-            tier={Tier.TERTIARY}
-            leading={<Icon name="x" />}
-          />
-        </div>
-      ) : null}
-      {title != null ? (
-        <div className={styles.title}>
-          <Title size={4} noMargin>
-            {title}
-          </Title>
-        </div>
-      ) : null}
-      <div className={styles.content}>{children}</div>
-      {footer != null ? <div className={styles.footer}>{footer}</div> : null}
-    </div>
-  ),
+export const BaseModal = ({
+  children,
+  onClickClose,
+  footer,
+  size = Size.DEFAULT,
+  title,
+  style,
+  ref,
+}: BaseModalProps & { ref?: React.Ref<HTMLDivElement> }) => (
+  <div
+    style={style}
+    className={cx(styles.root, { [styles.large]: size === Size.LARGE })}
+    ref={ref}>
+    {onClickClose != null ? (
+      <div className={styles.close}>
+        <Button
+          size={Size.SMALL}
+          onClick={onClickClose}
+          tier={Tier.TERTIARY}
+          leading={<Icon name="x" />}
+        />
+      </div>
+    ) : null}
+    {title != null ? (
+      <div className={styles.title}>
+        <Title size={4} noMargin>
+          {title}
+        </Title>
+      </div>
+    ) : null}
+    <div className={styles.content}>{children}</div>
+    {footer != null ? <div className={styles.footer}>{footer}</div> : null}
+  </div>
 );
 
 BaseModal.displayName = 'BaseModal';
@@ -232,12 +238,14 @@ export const Modal = ({ responsive, ...rest }: ModalProps): React.ReactPortal | 
 
   const [outletElement, setOutletElement] = useState<HTMLElement>();
   const [overflowing, setOverflowing] = useState(false);
-  const previousTouchYRef = useRef<number>();
+  const previousTouchYRef = useRef<number>(undefined);
   const { screenSize, ScreenSizes } = useScreenSize();
   const modalElement = useRef<HTMLDivElement>(null);
   const containerElement = useRef<HTMLDivElement>(null);
   const onClickCloseRef = useRef(onClickClose);
-  onClickCloseRef.current = onClickClose;
+  useEffect(() => {
+    onClickCloseRef.current = onClickClose;
+  });
 
   const handleWindowResize = () => {
     if (modalElement.current) {

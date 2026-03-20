@@ -5,7 +5,7 @@ import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { Category, Position, Shade, Size } from '../enums';
 import { Padding } from '../layout';
 import { Responsive, Style } from '../types';
-import { Deprecated, getEnumAsClass, useResponsiveProps } from '../utils';
+import { getEnumAsClass, useResponsiveProps } from '../utils';
 import { Icon, IconType } from './Icon';
 
 const styles = {
@@ -211,10 +211,6 @@ export const DropdownOption = React.memo(({ responsive, ...rest }: DropdownOptio
 });
 DropdownOption.displayName = 'DropdownOption';
 
-(DropdownOption as any).propTypes = {
-  icon: Deprecated,
-};
-
 export interface DropdownLinkProps extends DropdownOptionProps {
   /**
    *  The component used as link, defaults to the native 'a'
@@ -292,13 +288,20 @@ export const Dropdown = React.memo(({ responsive, ...rest }: DropdownProps) => {
     DropdownProps
   >(rest, responsive);
 
-  if (!React.isValidElement(trigger)) {
-    console.warn('Dropdown only accepts a single child as trigger');
-    return null;
-  }
-
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setDropdowOpen] = useState(false);
+
+  const isValidTrigger = React.isValidElement(trigger);
+
+  useEffect(() => {
+    if (!isValidTrigger) {
+      console.warn('Dropdown only accepts a single child as trigger');
+    }
+  }, [isValidTrigger]);
+
+  if (!isValidTrigger) {
+    return null;
+  }
 
   const handleDocumentClick = (e: Event) => {
     // Needs Event because React.MouseEvent<HTMLDivElement> does not match addEventListener signature

@@ -50,16 +50,12 @@ exports[`ProgressBar matches snapshot when has a color 1`] = `
 }
 
 <div
-  className="emotion-0 undefined"
+  class="emotion-0 undefined"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="bar"
-    style={
-      {
-        "width": "40%",
-      }
-    }
+    style="width: 40%;"
   />
 </div>
 `;
@@ -103,16 +99,12 @@ exports[`ProgressBar matches snapshot when has a value 1`] = `
 }
 
 <div
-  className="emotion-0 undefined"
+  class="emotion-0 undefined"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="bar"
-    style={
-      {
-        "width": "40%",
-      }
-    }
+    style="width: 40%;"
   />
 </div>
 `;
@@ -162,16 +154,12 @@ exports[`ProgressBar matches snapshot when is small 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="bar"
-    style={
-      {
-        "width": "40%",
-      }
-    }
+    style="width: 40%;"
   />
 </div>
 `;

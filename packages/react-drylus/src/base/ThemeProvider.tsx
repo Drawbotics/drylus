@@ -1,7 +1,7 @@
 import { Global, css as globalCSS } from '@emotion/react';
 import { css, cx } from '@emotion/css';
 import { LazyMotion, domAnimation } from 'framer-motion';
-import React from 'react';
+import React, { use } from 'react';
 
 import { Color } from '../enums';
 import { Style } from '../types';
@@ -69,7 +69,7 @@ export const ThemeProvider = ({
   );
 
   return (
-    <Context.Provider value={contextValue}>
+    <Context value={contextValue}>
       <LazyMotion features={domAnimation} strict>
         <Global styles={globalStylesArray} />
         <div
@@ -83,10 +83,10 @@ export const ThemeProvider = ({
           {children}
         </div>
       </LazyMotion>
-    </Context.Provider>
+    </Context>
   );
 };
 
 export function useThemeColor(): Color {
-  return React.useContext(Context).themeColor;
+  return use(Context).themeColor;
 }

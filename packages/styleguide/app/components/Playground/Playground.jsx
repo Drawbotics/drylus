@@ -100,8 +100,8 @@ const Playground = ({ component, children, mode, __code, enums }) => {
   const [props, setProps] = useState({});
   const [codeOpen, setCodeOpen] = useState(false);
   const [activeMode, setMode] = useState(supportedModes[0]);
-  const childrenRef = useRef();
-  const parentRef = useRef();
+  const childrenRef = useRef(null);
+  const parentRef = useRef(null);
   const [refreshKey, setRefreshKey] = useState(Math.random());
 
   const refresh = () => setRefreshKey(Math.random());

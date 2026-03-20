@@ -184,9 +184,11 @@ export const Popover = ({
   }, [openOnMount, visible]);
 
   const visibleRef = useRef(visible);
-  visibleRef.current = visible;
   const exitOnClickRef = useRef(exitOnClick);
-  exitOnClickRef.current = exitOnClick;
+  useEffect(() => {
+    visibleRef.current = visible;
+    exitOnClickRef.current = exitOnClick;
+  });
 
   useEffect(() => {
     const handleWindowClick = (e: Event) => {

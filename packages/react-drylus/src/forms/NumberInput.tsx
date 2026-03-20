@@ -253,9 +253,6 @@ export const NumberInput = <T extends string>({ responsive, ...rest }: NumberInp
 
   const value = rawValue === '-' || rawValue === '' ? rawValue : Number(rawValue);
 
-  if (value !== '-' && value !== '' && value !== 0 && !value) {
-    console.warn('Only numbers allowed as value for NumberInput');
-  }
 
   useEffect(() => {
     if (value === 0 || value) {

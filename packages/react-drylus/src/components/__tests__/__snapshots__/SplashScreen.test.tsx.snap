@@ -1,3 +1,150 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`SplashScreen matches snapshot when is visible without text 1`] = `null`;
+exports[`SplashScreen matches snapshot when is visible without text 1`] = `
+.emotion-0 {
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  -webkit-font-smoothing: auto;
+  -webkit-overflow-scrolling: touch;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+}
+
+.emotion-0 * {
+  font-family: "Rubik",sans-serif;
+}
+
+.emotion-0 a {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: inherit;
+}
+
+.emotion-0 b,
+.emotion-0 strong {
+  font-weight: 500;
+}
+
+.emotion-1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  background: #212121;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.emotion-2 {
+  width: 130px;
+  height: 130px;
+  position: relative;
+}
+
+.emotion-2>svg {
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: black;
+}
+
+<div
+  class="emotion-0"
+>
+  <div
+    class="emotion-1"
+    style="opacity: 0;"
+  >
+    <div
+      class="emotion-2"
+    >
+      <svg
+        height="100%"
+        viewBox="0 0 300 300"
+        width="100%"
+      >
+        <defs>
+          <lineargradient
+            gradientUnits="userSpaceOnUse"
+            id="gradient"
+            x1="0%"
+            x2="0%"
+            y1="0%"
+            y2="100%"
+          >
+            <stop
+              offset="0%"
+              style="stop-color: rgb(61, 181, 208); stop-opacity: 1;"
+            />
+            <stop
+              offset="100%"
+              style="stop-color: rgb(36, 116, 136); stop-opacity: 1;"
+            />
+          </lineargradient>
+        </defs>
+        <polygon
+          class="first"
+          draw="0 0"
+          fill="none"
+          id="1"
+          pathLength="1000"
+          points="5,228 195,5 295,280"
+          stroke="url('#gradient')"
+          stroke-dasharray="0 1010"
+          stroke-dashoffset="0"
+          style="stroke-linecap: butt;"
+        />
+        <polyline
+          class="second"
+          draw="0 0"
+          fill="none"
+          id="2"
+          pathLength="1000"
+          points="5,228 132,188 295,280"
+          stroke="url('#gradient')"
+          stroke-dasharray="0 1010"
+          stroke-dashoffset="0"
+          style="stroke-linecap: butt;"
+        />
+        <polyline
+          class="third"
+          draw="0 0"
+          fill="none"
+          id="3"
+          pathLength="1000"
+          points="132,188 195,5"
+          stroke="url('#gradient')"
+          stroke-dasharray="0 1010"
+          stroke-dashoffset="0"
+          style="stroke-linecap: butt;"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;

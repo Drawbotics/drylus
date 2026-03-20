@@ -1,6 +1,5 @@
-import { get } from '../../utils/helpers';
 import React from 'react';
-import { create } from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import { Category, Size } from '../../enums';
 import { Text } from '../Text';
@@ -10,39 +9,39 @@ import { TextLink } from '../TextLink';
 describe('Text', () => {
   describe('matches snapshot when it', () => {
     it('has children', () => {
-      const tree = create(<Text>Text content</Text>).toJSON();
+      const tree = render(<Text>Text content</Text>).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('is bold', () => {
-      const tree = create(<Text bold>Text content</Text>).toJSON();
+      const tree = render(<Text bold>Text content</Text>).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('is light and inversed', () => {
-      const tree = create(
+      const tree = render(
         <Text light inversed>
           Text content
         </Text>,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('has a size and category', () => {
-      const tree = create(
+      const tree = render(
         <Text size={Size.LARGE} category={Category.BRAND}>
           Text content
         </Text>,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
 
     it('has Text and TextLink as children', () => {
-      const tree = create(
+      const tree = render(
         <Text>
           Text content <Text>nested</Text> with a <TextLink>link</TextLink>
         </Text>,
-      ).toJSON();
+      ).container.firstChild;
       expect(tree).toMatchSnapshot();
     });
   });
@@ -50,8 +49,8 @@ describe('Text', () => {
     it('contains a date', () => {
       const date = new Date('2020-06-04 18:00');
 
-      const tree = create(<Text>{date}</Text>).toJSON();
-      const children = get(tree, 'children[0]', '');
+      const { container } = render(<Text>{date}</Text>);
+      const children = container.textContent;
 
       expect(children).toEqual('Thu 4 Jun, 6:00 PM');
     });
@@ -59,8 +58,8 @@ describe('Text', () => {
     it('contains a price', () => {
       const price = { value: 10000, currency: 'GBP' };
 
-      const tree = create(<Text>{price}</Text>).toJSON();
-      const children = get(tree, 'children[0]', '');
+      const { container } = render(<Text>{price}</Text>);
+      const children = container.textContent;
 
       expect(children).toEqual('£10,000');
     });

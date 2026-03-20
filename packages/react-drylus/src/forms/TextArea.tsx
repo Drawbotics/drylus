@@ -1,6 +1,6 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { css, cx } from '@emotion/css';
-import React, { forwardRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useThemeColor } from '../base';
 import { Icon, RoundIcon, Spinner, placeholderStyles } from '../components';
@@ -309,9 +309,9 @@ const RawTextArea = <T extends string>({ responsive, ...rest }: RawTextAreaProps
 /**
  * forward-ref
  */
-export const TextAreaWithRef = forwardRef<HTMLTextAreaElement, TextAreaProps>((props, ref) => {
+export const TextAreaWithRef = ({ ref, ...props }: TextAreaProps & { ref?: React.Ref<HTMLTextAreaElement> }) => {
   return <RawTextArea {...(props as any)} inputRef={ref} />;
-});
+};
 
 TextAreaWithRef.displayName = 'TextArea';
 

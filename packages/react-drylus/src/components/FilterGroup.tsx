@@ -1,7 +1,7 @@
 import sv from '@drawbotics/drylus-style-vars';
 import { useScreenSize } from '../utils/use-screen-size';
 import { css } from '@emotion/css';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 import { Category, Size, Tier } from '../enums';
 import { Flex, FlexItem, FlexJustify, Margin } from '../layout';
@@ -59,9 +59,14 @@ export const FilterGroup = ({
   const filters =
     children != null ? (React.Children.map(children, (x) => x) as Array<React.ReactNode>) : [];
 
+  useEffect(() => {
+    if (screenSize > ScreenSizes.L && filters == null) {
+      console.warn('No children provided');
+    }
+  }, [screenSize, ScreenSizes.L, filters]);
+
   if (screenSize > ScreenSizes.L) {
     if (filters == null) {
-      console.warn('No children provided');
       return null;
     }
     return (

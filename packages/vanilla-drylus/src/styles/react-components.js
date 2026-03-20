@@ -1,4 +1,4 @@
-const { css, injectGlobal } = require('emotion');
+const { css, injectGlobal } = require('@emotion/css');
 const sv = require('@drawbotics/drylus-style-vars');
 const { generateIconStyles } = require('@drawbotics/icons/dist/drycons.js');
 const packageJson = require('@drawbotics/icons/package.json');

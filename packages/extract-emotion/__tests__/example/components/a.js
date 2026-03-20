@@ -1,5 +1,5 @@
-import { cx as _cx } from "emotion";
-import { css as _css } from "emotion";
+import { cx as _cx } from "@emotion/css";
+import { css as _css } from "@emotion/css";
 import React from 'react';
 
 

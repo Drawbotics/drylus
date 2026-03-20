@@ -129,9 +129,12 @@ export const GridItem = ({
   animationSpeed,
   delay,
 }: GridItemProps) => {
-  if (span > columns) {
-    console.warn(`Warning: GridItem span cannot be more than number of columns`);
-  }
+  useEffect(() => {
+    if (span > columns) {
+      console.warn('Warning: GridItem span cannot be more than number of columns');
+    }
+  }, [span, columns]);
+
   const withSpan = styles.withSpan(span);
   const withRowSpan = styles.withRowSpan(rowSpan);
 

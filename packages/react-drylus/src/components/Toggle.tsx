@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Size } from '../enums';
 import { Responsive, Style } from '../types';
-import { Deprecated, getIconContent, isFunction, useResponsiveProps } from '../utils';
+import { getIconContent, isFunction, useResponsiveProps } from '../utils';
 
 const TRIGGER_DIMENSIONS = '18px';
 const TOGGLE_PADDING = '3px';
@@ -113,6 +113,3 @@ export const Toggle = <T extends string>({ responsive, ...rest }: ToggleProps<T>
   );
 };
 
-Toggle.propTypes = {
-  size: Deprecated,
-};

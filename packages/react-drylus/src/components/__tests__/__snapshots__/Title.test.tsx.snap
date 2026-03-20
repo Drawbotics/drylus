@@ -16,7 +16,7 @@ exports[`Title matches snapshot when does not have margins 1`] = `
 }
 
 <h1
-  className="emotion-0"
+  class="emotion-0"
 >
   Title content
 </h1>
@@ -36,7 +36,7 @@ exports[`Title matches snapshot when has a h1 size 1`] = `
 }
 
 <h1
-  className="emotion-0"
+  class="emotion-0"
 >
   Title content
 </h1>
@@ -56,7 +56,7 @@ exports[`Title matches snapshot when has a h2 size 1`] = `
 }
 
 <h1
-  className="emotion-0"
+  class="emotion-0"
 >
   Title content
 </h1>
@@ -76,7 +76,7 @@ exports[`Title matches snapshot when has a h3 size 1`] = `
 }
 
 <h1
-  className="emotion-0"
+  class="emotion-0"
 >
   Title content
 </h1>
@@ -97,7 +97,7 @@ exports[`Title matches snapshot when has a h4 size 1`] = `
 }
 
 <h1
-  className="emotion-0"
+  class="emotion-0"
 >
   Title content
 </h1>
@@ -117,14 +117,10 @@ exports[`Title matches snapshot when has a node as children 1`] = `
 }
 
 <h1
-  className="emotion-0"
+  class="emotion-0"
 >
   <span
-    style={
-      {
-        "fontWeight": 500,
-      }
-    }
+    style="font-weight: 500;"
   >
     Some 
   </span>
@@ -147,7 +143,7 @@ exports[`Title matches snapshot when is aligned to the right 1`] = `
 }
 
 <h1
-  className="emotion-0"
+  class="emotion-0"
 >
   Some content
 </h1>
@@ -168,7 +164,7 @@ exports[`Title matches snapshot when is center aligned 1`] = `
 }
 
 <h1
-  className="emotion-0"
+  class="emotion-0"
 >
   Some content
 </h1>

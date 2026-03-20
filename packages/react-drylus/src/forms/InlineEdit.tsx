@@ -112,8 +112,8 @@ export const InlineEdit = ({
 }: InlineEditProps) => {
   const childrenRef = useRef<HTMLElement | null>(null);
   const editRef = useRef<HTMLDivElement>(null);
-  const childrenCSSClassCopy = useRef<DOMTokenList>();
-  const childrenDisplayCopy = useRef<string>();
+  const childrenCSSClassCopy = useRef<DOMTokenList>(undefined);
+  const childrenDisplayCopy = useRef<string>(undefined);
   const [editing, setIsEditing] = useState(false);
 
   const handleMouseLeave = () => {
@@ -152,11 +152,13 @@ export const InlineEdit = ({
   };
 
   const editingRef = useRef(editing);
-  editingRef.current = editing;
   const exitOnClickRef = useRef(exitOnClick);
-  exitOnClickRef.current = exitOnClick;
   const onCancelRef = useRef(onCancel);
-  onCancelRef.current = onCancel;
+  useEffect(() => {
+    editingRef.current = editing;
+    exitOnClickRef.current = exitOnClick;
+    onCancelRef.current = onCancel;
+  });
 
   useEffect(() => {
     const handleWindowClick = (e: Event) => {

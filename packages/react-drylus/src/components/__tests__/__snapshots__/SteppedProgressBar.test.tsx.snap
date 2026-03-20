@@ -123,71 +123,55 @@ exports[`SteppedProgressBar matches snapshot when has 4 steps 1`] = `
 }
 
 <div
-  className="emotion-0 undefined"
+  class="emotion-0 undefined"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-2"
+      class="emotion-2"
       data-element="bar"
-      style={
-        {
-          "width": "100%",
-        }
-      }
+      style="width: 100%;"
     />
   </div>
   <div
-    className="emotion-3"
+    class="emotion-3"
   />
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-5"
+      class="emotion-5"
       data-element="bar"
-      style={
-        {
-          "width": "0",
-        }
-      }
+      style="width: 0px;"
     />
   </div>
   <div
-    className="emotion-3"
+    class="emotion-3"
   />
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-5"
+      class="emotion-5"
       data-element="bar"
-      style={
-        {
-          "width": "0",
-        }
-      }
+      style="width: 0px;"
     />
   </div>
   <div
-    className="emotion-3"
+    class="emotion-3"
   />
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-5"
+      class="emotion-5"
       data-element="bar"
-      style={
-        {
-          "width": "0",
-        }
-      }
+      style="width: 0px;"
     />
   </div>
 </div>
@@ -338,71 +322,55 @@ exports[`SteppedProgressBar matches snapshot when has a color 1`] = `
 }
 
 <div
-  className="emotion-0 undefined"
+  class="emotion-0 undefined"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-2"
+      class="emotion-2"
       data-element="bar"
-      style={
-        {
-          "width": "100%",
-        }
-      }
+      style="width: 100%;"
     />
   </div>
   <div
-    className="emotion-3"
+    class="emotion-3"
   />
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-5"
+      class="emotion-5"
       data-element="bar"
-      style={
-        {
-          "width": "0",
-        }
-      }
+      style="width: 0px;"
     />
   </div>
   <div
-    className="emotion-3"
+    class="emotion-3"
   />
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-5"
+      class="emotion-5"
       data-element="bar"
-      style={
-        {
-          "width": "0",
-        }
-      }
+      style="width: 0px;"
     />
   </div>
   <div
-    className="emotion-3"
+    class="emotion-3"
   />
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-5"
+      class="emotion-5"
       data-element="bar"
-      style={
-        {
-          "width": "0",
-        }
-      }
+      style="width: 0px;"
     />
   </div>
 </div>
@@ -495,71 +463,55 @@ exports[`SteppedProgressBar matches snapshot when has a percentage 1`] = `
 }
 
 <div
-  className="emotion-0 undefined"
+  class="emotion-0 undefined"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-2"
+      class="emotion-2"
       data-element="bar"
-      style={
-        {
-          "width": "40%",
-        }
-      }
+      style="width: 40%;"
     />
   </div>
   <div
-    className="emotion-3"
+    class="emotion-3"
   />
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-5"
+      class="emotion-5"
       data-element="bar"
-      style={
-        {
-          "width": "0",
-        }
-      }
+      style="width: 0px;"
     />
   </div>
   <div
-    className="emotion-3"
+    class="emotion-3"
   />
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-5"
+      class="emotion-5"
       data-element="bar"
-      style={
-        {
-          "width": "0",
-        }
-      }
+      style="width: 0px;"
     />
   </div>
   <div
-    className="emotion-3"
+    class="emotion-3"
   />
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-5"
+      class="emotion-5"
       data-element="bar"
-      style={
-        {
-          "width": "0",
-        }
-      }
+      style="width: 0px;"
     />
   </div>
 </div>
@@ -700,71 +652,55 @@ exports[`SteppedProgressBar matches snapshot when is small 1`] = `
 }
 
 <div
-  className="emotion-0"
+  class="emotion-0"
 >
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-2"
+      class="emotion-2"
       data-element="bar"
-      style={
-        {
-          "width": "100%",
-        }
-      }
+      style="width: 100%;"
     />
   </div>
   <div
-    className="emotion-3"
+    class="emotion-3"
   />
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-5"
+      class="emotion-5"
       data-element="bar"
-      style={
-        {
-          "width": "0",
-        }
-      }
+      style="width: 0px;"
     />
   </div>
   <div
-    className="emotion-3"
+    class="emotion-3"
   />
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-5"
+      class="emotion-5"
       data-element="bar"
-      style={
-        {
-          "width": "0",
-        }
-      }
+      style="width: 0px;"
     />
   </div>
   <div
-    className="emotion-3"
+    class="emotion-3"
   />
   <div
-    className="emotion-1"
+    class="emotion-1"
     data-element="step"
   >
     <div
-      className="emotion-5"
+      class="emotion-5"
       data-element="bar"
-      style={
-        {
-          "width": "0",
-        }
-      }
+      style="width: 0px;"
     />
   </div>
 </div>
